@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +24,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-    );
+    return MainTabBarView();
   }
 }
