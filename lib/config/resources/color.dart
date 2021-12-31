@@ -65,6 +65,8 @@ abstract class AppColor {
   Color sideBtnColor();
 
   Color disableColor();
+
+  Color titleColor();
 }
 
 class LightApp extends AppColor {
@@ -127,6 +129,11 @@ class LightApp extends AppColor {
   Color disableColor() {
     return const Color(0xFFA9B8BD);
   }
+
+  @override
+  Color titleColor() {
+   return const Color(0xff3D5586);
+  }
 }
 
 class DarkApp extends AppColor {
@@ -188,6 +195,11 @@ class DarkApp extends AppColor {
   @override
   Color disableColor() {
     return Colors.grey;
+  }
+
+  @override
+  Color titleColor() {
+      return const Color(0xffFFFFFF);
   }
 }
 

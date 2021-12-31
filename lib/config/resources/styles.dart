@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/config/themes/app_theme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,7 +49,7 @@ final spaceW60 = SizedBox(width: 60.w);
 final spaceW100 = SizedBox(width: 100.w);
 
 TextStyle textNormal(Color? color, double? fontSize) {
-  return GoogleFonts.sourceSansPro(
+  return GoogleFonts.roboto(
     color: color ?? Colors.white,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -62,7 +62,7 @@ TextStyle tokenDetailAmount({
   double fontSize = 24,
   FontWeight weight = FontWeight.w400,
 }) {
-  return GoogleFonts.sourceSansPro(
+  return GoogleFonts.roboto(
     color: color,
     fontWeight: weight,
     fontStyle: FontStyle.normal,
@@ -71,7 +71,7 @@ TextStyle tokenDetailAmount({
 }
 
 TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
-  return GoogleFonts.sourceSansPro(
+  return GoogleFonts.roboto(
     color: color,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -80,11 +80,11 @@ TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
 }
 
 TextStyle textNormalCustom(
-  Color? color,
+{ Color? color,
   double? fontSize,
-  FontWeight? fontWeight,
+  FontWeight? fontWeight,}
 ) {
-  return GoogleFonts.sourceSansPro(
+  return GoogleFonts.roboto(
     color: color ?? Colors.white,
     fontWeight: fontWeight ?? FontWeight.w500,
     fontStyle: FontStyle.normal,

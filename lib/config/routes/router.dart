@@ -10,7 +10,7 @@ class AppRouter {
   static const splash = '/splash';
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(builder: (ctx) => const SplashScreen());

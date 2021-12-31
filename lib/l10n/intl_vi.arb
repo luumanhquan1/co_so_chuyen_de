@@ -7,5 +7,21 @@
   "error_network": "Vui lòng kiểm tra kết nối mạng!",
   "retry": "Thử lại",
   "unauthorized": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
-  "search": "Tìm kiếm..."
+  "search": "Tìm kiếm...",
+  "press_socialNetWord": "Báo chí - mạng xã hội",
+  "word_processing_state" : "Tình hình xử lý văn bản",
+  "document" : "Văn bản",
+  "document_incoming" : "Văn bản đến",
+  "document_out_going" : "Văn bản đi",
+  "summary_of_tasks" : "Tổng hợp nhiệm vụ",
+  "situation_of_handling_people" : "Tình hình xử lý ý kiến người dân",
+  "people_opinions": "Ý kiến người dân",
+  "calendar_work" : "Lịch làm việc",
+  "meeting_schedule" : "Lịch họp",
+  "work_list" : "Danh sách công việc",
+  "event_of_day" : "Sự kiện trong ngày",
+  "birthday" : "Sinh nhật"
+
+
+
 }
