@@ -20,7 +20,11 @@
   "meeting_schedule" : "Lịch họp",
   "work_list" : "Danh sách công việc",
   "event_of_day" : "Sự kiện trong ngày",
-  "birthday" : "Sinh nhật"
+  "birthday" : "Sinh nhật",
+  "home" : "Trang chủ",
+  "report" : "Báo cáo",
+  "internal_interaction" : "Tương tác nội bộ",
+  "menu" : "Menu"
 
 
 

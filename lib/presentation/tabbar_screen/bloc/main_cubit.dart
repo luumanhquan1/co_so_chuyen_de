@@ -5,12 +5,12 @@ import 'package:rxdart/rxdart.dart';
 
 class MainCubit extends BaseCubit<MainState> {
   MainCubit() : super(MainStateInitial());
-  final BehaviorSubject<TabbarType> _selectTabBar =
-      BehaviorSubject<TabbarType>.seeded(TabbarType.home);
+  final BehaviorSubject<TabBarType> _selectTabBar =
+      BehaviorSubject<TabBarType>.seeded(TabBarType.home);
 
-  Stream<TabbarType> get selectTabBar => _selectTabBar.stream;
+  Stream<TabBarType> get selectTabBar => _selectTabBar.stream;
 
-  void selectTab(TabbarType tab) {
+  void selectTab(TabBarType tab) {
     _selectTabBar.sink.add(tab);
   }
 

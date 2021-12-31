@@ -73,13 +73,14 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         localeResolutionCallback: (deviceLocale, supportedLocales) {
-          if (supportedLocales.contains(
-            Locale(deviceLocale?.languageCode ?? EN_CODE),
-          )) {
-            return deviceLocale;
-          } else {
-            return const Locale.fromSubtags(languageCode: EN_CODE);
-          }
+          // if (supportedLocales.contains(
+          //   Locale(deviceLocale?.languageCode ?? EN_CODE),
+          // )) {
+          //   return deviceLocale;
+          // } else {
+          //   return const Locale.fromSubtags(languageCode: EN_CODE);
+          // }
+          return const  Locale.fromSubtags(languageCode: VI_CODE);
         },
         localizationsDelegates: const [
           S.delegate,

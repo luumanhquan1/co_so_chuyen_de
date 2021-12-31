@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class BottomTabBarWidget extends StatelessWidget {
   final int selectItemIndex;
-  final Function(TabbarType) onChange;
+  final Function(TabBarType) onChange;
   const BottomTabBarWidget({
     Key? key,
     required this.selectItemIndex,
@@ -32,7 +32,11 @@ class BottomTabBarWidget extends StatelessWidget {
                 onTap: () {
                   onChange(tab);
                 },
-                child: tabBarItem(context, tab, index == selectItemIndex),
+                child: tabBarItem(
+                  context: context,
+                  item: tab,
+                  isSelect: index == selectItemIndex,
+                ),
               ),
             );
           }),
@@ -41,18 +45,22 @@ class BottomTabBarWidget extends StatelessWidget {
     );
   }
 
-  Widget tabBarItem(BuildContext context, TabbarType item,bool isSelect) {
+  Widget tabBarItem({
+    required BuildContext context,
+    required TabBarType item,
+    bool isSelect = false,
+  }) {
     return Container(
       color: Colors.transparent,
-height: 32,
+      height: 32,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          item.getTabbarItem(isSelect: isSelect).icon,
+          item.getTabBarItem(isSelect: isSelect).icon,
           FittedBox(
             child: Text(
-              item.getTabbarItem().text,
+              item.getTabBarItem().text,
               style: textNormal(
                 isSelect ? const Color(0xff7966FF) : const Color(0xffA2AEBD),
                 10,

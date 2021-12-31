@@ -1,17 +1,18 @@
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum TabbarType { home, baoCao, lichLamViec, tuongTacNoiBo, menu }
-List<TabbarType> getTabListItem() {
+enum TabBarType { home, report, calendarWork, internalInteraction, menu }
+List<TabBarType> getTabListItem() {
   return [
-    TabbarType.home,
-    TabbarType.baoCao,
-    TabbarType.lichLamViec,
-    TabbarType.tuongTacNoiBo,
-    TabbarType.menu,
+    TabBarType.home,
+    TabBarType.report,
+    TabBarType.calendarWork,
+    TabBarType.internalInteraction,
+    TabBarType.menu,
   ];
 }
 
@@ -21,18 +22,18 @@ class TabBarItem {
   TabBarItem({required this.icon, required this.text});
 }
 
-extension TabbarEnum on TabbarType {
+extension TabbarEnum on TabBarType {
   int get index {
     switch (this) {
-      case TabbarType.home:
+      case TabBarType.home:
         return 0;
-      case TabbarType.baoCao:
+      case TabBarType.report:
         return 1;
-      case TabbarType.lichLamViec:
+      case TabBarType.calendarWork:
         return 2;
-      case TabbarType.tuongTacNoiBo:
+      case TabBarType.internalInteraction:
         return 3;
-      case TabbarType.menu:
+      case TabBarType.menu:
         return 4;
 
       default:
@@ -42,71 +43,83 @@ extension TabbarEnum on TabbarType {
 
   Widget getScreen() {
     switch (this) {
-      case TabbarType.home:
-        return Scaffold(
+      case TabBarType.home:
+        return const Scaffold(
           backgroundColor: Colors.red,
         );
-      case TabbarType.baoCao:
-        return Scaffold(
+      case TabBarType.report:
+        return const Scaffold(
           backgroundColor: Colors.blue,
         );
-      case TabbarType.lichLamViec:
-        return Scaffold(
+      case TabBarType.calendarWork:
+        return const Scaffold(
           backgroundColor: Colors.yellow,
         );
-      case TabbarType.tuongTacNoiBo:
-        return Scaffold(
+      case TabBarType.internalInteraction:
+        return const Scaffold(
           backgroundColor: Colors.cyanAccent,
         );
 
-      case TabbarType.menu:
-        return Scaffold(
+      case TabBarType.menu:
+        return const Scaffold(
           backgroundColor: Colors.pink,
         );
     }
   }
 
-  TabBarItem getTabbarItem({bool isSelect = false}) {
+  TabBarItem getTabBarItem({bool isSelect = false}) {
     switch (this) {
-      case TabbarType.home:
+      case TabBarType.home:
         return TabBarItem(
           icon: SvgPicture.asset(
-              isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,height: 16,),
-          text: 'Trang chủ',
+            isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
+            height: 16,
+          ),
+          text: S.current.home,
         );
-      case TabbarType.baoCao:
+      case TabBarType.report:
         return TabBarItem(
           icon: SvgPicture.asset(
-              isSelect ? ImageAssets.icChartFocus : ImageAssets.icChartUnFocus,height: 16,),
-          text: 'Báo cáo',
+            isSelect ? ImageAssets.icChartFocus : ImageAssets.icChartUnFocus,
+            height: 16,
+          ),
+          text: S.current.report,
         );
-      case TabbarType.lichLamViec:
-        return TabBarItem(
-          icon: SvgPicture.asset(isSelect
-              ? ImageAssets.icCalendarFocus
-              : ImageAssets.icCalendarUnFocus,height: 16,),
-          text: 'Lịch làm việc',
-        );
-      case TabbarType.tuongTacNoiBo:
-        return TabBarItem(
-          icon: SvgPicture.asset(isSelect
-              ? ImageAssets.icMessageFocus
-              : ImageAssets.icMessageUnFocus,height: 16,),
-          text: 'Tương tác nội bộ',
-        );
-      case TabbarType.menu:
+      case TabBarType.calendarWork:
         return TabBarItem(
           icon: SvgPicture.asset(
-              isSelect ? ImageAssets.icMenuFocus : ImageAssets.icMenuUnFocus,height: 16,),
-          text: 'Menu',
+            isSelect
+                ? ImageAssets.icCalendarFocus
+                : ImageAssets.icCalendarUnFocus,
+            height: 16,
+          ),
+          text: S.current.calendar_work,
+        );
+      case TabBarType.internalInteraction:
+        return TabBarItem(
+          icon: SvgPicture.asset(
+            isSelect
+                ? ImageAssets.icMessageFocus
+                : ImageAssets.icMessageUnFocus,
+            height: 16,
+          ),
+          text: S.current.internal_interaction,
+        );
+      case TabBarType.menu:
+        return TabBarItem(
+          icon: SvgPicture.asset(
+            isSelect ? ImageAssets.icMenuFocus : ImageAssets.icMenuUnFocus,
+            height: 16,
+          ),
+          text: S.current.menu,
         );
     }
   }
 }
 
-class Tabbar {
+class TabScreen {
   Widget widget;
-  TabbarType type;
+  TabBarType type;
 
-  Tabbar({required this.widget, required this.type});
+  TabScreen({required this.widget, required this.type});
 }

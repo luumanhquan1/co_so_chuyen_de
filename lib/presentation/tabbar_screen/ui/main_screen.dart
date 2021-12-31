@@ -1,9 +1,12 @@
 
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
+
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+
 
 
 class MainTabBarView extends StatefulWidget {
@@ -15,7 +18,7 @@ class MainTabBarView extends StatefulWidget {
 }
 
 class _MainTabBarViewState extends State<MainTabBarView> {
-  final List<Tabbar> _listScreen = [];
+  final List<TabScreen> _listScreen = [];
  final MainCubit _cubit = MainCubit();
 
   @override
@@ -23,8 +26,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
     // TODO: implement initState
 
     super.initState();
-    addScreen(TabbarType.home);
-    addScreen(TabbarType.baoCao);
+    _addScreen(TabBarType.home);
   }
 
   @override
@@ -38,33 +40,33 @@ class _MainTabBarViewState extends State<MainTabBarView> {
   @override
   Widget build(BuildContext context) {
 
-    return StreamBuilder<TabbarType>(
+    return StreamBuilder<TabBarType>(
       stream: _cubit.selectTabBar,
       builder: (context, snapshot) {
-        final type=snapshot.data??TabbarType.home;
+        final type=snapshot.data??TabBarType.home;
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body:  IndexedStack(
-              index: getIndexListScreen(type),
+              index: _getIndexListScreen(type),
               children: _listScreen.map((e) => e.widget).toList(),
           )   ,
           bottomNavigationBar: BottomTabBarWidget(selectItemIndex: type.index,
             onChange: (value){
-            addScreen(value);
+              _addScreen(value);
               _cubit.selectTab(value);
           },),
         );
-      }
+      },
     );
   }
-int getIndexListScreen(TabbarType type){
+int _getIndexListScreen(TabBarType type){
     return _listScreen.indexWhere((element) => element.type.index==type.index);
 }
-  void addScreen(TabbarType type) {
+  void _addScreen(TabBarType type) {
     if (_listScreen.indexWhere((element) => element.type.index == type.index) ==
         -1) {
       _listScreen.add(
-        Tabbar(widget: type.getScreen(), type: type),
+        TabScreen(widget: type.getScreen(), type: type),
       );
     }
   }
