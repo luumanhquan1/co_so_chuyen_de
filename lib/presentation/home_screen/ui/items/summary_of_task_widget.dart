@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_backgr
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/widgets/listview/rows_sum_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -53,64 +54,12 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
         )
       ],
       ),
+      padding: EdgeInsets.zero,
       child: Column(
         children: [
-          SizedBox(
-            height: 88,
-            child: ListView.builder(
-              itemCount: 10,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Container(
-                    width: 247,
-                    height: 88,
-                    decoration: const BoxDecoration(
-                      color: Color(0xffF5F8FD),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(6),
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/ic_nhiem_vu.svg',
-                        ),
-                        const SizedBox(
-                          width: 14,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Tổng số nhiệm vụ",
-                              style: textNormal(
-                              const  Color(0xff3D5586),
-                                16,
-                              ),
-                            ),
-                          const  SizedBox(
-                              height: 7,
-                            ),
-                            Text(
-                              "18,109",
-                              style: titleText(
-                                color: Color(0xff5A8DEE),
-                                fontSize: 26,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          RowSumInfoWidget(data: [
+
+          ],),
 
           const SizedBox(
             height: 20,

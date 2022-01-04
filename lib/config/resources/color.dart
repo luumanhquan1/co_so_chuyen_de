@@ -54,6 +54,8 @@ const choCapSoColor=Color(0xffFF6D99);
 const choBanHanhColor=Color(0xff374FC7);
 const radioUnfocusColor=Color(0xffE2E8F0);
 const radioFocusColor=Color(0xff7966FF);
+
+const backgroundRowColor = Color(0xffF5F8FD);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
@@ -83,6 +85,8 @@ abstract class AppColor {
   Color titleColor();
 
   Color backGroundColor();
+
+  Color subTitleColor();
 }
 
 class LightApp extends AppColor {
@@ -154,6 +158,11 @@ class LightApp extends AppColor {
   @override
   Color backGroundColor() {
    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+   return const Color(0xff5A8DEE);
   }
 }
 
@@ -228,6 +237,12 @@ class DarkApp extends AppColor {
 
       return Colors.black.withOpacity(0.8);
 
+  }
+
+  @override
+  Color subTitleColor() {
+    // TODO: implement subTitleColor
+    throw UnimplementedError();
   }
 }
 

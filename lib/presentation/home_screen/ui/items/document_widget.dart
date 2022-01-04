@@ -34,7 +34,6 @@ class _DocumentWidgetState extends State<DocumentWidget> {
               SelectKey.CHO_XU_LY_VB_DEN,
               SelectKey.CHO_CHO_Y_KIEN_VB_DEN,
               SelectKey.CHO_TRINH_KY_VB_DI,
-              SelectKey.NAM_NAY
             ],
           ),
           DialogData(
