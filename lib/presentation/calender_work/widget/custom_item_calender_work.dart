@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +9,12 @@ class CustomItemCalenderWork extends StatelessWidget {
   final String typeName;
   final int numberOfCalendars;
 
-  const CustomItemCalenderWork({Key? key, required this.image, required this.typeName, required this.numberOfCalendars}) : super(key: key);
+  const CustomItemCalenderWork(
+      {Key? key,
+      required this.image,
+      required this.typeName,
+      required this.numberOfCalendars})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +25,21 @@ class CustomItemCalenderWork extends StatelessWidget {
         width: 274,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6.0),
-          color: Color(0xffF5F8FD),
+          color: borderItemCalender,
         ),
         child: Row(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               flex: 2,
               child: Container(
                 height: 56,
                 width: 56,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xffffffff),
+                  color: backgroundColorApp,
                 ),
                 child: Center(
-                  child: SvgPicture.asset("assets/images/$image.svg"),
+                  child: SvgPicture.asset('$baseImg/$image.svg'),
                 ),
               ),
             ),
@@ -51,9 +56,15 @@ class CustomItemCalenderWork extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2
-                        ?.copyWith(fontSize: 16.0, color: Color(0xff3D5586)),
+                        ?.copyWith(fontSize: 16.0, color: titleCalenderWork),
                   ),
-                  Text(numberOfCalendars.toString(),style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 26,color: Color(0xff5A8DEE),fontWeight: FontWeight.w700),),
+                  Text(
+                    numberOfCalendars.toString(),
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        fontSize: 26,
+                        color: numberOfCalenders,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ],
               ),
             )

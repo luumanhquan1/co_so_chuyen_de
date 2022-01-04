@@ -4,9 +4,8 @@ import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:intl/intl.dart';
 
-class CalenderCubit extends BaseCubit<CalenderState>{
+class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(CalenderStateIntial());
-
 
   List<String> img = [
     "tong_so_lich_lam_viec",
