@@ -24,7 +24,36 @@
   "home" : "Trang chủ",
   "report" : "Báo cáo",
   "internal_interaction" : "Tương tác nội bộ",
-  "menu" : "Menu"
+  "menu" : "Menu",
+  "time" : "Thời gian",
+  "today" :  "Hôm nay",
+  "this_week": "Tuần này",
+  "this_month" : "Tháng này",
+  "this_year" : "Năm nay",
+  "all" : "Tất cả",
+  "unit" : "Đơn vị",
+  "cho_xu_ly" : "Chờ xử lý",
+  "dang_xu_ly" : "Đang xử lý",
+  "cho_tiep_nhan" : "Chờ tiếp nhận",
+  "lich_cua_toi" : "Lịch của tôi",
+  "lich_duoc_moi" : "Lịch được mời",
+  "lich_hop_duoc_moi": "Lịch họp được mời",
+  "lich_hop_can_duyet" : "Lịch họp cần duyệt",
+  "lich_duyet_phong" : "Lịch duyệt phòng",
+  "lich_hop_duyet_thiet_bi": "Lịch họp duyệt thiết bị",
+  "lich_hop_duyet_yeu_cau_tb": "Lịch họp duyệt yêu cầu chuẩn bị",
+  "cho_xu_ly_vb_den" : "Chờ xử lý VB đến",
+  "cho_cho_y_kien_VB_den" : "Chờ cho ý kiến VB đến",
+  "cho_trinh_ky_VB_di" : "Chờ trình ký VB đi",
+  "misson" : "Nhiệm vụ",
+  "hello" : "Xin chào",
+  "da_xu_ly" : "Đã xử lý",
+  "cho_vao_so" : "Chờ vào sổ",
+  "cho_trinh_ky" : "Chờ trình ký",
+  "cho_cap_so" : "Chờ cấp số",
+  "cho_ban_hanh" : "Chờ ban hành",
+  "khong_co_du_lieu" : "Không có dữ liệu"
+
 
 
 

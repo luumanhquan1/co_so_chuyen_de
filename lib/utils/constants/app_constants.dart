@@ -12,6 +12,28 @@ enum AuthMode { LOGIN, REGISTER }
 
 enum AuthType { ACCOUNT, PHONE }
 
+enum SelectKey {
+  TAT_CA,
+  DON_VI,
+  HOM_NAY,
+  TUAN_NAY,
+  THANG_NAY,
+  NAM_NAY,
+  CHO_XU_LY_VB_DEN,
+  CHO_CHO_Y_KIEN_VB_DEN,
+  CHO_XU_LY,
+  DANG_XU_LY,
+  CHO_TIEP_NHAN,
+  LICH_CUA_TOI,
+  LICH_DUOC_MOI,
+  LICH_HOP_DUOC_MOI,
+  LICH_HOP_CAN_DUYET,
+  LICH_DUYET_PHONG,
+  LICH_HOP_DUYET_THIET_BI,
+  LICH_HOP_DUYET_YEU_CAU_CHUAN_BI,
+  CHO_TRINH_KY_VB_DI
+}
+enum DocumentType { VBDen, VBDi }
 enum PageTransitionType {
   FADE,
   RIGHT_TO_LEFT,

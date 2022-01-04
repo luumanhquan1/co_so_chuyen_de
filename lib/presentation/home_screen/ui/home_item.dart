@@ -27,25 +27,45 @@ extension ItemExtension on HomeItemType {
   Widget getItems() {
     switch (this) {
       case HomeItemType.wordProcessState:
-        return const WordProcessingStateWidget();
+        return const WordProcessingStateWidget(
+          homeItemType: HomeItemType.wordProcessState,
+        );
       case HomeItemType.document:
-        return const DocumentWidget();
+        return const DocumentWidget(
+            homeItemType: HomeItemType.document
+        );
       case HomeItemType.summaryOfTask:
-        return const SummaryOfTaskWidget();
+        return const SummaryOfTaskWidget(
+            homeItemType: HomeItemType.summaryOfTask,
+        );
       case HomeItemType.situationHandlingPeople:
-        return const SituationOfHandlingPeopleWidget();
+        return const SituationOfHandlingPeopleWidget(
+            homeItemType: HomeItemType.situationHandlingPeople,
+        );
       case HomeItemType.peopleOpinions:
-        return const PeopleOpinions();
+        return const PeopleOpinions(
+          homeItemType: HomeItemType.peopleOpinions,
+        );
       case HomeItemType.workSchedule:
-        return const CalendarWorkWidget();
+        return const CalendarWorkWidget(
+          homeItemType: HomeItemType.workSchedule,
+        );
       case HomeItemType.meetingSchedule:
-        return const MeetingScheduleWidget();
+        return const MeetingScheduleWidget(
+          homeItemType: HomeItemType.meetingSchedule,
+        );
       case HomeItemType.pressSocialNetWork:
-        return const PressSocialNetWork();
+        return const PressSocialNetWork(
+          homeItemType: HomeItemType.pressSocialNetWork,
+        );
       case HomeItemType.listWork:
-        return const WorkListWidget();
+        return const WorkListWidget(
+          homeItemType: HomeItemType.listWork,
+        );
       case HomeItemType.eventOfDay:
-        return const EventOfDayWidget();
+        return const EventOfDayWidget(
+          homeItemType: HomeItemType.eventOfDay,
+        );
     }
   }
 }

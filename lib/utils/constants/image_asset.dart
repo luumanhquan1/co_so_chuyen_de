@@ -19,9 +19,14 @@ class ImageAssets {
   static const String icClose='$baseImg/ic_close.svg';
   static const String icNext='$baseImg/ic_next.svg';
   static const String icSinhNhat='$baseImg/ic_sinh_nhat.svg';
+  static const String icMore='$baseImg/ic_more.svg';
   ///SvgImage
   static const String icStar ='$baseImg/ic_start.png';
+  static const String appBarBackground='$baseImg/app_bar_background.png';
+  static const String headerBackground='$baseImg/header_background.png';
 
+  ///gif
+  static const String gifKhanCap='$baseImg/gif_khan_cap.gif';
   static SvgPicture svgAssets(
     String name, {
     Color? color,

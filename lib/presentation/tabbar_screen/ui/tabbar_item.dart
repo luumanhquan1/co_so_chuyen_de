@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -44,9 +45,7 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return const Scaffold(
-          backgroundColor: Colors.red,
-        );
+        return const HomeScreen();
       case TabBarType.report:
         return const Scaffold(
           backgroundColor: Colors.blue,
