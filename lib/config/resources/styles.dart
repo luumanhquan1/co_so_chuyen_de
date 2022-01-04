@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'color.dart';
+
 const emptyView = SizedBox(width: 0, height: 0);
 
 /// height and width space
@@ -89,5 +91,14 @@ TextStyle textNormalCustom(
     fontWeight: fontWeight ?? FontWeight.w500,
     fontStyle: FontStyle.normal,
     fontSize: fontSize?.sp ?? 14.sp,
+  );
+}
+
+TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: FontWeight.w500,
+    fontSize: fontSize.sp,
+    fontStyle: FontStyle.normal
   );
 }

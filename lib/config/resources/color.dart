@@ -40,6 +40,11 @@ const colorLineSearch = Color(0x80CACFD7);
 const colorPressedItemMenu = Color(0xffE7F8F8);
 const fittingBg = Color(0xFFF2F2F2);
 
+//tabar color
+const indicatorColor = Color(0xFF7966FF);
+const unselectLabelColor = Color(0xFFA2AEBD);
+const labelColor = Color(0xFF304261);
+const titleColor = Color(0xFF3D5586);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
