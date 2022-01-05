@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/widget_mange_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -59,11 +60,13 @@ extension TabbarEnum on TabBarType {
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,
         );
-
       case TabBarType.menu:
         return const Scaffold(
           backgroundColor: Colors.pink,
         );
+
+
+
     }
   }
 

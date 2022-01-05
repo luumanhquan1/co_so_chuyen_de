@@ -39,6 +39,14 @@ const subMenuColor = Color(0xff303742);
 const colorLineSearch = Color(0x80CACFD7);
 const colorPressedItemMenu = Color(0xffE7F8F8);
 const fittingBg = Color(0xFFF2F2F2);
+const itemWidgetUsing=Color(0xff28C76F);
+const itemWidgetNotUse=Color(0xffFF9F43);
+const backgroundWidget=Color(0xffF0F6FF);
+const textDefault=Color(0xff7966FF);
+const textTitle=Color(0xff3D5586);
+
+
+
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
@@ -67,6 +75,7 @@ abstract class AppColor {
   Color disableColor();
 
   Color titleColor();
+
 }
 
 class LightApp extends AppColor {
@@ -134,6 +143,7 @@ class LightApp extends AppColor {
   Color titleColor() {
    return const Color(0xff3D5586);
   }
+
 }
 
 class DarkApp extends AppColor {

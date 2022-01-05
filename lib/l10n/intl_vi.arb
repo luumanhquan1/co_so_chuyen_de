@@ -24,8 +24,12 @@
   "home" : "Trang chủ",
   "report" : "Báo cáo",
   "internal_interaction" : "Tương tác nội bộ",
-  "menu" : "Menu"
-
-
+  "menu" : "Menu",
+  "using": "Đang sử dụng",
+  "not_use": "Chưa sử dụng",
+  "keep_drop": "Nhấn giữ kéo để di chuyển các dịch vụ ",
+  "default_word": "Mặc Định",
+  "no_data": "Không có dữ liệu",
+  "widget_manage": "Quản lý widgets"
 
 }

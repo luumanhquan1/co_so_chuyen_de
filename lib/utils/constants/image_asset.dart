@@ -19,6 +19,8 @@ class ImageAssets {
   static const String icClose='$baseImg/ic_close.svg';
   static const String icNext='$baseImg/ic_next.svg';
   static const String icSinhNhat='$baseImg/ic_sinh_nhat.svg';
+  static const String icPrevAppbar='$baseImg/prev_appbar.svg';
+  static const String icAdd='$baseImg/add.svg';
   ///SvgImage
   static const String icStar ='$baseImg/ic_start.png';
 
