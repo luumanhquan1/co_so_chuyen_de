@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/widget_manage/ui/widget_mange_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:flutter/cupertino.dart';
