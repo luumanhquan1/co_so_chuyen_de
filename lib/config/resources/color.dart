@@ -44,8 +44,9 @@ const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);
 const statusCalenderRed = Color(0xffEA5455);
-const borderItemCalender= Color(0xffF5F8FD);
-const numberOfCalenders= Color(0xff5A8DEE);
+const backgroundItemCalender = Color(0xffF5F8FD);
+const borderItemCalender = Color(0xffE2E8F0);
+const numberOfCalenders = Color(0xff5A8DEE);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);

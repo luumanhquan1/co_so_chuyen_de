@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/widget/custom_item_calender_list.dart';
@@ -54,17 +55,12 @@ class _InListFormState extends State<InListForm> {
             Padding(
               padding:
                   const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
-              child: Text(
-                _cubit.currentTime,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    ?.copyWith(color: textBodyTime, fontSize: 14.0),
-              ),
+              child: Text(_cubit.currentTime,
+                  style: textNormalCustom(color: textBodyTime)),
             ),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: _cubit.listMeeting.length,
               itemBuilder: (context, index) {
