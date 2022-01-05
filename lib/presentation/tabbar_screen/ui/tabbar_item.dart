@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/base_choose_time/bloc/base_choose_time_cubit.dart';
+import 'package:ccvc_mobile/presentation/base_choose_time/ui/base_choose_time_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum TabBarType { home, report, calendarWork, internalInteraction, menu }
+
 List<TabBarType> getTabListItem() {
   return [
     TabBarType.home,
@@ -19,6 +22,7 @@ List<TabBarType> getTabListItem() {
 class TabBarItem {
   Widget icon;
   String text;
+
   TabBarItem({required this.icon, required this.text});
 }
 
@@ -42,6 +46,7 @@ extension TabbarEnum on TabBarType {
   }
 
   Widget getScreen() {
+    final a = DateTime.parse('2001-04-25');
     switch (this) {
       case TabBarType.home:
         return const Scaffold(
@@ -61,8 +66,14 @@ extension TabbarEnum on TabBarType {
         );
 
       case TabBarType.menu:
-        return const Scaffold(
-          backgroundColor: Colors.pink,
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+          ),
+          body: BaseChooseTimeScreen(
+            today: a,
+          ),
         );
     }
   }

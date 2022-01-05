@@ -24,6 +24,7 @@
   "home" : "Home",
   "report" : "Report",
   "internal_interaction" : "Internal interaction",
-  "menu" : "Menu"
+  "menu" : "Menu",
+  "today": "Today"
 
 }
