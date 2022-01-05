@@ -45,7 +45,17 @@ const backgroundWidget=Color(0xffF0F6FF);
 const textDefault=Color(0xff7966FF);
 const textTitle=Color(0xff3D5586);
 
+const backgroundColorApp = Color(0xffffffff);
+const titleCalenderWork = Color(0xff3D5586);
+const textBodyTime = Color(0xffA2AEBD);
+const statusCalenderRed = Color(0xffEA5455);
+const borderItemCalender= Color(0xffF5F8FD);
+const numberOfCalenders= Color(0xff5A8DEE);
 
+//tabbar color
+const labelColor = Color(0xff7966FF);
+const unselectedLabelColor = Color(0xff667793);
+const indicatorColor = Color(0xff7966FF);
 
 
 ///=========== Using to make change app theme ================================
@@ -141,7 +151,7 @@ class LightApp extends AppColor {
 
   @override
   Color titleColor() {
-   return const Color(0xff3D5586);
+    return const Color(0xff3D5586);
   }
 
 }
@@ -209,7 +219,7 @@ class DarkApp extends AppColor {
 
   @override
   Color titleColor() {
-      return const Color(0xffFFFFFF);
+    return const Color(0xffFFFFFF);
   }
 }
 

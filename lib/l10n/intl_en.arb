@@ -30,7 +30,11 @@
   "keep_drop": "Nhấn giữ kéo để di chuyển các dịch vụ ",
   "default_word": "Mặc Định",
   "no_data": "Không có dữ liệu",
-  "widget_manage": "Quản lý widgets"
+  "widget_manage": "Quản lý widgets",
+
+  "enterkeysearch" : "Import search key",
+  "inlistform" : "In list form",
+  "incalenderform" : "In calender form"
 
 
 }
