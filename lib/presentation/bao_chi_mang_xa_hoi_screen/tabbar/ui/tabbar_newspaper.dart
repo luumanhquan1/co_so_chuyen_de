@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +82,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
         ),
         Text(S.current.tat_ca_chu_de),
         Text(S.current.theo_doi_bai_viet),
-        Text(S.current.tin_tuc_thoi_su),
+        TinTucThoiSuScreen(),
       ]),
 
     );
