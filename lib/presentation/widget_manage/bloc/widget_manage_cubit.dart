@@ -8,9 +8,9 @@ class WidgetManageCubit {
  BehaviorSubject<List<WidgetModel>>();
  final BehaviorSubject <List<WidgetModel>>_listWidgetNotUse=
  BehaviorSubject<List<WidgetModel>>();
+
  Stream<List<WidgetModel>> get listWidgetUsing => _listWidgetUsing.stream;
  Stream<List<WidgetModel>> get listWidgetNotUse => _listWidgetNotUse.stream;
-
  void _getListWidgetUsing() {
    _listWidgetUsing.sink.add(FakeData.listUse);
  }
@@ -22,9 +22,9 @@ void loadApi(){
   _getListWidgetUsing();
   _getListWidgetNotuse();
 }
- void insertItemUsing(WidgetModel widgetItem, List
- <WidgetModel>listItemWidgetUsing,
-     List<WidgetModel>listItemWidgetNotUse, int index,){
+ void insertItemUsing(WidgetModel widgetItem,int index,){
+   final List<WidgetModel>listItemWidgetUsing=_listWidgetUsing.value;
+   final List<WidgetModel>listItemWidgetNotUse=_listWidgetNotUse.value;
    listItemWidgetUsing.insert(listItemWidgetUsing.length, widgetItem);
    listItemWidgetNotUse.removeAt(index);
    _listWidgetUsing.sink.add(listItemWidgetUsing);
@@ -32,14 +32,18 @@ void loadApi(){
 
  }
 
- void insertItemNotUse(WidgetModel widgetItem, List
- <WidgetModel>listItemWidgetUsing,
-     List<WidgetModel>listItemWidgetNotUse, int index,){
+ void insertItemNotUse(WidgetModel widgetItem, int index,){
+   final List<WidgetModel>listItemWidgetUsing=_listWidgetUsing.value;
+   final List<WidgetModel>listItemWidgetNotUse=_listWidgetNotUse.value;
    listItemWidgetNotUse.insert(0, widgetItem);
    listItemWidgetUsing.removeAt(index);
    _listWidgetUsing.sink.add(listItemWidgetUsing);
    _listWidgetNotUse.sink.add(listItemWidgetNotUse);
 
+ }
+ void dispose() {
+   _listWidgetUsing.close();
+   _listWidgetNotUse.close();
  }
 }
 

@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/widget_item.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,6 @@ class WidgetManageScreen extends StatefulWidget {
 
 class _WidgetManageScreenState extends State<WidgetManageScreen> {
   WidgetManageCubit widgetManageCubit = WidgetManageCubit();
-  List<WidgetModel> listWidgetUsing = [];
-  List<WidgetModel> listWidgetNotUse = [];
-
   @override
   void initState() {
     super.initState();
@@ -29,6 +27,7 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return WidgetManageProvider(
       widgetManageCubit: widgetManageCubit,
       child: Scaffold(
@@ -55,7 +54,8 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                         fontSize: 14,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -115,70 +115,10 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                   builder: (context, snapshot) {
                     final data = snapshot.data ?? [];
                     if (data.isNotEmpty) {
-                      listWidgetUsing = data;
-                      return ReorderableListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        proxyDecorator: (_, index, ___) {
-                          final String productName =
-                              listWidgetUsing[index].name;
-                          return Material(
-                            color: Colors.transparent,
-                            child: Center(
-                              child: SizedBox(
-                                height: 50,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),),),
-                                  child: WidgetItem(
-                                    widgetIcon: SvgPicture.asset
-                                      (ImageAssets.icClose),
-                                    backgroundColor:
-                                    itemWidgetUsing
-                                        .withOpacity(0.04),
-                                    borderColor:
-                                    itemWidgetUsing
-                                        .withOpacity(0.3),
-                                    content: productName,
-                                  ),
-                                ),
-                              ),
-                            ),);
-                        },
-                        itemCount: listWidgetUsing.length,
-                        itemBuilder: (context, index) {
-                          final String productName =
-                              listWidgetUsing[index].name;
-                          return Padding(
-                            key: ValueKey(productName),
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: WidgetItem(
-                              widgetIcon: SvgPicture.asset(
-                                ImageAssets.icClose,),
-                              clickICon: () {
-                                widgetManageCubit.insertItemNotUse(
-                                  listWidgetUsing[index],
-                                    listWidgetUsing, listWidgetNotUse, index,);
-                              },
-                              backgroundColor:itemWidgetUsing
-                                  .withOpacity(0.04),
-                              borderColor:itemWidgetUsing
-                                  .withOpacity(0.3),
-                              content: productName,
-                            ),
-                          );
-                        },
-                        onReorder: (oldIndex, newIndex) {
-                          setState(() {
-                            if (newIndex > oldIndex) {
-                              newIndex = newIndex - 1;
-                            }
-                            final element =
-                            listWidgetUsing.removeAt(oldIndex);
-                            listWidgetUsing.insert(newIndex, element);
-                          });
-                        },);
+                    final List<WidgetModel>listWidgetUsing = data;
+                      return DragItemList(listWidget: listWidgetUsing,
+                          widgetManageCubit: widgetManageCubit,
+                          isUsing: true,);
                     } else {
                       return  Center(
                         child: Text(S.current.no_data),
@@ -204,45 +144,10 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                   builder: (context, snapshot) {
                     final data = snapshot.data ?? [];
                     if (data.isNotEmpty) {
-                      listWidgetNotUse = data;
-                      return ReorderableListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        buildDefaultDragHandles: false,
-                        shrinkWrap: true,
-                        itemCount: listWidgetNotUse.length,
-                        itemBuilder: (context, index) {
-                          final String productName =
-                              listWidgetNotUse[index].name;
-                          return Padding(
-                            key: ValueKey(productName),
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: WidgetItem(
-                              widgetIcon: SvgPicture.asset(
-                                ImageAssets.icAdd,),
-                              clickICon: () {
-                                widgetManageCubit.insertItemUsing(
-                                  listWidgetNotUse[index],
-                                  listWidgetUsing, listWidgetNotUse, index,);
-                              },
-                              backgroundColor: itemWidgetNotUse
-                                  .withOpacity(0.05),
-                              borderColor: itemWidgetNotUse
-                                  .withOpacity(0.3),
-                              content: productName,
-                            ),
-                          );
-                        },
-                        // The reorder function
-                        onReorder: (oldIndex, newIndex) {
-                          setState(() {
-                            if (newIndex > oldIndex) {
-                              newIndex = newIndex - 1;
-                            }
-                            final element =
-                            listWidgetNotUse.removeAt(oldIndex);
-                            listWidgetNotUse.insert(newIndex, element);
-                          });
-                        },);
+                    final List<WidgetModel> listWidgetNotUse = data;
+                      return DragItemList(listWidget: listWidgetNotUse,
+                          widgetManageCubit: widgetManageCubit,
+                          isUsing: false,);
                     } else {
                       return  Center(
                         child: Text(S.current.no_data),
