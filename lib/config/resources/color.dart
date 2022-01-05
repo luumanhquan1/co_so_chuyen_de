@@ -52,15 +52,14 @@ const numberOfCalenders = Color(0xff5A8DEE);
 const labelColor = Color(0xff7966FF);
 const unselectedLabelColor = Color(0xff667793);
 const indicatorColor = Color(0xff7966FF);
+const titleColor = Color(0xFF3D5586);
+
 
 
 const lineColor=Color(0xffECEEF7);
 const buttonColor=Color(0xff7966FF);
 //tabar color
-const indicatorColor = Color(0xFF7966FF);
 const unselectLabelColor = Color(0xFFA2AEBD);
-const labelColor = Color(0xFF304261);
-const titleColor = Color(0xFF3D5586);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
