@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/tab_calender_form/ui/in_calender_form.dart';
 import 'package:ccvc_mobile/presentation/calender_work/tab_list_form/ui/in_list_form.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,11 +24,11 @@ class _MainTabarCalenderWorkState extends State<MainTabarCalenderWork> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('$baseImg/add_button_calender.svg'),
+            icon: SvgPicture.asset(ImageAssets.icAddButtonCalender),
           ),
           IconButton(
               onPressed: () {},
-              icon: SvgPicture.asset('$baseImg/menu_calender.svg'))
+              icon: SvgPicture.asset(ImageAssets.icMenuCalender))
         ],
       ),
       body: Column(

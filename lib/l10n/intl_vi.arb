@@ -25,12 +25,22 @@
   "report" : "Báo cáo",
   "internal_interaction" : "Tương tác nội bộ",
   "menu" : "Menu",
+
   "enterkeysearch" : "Nhập từ khóa tìm kiếm",
   "inlistform" : "Theo dạng list",
   "incalenderform" : "Theo dạng lịch",
+
+  "thu_hai" : "T.Hai",
+  "thu_ba" : "T.Ba",
+  "thu_tu" : "T.Tư",
+  "thu_nam" : "T.Năm",
+  "thu_sau" : "T.Sáu",
+  "thu_bay" : "T.Bảy",
+  "chu_nhat": "CN",
+  "chon_ngay" : "Chọn ngày",
+  "today" : "Hôm nay",
   "bao_cao_thong_ke": "Báo cáo thống kê",
   "tin_tuc_thoi_su" : "Tin tức thời sự",
   "theo_doi_bai_viet" : "Theo dõi bài viết",
   "tat_ca_chu_de" : "Tất cả chủ đề"
-
 }
