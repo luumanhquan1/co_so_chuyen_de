@@ -5,7 +5,6 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/widget_manage/ui/widget_mange_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder:()=> GetMaterialApp(
+      builder: () => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: Strings.app_name,
         theme: ThemeData(
@@ -68,7 +67,6 @@ class _MyAppState extends State<MyApp> {
             selectionColor: AppTheme.getInstance().primaryColor(),
             selectionHandleColor: AppTheme.getInstance().primaryColor(),
           ),
-
           colorScheme: ColorScheme.fromSwatch().copyWith(
             secondary: AppTheme.getInstance().accentColor(),
           ),
@@ -81,7 +79,7 @@ class _MyAppState extends State<MyApp> {
           // } else {
           //   return const Locale.fromSubtags(languageCode: EN_CODE);
           // }
-          return const  Locale.fromSubtags(languageCode: VI_CODE);
+          return const Locale.fromSubtags(languageCode: VI_CODE);
         },
         localizationsDelegates: const [
           S.delegate,

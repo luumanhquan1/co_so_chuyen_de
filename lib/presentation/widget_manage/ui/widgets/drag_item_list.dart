@@ -43,9 +43,7 @@ class _DragItemListState extends State<DragItemList> {
                   ),
                 ),
                 child: WidgetItem(
-                  clickICon: (){
-
-                  },
+                  clickICon: () {},
                   widgetIcon: widget.isUsing
                       ? SvgPicture.asset(ImageAssets.icClose)
                       : SvgPicture.asset(ImageAssets.icAdd),

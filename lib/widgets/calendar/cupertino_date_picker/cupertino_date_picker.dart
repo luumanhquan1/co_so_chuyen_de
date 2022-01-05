@@ -1,4 +1,3 @@
-
 import 'dart:math' as math;
 
 import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/cuper_date_picker_extension.dart';
@@ -18,6 +17,7 @@ const double kSqueeze = 1.25;
 const TextStyle _kDefaultPickerTextStyle = TextStyle(
   letterSpacing: -0.83,
 );
+
 TextStyle themeTextStyle(BuildContext context) {
   return CupertinoTheme.of(context).textTheme.dateTimePickerTextStyle;
 }
@@ -88,14 +88,13 @@ class _DatePickerLayoutDelegate extends MultiChildLayoutDelegate {
 
 enum PickerColumnType {
   dayOfMonth,
-
   month,
-
   year,
 }
 
 class FlutterRoundedCupertinoDatePickerWidget extends StatefulWidget {
   final TextStyle textStyleDate;
+
   FlutterRoundedCupertinoDatePickerWidget({
     Key? key,
     this.mode = CupertinoDatePickerMode.dateAndTime,
@@ -242,7 +241,7 @@ class CupertinoDatePickerDateState
       curve: Curves.easeOut,
     );
     yearController.animateToItem(
-      selectedYear ,
+      selectedYear,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
     );

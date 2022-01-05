@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 abstract class MainState extends Equatable {
@@ -14,4 +13,3 @@ class Loading extends MainState {
   @override
   List<Object> get props => [];
 }
-

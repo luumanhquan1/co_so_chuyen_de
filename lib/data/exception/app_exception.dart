@@ -1,5 +1,3 @@
-
-
 import 'package:ccvc_mobile/generated/l10n.dart';
 
 class AppException implements Exception {

@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 
-extension DateExtension on DateTime{
+extension DateExtension on DateTime {
   String getDayofWeekTxt() {
     switch (weekday) {
       case 1:
