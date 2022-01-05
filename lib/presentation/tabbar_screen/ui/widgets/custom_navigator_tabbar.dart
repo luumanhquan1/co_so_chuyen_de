@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class BottomTabBarWidget extends StatelessWidget {
   final int selectItemIndex;
   final Function(TabBarType) onChange;
+
   const BottomTabBarWidget({
     Key? key,
     required this.selectItemIndex,

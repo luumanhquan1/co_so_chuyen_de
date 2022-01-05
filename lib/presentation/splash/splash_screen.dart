@@ -1,4 +1,4 @@
-import 'dart:async';
+
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -20,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void dispose() {
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
