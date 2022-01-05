@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
-import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/widget_item.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_widget_item.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,6 +43,9 @@ class _DragItemListState extends State<DragItemList> {
                   ),
                 ),
                 child: WidgetItem(
+                  clickICon: (){
+
+                  },
                   widgetIcon: widget.isUsing
                       ? SvgPicture.asset(ImageAssets.icClose)
                       : SvgPicture.asset(ImageAssets.icAdd),

@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
@@ -18,6 +17,7 @@ class WidgetManageScreen extends StatefulWidget {
 
 class _WidgetManageScreenState extends State<WidgetManageScreen> {
   WidgetManageCubit widgetManageCubit = WidgetManageCubit();
+
   @override
   void initState() {
     super.initState();
@@ -26,15 +26,14 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return WidgetManageProvider(
       widgetManageCubit: widgetManageCubit,
       child: Scaffold(
         appBar: AppBar(
-          title:  Text(
+          title: Text(
             S.current.widget_manage,
             style: textNormalCustom(
-                color:textTitle,
+              color: textTitle,
               fontSize: 18,
             ),
           ),
@@ -47,14 +46,14 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
               children: [
                 Center(
                   child: TextButton(
-                    child:  Text(S.current.default_word,
+                    child: Text(
+                      S.current.default_word,
                       style: textNormalCustom(
-                        color:textDefault,
+                        color: textDefault,
                         fontSize: 14,
                       ),
                     ),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 const SizedBox(
@@ -93,7 +92,7 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                   ),
                   child: Text(
                     S.current.keep_drop,
-                    style:const TextStyle(color:textTitle),
+                    style: const TextStyle(color: textTitle),
                   ),
                 ),
                 const SizedBox(
@@ -114,12 +113,14 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                   builder: (context, snapshot) {
                     final data = snapshot.data ?? [];
                     if (data.isNotEmpty) {
-                    final List<WidgetModel>listWidgetUsing = data;
-                      return DragItemList(listWidget: listWidgetUsing,
-                          widgetManageCubit: widgetManageCubit,
-                          isUsing: true,);
+                      final List<WidgetModel> listWidgetUsing = data;
+                      return DragItemList(
+                        listWidget: listWidgetUsing,
+                        widgetManageCubit: widgetManageCubit,
+                        isUsing: true,
+                      );
                     } else {
-                      return  Center(
+                      return Center(
                         child: Text(S.current.no_data),
                       );
                     }
@@ -143,19 +144,22 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                   builder: (context, snapshot) {
                     final data = snapshot.data ?? [];
                     if (data.isNotEmpty) {
-                    final List<WidgetModel> listWidgetNotUse = data;
-                      return DragItemList(listWidget: listWidgetNotUse,
-                          widgetManageCubit: widgetManageCubit,
-                          isUsing: false,);
+                      final List<WidgetModel> listWidgetNotUse = data;
+                      return DragItemList(
+                        listWidget: listWidgetNotUse,
+                        widgetManageCubit: widgetManageCubit,
+                        isUsing: false,
+                      );
                     } else {
-                      return  Center(
+                      return Center(
                         child: Text(S.current.no_data),
                       );
                     }
                   },
                 ),
               ],
-            ),),
+            ),
+          ),
         ),
       ),
     );
@@ -183,5 +187,3 @@ class WidgetManageProvider extends InheritedWidget {
     return true;
   }
 }
-
-
