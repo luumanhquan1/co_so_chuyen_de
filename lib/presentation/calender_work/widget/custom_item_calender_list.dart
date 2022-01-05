@@ -1,10 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CustomItemCalenderList extends StatelessWidget {
   final String title;
-
   final String dateTimeFrom;
   final String dateTimeTo;
   final String urlImage;
@@ -24,8 +24,8 @@ class CustomItemCalenderList extends StatelessWidget {
       width: 343.0,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: const Color(0xffffffff),
-          border: Border.all(color: const Color(0xffE2E8F0), width: 1.0)),
+          color: backgroundColorApp,
+          border: Border.all(color: borderItemCalender)),
       child: Padding(
         padding: const EdgeInsets.only(top: 11.0, bottom: 11.0, left: 16.0),
         child: Row(
@@ -51,22 +51,14 @@ class CustomItemCalenderList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          color: titleCalenderWork,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      '$dateTimeFrom - $dateTimeTo',
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          color: textBodyTime,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400),
-                    ),
+                    Text(title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: textNormalCustom(
+                            color: titleCalenderWork, fontSize: 16.0)),
+                    Text('$dateTimeFrom - $dateTimeTo',
+                        style: textNormalCustom(
+                            color: textBodyTime, fontWeight: FontWeight.w400)),
                     SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Row(
