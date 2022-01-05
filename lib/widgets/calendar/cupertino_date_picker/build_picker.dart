@@ -11,16 +11,16 @@ class BuildPicker extends StatelessWidget {
   final Function(int) onSelectItem;
   final bool canBorderLeft;
   final bool canBorderRight;
-  const BuildPicker(
-      {Key? key,
-      required this.offAxisFraction,
-      required this.controller,
-      required this.backgroundColor,
-      required this.children,
-      required this.onSelectItem,
-      this.canBorderRight = false,
-      this.canBorderLeft = false})
-      : super(key: key);
+  const BuildPicker({
+    Key? key,
+    required this.offAxisFraction,
+    required this.controller,
+    required this.backgroundColor,
+    required this.children,
+    required this.onSelectItem,
+    this.canBorderRight = false,
+    this.canBorderLeft = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

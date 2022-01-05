@@ -134,10 +134,6 @@ extension CupertinoDataPicker on CupertinoDatePickerDateState {
 
     for (int i = 0; i < columnWidths.length; i++) {
       final double offAxisFraction = (i - 1) * 0.3 * textDirectionFactor;
-
-      EdgeInsets padding = EdgeInsets.zero;
-      if (textDirectionFactor == -1) padding = EdgeInsets.zero;
-
       pickers.add(
         LayoutId(
           id: i,
@@ -145,11 +141,8 @@ extension CupertinoDataPicker on CupertinoDatePickerDateState {
             offAxisFraction,
             (BuildContext context, Widget? child) {
               return Container(
-                padding: i == 0 ? null : padding,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: child,
-                ),
+                alignment: Alignment.center,
+                child: child,
               );
             },
           ),

@@ -1,13 +1,12 @@
+
 import 'dart:math' as math;
 
-
-
+import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/cuper_date_picker_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rounded_date_picker/src/era_mode.dart';
-import 'cuper_date_picker_extension.dart';
 
 const double kItemExtent = 32.0;
 
@@ -135,7 +134,6 @@ class FlutterRoundedCupertinoDatePickerWidget extends StatefulWidget {
 
   final ValueChanged<DateTime> onDateTimeChanged;
 
-
   final EraMode? era;
   final Color background;
   final Color textColor;
@@ -200,7 +198,6 @@ class CupertinoDatePickerDateState
   Alignment? alignCenterLeft;
   Alignment? alignCenterRight;
 
-
   late int selectedDay;
   late int selectedMonth;
   late int selectedYear;
@@ -223,6 +220,32 @@ class CupertinoDatePickerDateState
     monthController =
         FixedExtentScrollController(initialItem: selectedMonth - 1);
     yearController = FixedExtentScrollController(initialItem: selectedYear);
+  }
+
+  @override
+  void didUpdateWidget(
+    covariant FlutterRoundedCupertinoDatePickerWidget oldWidget,
+  ) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    selectedDay = widget.initialDateTime.day;
+    selectedMonth = widget.initialDateTime.month;
+    selectedYear = widget.initialDateTime.year;
+    dayController.animateToItem(
+      selectedDay - 1,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
+    monthController.animateToItem(
+      selectedMonth - 1,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
+    yearController.animateToItem(
+      selectedYear ,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -257,7 +280,6 @@ class CupertinoDatePickerDateState
       context,
     );
   }
-
 
   bool _keepInValidRange(ScrollEndNotification notification) {
     final int desiredDay =
