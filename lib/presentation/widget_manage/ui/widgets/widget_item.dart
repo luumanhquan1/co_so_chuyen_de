@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -43,8 +45,7 @@ class _WidgetItemState extends State<WidgetItem> {
             children: [
               Text(
                 widget.content,
-                style:
-                const TextStyle(color: Color(0xff3D5586), fontSize: 16),
+                style:textNormal(textTitle, 16),
               ),
               IconButton(
                 onPressed: () {

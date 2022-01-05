@@ -1,5 +1,6 @@
 
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
@@ -34,10 +35,10 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
         appBar: AppBar(
           title:  Text(
             S.current.widget_manage,
-            style: const TextStyle(
-              color:textTitle,
+            style: textNormalCustom(
+                color:textTitle,
               fontSize: 18,
-              fontWeight: FontWeight.w500,),
+            ),
           ),
           centerTitle: true,
           elevation: 0,
@@ -49,10 +50,11 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                 Center(
                   child: TextButton(
                     child:  Text(S.current.default_word,
-                      style:const TextStyle(
-                        color: textDefault,
+                      style: textNormalCustom(
+                        color:textDefault,
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,),),
+                      ),
+                    ),
                     onPressed: () {},
                   ),
                 ),
@@ -100,10 +102,10 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                 ),
                 Text(
                   S.current.using,
-                  style: const TextStyle(
+                  style: textNormalCustom(
                     color: itemWidgetUsing,
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,),
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -189,10 +191,10 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                 ),
                 Text(
                   S.current.not_use,
-                  style:const TextStyle(
+                  style: textNormalCustom(
                     color: itemWidgetNotUse,
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,),
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
