@@ -2,18 +2,19 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:intl/intl.dart';
 
 class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(CalenderStateIntial());
 
   List<String> img = [
-    "tong_so_lich_lam_viec",
-    "lich_cong_tac_trong_nuoc",
-    "lich_lam_viec",
-    "lich_cong_tac_nuoc_ngoai",
-    "lich_tiep_dan",
-    "admin_tao"
+    ImageAssets.icTongSoLichLamviec,
+    ImageAssets.icLichCongTacTrongNuoc,
+    ImageAssets.icLichLamViec,
+    ImageAssets.icLichCongTacNuocNgoai,
+    ImageAssets.icLichTiepDan,
+    ImageAssets.icAdminTao,
   ];
   List<DashboardSchedule> list = [
     DashboardSchedule(1, "22ssads2", "Lịch công tác trong nước"),

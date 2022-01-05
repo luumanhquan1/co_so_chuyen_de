@@ -49,19 +49,23 @@ const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);
 const statusCalenderRed = Color(0xffEA5455);
-const borderItemCalender= Color(0xffF5F8FD);
-const numberOfCalenders= Color(0xff5A8DEE);
+const backgroundItemCalender = Color(0xffF5F8FD);
+const borderItemCalender = Color(0xffE2E8F0);
+const numberOfCalenders = Color(0xff5A8DEE);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);
 const unselectedLabelColor = Color(0xff667793);
 const indicatorColor = Color(0xff7966FF);
+const titleColor = Color(0xFF3D5586);
+
 
 
 
 const lineColor=Color(0xffECEEF7);
 const buttonColor=Color(0xff7966FF);
-
+//tabar color
+const unselectLabelColor = Color(0xFFA2AEBD);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();

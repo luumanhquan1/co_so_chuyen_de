@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widget_mange_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -54,7 +55,7 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.blue,
         );
       case TabBarType.calendarWork:
-        return MainTabarCalenderWork();
+        return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,
@@ -63,9 +64,8 @@ extension TabbarEnum on TabBarType {
         // return const Scaffold(
         //   backgroundColor: Colors.pink,
         // );
-        return const WidgetManageScreen();
 
-
+        return const TabbarNewspaper();
 
     }
   }

@@ -19,8 +19,18 @@ class ImageAssets {
   static const String icClose='$baseImg/ic_close.svg';
   static const String icNext='$baseImg/ic_next.svg';
   static const String icSinhNhat='$baseImg/ic_sinh_nhat.svg';
+
   static const String icPrevAppbar='$baseImg/prev_appbar.svg';
   static const String icAdd='$baseImg/add.svg';
+
+  static const String icMenuCalender='$baseImg/menu_calender.svg';
+  static const String icAddButtonCalender='$baseImg/add_button_calender.svg';
+  static const String icTongSoLichLamviec='$baseImg/tong_so_lich_lam_viec.svg';
+  static const String icLichCongTacTrongNuoc='$baseImg/lich_cong_tac_trong_nuoc.svg';
+  static const String icLichLamViec='$baseImg/lich_lam_viec.svg';
+  static const String icLichCongTacNuocNgoai='$baseImg/lich_cong_tac_nuoc_ngoai.svg';
+  static const String icLichTiepDan='$baseImg/lich_tiep_dan.svg';
+  static const String icAdminTao='$baseImg/admin_tao.svg';
   ///SvgImage
   static const String icStar ='$baseImg/ic_start.png';
 
