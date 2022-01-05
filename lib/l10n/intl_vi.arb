@@ -24,7 +24,16 @@
   "home" : "Trang chủ",
   "report" : "Báo cáo",
   "internal_interaction" : "Tương tác nội bộ",
-  "menu" : "Menu"
+  "menu" : "Menu",
+  "thu_hai" : "T.Hai",
+  "thu_ba" : "T.Ba",
+  "thu_tu" : "T.Tư",
+  "thu_nam" : "T.Năm",
+  "thu_sau" : "T.Sáu",
+  "thu_bay" : "T.Bảy",
+  "chu_nhat": "CN",
+  "chon_ngay" : "Chọn ngày",
+  "today" : "Hôm nay"
 
 
 

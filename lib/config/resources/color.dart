@@ -39,7 +39,8 @@ const subMenuColor = Color(0xff303742);
 const colorLineSearch = Color(0x80CACFD7);
 const colorPressedItemMenu = Color(0xffE7F8F8);
 const fittingBg = Color(0xFFF2F2F2);
-
+const lineColor=Color(0xffECEEF7);
+const buttonColor=Color(0xff7966FF);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
