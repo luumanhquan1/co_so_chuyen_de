@@ -25,15 +25,30 @@
   "report" : "Báo cáo",
   "internal_interaction" : "Tương tác nội bộ",
   "menu" : "Menu",
+<<<<<<< HEAD
   "using": "Đang sử dụng",
   "not_use": "Chưa sử dụng",
   "keep_drop": "Nhấn giữ kéo để di chuyển các dịch vụ ",
   "default_word": "Mặc Định",
   "no_data": "Không có dữ liệu",
   "widget_manage": "Quản lý widgets",
+=======
+
+>>>>>>> develop
   "enterkeysearch" : "Nhập từ khóa tìm kiếm",
   "inlistform" : "Theo dạng list",
-  "incalenderform" : "Theo dạng lịch"
+  "incalenderform" : "Theo dạng lịch",
+
+  "thu_hai" : "T.Hai",
+  "thu_ba" : "T.Ba",
+  "thu_tu" : "T.Tư",
+  "thu_nam" : "T.Năm",
+  "thu_sau" : "T.Sáu",
+  "thu_bay" : "T.Bảy",
+  "chu_nhat": "CN",
+  "chon_ngay" : "Chọn ngày",
+  "today" : "Hôm nay"
+
 
 
 }

@@ -58,6 +58,10 @@ const unselectedLabelColor = Color(0xff667793);
 const indicatorColor = Color(0xff7966FF);
 
 
+
+const lineColor=Color(0xffECEEF7);
+const buttonColor=Color(0xff7966FF);
+
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
