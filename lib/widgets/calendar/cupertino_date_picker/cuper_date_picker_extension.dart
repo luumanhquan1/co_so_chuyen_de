@@ -27,7 +27,7 @@ extension CupertinoDataPicker on CupertinoDatePickerDateState {
         return itemPositioningBuilder(
           context,
           Text(
-            '${DateTime(selectedYear, selectedMonth, index + 1).getDayofWeekTxt()}, ${localizations.datePickerDayOfMonth(index + 1)}',
+            _getDayOfWeek(index),
             style: widget.textStyleDate,
           ),
         );
@@ -42,6 +42,10 @@ extension CupertinoDataPicker on CupertinoDatePickerDateState {
         }
       },
     );
+  }
+
+  String _getDayOfWeek(int index) {
+    return '''${DateTime(selectedYear, selectedMonth, index + 1).getDayofWeekTxt()}, ${localizations.datePickerDayOfMonth(index + 1)}''';
   }
 
   Widget buildMonthPicker(

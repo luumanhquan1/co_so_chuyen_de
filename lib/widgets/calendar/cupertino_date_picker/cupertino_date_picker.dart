@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/build_picker.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,8 +52,6 @@ class _DatePickerLayoutDelegate extends MultiChildLayoutDelegate {
         childWidth += remainingWidth / 2;
       }
 
-      // We can't actually assert here because it would break things badly for
-      // semantics, which will expect that we laid things out here.
       assert(
         () {
           if (childWidth < 0) {
@@ -137,7 +135,7 @@ class FlutterRoundedCupertinoDatePickerWidget extends StatefulWidget {
 
   final ValueChanged<DateTime> onDateTimeChanged;
 
-  /// Customize
+
   final EraMode? era;
   final Color background;
   final Color textColor;
@@ -279,8 +277,8 @@ class CupertinoDatePickerDateState
 
   @override
   Widget build(BuildContext context) {
-    List<ColumnBuilder> pickerBuilders = <ColumnBuilder>[];
-    List<double> columnWidths = <double>[];
+    final List<ColumnBuilder> pickerBuilders = <ColumnBuilder>[];
+    final List<double> columnWidths = <double>[];
     final List<Widget> pickers = <Widget>[];
     addPickerCell(pickerBuilders, columnWidths, pickers);
     return Container(
