@@ -25,6 +25,12 @@
   "report": "Báo cáo",
   "internal_interaction": "Tương tác nội bộ",
   "menu": "Menu",
+  "using": "Đang sử dụng",
+  "not_use": "Chưa sử dụng",
+  "keep_drop": "Nhấn giữ kéo để di chuyển các dịch vụ ",
+  "default_word": "Mặc Định",
+  "no_data": "Không có dữ liệu",
+  "widget_manage": "Quản lý widgets",
   "enterkeysearch": "Nhập từ khóa tìm kiếm",
   "inlistform": "Theo dạng list",
   "incalenderform": "Theo dạng lịch",
@@ -35,10 +41,10 @@
   "thu_sau": "T.Sáu",
   "thu_bay": "T.Bảy",
   "chu_nhat": "CN",
-  "chon_ngay" : "Chọn ngày",
-  "today" : "Hôm nay",
+  "chon_ngay": "Chọn ngày",
+  "today": "Hôm nay",
   "bao_cao_thong_ke": "Báo cáo thống kê",
-  "tin_tuc_thoi_su" : "Tin tức thời sự",
-  "theo_doi_bai_viet" : "Theo dõi bài viết",
-  "tat_ca_chu_de" : "Tất cả chủ đề"
+  "tin_tuc_thoi_su": "Tin tức thời sự",
+  "theo_doi_bai_viet": "Theo dõi bài viết",
+  "tat_ca_chu_de": "Tất cả chủ đề"
 }

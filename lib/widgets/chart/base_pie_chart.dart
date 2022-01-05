@@ -6,6 +6,7 @@ class PieChart extends StatelessWidget {
   final List<ChartData> chartData;
   final String title;
   final double paddingTop;
+
   const PieChart({
     Key? key,
     required this.chartData,
@@ -86,7 +87,7 @@ class PieChart extends StatelessWidget {
                   Text(
                     '${result.title} (${result.value.toInt()})',
                     style: textNormal(
-                     const Color(0xff667793),
+                      const Color(0xff667793),
                       14,
                     ),
                   )
@@ -111,6 +112,7 @@ class PieChart extends StatelessWidget {
 
 class ChartData {
   ChartData(this.title, this.value, this.color);
+
   final String title;
   final double value;
   final Color color;

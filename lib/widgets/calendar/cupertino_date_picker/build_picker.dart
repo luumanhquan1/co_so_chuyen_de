@@ -1,6 +1,6 @@
+import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/cupertino_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/cupertino_date_picker.dart';
 
 class BuildPicker extends StatelessWidget {
   final double offAxisFraction;
@@ -11,6 +11,7 @@ class BuildPicker extends StatelessWidget {
   final Function(int) onSelectItem;
   final bool canBorderLeft;
   final bool canBorderRight;
+
   const BuildPicker({
     Key? key,
     required this.offAxisFraction,
@@ -48,12 +49,14 @@ class BuildPicker extends StatelessWidget {
 class CupertinoPickerDefaultSelectionOverlayWidget extends StatelessWidget {
   final bool canBorderLeft;
   final bool canBorderRight;
+
   const CupertinoPickerDefaultSelectionOverlayWidget({
     Key? key,
     this.canBorderLeft = false,
     this.canBorderRight = false,
   }) : super(key: key);
   static const double _border = 4;
+
   @override
   Widget build(BuildContext context) {
     return Container(

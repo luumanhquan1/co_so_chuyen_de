@@ -90,7 +90,6 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                     onTap: () {
                       baseChooseTimeCubit.checkToOption(
                         baseChooseTimeCubit.changeOption,
-
                       );
                     },
                     child: SvgPicture.asset(ImageAssets.icNextDropDown),

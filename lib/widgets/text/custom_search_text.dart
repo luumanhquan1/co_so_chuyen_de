@@ -22,7 +22,10 @@ class CustomSearchText extends StatelessWidget {
         textAlignVertical: TextAlignVertical.center,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.search,
-        style: textNormal(null, 16,),
+        style: textNormal(
+          null,
+          16,
+        ),
         decoration: InputDecoration(
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
