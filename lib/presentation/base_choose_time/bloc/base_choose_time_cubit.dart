@@ -12,27 +12,204 @@ class BaseChooseTimeCubit extends BaseCubit<BaseChooseTimeState> {
   String textContent = 'Ngày';
 
   //
-  DateTime now = DateTime.now();
+
   String textDisplayTime = '';
   String changeOption = 'Ngày';
+  String dateChange = '';
+  DateTime times = DateTime.now();
   BehaviorSubject<String> textDateTimeSubject = BehaviorSubject();
-  BehaviorSubject<DateTime> dateSubject = BehaviorSubject();
 
   Stream<String> get textDateTimeStream => textDateTimeSubject.stream;
 
-  Stream<DateTime> get toDateStream => dateSubject.stream;
-
   void getState(DateTime time) {
+    times = time;
     textDisplayTime = getDateToString(time);
     textDateTimeSubject.sink.add(textDisplayTime);
   }
 
-  void onNextDay() {
-    int a = now.millisecondsSinceEpoch;
+  void onNextDay(DateTime time) {
+    int a = time.millisecondsSinceEpoch;
     a = a + (24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(a);
-    textDisplayTime = getDateToString(now);
+    times = DateTime.fromMillisecondsSinceEpoch(a);
+    textDisplayTime = getDateToString(times);
     textDateTimeSubject.sink.add(textDisplayTime);
+  }
+
+  void onBackDay() {
+    int a = times.millisecondsSinceEpoch;
+    a = a - (24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(a);
+    textDisplayTime = getDateToString(times);
+    textDateTimeSubject.sink.add(textDisplayTime);
+  }
+
+  void ontoDay() {
+    final DateTime now = DateTime.now();
+    times = now;
+    textDisplayTime = getDateToString(times);
+    textDateTimeSubject.sink.add(textDisplayTime);
+  }
+
+  DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
+
+  void onNextWeek() {
+    int b = times.millisecondsSinceEpoch;
+    b = b + (7 * 24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(b);
+    final String a = DateFormat(DateFormat.WEEKDAY).format(times); // Tues
+    final weekDay = times.weekday == 7 ? 0 : times.weekday;
+    if (a == 'Sunday') {
+      textDisplayTime = getDateToString(
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(
+            times.subtract(
+              Duration(days: DateTime.daysPerWeek - weekDay - 1),
+            ),
+          ).millisecondsSinceEpoch,
+        ),
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.subtract(Duration(days: weekDay)))
+              .millisecondsSinceEpoch,
+        ),
+      );
+      textDateTimeSubject.sink.add(textDisplayTime);
+    } else {
+      textDisplayTime = getDateToString(
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.subtract(Duration(days: weekDay)))
+                  .millisecondsSinceEpoch +
+              (24 * 60 * 60 * 1000),
+        ),
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.add(Duration(days: DateTime.daysPerWeek - weekDay - 1)))
+                  .millisecondsSinceEpoch +
+              (24 * 60 * 60 * 1000),
+        ),
+      );
+      textDateTimeSubject.sink.add(textDisplayTime);
+    }
+  }
+
+  void onBackWeek() {
+    int b = times.millisecondsSinceEpoch;
+    b = b - (7 * 24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(b);
+    final String a = DateFormat(DateFormat.WEEKDAY).format(times); // Tues
+    final weekDay = times.weekday == 7 ? 0 : times.weekday;
+    if (a == 'Sunday') {
+      textDisplayTime = getDateToString(
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(
+            times.subtract(
+              Duration(days: DateTime.daysPerWeek - weekDay - 1),
+            ),
+          ).millisecondsSinceEpoch,
+        ),
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.subtract(Duration(days: weekDay)))
+              .millisecondsSinceEpoch,
+        ),
+      );
+      textDateTimeSubject.sink.add(textDisplayTime);
+    } else {
+      textDisplayTime = getDateToString(
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.subtract(Duration(days: weekDay)))
+                  .millisecondsSinceEpoch +
+              (24 * 60 * 60 * 1000),
+        ),
+        DateTime.fromMillisecondsSinceEpoch(
+          getDate(times.add(Duration(days: DateTime.daysPerWeek - weekDay - 1)))
+                  .millisecondsSinceEpoch +
+              (24 * 60 * 60 * 1000),
+        ),
+      );
+      textDateTimeSubject.sink.add(textDisplayTime);
+    }
+  }
+
+  void onNextMonth() {
+    final firstDayThisMonth = DateTime(times.year, times.month, times.day);
+    final firstDayNextMonth = DateTime(
+      firstDayThisMonth.year,
+      firstDayThisMonth.month + 1,
+      firstDayThisMonth.day,
+    );
+    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
+    int b = times.millisecondsSinceEpoch;
+    b = b + (c * 24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(b);
+    textDisplayTime = getDateToString(
+      DateTime.fromMillisecondsSinceEpoch(
+        DateTime.utc(
+          times.year,
+          times.month,
+        ).millisecondsSinceEpoch,
+      ),
+      DateTime.fromMillisecondsSinceEpoch(
+        DateTime.utc(
+          times.year,
+          times.month + 1,
+        ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
+      ),
+    );
+    textDateTimeSubject.sink.add(textDisplayTime);
+  }
+
+  void onBackMonth() {
+    final firstDayThisMonth = DateTime(times.year, times.month, times.day);
+    final firstDayNextMonth = DateTime(
+      firstDayThisMonth.year,
+      firstDayThisMonth.month + 1,
+      firstDayThisMonth.day,
+    );
+    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
+    int b = times.millisecondsSinceEpoch;
+    b = b - (c * 24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(b);
+    textDisplayTime = getDateToString(
+      DateTime.fromMillisecondsSinceEpoch(
+        DateTime.utc(
+          times.year,
+          times.month,
+        ).millisecondsSinceEpoch,
+      ),
+      DateTime.fromMillisecondsSinceEpoch(
+        DateTime.utc(
+          times.year,
+          times.month + 1,
+        ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
+      ),
+    );
+    textDateTimeSubject.sink.add(textDisplayTime);
+  }
+
+  void checkToOption(String a) {
+    switch (a) {
+      case 'Ngày':
+        onNextDay(times);
+        break;
+      case 'Tuần':
+        onNextWeek();
+        break;
+      case 'Tháng':
+        onNextMonth();
+        break;
+    }
+  }
+
+  void checkToOptionBackDay(String a) {
+    switch (a) {
+      case 'Ngày':
+        onBackDay();
+        break;
+      case 'Tuần':
+        onBackWeek();
+        break;
+      case 'Tháng':
+        onBackMonth();
+        break;
+    }
   }
 
   String getDateToString(DateTime time, [DateTime? endDate]) {
@@ -72,180 +249,6 @@ class BaseChooseTimeCubit extends BaseCubit<BaseChooseTimeState> {
     }
     return '$day Tháng $month,${time.year}';
     //
-  }
-
-  void onBackDay() {
-    int a = now.millisecondsSinceEpoch;
-    a = a - (24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(a);
-    textDisplayTime = getDateToString(now);
-    textDateTimeSubject.sink.add(textDisplayTime);
-  }
-
-  void ontoDay() {
-    final DateTime today = DateTime.now();
-    textDisplayTime = getDateToString(today);
-    textDateTimeSubject.sink.add(textDisplayTime);
-  }
-
-  DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
-
-  void onNextWeek() {
-    int b = now.millisecondsSinceEpoch;
-    b = b + (7 * 24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(b);
-    final String a = DateFormat(DateFormat.WEEKDAY).format(now); // Tues
-    final weekDay = now.weekday == 7 ? 0 : now.weekday;
-    if (a == 'Sunday') {
-      textDisplayTime = getDateToString(
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(
-            now.subtract(
-              Duration(days: DateTime.daysPerWeek - weekDay - 1),
-            ),
-          ).millisecondsSinceEpoch,
-        ),
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.subtract(Duration(days: weekDay))).millisecondsSinceEpoch,
-        ),
-      );
-      textDateTimeSubject.sink.add(textDisplayTime);
-    } else {
-      textDisplayTime = getDateToString(
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.subtract(Duration(days: weekDay)))
-                  .millisecondsSinceEpoch +
-              (24 * 60 * 60 * 1000),
-        ),
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.add(Duration(days: DateTime.daysPerWeek - weekDay - 1)))
-                  .millisecondsSinceEpoch +
-              (24 * 60 * 60 * 1000),
-        ),
-      );
-      textDateTimeSubject.sink.add(textDisplayTime);
-    }
-  }
-
-  void onBackWeek() {
-    int b = now.millisecondsSinceEpoch;
-    b = b - (7 * 24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(b);
-    final String a = DateFormat(DateFormat.WEEKDAY).format(now); // Tues
-    final weekDay = now.weekday == 7 ? 0 : now.weekday;
-    if (a == 'Sunday') {
-      textDisplayTime = getDateToString(
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(
-            now.subtract(
-              Duration(days: DateTime.daysPerWeek - weekDay - 1),
-            ),
-          ).millisecondsSinceEpoch,
-        ),
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.subtract(Duration(days: weekDay))).millisecondsSinceEpoch,
-        ),
-      );
-      textDateTimeSubject.sink.add(textDisplayTime);
-    } else {
-      textDisplayTime = getDateToString(
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.subtract(Duration(days: weekDay)))
-                  .millisecondsSinceEpoch +
-              (24 * 60 * 60 * 1000),
-        ),
-        DateTime.fromMillisecondsSinceEpoch(
-          getDate(now.add(Duration(days: DateTime.daysPerWeek - weekDay - 1)))
-                  .millisecondsSinceEpoch +
-              (24 * 60 * 60 * 1000),
-        ),
-      );
-      textDateTimeSubject.sink.add(textDisplayTime);
-    }
-  }
-
-  void onNextMonth() {
-    final firstDayThisMonth = DateTime(now.year, now.month, now.day);
-    final firstDayNextMonth = DateTime(
-      firstDayThisMonth.year,
-      firstDayThisMonth.month + 1,
-      firstDayThisMonth.day,
-    );
-    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
-    int b = now.millisecondsSinceEpoch;
-    b = b + (c * 24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(b);
-    textDisplayTime = getDateToString(
-      DateTime.fromMillisecondsSinceEpoch(
-        DateTime.utc(
-          now.year,
-          now.month,
-        ).millisecondsSinceEpoch,
-      ),
-      DateTime.fromMillisecondsSinceEpoch(
-        DateTime.utc(
-          now.year,
-          now.month + 1,
-        ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
-      ),
-    );
-    textDateTimeSubject.sink.add(textDisplayTime);
-  }
-
-  void onBackMonth() {
-    final firstDayThisMonth = DateTime(now.year, now.month, now.day);
-    final firstDayNextMonth = DateTime(
-      firstDayThisMonth.year,
-      firstDayThisMonth.month + 1,
-      firstDayThisMonth.day,
-    );
-    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
-    int b = now.millisecondsSinceEpoch;
-    b = b - (c * 24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(b);
-    textDisplayTime = getDateToString(
-      DateTime.fromMillisecondsSinceEpoch(
-        DateTime.utc(
-          now.year,
-          now.month,
-        ).millisecondsSinceEpoch,
-      ),
-      DateTime.fromMillisecondsSinceEpoch(
-        DateTime.utc(
-          now.year,
-          now.month + 1,
-        ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
-      ),
-    );
-    textDateTimeSubject.sink.add(textDisplayTime);
-  }
-
-  void checkToOption(String a) {
-    switch (a) {
-      case 'Ngày':
-        onNextDay();
-        break;
-      case 'Tuần':
-        onNextWeek();
-        break;
-      case 'Tháng':
-        onNextMonth();
-        break;
-    }
-  }
-
-  void checkToOptionBackDay(String a) {
-    switch (a) {
-      case 'Ngày':
-        onBackDay();
-        break;
-      case 'Tuần':
-        onBackWeek();
-        break;
-      case 'Tháng':
-        onBackMonth();
-        break;
-    }
   }
 
   void dispose() {

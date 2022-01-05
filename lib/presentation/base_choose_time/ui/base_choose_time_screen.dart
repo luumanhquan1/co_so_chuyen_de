@@ -68,6 +68,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      setState(() {});
                       baseChooseTimeCubit.checkToOptionBackDay(
                         baseChooseTimeCubit.changeOption,
                       );
@@ -89,6 +90,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                     onTap: () {
                       baseChooseTimeCubit.checkToOption(
                         baseChooseTimeCubit.changeOption,
+
                       );
                     },
                     child: SvgPicture.asset(ImageAssets.icNextDropDown),
