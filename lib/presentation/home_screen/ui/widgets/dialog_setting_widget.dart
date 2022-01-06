@@ -12,15 +12,19 @@ import 'package:flutter/material.dart';
 class DialogSettingWidget extends StatelessWidget {
   final List<DialogData>? listSelectKey;
   final Function(SelectKey)? onSelect;
-
+  final Widget? customDialog;
   final HomeItemType type;
-  const DialogSettingWidget(
-      {Key? key, this.listSelectKey, this.onSelect, required this.type})
-      : super(key: key);
+  const DialogSettingWidget({
+    Key? key,
+    this.listSelectKey,
+    this.onSelect,
+    required this.type,
+    this.customDialog,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return listSelectKey == null
+    return listSelectKey == null && customDialog == null
         ? const SizedBox()
         : StreamBuilder<HomeItemType?>(
             stream: HomeProvider.of(context).homeCubit.showDialogSetting,
@@ -41,21 +45,23 @@ class DialogSettingWidget extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(12)),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            List.generate(listSelectKey?.length ?? 0, (index) {
-                          final data = listSelectKey?[index] ??
-                              DialogData(key: [], title: '');
+                      child: customDialog ??
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: List.generate(listSelectKey?.length ?? 0,
+                                (index) {
+                              final data = listSelectKey?[index] ??
+                                  DialogData(key: [], title: '');
 
-                          return Padding(
-                            padding: EdgeInsets.only(top: index == 0 ? 0 : 26),
-                            child: SelectCell(
-                              data: data,
-                            ),
-                          );
-                        }),
-                      ),
+                              return Padding(
+                                padding:
+                                    EdgeInsets.only(top: index == 0 ? 0 : 26),
+                                child: SelectCell(
+                                  data: data,
+                                ),
+                              );
+                            }),
+                          ),
                     )
                   : const SizedBox();
             },
@@ -109,10 +115,8 @@ class _SelectCellState extends State<SelectCell> {
                   title: data.getText(),
                   groupValue: selectKey,
                   onChange: (value) {
-                    selectKey=value??SelectKey.HOM_NAY;
-                    setState(() {
-
-                    });
+                    selectKey = value ?? SelectKey.HOM_NAY;
+                    setState(() {});
                   },
                 ),
               ),

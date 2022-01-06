@@ -5,28 +5,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ImageAssets {
   ///Svg path
   static const String icBack = '$baseImg/ic_back.svg';
-  static const String icHomeFocus='$baseImg/ic_home.svg';
-  static const String icHomeUnFocus='$baseImg/ic_home_unfocus.svg';
-  static const String icChartUnFocus='$baseImg/ic_chart.svg';
-  static const String icChartFocus='$baseImg/ic_bao_cao.svg';
-  static const String icCalendarUnFocus='$baseImg/ic_calendar.svg';
-  static const String icCalendarFocus='$baseImg/ic_calendar_focus.svg';
-  static const String icMessageUnFocus='$baseImg/ic_message.svg';
-  static const String icMessageFocus='$baseImg/ic_chat_focus.svg';
-  static const String icMenuUnFocus='$baseImg/ic_menu.svg';
-  static const String icMenuFocus='$baseImg/ic_menu_focus.svg';
-  static const String icPlus='$baseImg/ic_cong.svg';
-  static const String icClose='$baseImg/ic_close.svg';
-  static const String icNext='$baseImg/ic_next.svg';
-  static const String icSinhNhat='$baseImg/ic_sinh_nhat.svg';
-  static const String icMore='$baseImg/ic_more.svg';
+  static const String icHomeFocus = '$baseImg/ic_home.svg';
+  static const String icHomeUnFocus = '$baseImg/ic_home_unfocus.svg';
+  static const String icChartUnFocus = '$baseImg/ic_chart.svg';
+  static const String icChartFocus = '$baseImg/ic_bao_cao.svg';
+  static const String icCalendarUnFocus = '$baseImg/ic_calendar.svg';
+  static const String icCalendarFocus = '$baseImg/ic_calendar_focus.svg';
+  static const String icMessageUnFocus = '$baseImg/ic_message.svg';
+  static const String icMessageFocus = '$baseImg/ic_chat_focus.svg';
+  static const String icMenuUnFocus = '$baseImg/ic_menu.svg';
+  static const String icMenuFocus = '$baseImg/ic_menu_focus.svg';
+  static const String icPlus = '$baseImg/ic_cong.svg';
+  static const String icClose = '$baseImg/ic_close.svg';
+  static const String icNext = '$baseImg/ic_next.svg';
+  static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
+  static const String icMore = '$baseImg/ic_more.svg';
+  static const String icEdit = '$baseImg/ic_edit.svg';
+  static const String icStarUnfocus='$baseImg/ic_start_unfocus.svg';
+  static const String icStarFocus= '$baseImg/ic_start_focus.svg';
+
   ///SvgImage
-  static const String icStar ='$baseImg/ic_start.png';
-  static const String appBarBackground='$baseImg/app_bar_background.png';
-  static const String headerBackground='$baseImg/header_background.png';
+  static const String icStar = '$baseImg/ic_start.png';
+  static const String appBarBackground = '$baseImg/app_bar_background.png';
+  static const String headerBackground = '$baseImg/header_background.png';
 
   ///gif
-  static const String gifKhanCap='$baseImg/gif_khan_cap.gif';
+  static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
   static SvgPicture svgAssets(
     String name, {
     Color? color,
@@ -52,6 +56,5 @@ class ImageAssets {
     );
   }
 
-  static const Map<String, List<double>> _svgImageSize = {
-  };
+  static const Map<String, List<double>> _svgImageSize = {};
 }

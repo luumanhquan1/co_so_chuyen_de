@@ -39,6 +39,7 @@ const subMenuColor = Color(0xff303742);
 const colorLineSearch = Color(0x80CACFD7);
 const colorPressedItemMenu = Color(0xffE7F8F8);
 const fittingBg = Color(0xFFF2F2F2);
+
 const homeColor =Color(0xffEEF3FF);
 const borderColor = Color(0xffDBDFEF);
 const AqiColor = Color(0xffA2AEBD);
@@ -54,8 +55,27 @@ const choCapSoColor=Color(0xffFF6D99);
 const choBanHanhColor=Color(0xff374FC7);
 const radioUnfocusColor=Color(0xffE2E8F0);
 const radioFocusColor=Color(0xff7966FF);
-
+const borderButtomColor=Color(0xffE2E8F0);
 const backgroundRowColor = Color(0xffF5F8FD);
+
+
+const backgroundColorApp = Color(0xffffffff);
+const titleCalenderWork = Color(0xff3D5586);
+const textBodyTime = Color(0xffA2AEBD);
+const statusCalenderRed = Color(0xffEA5455);
+const borderItemCalender= Color(0xffF5F8FD);
+const numberOfCalenders= Color(0xff5A8DEE);
+
+//tabbar color
+const labelColor = Color(0xff7966FF);
+const unselectedLabelColor = Color(0xff667793);
+const indicatorColor = Color(0xff7966FF);
+
+
+const lineColor=Color(0xffECEEF7);
+const buttonColor=Color(0xff7966FF);
+
+
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
@@ -152,7 +172,7 @@ class LightApp extends AppColor {
 
   @override
   Color titleColor() {
-   return const Color(0xff3D5586);
+    return const Color(0xff3D5586);
   }
 
   @override
@@ -229,7 +249,7 @@ class DarkApp extends AppColor {
 
   @override
   Color titleColor() {
-      return const Color(0xffFFFFFF);
+    return const Color(0xffFFFFFF);
   }
 
   @override

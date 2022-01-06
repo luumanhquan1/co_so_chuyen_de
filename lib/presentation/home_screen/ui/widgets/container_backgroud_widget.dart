@@ -15,16 +15,20 @@ class ContainerBackgroundWidget extends StatefulWidget {
   final Widget? dialogSelect;
   final EdgeInsetsGeometry? padding;
   final Function()? onTapIcon;
-  const ContainerBackgroundWidget({
-    Key? key,
-    required this.child,
-    required this.title,
-    this.urlIcon = ImageAssets.icMore,
-    this.leadingIcon,
-    this.dialogSelect,
-    this.padding,
-    this.onTapIcon,
-  }) : super(key: key);
+  final double spacingTitle;
+  final EdgeInsetsGeometry paddingChild;
+  const ContainerBackgroundWidget(
+      {Key? key,
+      required this.child,
+      required this.title,
+      this.urlIcon = ImageAssets.icMore,
+      this.leadingIcon,
+      this.dialogSelect,
+      this.padding,
+      this.onTapIcon,
+      this.spacingTitle = 20,
+      this.paddingChild = const EdgeInsets.symmetric(vertical: 20)})
+      : super(key: key);
 
   @override
   _ContainerBackgroudWidgetState createState() =>
@@ -37,7 +41,7 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
     return Container(
       color: AppTheme.getInstance().backGroundColor(),
       constraints: const BoxConstraints(minHeight: 300),
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: widget.paddingChild,
       margin: const EdgeInsets.only(top: 6),
       child: Stack(
         children: [
@@ -77,6 +81,7 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
                         GestureDetector(
                           onTap: () {
                             if (widget.onTapIcon != null) {
+
                               widget.onTapIcon!();
                             } else {}
                           },
@@ -85,8 +90,8 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: widget.spacingTitle,
                   ),
                   Padding(
                     padding: widget.padding ??

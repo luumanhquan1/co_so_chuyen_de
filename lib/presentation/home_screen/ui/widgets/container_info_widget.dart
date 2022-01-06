@@ -56,7 +56,10 @@ class ContainerInfoWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Row(
                   children: [
-                    SvgPicture.asset(data.urlIcon),
+                    if (data.urlIcon.isEmpty)
+                      const SizedBox()
+                    else
+                      SvgPicture.asset(data.urlIcon),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Text(

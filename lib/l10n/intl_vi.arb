@@ -52,7 +52,20 @@
   "cho_trinh_ky" : "Chờ trình ký",
   "cho_cap_so" : "Chờ cấp số",
   "cho_ban_hanh" : "Chờ ban hành",
-  "khong_co_du_lieu" : "Không có dữ liệu"
+  "khong_co_du_lieu" : "Không có dữ liệu",
+  "enterkeysearch" : "Nhập từ khóa tìm kiếm",
+  "inlistform" : "Theo dạng list",
+  "incalenderform" : "Theo dạng lịch",
+  "thu_hai" : "T.Hai",
+  "thu_ba" : "T.Ba",
+  "thu_tu" : "T.Tư",
+  "thu_nam" : "T.Năm",
+  "thu_sau" : "T.Sáu",
+  "thu_bay" : "T.Bảy",
+  "chu_nhat": "CN",
+  "chon_ngay" : "Chọn ngày",
+  "da_hoan_thanh" : "Đã hoàn thành",
+  "them_cong_viec" : "Thêm công việc"
 
 
 

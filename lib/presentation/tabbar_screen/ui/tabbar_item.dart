@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,9 +51,7 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.blue,
         );
       case TabBarType.calendarWork:
-        return const Scaffold(
-          backgroundColor: Colors.yellow,
-        );
+        return MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,

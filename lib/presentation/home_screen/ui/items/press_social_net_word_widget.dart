@@ -42,11 +42,11 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
           )
         ],
       ),
-padding: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
       child: Column(
         children: [
           tagWidget(),
-         const SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Padding(
