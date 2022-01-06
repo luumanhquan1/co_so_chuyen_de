@@ -14,7 +14,6 @@ bool isEmail(String email) {
   return RegExp(EMAIL_REGEX).hasMatch(email);
 }
 
-
 /// validate vietnam phone number
 bool isVNPhone(String phone) {
   return RegExp(VN_PHONE).hasMatch(phone);
@@ -89,18 +88,19 @@ Future<String> getDeviceId() async {
 
 void showLoading(BuildContext context, {Function? close}) {
   showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) {
-        return WillPopScope(
-          child: Center(
-            child: CircularProgressIndicator(
-              color: AppTheme.getInstance().primaryColor(),
-            ),
+    context: context,
+    barrierDismissible: false,
+    builder: (ctx) {
+      return WillPopScope(
+        child: Center(
+          child: CircularProgressIndicator(
+            color: AppTheme.getInstance().primaryColor(),
           ),
-          onWillPop: () async => false,
-        );
-      },).then(
+        ),
+        onWillPop: () async => false,
+      );
+    },
+  ).then(
     (value) {
       if (close != null) close(value);
     },

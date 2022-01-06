@@ -13,5 +13,6 @@ Future<void> launchURL(String url) async {
 
 void updateLocale() {
   Get.updateLocale(
-      Locale.fromSubtags(languageCode: PrefsService.getLanguage()),);
+    Locale.fromSubtags(languageCode: PrefsService.getLanguage()),
+  );
 }

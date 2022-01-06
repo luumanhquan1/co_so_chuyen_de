@@ -36,6 +36,9 @@ dependencies:
   table_calendar: ^3.0.2
   image_picker: ^0.8.4+3
   syncfusion_flutter_charts: ^19.4.38
+  flutter_rounded_date_picker: ^2.0.2
+  syncfusion_flutter_calendar: ^19.4.40
+  date_format: ^2.0.2
 
   #Library helpful
   intl: ^0.17.0
@@ -55,12 +58,14 @@ dependencies:
 
   carousel_slider: ^4.0.0-nullsafety.0
   dots_indicator: ^2.0.0
+  dotted_border:
   #svg
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
   dart_ipify: ^1.1.0
   crypto: ^3.0.1
   shimmer: ^2.0.0
+
 
   # GETX
   get: ^4.1.4
