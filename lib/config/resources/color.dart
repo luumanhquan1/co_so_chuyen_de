@@ -45,6 +45,10 @@ const backgroundWidget = Color(0xffF0F6FF);
 const textDefault = Color(0xff7966FF);
 const textTitle = Color(0xff3D5586);
 
+const textDropDownColor = Color(0xff3D5586);
+const bgDropDown = Color(0xFFE2E8F0);
+const bgButtonDropDown = Color(0xff7966FF);
+
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);

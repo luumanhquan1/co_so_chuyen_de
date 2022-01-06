@@ -19,10 +19,6 @@ class ImageAssets {
   static const String icClose = '$baseImg/ic_close.svg';
   static const String icNext = '$baseImg/ic_next.svg';
   static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
-
-  static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
-  static const String icAdd = '$baseImg/add.svg';
-
   static const String icMenuCalender = '$baseImg/menu_calender.svg';
   static const String icAddButtonCalender = '$baseImg/add_button_calender.svg';
   static const String icTongSoLichLamviec =
@@ -34,6 +30,13 @@ class ImageAssets {
       '$baseImg/lich_cong_tac_nuoc_ngoai.svg';
   static const String icLichTiepDan = '$baseImg/lich_tiep_dan.svg';
   static const String icAdminTao = '$baseImg/admin_tao.svg';
+  static const String icNextDropDown = '$baseImg/ic_next_drop_down.svg';
+  static const String icBackDropDown = '$baseImg/ic_back_drop_down.svg';
+  static const String icDropDownButton =
+      '$baseImg/ic_drop_down_button_down.svg';
+
+  static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
+  static const String icAdd = '$baseImg/add.svg';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
