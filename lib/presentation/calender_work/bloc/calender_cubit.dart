@@ -3,7 +3,10 @@ import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(CalenderStateIntial());
@@ -30,4 +33,29 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     MeetingSchedule("hung", "2021-12-29T13:45:00", "2021-12-29T15:45:00"),
   ];
   dynamic currentTime = DateFormat.yMMMEd().format(DateTime.now());
+
+  DataSource getCalenderDataSource() {
+    List<Appointment> appointments = [];
+    RecurrenceProperties recurrence =
+    RecurrenceProperties(startDate: DateTime.now());
+    recurrence.recurrenceType = RecurrenceType.daily;
+    recurrence.interval = 2;
+    recurrence.recurrenceRange = RecurrenceRange.noEndDate;
+    recurrence.recurrenceCount = 10;
+    for (int i = 0; i < listMeeting.length; i++) {
+      appointments.add(Appointment(
+        startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
+        endTime: DateTime.parse(listMeeting[i].dateTimeTo),
+        subject: listMeeting[i].title,
+        color: Colors.blue,
+      ));
+    }
+    return DataSource(appointments);
+  }
+}
+
+class DataSource extends CalendarDataSource {
+  DataSource(List<Appointment> source) {
+    appointments = source;
+  }
 }
