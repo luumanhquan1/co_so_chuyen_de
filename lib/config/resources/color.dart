@@ -45,6 +45,7 @@ const indicatorColor = Color(0xFF7966FF);
 const unselectLabelColor = Color(0xFFA2AEBD);
 const labelColor = Color(0xFF304261);
 const titleColor = Color(0xFF3D5586);
+const dateColor = Color(0xFF667793);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
