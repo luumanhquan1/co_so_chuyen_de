@@ -28,11 +28,11 @@ class ItemDrawerMenu extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-              height: 32, width: 32, child: Image.asset(menuItem.iconAsset())),
-          const SizedBox(
-            width: 12,
-          ),
+          // Container(
+          //     height: 32, width: 32, child: Image.asset(menuItem.iconAsset())),
+          // const SizedBox(
+          //   width: 12,
+          // ),
           Expanded(
             child: Text(
               menuItem.key,

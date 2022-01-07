@@ -1,22 +1,33 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/menu_item_schedule.dart';
+import 'package:ccvc_mobile/presentation/list_menu/bloc/list_menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/list_menu/widget/item_drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/widget/item_expandable_menu.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ModelMenuCCVC extends StatefulWidget {
   final Animation<Offset> offsetAnimation;
   final String title;
+  final String image;
 
   // const ModelMenuCCVC({Key? key}) : super(key: key);
-  const ModelMenuCCVC(this.offsetAnimation, this.title);
+  const ModelMenuCCVC(this.offsetAnimation, this.title,this.image);
 
   @override
   _ModelMenuCCVCState createState() => _ModelMenuCCVCState();
 }
 
 class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
+  late ListMenuCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = ListMenuCubit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,7 +43,6 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                   child: Scaffold(
                     backgroundColor: backgroundDrawerMenu,
                     appBar: AppBar(
-                      // shadowColor: Color(0xff333333),
                       title: Text(
                         widget.title,
                         style: const TextStyle(fontSize: 14),
@@ -41,7 +51,7 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                       leading: Builder(
                         builder: (BuildContext context) {
                           return IconButton(
-                            icon: const Icon(Icons.menu),
+                            icon: SvgPicture.asset(widget.image),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -50,53 +60,14 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                       ),
                     ),
                     body: SafeArea(
-                      child: StreamBuilder<List<MenuItemSchedule>>(
-
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<MenuItemSchedule>>snapShot) {
-                          final items = snapShot.data ?? [];
-                          if (items.isNotEmpty) {
-                            return ListView.separated(
-                              padding: const EdgeInsets.all(16),
-                              itemCount: items.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return GestureDetector(
-                                  child: ItemDrawerMenu(
-                                    menuItem: items[index],
-                                  ),
-                                  onTap: () => {
-                                    // widget._viewModel
-                                    //     .didSelectMenuItem(items[index]),
-                                    Navigator.pop(context, items[index].key),
-                                  },
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const Divider(
-                                color: Colors.transparent,
-                              ),
-                            );
-                          } else {
-                            return ListView.separated(
-                              padding: const EdgeInsets.all(16),
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                // return Container();
-                                return GestureDetector(
-                                  child: ItemExpandableMenu(title: 'okok'),
-                                  onTap: () => {
-                                    Navigator.pop(context, items[index].key),
-                                  },
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const Divider(
-                                color: Colors.transparent,
-                              ),
-                            );
-                          }
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _cubit.menuItems.length,
+                        itemBuilder: (context, index) {
+                          // return ItemDrawerMenu(
+                          //   menuItem: _cubit.fakeDataMenu()[index],
+                          // );
+                          return ItemExpandableMenu(image: _cubit.img[index],title: _cubit.menuItems[index].menuTitle, cubit: _cubit,);
                         },
                       ),
                     ),

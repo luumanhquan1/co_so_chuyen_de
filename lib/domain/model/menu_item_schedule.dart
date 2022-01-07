@@ -4,27 +4,25 @@ class MenuItemSchedule {
   final int badgeNumber;
   List<ChildrenMenuItem> children;
 
-  MenuItemSchedule(
-      {required this.key,
-      required this.menuTitle,
-      required this.badgeNumber,
-      required this.children});
-
-  String iconAsset() {
-    return 'assets/images/' + key + '.svg';
-  }
+  MenuItemSchedule({
+    required this.key,
+    required this.menuTitle,
+    required this.badgeNumber,
+    required this.children,
+  });
 }
 
 class ChildrenMenuItem {
   final bool isSelected;
   final String title;
   final int number;
-  List<ChildrenMenuItem> children;
+  // List<ChildrenMenuItem> children;
 
   ChildrenMenuItem(
-    this.isSelected,
-    this.title,
-    this.number,
-    this.children,
+  {required this.isSelected,
+    required this.title,
+    required this.number,
+    // required this.children,
+  }
   );
 }

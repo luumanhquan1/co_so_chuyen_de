@@ -1,12 +1,18 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/presentation/list_menu/bloc/list_menu_cubit.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ItemExpandableMenu extends StatefulWidget {
   late String title;
+  final String image;
+  final ListMenuCubit cubit;
 
-  ItemExpandableMenu({Key? key, required this.title}) : super(key: key);
+  ItemExpandableMenu(
+      {Key? key, required this.title, required this.image, required this.cubit})
+      : super(key: key);
 
   @override
   State createState() {
@@ -35,7 +41,7 @@ class ItemExpandableMenuState extends State<ItemExpandableMenu> {
               ),
               header: Row(
                 children: [
-                  const Icon(Icons.margin),
+                  SvgPicture.asset(widget.image),
                   const SizedBox(
                     width: 15,
                   ),
@@ -50,16 +56,17 @@ class ItemExpandableMenuState extends State<ItemExpandableMenu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ListTile(
-                    title: const Text(
-                      'Item 1',
-                      style: TextStyle(color: fontColor),
+                    title: Text(
+                      widget.cubit.menuItems[0].children[0].title,
+                      style: const TextStyle(color: fontColor),
                     ),
                     trailing: Container(
                       color: buttonColor,
                       height: 15,
                       width: 20,
-                      child:
-                          const Text('12', style: TextStyle(color: fontColor)),
+                      child: Text(
+                          widget.cubit.menuItems[0].children[0].number.toString(),
+                          style: const TextStyle(color: fontColor)),
                     ),
                     onTap: () {
                       Navigator.pop(context);

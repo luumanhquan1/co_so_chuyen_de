@@ -40,7 +40,7 @@ class _MainTabarCalenderWorkState extends State<MainTabarCalenderWork> {
                       const end = Offset.zero;
                       final tween = Tween(begin: begin, end: end);
                       final offsetAnimation = animation.drive(tween);
-                      return ModelMenuCCVC(offsetAnimation, 'Họp');
+                      return ModelMenuCCVC(offsetAnimation, 'Lịch làm việc', ImageAssets.icMenuCalender);
                     },
                     opaque: false,
                   ),
