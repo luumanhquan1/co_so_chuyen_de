@@ -37,9 +37,11 @@ class ImageAssets {
 
   static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
   static const String icAdd = '$baseImg/add.svg';
+  static const String imgLogin = '$baseImg/img_login.png';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
+
 
   static SvgPicture svgAssets(
     String name, {
