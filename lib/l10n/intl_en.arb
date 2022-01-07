@@ -46,5 +46,9 @@
   "bao_cao_thong_ke": "Báo cáo thống kê",
   "tin_tuc_thoi_su": "Tin tức thời sự",
   "theo_doi_bai_viet": "Theo dõi bài viết",
-  "tat_ca_chu_de": "Tất cả chủ đề"
+  "tin_tuc_thoi_su" : "Tin tức thời sự",
+  "theo_doi_bai_viet" : "Theo dõi bài viết",
+  "tat_ca_chu_de" : "Tất cả chủ đề",
+  "nghe_doc_tin" : "Nghe đọc tin",
+  "tin_tong_hop" : "Tin tổng hợp"
 }
