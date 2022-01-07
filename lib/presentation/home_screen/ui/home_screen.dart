@@ -20,13 +20,15 @@ class HomeScreen extends StatefulWidget {
 
 class _MyHomePageState extends State<HomeScreen> {
   ScrollController scrollController = ScrollController();
-HomeCubit homeCubit=HomeCubit();
-@override
+  HomeCubit homeCubit = HomeCubit();
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
   }
+
   @override
   Widget build(BuildContext context) {
     return HomeProvider(
@@ -38,7 +40,7 @@ HomeCubit homeCubit=HomeCubit();
           title: Text(
             S.current.home,
             style: textNormalCustom(
-                fontSize: 18, color: AppTheme.getInstance().backGroundColor(),),
+              fontSize: 18, color: AppTheme.getInstance().backGroundColor(),),
           ),
           centerTitle: true,
           flexibleSpace: Container(
@@ -64,7 +66,8 @@ HomeCubit homeCubit=HomeCubit();
                 children: [
                   const HeaderWidget(),
                   Column(
-                    children: List.generate(HomeItemType.values.length, (index) {
+                    children: List.generate(
+                        HomeItemType.values.length, (index) {
                       final type = HomeItemType.values[index];
                       return type.getItems();
                     }),
@@ -79,18 +82,23 @@ HomeCubit homeCubit=HomeCubit();
     );
   }
 }
+
 class HomeProvider extends InheritedWidget {
   final HomeCubit homeCubit;
+
   const HomeProvider({
     Key? key,
     required this.homeCubit,
     required Widget child,
   }) : super(key: key, child: child);
-  static HomeProvider of(BuildContext context){
-    final HomeProvider? result=context.dependOnInheritedWidgetOfExactType<HomeProvider>();
-    assert(result!=null,'No elenment');
+
+  static HomeProvider of(BuildContext context) {
+    final HomeProvider? result = context.dependOnInheritedWidgetOfExactType<
+        HomeProvider>();
+    assert(result != null, 'No elenment');
     return result!;
   }
+
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
     return true;
