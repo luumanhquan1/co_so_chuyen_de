@@ -34,10 +34,11 @@ class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
       ),
       centerTitle: true,
       leading: IconButton(
-          onPressed: () => {Navigator.pop(context)},
-          icon: SvgPicture.asset(
-            ImageAssets.icBack,
-          )),
+        onPressed: () => {Navigator.pop(context)},
+        icon: SvgPicture.asset(
+          ImageAssets.icBack,
+        ),
+      ),
     );
   }
 }

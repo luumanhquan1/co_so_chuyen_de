@@ -101,12 +101,27 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
           ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children:  [
-              ItemListBangTin(tin: 'ascasdasf', isCheck: false),
-              ItemListBangTin(tin: 'ascasdasf', isCheck: false),
-              ItemListBangTin(tin: 'ascasdasf', isCheck: true),
-              ItemListBangTin(tin: 'ascasdasf', isCheck: false),
-              ItemListBangTin(tin: 'ascasdasf', isCheck: false),
+            children: [
+              ItemListBangTin(
+                  tin:
+                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                  isCheck: false),
+              ItemListBangTin(
+                  tin:
+                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                  isCheck: false),
+              ItemListBangTin(
+                  tin:
+                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                  isCheck: true),
+              ItemListBangTin(
+                  tin:
+                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                  isCheck: false),
+              ItemListBangTin(
+                  tin:
+                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                  isCheck: false),
             ],
           )
         ],

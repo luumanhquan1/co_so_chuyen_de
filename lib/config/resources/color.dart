@@ -86,8 +86,25 @@ const buttonColor = Color(0xff7966FF);
 const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+//drawer menu color
+const backgroundDrawerMenu = Color(0xFF333333);
+const backgroundDrawer = Colors.black12;
+const fontColor = Colors.white;
+
+
+
 
 const dateColor = Color(0xFF667793);
+
+//tất cả chủ đề color
+const textColorTongTin = Color(0xFF39CEAD);
+const textColorBaoChi = Color(0xFFF763A0);
+const textColorMangXaHoi = Color(0xFF2F80ED);
+const textColorForum = Color(0xFFFF9F43);
+const textColorBlog = Color(0xFF7367F0);
+const textColorNguonKhac = Color(0xFFF57168);
+const titleColumn = Color(0xFF667793);
+const iconColor = Color(0xFFDADADA);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

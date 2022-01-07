@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,6 @@ extension TabbarEnum on TabBarType {
   }
 
   Widget getScreen() {
-    final a = DateTime.parse('2001-04-25');
     switch (this) {
       case TabBarType.home:
         return const HomeScreen();
@@ -61,11 +61,8 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
-        // return const Scaffold(
-        //   backgroundColor: Colors.pink,
-        // );
+        return const MenuScreen();
 
-        return const LoginScreen();
     }
   }
 
