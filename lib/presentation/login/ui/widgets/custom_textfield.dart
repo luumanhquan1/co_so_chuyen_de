@@ -1,20 +1,18 @@
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool isPass;
   final String? textHint;
   final Widget? prefixIcon;
-  final FocusNode? focusNode;
-  final TextEditingController? controller;
   final LoginCubit loginCubit;
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
 
   const CustomTextField(
       {Key? key,
-      this.focusNode,
-      this.controller,
       this.onChange,
       this.onSubmit,
       this.textHint,
@@ -37,8 +35,6 @@ class CustomTextField extends StatelessWidget {
         }
         return TextFormField(
           obscureText: chekPassWord,
-          focusNode: focusNode,
-          controller: controller,
           textAlignVertical: TextAlignVertical.center,
           cursorColor: Colors.black12,
           style: const TextStyle(
@@ -46,16 +42,22 @@ class CustomTextField extends StatelessWidget {
             color: Colors.black,
           ),
           decoration: InputDecoration(
-            prefixIcon: prefixIcon,
+            prefixIcon: SizedBox(
+                width: 50, height: 14,  child: prefixIcon),
+            prefixIconConstraints: const BoxConstraints(
+              maxWidth: 40,
+              maxHeight: 14,
+            ),
             suffixIcon: Visibility(
               visible: isPass,
               child: IconButton(
-                icon: const Icon(Icons.stream),
+                icon: SvgPicture.asset(ImageAssets.imgView),
                 onPressed: () {
                   loginCubit.getIsShowPassWord(isShow: !data);
                 },
               ),
             ),
+            contentPadding: const EdgeInsets.only(left: 20),
             isCollapsed: true,
             fillColor: const Color(0xffE2E8F0).withOpacity(0.1),
             filled: true,
@@ -82,7 +84,7 @@ class CustomTextField extends StatelessWidget {
           },
           validator: (String? value) {
             if (value == null || value.trim().isEmpty) {
-              return 'email must not be empty';
+              return 'must not be empty';
             }
             return null;
           },

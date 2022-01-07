@@ -1,8 +1,10 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckBox extends StatefulWidget {
-  final String title;
+  final  title;
   bool isCheck;
   final Function(bool check) onChange;
 
@@ -43,7 +45,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         ),
         Text(
           widget.title,
-          style: const TextStyle(fontSize: 14),
+          style:textNormal(titleColor,14),
         )
       ],
     );
