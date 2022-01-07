@@ -39,7 +39,9 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
             Icons.arrow_back_ios,
             color: unselectLabelColor,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(

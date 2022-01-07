@@ -93,7 +93,8 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                   child: GestureDetector(
                     onTap: () {
                       showBottomSheet(
-                          context: widget.pContext,
+                          // context: widget.pContext,
+                        context: context,
                           builder: (context) {
                             return const BanTinBtnSheet();
                           });
