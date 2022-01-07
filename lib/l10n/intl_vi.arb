@@ -73,9 +73,6 @@
   "no_data": "Không có dữ liệu",
   "widget_manage": "Quản lý widgets",
   "bao_cao_thong_ke": "Báo cáo thống kê",
-  "tin_tuc_thoi_su": "Tin tức thời sự",
-  "theo_doi_bai_viet": "Theo dõi bài viết",
-  "tat_ca_chu_de": "Tất cả chủ đề",
   "den_han" : "Đến hạn",
   "qua_han" : "Quá hạn",
   "hoan_thanh" : "Hoàn thành",
@@ -85,6 +82,12 @@
   "noi_gui" : "Nơi gửi",
   "da_qua_han" : "Đã quá hạn",
   "nguoi_chu_tri" : "Người chủ trì",
-  "dia_diem": "Địa điểm"
+  "dia_diem": "Địa điểm",
+  "tin_tuc_thoi_su" : "Tin tức thời sự",
+  "theo_doi_bai_viet" : "Theo dõi bài viết",
+  "tat_ca_chu_de" : "Tất cả chủ đề",
+  "nghe_doc_tin" : "Nghe đọc tin",
+  "tin_tong_hop" : "Tin tổng hợp"
+
 
 }

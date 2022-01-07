@@ -38,6 +38,8 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.38
 
   flutter_rounded_date_picker: ^2.0.2
+  syncfusion_flutter_calendar: ^19.4.40
+  date_format: ^2.0.2
 
 
   #Library helpful
