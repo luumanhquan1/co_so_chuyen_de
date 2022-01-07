@@ -56,6 +56,7 @@ class ImageAssets {
   static const String icHanhChinhCong = '$baseImg/ic_hanh_chinh_cong.svg';
   static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
   static const String icAdd = '$baseImg/add.svg';
+
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
   static const String icBaoChiMangXaHoi = '$baseImg/ic_bao_chi_mang_xa_hoi.svg';
@@ -65,6 +66,12 @@ class ImageAssets {
   static const String icCaiDatGiaoDien = '$baseImg/ic_cai_dat_giao_dien.svg';
   static const String icHoiDap = '$baseImg/ic_hoi_dap.svg';
   static const String icDoiMatKhau = '$baseImg/ic_doi_mat_khau.svg';
+
+  static const String icImageChangePassword =
+      '$baseImg/image_change_password.svg';
+  static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
+
+
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

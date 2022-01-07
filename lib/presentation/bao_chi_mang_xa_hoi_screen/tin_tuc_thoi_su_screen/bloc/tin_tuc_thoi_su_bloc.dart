@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TinTucThoiSuBloc {
@@ -5,14 +6,14 @@ class TinTucThoiSuBloc {
 
   Stream<int> get dropDownStream => dropDownSubject.stream;
 
-  void changeItem(String? nameDrop) {
+  void changeItem(dropDown? nameDrop) {
     switch(nameDrop) {
-      case 'Tin radio': {
+      case dropDown.tinRadio: {
         dropDownSubject.add(1);
         break;
       }
 
-      case 'Tin trong nước' : {
+      case dropDown.tinTrongNuoc : {
         dropDownSubject.add(2);
         break;
       }

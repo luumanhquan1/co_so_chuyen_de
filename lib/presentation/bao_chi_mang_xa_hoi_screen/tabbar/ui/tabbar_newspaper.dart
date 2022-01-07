@@ -78,7 +78,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
         ),
         Text(S.current.tat_ca_chu_de),
         Text(S.current.theo_doi_bai_viet),
-        TinTucThoiSuScreen(tinTucThoiSuBloc: TinTucThoiSuBloc(),),
+        TinTucThoiSuScreen(tinTucThoiSuBloc: TinTucThoiSuBloc(), pContext: context,),
       ]),
 
     );
