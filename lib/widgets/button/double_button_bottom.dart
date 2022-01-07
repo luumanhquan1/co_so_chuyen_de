@@ -27,16 +27,16 @@ class _DoubleButtonBottomState extends State<DoubleButtonBottom> {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            height: 40.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-              color: buttonColor2,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                widget.onPressed1();
-              },
+          child: GestureDetector(
+            onTap: () {
+              widget.onPressed1();
+            },
+            child: Container(
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4.0),
+                color: buttonColor2,
+              ),
               child: Center(
                 child: Text(
                   widget.title1,
@@ -50,16 +50,16 @@ class _DoubleButtonBottomState extends State<DoubleButtonBottom> {
         ),
         const SizedBox(width: 16.0),
         Expanded(
-          child: Container(
-            height: 40.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-              color: textDefault,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                widget.onPressed2();
-              },
+          child: GestureDetector(
+            onTap: () {
+              widget.onPressed2();
+            },
+            child: Container(
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4.0),
+                color: textDefault,
+              ),
               child: Center(
                 child: Text(
                   widget.title2,

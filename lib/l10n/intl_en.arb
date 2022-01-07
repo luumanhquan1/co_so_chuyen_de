@@ -50,5 +50,19 @@
   "theo_doi_bai_viet" : "Theo dõi bài viết",
   "tat_ca_chu_de" : "Tất cả chủ đề",
   "nghe_doc_tin" : "Nghe đọc tin",
-  "tin_tong_hop" : "Tin tổng hợp"
+  "tin_tong_hop" : "Tin tổng hợp",
+  "dat_lai_mat_khau" : "Đặt lại mật khẩu",
+  "doi_mat_khau" : "Đổi mật khẩu",
+  "mat_khau_hien_tai" : "Mật khẩu hiện tại",
+  "mat_khau_moi" : "Mật khẩu mới",
+  "nhap_lai_mat_khau" : "Nhập lại mật khẩu",
+  "quen_mat_khau" : "Quên mật khẩu",
+  "cap_nhat" : "Cập nhật",
+  "tiep_theo" : "Tiếp theo",
+  "xac_nhan" : "Xác nhận",
+  "nhap_ma_xac_minh" : "Vui Lòng Nhập Mã Xác Minh",
+  "ma_xac_minh_cua_ban" : "Mã xác minh của bạn sẽ được gửi đến email",
+  "ban_khong_nhan_duoc_ma" : "Bạn không nhận được mã?",
+  "tao_mk_moi_cho" : "Tạo mật khẩu mới cho",
+  "gui_lai" : " Gửi lại"
 }
