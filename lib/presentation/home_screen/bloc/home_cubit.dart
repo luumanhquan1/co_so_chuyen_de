@@ -1,14 +1,17 @@
-import 'dart:developer';
-
-import 'package:ccvc_mobile/domain/model/home/document_model.dart';
+import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/domain/model/user_infomation_model.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:rxdart/rxdart.dart';
 
-class HomeCubit {
+class HomeCubit extends BaseCubit<HomeState>{
+  HomeCubit() : super(MainStateInitial());
+
   final BehaviorSubject<HomeItemType?> _showDialogSetting =
       BehaviorSubject<HomeItemType?>();
   final BehaviorSubject<List<TinhHuongKhanCapModel>> _tinhHuongKhanCap =
@@ -21,6 +24,14 @@ class HomeCubit {
       BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<TodoListModel> _getTodoList =
       BehaviorSubject<TodoListModel>();
+  final BehaviorSubject<List<PressNetWorkModel>> _getPressNetWork =
+      BehaviorSubject<List<PressNetWorkModel>>();
+  final BehaviorSubject<List<TagModel>> _getTag =
+      BehaviorSubject<List<TagModel>>();
+  final BehaviorSubject<bool> _showAddTag=BehaviorSubject<bool>();
+
+
+
   void _getTinhHuongKhanCap() {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
   }
@@ -29,25 +40,66 @@ class HomeCubit {
     _showDialogSetting.add(type);
   }
 
-  void getToDoList() {
-    final data = FakeData.listTodoWork;
-    final result = TodoListModel(
-      listTodoDone: data
-          .where((element) => element.toDoStatus == ToDoStatus.done)
-          .toList(),
-      listTodoImportant: data
-          .where((element) => element.toDoStatus == ToDoStatus.unfinished)
-          .toList(),
-    );
-    _getTodoList.sink.add(result);
-  }
-
   Future<void> getDocument() async {
     await Future.delayed(const Duration(seconds: 10));
     _getDocumentVBDen.sink.add(FakeData.tinhHinhXuLyDocVBDen);
     _getDocumentVBDi.sink.add(FakeData.tinhHinhXuLyDocVBDi);
   }
 
+  void loadApi() {
+    _getTinhHuongKhanCap();
+  }
+
+  void dispose() {
+    _showDialogSetting.close();
+    _tinhHuongKhanCap.close();
+    _getTodoList.close();
+    _getDocumentVBDen.close();
+    _getDocumentVBDi.close();
+    _getTag.close();
+    _getPressNetWork.close();
+    _userInformation.close();
+    _showAddTag.close();
+  }
+
+  Stream<DocumentDashboardModel> get getDocumentVBDen =>
+      _getDocumentVBDen.stream;
+  Stream<List<TagModel>> get getTag => _getTag.stream;
+  Stream<List<PressNetWorkModel>> get getPressNetWork =>
+      _getPressNetWork.stream;
+  Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
+  Stream<UserInformationModel> get userInformation => _userInformation;
+  Stream<List<TinhHuongKhanCapModel>> get tinhHuongKhanCap =>
+      _tinhHuongKhanCap.stream;
+  Stream<HomeItemType?> get showDialogSetting => _showDialogSetting.stream;
+  Stream<TodoListModel> get getTodoList => _getTodoList.stream;
+}
+
+///Báo chí mạng xã hội
+extension BaoChiMangXaHoi on HomeCubit {
+  void getPress() {
+    _getTag.sink.add(FakeData.tag);
+    _getPressNetWork.sink.add(FakeData.fakeDataPress);
+  }
+
+  void selectTag(TagModel tagModel) {
+    final oldSelect = _getTag.value.indexWhere(
+      (element) => element.select == true,
+    );
+    _getTag.value[oldSelect].select = false;
+    final newSelect = _getTag.value.indexWhere(
+      (element) => element.title == tagModel.title,
+    );
+    _getTag.value[newSelect].select = true;
+    _getTag.sink.add(_getTag.value);
+  }
+  void showAddTag(){
+
+  }
+}
+
+///Danh sách công việc
+extension DanhSachCongViec on HomeCubit {
   void tickerListWord({required TodoModel todo, bool removeDone = true}) {
     final data = _getTodoList.value;
     if (removeDone) {
@@ -68,7 +120,7 @@ class HomeCubit {
         isTicked: false,
         label: label,
       ),
-    ); // chỗ này là fake data a nhớ
+    );
     _getTodoList.sink.add(data);
   }
 
@@ -130,25 +182,16 @@ class HomeCubit {
     _getTodoList.sink.add(data);
   }
 
-  void loadApi() {
-    _getTinhHuongKhanCap();
+  void getToDoList() {
+    final data = FakeData.listTodoWork;
+    final result = TodoListModel(
+      listTodoDone: data
+          .where((element) => element.toDoStatus == ToDoStatus.done)
+          .toList(),
+      listTodoImportant: data
+          .where((element) => element.toDoStatus == ToDoStatus.unfinished)
+          .toList(),
+    );
+    _getTodoList.sink.add(result);
   }
-
-  void dispose() {
-    _showDialogSetting.close();
-    _tinhHuongKhanCap.close();
-    _getTodoList.close();
-    _getDocumentVBDen.close();
-    _getDocumentVBDi.close();
-  }
-
-  Stream<DocumentDashboardModel> get getDocumentVBDen =>
-      _getDocumentVBDen.stream;
-
-  Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
-  Stream<UserInformationModel> get userInformation => _userInformation;
-  Stream<List<TinhHuongKhanCapModel>> get tinhHuongKhanCap =>
-      _tinhHuongKhanCap.stream;
-  Stream<HomeItemType?> get showDialogSetting => _showDialogSetting.stream;
-  Stream<TodoListModel> get getTodoList => _getTodoList.stream;
 }

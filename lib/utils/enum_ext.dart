@@ -1,7 +1,7 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-
-
+import 'package:flutter/cupertino.dart';
 
 extension SelectKeyExt on SelectKey {
   String getText() {
@@ -44,6 +44,42 @@ extension SelectKeyExt on SelectKey {
         return S.current.lich_hop_duyet_yeu_cau_tb;
       case SelectKey.CHO_TRINH_KY_VB_DI:
         return S.current.cho_trinh_ky_VB_di;
+    }
+  }
+}
+
+extension DocumentStatusEx on DocumentStatus {
+  String getText() {
+    switch (this) {
+      case DocumentStatus.DEN_HAN:
+        return S.current.den_han;
+      case DocumentStatus.QUA_HAN:
+        return S.current.qua_han;
+      case DocumentStatus.CHO_TIEP_NHAN:
+        return S.current.cho_tiep_nhan;
+      case DocumentStatus.HOAN_THANH:
+        return S.current.hoan_thanh;
+      case DocumentStatus.CHO_XAC_NHAN:
+        return S.current.cho_xac_nhan;
+      case DocumentStatus.THAM_GIA:
+        return S.current.tham_gia;
+    }
+  }
+
+  Color getColor() {
+    switch (this) {
+      case DocumentStatus.DEN_HAN:
+        return itemWidgetNotUse;
+      case DocumentStatus.QUA_HAN:
+        return statusCalenderRed;
+      case DocumentStatus.CHO_TIEP_NHAN:
+        return itemWidgetNotUse;
+      case DocumentStatus.HOAN_THANH:
+        return itemWidgetUsing;
+      case DocumentStatus.CHO_XAC_NHAN:
+        return itemWidgetNotUse;
+      case DocumentStatus.THAM_GIA:
+        return itemWidgetUsing;
     }
   }
 }

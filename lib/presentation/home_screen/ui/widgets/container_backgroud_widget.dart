@@ -81,11 +81,15 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
                         GestureDetector(
                           onTap: () {
                             if (widget.onTapIcon != null) {
-
                               widget.onTapIcon!();
                             } else {}
                           },
-                          child: SvgPicture.asset(widget.urlIcon),
+                          child: Container(
+                            width: 20,
+                            color: Colors.transparent,
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(widget.urlIcon),
+                          ),
                         )
                       ],
                     ),

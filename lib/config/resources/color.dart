@@ -39,6 +39,15 @@ const subMenuColor = Color(0xff303742);
 const colorLineSearch = Color(0x80CACFD7);
 const colorPressedItemMenu = Color(0xffE7F8F8);
 const fittingBg = Color(0xFFF2F2F2);
+const itemWidgetUsing = Color(0xff28C76F);
+const itemWidgetNotUse = Color(0xffFF9F43);
+const backgroundWidget = Color(0xffF0F6FF);
+const textDefault = Color(0xff7966FF);
+const textTitle = Color(0xff3D5586);
+
+const textDropDownColor = Color(0xff3D5586);
+const bgDropDown = Color(0xFFE2E8F0);
+const bgButtonDropDown = Color(0xff7966FF);
 
 const homeColor =Color(0xffEEF3FF);
 const borderColor = Color(0xffDBDFEF);
@@ -63,17 +72,20 @@ const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);
 const statusCalenderRed = Color(0xffEA5455);
-const borderItemCalender= Color(0xffF5F8FD);
-const numberOfCalenders= Color(0xff5A8DEE);
+const backgroundItemCalender = Color(0xffF5F8FD);
+const borderItemCalender = Color(0xffE2E8F0);
+const numberOfCalenders = Color(0xff5A8DEE);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);
 const unselectedLabelColor = Color(0xff667793);
 const indicatorColor = Color(0xff7966FF);
+const titleColor = Color(0xFF3D5586);
 
-
-const lineColor=Color(0xffECEEF7);
-const buttonColor=Color(0xff7966FF);
+const lineColor = Color(0xffECEEF7);
+const buttonColor = Color(0xff7966FF);
+//tabar color
+const unselectLabelColor = Color(0xFFA2AEBD);
 
 
 ///=========== Using to make change app theme ================================

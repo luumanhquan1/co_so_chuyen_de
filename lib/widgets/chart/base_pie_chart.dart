@@ -70,47 +70,50 @@ class PieChart extends StatelessWidget {
             ],
           ),
         ),
-        if (isSubjectInfo) GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          childAspectRatio: 10,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          children: List.generate(chartData.length, (index) {
-            final result = chartData[index];
-            // ignore: avoid_unnecessary_containers
-            return GestureDetector(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!(index);
-                } else {}
-              },
-              child: Row(
-                children: [
-                  Container(
-                    height: 14,
-                    width: 14,
-                    decoration: BoxDecoration(
-                      color: result.color,
-                      shape: BoxShape.circle,
+        if (isSubjectInfo)
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 10,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            children: List.generate(chartData.length, (index) {
+              final result = chartData[index];
+              // ignore: avoid_unnecessary_containers
+              return GestureDetector(
+                onTap: () {
+                  if (onTap != null) {
+                    onTap!(index);
+                  } else {}
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: 14,
+                      width: 14,
+                      decoration: BoxDecoration(
+                        color: result.color,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    '${result.title} (${result.value.toInt()})',
-                    style: textNormal(
-                      infoColor,
-                      14,
+                    const SizedBox(
+                      width: 12,
                     ),
-                  )
-                ],
-              ),
-            );
-          }),
-        ) else const SizedBox()
+                    Text(
+                      '${result.title} (${result.value.toInt()})',
+                      style: textNormal(
+                        infoColor,
+                        14,
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }),
+          )
+        else
+          const SizedBox()
       ],
     );
   }

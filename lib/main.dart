@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder:()=> GetMaterialApp(
+      builder: () => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: Strings.app_name,
         theme: ThemeData(
@@ -67,7 +67,6 @@ class _MyAppState extends State<MyApp> {
             selectionColor: AppTheme.getInstance().primaryColor(),
             selectionHandleColor: AppTheme.getInstance().primaryColor(),
           ),
-
           colorScheme: ColorScheme.fromSwatch().copyWith(
             secondary: AppTheme.getInstance().accentColor(),
           ),
@@ -80,7 +79,7 @@ class _MyAppState extends State<MyApp> {
           // } else {
           //   return const Locale.fromSubtags(languageCode: EN_CODE);
           // }
-          return const  Locale.fromSubtags(languageCode: VI_CODE);
+          return const Locale.fromSubtags(languageCode: VI_CODE);
         },
         localizationsDelegates: const [
           S.delegate,

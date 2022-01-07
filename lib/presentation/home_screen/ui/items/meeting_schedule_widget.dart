@@ -5,13 +5,16 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_backgr
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:flutter/material.dart';
 
-
+import '../../fake_data.dart';
 
 class MeetingScheduleWidget extends StatefulWidget {
   final HomeItemType homeItemType;
-  const MeetingScheduleWidget({Key? key,required this.homeItemType}) : super(key: key);
+  const MeetingScheduleWidget({Key? key, required this.homeItemType})
+      : super(key: key);
 
   @override
   State<MeetingScheduleWidget> createState() => _MeetingScheduleWidgetState();
@@ -21,8 +24,9 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
+      spacingTitle: 0,
       title: S.current.meeting_schedule,
-      onTapIcon: (){
+      onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       dialogSelect: DialogSettingWidget(
@@ -50,48 +54,35 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
         ],
       ),
       child: Column(
-        children: const [
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+          children: List.generate(FakeData.caledar.length, (index) {
+        final data = FakeData.caledar[index];
+        return Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: ContainerInfoWidget(
+            status: data.codeStatus.getText(),
+            colorStatus: data.codeStatus.getColor(),
+            backGroundStatus: true,
+            title: data.title,
             listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
               InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298'),
+                urlIcon: ImageAssets.icTime,
+                key: S.current.time,
+                value: data.time,
+              ),
+              InfoData(
+                urlIcon: ImageAssets.icAddress,
+                key: S.current.dia_diem,
+                value: data.address,
+              ),
+              InfoData(
+                urlIcon: ImageAssets.icPeople,
+                key: S.current.nguoi_chu_tri,
+                value: data.nguoiChuTri,
+              ),
             ],
           ),
-          SizedBox(
-            height: 16,
-          ),
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298'),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298'),
-            ],
-          )
-        ],
-      ),
+        );
+      })),
     );
   }
 }

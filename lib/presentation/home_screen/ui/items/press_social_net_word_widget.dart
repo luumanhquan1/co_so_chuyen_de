@@ -1,13 +1,18 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,6 +26,15 @@ class PressSocialNetWork extends StatefulWidget {
 }
 
 class _PressSocialNetWorkState extends State<PressSocialNetWork> {
+  late HomeCubit cubit;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    cubit = HomeProvider.of(context).homeCubit;
+    cubit.getPress();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
@@ -29,10 +43,28 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       dialogSelect: DialogSettingWidget(
+        labelWidget: Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: Row(
+            children: [
+              SvgPicture.asset(ImageAssets.icTag),
+              const SizedBox(
+                width: 9,
+              ),
+              Text(
+                'Chỉnh sửa tag',
+                style: textNormalCustom(
+                  fontSize: 14,
+                  color: textDefault,
+                ),
+              )
+            ],
+          ),
+        ),
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            title: S.current.press_socialNetWord,
+            title: S.current.time,
             key: [
               SelectKey.HOM_NAY,
               SelectKey.TUAN_NAY,
@@ -45,28 +77,42 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
       padding: EdgeInsets.zero,
       child: Column(
         children: [
-          tagWidget(),
-          const SizedBox(
-            height: 16,
-          ),
+          tagWidget(cubit),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                baoChiWidget(),
-                SizedBox(
-                  height: 16,
-                ),
-                baoChiWidget(),
-                SizedBox(
-                  height: 16,
-                ),
-                baoChiWidget(),
-                SizedBox(
-                  height: 16,
-                ),
-                baoChiWidget()
-              ],
+            child: StreamBuilder<List<PressNetWorkModel>>(
+              stream: cubit.getPressNetWork,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <PressNetWorkModel>[];
+                if (data.isNotEmpty) {
+                  return Column(
+                    children: List.generate(data.length, (index) {
+                      final result = data[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (_, __, ___) => WebViewScreen(
+                                  title: '',
+                                  url: result.url,
+                                ),
+                              ),
+                            );
+                          },
+                          child: baoChiWidget(result),
+                        ),
+                      );
+                    }),
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: NodataWidget(),
+                );
+              },
             ),
           )
         ],
@@ -74,18 +120,18 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
     );
   }
 
-  Widget baoChiWidget() {
+  Widget baoChiWidget(PressNetWorkModel data) {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: const Color(0xffDBDFEF).withOpacity(0.5),
+          color: borderColor.withOpacity(0.5),
         ),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xff6566E9).withOpacity(0.05),
+            color: shadowContainerColor.withOpacity(0.05),
             offset: const Offset(0, 4),
             blurRadius: 10,
           )
@@ -97,13 +143,14 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
             width: 110,
             height: 90,
             clipBehavior: Clip.hardEdge,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),
               image: DecorationImage(
                 image: NetworkImage(
-                    'https://kinhdoanhvaphattrien.vn/data/uploads/2021/12/IMG_9848.jpg'),
+                  data.avatar,
+                ),
                 fit: BoxFit.cover,
               ),
             ),
@@ -117,9 +164,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Xem xét đề xuất tạm dừng bay TP HCM - Phú Quốc qehqwioehiq w1he234',
+                  data.title,
                   style: textNormal(
-                    const Color(0xff3D5586),
+                    titleColor,
                     14,
                   ),
                   maxLines: 2,
@@ -135,9 +182,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                       width: 13,
                     ),
                     Text(
-                      '5/11/2021  9:10:03 PM',
+                      DateTime.parse(data.publishedTime).formatDdMMYYYY,
                       style: textNormal(
-                        const Color(0xff667793),
+                        infoColor,
                         14,
                       ),
                     ),
@@ -147,9 +194,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                   height: 6,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 25),
+                  padding: const EdgeInsets.only(left: 29),
                   child: Text(
-                    'dienbien.gov.vn',
+                    data.domain,
                     style: textNormal(
                       linkColor,
                       14,
@@ -164,29 +211,48 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
     );
   }
 
-  Widget tagWidget() {
+  Widget tagWidget(HomeCubit cubit) {
     return SizedBox(
       height: 26,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: const BoxDecoration(
-                color: linkColor,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
-              ),
-              child: Text(
-                "#Covid-19",
-                style: textNormal(
-                  AppTheme.getInstance().dfBtnTxtColor(),
-                  12,
+      child: StreamBuilder<List<TagModel>>(
+        initialData: const [],
+        stream: cubit.getTag,
+        builder: (context, snapshot) {
+          final data = snapshot.data ?? <TagModel>[];
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final result = data[index];
+              return GestureDetector(
+                onTap: () {
+                  cubit.selectTag(result);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: result.select
+                        ? linkColor
+                        : radioFocusColor.withOpacity(0.1),
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
+                  ),
+                  child: Text(
+                    '#${result.title}',
+                    style: textNormal(
+                      result.select
+                          ? AppTheme.getInstance().dfBtnTxtColor()
+                          : linkColor,
+                      12,
+                    ),
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

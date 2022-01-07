@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/home/document_model.dart';
+import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
@@ -98,7 +99,7 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
                       ),
                     ],
                     onTap: (value) {
-                      log('${value}');
+
                     },
                   );
                 }

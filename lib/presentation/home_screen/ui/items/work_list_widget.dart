@@ -61,10 +61,10 @@ class _WorkListWidgetState extends State<WorkListWidget> {
               final data = snapshot.data?.listTodoImportant ?? <TodoModel>[];
               if (data.isNotEmpty) {
                 return Column(
+                  key: UniqueKey(),
                   children: List.generate(data.length, (index) {
                     final todo = data[index];
                     return CongViecCell(
-                      key: ValueKey(todo.id),
                       text: todo.label ?? '',
                       todoModel: todo,
                       onCheckBox: (value) {
@@ -105,10 +105,10 @@ class _WorkListWidgetState extends State<WorkListWidget> {
                   final data = snapshot.data?.listTodoDone ?? <TodoModel>[];
                   if (data.isNotEmpty) {
                     return Column(
+                      key: UniqueKey(),
                       children: List.generate(data.length, (index) {
                         final todo = data[index];
                         return CongViecCell(
-                          key: ValueKey(todo.id),
                           enabled: false,
                           todoModel: todo,
                           onCheckBox: (value) {

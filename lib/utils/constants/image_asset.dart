@@ -19,15 +19,40 @@ class ImageAssets {
   static const String icClose = '$baseImg/ic_close.svg';
   static const String icNext = '$baseImg/ic_next.svg';
   static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
+
   static const String icMore = '$baseImg/ic_more.svg';
   static const String icEdit = '$baseImg/ic_edit.svg';
-  static const String icStarUnfocus='$baseImg/ic_start_unfocus.svg';
-  static const String icStarFocus= '$baseImg/ic_start_focus.svg';
+  static const String icStarUnfocus = '$baseImg/ic_start_unfocus.svg';
+  static const String icStarFocus = '$baseImg/ic_start_focus.svg';
+  static const String icTag = '$baseImg/ic_tag.svg';
+  static const String icAddress = '$baseImg/ic_addres.svg';
+  static const String icSoKyHieu = '$baseImg/ic_so_ky_hieu.svg';
+  static const String icTime = '$baseImg/ic_time.svg';
+  static const String icPeople = '$baseImg/ic_people.svg';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';
+
+  static const String icMenuCalender = '$baseImg/menu_calender.svg';
+  static const String icAddButtonCalender = '$baseImg/add_button_calender.svg';
+  static const String icTongSoLichLamviec =
+      '$baseImg/tong_so_lich_lam_viec.svg';
+  static const String icLichCongTacTrongNuoc =
+      '$baseImg/lich_cong_tac_trong_nuoc.svg';
+  static const String icLichLamViec = '$baseImg/lich_lam_viec.svg';
+  static const String icLichCongTacNuocNgoai =
+      '$baseImg/lich_cong_tac_nuoc_ngoai.svg';
+  static const String icLichTiepDan = '$baseImg/lich_tiep_dan.svg';
+  static const String icAdminTao = '$baseImg/admin_tao.svg';
+  static const String icNextDropDown = '$baseImg/ic_next_drop_down.svg';
+  static const String icBackDropDown = '$baseImg/ic_back_drop_down.svg';
+  static const String icDropDownButton =
+      '$baseImg/ic_drop_down_button_down.svg';
+
+  static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
+  static const String icAdd = '$baseImg/add.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

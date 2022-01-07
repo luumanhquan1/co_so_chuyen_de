@@ -1,20 +1,22 @@
 class Validator {
   static bool isValidPassword(String value) {
-    if(value.length < 8 || value.isEmpty) {
+    if (value.length < 8 || value.isEmpty) {
       return false;
     } else {
       return true;
     }
   }
+
   //validate pw
-  static bool validateStructure(String value){
-    const String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.!@#\$&*~]).{8,}$';
+  static bool validateStructure(String value) {
+    const String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.!@#\$&*~]).{8,}$';
     final RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(value);
   }
 
   static bool validateAddress(String value) {
-    if(value.substring(0,2) != '0x') {
+    if (value.substring(0, 2) != '0x') {
       return false;
     }
     const String pattern = r'^[a-zA-Z0-9]{1,40}+$';
@@ -35,7 +37,8 @@ class Validator {
   }
 
   static bool validateMoney(String value) {
-    const String pattern = r'/(?=.*\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|0)?(\.\d{1,2})?$/';
+    const String pattern =
+        r'/(?=.*\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|0)?(\.\d{1,2})?$/';
     final RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(value);
   }

@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,7 +25,7 @@ class CustomItemCalenderWork extends StatelessWidget {
         width: 274,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6.0),
-          color: borderItemCalender,
+          color: backgroundItemCalender,
         ),
         child: Row(
           children: [
@@ -39,7 +39,7 @@ class CustomItemCalenderWork extends StatelessWidget {
                   color: backgroundColorApp,
                 ),
                 child: Center(
-                  child: SvgPicture.asset('$baseImg/$image.svg'),
+                  child: SvgPicture.asset(image),
                 ),
               ),
             ),
@@ -49,22 +49,13 @@ class CustomItemCalenderWork extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    typeName,
-                    softWrap: true,
-                    maxLines: 2,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2
-                        ?.copyWith(fontSize: 16.0, color: titleCalenderWork),
-                  ),
-                  Text(
-                    numberOfCalendars.toString(),
-                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        fontSize: 26,
-                        color: numberOfCalenders,
-                        fontWeight: FontWeight.w700),
-                  ),
+                  Text(typeName,
+                      softWrap: true,
+                      maxLines: 2,
+                      style: textNormalCustom(color: titleCalenderWork)),
+                  Text(numberOfCalendars.toString(),
+                      style:
+                          titleText(color: numberOfCalenders, fontSize: 26.0)),
                 ],
               ),
             )

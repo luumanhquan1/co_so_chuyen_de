@@ -1,17 +1,19 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:ccvc_mobile/utils/enum_ext.dart';
 
 class DocumentWidget extends StatefulWidget {
   final HomeItemType homeItemType;
-  const DocumentWidget({Key? key,required this.homeItemType}) : super(key: key);
+  const DocumentWidget({Key? key, required this.homeItemType})
+      : super(key: key);
 
   @override
   State<DocumentWidget> createState() => _DocumentWidgetState();
@@ -20,9 +22,10 @@ class DocumentWidget extends StatefulWidget {
 class _DocumentWidgetState extends State<DocumentWidget> {
   @override
   Widget build(BuildContext context) {
-    return      ContainerBackgroundWidget(
+    return ContainerBackgroundWidget(
       title: S.current.document,
-      onTapIcon: (){
+      spacingTitle: 0,
+      onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       dialogSelect: DialogSettingWidget(
@@ -48,53 +51,29 @@ class _DocumentWidgetState extends State<DocumentWidget> {
         ],
       ),
       child: Column(
-        children: const [
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            status: 'Quá hạn',
-            colorStatus: Color(0xffEA5455),
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 239847',),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            status: 'Chờ tiếp nhận',
-            colorStatus: Color(0xffEA5455),
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 23984',),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          ContainerInfoWidget(
-            title:
-            'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            status: 'Hoàn thành',
-            colorStatus: Color(0xff28C76F),
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                  'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 23738',),
-            ],
-          )
-        ],
+        children: List.generate(FakeData.documentList.length, (index) {
+          final data = FakeData.documentList[index];
+          return Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: ContainerInfoWidget(
+              title: data.title,
+              status: data.documentStatus.getText(),
+              colorStatus: data.documentStatus.getColor(),
+              listData: [
+                InfoData(
+                  urlIcon: ImageAssets.icSoKyHieu,
+                  key: S.current.so_ky_hieu,
+                  value: data.kyHieu,
+                ),
+                InfoData(
+                  urlIcon: ImageAssets.icAddress,
+                  key: S.current.noi_gui,
+                  value: data.noiGui,
+                ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

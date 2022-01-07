@@ -5,21 +5,25 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/widgets/radio/radio_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DialogSettingWidget extends StatelessWidget {
   final List<DialogData>? listSelectKey;
   final Function(SelectKey)? onSelect;
   final Widget? customDialog;
   final HomeItemType type;
+  final Widget? labelWidget;
   const DialogSettingWidget({
     Key? key,
     this.listSelectKey,
     this.onSelect,
     required this.type,
     this.customDialog,
+    this.labelWidget,
   }) : super(key: key);
 
   @override
@@ -48,19 +52,25 @@ class DialogSettingWidget extends StatelessWidget {
                       child: customDialog ??
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(listSelectKey?.length ?? 0,
-                                (index) {
-                              final data = listSelectKey?[index] ??
-                                  DialogData(key: [], title: '');
+                            children: [
+                              labelWidget ?? const SizedBox(),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                    listSelectKey?.length ?? 0, (index) {
+                                  final data = listSelectKey?[index] ??
+                                      DialogData(key: [], title: '');
 
-                              return Padding(
-                                padding:
-                                    EdgeInsets.only(top: index == 0 ? 0 : 26),
-                                child: SelectCell(
-                                  data: data,
-                                ),
-                              );
-                            }),
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        top: index == 0 ? 0 : 26),
+                                    child: SelectCell(
+                                      data: data,
+                                    ),
+                                  );
+                                }),
+                              )
+                            ],
                           ),
                     )
                   : const SizedBox();

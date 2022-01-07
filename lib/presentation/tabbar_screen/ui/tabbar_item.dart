@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum TabBarType { home, report, calendarWork, internalInteraction, menu }
+
 List<TabBarType> getTabListItem() {
   return [
     TabBarType.home,
@@ -20,6 +22,7 @@ List<TabBarType> getTabListItem() {
 class TabBarItem {
   Widget icon;
   String text;
+
   TabBarItem({required this.icon, required this.text});
 }
 
@@ -43,6 +46,7 @@ extension TabbarEnum on TabBarType {
   }
 
   Widget getScreen() {
+    final a = DateTime.parse('2001-04-25');
     switch (this) {
       case TabBarType.home:
         return const HomeScreen();
@@ -51,16 +55,17 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.blue,
         );
       case TabBarType.calendarWork:
-        return MainTabarCalenderWork();
+        return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,
         );
-
       case TabBarType.menu:
-        return const Scaffold(
-          backgroundColor: Colors.pink,
-        );
+        // return const Scaffold(
+        //   backgroundColor: Colors.pink,
+        // );
+
+        return const TabbarNewspaper();
     }
   }
 

@@ -33,13 +33,26 @@ enum SelectKey {
   LICH_HOP_DUYET_YEU_CAU_CHUAN_BI,
   CHO_TRINH_KY_VB_DI
 }
-enum DocumentType { VBDen, VBDi }
+enum DocumentStatus {
+  DEN_HAN,
+  QUA_HAN,
+  CHO_TIEP_NHAN,
+  HOAN_THANH,
+  CHO_XAC_NHAN,
+  THAM_GIA
+}
 enum PageTransitionType {
   FADE,
   RIGHT_TO_LEFT,
   BOTTOM_TO_TOP,
   RIGHT_TO_LEFT_WITH_FADE,
 }
+const String HOAN_THANH = 'HOAN_THANH';
+const String DEN_HAN = 'DEN_HAN';
+const String QUA_HAN = 'QUA_HAN';
+const String CHO_TIEP_NHAN = 'CHO_TIEP_NHAN';
+const String CHO_XAC_NHAN = 'CHO_XAC_NHAN';
+const String THAM_GIA = 'THAM_GIA';
 
 const String CALENDAR_TYPE_DAY = 'Day';
 const String CALENDAR_TYPE_MONTH = 'Month';

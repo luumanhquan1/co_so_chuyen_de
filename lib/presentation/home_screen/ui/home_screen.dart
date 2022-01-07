@@ -56,6 +56,7 @@ HomeCubit homeCubit=HomeCubit();
           },
           child: SizedBox.expand(
             child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               physics: const ClampingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
               ),
