@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/tat_ca_chu_de_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,43 +15,39 @@ class TabbarNewspaper extends StatefulWidget {
 
 class _TabbarNewspaperState extends State<TabbarNewspaper> {
   var _controller = TabController(vsync: AnimatedListState(), length: 4);
-  BaoChiMangXaHoiBloc baoChiMangXaHoiBloc = BaoChiMangXaHoiBloc();
 
   @override
   void initState() {
     _controller = TabController(vsync: AnimatedListState(), length: 4);
 
-    _controller.addListener(() {
-      setState(() {
-        baoChiMangXaHoiBloc.getTextAppbar(_controller.index);
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         title: Text(
-          baoChiMangXaHoiBloc.titleAppbar,
+          S.current.tin_tong_hop,
           style: titleAppbar(),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios,
-            color: unselectLabelColor,),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: unselectLabelColor,
+          ),
           onPressed: () {},
         ),
-
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu_open_rounded,
-              color: unselectLabelColor,),
-
+            icon: const Icon(
+              Icons.menu_open_rounded,
+              color: unselectLabelColor,
+            ),
             onPressed: () {},
           ),
         ],
-
         bottom: TabBar(
           controller: _controller,
           indicatorColor: indicatorColor,
@@ -79,11 +76,10 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
         Text(
           S.current.bao_cao_thong_ke,
         ),
-        Text(S.current.tat_ca_chu_de),
+        const TatCaChuDeScreen(),
         Text(S.current.theo_doi_bai_viet),
         Text(S.current.tin_tuc_thoi_su),
       ]),
-
     );
   }
 }

@@ -27,6 +27,16 @@ class ImageAssets {
   static const String icLichCongTacNuocNgoai='$baseImg/lich_cong_tac_nuoc_ngoai.svg';
   static const String icLichTiepDan='$baseImg/lich_tiep_dan.svg';
   static const String icAdminTao='$baseImg/admin_tao.svg';
+  static const String icBaoChi='$baseImg/ic_bao_chi.svg';
+  static const String icBlog='$baseImg/ic_blog.svg';
+  static const String icForum='$baseImg/ic_forum.svg';
+  static const String icMangXaHoi='$baseImg/ic_mang_xa_hoi.svg';
+  static const String icNguonKhac='$baseImg/ic_nguon_khac.svg';
+  static const String icTongTin='$baseImg/ic_tong_tin.svg';
+  static const String icBaiViet='$baseImg/ic_bai_viet.svg';
+  static const String icComment='$baseImg/ic_comment.svg';
+  static const String icLike='$baseImg/ic_like.svg';
+  static const String icShare='$baseImg/ic_share.svg';
   ///SvgImage
   static const String icStar ='$baseImg/ic_start.png';
 

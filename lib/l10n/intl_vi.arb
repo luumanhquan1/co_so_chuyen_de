@@ -42,5 +42,18 @@
   "bao_cao_thong_ke": "Báo cáo thống kê",
   "tin_tuc_thoi_su" : "Tin tức thời sự",
   "theo_doi_bai_viet" : "Theo dõi bài viết",
-  "tat_ca_chu_de" : "Tất cả chủ đề"
+  "tat_ca_chu_de" : "Tất cả chủ đề",
+  "tin_tong_hop" : "Tin tổng hợp",
+  "tong_tin" : "Tổng tin",
+  "bao_chi" : "Báo chí",
+  "mang_xa_hoi" : "Mạng xã hội",
+  "forum" : "Forum",
+  "blog" : "Blog",
+  "nguon_khac" : "Nguon khác",
+  "bai_viet" : "Bài viết",
+  "like" : "Like",
+  "share" : "Share",
+  "comment" : "Comment",
+  "bao_cao_chi_tiet" : "Báo cáo chi tiết >"
+
 }
