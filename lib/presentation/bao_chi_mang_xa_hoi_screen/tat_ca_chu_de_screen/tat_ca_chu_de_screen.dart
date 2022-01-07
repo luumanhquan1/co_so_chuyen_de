@@ -12,9 +12,26 @@ import 'item_list_new.dart';
 import 'item_table_topic.dart';
 import 'item_infomation.dart';
 
-class TatCaChuDeScreen extends StatelessWidget {
+class TatCaChuDeScreen extends StatefulWidget {
   const TatCaChuDeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<TatCaChuDeScreen> createState() => _TatCaChuDeScreenState();
+}
+
+class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +95,10 @@ class TatCaChuDeScreen extends StatelessWidget {
                     '5/11/2021  9:10:03 PM',
                     'Ngưng hoạt động gần 3 tháng do dịch, lãnh đạo nhà máy Chang Shin Việt Nam (huyện Vĩnh Cửu ...'),
                 ListView.builder(
+                  // controller: _scrollController,
                   itemCount: 10,
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return const ItemListNews(
                         'https://recmiennam.com/wp-content/uploads/2018/01/phong-canh-thien-nhien-dep-1.jpg',
