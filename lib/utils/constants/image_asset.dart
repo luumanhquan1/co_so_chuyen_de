@@ -86,6 +86,10 @@ class ImageAssets {
   static const String icLike='$baseImg/ic_like.svg';
   static const String icShare='$baseImg/ic_share.svg';
   static const String icCalendar='$baseImg/ic_calendar.svg';
+  static const String icLock='$baseImg/ic_lock.svg';
+  static const String icShieldDone='$baseImg/ic_shield_done.svg';
+  static const String image_lock_reset='$baseImg/image_lock_reset.svg';
+  static const String ic_email='$baseImg/ic_email.svg';
 
 
 
