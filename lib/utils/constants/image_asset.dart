@@ -55,6 +55,9 @@ class ImageAssets {
 
   static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
   static const String icAdd = '$baseImg/add.svg';
+  static const String icImageChangePassword =
+      '$baseImg/image_change_password.svg';
+  static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
 
 
   ///gif
