@@ -6,16 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
+class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
-
+  final Widget? leadingIcon;
   final String title;
-
-  AppBarDefaultBack(
-    this.title, {
-    Key? key,
-  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
+  final List<Widget>? actions;
+  BaseAppBar( {Key? key,required this.title, this.leadingIcon,this.actions})
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override
@@ -33,12 +31,8 @@ class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
         style: titleAppbar(),
       ),
       centerTitle: true,
-      leading: IconButton(
-        onPressed: () => {Navigator.pop(context)},
-        icon: SvgPicture.asset(
-          ImageAssets.icBack,
-        ),
-      ),
+      leading: leadingIcon,
+      actions: actions,
     );
   }
 }
