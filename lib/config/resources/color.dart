@@ -12,7 +12,7 @@ const mainTxtColor = Color(0xFF30536F);
 const dfTxtColor = Color(0xFF303742);
 const secondTxtColor = Color(0xFF808FA8);
 const highlightTxtColor = Color(0xff303742);
-const subTitleTxtColor = Color(0xff9097A3);
+const subTitle = Color(0xff8F9CAE);
 
 //bottom navigation color
 const bgBottomTab = Color(0xFFFCFCFC);
@@ -49,6 +49,24 @@ const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
 const bgButtonDropDown = Color(0xff7966FF);
 
+const homeColor = Color(0xffEEF3FF);
+const borderColor = Color(0xffDBDFEF);
+const AqiColor = Color(0xffA2AEBD);
+const infoColor = Color(0xff667793);
+const linkColor = Color(0xff7966FF);
+const shadowContainerColor = Color(0xff6566E9);
+const choXuLyColor = Color(0xff5A8DEE);
+const dangXyLyColor = Color(0xff7966FF);
+const daXuLyColor = Color(0xff28C76F);
+const choVaoSoColor = Color(0xffFF9F43);
+const choTrinhKyColor = Color(0xff02C5DD);
+const choCapSoColor = Color(0xffFF6D99);
+const choBanHanhColor = Color(0xff374FC7);
+const radioUnfocusColor = Color(0xffE2E8F0);
+const radioFocusColor = Color(0xff7966FF);
+const borderButtomColor = Color(0xffE2E8F0);
+const backgroundRowColor = Color(0xffF5F8FD);
+
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);
@@ -65,9 +83,12 @@ const titleColor = Color(0xFF3D5586);
 
 const lineColor = Color(0xffECEEF7);
 const buttonColor = Color(0xff7966FF);
+const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+
 const dateColor = Color(0xFF667793);
+
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
@@ -95,6 +116,10 @@ abstract class AppColor {
   Color disableColor();
 
   Color titleColor();
+
+  Color backGroundColor();
+
+  Color subTitleColor();
 }
 
 class LightApp extends AppColor {
@@ -160,7 +185,17 @@ class LightApp extends AppColor {
 
   @override
   Color titleColor() {
-   return const Color(0xff3D5586);
+    return const Color(0xff3D5586);
+  }
+
+  @override
+  Color backGroundColor() {
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+    return const Color(0xff5A8DEE);
   }
 }
 
@@ -227,7 +262,18 @@ class DarkApp extends AppColor {
 
   @override
   Color titleColor() {
-      return const Color(0xffFFFFFF);
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color backGroundColor() {
+    return Colors.black.withOpacity(0.8);
+  }
+
+  @override
+  Color subTitleColor() {
+    // TODO: implement subTitleColor
+    throw UnimplementedError();
   }
 }
 
