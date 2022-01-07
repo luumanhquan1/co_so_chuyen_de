@@ -67,6 +67,13 @@ const lineColor = Color(0xffECEEF7);
 const buttonColor = Color(0xff7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+//drawer menu color
+const backgroundDrawerMenu = Color(0xFF333333);
+const backgroundDrawer = Colors.black12;
+const fontColor = Colors.white;
+
+
+
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

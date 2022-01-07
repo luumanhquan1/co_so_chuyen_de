@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/tab_calender_form/ui/in_calender_form.dart';
 import 'package:ccvc_mobile/presentation/calender_work/tab_list_form/ui/in_list_form.dart';
-import 'package:ccvc_mobile/presentation/list_menu/ui/Drawer_menu.dart';
+import 'package:ccvc_mobile/presentation/list_menu/ui/drawer_menu.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,24 @@ class _MainTabarCalenderWorkState extends State<MainTabarCalenderWork> {
             icon: SvgPicture.asset(ImageAssets.icAddButtonCalender),
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    reverseTransitionDuration:
+                        const Duration(milliseconds: 250),
+                    transitionDuration: const Duration(milliseconds: 250),
+                    pageBuilder: (_, animation, ___) {
+                      const begin = Offset(-1.0, 0.0);
+                      const end = Offset.zero;
+                      final tween = Tween(begin: begin, end: end);
+                      final offsetAnimation = animation.drive(tween);
+                      return ModelMenuCCVC(offsetAnimation, 'Họp');
+                    },
+                    opaque: false,
+                  ),
+                );
+              },
               icon: SvgPicture.asset(ImageAssets.icMenuCalender))
         ],
       ),

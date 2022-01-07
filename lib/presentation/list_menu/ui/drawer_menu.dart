@@ -1,5 +1,7 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/menu_item_schedule.dart';
 import 'package:ccvc_mobile/presentation/list_menu/widget/item_drawer_menu.dart';
+import 'package:ccvc_mobile/presentation/list_menu/widget/item_expandable_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -24,18 +26,18 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
             Expanded(
               flex: 8,
               child: Container(
-                color: Colors.black12,
+                color: backgroundDrawer,
                 child: SlideTransition(
                   position: widget.offsetAnimation,
                   child: Scaffold(
-                    backgroundColor: const Color(0xff333333),
+                    backgroundColor: backgroundDrawerMenu,
                     appBar: AppBar(
                       // shadowColor: Color(0xff333333),
                       title: Text(
                         widget.title,
                         style: const TextStyle(fontSize: 14),
                       ),
-                      backgroundColor: const Color(0xff333333),
+                      backgroundColor: backgroundDrawerMenu,
                       leading: Builder(
                         builder: (BuildContext context) {
                           return IconButton(
@@ -48,12 +50,10 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                       ),
                     ),
                     body: SafeArea(
-                      child: StreamBuilder<List<CCVCMenuItemSchedule>>(
-                        // stream: widget._viewModel.menuItemStream,
-                        initialData: List.empty(),
+                      child: StreamBuilder<List<MenuItemSchedule>>(
+
                         builder: (BuildContext context,
-                            AsyncSnapshot<List<CCVCMenuItemSchedule>>
-                                snapShot) {
+                            AsyncSnapshot<List<MenuItemSchedule>>snapShot) {
                           final items = snapShot.data ?? [];
                           if (items.isNotEmpty) {
                             return ListView.separated(
@@ -84,13 +84,8 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                               itemBuilder: (BuildContext context, int index) {
                                 // return Container();
                                 return GestureDetector(
-                                  // child: ItemDrawerMenu(
-                                  //   menuItem: widget
-                                  //       ._viewModel.listMenuLocal[index],
-                                  // ),
+                                  child: ItemExpandableMenu(title: 'okok'),
                                   onTap: () => {
-                                    // widget._viewModel
-                                    //     .didSelectMenuItem(items[index]),
                                     Navigator.pop(context, items[index].key),
                                   },
                                 );
@@ -110,13 +105,13 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
               ),
             ),
             Expanded(
+              flex: 3,
               child: GestureDetector(
-                child: Container(color: Colors.black12),
+                child: Container(color: backgroundDrawer),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
-              flex: 3,
             ),
           ],
         )

@@ -1,8 +1,11 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class ItemExpandableMenu extends StatefulWidget {
   late String title;
+
   ItemExpandableMenu({Key? key, required this.title}) : super(key: key);
 
   @override
@@ -14,74 +17,67 @@ class ItemExpandableMenu extends StatefulWidget {
 class ItemExpandableMenuState extends State<ItemExpandableMenu> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.black,
-          useInkWell: true,
-        ),
-        child: ExpandableNotifier(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: <Widget>[
-                  ScrollOnExpand(
-                    scrollOnExpand: true,
-                    scrollOnCollapse: false,
-                    child: ExpandablePanel(
-                      theme: const ExpandableThemeData(
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        tapBodyToCollapse: true,
-                      ),
-                      header: Padding(
-                          padding: const EdgeInsets.all(19),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.margin),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                widget.title,
-                                // style: Theme.of(context).textTheme.body2,
-                              ),
-                            ],
-                          )),
-                      collapsed: const SizedBox(),
-                      expanded: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: const Text('Item 1'),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          ListTile(
-                            title: const Text('Item 2'),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ),
-                      builder: (_, collapsed, expanded) {
-                        return Padding(
-                          padding:
-                          const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                          child: Expandable(
-                            collapsed: collapsed,
-                            expanded: expanded,
-                            theme: const ExpandableThemeData(crossFadePoint: 0),
-                          ),
-                        );
-                      },
-                    ),
+    return ExpandableTheme(
+      data: const ExpandableThemeData(
+        iconColor: fontColor,
+        useInkWell: true,
+      ),
+      child: ExpandableNotifier(
+          child: Column(
+        children: <Widget>[
+          ScrollOnExpand(
+            scrollOnExpand: true,
+            scrollOnCollapse: false,
+            child: ExpandablePanel(
+              theme: const ExpandableThemeData(
+                headerAlignment: ExpandablePanelHeaderAlignment.center,
+                tapBodyToCollapse: true,
+              ),
+              header: Row(
+                children: [
+                  const Icon(Icons.margin),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    widget.title,
+                    style: const TextStyle(color: fontColor),
                   ),
                 ],
               ),
-            )),
-      ),
+              collapsed: const SizedBox(),
+              expanded: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ListTile(
+                    title: const Text(
+                      'Item 1',
+                      style: TextStyle(color: fontColor),
+                    ),
+                    trailing: Container(
+                      color: buttonColor,
+                      height: 15,
+                      width: 20,
+                      child:
+                          const Text('12', style: TextStyle(color: fontColor)),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+              builder: (_, collapsed, expanded) {
+                return Expandable(
+                  collapsed: collapsed,
+                  expanded: expanded,
+                  theme: const ExpandableThemeData(crossFadePoint: 0),
+                );
+              },
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

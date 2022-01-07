@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 class ItemDrawerMenu extends StatelessWidget {
   const ItemDrawerMenu({required this.menuItem});
 
-  final CCVCMenuItemSchedule menuItem;
-
+  final MenuItemSchedule menuItem;
   // const ItemDrawerMenu({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final TextStyle? titleStyle =
@@ -41,7 +39,7 @@ class ItemDrawerMenu extends StatelessWidget {
               style: titleStyle,
             ),
           ),
-          badge(menuItem.badgeNumber, context),
+          // badge(menuItem.badgeNumber, context),
         ],
       ),
     );
