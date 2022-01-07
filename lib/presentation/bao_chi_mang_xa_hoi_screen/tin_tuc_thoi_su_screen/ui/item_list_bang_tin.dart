@@ -38,12 +38,14 @@ class ItemListBangTin extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            tin,
-            style: textNormalCustom(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: bgButtonDropDown),
+          Expanded(
+            child: Text(
+              tin,
+              style: textNormalCustom(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: bgButtonDropDown),
+            ),
           )
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ItemListNews extends StatelessWidget {
   final String image;
@@ -16,7 +18,15 @@ class ItemListNews extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          Expanded(flex: 3 ,child: Image(image: NetworkImage(image),)),
+          Expanded(
+              flex: 3,
+              child: Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                  clipBehavior: Clip.antiAlias,
+                  child: Image(
+                    image: NetworkImage(image),
+                  ))),
           const SizedBox(
             width: 10,
           ),
@@ -38,10 +48,11 @@ class ItemListNews extends StatelessWidget {
                   height: 10,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(Icons.calendar_today_outlined, color: iconColor,),
+                    SvgPicture.asset(ImageAssets.icCalendar),
                     const SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
                     Text(
                       date,

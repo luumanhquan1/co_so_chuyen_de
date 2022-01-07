@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HotNews extends StatelessWidget {
   final String image;
@@ -42,10 +44,11 @@ class HotNews extends StatelessWidget {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Icon(Icons.calendar_today_outlined, color: iconColor,),
+              SvgPicture.asset(ImageAssets.icCalendar),
               const SizedBox(
-                width: 20,
+                width: 10,
               ),
               Text(
                 date,
