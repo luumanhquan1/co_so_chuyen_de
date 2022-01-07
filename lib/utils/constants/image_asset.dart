@@ -55,6 +55,9 @@ class ImageAssets {
 
   static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
   static const String icAdd = '$baseImg/add.svg';
+  static const String icImageChangePassword =
+      '$baseImg/image_change_password.svg';
+  static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
   static const String icBaoChi='$baseImg/ic_bao_chi.svg';
   static const String icBlog='$baseImg/ic_blog.svg';
   static const String icForum='$baseImg/ic_forum.svg';
@@ -66,6 +69,7 @@ class ImageAssets {
   static const String icLike='$baseImg/ic_like.svg';
   static const String icShare='$baseImg/ic_share.svg';
   static const String icCalendar='$baseImg/ic_calendar.svg';
+
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

@@ -40,6 +40,7 @@ dependencies:
   flutter_rounded_date_picker: ^2.0.2
   syncfusion_flutter_calendar: ^19.4.40
   date_format: ^2.0.2
+  pin_code_fields: ^7.3.0
 
 
   #Library helpful
