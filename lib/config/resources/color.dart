@@ -65,6 +65,7 @@ const titleColor = Color(0xFF3D5586);
 
 const lineColor = Color(0xffECEEF7);
 const buttonColor = Color(0xff7966FF);
+const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
 const dateColor = Color(0xFF667793);
