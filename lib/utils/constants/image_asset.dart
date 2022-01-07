@@ -5,20 +5,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ImageAssets {
   ///Svg path
   static const String icBack = '$baseImg/ic_back.svg';
-  static const String icHomeFocus = '$baseImg/ic_home.svg';
-  static const String icHomeUnFocus = '$baseImg/ic_home_unfocus.svg';
-  static const String icChartUnFocus = '$baseImg/ic_chart.svg';
-  static const String icChartFocus = '$baseImg/ic_bao_cao.svg';
-  static const String icCalendarUnFocus = '$baseImg/ic_calendar.svg';
-  static const String icCalendarFocus = '$baseImg/ic_calendar_focus.svg';
-  static const String icMessageUnFocus = '$baseImg/ic_message.svg';
-  static const String icMessageFocus = '$baseImg/ic_chat_focus.svg';
-  static const String icMenuUnFocus = '$baseImg/ic_menu.svg';
-  static const String icMenuFocus = '$baseImg/ic_menu_focus.svg';
-  static const String icPlus = '$baseImg/ic_cong.svg';
-  static const String icClose = '$baseImg/ic_close.svg';
-  static const String icNext = '$baseImg/ic_next.svg';
-  static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
+  static const String icHomeFocus='$baseImg/ic_home.svg';
+  static const String icHomeUnFocus='$baseImg/ic_home_unfocus.svg';
+  static const String icChartUnFocus='$baseImg/ic_chart.svg';
+  static const String icChartFocus='$baseImg/ic_bao_cao.svg';
+  static const String icCalendarUnFocus='$baseImg/ic_calendar.svg';
+  static const String icCalendarFocus='$baseImg/ic_calendar_focus.svg';
+  static const String icMessageUnFocus='$baseImg/ic_message.svg';
+  static const String icMessageFocus='$baseImg/ic_chat_focus.svg';
+  static const String icMenuUnFocus='$baseImg/ic_menu.svg';
+  static const String icMenuFocus='$baseImg/ic_menu_focus.svg';
+  static const String icPlus='$baseImg/ic_cong.svg';
+  static const String icClose='$baseImg/ic_close.svg';
+  static const String icNext='$baseImg/ic_next.svg';
+  static const String icSinhNhat='$baseImg/ic_sinh_nhat.svg';
+  static const String icPlay = '$baseImg/ic_play.svg';
+
   static const String icMenuCalender = '$baseImg/menu_calender.svg';
   static const String icAddButtonCalender = '$baseImg/add_button_calender.svg';
   static const String icTongSoLichLamviec =
@@ -39,7 +41,7 @@ class ImageAssets {
   static const String icAdd = '$baseImg/add.svg';
 
   ///SvgImage
-  static const String icStar = '$baseImg/ic_start.png';
+  static const String icStar ='$baseImg/ic_start.png';
 
   static SvgPicture svgAssets(
     String name, {

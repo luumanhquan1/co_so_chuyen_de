@@ -68,7 +68,7 @@ const buttonColor = Color(0xff7966FF);
 const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
-
+const dateColor = Color(0xFF667793);
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
   Color primaryColor();
@@ -161,7 +161,7 @@ class LightApp extends AppColor {
 
   @override
   Color titleColor() {
-    return const Color(0xff3D5586);
+   return const Color(0xff3D5586);
   }
 }
 
@@ -228,7 +228,7 @@ class DarkApp extends AppColor {
 
   @override
   Color titleColor() {
-    return const Color(0xffFFFFFF);
+      return const Color(0xffFFFFFF);
   }
 }
 
