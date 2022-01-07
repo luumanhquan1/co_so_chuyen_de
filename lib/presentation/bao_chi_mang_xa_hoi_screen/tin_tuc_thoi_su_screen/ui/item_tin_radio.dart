@@ -22,7 +22,7 @@ class ItemTinRadio extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.12),
+              color: Colors.white.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(0, 3), // changes position of shadow
@@ -45,7 +45,6 @@ class ItemTinRadio extends StatelessWidget {
                 child: Image.network(
                   image,
                   fit: BoxFit.cover,
-
                 ),
               )),
           Expanded(
@@ -71,10 +70,7 @@ class ItemTinRadio extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(
-                        Icons.date_range,
-                        color: Color(0xFFDADADA),
-                      ),
+                      SvgPicture.asset(ImageAssets.icCalendar),
                       Text(
                         date,
                         style: textNormalCustom(
@@ -82,6 +78,9 @@ class ItemTinRadio extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: dateColor,
                         ),
+                      ),
+                      const SizedBox(
+                        width: 30,
                       ),
                       SvgPicture.asset(ImageAssets.icPlay)
                     ],
