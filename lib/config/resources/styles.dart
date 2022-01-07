@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'color.dart';
@@ -9,52 +8,52 @@ const emptyView = SizedBox(width: 0, height: 0);
 /// height and width space
 
 /// height and width space
-final spaceH2 = SizedBox(height: 2.h);
-final spaceH3 = SizedBox(height: 3.h);
-final spaceH4 = SizedBox(height: 4.h);
-final spaceH5 = SizedBox(height: 5.h);
-final spaceH6 = SizedBox(height: 6.h);
-final spaceH8 = SizedBox(height: 8.h);
-final spaceH10 = SizedBox(height: 10.h);
-final spaceH12 = SizedBox(height: 12.h);
-final spaceH15 = SizedBox(height: 15.h);
-final spaceH16 = SizedBox(height: 16.h);
-final spaceH20 = SizedBox(height: 20.h);
-final spaceH24 = SizedBox(height: 24.h);
-final spaceH25 = SizedBox(height: 25.h);
-final spaceH30 = SizedBox(height: 30.h);
-final spaceH35 = SizedBox(height: 35.h);
-final spaceH38 = SizedBox(height: 38.h);
-final spaceH40 = SizedBox(height: 40.h);
-final spaceH46 = SizedBox(height: 46.h);
-final spaceH50 = SizedBox(height: 50.h);
-final spaceH60 = SizedBox(height: 60.h);
-final spaceH70 = SizedBox(height: 70.h);
+final spaceH2 = const SizedBox(height: 2);
+final spaceH3 = const SizedBox(height: 3);
+final spaceH4 = const SizedBox(height: 4);
+final spaceH5 = const SizedBox(height: 5);
+final spaceH6 = const SizedBox(height: 6);
+final spaceH8 = const SizedBox(height: 8);
+final spaceH10 = const SizedBox(height: 10);
+final spaceH12 = const SizedBox(height: 12);
+final spaceH15 = const SizedBox(height: 15);
+final spaceH16 = const SizedBox(height: 16);
+final spaceH20 = const SizedBox(height: 20);
+final spaceH24 = const SizedBox(height: 24);
+final spaceH25 = const SizedBox(height: 25);
+final spaceH30 = const SizedBox(height: 30);
+final spaceH35 = const SizedBox(height: 35);
+final spaceH38 = const SizedBox(height: 38);
+final spaceH40 = const SizedBox(height: 40);
+final spaceH46 = const SizedBox(height: 46);
+final spaceH50 = const SizedBox(height: 50);
+final spaceH60 = const SizedBox(height: 60);
+final spaceH70 = const SizedBox(height: 70);
 
 ///W
-final spaceW2 = SizedBox(width: 2.w);
-final spaceW3 = SizedBox(width: 3.w);
-final spaceW4 = SizedBox(width: 4.w);
-final spaceW5 = SizedBox(width: 5.w);
-final spaceW6 = SizedBox(width: 6.w);
-final spaceW8 = SizedBox(width: 8.w);
-final spaceW10 = SizedBox(width: 10.w);
-final spaceW12 = SizedBox(width: 12.w);
-final spaceW15 = SizedBox(width: 15.w);
-final spaceW16 = SizedBox(width: 16.w);
-final spaceW18 = SizedBox(width: 18.w);
-final spaceW20 = SizedBox(width: 20.w);
-final spaceW25 = SizedBox(width: 25.w);
-final spaceW30 = SizedBox(width: 30.w);
-final spaceW60 = SizedBox(width: 60.w);
-final spaceW100 = SizedBox(width: 100.w);
+final spaceW2 = const SizedBox(width: 2);
+final spaceW3 = const SizedBox(width: 3);
+final spaceW4 = const SizedBox(width: 4);
+final spaceW5 = const SizedBox(width: 5);
+final spaceW6 = const SizedBox(width: 6);
+final spaceW8 = const SizedBox(width: 8);
+final spaceW10 = const SizedBox(width: 10);
+final spaceW12 = const SizedBox(width: 12);
+final spaceW15 = const SizedBox(width: 15);
+final spaceW16 = const SizedBox(width: 16);
+final spaceW18 = const SizedBox(width: 18);
+final spaceW20 = const SizedBox(width: 20);
+final spaceW25 = const SizedBox(width: 25);
+final spaceW30 = const SizedBox(width: 30);
+final spaceW60 = const SizedBox(width: 60);
+final spaceW100 = const SizedBox(width: 100);
 
 TextStyle textNormal(Color? color, double? fontSize) {
   return GoogleFonts.roboto(
     color: color ?? Colors.white,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontSize: fontSize?.sp ?? 14.sp,
+    fontSize: fontSize ?? 14,
   );
 }
 
@@ -67,7 +66,7 @@ TextStyle tokenDetailAmount({
     color: color,
     fontWeight: weight,
     fontStyle: FontStyle.normal,
-    fontSize: fontSize.sp,
+    fontSize: fontSize,
   );
 }
 
@@ -76,7 +75,7 @@ TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
     color: color,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
-    fontSize: fontSize.sp,
+    fontSize: fontSize,
   );
 }
 
@@ -89,14 +88,15 @@ TextStyle textNormalCustom({
     color: color ?? Colors.white,
     fontWeight: fontWeight ?? FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontSize: fontSize?.sp ?? 14.sp,
+    fontSize: fontSize ?? 14,
   );
 }
 
 TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
   return GoogleFonts.roboto(
-      color: color,
-      fontWeight: FontWeight.w500,
-      fontSize: fontSize.sp,
-      fontStyle: FontStyle.normal,);
+    color: color,
+    fontWeight: FontWeight.w500,
+    fontSize: fontSize,
+    fontStyle: FontStyle.normal,
+  );
 }
