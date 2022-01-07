@@ -3,31 +3,35 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/drop_down_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'ban_tin_btn_sheet.dart';
 import 'item_tin_radio.dart';
 import 'item_tin_trong_nuoc.dart';
 
+enum dropDown { tinRadio, tinTrongNuoc }
+
 class TinTucThoiSuScreen extends StatefulWidget {
   TinTucThoiSuBloc tinTucThoiSuBloc;
+  BuildContext pContext;
 
-  TinTucThoiSuScreen({Key? key, required this.tinTucThoiSuBloc})
-      : super(key: key);
+
+  TinTucThoiSuScreen({Key? key, required this.tinTucThoiSuBloc, required this.pContext}) : super(key: key);
 
   @override
   State<TinTucThoiSuScreen> createState() => _TinTucThoiSuScreenState();
 }
 
 class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
-  String? valueChoose = 'Tin radio';
-
+  dropDown? valueChoose = dropDown.tinRadio;
 
   @override
   void initState() {
-    widget.tinTucThoiSuBloc.changeItem('Tin radio');
+    widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
   }
 
   @override
@@ -63,17 +67,20 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                               value: valueChoose,
                               onChanged: (value) {
                                 setState(() {
-                                  valueChoose = value as String?;
+                                  valueChoose = value as dropDown?;
                                   widget.tinTucThoiSuBloc
                                       .changeItem(valueChoose);
                                 });
                               },
-                              items: <String>['Tin radio', 'Tin trong nước']
-                                  .map<DropdownMenuItem<String>>(
+                              items: <dropDown>[
+                                dropDown.tinRadio,
+                                dropDown.tinTrongNuoc
+                              ]
+                                  .map<DropdownMenuItem<dropDown>>(
                                       (value) => DropdownMenuItem(
                                             value: value,
                                             child: Text(
-                                              value,
+                                              value.getString(),
                                               style: textNormalCustom(
                                                   color: titleColor,
                                                   fontSize: 14,
@@ -85,24 +92,31 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: indicatorColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(ImageAssets.icPlay),
-                            Text(
-                              S.current.nghe_doc_tin,
-                              style: textNormalCustom(
-                                  color: indicatorColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                         showBottomSheet(context: widget.pContext, builder: (context) {
+                           return BanTinBtnSheet();
+                         });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: indicatorColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(ImageAssets.icPlay),
+                              Text(
+                                S.current.nghe_doc_tin,
+                                style: textNormalCustom(
+                                    color: indicatorColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

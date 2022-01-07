@@ -1,0 +1,221 @@
+import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/domain/model/home/document_model.dart';
+import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
+import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/items/press_social_net_word_widget.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+
+class FakeData {
+  static final tinhKhanCap = <TinhHuongKhanCapModel>[
+    TinhHuongKhanCapModel(
+        id: '6183602f-f5fc-4cbe-9618-339658767f89',
+        isLink: true,
+        linkOrContent: 'https://www.google.com/',
+        title: 'Cập nhật mới nhất tình hình dịch bệnh COVID-19 tại Đồng Nai'),
+    TinhHuongKhanCapModel(
+        id: '6009d3c6-7908-42ca-8502-5139da346a98',
+        isLink: true,
+        linkOrContent: 'https://www.google.com/',
+        title:
+            'Đồng Nai sẽ hỗ trợ gần 8.00 công dân về quê tỉnh Phú Yên trong chiều ngày 25.11'),
+    TinhHuongKhanCapModel(
+        id: 'b6d248b3-1120-44e3-ba97-c48e2a8f5fe2',
+        isLink: true,
+        linkOrContent: 'https://www.google.com/',
+        title:
+            'Sáng 12-11, thêm 247 ca mắc trong cộng đồng; hơn 95 ngàn trẻ từ 15 đến dưới 18 tuổi đã tiêm vắc xin COVID-19'),
+    TinhHuongKhanCapModel(
+        id: 'f7034c54-d00c-44a3-9105-f3f7d8ec1227',
+        isLink: true,
+        linkOrContent: 'https://www.google.com/',
+        title:
+            'Ngày 11-11: Có 8.162 ca mắc COVID-19 tại 56 địa phương, TP.HCM nhiều nhất với gần 1.200 ca')
+  ];
+  static final tinhHinhXuLyDocVBDen = DocumentDashboardModel(
+    soLuongChoXuLy: 5,
+    soLuongDangXuLy: 0,
+    soLuongDaXuLy: 17,
+    soLuongChoVaoSo: 4,
+  );
+  static final tinhHinhXuLyDocVBDi = DocumentDashboardModel(
+    soLuongChoTrinhKy: 30,
+    soLuongChoXuLy: 12,
+    soLuongDaXuLy: 14,
+    soLuongChoCapSo: 14,
+    soLuongChoBanHanh: 13,
+  );
+  static final ykienNguoiDan = DocumentDashboardModel(
+      soLuongDangXuLy: 30, soLuongQuaHan: 30, soLuongDaBanHanh: 30);
+  static final listTodoWork = [
+    TodoModel(
+        id: "12312312312",
+        important: false,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: true,
+        label:
+            '423 8932 48967532 9832  ư rwqe rư r hwue r r weuruwe wehruiewhru hui hewquhr uiwhe uhrewhr weh wehr ewuh riuwehriuweohr jhfuwe hueifh iuew hfeui hfeuwi fhiuewhr ijhsdfhuwieh fiufheiw iuwfh ưe798237 8832341 234 234 74 89372 9843274'),
+    TodoModel(
+        id: "1231221312331sad2312",
+        important: true,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: false,
+        label: 'gán việc3543'),
+    TodoModel(
+        id: "1231231212312312qưq321312",
+        important: false,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: false,
+        label: "23423213345"),
+    TodoModel(
+        id: "1231231121xzc31232312",
+        important: false,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: true,
+        label: "Việc thì nhiều nhưng làm không bao nhiêu :)"),
+    TodoModel(
+        id: "1231231231231dá23112",
+        important: false,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: false,
+        label: "123213"),
+    TodoModel(
+        id: "12312312ádasdqe31sda2",
+        important: true,
+        inUsed: true,
+        isDeleted: false,
+        isTicked: true,
+        label: "Họp với ban Tổng Giám đốc"),
+  ];
+  static final fakeDataPress = [
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine"),
+    PressNetWorkModel(
+        url:
+            "https://tin247.com/sang-61-hon-143-trieu-ca-covid-19-o-nuoc-ta-khoi-benh-toc-do-lay-cua-omicron-gap-7-lan-voi-nhom-chua-tiem-vaccine-24-29186882.html",
+        publishedTime: "2022-01-06T09:47:56",
+        avatar:
+            "https://image2.tin247.news/pictures/2022/01/06/tyl1641437344.jpeg",
+        domain: "tin247.com",
+        title:
+            "Sáng 6/1: Hơn 1,43 Triệu Ca Covid-19 Ở Nước Ta Khỏi Bệnh; Tốc Độ Lây Của Omicron Gấp 7 Lần Với Nhóm Chưa Tiêm Vaccine")
+  ];
+  static final tag = [
+    TagModel('Covid-19', false),
+    TagModel('Vaccine', true),
+    TagModel('Lê Sĩ Lâm', false),
+  ];
+  static final documentList = [
+    DocumentModel(
+        title: 'Công văn 2005/KHPTDL chờ phê duyệt',
+        kyHieu: 'VPCP-TTĐT',
+        status: 'Hoàn thành',
+        code: 'HOAN_THANH',
+        noiGui: "Ban ATGT Tiền Giang - tỉnh tiền giang ok các thứ"),
+    DocumentModel(
+        title: 'Công văn 2005/KHPTDL chờ phê duyệt',
+        kyHieu: 'VPCP-TTĐT',
+        status: 'Quá hạn',
+        code: 'HOAN_THANH',
+        noiGui: "Ban ATGT Tiền Giang - tỉnh tiền giang ok các thứ"),
+    DocumentModel(
+        title: 'Công văn 2005/KHPTDL chờ phê duyệt',
+        kyHieu: 'VPCP-TTĐT',
+        status: 'Hoàn thành',
+        code: 'QUA_HAN',
+        noiGui: "Ban ATGT Tiền Giang - tỉnh tiền giang ok các thứ"),
+    DocumentModel(
+        title: 'Công văn 2005/KHPTDL chờ phê duyệt',
+        kyHieu: 'VPCP-TTĐT',
+        status: 'Hoàn thành',
+        code: 'HOAN_THANH',
+        noiGui: "Ban ATGT Tiền Giang - tỉnh tiền giang ok các thứ")
+  ];
+  static final caledar = [
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.CHO_XAC_NHAN,
+        nguoiChuTri: 'Phan Hà Minh'),
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.THAM_GIA,
+        nguoiChuTri: 'Phan Hà Minh'),
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.THAM_GIA,
+        nguoiChuTri: 'Phan Hà Minh'),
+  ];
+}
