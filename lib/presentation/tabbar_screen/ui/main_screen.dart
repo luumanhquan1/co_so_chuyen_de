@@ -1,9 +1,6 @@
-
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
-
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +37,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
       builder: (context, snapshot) {
         final type = snapshot.data ?? TabBarType.home;
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: IndexedStack(
             index: _getIndexListScreen(type),
             children: _listScreen.map((e) => e.widget).toList(),

@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,16 +49,13 @@ class CustomItemCalenderWork extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    typeName,
-                    softWrap: true,
-                    maxLines: 2,
-                    style: textNormalCustom(color: titleCalenderWork)
-                  ),
-                  Text(
-                    numberOfCalendars.toString(),
-                    style: titleText(color: numberOfCalenders,fontSize: 26.0)
-                  ),
+                  Text(typeName,
+                      softWrap: true,
+                      maxLines: 2,
+                      style: textNormalCustom(color: titleCalenderWork)),
+                  Text(numberOfCalendars.toString(),
+                      style:
+                          titleText(color: numberOfCalenders, fontSize: 26.0)),
                 ],
               ),
             )

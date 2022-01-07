@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class BaseSearchBar extends StatelessWidget {
-  const BaseSearchBar({Key? key,  this.focusNode,this.onSubmit, this.onChange, this.controller})
+  const BaseSearchBar(
+      {Key? key, this.focusNode, this.onSubmit, this.onChange, this.controller})
       : super(key: key);
   final Function(String)? onSubmit;
   final Function(String)? onChange;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+
   @override
   Widget build(BuildContext context) {
     return Container(

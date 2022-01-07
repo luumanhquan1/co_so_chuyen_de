@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,11 +80,11 @@ TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
   );
 }
 
-TextStyle textNormalCustom(
-{ Color? color,
+TextStyle textNormalCustom({
+  Color? color,
   double? fontSize,
-  FontWeight? fontWeight,}
-) {
+  FontWeight? fontWeight,
+}) {
   return GoogleFonts.roboto(
     color: color ?? Colors.white,
     fontWeight: fontWeight ?? FontWeight.w500,
@@ -96,9 +95,8 @@ TextStyle textNormalCustom(
 
 TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
   return GoogleFonts.roboto(
-    color: color,
-    fontWeight: FontWeight.w500,
-    fontSize: fontSize.sp,
-    fontStyle: FontStyle.normal
-  );
+      color: color,
+      fontWeight: FontWeight.w500,
+      fontSize: fontSize.sp,
+      fontStyle: FontStyle.normal,);
 }

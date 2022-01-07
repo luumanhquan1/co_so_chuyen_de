@@ -1,4 +1,6 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -6,11 +8,15 @@ class PieChart extends StatelessWidget {
   final List<ChartData> chartData;
   final String title;
   final double paddingTop;
+  final Function(int)? onTap;
+  final bool isSubjectInfo;
   const PieChart({
     Key? key,
     required this.chartData,
     this.title = '',
     this.paddingTop = 20,
+    this.onTap,
+    this.isSubjectInfo = true,
   }) : super(key: key);
 
   @override
@@ -27,7 +33,7 @@ class PieChart extends StatelessWidget {
               child: Text(
                 title,
                 style: textNormalCustom(
-                  color: const Color(0xff667793),
+                  color: infoColor,
                   fontSize: 16,
                 ),
               ),
@@ -47,11 +53,16 @@ class PieChart extends StatelessWidget {
                 xValueMapper: (ChartData data, _) => data.title,
                 yValueMapper: (ChartData data, _) => data.value,
                 dataLabelMapper: (ChartData data, _) => percent(data.value),
+                onPointTap: (value) {
+                  if (onTap != null) {
+                    onTap!(value.pointIndex ?? 0);
+                  } else {}
+                },
                 dataLabelSettings: DataLabelSettings(
                   isVisible: true,
                   showZeroValue: false,
                   textStyle: textNormalCustom(
-                    color: const Color(0xffFFFFFF),
+                    color: AppTheme.getInstance().backGroundColor(),
                     fontSize: 14,
                   ),
                 ),
@@ -59,42 +70,50 @@ class PieChart extends StatelessWidget {
             ],
           ),
         ),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          childAspectRatio: 10,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          children: List.generate(chartData.length, (index) {
-            final result = chartData[index];
-            // ignore: avoid_unnecessary_containers
-            return Container(
-              child: Row(
-                children: [
-                  Container(
-                    height: 14,
-                    width: 14,
-                    decoration: BoxDecoration(
-                      color: result.color,
-                      shape: BoxShape.circle,
+        if (isSubjectInfo)
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 10,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            children: List.generate(chartData.length, (index) {
+              final result = chartData[index];
+              // ignore: avoid_unnecessary_containers
+              return GestureDetector(
+                onTap: () {
+                  if (onTap != null) {
+                    onTap!(index);
+                  } else {}
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: 14,
+                      width: 14,
+                      decoration: BoxDecoration(
+                        color: result.color,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    '${result.title} (${result.value.toInt()})',
-                    style: textNormal(
-                     const Color(0xff667793),
-                      14,
+                    const SizedBox(
+                      width: 12,
                     ),
-                  )
-                ],
-              ),
-            );
-          }),
-        )
+                    Text(
+                      '${result.title} (${result.value.toInt()})',
+                      style: textNormal(
+                        infoColor,
+                        14,
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }),
+          )
+        else
+          const SizedBox()
       ],
     );
   }
@@ -105,7 +124,7 @@ class PieChart extends StatelessWidget {
       sum += vl.value;
     }
     final double percent = (vl / sum) * 100;
-    return '${percent.toStringAsFixed(2)}%';
+    return '${percent.toStringAsFixed(2).replaceAll('.00', '')}%';
   }
 }
 
