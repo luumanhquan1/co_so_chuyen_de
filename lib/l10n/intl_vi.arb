@@ -117,6 +117,12 @@
   "gui_lai" : " Gửi lại",
   "ban_tin_trua_ngay" : "Bản tin trưa ngày",
   "time_play" : "01:30 / 03/50",
+  "account": "Tài khoản",
+  "password": "Mật khẩu",
+  "save_password": "Ghi nhớ đăng nhập",
+  "login": "Đăng nhập",
+  "hello": "Xin chào!",
+  "wellcom_login": "Vui lòng đăng nhập để sử dụng ứng dụng",
   "tong_tin" : "Tổng tin",
   "bao_chi" : "Báo chí",
   "mang_xa_hoi" : "Mạng xã hội",
@@ -128,5 +134,4 @@
   "share" : "Share",
   "comment" : "Comment",
   "bao_cao_chi_tiet" : "Báo cáo chi tiết >"
-
 }

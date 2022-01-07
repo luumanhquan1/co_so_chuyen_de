@@ -56,6 +56,11 @@ class ImageAssets {
   static const String icHanhChinhCong = '$baseImg/ic_hanh_chinh_cong.svg';
   static const String icPrevAppbar = '$baseImg/prev_appbar.svg';
   static const String icAdd = '$baseImg/add.svg';
+  static const String imgLogin = '$baseImg/img_login.png';
+  static const String imgAcount = '$baseImg/ic_acount.svg';
+  static const String imgPassword = '$baseImg/ic_password.svg';
+  static const String imgView = '$baseImg/ic_view.svg';
+  static const String imgBackGroundLogin = '$baseImg/image_login_background.svg';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
@@ -89,6 +94,7 @@ class ImageAssets {
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
+
 
   static SvgPicture svgAssets(
     String name, {
