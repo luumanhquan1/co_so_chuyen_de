@@ -37,7 +37,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
       builder: (context, snapshot) {
         final type = snapshot.data ?? TabBarType.home;
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: IndexedStack(
             index: _getIndexListScreen(type),
             children: _listScreen.map((e) => e.widget).toList(),
