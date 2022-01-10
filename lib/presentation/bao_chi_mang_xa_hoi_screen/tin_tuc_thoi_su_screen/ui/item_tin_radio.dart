@@ -22,10 +22,10 @@ class ItemTinRadio extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.white.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
+              color: Color(0xFF6566E9).withOpacity(0.05),
+              spreadRadius: 0,
+              blurRadius: 10,
+              offset: const Offset(0, 4), // changes position of shadow
             ),
           ],
           borderRadius: BorderRadius.circular(6),
@@ -80,7 +80,7 @@ class ItemTinRadio extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        width: 30,
+                        width: 45,
                       ),
                       SvgPicture.asset(ImageAssets.icPlay)
                     ],
