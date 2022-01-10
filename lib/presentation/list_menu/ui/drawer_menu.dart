@@ -45,7 +45,7 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                     appBar: AppBar(
                       title: Text(
                         widget.title,
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14), 
                       ),
                       backgroundColor: backgroundDrawerMenu,
                       leading: Builder(
@@ -69,7 +69,7 @@ class _ModelMenuCCVCState extends State<ModelMenuCCVC> {
                           // );
                           return ItemExpandableMenu(image: _cubit.img[index],title: _cubit.menuItems[index].menuTitle, cubit: _cubit,);
                         },
-                      ),
+                      ),         
                     ),
                   ),
                 ),

@@ -18,15 +18,57 @@ extension StringMoneyFormat on String {
   }
 }
 
-extension FormatAddress on String {
-  String formatAddressWallet() {
-    final String result = '${substring(0, 5)}...${substring(
-      length - 4,
-      length,
-    )}';
-    return result;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 extension FormatAddressConfirm on String {
   String formatAddressWalletConfirm() {
