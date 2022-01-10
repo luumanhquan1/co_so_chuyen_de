@@ -1,5 +1,5 @@
 enum AppMode { LIGHT, DARK }
-
+enum DeviceType { MOBILE, TABLET }
 enum ServerType { DEV, QA, STAGING, PRODUCT }
 
 enum LoadingType { REFRESH, LOAD_MORE }
