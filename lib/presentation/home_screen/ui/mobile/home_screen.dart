@@ -9,16 +9,16 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/header_widget.da
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
+class HomeScreenMobile extends StatefulWidget {
+  const HomeScreenMobile({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _MyHomePageState();
+  State<HomeScreenMobile> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<HomeScreen> {
+class _MyHomePageState extends State<HomeScreenMobile> {
   ScrollController scrollController = ScrollController();
   HomeCubit homeCubit = HomeCubit();
 

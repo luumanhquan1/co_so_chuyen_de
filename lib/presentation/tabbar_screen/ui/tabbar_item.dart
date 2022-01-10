@@ -1,8 +1,11 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +52,9 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return const HomeScreen();
+        return APP_DEVICE == DeviceType.MOBILE
+            ? HomeScreenMobile()
+            : HomeScreenTablet();
       case TabBarType.report:
         return const Scaffold(
           backgroundColor: Colors.blue,
@@ -62,7 +67,6 @@ extension TabbarEnum on TabBarType {
         );
       case TabBarType.menu:
         return const MenuScreen();
-
     }
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
@@ -39,6 +41,7 @@ class _CongViecCellState extends State<CongViecCell> {
     super.initState();
     textEditingController.text = widget.text.trim();
     focusNode.addListener(() {
+      log("23234243");
       if (!focusNode.hasFocus && widget.onChange != null) {
         widget.onChange?.call(textEditingController);
       }
