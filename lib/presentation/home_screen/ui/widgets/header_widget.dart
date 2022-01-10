@@ -6,7 +6,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/clock_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/mequee_widget.dart';
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
@@ -236,7 +236,7 @@ class HeaderWidget extends StatelessWidget {
                                       result.title,
                                       style: textNormalCustom(
                                         color: specialPriceColor,
-                                        fontSize: 14,
+                                        fontSize: 16,
                                       ),
                                     )
                                   ],
