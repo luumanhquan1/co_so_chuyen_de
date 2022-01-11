@@ -5,14 +5,14 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextFieldTablet extends StatefulWidget {
   final bool isPass;
   final String? textHint;
   final Widget? prefixIcon;
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
 
-  const CustomTextField(
+  const CustomTextFieldTablet(
       {Key? key,
       this.onChange,
       this.onSubmit,
@@ -22,10 +22,10 @@ class CustomTextField extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextFieldTablet> createState() => _CustomTextFieldTabletState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomTextFieldTabletState extends State<CustomTextFieldTablet> {
   bool obscureText = false;
 
   @override
@@ -36,13 +36,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textAlignVertical: TextAlignVertical.center,
       cursorColor: Colors.black12,
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         color: Colors.black,
       ),
       decoration: InputDecoration(
         prefixIcon: SizedBox(width: 50, height: 14, child: widget.prefixIcon),
         prefixIconConstraints: const BoxConstraints(
-          maxWidth: 40,
+          maxWidth: 56,
           maxHeight: 14,
         ),
         suffixIcon: Visibility(
@@ -60,11 +60,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         contentPadding: const EdgeInsets.only(left: 20),
         isCollapsed: true,
-        fillColor: bgDropDown.withOpacity(0.1),
+        fillColor: borderButtomColor.withOpacity(0.1),
         filled: true,
         hintText: widget.textHint,
         hintStyle: textNormalCustom(
-            fontSize: 14,
+            fontSize: 18,
             color: unselectedLabelColor,
             fontWeight: FontWeight.w400),
         errorBorder: const OutlineInputBorder(

@@ -1,14 +1,15 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomCheckBox extends StatefulWidget {
+class CustomCheckBoxTablet extends StatefulWidget {
   final title;
   bool isCheck;
   final Function(bool check) onChange;
 
-  CustomCheckBox({
+  CustomCheckBoxTablet({
     Key? key,
     required this.title,
     required this.isCheck,
@@ -16,17 +17,17 @@ class CustomCheckBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomCheckBoxState createState() => _CustomCheckBoxState();
+  _CustomCheckBoxTabletState createState() => _CustomCheckBoxTabletState();
 }
 
-class _CustomCheckBoxState extends State<CustomCheckBox> {
+class _CustomCheckBoxTabletState extends State<CustomCheckBoxTablet> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
-          width: 18.0,
-          height: 18.0,
+          width: 20,
+          height: 20,
           child: Checkbox(
             checkColor: Colors.white,
             // color of tick Mark
@@ -44,11 +45,11 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           ),
         ),
         const SizedBox(
-          width: 13,
+          width: 14,
         ),
         Text(
           widget.title,
-          style: textNormal(titleColor, 14),
+          style: textNormal(titleColor, 14.0.textScale()),
         )
       ],
     );

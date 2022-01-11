@@ -138,5 +138,6 @@
   "time_play" : "01:30 / 03/50",
   "email" : "Email",
   "doi_lai_mat_khau_thanh_cong" : "Đổi lại mật khẩu thành công",
-  "chuc_mung_ban" : "Chúc mừng bạn đã đổi lại mật khẩu thành công"
+  "chuc_mung_ban" : "Chúc mừng bạn đã đổi lại mật khẩu thành công",
+  "khong_the_bo_trong" : "Không thể bỏ trống"
 }
