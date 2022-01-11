@@ -90,9 +90,13 @@ const unselectLabelColor = Color(0xFFA2AEBD);
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
-
-
-
+const containerColor = Color(0xff4F4F4F);
+const containerColorTab = Color(0xffE2E8F0);
+const fontColorTablet = Colors.black;
+const fontColorTablet2 = Color(0xff3D5586);
+const numberColorTablet = Color(0xff7966FF);
+const numberColorTabletbg = Color(0xffECEAFF);
+const iconColorDown = Color(0xffA2AEBD);
 
 const dateColor = Color(0xFF667793);
 
@@ -105,6 +109,8 @@ const textColorBlog = Color(0xFF7367F0);
 const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
+Color cellColor = Color(0xFFDBDFEF).withOpacity(0.5);
+
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
