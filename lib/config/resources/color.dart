@@ -45,7 +45,7 @@ const backgroundWidget = Color(0xffF0F6FF);
 const textDefault = Color(0xff7966FF);
 const textTitle = Color(0xff3D5586);
 const titleItemEdit = Color(0xff586B8B);
-
+const bgColor = Color(0xffE5E5E5);
 const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
 const bgButtonDropDown = Color(0xff7966FF);

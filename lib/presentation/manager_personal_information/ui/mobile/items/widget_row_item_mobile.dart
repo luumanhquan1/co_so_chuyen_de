@@ -7,22 +7,22 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class WidgetRowItem extends StatefulWidget {
+class WidgetRowItemMobile extends StatefulWidget {
   final ManagerPersonalInformationRow row;
 
-  const WidgetRowItem({Key? key, required this.row}) : super(key: key);
+  const WidgetRowItemMobile({Key? key, required this.row}) : super(key: key);
 
   @override
-  State<WidgetRowItem> createState() => _WidgetRowItemState();
+  State<WidgetRowItemMobile> createState() => _WidgetRowItemMobileState();
 }
 
-class _WidgetRowItemState extends State<WidgetRowItem> {
+class _WidgetRowItemMobileState extends State<WidgetRowItemMobile> {
   @override
   Widget build(BuildContext context) {
     final bool isContainer = widget.row.type == TypeRow.status;
     return Column(
       children: [
-        spaceH24,
+        spaceH10,
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -31,7 +31,7 @@ class _WidgetRowItemState extends State<WidgetRowItem> {
               child: Text(
                 widget.row.title,
                 style: tokenDetailAmount(
-                  fontSize: 14.0.textScale(),
+                  fontSize: 12.0.textScale(),
                   color: titleItemEdit,
                 ),
               ),
@@ -42,7 +42,7 @@ class _WidgetRowItemState extends State<WidgetRowItem> {
                     ? Text(
                         '${widget.row.value}',
                         style: tokenDetailAmount(
-                          fontSize: 14.0.textScale(),
+                          fontSize: 12.0.textScale(),
                           color: titleCalenderWork,
                         ),
                         maxLines: 3,
@@ -61,16 +61,15 @@ class _WidgetRowItemState extends State<WidgetRowItem> {
                               ),
                               child: Container(
                                 margin: const EdgeInsets.only(
-                                  left: 6,
-                                  right: 6,
-                                  top: 2,
-                                  bottom: 2,
+                                  left: 8,
+                                  right: 8,
+                                  top: 4,
+                                  bottom: 4,
                                 ),
                                 child: Text(
                                   widget.row.value,
                                   style: tokenDetailAmount(
                                     fontSize: 10.0.textScale(),
-                                    color: backgroundColorApp,
                                   ),
                                 ),
                               ),
@@ -78,7 +77,7 @@ class _WidgetRowItemState extends State<WidgetRowItem> {
                           else
                             customSwitch(widget.row.value, (value) {})
                         ],
-                      ))
+                      ),)
           ],
         )
       ],

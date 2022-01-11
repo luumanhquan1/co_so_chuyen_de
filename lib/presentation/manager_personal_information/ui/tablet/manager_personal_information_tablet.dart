@@ -25,6 +25,7 @@ class _ManagerPersonalInformationTabletState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: BaseAppBar(
         title: 'Quản lý thông tin cá nhân',
         leadingIcon: IconButton(
