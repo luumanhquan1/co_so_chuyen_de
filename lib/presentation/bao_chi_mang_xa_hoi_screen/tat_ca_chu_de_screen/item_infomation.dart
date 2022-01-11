@@ -10,15 +10,22 @@ class ItemInfomation extends StatelessWidget {
   final String title;
   final String index;
 
-  const ItemInfomation(this.image, this.color, this.title, this.index,
-      {Key? key})
+  const ItemInfomation(
+      {Key? key,
+      required this.image,
+      required this.color,
+      required this.title,
+      required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(image, fit: BoxFit.cover,),
+        SvgPicture.asset(
+          image,
+          fit: BoxFit.cover,
+        ),
         const SizedBox(
           width: 10,
         ),
