@@ -12,3 +12,4 @@ extension SizeDouble on double {
     return APP_DEVICE == DeviceType.MOBILE ? this : this + space;
   }
 }
+
