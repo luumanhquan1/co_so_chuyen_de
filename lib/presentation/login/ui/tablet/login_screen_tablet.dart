@@ -2,11 +2,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
-import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox_tablet.dart';
-import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_textfield_tablet.dart';
+import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_textfield.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-import 'package:ccvc_mobile/widgets/button/tablet/button_custom_bottom_tablet.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -72,7 +72,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                     const SizedBox(
                       height: 32,
                     ),
-                    CustomTextFieldTablet(
+                    CustomTextField(
                       isPass: false,
                       textHint: S.current.account,
                       prefixIcon: SvgPicture.asset(ImageAssets.imgAcount),
@@ -81,7 +81,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    CustomTextFieldTablet(
+                    CustomTextField(
                       isPass: true,
                       textHint: S.current.password,
                       prefixIcon: SvgPicture.asset(ImageAssets.imgPassword),
@@ -94,7 +94,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                       stream: loginCubit.savePassword,
                       builder: (context, snapshot) {
                         final isSave = snapshot.data ?? false;
-                        return CustomCheckBoxTablet(
+                        return CustomCheckBox(
                           title: S.current.save_password,
                           isCheck: isSave,
                           onChange: (data) {
@@ -106,7 +106,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    ButtonCustomBottomTablet(
+                    ButtonCustomBottom(
                       title: S.current.login,
                       isColorBlue: true,
                       onPressed: () {

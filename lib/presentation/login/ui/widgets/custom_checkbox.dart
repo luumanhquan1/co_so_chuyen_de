@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,8 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     return Row(
       children: [
         SizedBox(
-          width: 18.0,
-          height: 18.0,
+          width: 18.0.textScale(),
+          height: 18.0.textScale(),
           child: Checkbox(
             checkColor: Colors.white,
             // color of tick Mark
@@ -48,7 +49,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
         ),
         Text(
           widget.title,
-          style: textNormal(titleColor, 14),
+          style: textNormal(titleColor, 14.0.textScale()),
         )
       ],
     );
