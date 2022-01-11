@@ -14,7 +14,8 @@ class WidgetManageScreenTablet extends StatefulWidget {
   const WidgetManageScreenTablet({Key? key}) : super(key: key);
 
   @override
-  _WidgetManageScreenTabletState createState() => _WidgetManageScreenTabletState();
+  _WidgetManageScreenTabletState createState() =>
+      _WidgetManageScreenTabletState();
 }
 
 class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
@@ -53,12 +54,14 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
-            padding:const EdgeInsets.fromLTRB(30, 28, 30, 5),
+            padding: const EdgeInsets.fromLTRB(30, 28, 30, 5),
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: borderColor.withOpacity(0.5),),
+                border: Border.all(
+                  color: borderColor.withOpacity(0.5),
+                ),
                 color: backgroundColorApp,
               ),
               child: Column(
@@ -66,22 +69,26 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                 children: [
                   SizedBox(
                     width: 185,
-                    child: ButtonCustomBottom(title: S.current.dat_lai_mac_dinh,
-                      isColorBlue: true,onPressed: (){},),
+                    child: ButtonCustomBottom(
+                      title: S.current.dat_lai_mac_dinh,
+                      isColorBlue: true,
+                      onPressed: () {},
+                    ),
                   ),
                   const SizedBox(
                     height: 24,
                   ),
-                   Row(
-                  children: [
-                    SvgPicture.asset(ImageAssets.ic_hoicham),
-                    const SizedBox(width: 8,),
-                    Text(
-                      S.current.keep_drop,
-                      style: textNormal(textTitle, 14.0.textScale()),
-                    ),
-                  ],
-
+                  Row(
+                    children: [
+                      SvgPicture.asset(ImageAssets.ic_hoicham),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        S.current.keep_drop,
+                        style: textNormal(textTitle, 14.0.textScale()),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 16,

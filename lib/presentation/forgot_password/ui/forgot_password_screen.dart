@@ -42,7 +42,6 @@ class _ForgotPassWordScreenState extends State<ForgotPassWordScreen> {
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.mat_khau_hien_tai,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.icShieldDone),
                   onChange: (text) {
                   },
@@ -51,7 +50,6 @@ class _ForgotPassWordScreenState extends State<ForgotPassWordScreen> {
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.mat_khau_moi,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.icLock),
                   onChange: (text) {
                   },
@@ -60,7 +58,6 @@ class _ForgotPassWordScreenState extends State<ForgotPassWordScreen> {
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.nhap_lai_mat_khau,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.icLock),
                   onChange: (text) {
                   },
