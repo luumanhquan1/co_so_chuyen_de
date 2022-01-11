@@ -27,17 +27,17 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-      }
+          _scrollController.position.maxScrollExtent) {}
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -51,18 +51,36 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                   crossAxisCount: 2,
                   childAspectRatio: 2.3,
                   children: const [
-                    ItemInfomation(ImageAssets.icTongTin, textColorTongTin,
-                        'Tổng tin', '2032'),
-                    ItemInfomation(ImageAssets.icBaoChi, textColorBaoChi,
-                        'Báo chí', '2032'),
-                    ItemInfomation(ImageAssets.icMangXaHoi, textColorMangXaHoi,
-                        'Mạng xã hội', '2032'),
                     ItemInfomation(
-                        ImageAssets.icForum, textColorForum, 'Forum', '2032'),
+                        image: ImageAssets.icTongTin,
+                        color: textColorTongTin,
+                        title: 'Tổng tin',
+                        index: '2032'),
                     ItemInfomation(
-                        ImageAssets.icBlog, textColorBlog, 'Blog', '2032'),
-                    ItemInfomation(ImageAssets.icNguonKhac, textColorNguonKhac,
-                        'Nguồn khác', '2032'),
+                        image: ImageAssets.icBaoChi,
+                        color: textColorBaoChi,
+                        title: 'Báo chí',
+                        index: '2032'),
+                    ItemInfomation(
+                        image: ImageAssets.icMangXaHoi,
+                        color: textColorMangXaHoi,
+                        title: 'Mạng xã hội',
+                        index: '2032'),
+                    ItemInfomation(
+                        image: ImageAssets.icForum,
+                        color: textColorForum,
+                        title: 'Forum',
+                        index: '2032'),
+                    ItemInfomation(
+                        image: ImageAssets.icBlog,
+                        color: textColorBlog,
+                        title: 'Blog',
+                        index: '2032'),
+                    ItemInfomation(
+                        image: ImageAssets.icNguonKhac,
+                        color: textColorNguonKhac,
+                        title: 'Nguồn khác',
+                        index: '2032'),
                   ],
                 ),
                 SingleChildScrollView(
@@ -94,16 +112,34 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                     'Bản tin tiêu dùng ngày 27/12: Loại gà ăn thực đơn “hạng sang” được săn lùng trong dịp Tết',
                     '5/11/2021  9:10:03 PM',
                     'Ngưng hoạt động gần 3 tháng do dịch, lãnh đạo nhà máy Chang Shin Việt Nam (huyện Vĩnh Cửu ...'),
+                const SizedBox(
+                  height: 16,
+                  child: Divider(
+                    color: Color(0xFFECEEF7),
+                    height: 1,
+                  ),
+                ),
                 ListView.builder(
                   // controller: _scrollController,
                   itemCount: 10,
                   shrinkWrap: true,
-                   physics: const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return const ItemListNews(
-                        'https://recmiennam.com/wp-content/uploads/2018/01/phong-canh-thien-nhien-dep-1.jpg',
-                        'Những cuộc thương lượng thưởng Tết',
-                        "5/11/2021  9:10:03 PM");
+                    return Column(
+                      children: const [
+                        ItemListNews(
+                            'https://recmiennam.com/wp-content/uploads/2018/01/phong-canh-thien-nhien-dep-1.jpg',
+                            'Những cuộc thương lượng thưởng Tết',
+                            "5/11/2021  9:10:03 PM"),
+                        SizedBox(
+                          height: 16,
+                          child: Divider(
+                            color: Color(0xFFECEEF7),
+                            height: 1,
+                          ),
+                        ),
+                      ],
+                    );
                   },
                 ),
               ],
