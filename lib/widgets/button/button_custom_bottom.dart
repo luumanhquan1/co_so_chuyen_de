@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class ButtonCustomBottom extends StatefulWidget {
@@ -29,15 +30,16 @@ class _ButtonCustomBottomState extends State<ButtonCustomBottom> {
               widget.onPressed();
             },
             child: Container(
-              height: 40.0,
+              height: 40.0.textScale(space: 16.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0),
+                borderRadius: BorderRadius.circular(4.0.textScale(space: 4.0)),
                 color: widget.isColorBlue ? textDefault : buttonColor2,
               ),
               child: Center(
                 child: Text(
                   widget.title,
                   style: textNormalCustom(
+                    fontSize: 14.0.textScale(space: 4.0),
                       color: widget.isColorBlue
                           ? backgroundColorApp
                           : textDefault),
