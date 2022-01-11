@@ -113,7 +113,7 @@ class PieChart extends StatelessWidget {
             }),
           )
         else
-          const SizedBox()
+           const SizedBox()
       ],
     );
   }
