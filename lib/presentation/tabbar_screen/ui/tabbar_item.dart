@@ -3,8 +3,6 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
-import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
-import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -57,9 +55,9 @@ extension TabbarEnum on TabBarType {
             ? HomeScreenMobile()
             : HomeScreenTablet();
       case TabBarType.report:
-        return APP_DEVICE == DeviceType.MOBILE
-            ? LoginScreen()
-            : LoginTabletScreen();
+        return const Scaffold(
+          backgroundColor: Colors.blue,
+        );
       case TabBarType.calendarWork:
         return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:

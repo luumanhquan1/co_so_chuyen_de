@@ -20,7 +20,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: MediaQuery.of(context).size.height * 0.85,
+      height: MediaQuery.of(context).size.height * 0.93,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           boxShadow: [
@@ -28,7 +28,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
           color: Colors.white,
