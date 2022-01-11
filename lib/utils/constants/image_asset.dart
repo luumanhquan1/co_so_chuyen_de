@@ -90,6 +90,7 @@ class ImageAssets {
   static const String icShieldDone='$baseImg/ic_shield_done.svg';
   static const String image_lock_reset='$baseImg/image_lock_reset.svg';
   static const String ic_email='$baseImg/ic_email.svg';
+  static const String ic_hoicham='$baseImg/ic_hoicham.svg';
 
 
 
