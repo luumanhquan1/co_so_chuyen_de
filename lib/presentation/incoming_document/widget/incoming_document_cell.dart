@@ -10,14 +10,14 @@ class IncomingDocumentCell extends StatelessWidget {
   final String userName;
   final String status;
 
-  const IncomingDocumentCell(
-      {Key? key,
-      required this.title,
-      required this.dateTime,
-      required this.userImage,
-      required this.userName,
-      required this.status})
-      : super(key: key);
+  const IncomingDocumentCell({
+    Key? key,
+    required this.title,
+    required this.dateTime,
+    required this.userImage,
+    required this.userName,
+    required this.status,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,99 +27,108 @@ class IncomingDocumentCell extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 20.0),
         height: 107,
         decoration: BoxDecoration(
-            border: Border.all(color: borderItemCalender),
-            borderRadius: BorderRadius.circular(10.0),
-            color: backgroundColorApp,
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.05),
-                offset: Offset(0, 0),
-                blurRadius: 5,
-                spreadRadius: 2,
-              )
-            ]),
+          border: Border.all(color: borderItemCalender),
+          borderRadius: BorderRadius.circular(10.0),
+          color: backgroundColorApp,
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              blurRadius: 5,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Expanded(
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0, top: 6.0),
-                      child: Container(
-                        width: 8.0,
-                        height: 8.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: statusCalenderRed,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0, top: 6.0),
+                          child: Container(
+                            width: 8.0,
+                            height: 8.0,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: statusCalenderRed,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        title,
-                        style: titleAppbar(fontSize: 16.0),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      Text(
-                        DateTime.parse(dateTime).toStringWithListFormat,
-                        style: textNormalCustom(
-                            color: textBodyTime, fontWeight: FontWeight.w400),
-                      ),
-                      Row(
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
+                          Text(
+                            title,
+                            style: titleAppbar(fontSize: 16.0),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          Text(
+                            DateTime.parse(dateTime).toStringWithListFormat,
+                            style: textNormalCustom(
+                              color: textBodyTime,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
                                     image: NetworkImage(userImage),
-                                    fit: BoxFit.cover)),
-                          ),
-                          const SizedBox(
-                            width: 12.0,
-                          ),
-                          Expanded(
-                            child: Text(
-                              userName,
-                              style: textNormalCustom(
-                                  color: unselectedLabelColor,
-                                  fontWeight: FontWeight.w400),
-                              maxLines: 1,
-                              overflow: TextOverflow.visible,
-                            ),
-                          ),
-                          Container(
-                            width: 101.0,
-                            height: 24.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                              color: textColorForum,
-                            ),
-                            child: Center(
-                              child: Text(
-                                status,
-                                style: textNormalCustom(fontSize: 12.0),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
+                              const SizedBox(
+                                width: 12.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  userName,
+                                  style: textNormalCustom(
+                                    color: unselectedLabelColor,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Container(
+                                width: 101.0,
+                                height: 24.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  color: textColorForum,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    status,
+                                    style: textNormalCustom(fontSize: 12.0),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

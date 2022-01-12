@@ -38,6 +38,7 @@ class _OutgoingDocumentScreenTabletState
                     userName: cubit.listIncomingDocument[index].nguoiSoanThao,
                     status: cubit.listIncomingDocument[index].doKhan,
                     userImage: '',
+                    index: index,
                   );
                 },
               ),
