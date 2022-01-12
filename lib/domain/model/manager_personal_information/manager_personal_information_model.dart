@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/items/manager_personal_information_row.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_personal_information_row.dart';
 
 class ManagerPersonalInformationModel {
   String? hoten;
@@ -70,8 +70,7 @@ class ManagerPersonalInformationModel {
     donVi: 'UBND tỉnh Đồng nai',
     chuVu: 'Văn thư',
     tenDangNhap: 'lamls',
-    ungDung:
-        'Ứng dụng app điều hành Quản lý văn bản Ứng dụng họp Văn phòng điện tử Ứng dụng quản lý nhiệm vụ Phản ánh kiến nghị',
+    ungDung: 'Ứng dụng app điều hành ',
     trangThai: 'Hoạt động',
     macDinh: true,
   );
@@ -88,11 +87,17 @@ class ManagerPersonalInformationModel {
       ManagerPersonalInformationRow('SĐT cơ quan', sdtCoQuan, TypeRow.text),
       ManagerPersonalInformationRow('SĐT liên hệ', sdtLienHe, TypeRow.text),
       ManagerPersonalInformationRow(
-          'Tỉnh/Thành phố', tinhThanhPho, TypeRow.text),
+        'Tỉnh/Thành phố',
+        tinhThanhPho,
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow('Quận/Huyện', quanHuyen, TypeRow.text),
       ManagerPersonalInformationRow('Phường/Xã', phuongXa, TypeRow.text),
       ManagerPersonalInformationRow(
-          "Địa chỉ liên hệ", diaChiLienHe, TypeRow.text),
+        'Địa chỉ liên hệ',
+        diaChiLienHe,
+        TypeRow.text,
+      ),
     ];
     return list;
   }
@@ -115,11 +120,17 @@ class ManagerPersonalInformationModel {
       ManagerPersonalInformationRow('SĐT cơ quan', sdtCoQuan, TypeRow.text),
       ManagerPersonalInformationRow('SĐT liên hệ', sdtLienHe, TypeRow.text),
       ManagerPersonalInformationRow(
-          'Tỉnh/Thành phố', tinhThanhPho, TypeRow.text),
+        'Tỉnh/Thành phố',
+        tinhThanhPho,
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow('Quận/Huyện', quanHuyen, TypeRow.text),
       ManagerPersonalInformationRow('Phường/Xã', phuongXa, TypeRow.text),
       ManagerPersonalInformationRow(
-          "Địa chỉ liên hệ", diaChiLienHe, TypeRow.text),
+        'Địa chỉ liên hệ',
+        diaChiLienHe,
+        TypeRow.text,
+      ),
     ];
 
     return list;
@@ -140,7 +151,7 @@ class ManagerPersonalInformationModel {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow('STT', stt, TypeRow.text),
       ManagerPersonalInformationRow('Tên đăng nhập', tenDangNhap, TypeRow.text),
-      ManagerPersonalInformationRow('Ứng dụng', ungDung, TypeRow.text),
+      ManagerPersonalInformationRow('Ứng dụng', ungDung, TypeRow.list),
       ManagerPersonalInformationRow('Trạng Thái', trangThai, TypeRow.status),
     ];
     return list;

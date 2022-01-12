@@ -26,7 +26,9 @@ class _WigetImageState extends State<WigetImage> {
             Text(
               'Ảnh đại điện',
               style: tokenDetailAmount(
-                  fontSize: 14.0.textScale(), color: infoColor),
+                fontSize: 14.0.textScale(),
+                color: infoColor,
+              ),
             ),
           ],
         ),
@@ -40,7 +42,9 @@ class _WigetImageState extends State<WigetImage> {
             Text(
               'Ảnh chữ ký',
               style: tokenDetailAmount(
-                  fontSize: 14.0.textScale(), color: infoColor),
+                fontSize: 14.0.textScale(),
+                color: infoColor,
+              ),
             ),
           ],
         ),
@@ -54,7 +58,9 @@ class _WigetImageState extends State<WigetImage> {
             Text(
               'Ảnh ký nháy',
               style: tokenDetailAmount(
-                  fontSize: 14.0.textScale(), color: infoColor),
+                fontSize: 14.0.textScale(),
+                color: infoColor,
+              ),
             ),
           ],
         ),

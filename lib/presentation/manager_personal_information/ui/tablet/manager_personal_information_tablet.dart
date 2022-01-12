@@ -25,7 +25,7 @@ class _ManagerPersonalInformationTabletState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
         title: 'Quản lý thông tin cá nhân',
         leadingIcon: IconButton(
@@ -57,8 +57,7 @@ class _ManagerPersonalInformationTabletState
             children: [
               Text(
                 'Thông tin',
-                style:
-                    titleAppbar(color: textTitle, fontSize: 16.0.textScale()),
+                style: titleAppbar(fontSize: 16.0.textScale()),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +99,5 @@ class _ManagerPersonalInformationTabletState
         ),
       ),
     );
-    ;
   }
 }

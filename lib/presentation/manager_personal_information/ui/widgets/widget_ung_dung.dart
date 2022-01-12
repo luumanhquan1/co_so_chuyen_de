@@ -1,7 +1,6 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/items/widget_row_item.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_row_ung_dung_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +22,7 @@ class _WidgetUngDungState extends State<WidgetUngDung> {
       children: [
         Text(
           'Ứng dụng',
-          style: titleAppbar(color: textTitle, fontSize: 16.0.textScale()),
+          style: titleAppbar(fontSize: 16.0.textScale()),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +31,7 @@ class _WidgetUngDungState extends State<WidgetUngDung> {
               children: _cubit.managerPersonalInformationModel
                   .toListUngDung()
                   .map(
-                    (row) => WidgetRowItem(
+                    (row) => WidgetRowUngDungTablet(
                       row: row,
                     ),
                   )

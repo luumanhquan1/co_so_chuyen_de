@@ -67,6 +67,7 @@ const radioUnfocusColor = Color(0xffE2E8F0);
 const radioFocusColor = Color(0xff7966FF);
 const borderButtomColor = Color(0xffE2E8F0);
 const backgroundRowColor = Color(0xffF5F8FD);
+const bgManagerColor = Color(0xffF9FAFF);
 
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);

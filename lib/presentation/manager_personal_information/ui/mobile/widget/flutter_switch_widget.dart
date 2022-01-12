@@ -28,15 +28,13 @@ class FlutterSwitchWidget extends StatefulWidget {
     this.duration = const Duration(milliseconds: 200),
     this.disabled = false,
   })  : assert(
-            (switchBorder == null || activeSwitchBorder == null) &&
-                (switchBorder == null || inactiveSwitchBorder == null),
-            'Cannot provide switchBorder when an activeSwitchBorder or inactiveSwitchBorder was given\n'
-            'To give the switch a border, use "activeSwitchBorder: border" or "inactiveSwitchBorder: border".'),
+          (switchBorder == null || activeSwitchBorder == null) &&
+              (switchBorder == null || inactiveSwitchBorder == null),
+        ),
         assert(
-            (toggleBorder == null || activeToggleBorder == null) &&
-                (toggleBorder == null || inactiveToggleBorder == null),
-            'Cannot provide toggleBorder when an activeToggleBorder or inactiveToggleBorder was given\n'
-            'To give the toggle a border, use "activeToggleBorder: color" or "inactiveToggleBorder: color".'),
+          (toggleBorder == null || activeToggleBorder == null) &&
+              (toggleBorder == null || inactiveToggleBorder == null),
+        ),
         super(key: key);
 
   final bool value;
@@ -127,10 +125,11 @@ class _FlutterSwitchState extends State<FlutterSwitchWidget>
       return;
     }
 
-    if (widget.value)
+    if (widget.value) {
       _animationController.forward();
-    else
+    } else {
       _animationController.reverse();
+    }
   }
 
   @override
@@ -165,10 +164,11 @@ class _FlutterSwitchState extends State<FlutterSwitchWidget>
           child: GestureDetector(
             onTap: () {
               if (!widget.disabled) {
-                if (widget.value)
+                if (widget.value) {
                   _animationController.forward();
-                else
+                } else {
                   _animationController.reverse();
+                }
                 widget.onToggle(!widget.value);
               }
             },
@@ -201,25 +201,21 @@ class _FlutterSwitchState extends State<FlutterSwitchWidget>
                         opacity: !widget.value ? 1.0 : 0.0,
                         duration: widget.duration,
                         child: Container(
-                          // width: _textSpace,
-                          // padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           alignment: Alignment.centerRight,
                           child: _inactiveText,
                         ),
                       ),
                     ),
-                    Container(
-                      child: Align(
-                        alignment: _toggleAnimation.value,
-                        child: Container(
-                          width: widget.toggleSize,
-                          height: widget.toggleSize,
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _toggleColor,
-                            border: _toggleBorder,
-                          ),
+                    Align(
+                      alignment: _toggleAnimation.value,
+                      child: Container(
+                        width: widget.toggleSize,
+                        height: widget.toggleSize,
+                        padding: const EdgeInsets.all(4.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _toggleColor,
+                          border: _toggleBorder,
                         ),
                       ),
                     ),

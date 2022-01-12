@@ -1,4 +1,4 @@
-enum TypeRow { checkbox, text, status }
+enum TypeRow { checkbox, text, status , list}
 
 class ManagerPersonalInformationRow {
   String title = '';

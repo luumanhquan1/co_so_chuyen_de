@@ -27,7 +27,9 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               Text(
                 'Ảnh đại điện',
                 style: tokenDetailAmount(
-                    fontSize: 12.0.textScale(), color: infoColor,),
+                  fontSize: 12.0.textScale(),
+                  color: infoColor,
+                ),
               ),
             ],
           ),
@@ -43,7 +45,9 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               Text(
                 'Ảnh chữ ký',
                 style: tokenDetailAmount(
-                    fontSize: 12.0.textScale(), color: infoColor,),
+                  fontSize: 12.0.textScale(),
+                  color: infoColor,
+                ),
               ),
             ],
           ),
@@ -59,7 +63,9 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               Text(
                 'Ảnh ký nháy',
                 style: tokenDetailAmount(
-                    fontSize: 12.0.textScale(), color: infoColor,),
+                  fontSize: 12.0.textScale(),
+                  color: infoColor,
+                ),
               ),
             ],
           ),

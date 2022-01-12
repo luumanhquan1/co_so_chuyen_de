@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/items/widget_row_item_mobile.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_row_item_mobile.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -23,11 +23,11 @@ class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
       children: [
         Text(
           'Đơn vị',
-          style: titleAppbar(color: textTitle, fontSize: 14.0.textScale()),
+          style: titleAppbar(fontSize: 14.0.textScale()),
         ),
         spaceH16,
         Container(
-          padding: const EdgeInsets.only(top: 6,left: 16),
+          padding: const EdgeInsets.only(top: 6, left: 16),
           decoration: BoxDecoration(
             color: borderItemCalender.withOpacity(0.1),
             borderRadius: BorderRadius.circular(6),
@@ -36,13 +36,19 @@ class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Column(
                   children: _cubit.managerPersonalInformationModel
                       .toListDonVi()
-                      .map((row) => WidgetRowItemMobile(
-                            row: row,
-                          ))
-                      .toList())
+                      .map(
+                        (row) => WidgetRowItemMobile(
+                          row: row,
+                        ),
+                      )
+                      .toList(),
+                ),
+              )
             ],
           ),
         )

@@ -51,8 +51,7 @@ class _ManagerPersonalInformationState
             children: [
               Text(
                 'Thông tin',
-                style:
-                    titleAppbar(color: textTitle, fontSize: 14.0.textScale()),
+                style: titleAppbar(fontSize: 14.0.textScale()),
               ),
               const WidgetThongTinMobile(),
               spaceH20,
@@ -67,6 +66,5 @@ class _ManagerPersonalInformationState
         ),
       ),
     );
-    ;
   }
 }
