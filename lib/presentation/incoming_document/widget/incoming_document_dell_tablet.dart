@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 
 class IncomingDocumentCellTablet extends StatelessWidget {
-
   final String title;
   final String dateTime;
   final String userImage;
@@ -13,11 +12,11 @@ class IncomingDocumentCellTablet extends StatelessWidget {
 
   const IncomingDocumentCellTablet(
       {Key? key,
-        required this.title,
-        required this.dateTime,
-        required this.userImage,
-        required this.userName,
-        required this.status})
+      required this.title,
+      required this.dateTime,
+      required this.userImage,
+      required this.userName,
+      required this.status})
       : super(key: key);
 
   @override

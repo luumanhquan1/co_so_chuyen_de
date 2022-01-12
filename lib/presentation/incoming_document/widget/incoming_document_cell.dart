@@ -80,7 +80,7 @@ class IncomingDocumentCell extends StatelessWidget {
                           Container(
                             width: 24,
                             height: 24,
-                            decoration:  BoxDecoration(
+                            decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     image: NetworkImage(userImage),
