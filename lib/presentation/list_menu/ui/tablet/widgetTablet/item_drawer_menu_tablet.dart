@@ -21,44 +21,93 @@ class ItemDrawerMenuTablet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.pop(context);
+        },
         child: Row(
           children: [
-            SvgPicture.asset(image),
-            const SizedBox(
-              width: 15,
-            ),
-            Text(
-              title,
-              style: textNormalCustom(
-                fontSize: 14.0.textScale(),
-              ).copyWith(color: fontColorTablet2, fontSize: 20),
-            ),
-            const Expanded(child: SizedBox()),
             if (cubit.menuItems[index].badgeNumber == 0)
-              const SizedBox()
-            else
-              Container(
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  color: numberColorTabletbg,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(4),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15, left: 30),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(color: cellColorborder, width: 1),
+                      bottom: BorderSide(color: cellColorborder, width: 1),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: SvgPicture.asset(image),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        title,
+                        style: textNormalCustom(
+                          fontSize: 14.0.textScale(),
+                        ).copyWith(color: fontColorTablet2, fontSize: 20),
+                      ),
+                    ],
                   ),
                 ),
+              )
+            else
+              Expanded(
                 child: Container(
-                  margin:
-                      const EdgeInsets.all(4),
-                  child: Text(
-                    cubit.menuItems[index].badgeNumber.toString(),
-                    style:
-                        const TextStyle(color: numberColorTablet, fontSize: 14),
+                  padding: const EdgeInsets.only(top: 15, bottom: 15, left: 30),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: cellColorborder),
+                    color: cellColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: SvgPicture.asset(image),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        title,
+                        style: textNormalCustom(
+                          fontSize: 14.0.textScale(),
+                        ).copyWith(color: fontColorTablet2, fontSize: 20),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          color: numberColorTabletbg,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(4),
+                          child: Text(
+                            cubit.menuItems[index].badgeNumber.toString(),
+                            style: const TextStyle(
+                                color: numberColorTablet, fontSize: 14),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      )
+                    ],
                   ),
                 ),
               ),
-            const SizedBox(
-              width: 16,
-            )
           ],
         ),
       ),

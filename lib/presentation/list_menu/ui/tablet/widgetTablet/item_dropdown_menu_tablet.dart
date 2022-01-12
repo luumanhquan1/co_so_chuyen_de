@@ -10,8 +10,7 @@ class ItemDropDownMenuTablet extends StatefulWidget {
   late String title;
   final String image;
   final ListMenuCubit cubit;
-  final index;
-  dynamic a;
+  final int index;
 
   ItemDropDownMenuTablet(
       {Key? key,
@@ -19,7 +18,7 @@ class ItemDropDownMenuTablet extends StatefulWidget {
       required this.image,
       required this.cubit,
       required this.index})
-      : super(key: key);
+      : super(key: key);da
 
   @override
   State createState() {
@@ -31,20 +30,29 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
   @override
   Widget build(BuildContext context) {
     if (widget.cubit.menuItems[widget.index].badgeNumber != 0) {
+      //number
       return Container(
+        margin: const EdgeInsets.only(left: 27, right: 29, bottom: 24),
         decoration: BoxDecoration(
+          border: Border.all(color: cellColorborder),
           color: cellColor,
           borderRadius: const BorderRadius.all(
             Radius.circular(8),
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 23),
+          padding:
+              const EdgeInsets.only(left: 20, right: 12, bottom: 12, top: 12),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Row(
               children: [
-                SvgPicture.asset(widget.image),
+                SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: SvgPicture.asset(widget.image)),
                 const SizedBox(
                   width: 15,
                 ),
@@ -75,23 +83,24 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                       ),
                     ),
                   ),
-                const SizedBox(
-                  width: 16,
-                )
+                // const SizedBox(
+                //   width: 16,
+                // )
               ],
             ),
           ),
         ),
       );
     } else {
+      // dropdown
       return ExpandableTheme(
         data: const ExpandableThemeData(
           iconColor: iconColorDown,
           useInkWell: true,
         ),
         child: ExpandableNotifier(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 23),
+          child: Container(
+            margin: const EdgeInsets.only(left: 27, right: 30, bottom: 24),
             child: Column(
               children: <Widget>[
                 ScrollOnExpand(
@@ -99,32 +108,57 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                   child: ExpandablePanel(
                     theme: const ExpandableThemeData(
                       headerAlignment: ExpandablePanelHeaderAlignment.center,
-                      tapBodyToCollapse: true,
+                      tapBodyToCollapse: false,
                     ),
-                    header: Row(
-                      children: [
-                        SvgPicture.asset(widget.image),
-                        const SizedBox(
-                          width: 15,
+                    header: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: cellColorborder),
+                        color: cellColor,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
                         ),
-                        Text(
-                          widget.title,
-                          style: textNormalCustom(
-                            fontSize: 14.0.textScale(),
-                          ).copyWith(color: fontColorTablet2, fontSize: 20),
-                        ),
-                      ],
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: SvgPicture.asset(widget.image),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            widget.title,
+                            style: textNormalCustom(
+                              fontSize: 14.0.textScale(),
+                            ).copyWith(
+                                color: fontColorTablet2, fontSize: 20),
+                          ),
+                        ],
+                      ),
                     ),
-                    collapsed: const SizedBox(),
-                    expanded: Padding(
-                      padding: const EdgeInsets.only(left: 32),
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: widget
-                            .cubit.menuItems[widget.index].children.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
+                    collapsed: Container(
+                      color: Colors.red,
+                    ),
+                    expanded: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                          widget.cubit.menuItems[widget.index].children.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.only(left: 45),
+                          margin: const EdgeInsets.only(top: 16),
+                          decoration: BoxDecoration(
+                            color: cellColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                          child: ListTile(
                             title: Text(
                               widget.cubit.menuItems[widget.index]
                                   .children[index].title,
@@ -136,7 +170,7 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                               decoration: const BoxDecoration(
                                 color: numberColorTabletbg,
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(2),
+                                  Radius.circular(4),
                                 ),
                               ),
                               child: Container(
@@ -150,16 +184,18 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                                 ),
                               ),
                             ),
-                            onTap: () {},
-                          );
-                        },
-                      ),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      },
                     ),
                     builder: (_, collapsed, expanded) {
                       return Expandable(
                         collapsed: collapsed,
                         expanded: expanded,
-                        theme: const ExpandableThemeData(crossFadePoint: 0),
+                        // theme: const ExpandableThemeData(crossFadePoint: 0),
                       );
                     },
                   ),

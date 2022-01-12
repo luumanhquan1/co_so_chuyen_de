@@ -109,7 +109,8 @@ const textColorBlog = Color(0xFF7367F0);
 const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
-Color cellColor = Color(0xFFDBDFEF).withOpacity(0.5);
+Color cellColor = Color(0xFFDBDFEF).withOpacity(0.1);
+Color cellColorborder = Color(0xFFDBDFEF).withOpacity(0.5);
 
 
 ///=========== Using to make change app theme ================================

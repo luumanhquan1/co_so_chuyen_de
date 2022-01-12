@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/presentation/list_menu/bloc/list_menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/widgetTablet/item_drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/widgetTablet/item_dropdown_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_close.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,22 +44,7 @@ class _BaseMenuPhoneState extends State<BaseMenuTablet> {
                   position: widget.offsetAnimation,
                   child: Scaffold(
                     backgroundColor: fontColor,
-                    appBar: AppBar(
-                      elevation: 0,
-                      title: Text(
-                        widget.title,
-                        style: textNormalCustom(fontSize: 14.0.textScale()).copyWith(color: fontColorTablet),
-                      ),
-                      backgroundColor: fontColor,
-                      leading: Builder(
-                        builder: (BuildContext context) {
-                          return IconButton(
-                            icon: SvgPicture.asset(widget.image),
-                            onPressed: () {},
-                          );
-                        },
-                      ),
-                    ),
+                    appBar: AppBarDefaultClose(widget.title, fontColorTablet2),
                     body: SafeArea(
                       child: Padding(
                         padding:
@@ -66,18 +52,28 @@ class _BaseMenuPhoneState extends State<BaseMenuTablet> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: _cubit.menuItems.length,
-                                itemBuilder: (context, index) {
-                                  return ItemDrawerMenuTablet(
+                              Column(
+                                children: List.generate(
+                                  _cubit.menuItems.length,
+                                  (index) => ItemDrawerMenuTablet(
                                       _cubit,
                                       _cubit.img[index],
                                       _cubit.menuItems[index].menuTitle,
-                                      index);
-                                },
+                                      index),
+                                ),
                               ),
+                              // ListView.builder(
+                              //   physics: const NeverScrollableScrollPhysics(),
+                              //   shrinkWrap: true,
+                              //   itemCount: _cubit.menuItems.length,
+                              //   itemBuilder: (context, index) {
+                              //     return ItemDrawerMenuTablet(
+                              //         _cubit,
+                              //         _cubit.img[index],
+                              //         _cubit.menuItems[index].menuTitle,
+                              //         index);
+                              //   },
+                              // ),
                               if (_cubit.menuItems.isEmpty)
                                 const SizedBox()
                               else
