@@ -60,7 +60,8 @@ class ImageAssets {
   static const String imgAcount = '$baseImg/ic_acount.svg';
   static const String imgPassword = '$baseImg/ic_password.svg';
   static const String imgView = '$baseImg/ic_view.svg';
-  static const String imgBackGroundLogin = '$baseImg/image_login_background.svg';
+  static const String imgBackGroundLogin =
+      '$baseImg/image_login_background.svg';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
@@ -75,30 +76,29 @@ class ImageAssets {
   static const String icImageChangePassword =
       '$baseImg/image_change_password.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
-  static const String icBaoChi='$baseImg/ic_bao_chi.svg';
-  static const String icBlog='$baseImg/ic_blog.svg';
-  static const String icForum='$baseImg/ic_forum.svg';
-  static const String icMangXaHoi='$baseImg/ic_mang_xa_hoi.svg';
-  static const String icNguonKhac='$baseImg/ic_nguon_khac.svg';
-  static const String icTongTin='$baseImg/ic_tong_tin.svg';
-  static const String icBaiViet='$baseImg/ic_bai_viet.svg';
-  static const String icComment='$baseImg/ic_comment.svg';
-  static const String icLike='$baseImg/ic_like.svg';
-  static const String icShare='$baseImg/ic_share.svg';
-  static const String icCalendar='$baseImg/ic_calendar.svg';
-  static const String icLock='$baseImg/ic_lock.svg';
-  static const String icShieldDone='$baseImg/ic_shield_done.svg';
-  static const String image_lock_reset='$baseImg/image_lock_reset.svg';
-  static const String ic_email='$baseImg/ic_email.svg';
-
-
+  static const String icBaoChi = '$baseImg/ic_bao_chi.svg';
+  static const String icBlog = '$baseImg/ic_blog.svg';
+  static const String icForum = '$baseImg/ic_forum.svg';
+  static const String icMangXaHoi = '$baseImg/ic_mang_xa_hoi.svg';
+  static const String icNguonKhac = '$baseImg/ic_nguon_khac.svg';
+  static const String icTongTin = '$baseImg/ic_tong_tin.svg';
+  static const String icBaiViet = '$baseImg/ic_bai_viet.svg';
+  static const String icComment = '$baseImg/ic_comment.svg';
+  static const String icLike = '$baseImg/ic_like.svg';
+  static const String icShare = '$baseImg/ic_share.svg';
+  static const String icCalendar = '$baseImg/ic_calendar.svg';
+  static const String icLock = '$baseImg/ic_lock.svg';
+  static const String icShieldDone = '$baseImg/ic_shield_done.svg';
+  static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
+  static const String ic_email = '$baseImg/ic_email.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
-
+  static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
+  static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
 
   static SvgPicture svgAssets(
     String name, {
@@ -125,6 +125,5 @@ class ImageAssets {
     );
   }
 
-  static const Map<String, List<double>> _svgImageSize = {
-  };
+  static const Map<String, List<double>> _svgImageSize = {};
 }

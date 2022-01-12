@@ -46,7 +46,6 @@
   "cho_cho_y_kien_VB_den" : "Chờ cho ý kiến VB đến",
   "cho_trinh_ky_VB_di" : "Chờ trình ký VB đi",
   "misson" : "Nhiệm vụ",
-  "hello" : "Xin chào",
   "da_xu_ly" : "Đã xử lý",
   "cho_vao_so" : "Chờ vào sổ",
   "cho_trinh_ky" : "Chờ trình ký",
@@ -121,7 +120,7 @@
   "password": "Mật khẩu",
   "save_password": "Ghi nhớ đăng nhập",
   "login": "Đăng nhập",
-  "hello": "Xin chào!",
+  "hello": "Xin chào",
   "wellcom_login": "Vui lòng đăng nhập để sử dụng ứng dụng",
   "tong_tin" : "Tổng tin",
   "bao_chi" : "Báo chí",
@@ -136,5 +135,8 @@
   "bao_cao_chi_tiet" : "Báo cáo chi tiết >",
   "email" : "Email",
   "doi_lai_mat_khau_thanh_cong" : "Đổi lại mật khẩu thành công",
-  "chuc_mung_ban" : "Chúc mừng bạn đã đổi lại mật khẩu thành công"
+  "chuc_mung_ban" : "Chúc mừng bạn đã đổi lại mật khẩu thành công",
+  "cho_phan_xu_ly" : "Chờ phân xử lý",
+  "loai_nhiem_vu" : "Loại nhiệm vụ",
+  "han_xu_ly" : "Hạn xử lý"
 }

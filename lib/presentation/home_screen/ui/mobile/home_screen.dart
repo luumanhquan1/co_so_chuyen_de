@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/header_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<HomeScreenMobile> {
                     children: List.generate(
                         HomeItemType.values.length, (index) {
                       final type = HomeItemType.values[index];
-                      return type.getItems();
+                      return type.getItemsMobile();
                     }),
                   )
                 ],

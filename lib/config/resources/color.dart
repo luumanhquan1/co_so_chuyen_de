@@ -74,7 +74,7 @@ const statusCalenderRed = Color(0xffEA5455);
 const backgroundItemCalender = Color(0xffF5F8FD);
 const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
-
+const dotColor = Color(0xffD4DAE3);
 //tabbar color
 const labelColor = Color(0xff7966FF);
 const unselectedLabelColor = Color(0xff667793);
@@ -91,9 +91,6 @@ const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
 
-
-
-
 const dateColor = Color(0xFF667793);
 
 //tất cả chủ đề color
@@ -105,6 +102,7 @@ const textColorBlog = Color(0xFF7367F0);
 const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
+const bgTabletColor = Color(0xffF9FAFF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

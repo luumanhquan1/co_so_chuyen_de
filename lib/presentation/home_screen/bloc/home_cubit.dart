@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
@@ -9,7 +11,7 @@ import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:rxdart/rxdart.dart';
 
-class HomeCubit extends BaseCubit<HomeState>{
+class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(MainStateInitial());
 
   final BehaviorSubject<HomeItemType?> _showDialogSetting =
@@ -28,9 +30,11 @@ class HomeCubit extends BaseCubit<HomeState>{
       BehaviorSubject<List<PressNetWorkModel>>();
   final BehaviorSubject<List<TagModel>> _getTag =
       BehaviorSubject<List<TagModel>>();
-  final BehaviorSubject<bool> _showAddTag=BehaviorSubject<bool>();
-
-
+  final BehaviorSubject<bool> _showAddTag = BehaviorSubject<bool>();
+  final BehaviorSubject<List<DashboardSchedule>> _getTongHopNhiemVu =
+      BehaviorSubject<List<DashboardSchedule>>();
+  final BehaviorSubject<List<CalendarMeetingModel>> _getNhiemVu =
+  BehaviorSubject<List<CalendarMeetingModel>>();
 
   void _getTinhHuongKhanCap() {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
@@ -60,11 +64,17 @@ class HomeCubit extends BaseCubit<HomeState>{
     _getPressNetWork.close();
     _userInformation.close();
     _showAddTag.close();
+    _getTongHopNhiemVu.close();
+    _getNhiemVu.close();
   }
+  Stream<List<CalendarMeetingModel>> get getNhiemVu =>
+      _getNhiemVu.stream;
 
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
       _getDocumentVBDen.stream;
   Stream<List<TagModel>> get getTag => _getTag.stream;
+  Stream<List<DashboardSchedule>> get getTonghopNhiemVu =>
+      _getTongHopNhiemVu.stream;
   Stream<List<PressNetWorkModel>> get getPressNetWork =>
       _getPressNetWork.stream;
   Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
@@ -93,9 +103,8 @@ extension BaoChiMangXaHoi on HomeCubit {
     _getTag.value[newSelect].select = true;
     _getTag.sink.add(_getTag.value);
   }
-  void showAddTag(){
 
-  }
+  void showAddTag() {}
 }
 
 ///Danh sách công việc
@@ -193,5 +202,13 @@ extension DanhSachCongViec on HomeCubit {
           .toList(),
     );
     _getTodoList.sink.add(result);
+  }
+}
+
+/// Tổng hợp nhiệm vụ
+extension TongHopNhiemVu on HomeCubit {
+  void getDataTongHopNhiemVu(){
+    _getTongHopNhiemVu.sink.add(FakeData.listCalendarWork);
+    _getNhiemVu.sink.add(FakeData.listNhiemView);
   }
 }
