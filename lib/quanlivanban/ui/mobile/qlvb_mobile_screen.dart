@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_do
 import 'package:ccvc_mobile/quanlivanban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 class QLVBScreenMobile extends StatefulWidget {
@@ -30,7 +31,9 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBarDefaultBack(
+        S.current.thong_tin_chung,
+      ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(

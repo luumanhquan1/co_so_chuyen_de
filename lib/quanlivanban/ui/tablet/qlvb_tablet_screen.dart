@@ -70,29 +70,30 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet> {
                         },
                       ),
                     ),
-                    // DefaultTabController(
-                    //   length: 2,
-                    //   child: Scaffold(
-                    //     appBar: AppBar(
-                    //       bottom: const TabBar(
-                    //         tabs: [
-                    //           Text('tab1'),
-                    //           Text('tab2'),
-                    //         ],
-                    //       ),
-                    //
-                    //     ),
-                    //     body:const TabBarView(
-                    //       children: [
-                    //         Center(child: Text('Tab1'),),
-                    //         Center(child: Text('Tab2'),),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // )
+
                   ],
                 ),
               ),
+              DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: AppBar(
+                    bottom: const TabBar(
+                      tabs: [
+                        Text('tab1'),
+                        Text('tab2'),
+                      ],
+                    ),
+
+                  ),
+                  body:const TabBarView(
+                    children: [
+                      Center(child: Text('Tab1'),),
+                      Center(child: Text('Tab2'),),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

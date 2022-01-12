@@ -4,8 +4,10 @@ import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/widget_mange_screen.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
+import 'package:ccvc_mobile/quanlivanban/ui/tablet/qlvb_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,7 +70,9 @@ extension TabbarEnum on TabBarType {
         );
       case TabBarType.menu:
          // return const MenuScreen();
-         return const QLVBScreenMobile();
+      return APP_DEVICE == DeviceType.MOBILE
+          ?const QLVBScreenMobile()
+          : const QLVBScreenTablet();
 
     }
   }
