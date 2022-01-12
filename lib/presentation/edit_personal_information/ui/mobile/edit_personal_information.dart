@@ -1,20 +1,22 @@
 import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/input_info.dart';
 import 'package:flutter/material.dart';
 
 class EditPersonInformationScreen extends StatefulWidget {
-  final EditPersonalInformationModel editPersonalInformationModel;
+  final ManagerPersonalInformationModel managerPersonalInformationModel;
 
   const EditPersonInformationScreen(
-      {Key? key, required this.editPersonalInformationModel})
+      {Key? key, required this.managerPersonalInformationModel})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _EditAccountScreen();
+  State<StatefulWidget> createState() => _EditPersonalInformationScreen();
 }
 
-class _EditAccountScreen extends State<EditPersonInformationScreen> {
+class _EditPersonalInformationScreen
+    extends State<EditPersonInformationScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
   TextEditingController nameController = TextEditingController();
@@ -29,7 +31,20 @@ class _EditAccountScreen extends State<EditPersonInformationScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    cubit.getCurrentUnit(widget.editPersonalInformationModel);
+    cubit.getCurrentUnit(widget.managerPersonalInformationModel);
+    nameController.text = widget.managerPersonalInformationModel.hoTen ?? '';
+    maCanBoController.text =
+        widget.managerPersonalInformationModel.maCanBo ?? '';
+    // thuTuController.text =
+    //     (widget.managerPersonalInformationModel.thuTu ?? 0) as String;
+    cmndController.text = widget.managerPersonalInformationModel.cmtnd ?? '';
+    emailController.text = widget.managerPersonalInformationModel.email ?? '';
+    sdtCoquanController.text =
+        widget.managerPersonalInformationModel.phoneCoQuan ?? '';
+    sdtController.text =
+        widget.managerPersonalInformationModel.phoneDiDong ?? '';
+    diaChiLienHeController.text =
+        widget.managerPersonalInformationModel.diaChi ?? '';
     super.initState();
   }
 
@@ -43,7 +58,7 @@ class _EditAccountScreen extends State<EditPersonInformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('lucc'),
       ),
@@ -56,7 +71,8 @@ class _EditAccountScreen extends State<EditPersonInformationScreen> {
               height: 10,
             ),
             InputInfo(
-              editPersonalInformationModel: widget.editPersonalInformationModel,
+              managerPersonalInformationModel:
+                  widget.managerPersonalInformationModel,
               formKey: formKey,
               cubit: cubit,
               nameController: nameController,

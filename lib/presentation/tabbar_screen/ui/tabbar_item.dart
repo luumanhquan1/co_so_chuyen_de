@@ -63,26 +63,8 @@ extension TabbarEnum on TabBarType {
       case TabBarType.calendarWork:
         return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
-        return Scaffold(
-          // backgroundColor: Colors.cyanAccent,
-          body: EditPersonInformationScreen(
-            editPersonalInformationModel: EditPersonalInformationModel(
-              id: 'aa',
-              maCanBo: '121',
-              hoTen: 'luc',
-              phoneDiDong: '0123456789',
-              phoneCoQuan: '0123456789',
-              email: 'luc@gmail.com',
-              gioiTinh: true,
-              ngaySinh: '2001-09-02',
-              cmtnd: '123456789',
-              diaChi: 'ssssss',
-              thuTu: 1,
-              tinh: true,
-              huyen: true,
-              xa: true
-            ),
-          ),
+        return const Scaffold(
+          backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
         return const MenuScreen();

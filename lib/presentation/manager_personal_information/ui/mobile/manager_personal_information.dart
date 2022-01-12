@@ -2,11 +2,12 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/edit_personal_information.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_image_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_thong_tin.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -22,6 +23,9 @@ class ManagerPersonalInformation extends StatefulWidget {
 
 class _ManagerPersonalInformationState
     extends State<ManagerPersonalInformation> {
+  final ManagerPersonalInformationCubit _cubit =
+      ManagerPersonalInformationCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,17 @@ class _ManagerPersonalInformationState
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditPersonInformationScreen(
+                    managerPersonalInformationModel:
+                        _cubit.managerPersonalInformationModel,
+                  ),
+                ),
+              );
+            },
             icon: SvgPicture.asset('$baseImg/ic_edit_manager_person.svg'),
           ),
           spaceW10

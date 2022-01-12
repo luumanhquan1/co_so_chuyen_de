@@ -30,12 +30,10 @@ class InputInfoUserWidget extends StatelessWidget {
                     .bodyText1
                     ?.copyWith(fontWeight: FontWeight.w400),
               ),
-              isObligatory
-                  ? const Text(
+              if (isObligatory) const Text(
                       ' *',
                       style: TextStyle(color: Colors.red),
-                    )
-                  : const SizedBox()
+                    ) else const SizedBox()
             ],
           ),
           const SizedBox(

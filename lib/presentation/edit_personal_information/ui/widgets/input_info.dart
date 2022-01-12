@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
@@ -19,13 +20,13 @@ class InputInfo extends StatelessWidget {
 
   //
 
-  final EditPersonalInformationModel editPersonalInformationModel;
+  final ManagerPersonalInformationModel managerPersonalInformationModel;
   final GlobalKey<FormState> formKey;
   final EditPersonalInformationCubit cubit;
 
   const InputInfo({
     Key? key,
-    required this.editPersonalInformationModel,
+    required this.managerPersonalInformationModel,
     required this.formKey,
     required this.cubit,
     required this.nameController,
@@ -41,7 +42,7 @@ class InputInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> user =
-        editPersonalInformationModel.getInfoToMap();
+        managerPersonalInformationModel.getInfoToMap();
     return ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -104,7 +105,7 @@ class InputInfo extends StatelessWidget {
                     isObligatory: true,
                     title: user.keys.elementAt(4),
                     child: CustomSelectDate(
-                      value: editPersonalInformationModel.ngaySinh,
+                      value: managerPersonalInformationModel.ngaySinh,
                       onSelectDate: (dateTime) {
                         cubit.selectBirthdayEvent(dateTime.toString());
                       },
@@ -130,7 +131,7 @@ class InputInfo extends StatelessWidget {
                       isObligatory: true,
                       title: user.keys.elementAt(6),
                       child: CustomDropDown(
-                        value: editPersonalInformationModel.gioiTinh ?? false
+                        value: managerPersonalInformationModel.gioiTinh ?? false
                             ? 'Nam'
                             : 'Nu',
                         items: ['Nam', 'Nu'],
@@ -197,7 +198,7 @@ class InputInfo extends StatelessWidget {
                       isObligatory: true,
                       title: user.keys.elementAt(10),
                       child: CustomDropDown(
-                        value: editPersonalInformationModel.gioiTinh ?? false
+                        value: managerPersonalInformationModel.gioiTinh ?? false
                             ? 'Nam'
                             : 'Nu',
                         items: ['Nam', 'Nu'],
@@ -213,7 +214,7 @@ class InputInfo extends StatelessWidget {
                       isObligatory: true,
                       title: user.keys.elementAt(11),
                       child: CustomDropDown(
-                        value: editPersonalInformationModel.gioiTinh ?? false
+                        value: managerPersonalInformationModel.gioiTinh ?? false
                             ? 'Nam'
                             : 'Nu',
                         items: ['Nam', 'Nu'],
@@ -229,7 +230,7 @@ class InputInfo extends StatelessWidget {
                       isObligatory: true,
                       title: user.keys.elementAt(12),
                       child: CustomDropDown(
-                        value: editPersonalInformationModel.gioiTinh ?? false
+                        value: managerPersonalInformationModel.gioiTinh ?? false
                             ? 'Nam'
                             : 'Nu',
                         items: ['Nam', 'Nu'],
@@ -245,21 +246,11 @@ class InputInfo extends StatelessWidget {
                   InputInfoUserWidget(
                     title: user.keys.elementAt(13),
                     child: TextFormFieldWidget(
-                      controller: nameController,
+                      controller: diaChiLienHeController,
                       isEnabled: true,
-                      onChange: (value) {
-                        formKey.currentState!.validate();
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'dien';
-                        }
-                        return null;
-                      },
                     ),
                   )
                   //
-
                 ],
               )),
         ]);
