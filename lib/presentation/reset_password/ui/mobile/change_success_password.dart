@@ -28,7 +28,6 @@ class _ChangeSuccessPasswordState extends State<ChangeSuccessPassword> {
             child: SizedBox(
               width: double.maxFinite,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 80.0),
                   Text(

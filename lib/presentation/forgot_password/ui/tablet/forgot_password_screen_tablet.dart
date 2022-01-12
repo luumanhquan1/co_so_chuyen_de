@@ -27,20 +27,22 @@ class _ForgotPassWordScreenTabletState
         resizeToAvoidBottomInset: true,
         appBar: AppBarDefaultBack(S.current.doi_mat_khau),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 150.0),
+          child: Center(
             child: SizedBox(
-              width: double.maxFinite,
+              width: 510.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(
                     height: 20.0,
                   ),
-                  Container(
-                    height: 400,
+                  SizedBox(
+                    height: 400.0,
                     child: Center(
-                      child: SvgPicture.asset(ImageAssets.icImageChangePasswordTablet),
+                      child: SvgPicture.asset(
+                        ImageAssets.icImageChangePasswordTablet,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -48,10 +50,12 @@ class _ForgotPassWordScreenTabletState
                     isPass: true,
                     textHint: S.current.mat_khau_hien_tai,
                     prefixIcon: SvgPicture.asset(ImageAssets.icShieldDone),
+                    sizeWith: 500.0,
                     onChange: (text) {},
                   ),
                   const SizedBox(height: 24.0),
                   CustomTextField(
+                    sizeWith: 502.0,
                     isPass: true,
                     textHint: S.current.mat_khau_moi,
                     prefixIcon: SvgPicture.asset(ImageAssets.icLock),
@@ -75,7 +79,7 @@ class _ForgotPassWordScreenTabletState
                     },
                     child: Text(
                       S.current.quen_mat_khau,
-                      style: textNormalCustom(color: textDefault,fontSize: 16.0),
+                      style: textNormalCustom(color: textDefault, fontSize: 16.0),
                     ),
                   ),
                   const SizedBox(height: 30.0),

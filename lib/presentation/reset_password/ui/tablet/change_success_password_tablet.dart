@@ -26,40 +26,43 @@ class _ChangeSuccessPasswordTabletState
         appBar: AppBarDefaultBack(S.current.dat_lai_mat_khau),
         body: SingleChildScrollView(
           child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 80.0),
-                Text(
-                  S.current.doi_lai_mat_khau_thanh_cong,
-                  style: textNormalCustom(color: titleColor, fontSize: 20.0),
-                ),
-                const SizedBox(height: 60.0),
-                Center(
-                  child: SvgPicture.asset(ImageAssets.image_lock_reset_tablet),
-                ),
-                const SizedBox(height: 30.0),
-                SizedBox(
-                  height: 52,
-                  width: 186,
-                  child: Text(
-                    S.current.chuc_mung_ban,
-                    textAlign: TextAlign.center,
-                    style: textNormalCustom(
-                      fontSize: 16.0,
-                      color: unselectedLabelColor,
-                      fontWeight: FontWeight.w400,
+            child: SizedBox(
+              width: 510.0,
+              child: Column(
+                children: [
+                  const SizedBox(height: 80.0),
+                  Text(
+                    S.current.doi_lai_mat_khau_thanh_cong,
+                    style: textNormalCustom(color: titleColor, fontSize: 20.0),
+                  ),
+                  const SizedBox(height: 60.0),
+                  Center(
+                    child: SvgPicture.asset(ImageAssets.image_lock_reset_tablet),
+                  ),
+                  const SizedBox(height: 30.0),
+                  SizedBox(
+                    height: 52,
+                    width: 186,
+                    child: Text(
+                      S.current.chuc_mung_ban,
+                      textAlign: TextAlign.center,
+                      style: textNormalCustom(
+                        fontSize: 16.0,
+                        color: unselectedLabelColor,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 120.0),
-                ButtonCustomBottom(
-                  isColorBlue: true,
-                  title: S.current.ok,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
+                  const SizedBox(height: 120.0),
+                  ButtonCustomBottom(
+                    isColorBlue: true,
+                    title: S.current.ok,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

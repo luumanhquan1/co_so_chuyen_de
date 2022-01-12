@@ -25,10 +25,9 @@ class _SendMailScreenTabletState extends State<SendMailScreenTablet> {
         resizeToAvoidBottomInset: true,
         appBar: AppBarDefaultBack(S.current.dat_lai_mat_khau),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 150.0),
+          child: Center(
             child: SizedBox(
-              width: double.maxFinite,
+              width: 510.0,
               child: Column(
                 children: [
                   const SizedBox(height: 80.0),
@@ -59,7 +58,8 @@ class _SendMailScreenTabletState extends State<SendMailScreenTablet> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const ResetPasswordScreenTablet(),
+                          builder: (context) =>
+                              const ResetPasswordScreenTablet(),
                         ),
                       );
                     },
