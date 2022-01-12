@@ -1,12 +1,10 @@
 import 'dart:ui';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 
-class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
+class BaseAppBarMobile extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
   final Widget? leadingIcon;
@@ -14,12 +12,12 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
   final double? elevation;
   final List<Widget>? actions;
 
-  BaseAppBar(
+  BaseAppBarMobile(
       {Key? key,
-      required this.title,
-      this.leadingIcon,
-      this.actions,
-      this.elevation})
+        required this.title,
+        this.leadingIcon,
+        this.actions,
+        this.elevation})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 

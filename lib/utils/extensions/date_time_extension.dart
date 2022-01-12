@@ -15,6 +15,12 @@ extension DateFormatString on DateTime {
         DateFormat('dd/MM/yyyy ').format(this) + toStringWithAMPM;
     return dateString;
   }
+
+  String get toStringWithListFormat {
+    final dateString = DateFormat('dd/MM/yyyy').format(this);
+    return dateString;
+  }
+
   String getDayofWeekTxt() {
     switch (weekday) {
       case 1:

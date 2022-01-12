@@ -44,7 +44,8 @@ const itemWidgetNotUse = Color(0xffFF9F43);
 const backgroundWidget = Color(0xffF0F6FF);
 const textDefault = Color(0xff7966FF);
 const textTitle = Color(0xff3D5586);
-
+const titleItemEdit = Color(0xff586B8B);
+const bgColor = Color(0xffE5E5E5);
 const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
 const bgButtonDropDown = Color(0xff7966FF);
@@ -66,6 +67,7 @@ const radioUnfocusColor = Color(0xffE2E8F0);
 const radioFocusColor = Color(0xff7966FF);
 const borderButtomColor = Color(0xffE2E8F0);
 const backgroundRowColor = Color(0xffF5F8FD);
+const bgManagerColor = Color(0xffF9FAFF);
 
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
@@ -74,6 +76,7 @@ const statusCalenderRed = Color(0xffEA5455);
 const backgroundItemCalender = Color(0xffF5F8FD);
 const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
+const colorNumberCellQLVB=Color(0xff586B8B);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);
@@ -90,9 +93,6 @@ const unselectLabelColor = Color(0xFFA2AEBD);
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
-
-
-
 
 const dateColor = Color(0xFF667793);
 
