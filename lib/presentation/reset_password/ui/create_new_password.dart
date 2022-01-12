@@ -47,19 +47,15 @@ class _CreateNewPassWordScreenState extends State<CreateNewPassWordScreen> {
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.mat_khau_moi,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.icLock),
-                  onChange: (text) {
-                  },
+                  onChange: (text) {},
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.nhap_lai_mat_khau,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.icLock),
-                  onChange: (text) {
-                  },
+                  onChange: (text) {},
                 ),
                 const SizedBox(height: 20.0),
                 ButtonCustomBottom(
