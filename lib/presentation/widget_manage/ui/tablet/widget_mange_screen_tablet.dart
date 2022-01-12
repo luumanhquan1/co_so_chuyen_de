@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,31 +33,14 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
     return WidgetManageProvider(
       widgetManageCubit: widgetManageCubit,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            S.current.widget_manage,
-            style: textNormalCustom(
-              color: textTitle,
-              fontSize: 18,
-            ),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            onPressed: () => {Navigator.pop(context)},
-            icon: SvgPicture.asset(
-              ImageAssets.icBack,
-            ),
-          ),
-        ),
+        backgroundColor: bgWidgets,
+        appBar: AppBarDefaultBack(S.current.widget_manage,),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
             padding: const EdgeInsets.fromLTRB(30, 28, 30, 5),
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
@@ -67,9 +51,11 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                 const SizedBox(height: 20,),
                   SizedBox(
                     width: 185,
                     child: ButtonCustomBottom(
+                      size: 16,
                       title: S.current.dat_lai_mac_dinh,
                       isColorBlue: true,
                       onPressed: () {},
@@ -122,7 +108,7 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                     },
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 20,
                   ),
                   Text(
                     S.current.not_use,
@@ -132,7 +118,7 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                     ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   StreamBuilder<List<WidgetModel>>(
                     stream: widgetManageCubit.listWidgetNotUse,

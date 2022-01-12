@@ -68,7 +68,9 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
-          return const MenuScreen();
+        return APP_DEVICE == DeviceType.MOBILE
+            ? WidgetManageScreen()
+            : WidgetManageScreenTablet();
 
     }
   }
