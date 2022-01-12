@@ -139,6 +139,9 @@
   "email" : "Email",
   "doi_lai_mat_khau_thanh_cong" : "Đổi lại mật khẩu thành công",
   "chuc_mung_ban" : "Chúc mừng bạn đã đổi lại mật khẩu thành công",
+  "khong_the_bo_trong" : "Không thể bỏ trống",
+  "danh_sach_van_ban_den": "Danh sách văn bản đến",
+  "danh_sach_van_ban_di": "Danh sách văn bản đi"
   "tim_kiem" : "Tìm kiếm",
   "nhap_tu_khoa_tim_kiem" : "Nhập từ khoá tìm kiếm",
   "tu_khoa_pho_bien" : "Từ khóa phổ biến"
