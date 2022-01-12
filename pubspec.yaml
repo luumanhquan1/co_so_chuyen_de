@@ -41,7 +41,7 @@ dependencies:
   syncfusion_flutter_calendar: ^19.4.40
   date_format: ^2.0.2
   pin_code_fields: ^7.3.0
-
+  keyboard_dismisser: ^2.0.0
 
   #Library helpful
   intl: ^0.17.0

@@ -46,3 +46,15 @@ extension StringParse on String {
     return parsedString;
   }
 }
+
+extension CheckValidate on String {
+  bool checkEmail() {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}")
+        .hasMatch(this);
+  }
+
+  bool checkSdt() {
+    return RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(this);
+  }
+}

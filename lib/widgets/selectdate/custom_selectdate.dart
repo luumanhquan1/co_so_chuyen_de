@@ -1,0 +1,158 @@
+import 'package:ccvc_mobile/config/resources/images.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+
+class CustomSelectDate extends StatefulWidget {
+  String? value;
+  final Function(DateTime) onSelectDate;
+  final String? hintText;
+  final Color? backgroundColor;
+  final String? urlLeadingIcon;
+  final bool isObligatory;
+
+  CustomSelectDate(
+      {Key? key,
+      this.value,
+      required this.onSelectDate,
+      this.hintText,
+      this.backgroundColor,
+      this.urlLeadingIcon,
+      this.isObligatory = false})
+      : super(key: key);
+
+  @override
+  _CustomDropDownState createState() => _CustomDropDownState();
+}
+
+class _CustomDropDownState extends State<CustomSelectDate> {
+  String dateSelect = '';
+
+  @override
+  void didUpdateWidget(covariant CustomSelectDate oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    dateSelect = widget.value ?? DateTime.now().toString();
+  }
+
+  @override
+  void initState() {
+    if (!widget.isObligatory) {
+      dateSelect = widget.value ?? DateTime.now().toString();
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.isObligatory
+          ? null
+          : () async {
+              final String date = DateFormat(DateFormatApp.date)
+                  .format(DateTime.parse(dateSelect));
+              final DateTime parseDate =
+                  DateFormat(DateFormatApp.date).parse(date);
+              final selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: parseDate,
+                  firstDate: DateTime(1800),
+                  lastDate: DateTime(2200),
+                  builder: (BuildContext context, Widget? child) {
+                    return Theme(
+                      data: ThemeData.light().copyWith(
+                        colorScheme: const ColorScheme.light().copyWith(
+                          primary: const Color(0xffDB353A),
+                        ),
+                      ),
+                      child: child ?? Container(),
+                    );
+                  });
+              if (selectedDate != null) {
+                dateSelect = selectedDate.toString();
+                widget.value = selectedDate.toString();
+                setState(() {});
+                widget.onSelectDate(selectedDate);
+              }
+            },
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: widget.isObligatory
+                    ? const Color(0xffDBDFEF).withOpacity(0.3)
+                    : widget.backgroundColor ?? Colors.transparent,
+                border: Border.all(
+                  color: const Color(0xffDBDFEF),
+                ),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          height: 44,
+                          child: widget.value == null
+                              ? Text(
+                                  widget.hintText ?? 'Vui lòng chọn',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: const Color(0xffA2AEBD)),
+                                )
+                              : Text(
+                                  widget.isObligatory
+                                      ? '${widget.value}'
+                                      : DateTime.parse(dateSelect)
+                                          .toStringWithFormat
+                                          .replaceAll(' ', ''),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .copyWith(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                      ),
+                                ),
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      right: 3,
+                      height: 44,
+                      child: Center(
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Container(),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DateFormatApp {
+  static String date = 'dd/MM/yyyy';
+  static String dateTime = 'dd/MM/yyyy HH:mm:ss';
+  static String dateTimeFormat = 'yyyy/MM/dd';
+  static String dateBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS';
+  static String dateTimeBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss';
+  static String dateSecondBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SS';
+}

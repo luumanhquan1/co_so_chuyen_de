@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/edit_personal_information.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
@@ -61,8 +63,26 @@ extension TabbarEnum on TabBarType {
       case TabBarType.calendarWork:
         return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
-        return const Scaffold(
-          backgroundColor: Colors.cyanAccent,
+        return Scaffold(
+          // backgroundColor: Colors.cyanAccent,
+          body: EditPersonInformationScreen(
+            editPersonalInformationModel: EditPersonalInformationModel(
+              id: 'aa',
+              maCanBo: '121',
+              hoTen: 'luc',
+              phoneDiDong: '0123456789',
+              phoneCoQuan: '0123456789',
+              email: 'luc@gmail.com',
+              gioiTinh: true,
+              ngaySinh: '2001-09-02',
+              cmtnd: '123456789',
+              diaChi: 'ssssss',
+              thuTu: 1,
+              tinh: true,
+              huyen: true,
+              xa: true
+            ),
+          ),
         );
       case TabBarType.menu:
         return const MenuScreen();
