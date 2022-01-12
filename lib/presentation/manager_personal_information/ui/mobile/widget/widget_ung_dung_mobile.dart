@@ -27,7 +27,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
         ),
         spaceH16,
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(top: 6,left: 16),
           decoration: BoxDecoration(
             color: borderItemCalender.withOpacity(0.1),
             borderRadius: BorderRadius.circular(6),
