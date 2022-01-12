@@ -18,7 +18,7 @@ class ItemDropDownMenuTablet extends StatefulWidget {
       required this.image,
       required this.cubit,
       required this.index})
-      : super(key: key);da
+      : super(key: key);
 
   @override
   State createState() {
