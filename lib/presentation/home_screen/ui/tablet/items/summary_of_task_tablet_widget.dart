@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
@@ -12,6 +12,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_w
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/widgets/listview/rows_sum_widget.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
@@ -116,9 +117,11 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
                               title: result.title,
                               listData: [
                                 InfoData(
+                                  urlIcon: ImageAssets.icWork,
                                     key: S.current.loai_nhiem_vu,
-                                    value: result.loaiNhiemVu),
+                                    value: result.loaiNhiemVu,),
                                 InfoData(
+                                 urlIcon: ImageAssets.icCalendar,
                                   key: S.current.han_xu_ly,
                                   value: S.current.han_xu_ly,
                                 ),

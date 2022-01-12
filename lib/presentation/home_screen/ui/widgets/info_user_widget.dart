@@ -6,12 +6,16 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class InfoUserWidget extends StatelessWidget {
-  const InfoUserWidget({Key? key}) : super(key: key);
+  final MainAxisAlignment mainAxisAlignment;
+  const InfoUserWidget({
+    Key? key,
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: mainAxisAlignment,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

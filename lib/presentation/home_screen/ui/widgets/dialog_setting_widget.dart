@@ -2,14 +2,15 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/widgets/radio/radio_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 class DialogSettingWidget extends StatelessWidget {
   final List<DialogData>? listSelectKey;
@@ -63,7 +64,7 @@ class DialogSettingWidget extends StatelessWidget {
 
                                   return Padding(
                                     padding: EdgeInsets.only(
-                                        top: index == 0 ? 0 : 26),
+                                        top: index == 0 ? 0 : 26,),
                                     child: SelectCell(
                                       data: data,
                                     ),

@@ -1,4 +1,4 @@
-
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/day_time_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/info_user_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/mequee_widget.dart';
@@ -32,32 +32,32 @@ class HeaderTabletWidget extends StatelessWidget {
             height: 120,
             width: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 30),
-            padding: const EdgeInsets.symmetric(vertical: 28),
+            padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 28),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 20,
-                  color: const Color(0xff6566E9).withOpacity(0.1),
+                  color: shadowContainerColor.withOpacity(0.1),
                 )
               ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        right: BorderSide(color: Color(0xffE2E8F0)),
-                      ),
-                    ),
-                    child: const InfoUserWidget(),
-                  ),
+                const Expanded(
+                  child: InfoUserWidget(),
+                ),
+                Container(
+                  width: 1,
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  color: borderItemCalender,
                 ),
                 const Expanded(
-                  child: DayTimeWidget(),
+                  child: DayTimeWidget(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                  ),
                 )
               ],
             ),

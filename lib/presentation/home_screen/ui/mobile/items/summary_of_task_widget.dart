@@ -1,121 +1,138 @@
-import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/widgets/listview/rows_sum_widget.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SummaryOfTaskWidget extends StatefulWidget {
   final HomeItemType homeItemType;
-  const SummaryOfTaskWidget({Key? key,required this.homeItemType}) : super(key: key);
+  const SummaryOfTaskWidget({Key? key, required this.homeItemType})
+      : super(key: key);
 
   @override
   State<SummaryOfTaskWidget> createState() => _SummaryOfTaskWidgetState();
 }
 
 class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
+  late HomeCubit cubit;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    cubit = HomeProvider.of(context).homeCubit;
+    cubit.getDataTongHopNhiemVu();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
       title: S.current.summary_of_tasks,
-      onTapIcon: (){
+      onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
-      listSelectKey: [
-        DialogData(
-          title: S.current.summary_of_tasks,
-          key: [
-            SelectKey.TAT_CA,
-            SelectKey.DON_VI,
-          ],
-        ),
-        DialogData(
-          title: S.current.misson,
-          key: [
-            SelectKey.CHO_XU_LY,
-            SelectKey.DANG_XU_LY,
-          ],
-        ),
-        DialogData(
-          title: S.current.time,
-          key: [
-            SelectKey.HOM_NAY,
-            SelectKey.TUAN_NAY,
-            SelectKey.THANG_NAY,
-            SelectKey.NAM_NAY
-          ],
-        )
-      ],
+        listSelectKey: [
+          DialogData(
+            title: S.current.summary_of_tasks,
+            key: [
+              SelectKey.TAT_CA,
+              SelectKey.DON_VI,
+            ],
+          ),
+          DialogData(
+            title: S.current.misson,
+            key: [
+              SelectKey.CHO_XU_LY,
+              SelectKey.DANG_XU_LY,
+            ],
+          ),
+          DialogData(
+            title: S.current.time,
+            key: [
+              SelectKey.HOM_NAY,
+              SelectKey.TUAN_NAY,
+              SelectKey.THANG_NAY,
+              SelectKey.NAM_NAY
+            ],
+          )
+        ],
       ),
       padding: EdgeInsets.zero,
       child: Column(
         children: [
-          RowSumInfoWidget(data: [
-
-          ],),
-
+          StreamBuilder<List<DashboardSchedule>>(
+            stream: cubit.getTonghopNhiemVu,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? <DashboardSchedule>[];
+              return RowSumInfoWidget(
+                padding: 16,
+                data: List.generate(data.length, (index) {
+                  final img = FakeData.img[index];
+                  final result = data[index];
+                  return DataInfo(
+                    title: result.typeName,
+                    urlIcon: img,
+                    value: result.numberOfCalendars.toString(),
+                  );
+                }),
+              );
+            },
+          ),
           const SizedBox(
             height: 20,
           ),
-          const ContainerInfoWidget(
-            status: 'Chờ phân xử lý',
-            colorStatus: Color(0xff5A8DEE),
-            title:
-                'Rà soát, hoàn chỉnh kế hoạch đầu tư công trung hạn 2021-2025 cấp huyện',
-            backGroundStatus: false,
-            listData: [
-              InfoData(key: 'Loại nhiệm vụ', value: 'Nhiệm vụ CP/VPCP'),
-              InfoData(
-                key: 'Hạn xử lý',
-                value: '13/10/2021',
-              ),
-            ],
-          ),
-          const ContainerInfoWidget(
-            status: 'Chờ phân xử lý',
-            colorStatus: Color(0xff5A8DEE),
-            title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                  key: 'Nơi gửi',
-                  value:
-                      'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298'),
-            ],
-          ),
-          const ContainerInfoWidget(
-            status: 'Chờ phân xử lý',
-            colorStatus: Color(0xff5A8DEE),
-            title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                key: 'Nơi gửi',
-                value:
-                    'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298',
-              ),
-            ],
-          ),
-          const ContainerInfoWidget(
-            status: 'Chờ phân xử lý',
-            colorStatus: Color(0xff5A8DEE),
-            title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
-            listData: [
-              InfoData(key: 'Số/ký hiệu', value: 'VPCP-TTĐT'),
-              InfoData(
-                key: 'Nơi gửi',
-                value:
-                    'Ban ATGT Tiền Giang - tỉnh Tiền 4892 394 8372 9847 2398473298',
-              ),
-            ],
-          ),
+          StreamBuilder<List<CalendarMeetingModel>>(
+            stream: cubit.getNhiemVu,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? <CalendarMeetingModel>[];
+              if (data.isNotEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: List.generate(data.length, (index) {
+                      final result = data[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: ContainerInfoWidget(
+                          status: result.codeStatus.getText(),
+                          colorStatus: result.codeStatus.getColor(),
+                          title: result.title,
+                          listData: [
+                            InfoData(
+                              urlIcon: ImageAssets.icWork,
+                              key: S.current.loai_nhiem_vu,
+                              value: result.loaiNhiemVu,
+                            ),
+                            InfoData(
+                              urlIcon: ImageAssets.icCalendar,
+                              key: S.current.han_xu_ly,
+                              value: S.current.han_xu_ly,
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                );
+              }
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: NodataWidget(),
+              );
+            },
+          )
         ],
       ),
     );

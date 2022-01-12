@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';

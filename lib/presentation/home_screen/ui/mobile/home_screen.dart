@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -40,7 +41,9 @@ class _MyHomePageState extends State<HomeScreenMobile> {
           title: Text(
             S.current.home,
             style: textNormalCustom(
-              fontSize: 18, color: AppTheme.getInstance().backGroundColor(),),
+              fontSize: 18,
+              color: AppTheme.getInstance().backGroundColor(),
+            ),
           ),
           centerTitle: true,
           flexibleSpace: Container(
@@ -66,8 +69,8 @@ class _MyHomePageState extends State<HomeScreenMobile> {
                 children: [
                   const HeaderWidget(),
                   Column(
-                    children: List.generate(
-                        HomeItemType.values.length, (index) {
+                    children:
+                        List.generate(HomeItemType.values.length, (index) {
                       final type = HomeItemType.values[index];
                       return type.getItemsMobile();
                     }),
@@ -77,31 +80,7 @@ class _MyHomePageState extends State<HomeScreenMobile> {
             ),
           ),
         ),
-
       ),
     );
   }
 }
-
-class HomeProvider extends InheritedWidget {
-  final HomeCubit homeCubit;
-
-  const HomeProvider({
-    Key? key,
-    required this.homeCubit,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static HomeProvider of(BuildContext context) {
-    final HomeProvider? result = context.dependOnInheritedWidgetOfExactType<
-        HomeProvider>();
-    assert(result != null, 'No elenment');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
-  }
-}
-

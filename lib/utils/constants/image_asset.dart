@@ -91,6 +91,9 @@ class ImageAssets {
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
   static const String ic_email = '$baseImg/ic_email.svg';
+  static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icThongBao = '$baseImg/ic_thong_bao.svg';
+  static const String icWork = '$baseImg/ic_work.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

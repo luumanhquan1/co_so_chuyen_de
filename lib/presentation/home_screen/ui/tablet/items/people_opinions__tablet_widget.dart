@@ -1,8 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
@@ -14,7 +13,8 @@ import 'package:flutter/material.dart';
 
 class PeopleOpinionsTabletWidget extends StatefulWidget {
   final HomeItemType homeItemType;
-  const PeopleOpinionsTabletWidget({Key? key,required this.homeItemType}) : super(key: key);
+  const PeopleOpinionsTabletWidget({Key? key, required this.homeItemType})
+      : super(key: key);
 
   @override
   State<PeopleOpinionsTabletWidget> createState() => _PeopleOpinionsState();
@@ -26,7 +26,7 @@ class _PeopleOpinionsState extends State<PeopleOpinionsTabletWidget> {
     return ContainerBackgroundTabletWidget(
       maxHeight: 415,
       title: S.current.people_opinions,
-      onTapIcon: (){
+      onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       dialogSelect: DialogSettingWidget(
@@ -34,10 +34,7 @@ class _PeopleOpinionsState extends State<PeopleOpinionsTabletWidget> {
         listSelectKey: [
           DialogData(
             title: S.current.people_opinions,
-            key: [
-            SelectKey.CHO_TIEP_NHAN,
-            SelectKey.CHO_XU_LY
-            ],
+            key: [SelectKey.CHO_TIEP_NHAN, SelectKey.CHO_XU_LY],
           ),
           DialogData(
             title: S.current.time,

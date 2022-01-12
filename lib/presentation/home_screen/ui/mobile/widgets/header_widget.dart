@@ -1,15 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/config/themes/app_theme.dart';
-import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/clock_widget.dart';
+import 'package:ccvc_mobile/config/themes/app_theme.dart';
+
+
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/day_time_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/info_user_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/mequee_widget.dart';
-import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 
@@ -57,12 +54,12 @@ class HeaderWidget extends StatelessWidget {
                   decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(color: borderColor)),
                   ),
-                  child: InfoUserWidget(),
+                  child:const InfoUserWidget(),
                 ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    child: DayTimeWidget(),
+                    child:const DayTimeWidget(),
                   ),
                 )
               ],
