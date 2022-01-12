@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
-import 'package:ccvc_mobile/presentation/forgot_password/ui/forgot_password_screen.dart';
+import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
+import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 
@@ -127,7 +128,7 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.doiMatKhau:
-        return const ForgotPassWordScreen();
+        return const ForgotPassWordScreenTablet();
     }
   }
 }

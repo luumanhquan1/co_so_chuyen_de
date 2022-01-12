@@ -1,60 +1,63 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class ChangeSuccessPassword extends StatefulWidget {
-  const ChangeSuccessPassword({Key? key}) : super(key: key);
+class ChangeSuccessPasswordTablet extends StatefulWidget {
+  const ChangeSuccessPasswordTablet({Key? key}) : super(key: key);
 
   @override
-  _ChangeSuccessPasswordState createState() => _ChangeSuccessPasswordState();
+  _ChangeSuccessPasswordTabletState createState() =>
+      _ChangeSuccessPasswordTabletState();
 }
 
-class _ChangeSuccessPasswordState extends State<ChangeSuccessPassword> {
+class _ChangeSuccessPasswordTabletState
+    extends State<ChangeSuccessPasswordTablet> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarDefaultBack(S.current.dat_lai_mat_khau),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: SizedBox(
-            width: double.maxFinite,
+    return KeyboardDismisser(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBarDefaultBack(S.current.dat_lai_mat_khau),
+        body: SingleChildScrollView(
+          child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 80.0),
                 Text(
                   S.current.doi_lai_mat_khau_thanh_cong,
-                  style: textNormalCustom(color: titleColor, fontSize: 16.0),
+                  style: textNormalCustom(color: titleColor, fontSize: 20.0),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 60.0),
                 Center(
-                  child: SvgPicture.asset(ImageAssets.image_lock_reset),
+                  child: SvgPicture.asset(ImageAssets.image_lock_reset_tablet),
                 ),
                 const SizedBox(height: 30.0),
                 SizedBox(
-                  height: 44,
-                  width: 163,
+                  height: 52,
+                  width: 186,
                   child: Text(
                     S.current.chuc_mung_ban,
                     textAlign: TextAlign.center,
                     style: textNormalCustom(
+                      fontSize: 16.0,
                       color: unselectedLabelColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
-                const SizedBox(height: 80.0),
+                const SizedBox(height: 120.0),
                 ButtonCustomBottom(
                   isColorBlue: true,
                   title: S.current.ok,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
             ),
