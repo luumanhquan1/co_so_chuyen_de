@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_table
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
+import 'package:ccvc_mobile/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -68,7 +69,7 @@ extension TabbarEnum on TabBarType {
         );
       case TabBarType.menu:
         // return const MenuScreen();
-        return const CommonInformationMobile();
+        return const QLVBScreenMobile();
     }
   }
 

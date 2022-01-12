@@ -7,14 +7,14 @@ class BoxStatusVanBan extends StatelessWidget {
   final String  statusName;
   final Function() onTap;
   const BoxStatusVanBan({Key? key,required this.color,required
-  this.value,required this.onTap,required this.statusName}) : super(key: key);
+  this.value,required this.onTap,required this.statusName,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 14),
+        height: 80,
         decoration: BoxDecoration(
           borderRadius:const BorderRadius.all(
             Radius.circular(6),
@@ -22,21 +22,31 @@ class BoxStatusVanBan extends StatelessWidget {
           color: radioUnfocusColor.withOpacity(0.1),
           border: Border.all(color: radioUnfocusColor),
         ),
-        child: Column(
-          children: [
-            Text(
-              value,
-              style:  titleText(
-                fontSize: 28,
-                color: color,
-              ),),
-             Text(
-              statusName,
-               style: textNormal(
-                 color,14,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(
+                child: Text(
+                  value,
+                  style:  titleText(
+                    fontSize: 28,
+                    color: color,
+                  ),),
+              ),
+               const SizedBox(
+                 height: 4,
                ),
-             ),
-          ],
+               FittedBox(
+                 child: Text(
+                  statusName,
+                   style: textNormal(
+                     color,14,
+                   ),
+                 ),
+               ),
+            ],
+          ),
         ),
       ),
     );
