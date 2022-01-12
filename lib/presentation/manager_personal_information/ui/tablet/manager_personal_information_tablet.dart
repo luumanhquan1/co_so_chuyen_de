@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_don_vi.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_image.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_thong_tin_left.dart';
@@ -27,7 +28,7 @@ class _ManagerPersonalInformationTabletState
     return Scaffold(
       backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
-        title: 'Quản lý thông tin cá nhân',
+        title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset('$baseImg/ic_vector.svg'),
           onPressed: () {},
@@ -56,7 +57,7 @@ class _ManagerPersonalInformationTabletState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Thông tin',
+                S.current.thong_tin,
                 style: titleAppbar(fontSize: 16.0.textScale()),
               ),
               Row(

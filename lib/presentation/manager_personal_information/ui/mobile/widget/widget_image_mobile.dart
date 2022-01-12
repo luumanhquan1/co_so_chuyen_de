@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               ),
               spaceH12,
               Text(
-                'Ảnh đại điện',
+                S.current.anh_dai_dien,
                 style: tokenDetailAmount(
                   fontSize: 12.0.textScale(),
                   color: infoColor,
@@ -43,7 +44,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               ),
               spaceH12,
               Text(
-                'Ảnh chữ ký',
+                S.current.anh_chu_ky,
                 style: tokenDetailAmount(
                   fontSize: 12.0.textScale(),
                   color: infoColor,
@@ -61,7 +62,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
               ),
               spaceH12,
               Text(
-                'Ảnh ký nháy',
+                S.current.anh_ky_nhay,
                 style: tokenDetailAmount(
                   fontSize: 12.0.textScale(),
                   color: infoColor,

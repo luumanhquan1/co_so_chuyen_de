@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_row_item.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_row_item.dart';
 import 'package:flutter/material.dart';
 
 class WidgetThongTinRight extends StatefulWidget {

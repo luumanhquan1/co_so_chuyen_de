@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_row_ung_dung_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -21,7 +22,7 @@ class _WidgetUngDungState extends State<WidgetUngDung> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Ứng dụng',
+          S.current.ung_dung,
           style: titleAppbar(fontSize: 16.0.textScale()),
         ),
         Column(

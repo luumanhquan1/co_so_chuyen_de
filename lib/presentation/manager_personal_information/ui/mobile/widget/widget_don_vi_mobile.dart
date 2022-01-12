@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_row_item_mobile.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -22,7 +23,7 @@ class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Đơn vị',
+          S.current.don_vi,
           style: titleAppbar(fontSize: 14.0.textScale()),
         ),
         spaceH16,

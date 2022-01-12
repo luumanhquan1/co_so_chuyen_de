@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_image_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_thong_tin.dart';
@@ -26,7 +27,7 @@ class _ManagerPersonalInformationState
     return Scaffold(
       backgroundColor: bgColor,
       appBar: BaseAppBar(
-        title: 'Quản lý thông tin cá nhân',
+        title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset('$baseImg/ic_vector.svg'),
           onPressed: () {
@@ -45,14 +46,10 @@ class _ManagerPersonalInformationState
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
           color: backgroundColorApp,
-          padding: const EdgeInsets.only(top: 12, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Thông tin',
-                style: titleAppbar(fontSize: 14.0.textScale()),
-              ),
               const WidgetThongTinMobile(),
               spaceH20,
               const WidgetDonVibMobile(),

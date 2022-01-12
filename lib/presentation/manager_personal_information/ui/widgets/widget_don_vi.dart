@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_row_item.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_row_item.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _WidgetDonViState extends State<WidgetDonVi> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Đơn vị',
+          S.current.don_vi,
           style: titleAppbar(fontSize: 16.0.textScale()),
         ),
         Column(
