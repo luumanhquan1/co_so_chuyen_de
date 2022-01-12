@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
@@ -68,8 +67,9 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
-        // return const MenuScreen();
-        return const QLVBScreenMobile();
+         // return const MenuScreen();
+         return const QLVBScreenMobile();
+
     }
   }
 
@@ -80,6 +80,7 @@ extension TabbarEnum on TabBarType {
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
             height: 16,
+
           ),
           text: S.current.home,
         );

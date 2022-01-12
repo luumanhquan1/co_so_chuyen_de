@@ -48,6 +48,7 @@ const textTitle = Color(0xff3D5586);
 const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
 const bgButtonDropDown = Color(0xff7966FF);
+const bgQLVBTablet = Color(0xffF9FAFF);
 
 const homeColor = Color(0xffEEF3FF);
 const borderColor = Color(0xffDBDFEF);
@@ -74,6 +75,7 @@ const statusCalenderRed = Color(0xffEA5455);
 const backgroundItemCalender = Color(0xffF5F8FD);
 const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
+const colorNumberCellQLVB=Color(0xff586B8B);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);

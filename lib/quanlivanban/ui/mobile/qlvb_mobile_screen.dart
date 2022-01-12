@@ -1,10 +1,16 @@
 
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
+import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
+import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_document_screen.dart';
 import 'package:ccvc_mobile/quanlivanban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 class QLVBScreenMobile extends StatefulWidget {
   const QLVBScreenMobile({Key? key}) : super(key: key);
 
@@ -14,8 +20,9 @@ class QLVBScreenMobile extends StatefulWidget {
 
 class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
   QLVBCCubit qlvbCubit=QLVBCCubit();
+  OutgoingDocumentCubit cubit = OutgoingDocumentCubit();
 
-   @override
+  @override
   void initState() {
     super.initState();
     qlvbCubit.callAPi();
@@ -50,6 +57,109 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               },
             ),
             Container (height: 6,color: homeColor,),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(S.current.danh_sach_van_ban_den,
+                      style: textNormalCustom(fontSize: 16,
+                        color: textDropDownColor,),),
+                      IconButton(
+                        onPressed: (){},
+                        icon: SvgPicture.asset(ImageAssets.ic_next_color),
+                      )
+                    ],),
+                  const SizedBox(height: 16.0),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: cubit.listIncomingDocument.length,
+                    itemBuilder: (context, index) {
+                      return IncomingDocumentCell(
+                        title: cubit.listIncomingDocument[index].loaiVanBan,
+                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
+                        userName: cubit.listIncomingDocument[index].nguoiSoanThao,
+                        status: cubit.listIncomingDocument[index].doKhan,
+                        userImage: '',
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: cubit.listIncomingDocument.length,
+                    itemBuilder: (context, index) {
+                      return IncomingDocumentCell(
+                        title: cubit.listIncomingDocument[index].loaiVanBan,
+                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
+                        userName: cubit.listIncomingDocument[index].nguoiSoanThao,
+                        status: cubit.listIncomingDocument[index].doKhan,
+                        userImage: '',
+                      );
+                    },
+                  ),
+
+
+                ],
+              ),
+            ),
+            Container (height: 6,color: homeColor,),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(S.current.danh_sach_van_ban_di,
+                        style: textNormalCustom(fontSize: 16,
+                          color: textDropDownColor,),),
+                      IconButton(
+                        onPressed: (){},
+                        icon: SvgPicture.asset(ImageAssets.ic_next_color),
+                      )
+                    ],),
+                  const SizedBox(height: 16.0),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: cubit.listIncomingDocument.length,
+                    itemBuilder: (context, index) {
+                      return IncomingDocumentCell(
+                        title: cubit.listIncomingDocument[index].loaiVanBan,
+                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
+                        userName: cubit.listIncomingDocument[index].nguoiSoanThao,
+                        status: cubit.listIncomingDocument[index].doKhan,
+                        userImage: '',
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: cubit.listIncomingDocument.length,
+                    itemBuilder: (context, index) {
+                      return IncomingDocumentCell(
+                        title: cubit.listIncomingDocument[index].loaiVanBan,
+                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
+                        userName: cubit.listIncomingDocument[index].nguoiSoanThao,
+                        status: cubit.listIncomingDocument[index].doKhan,
+                        userImage: '',
+                      );
+                    },
+                  ),
+
+
+                ],
+              ),
+            ),
+
+            // const OutgoingDocumentScreen(),
           ],
         ),
       ),

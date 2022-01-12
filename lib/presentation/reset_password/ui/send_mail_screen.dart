@@ -34,10 +34,8 @@ class _SendMailScreenState extends State<SendMailScreen> {
                 CustomTextField(
                   isPass: true,
                   textHint: S.current.email,
-                  loginCubit: loginCubit,
                   prefixIcon: SvgPicture.asset(ImageAssets.ic_email),
-                  onChange: (text) {
-                  },
+                  onChange: (text) {},
                 ),
                 const SizedBox(height: 20.0),
                 ButtonCustomBottom(
