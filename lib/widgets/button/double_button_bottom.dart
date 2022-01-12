@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class DoubleButtonBottom extends StatefulWidget {
@@ -32,9 +33,9 @@ class _DoubleButtonBottomState extends State<DoubleButtonBottom> {
               widget.onPressed1();
             },
             child: Container(
-              height: 40.0,
+              height: 40.0.textScale(space: 16.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0),
+                borderRadius: BorderRadius.circular(4.0.textScale(space: 4.0)),
                 color: buttonColor2,
               ),
               child: Center(
@@ -48,22 +49,23 @@ class _DoubleButtonBottomState extends State<DoubleButtonBottom> {
             ),
           ),
         ),
-        const SizedBox(width: 16.0),
+        SizedBox(width: 16.0.textScale(space: 8.0)),
         Expanded(
           child: GestureDetector(
             onTap: () {
               widget.onPressed2();
             },
             child: Container(
-              height: 40.0,
+              height: 40.0.textScale(space: 16.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0),
+                borderRadius: BorderRadius.circular(4.0.textScale(space: 4.0)),
                 color: textDefault,
               ),
               child: Center(
                 child: Text(
                   widget.title2,
                   style: textNormalCustom(
+                    fontSize: 14.0.textScale(space: 4.0),
                     color: backgroundColorApp,
                   ),
                 ),
