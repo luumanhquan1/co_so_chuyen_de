@@ -7,12 +7,14 @@ class ButtonCustomBottom extends StatefulWidget {
   final bool isColorBlue;
   final String title;
   final Function onPressed;
+  final double? size;
 
   const ButtonCustomBottom(
       {Key? key,
       required this.isColorBlue,
       required this.title,
-      required this.onPressed})
+      this.size,
+      required this.onPressed,})
       : super(key: key);
 
   @override
@@ -39,7 +41,7 @@ class _ButtonCustomBottomState extends State<ButtonCustomBottom> {
                 child: Text(
                   widget.title,
                   style: textNormalCustom(
-                    fontSize: 14.0.textScale(space: 4.0),
+                    fontSize: widget.size ??14.0.textScale(space: 4.0),
                       color: widget.isColorBlue
                           ? backgroundColorApp
                           : textDefault),

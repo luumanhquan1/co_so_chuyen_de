@@ -66,10 +66,10 @@
   "chon_ngay": "Chọn ngày",
   "da_hoan_thanh": "Đã hoàn thành",
   "them_cong_viec": "Thêm công việc",
-  "using": "Đang sử dụng",
-  "not_use": "Chưa sử dụng",
+  "using": "Widgets đang sử dụng",
+  "not_use": "Widgets chưa sử dụng",
   "keep_drop": "Nhấn giữ kéo để di chuyển các dịch vụ ",
-  "default_word": "Mặc Định",
+  "default_word": "Mặc định",
   "no_data": "Không có dữ liệu",
   "widget_manage": "Quản lý widgets",
   "bao_cao_thong_ke": "Báo cáo thống kê",
@@ -148,5 +148,7 @@
   "anh_dai_dien": "Ảnh đại điện",
   "anh_chu_ky": "Ảnh chữ ký",
   "anh_ky_nhay": "Ảnh ký nháy",
-  "manager_information": "Quản lý thông tin cá nhân"
+  "manager_information": "Quản lý thông tin cá nhân",
+  "dat_lai_mac_dinh": "Đặt lại về mặc định"
+
 }

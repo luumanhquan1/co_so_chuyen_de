@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_svg/svg.dart';
 class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
-
   final String title;
 
   AppBarDefaultBack(
