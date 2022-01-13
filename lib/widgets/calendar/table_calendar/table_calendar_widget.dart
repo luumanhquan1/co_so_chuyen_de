@@ -1,13 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
@@ -19,10 +19,6 @@ class TableCalendarWidget extends StatefulWidget {
 }
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
-  String convertDate(DateTime dateTime) {
-    return DateFormat('dd/MM/yyyy').format(dateTime);
-  }
-
   List<Event> _getEventsfromDay(DateTime date) {
     return selectedEvents[date] ?? [];
   }
@@ -81,7 +77,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         child: TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Tìm kiếm',
+                            hintText: S.current.tim_kiem,
                             hintStyle: textNormalCustom(
                               color: textBodyTime,
                               fontWeight: FontWeight.w400,
@@ -95,7 +91,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         children: [
                           Text(
                             DateTime.now().toStringWithListFormat,
-                            style:  TextStyle(
+                            style:  textNormalCustom(
                               fontSize: 14.0.textScale(),
                               fontWeight: FontWeight.w500,
                               color: titleColor,
