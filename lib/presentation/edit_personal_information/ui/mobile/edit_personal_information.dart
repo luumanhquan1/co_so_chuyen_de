@@ -18,6 +18,13 @@ class EditPersonInformationScreen extends StatefulWidget {
 class _EditPersonalInformationScreen
     extends State<EditPersonInformationScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyName = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyMa = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyThuTu = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyCmnd = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyEmail = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeySdtCoQuan = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeySDT = GlobalKey<FormState>();
   EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
   TextEditingController nameController = TextEditingController();
   TextEditingController maCanBoController = TextEditingController();
@@ -74,6 +81,13 @@ class _EditPersonalInformationScreen
               managerPersonalInformationModel:
                   widget.managerPersonalInformationModel,
               formKey: formKey,
+              formKeyCmnd: formKeyCmnd,
+              formKeyEmail: formKeyEmail,
+              formKeyMa: formKeyMa,
+              formKeyName: formKeyName,
+              formKeySDT: formKeySDT,
+              formKeySdtCoQuan: formKeySdtCoQuan,
+              formKeyThuTu: formKeyThuTu,
               cubit: cubit,
               nameController: nameController,
               emailController: emailController,
