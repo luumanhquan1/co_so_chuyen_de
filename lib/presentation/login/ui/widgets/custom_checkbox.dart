@@ -1,10 +1,11 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckBox extends StatefulWidget {
-  final  title;
+  final title;
   bool isCheck;
   final Function(bool check) onChange;
 
@@ -24,28 +25,31 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Checkbox(
-          checkColor: Colors.white,
-          // color of tick Mark
-          activeColor: const Color(0xff3D5586),
-          side: MaterialStateBorderSide.resolveWith(
-            (states) => const BorderSide(
-              color: Color(0xffDBDFEF),
+        SizedBox(
+          width: 18.0.textScale(),
+          height: 18.0.textScale(),
+          child: Checkbox(
+            checkColor: Colors.white,
+            // color of tick Mark
+            activeColor: indicatorColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(3),
             ),
+            side: const BorderSide(width: 1.5, color: lineColor),
+            value: widget.isCheck,
+            onChanged: (value) {
+              setState(() {
+                widget.onChange(widget.isCheck);
+              });
+            },
           ),
-          value: widget.isCheck,
-          onChanged: (value) {
-            setState(() {
-              widget.onChange(widget.isCheck);
-            });
-          },
         ),
         const SizedBox(
-          width: 4,
+          width: 13,
         ),
         Text(
           widget.title,
-          style:textNormal(titleColor,14),
+          style: textNormal(titleColor, 14.0.textScale()),
         )
       ],
     );

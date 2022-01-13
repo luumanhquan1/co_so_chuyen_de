@@ -31,6 +31,11 @@ class ImageAssets {
   static const String icTime = '$baseImg/ic_time.svg';
   static const String icPeople = '$baseImg/ic_people.svg';
   static const String icCamera = '$baseImg/ic_camera.svg';
+  static const String icX = '$baseImg/ic_x.svg';
+  static const String icV = '$baseImg/ic_v.svg';
+  static const String icProfile = '$baseImg/profile_edit_persion.png';
+  static const String icVector = '$baseImg/ic_vector.svg';
+  static const String icManager = '$baseImg/ic_edit_manager_person.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -59,6 +64,7 @@ class ImageAssets {
   static const String imgLogin = '$baseImg/img_login.png';
   static const String imgAcount = '$baseImg/ic_acount.svg';
   static const String imgPassword = '$baseImg/ic_password.svg';
+  static const String imgViewHide = '$baseImg/ic_view_hide.svg';
   static const String imgView = '$baseImg/ic_view.svg';
   static const String imgBackGroundLogin =
       '$baseImg/image_login_background.svg';
@@ -75,6 +81,8 @@ class ImageAssets {
 
   static const String icImageChangePassword =
       '$baseImg/image_change_password.svg';
+  static const String icImageChangePasswordTablet =
+      '$baseImg/image_change_pass_tablet.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
   static const String icBaoChi = '$baseImg/ic_bao_chi.svg';
   static const String icBlog = '$baseImg/ic_blog.svg';
@@ -90,16 +98,22 @@ class ImageAssets {
   static const String icLock = '$baseImg/ic_lock.svg';
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
+
   static const String ic_email = '$baseImg/ic_email.svg';
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+
+  static const String image_lock_reset_tablet =
+      '$baseImg/image_lock_reset_tablet.svg';
+  static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
+
   static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
 
