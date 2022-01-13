@@ -44,6 +44,9 @@ const itemWidgetNotUse = Color(0xffFF9F43);
 const backgroundWidget = Color(0xffF0F6FF);
 const textDefault = Color(0xff7966FF);
 const textTitle = Color(0xff3D5586);
+const titleItemEdit = Color(0xff586B8B);
+const bgColor = Color(0xffE5E5E5);
+const bgWidgets = Color(0xffF9FAFF);
 
 const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
@@ -66,6 +69,7 @@ const radioUnfocusColor = Color(0xffE2E8F0);
 const radioFocusColor = Color(0xff7966FF);
 const borderButtomColor = Color(0xffE2E8F0);
 const backgroundRowColor = Color(0xffF5F8FD);
+const bgManagerColor = Color(0xffF9FAFF);
 
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
@@ -74,7 +78,11 @@ const statusCalenderRed = Color(0xffEA5455);
 const backgroundItemCalender = Color(0xffF5F8FD);
 const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
+
+const dotColor = Color(0xffD4DAE3);
+
 const colorNumberCellQLVB=Color(0xff586B8B);
+
 
 //tabbar color
 const labelColor = Color(0xff7966FF);
@@ -89,13 +97,13 @@ const buttonColor = Color(0xff7966FF);
 const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+const selectColorTabbar = Color(0xFF304261);
+const whiteHide = Color(0xFFEAEEF5);
+const greyHide = Color(0xFFF5F6FA);
 //drawer menu color
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
-
-
-
 
 const dateColor = Color(0xFF667793);
 
@@ -108,6 +116,8 @@ const textColorBlog = Color(0xFF7367F0);
 const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
+const bgTabletColor = Color(0xffF9FAFF);
+const toDayColor = Color(0xFFF2F0FF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

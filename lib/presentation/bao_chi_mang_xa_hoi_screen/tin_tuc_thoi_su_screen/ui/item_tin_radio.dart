@@ -22,15 +22,14 @@ class ItemTinRadio extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Color(0xFF6566E9).withOpacity(0.05),
-              spreadRadius: 0,
+              color: shadowContainerColor.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4), // changes position of shadow
             ),
           ],
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
-              color: const Color(0xFFDBDFEF).withOpacity(0.5), width: 1)),
+              color: borderColor.withOpacity(0.5),),),
       child: Row(
         children: [
           Expanded(
@@ -46,7 +45,7 @@ class ItemTinRadio extends StatelessWidget {
                   image,
                   fit: BoxFit.cover,
                 ),
-              )),
+              ),),
           Expanded(
             flex: 8,
             child: Container(
@@ -62,7 +61,7 @@ class ItemTinRadio extends StatelessWidget {
                     style: textNormalCustom(
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
-                        color: titleColor),
+                        color: titleColor,),
                   ),
                   const SizedBox(
                     height: 4,

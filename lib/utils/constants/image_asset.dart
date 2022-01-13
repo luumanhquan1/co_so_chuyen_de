@@ -31,6 +31,11 @@ class ImageAssets {
   static const String icTime = '$baseImg/ic_time.svg';
   static const String icPeople = '$baseImg/ic_people.svg';
   static const String icCamera = '$baseImg/ic_camera.svg';
+  static const String icX = '$baseImg/ic_x.svg';
+  static const String icV = '$baseImg/ic_v.svg';
+  static const String icProfile = '$baseImg/profile_edit_persion.png';
+  static const String icVector = '$baseImg/ic_vector.svg';
+  static const String icManager = '$baseImg/ic_edit_manager_person.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -61,7 +66,8 @@ class ImageAssets {
   static const String imgPassword = '$baseImg/ic_password.svg';
   static const String imgViewHide = '$baseImg/ic_view_hide.svg';
   static const String imgView = '$baseImg/ic_view.svg';
-  static const String imgBackGroundLogin = '$baseImg/image_login_background.svg';
+  static const String imgBackGroundLogin =
+      '$baseImg/image_login_background.svg';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
@@ -78,24 +84,30 @@ class ImageAssets {
   static const String icImageChangePasswordTablet =
       '$baseImg/image_change_pass_tablet.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
-  static const String icBaoChi='$baseImg/ic_bao_chi.svg';
-  static const String icBlog='$baseImg/ic_blog.svg';
-  static const String icForum='$baseImg/ic_forum.svg';
-  static const String icMangXaHoi='$baseImg/ic_mang_xa_hoi.svg';
-  static const String icNguonKhac='$baseImg/ic_nguon_khac.svg';
-  static const String icTongTin='$baseImg/ic_tong_tin.svg';
-  static const String icBaiViet='$baseImg/ic_bai_viet.svg';
-  static const String icComment='$baseImg/ic_comment.svg';
-  static const String icLike='$baseImg/ic_like.svg';
-  static const String icShare='$baseImg/ic_share.svg';
-  static const String icCalendar='$baseImg/ic_calendar.svg';
-  static const String icLock='$baseImg/ic_lock.svg';
-  static const String icShieldDone='$baseImg/ic_shield_done.svg';
-  static const String image_lock_reset='$baseImg/image_lock_reset.svg';
-  static const String image_lock_reset_tablet='$baseImg/image_lock_reset_tablet.svg';
-  static const String ic_email='$baseImg/ic_email.svg';
+  static const String icBaoChi = '$baseImg/ic_bao_chi.svg';
+  static const String icBlog = '$baseImg/ic_blog.svg';
+  static const String icForum = '$baseImg/ic_forum.svg';
+  static const String icMangXaHoi = '$baseImg/ic_mang_xa_hoi.svg';
+  static const String icNguonKhac = '$baseImg/ic_nguon_khac.svg';
+  static const String icTongTin = '$baseImg/ic_tong_tin.svg';
+  static const String icBaiViet = '$baseImg/ic_bai_viet.svg';
+  static const String icComment = '$baseImg/ic_comment.svg';
+  static const String icLike = '$baseImg/ic_like.svg';
+  static const String icShare = '$baseImg/ic_share.svg';
+  static const String icCalendar = '$baseImg/ic_calendar.svg';
+  static const String icLock = '$baseImg/ic_lock.svg';
+  static const String icShieldDone = '$baseImg/ic_shield_done.svg';
+  static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
 
+  static const String ic_email = '$baseImg/ic_email.svg';
+  static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icThongBao = '$baseImg/ic_thong_bao.svg';
+  static const String icWork = '$baseImg/ic_work.svg';
+  static const String ic_search_calendar='$baseImg/ic_search_calendar.svg';
 
+  static const String image_lock_reset_tablet =
+      '$baseImg/image_lock_reset_tablet.svg';
+  static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
@@ -103,6 +115,8 @@ class ImageAssets {
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
 
+  static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
+  static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
 
   static SvgPicture svgAssets(
     String name, {
@@ -129,6 +143,5 @@ class ImageAssets {
     );
   }
 
-  static const Map<String, List<double>> _svgImageSize = {
-  };
+  static const Map<String, List<double>> _svgImageSize = {};
 }
