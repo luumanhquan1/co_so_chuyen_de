@@ -6,7 +6,6 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class ChangeSuccessPasswordTablet extends StatefulWidget {
   const ChangeSuccessPasswordTablet({Key? key}) : super(key: key);

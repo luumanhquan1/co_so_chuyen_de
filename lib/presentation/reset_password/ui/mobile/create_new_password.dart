@@ -75,7 +75,12 @@ class _CreateNewPassWordScreenState extends State<CreateNewPassWordScreen> {
                       keytextnhapLaiMatKhau.currentState?.validate();
                     },
                     validate: (value) {
-                      return cubit.validateInputText(value!);
+                      if (value != matKhauMoiController.text &&
+                          value!.isNotEmpty) {
+                        return S.current.khong_trung_mat_khau_moi;
+                      } else {
+                        return cubit.validateInputText(value!);
+                      }
                     },
                   ),
                 ),
@@ -87,7 +92,9 @@ class _CreateNewPassWordScreenState extends State<CreateNewPassWordScreen> {
                     keytextmatKhauMoi.currentState?.validate();
                     keytextnhapLaiMatKhau.currentState?.validate();
                     if (matKhauMoiController.value.text.isNotEmpty &&
-                        nhapLaiMatKhauController.value.text.isNotEmpty) {
+                        nhapLaiMatKhauController.value.text.isNotEmpty &&
+                        matKhauMoiController.value.text ==
+                            nhapLaiMatKhauController.value.text) {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

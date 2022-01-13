@@ -89,7 +89,12 @@ class _ForgotPassWordScreenState extends State<ForgotPassWordScreen> {
                       keytextnhapLaiMatKhau.currentState?.validate();
                     },
                     validate: (value) {
-                      return cubit.validateInputText(value!);
+                      if (value != matKhauMoiController.value.text &&
+                          value!.isNotEmpty) {
+                        return S.current.khong_trung_mat_khau_moi;
+                      } else {
+                        return cubit.validateInputText(value!);
+                      }
                     },
                   ),
                 ),
@@ -114,7 +119,18 @@ class _ForgotPassWordScreenState extends State<ForgotPassWordScreen> {
                   onPressed1: () {
                     Navigator.of(context).pop();
                   },
-                  onPressed2: () {},
+                  onPressed2: () {
+                    keytextmatKhauMoi.currentState?.validate();
+                    keytextnhapLaiMatKhau.currentState?.validate();
+                    keytextmatKhauHienTai.currentState?.validate();
+                    if (matKhauHienTaiController.value.text.isNotEmpty &&
+                        matKhauMoiController.value.text.isNotEmpty &&
+                        nhapLaiMatKhauController.value.text.isNotEmpty &&
+                        matKhauMoiController.value.text ==
+                            nhapLaiMatKhauController.value.text) {
+                      Navigator.of(context).pop();
+                    }
+                  },
                 )
               ],
             ),
