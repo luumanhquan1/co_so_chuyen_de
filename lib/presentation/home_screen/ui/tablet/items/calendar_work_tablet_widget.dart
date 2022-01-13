@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
@@ -12,7 +13,7 @@ import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:flutter/material.dart';
 
 class CalendarWorkTabletWidget extends StatefulWidget {
-  final HomeItemType homeItemType;
+  final WidgetType homeItemType;
   const CalendarWorkTabletWidget({Key? key, required this.homeItemType})
       : super(key: key);
 
@@ -29,7 +30,7 @@ class _CalendarWorkWidgetState extends State<CalendarWorkTabletWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
-      dialogSelect: StreamBuilder<HomeItemType?>(
+      dialogSelect: StreamBuilder<WidgetType?>(
         stream: HomeProvider.of(context).homeCubit.showDialogSetting,
         builder: (context, snapshot) {
           return DialogSettingWidget(

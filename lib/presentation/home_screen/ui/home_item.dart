@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/calendar_work_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/document_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/event_of_day_widget.dart';
@@ -23,109 +24,96 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/work_list_t
 
 import 'package:flutter/cupertino.dart';
 
-enum HomeItemType {
-  wordProcessState,
-  document,
-  summaryOfTask,
-  situationHandlingPeople,
-  peopleOpinions,
-  workSchedule,
-  meetingSchedule,
-  pressSocialNetWork,
-  listWork,
-  eventOfDay,
-  sinhNhat
-}
 
-extension ItemExtension on HomeItemType {
+extension ItemExtension on WidgetType {
   Widget getItemsMobile() {
     switch (this) {
-      case HomeItemType.wordProcessState:
+      case WidgetType.wordProcessState:
         return const WordProcessingStateWidget(
-          homeItemType: HomeItemType.wordProcessState,
+          homeItemType: WidgetType.wordProcessState,
         );
-      case HomeItemType.document:
-        return const DocumentWidget(homeItemType: HomeItemType.document);
-      case HomeItemType.summaryOfTask:
+      case WidgetType.document:
+        return const DocumentWidget(homeItemType: WidgetType.document);
+      case WidgetType.summaryOfTask:
         return const SummaryOfTaskWidget(
-          homeItemType: HomeItemType.summaryOfTask,
+          homeItemType: WidgetType.summaryOfTask,
         );
-      case HomeItemType.situationHandlingPeople:
+      case WidgetType.situationHandlingPeople:
         return const SituationOfHandlingPeopleWidget(
-          homeItemType: HomeItemType.situationHandlingPeople,
+          homeItemType: WidgetType.situationHandlingPeople,
         );
-      case HomeItemType.peopleOpinions:
+      case WidgetType.peopleOpinions:
         return const PeopleOpinions(
-          homeItemType: HomeItemType.peopleOpinions,
+          homeItemType: WidgetType.peopleOpinions,
         );
-      case HomeItemType.workSchedule:
+      case WidgetType.workSchedule:
         return const CalendarWorkWidget(
-          homeItemType: HomeItemType.workSchedule,
+          homeItemType: WidgetType.workSchedule,
         );
-      case HomeItemType.meetingSchedule:
+      case WidgetType.meetingSchedule:
         return const MeetingScheduleWidget(
-          homeItemType: HomeItemType.meetingSchedule,
+          homeItemType: WidgetType.meetingSchedule,
         );
-      case HomeItemType.pressSocialNetWork:
+      case WidgetType.pressSocialNetWork:
         return const PressSocialNetWork(
-          homeItemType: HomeItemType.pressSocialNetWork,
+          homeItemType: WidgetType.pressSocialNetWork,
         );
-      case HomeItemType.listWork:
+      case WidgetType.listWork:
         return const WorkListWidget(
-          homeItemType: HomeItemType.listWork,
+          homeItemType: WidgetType.listWork,
         );
-      case HomeItemType.eventOfDay:
+      case WidgetType.eventOfDay:
         return const EventOfDayWidget(
-          homeItemType: HomeItemType.eventOfDay,
+          homeItemType: WidgetType.eventOfDay,
         );
-      case HomeItemType.sinhNhat:
-        return const SinhNhatWidget(homeItemType: HomeItemType.sinhNhat);
+      case WidgetType.sinhNhat:
+        return const SinhNhatWidget(homeItemType: WidgetType.sinhNhat);
     }
   }
 
   Widget getItemsTablet() {
     switch (this) {
-      case HomeItemType.wordProcessState:
+      case WidgetType.wordProcessState:
         return const WordProcessingStateTabletWidget(
-          homeItemType: HomeItemType.wordProcessState,
+          homeItemType: WidgetType.wordProcessState,
         );
-      case HomeItemType.document:
-        return const DocumentTabletWidget(homeItemType: HomeItemType.document);
-      case HomeItemType.summaryOfTask:
+      case WidgetType.document:
+        return const DocumentTabletWidget(homeItemType: WidgetType.document);
+      case WidgetType.summaryOfTask:
         return const SummaryOfTaskTabletWidget(
-          homeItemType: HomeItemType.summaryOfTask,
+          homeItemType: WidgetType.summaryOfTask,
         );
-      case HomeItemType.situationHandlingPeople:
+      case WidgetType.situationHandlingPeople:
         return const SituationOfHandlingPeopleTabletWidget(
-          homeItemType: HomeItemType.situationHandlingPeople,
+          homeItemType: WidgetType.situationHandlingPeople,
         );
-      case HomeItemType.peopleOpinions:
+      case WidgetType.peopleOpinions:
         return const PeopleOpinionsTabletWidget(
-          homeItemType: HomeItemType.peopleOpinions,
+          homeItemType: WidgetType.peopleOpinions,
         );
-      case HomeItemType.workSchedule:
+      case WidgetType.workSchedule:
         return const CalendarWorkTabletWidget(
-          homeItemType: HomeItemType.workSchedule,
+          homeItemType: WidgetType.workSchedule,
         );
-      case HomeItemType.meetingSchedule:
+      case WidgetType.meetingSchedule:
         return const MeetingScheduleTabletWidget(
-          homeItemType: HomeItemType.meetingSchedule,
+          homeItemType: WidgetType.meetingSchedule,
         );
-      case HomeItemType.pressSocialNetWork:
+      case WidgetType.pressSocialNetWork:
         return const PressSocialNetWorkTabletWidget(
-          homeItemType: HomeItemType.pressSocialNetWork,
+          homeItemType: WidgetType.pressSocialNetWork,
         );
-      case HomeItemType.listWork:
+      case WidgetType.listWork:
         return const WorkListTabletWidget(
-          homeItemType: HomeItemType.listWork,
+          homeItemType: WidgetType.listWork,
         );
-      case HomeItemType.eventOfDay:
+      case WidgetType.eventOfDay:
         return const EventOfDayTabletWidget(
-          homeItemType: HomeItemType.eventOfDay,
+          homeItemType: WidgetType.eventOfDay,
         );
 
-      case HomeItemType.sinhNhat:
-        return const SinhNhatTabletWidget(homeItemType: HomeItemType.sinhNhat);
+      case WidgetType.sinhNhat:
+        return const SinhNhatTabletWidget(homeItemType: WidgetType.sinhNhat);
     }
   }
 }

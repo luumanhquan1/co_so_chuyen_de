@@ -1,12 +1,4 @@
-import 'dart:developer';
 
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/enum_ext.dart';
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +12,6 @@ class ScrollBarWidget extends StatefulWidget {
 
 class _ScrollBarWidgetState extends State<ScrollBarWidget> {
   final ScrollController scrollController = ScrollController();
-  GlobalKey key = GlobalKey();
-  double _alignmentY = -1;
-  bool isShowScrollBar = true;
   @override
   void initState() {
     // TODO: implement initState

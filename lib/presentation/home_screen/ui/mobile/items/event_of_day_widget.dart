@@ -1,4 +1,5 @@
 
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 
 
 class EventOfDayWidget extends StatefulWidget {
-  final HomeItemType homeItemType;
+  final WidgetType homeItemType;
   const EventOfDayWidget({Key? key, required this.homeItemType})
       : super(key: key);
 

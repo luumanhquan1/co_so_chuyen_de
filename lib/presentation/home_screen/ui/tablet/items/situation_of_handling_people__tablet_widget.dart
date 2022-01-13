@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -9,7 +10,7 @@ import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SituationOfHandlingPeopleTabletWidget extends StatefulWidget {
-  final HomeItemType homeItemType;
+  final WidgetType homeItemType;
   const SituationOfHandlingPeopleTabletWidget({
     Key? key,
     required this.homeItemType,

@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
@@ -11,7 +12,7 @@ import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:flutter/material.dart';
 
 class PeopleOpinions extends StatefulWidget {
-  final HomeItemType homeItemType;
+  final WidgetType homeItemType;
   const PeopleOpinions({Key? key,required this.homeItemType}) : super(key: key);
 
   @override

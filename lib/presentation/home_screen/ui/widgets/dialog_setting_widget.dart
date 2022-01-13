@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 
@@ -16,7 +16,7 @@ class DialogSettingWidget extends StatelessWidget {
   final List<DialogData>? listSelectKey;
   final Function(SelectKey)? onSelect;
   final Widget? customDialog;
-  final HomeItemType type;
+  final WidgetType type;
   final Widget? labelWidget;
   const DialogSettingWidget({
     Key? key,
@@ -31,7 +31,7 @@ class DialogSettingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return listSelectKey == null && customDialog == null
         ? const SizedBox()
-        : StreamBuilder<HomeItemType?>(
+        : StreamBuilder<WidgetType?>(
             stream: HomeProvider.of(context).homeCubit.showDialogSetting,
             builder: (context, snapshot) {
               return snapshot.data == type

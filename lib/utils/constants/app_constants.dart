@@ -54,7 +54,7 @@ const String QUA_HAN = 'QUA_HAN';
 const String CHO_TIEP_NHAN = 'CHO_TIEP_NHAN';
 const String CHO_XAC_NHAN = 'CHO_XAC_NHAN';
 const String THAM_GIA = 'THAM_GIA';
-const String CHO_PHAN_XU_LY= 'CHO_PHAN_XU_LY';
+const String CHO_PHAN_XU_LY = 'CHO_PHAN_XU_LY';
 
 const String CALENDAR_TYPE_DAY = 'Day';
 const String CALENDAR_TYPE_MONTH = 'Month';
@@ -90,4 +90,17 @@ class DateTimeFormat {
   static const CREATE_FORMAT = _dtFormat3;
   static const DOB_FORMAT = _dtFormat4;
   static const CREATE_BLOG_FORMAT = _dtFormat5;
+}
+
+class WidgetTypeConstant {
+  static const String TINH_HINH_XU_LY_VAN_BAN = 'TinhHinhXuLyVanBan';
+  static const String VAN_BAN = 'VanBanWidGet';
+  static const String TONG_HOP_NHIEM_VU = 'TongHopNhiemVu';
+  static const String Y_KIEN_NGUOI_DAN = 'YKienNguoiDanTongHop';
+  static const String LICH_LAM_VIEC = 'BoxLichLamViec';
+  static const String LICH_HOP = 'BoxLichHop';
+  static const String BAO_CHI = 'BaoChi';
+  static const String DANH_SANH_CONG_VIEC = 'BoxTodoList';
+  static const String SU_KIEN_TRONG_NGAY = 'SuKienTrongNgay';
+  static const String SINH_NHAT = 'SinhNhat';
 }

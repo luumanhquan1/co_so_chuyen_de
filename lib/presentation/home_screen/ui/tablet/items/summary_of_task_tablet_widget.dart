@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
@@ -19,7 +20,7 @@ import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
 class SummaryOfTaskTabletWidget extends StatefulWidget {
-  final HomeItemType homeItemType;
+  final WidgetType homeItemType;
   const SummaryOfTaskTabletWidget({Key? key, required this.homeItemType})
       : super(key: key);
 

@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -382,10 +383,24 @@ class FakeData {
         hanXuLy: '13/10/2021',
         codeStatus: DocumentStatus.CHO_PHAN_XU_LY
     ),
-
-
-
-
-
   ];
+  static final List<WidgetModel> listUseWidget = [
+    WidgetModel(
+        name: 'Tình hình xử lý văn bản',
+        id: '',
+        component: 'TinhHinhXuLyVanBan'),
+    WidgetModel(name: 'Văn bản', id: '', component: 'VanBanWidGet'),
+    WidgetModel(name: 'Tổng hợp nhiệm vụ', id: '', component: 'TongHopNhiemVu'),
+    WidgetModel(
+        name: 'Ý kiến người dân', id: '', component: 'YKienNguoiDanTongHop'),
+    WidgetModel(name: 'Lịch làm việc', id: '', component: 'BoxLichLamViec'),
+    WidgetModel(name: 'Lịch họp', id: '', component: 'BoxLichHop'),
+    WidgetModel(name: 'Báo chị mạng xã hội', id: '', component: 'BaoChi'),
+    WidgetModel(
+        name: 'Danh sách công việc', id: '', component: 'BoxTodoList'),
+    WidgetModel(
+        name: 'Sự kiện trong ngày', id: '', component: 'SuKienTrongNgay'),
+    WidgetModel(name: 'Sinh nhật', id: '', component: 'SinhNhat'),
+  ];
+
 }

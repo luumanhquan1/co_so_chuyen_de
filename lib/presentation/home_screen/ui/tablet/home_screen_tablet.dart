@@ -1,4 +1,7 @@
+
+
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
@@ -12,7 +15,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+final keyHomeTablet =GlobalKey<_HomeScreenTabletState>();
 class HomeScreenTablet extends StatefulWidget {
   const HomeScreenTablet({Key? key}) : super(key: key);
 
@@ -20,15 +23,29 @@ class HomeScreenTablet extends StatefulWidget {
   State<HomeScreenTablet> createState() => _HomeScreenTabletState();
 }
 
-class _HomeScreenTabletState extends State<HomeScreenTablet> {
+class _HomeScreenTabletState extends State<HomeScreenTablet>
+    with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
   HomeCubit homeCubit = HomeCubit();
-
+  late AnimationController animationController;
   @override
   void initState() {
     // TODO: implement initState
+    animationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
     super.initState();
     homeCubit.loadApi();
+    homeCubit.configWidget();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    animationController.dispose();
+    homeCubit.dispose();
   }
 
   @override
@@ -63,25 +80,66 @@ class _HomeScreenTabletState extends State<HomeScreenTablet> {
             child: Column(
               children: [
                 const HeaderTabletWidget(),
-                StaggeredGridView.countBuilder(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: HomeItemType.values.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final type = HomeItemType.values[index];
-                    return type.getItemsTablet();
-                  },
-                  staggeredTileBuilder: (int index) {
-                    final type = HomeItemType.values[index];
-                    if (type == HomeItemType.wordProcessState) {
-                      return const StaggeredTile.fit(2);
+                StreamBuilder<List<WidgetModel>>(
+                  stream: homeCubit.getConfigWidget,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? <WidgetModel>[];
+                    if (data.isNotEmpty) {
+                      return StaggeredGridView.countBuilder(
+                        crossAxisCount: 2,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final int count = data.length;
+                          final Animation<double> animation =
+                              Tween<double>(begin: 0.0, end: 1.0).animate(
+                            CurvedAnimation(
+                              parent: animationController,
+                              curve: Interval(
+                                (1 / count) * index,
+                                1.0,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                          );
+                          if (animationController.status ==
+                              AnimationStatus.dismissed) {
+                            animationController.forward();
+                          }
+                          final type = data[index];
+                          return AnimatedBuilder(
+                            animation: animationController,
+                            builder: (context, _) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: Transform(
+                                  transform: Matrix4.translationValues(
+                                    0.0,
+                                    100 * (1.0 - animation.value),
+                                    0.0,
+                                  ),
+                                  child: type.widgetType?.getItemsTablet() ??
+                                      const SizedBox(),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        staggeredTileBuilder: (int index) {
+                          final type = data[index];
+                          if (type.widgetType == WidgetType.wordProcessState) {
+                            return const StaggeredTile.fit(2);
+                          }
+                          return const StaggeredTile.fit(1);
+                        },
+                        mainAxisSpacing: 28,
+                        crossAxisSpacing: 28,
+                      );
                     }
-                    return const StaggeredTile.fit(1);
+                    return const SizedBox();
                   },
-                  mainAxisSpacing: 28,
-                  crossAxisSpacing: 28,
                 )
               ],
             ),
