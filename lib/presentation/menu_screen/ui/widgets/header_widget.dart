@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 
 class HeaderMenuWidget extends StatelessWidget {
   final double paddingVertical;
+  final String urlBackGround;
   const HeaderMenuWidget({
     Key? key,
     this.paddingVertical = 29,
+    this.urlBackGround = ImageAssets.headerMenu,
   }) : super(key: key);
 
   @override
@@ -18,11 +20,11 @@ class HeaderMenuWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: paddingVertical),
       width: double.infinity,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+      decoration:  BoxDecoration(
+        borderRadius:const BorderRadius.all(Radius.circular(8)),
         image: DecorationImage(
           image: AssetImage(
-            ImageAssets.headerMenu,
+            urlBackGround,
           ),
           fit: BoxFit.fill,
         ),
