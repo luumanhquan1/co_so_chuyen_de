@@ -63,6 +63,7 @@ dependencies:
   carousel_slider: ^4.0.0-nullsafety.0
   dots_indicator: ^2.0.0
   dotted_border:
+  keyboard_dismisser: ^2.0.0
   #svg
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2

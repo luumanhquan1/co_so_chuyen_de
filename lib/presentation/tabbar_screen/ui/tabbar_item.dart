@@ -62,7 +62,7 @@ extension TabbarEnum on TabBarType {
         return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
-          backgroundColor: Colors.cyanAccent,
+          // backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
         return const MenuScreen();
