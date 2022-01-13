@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -34,7 +35,7 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
             S.current.widget_manage,
             style: textNormalCustom(
               color: textTitle,
-              fontSize: 18,
+              fontSize: 18.0.textScale(space: 6),
             ),
           ),
           centerTitle: true,
@@ -62,17 +63,11 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
               ],
             ),
           ],
-          leading: Row(
-            children: [
-              const SizedBox(
-                width: 16,
-              ),
-              Center(
-                child: Center(
-                  child: SvgPicture.asset(ImageAssets.icPrevAppbar),
-                ),
-              ),
-            ],
+          leading: IconButton(
+            onPressed: () => {Navigator.pop(context)},
+            icon: SvgPicture.asset(
+              ImageAssets.icBack,
+            ),
           ),
         ),
         body: SingleChildScrollView(
