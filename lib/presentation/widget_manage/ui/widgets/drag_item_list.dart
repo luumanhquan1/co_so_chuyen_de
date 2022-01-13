@@ -25,12 +25,14 @@ class DragItemList extends StatefulWidget {
 class _DragItemListState extends State<DragItemList> {
   @override
   Widget build(BuildContext context) {
+    widget.widgetManageCubit.listUpdate=widget.listWidget;
     return ReorderableListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       buildDefaultDragHandles: widget.isUsing,
       proxyDecorator: (_, index, ___) {
-        final String productName = widget.listWidget[index].name;
+        final String productName = widget.widgetManageCubit
+            .listUpdate[index].name;
         return Material(
           color: Colors.transparent,
           child: Center(
@@ -60,9 +62,10 @@ class _DragItemListState extends State<DragItemList> {
           ),
         );
       },
-      itemCount: widget.listWidget.length,
+      itemCount: widget.widgetManageCubit.listUpdate.length,
       itemBuilder: (context, index) {
-        final String productName = widget.listWidget[index].name;
+        final String productName = widget.widgetManageCubit
+            .listUpdate[index].name;
         return Padding(
           key: ValueKey(productName),
           padding: const EdgeInsets.only(bottom: 20),
@@ -80,11 +83,11 @@ class _DragItemListState extends State<DragItemList> {
             clickICon: () {
               widget.isUsing
                   ? widget.widgetManageCubit.insertItemNotUse(
-                      widget.listWidget[index],
+                      widget.widgetManageCubit.listUpdate[index],
                       index,
                     )
                   : widget.widgetManageCubit.insertItemUsing(
-                      widget.listWidget[index],
+                      widget.widgetManageCubit.listUpdate[index],
                       index,
                     );
             },
@@ -96,8 +99,8 @@ class _DragItemListState extends State<DragItemList> {
           if (newIndex > oldIndex) {
             newIndex = newIndex - 1;
           }
-          final element = widget.listWidget.removeAt(oldIndex);
-          widget.listWidget.insert(newIndex, element);
+          final element = widget.widgetManageCubit.listUpdate.removeAt(oldIndex);
+          widget.widgetManageCubit.listUpdate.insert(newIndex, element);
         });
       },
     );

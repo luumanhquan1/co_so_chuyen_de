@@ -7,6 +7,7 @@ class WidgetManageCubit {
       BehaviorSubject<List<WidgetModel>>();
   final BehaviorSubject<List<WidgetModel>> _listWidgetNotUse =
       BehaviorSubject<List<WidgetModel>>();
+   List<WidgetModel>listUpdate=[];
 
   Stream<List<WidgetModel>> get listWidgetUsing => _listWidgetUsing.stream;
 
@@ -52,5 +53,9 @@ class WidgetManageCubit {
   void dispose() {
     _listWidgetUsing.close();
     _listWidgetNotUse.close();
+  }
+  void sortListWidget(WidgetModel widgetModel,int newIndex,
+      List<WidgetModel>lists,int oldIndex,){
+
   }
 }
