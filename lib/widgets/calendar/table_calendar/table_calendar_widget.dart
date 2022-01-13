@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       Row(
                         children: [
                           Text(
-                            convertDate(DateTime.now()),
+                            DateTime.now().toStringWithListFormat,
                             style:  TextStyle(
                               fontSize: 14.0.textScale(),
                               fontWeight: FontWeight.w500,

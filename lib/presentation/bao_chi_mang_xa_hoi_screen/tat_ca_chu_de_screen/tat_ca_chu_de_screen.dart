@@ -112,7 +112,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
-                        color: Color(0xFF3D5586),
+                        color: titleColor,
                       ),
                     ),
                     const SizedBox(
@@ -128,7 +128,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                     const SizedBox(
                       height: 16,
                       child: Divider(
-                        color: Color(0xFFECEEF7),
+                        color:lineColor,
                         height: 1,
                       ),
                     ),

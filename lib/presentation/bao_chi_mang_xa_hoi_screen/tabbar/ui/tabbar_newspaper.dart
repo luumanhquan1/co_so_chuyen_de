@@ -87,7 +87,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           tinTucThoiSuBloc: TinTucThoiSuBloc(),
           pContext: context,
         ),
-      ]),
+      ],),
     );
   }
 }
