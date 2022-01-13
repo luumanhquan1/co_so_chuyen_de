@@ -77,10 +77,10 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
           actions: const [
             Center(
               child: SizedBox(
-                width: 28,
-                height: 28,
+                width: 24,
+                height: 25,
                 child: ThongBaoWidget(
-                  sum: 0,
+                  sum: 10,
                 ),
               ),
             ),
