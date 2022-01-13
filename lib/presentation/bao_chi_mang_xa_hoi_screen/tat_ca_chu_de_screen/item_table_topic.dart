@@ -20,8 +20,11 @@ class ItemTableTopic extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: const Color(0xFFEAEEF5), width: 1)),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: whiteHide,
+        ),
+      ),
       child: Column(
         children: [
           Container(
@@ -29,41 +32,66 @@ class ItemTableTopic extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 6),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFFEAEEF5))),
-            child: Text(title,
-                style: textNormalCustom(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: titleColumn)),
+              border: Border.all(
+                color: whiteHide,
+              ),
+            ),
+            child: Text(
+              title,
+              style: textNormalCustom(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: titleColumn,
+              ),
+            ),
           ),
           Row(
             children: const [
               Expanded(
-                  child:
-                      ItemInTable('11,085', 'Bài viết', ImageAssets.icBaiViet)),
+                child: ItemInTable(
+                  '11,085',
+                  'Bài viết',
+                  ImageAssets.icBaiViet,
+                ),
+              ),
               Expanded(
-                  child: ItemInTable('11,085', 'Like', ImageAssets.icLike)),
+                child: ItemInTable(
+                  '11,085',
+                  'Like',
+                  ImageAssets.icLike,
+                ),
+              ),
             ],
           ),
           Row(
             children: const [
               Expanded(
-                  child: ItemInTable('11,085', 'Share', ImageAssets.icShare)),
+                child: ItemInTable(
+                  '11,085',
+                  'Share',
+                  ImageAssets.icShare,
+                ),
+              ),
               Expanded(
-                  child:
-                      ItemInTable('11,085', 'Comment', ImageAssets.icComment)),
+                child: ItemInTable(
+                  '11,085',
+                  'Comment',
+                  ImageAssets.icComment,
+                ),
+              ),
             ],
           ),
           GestureDetector(
             onTap: () {},
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 S.current.bao_cao_chi_tiet,
                 style: textNormalCustom(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: buttonColor),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: buttonColor,
+                ),
               ),
             ),
           )
@@ -87,11 +115,10 @@ class ItemInTable extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F6FA),
+        color: greyHide,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             children: [
@@ -100,7 +127,7 @@ class ItemInTable extends StatelessWidget {
                 style: textNormalCustom(
                     color: titleColor,
                     fontSize: 18,
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w700,),
               ),
               const SizedBox(
                 height: 3,
@@ -108,9 +135,10 @@ class ItemInTable extends StatelessWidget {
               Text(
                 content,
                 style: textNormalCustom(
-                    color: unselectLabelColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14),
+                  color: unselectLabelColor,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
               ),
             ],
           ),
@@ -118,8 +146,12 @@ class ItemInTable extends StatelessWidget {
             width: 10,
           ),
           Expanded(
-              child: SizedBox(
-                  height: 24, width: 24, child: SvgPicture.asset(icon)))
+            child: SizedBox(
+              height: 24,
+              width: 24,
+              child: SvgPicture.asset(icon),
+            ),
+          )
         ],
       ),
     );

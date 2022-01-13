@@ -27,18 +27,20 @@ class ItemTinTrongNuoc extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white.withOpacity(0.12),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-              color: const Color(0xFFDBDFEF).withOpacity(0.5), width: 1)),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.12),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: const Color(0xFFDBDFEF).withOpacity(0.5),
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -56,9 +58,8 @@ class ItemTinTrongNuoc extends StatelessWidget {
                     child: Image.network(
                       imgTitle,
                       fit: BoxFit.cover,
-
                     ),
-                  )),
+                  ),),
               Expanded(
                 flex: 8,
                 child: Container(
@@ -75,7 +76,7 @@ class ItemTinTrongNuoc extends StatelessWidget {
                         style: textNormalCustom(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
-                            color: indicatorColor),
+                            color: indicatorColor,),
                       ),
                       const SizedBox(
                         height: 6,
@@ -85,7 +86,7 @@ class ItemTinTrongNuoc extends StatelessWidget {
                         children: [
                           const Icon(
                             Icons.date_range,
-                            color: Color(0xFFDADADA),
+                            color: iconColor,
                           ),
                           Text(
                             date,
@@ -95,10 +96,12 @@ class ItemTinTrongNuoc extends StatelessWidget {
                               color: dateColor,
                             ),
                           ),
-
-                          const SizedBox(width: 30,),
-
-                          SvgPicture.asset(ImageAssets.icPlay,)
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          SvgPicture.asset(
+                            ImageAssets.icPlay,
+                          )
                         ],
                       )
                     ],
@@ -111,16 +114,17 @@ class ItemTinTrongNuoc extends StatelessWidget {
             height: 10,
           ),
           Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
-              child: Image.network(imgContent)),
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
+            child: Image.network(imgContent),
+          ),
           const SizedBox(
             height: 10,
           ),
           Text(
             content,
             style: textNormalCustom(
-                color: titleColor, fontSize: 14, fontWeight: FontWeight.w500),
+                color: titleColor, fontSize: 14, fontWeight: FontWeight.w500,),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           )

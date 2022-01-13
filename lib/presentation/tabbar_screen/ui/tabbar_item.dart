@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum TabBarType { home, report, calendarWork, internalInteraction, menu }
+
 List<TabBarType> getTabListItem() {
   return [
     TabBarType.home,
