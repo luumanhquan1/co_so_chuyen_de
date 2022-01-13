@@ -1,7 +1,7 @@
-
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
+
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
@@ -48,11 +48,17 @@ class _EventOfDayWidgetState extends State<SinhNhatWidget> {
       leadingIcon: SvgPicture.asset(ImageAssets.icSinhNhat),
       child: Column(
         children: List.generate(
-          10,
-              (index) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: EventWidget(onTap: (){},title: '"Sinh nhật bà Vy Vũ Hồng Thảo - (26/10/2021)"',),
-          ),
+          FakeData.sinhNhat.length,
+          (index) {
+            final data = FakeData.sinhNhat[index];
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: EventWidget(
+                onTap: () {},
+                title: data.name,
+              ),
+            );
+          },
         ),
       ),
     );

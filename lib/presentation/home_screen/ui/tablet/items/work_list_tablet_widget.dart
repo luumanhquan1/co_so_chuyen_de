@@ -5,7 +5,7 @@ import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
@@ -79,7 +79,7 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
                         onClose: () {},
                         onChange: (controller) {
                           final result = cubit.changeLabelTodo(
-                              controller.text.trim(), todo);
+                              controller.text.trim(), todo,);
                           controller.text = result;
                         },
                       );

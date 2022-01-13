@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
+
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
@@ -47,14 +48,17 @@ class _EventOfDayWidgetState extends State<EventOfDayTabletWidget> {
       child: Flexible(
         child: ScrollBarWidget(
           children: List.generate(
-            10,
-            (index) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: EventWidget(
-                onTap: () {},
-                title: "Talkshow “Trí tuệ nhân tạo với cuộc sống”",
-              ),
-            ),
+            FakeData.suKienTrongNgay.length,
+                (index) {
+              final data= FakeData.suKienTrongNgay[index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child:  EventWidget(
+                  onTap: () {},
+                  title: data.name,
+                ),
+              );
+            },
           ),
         ),
       ),

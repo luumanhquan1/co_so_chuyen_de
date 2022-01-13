@@ -37,6 +37,9 @@ class HomeCubit extends BaseCubit<HomeState> {
       BehaviorSubject<List<DashboardSchedule>>();
   final BehaviorSubject<List<CalendarMeetingModel>> _getNhiemVu =
       BehaviorSubject<List<CalendarMeetingModel>>();
+  final  BehaviorSubject<UserInformationModel> _getUserInformation =
+  BehaviorSubject<UserInformationModel>();
+
 
   void _getTinhHuongKhanCap() {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
@@ -53,9 +56,12 @@ class HomeCubit extends BaseCubit<HomeState> {
   }
 
   void loadApi() {
+
     _getTinhHuongKhanCap();
   }
-
+void getUserInFor(){
+    _getUserInformation.sink.add(FakeData.userInfo);
+}
   void dispose() {
     _showDialogSetting.close();
     _tinhHuongKhanCap.close();
@@ -68,8 +74,9 @@ class HomeCubit extends BaseCubit<HomeState> {
     _showAddTag.close();
     _getTongHopNhiemVu.close();
     _getNhiemVu.close();
+    _getUserInformation.close();
   }
-
+Stream<UserInformationModel> get getUserInformation => _getUserInformation.stream;
   Stream<List<WidgetModel>> get getConfigWidget => _getConfigWidget.stream;
   Stream<List<CalendarMeetingModel>> get getNhiemVu => _getNhiemVu.stream;
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
