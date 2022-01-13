@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -42,7 +43,10 @@ class ContainerInfoWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: textNormal(AppTheme.getInstance().titleColor(), 16),
+            style: textNormal(
+              AppTheme.getInstance().titleColor(),
+              16.0.textScale(),
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -64,7 +68,7 @@ class ContainerInfoWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         '${data.key}: ${data.value}',
-                        style: textNormal(infoColor, 14),
+                        style: textNormal(infoColor, 14.0.textScale()),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -89,7 +93,8 @@ class ContainerInfoWidget extends StatelessWidget {
                   color: backGroundStatus
                       ? AppTheme.getInstance().backGroundColor()
                       : colorStatus,
-                  fontSize: backGroundStatus ? 12 : 14,
+                  fontSize:
+                      backGroundStatus ? 12.0.textScale() : 14.0.textScale(),
                 ),
               ),
             ),

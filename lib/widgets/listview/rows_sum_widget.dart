@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RowSumInfoWidget extends StatelessWidget {
-  final List<DataRow> data;
+  final List<DataInfo> data;
+  final double padding;
   const RowSumInfoWidget({
     Key? key,
     required this.data,
+    this.padding = 0,
   }) : super(key: key);
 
   @override
@@ -21,10 +23,13 @@ class RowSumInfoWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           final result = data[index];
           return Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(
+              left: index == 0 ? padding : 0,
+              right: data.length - 1 == index ? padding : 16,
+            ),
             child: Container(
-              width: 247,
               height: 88,
+              constraints: const BoxConstraints(minWidth: 247),
               decoration: const BoxDecoration(
                 color: backgroundRowColor,
                 borderRadius: BorderRadius.all(
@@ -34,8 +39,17 @@ class RowSumInfoWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  SvgPicture.asset(
-                    result.urlIcon,
+                  Container(
+                    width: 56,
+                    height: 56,
+                    padding: const EdgeInsets.all(12),
+                    decoration: const BoxDecoration(
+                      color: backgroundColorApp,
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset(
+                      result.urlIcon,
+                    ),
                   ),
                   const SizedBox(
                     width: 14,
@@ -73,9 +87,9 @@ class RowSumInfoWidget extends StatelessWidget {
   }
 }
 
-class DataRow {
+class DataInfo {
   final String urlIcon;
   final String title;
   final String value;
-  DataRow({required this.urlIcon, required this.title, required this.value});
+  DataInfo({required this.urlIcon, required this.title, required this.value});
 }
