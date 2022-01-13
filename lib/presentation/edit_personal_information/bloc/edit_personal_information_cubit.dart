@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_state.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rxdart/rxdart.dart';
 
 class EditPersonalInformationCubit
     extends BaseCubit<EditPersonalInformationState> {
   EditPersonalInformationCubit() : super(EditPersonalInformationInitial());
+  BehaviorSubject<File> saveFile = BehaviorSubject();
+
+  Stream<File> get saveFileStream => saveFile.stream;
   String ngaySinh = '';
   bool gioiTinh = false;
   TextEditingController nameController = TextEditingController();
@@ -40,6 +45,12 @@ class EditPersonalInformationCubit
 
   Future<void> selectBirthdayEvent(String birthday) async {
     ngaySinh = birthday;
+  }
+
+  Future<void> uploadImage({required File xFile}) async {
+   // File file = File();
+
+    saveFile.sink.add(xFile);
   }
 
   void dispose() {}

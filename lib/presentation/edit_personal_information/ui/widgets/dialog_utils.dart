@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 
 class DialogUtils {
   static final DialogUtils _instance = new DialogUtils.internal();
@@ -151,7 +151,7 @@ class DialogUtils {
       ),
       onPressed: () {
         Navigator.pop(context);
-        openAppSettings();
+     //   openAppSettings();
       },
     );
 

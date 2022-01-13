@@ -1,5 +1,4 @@
-import 'package:ccvc_mobile/domain/model/edit_personal_information/user_accounts.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_personal_information_row.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 
 class ManagerPersonalInformationModel {
@@ -120,7 +119,7 @@ class ManagerPersonalInformationModel {
     huyen: 'a',
     xa: 'a',
     isDefault: false,
-    trangThai: "Hoạt động",
+    trangThai: 'Hoạt động',
     ungDung: 'a',
   );
 

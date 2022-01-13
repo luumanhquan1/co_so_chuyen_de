@@ -1,7 +1,12 @@
+
+
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/avatar.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -313,7 +318,18 @@ class InputInfo extends StatelessWidget {
         spaceH20,
         const WidgetDonVibMobile(),
         spaceH20,
-        const WidgetUngDungMobile()
+        const WidgetUngDungMobile(),
+        spaceH20,
+        Expanded(
+          child: StreamBuilder<File>(
+              stream: cubit.saveFileStream,
+              builder: (context, snapshot) {
+                return AvatarAndSignature(
+                  managerPersonalInformationModel: snapshot.data ,
+                  editPersonalInformationCubit: EditPersonalInformationCubit(),
+                );
+              }),
+        )
       ],
     );
   }

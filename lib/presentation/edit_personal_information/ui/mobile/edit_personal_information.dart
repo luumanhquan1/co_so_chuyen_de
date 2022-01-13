@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/input_info.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class EditPersonInformationScreen extends StatefulWidget {
@@ -65,6 +66,7 @@ class _EditPersonalInformationScreen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('lucc'),
@@ -100,11 +102,14 @@ class _EditPersonalInformationScreen
             ),
             GestureDetector(
               onTap: () {
-                if (formKey.currentState!.validate()) {
-                  print("đún");
-                } else {
-                  print("đún");
-                }
+                FilePicker.platform.pickFiles(
+                  type: FileType.image,
+                );
+                // if (formKey.currentState!.validate()) {
+                //   print("đún");
+                // } else {
+                //   print("đún");
+                // }
               },
               child: Container(
                 height: 50,
