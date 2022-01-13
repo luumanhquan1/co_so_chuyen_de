@@ -98,16 +98,25 @@ class ImageAssets {
   static const String icLock = '$baseImg/ic_lock.svg';
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
+
+  static const String ic_email = '$baseImg/ic_email.svg';
+  static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icThongBao = '$baseImg/ic_thong_bao.svg';
+  static const String icWork = '$baseImg/ic_work.svg';
+  static const String ic_search_calendar='$baseImg/ic_search_calendar.svg';
+
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';
-  static const String ic_email = '$baseImg/ic_email.svg';
-  static const String ic_hoicham='$baseImg/ic_hoicham.svg';
+  static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 
   ///SvgImage
   static const String icStar = '$baseImg/ic_start.png';
+
+  static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
+  static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
 
   static SvgPicture svgAssets(
     String name, {

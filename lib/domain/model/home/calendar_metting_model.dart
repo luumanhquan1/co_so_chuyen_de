@@ -6,11 +6,15 @@ class CalendarMeetingModel {
   final String address;
   final String nguoiChuTri;
   final DocumentStatus codeStatus;
+  final String loaiNhiemVu;
+  final String hanXuLy;
   CalendarMeetingModel({
-    required this.title,
-    required this.time,
-    required this.address,
-    required this.codeStatus,
-    required this.nguoiChuTri,
+    this.title = '',
+    this.time = '',
+    this.address = '',
+    this.codeStatus = DocumentStatus.CHO_PHAN_XU_LY,
+    this.nguoiChuTri = '',
+    this.hanXuLy = '',
+    this.loaiNhiemVu = '',
   });
 }
