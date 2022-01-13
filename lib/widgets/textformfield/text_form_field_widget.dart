@@ -21,41 +21,39 @@ class TextFormFieldWidget extends StatelessWidget {
       this.validator,
       this.initialValue,
       this.maxLine = 1,
-      this.textInputType})
+      this.textInputType,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextFormField(
-        controller: controller,
-        onChanged: onChange,
-        initialValue: initialValue,
-        keyboardType: textInputType,
-        maxLines: maxLine,
-        style: tokenDetailAmount(
-          fontSize: 12.0.textScale(),
-          color: titleColor,
-        ),
-        enabled: isEnabled,
-        decoration: InputDecoration(
-            contentPadding: maxLine == 1
-                ? const EdgeInsets.symmetric(vertical: 4, horizontal: 10)
-                : null,
-            fillColor: isEnabled
-                ? Colors.transparent
-                : Color(0xffDBDFEF).withOpacity(0.3),
-            filled: true,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffDBDFEF)),
-              borderRadius: BorderRadius.all(Radius.circular(6)),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffDBDFEF)),
-              borderRadius: BorderRadius.all(Radius.circular(6)),
-            )),
-        validator: validator,
+    return TextFormField(
+      controller: controller,
+      onChanged: onChange,
+      initialValue: initialValue,
+      keyboardType: textInputType,
+      maxLines: maxLine,
+      style: tokenDetailAmount(
+        fontSize: 12.0.textScale(),
+        color: titleColor,
       ),
+      enabled: isEnabled,
+      decoration: InputDecoration(
+        contentPadding: maxLine == 1
+            ? const EdgeInsets.symmetric(vertical: 4, horizontal: 10)
+            : null,
+        fillColor:
+            isEnabled ? Colors.transparent : borderColor.withOpacity(0.3),
+        filled: true,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+        ),
+      ),
+      validator: validator,
     );
   }
 }

@@ -1,33 +1,38 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:rxdart/subjects.dart';
 
-import 'base_search_bar.dart';
-
 // ignore: must_be_immutable
-class CustomSelectMultiItems extends StatefulWidget {
+class CustomSelectItems extends StatefulWidget {
   final BuildContext context;
   final List<String> items;
   String? title;
   final Function(List<int>) onChange;
   Function(int)? onSelectItem;
   Function(int)? onRemoveItem;
+  bool isCheckEnable = false;
 
-  CustomSelectMultiItems({
-    Key? key,
-    this.onSelectItem,
-    this.onRemoveItem,
-    this.title,
-    required this.context,
-    required this.items,
-    required this.onChange,
-  }) : super(key: key);
+  CustomSelectItems(
+      {Key? key,
+      this.onSelectItem,
+      this.onRemoveItem,
+      this.title,
+      required this.context,
+      required this.items,
+      required this.onChange,
+      required this.isCheckEnable})
+      : super(key: key);
 
   @override
-  _CustomSelectMultiItemsState createState() => _CustomSelectMultiItemsState();
+  _CustomSelectItemsState createState() => _CustomSelectItemsState();
 }
 
-class _CustomSelectMultiItemsState extends State<CustomSelectMultiItems> {
+class _CustomSelectItemsState extends State<CustomSelectItems> {
   List<String> selectedItems = [];
   List<String> searchList = [];
   bool isSearching = false;
@@ -37,72 +42,73 @@ class _CustomSelectMultiItemsState extends State<CustomSelectMultiItems> {
   void showListItem(BuildContext context) {
     searchItemSubject = BehaviorSubject.seeded(widget.items);
     showDialog(
-        context: context,
-        builder: (context) {
-          return KeyboardDismisser(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Scaffold(
-                resizeToAvoidBottomInset: true,
-                backgroundColor: Colors.transparent,
-                body: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).viewInsets.bottom <= 160
-                        ? 100
-                        : 20,
-                    horizontal: 50,
+      context: context,
+      builder: (context) {
+        return KeyboardDismisser(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+              backgroundColor: Colors.transparent,
+              body: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).viewInsets.bottom <= 160
+                      ? 100
+                      : 20,
+                  horizontal: 50,
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: backgroundColorApp,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 56,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color(0xffEDF0FD),
-                                ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          height: 56,
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: editColor,
                               ),
                             ),
-                            padding: const EdgeInsets.only(left: 28, right: 19),
-                            child: Stack(
-                              children: [
-                                Align(
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                flex: 6,
+                                child: Container(
+                                  alignment: Alignment.center,
                                   child: Text(
-                                    widget.title ?? 'Chọn đơn vị',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline4
-                                        ?.copyWith(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  bottom: 0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: const Color(0xffA2AEBD),
+                                    widget.title ?? '',
+                                    style: tokenDetailAmount(
+                                      fontSize: 12.0.textScale(),
+                                      color: titleColor,
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              ),
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(
+                                    Icons.close,
+                                    color: AqiColor,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          BaseSearchBar(onChange: (keySearch) async {
+                        ),
+                        BaseSearchBar(
+                          onChange: (keySearch) async {
                             searchList = widget.items
                                 .where(
                                   (item) => item.trim().toLowerCase().contains(
@@ -111,88 +117,82 @@ class _CustomSelectMultiItemsState extends State<CustomSelectMultiItems> {
                                 )
                                 .toList();
                             searchItemSubject.sink.add(searchList);
-                          }),
-                          Expanded(
-                            child: StreamBuilder<List<String>>(
-                                stream: searchItemSubject,
-                                builder: (context, snapshot) {
-                                  final listData = snapshot.data ?? [];
-                                  return listData.isEmpty
-                                      ? const Padding(
-                                          padding: EdgeInsets.all(16),
-                                          child: Text('Danh sách rỗng'),
-                                        )
-                                      : ListView.separated(
-                                          itemBuilder: (context, index) {
-                                            final itemTitle =
-                                                snapshot.data?[index] ?? '';
-                                            return GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  if (selectedItems
-                                                      .contains(itemTitle)) {
-                                                    selectedItems
-                                                        .remove(itemTitle);
-                                                  } else {
-                                                    selectedItems
-                                                        .add(itemTitle);
-                                                  }
-                                                });
-                                                widget
-                                                    .onChange(selectedIndex());
-                                                if (widget.onSelectItem !=
-                                                    null) {
-                                                  widget.onSelectItem!(index);
-                                                }
-                                                Navigator.of(context).pop();
-                                                searchItemSubject.close();
-                                              },
-                                              child: Container(
-                                                color: Colors.transparent,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8),
-                                                child: Text(
-                                                  itemTitle,
-                                                  style: TextStyle(
-                                                    color:
-                                                        const Color(0xff586B8B),
-                                                    fontWeight: selectedItems
-                                                            .contains(itemTitle)
-                                                        ? FontWeight.w600
-                                                        : FontWeight.normal,
-                                                  ),
-                                                ),
+                          },
+                        ),
+                        Expanded(
+                          child: StreamBuilder<List<String>>(
+                            stream: searchItemSubject,
+                            builder: (context, snapshot) {
+                              final listData = snapshot.data ?? [];
+                              return listData.isEmpty
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Text(S.current.danh_sach_rong),
+                                    )
+                                  : ListView.separated(
+                                      itemBuilder: (context, index) {
+                                        final itemTitle =
+                                            snapshot.data?[index] ?? '';
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (selectedItems
+                                                  .contains(itemTitle)) {
+                                              } else {
+                                                selectedItems.clear();
+                                                selectedItems.add(itemTitle);
+                                              }
+                                            });
+                                            // widget.onChange(selectedIndex());
+                                            // if (widget.onSelectItem != null) {
+                                            //   widget.onSelectItem!(index);
+                                            // }
+                                            Navigator.of(context).pop();
+                                            searchItemSubject.close();
+                                          },
+                                          child: Container(
+                                            color: Colors.transparent,
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 8,
+                                            ),
+                                            child: Text(
+                                              itemTitle,
+                                              style: TextStyle(
+                                                color: borderColor,
+                                                fontWeight: selectedItems
+                                                        .contains(itemTitle)
+                                                    ? FontWeight.w600
+                                                    : FontWeight.normal,
                                               ),
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return const Divider(
-                                              color: Color(0xffDBDFEF),
-                                            );
-                                          },
-                                          itemCount: snapshot.data?.length ?? 0,
+                                            ),
+                                          ),
                                         );
-                                }),
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const Divider(
+                                          color: borderColor,
+                                        );
+                                      },
+                                      itemCount: snapshot.data?.length ?? 0,
+                                    );
+                            },
                           ),
-                          const SizedBox(
-                            height: 10,
-                          )
-                        ],
-                      ),
+                        ),
+                        spaceH10
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildTagView() {
     return Wrap(
-      runSpacing: 8,
-      spacing: 8,
       children: _listTag(),
     );
   }
@@ -206,42 +206,11 @@ class _CustomSelectMultiItemsState extends State<CustomSelectMultiItems> {
   }
 
   Widget _buildTagItem(String content, int index) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffDB353A),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            constraints: BoxConstraints(
-              maxWidth: sizeWitdhTag - 60,
-            ),
-            child: Text(content,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    ?.copyWith(fontSize: 16, color: Colors.white)),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedItems.removeAt(index);
-              });
-              widget.onChange(selectedIndex());
-              if (widget.onRemoveItem != null) {
-                widget.onRemoveItem!(widget.items.indexOf(content));
-              }
-            },
-            child: const Icon(
-              Icons.close,
-              size: 18,
-              color: Colors.white,
-            ),
-          ),
-        ],
+    return Text(
+      content,
+      style: tokenDetailAmount(
+        fontSize: 12.0.textScale(),
+        color: titleColor,
       ),
     );
   }
@@ -267,23 +236,59 @@ class _CustomSelectMultiItemsState extends State<CustomSelectMultiItems> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // showBottomSheet(Widgets.context);
-        showListItem(widget.context);
-      },
-      child: Container(
-        key: keyDiaLog,
-        padding: const EdgeInsets.only(left: 16, right: 24),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(width: 1, color: const Color(0xffDBDFEF)),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: selectedItems.isNotEmpty
-            ? _buildTagView()
-            : Text(widget.title ?? 'chon_don_vi'),
-      ),
-    );
+    return widget.isCheckEnable
+        ? Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  key: keyDiaLog,
+                  padding: const EdgeInsets.only(left: 8, top: 16, bottom: 16),
+                  decoration: BoxDecoration(
+                    color: borderColor.withOpacity(0.2),
+                    border: Border.all(color: borderColor),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: selectedItems.isNotEmpty
+                      ? _buildTagView()
+                      : Text(
+                          widget.title ?? 'luc',
+                          style: tokenDetailAmount(
+                            fontSize: 12.0.textScale(),
+                            color: titleColor,
+                          ),
+                        ),
+                ),
+              ],
+            ),
+          )
+        : GestureDetector(
+            onTap: () {
+              // showBottomSheet(Widgets.context);
+              showListItem(widget.context);
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  key: keyDiaLog,
+                  padding: const EdgeInsets.only(left: 8, top: 16, bottom: 16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: borderColor),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: selectedItems.isNotEmpty
+                      ? _buildTagView()
+                      : Text(
+                          widget.title ?? 'luc',
+                          style: tokenDetailAmount(
+                            fontSize: 12.0.textScale(),
+                            color: titleColor,
+                          ),
+                        ),
+                ),
+              ],
+            ),
+          );
   }
 }

@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/tablet/manager_personal_information_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';
 
 final listFeature = [
@@ -153,9 +154,10 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.doiMatKhau:
-        return APP_DEVICE == DeviceType.MOBILE
-            ? const ForgotPassWordScreen()
-            : const ForgotPassWordScreenTablet();
+        return screenDevice(
+          mobileScreen: const ForgotPassWordScreen(),
+          tabletScreen: const ForgotPassWordScreenTablet(),
+        );
     }
   }
 }

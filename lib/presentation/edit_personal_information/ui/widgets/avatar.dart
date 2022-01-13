@@ -68,7 +68,7 @@ class AvatarAndSignature extends StatelessWidget {
       type: FileType.image,
     );
     if (result != null) {
-      File file = File(result.files.single.path ?? '');
+      final File file = File(result.files.single.path ?? '');
       await editPersonalInformationCubit.uploadImage(xFile: file);
     } else {}
 
@@ -90,7 +90,7 @@ class AvatarAndSignature extends StatelessWidget {
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: colorBlack.withOpacity(0.1),
                   blurRadius: 7,
                   // offset: const Offset(0, 1), // changes position of shadow
                 ),

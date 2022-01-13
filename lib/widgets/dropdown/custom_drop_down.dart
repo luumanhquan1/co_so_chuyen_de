@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/dropdown/drop_down_button.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,13 @@ class CustomDropDown extends StatefulWidget {
   final Function(int)? onSelectItem;
   final Widget? hint;
 
-  CustomDropDown(
-      {Key? key, this.value, required this.items, this.onSelectItem, this.hint})
-      : super(key: key);
+  CustomDropDown({
+    Key? key,
+    this.value,
+    required this.items,
+    this.onSelectItem,
+    this.hint,
+  }) : super(key: key);
 
   @override
   _CustomDropDownState createState() => _CustomDropDownState();
@@ -35,14 +40,14 @@ class _CustomDropDownState extends State<CustomDropDown> {
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(
-                color: const Color(0xffDBDFEF),
+                color: backgroundColorApp,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 16, right: 24),
+                  padding: const EdgeInsets.only(left: 8, right: 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -62,12 +67,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           underline: Container(),
                           isExpanded: true,
                           value: widget.value,
-                          hint: widget.hint ?? Text('select_validate'),
+                          hint: widget.hint ?? Text(S.current.select_validate),
                           icon: Container(),
-                          focusColor: Colors.red,
+                          focusColor: statusCalenderRed,
                           onChanged: (value) {
                             if (widget.items.isNotEmpty &&
-                                widget.items.first != 'Danh sách rỗng') {
+                                widget.items.first !=
+                                    S.current.danh_sach_rong) {
                               setState(() {
                                 widget.value = value;
                               });
@@ -92,9 +98,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
                                 }).toList()
                               : [
                                   DropdownMenuItemWidget(
-                                      value: 'Danh sách rỗng',
+                                      value: S.current.danh_sach_rong,
                                       child: Text(
-                                        'Danh sách rỗng',
+                                        S.current.danh_sach_rong,
                                         style: tokenDetailAmount(
                                           fontSize: 12.0.textScale(),
                                           color: titleColor,
@@ -109,7 +115,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   right: 10,
                   top: 20,
                   child: SvgPicture.asset(
-                    '$baseImg/ic_edit_infor.svg',
+                    ImageAssets.icEditInfor,
                   ),
                 ),
               ],

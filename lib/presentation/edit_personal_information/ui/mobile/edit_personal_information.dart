@@ -170,8 +170,8 @@ class _EditPersonalInformationScreen
                 child: CustomDropDown(
                   value: cubit.managerPersonalInformationModel.gioiTinh ?? false
                       ? 'Nam'
-                      : 'Nu',
-                  items: ['Nam', 'Nu'],
+                      : 'Nữ',
+                  items: cubit.fakeDataGioiTinh,
                   onSelectItem: (value) {
                     if (value == 0) {
                       cubit.selectGTEvent(true);
@@ -241,57 +241,48 @@ class _EditPersonalInformationScreen
             ),
             Form(
               child: InputInfoUserWidget(
-                  title: user.keys.elementAt(10),
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 16, right: 24),
-                    child: CustomSelectMultiItems(
-                      title: 'Chọn nhóm',
-                      context: context,
-                      items: ["dd", 'ddd', 'dddddd'],
-                      onChange: (indexes) {
-                        //  widget._viewModel.selectGroup(indexes);
-                      },
-                      onRemoveItem: (index) {
-                        print(index);
-                      },
-                    ),
-                  )),
+                title: user.keys.elementAt(10),
+                child: CustomSelectItems(
+                  title: 'Tỉnh/Thành phố',
+                  context: context,
+                  items: cubit.fakeDataTinh,
+                  onChange: (indexes) {
+                    //  widget._viewModel.selectGroup(indexes);
+                  },
+                  onRemoveItem: (index) {},
+                  isCheckEnable: true,
+                ),
+              ),
             ),
             Form(
               child: InputInfoUserWidget(
-                  title: user.keys.elementAt(11),
-                  child: CustomDropDown(
-                    value:
-                        cubit.managerPersonalInformationModel.gioiTinh ?? false
-                            ? 'Nam'
-                            : 'Nu',
-                    items: ['Nam', 'Nu'],
-                    onSelectItem: (value) {
-                      if (value == 0) {
-                        cubit.selectGTEvent(true);
-                      } else {
-                        cubit.selectGTEvent(false);
-                      }
-                    },
-                  )),
+                title: user.keys.elementAt(11),
+                child: CustomSelectItems(
+                  title: 'Quận/Huyện',
+                  context: context,
+                  items: cubit.fakeDataTinh,
+                  onChange: (indexes) {
+                    //  widget._viewModel.selectGroup(indexes);
+                  },
+                  onRemoveItem: (index) {},
+                  isCheckEnable: false,
+                ),
+              ),
             ),
             Form(
               child: InputInfoUserWidget(
-                  title: user.keys.elementAt(12),
-                  child: CustomDropDown(
-                    value:
-                        cubit.managerPersonalInformationModel.gioiTinh ?? false
-                            ? 'Nam'
-                            : 'Nu',
-                    items: ['Nam', 'Nu'],
-                    onSelectItem: (value) {
-                      if (value == 0) {
-                        cubit.selectGTEvent(true);
-                      } else {
-                        cubit.selectGTEvent(false);
-                      }
-                    },
-                  )),
+                title: user.keys.elementAt(12),
+                child: CustomSelectItems(
+                  title: 'Phường/Xã',
+                  context: context,
+                  items: cubit.fakeDataTinh,
+                  onChange: (indexes) {
+                    //  widget._viewModel.selectGroup(indexes);
+                  },
+                  onRemoveItem: (index) {},
+                  isCheckEnable: true,
+                ),
+              ),
             ),
             Form(
               key: formKey,

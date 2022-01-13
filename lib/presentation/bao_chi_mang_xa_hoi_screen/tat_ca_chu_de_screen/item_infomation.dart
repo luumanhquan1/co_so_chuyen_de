@@ -35,11 +35,11 @@ class ItemInfomation extends StatelessWidget {
                 style: textNormalCustom(
                     color: unselectLabelColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14)),
+                    fontSize: 14,),),
             Text(
               index,
               style: textNormalCustom(
-                  color: color, fontSize: 26, fontWeight: FontWeight.w700),
+                  color: color, fontSize: 26, fontWeight: FontWeight.w700,),
             )
           ],
         )

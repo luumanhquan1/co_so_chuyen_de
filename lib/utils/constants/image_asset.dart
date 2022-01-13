@@ -37,6 +37,7 @@ class ImageAssets {
   static const String icVector = '$baseImg/ic_vector.svg';
   static const String icManager = '$baseImg/ic_edit_manager_person.svg';
   static const String icImage = '$baseImg/ic_Image.svg';
+  static const String icEditInfor = '$baseImg/ic_edit_infor.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -104,6 +105,7 @@ class ImageAssets {
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+  static const String ic_search_calendar='$baseImg/ic_search_calendar.svg';
 
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';

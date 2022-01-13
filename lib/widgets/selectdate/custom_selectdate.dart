@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                     return Theme(
                       data: ThemeData.light().copyWith(
                         colorScheme: const ColorScheme.light().copyWith(
-                          primary: const Color(0xffDB353A),
+                          primary: statusCalenderRed,
                         ),
                       ),
                       child: child ?? Container(),
@@ -83,10 +84,10 @@ class _CustomDropDownState extends State<CustomSelectDate> {
             child: Container(
               decoration: BoxDecoration(
                 color: widget.isObligatory
-                    ? const Color(0xffDBDFEF).withOpacity(0.3)
+                    ? backgroundColorApp.withOpacity(0.3)
                     : widget.backgroundColor ?? Colors.transparent,
                 border: Border.all(
-                  color: const Color(0xffDBDFEF),
+                  color: backgroundColorApp,
                 ),
                 borderRadius: BorderRadius.circular(6),
               ),
@@ -102,7 +103,7 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                           height: 44,
                           child: widget.value == null
                               ? Text(
-                                  widget.hintText ?? 'Vui lòng chọn',
+                                  widget.hintText ?? S.current.vuiLongChon,
                                   style: tokenDetailAmount(
                                     fontSize: 12.0.textScale(),
                                     color: titleColor,

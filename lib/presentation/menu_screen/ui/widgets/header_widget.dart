@@ -3,17 +3,20 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class HeaderMenuWidget extends StatelessWidget {
+  final double paddingVertical;
   const HeaderMenuWidget({
     Key? key,
+    this.paddingVertical = 29,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 29),
+      padding: EdgeInsets.symmetric(vertical: paddingVertical),
       width: double.infinity,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -34,8 +37,8 @@ class HeaderMenuWidget extends StatelessWidget {
               ),
             ),
             child: Container(
-              height: 56,
-              width: 56,
+              height: 56.0.textScale(space: 8),
+              width: 56.0.textScale(space: 8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.transparent,
@@ -61,7 +64,7 @@ class HeaderMenuWidget extends StatelessWidget {
             'Cao Tiến Dũng',
             style: textNormalCustom(
               color: AppTheme.getInstance().dfBtnTxtColor(),
-              fontSize: 16,
+              fontSize: 16.0.textScale(),
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -72,7 +75,7 @@ class HeaderMenuWidget extends StatelessWidget {
             'Chủ tịch UBND tỉnh',
             style: textNormal(
               AppTheme.getInstance().dfBtnTxtColor().withOpacity(0.8),
-              14,
+              14.0.textScale(),
             ),
           )
         ],

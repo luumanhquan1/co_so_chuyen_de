@@ -48,10 +48,25 @@ class EditPersonalInformationCubit
   }
 
   Future<void> uploadImage({required File xFile}) async {
-   // File file = File();
+    // File file = File();
 
     saveFile.sink.add(xFile);
   }
+  List<String> fakeDataGioiTinh = [
+    'Nam',
+    'Nữ',
+  ];
+
+  List<String> fakeDataTinh = [
+    'hà nôi',
+    'lam loi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+  ];
 
   void dispose() {}
 }
