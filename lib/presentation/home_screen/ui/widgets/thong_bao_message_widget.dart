@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,14 +21,17 @@ class ThongBaoWidget extends StatelessWidget {
             bottom: 0,
             child: SvgPicture.asset(
               ImageAssets.icThongBao,
-              height: 26,
-              width: 26,
+              height: 18.0.textScale(space: 8),
+              width: 18.0.textScale(space: 8),
             ),
           ),
           Positioned(
             right: 0,
             child: Container(
-              padding: const EdgeInsets.all(5),
+              padding: EdgeInsets.symmetric(
+                horizontal: 4.0.textScale(space: 1),
+                vertical: 1,
+              ),
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: statusCalenderRed,
@@ -44,7 +48,7 @@ class ThongBaoWidget extends StatelessWidget {
   }
 
   String sumThongBao() {
-    if (sum > 10) {
+    if (sum >= 10) {
       return '9+';
     }
     return sum.toString();

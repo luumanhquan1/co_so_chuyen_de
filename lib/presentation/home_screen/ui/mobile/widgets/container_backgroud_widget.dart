@@ -38,7 +38,6 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
   Widget build(BuildContext context) {
     return Container(
       color: AppTheme.getInstance().backGroundColor(),
-      constraints: const BoxConstraints(minHeight: 300),
       padding: widget.paddingChild,
       margin: const EdgeInsets.only(top: 6),
       child: Stack(

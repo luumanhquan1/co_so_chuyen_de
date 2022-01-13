@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/widget_mange_screen.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/tablet/widget_mange_screen_tablet.dart';
 
@@ -58,29 +59,10 @@ class _MenuScreenState extends State<MenuScreen> {
                       );
                     }),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: TextButton(
-                      child: Text(
-                        S.current.quan_ly_widget,
-                        style: textNormalCustom(
-                          color: buttonColor,
-                          fontSize: 14,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => screenDevice(
-                              mobileScreen: const WidgetManageScreen(),
-                              tabletScreen: const WidgetManageScreenTablet(),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                 const Padding(
+                    padding:  EdgeInsets.only(top: 16,bottom: 24),
+                    child: TextQuanLyWidget(),
+                  )
                 ],
               ),
             ),
