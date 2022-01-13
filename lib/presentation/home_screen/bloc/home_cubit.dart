@@ -56,7 +56,7 @@ class HomeCubit extends BaseCubit<HomeState> {
   }
 
   void loadApi() {
-
+    getUserInFor();
     _getTinhHuongKhanCap();
   }
 void getUserInFor(){
