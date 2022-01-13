@@ -75,6 +75,8 @@ class ImageAssets {
 
   static const String icImageChangePassword =
       '$baseImg/image_change_password.svg';
+  static const String icImageChangePasswordTablet =
+      '$baseImg/image_change_pass_tablet.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
   static const String icBaoChi='$baseImg/ic_bao_chi.svg';
   static const String icBlog='$baseImg/ic_blog.svg';
@@ -90,6 +92,7 @@ class ImageAssets {
   static const String icLock='$baseImg/ic_lock.svg';
   static const String icShieldDone='$baseImg/ic_shield_done.svg';
   static const String image_lock_reset='$baseImg/image_lock_reset.svg';
+  static const String image_lock_reset_tablet='$baseImg/image_lock_reset_tablet.svg';
   static const String ic_email='$baseImg/ic_email.svg';
 
 
