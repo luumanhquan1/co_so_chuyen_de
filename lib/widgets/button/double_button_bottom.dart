@@ -10,13 +10,13 @@ class DoubleButtonBottom extends StatefulWidget {
   final Function onPressed1;
   final Function onPressed2;
 
-  const DoubleButtonBottom(
-      {Key? key,
-      required this.title1,
-      required this.title2,
-      required this.onPressed1,
-      required this.onPressed2})
-      : super(key: key);
+  const DoubleButtonBottom({
+    Key? key,
+    required this.title1,
+    required this.title2,
+    required this.onPressed1,
+    required this.onPressed2,
+  }) : super(key: key);
 
   @override
   State<DoubleButtonBottom> createState() => _DoubleButtonBottomState();
@@ -42,6 +42,7 @@ class _DoubleButtonBottomState extends State<DoubleButtonBottom> {
                 child: Text(
                   widget.title1,
                   style: textNormalCustom(
+                    fontSize: 14.0.textScale(space: 4.0),
                     color: textDefault,
                   ),
                 ),
