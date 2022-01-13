@@ -59,6 +59,10 @@ class HomeCubit extends BaseCubit<HomeState> {
     getUserInFor();
     _getTinhHuongKhanCap();
   }
+
+  void orderWidget(List<WidgetModel> listWidgetConfig) {
+    _getConfigWidget.sink.add(listWidgetConfig);
+  }
 void getUserInFor(){
     _getUserInformation.sink.add(FakeData.userInfo);
 }
@@ -101,9 +105,7 @@ extension GetConfigWidget on HomeCubit {
     _getConfigWidget.sink.add(FakeData.listUseWidget);
   }
 
-  void orderWidget(List<WidgetModel> listWidgetConfig) {
-    _getConfigWidget.sink.add(listWidgetConfig);
-  }
+
 }
 
 ///Báo chí mạng xã hội
