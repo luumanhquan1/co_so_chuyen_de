@@ -7,11 +7,15 @@ class WidgetManageCubit {
       BehaviorSubject<List<WidgetModel>>();
   final BehaviorSubject<List<WidgetModel>> _listWidgetNotUse =
       BehaviorSubject<List<WidgetModel>>();
-   List<WidgetModel>listUpdate=[];
+  final BehaviorSubject<List<WidgetModel>>_listUpdate=
+  BehaviorSubject<List<WidgetModel>>();
 
   Stream<List<WidgetModel>> get listWidgetUsing => _listWidgetUsing.stream;
 
   Stream<List<WidgetModel>> get listWidgetNotUse => _listWidgetNotUse.stream;
+
+  Stream<List<WidgetModel>> get listUpdate => _listUpdate.stream;
+
 
   void _getListWidgetUsing() {
     _listWidgetUsing.sink.add(FakeData.listUse);
@@ -54,8 +58,14 @@ class WidgetManageCubit {
     _listWidgetUsing.close();
     _listWidgetNotUse.close();
   }
-  void sortListWidget(WidgetModel widgetModel,int newIndex,
-      List<WidgetModel>lists,int oldIndex,){
 
+  void sortListWidget(
+    int oldIndex,
+    int newIndex,
+  ) {
+    final List<WidgetModel>listUpdate=_listWidgetUsing.value;
+    final element=listUpdate.removeAt(oldIndex);
+    listUpdate.insert(newIndex, element);
+    _listUpdate.sink.add(listUpdate);
   }
 }
