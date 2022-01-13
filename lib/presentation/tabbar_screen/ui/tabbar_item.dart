@@ -3,10 +3,10 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/search_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/search_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/widget_mange_screen.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/tablet/widget_mange_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,10 +55,9 @@ extension TabbarEnum on TabBarType {
     switch (this) {
       case TabBarType.home:
         return APP_DEVICE == DeviceType.MOBILE
-            // ? HomeScreenMobile()
-            // : HomeScreenTablet();
-            ? SearchScreen()
-            : SearchScreenTablet();
+            ? HomeScreenMobile()
+            : HomeScreenTablet();
+        return const Center();
       case TabBarType.report:
         return const Scaffold(
           backgroundColor: Colors.blue,
@@ -70,10 +69,12 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
-        return const MenuScreen();
+        return APP_DEVICE == DeviceType.MOBILE
+            ? WidgetManageScreen()
+            : WidgetManageScreenTablet();
+
     }
   }
-
   TabBarItem getTabBarItem({bool isSelect = false}) {
     switch (this) {
       case TabBarType.home:

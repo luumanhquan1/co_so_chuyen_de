@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
@@ -5,7 +6,9 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
-import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/widget_mange_screen.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/tablet/widget_mange_screen_tablet.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +24,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEEF3FF),
+      backgroundColor: const Color(0xffEEF3FF),
       appBar: BaseAppBar(
         title: S.current.menu,
       ),
@@ -47,17 +50,34 @@ class _MenuScreenState extends State<MenuScreen> {
                           );
                         },
                         child: MenuCellWidget(
-                          title: type.getItem().title,
-                          urlIcon: type.getItem().url,
+                          title: type
+                              .getItem()
+                              .title,
+                          urlIcon: type
+                              .getItem()
+                              .url,
                         ),
                       );
                     }),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      S.current.quan_ly_widget,
-                      style: textNormalCustom(color: buttonColor, fontSize: 14),
+                    child: TextButton(
+                      child: Text(
+                        S.current.quan_ly_widget,
+                        style: textNormalCustom(color: buttonColor,
+                          fontSize: 14,),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              APP_DEVICE == DeviceType.MOBILE
+                                  ? const WidgetManageScreen()
+                                  : const WidgetManageScreenTablet(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -83,8 +103,12 @@ class _MenuScreenState extends State<MenuScreen> {
                           );
                         },
                         child: MenuCellWidget(
-                          title: type.getItem().title,
-                          urlIcon: type.getItem().url,
+                          title: type
+                              .getItem()
+                              .title,
+                          urlIcon: type
+                              .getItem()
+                              .url,
                           isBorder: index != listFeatureAccount.length - 1,
                         ),
                       );
