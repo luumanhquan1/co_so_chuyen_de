@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
-  const TableCalendarWidget({Key? key}) : super(key: key);
+  const TableCalendarWidget({Key? key,})
+      : super(key: key);
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -55,7 +56,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
             boxShadow: [
               BoxShadow(
                 color: shadowContainerColor.withOpacity(0.1),
-                blurRadius: 20,
+                blurRadius: 20.0.textScale(),
                 offset: const Offset(0, 4),
               ),
             ],
@@ -68,60 +69,62 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 10.0.textScale(),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (isSearch) Expanded(
-                      child: TextField(
-
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Tìm kiếm',
-                          hintStyle: textNormalCustom(
-                            color: textBodyTime,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14
-                          )
+                    if (isSearch)
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Tìm kiếm',
+                            hintStyle: textNormalCustom(
+                              color: textBodyTime,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.0.textScale(),
+                            ),
+                          ),
                         ),
+                      )
+                    else
+                      Row(
+                        children: [
+                          Text(
+                            convertDate(DateTime.now()),
+                            style:  TextStyle(
+                              fontSize: 14.0.textScale(),
+                              fontWeight: FontWeight.w500,
+                              color: titleColor,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.arrow_drop_down_sharp,
+                              color: textBodyTime,
+                            ),
+                            onPressed: () {
+                              isFomat = !isFomat;
+                              setState(() {});
+                            },
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                          ),
+                        ],
                       ),
-                    ) else Row(
-                      children: [
-                        Text(
-                          convertDate(DateTime.now()),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: titleColor,
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.arrow_drop_down_sharp,
-                            color: textBodyTime,
-                          ),
-                          onPressed: () {
-                            isFomat = !isFomat;
-                            setState(() {});
-                          },
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                        ),
-                      ],
-                    ),
                     GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isSearch = !isSearch;
-                          });
-                        },
-                        child:
-                            SvgPicture.asset(ImageAssets.ic_search_calendar)),
-                    const SizedBox(
-                      width: 10,
+                      onTap: () {
+                        setState(() {
+                          isSearch = !isSearch;
+                        });
+                      },
+                      child: SvgPicture.asset(ImageAssets.ic_search_calendar),
+                    ),
+                     SizedBox(
+                      width: 10.0.textScale(),
                     ),
                   ],
                 ),
@@ -151,17 +154,17 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 calendarStyle: CalendarStyle(
                   weekendTextStyle: textNormalCustom(
                     color: titleCalenderWork,
-                    fontSize: 14,
+                    fontSize: 14.0.textScale(),
                     fontWeight: FontWeight.w500,
                   ),
                   defaultTextStyle: textNormalCustom(
                     color: titleColor,
-                    fontSize: 14,
+                    fontSize: 14.0.textScale(),
                     fontWeight: FontWeight.w500,
                   ),
                   selectedTextStyle: textNormalCustom(
                     fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                    fontSize: 14.0.textScale(),
                     color: Colors.white,
                   ),
                   todayDecoration: const BoxDecoration(
@@ -169,7 +172,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                     color: toDayColor,
                   ),
                   todayTextStyle: textNormalCustom(
-                    fontSize: 14,
+                    fontSize: 14.0.textScale(),
                     fontWeight: FontWeight.w500,
                     color: buttonColor,
                   ),

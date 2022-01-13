@@ -57,7 +57,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           controller: _controller,
           indicatorColor: indicatorColor,
           unselectedLabelColor: unselectLabelColor,
-          labelColor: labelColor,
+          labelColor: selectColorTabbar,
           tabs: [
             Tab(
               child: Text(

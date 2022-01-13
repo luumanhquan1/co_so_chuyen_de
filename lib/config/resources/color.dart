@@ -87,6 +87,9 @@ const buttonColor = Color(0xff7966FF);
 const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+const selectColorTabbar = Color(0xFF304261);
+const whiteHide = Color(0xFFEAEEF5);
+const greyHide = Color(0xFFF5F6FA);
 //drawer menu color
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
