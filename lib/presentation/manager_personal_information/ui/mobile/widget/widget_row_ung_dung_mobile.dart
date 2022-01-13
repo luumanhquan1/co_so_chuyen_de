@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_personal_information_row.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 

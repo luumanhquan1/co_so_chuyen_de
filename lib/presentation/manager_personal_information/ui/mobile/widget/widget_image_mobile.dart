@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
           child: Column(
             children: [
               Image.asset(
-                '$baseImg/profile_edit_persion.png',
+                ImageAssets.icProfile,
               ),
               spaceH12,
               Text(
@@ -40,7 +40,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
           child: Column(
             children: [
               Image.asset(
-                '$baseImg/profile_edit_persion.png',
+                ImageAssets.icProfile,
               ),
               spaceH12,
               Text(
@@ -58,7 +58,7 @@ class _WidgetImageMobileState extends State<WidgetImageMobile> {
           child: Column(
             children: [
               Image.asset(
-                '$baseImg/profile_edit_persion.png',
+                ImageAssets.icProfile,
               ),
               spaceH12,
               Text(

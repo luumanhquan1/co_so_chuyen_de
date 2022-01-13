@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_personal_information_row.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 
 class ManagerPersonalInformationModel {
   String? hoten;

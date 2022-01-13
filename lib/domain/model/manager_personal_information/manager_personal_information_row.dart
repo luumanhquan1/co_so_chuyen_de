@@ -7,7 +7,7 @@ class ManagerPersonalInformationRow {
 
   ManagerPersonalInformationRow(this.title, this.value, this.type);
 
-  ManagerPersonalInformationRow.DocumentDefault(
+  ManagerPersonalInformationRow.managerDefault(
     this.title,
     this.value,
   );

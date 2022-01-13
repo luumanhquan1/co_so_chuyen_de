@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_don_vi.dart';
@@ -7,6 +6,7 @@ import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_thong_tin_left.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_thong_tin_right.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_ung_dung.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +30,14 @@ class _ManagerPersonalInformationTabletState
       appBar: BaseAppBar(
         title: S.current.manager_information,
         leadingIcon: IconButton(
-          icon: SvgPicture.asset('$baseImg/ic_vector.svg'),
+          icon: SvgPicture.asset(ImageAssets.icVector),
           onPressed: () {},
         ),
         elevation: 0.2,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('$baseImg/ic_edit_manager_person.svg'),
+            icon: SvgPicture.asset(ImageAssets.icManager),
           ),
           spaceW30
         ],
