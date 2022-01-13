@@ -1,4 +1,4 @@
-enum TypeRow { checkbox, text, status , list}
+enum TypeRow { checkbox, text, status, list }
 
 class ManagerPersonalInformationRow {
   String title = '';
@@ -8,7 +8,7 @@ class ManagerPersonalInformationRow {
   ManagerPersonalInformationRow(this.title, this.value, this.type);
 
   ManagerPersonalInformationRow.DocumentDefault(
-      this.title,
-      this.value,
-      );
+    this.title,
+    this.value,
+  );
 }

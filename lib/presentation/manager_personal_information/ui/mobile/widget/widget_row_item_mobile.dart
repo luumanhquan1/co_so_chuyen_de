@@ -27,7 +27,7 @@ class _WidgetRowItemMobileState extends State<WidgetRowItemMobile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Text(
                 widget.row.title,
                 style: tokenDetailAmount(

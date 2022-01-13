@@ -24,7 +24,7 @@ class _WidgetRowUngDungMobileState extends State<WidgetRowUngDungMobile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Text(
                 widget.row.title,
                 style: tokenDetailAmount(
