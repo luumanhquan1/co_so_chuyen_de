@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
-import 'package:ccvc_mobile/presentation/forgot_password/ui/forgot_password_screen.dart';
+import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
+import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';
 
 final listFeature = [
@@ -42,41 +44,59 @@ extension MenuTypeItem on MenuType {
         return MenuCellType(url: ImageAssets.icCamera, title: S.current.hop);
       case MenuType.quanLyNhiemVu:
         return MenuCellType(
-            url: ImageAssets.icQuanLyNhiemVu,
-            title: S.current.quan_ly_nhiem_vu);
+          url: ImageAssets.icQuanLyNhiemVu,
+          title: S.current.quan_ly_nhiem_vu,
+        );
       case MenuType.hanhChinhCong:
         return MenuCellType(
-            url: ImageAssets.icHanhChinhCong, title: S.current.hanh_chinh_cong);
+          url: ImageAssets.icHanhChinhCong,
+          title: S.current.hanh_chinh_cong,
+        );
       case MenuType.yKienNguoiDan:
         return MenuCellType(
-            url: ImageAssets.icYKienNguoiDan,
-            title: S.current.y_kien_nguoi_dan);
+          url: ImageAssets.icYKienNguoiDan,
+          title: S.current.y_kien_nguoi_dan,
+        );
       case MenuType.quanLyVanBan:
         return MenuCellType(
-            url: ImageAssets.icQuanLyVanBan, title: S.current.quan_ly_van_ban);
+          url: ImageAssets.icQuanLyVanBan,
+          title: S.current.quan_ly_van_ban,
+        );
       case MenuType.baoChiMangXaHoi:
         return MenuCellType(
-            url: ImageAssets.icBaoChiMangXaHoi,
-            title: S.current.bao_chi_mang_xa_hoi);
+          url: ImageAssets.icBaoChiMangXaHoi,
+          title: S.current.bao_chi_mang_xa_hoi,
+        );
       case MenuType.ketNoi:
         return MenuCellType(
-            url: ImageAssets.icKetNoi, title: S.current.ket_noi);
+          url: ImageAssets.icKetNoi,
+          title: S.current.ket_noi,
+        );
       case MenuType.tienIch:
         return MenuCellType(
-            url: ImageAssets.icTienIch, title: S.current.tien_ich);
+          url: ImageAssets.icTienIch,
+          title: S.current.tien_ich,
+        );
       case MenuType.chuyenPhamVi:
         return MenuCellType(
-            url: ImageAssets.icChuyenPhamVi, title: S.current.chuyen_pham_vi);
+          url: ImageAssets.icChuyenPhamVi,
+          title: S.current.chuyen_pham_vi,
+        );
       case MenuType.caiDatGiaoDien:
         return MenuCellType(
-            url: ImageAssets.icCaiDatGiaoDien,
-            title: S.current.cai_dat_giao_dien);
+          url: ImageAssets.icCaiDatGiaoDien,
+          title: S.current.cai_dat_giao_dien,
+        );
       case MenuType.hoiDap:
         return MenuCellType(
-            url: ImageAssets.icHoiDap, title: S.current.hoi_dap);
+          url: ImageAssets.icHoiDap,
+          title: S.current.hoi_dap,
+        );
       case MenuType.doiMatKhau:
         return MenuCellType(
-            url: ImageAssets.icDoiMatKhau, title: S.current.doi_mat_khau);
+          url: ImageAssets.icDoiMatKhau,
+          title: S.current.doi_mat_khau,
+        );
     }
   }
 }
@@ -127,7 +147,10 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.doiMatKhau:
-        return const ForgotPassWordScreen();
+        return screenDevice(
+          mobileScreen: const ForgotPassWordScreen(),
+          tabletScreen: const ForgotPassWordScreenTablet(),
+        );
     }
   }
 }

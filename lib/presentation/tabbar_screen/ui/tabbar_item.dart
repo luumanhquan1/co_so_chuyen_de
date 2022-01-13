@@ -5,7 +5,14 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/search_screen.dar
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/search_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
+
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,11 +58,15 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return APP_DEVICE == DeviceType.MOBILE
-            // ? HomeScreenMobile()
-            // : HomeScreenTablet();
-            ? SearchScreen()
-            : SearchScreenTablet();
+        return screenDevice(
+          mobileScreen: HomeScreenMobile(
+            key: keyHomeMobile,
+          ),
+          tabletScreen: HomeScreenTablet(
+            key: keyHomeTablet,
+          ),
+        );
+
       case TabBarType.report:
         return const Scaffold(
           backgroundColor: Colors.blue,
@@ -67,7 +78,10 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
-        return const MenuScreen();
+        return screenDevice(
+          mobileScreen: const MenuScreen(),
+          tabletScreen: const MenuScreen(),
+        );
     }
   }
 
