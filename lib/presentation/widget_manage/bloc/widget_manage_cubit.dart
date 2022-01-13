@@ -69,6 +69,7 @@ class WidgetManageCubit {
     int oldIndex,
     int newIndex,
   ) {
+
     final List<WidgetModel> listUpdate = _listWidgetUsing.value;
     final element=listUpdate.removeAt(oldIndex);
     listUpdate.insert(newIndex, element);

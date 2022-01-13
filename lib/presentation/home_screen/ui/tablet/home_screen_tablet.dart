@@ -67,7 +67,7 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
               width: 31,
             ),
             const ThongBaoWidget(
-              sum: 9,
+              sum: 19,
             )
           ],
         ),
