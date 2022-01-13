@@ -52,15 +52,24 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                  const SizedBox(height: 20,),
-                  SizedBox(
-                    width: 185,
-                    child: ButtonCustomBottom(
-                      size: 16,
-                      title: S.current.dat_lai_mac_dinh,
-                      isColorBlue: true,
-                      onPressed: () {},
+                  Container(
+                    decoration: BoxDecoration(
+                      color: textDefault,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
+                    padding:const EdgeInsets.symmetric(horizontal: 24,
+                      vertical: 13,),
+                    width: 185,
+                    height: 44,
+                    child: Center(
+                      child: Text(
+                        S.current.dat_lai_mac_dinh,
+                        style: textNormalCustom(
+                          fontSize: 16,
+                           color:backgroundColorApp,
+                      ),
+                    ),
+                  )),
                   const SizedBox(
                     height: 24,
                   ),
