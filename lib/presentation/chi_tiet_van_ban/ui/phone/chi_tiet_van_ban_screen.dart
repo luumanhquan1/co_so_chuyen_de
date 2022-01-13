@@ -1,11 +1,13 @@
+import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
-
+// todo chi tiet van ban
 class DetailDocument extends StatefulWidget {
-  final String taskId;
+  // final String taskId;
 
   // final DetailMissionViewModel viewModel;
-  final bool isPersonal;
+  // final bool isPersonal;
 
   // const DetailDocument(
   //     {required this.taskId,
@@ -28,24 +30,12 @@ class _DetailDocumentState extends State<DetailDocument> {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBarDefaultBack('Chi tiết văn bản'),
-        // floatingActionButton: StreamBuilder<DetailMission>(
-        //     stream: widget.viewModel.detailMissionSubject.stream,
-        //     builder: (context, snapshot) {
-        //       return CustomDocumentFloatButton(
-        //         opTapCallBack: (type) {
-        //           presentDocProcessorScreen(
-        //               type, context, snapshot.data ?? widget.viewModel.info);
-        //         },
-        //         detailMission: widget.viewModel.info,
-        //         state: StateDocument.nhiemvu,
-        //       );
-        //     }),
         body: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-              child: StreamBuilder<DetailMission>(
-                  stream: widget.viewModel.detailMissionSubject,
+              child: StreamBuilder<DetailDocumentModel>(
+                  // stream: widget.viewModel.detailMissionSubject,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
@@ -59,79 +49,79 @@ class _DetailDocumentState extends State<DetailDocument> {
                     }
                   }),
             ),
-            StreamBuilder(
-                stream: widget.viewModel.streamCheckExpand,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Container();
-                  }
-                  return Column(
-                    children: [
-                      StreamBuilder(
-                          stream: widget.viewModel.streamVanBanLQ,
-                          builder: (context,
-                              AsyncSnapshot<List<VanBanLienQuan>> snapshot) {
-                            final listVBLQ = snapshot.data ?? [];
-                            return VanBanLienQuanExpand(
-                              listVanBanLienQuan: listVBLQ,
-                              viewModel: widget.viewModel,
-                            );
-                          }),
-                      StreamBuilder(
-                          stream: widget.viewModel.streamDSCV,
-                          builder: (context,
-                              AsyncSnapshot<List<DanhSachCongViec>>
-                                  snapshot) {
-                            final List<DanhSachCongViec> listDSCV =
-                                snapshot.data ?? [];
-                            return DanhSachCongViecExpand(
-                              listDSCV: listDSCV,
-                              viewModel: widget.viewModel,
-                            );
-                          }),
-                      StreamBuilder<List<HandingCommentInDocumment>>(
-                        stream: widget.viewModel.commentDocumentStream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return YKienXuLyExpand(
-                              miss: widget.viewModel.info,
-                              viewModel: widget.viewModel,
-                              opTapDowloadFile: (file) {
-                                dowloadFile(file);
-                              },
-                              listComment: snapshot.data ?? [],
-                              onSendComment: (text, listFileId) {
-                                EasyLoading.show();
-                                widget.viewModel
-                                    .createHandingComment(
-                                        text, listFileId, widget.taskId)
-                                    .then((response) {
-                                  EasyLoading.dismiss(animation: true);
-                                  if (response.hasData) {
-                                    CoolAlert.show(
-                                      context: context,
-                                      type: CoolAlertType.success,
-                                      text: 'Cho ý kiến thành công!',
-                                    );
-                                    widget.viewModel
-                                        .getListChoYKien(widget.taskId);
-                                  } else {
-                                    CoolAlert.show(
-                                      context: context,
-                                      type: CoolAlertType.error,
-                                      text: response.error.toString(),
-                                    );
-                                  }
-                                });
-                              },
-                            );
-                          }
-                          return Container();
-                        },
-                      )
-                    ],
-                  );
-                })
+            // StreamBuilder(
+            //     stream: widget.DetailDocument.streamCheckExpand,
+            //     builder: (context, snapshot) {
+            //       if (!snapshot.hasData) {
+            //         return Container();
+            //       }
+            //       return Column(
+            //         children: [
+            //           StreamBuilder(
+            //               stream: widget.viewModel.streamVanBanLQ,
+            //               builder: (context,
+            //                   AsyncSnapshot<List<VanBanLienQuan>> snapshot) {
+            //                 final listVBLQ = snapshot.data ?? [];
+            //                 return VanBanLienQuanExpand(
+            //                   listVanBanLienQuan: listVBLQ,
+            //                   viewModel: widget.viewModel,
+            //                 );
+            //               }),
+            //           StreamBuilder(
+            //               stream: widget.viewModel.streamDSCV,
+            //               builder: (context,
+            //                   AsyncSnapshot<List<DanhSachCongViec>>
+            //                       snapshot) {
+            //                 final List<DanhSachCongViec> listDSCV =
+            //                     snapshot.data ?? [];
+            //                 return DanhSachCongViecExpand(
+            //                   listDSCV: listDSCV,
+            //                   viewModel: widget.viewModel,
+            //                 );
+            //               }),
+            //           StreamBuilder<List<HandingCommentInDocumment>>(
+            //             stream: widget.viewModel.commentDocumentStream,
+            //             builder: (context, snapshot) {
+            //               if (snapshot.hasData) {
+            //                 return YKienXuLyExpand(
+            //                   miss: widget.viewModel.info,
+            //                   viewModel: widget.viewModel,
+            //                   opTapDowloadFile: (file) {
+            //                     dowloadFile(file);
+            //                   },
+            //                   listComment: snapshot.data ?? [],
+            //                   onSendComment: (text, listFileId) {
+            //                     EasyLoading.show();
+            //                     widget.viewModel
+            //                         .createHandingComment(
+            //                             text, listFileId, widget.taskId)
+            //                         .then((response) {
+            //                       EasyLoading.dismiss(animation: true);
+            //                       if (response.hasData) {
+            //                         CoolAlert.show(
+            //                           context: context,
+            //                           type: CoolAlertType.success,
+            //                           text: 'Cho ý kiến thành công!',
+            //                         );
+            //                         widget.viewModel
+            //                             .getListChoYKien(widget.taskId);
+            //                       } else {
+            //                         CoolAlert.show(
+            //                           context: context,
+            //                           type: CoolAlertType.error,
+            //                           text: response.error.toString(),
+            //                         );
+            //                       }
+            //                     });
+            //                   },
+            //                 );
+            //               }
+            //               return Container();
+            //             },
+            //           )
+            //         ],
+            //       );
+            //     })
           ],
         ));
   }

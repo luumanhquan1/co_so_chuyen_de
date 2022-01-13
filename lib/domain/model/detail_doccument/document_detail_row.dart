@@ -1,6 +1,4 @@
-
-
-class QLVBDocumentDetail {
+class DocumentDetailToRow {
   String? soVanBan;
   String? soDen;
   String? soPhu;
@@ -23,10 +21,10 @@ class QLVBDocumentDetail {
 
   // List<AttachedFileInfo> FileDinhKems = [];
 
-  QLVBDocumentDetail();
+  DocumentDetailToRow();
 
-  factory QLVBDocumentDetail.fromJson(Map<String, dynamic> json) {
-    final QLVBDocumentDetail info = QLVBDocumentDetail();
+  factory DocumentDetailToRow.fromJson(Map<String, dynamic> json) {
+    final DocumentDetailToRow info = DocumentDetailToRow();
     // info.VanBanId = json.stringValueOrEmpty('VanBanId');
     // info.IsDonViTrong = json.boolValue('IsDonViTrong');
     // info.TaskId = json.stringValueOrEmpty('TaskId');
@@ -95,44 +93,28 @@ class QLVBDocumentDetail {
 
   List<DocumentDetailRow> toListRow() {
     final List<DocumentDetailRow> list = [
+      DocumentDetailRow('Sổ văn bản', soVanBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', soDen, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', soPhu, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', noiGui, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', loaiVanBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', soKyHieu, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', ngayBH, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', ngayDen, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', doKhan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', ngayHanXL, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', hanXL, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', nguoiKy, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', soBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', soTrang, TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          'Sổ văn bản', soVanBan ?? '', TypeDocumentDetailRow.text),
+          'Sổ văn bản', phuongThucNhan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Sổ văn bản', trichYeu, TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          'Sổ văn bản', soDen ?? '', TypeDocumentDetailRow.text),
+          'Sổ văn bản', vanBanQlPL, TypeDocumentDetailRow.checkbox),
+      DocumentDetailRow('Sổ văn bản', hoiBao, TypeDocumentDetailRow.checkbox),
       DocumentDetailRow(
-          'Sổ văn bản', soPhu ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', noiGui ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', loaiVanBan ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', soKyHieu ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', ngayBH ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', ngayDen ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', doKhan ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', ngayHanXL ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', hanXL ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', nguoiKy ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', soBan ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', soTrang ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', phuongThucNhan ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', trichYeu ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Sổ văn bản', vanBanQlPL ?? '', TypeDocumentDetailRow.checkbox),
-      DocumentDetailRow(
-          'Sổ văn bản', hoiBao ?? '', TypeDocumentDetailRow.checkbox),
-      DocumentDetailRow(
-          'Sổ văn bản', daNhanBanGiay ?? '', TypeDocumentDetailRow.checkbox),
+          'Sổ văn bản', daNhanBanGiay, TypeDocumentDetailRow.checkbox),
 
       // DocumentDetailRow(tr('ctvb_so_den'),
       //     SoDen == null ? '' : SoDen.toString(), TypeDocumentDetailRow.text),
@@ -194,8 +176,7 @@ class DocumentDetailRow {
   DocumentDetailRow(this.title, this.value, this.type);
 
   DocumentDetailRow.DocumentDefault(
-      this.title,
-      this.value,
-      );
-
+    this.title,
+    this.value,
+  );
 }
