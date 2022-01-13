@@ -1,13 +1,17 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/header_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+
+final keyHomeMobile = GlobalKey<_HomeScreenMobileState>();
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({
@@ -15,10 +19,10 @@ class HomeScreenMobile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<HomeScreenMobile> createState() => _MyHomePageState();
+  State<HomeScreenMobile> createState() => _HomeScreenMobileState();
 }
 
-class _MyHomePageState extends State<HomeScreenMobile> {
+class _HomeScreenMobileState extends State<HomeScreenMobile> {
   ScrollController scrollController = ScrollController();
   HomeCubit homeCubit = HomeCubit();
 
@@ -27,6 +31,14 @@ class _MyHomePageState extends State<HomeScreenMobile> {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
+    homeCubit.configWidget();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    homeCubit.dispose();
   }
 
   @override
@@ -40,7 +52,9 @@ class _MyHomePageState extends State<HomeScreenMobile> {
           title: Text(
             S.current.home,
             style: textNormalCustom(
-              fontSize: 18, color: AppTheme.getInstance().backGroundColor(),),
+              fontSize: 18,
+              color: AppTheme.getInstance().backGroundColor(),
+            ),
           ),
           centerTitle: true,
           flexibleSpace: Container(
@@ -66,10 +80,9 @@ class _MyHomePageState extends State<HomeScreenMobile> {
                 children: [
                   const HeaderWidget(),
                   Column(
-                    children: List.generate(
-                        HomeItemType.values.length, (index) {
-                      final type = HomeItemType.values[index];
-                      return type.getItems();
+                    children: List.generate(WidgetType.values.length, (index) {
+                      final type = WidgetType.values[index];
+                      return type.getItemsMobile();
                     }),
                   )
                 ],
@@ -77,31 +90,7 @@ class _MyHomePageState extends State<HomeScreenMobile> {
             ),
           ),
         ),
-
       ),
     );
   }
 }
-
-class HomeProvider extends InheritedWidget {
-  final HomeCubit homeCubit;
-
-  const HomeProvider({
-    Key? key,
-    required this.homeCubit,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static HomeProvider of(BuildContext context) {
-    final HomeProvider? result = context.dependOnInheritedWidgetOfExactType<
-        HomeProvider>();
-    assert(result != null, 'No elenment');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
-  }
-}
-

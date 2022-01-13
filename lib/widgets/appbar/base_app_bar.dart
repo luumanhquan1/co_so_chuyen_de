@@ -11,8 +11,15 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
   final Widget? leadingIcon;
   final String title;
+  final double? elevation;
   final List<Widget>? actions;
-  BaseAppBar( {Key? key,required this.title, this.leadingIcon,this.actions})
+
+  BaseAppBar(
+      {Key? key,
+      required this.title,
+      this.leadingIcon,
+      this.actions,
+      this.elevation})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -24,7 +31,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       backgroundColor: backgroundColorApp,
       bottomOpacity: 0.0,
-      elevation: 0.0,
+      elevation: elevation ?? 0.0,
       automaticallyImplyLeading: false,
       title: Text(
         title,

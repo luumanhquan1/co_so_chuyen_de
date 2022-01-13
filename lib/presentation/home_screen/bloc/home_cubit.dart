@@ -1,19 +1,23 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/domain/model/user_infomation_model.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
+
 import 'package:rxdart/rxdart.dart';
 
-class HomeCubit extends BaseCubit<HomeState>{
+class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(MainStateInitial());
-
-  final BehaviorSubject<HomeItemType?> _showDialogSetting =
-      BehaviorSubject<HomeItemType?>();
+  final BehaviorSubject<List<WidgetModel>> _getConfigWidget =
+      BehaviorSubject<List<WidgetModel>>();
+  final BehaviorSubject<WidgetType?> _showDialogSetting =
+      BehaviorSubject<WidgetType?>();
   final BehaviorSubject<List<TinhHuongKhanCapModel>> _tinhHuongKhanCap =
       BehaviorSubject<List<TinhHuongKhanCapModel>>();
   final BehaviorSubject<UserInformationModel> _userInformation =
@@ -28,15 +32,20 @@ class HomeCubit extends BaseCubit<HomeState>{
       BehaviorSubject<List<PressNetWorkModel>>();
   final BehaviorSubject<List<TagModel>> _getTag =
       BehaviorSubject<List<TagModel>>();
-  final BehaviorSubject<bool> _showAddTag=BehaviorSubject<bool>();
-
+  final BehaviorSubject<bool> _showAddTag = BehaviorSubject<bool>();
+  final BehaviorSubject<List<DashboardSchedule>> _getTongHopNhiemVu =
+      BehaviorSubject<List<DashboardSchedule>>();
+  final BehaviorSubject<List<CalendarMeetingModel>> _getNhiemVu =
+      BehaviorSubject<List<CalendarMeetingModel>>();
+  final  BehaviorSubject<UserInformationModel> _getUserInformation =
+  BehaviorSubject<UserInformationModel>();
 
 
   void _getTinhHuongKhanCap() {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
   }
 
-  void showDialog(HomeItemType? type) {
+  void showDialog(WidgetType? type) {
     _showDialogSetting.add(type);
   }
 
@@ -47,9 +56,12 @@ class HomeCubit extends BaseCubit<HomeState>{
   }
 
   void loadApi() {
+    getUserInFor();
     _getTinhHuongKhanCap();
   }
-
+void getUserInFor(){
+    _getUserInformation.sink.add(FakeData.userInfo);
+}
   void dispose() {
     _showDialogSetting.close();
     _tinhHuongKhanCap.close();
@@ -60,19 +72,38 @@ class HomeCubit extends BaseCubit<HomeState>{
     _getPressNetWork.close();
     _userInformation.close();
     _showAddTag.close();
+    _getTongHopNhiemVu.close();
+    _getNhiemVu.close();
+    _getUserInformation.close();
   }
-
+Stream<UserInformationModel> get getUserInformation => _getUserInformation.stream;
+  Stream<List<WidgetModel>> get getConfigWidget => _getConfigWidget.stream;
+  Stream<List<CalendarMeetingModel>> get getNhiemVu => _getNhiemVu.stream;
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
       _getDocumentVBDen.stream;
   Stream<List<TagModel>> get getTag => _getTag.stream;
+  Stream<List<DashboardSchedule>> get getTonghopNhiemVu =>
+      _getTongHopNhiemVu.stream;
   Stream<List<PressNetWorkModel>> get getPressNetWork =>
       _getPressNetWork.stream;
   Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
   Stream<UserInformationModel> get userInformation => _userInformation;
   Stream<List<TinhHuongKhanCapModel>> get tinhHuongKhanCap =>
       _tinhHuongKhanCap.stream;
-  Stream<HomeItemType?> get showDialogSetting => _showDialogSetting.stream;
+  Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
   Stream<TodoListModel> get getTodoList => _getTodoList.stream;
+}
+
+/// Get Config Widget
+extension GetConfigWidget on HomeCubit {
+  Future<void> configWidget() async {
+    await Future.delayed(Duration(seconds: 10));
+    _getConfigWidget.sink.add(FakeData.listUseWidget);
+  }
+
+  void orderWidget(List<WidgetModel> listWidgetConfig) {
+    _getConfigWidget.sink.add(listWidgetConfig);
+  }
 }
 
 ///Báo chí mạng xã hội
@@ -93,9 +124,8 @@ extension BaoChiMangXaHoi on HomeCubit {
     _getTag.value[newSelect].select = true;
     _getTag.sink.add(_getTag.value);
   }
-  void showAddTag(){
 
-  }
+  void showAddTag() {}
 }
 
 ///Danh sách công việc
@@ -193,5 +223,13 @@ extension DanhSachCongViec on HomeCubit {
           .toList(),
     );
     _getTodoList.sink.add(result);
+  }
+}
+
+/// Tổng hợp nhiệm vụ
+extension TongHopNhiemVu on HomeCubit {
+  void getDataTongHopNhiemVu() {
+    _getTongHopNhiemVu.sink.add(FakeData.listCalendarWork);
+    _getNhiemVu.sink.add(FakeData.listNhiemView);
   }
 }
