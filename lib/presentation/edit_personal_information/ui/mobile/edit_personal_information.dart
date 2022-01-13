@@ -1,8 +1,18 @@
-import 'package:ccvc_mobile/domain/model/edit_personal_information/edit_personal_information_model.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/input_info.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/avatar.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_multi_items.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
+import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
+import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
+import 'package:ccvc_mobile/widgets/selectdate/custom_selectdate.dart';
+import 'package:ccvc_mobile/widgets/textformfield/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 
 class EditPersonInformationScreen extends StatefulWidget {
@@ -43,8 +53,8 @@ class _EditPersonalInformationScreen
     nameController.text = widget.managerPersonalInformationModel.hoTen ?? '';
     maCanBoController.text =
         widget.managerPersonalInformationModel.maCanBo ?? '';
-    // thuTuController.text =
-    //     (widget.managerPersonalInformationModel.thuTu ?? 0) as String;
+    thuTuController.text =
+        widget.managerPersonalInformationModel.thuTu.toString();
     cmndController.text = widget.managerPersonalInformationModel.cmtnd ?? '';
     emailController.text = widget.managerPersonalInformationModel.email ?? '';
     sdtCoquanController.text =
@@ -65,57 +75,255 @@ class _EditPersonalInformationScreen
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> user =
+        cubit.managerPersonalInformationModel.getInfoToMap();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('lucc'),
-      ),
+      appBar: AppBarDefaultBack(S.current.chinh_sua_thong_tin),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            InputInfo(
-              managerPersonalInformationModel:
-                  widget.managerPersonalInformationModel,
-              formKey: formKey,
-              formKeyCmnd: formKeyCmnd,
-              formKeyEmail: formKeyEmail,
-              formKeyMa: formKeyMa,
-              formKeyName: formKeyName,
-              formKeySDT: formKeySDT,
-              formKeySdtCoQuan: formKeySdtCoQuan,
-              formKeyThuTu: formKeyThuTu,
-              cubit: cubit,
-              nameController: nameController,
-              emailController: emailController,
-              sdtController: sdtController,
-              cmndController: cmndController,
-              diaChiLienHeController: diaChiLienHeController,
-              maCanBoController: maCanBoController,
-              sdtCoquanController: sdtCoquanController,
-              thuTuController: thuTuController,
-            ),
-            GestureDetector(
-              onTap: () {
-                FilePicker.platform.pickFiles(
-                  type: FileType.image,
-                );
-                // if (formKey.currentState!.validate()) {
-                //   print("đún");
-                // } else {
-                //   print("đún");
-                // }
-              },
-              child: Container(
-                height: 50,
-                child: Text("tap"),
+            Form(
+              key: formKeyName,
+              child: InputInfoUserWidget(
+                isObligatory: true,
+                title: user.keys.elementAt(1),
+                child: TextFormFieldWidget(
+                  controller: nameController,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeyName.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Không được để trống';
+                    }
+                    return null;
+                  },
+                ),
               ),
-            )
+            ),
+            Form(
+              key: formKeyMa,
+              child: InputInfoUserWidget(
+                isObligatory: true,
+                title: user.keys.elementAt(2),
+                child: TextFormFieldWidget(
+                  controller: maCanBoController,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeyMa.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Không được để trống';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+            Form(
+              key: formKeyThuTu,
+              child: InputInfoUserWidget(
+                title: user.keys.elementAt(3),
+                child: TextFormFieldWidget(
+                  controller: thuTuController,
+                  isEnabled: true,
+                ),
+              ),
+            ),
+            InputInfoUserWidget(
+              isObligatory: true,
+              title: user.keys.elementAt(4),
+              child: CustomSelectDate(
+                value: cubit.managerPersonalInformationModel.ngaySinh,
+                onSelectDate: (dateTime) {
+                  cubit.selectBirthdayEvent(dateTime.toString());
+                },
+              ),
+            ),
+            Form(
+              key: formKeyCmnd,
+              child: InputInfoUserWidget(
+                title: user.keys.elementAt(5),
+                child: TextFormFieldWidget(
+                  controller: cmndController,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeyCmnd.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Không được để trống';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+            InputInfoUserWidget(
+                isObligatory: true,
+                title: user.keys.elementAt(6),
+                child: CustomDropDown(
+                  value: cubit.managerPersonalInformationModel.gioiTinh ?? false
+                      ? 'Nam'
+                      : 'Nu',
+                  items: ['Nam', 'Nu'],
+                  onSelectItem: (value) {
+                    if (value == 0) {
+                      cubit.selectGTEvent(true);
+                    } else {
+                      cubit.selectGTEvent(false);
+                    }
+                  },
+                )),
+            Form(
+              key: formKeyEmail,
+              child: InputInfoUserWidget(
+                  title: user.keys.elementAt(7),
+                  child: TextFormFieldWidget(
+                    controller: emailController,
+                    initialValue: null,
+                    isEnabled: true,
+                    onChange: (value) {
+                      formKeyEmail.currentState!.validate();
+                    },
+                    validator: (value) {
+                      if (value!.checkEmail() == false) {
+                        return 'emailEx';
+                      }
+                      return null;
+                    },
+                  )),
+            ),
+            Form(
+              key: formKeySdtCoQuan,
+              child: InputInfoUserWidget(
+                  title: user.keys.elementAt(8),
+                  child: TextFormFieldWidget(
+                    controller: sdtCoquanController,
+                    textInputType: TextInputType.number,
+                    isEnabled: true,
+                    onChange: (value) {
+                      formKeySdtCoQuan.currentState!.validate();
+                    },
+                    validator: (value) {
+                      if (value!.checkSdt() == false) {
+                        return 'sdtEx';
+                      }
+                      return null;
+                    },
+                  )),
+            ),
+            //
+            Form(
+              key: formKeySDT,
+              child: InputInfoUserWidget(
+                title: user.keys.elementAt(9),
+                child: TextFormFieldWidget(
+                  controller: sdtController,
+                  textInputType: TextInputType.number,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeySDT.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.checkSdt() == false) {
+                      return 'sdtEx';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+            Form(
+              child: InputInfoUserWidget(
+                  title: user.keys.elementAt(10),
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 16, right: 24),
+                    child: CustomSelectMultiItems(
+                      title: 'Chọn nhóm',
+                      context: context,
+                      items: ["dd", 'ddd', 'dddddd'],
+                      onChange: (indexes) {
+                        //  widget._viewModel.selectGroup(indexes);
+                      },
+                      onRemoveItem: (index) {
+                        print(index);
+                      },
+                    ),
+                  )),
+            ),
+            Form(
+              child: InputInfoUserWidget(
+                  title: user.keys.elementAt(11),
+                  child: CustomDropDown(
+                    value:
+                        cubit.managerPersonalInformationModel.gioiTinh ?? false
+                            ? 'Nam'
+                            : 'Nu',
+                    items: ['Nam', 'Nu'],
+                    onSelectItem: (value) {
+                      if (value == 0) {
+                        cubit.selectGTEvent(true);
+                      } else {
+                        cubit.selectGTEvent(false);
+                      }
+                    },
+                  )),
+            ),
+            Form(
+              child: InputInfoUserWidget(
+                  title: user.keys.elementAt(12),
+                  child: CustomDropDown(
+                    value:
+                        cubit.managerPersonalInformationModel.gioiTinh ?? false
+                            ? 'Nam'
+                            : 'Nu',
+                    items: ['Nam', 'Nu'],
+                    onSelectItem: (value) {
+                      if (value == 0) {
+                        cubit.selectGTEvent(true);
+                      } else {
+                        cubit.selectGTEvent(false);
+                      }
+                    },
+                  )),
+            ),
+            Form(
+              key: formKey,
+              child: InputInfoUserWidget(
+                title: user.keys.elementAt(13),
+                child: TextFormFieldWidget(
+                  controller: diaChiLienHeController,
+                  isEnabled: true,
+                ),
+              ),
+            ),
+            spaceH20,
+            const WidgetDonVibMobile(),
+            spaceH20,
+            const WidgetUngDungMobile(),
+            spaceH20,
+            AvatarAndSignature(
+              editPersonalInformationCubit: EditPersonalInformationCubit(),
+            ),
+            spaceH20,
+            ButtonCustomBottom(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  print("dung");
+                } else {
+                  print("sai");
+                }
+              },
+              title: S.current.thay_doi,
+              isColorBlue: true,
+            ),
+            spaceH32,
           ],
         ),
       ),

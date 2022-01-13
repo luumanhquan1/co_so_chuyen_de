@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +33,10 @@ class TextFormFieldWidget extends StatelessWidget {
         initialValue: initialValue,
         keyboardType: textInputType,
         maxLines: maxLine,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText2
-            ?.copyWith(fontWeight: FontWeight.w400),
+        style: tokenDetailAmount(
+          fontSize: 12.0.textScale(),
+          color: titleColor,
+        ),
         enabled: isEnabled,
         decoration: InputDecoration(
             contentPadding: maxLine == 1

@@ -2,30 +2,35 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_backgroud_widget.dart';
+
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PressSocialNetWork extends StatefulWidget {
-  final HomeItemType homeItemType;
-  const PressSocialNetWork({Key? key, required this.homeItemType})
+class PressSocialNetWorkTabletWidget extends StatefulWidget {
+  final WidgetType homeItemType;
+  const PressSocialNetWorkTabletWidget({Key? key, required this.homeItemType})
       : super(key: key);
 
   @override
-  State<PressSocialNetWork> createState() => _PressSocialNetWorkState();
+  State<PressSocialNetWorkTabletWidget> createState() =>
+      _PressSocialNetWorkState();
 }
 
-class _PressSocialNetWorkState extends State<PressSocialNetWork> {
+class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
   late HomeCubit cubit;
   @override
   void didChangeDependencies() {
@@ -37,8 +42,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
 
   @override
   Widget build(BuildContext context) {
-    return ContainerBackgroundWidget(
+    return ContainerBackgroundTabletWidget(
       title: S.current.press_socialNetWord,
+      maxHeight: 415,
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
@@ -75,47 +81,51 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
         ],
       ),
       padding: EdgeInsets.zero,
-      child: Column(
-        children: [
-          tagWidget(cubit),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: StreamBuilder<List<PressNetWorkModel>>(
-              stream: cubit.getPressNetWork,
-              builder: (context, snapshot) {
-                final data = snapshot.data ?? <PressNetWorkModel>[];
-                if (data.isNotEmpty) {
-                  return Column(
-                    children: List.generate(data.length, (index) {
-                      final result = data[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => WebViewScreen(
-                                  title: '',
-                                  url: result.url,
-                                ),
-                              ),
-                            );
-                          },
-                          child: baoChiWidget(result),
-                        ),
-                      );
-                    }),
-                  );
-                }
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: NodataWidget(),
-                );
-              },
+      child: Flexible(
+        child: Column(
+          children: [
+            tagWidget(cubit),
+            const SizedBox(
+              height: 16,
             ),
-          )
-        ],
+            Flexible(
+              child: StreamBuilder<List<PressNetWorkModel>>(
+                stream: cubit.getPressNetWork,
+                builder: (context, snapshot) {
+                  final data = snapshot.data ?? <PressNetWorkModel>[];
+                  if (data.isNotEmpty) {
+                    return ScrollBarWidget(
+                      children: List.generate(data.length, (index) {
+                        final result = data[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => WebViewScreen(
+                                    title: '',
+                                    url: result.url,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: baoChiWidget(result),
+                          ),
+                        );
+                      }),
+                    );
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: NodataWidget(),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -141,7 +151,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
         children: [
           Container(
             width: 110,
-            height: 90,
+            height: 106,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
@@ -167,7 +177,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                   data.title,
                   style: textNormal(
                     titleColor,
-                    14,
+                    14.0.textScale(space: 4),
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -181,11 +191,15 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                     const SizedBox(
                       width: 13,
                     ),
-                    Text(
-                      DateTime.parse(data.publishedTime).formatDdMMYYYY,
-                      style: textNormal(
-                        infoColor,
-                        14,
+                    Expanded(
+                      child: FittedBox(
+                        child: Text(
+                          DateTime.parse(data.publishedTime).formatDdMMYYYY,
+                          style: textNormal(
+                            infoColor,
+                            14.0.textScale(),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -195,11 +209,13 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 29),
-                  child: Text(
-                    data.domain,
-                    style: textNormal(
-                      linkColor,
-                      14,
+                  child: FittedBox(
+                    child: Text(
+                      data.domain,
+                      style: textNormal(
+                        linkColor,
+                        14.0.textScale(),
+                      ),
                     ),
                   ),
                 )
@@ -244,7 +260,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                       result.select
                           ? AppTheme.getInstance().dfBtnTxtColor()
                           : linkColor,
-                      12,
+                      12.0.textScale(),
                     ),
                   ),
                 ),

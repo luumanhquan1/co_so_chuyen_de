@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 class ClockWidget extends StatefulWidget {
   const ClockWidget({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _ClockWidgetState extends State<ClockWidget> {
     return  Text(
       '$hour:$minute',
       style: textNormalCustom(
-          fontSize: 32,
+          fontSize: 32.0.textScale(space: 4),
           fontWeight: FontWeight.w500,
           color: AppTheme.getInstance().titleColor(),),
     );

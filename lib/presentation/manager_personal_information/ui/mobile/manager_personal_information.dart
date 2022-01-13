@@ -32,11 +32,14 @@ class _ManagerPersonalInformationState
       backgroundColor: bgColor,
       appBar: BaseAppBar(
         title: S.current.manager_information,
-        leadingIcon: IconButton(
-          icon: SvgPicture.asset(ImageAssets.icVector),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        leadingIcon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            icon: SvgPicture.asset(ImageAssets.icVector),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         actions: [
           IconButton(
@@ -51,7 +54,10 @@ class _ManagerPersonalInformationState
                 ),
               );
             },
-            icon: SvgPicture.asset(ImageAssets.icManager),
+            icon: Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: SvgPicture.asset(ImageAssets.icManager),
+            ),
           ),
           spaceW10
         ],

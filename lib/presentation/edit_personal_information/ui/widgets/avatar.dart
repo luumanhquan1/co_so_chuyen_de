@@ -1,53 +1,63 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AvatarAndSignature extends StatelessWidget {
   final EditPersonalInformationCubit editPersonalInformationCubit;
-  final ManagerPersonalInformationModel managerPersonalInformationModel;
 
-  const AvatarAndSignature(
-      {Key? key,
-      required this.editPersonalInformationCubit,
-      required this.managerPersonalInformationModel})
-      : super(key: key);
+  const AvatarAndSignature({
+    Key? key,
+    required this.editPersonalInformationCubit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: treeWidget(
-            context,
-            'doiAvatar',
-            () async {
-              await upLoadImg(context, 1);
-            },
-            editPersonalInformationCubit
-                    .managerPersonalInformationModel.anhDaiDienFilePath ??
-                '',
-            true,
-          ),
+        treeWidget(
+          context,
+          S.current.anh_dai_dien,
+          () async {
+            await upLoadImg(context, 1);
+          },
+          editPersonalInformationCubit
+                  .managerPersonalInformationModel.anhDaiDienFilePath ??
+              '',
+          true,
         ),
-        Expanded(
-          child: treeWidget(
-            context,
-            'doiChuKy',
-            () async {
-              await upLoadImg(context, 2);
-            },
-            editPersonalInformationCubit
-                    .managerPersonalInformationModel.anhChuKyFilePath ??
-                '',
-            false,
-          ),
+        treeWidget(
+          context,
+          S.current.anh_chu_ky,
+          () async {
+            await upLoadImg(context, 2);
+          },
+          editPersonalInformationCubit
+                  .managerPersonalInformationModel.anhChuKyFilePath ??
+              '',
+          true,
+        ),
+        treeWidget(
+          context,
+          S.current.anh_ky_nhay,
+          () async {
+            await upLoadImg(context, 3);
+          },
+          editPersonalInformationCubit
+                  .managerPersonalInformationModel.anhChuKyNhayFilePath ??
+              '',
+          true,
         )
       ],
     );
@@ -75,39 +85,73 @@ class AvatarAndSignature extends StatelessWidget {
             height: 100,
             width: 100,
             decoration: BoxDecoration(
+              border: Border.all(color: colorLineSearch),
               shape: BoxShape.circle,
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 5,
+                  color: Colors.black.withOpacity(0.1),
                   blurRadius: 7,
-                  offset: const Offset(1, 5), // changes position of shadow
+                  // offset: const Offset(0, 1), // changes position of shadow
                 ),
               ],
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: CachedNetworkImage(
-                imageUrl: Strings.urlChuKyDefault,
-                fit: BoxFit.fill,
-                errorWidget: (context, url, error) {
-                  if (isAvatarUser) {
-                    return SvgPicture.asset('assets/images/user.svg');
-                  }
-                  // return Image.network(QLVBConstant.urlChuKyDefault);
-                  return CachedNetworkImage(
-                    imageUrl: Strings.urlChuKyDefault,
-                    errorWidget: (context, url, error) => const SizedBox(),
-                  );
-                },
-              ),
+              child:
+                  // CachedNetworkImage(
+                  //   imageUrl: Strings.urlChuKyDefault,
+                  //   fit: BoxFit.fill,
+                  //   errorWidget: (context, url, error) {
+                  //     if (isAvatarUser) {
+                  //       return Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: SvgPicture.asset(ImageAssets.icImage),
+                  //       );
+                  //     }
+                  //     // return Image.network(QLVBConstant.urlChuKyDefault);
+                  //     return CachedNetworkImage(
+                  //       imageUrl: Strings.urlChuKyDefault,
+                  //       errorWidget: (context, url, error) => Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: SvgPicture.asset(ImageAssets.icImage),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  isAvatarUser
+                      ? Padding(
+                          padding: const EdgeInsets.all(34.0),
+                          child: SvgPicture.asset(ImageAssets.icImage),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl:
+                              'https://vcdn-vnexpress.vnecdn.net/2021/11/20/Co-Moon-Nguyen-6518-1637375803.jpg',
+                          imageBuilder: (context, imageProvider) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(2.0),
+                                ),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: imageProvider,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
             ),
           ),
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        spaceH16,
+        Text(
+          text,
+          style: tokenDetailAmount(
+            fontSize: 12.0.textScale(),
+            color: infoColor,
+          ),
+        )
       ],
     );
   }

@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,18 +15,18 @@ class ContainerBackgroundWidget extends StatefulWidget {
   final Function()? onTapIcon;
   final double spacingTitle;
   final EdgeInsetsGeometry paddingChild;
-  const ContainerBackgroundWidget(
-      {Key? key,
-      required this.child,
-      required this.title,
-      this.urlIcon = ImageAssets.icMore,
-      this.leadingIcon,
-      this.dialogSelect,
-      this.padding,
-      this.onTapIcon,
-      this.spacingTitle = 20,
-      this.paddingChild = const EdgeInsets.symmetric(vertical: 20)})
-      : super(key: key);
+  const ContainerBackgroundWidget({
+    Key? key,
+    required this.child,
+    required this.title,
+    this.urlIcon = ImageAssets.icMore,
+    this.leadingIcon,
+    this.dialogSelect,
+    this.padding,
+    this.onTapIcon,
+    this.spacingTitle = 20,
+    this.paddingChild = const EdgeInsets.symmetric(vertical: 20),
+  }) : super(key: key);
 
   @override
   _ContainerBackgroudWidgetState createState() =>

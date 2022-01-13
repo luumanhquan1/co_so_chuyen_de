@@ -63,6 +63,8 @@ extension DocumentStatusEx on DocumentStatus {
         return S.current.cho_xac_nhan;
       case DocumentStatus.THAM_GIA:
         return S.current.tham_gia;
+      case DocumentStatus.CHO_PHAN_XU_LY:
+        return S.current.cho_phan_xu_ly;
     }
   }
 
@@ -80,6 +82,8 @@ extension DocumentStatusEx on DocumentStatus {
         return itemWidgetNotUse;
       case DocumentStatus.THAM_GIA:
         return itemWidgetUsing;
+      case DocumentStatus.CHO_PHAN_XU_LY:
+        return choXuLyColor;
     }
   }
 }

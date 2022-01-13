@@ -1,4 +1,7 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/dropdown/drop_down_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -48,12 +51,10 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             widget.value ?? '',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14),
+                            style: tokenDetailAmount(
+                              fontSize: 12.0.textScale(),
+                              color: titleColor,
+                            ),
                           ),
                         )
                       else
@@ -82,13 +83,10 @@ class _CustomDropDownState extends State<CustomDropDown> {
                                     value: value,
                                     child: Text(
                                       value,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 14,
-                                          ),
+                                      style: tokenDetailAmount(
+                                        fontSize: 12.0.textScale(),
+                                        color: titleColor,
+                                      ),
                                     ),
                                   );
                                 }).toList()
@@ -97,13 +95,10 @@ class _CustomDropDownState extends State<CustomDropDown> {
                                       value: 'Danh sách rỗng',
                                       child: Text(
                                         'Danh sách rỗng',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 14,
-                                            ),
+                                        style: tokenDetailAmount(
+                                          fontSize: 12.0.textScale(),
+                                          color: titleColor,
+                                        ),
                                       ))
                                 ],
                         ),

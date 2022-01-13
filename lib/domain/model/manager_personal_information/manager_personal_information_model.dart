@@ -1,6 +1,19 @@
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 
+enum Status { OFFLINE, ONLINME }
+
+extension CheckStatus on Status {
+  String getText() {
+    switch (this) {
+      case Status.OFFLINE:
+        return 'Hoạt động';
+      case Status.ONLINME:
+        return 'Không hoạt động';
+    }
+  }
+}
+
 class ManagerPersonalInformationModel {
 //   String? hoten;
 //   String? ma;
@@ -57,8 +70,9 @@ class ManagerPersonalInformationModel {
   String? huyen;
   String? xa;
   bool? isDefault;
-  String? trangThai;
+  int? trangThai;
   String? ungDung;
+  Status status = Status.OFFLINE;
 
   ManagerPersonalInformationModel({
     this.id,
@@ -89,7 +103,13 @@ class ManagerPersonalInformationModel {
     this.isDefault,
     this.trangThai,
     this.ungDung,
-  }); // List<UserAccounts>? userAccounts;
+  }) {
+    if (trangThai == 1) {
+      status = Status.OFFLINE;
+    } else {
+      status = Status.ONLINME;
+    }
+  } // List<UserAccounts>? userAccounts;
 
   static ManagerPersonalInformationModel fakeData =
       ManagerPersonalInformationModel(
@@ -119,7 +139,7 @@ class ManagerPersonalInformationModel {
     huyen: 'a',
     xa: 'a',
     isDefault: false,
-    trangThai: 'Hoạt động',
+    trangThai: 1,
     ungDung: 'a',
   );
 
@@ -189,26 +209,26 @@ class ManagerPersonalInformationModel {
       ManagerPersonalInformationRow('STT', thuTu, TypeRow.text),
       ManagerPersonalInformationRow('Đơn vị', donVi, TypeRow.text),
       ManagerPersonalInformationRow('Chức vụ', chucVu, TypeRow.text),
-      ManagerPersonalInformationRow('Trạng Thái', trangThai, TypeRow.status),
       ManagerPersonalInformationRow('Mặc định', isDefault, TypeRow.checkbox),
     ];
-    // if (trangThai == 1) {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       'Trạng Thái',
-    //       'Hoạt động',
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // } else {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       'Trạng Thái',
-    //       'Không hoạt động',
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // }
+    if (trangThai == 1) {
+      list.insert(
+        3,
+        ManagerPersonalInformationRow(
+          'Trạng Thái',
+          'Hoạt động',
+          TypeRow.status,
+        ),
+      );
+    } else {
+      list.add(
+        ManagerPersonalInformationRow(
+          'Trạng Thái',
+          'Không hoạt động',
+          TypeRow.status,
+        ),
+      );
+    }
     return list;
   }
 
@@ -217,25 +237,24 @@ class ManagerPersonalInformationModel {
       ManagerPersonalInformationRow('STT', thuTu, TypeRow.text),
       ManagerPersonalInformationRow('Tên đăng nhập', hoTen, TypeRow.text),
       ManagerPersonalInformationRow('Ứng dụng', ungDung, TypeRow.list),
-      ManagerPersonalInformationRow('Trạng Thái', trangThai, TypeRow.status),
     ];
-    // if (trangThai == 1) {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       'Trạng Thái',
-    //       'Hoạt động',
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // } else {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       'Trạng Thái',
-    //       'Không hoạt động',
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // }
+    if (trangThai == 1) {
+      list.add(
+        ManagerPersonalInformationRow(
+          'Trạng Thái',
+          'Hoạt động',
+          TypeRow.status,
+        ),
+      );
+    } else {
+      list.add(
+        ManagerPersonalInformationRow(
+          'Trạng Thái',
+          'Không hoạt động',
+          TypeRow.status,
+        ),
+      );
+    }
     return list;
   }
 
@@ -244,20 +263,16 @@ class ManagerPersonalInformationModel {
       'id': id ?? '',
       'Họ và Tên': hoTen ?? '',
       'Mã cán bộ': maCanBo ?? '',
-      'Thứ tự': thuTu ?? 0,
-      'Ngày sinh':
-          DateTime.parse(ngaySinh ?? '').toStringWithFormat.replaceAll(' ', ''),
+      'Thứ tự': thuTu.toString(),
+      'Ngày sinh': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
       'Số CMND': cmtnd ?? '',
       'Giới tính': gioiTinh ?? false ? 'Nam' : 'Nu',
       'Email': email ?? '',
       'Số điện thoại cơ quan': phoneCoQuan ?? '',
       'Số điện thoại': phoneDiDong ?? '',
-      'Tỉnh/Thành phố':
-          DateTime.parse(ngaySinh ?? '').toStringWithFormat.replaceAll(' ', ''),
-      'Quận/Huyện':
-          DateTime.parse(ngaySinh ?? '').toStringWithFormat.replaceAll(' ', ''),
-      'Phường/Xã':
-          DateTime.parse(ngaySinh ?? '').toStringWithFormat.replaceAll(' ', ''),
+      'Tỉnh/Thành phố': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      'Quận/Huyện': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      'Phường/Xã': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
       'Địa chỉ liên hệ': diaChi ?? '',
     };
   }

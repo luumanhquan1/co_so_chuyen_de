@@ -5,7 +5,11 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
-import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/widget_mange_screen.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/tablet/widget_mange_screen_tablet.dart';
+
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +25,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEEF3FF),
+      backgroundColor: homeColor,
       appBar: BaseAppBar(
         title: S.current.menu,
       ),
@@ -40,9 +44,10 @@ class _MenuScreenState extends State<MenuScreen> {
                       final type = listFeature[index];
                       return GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => type.getScreen(),
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => type.getScreen(),
                             ),
                           );
                         },
@@ -55,9 +60,25 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      S.current.quan_ly_widget,
-                      style: textNormalCustom(color: buttonColor, fontSize: 14),
+                    child: TextButton(
+                      child: Text(
+                        S.current.quan_ly_widget,
+                        style: textNormalCustom(
+                          color: buttonColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => screenDevice(
+                              mobileScreen: const WidgetManageScreen(),
+                              tabletScreen: const WidgetManageScreenTablet(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -76,9 +97,10 @@ class _MenuScreenState extends State<MenuScreen> {
                       final type = listFeatureAccount[index];
                       return GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => type.getScreen(),
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => type.getScreen(),
                             ),
                           );
                         },

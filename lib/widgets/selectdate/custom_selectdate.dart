@@ -1,7 +1,8 @@
-import 'package:ccvc_mobile/config/resources/images.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 class CustomSelectDate extends StatefulWidget {
@@ -102,27 +103,20 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                           child: widget.value == null
                               ? Text(
                                   widget.hintText ?? 'Vui lòng chọn',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline4!
-                                      .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
-                                          color: const Color(0xffA2AEBD)),
+                                  style: tokenDetailAmount(
+                                    fontSize: 12.0.textScale(),
+                                    color: titleColor,
+                                  ),
                                 )
                               : Text(
                                   widget.isObligatory
                                       ? '${widget.value}'
                                       : DateTime.parse(dateSelect)
-                                          .toStringWithFormat
-                                          .replaceAll(' ', ''),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline4!
-                                      .copyWith(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 14,
-                                      ),
+                                          .toStringWithListFormat,
+                                  style: tokenDetailAmount(
+                                    fontSize: 12.0.textScale(),
+                                    color: titleColor,
+                                  ),
                                 ),
                         )
                       ],

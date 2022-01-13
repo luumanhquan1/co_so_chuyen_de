@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class InputInfoUserWidget extends StatelessWidget {
@@ -25,15 +28,18 @@ class InputInfoUserWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    ?.copyWith(fontWeight: FontWeight.w400),
+                style: tokenDetailAmount(
+                  fontSize: 12.0.textScale(),
+                  color: colorNumberCellQLVB,
+                ),
               ),
-              if (isObligatory) const Text(
-                      ' *',
-                      style: TextStyle(color: Colors.red),
-                    ) else const SizedBox()
+              if (isObligatory)
+                const Text(
+                  ' *',
+                  style: TextStyle(color: Colors.red),
+                )
+              else
+                const SizedBox()
             ],
           ),
           const SizedBox(

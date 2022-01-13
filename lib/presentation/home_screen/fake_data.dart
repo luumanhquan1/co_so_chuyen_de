@@ -1,11 +1,17 @@
+import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+import 'package:ccvc_mobile/domain/model/home/date_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
+import 'package:ccvc_mobile/domain/model/home/event_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/press_social_net_word_widget.dart';
+import 'package:ccvc_mobile/domain/model/user_infomation_model.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 class FakeData {
   static final tinhKhanCap = <TinhHuongKhanCapModel>[
@@ -209,6 +215,24 @@ class FakeData {
         time: '5/11/2021 8:00 - 9:00 PM',
         title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
         address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.CHO_XAC_NHAN,
+        nguoiChuTri: 'Phan Hà Minh'),
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.CHO_XAC_NHAN,
+        nguoiChuTri: 'Phan Hà Minh'),
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
+        codeStatus: DocumentStatus.CHO_XAC_NHAN,
+        nguoiChuTri: 'Phan Hà Minh'),
+    CalendarMeetingModel(
+        time: '5/11/2021 8:00 - 9:00 PM',
+        title: 'Hội nghị lãnh đạo về việc cải cách chương trình đào tạo',
+        address: 'UBND Tỉnh Đồng Nai',
         codeStatus: DocumentStatus.THAM_GIA,
         nguoiChuTri: 'Phan Hà Minh'),
     CalendarMeetingModel(
@@ -217,5 +241,219 @@ class FakeData {
         address: 'UBND Tỉnh Đồng Nai',
         codeStatus: DocumentStatus.THAM_GIA,
         nguoiChuTri: 'Phan Hà Minh'),
+  ];
+  static final List<String> img = [
+    ImageAssets.icTongSoLichLamviec,
+    ImageAssets.icLichCongTacTrongNuoc,
+    ImageAssets.icLichLamViec,
+    ImageAssets.icLichCongTacNuocNgoai,
+    ImageAssets.icLichTiepDan,
+    ImageAssets.icAdminTao,
+  ];
+  static final listCalendarWork = [
+    DashboardSchedule(1, "22ssads2", "Tổng số lịch làm việc"),
+    DashboardSchedule(2, "2dasdsd22", "Lịch công tác trong nước"),
+    DashboardSchedule(3, "2dasda22", "Lịch làm việc"),
+    DashboardSchedule(4, "2asdas22", "Lịch công tác nước ngoài"),
+    DashboardSchedule(5, "sdasdasd", "Lịch tiếp dân"),
+    DashboardSchedule(5, "sdasdasd", "Admin tạo"),
+  ];
+  static final listNhiemView = [
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+    CalendarMeetingModel(
+        title:
+            'Rà soát, hoàn chỉnh kế hoạch đầu tư công qweuqioweuiqowueiou ioeu iouqwioe qiow uoiq',
+        loaiNhiemVu: 'Nhiệm vụ CP/VPCP',
+        hanXuLy: '13/10/2021',
+        codeStatus: DocumentStatus.CHO_PHAN_XU_LY),
+  ];
+  static final List<WidgetModel> listUseWidget = [
+    WidgetModel(
+        name: 'Tình hình xử lý văn bản',
+        id: '',
+        component: 'TinhHinhXuLyVanBan'),
+    WidgetModel(name: 'Văn bản', id: '', component: 'VanBanWidGet'),
+    WidgetModel(name: 'Tổng hợp nhiệm vụ', id: '', component: 'TongHopNhiemVu'),
+    WidgetModel(
+        name: 'Ý kiến người dân', id: '', component: 'YKienNguoiDanTongHop'),
+    WidgetModel(name: 'Lịch làm việc', id: '', component: 'BoxLichLamViec'),
+    WidgetModel(name: 'Lịch họp', id: '', component: 'BoxLichHop'),
+    WidgetModel(name: 'Báo chị mạng xã hội', id: '', component: 'BaoChi'),
+    WidgetModel(name: 'Danh sách công việc', id: '', component: 'BoxTodoList'),
+    WidgetModel(
+        name: 'Sự kiện trong ngày', id: '', component: 'SuKienTrongNgay'),
+    WidgetModel(name: 'Sinh nhật', id: '', component: 'SinhNhat'),
+  ];
+  static DateModel dateModel = DateModel(lunarDateArray: [
+    "Ngày 11 tháng Chạp năm Tân Sửu",
+    "Tháng Tân Sửu",
+    "Ngày Bính Dần",
+    "Tiết Tiểu Hàn"
+  ], dateMore: "Thứ 5, 13 Tháng 1, 2022");
+  static final userInfo = UserInformationModel(
+      hoTen: 'Cao Tiến Dũng', chucVu: 'Chủ thích UBND tỉnh');
+  static final suKienTrongNgay = [
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”"),
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”"),
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”"),
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”"),
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”"),
+    EventModel('', "Talkshow “Trí tuệ nhân tạo với cuộc sống”")
+  ];
+  static final sinhNhat = [
+    EventModel('', "Sinh nhật bà Vy Vũ Hồng Thảo - (26/10/2021)"),
+    EventModel('', "Sinh nhật ông Nguyễn Thanh Tú - (27/10/2021)"),
+    EventModel('', "Sinh nhật ông Hồ Văn Hà - (28/10/2021)"),
+    EventModel('', "Sinh nhật ông Cao Văn Thành - (29/10/2021)"),
+    EventModel('', "Sinh nhật ông Lê Sĩ Lâm - (30/10/2021)"),
   ];
 }
