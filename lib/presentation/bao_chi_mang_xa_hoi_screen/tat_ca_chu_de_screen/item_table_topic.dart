@@ -33,7 +33,7 @@ class ItemTableTopic extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               border: Border.all(
-                color: const Color(0xFFEAEEF5),
+                color: whiteHide,
               ),
             ),
             child: Text(
