@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/fake_data.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/search_widget.dart';
+import 'package:ccvc_mobile/presentation/search_screen/widget/search_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/tu_khoa_pho_bien_widget.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
