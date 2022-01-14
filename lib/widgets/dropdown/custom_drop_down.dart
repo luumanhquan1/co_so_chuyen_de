@@ -40,14 +40,19 @@ class _CustomDropDownState extends State<CustomDropDown> {
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(
-                color: backgroundColorApp,
+                color: borderColor,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 8, right: 24),
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    right: 24,
+                    top: 2,
+                    bottom: 2,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -57,7 +62,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           child: Text(
                             widget.value ?? '',
                             style: tokenDetailAmount(
-                              fontSize: 12.0.textScale(),
+                              fontSize: 14.0.textScale(),
                               color: titleColor,
                             ),
                           ),
@@ -90,7 +95,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                                     child: Text(
                                       value,
                                       style: tokenDetailAmount(
-                                        fontSize: 12.0.textScale(),
+                                        fontSize: 14.0.textScale(),
                                         color: titleColor,
                                       ),
                                     ),
@@ -102,7 +107,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                                       child: Text(
                                         S.current.danh_sach_rong,
                                         style: tokenDetailAmount(
-                                          fontSize: 12.0.textScale(),
+                                          fontSize: 14.0.textScale(),
                                           color: titleColor,
                                         ),
                                       ))

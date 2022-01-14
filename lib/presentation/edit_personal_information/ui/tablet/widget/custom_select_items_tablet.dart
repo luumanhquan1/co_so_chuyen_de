@@ -1,43 +1,53 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:rxdart/subjects.dart';
 
 // ignore: must_be_immutable
-class CustomSelectItems extends StatefulWidget {
+class CustomSelectItemsTablet extends StatefulWidget {
   final BuildContext context;
   final List<String> items;
   String? title;
-  final Function(List<int>) onChange;
+  final Function(int) onChange;
   Function(int)? onSelectItem;
-  Function(int)? onRemoveItem;
+  Function? onRemove;
   bool isCheckEnable = false;
 
-  CustomSelectItems(
-      {Key? key,
-      this.onSelectItem,
-      this.onRemoveItem,
-      this.title,
-      required this.context,
-      required this.items,
-      required this.onChange,
-      required this.isCheckEnable})
-      : super(key: key);
+
+  CustomSelectItemsTablet({
+    Key? key,
+    this.onSelectItem,
+    this.onRemove,
+    this.title,
+
+    required this.context,
+    required this.items,
+    required this.onChange,
+    required this.isCheckEnable,
+  }) : super(key: key);
 
   @override
-  _CustomSelectItemsState createState() => _CustomSelectItemsState();
+  _CustomSelectItemsTabletState createState() =>
+      _CustomSelectItemsTabletState();
 }
 
-class _CustomSelectItemsState extends State<CustomSelectItems> {
+class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
   List<String> selectedItems = [];
   List<String> searchList = [];
   bool isSearching = false;
   double sizeWitdhTag = 0;
   BehaviorSubject<List<String>> searchItemSubject = BehaviorSubject();
+  EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
 
   void showListItem(BuildContext context) {
     searchItemSubject = BehaviorSubject.seeded(widget.items);
@@ -53,9 +63,9 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
               body: Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: MediaQuery.of(context).viewInsets.bottom <= 160
-                      ? 100
-                      : 20,
-                  horizontal: 50,
+                      ? 300
+                      : 100,
+                  horizontal: 200,
                 ),
                 child: Container(
                   decoration: const BoxDecoration(
@@ -127,7 +137,13 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                               return listData.isEmpty
                                   ? Padding(
                                       padding: const EdgeInsets.all(16),
-                                      child: Text(S.current.danh_sach_rong),
+                                      child: Text(
+                                        S.current.danh_sach_rong,
+                                        style: tokenDetailAmount(
+                                          fontSize: 12.0.textScale(),
+                                          color: titleColor,
+                                        ),
+                                      ),
                                     )
                                   : ListView.separated(
                                       itemBuilder: (context, index) {
@@ -143,10 +159,10 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                                 selectedItems.add(itemTitle);
                                               }
                                             });
-                                            // widget.onChange(selectedIndex());
-                                            // if (widget.onSelectItem != null) {
-                                            //   widget.onSelectItem!(index);
-                                            // }
+                                            widget.onChange(index);
+                                            if (widget.onSelectItem != null) {
+                                              widget.onSelectItem!(index);
+                                            }
                                             Navigator.of(context).pop();
                                             searchItemSubject.close();
                                           },
@@ -158,10 +174,10 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                             child: Text(
                                               itemTitle,
                                               style: TextStyle(
-                                                color: borderColor,
+                                                color: titleColor,
                                                 fontWeight: selectedItems
                                                         .contains(itemTitle)
-                                                    ? FontWeight.w600
+                                                    ? FontWeight.w400
                                                     : FontWeight.normal,
                                               ),
                                             ),
@@ -206,12 +222,36 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
   }
 
   Widget _buildTagItem(String content, int index) {
-    return Text(
-      content,
-      style: tokenDetailAmount(
-        fontSize: 12.0.textScale(),
-        color: titleColor,
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Expanded(
+          flex: 9,
+          child: Text(
+            content,
+            style: tokenDetailAmount(
+              fontSize: 14.0.textScale(),
+              color: titleColor,
+            ),
+          ),
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              if(widget.onRemove!=null){
+                widget.onRemove!();
+              }
+              // log("messa345ge");
+              setState(() {
+                selectedItems.removeAt(index);
+              });
+
+            },
+            child: SvgPicture.asset(ImageAssets.icClose),
+          ),
+        ),
+        spaceW8
+      ],
     );
   }
 
@@ -237,30 +277,27 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
   @override
   Widget build(BuildContext context) {
     return widget.isCheckEnable
-        ? Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  key: keyDiaLog,
-                  padding: const EdgeInsets.only(left: 8, top: 16, bottom: 16),
-                  decoration: BoxDecoration(
-                    color: borderColor.withOpacity(0.2),
-                    border: Border.all(color: borderColor),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: selectedItems.isNotEmpty
-                      ? _buildTagView()
-                      : Text(
-                          widget.title ?? 'luc',
-                          style: tokenDetailAmount(
-                            fontSize: 12.0.textScale(),
-                            color: titleColor,
-                          ),
-                        ),
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
+                decoration: BoxDecoration(
+                  color: borderColor.withOpacity(0.2),
+                  border: Border.all(color: borderColor),
+                  borderRadius: BorderRadius.circular(6),
                 ),
-              ],
-            ),
+                child: selectedItems.isNotEmpty
+                    ? _buildTagView()
+                    : Text(
+                        widget.title ?? 'luc',
+                        style: tokenDetailAmount(
+                          fontSize: 14.0.textScale(),
+                          color: titleColor,
+                        ),
+                      ),
+              ),
+            ],
           )
         : GestureDetector(
             onTap: () {
@@ -272,7 +309,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
               children: [
                 Container(
                   key: keyDiaLog,
-                  padding: const EdgeInsets.only(left: 8, top: 16, bottom: 16),
+                  padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
                   decoration: BoxDecoration(
                     border: Border.all(color: borderColor),
                     borderRadius: BorderRadius.circular(6),
@@ -282,7 +319,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                       : Text(
                           widget.title ?? 'luc',
                           style: tokenDetailAmount(
-                            fontSize: 12.0.textScale(),
+                            fontSize: 14.0.textScale(),
                             color: titleColor,
                           ),
                         ),

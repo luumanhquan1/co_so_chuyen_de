@@ -28,6 +28,7 @@ final spaceH35 = const SizedBox(height: 35);
 final spaceH38 = const SizedBox(height: 38);
 final spaceH40 = const SizedBox(height: 40);
 final spaceH46 = const SizedBox(height: 46);
+final spaceH48 = const SizedBox(height: 48);
 final spaceH50 = const SizedBox(height: 50);
 final spaceH60 = const SizedBox(height: 60);
 final spaceH70 = const SizedBox(height: 70);
@@ -46,9 +47,11 @@ final spaceW16 = const SizedBox(width: 16);
 final spaceW18 = const SizedBox(width: 18);
 final spaceW20 = const SizedBox(width: 20);
 final spaceW25 = const SizedBox(width: 25);
+final spaceW28 = const SizedBox(width: 28);
 final spaceW30 = const SizedBox(width: 30);
 final spaceW56 = const SizedBox(width: 56);
 final spaceW60 = const SizedBox(width: 60);
+final spaceW78 = const SizedBox(width: 78);
 final spaceW100 = const SizedBox(width: 100);
 
 TextStyle textNormal(Color? color, double? fontSize) {

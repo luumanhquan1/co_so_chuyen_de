@@ -13,16 +13,16 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextInputType? textInputType;
   final int maxLine;
 
-  const TextFormFieldWidget(
-      {Key? key,
-      this.controller,
-      required this.isEnabled,
-      this.onChange,
-      this.validator,
-      this.initialValue,
-      this.maxLine = 1,
-      this.textInputType,})
-      : super(key: key);
+  const TextFormFieldWidget({
+    Key? key,
+    this.controller,
+    required this.isEnabled,
+    this.onChange,
+    this.validator,
+    this.initialValue,
+    this.maxLine = 1,
+    this.textInputType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,13 @@ class TextFormFieldWidget extends StatelessWidget {
       keyboardType: textInputType,
       maxLines: maxLine,
       style: tokenDetailAmount(
-        fontSize: 12.0.textScale(),
+        fontSize: 14.0.textScale(),
         color: titleColor,
       ),
       enabled: isEnabled,
       decoration: InputDecoration(
         contentPadding: maxLine == 1
-            ? const EdgeInsets.symmetric(vertical: 4, horizontal: 10)
+            ? const EdgeInsets.symmetric(vertical: 14, horizontal: 10)
             : null,
         fillColor:
             isEnabled ? Colors.transparent : borderColor.withOpacity(0.3),

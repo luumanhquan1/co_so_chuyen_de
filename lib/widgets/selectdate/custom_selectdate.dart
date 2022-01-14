@@ -84,10 +84,10 @@ class _CustomDropDownState extends State<CustomSelectDate> {
             child: Container(
               decoration: BoxDecoration(
                 color: widget.isObligatory
-                    ? backgroundColorApp.withOpacity(0.3)
+                    ? borderColor.withOpacity(0.3)
                     : widget.backgroundColor ?? Colors.transparent,
                 border: Border.all(
-                  color: backgroundColorApp,
+                  color: borderColor,
                 ),
                 borderRadius: BorderRadius.circular(6),
               ),
@@ -99,13 +99,12 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Container(
-                          alignment: Alignment.centerLeft,
-                          height: 44,
+                          padding: const EdgeInsets.only(top: 14, bottom: 14),
                           child: widget.value == null
                               ? Text(
                                   widget.hintText ?? S.current.vuiLongChon,
                                   style: tokenDetailAmount(
-                                    fontSize: 12.0.textScale(),
+                                    fontSize: 14.0.textScale(),
                                     color: titleColor,
                                   ),
                                 )
@@ -115,7 +114,7 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                                       : DateTime.parse(dateSelect)
                                           .toStringWithListFormat,
                                   style: tokenDetailAmount(
-                                    fontSize: 12.0.textScale(),
+                                    fontSize: 14.0.textScale(),
                                     color: titleColor,
                                   ),
                                 ),

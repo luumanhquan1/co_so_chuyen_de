@@ -3,7 +3,7 @@ import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_pe
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/avatar.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_multi_items.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -18,9 +18,10 @@ import 'package:flutter/material.dart';
 class EditPersonInformationScreen extends StatefulWidget {
   final ManagerPersonalInformationModel managerPersonalInformationModel;
 
-  const EditPersonInformationScreen(
-      {Key? key, required this.managerPersonalInformationModel})
-      : super(key: key);
+  const EditPersonInformationScreen({
+    Key? key,
+    required this.managerPersonalInformationModel,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EditPersonalInformationScreen();
@@ -98,7 +99,7 @@ class _EditPersonalInformationScreen
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Không được để trống';
+                      return S.current.khong_duoc_de_trong;
                     }
                     return null;
                   },
@@ -118,7 +119,7 @@ class _EditPersonalInformationScreen
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Không được để trống';
+                      return S.current.khong_duoc_de_trong;
                     }
                     return null;
                   },
@@ -157,7 +158,7 @@ class _EditPersonalInformationScreen
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Không được để trống';
+                      return S.current.khong_duoc_de_trong;
                     }
                     return null;
                   },
@@ -165,58 +166,60 @@ class _EditPersonalInformationScreen
               ),
             ),
             InputInfoUserWidget(
-                isObligatory: true,
-                title: user.keys.elementAt(6),
-                child: CustomDropDown(
-                  value: cubit.managerPersonalInformationModel.gioiTinh ?? false
-                      ? 'Nam'
-                      : 'Nữ',
-                  items: cubit.fakeDataGioiTinh,
-                  onSelectItem: (value) {
-                    if (value == 0) {
-                      cubit.selectGTEvent(true);
-                    } else {
-                      cubit.selectGTEvent(false);
-                    }
-                  },
-                )),
+              isObligatory: true,
+              title: user.keys.elementAt(6),
+              child: CustomDropDown(
+                value: cubit.managerPersonalInformationModel.gioiTinh ?? false
+                    ? S.current.Nam
+                    : S.current.Nu,
+                items: cubit.fakeDataGioiTinh,
+                onSelectItem: (value) {
+                  if (value == 0) {
+                    cubit.selectGTEvent(true);
+                  } else {
+                    cubit.selectGTEvent(false);
+                  }
+                },
+              ),
+            ),
             Form(
               key: formKeyEmail,
               child: InputInfoUserWidget(
-                  title: user.keys.elementAt(7),
-                  child: TextFormFieldWidget(
-                    controller: emailController,
-                    initialValue: null,
-                    isEnabled: true,
-                    onChange: (value) {
-                      formKeyEmail.currentState!.validate();
-                    },
-                    validator: (value) {
-                      if (value!.checkEmail() == false) {
-                        return 'emailEx';
-                      }
-                      return null;
-                    },
-                  )),
+                title: user.keys.elementAt(7),
+                child: TextFormFieldWidget(
+                  controller: emailController,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeyEmail.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.checkEmail() == false) {
+                      return S.current.dinh_dang_email;
+                    }
+                    return null;
+                  },
+                ),
+              ),
             ),
             Form(
               key: formKeySdtCoQuan,
               child: InputInfoUserWidget(
-                  title: user.keys.elementAt(8),
-                  child: TextFormFieldWidget(
-                    controller: sdtCoquanController,
-                    textInputType: TextInputType.number,
-                    isEnabled: true,
-                    onChange: (value) {
-                      formKeySdtCoQuan.currentState!.validate();
-                    },
-                    validator: (value) {
-                      if (value!.checkSdt() == false) {
-                        return 'sdtEx';
-                      }
-                      return null;
-                    },
-                  )),
+                title: user.keys.elementAt(8),
+                child: TextFormFieldWidget(
+                  controller: sdtCoquanController,
+                  textInputType: TextInputType.number,
+                  isEnabled: true,
+                  onChange: (value) {
+                    formKeySdtCoQuan.currentState!.validate();
+                  },
+                  validator: (value) {
+                    if (value!.checkSdt() == false) {
+                      return S.current.dinh_dang_sdt;
+                    }
+                    return null;
+                  },
+                ),
+              ),
             ),
             //
             Form(
@@ -232,7 +235,7 @@ class _EditPersonalInformationScreen
                   },
                   validator: (value) {
                     if (value!.checkSdt() == false) {
-                      return 'sdtEx';
+                      return S.current.dinh_dang_sdt;
                     }
                     return null;
                   },
@@ -243,46 +246,62 @@ class _EditPersonalInformationScreen
               child: InputInfoUserWidget(
                 title: user.keys.elementAt(10),
                 child: CustomSelectItems(
-                  title: 'Tỉnh/Thành phố',
+                  title: S.current.tinh_thanh,
                   context: context,
                   items: cubit.fakeDataTinh,
                   onChange: (indexes) {
-                    //  widget._viewModel.selectGroup(indexes);
-                  },
-                  onRemoveItem: (index) {},
-                  isCheckEnable: true,
-                ),
-              ),
-            ),
-            Form(
-              child: InputInfoUserWidget(
-                title: user.keys.elementAt(11),
-                child: CustomSelectItems(
-                  title: 'Quận/Huyện',
-                  context: context,
-                  items: cubit.fakeDataTinh,
-                  onChange: (indexes) {
-                    //  widget._viewModel.selectGroup(indexes);
+                    if (indexes >= 0) {
+                      cubit.isCheckH(false);
+                    }
                   },
                   onRemoveItem: (index) {},
                   isCheckEnable: false,
                 ),
               ),
             ),
-            Form(
-              child: InputInfoUserWidget(
-                title: user.keys.elementAt(12),
-                child: CustomSelectItems(
-                  title: 'Phường/Xã',
-                  context: context,
-                  items: cubit.fakeDataTinh,
-                  onChange: (indexes) {
-                    //  widget._viewModel.selectGroup(indexes);
-                  },
-                  onRemoveItem: (index) {},
-                  isCheckEnable: true,
-                ),
-              ),
+            StreamBuilder<bool>(
+              stream: cubit.isCheckTinhStream,
+              builder: (context, snapshot) {
+                final snap = snapshot.data ?? true;
+                return Form(
+                  child: InputInfoUserWidget(
+                    title: user.keys.elementAt(11),
+                    child: CustomSelectItems(
+                      title: S.current.quan_huyen,
+                      context: context,
+                      items: cubit.fakeDataTinh,
+                      onChange: (indexes) {
+                        if (indexes >= 0) {
+                          cubit.isCheckH(false);
+                        }
+                      },
+                      onRemoveItem: (index) {},
+                      isCheckEnable: snap,
+                    ),
+                  ),
+                );
+              },
+            ),
+            StreamBuilder<bool>(
+              stream: cubit.isCheckHuyenStream,
+              builder: (context, snapshot) {
+                final snap = snapshot.data ?? true;
+                return Form(
+                  child: InputInfoUserWidget(
+                    title: user.keys.elementAt(12),
+                    child: CustomSelectItems(
+                      title: S.current.phuong_xa,
+                      context: context,
+                      items: cubit.fakeDataTinh,
+                      onChange: (indexes) {
+                        //  widget._viewModel.selectGroup(indexes);
+                      },
+                      onRemoveItem: (index) {},
+                      isCheckEnable: snap,
+                    ),
+                  ),
+                );
+              },
             ),
             Form(
               key: formKey,
@@ -305,11 +324,9 @@ class _EditPersonalInformationScreen
             spaceH20,
             ButtonCustomBottom(
               onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  print("dung");
-                } else {
-                  print("sai");
-                }
+                if (formKeyName.currentState!.validate() &&
+                    formKeyMa.currentState!.validate()) {
+                } else {}
               },
               title: S.current.thay_doi,
               isColorBlue: true,

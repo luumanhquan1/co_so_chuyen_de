@@ -12,6 +12,13 @@ class EditPersonalInformationCubit
   BehaviorSubject<File> saveFile = BehaviorSubject();
 
   Stream<File> get saveFileStream => saveFile.stream;
+  BehaviorSubject<bool> isCheckTinhSubject = BehaviorSubject();
+
+  Stream<bool> get isCheckTinhStream => isCheckTinhSubject.stream;
+
+  BehaviorSubject<bool> isCheckHuyenSubject = BehaviorSubject();
+
+  Stream<bool> get isCheckHuyenStream => isCheckHuyenSubject.stream;
   String ngaySinh = '';
   bool gioiTinh = false;
   TextEditingController nameController = TextEditingController();
@@ -24,6 +31,14 @@ class EditPersonalInformationCubit
   TextEditingController diaChiLienHeController = TextEditingController();
   ManagerPersonalInformationModel managerPersonalInformationModel =
       ManagerPersonalInformationModel();
+
+  void isCheckT(bool isCheckTinh) {
+    isCheckTinhSubject.sink.add(isCheckTinh);
+  }
+
+  void isCheckH(bool isCheckHuyen) {
+    isCheckHuyenSubject.sink.add(isCheckHuyen);
+  }
 
   void getValueController() {
     nameController.text = managerPersonalInformationModel.hoTen!.trim();
@@ -52,6 +67,7 @@ class EditPersonalInformationCubit
 
     saveFile.sink.add(xFile);
   }
+
   List<String> fakeDataGioiTinh = [
     'Nam',
     'Nữ',
@@ -67,6 +83,15 @@ class EditPersonalInformationCubit
     'hà nôi',
     'hà nôi',
   ];
-
+  List<String> fakeDataHuyen = [
+    'hà nôi',
+    'lam loi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+    'hà nôi',
+  ];
   void dispose() {}
 }

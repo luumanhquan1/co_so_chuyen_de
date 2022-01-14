@@ -9,13 +9,13 @@ class InputInfoUserWidget extends StatelessWidget {
   final bool isObligatory;
   final bool needMargin;
 
-  const InputInfoUserWidget(
-      {Key? key,
-      required this.title,
-      required this.child,
-      this.isObligatory = false,
-      this.needMargin = true})
-      : super(key: key);
+  const InputInfoUserWidget({
+    Key? key,
+    required this.title,
+    required this.child,
+    this.isObligatory = false,
+    this.needMargin = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class InputInfoUserWidget extends StatelessWidget {
               Text(
                 title,
                 style: tokenDetailAmount(
-                  fontSize: 12.0.textScale(),
+                  fontSize: 14.0.textScale(),
                   color: colorNumberCellQLVB,
                 ),
               ),
@@ -42,9 +42,7 @@ class InputInfoUserWidget extends StatelessWidget {
                 const SizedBox()
             ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          spaceH10,
           child
         ],
       ),

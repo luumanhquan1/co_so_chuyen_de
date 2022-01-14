@@ -10,10 +10,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AvatarAndSignature extends StatelessWidget {
+class AvatarAndSignatureTablet extends StatelessWidget {
   final EditPersonalInformationCubit editPersonalInformationCubit;
 
-  const AvatarAndSignature({
+  const AvatarAndSignatureTablet({
     Key? key,
     required this.editPersonalInformationCubit,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class AvatarAndSignature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         treeWidget(
           context,
@@ -34,6 +34,7 @@ class AvatarAndSignature extends StatelessWidget {
               '',
           true,
         ),
+        spaceW78,
         treeWidget(
           context,
           S.current.anh_chu_ky,
@@ -45,6 +46,7 @@ class AvatarAndSignature extends StatelessWidget {
               '',
           true,
         ),
+        spaceW78,
         treeWidget(
           context,
           S.current.anh_ky_nhay,
@@ -87,7 +89,7 @@ class AvatarAndSignature extends StatelessWidget {
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: colorBlack.withOpacity(0.1),
+                  color: bgImage.withOpacity(0.2),
                   blurRadius: 7,
                   // offset: const Offset(0, 1), // changes position of shadow
                 ),

@@ -157,8 +157,16 @@
   "tim_kiem": "Tìm kiếm",
   "nhap_tu_khoa_tim_kiem": "Nhập từ khoá tìm kiếm",
   "tu_khoa_pho_bien": "Từ khóa phổ biến",
-  "danh_sach_rong" : "Danh sách rỗng",
+  "danh_sach_rong": "Danh sách rỗng",
   "select_validate": "select_validate",
-  "vuiLongChon": "Vui lòng chọn"
-
+  "vuiLongChon": "Vui lòng chọn",
+  "khong_duoc_de_trong": "Không được để trống",
+  "Nam": "Nam",
+  "Nu": "Nữ",
+  "tinh_thanh": "Tỉnh/Thành phố",
+  "quan_huyen": "Quận/Huyện",
+  "phuong_xa": "Phường/Xã",
+  "dinh_dang_email": "Sai định dạng email",
+  "dinh_dang_sdt": "Sai định dạng số điện thoại",
+  "huy": "Hủy"
 }

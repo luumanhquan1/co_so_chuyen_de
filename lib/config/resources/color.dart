@@ -70,7 +70,7 @@ const radioFocusColor = Color(0xff7966FF);
 const borderButtomColor = Color(0xffE2E8F0);
 const backgroundRowColor = Color(0xffF5F8FD);
 const bgManagerColor = Color(0xffF9FAFF);
-
+const bgImage = Color(0xffE4E9FD);
 const backgroundColorApp = Color(0xffffffff);
 const titleCalenderWork = Color(0xff3D5586);
 const textBodyTime = Color(0xffA2AEBD);
