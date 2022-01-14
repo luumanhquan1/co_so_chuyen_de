@@ -29,87 +29,128 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: bgDropDown.withOpacity(0.2),
-      height: 56,
-      padding: const EdgeInsets.only(top: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          spaceW8,
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: bgButtonDropDown.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  baseChooseTimeCubit.ontoDay();
-                },
-                child: Text(
-                  S.current.today,
-                  textAlign: TextAlign.center,
-                  style: textNormalCustom(
-                    color: bgButtonDropDown,
-                    fontSize: 14.0,
-                  ),
+        height: 56,
+        color: Colors.green,
+        padding: const EdgeInsets.symmetric(horizontal:30),
+        child: Row(
+
+          children: [
+            Expanded(
+              flex: 6,
+              child: Container(
+                color: Colors.yellow,
+                child: Row(
+                  children: [
+                    spaceW8,
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        height: 32,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: bgButtonDropDown.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            baseChooseTimeCubit.ontoDay();
+                          },
+                          child: Text(
+                            S.current.today,
+                            textAlign: TextAlign.center,
+                            style: textNormalCustom(
+                              color: bgButtonDropDown,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 8,
+                      child: Container(
+                        height: 32,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                                baseChooseTimeCubit.checkToOptionBackDay(
+                                  baseChooseTimeCubit.changeOption,
+                                );
+                              },
+                              child: SvgPicture.asset(ImageAssets.ic_prev_box),
+                            ),
+                            spaceW12,
+                            StreamBuilder<Object>(
+                              stream: baseChooseTimeCubit.textDateTimeStream,
+                              builder: (context, snapshot) {
+                                return Text(
+                                  '${snapshot.data}',
+                                  style: textNormal(textDropDownColor, 14),
+                                );
+                              },
+                            ),
+                            spaceW12,
+                            GestureDetector(
+                              onTap: () {
+                                baseChooseTimeCubit.checkToOption(
+                                  baseChooseTimeCubit.changeOption,
+                                );
+                              },
+                              child: SvgPicture.asset(ImageAssets.ic_next_box),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: ShowDropDownButton(
+                        onChanged: (value) {
+                          baseChooseTimeCubit.changeOption = value;
+                        },
+                        baseChooseTimeCubit: BaseChooseTimeCubit(),
+                      ),
+                    ),
+                    spaceW8,
+                  ],
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 8,
-            child: Container(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {});
-                      baseChooseTimeCubit.checkToOptionBackDay(
-                        baseChooseTimeCubit.changeOption,
-                      );
-                    },
-                    child: SvgPicture.asset(ImageAssets.icBackDropDown),
+            Expanded(
+              flex: 4,
+              child: SizedBox(
+                height: 20,
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: SizedBox(
+                      // width: 50,
+                      // height: 14,
+                      child: SvgPicture.asset(ImageAssets.ic_search),
+                    ),
+                    // prefixIconConstraints: BoxConstraints(
+                    //   maxWidth: 40.0.textScale(space: 16.0),
+                    //   maxHeight: 14,
+                    // ),
+                    contentPadding: const EdgeInsets.only(left: 20),
+                    isCollapsed: true,
+                    fillColor: bgDropDown.withOpacity(0.1),
+                    filled: true,
+                    hintText: S.current.tiem_kiem,
+                    hintStyle: textNormal(
+                      sideTextInactiveColor,
+                      14,
+                    ),
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: bgDropDown),
+                    ),
                   ),
-                  spaceW12,
-                  StreamBuilder<Object>(
-                    stream: baseChooseTimeCubit.textDateTimeStream,
-                    builder: (context, snapshot) {
-                      return Text(
-                        '${snapshot.data}',
-                        style: textNormal(textDropDownColor, 14),
-                      );
-                    },
-                  ),
-                  spaceW12,
-                  GestureDetector(
-                    onTap: () {
-                      baseChooseTimeCubit.checkToOption(
-                        baseChooseTimeCubit.changeOption,
-                      );
-                    },
-                    child: SvgPicture.asset(ImageAssets.icNextDropDown),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: ShowDropDownButton(
-              onChanged: (value) {
-                baseChooseTimeCubit.changeOption = value;
-              },
-              baseChooseTimeCubit: BaseChooseTimeCubit(),
-            ),
-          ),
-          spaceW8,
-        ],
-      ),
-    );
+            )
+          ],
+        ));
   }
 }

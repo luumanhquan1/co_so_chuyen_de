@@ -92,6 +92,10 @@ class ImageAssets {
   static const String image_lock_reset='$baseImg/image_lock_reset.svg';
   static const String ic_email='$baseImg/ic_email.svg';
   static const String ic_next_color='$baseImg/ic_next_color.svg';
+  static const String ic_chitet='$baseImg/ic_chitiet.svg';
+  static const String ic_prev_box='$baseImg/prev_box_ic.svg';
+  static const String ic_next_box='$baseImg/next_box_ic.svg';
+  static const String ic_search='$baseImg/ic_search.svg';
 
 
 

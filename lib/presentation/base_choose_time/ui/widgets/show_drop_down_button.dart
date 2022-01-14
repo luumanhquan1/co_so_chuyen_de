@@ -46,7 +46,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           key: globalKey,
@@ -109,7 +109,6 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
               children: [
                 Positioned(
                   top: position.dy + 10,
-                  right: 8,
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
