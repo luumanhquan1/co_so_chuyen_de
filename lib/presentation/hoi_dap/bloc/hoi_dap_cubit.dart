@@ -20,4 +20,9 @@ class HoiDapCubit extends BaseCubit<HoiDapState> {
     HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
         'Lịch làm việc', 'QA'),
   ];
+
+  bool isCheck = false;
+  List<String> listText = ['Tất cả', 'Báo cáo', 'Lịch làm việc ', 'Họp'];
+  String textContent = 'Tất cả';
+  String changeOption = 'Tất cả';
 }
