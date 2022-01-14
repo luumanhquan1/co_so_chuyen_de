@@ -5,7 +5,9 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key}) : super(key: key);
+  final String? hintText;
+
+  const SearchWidget({Key? key, this.hintText}) : super(key: key);
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -20,7 +22,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: TextField(
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(3),
-            hintText: S.current.nhap_tu_khoa_tim_kiem,
+            hintText:widget.hintText ??S.current.nhap_tu_khoa_tim_kiem,
             hintStyle: textNormalCustom(
                 fontWeight: FontWeight.w400,
                 fontSize: 14.0.textScale(),
