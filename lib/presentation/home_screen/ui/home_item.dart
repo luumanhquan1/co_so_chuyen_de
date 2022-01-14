@@ -24,8 +24,32 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/work_list_t
 
 import 'package:flutter/cupertino.dart';
 
-
 extension ItemExtension on WidgetType {
+  Widget getItemSearch() {
+    switch (this) {
+      case WidgetType.document:
+        return const DocumentWidget(homeItemType: WidgetType.document);
+      // case WidgetType.summaryOfTask:
+      //   return const SummaryOfTaskWidget(
+      //     homeItemType: WidgetType.summaryOfTask,
+      //   );
+      // case WidgetType.peopleOpinions:
+      //   return const PeopleOpinions(
+      //     homeItemType: WidgetType.peopleOpinions,
+      //   );
+      // case WidgetType.meetingSchedule:
+      //   return const MeetingScheduleWidget(
+      //     homeItemType: WidgetType.meetingSchedule,
+      //   );
+      // case WidgetType.pressSocialNetWork:
+      //   return const PressSocialNetWork(
+      //     homeItemType: WidgetType.pressSocialNetWork,
+      //   );
+      default:
+        return Container();
+    }
+  }
+
   Widget getItemsMobile() {
     switch (this) {
       case WidgetType.wordProcessState:
