@@ -6,10 +6,11 @@ import 'package:rxdart/rxdart.dart';
 
 class SearchCubit extends HomeCubit {
   SearchCubit() : super();
-
   BehaviorSubject<List<WidgetModel>> listWigdetSubject = BehaviorSubject();
 
   Stream<List<WidgetModel>> get listWigetStream => listWigdetSubject.stream;
+
+
 
   @override
   void getDataTongHopNhiemVu() {

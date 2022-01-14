@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/fake_data.dart';
 import 'package:ccvc_mobile/presentation/search_screen/bloc/search_cubit.dart';
+import 'package:ccvc_mobile/presentation/search_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/bao_chi_mang_xa_hoi_widget.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/lich_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/lich_lam_viec_widget.dart';
@@ -100,28 +101,28 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                     VanBanWidget(
-                      time: 'Cá nhân - Hôm nay',
+                      time: vanBanDiModel.time,
                       listDocument: FakeData.documentList,
                     ),
                     TongHopNVWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.listNhiemView,
+                      time: tongHopNVModel.time,
+                      listData: tongHopNVModel.listData,
                     ),
                     YKienNguoiDanWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.documentList,
+                      time: yKienNguoiDan.time,
+                      listData: yKienNguoiDan.listDocument,
                     ),
                     LichLamViecWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.caledar,
+                      time: lichLamViec.time,
+                      listData: lichLamViec.listData,
                     ),
                     LichHopWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.caledar,
+                      time: lichHop.time,
+                      listData: lichHop.listData,
                     ),
                     BaoChiMangXaHoiWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.fakeDataPress,
+                      time: baoChiMangXaHoi.time,
+                      listData: baoChiMangXaHoi.listData,
                     )
                   ],
                 ),
