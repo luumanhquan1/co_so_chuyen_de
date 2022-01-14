@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +28,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
     super.initState();
     menuCubit.getUser();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +40,9 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-             HeaderMenuWidget(
+            HeaderMenuWidget(
               paddingVertical: 20,
+              urlBackGround: ImageAssets.imgHeaderMenuTablet,
               menuCubit: menuCubit,
             ),
             const Padding(

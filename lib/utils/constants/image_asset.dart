@@ -99,7 +99,6 @@ class ImageAssets {
   static const String icLock = '$baseImg/ic_lock.svg';
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
-
   static const String ic_email = '$baseImg/ic_email.svg';
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
@@ -127,7 +126,7 @@ class ImageAssets {
 
   static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
-
+  static const String imgHeaderMenuTablet = '$baseImg/ic_header_menu_ipad.png';
   static SvgPicture svgAssets(
     String name, {
     Color? color,

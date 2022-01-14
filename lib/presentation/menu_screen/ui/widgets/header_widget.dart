@@ -59,13 +59,15 @@ class HeaderMenuWidget extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(31),
-                    child: CachedNetworkImage(
-                      imageUrl: data?.anhDaiDienFilePath ?? '',
-                      fit: BoxFit.fill,
-                      errorWidget: (_, __, ___) {
-                        return const SizedBox();
-                      },
-                    ),
+                    child: data?.anhDaiDienFilePath == null
+                        ? const SizedBox()
+                        : CachedNetworkImage(
+                            imageUrl: data?.anhDaiDienFilePath ?? '',
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return const SizedBox();
+                            },
+                          ),
                   ),
                 ),
               ),
