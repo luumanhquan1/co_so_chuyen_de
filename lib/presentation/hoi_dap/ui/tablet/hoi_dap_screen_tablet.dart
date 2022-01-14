@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_cubit.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/show_drop_drow_button_hoi_dap.dart';
-import 'package:ccvc_mobile/presentation/search_screen/widget/search_widget.dart';
+import 'package:ccvc_mobile/presentation/search_screen/ui/widget/search_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
