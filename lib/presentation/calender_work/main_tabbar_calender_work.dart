@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/calender_work/tab_list_form/ui/in_list_
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,7 +42,11 @@ class _MainTabarCalenderWorkState extends State<MainTabarCalenderWork> {
                       const end = Offset.zero;
                       final tween = Tween(begin: begin, end: end);
                       final offsetAnimation = animation.drive(tween);
-                      return BaseMenuTablet(offsetAnimation, 'Lịch làm việc', ImageAssets.icMenuCalender);
+                      return screenDevice(
+                          mobileScreen: BaseMenuPhone(offsetAnimation,
+                              'Lịch làm việc', ImageAssets.icMenuCalender),
+                          tabletScreen: BaseMenuTablet(offsetAnimation,
+                              'Lịch làm việc', ImageAssets.icMenuCalender));
                     },
                     opaque: false,
                   ),

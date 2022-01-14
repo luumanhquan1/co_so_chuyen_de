@@ -1,9 +1,10 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:flutter/material.dart';
 
 class ExpansionTitleCustom extends StatefulWidget {
   final Widget child;
   final bool expand;
-  final List<Widget> title;
+  final Widget title;
   final Function onChangeExpand;
   final Decoration? headerDecoration;
   final EdgeInsetsGeometry? paddingRightIcon;
@@ -27,9 +28,9 @@ class ExpansionTitleCustom extends StatefulWidget {
 class _ExpansionTitleCustomState extends State<ExpansionTitleCustom>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween =
-  CurveTween(curve: Curves.easeIn);
+      CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween =
-  Tween<double>(begin: 0.0, end: 0.5);
+      Tween<double>(begin: 0.0, end: 0.5);
   late AnimationController expandController;
   late Animation<double> animation;
   late Animation<double> _iconTurns;
@@ -84,12 +85,25 @@ class _ExpansionTitleCustomState extends State<ExpansionTitleCustom>
             widget.onChangeExpand();
           },
           child: Container(
-            decoration: widget.headerDecoration,
+            decoration: BoxDecoration(
+              color: const Color(0xffDBDFEF).withOpacity(0.1),
+              border: Border(
+                bottom: BorderSide(
+                  color: cellColorborder,
+                  width: 1,
+                ),
+                top: BorderSide(
+                  color: cellColorborder,
+                  width: 1,
+                ),
+              ),
+            ),
+            // decoration: widget.headerDecoration,
             child: Row(
               children: [
                 Expanded(
                   child: Row(
-                    children: [...widget.title],
+                    children: [widget.title],
                   ),
                 ),
                 Padding(
