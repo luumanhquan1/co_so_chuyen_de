@@ -15,6 +15,8 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../fake_data.dart';
+
 class SearchScreenTablet extends StatefulWidget {
   const SearchScreenTablet({Key? key}) : super(key: key);
 
@@ -92,28 +94,28 @@ class _SearchScreenTabletState extends State<SearchScreenTablet> {
                       ),
                     ),
                     VanBanWidget(
-                      time: 'Cá nhân - Hôm nay',
+                      time: vanBanDiModel.time,
                       listDocument: FakeData.documentList,
                     ),
                     TongHopNVWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.listNhiemView,
+                      time: tongHopNVModel.time,
+                      listData: tongHopNVModel.listData,
                     ),
                     YKienNguoiDanWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.documentList,
+                      time: yKienNguoiDan.time,
+                      listData: yKienNguoiDan.listDocument,
                     ),
                     LichLamViecWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.caledar,
+                      time: lichLamViec.time,
+                      listData: lichLamViec.listData,
                     ),
                     LichHopWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.caledar,
+                      time: lichHop.time,
+                      listData: lichHop.listData,
                     ),
                     BaoChiMangXaHoiWidget(
-                      time: 'Cá nhân - Hôm nay',
-                      listData: FakeData.fakeDataPress,
+                      time: baoChiMangXaHoi.time,
+                      listData: baoChiMangXaHoi.listData,
                     )
                   ],
                 ),
