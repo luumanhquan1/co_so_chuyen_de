@@ -433,6 +433,17 @@ class FakeData {
         name: 'Sự kiện trong ngày', id: '', component: 'SuKienTrongNgay'),
     WidgetModel(name: 'Sinh nhật', id: '', component: 'SinhNhat'),
   ];
+
+  static final List<WidgetModel> listSearchWidget = [
+    WidgetModel(name: 'Văn bản', id: '', component: 'VanBanWidGet'),
+    WidgetModel(name: 'Tổng hợp nhiệm vụ', id: '', component: 'TongHopNhiemVu'),
+    WidgetModel(
+        name: 'Ý kiến người dân', id: '', component: 'YKienNguoiDanTongHop'),
+    WidgetModel(name: 'Lịch làm việc', id: '', component: 'BoxLichLamViec'),
+    WidgetModel(name: 'Lịch họp', id: '', component: 'BoxLichHop'),
+    WidgetModel(name: 'Báo chị mạng xã hội', id: '', component: 'BaoChi'),
+  ];
+
   static DateModel dateModel = DateModel(lunarDateArray: [
     "Ngày 11 tháng Chạp năm Tân Sửu",
     "Tháng Tân Sửu",

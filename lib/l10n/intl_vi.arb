@@ -1,13 +1,13 @@
 {
-  "@@locale": "vi",
-  "ok": "Đồng ý",
-  "cancel": "Huỷ ",
-  "something_went_wrong": "Có lỗi xảy ra. Bạn vui lòng thử lại sau",
-  "error": "Lỗi",
-  "error_network": "Vui lòng kiểm tra kết nối mạng!",
-  "retry": "Thử lại",
-  "unauthorized": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
-  "search": "Tìm kiếm...",
+  "@@locale": "en",
+  "ok": "Ok",
+  "cancel": "Cancel",
+  "something_went_wrong": "Something went wrong. Please try again later.",
+  "error": "Error",
+  "error_network": "No internet!",
+  "retry": "Retry",
+  "unauthorized": "Your session has expired. Please sign in.",
+  "search": "Search...",
   "press_socialNetWord": "Báo chí - mạng xã hội",
   "word_processing_state": "Tình hình xử lý văn bản",
   "document": "Văn bản",
@@ -164,4 +164,7 @@
   "loai_hdsd" : "Loại HDSD",
   "tim_kiem_hoi_dap" : "Tìm kiếm hỏi đáp",
   "ban_co_the_tim_kiem_hoi_dap" : "Bạn có thể tìm kiếm các hỏi đáp tại đây"
+  "tim_kiem" : "Tìm kiếm",
+  "dat_lai_mac_dinh": "Đặt lại về mặc định"
+
 }

@@ -104,8 +104,6 @@ extension GetConfigWidget on HomeCubit {
     await Future.delayed(Duration(seconds: 10));
     _getConfigWidget.sink.add(FakeData.listUseWidget);
   }
-
-
 }
 
 ///Báo chí mạng xã hội

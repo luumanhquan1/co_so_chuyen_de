@@ -164,5 +164,7 @@
   "chu_de" : "Chủ đề",
   "loai_hdsd" : "Loại HDSD",
   "tim_kiem_hoi_dap" : "Tìm kiếm hỏi đáp",
-  "ban_co_the_tim_kiem_hoi_dap" : "Bạn có thể tìm kiếm các hỏi đáp tại đây"
+  "ban_co_the_tim_kiem_hoi_dap" : "Bạn có thể tìm kiếm các hỏi đáp tại đây",
+  "dat_lai_mac_dinh": "Đặt lại về mặc định"
+
 }

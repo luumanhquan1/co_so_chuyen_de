@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TuKhoaPhoBienWidget extends StatelessWidget {
-  List<String> listKeyWord;
+  final List<String> listKeyWord;
 
-  TuKhoaPhoBienWidget({Key? key, required this.listKeyWord}) : super(key: key);
+  const TuKhoaPhoBienWidget({Key? key, required this.listKeyWord})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
