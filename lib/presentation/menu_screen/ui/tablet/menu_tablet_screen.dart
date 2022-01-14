@@ -2,12 +2,14 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/bloc/menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuTabletScreen extends StatefulWidget {
@@ -18,6 +20,13 @@ class MenuTabletScreen extends StatefulWidget {
 }
 
 class _MenuTabletScreenState extends State<MenuTabletScreen> {
+  MenuCubit menuCubit = MenuCubit();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    menuCubit.getUser();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +38,9 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const HeaderMenuWidget(
+             HeaderMenuWidget(
               paddingVertical: 20,
+              menuCubit: menuCubit,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
@@ -40,12 +50,19 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
               shrinkWrap: true,
               crossAxisSpacing: 28,
               mainAxisSpacing: 28,
-              childAspectRatio: 1.24,
+              childAspectRatio: 1.25,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 4,
               children: List.generate(listFeature.length, (index) {
                 final type = listFeature[index];
-                return containerType(type);
+                return containerType(type, () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => type.getScreen(),
+                    ),
+                  );
+                });
               }),
             ),
             const SizedBox(
@@ -111,28 +128,42 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
     );
   }
 
-  Widget containerType(MenuType type) {
-    return Container(
-      decoration: BoxDecoration(
-        color: backgroundColorApp,
-        border: Border.all(color: borderColor.withOpacity(0.5)),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 10, color: shadowContainerColor.withOpacity(0.05))
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SvgPicture.asset(type.getItem().url),
-          FittedBox(
-            child: Text(
-              type.getItem().title,
-              style: textNormalCustom(fontSize: 18, color: titleColor),
+  Widget containerType(MenuType type, Function onTap) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(
+          color: backgroundColorApp,
+          border: Border.all(color: borderColor.withOpacity(0.5)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              color: shadowContainerColor.withOpacity(0.05),
+            )
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              type.getItem().url,
+              width: 20.sp,
+              height: 20.sp,
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: Text(
+                type.getItem().title,
+                style: textNormalCustom(fontSize: 18, color: titleColor),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
