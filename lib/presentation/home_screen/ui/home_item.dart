@@ -1,71 +1,119 @@
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/calendar_work_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/document_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/event_of_day_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/meeting_schedule_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/people_opinions_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/press_social_net_word_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/situation_of_handling_people_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/summary_of_task_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/word_processing_state_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/items/work_list_widget.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/calendar_work_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/document_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/event_of_day_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/meeting_schedule_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/people_opinions_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/press_social_net_word_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/sinh_nhat_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/situation_of_handling_people_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/summary_of_task_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/word_processing_state_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/items/work_list_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/calendar_work_tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/document__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/event_of_day_tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/meeting_schedule__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/people_opinions__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/press_social_net_word__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/sinh_nhat__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/situation_of_handling_people__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/summary_of_task_tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/word_processing_state_tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/work_list_tablet_widget.dart';
+
 import 'package:flutter/cupertino.dart';
 
-enum HomeItemType {
-  wordProcessState,
-  document,
-  summaryOfTask,
-  situationHandlingPeople,
-  peopleOpinions,
-  workSchedule,
-  meetingSchedule,
-  pressSocialNetWork,
-  listWork,
-  eventOfDay
-}
 
-extension ItemExtension on HomeItemType {
-  Widget getItems() {
+extension ItemExtension on WidgetType {
+  Widget getItemsMobile() {
     switch (this) {
-      case HomeItemType.wordProcessState:
+      case WidgetType.wordProcessState:
         return const WordProcessingStateWidget(
-          homeItemType: HomeItemType.wordProcessState,
+          homeItemType: WidgetType.wordProcessState,
         );
-      case HomeItemType.document:
-        return const DocumentWidget(
-            homeItemType: HomeItemType.document
-        );
-      case HomeItemType.summaryOfTask:
+      case WidgetType.document:
+        return const DocumentWidget(homeItemType: WidgetType.document);
+      case WidgetType.summaryOfTask:
         return const SummaryOfTaskWidget(
-            homeItemType: HomeItemType.summaryOfTask,
+          homeItemType: WidgetType.summaryOfTask,
         );
-      case HomeItemType.situationHandlingPeople:
+      case WidgetType.situationHandlingPeople:
         return const SituationOfHandlingPeopleWidget(
-            homeItemType: HomeItemType.situationHandlingPeople,
+          homeItemType: WidgetType.situationHandlingPeople,
         );
-      case HomeItemType.peopleOpinions:
+      case WidgetType.peopleOpinions:
         return const PeopleOpinions(
-          homeItemType: HomeItemType.peopleOpinions,
+          homeItemType: WidgetType.peopleOpinions,
         );
-      case HomeItemType.workSchedule:
+      case WidgetType.workSchedule:
         return const CalendarWorkWidget(
-          homeItemType: HomeItemType.workSchedule,
+          homeItemType: WidgetType.workSchedule,
         );
-      case HomeItemType.meetingSchedule:
+      case WidgetType.meetingSchedule:
         return const MeetingScheduleWidget(
-          homeItemType: HomeItemType.meetingSchedule,
+          homeItemType: WidgetType.meetingSchedule,
         );
-      case HomeItemType.pressSocialNetWork:
+      case WidgetType.pressSocialNetWork:
         return const PressSocialNetWork(
-          homeItemType: HomeItemType.pressSocialNetWork,
+          homeItemType: WidgetType.pressSocialNetWork,
         );
-      case HomeItemType.listWork:
+      case WidgetType.listWork:
         return const WorkListWidget(
-          homeItemType: HomeItemType.listWork,
+          homeItemType: WidgetType.listWork,
         );
-      case HomeItemType.eventOfDay:
+      case WidgetType.eventOfDay:
         return const EventOfDayWidget(
-          homeItemType: HomeItemType.eventOfDay,
+          homeItemType: WidgetType.eventOfDay,
         );
+      case WidgetType.sinhNhat:
+        return const SinhNhatWidget(homeItemType: WidgetType.sinhNhat);
+    }
+  }
+
+  Widget getItemsTablet() {
+    switch (this) {
+      case WidgetType.wordProcessState:
+        return const WordProcessingStateTabletWidget(
+          homeItemType: WidgetType.wordProcessState,
+        );
+      case WidgetType.document:
+        return const DocumentTabletWidget(homeItemType: WidgetType.document);
+      case WidgetType.summaryOfTask:
+        return const SummaryOfTaskTabletWidget(
+          homeItemType: WidgetType.summaryOfTask,
+        );
+      case WidgetType.situationHandlingPeople:
+        return const SituationOfHandlingPeopleTabletWidget(
+          homeItemType: WidgetType.situationHandlingPeople,
+        );
+      case WidgetType.peopleOpinions:
+        return const PeopleOpinionsTabletWidget(
+          homeItemType: WidgetType.peopleOpinions,
+        );
+      case WidgetType.workSchedule:
+        return const CalendarWorkTabletWidget(
+          homeItemType: WidgetType.workSchedule,
+        );
+      case WidgetType.meetingSchedule:
+        return const MeetingScheduleTabletWidget(
+          homeItemType: WidgetType.meetingSchedule,
+        );
+      case WidgetType.pressSocialNetWork:
+        return const PressSocialNetWorkTabletWidget(
+          homeItemType: WidgetType.pressSocialNetWork,
+        );
+      case WidgetType.listWork:
+        return const WorkListTabletWidget(
+          homeItemType: WidgetType.listWork,
+        );
+      case WidgetType.eventOfDay:
+        return const EventOfDayTabletWidget(
+          homeItemType: WidgetType.eventOfDay,
+        );
+
+      case WidgetType.sinhNhat:
+        return const SinhNhatTabletWidget(homeItemType: WidgetType.sinhNhat);
     }
   }
 }

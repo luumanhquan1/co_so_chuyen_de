@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -10,6 +11,7 @@ class PieChart extends StatelessWidget {
   final double paddingTop;
   final Function(int)? onTap;
   final bool isSubjectInfo;
+  final double paddingLeftSubTitle;
   const PieChart({
     Key? key,
     required this.chartData,
@@ -17,6 +19,7 @@ class PieChart extends StatelessWidget {
     this.paddingTop = 20,
     this.onTap,
     this.isSubjectInfo = true,
+    this.paddingLeftSubTitle = 0,
   }) : super(key: key);
 
   @override
@@ -71,46 +74,51 @@ class PieChart extends StatelessWidget {
           ),
         ),
         if (isSubjectInfo)
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            childAspectRatio: 10,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: List.generate(chartData.length, (index) {
-              final result = chartData[index];
-              // ignore: avoid_unnecessary_containers
-              return GestureDetector(
-                onTap: () {
-                  if (onTap != null) {
-                    onTap!(index);
-                  } else {}
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      height: 14,
-                      width: 14,
-                      decoration: BoxDecoration(
-                        color: result.color,
-                        shape: BoxShape.circle,
+          Padding(
+            padding: EdgeInsets.only(left: paddingLeftSubTitle),
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 9,
+              mainAxisSpacing: 10.0.textScale(space: 4),
+              crossAxisSpacing: 10,
+              children: List.generate(chartData.length, (index) {
+                final result = chartData[index];
+                // ignore: avoid_unnecessary_containers
+                return GestureDetector(
+                  onTap: () {
+                    if (onTap != null) {
+                      onTap!(index);
+                    } else {}
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 14,
+                        width: 14,
+                        decoration: BoxDecoration(
+                          color: result.color,
+                          shape: BoxShape.circle,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      '${result.title} (${result.value.toInt()})',
-                      style: textNormal(
-                        infoColor,
-                        14,
+                      const SizedBox(
+                        width: 12,
                       ),
-                    )
-                  ],
-                ),
-              );
-            }),
+                      FittedBox(
+                        child: Text(
+                          '${result.title} (${result.value.toInt()})',
+                          style: textNormal(
+                            infoColor,
+                            14.0.textScale(),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
+            ),
           )
         else
            const SizedBox()

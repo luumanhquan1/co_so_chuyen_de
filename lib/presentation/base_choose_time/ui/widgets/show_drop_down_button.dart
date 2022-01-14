@@ -45,6 +45,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -109,6 +110,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
               children: [
                 Positioned(
                   top: position.dy + 10,
+                  left: position.dx,
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
@@ -133,24 +135,27 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
                               widget.baseChooseTimeCubit.textContent,
                             );
                           },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                child: Text(
-                                  widget.baseChooseTimeCubit.listText[index],
-                                  style: textNormal(textDropDownColor, 14),
-                                ),
-                              ),
-                              if (index == 2)
-                                Container()
-                              else
+                          child: Container(
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Container(
-                                  height: 1,
-                                  color: bgDropDown,
-                                )
-                            ],
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    widget.baseChooseTimeCubit.listText[index],
+                                    style: textNormal(textDropDownColor, 14),
+                                  ),
+                                ),
+                                if (index == 2)
+                                  Container()
+                                else
+                                  Container(
+                                    height: 1,
+                                    color: bgDropDown,
+                                  )
+                              ],
+                            ),
                           ),
                         ),
                       ),

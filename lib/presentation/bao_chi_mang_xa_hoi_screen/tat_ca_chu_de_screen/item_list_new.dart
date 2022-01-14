@@ -26,7 +26,7 @@ class ItemListNews extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   child: Image(
                     image: NetworkImage(image),
-                  ))),
+                  ),),),
           const SizedBox(
             width: 10,
           ),
@@ -40,7 +40,7 @@ class ItemListNews extends StatelessWidget {
                   style: textNormalCustom(
                       color: titleColor,
                       fontWeight: FontWeight.w500,
-                      fontSize: 14),
+                      fontSize: 14,),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -48,7 +48,6 @@ class ItemListNews extends StatelessWidget {
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SvgPicture.asset(ImageAssets.icCalendar),
                     const SizedBox(
@@ -59,7 +58,7 @@ class ItemListNews extends StatelessWidget {
                       style: textNormalCustom(
                           color: unselectedLabelColor,
                           fontWeight: FontWeight.w400,
-                          fontSize: 14),
+                          fontSize: 14,),
                     ),
                   ],
                 ),

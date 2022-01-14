@@ -21,6 +21,7 @@ final spaceH16 = const SizedBox(height: 16);
 final spaceH20 = const SizedBox(height: 20);
 final spaceH24 = const SizedBox(height: 24);
 final spaceH25 = const SizedBox(height: 25);
+final spaceH28 = const SizedBox(height: 28);
 final spaceH30 = const SizedBox(height: 30);
 final spaceH35 = const SizedBox(height: 35);
 final spaceH38 = const SizedBox(height: 38);
@@ -45,6 +46,7 @@ final spaceW18 = const SizedBox(width: 18);
 final spaceW20 = const SizedBox(width: 20);
 final spaceW25 = const SizedBox(width: 25);
 final spaceW30 = const SizedBox(width: 30);
+final spaceW56 = const SizedBox(width: 56);
 final spaceW60 = const SizedBox(width: 60);
 final spaceW100 = const SizedBox(width: 100);
 

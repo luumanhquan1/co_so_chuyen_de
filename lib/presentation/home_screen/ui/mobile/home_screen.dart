@@ -1,13 +1,19 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/header_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+final keyHomeMobile = GlobalKey<_HomeScreenMobileState>();
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({
@@ -15,10 +21,10 @@ class HomeScreenMobile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<HomeScreenMobile> createState() => _MyHomePageState();
+  State<HomeScreenMobile> createState() => _HomeScreenMobileState();
 }
 
-class _MyHomePageState extends State<HomeScreenMobile> {
+class _HomeScreenMobileState extends State<HomeScreenMobile> {
   ScrollController scrollController = ScrollController();
   HomeCubit homeCubit = HomeCubit();
 
@@ -27,6 +33,14 @@ class _MyHomePageState extends State<HomeScreenMobile> {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
+    homeCubit.configWidget();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    homeCubit.dispose();
   }
 
   @override
@@ -37,10 +51,19 @@ class _MyHomePageState extends State<HomeScreenMobile> {
         backgroundColor: homeColor,
         appBar: AppBar(
           elevation: 0,
+          leading: Center(
+            child: SvgPicture.asset(
+              ImageAssets.icSearch,
+              height: 18,
+              width: 18,
+            ),
+          ),
           title: Text(
             S.current.home,
             style: textNormalCustom(
-              fontSize: 18, color: AppTheme.getInstance().backGroundColor(),),
+              fontSize: 18,
+              color: AppTheme.getInstance().backGroundColor(),
+            ),
           ),
           centerTitle: true,
           flexibleSpace: Container(
@@ -51,6 +74,20 @@ class _MyHomePageState extends State<HomeScreenMobile> {
               ),
             ),
           ),
+          actions: const [
+            Center(
+              child: SizedBox(
+                width: 24,
+                height: 25,
+                child: ThongBaoWidget(
+                  sum: 10,
+                ),
+              ),
+            ),
+             SizedBox(
+              width: 16,
+            )
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -65,43 +102,28 @@ class _MyHomePageState extends State<HomeScreenMobile> {
               child: Column(
                 children: [
                   const HeaderWidget(),
-                  Column(
-                    children: List.generate(
-                        HomeItemType.values.length, (index) {
-                      final type = HomeItemType.values[index];
-                      return type.getItems();
-                    }),
+                  StreamBuilder<List<WidgetModel>>(
+                    stream: homeCubit.getConfigWidget,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <WidgetModel>[];
+                      if (data.isNotEmpty) {
+                        return Column(
+                          children: List.generate(data.length, (index) {
+                            final type = data[index];
+                            return type.widgetType?.getItemsMobile() ??
+                                const SizedBox();
+                          }),
+                        );
+                      }
+                      return const SizedBox();
+                    },
                   )
                 ],
               ),
             ),
           ),
         ),
-
       ),
     );
   }
 }
-
-class HomeProvider extends InheritedWidget {
-  final HomeCubit homeCubit;
-
-  const HomeProvider({
-    Key? key,
-    required this.homeCubit,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static HomeProvider of(BuildContext context) {
-    final HomeProvider? result = context.dependOnInheritedWidgetOfExactType<
-        HomeProvider>();
-    assert(result != null, 'No elenment');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
-  }
-}
-
