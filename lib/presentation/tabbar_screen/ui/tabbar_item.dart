@@ -3,6 +3,9 @@ import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
+
+import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -72,7 +75,7 @@ extension TabbarEnum on TabBarType {
       case TabBarType.menu:
         return screenDevice(
           mobileScreen: const MenuScreen(),
-          tabletScreen: const MenuScreen(),
+          tabletScreen: const MenuTabletScreen(),
         );
     }
   }

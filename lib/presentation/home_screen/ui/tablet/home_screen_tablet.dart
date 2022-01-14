@@ -9,7 +9,9 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/app_bar_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/header_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
+
 import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_tablet.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

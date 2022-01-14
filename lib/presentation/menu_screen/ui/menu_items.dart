@@ -1,9 +1,12 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/tablet/hoi_dap_screen_tablet.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';
@@ -43,40 +46,67 @@ extension MenuTypeItem on MenuType {
   MenuCellType getItem() {
     switch (this) {
       case MenuType.hop:
-        return MenuCellType(url: ImageAssets.icCamera, title: S.current.hop);
+        return MenuCellType(
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icCameraTablet,
+            iconMobile: ImageAssets.icCamera,
+          ),
+          title: S.current.hop,
+        );
       case MenuType.quanLyNhiemVu:
         return MenuCellType(
-          url: ImageAssets.icQuanLyNhiemVu,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icQuanLyNhiemVuTablet,
+            iconMobile: ImageAssets.icQuanLyNhiemVu,
+          ),
           title: S.current.quan_ly_nhiem_vu,
         );
       case MenuType.hanhChinhCong:
         return MenuCellType(
-          url: ImageAssets.icHanhChinhCong,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icHanhChinhCongTablet,
+            iconMobile: ImageAssets.icHanhChinhCong,
+          ),
           title: S.current.hanh_chinh_cong,
         );
       case MenuType.yKienNguoiDan:
         return MenuCellType(
-          url: ImageAssets.icYKienNguoiDan,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icYKienNguoiDanTablet,
+            iconMobile: ImageAssets.icYKienNguoiDan,
+          ),
           title: S.current.y_kien_nguoi_dan,
         );
       case MenuType.quanLyVanBan:
         return MenuCellType(
-          url: ImageAssets.icQuanLyVanBan,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icQuanLyVanBanTablet,
+            iconMobile: ImageAssets.icQuanLyVanBan,
+          ),
           title: S.current.quan_ly_van_ban,
         );
       case MenuType.baoChiMangXaHoi:
         return MenuCellType(
-          url: ImageAssets.icBaoChiMangXaHoi,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icBaoChiTablet,
+            iconMobile: ImageAssets.icBaoChiMangXaHoi,
+          ),
           title: S.current.bao_chi_mang_xa_hoi,
         );
       case MenuType.ketNoi:
         return MenuCellType(
-          url: ImageAssets.icKetNoi,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icKetNoiTablet,
+            iconMobile: ImageAssets.icKetNoi,
+          ),
           title: S.current.ket_noi,
         );
       case MenuType.tienIch:
         return MenuCellType(
-          url: ImageAssets.icTienIch,
+          url: urlIconScreen(
+            iconTablet: ImageAssets.icTienIchTablet,
+            iconMobile: ImageAssets.icTienIch,
+          ),
           title: S.current.tien_ich,
         );
       case MenuType.chuyenPhamVi:
@@ -100,6 +130,13 @@ extension MenuTypeItem on MenuType {
           title: S.current.doi_mat_khau,
         );
     }
+  }
+
+  String urlIconScreen({
+    required String iconMobile,
+    required String iconTablet,
+  }) {
+    return APP_DEVICE == DeviceType.MOBILE ? iconMobile : iconTablet;
   }
 }
 
@@ -145,7 +182,7 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.hoiDap:
-        return  screenDevice(
+        return screenDevice(
           mobileScreen: const HoiDapScreen(),
           tabletScreen: const HoiDapScreenTablet(),
         );

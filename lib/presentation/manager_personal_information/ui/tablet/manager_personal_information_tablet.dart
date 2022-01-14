@@ -33,7 +33,6 @@ class _ManagerPersonalInformationTabletState
           icon: SvgPicture.asset(ImageAssets.icVector),
           onPressed: () {},
         ),
-        elevation: 0.2,
         actions: [
           IconButton(
             onPressed: () {},

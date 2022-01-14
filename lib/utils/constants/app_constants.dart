@@ -103,4 +103,5 @@ class WidgetTypeConstant {
   static const String DANH_SANH_CONG_VIEC = 'BoxTodoList';
   static const String SU_KIEN_TRONG_NGAY = 'SuKienTrongNgay';
   static const String SINH_NHAT = 'SinhNhat';
+  static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
 }
