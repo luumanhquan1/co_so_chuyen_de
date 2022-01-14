@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuTabletScreen extends StatefulWidget {
   const MenuTabletScreen({Key? key}) : super(key: key);
@@ -31,21 +32,20 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
             const HeaderMenuWidget(
               paddingVertical: 20,
             ),
-           const Padding(
-              padding:  EdgeInsets.symmetric(vertical: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
               child: TextQuanLyWidget(),
             ),
-
             GridView.count(
               shrinkWrap: true,
               crossAxisSpacing: 28,
               mainAxisSpacing: 28,
+              childAspectRatio: 1.24,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 4,
               children: List.generate(listFeature.length, (index) {
-                return Container(
-                  color: Colors.red,
-                );
+                final type = listFeature[index];
+                return containerType(type);
               }),
             ),
             const SizedBox(
@@ -107,6 +107,32 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget containerType(MenuType type) {
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColorApp,
+        border: Border.all(color: borderColor.withOpacity(0.5)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 10, color: shadowContainerColor.withOpacity(0.05))
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SvgPicture.asset(type.getItem().url),
+          FittedBox(
+            child: Text(
+              type.getItem().title,
+              style: textNormalCustom(fontSize: 18, color: titleColor),
+            ),
+          )
+        ],
       ),
     );
   }
