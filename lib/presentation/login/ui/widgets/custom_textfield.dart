@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final Function(String text)? onSubmit;
   final String? Function(String?)? validate;
   final double? sizeWith;
+  final TextEditingController? controller;
 
   const CustomTextField({
     Key? key,
@@ -26,6 +27,7 @@ class CustomTextField extends StatefulWidget {
     this.validate,
     this.sizeWith,
     required this.isPass,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return SizedBox(
       width: widget.sizeWith,
       child: TextFormField(
+        controller: widget.controller,
         obscureText:
             widget.isPass == true ? obscureText == false : obscureText == true,
         textAlignVertical: TextAlignVertical.center,
