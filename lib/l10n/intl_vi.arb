@@ -158,5 +158,8 @@
   "tim_kiem" : "Tìm kiếm",
   "nhap_tu_khoa_tim_kiem" : "Nhập từ khoá tìm kiếm",
   "tu_khoa_pho_bien" : "Từ khóa phổ biến",
-  "tim_kiem" : "Tìm kiếm"
+  "tim_kiem" : "Tìm kiếm",
+  "tieu_de" : "Tiêu đề",
+  "chu_de" : "Chủ đề",
+  "loai_hdsd" : "Loại HDSD"
 }
