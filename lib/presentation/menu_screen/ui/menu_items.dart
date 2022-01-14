@@ -4,6 +4,9 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/ta
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
+import 'package:ccvc_mobile/presentation/hoi_dap/ui/tablet/hoi_dap_screen_tablet.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';
@@ -179,8 +182,9 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.hoiDap:
-        return const Scaffold(
-          backgroundColor: Colors.red,
+        return screenDevice(
+          mobileScreen: const HoiDapScreen(),
+          tabletScreen: const HoiDapScreenTablet(),
         );
       case MenuType.doiMatKhau:
         return screenDevice(

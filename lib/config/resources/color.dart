@@ -97,6 +97,9 @@ const buttonColor = Color(0xff7966FF);
 const buttonColor2 = Color(0x1A7966FF);
 //tabar color
 const unselectLabelColor = Color(0xFFA2AEBD);
+const selectColorTabbar = Color(0xFF304261);
+const whiteHide = Color(0xFFEAEEF5);
+const greyHide = Color(0xFFF5F6FA);
 //drawer menu color
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
@@ -114,6 +117,7 @@ const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
 const bgTabletColor = Color(0xffF9FAFF);
+const toDayColor = Color(0xFFF2F0FF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

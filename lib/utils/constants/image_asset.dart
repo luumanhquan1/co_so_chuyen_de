@@ -103,7 +103,11 @@ class ImageAssets {
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+
   static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
+
+  static const String ic_search_calendar = '$baseImg/ic_search_calendar.svg';
+
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';
   static const String icQuanLyNhiemVuTablet =
@@ -116,7 +120,11 @@ class ImageAssets {
       '$baseImg/ic_quan_ly_van_ban_tablet.svg';
   static const String icBaoChiTablet = '$baseImg/ic_bao_chi_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
+
   static const String icKetNoiTablet = '$baseImg/ic_ket-noi_tablet.svg';
+
+  static const String icDeleteRed = '$baseImg/ic_delete_red.svg';
+  static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

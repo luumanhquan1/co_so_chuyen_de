@@ -433,12 +433,12 @@ class FakeData {
         name: 'Sự kiện trong ngày', id: '', component: 'SuKienTrongNgay'),
     WidgetModel(name: 'Sinh nhật', id: '', component: 'SinhNhat'),
   ];
-  static DateModel dateModel = DateModel(lunarDateArray: [
-    "Ngày 11 tháng Chạp năm Tân Sửu",
-    "Tháng Tân Sửu",
-    "Ngày Bính Dần",
-    "Tiết Tiểu Hàn"
-  ], dateMore: "Thứ 5, 13 Tháng 1, 2022");
+  static DateModel dateModel = DateModel(
+      dateMore: 'Thứ 3, ngày 27 tháng 04 năm 2021',
+      aqiStatus: 'Tốt',
+      dayLunar: 'Ngày hoàng đạo',
+      lunarDate: '16 tháng 3 (Đ), Tân Sửu',
+      aqi: '49');
   static final userInfo = UserInformationModel(
       hoTen: 'Cao Tiến Dũng', chucVu: 'Chủ thích UBND tỉnh');
   static final suKienTrongNgay = [

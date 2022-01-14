@@ -23,17 +23,20 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
       height: MediaQuery.of(context).size.height * 0.93,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40))),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -58,29 +61,31 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
             ),
           ),
           Slider(
-              value: 5,
-              min: 0.0,
-              max: 20,
-              activeColor: labelColor,
-              inactiveColor: borderButtomColor,
-              onChanged: (value) {}),
+            value: 5,
+            max: 20,
+            activeColor: labelColor,
+            inactiveColor: borderButtomColor,
+            onChanged: (value) {},
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   IconButton(
-                      color: unselectLabelColor,
-                      onPressed: () {},
-                      icon: const Icon(Icons.skip_previous)),
+                    color: unselectLabelColor,
+                    onPressed: () {},
+                    icon: const Icon(Icons.skip_previous),
+                  ),
                   GestureDetector(
                     onTap: () {},
                     child: SvgPicture.asset(ImageAssets.icPlay),
                   ),
                   IconButton(
-                      color: unselectLabelColor,
-                      onPressed: () {},
-                      icon: const Icon(Icons.skip_next)),
+                    color: unselectLabelColor,
+                    onPressed: () {},
+                    icon: const Icon(Icons.skip_next),
+                  ),
                   const SizedBox(
                     width: 20,
                   ),
@@ -94,8 +99,11 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               Text(
                 S.current.time_play,
                 style: textNormalCustom(
-                    color: AqiColor, fontSize: 14, fontWeight: FontWeight.w400),
-              )
+                  color: AqiColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ],
           ),
           ListView(
@@ -103,25 +111,30 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               ItemListBangTin(
-                  tin:
-                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                  isCheck: false),
+                tin:
+                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                isCheck: false,
+              ),
               ItemListBangTin(
-                  tin:
-                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                  isCheck: false),
+                tin:
+                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                isCheck: false,
+              ),
               ItemListBangTin(
-                  tin:
-                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                  isCheck: true),
+                tin:
+                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                isCheck: true,
+              ),
               ItemListBangTin(
-                  tin:
-                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                  isCheck: false),
+                tin:
+                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                isCheck: false,
+              ),
               ItemListBangTin(
-                  tin:
-                      'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                  isCheck: false),
+                tin:
+                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
+                isCheck: false,
+              ),
             ],
           )
         ],
