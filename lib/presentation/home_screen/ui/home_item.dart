@@ -24,7 +24,6 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/work_list_t
 
 import 'package:flutter/cupertino.dart';
 
-
 extension ItemExtension on WidgetType {
   Widget getItemsMobile() {
     switch (this) {

@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+import 'package:ccvc_mobile/domain/model/home/date_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
@@ -37,9 +38,9 @@ class HomeCubit extends BaseCubit<HomeState> {
       BehaviorSubject<List<DashboardSchedule>>();
   final BehaviorSubject<List<CalendarMeetingModel>> _getNhiemVu =
       BehaviorSubject<List<CalendarMeetingModel>>();
-  final  BehaviorSubject<UserInformationModel> _getUserInformation =
-  BehaviorSubject<UserInformationModel>();
-
+  final BehaviorSubject<UserInformationModel> _getUserInformation =
+      BehaviorSubject<UserInformationModel>();
+  final BehaviorSubject<DateModel> _getDate = BehaviorSubject<DateModel>();
 
   void _getTinhHuongKhanCap() {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
@@ -58,14 +59,21 @@ class HomeCubit extends BaseCubit<HomeState> {
   void loadApi() {
     getUserInFor();
     _getTinhHuongKhanCap();
+    getDate();
   }
 
   void orderWidget(List<WidgetModel> listWidgetConfig) {
     _getConfigWidget.sink.add(listWidgetConfig);
   }
-void getUserInFor(){
+
+  void getUserInFor() {
     _getUserInformation.sink.add(FakeData.userInfo);
-}
+  }
+
+  void getDate() {
+    _getDate.sink.add(FakeData.dateModel);
+  }
+
   void dispose() {
     _showDialogSetting.close();
     _tinhHuongKhanCap.close();
@@ -79,8 +87,12 @@ void getUserInFor(){
     _getTongHopNhiemVu.close();
     _getNhiemVu.close();
     _getUserInformation.close();
+    _getDate.close();
   }
-Stream<UserInformationModel> get getUserInformation => _getUserInformation.stream;
+
+  Stream<DateModel> get getDateStream => _getDate.stream;
+  Stream<UserInformationModel> get getUserInformation =>
+      _getUserInformation.stream;
   Stream<List<WidgetModel>> get getConfigWidget => _getConfigWidget.stream;
   Stream<List<CalendarMeetingModel>> get getNhiemVu => _getNhiemVu.stream;
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
@@ -104,8 +116,6 @@ extension GetConfigWidget on HomeCubit {
     await Future.delayed(Duration(seconds: 10));
     _getConfigWidget.sink.add(FakeData.listUseWidget);
   }
-
-
 }
 
 ///Báo chí mạng xã hội

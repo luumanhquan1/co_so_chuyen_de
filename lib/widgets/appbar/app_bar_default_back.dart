@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,8 @@ class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
       ),
       backgroundColor: backgroundColorApp,
       bottomOpacity: 0.0,
-      elevation: 0.0,
+      elevation: APP_DEVICE == DeviceType.MOBILE ? 0 : 0.7,
+      shadowColor: bgDropDown,
       automaticallyImplyLeading: false,
       title: Text(
         title,

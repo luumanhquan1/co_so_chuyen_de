@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_state.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -37,5 +38,12 @@ class LoginCubit extends BaseCubit<LoginState> {
     _isShowPassword.close();
     _showEmptyTextTaiKhoan.close();
     _showEmptyTextPassword.close();
+  }
+
+  validateInputText(String inputText) {
+    if (inputText.isEmpty) {
+      return S.current.khong_the_bo_trong;
+    }
+    return;
   }
 }

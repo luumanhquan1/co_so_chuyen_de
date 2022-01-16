@@ -36,6 +36,7 @@ class ImageAssets {
   static const String icProfile = '$baseImg/profile_edit_persion.png';
   static const String icVector = '$baseImg/ic_vector.svg';
   static const String icManager = '$baseImg/ic_edit_manager_person.svg';
+  static const String icTienIchTablet = '$baseImg/ic_tien_ich_tablet.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -99,7 +100,6 @@ class ImageAssets {
   static const String icLock = '$baseImg/ic_lock.svg';
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
-
   static const String ic_email = '$baseImg/ic_email.svg';
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
@@ -111,14 +111,26 @@ class ImageAssets {
   static const String ic_next_box='$baseImg/next_box_ic.svg';
   static const String ic_search='$baseImg/ic_search.svg';
 
-
-
-
+  static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
 
 
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';
+  static const String icQuanLyNhiemVuTablet =
+      '$baseImg/ic_quan_ly_nhiem_vu_tablet.svg';
+  static const String icHanhChinhCongTablet =
+      '$baseImg/ic_hanh_chinh_cong_tablet.svg';
+  static const String icYKienNguoiDanTablet =
+      '$baseImg/ic_y_kien_nguoi_dan_tablet.svg';
+  static const String icQuanLyVanBanTablet =
+      '$baseImg/ic_quan_ly_van_ban_tablet.svg';
+  static const String icBaoChiTablet = '$baseImg/ic_bao_chi_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
+
+  static const String icKetNoiTablet = '$baseImg/ic_ket-noi_tablet.svg';
+
+  static const String icDeleteRed = '$baseImg/ic_delete_red.svg';
+  static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
@@ -128,7 +140,7 @@ class ImageAssets {
 
   static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
-
+  static const String imgHeaderMenuTablet = '$baseImg/ic_header_menu_ipad.png';
   static SvgPicture svgAssets(
     String name, {
     Color? color,
