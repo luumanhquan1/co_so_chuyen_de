@@ -1,24 +1,24 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/quanlivanban/bloc/qlvb_cubit.dart';
-import 'package:ccvc_mobile/quanlivanban/ui/widgets/box_satatus_vb.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
-class CommonInformationMobile extends StatefulWidget {
+class CommonInformationTablet extends StatefulWidget {
   final DocumentDashboardModel documentDashboardModel;
   final String? title;
   final bool isVbDen;
-  const CommonInformationMobile({Key? key,
+  const CommonInformationTablet({Key? key,
     required this.documentDashboardModel,this.title,required this.isVbDen,})
       : super(key: key);
 
   @override
-  _CommonInformationMobileState createState() =>
-      _CommonInformationMobileState();
+  _CommonInformationTabletState createState() =>
+      _CommonInformationTabletState();
 }
 
-class _CommonInformationMobileState extends State<CommonInformationMobile> {
+class _CommonInformationTabletState extends State<CommonInformationTablet> {
   QLVBCCubit qlvbcCubit=QLVBCCubit();
 
   @override
@@ -33,7 +33,6 @@ class _CommonInformationMobileState extends State<CommonInformationMobile> {
       color: Colors.white,
       padding: const EdgeInsets.all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PieChart(
             title: widget.title??'',

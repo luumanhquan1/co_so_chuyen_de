@@ -4,8 +4,9 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart'
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
-import 'package:ccvc_mobile/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
-import 'package:ccvc_mobile/quanlivanban/ui/tablet/qlvb_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/qlvb_tablet_screen.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/cupertino.dart';

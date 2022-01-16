@@ -6,8 +6,8 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_document_screen.dart';
-import 'package:ccvc_mobile/quanlivanban/bloc/qlvb_cubit.dart';
-import 'package:ccvc_mobile/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +156,6 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                       );
                     },
                   ),
-
 
                 ],
               ),

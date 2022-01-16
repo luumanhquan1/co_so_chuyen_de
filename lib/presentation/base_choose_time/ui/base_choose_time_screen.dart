@@ -70,6 +70,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            const SizedBox(width: 10,),
                             GestureDetector(
                               onTap: () {
                                 setState(() {});
@@ -103,6 +104,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                               },
                               child: SvgPicture.asset(ImageAssets.ic_next_box),
                             ),
+                            const SizedBox(width: 10,),
                           ],
                         ),
                       ),
