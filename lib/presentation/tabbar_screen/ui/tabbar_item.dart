@@ -73,7 +73,7 @@ extension TabbarEnum on TabBarType {
       case TabBarType.menu:
         return screenDevice(
           mobileScreen: const MenuScreen(),
-          tabletScreen: const MenuScreen(),
+          tabletScreen: const MenuTabletScreen(),
         );
 
     }

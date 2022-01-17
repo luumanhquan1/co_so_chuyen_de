@@ -54,7 +54,7 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                 child: Container(
                   color: Colors.white,
                   child: BaseChooseTimeScreen(
-                    today: DateTime.parse('2022-01-13'),
+                    today: DateTime.now(),
                   ),
                 ),
               ),
