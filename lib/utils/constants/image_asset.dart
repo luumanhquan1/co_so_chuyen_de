@@ -125,6 +125,10 @@ class ImageAssets {
 
   static const String icDeleteRed = '$baseImg/ic_delete_red.svg';
   static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
+  static const String icClaseSquare = '$baseImg/ic_close_square.svg';
+  static const String icDanger = '$baseImg/ic_danger.svg';
+  static const String icMessenge = '$baseImg/ic_messenge.svg';
+  static const String icVideo = '$baseImg/ic_video.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

@@ -163,5 +163,6 @@
   "AQI" : "AQI",
   "tim_kiem_hoi_dap" : "Tìm kiếm hỏi đáp",
   "ban_co_the_tim_kiem_hoi_dap" : "Bạn có thể tìm kiếm các hỏi đáp tại đây",
-  "tim_kiem" : "Tìm kiếm"
+  "tim_kiem" : "Tìm kiếm",
+  "thong_bao" : "Thông báo"
 }
