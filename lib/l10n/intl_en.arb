@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
-  "ok": "Ok",
-  "cancel": "Cancel",
+  "ok": "Đồng ý",
+  "cancel": "Hủy",
   "something_went_wrong": "Something went wrong. Please try again later.",
   "error": "Error",
   "error_network": "No internet!",
@@ -203,6 +203,8 @@
   "AQI": "AQI",
   "tim_kiem_hoi_dap": "Tìm kiếm hỏi đáp",
   "ban_co_the_tim_kiem_hoi_dap": "Bạn có thể tìm kiếm các hỏi đáp tại đây",
-  "tim_kiem": "Tìm kiếm"
+  "tim_kiem": "Tìm kiếm",
+  "xem_danh_sach": "Xem danh sách chi tiết"
+
 
 }
