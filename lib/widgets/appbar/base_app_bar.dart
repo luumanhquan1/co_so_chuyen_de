@@ -1,26 +1,28 @@
 import 'dart:ui';
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+
 
 class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
   final Widget? leadingIcon;
   final String title;
-  final double? elevation;
+
   final List<Widget>? actions;
 
-  BaseAppBar(
-      {Key? key,
-      required this.title,
-      this.leadingIcon,
-      this.actions,
-      this.elevation})
-      : preferredSize = const Size.fromHeight(kToolbarHeight),
+  BaseAppBar({
+    Key? key,
+    required this.title,
+    this.leadingIcon,
+    this.actions,
+  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override
@@ -31,11 +33,12 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       backgroundColor: backgroundColorApp,
       bottomOpacity: 0.0,
-      elevation: elevation ?? 0.0,
+      elevation: APP_DEVICE == DeviceType.MOBILE ? 0 : 0.7,
+      shadowColor: bgDropDown,
       automaticallyImplyLeading: false,
       title: Text(
         title,
-        style: titleAppbar(),
+        style:titleAppbar(fontSize: 18.0.textScale(space: 6.0)),
       ),
       centerTitle: true,
       leading: leadingIcon,

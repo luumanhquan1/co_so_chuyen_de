@@ -118,7 +118,7 @@ class ManagerPersonalInformationModel {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_ten, hoTen, TypeRow.text),
       ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tu, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         ngaySinh,
@@ -161,7 +161,7 @@ class ManagerPersonalInformationModel {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_ten, hoTen, TypeRow.text),
       ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tu, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         ngaySinh,
@@ -169,7 +169,10 @@ class ManagerPersonalInformationModel {
       ),
       ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
       ManagerPersonalInformationRow(
-          S.current.gioi_tinh, gioiTinh, TypeRow.text,),
+        S.current.gioi_tinh,
+        gioiTinh,
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
     ];
     return list;
@@ -271,7 +274,7 @@ class ManagerPersonalInformationModel {
       S.current.id: id ?? '',
       S.current.ho_ten: hoTen ?? '',
       S.current.ma_can_bo: maCanBo ?? '',
-      S.current.thu_tu: thuTu.toString(),
+      S.current.thu_tus: thuTu.toString(),
       S.current.ngay_sinh:
           DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
       S.current.cmnd: cmtnd ?? '',

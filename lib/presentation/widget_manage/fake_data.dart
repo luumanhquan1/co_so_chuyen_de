@@ -13,15 +13,16 @@ class FakeData {
     WidgetModel(name: 'Lịch làm việc', id: '', component: 'BoxLichLamViec'),
     WidgetModel(name: 'Lịch họp', id: '', component: 'BoxLichHop'),
     WidgetModel(name: 'Báo chị mạng xã hội', id: '', component: 'BaoChi'),
-    WidgetModel(
-        name: 'Danh sách công việc', id: '', component: 'BoxTodoList'),
+    WidgetModel(name: 'Danh sách công việc', id: '', component: 'BoxTodoList'),
     WidgetModel(
         name: 'Sự kiện trong ngày', id: '', component: 'SuKienTrongNgay'),
     WidgetModel(name: 'Sinh nhật', id: '', component: 'SinhNhat'),
   ];
 
-  static final List<WidgetModel> listNotUse = List.generate(
-      10,
-      (index) => WidgetModel(
-          id: 'bb', name: "Two ${index.toString()}", component: ''));
+  static final List<WidgetModel> listNotUse = [
+    WidgetModel(
+        id: 'bb',
+        name: "Tình hình xử lý ý kiến người dân",
+        component: 'TinhHinhXuLyYKienNguoiDan')
+  ];
 }

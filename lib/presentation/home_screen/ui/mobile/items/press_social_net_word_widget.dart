@@ -9,11 +9,11 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/bao_chi_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -104,7 +104,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                               ),
                             );
                           },
-                          child: baoChiWidget(result),
+                          child: BaoChiWidget(data: result),
                         ),
                       );
                     }),
@@ -115,97 +115,6 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                   child: NodataWidget(),
                 );
               },
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget baoChiWidget(PressNetWorkModel data) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          color: borderColor.withOpacity(0.5),
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        boxShadow: [
-          BoxShadow(
-            color: shadowContainerColor.withOpacity(0.05),
-            offset: const Offset(0, 4),
-            blurRadius: 10,
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 110,
-            height: 90,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
-              image: DecorationImage(
-                image: NetworkImage(
-                  data.avatar,
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  data.title,
-                  style: textNormal(
-                    titleColor,
-                    14,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  children: [
-                    SvgPicture.asset(ImageAssets.icCalendarUnFocus),
-                    const SizedBox(
-                      width: 13,
-                    ),
-                    Text(
-                      DateTime.parse(data.publishedTime).formatDdMMYYYY,
-                      style: textNormal(
-                        infoColor,
-                        14,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 29),
-                  child: Text(
-                    data.domain,
-                    style: textNormal(
-                      linkColor,
-                      14,
-                    ),
-                  ),
-                )
-              ],
             ),
           )
         ],

@@ -1,58 +1,56 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'color.dart';
 
 const emptyView = SizedBox(width: 0, height: 0);
 
 /// height and width space
 
-/// height and width space
-final spaceH2 = const SizedBox(height: 2);
-final spaceH3 = const SizedBox(height: 3);
-final spaceH4 = const SizedBox(height: 4);
-final spaceH5 = const SizedBox(height: 5);
-final spaceH6 = const SizedBox(height: 6);
-final spaceH8 = const SizedBox(height: 8);
-final spaceH10 = const SizedBox(height: 10);
-final spaceH12 = const SizedBox(height: 12);
-final spaceH15 = const SizedBox(height: 15);
-final spaceH16 = const SizedBox(height: 16);
-final spaceH20 = const SizedBox(height: 20);
-final spaceH24 = const SizedBox(height: 24);
-final spaceH25 = const SizedBox(height: 25);
-final spaceH28 = const SizedBox(height: 28);
-final spaceH30 = const SizedBox(height: 30);
-final spaceH32 = const SizedBox(height: 20);
-final spaceH35 = const SizedBox(height: 35);
-final spaceH38 = const SizedBox(height: 38);
-final spaceH40 = const SizedBox(height: 40);
-final spaceH46 = const SizedBox(height: 46);
-final spaceH48 = const SizedBox(height: 48);
-final spaceH50 = const SizedBox(height: 50);
-final spaceH60 = const SizedBox(height: 60);
-final spaceH70 = const SizedBox(height: 70);
+const spaceH2 = SizedBox(height: 2);
+const spaceH3 = SizedBox(height: 3);
+const spaceH4 = SizedBox(height: 4);
+const spaceH5 = SizedBox(height: 5);
+const spaceH6 = SizedBox(height: 6);
+const spaceH8 = SizedBox(height: 8);
+const spaceH10 = SizedBox(height: 10);
+const spaceH12 = SizedBox(height: 12);
+const spaceH15 = SizedBox(height: 15);
+const spaceH16 = SizedBox(height: 16);
+const spaceH20 = SizedBox(height: 20);
+const spaceH24 = SizedBox(height: 24);
+const spaceH25 = SizedBox(height: 25);
+const spaceH28 = SizedBox(height: 28);
+const spaceH30 = SizedBox(height: 30);
+const spaceH32 = SizedBox(height: 20);
+const spaceH35 = SizedBox(height: 35);
+const spaceH38 = SizedBox(height: 38);
+const spaceH40 = SizedBox(height: 40);
+const spaceH46 = SizedBox(height: 46);
+const spaceH48 = SizedBox(height: 48);
+const spaceH50 = SizedBox(height: 50);
+const spaceH60 = SizedBox(height: 60);
+const spaceH70 = SizedBox(height: 70);
 
 ///W
-final spaceW2 = const SizedBox(width: 2);
-final spaceW3 = const SizedBox(width: 3);
-final spaceW4 = const SizedBox(width: 4);
-final spaceW5 = const SizedBox(width: 5);
-final spaceW6 = const SizedBox(width: 6);
-final spaceW8 = const SizedBox(width: 8);
-final spaceW10 = const SizedBox(width: 10);
-final spaceW12 = const SizedBox(width: 12);
-final spaceW15 = const SizedBox(width: 15);
-final spaceW16 = const SizedBox(width: 16);
-final spaceW18 = const SizedBox(width: 18);
-final spaceW20 = const SizedBox(width: 20);
-final spaceW25 = const SizedBox(width: 25);
-final spaceW28 = const SizedBox(width: 28);
-final spaceW30 = const SizedBox(width: 30);
-final spaceW56 = const SizedBox(width: 56);
-final spaceW60 = const SizedBox(width: 60);
-final spaceW78 = const SizedBox(width: 78);
-final spaceW100 = const SizedBox(width: 100);
+const spaceW2 = SizedBox(width: 2);
+const spaceW3 = SizedBox(width: 3);
+const spaceW4 = SizedBox(width: 4);
+const spaceW5 = SizedBox(width: 5);
+const spaceW6 = SizedBox(width: 6);
+const spaceW8 = SizedBox(width: 8);
+const spaceW10 = SizedBox(width: 10);
+const spaceW12 = SizedBox(width: 12);
+const spaceW15 = SizedBox(width: 15);
+const spaceW16 = SizedBox(width: 16);
+const spaceW18 = SizedBox(width: 18);
+const spaceW20 = SizedBox(width: 20);
+const spaceW25 = SizedBox(width: 25);
+const spaceW28 = SizedBox(width: 28);
+const spaceW30 = SizedBox(width: 30);
+const spaceW56 = SizedBox(width: 56);
+const spaceW60 = SizedBox(width: 60);
+const spaceW78 = SizedBox(width: 78);
+const spaceW100 = SizedBox(width: 100);
 
 TextStyle textNormal(Color? color, double? fontSize) {
   return GoogleFonts.roboto(

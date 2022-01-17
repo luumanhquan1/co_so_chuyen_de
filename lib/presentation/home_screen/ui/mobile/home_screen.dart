@@ -8,7 +8,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
-
+import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,10 +52,20 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         appBar: AppBar(
           elevation: 0,
           leading: Center(
-            child: SvgPicture.asset(
-              ImageAssets.icSearch,
-              height: 18,
-              width: 18,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                ImageAssets.icSearch,
+                height: 18,
+                width: 18,
+              ),
             ),
           ),
           title: Text(
@@ -84,7 +94,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                 ),
               ),
             ),
-             SizedBox(
+            SizedBox(
               width: 16,
             )
           ],
