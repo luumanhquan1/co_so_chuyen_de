@@ -8,8 +8,8 @@ void showDiaLogFeature(
   BuildContext context, {
   required String title,
   required Widget child,
-  String btnRightTxt = 'Cập Nhật',
-  String btnLeftTxt = 'Xem trước',
+  String btnRightTxt = '',
+  String btnLeftTxt = '',
   bool isBottomShow = true,
   required Function funcBtnOk,
 }) {
