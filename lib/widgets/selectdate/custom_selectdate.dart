@@ -1,28 +1,29 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CustomSelectDate extends StatefulWidget {
-  String? value;
+  final String? value;
   final Function(DateTime) onSelectDate;
   final String? hintText;
   final Color? backgroundColor;
   final String? urlLeadingIcon;
   final bool isObligatory;
 
-  CustomSelectDate(
-      {Key? key,
-      this.value,
-      required this.onSelectDate,
-      this.hintText,
-      this.backgroundColor,
-      this.urlLeadingIcon,
-      this.isObligatory = false})
-      : super(key: key);
+  const CustomSelectDate({
+    Key? key,
+    this.value,
+    required this.onSelectDate,
+    this.hintText,
+    this.backgroundColor,
+    this.urlLeadingIcon,
+    this.isObligatory = false,
+  }) : super(key: key);
 
   @override
   _CustomDropDownState createState() => _CustomDropDownState();
@@ -57,23 +58,24 @@ class _CustomDropDownState extends State<CustomSelectDate> {
               final DateTime parseDate =
                   DateFormat(DateFormatApp.date).parse(date);
               final selectedDate = await showDatePicker(
-                  context: context,
-                  initialDate: parseDate,
-                  firstDate: DateTime(1800),
-                  lastDate: DateTime(2200),
-                  builder: (BuildContext context, Widget? child) {
-                    return Theme(
-                      data: ThemeData.light().copyWith(
-                        colorScheme: const ColorScheme.light().copyWith(
-                          primary: statusCalenderRed,
-                        ),
+                context: context,
+                initialDate: parseDate,
+                firstDate: DateTime(1800),
+                lastDate: DateTime(2200),
+                builder: (BuildContext context, Widget? child) {
+                  return Theme(
+                    data: ThemeData.light().copyWith(
+                      colorScheme: const ColorScheme.light().copyWith(
+                        primary: statusCalenderRed,
                       ),
-                      child: child ?? Container(),
-                    );
-                  });
+                    ),
+                    child: child ?? Container(),
+                  );
+                },
+              );
               if (selectedDate != null) {
                 dateSelect = selectedDate.toString();
-                widget.value = selectedDate.toString();
+                dateSelect = selectedDate.toString();
                 setState(() {});
                 widget.onSelectDate(selectedDate);
               }
@@ -140,13 +142,4 @@ class _CustomDropDownState extends State<CustomSelectDate> {
       ),
     );
   }
-}
-
-class DateFormatApp {
-  static String date = 'dd/MM/yyyy';
-  static String dateTime = 'dd/MM/yyyy HH:mm:ss';
-  static String dateTimeFormat = 'yyyy/MM/dd';
-  static String dateBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS';
-  static String dateTimeBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss';
-  static String dateSecondBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SS';
 }

@@ -69,14 +69,14 @@ class _ManagerPersonalInformationState
           padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const WidgetThongTinMobile(),
+            children: const [
+              WidgetThongTinMobile(),
               spaceH20,
-              const WidgetDonVibMobile(),
+              WidgetDonVibMobile(),
               spaceH20,
-              const WidgetUngDungMobile(),
+              WidgetUngDungMobile(),
               spaceH20,
-              const WidgetImageMobile(),
+              WidgetImageMobile(),
               spaceH24,
             ],
           ),

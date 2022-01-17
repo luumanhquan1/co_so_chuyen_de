@@ -193,10 +193,7 @@ class _EditPersonalInformationScreen
                     formKeyEmail.currentState!.validate();
                   },
                   validator: (value) {
-                    if (value!.checkEmail() == false) {
-                      return S.current.dinh_dang_email;
-                    }
-                    return null;
+                    return value!.checkEmail();
                   },
                 ),
               ),
@@ -213,10 +210,7 @@ class _EditPersonalInformationScreen
                     formKeySdtCoQuan.currentState!.validate();
                   },
                   validator: (value) {
-                    if (value!.checkSdt() == false) {
-                      return S.current.dinh_dang_sdt;
-                    }
-                    return null;
+                    return value!.checkSdt();
                   },
                 ),
               ),
@@ -234,10 +228,7 @@ class _EditPersonalInformationScreen
                     formKeySDT.currentState!.validate();
                   },
                   validator: (value) {
-                    if (value!.checkSdt() == false) {
-                      return S.current.dinh_dang_sdt;
-                    }
-                    return null;
+                    return value!.checkSdt();
                   },
                 ),
               ),
