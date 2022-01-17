@@ -28,7 +28,6 @@ class _ShowDropDownButtonHoiDapState extends State<ShowDropDownButtonHoiDap> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -121,8 +120,7 @@ class _ShowDropDownButtonHoiDapState extends State<ShowDropDownButtonHoiDap> {
                       ),
                     ),
                     child: Column(
-                      children:
-                      List.generate(
+                      children: List.generate(
                         4,
                         (index) => GestureDetector(
                           onTap: () {

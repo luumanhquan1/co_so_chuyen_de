@@ -62,14 +62,14 @@ class _BlockTextViewState extends State<BlockTextView> {
             ),
             decoration: InputDecoration(
               hintText: widget.hintText,
-              fillColor: Colors.white,
+              fillColor: backgroundColorApp,
               filled: true,
               focusedErrorBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.0),
                 ),
                 borderSide: BorderSide(
-                  color: Colors.red,
+                  color: canceledColor,
                 ),
               ),
               errorBorder: const OutlineInputBorder(
@@ -77,7 +77,7 @@ class _BlockTextViewState extends State<BlockTextView> {
                   Radius.circular(10.0),
                 ),
                 borderSide: BorderSide(
-                  color: Colors.red,
+                  color: canceledColor,
                 ),
               ),
               focusedBorder: const OutlineInputBorder(
@@ -85,7 +85,7 @@ class _BlockTextViewState extends State<BlockTextView> {
                   Radius.circular(10.0),
                 ),
                 borderSide: BorderSide(
-                  color: Color(0xffDBDFEF),
+                  color: borderColor,
                 ),
               ),
               enabledBorder: const OutlineInputBorder(
@@ -93,12 +93,12 @@ class _BlockTextViewState extends State<BlockTextView> {
                   Radius.circular(10.0),
                 ),
                 borderSide: BorderSide(
-                  color: Color(0xffDBDFEF),
+                  color: borderColor,
                 ),
               ),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
-              errorStyle: const TextStyle(color: Colors.red, fontSize: 12.0),
+              errorStyle: tokenDetailAmount(fontSize: 12, color: canceledColor),
             ),
             validator: (String? value) {
               if (widget.validate ?? true) {

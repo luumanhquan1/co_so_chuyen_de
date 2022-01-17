@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/tablet/edit_hdsd_tablet.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/base_popup.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_cubit.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/show_drop_drow_button_hoi_dap.dart';
@@ -97,6 +99,17 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
                     tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
                     chuDe: cubit.listHoiDap[index].chuDe ?? '',
                     loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
+                    onTapEdit: () {
+                      showDiaLogFeature(
+                        context,
+                        title: S.current.chinh_sua_hdsd,
+                        child: EditHDSDScreenTablet(
+                          hoiDap: cubit.listHoiDap[index],
+                        ),
+                        funcBtnOk: () {},
+                      );
+                    },
+                    onTapXoa: () {},
                   );
                 },
               ),
