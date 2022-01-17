@@ -44,10 +44,13 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               stream: qlvbCubit.getVbDen,
               builder: (context, snapshot) {
                 final dataVBDen = snapshot.data ?? DocumentDashboardModel();
-                return CommonInformationMobile(
-                  documentDashboardModel: dataVBDen,
-                  isVbDen: true,
-                  title: S.current.document_incoming,
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  child: CommonInformationMobile(
+                    documentDashboardModel: dataVBDen,
+                    isVbDen: true,
+                    title: S.current.document_incoming,
+                  ),
                 );
               },
             ),
@@ -59,10 +62,13 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               stream: qlvbCubit.getVbDi,
               builder: (context, snapshot) {
                 final dataVBDi = snapshot.data ?? DocumentDashboardModel();
-                return CommonInformationMobile(
-                  documentDashboardModel: dataVBDi,
-                  isVbDen: false,
-                  title: S.current.document_out_going,
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  child: CommonInformationMobile(
+                    documentDashboardModel: dataVBDi,
+                    isVbDen: false,
+                    title: S.current.document_out_going,
+                  ),
                 );
               },
             ),
@@ -112,22 +118,6 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                       );
                     },
                   ),
-                  const SizedBox(height: 16.0),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
-                    itemBuilder: (context, index) {
-                      return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
-                        userImage: '',
-                      );
-                    },
-                  ),
                 ],
               ),
             ),
@@ -160,22 +150,6 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         icon: SvgPicture.asset(ImageAssets.ic_next_color),
                       )
                     ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
-                    itemBuilder: (context, index) {
-                      return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
-                        userImage: '',
-                      );
-                    },
                   ),
                   const SizedBox(height: 16.0),
                   ListView.builder(
