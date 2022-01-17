@@ -213,10 +213,7 @@ class _EditPersonalInformationTabletScreen
                                 formKeyEmail.currentState!.validate();
                               },
                               validator: (value) {
-                                if (value!.checkEmail() == false) {
-                                  return S.current.dinh_dang_email;
-                                }
-                                return null;
+                                return value!.checkEmail();
                               },
                             ),
                           ),
@@ -240,10 +237,7 @@ class _EditPersonalInformationTabletScreen
                                 formKeySdtCoQuan.currentState!.validate();
                               },
                               validator: (value) {
-                                if (value!.checkSdt() == false) {
-                                  return S.current.dinh_dang_sdt;
-                                }
-                                return null;
+                                return value!.checkSdt();
                               },
                             ),
                           ),
@@ -261,10 +255,7 @@ class _EditPersonalInformationTabletScreen
                                 formKeySDT.currentState!.validate();
                               },
                               validator: (value) {
-                                if (value!.checkSdt() == false) {
-                                  return S.current.dinh_dang_sdt;
-                                }
-                                return null;
+                                return value!.checkSdt();
                               },
                             ),
                           ),
