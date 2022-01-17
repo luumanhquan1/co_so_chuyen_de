@@ -37,6 +37,7 @@ class ImageAssets {
   static const String icVector = '$baseImg/ic_vector.svg';
   static const String icManager = '$baseImg/ic_edit_manager_person.svg';
   static const String icTienIchTablet = '$baseImg/ic_tien_ich_tablet.svg';
+  static const String icXoaHDSD = '$baseImg/ic_xoa_hdsd.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -135,6 +136,7 @@ class ImageAssets {
   static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
   static const String imgHeaderMenuTablet = '$baseImg/ic_header_menu_ipad.png';
+
   static SvgPicture svgAssets(
     String name, {
     Color? color,
