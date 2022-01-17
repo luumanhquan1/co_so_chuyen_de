@@ -42,8 +42,8 @@ class _ManagerPersonalInformationState
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -54,9 +54,10 @@ class _ManagerPersonalInformationState
                 ),
               );
             },
-            icon: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: SvgPicture.asset(ImageAssets.icManager),
+            child: SvgPicture.asset(
+              ImageAssets.icManager,
+              width: 17,
+              height: 17,
             ),
           ),
           spaceW10
