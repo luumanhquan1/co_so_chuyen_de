@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 
 enum Status { OFFLINE, ONLINME }
@@ -7,42 +8,14 @@ extension CheckStatus on Status {
   String getText() {
     switch (this) {
       case Status.OFFLINE:
-        return 'Hoạt động';
+        return S.current.hoat_dong;
       case Status.ONLINME:
-        return 'Không hoạt động';
+        return S.current.k_hoat_dong;
     }
   }
 }
 
 class ManagerPersonalInformationModel {
-//   String? hoten;
-//   String? ma;
-//   String? thutu;
-//   String? ngaysinh;
-//   String? cmnd;
-//   String? gioitinh;
-//   String? email;
-//
-//   //
-//   String? sdtCoQuan;
-//   String? sdtLienHe;
-//   String? tinhThanhPho;
-//   String? quanHuyen;
-//   String? phuongXa;
-//   String? diaChiLienHe;
-//
-//   //
-//   String? stt;
-//   String? donVi;
-//   String? chuVu;
-//   String? trangThai;
-//   bool? macDinh;
-//
-// //
-//   String? tenDangNhap;
-//   String? ungDung;
-
-  //
   String? id;
   String? maCanBo;
   String? hoTen;
@@ -130,8 +103,6 @@ class ManagerPersonalInformationModel {
     thoiGianCapNhat: 'a',
     chucVu: 'bi thu',
     donVi: 'lanh dao',
-    //   bitThuTruongDonVi: 'a',
-    //   bitDauMoiPAKN: 'a',
     diaChi: 'lam loi',
     thuTu: 2,
     iThuTu: 3,
@@ -145,24 +116,40 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow('Họ và tên', hoTen, TypeRow.text),
-      ManagerPersonalInformationRow('Mã cán bộ', maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow('Thứ tự', thuTu, TypeRow.text),
-      ManagerPersonalInformationRow('Ngày sinh', ngaySinh, TypeRow.text),
-      ManagerPersonalInformationRow('Số cmnd', cmtnd, TypeRow.text),
-      ManagerPersonalInformationRow('Giới tính', gioiTinh, TypeRow.text),
-      ManagerPersonalInformationRow('Email', email, TypeRow.text),
-      ManagerPersonalInformationRow('SĐT cơ quan', phoneCoQuan, TypeRow.text),
-      ManagerPersonalInformationRow('SĐT liên hệ', phoneDiDong, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.ho_ten, hoTen, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.thu_tu, thuTu, TypeRow.text),
       ManagerPersonalInformationRow(
-        'Tỉnh/Thành phố',
+        S.current.ngay_sinh,
+        ngaySinh,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.gioi_tinh,
+        gioiTinh,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.sdt_co_quan,
+        phoneCoQuan,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.sdt_lien_he,
+        phoneDiDong,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.tinh_thanh,
         tinh,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow('Quận/Huyện', huyen, TypeRow.text),
-      ManagerPersonalInformationRow('Phường/Xã', xa, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
       ManagerPersonalInformationRow(
-        'Địa chỉ liên hệ',
+        S.current.dia_chi_lien_he,
         diaChi,
         TypeRow.text,
       ),
@@ -172,30 +159,43 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListRowDetailJob() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow('Họ và tên', hoTen, TypeRow.text),
-      ManagerPersonalInformationRow('Mã cán bộ', maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow('Thứ tự', thuTu, TypeRow.text),
-      ManagerPersonalInformationRow('Ngày sinh', ngaySinh, TypeRow.text),
-      ManagerPersonalInformationRow('Số cmnd', cmtnd, TypeRow.text),
-      ManagerPersonalInformationRow('Giới tính', gioiTinh, TypeRow.text),
-      ManagerPersonalInformationRow('Email', email, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.ho_ten, hoTen, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.thu_tu, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ngay_sinh,
+        ngaySinh,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(
+          S.current.gioi_tinh, gioiTinh, TypeRow.text,),
+      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
     ];
     return list;
   }
 
   List<ManagerPersonalInformationRow> toListAdress() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow('SĐT cơ quan', phoneCoQuan, TypeRow.text),
-      ManagerPersonalInformationRow('SĐT liên hệ', phoneDiDong, TypeRow.text),
       ManagerPersonalInformationRow(
-        'Tỉnh/Thành phố',
+        S.current.sdt_co_quan,
+        phoneCoQuan,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.sdt_lien_he,
+        phoneDiDong,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.tinh_thanh,
         tinh,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow('Quận/Huyện', huyen, TypeRow.text),
-      ManagerPersonalInformationRow('Phường/Xã', xa, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
       ManagerPersonalInformationRow(
-        'Địa chỉ liên hệ',
+        S.current.dia_chi_lien_he,
         diaChi,
         TypeRow.text,
       ),
@@ -206,25 +206,29 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListDonVi() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow('STT', thuTu, TypeRow.text),
-      ManagerPersonalInformationRow('Đơn vị', donVi, TypeRow.text),
-      ManagerPersonalInformationRow('Chức vụ', chucVu, TypeRow.text),
-      ManagerPersonalInformationRow('Mặc định', isDefault, TypeRow.checkbox),
+      ManagerPersonalInformationRow(S.current.stt, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.don_vi, donVi, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.chuc_vu, chucVu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.mac_dinh,
+        isDefault,
+        TypeRow.checkbox,
+      ),
     ];
     if (trangThai == 1) {
       list.insert(
         3,
         ManagerPersonalInformationRow(
-          'Trạng Thái',
-          'Hoạt động',
+          S.current.trang_thai,
+          S.current.hoat_dong,
           TypeRow.status,
         ),
       );
     } else {
       list.add(
         ManagerPersonalInformationRow(
-          'Trạng Thái',
-          'Không hoạt động',
+          S.current.trang_thai,
+          S.current.k_hoat_dong,
           TypeRow.status,
         ),
       );
@@ -234,23 +238,27 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListUngDung() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow('STT', thuTu, TypeRow.text),
-      ManagerPersonalInformationRow('Tên đăng nhập', hoTen, TypeRow.text),
-      ManagerPersonalInformationRow('Ứng dụng', ungDung, TypeRow.list),
+      ManagerPersonalInformationRow(S.current.stt, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ten_dang_nhap,
+        hoTen,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(S.current.ung_dung, ungDung, TypeRow.list),
     ];
     if (trangThai == 1) {
       list.add(
         ManagerPersonalInformationRow(
-          'Trạng Thái',
-          'Hoạt động',
+          S.current.trang_thai,
+          S.current.hoat_dong,
           TypeRow.status,
         ),
       );
     } else {
       list.add(
         ManagerPersonalInformationRow(
-          'Trạng Thái',
-          'Không hoạt động',
+          S.current.trang_thai,
+          S.current.k_hoat_dong,
           TypeRow.status,
         ),
       );
@@ -260,20 +268,24 @@ class ManagerPersonalInformationModel {
 
   Map<String, dynamic> getInfoToMap() {
     return {
-      'id': id ?? '',
-      'Họ và Tên': hoTen ?? '',
-      'Mã cán bộ': maCanBo ?? '',
-      'Thứ tự': thuTu.toString(),
-      'Ngày sinh': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      'Số CMND': cmtnd ?? '',
-      'Giới tính': gioiTinh ?? false ? 'Nam' : 'Nu',
-      'Email': email ?? '',
-      'Số điện thoại cơ quan': phoneCoQuan ?? '',
-      'Số điện thoại': phoneDiDong ?? '',
-      'Tỉnh/Thành phố': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      'Quận/Huyện': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      'Phường/Xã': DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      'Địa chỉ liên hệ': diaChi ?? '',
+      S.current.id: id ?? '',
+      S.current.ho_ten: hoTen ?? '',
+      S.current.ma_can_bo: maCanBo ?? '',
+      S.current.thu_tu: thuTu.toString(),
+      S.current.ngay_sinh:
+          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.cmnd: cmtnd ?? '',
+      S.current.gioi_tinh: gioiTinh ?? false ? S.current.Nam : S.current.Nu,
+      S.current.email: email ?? '',
+      S.current.sdt_co_quan: phoneCoQuan ?? '',
+      S.current.sdt_lien_he: phoneDiDong ?? '',
+      S.current.tinh_thanh:
+          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.quan_huyen:
+          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.phuong_xa:
+          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.dia_chi_lien_he: diaChi ?? '',
     };
   }
 }

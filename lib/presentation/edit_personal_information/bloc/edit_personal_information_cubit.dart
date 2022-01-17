@@ -32,14 +32,6 @@ class EditPersonalInformationCubit
   ManagerPersonalInformationModel managerPersonalInformationModel =
       ManagerPersonalInformationModel();
 
-  void isCheckT(bool isCheckTinh) {
-    isCheckTinhSubject.sink.add(isCheckTinh);
-  }
-
-  void isCheckH(bool isCheckHuyen) {
-    isCheckHuyenSubject.sink.add(isCheckHuyen);
-  }
-
   void getValueController() {
     nameController.text = managerPersonalInformationModel.hoTen!.trim();
     emailController.text = managerPersonalInformationModel.email!.trim();
@@ -93,5 +85,6 @@ class EditPersonalInformationCubit
     'hà nôi',
     'hà nôi',
   ];
+
   void dispose() {}
 }

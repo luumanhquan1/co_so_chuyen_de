@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -10,7 +8,6 @@ import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:rxdart/subjects.dart';
 
 // ignore: must_be_immutable
@@ -23,13 +20,11 @@ class CustomSelectItemsTablet extends StatefulWidget {
   Function? onRemove;
   bool isCheckEnable = false;
 
-
   CustomSelectItemsTablet({
     Key? key,
     this.onSelectItem,
     this.onRemove,
     this.title,
-
     required this.context,
     required this.items,
     required this.onChange,
@@ -95,7 +90,7 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    widget.title ?? '',
+                                    widget.title ?? S.current.danh_sach_rong,
                                     style: tokenDetailAmount(
                                       fontSize: 12.0.textScale(),
                                       color: titleColor,
@@ -108,10 +103,7 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: const Icon(
-                                    Icons.close,
-                                    color: AqiColor,
-                                  ),
+                                  icon: SvgPicture.asset(ImageAssets.icClose),
                                 ),
                               ),
                             ],
@@ -238,14 +230,12 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              if(widget.onRemove!=null){
+              if (widget.onRemove != null) {
                 widget.onRemove!();
               }
-              // log("messa345ge");
               setState(() {
                 selectedItems.removeAt(index);
               });
-
             },
             child: SvgPicture.asset(ImageAssets.icClose),
           ),
@@ -290,7 +280,7 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
                 child: selectedItems.isNotEmpty
                     ? _buildTagView()
                     : Text(
-                        widget.title ?? 'luc',
+                        widget.title ?? S.current.danh_sach_rong,
                         style: tokenDetailAmount(
                           fontSize: 14.0.textScale(),
                           color: titleColor,
@@ -317,7 +307,7 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
                   child: selectedItems.isNotEmpty
                       ? _buildTagView()
                       : Text(
-                          widget.title ?? 'luc',
+                          widget.title ?? S.current.danh_sach_rong,
                           style: tokenDetailAmount(
                             fontSize: 14.0.textScale(),
                             color: titleColor,

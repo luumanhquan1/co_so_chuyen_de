@@ -87,7 +87,7 @@ class AvatarAndSignature extends StatelessWidget {
               color: Colors.transparent,
               boxShadow: [
                 BoxShadow(
-                  color: colorBlack.withOpacity(0.1),
+                  color: bgImage.withOpacity(0.1),
                   blurRadius: 7,
                   // offset: const Offset(0, 1), // changes position of shadow
                 ),

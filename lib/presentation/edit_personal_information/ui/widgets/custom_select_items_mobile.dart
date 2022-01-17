@@ -1,9 +1,11 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -14,19 +16,19 @@ class CustomSelectItems extends StatefulWidget {
   String? title;
   final Function(int) onChange;
   Function(int)? onSelectItem;
-  Function(int)? onRemoveItem;
+  Function? onRemove;
   bool isCheckEnable = false;
 
-  CustomSelectItems(
-      {Key? key,
-      this.onSelectItem,
-      this.onRemoveItem,
-      this.title,
-      required this.context,
-      required this.items,
-      required this.onChange,
-      required this.isCheckEnable})
-      : super(key: key);
+  CustomSelectItems({
+    Key? key,
+    this.onSelectItem,
+    this.onRemove,
+    this.title,
+    required this.context,
+    required this.items,
+    required this.onChange,
+    required this.isCheckEnable,
+  }) : super(key: key);
 
   @override
   _CustomSelectItemsState createState() => _CustomSelectItemsState();
@@ -85,7 +87,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    widget.title ?? '',
+                                    widget.title ?? S.current.danh_sach_rong,
                                     style: tokenDetailAmount(
                                       fontSize: 12.0.textScale(),
                                       color: titleColor,
@@ -98,10 +100,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: const Icon(
-                                    Icons.close,
-                                    color: AqiColor,
-                                  ),
+                                  icon: SvgPicture.asset(ImageAssets.icClose),
                                 ),
                               ),
                             ],
@@ -158,7 +157,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                             child: Text(
                                               itemTitle,
                                               style: TextStyle(
-                                                color: borderColor,
+                                                color: titleColor,
                                                 fontWeight: selectedItems
                                                         .contains(itemTitle)
                                                     ? FontWeight.w600
@@ -206,12 +205,34 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
   }
 
   Widget _buildTagItem(String content, int index) {
-    return Text(
-      content,
-      style: tokenDetailAmount(
-        fontSize: 12.0.textScale(),
-        color: titleColor,
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Expanded(
+          flex: 9,
+          child: Text(
+            content,
+            style: tokenDetailAmount(
+              fontSize: 14.0.textScale(),
+              color: titleColor,
+            ),
+          ),
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              if (widget.onRemove != null) {
+                widget.onRemove!();
+              }
+              setState(() {
+                selectedItems.removeAt(index);
+              });
+            },
+            child: SvgPicture.asset(ImageAssets.icClose),
+          ),
+        ),
+        spaceW8
+      ],
     );
   }
 
@@ -250,7 +271,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                 child: selectedItems.isNotEmpty
                     ? _buildTagView()
                     : Text(
-                        widget.title ?? 'luc',
+                        widget.title ?? S.current.danh_sach_rong,
                         style: tokenDetailAmount(
                           fontSize: 14.0.textScale(),
                           color: titleColor,
@@ -277,7 +298,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                   child: selectedItems.isNotEmpty
                       ? _buildTagView()
                       : Text(
-                          widget.title ?? 'luc',
+                          widget.title ?? S.current.danh_sach_rong,
                           style: tokenDetailAmount(
                             fontSize: 14.0.textScale(),
                             color: titleColor,

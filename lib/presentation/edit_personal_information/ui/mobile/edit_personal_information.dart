@@ -251,10 +251,16 @@ class _EditPersonalInformationScreen
                   items: cubit.fakeDataTinh,
                   onChange: (indexes) {
                     if (indexes >= 0) {
-                      cubit.isCheckH(false);
+                      setState(() {
+                        // cubit.isCheckH(false);
+                        cubit.isCheckTinhSubject.sink.add(false);
+                      });
                     }
                   },
-                  onRemoveItem: (index) {},
+                  onRemove: () {
+                    cubit.isCheckTinhSubject.sink.add(true);
+                    cubit.isCheckHuyenSubject.sink.add(true);
+                  },
                   isCheckEnable: false,
                 ),
               ),
@@ -269,13 +275,17 @@ class _EditPersonalInformationScreen
                     child: CustomSelectItems(
                       title: S.current.quan_huyen,
                       context: context,
-                      items: cubit.fakeDataTinh,
+                      items: cubit.fakeDataHuyen,
                       onChange: (indexes) {
                         if (indexes >= 0) {
-                          cubit.isCheckH(false);
+                          setState(() {
+                            cubit.isCheckHuyenSubject.sink.add(false);
+                          });
                         }
                       },
-                      onRemoveItem: (index) {},
+                      onRemove: () {
+                        cubit.isCheckHuyenSubject.sink.add(true);
+                      },
                       isCheckEnable: snap,
                     ),
                   ),
@@ -290,13 +300,13 @@ class _EditPersonalInformationScreen
                   child: InputInfoUserWidget(
                     title: user.keys.elementAt(12),
                     child: CustomSelectItems(
+                      key: UniqueKey(),
                       title: S.current.phuong_xa,
                       context: context,
                       items: cubit.fakeDataTinh,
                       onChange: (indexes) {
                         //  widget._viewModel.selectGroup(indexes);
                       },
-                      onRemoveItem: (index) {},
                       isCheckEnable: snap,
                     ),
                   ),
