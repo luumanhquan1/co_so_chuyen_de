@@ -2,10 +2,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/incoming_document/ui/tablet/imcoming_document_tablet.dart';
+import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
+import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/outgoing_document/ui/tablet/outgoing_document_tablet.dart';
+import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_document_screen.dart';
 import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/presentation/quanlivanban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -22,7 +23,8 @@ class QLVBScreenMobile extends StatefulWidget {
 
 class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
   QLVBCCubit qlvbCubit = QLVBCCubit();
-  OutgoingDocumentCubit cubit = OutgoingDocumentCubit();
+  OutgoingDocumentCubit cubitOutgoing = OutgoingDocumentCubit();
+  IncomingDocumentCubit cubitIncoming = IncomingDocumentCubit();
 
   @override
   void initState() {
@@ -44,10 +46,13 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               stream: qlvbCubit.getVbDen,
               builder: (context, snapshot) {
                 final dataVBDen = snapshot.data ?? DocumentDashboardModel();
-                return CommonInformationMobile(
-                  documentDashboardModel: dataVBDen,
-                  isVbDen: true,
-                  title: S.current.document_incoming,
+                return Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CommonInformationMobile(
+                    documentDashboardModel: dataVBDen,
+                    isVbDen: true,
+                    title: S.current.document_incoming,
+                  ),
                 );
               },
             ),
@@ -59,10 +64,13 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               stream: qlvbCubit.getVbDi,
               builder: (context, snapshot) {
                 final dataVBDi = snapshot.data ?? DocumentDashboardModel();
-                return CommonInformationMobile(
-                  documentDashboardModel: dataVBDi,
-                  isVbDen: false,
-                  title: S.current.document_out_going,
+                return Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CommonInformationMobile(
+                    documentDashboardModel: dataVBDi,
+                    isVbDen: false,
+                    title: S.current.document_out_going,
+                  ),
                 );
               },
             ),
@@ -90,7 +98,9 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                              const IncomingDocumentScreenTablet(),),);
+                                  const IncomingDocumentScreen(),
+                            ),
+                          );
                         },
                         icon: SvgPicture.asset(ImageAssets.ic_next_color),
                       )
@@ -100,30 +110,18 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
+                    itemCount: cubitIncoming.listIncomingDocument.length,
                     itemBuilder: (context, index) {
                       return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
-                        userImage: '',
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
-                    itemBuilder: (context, index) {
-                      return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
+                        onTap: () {},
+                        title: cubitIncoming
+                            .listIncomingDocument[index].loaiVanBan,
+                        dateTime:
+                            cubitIncoming.listIncomingDocument[index].ngayTao,
+                        userName: cubitIncoming
+                            .listIncomingDocument[index].nguoiSoanThao,
+                        status:
+                            cubitIncoming.listIncomingDocument[index].doKhan,
                         userImage: '',
                       );
                     },
@@ -152,10 +150,12 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                       IconButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                  const OutgoingDocumentScreenTablet(),),);
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const OutgoingDocumentScreen(),
+                            ),
+                          );
                         },
                         icon: SvgPicture.asset(ImageAssets.ic_next_color),
                       )
@@ -165,30 +165,18 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
+                    itemCount: cubitOutgoing.listIncomingDocument.length,
                     itemBuilder: (context, index) {
                       return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
-                        userImage: '',
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: cubit.listIncomingDocument.length,
-                    itemBuilder: (context, index) {
-                      return IncomingDocumentCell(
-                        title: cubit.listIncomingDocument[index].loaiVanBan,
-                        dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
-                        userName:
-                            cubit.listIncomingDocument[index].nguoiSoanThao,
-                        status: cubit.listIncomingDocument[index].doKhan,
+                        onTap: () {},
+                        title: cubitOutgoing
+                            .listIncomingDocument[index].loaiVanBan,
+                        dateTime: cubitOutgoing
+                            .listIncomingDocument[index].ngayBanHanh,
+                        userName: cubitOutgoing
+                            .listIncomingDocument[index].nguoiSoanThao,
+                        status:
+                            cubitOutgoing.listIncomingDocument[index].doKhan,
                         userImage: '',
                       );
                     },

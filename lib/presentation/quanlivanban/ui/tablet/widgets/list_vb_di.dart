@@ -1,25 +1,29 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/document/outgoing_document.dart';
-import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
+import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ListVB extends StatefulWidget {
+class ListVBDi extends StatefulWidget {
   final String titleButton;
   final List<OutgoingDocument> list;
   final Function() onTap;
 
-  const ListVB({required this.titleButton, required this.list,
-    required this.onTap,Key? key})
-      : super(key: key);
+
+  const ListVBDi({
+    required this.titleButton,
+    required this.list,
+    required this.onTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _ListVBState createState() => _ListVBState();
+  _ListVBDiState createState() => _ListVBDiState();
 }
 
-class _ListVBState extends State<ListVB> {
+class _ListVBDiState extends State<ListVBDi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +35,7 @@ class _ListVBState extends State<ListVB> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              buttonChitiet(widget.titleButton,widget.onTap),
+              buttonChitiet(widget.titleButton, widget.onTap),
               const SizedBox(
                 height: 20,
               ),
@@ -40,12 +44,14 @@ class _ListVBState extends State<ListVB> {
                 shrinkWrap: true,
                 itemCount: widget.list.length,
                 itemBuilder: (context, index) {
-                  return IncomingDocumentCell(
+                  return IncomingDocumentCellTablet(
+                    onTap: () {},
                     title: widget.list[index].loaiVanBan,
                     dateTime: widget.list[index].ngayBanHanh,
                     userName: widget.list[index].nguoiSoanThao,
                     status: widget.list[index].doKhan,
                     userImage: '',
+                    index: index,
                   );
                 },
               ),
@@ -57,10 +63,9 @@ class _ListVBState extends State<ListVB> {
   }
 }
 
-Widget buttonChitiet(String text,Function  onTap) {
+Widget buttonChitiet(String text, Function onTap) {
   return GestureDetector(
-    onTap: (){
-
+    onTap: () {
       onTap();
     },
     child: Container(

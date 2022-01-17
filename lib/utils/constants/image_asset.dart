@@ -114,6 +114,8 @@ class ImageAssets {
   static const String ic_search='$baseImg/ic_search.svg';
 
   static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
+  static const String ic_KinhRong = '$baseImg/ic_kinh_rong.svg';
+
 
 
   static const String image_lock_reset_tablet =

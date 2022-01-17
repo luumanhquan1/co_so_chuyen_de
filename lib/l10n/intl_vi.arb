@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
-  "ok": "Ok",
-  "cancel": "Cancel",
+  "ok": "Đồng ý",
+  "cancel": "Hủy",
   "something_went_wrong": "Something went wrong. Please try again later.",
   "error": "Error",
   "error_network": "No internet!",
@@ -204,6 +204,6 @@
   "noi_dung": "Nội dung",
   "chinh_sua_hdsd": "Chỉnh sửa hướng dẫn sử dụng",
   "xem_truoc": "Xem trước",
-  "cap_nhat": "Cập nhật",
-  "chu_de_hdsd": "Chủ đề HDSD"
+  "chu_de_hdsd": "Chủ đề HDSD",
+  "xem_danh_sach": "Xem danh sách chi tiết"
 }
