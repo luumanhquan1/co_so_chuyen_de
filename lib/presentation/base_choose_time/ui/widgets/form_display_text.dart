@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class FormDisplayText extends StatefulWidget {
@@ -18,7 +19,7 @@ class _FormDisplayTextState extends State<FormDisplayText> {
       padding: const EdgeInsets.only(left: 8),
       child: Text(
         widget.text,
-        style: textNormal(textDropDownColor, 14),
+        style: textNormal(textDropDownColor, 14.0.textScale()),
       ),
     );
   }

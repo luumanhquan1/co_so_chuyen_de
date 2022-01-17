@@ -75,6 +75,7 @@ extension TabbarEnum on TabBarType {
           mobileScreen: const MenuScreen(),
           tabletScreen: const MenuTabletScreen(),
         );
+
     }
   }
 
@@ -85,6 +86,7 @@ extension TabbarEnum on TabBarType {
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
             height: 16,
+
           ),
           text: S.current.home,
         );
