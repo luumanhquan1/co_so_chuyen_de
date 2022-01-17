@@ -41,7 +41,7 @@ dependencies:
   date_format: ^2.0.2
   pin_code_fields: ^7.3.0
   keyboard_dismisser: ^2.0.0
-
+  sticky_headers: ^0.2.0
   #Library helpful
   intl: ^0.17.0
   event_bus: ^2.0.0
@@ -55,6 +55,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   logger: any
   rxdart: ^0.27.1
+  #  permission_handler: ^8.1.4+2
+  file_picker: ^4.0.2
+  cool_alert: ^1.1.0
   expandable: 5.0.1
   sliding_up_panel: ^2.0.0+1
 

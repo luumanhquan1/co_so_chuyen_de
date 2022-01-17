@@ -36,6 +36,8 @@ class ImageAssets {
   static const String icProfile = '$baseImg/profile_edit_persion.png';
   static const String icVector = '$baseImg/ic_vector.svg';
   static const String icManager = '$baseImg/ic_edit_manager_person.svg';
+  static const String icImage = '$baseImg/ic_Image.svg';
+  static const String icEditInfor = '$baseImg/ic_edit_infor.svg';
   static const String icTienIchTablet = '$baseImg/ic_tien_ich_tablet.svg';
   static const String icXoaHDSD = '$baseImg/ic_xoa_hdsd.svg';
 
@@ -86,6 +88,7 @@ class ImageAssets {
   static const String icImageChangePasswordTablet =
       '$baseImg/image_change_pass_tablet.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
+
   static const String icBaoChi = '$baseImg/ic_bao_chi.svg';
   static const String icBlog = '$baseImg/ic_blog.svg';
   static const String icForum = '$baseImg/ic_forum.svg';
@@ -104,10 +107,15 @@ class ImageAssets {
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+  static const String ic_search_calendar='$baseImg/ic_search_calendar.svg';
+  static const String ic_chitet='$baseImg/ic_chitiet.svg';
+  static const String ic_next_color='$baseImg/ic_next_color.svg';
+  static const String ic_prev_box='$baseImg/prev_box_ic.svg';
+  static const String ic_next_box='$baseImg/next_box_ic.svg';
+  static const String ic_search='$baseImg/ic_search.svg';
 
   static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
 
-  static const String ic_search_calendar = '$baseImg/ic_search_calendar.svg';
 
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';

@@ -106,3 +106,11 @@ class WidgetTypeConstant {
   static const String SINH_NHAT = 'SinhNhat';
   static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
 }
+class DateFormatApp {
+  static String date = 'dd/MM/yyyy';
+  static String dateTime = 'dd/MM/yyyy HH:mm:ss';
+  static String dateTimeFormat = 'yyyy/MM/dd';
+  static String dateBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS';
+  static String dateTimeBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss';
+  static String dateSecondBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SS';
+}

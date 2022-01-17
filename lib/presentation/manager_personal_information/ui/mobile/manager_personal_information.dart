@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/edit_personal_information.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_image_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_thong_tin.dart';
@@ -21,24 +23,41 @@ class ManagerPersonalInformation extends StatefulWidget {
 
 class _ManagerPersonalInformationState
     extends State<ManagerPersonalInformation> {
+  final ManagerPersonalInformationCubit _cubit =
+      ManagerPersonalInformationCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: BaseAppBar(
         title: S.current.manager_information,
-        leadingIcon: IconButton(
-          icon: SvgPicture.asset(ImageAssets.icVector),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        leadingIcon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            icon: SvgPicture.asset(ImageAssets.icVector),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(ImageAssets.icManager),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditPersonInformationScreen(
+                    managerPersonalInformationModel:
+                        _cubit.managerPersonalInformationModel,
+                  ),
+                ),
+              );
+            },
+            child: SvgPicture.asset(
+              ImageAssets.icManager,
+              width: 17,
+              height: 17,
             ),
           ),
           spaceW10
@@ -51,14 +70,14 @@ class _ManagerPersonalInformationState
           padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const WidgetThongTinMobile(),
+            children: const [
+              WidgetThongTinMobile(),
               spaceH20,
-              const WidgetDonVibMobile(),
+              WidgetDonVibMobile(),
               spaceH20,
-              const WidgetUngDungMobile(),
+              WidgetUngDungMobile(),
               spaceH20,
-              const WidgetImageMobile(),
+              WidgetImageMobile(),
               spaceH24,
             ],
           ),
