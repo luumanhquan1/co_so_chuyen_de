@@ -26,7 +26,7 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
     with SingleTickerProviderStateMixin {
   QLVBCCubit qlvbCubit = QLVBCCubit();
   OutgoingDocumentCubit outgoingDocumentCubit = OutgoingDocumentCubit();
-  IncomingDocumentCubit incomingDocumentCubit=IncomingDocumentCubit();
+  IncomingDocumentCubit incomingDocumentCubit = IncomingDocumentCubit();
   late TabController controller;
 
   late ScrollController scrollController;

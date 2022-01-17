@@ -4,21 +4,35 @@ import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_state.dart';
 
 class HoiDapCubit extends BaseCubit<HoiDapState> {
   HoiDapCubit() : super(HoiDapStateIntial());
+  HoiDap hoiDap = HoiDap();
+
   List<HoiDap> listHoiDap = [
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
-    HoiDap('Danh sách lịch sẽ được hiển thị những loại lịch nào?',
-        'Lịch làm việc', 'QA'),
+    HoiDap(
+        tieuDe: 'Danh sách lịch sẽ được hiển thị những loại lịch nào?',
+        chuDe: 'Lịch làm việc',
+        loaiHDSD: 'QA',
+        danhSach: 'alo alo',
+        noiDung: 'Hòa chung vào không khí đón Tết đang cận kề'),
+    HoiDap(
+      tieuDe: 'Danh sách lịch sẽ được hiển thị những loại lịch nào?',
+      chuDe: 'Lịch làm việc',
+      loaiHDSD: 'QA',
+    ),
+    HoiDap(
+      tieuDe: 'Danh sách lịch sẽ được hiển thị những loại lịch nào?',
+      chuDe: 'Lịch làm việc',
+      loaiHDSD: 'QA',
+    ),
+    HoiDap(
+      tieuDe: 'Danh sách lịch sẽ được hiển thị những loại lịch nào?',
+      chuDe: 'Lịch làm việc',
+      loaiHDSD: 'QA',
+    ),
+    HoiDap(
+      tieuDe: 'Danh sách lịch sẽ được hiển thị những loại lịch nào?',
+      chuDe: 'Lịch làm việc',
+      loaiHDSD: 'QA',
+    )
   ];
 
   bool isCheck = false;

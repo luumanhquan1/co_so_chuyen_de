@@ -30,13 +30,13 @@ class InputInfoUserWidget extends StatelessWidget {
                 title,
                 style: tokenDetailAmount(
                   fontSize: 14.0.textScale(),
-                  color: colorNumberCellQLVB,
+                  color: titleItemEdit,
                 ),
               ),
               if (isObligatory)
                 const Text(
                   ' *',
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: canceledColor),
                 )
               else
                 const SizedBox()

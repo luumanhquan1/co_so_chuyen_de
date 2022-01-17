@@ -9,12 +9,16 @@ class CustomHoiDapWidget extends StatelessWidget {
   final String tieuDe;
   final String chuDe;
   final String loaiHDSD;
+  final Function onTapEdit;
+  final Function onTapXoa;
 
   const CustomHoiDapWidget({
     Key? key,
     required this.tieuDe,
     required this.chuDe,
     required this.loaiHDSD,
+    required this.onTapEdit,
+    required this.onTapXoa,
   }) : super(key: key);
 
   @override
@@ -117,14 +121,18 @@ class CustomHoiDapWidget extends StatelessWidget {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                onTapEdit();
+                              },
                               child: SvgPicture.asset(ImageAssets.icEditBlue),
                             ),
                             const SizedBox(
                               width: 20.0,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                onTapXoa();
+                              },
                               child: SvgPicture.asset(ImageAssets.icDeleteRed),
                             )
                           ],
