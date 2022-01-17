@@ -94,9 +94,9 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
                 itemCount: cubit.listHoiDap.length,
                 itemBuilder: (context, index) {
                   return CustomHoiDapWidgetTablet(
-                    tieuDe: cubit.listHoiDap[index].tieuDe,
-                    chuDe: cubit.listHoiDap[index].chuDe,
-                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD,
+                    tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
+                    chuDe: cubit.listHoiDap[index].chuDe ?? '',
+                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
                   );
                 },
               ),

@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/mobile/edit_hdsd_mobile.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/base_popup.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_cubit.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -50,9 +52,21 @@ class _HoiDapScreenState extends State<HoiDapScreen> {
                 itemCount: cubit.listHoiDap.length,
                 itemBuilder: (context, index) {
                   return CustomHoiDapWidget(
-                    tieuDe: cubit.listHoiDap[index].tieuDe,
-                    chuDe: cubit.listHoiDap[index].chuDe,
-                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD,
+                    tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
+                    chuDe: cubit.listHoiDap[index].chuDe ?? '',
+                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
+                    onTapXoa: () {},
+                    onTapEdit: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditHDSDScreen(
+                            hoiDap: cubit.listHoiDap[index],
+                            index: index,
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
