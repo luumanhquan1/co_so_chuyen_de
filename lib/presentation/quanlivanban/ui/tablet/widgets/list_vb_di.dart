@@ -6,12 +6,13 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ListVB extends StatefulWidget {
+class ListVBDi extends StatefulWidget {
   final String titleButton;
   final List<OutgoingDocument> list;
   final Function() onTap;
 
-  const ListVB({
+
+  const ListVBDi({
     required this.titleButton,
     required this.list,
     required this.onTap,
@@ -19,10 +20,10 @@ class ListVB extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ListVBState createState() => _ListVBState();
+  _ListVBDiState createState() => _ListVBDiState();
 }
 
-class _ListVBState extends State<ListVB> {
+class _ListVBDiState extends State<ListVBDi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
