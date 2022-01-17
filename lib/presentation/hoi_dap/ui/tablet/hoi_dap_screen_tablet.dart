@@ -102,6 +102,8 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
                     onTapEdit: () {
                       showDiaLogFeature(
                         context,
+                        btnLeftTxt: S.current.xem_truoc,
+                        btnRightTxt: S.current.cap_nhat,
                         title: S.current.chinh_sua_hdsd,
                         child: EditHDSDScreenTablet(
                           hoiDap: cubit.listHoiDap[index],

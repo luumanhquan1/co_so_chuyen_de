@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/hoi_dap/hoi_dap.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
@@ -60,13 +61,10 @@ class _EditHDSDScreenState extends State<EditHDSDScreen> {
                       controller: chuDeController,
                       isEnabled: true,
                       onChange: (value) {
-                        formKeyChuDe.currentState!.validate();
+                        formKeyChuDe.currentState?.validate();
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
+                        return value?.checkNull();
                       },
                     ),
                   ),
@@ -79,13 +77,10 @@ class _EditHDSDScreenState extends State<EditHDSDScreen> {
                       controller: loaiHDController,
                       isEnabled: true,
                       onChange: (value) {
-                        formKeyLoaiHD.currentState!.validate();
+                        formKeyLoaiHD.currentState?.validate();
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
+                        return value?.checkNull();
                       },
                     ),
                   ),
@@ -98,13 +93,10 @@ class _EditHDSDScreenState extends State<EditHDSDScreen> {
                       controller: danhSachController,
                       isEnabled: true,
                       onChange: (value) {
-                        formKeyDanhSach.currentState!.validate();
+                        formKeyDanhSach.currentState?.validate();
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
+                        return value?.checkNull();
                       },
                     ),
                   ),
