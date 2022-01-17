@@ -3,12 +3,16 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/base_choose_time/ui/base_choose_time_screen.dart';
+import 'package:ccvc_mobile/presentation/incoming_document/ui/tablet/imcoming_document_tablet.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
+import 'package:ccvc_mobile/presentation/outgoing_document/ui/tablet/outgoing_document_tablet.dart';
 import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/common_infor_tablet.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/tabbar_sliver.dart';
+import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/list_vb.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
+import 'package:sticky_headers/sticky_headers.dart';
+
 class QLVBScreenTablet extends StatefulWidget {
   const QLVBScreenTablet({Key? key}) : super(key: key);
 
@@ -35,36 +39,41 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarDefaultBack(
-          S.current.thong_tin_chung,
-        ),
-        body: DefaultTabController(
-          length: 2,
-          child: NestedScrollView(
-            headerSliverBuilder: (BuildContext context,
-                bool innerBoxIsScrolled,) {
-              return <Widget>[
-                SliverToBoxAdapter(
-                  child: Container(
-                    color: Colors.white,
-                    child: BaseChooseTimeScreen(
-                      today: DateTime.parse('2022-01-13'),
-                    ),
+      appBar: AppBarDefaultBack(
+        S.current.thong_tin_chung,
+      ),
+      body: DefaultTabController(
+        length: 2,
+        child: NestedScrollView(
+          headerSliverBuilder: (
+            BuildContext context,
+            bool innerBoxIsScrolled,
+          ) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Container(
+                  color: Colors.white,
+                  child: BaseChooseTimeScreen(
+                    today: DateTime.parse('2022-01-13'),
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      Container(
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    Container(
+                      color: bgQLVBTablet,
+                      child: Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 20,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: borderColor
-                              .withOpacity(0.5),),
+                          border: Border.all(
+                            color: borderColor.withOpacity(0.5),
+                          ),
                         ),
                         child: Row(
                           children: [
@@ -99,45 +108,68 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 38,),
-                    ],
-                  ),
-                ),
-                SliverPersistentHeader(
-                  delegate: TabBarSliver(
-                    TabBar(
-                      unselectedLabelStyle: titleAppbar(fontSize: 16),
-                      unselectedLabelColor: AqiColor,
-                      labelColor: textDefault,
-                      labelStyle: titleText(fontSize: 16),
-                      indicatorColor: textDefault,
-                      tabs: [
-                        Container(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(S.current.danh_sach_van_ban_den),),
-                        Container(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(S.current.danh_sach_van_ban_di),),
-                      ],
                     ),
+                    Container(
+                      color: bgQLVBTablet,
+                      height: 18,
+                    ),
+                  ],
+                ),
+              ),
+            ];
+          },
+          body: StickyHeader(
+            overlapHeaders: true,
+            header: Container(
+              color: bgQLVBTablet,
+              height: 50,
+              child: TabBar(
+                unselectedLabelStyle: titleAppbar(fontSize: 16),
+                unselectedLabelColor: AqiColor,
+                labelColor: textDefault,
+                labelStyle: titleText(fontSize: 16),
+                indicatorColor: textDefault,
+                tabs: [
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(S.current.danh_sach_van_ban_den),
                   ),
-                )
-              ];
-            },
-            body:const TabBarView(
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(S.current.danh_sach_van_ban_di),
+                  ),
+                ],
+              ),
+            ),
+            content: TabBarView(
               children: [
-               // ListVB(titleButton: S.current.danh_sach_van_ban_den,
-               //     list:cubit.listIncomingDocument,),
-
-                 // ListVB(titleButton: S.current.danh_sach_van_ban_den,
-                 //     list:cubit.listIncomingDocument,),
-
-
+                ListVB(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const IncomingDocumentScreenTablet(),),);
+                  },
+                  titleButton: S.current.danh_sach_van_ban_den,
+                  list: cubit.listIncomingDocument,
+                ),
+                ListVB(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const OutgoingDocumentScreenTablet()));
+                  },
+                  titleButton: S.current.danh_sach_van_ban_di,
+                  list: cubit.listIncomingDocument,
+                ),
               ],
             ),
-
           ),
         ),
+      ),
     );
   }
 }

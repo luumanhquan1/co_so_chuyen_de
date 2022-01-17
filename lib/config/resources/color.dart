@@ -83,6 +83,7 @@ const numberOfCalenders = Color(0xff5A8DEE);
 const dotColor = Color(0xffD4DAE3);
 
 const colorNumberCellQLVB=Color(0xff586B8B);
+const borderCaneder=Color(0xff586B8B);
 
 
 //tabbar color

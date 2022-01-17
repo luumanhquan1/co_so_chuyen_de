@@ -5,13 +5,18 @@ import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/presentation/quanlivanban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
+
 class CommonInformationMobile extends StatefulWidget {
   final DocumentDashboardModel documentDashboardModel;
   final String? title;
   final bool isVbDen;
-  const CommonInformationMobile({Key? key,
-    required this.documentDashboardModel,this.title,required this.isVbDen,})
-      : super(key: key);
+
+  const CommonInformationMobile({
+    Key? key,
+    required this.documentDashboardModel,
+    this.title,
+    required this.isVbDen,
+  }) : super(key: key);
 
   @override
   _CommonInformationMobileState createState() =>
@@ -19,7 +24,7 @@ class CommonInformationMobile extends StatefulWidget {
 }
 
 class _CommonInformationMobileState extends State<CommonInformationMobile> {
-  QLVBCCubit qlvbcCubit=QLVBCCubit();
+  QLVBCCubit qlvbcCubit = QLVBCCubit();
 
   @override
   void initState() {
@@ -33,44 +38,60 @@ class _CommonInformationMobileState extends State<CommonInformationMobile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         PieChart(
-          title: widget.title??'',
-          chartData: widget.isVbDen? qlvbcCubit.chartDataVbDen
-              :qlvbcCubit.chartDataVbDi,
-          onTap: (int value){
-
-          },
+          title: widget.title ?? '',
+          chartData: widget.isVbDen
+              ? qlvbcCubit.chartDataVbDen
+              : qlvbcCubit.chartDataVbDi,
+          onTap: (int value) {},
         ),
         Container(height: 20),
-        if (widget.isVbDen) Row(
-          children: [
-            Expanded(
-              child: BoxStatusVanBan(value: widget.documentDashboardModel
-                  .soLuongTrongHan.toString(),
-                onTap: () {  }, color: numberOfCalenders,
-                statusName: S.current.trong_han,),
+        if (widget.isVbDen)
+          Row(
+            children: [
+              Expanded(
+                child: BoxStatusVanBan(
+                  value:
+                      widget.documentDashboardModel.soLuongTrongHan.toString(),
+                  onTap: () {},
+                  color: numberOfCalenders,
+                  statusName: S.current.trong_han,
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: BoxStatusVanBan(
+                  value: widget.documentDashboardModel.soLuongQuaHan.toString(),
+                  onTap: () {},
+                  color: statusCalenderRed,
+                  statusName: S.current.qua_han,
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: BoxStatusVanBan(
+                  value: widget.documentDashboardModel.soLuongThuongKhan
+                      .toString(),
+                  onTap: () {},
+                  color: textColorForum,
+                  statusName: S.current.thuong_khan,
+                ),
+              ),
+            ],
+          )
+        else
+          SizedBox(
+            width: 103,
+            child: BoxStatusVanBan(
+              value: widget.documentDashboardModel.soLuongThuongKhan.toString(),
+              onTap: () {},
+              color: textColorForum,
+              statusName: S.current.thuong_khan,
             ),
-            const SizedBox(width: 16,),
-            Expanded(
-              child: BoxStatusVanBan(value: widget.documentDashboardModel
-                  .soLuongQuaHan.toString(),
-                onTap: () {  }, color: statusCalenderRed,
-                statusName: S.current.qua_han,),
-            ),
-            const SizedBox(width: 16,),
-            Expanded(
-              child: BoxStatusVanBan(value: widget.documentDashboardModel
-                  .soLuongThuongKhan.toString(),
-                onTap: () {  }, color: textColorForum,
-                statusName: S.current.thuong_khan,),
-            ),
-          ],
-        ) else SizedBox(
-          width: 103,
-          child: BoxStatusVanBan(value: widget.documentDashboardModel
-              .soLuongThuongKhan.toString(),
-            onTap: () {  }, color: textColorForum,
-            statusName: S.current.thuong_khan,),
-        ),
+          ),
       ],
     );
   }

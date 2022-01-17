@@ -11,8 +11,10 @@ import 'package:flutter_svg/svg.dart';
 
 class BaseChooseTimeScreen extends StatefulWidget {
   final DateTime today;
-
-  const BaseChooseTimeScreen({Key? key, required this.today}) : super(key: key);
+  final Function(String text)? onChange;
+  final Function(String text)? onSubmit;
+  const BaseChooseTimeScreen({Key? key, required this.today,this.onChange,this.onSubmit})
+      : super(key: key);
 
   @override
   _BaseChooseTimeScreenState createState() => _BaseChooseTimeScreenState();
@@ -32,6 +34,9 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
     return Container(
         height: 56,
         padding: const EdgeInsets.symmetric(horizontal:30),
+        decoration: BoxDecoration(
+          border: Border.all(color: bgDropDown),
+        ),
         child: Row(
 
           children: [
@@ -127,6 +132,12 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
             Expanded(
               flex: 4,
               child: TextField(
+                onChanged: (text) {
+                  widget.onChange != null ? widget.onChange!(text) : null;
+                },
+                onSubmitted: (text) {
+                  widget.onChange != null ? widget.onSubmit!(text) : null;
+                },
                 decoration: InputDecoration(
                   prefixIcon: SizedBox(
                     width: 36, height: 14,
@@ -157,6 +168,6 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
               ),
             )
           ],
-        ));
+        ),);
   }
 }
