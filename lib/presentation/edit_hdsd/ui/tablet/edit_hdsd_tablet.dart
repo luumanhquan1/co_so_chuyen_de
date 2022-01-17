@@ -43,85 +43,87 @@ class _EditHDSDScreenTabletState extends State<EditHDSDScreenTablet> {
     final Map<String, dynamic> hoiDaps = widget.hoiDap.getInfoToMap();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Container(
-        padding: const EdgeInsets.only(left: 24, right: 24),
-        child: Column(
-          children: [
-            Column(
-              children: [
-                Form(
-                  key: formKeyChuDe,
-                  child: InputInfoUserWidget(
-                    title: hoiDaps.keys.elementAt(1),
-                    child: TextFormFieldWidget(
-                      controller: chuDeController,
-                      isEnabled: true,
-                      onChange: (value) {
-                        formKeyChuDe.currentState!.validate();
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
-                      },
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(left: 24, right: 24),
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  Form(
+                    key: formKeyChuDe,
+                    child: InputInfoUserWidget(
+                      title: hoiDaps.keys.elementAt(1),
+                      child: TextFormFieldWidget(
+                        controller: chuDeController,
+                        isEnabled: true,
+                        onChange: (value) {
+                          formKeyChuDe.currentState!.validate();
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return S.current.khong_duoc_de_trong;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Form(
-                  key: formKeyLoaiHD,
-                  child: InputInfoUserWidget(
-                    title: hoiDaps.keys.elementAt(2),
-                    child: TextFormFieldWidget(
-                      controller: loaiHDController,
-                      isEnabled: true,
-                      onChange: (value) {
-                        formKeyLoaiHD.currentState!.validate();
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
-                      },
+                  Form(
+                    key: formKeyLoaiHD,
+                    child: InputInfoUserWidget(
+                      title: hoiDaps.keys.elementAt(2),
+                      child: TextFormFieldWidget(
+                        controller: loaiHDController,
+                        isEnabled: true,
+                        onChange: (value) {
+                          formKeyLoaiHD.currentState!.validate();
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return S.current.khong_duoc_de_trong;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Form(
-                  key: formKeyDanhSach,
-                  child: InputInfoUserWidget(
-                    title: hoiDaps.keys.elementAt(3),
-                    child: TextFormFieldWidget(
-                      controller: danhSachController,
-                      isEnabled: true,
-                      onChange: (value) {
-                        formKeyDanhSach.currentState!.validate();
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return S.current.khong_duoc_de_trong;
-                        }
-                        return null;
-                      },
+                  Form(
+                    key: formKeyDanhSach,
+                    child: InputInfoUserWidget(
+                      title: hoiDaps.keys.elementAt(3),
+                      child: TextFormFieldWidget(
+                        controller: danhSachController,
+                        isEnabled: true,
+                        onChange: (value) {
+                          formKeyDanhSach.currentState!.validate();
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return S.current.khong_duoc_de_trong;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
-                ),
-                spaceH24,
-                BlockTextView(
-                  title: hoiDaps.keys.elementAt(4),
-                  contentController: noiDungController,
-                  formKey: formKeyNoiDung,
-                ),
-              ],
-            ),
-            spaceH36,
-            DoubleButtonEditHDSDScreen(
-              onPressed2: () {},
-              title2: S.current.cap_nhat,
-              onPressed1: () {},
-              title1: S.current.xem_truoc,
-            )
-          ],
+                  spaceH24,
+                  BlockTextView(
+                    title: hoiDaps.keys.elementAt(4),
+                    contentController: noiDungController,
+                    formKey: formKeyNoiDung,
+                  ),
+                ],
+              ),
+              spaceH36,
+              DoubleButtonEditHDSDScreen(
+                onPressed2: () {},
+                title2: S.current.cap_nhat,
+                onPressed1: () {},
+                title1: S.current.xem_truoc,
+              )
+            ],
+          ),
         ),
       ),
     );
