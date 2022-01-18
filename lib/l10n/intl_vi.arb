@@ -164,5 +164,8 @@
   "tim_kiem_hoi_dap" : "Tìm kiếm hỏi đáp",
   "ban_co_the_tim_kiem_hoi_dap" : "Bạn có thể tìm kiếm các hỏi đáp tại đây",
   "tim_kiem" : "Tìm kiếm",
-  "thong_bao" : "Thông báo"
+  "thong_bao" : "Thông báo",
+  "vao_hop_truc_tuyen" : "Vào họp trực tuyến :",
+  "thong_bao_khan" : "Thông báo khẩn"
+
 }

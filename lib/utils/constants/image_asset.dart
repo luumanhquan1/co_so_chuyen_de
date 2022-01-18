@@ -103,6 +103,8 @@ class ImageAssets {
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+  static const String icSetting = '$baseImg/ic_setting.svg';
+  static const String icUnion = '$baseImg/ic_union.svg';
 
   static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
 
@@ -125,7 +127,7 @@ class ImageAssets {
 
   static const String icDeleteRed = '$baseImg/ic_delete_red.svg';
   static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
-  static const String icClaseSquare = '$baseImg/ic_close_square.svg';
+  static const String icCloseSquare = '$baseImg/ic_close_square.svg';
   static const String icDanger = '$baseImg/ic_danger.svg';
   static const String icMessenge = '$baseImg/ic_messenge.svg';
   static const String icVideo = '$baseImg/ic_video.svg';
