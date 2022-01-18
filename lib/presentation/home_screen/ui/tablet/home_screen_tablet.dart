@@ -11,7 +11,6 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/header_ta
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
 
 import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/thong_bao/ui/tablet/thong_bao_screen_tablet.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -68,43 +67,20 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
           title: S.current.home,
           acction: [
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchScreenTablet(),
-                  ),
-                );
-              },
-              child: SvgPicture.asset(ImageAssets.icSearch),
-            ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreenTablet(),
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(ImageAssets.icSearch),),
             const SizedBox(
               width: 31,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    reverseTransitionDuration:
-                        const Duration(milliseconds: 250),
-                    transitionDuration: const Duration(milliseconds: 250),
-                    pageBuilder: (_, animation, ___) {
-                      const begin = Offset(1.0, 0.0);
-                      const end = Offset.zero;
-                      final tween = Tween(end: end, begin: begin);
-                      final offsetAnimation = animation.drive(tween);
-                      return ThongBaoScreenTablet(
-                        offsetAnimation: offsetAnimation,
-                      );
-                    },
-                    opaque: false,
-                  ),
-                );
-              },
-              child: const ThongBaoWidget(
-                sum: 19,
-              ),
+            const ThongBaoWidget(
+              sum: 19,
             )
           ],
         ),

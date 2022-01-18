@@ -92,11 +92,6 @@ class DateTimeFormat {
   static const CREATE_BLOG_FORMAT = _dtFormat5;
 }
 
-class ThongBaoTypeConstant {
-  static const String LICH_HOP_MOI = 'LichHopMoi';
-  static const String TIN_NHAN_MOI = 'TinNhanMoi';
-}
-
 class WidgetTypeConstant {
   static const String TINH_HINH_XU_LY_VAN_BAN = 'TinhHinhXuLyVanBan';
   static const String VAN_BAN = 'VanBanWidGet';
