@@ -102,7 +102,8 @@ class ImageAssets {
   static const String icShieldDone = '$baseImg/ic_shield_done.svg';
   static const String image_lock_reset = '$baseImg/image_lock_reset.svg';
   static const String ic_email = '$baseImg/ic_email.svg';
-  static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icSearchBlu = '$baseImg/ic_search_blu.svg';
+  static const String icSearchWhite = '$baseImg/ic_search_white.svg';
   static const String icThongBao = '$baseImg/ic_thong_bao.svg';
   static const String icWork = '$baseImg/ic_work.svg';
   static const String ic_search_calendar='$baseImg/ic_search_calendar.svg';
@@ -110,7 +111,6 @@ class ImageAssets {
   static const String ic_next_color='$baseImg/ic_next_color.svg';
   static const String ic_prev_box='$baseImg/prev_box_ic.svg';
   static const String ic_next_box='$baseImg/next_box_ic.svg';
-  static const String ic_search='$baseImg/ic_search.svg';
 
   static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
   static const String ic_KinhRong = '$baseImg/ic_kinh_rong.svg';

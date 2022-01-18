@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NavigatorSlide {
+class DrawerSlide {
   static void navigatorSlide({
     required BuildContext context,
     required Widget screen,

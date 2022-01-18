@@ -14,7 +14,7 @@ import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_t
 import 'package:ccvc_mobile/presentation/thong_bao/ui/tablet/thong_bao_screen_tablet.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/navigator/navigator_slide.dart';
+import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,14 +77,14 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
                   ),
                 );
               },
-              child: SvgPicture.asset(ImageAssets.icSearch),
+              child: SvgPicture.asset(ImageAssets.icSearchWhite),
             ),
             const SizedBox(
               width: 31,
             ),
             GestureDetector(
               onTap: () {
-                NavigatorSlide.navigatorSlide(context: context,
+                DrawerSlide.navigatorSlide(context: context,
                     screen: const ThongBaoScreenTablet(), isLeft: false,);
               },
               child: const ThongBaoWidget(

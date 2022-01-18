@@ -57,13 +57,13 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchScreen(),
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const SearchScreen(),
                   ),
                 );
               },
               child: SvgPicture.asset(
-                ImageAssets.icSearch,
+                ImageAssets.icSearchWhite,
                 height: 18,
                 width: 18,
               ),
@@ -91,8 +91,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ThongBaoScreen(),
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => const ThongBaoScreen(),
                     ),
                   );
                 },
