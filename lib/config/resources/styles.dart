@@ -75,6 +75,20 @@ TextStyle tokenDetailAmount({
   );
 }
 
+TextStyle textDetailHDSD({
+  Color color = Colors.white,
+  double fontSize = 24,
+  FontWeight weight = FontWeight.w400,
+  double textHeight = 1.9,
+}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: weight,
+    fontStyle: FontStyle.normal,
+    fontSize: fontSize,
+  ).copyWith(height: textHeight);
+}
+
 TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
   return GoogleFonts.roboto(
     color: color,

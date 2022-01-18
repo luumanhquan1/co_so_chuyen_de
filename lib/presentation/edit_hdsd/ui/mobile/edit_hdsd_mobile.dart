@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/hoi_dap/hoi_dap.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/detail_hdsd/ui/mobile/detail_hdsd.dart';
 import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -117,7 +118,14 @@ class _EditHDSDScreenState extends State<EditHDSDScreen> {
         child: DoubleButtonBottom(
           onPressed2: () {},
           title2: S.current.cap_nhat,
-          onPressed1: () {},
+          onPressed1: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DetailHDSDScreen(),
+              ),
+            );
+          },
           title1: S.current.xem_truoc,
         ),
       ),
