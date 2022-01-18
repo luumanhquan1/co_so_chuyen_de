@@ -16,6 +16,7 @@ class ItemThongBaoMobile extends StatelessWidget {
   final String content;
   final String time;
   final bool status;
+  final String typeNotify;
 
   const ItemThongBaoMobile({
     Key? key,
@@ -24,6 +25,7 @@ class ItemThongBaoMobile extends StatelessWidget {
     required this.content,
     required this.time,
     required this.status,
+    required this.typeNotify,
   }) : super(key: key);
 
   @override
@@ -57,7 +59,7 @@ class ItemThongBaoMobile extends StatelessWidget {
                     ),
                     if (ThongBaoInherted.of(context)
                             .thongBaoCubit
-                            .typeContent(title) ==
+                            .typeContent(typeNotify) ==
                         ThongBaoType.TinNhanMoi)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

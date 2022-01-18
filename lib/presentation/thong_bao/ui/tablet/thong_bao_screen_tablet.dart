@@ -118,6 +118,7 @@ class _ThongBaoScreenTabletState extends State<ThongBaoScreenTablet> {
                                     content: data[index].content,
                                     time: data[index].time,
                                     status: data[index].status,
+                                    typeNotify: data[index].typeNotify,
                                   );
                                 },
                               );
@@ -169,6 +170,7 @@ class _ThongBaoScreenTabletState extends State<ThongBaoScreenTablet> {
                                       content: data[index].content,
                                       time: data[index].time,
                                       status: data[index].status,
+                                      typeNotify: data[index].typeNotify,
                                     );
                                   },
                                 );

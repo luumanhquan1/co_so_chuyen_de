@@ -14,6 +14,7 @@ class ItemThongBaoTablet extends StatelessWidget {
   final String content;
   final String time;
   final bool status;
+  final String typeNotify;
 
   const ItemThongBaoTablet({
     Key? key,
@@ -22,6 +23,7 @@ class ItemThongBaoTablet extends StatelessWidget {
     required this.content,
     required this.time,
     required this.status,
+    required this.typeNotify,
   }) : super(key: key);
 
   @override

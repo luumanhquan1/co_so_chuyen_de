@@ -72,6 +72,7 @@ class _ThongBaoScreenState extends State<ThongBaoScreen> {
                           content: data[index].content,
                           time: data[index].time,
                           status: data[index].status,
+                          typeNotify: data[index].typeNotify,
                         );
                       },
                     );
@@ -92,41 +93,45 @@ class _ThongBaoScreenState extends State<ThongBaoScreen> {
                       ),
                     ),
                     customSwitch(
-                        onToggle: (value) {
-                          thongBaoCubit.isSwitch = value;
-                          setState(() {});
-                        },
-                        value: thongBaoCubit.isSwitch,),
+                      onToggle: (value) {
+                        thongBaoCubit.isSwitch = value;
+                        setState(() {});
+                      },
+                      value: thongBaoCubit.isSwitch,
+                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 18.5,
                 ),
+                if (thongBaoCubit.isSwitch)
+                  StreamBuilder<List<ThongBaoModel>>(
+                    stream: thongBaoCubit.canhBaoStream,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Container();
+                      }
 
-                if (thongBaoCubit.isSwitch) StreamBuilder<List<ThongBaoModel>>(
-                  stream: thongBaoCubit.canhBaoStream,
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Container();
-                    }
+                      final data = snapshot.data ?? [];
 
-                    final data = snapshot.data ?? [];
-
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return ItemThongBaoMobile(
-                          image: data[index].image,
-                          title: data[index].title,
-                          content: data[index].content,
-                          time: data[index].time,
-                          status: data[index].status,
-                        );
-                      },
-                    );
-                  },
-                ) else Container(),
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return ItemThongBaoMobile(
+                            image: data[index].image,
+                            title: data[index].title,
+                            content: data[index].content,
+                            time: data[index].time,
+                            status: data[index].status,
+                            typeNotify: data[index].typeNotify,
+                          );
+                        },
+                      );
+                    },
+                  )
+                else
+                  Container(),
               ],
             ),
           ),

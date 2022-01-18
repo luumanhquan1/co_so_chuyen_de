@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/thong_bao/thong_bao_model.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/bloc/thong_bao_state.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/fake_data.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/thong_bao_type.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ThongBaoCubit extends BaseCubit<ThongBaoState> {
@@ -25,11 +26,11 @@ class ThongBaoCubit extends BaseCubit<ThongBaoState> {
     canhBaoSubject.sink.add(fakeDataCanhBao);
   }
 
-  ThongBaoType typeContent(String title) {
-    switch (title) {
-      case 'Có lịch họp mới':
+  ThongBaoType typeContent(String typeNotify) {
+    switch (typeNotify) {
+      case ThongBaoTypeConstant.LICH_HOP_MOI:
         return ThongBaoType.LichHopMoi;
-      case 'Có tin nhắn mới':
+      case ThongBaoTypeConstant.TIN_NHAN_MOI:
         return ThongBaoType.TinNhanMoi;
       default:
         return ThongBaoType.LichHopMoi;

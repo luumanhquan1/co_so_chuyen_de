@@ -119,10 +119,6 @@ class ImageAssets {
   static const String icSetting = '$baseImg/ic_setting.svg';
   static const String icUnion = '$baseImg/ic_union.svg';
 
-  static const String icCameraTablet = '$baseImg/ic_camera_tablet.svg';
-
-  static const String ic_search_calendar = '$baseImg/ic_search_calendar.svg';
-
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';
   static const String icQuanLyNhiemVuTablet =
