@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_t
 import 'package:ccvc_mobile/presentation/thong_bao/ui/tablet/thong_bao_screen_tablet.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/navigator/navigator_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,24 +84,8 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    reverseTransitionDuration:
-                        const Duration(milliseconds: 250),
-                    transitionDuration: const Duration(milliseconds: 250),
-                    pageBuilder: (_, animation, ___) {
-                      const begin = Offset(1.0, 0.0);
-                      const end = Offset.zero;
-                      final tween = Tween(end: end, begin: begin);
-                      final offsetAnimation = animation.drive(tween);
-                      return ThongBaoScreenTablet(
-                        offsetAnimation: offsetAnimation,
-                      );
-                    },
-                    opaque: false,
-                  ),
-                );
+                NavigatorSlide.navigatorSlide(context: context,
+                    screen: const ThongBaoScreenTablet(), isLeft: false,);
               },
               child: const ThongBaoWidget(
                 sum: 19,
@@ -131,7 +116,7 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
                         itemBuilder: (BuildContext context, int index) {
                           final int count = data.length;
                           final Animation<double> animation =
-                              Tween<double>(begin: 0.0, end: 1.0).animate(
+                          Tween<double>(begin: 0.0, end: 1.0).animate(
                             CurvedAnimation(
                               parent: animationController,
                               curve: Interval(
