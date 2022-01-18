@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/mobile/edit_hdsd_mobile.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_cubit.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget.dart';
+import 'package:ccvc_mobile/presentation/them_hdsd/ui/mobile/them_hdsd.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
@@ -30,7 +32,14 @@ class _HoiDapScreenState extends State<HoiDapScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ThemHDSDScreen(),
+                ),
+              );
+            },
             icon: SvgPicture.asset(ImageAssets.icAddButtonCalender),
           )
         ],
@@ -50,9 +59,21 @@ class _HoiDapScreenState extends State<HoiDapScreen> {
                 itemCount: cubit.listHoiDap.length,
                 itemBuilder: (context, index) {
                   return CustomHoiDapWidget(
-                    tieuDe: cubit.listHoiDap[index].tieuDe,
-                    chuDe: cubit.listHoiDap[index].chuDe,
-                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD,
+                    tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
+                    chuDe: cubit.listHoiDap[index].chuDe ?? '',
+                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
+                    onTapXoa: () {},
+                    onTapEdit: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditHDSDScreen(
+                            hoiDap: cubit.listHoiDap[index],
+                            index: index,
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),

@@ -1,10 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/tablet/edit_hdsd_tablet.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/base_popup.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/bloc/hoi_dap_cubit.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/widget/show_drop_drow_button_hoi_dap.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/search_widget.dart';
+import 'package:ccvc_mobile/presentation/them_hdsd/ui/tablet/them_hdsd_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +36,16 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDiaLogFeature(
+                context,
+                btnLeftTxt: S.current.xem_truoc,
+                btnRightTxt: S.current.cap_nhat,
+                title: S.current.them_hdsd,
+                child: const ThemHDSDScreenTablet(),
+                funcBtnOk: () {},
+              );
+            },
             icon: SvgPicture.asset(ImageAssets.icAddButtonCalender),
           )
         ],
@@ -94,9 +106,22 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
                 itemCount: cubit.listHoiDap.length,
                 itemBuilder: (context, index) {
                   return CustomHoiDapWidgetTablet(
-                    tieuDe: cubit.listHoiDap[index].tieuDe,
-                    chuDe: cubit.listHoiDap[index].chuDe,
-                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD,
+                    tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
+                    chuDe: cubit.listHoiDap[index].chuDe ?? '',
+                    loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
+                    onTapEdit: () {
+                      showDiaLogFeature(
+                        context,
+                        btnLeftTxt: S.current.xem_truoc,
+                        btnRightTxt: S.current.cap_nhat,
+                        title: S.current.chinh_sua_hdsd,
+                        child: EditHDSDScreenTablet(
+                          hoiDap: cubit.listHoiDap[index],
+                        ),
+                        funcBtnOk: () {},
+                      );
+                    },
+                    onTapXoa: () {},
                   );
                 },
               ),
