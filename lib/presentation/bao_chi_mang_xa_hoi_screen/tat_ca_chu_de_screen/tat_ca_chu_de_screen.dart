@@ -43,6 +43,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 130,
