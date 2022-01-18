@@ -151,6 +151,7 @@
   "khong_trung_mat_khau_moi": "Không trùng với mật khẩu mới",
   "khong_trung_mat_khau_nhap_lai": "Không trùng với mật khẩu nhập lại",
   "danh_sach_van_ban_di": "Danh sách văn bản đi",
+  "ung_dung": "Ứng dụng",
   "don_vi": "Đơn vị",
   "thong_tin": "Thông tin",
   "anh_dai_dien": "Ảnh đại điện",
@@ -188,7 +189,6 @@
   "hoat_dong": "Hoạt động",
   "k_hoat_dong": "Không hoạt động",
   "stt": "STT",
-  "ung_dung": "Ứng dụng",
   "ten_dang_nhap": "Tên đăng nhập",
   "mac_dinh": "Mặc định",
   "chuc_vu": "Chức vụ",
@@ -208,5 +208,8 @@
   "chu_de_hdsd": "Chủ đề HDSD",
   "xem_danh_sach": "Xem danh sách chi tiết",
   "them_moi": "Thêm mới",
-  "them_hdsd": "Thêm hướng dẫn sử dụng"
+  "them_hdsd": "Thêm hướng dẫn sử dụng",
+  "thong_bao" : "Thông báo",
+  "vao_hop_truc_tuyen" : "Vào họp trực tuyến :",
+  "thong_bao_khan" : "Thông báo khẩn"
 }
