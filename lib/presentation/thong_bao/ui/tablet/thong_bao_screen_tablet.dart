@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/thong_bao/fake_data.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/widget/item_thong_bao_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/switch/custom_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -120,7 +121,7 @@ class _ThongBaoScreenTabletState extends State<ThongBaoScreenTablet> {
                         fontSize: 18,
                       ),
                     ),
-                    customSwitch(
+                    CustomSwitch(
                       onToggle: (value) {
                         thongBaoCubit.isSwitch = value;
                         setState(() {});

@@ -4,13 +4,11 @@ import 'package:ccvc_mobile/domain/model/thong_bao/thong_bao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/bloc/thong_bao_cubit.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/widget/item_thong_bao_mobile.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/mobile/base_app_bar_mobile.dart';
-import 'package:ccvc_mobile/widgets/button_switch/flutter_switch_widget.dart';
+import 'package:ccvc_mobile/widgets/switch/custom_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ThongBaoScreen extends StatefulWidget {
   const ThongBaoScreen({
@@ -92,7 +90,7 @@ class _ThongBaoScreenState extends State<ThongBaoScreen> {
                         fontSize: 16,
                       ),
                     ),
-                    customSwitch(
+                    CustomSwitch(
                       onToggle: (value) {
                         thongBaoCubit.isSwitch = value;
                         setState(() {});
@@ -161,18 +159,4 @@ class ThongBaoInherted extends InheritedWidget {
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
     return true;
   }
-}
-
-Widget customSwitch({required bool value, required Function(bool) onToggle}) {
-  return FlutterSwitchWidget(
-    height: 24,
-    width: 42,
-    toggleSize: 14,
-    inactiveIcon: SvgPicture.asset(ImageAssets.icX),
-    activeIcon: SvgPicture.asset(ImageAssets.icV),
-    inactiveColor: borderColor,
-    activeColor: labelColor,
-    value: value,
-    onToggle: onToggle,
-  );
 }
