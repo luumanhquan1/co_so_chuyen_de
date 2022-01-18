@@ -22,7 +22,7 @@ class ItemListNews extends StatelessWidget {
               flex: 3,
               child: Container(
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   clipBehavior: Clip.antiAlias,
                   child: Image(
                     image: NetworkImage(image),

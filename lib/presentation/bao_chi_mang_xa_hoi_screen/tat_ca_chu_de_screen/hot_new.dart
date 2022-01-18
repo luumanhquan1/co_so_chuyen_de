@@ -24,7 +24,7 @@ class HotNews extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.center,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
           child: Image(image: NetworkImage(image), fit: BoxFit.cover,),
         ),
         const SizedBox(
@@ -35,7 +35,7 @@ class HotNews extends StatelessWidget {
           style: textNormalCustom(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: titleCalenderWork,),
+              color: titleCalenderWork,).copyWith(height: 1.3),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
