@@ -11,8 +11,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
-  const TableCalendarWidget({Key? key,})
-      : super(key: key);
+  const TableCalendarWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -91,7 +92,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         children: [
                           Text(
                             DateTime.now().toStringWithListFormat,
-                            style:  textNormalCustom(
+                            style: textNormalCustom(
                               fontSize: 14.0.textScale(),
                               fontWeight: FontWeight.w500,
                               color: titleColor,
@@ -120,7 +121,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       },
                       child: SvgPicture.asset(ImageAssets.ic_search_calendar),
                     ),
-                     SizedBox(
+                    SizedBox(
                       width: 10.0.textScale(),
                     ),
                   ],
