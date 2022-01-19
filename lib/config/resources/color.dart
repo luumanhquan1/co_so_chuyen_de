@@ -110,6 +110,15 @@ const greyHide = Color(0xFFF5F6FA);
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
+const containerColor = Color(0xff4F4F4F);
+const containerColorTab = Color(0xffE2E8F0);
+const fontColorTablet = Colors.black;
+const fontColorTablet2 = Color(0xff3D5586);
+const numberColorTablet = Color(0xff7966FF);
+const numberColorTabletbg = Color(0xffECEAFF);
+const iconColorDown = Color(0xffA2AEBD);
+Color cellColorborder = Color(0xffDBDFEF).withOpacity(0.5);
+Color cellColor = Color(0xffDBDFEF).withOpacity(0.1);
 
 const dateColor = Color(0xFF667793);
 
@@ -123,7 +132,8 @@ const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
 const bgTabletColor = Color(0xffF9FAFF);
-const toDayColor = Color(0xFFF2F0FF);
+const toDayColor = Color(0xFFDBDFEF);
+
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

@@ -54,8 +54,10 @@ class MarqueeWidget extends StatelessWidget {
                           Container(
                             height: 6.0.textScale(),
                             width: 6.0.textScale(),
-                            decoration: const BoxDecoration(
-                              color: specialPriceColor,
+                            decoration: BoxDecoration(
+                              color: index % 2 == 0
+                                  ? specialPriceColor
+                                  : textTitle,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -65,7 +67,9 @@ class MarqueeWidget extends StatelessWidget {
                           Text(
                             result.title,
                             style: textNormalCustom(
-                              color: specialPriceColor,
+                              color: index % 2 == 0
+                                  ? specialPriceColor
+                                  : textTitle,
                               fontSize: 14.0.textScale(),
                             ),
                           )
