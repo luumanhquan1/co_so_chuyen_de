@@ -27,7 +27,7 @@ class _WidgetItemState extends State<WidgetItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 48,
       width: double.maxFinite,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
