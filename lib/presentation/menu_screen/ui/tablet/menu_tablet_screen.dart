@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/tablet/manager_personal_information_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/bloc/menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
@@ -22,6 +23,7 @@ class MenuTabletScreen extends StatefulWidget {
 
 class _MenuTabletScreenState extends State<MenuTabletScreen> {
   MenuCubit menuCubit = MenuCubit();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -40,10 +42,21 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            HeaderMenuWidget(
-              paddingVertical: 20,
-              urlBackGround: ImageAssets.imgHeaderMenuTablet,
-              menuCubit: menuCubit,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const ManagerPersonalInformationTablet(),
+                  ),
+                );
+              },
+              child: HeaderMenuWidget(
+                paddingVertical: 20,
+                urlBackGround: ImageAssets.imgHeaderMenuTablet,
+                menuCubit: menuCubit,
+              ),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
