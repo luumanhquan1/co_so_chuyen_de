@@ -32,9 +32,9 @@ class _ButtonCustomBottomState extends State<ButtonCustomBottom> {
               widget.onPressed();
             },
             child: Container(
-              height: 40.0.textScale(space: 16.0),
+              height: 30.0.textScale(space: 16.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0.textScale(space: 4.0)),
+                borderRadius: BorderRadius.circular(8.0.textScale(space: 4.0)),
                 color: widget.isColorBlue ? textDefault : buttonColor2,
               ),
               child: Center(
