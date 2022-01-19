@@ -42,22 +42,22 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
       margin: const EdgeInsets.only(top: 6),
       child: Stack(
         children: [
-          MouseRegion(
-            onHover: (_) {
-              HomeProvider.of(context).homeCubit.showDialog(null);
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+          Container(
+            color: Colors.transparent,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MouseRegion(
+                        onHover: (_) {
+                          HomeProvider.of(context).homeCubit.closeDialog();
+                        },
+                        child: Row(
                           children: [
                             if (widget.leadingIcon == null)
                               const SizedBox()
@@ -75,34 +75,39 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
                             ),
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            if (widget.onTapIcon != null) {
-                              widget.onTapIcon!();
-                            } else {}
-                          },
-                          child: Container(
-                            width: 20,
-                            color: Colors.transparent,
-                            alignment: Alignment.centerRight,
-                            child: SvgPicture.asset(widget.urlIcon),
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (widget.onTapIcon != null) {
+                            widget.onTapIcon!();
+                          } else {}
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          color: Colors.transparent,
+                          alignment: Alignment.centerRight,
+                          child: SvgPicture.asset(widget.urlIcon),
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: widget.spacingTitle,
-                  ),
-                  Padding(
+                ),
+                SizedBox(
+                  height: widget.spacingTitle,
+                ),
+                MouseRegion(
+                  onHover: (_) {
+                    HomeProvider.of(context).homeCubit.closeDialog();
+                  },
+                  child: Padding(
                     padding: widget.padding ??
                         const EdgeInsets.symmetric(
                           horizontal: 16,
                         ),
                     child: widget.child,
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
           Positioned(
