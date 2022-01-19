@@ -209,7 +209,9 @@
   "xem_danh_sach": "Xem danh sách chi tiết",
   "them_moi": "Thêm mới",
   "them_hdsd": "Thêm hướng dẫn sử dụng",
-  "thong_bao" : "Thông báo",
-  "vao_hop_truc_tuyen" : "Vào họp trực tuyến :",
-  "thong_bao_khan" : "Thông báo khẩn"
+  "xem_hdsd": "Xem trước HDSD",
+  "thong_tin_chuong_trinh_hop": "Thông tin về Chương trình họp",
+  "thong_bao": "Thông báo",
+  "vao_hop_truc_tuyen": "Vào họp trực tuyến :",
+  "thong_bao_khan": "Thông báo khẩn"
 }
