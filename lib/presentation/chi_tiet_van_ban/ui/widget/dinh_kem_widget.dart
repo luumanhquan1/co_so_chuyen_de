@@ -1,20 +1,17 @@
-
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
-
 class AttackButtonWidget extends StatefulWidget {
   AttackButtonWidget(
       {Key? key,
-        required this.onAddPresss,
-        required this.onRemovePress,
-        this.onSignNumberPress})
+      required this.onAddPresss,
+      required this.onRemovePress,
+      this.onSignNumberPress})
       : super(key: key);
   List<PlatformFile> listFile = [];
+
   // onAddPresss: parameter: (Tong file da upload , danh sach file vua them)
   void Function(List<PlatformFile>, List<PlatformFile>) onAddPresss;
   VoidCallback? onSignNumberPress;
@@ -51,7 +48,7 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                   //   return;
                   // }
                   final FilePickerResult? result =
-                  await FilePicker.platform.pickFiles(
+                      await FilePicker.platform.pickFiles(
                     allowMultiple: true,
                   );
                   final List<PlatformFile> listFileToSv = [];
@@ -83,7 +80,7 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
-                      .copyWith(color: Colors.white),
+                      .copyWith(color: Colors.white, fontSize: 14),
                 ),
               )),
           Visibility(
@@ -124,7 +121,7 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                 itemCount: value.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  final int indexDuoi=value[index].name.lastIndexOf('.');
+                  final int indexDuoi = value[index].name.lastIndexOf('.');
                   return Container(
                     height: 38,
                     child: Row(
@@ -133,27 +130,27 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                       children: [
                         Expanded(
                             child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width-160),
-                                  child: Text(
-                                    '${value[index].name.substring(0,indexDuoi)}',
-                                    style: Theme.of(context).textTheme.headline1,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-
-                                  ),
-                                ),
-                                Text(
-                                  '${value[index].name.substring(indexDuoi)}',
-                                  style: Theme.of(context).textTheme.headline1,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                )
-                              ],
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width - 160),
+                              child: Text(
+                                '${value[index].name.substring(0, indexDuoi)}',
+                                style: Theme.of(context).textTheme.headline1,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ),
+                            Text(
+                              '${value[index].name.substring(indexDuoi)}',
+                              style: Theme.of(context).textTheme.headline1,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             )
-                        ),
+                          ],
+                        )),
                         const SizedBox(
                           width: 10,
                         ),
@@ -169,7 +166,8 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                                         List.from(widget.listFile);
                                     widget.onRemovePress(index);
                                   },
-                                  child: const Icon(Icons.delete, color: Colors.red)),
+                                  child: const Icon(Icons.delete,
+                                      color: Colors.red)),
                               // icon: Icon(Icons.delete),
                               // color: Colors.red,
                             ),

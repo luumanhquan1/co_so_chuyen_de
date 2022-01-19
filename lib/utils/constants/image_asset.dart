@@ -107,6 +107,7 @@ class ImageAssets {
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
+  static const String ic_gui_y_kien = '$baseImg/icon_send.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

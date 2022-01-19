@@ -31,86 +31,97 @@ extension trangThaiMission on TrangThaiMission {
 }
 
 class DetailDocumentModel {
-  bool CoTheCapNhatTinhHinhThucHien = false;
-  bool CoTheDonDoc = false;
-  bool CoTheSua = false;
-  bool CoTheThuHoi = false;
-  bool CoTheTraLai = false;
-  bool CoTheXoa = false;
-  String HanXuLy = '';
-  String HanXuLyVPCP = '';
-  String Id = '';
-  String NguoiGiao = '';
-  String NguoiTaoId = '';
-  String ProcessCode = '';
-  String ProcessContent = '';
-  String ProcessTypeCode = '';
-  String ProcessTypeId = '';
-  String ProcessTypeName = '';
-  String StatusCode = '';
-  String StatusId = '';
-  String StatusName = '';
-  String TaskId = '';
-  bool isPersonal = false;
+  String? soVanBan = '';
+  String? soDen = '';
+  String? soPhu = '';
+  String? noiGui = '';
+  String? loaiVanBan = '';
+  String? soKyHieu = '';
+  String? ngayBH = '';
+  String? ngayDen = '';
+  String? doKhan = '';
+  String? ngayHanXL = '';
+  String? hanXL = '';
+  String? nguoiKy = '';
+  int? soBan = 0;
+  int? soTrang = 0;
+  String? phuongThucNhan = '';
+  String? trichYeu = '';
+  bool vanBanQlPL = false;
+  bool hoiBao = false;
+  bool daNhanBanGiay = false;
 
   DetailDocumentModel(
-      {required this.CoTheCapNhatTinhHinhThucHien,
-      required this.CoTheDonDoc,
-      required this.CoTheSua,
-      required this.CoTheThuHoi,
-      required this.CoTheTraLai,
-      required this.CoTheXoa,
-      required this.HanXuLy,
-      required this.HanXuLyVPCP,
-      required this.Id,
-      required this.NguoiGiao,
-      required this.NguoiTaoId,
-      required this.ProcessCode,
-      required this.ProcessContent,
-      required this.ProcessTypeId,
-      required this.ProcessTypeName,
-      required this.StatusCode,
-      required this.StatusId,
-      required this.StatusName,
-      required this.TaskId});
+      {required this.soVanBan,
+      required this.soDen,
+      required this.trichYeu,
+      required this.daNhanBanGiay,
+      required this.doKhan,
+      required this.hanXL,
+      required this.hoiBao,
+      required this.loaiVanBan,
+      required this.ngayBH,
+      required this.ngayDen,
+      required this.ngayHanXL,
+      required this.nguoiKy,
+      required this.noiGui,
+      required this.phuongThucNhan,
+      required this.soBan,
+      required this.soPhu,
+      required this.soKyHieu,
+      required this.soTrang,
+      required this.vanBanQlPL});
 
   DetailDocumentModel.fromDetail();
 
   factory DetailDocumentModel.fromJson(Map<String, dynamic> json) {
     return DetailDocumentModel(
-        CoTheCapNhatTinhHinhThucHien: json['CoTheCapNhatTinhHinhThucHien'],
-        CoTheDonDoc: json['CoTheDonDoc'],
-        CoTheSua: json['CoTheSua'],
-        CoTheThuHoi: json['CoTheThuHoi'],
-        CoTheTraLai: json['CoTheTraLai'],
-        CoTheXoa: json['CoTheXoa'],
-        HanXuLy: json['HanXuLy'].trim(),
-        HanXuLyVPCP: json['HanXuLyVPCP'].trim(),
-        Id: json['Id'].trim(),
-        NguoiGiao: json['NguoiGiao'].trim(),
-        NguoiTaoId: json['NguoiTaoId'].trim(),
-        ProcessCode: json['ProcessCode'].trim(),
-        ProcessContent: json['ProcessContent'].stripHtmlIfNeeded().trim(),
-        ProcessTypeId: json['ProcessTypeId'].trim(),
-        ProcessTypeName: json['ProcessTypeName'].trim(),
-        StatusCode: json['StatusCode'].trim(),
-        StatusId: json['StatusId'].trim(),
-        StatusName: json['StatusName'].trim(),
-        TaskId: json['TaskId'].trim());
+        soVanBan: json['CoTheCapNhatTinhHinhThucHien'],
+        soDen: json['CoTheDonDoc'],
+        soPhu: json['CoTheSua'],
+        noiGui: json['CoTheThuHoi'],
+        loaiVanBan: json['CoTheTraLai'],
+        soKyHieu: json['CoTheXoa'],
+        ngayBH: json['HanXuLy'].trim(),
+        ngayDen: json['HanXuLyVPCP'].trim(),
+        doKhan: json['Id'].trim(),
+        ngayHanXL: json['NguoiGiao'].trim(),
+        hanXL: json['NguoiTaoId'].trim(),
+        nguoiKy: json['ProcessCode'].trim(),
+        soBan: json['ProcessContent'].stripHtmlIfNeeded().trim(),
+        soTrang: json['ProcessTypeId'].trim(),
+        phuongThucNhan: json['ProcessTypeName'].trim(),
+        trichYeu: json['StatusCode'].trim(),
+        vanBanQlPL: json['StatusId'].trim(),
+        hoiBao: json['StatusName'].trim(),
+        daNhanBanGiay: json['TaskId'].trim());
   }
 
   List<DocumentDetailRow> toListRow() {
     final List<DocumentDetailRow> list = [
+      DocumentDetailRow('Sổ văn bản', soVanBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Số đến', soDen, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Số phụ', soPhu, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Nơi gửi', noiGui, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Loại văn bản', loaiVanBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Số ký hiệu', soKyHieu, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Ngày BH', ngayBH, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Ngày đến', ngayDen, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Độ khẩn', doKhan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Ngày hạn XL', ngayHanXL, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Hạn Xử lý', hanXL, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Người ký', nguoiKy, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Số bản', soBan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Số trang', soTrang, TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          'detail_mission_loaiNV', ProcessTypeName, TypeDocumentDetailRow.text),
+          'Phương thức nhận', phuongThucNhan, TypeDocumentDetailRow.text),
+      DocumentDetailRow('Trích yếu', trichYeu, TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          'detail_mission_th_thuchien', StatusName, TypeDocumentDetailRow.text),
+          'Văn bản QPPL', vanBanQlPL, TypeDocumentDetailRow.checkbox),
       DocumentDetailRow(
-          'detail_mission_noidung', ProcessContent, TypeDocumentDetailRow.text),
+          'Hồi báo văn bản', hoiBao, TypeDocumentDetailRow.checkbox),
       DocumentDetailRow(
-          'detail_mission_sonv', ProcessCode, TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'detail_mission_hanxuly', HanXuLy, TypeDocumentDetailRow.text),
+          'Đã nhận bản giấy', daNhanBanGiay, TypeDocumentDetailRow.checkbox),
     ];
 
     //   if (ProcessTypeName == 'Nhiệm vụ CP/VPCP') {

@@ -54,7 +54,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
               height: 20,
               child: Checkbox(
                   checkColor: Colors.white, // color of tick Mark
-                  activeColor: const Color(0xffDB353A),
+                  activeColor: const Color(0xff7966FF),
                   value: widget.isCheck,
                   onChanged: (value) {
                     if (widget.onChange != null) {
