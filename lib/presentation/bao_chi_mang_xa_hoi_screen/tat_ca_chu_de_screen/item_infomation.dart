@@ -30,16 +30,19 @@ class ItemInfomation extends StatelessWidget {
           width: 10,
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title,
                 style: textNormalCustom(
                     color: unselectLabelColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14)),
+                    fontSize: 14,),),
+            const SizedBox(height: 5,),
             Text(
               index,
               style: textNormalCustom(
-                  color: color, fontSize: 26, fontWeight: FontWeight.w700),
+                  color: color, fontSize: 26, fontWeight: FontWeight.w700,),
             )
           ],
         )

@@ -122,7 +122,6 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
                 if (snapshot.hasData) {
                   final data = snapshot.data!;
                   return PieChart(
-
                     chartData: [
                       ChartData(
                         S.current.cho_trinh_ky,

@@ -40,9 +40,8 @@ dependencies:
   syncfusion_flutter_calendar: ^19.4.40
   date_format: ^2.0.2
   pin_code_fields: ^7.3.0
-
-
-
+  keyboard_dismisser: ^2.0.0
+  sticky_headers: ^0.2.0
   #Library helpful
   intl: ^0.17.0
   event_bus: ^2.0.0
@@ -56,6 +55,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   logger: any
   rxdart: ^0.27.1
+  #  permission_handler: ^8.1.4+2
+  file_picker: ^4.0.2
+  cool_alert: ^1.1.0
   expandable: 5.0.1
   sliding_up_panel: ^2.0.0+1
 
@@ -63,7 +65,6 @@ dependencies:
   carousel_slider: ^4.0.0-nullsafety.0
   dots_indicator: ^2.0.0
   dotted_border:
-  keyboard_dismisser: ^2.0.0
   #svg
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
@@ -79,7 +80,6 @@ dependencies:
   injectable: ^1.4.1
   freezed: ^0.14.2
   tuple: ^2.0.0
-  file_picker: ^4.3.1
 
 dev_dependencies:
   flutter_test:

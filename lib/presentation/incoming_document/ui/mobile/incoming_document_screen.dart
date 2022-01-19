@@ -32,6 +32,7 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
                 itemCount: cubit.listIncomingDocument.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCell(
+                    onTap: () {},
                     title: cubit.listIncomingDocument[index].loaiVanBan,
                     dateTime: cubit.listIncomingDocument[index].ngayTao,
                     userName: cubit.listIncomingDocument[index].nguoiSoanThao,

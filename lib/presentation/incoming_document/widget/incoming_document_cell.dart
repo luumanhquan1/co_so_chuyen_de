@@ -9,6 +9,7 @@ class IncomingDocumentCell extends StatelessWidget {
   final String userImage;
   final String userName;
   final String status;
+  final Function onTap;
 
   const IncomingDocumentCell({
     Key? key,
@@ -17,12 +18,15 @@ class IncomingDocumentCell extends StatelessWidget {
     required this.userImage,
     required this.userName,
     required this.status,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20.0),
         height: 107,

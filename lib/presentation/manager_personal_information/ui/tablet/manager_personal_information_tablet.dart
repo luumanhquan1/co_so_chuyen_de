@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/edit_personal_information_tablet.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_don_vi.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_image.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_thong_tin_left.dart';
@@ -25,18 +27,31 @@ class _ManagerPersonalInformationTabletState
     extends State<ManagerPersonalInformationTablet> {
   @override
   Widget build(BuildContext context) {
+    final ManagerPersonalInformationCubit _cubit =
+        ManagerPersonalInformationCubit();
     return Scaffold(
       backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
         title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset(ImageAssets.icVector),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        elevation: 0.2,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditPersonInformationTabletScreen(
+                    managerPersonalInformationModel:
+                        _cubit.managerPersonalInformationModel,
+                  ),
+                ),
+              );
+            },
             icon: SvgPicture.asset(ImageAssets.icManager),
           ),
           spaceW30

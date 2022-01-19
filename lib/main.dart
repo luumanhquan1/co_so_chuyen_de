@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 MethodChannel trustWalletChannel = const MethodChannel('flutter/trust_wallet');
 
@@ -45,51 +46,53 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: () => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: Strings.app_name,
-        theme: ThemeData(
-          primaryColor: AppTheme.getInstance().primaryColor(),
-          cardColor: Colors.white,
-          textTheme: GoogleFonts.latoTextTheme(
-            Theme.of(context).textTheme,
+    return KeyboardDismisser(
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        builder: () => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: Strings.app_name,
+          theme: ThemeData(
+            primaryColor: AppTheme.getInstance().primaryColor(),
+            cardColor: Colors.white,
+            textTheme: GoogleFonts.latoTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            appBarTheme: const AppBarTheme(
+              color: Colors.white,
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
+            ),
+            dividerColor: dividerColor,
+            scaffoldBackgroundColor: Colors.white,
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: AppTheme.getInstance().primaryColor(),
+              selectionColor: AppTheme.getInstance().primaryColor(),
+              selectionHandleColor: AppTheme.getInstance().primaryColor(),
+            ),
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              secondary: AppTheme.getInstance().accentColor(),
+            ),
           ),
-          appBarTheme: const AppBarTheme(
-            color: Colors.white,
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ),
-          dividerColor: dividerColor,
-          scaffoldBackgroundColor: Colors.white,
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: AppTheme.getInstance().primaryColor(),
-            selectionColor: AppTheme.getInstance().primaryColor(),
-            selectionHandleColor: AppTheme.getInstance().primaryColor(),
-          ),
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: AppTheme.getInstance().accentColor(),
-          ),
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            // if (supportedLocales.contains(
+            //   Locale(deviceLocale?.languageCode ?? EN_CODE),
+            // )) {
+            //   return deviceLocale;
+            // } else {
+            //   return const Locale.fromSubtags(languageCode: EN_CODE);
+            // }
+            return const Locale.fromSubtags(languageCode: VI_CODE);
+          },
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          onGenerateRoute: AppRouter.generateRoute,
+          initialRoute: AppRouter.splash,
         ),
-        localeResolutionCallback: (deviceLocale, supportedLocales) {
-          // if (supportedLocales.contains(
-          //   Locale(deviceLocale?.languageCode ?? EN_CODE),
-          // )) {
-          //   return deviceLocale;
-          // } else {
-          //   return const Locale.fromSubtags(languageCode: EN_CODE);
-          // }
-          return const Locale.fromSubtags(languageCode: VI_CODE);
-        },
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: AppRouter.generateRoute,
-        initialRoute: AppRouter.splash,
       ),
     );
   }

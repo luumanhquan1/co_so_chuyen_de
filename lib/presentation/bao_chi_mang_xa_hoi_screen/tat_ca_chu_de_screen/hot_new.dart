@@ -17,62 +17,59 @@ class HotNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.center,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
-            child: Image(image: NetworkImage(image), fit: BoxFit.cover,),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            title,
-            style: textNormalCustom(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: titleCalenderWork),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SvgPicture.asset(ImageAssets.icCalendar),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                date,
-                style: textNormalCustom(
-                    color: unselectedLabelColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            content,
-            style: textNormalCustom(
-                color: unselectedLabelColor,
-                fontWeight: FontWeight.w400,
-                fontSize: 14),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.center,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          child: Image(image: NetworkImage(image), fit: BoxFit.cover,),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          title,
+          style: textNormalCustom(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: titleCalenderWork,).copyWith(height: 1.3),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            SvgPicture.asset(ImageAssets.icCalendar),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              date,
+              style: textNormalCustom(
+                  color: unselectedLabelColor,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          content,
+          style: textNormalCustom(
+              color: unselectedLabelColor,
+              fontWeight: FontWeight.w400,
+              fontSize: 14,),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

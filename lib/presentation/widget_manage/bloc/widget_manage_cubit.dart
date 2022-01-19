@@ -1,5 +1,9 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/fake_data.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:rxdart/subjects.dart';
 
 class WidgetManageCubit {
@@ -38,6 +42,7 @@ class WidgetManageCubit {
     final List<WidgetModel> listItemWidgetNotUse = _listWidgetNotUse.value;
     listItemWidgetUsing.insert(listItemWidgetUsing.length, widgetItem);
     listItemWidgetNotUse.removeAt(index);
+    orderWidgetHome(listItemWidgetUsing);
     _listWidgetUsing.sink.add(listItemWidgetUsing);
     _listWidgetNotUse.sink.add(listItemWidgetNotUse);
   }
@@ -51,6 +56,7 @@ class WidgetManageCubit {
     listItemWidgetNotUse.insert(0, widgetItem);
     listItemWidgetUsing.removeAt(index);
     _listWidgetUsing.sink.add(listItemWidgetUsing);
+    orderWidgetHome(listItemWidgetUsing);
     _listWidgetNotUse.sink.add(listItemWidgetNotUse);
   }
 
@@ -63,9 +69,22 @@ class WidgetManageCubit {
     int oldIndex,
     int newIndex,
   ) {
-    final List<WidgetModel>listUpdate=_listWidgetUsing.value;
+
+    final List<WidgetModel> listUpdate = _listWidgetUsing.value;
     final element=listUpdate.removeAt(oldIndex);
     listUpdate.insert(newIndex, element);
+    if(APP_DEVICE==DeviceType.TABLET){
+      keyHomeTablet.currentState?.homeCubit.orderWidget(listUpdate);
+    }else{
+      keyHomeMobile.currentState?.homeCubit.orderWidget(listUpdate);
+    }
     _listUpdate.sink.add(listUpdate);
+  }
+  void orderWidgetHome(List<WidgetModel> listUpdate){
+    if(APP_DEVICE==DeviceType.TABLET){
+      keyHomeTablet.currentState?.homeCubit.orderWidget(listUpdate);
+    }else{
+      keyHomeMobile.currentState?.homeCubit.orderWidget(listUpdate);
+    }
   }
 }

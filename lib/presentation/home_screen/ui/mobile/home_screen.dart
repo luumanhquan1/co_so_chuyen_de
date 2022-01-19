@@ -7,9 +7,12 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
-
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
+import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.dart';
+import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 final keyHomeMobile = GlobalKey<_HomeScreenMobileState>();
 
@@ -49,6 +52,23 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         backgroundColor: homeColor,
         appBar: AppBar(
           elevation: 0,
+          leading: Center(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const SearchScreen(),
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                ImageAssets.icSearchWhite,
+                height: 18,
+                width: 18,
+              ),
+            ),
+          ),
           title: Text(
             S.current.home,
             style: textNormalCustom(
@@ -65,6 +85,30 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               ),
             ),
           ),
+          actions: [
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => const ThongBaoScreen(),
+                    ),
+                  );
+                },
+                child: const SizedBox(
+                  width: 24,
+                  height: 25,
+                  child: ThongBaoWidget(
+                    sum: 10,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 16,
+            )
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -79,11 +123,21 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               child: Column(
                 children: [
                   const HeaderWidget(),
-                  Column(
-                    children: List.generate(WidgetType.values.length, (index) {
-                      final type = WidgetType.values[index];
-                      return type.getItemsMobile();
-                    }),
+                  StreamBuilder<List<WidgetModel>>(
+                    stream: homeCubit.getConfigWidget,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <WidgetModel>[];
+                      if (data.isNotEmpty) {
+                        return Column(
+                          children: List.generate(data.length, (index) {
+                            final type = data[index];
+                            return type.widgetType?.getItemsMobile() ??
+                                const SizedBox();
+                          }),
+                        );
+                      }
+                      return const SizedBox();
+                    },
                   )
                 ],
               ),

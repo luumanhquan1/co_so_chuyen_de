@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:flutter/material.dart';
 
 class FlutterSwitchWidget extends StatefulWidget {
@@ -5,9 +6,9 @@ class FlutterSwitchWidget extends StatefulWidget {
     Key? key,
     required this.value,
     required this.onToggle,
-    this.activeColor = Colors.blue,
-    this.inactiveColor = Colors.grey,
-    this.toggleColor = Colors.white,
+    this.activeColor = numberOfCalenders,
+    this.inactiveColor = textBodyTime,
+    this.toggleColor = backgroundColorApp,
     this.activeToggleColor,
     this.inactiveToggleColor,
     this.width = 70.0,
@@ -134,8 +135,8 @@ class _FlutterSwitchState extends State<FlutterSwitchWidget>
 
   @override
   Widget build(BuildContext context) {
-    Color _toggleColor = Colors.white;
-    Color _switchColor = Colors.white;
+    Color _toggleColor = backgroundColorApp;
+    Color _switchColor = backgroundColorApp;
     Border? _switchBorder;
     Border? _toggleBorder;
 

@@ -1,14 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
+
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/manager_personal_information.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/bloc/menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget.dart';
-import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/widget_mange_screen.dart';
-import 'package:ccvc_mobile/presentation/widget_manage/ui/tablet/widget_mange_screen_tablet.dart';
-
-import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
 
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
@@ -22,6 +21,15 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  MenuCubit menuCubit = MenuCubit();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    menuCubit.getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +46,20 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const HeaderMenuWidget(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const ManagerPersonalInformation(),
+                        ),
+                      );
+                    },
+                    child: HeaderMenuWidget(
+                      menuCubit: menuCubit,
+                    ),
+                  ),
                   Column(
                     children: List.generate(listFeature.length, (index) {
                       final type = listFeature[index];
@@ -58,29 +79,10 @@ class _MenuScreenState extends State<MenuScreen> {
                       );
                     }),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: TextButton(
-                      child: Text(
-                        S.current.quan_ly_widget,
-                        style: textNormalCustom(
-                          color: buttonColor,
-                          fontSize: 14,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => screenDevice(
-                              mobileScreen: const WidgetManageScreen(),
-                              tabletScreen: const WidgetManageScreenTablet(),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16, bottom: 24),
+                    child: TextQuanLyWidget(),
+                  )
                 ],
               ),
             ),

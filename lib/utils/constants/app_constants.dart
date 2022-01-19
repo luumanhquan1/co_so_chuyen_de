@@ -48,6 +48,7 @@ enum PageTransitionType {
   BOTTOM_TO_TOP,
   RIGHT_TO_LEFT_WITH_FADE,
 }
+
 const String HOAN_THANH = 'HOAN_THANH';
 const String DEN_HAN = 'DEN_HAN';
 const String QUA_HAN = 'QUA_HAN';
@@ -92,6 +93,11 @@ class DateTimeFormat {
   static const CREATE_BLOG_FORMAT = _dtFormat5;
 }
 
+class ThongBaoTypeConstant {
+  static const String LICH_HOP_MOI = 'LichHopMoi';
+  static const String TIN_NHAN_MOI = 'TinNhanMoi';
+}
+
 class WidgetTypeConstant {
   static const String TINH_HINH_XU_LY_VAN_BAN = 'TinhHinhXuLyVanBan';
   static const String VAN_BAN = 'VanBanWidGet';
@@ -103,4 +109,13 @@ class WidgetTypeConstant {
   static const String DANH_SANH_CONG_VIEC = 'BoxTodoList';
   static const String SU_KIEN_TRONG_NGAY = 'SuKienTrongNgay';
   static const String SINH_NHAT = 'SinhNhat';
+  static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
+}
+class DateFormatApp {
+  static String date = 'dd/MM/yyyy';
+  static String dateTime = 'dd/MM/yyyy HH:mm:ss';
+  static String dateTimeFormat = 'yyyy/MM/dd';
+  static String dateBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS';
+  static String dateTimeBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss';
+  static String dateSecondBackEnd = 'yyyy-MM-dd\'T\'HH:mm:ss.SS';
 }

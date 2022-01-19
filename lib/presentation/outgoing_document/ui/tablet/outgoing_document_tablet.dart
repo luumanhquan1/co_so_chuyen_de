@@ -33,6 +33,7 @@ class _OutgoingDocumentScreenTabletState
                 itemCount: cubit.listIncomingDocument.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCellTablet(
+                    onTap: () {},
                     title: cubit.listIncomingDocument[index].loaiVanBan,
                     dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
                     userName: cubit.listIncomingDocument[index].nguoiSoanThao,
