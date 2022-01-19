@@ -31,9 +31,9 @@ class ItemTableTopic extends StatelessWidget {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 6),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: whiteHide,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: whiteHide),
               ),
             ),
             child: Text(
@@ -113,25 +113,28 @@ class ItemInTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: greyHide,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
+          Text(
+            index,
+            style: textNormalCustom(
+              color: titleColor,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                index,
-                style: textNormalCustom(
-                    color: titleColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,),
-              ),
-              const SizedBox(
-                height: 3,
-              ),
               Text(
                 content,
                 style: textNormalCustom(
@@ -140,18 +143,13 @@ class ItemInTable extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
+              SizedBox(
+                height: 24,
+                width: 24,
+                child: SvgPicture.asset(icon),
+              )
             ],
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: SizedBox(
-              height: 24,
-              width: 24,
-              child: SvgPicture.asset(icon),
-            ),
-          )
         ],
       ),
     );
