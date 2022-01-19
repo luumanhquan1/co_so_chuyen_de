@@ -14,9 +14,12 @@ class BaseChooseTimeScreen extends StatefulWidget {
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
 
-  const BaseChooseTimeScreen(
-      {Key? key, required this.today, this.onChange, this.onSubmit,})
-      : super(key: key);
+  const BaseChooseTimeScreen({
+    Key? key,
+    required this.today,
+    this.onChange,
+    this.onSubmit,
+  }) : super(key: key);
 
   @override
   _BaseChooseTimeScreenState createState() => _BaseChooseTimeScreenState();

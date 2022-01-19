@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_state.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_state.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:rxdart/rxdart.dart';
 

@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/presentation/search_screen/ui/widget/search_widget.d
 import 'package:ccvc_mobile/presentation/them_hdsd/ui/tablet/them_hdsd_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/dialog/dialog_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -35,18 +36,21 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
           icon: SvgPicture.asset(ImageAssets.icBack),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              showDiaLogFeature(
-                context,
-                btnLeftTxt: S.current.xem_truoc,
-                btnRightTxt: S.current.cap_nhat,
-                title: S.current.them_hdsd,
-                child: const ThemHDSDScreenTablet(),
-                funcBtnOk: () {},
-              );
-            },
-            icon: SvgPicture.asset(ImageAssets.icAddButtonCalender),
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: IconButton(
+              onPressed: () {
+                showDiaLogFeature(
+                  context,
+                  btnLeftTxt: S.current.xem_truoc,
+                  btnRightTxt: S.current.cap_nhat,
+                  title: S.current.them_hdsd,
+                  child: const ThemHDSDScreenTablet(),
+                  funcBtnOk: () {},
+                );
+              },
+              icon: SvgPicture.asset(ImageAssets.icAddButtonCalenderTablet),
+            ),
           )
         ],
       ),
@@ -121,7 +125,14 @@ class _HoiDapScreenTabletState extends State<HoiDapScreenTablet> {
                         funcBtnOk: () {},
                       );
                     },
-                    onTapXoa: () {},
+                    onTapXoa: () {
+                      DialogUtils.showDialogDelete(
+                        context,
+                        title: S.current.xoa_hdsd,
+                        icon: SvgPicture.asset(ImageAssets.icXoaHDSD),
+                        okBtnFunction: () {},
+                      );
+                    },
                   );
                 },
               ),

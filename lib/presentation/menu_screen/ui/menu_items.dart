@@ -3,14 +3,11 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
-
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/mobile/qlvb_mobile_screen.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/qlvb_tablet_screen.dart';
-
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/tablet/hoi_dap_screen_tablet.dart';
-
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/qlvb_mobile_screen.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/qlvb_tablet_screen.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';

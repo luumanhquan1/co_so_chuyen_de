@@ -7,10 +7,10 @@ import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_documen
 import 'package:ccvc_mobile/presentation/incoming_document/ui/tablet/incoming_document_tablet.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/ui/tablet/outgoing_document_tablet.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/bloc/qlvb_cubit.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/common_infor_tablet.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/list_vb_den.dart';
-import 'package:ccvc_mobile/presentation/quanlivanban/ui/tablet/widgets/list_vb_di.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_cubit.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/widgets/common_infor_tablet.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/widgets/list_vb_den.dart';
+import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/widgets/list_vb_di.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
