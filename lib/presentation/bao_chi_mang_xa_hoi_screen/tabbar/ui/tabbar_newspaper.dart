@@ -58,21 +58,21 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           indicatorColor: indicatorColor,
           unselectedLabelColor: unselectLabelColor,
           labelColor: selectColorTabbar,
+          isScrollable: true,
           tabs: [
             Tab(
               child: Text(
                 S.current.bao_cao_thong_ke,
-                maxLines: 1,
               ),
             ),
             Tab(
-              child: Text(S.current.tat_ca_chu_de, maxLines: 1),
+              child: Text(S.current.tat_ca_chu_de),
             ),
             Tab(
-              child: Text(S.current.theo_doi_bai_viet, maxLines: 1),
+              child: Text(S.current.theo_doi_bai_viet),
             ),
             Tab(
-              child: Text(S.current.tin_tuc_thoi_su, maxLines: 1),
+              child: Text(S.current.tin_tuc_thoi_su),
             ),
           ],
         ),

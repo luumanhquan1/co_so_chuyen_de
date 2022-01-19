@@ -23,6 +23,7 @@ const spaceH28 = SizedBox(height: 28);
 const spaceH30 = SizedBox(height: 30);
 const spaceH32 = SizedBox(height: 20);
 const spaceH35 = SizedBox(height: 35);
+const spaceH36 = SizedBox(height: 36);
 const spaceH38 = SizedBox(height: 38);
 const spaceH40 = SizedBox(height: 40);
 const spaceH46 = SizedBox(height: 46);
@@ -72,6 +73,20 @@ TextStyle tokenDetailAmount({
     fontStyle: FontStyle.normal,
     fontSize: fontSize,
   );
+}
+
+TextStyle textDetailHDSD({
+  Color color = Colors.white,
+  double fontSize = 24,
+  FontWeight weight = FontWeight.w400,
+  double textHeight = 1.9,
+}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: weight,
+    fontStyle: FontStyle.normal,
+    fontSize: fontSize,
+  ).copyWith(height: textHeight);
 }
 
 TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {

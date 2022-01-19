@@ -158,7 +158,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                     alignment: Alignment.topLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 10),
-                      child: SvgPicture.asset(ImageAssets.ic_search),
+                      child: SvgPicture.asset(ImageAssets.ic_KinhRong),
                     ),
                   ),
                 ),

@@ -68,4 +68,11 @@ extension CheckValidate on String {
       return S.current.dinh_dang_sdt;
     }
   }
+
+  String? checkNull() {
+    if (isEmpty) {
+      return S.current.khong_duoc_de_trong;
+    }
+    return null;
+  }
 }

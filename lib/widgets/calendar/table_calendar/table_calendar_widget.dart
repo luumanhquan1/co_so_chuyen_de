@@ -149,6 +149,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                   return isSameDay(_selectedDay, day);
                 },
                 calendarStyle: CalendarStyle(
+                  cellMargin: const EdgeInsets.all(11),
                   weekendTextStyle: textNormalCustom(
                     color: titleCalenderWork,
                     fontSize: 14.0.textScale(),

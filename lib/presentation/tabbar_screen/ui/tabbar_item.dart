@@ -59,7 +59,6 @@ extension TabbarEnum on TabBarType {
             key: keyHomeTablet,
           ),
         );
-
       case TabBarType.report:
         return const Scaffold(
           backgroundColor: Colors.blue,
