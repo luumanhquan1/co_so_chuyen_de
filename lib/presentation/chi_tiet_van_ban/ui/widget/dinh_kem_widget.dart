@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _AttackButtonWidgetState extends State<AttackButtonWidget> {
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
-                      .copyWith(color: Colors.white, fontSize: 14),
+                      .copyWith(color: Colors.white, fontSize: 14.0.textScale(space: 2.0)),
                 ),
               ),
             ),

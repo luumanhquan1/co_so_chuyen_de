@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,7 +55,7 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
-                      .copyWith(fontSize: 14, color: Colors.black),
+                      .copyWith(fontSize: 14.0.textScale(space: 2.0), color: Colors.black),
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
@@ -85,7 +86,7 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
                     hintStyle: Theme.of(context)
                         .textTheme
                         .headline4!
-                        .copyWith(color: const Color(0xffA2AEBD), fontSize: 14),
+                        .copyWith(fontSize: 14.0.textScale(space: 2.0)),
                     errorStyle:
                         const TextStyle(color: Colors.red, fontSize: 12.0),
                   ),

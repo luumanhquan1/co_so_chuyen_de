@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/bloc/detail_row_cubit.dart';
 import 'package:ccvc_mobile/widgets/checkbox/custom_checkbox.dart';
@@ -7,10 +9,11 @@ import 'package:flutter/material.dart';
 class DetailDocumentRowTablet extends StatefulWidget {
   final DocumentDetailRow row;
 
-  DetailDocumentRowTablet({Key? key, required this.row}) : super(key: key);
+  const DetailDocumentRowTablet({Key? key, required this.row}) : super(key: key);
 
   @override
-  State<DetailDocumentRowTablet> createState() => _DetailDocumentRowTabletState();
+  State<DetailDocumentRowTablet> createState() =>
+      _DetailDocumentRowTabletState();
 }
 
 class _DetailDocumentRowTabletState extends State<DetailDocumentRowTablet> {
@@ -46,8 +49,10 @@ class _DetailDocumentRowTabletState extends State<DetailDocumentRowTablet> {
                             },
                             child: Text(
                               '${widget.row.value}',
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.black),
+                              style: textNormalCustom(
+                                fontSize: 16,
+                                color: titleColor,
+                              ),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -61,8 +66,10 @@ class _DetailDocumentRowTabletState extends State<DetailDocumentRowTablet> {
                             },
                             child: Text(
                               '${widget.row.value}',
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.black),
+                              style: textNormalCustom(
+                                fontSize: 16,
+                                color: titleColor,
+                              ),
                             ),
                           )
                     // : Row(
@@ -97,37 +104,14 @@ class _DetailDocumentRowTabletState extends State<DetailDocumentRowTablet> {
               ),
               AutoSizeText(
                 widget.row.title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xff667793),
+                style: textNormalCustom(
+                  fontSize: 16,
+                  color: const Color(0xff667793),
                 ),
-              )
+              ),
             ],
-          ),
+          )
       ],
     );
   }
-}
-
-Widget checkBoxCusTom(DocumentDetailRow row) {
-  return Row(
-    // mainAxisSize: MainAxisSize.min,
-    children: [
-      SizedBox(
-        height: 20,
-        width: 41,
-        child: CustomCheckBox(
-          title: '',
-          isCheck: row.value,
-        ),
-      ),
-      AutoSizeText(
-        row.title,
-        style: const TextStyle(
-          fontSize: 14,
-          color: Color(0xff667793),
-        ),
-      ),
-    ],
-  );
 }

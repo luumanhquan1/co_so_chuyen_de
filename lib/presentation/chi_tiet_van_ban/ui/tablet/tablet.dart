@@ -58,7 +58,7 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30),
-              padding: const EdgeInsets.only(left: 600),
+              padding: const EdgeInsets.only(left: 600, top: 25, bottom: 25),
               child: ButtonCustomBottom(
                 title: 'Xem luồng',
                 onPressed: () {
@@ -126,234 +126,264 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ExpansionTitleCustom(
-                            expand: expanded,
-                            paddingRightIcon: const EdgeInsets.only(right: 21),
-                            title: Container(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                top: 10.5,
-                                bottom: 10.5,
-                              ),
-                              child: const Text('Thông tin gửi nhận'),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0xffE2E8F0).withOpacity(0.5),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 16, left: 16, right: 16),
-                              child: StreamBuilder<DetailDocumentProfileSend>(
-                                initialData: cubit.thongTinGuiNhan,
-                                stream: cubit.detailDocumentGuiNhan,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: 2,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          margin:
-                                              const EdgeInsets.only(top: 16),
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: const Color(0xffE2E8F0)),
-                                            color: const Color(0xffE2E8F0)
-                                                .withOpacity(0.1),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(6)),
-                                          ),
-                                          child: Column(
-                                            children:
-                                                snapshot.data!.toListRow().map(
-                                              (row) {
-                                                return DetailDocumentRow(
-                                                  row: row,
-                                                );
-                                              },
-                                            ).toList(),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ExpansionTitleCustom(
+                                  expand: expanded,
+                                  paddingRightIcon:
+                                      const EdgeInsets.only(right: 21),
+                                  title: Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      top: 10.5,
+                                      bottom: 10.5,
+                                    ),
+                                    child: const Text('Thông tin gửi nhận'),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 16, left: 16, right: 16),
+                                    child: StreamBuilder<
+                                        DetailDocumentProfileSend>(
+                                      initialData: cubit.thongTinGuiNhan,
+                                      stream: cubit.detailDocumentGuiNhan,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: 2,
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: 16),
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: const Color(
+                                                          0xffE2E8F0)),
+                                                  color: const Color(0xffE2E8F0)
+                                                      .withOpacity(0.1),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(6)),
+                                                ),
+                                                child: Column(
+                                                  children: snapshot.data!
+                                                      .toListRow()
+                                                      .map(
+                                                    (row) {
+                                                      return DetailDocumentRow(
+                                                        row: row,
+                                                      );
+                                                    },
+                                                  ).toList(),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          return const SingleChildScrollView(
+                                            physics:
+                                                AlwaysScrollableScrollPhysics(),
+                                            child: SizedBox(
+                                              height: 200,
+                                              child: Center(
+                                                child: Text('Không có dữ liệu'),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  onChangeExpand: () {
+                                    setState(() {
+                                      expanded = !expanded;
+                                      // expanded2 = !expanded2;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ExpansionTitleCustom(
+                                  expand: expanded3,
+                                  paddingRightIcon:
+                                      const EdgeInsets.only(right: 21),
+                                  title: Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      top: 10.5,
+                                      bottom: 10.5,
+                                    ),
+                                    child: const Text(
+                                        'Lịch sử cập nhật tình hình xử lý'),
+                                  ),
+                                  child: StreamBuilder<HistoryProcessPage>(
+                                    stream: cubit.screenJobProfilesStream,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          cubit.listHistory.isNotEmpty) {
+                                        return HistoryWidget(cubit);
+                                      } else {
+                                        return const SingleChildScrollView(
+                                          physics:
+                                              AlwaysScrollableScrollPhysics(),
+                                          child: SizedBox(
+                                            height: 200,
+                                            child: Center(
+                                              child: Text('Không có dữ liệu'),
+                                            ),
                                           ),
                                         );
-                                      },
-                                    );
-                                  } else {
-                                    return const SingleChildScrollView(
-                                      physics: AlwaysScrollableScrollPhysics(),
-                                      child: SizedBox(
-                                        height: 200,
-                                        child: Center(
-                                          child: Text('Không có dữ liệu'),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
+                                      }
+                                    },
+                                  ),
+                                  onChangeExpand: () {
+                                    setState(() {
+                                      expanded3 = !expanded3;
+                                    });
+                                  },
+                                ),
                               ),
-                            ),
-                            onChangeExpand: () {
-                              setState(() {
-                                expanded = !expanded;
-                                // expanded2 = !expanded2;
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ExpansionTitleCustom(
-                            expand: expanded3,
-                            paddingRightIcon: const EdgeInsets.only(right: 21),
-                            title: Container(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                top: 10.5,
-                                bottom: 10.5,
-                              ),
-                              child: const Text(
-                                  'Lịch sử cập nhật tình hình xử lý'),
-                            ),
-                            child: StreamBuilder<HistoryProcessPage>(
-                              stream: cubit.screenJobProfilesStream,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData &&
-                                    cubit.listHistory.isNotEmpty) {
-                                  return HistoryWidget(cubit);
-                                } else {
-                                  return const SingleChildScrollView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    child: SizedBox(
-                                      height: 200,
-                                      child: Center(
-                                        child: Text('Không có dữ liệu'),
-                                      ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ExpansionTitleCustom(
+                                  expand: expanded4,
+                                  paddingRightIcon:
+                                      const EdgeInsets.only(right: 21),
+                                  title: Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      top: 10.5,
+                                      bottom: 10.5,
                                     ),
-                                  );
-                                }
-                              },
-                            ),
-                            onChangeExpand: () {
-                              setState(() {
-                                expanded3 = !expanded3;
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ExpansionTitleCustom(
-                            expand: expanded4,
-                            paddingRightIcon: const EdgeInsets.only(right: 21),
-                            title: Container(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                top: 10.5,
-                                bottom: 10.5,
+                                    child: const Text('Lịch sử trả lại'),
+                                  ),
+                                  child: StreamBuilder<HistoryProcessPage>(
+                                    stream: cubit.screenJobProfilesStream,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          cubit.listHistory.isNotEmpty) {
+                                        return HistoryWidget(cubit);
+                                      } else {
+                                        return const SingleChildScrollView(
+                                          physics:
+                                              AlwaysScrollableScrollPhysics(),
+                                          child: SizedBox(
+                                            height: 200,
+                                            child: Center(
+                                              child: Text('Không có dữ liệu'),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  onChangeExpand: () {
+                                    setState(() {
+                                      expanded4 = !expanded4;
+                                    });
+                                  },
+                                ),
                               ),
-                              child: const Text('Lịch sử trả lại'),
-                            ),
-                            child: StreamBuilder<HistoryProcessPage>(
-                              stream: cubit.screenJobProfilesStream,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData &&
-                                    cubit.listHistory.isNotEmpty) {
-                                  return HistoryWidget(cubit);
-                                } else {
-                                  return const SingleChildScrollView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    child: SizedBox(
-                                      height: 200,
-                                      child: Center(
-                                        child: Text('Không có dữ liệu'),
-                                      ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ExpansionTitleCustom(
+                                  expand: expanded5,
+                                  paddingRightIcon:
+                                      const EdgeInsets.only(right: 21),
+                                  title: Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      top: 10.5,
+                                      bottom: 10.5,
                                     ),
-                                  );
-                                }
-                              },
-                            ),
-                            onChangeExpand: () {
-                              setState(() {
-                                expanded4 = !expanded4;
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ExpansionTitleCustom(
-                            expand: expanded5,
-                            paddingRightIcon: const EdgeInsets.only(right: 21),
-                            title: Container(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                top: 10.5,
-                                bottom: 10.5,
+                                    child: const Text('Lịch sử thu hồi'),
+                                  ),
+                                  child: StreamBuilder<HistoryProcessPage>(
+                                    stream: cubit.screenJobProfilesStream,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          cubit.listHistory.isNotEmpty) {
+                                        return HistoryWidget(cubit);
+                                      } else {
+                                        return const SingleChildScrollView(
+                                          physics:
+                                              AlwaysScrollableScrollPhysics(),
+                                          child: SizedBox(
+                                            height: 200,
+                                            child: Center(
+                                              child: Text('Không có dữ liệu'),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  onChangeExpand: () {
+                                    setState(() {
+                                      expanded5 = !expanded5;
+                                    });
+                                  },
+                                ),
                               ),
-                              child: const Text('Lịch sử thu hồi'),
-                            ),
-                            child: StreamBuilder<HistoryProcessPage>(
-                              stream: cubit.screenJobProfilesStream,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData &&
-                                    cubit.listHistory.isNotEmpty) {
-                                  return HistoryWidget(cubit);
-                                } else {
-                                  return const SingleChildScrollView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    child: SizedBox(
-                                      height: 200,
-                                      child: Center(
-                                        child: Text('Không có dữ liệu'),
-                                      ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ExpansionTitleCustom(
+                                  expand: expanded6,
+                                  paddingRightIcon:
+                                      const EdgeInsets.only(right: 21),
+                                  title: Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      top: 10.5,
+                                      bottom: 10.5,
                                     ),
-                                  );
-                                }
-                              },
-                            ),
-                            onChangeExpand: () {
-                              setState(() {
-                                expanded5 = !expanded5;
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: ExpansionTitleCustom(
-                            expand: expanded6,
-                            paddingRightIcon: const EdgeInsets.only(right: 21),
-                            title: Container(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                top: 10.5,
-                                bottom: 10.5,
+                                    child: const Text(
+                                        'Lịch sử văn bản liên thông'),
+                                  ),
+                                  child: StreamBuilder<HistoryProcessPage>(
+                                    stream: cubit.screenJobProfilesStream,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          cubit.listHistory.isNotEmpty) {
+                                        return HistoryWidget(cubit);
+                                      } else {
+                                        return const SingleChildScrollView(
+                                          physics:
+                                              AlwaysScrollableScrollPhysics(),
+                                          child: SizedBox(
+                                            height: 200,
+                                            child: Center(
+                                              child: Text('Không có dữ liệu'),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  onChangeExpand: () {
+                                    setState(() {
+                                      expanded6 = !expanded6;
+                                    });
+                                  },
+                                ),
                               ),
-                              child: const Text('Lịch sử văn bản liên thông'),
-                            ),
-                            child: StreamBuilder<HistoryProcessPage>(
-                              stream: cubit.screenJobProfilesStream,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData &&
-                                    cubit.listHistory.isNotEmpty) {
-                                  return HistoryWidget(cubit);
-                                } else {
-                                  return const SingleChildScrollView(
-                                    physics: AlwaysScrollableScrollPhysics(),
-                                    child: SizedBox(
-                                      height: 200,
-                                      child: Center(
-                                        child: Text('Không có dữ liệu'),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                            onChangeExpand: () {
-                              setState(() {
-                                expanded6 = !expanded6;
-                              });
-                            },
+                            ],
                           ),
                         ),
                       ],
@@ -362,8 +392,13 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
                 ),
                 Expanded(
                   child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color(0xffE2E8F0).withOpacity(0.5),
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
                     margin: const EdgeInsets.only(right: 30),
-                    padding: const EdgeInsets.only(top: 10),
                     child: ExpansionTitleCustom(
                       expand: expanded2,
                       paddingRightIcon: const EdgeInsets.only(right: 21),

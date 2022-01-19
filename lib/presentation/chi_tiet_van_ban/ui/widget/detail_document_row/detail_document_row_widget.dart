@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 import 'package:ccvc_mobile/widgets/checkbox/custom_checkbox.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +48,10 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                             },
                             child: Text(
                               '${widget.row.value}',
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.black),
+                              style: textNormalCustom(
+                                fontSize: 14,
+                                color: titleColor,
+                              ),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -61,8 +65,10 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                             },
                             child: Text(
                               '${widget.row.value}',
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.black),
+                              style: textNormalCustom(
+                                fontSize: 14,
+                                color: titleColor,
+                              ),
                             ),
                           )
                     // : Row(
@@ -99,7 +105,7 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
 }
 
 Widget checkBoxCusTom(DocumentDetailRow row) {
-  return  Row(
+  return Row(
     // mainAxisSize: MainAxisSize.min,
     children: [
       SizedBox(
@@ -110,13 +116,11 @@ Widget checkBoxCusTom(DocumentDetailRow row) {
           isCheck: row.value,
         ),
       ),
-      AutoSizeText(
-        row.title,
-        style: const TextStyle(
-          fontSize: 14,
-          color: Color(0xff667793),
-        ),
-      ),
+      AutoSizeText(row.title,
+          style: textNormalCustom(
+            fontSize: 14,
+            color: const Color(0xff667793),
+          )),
     ],
   );
 }

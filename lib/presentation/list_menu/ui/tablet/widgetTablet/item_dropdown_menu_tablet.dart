@@ -104,109 +104,106 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
         child: ExpandableNotifier(
           child: Container(
             margin: const EdgeInsets.only(left: 27, right: 30, bottom: 24),
-            child: Column(
-              children: <Widget>[
-                ScrollOnExpand(
-                  scrollOnCollapse: false,
-                  child: ExpandablePanel(
-                    theme: const ExpandableThemeData(
-                      headerAlignment: ExpandablePanelHeaderAlignment.center,
-                      tapBodyToCollapse: false,
+            child: ScrollOnExpand(
+              scrollOnCollapse: false,
+              child: ExpandablePanel(
+                theme: const ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToCollapse: false,
+                ),
+                header: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: cellColorborder),
+                    color: cellColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8),
                     ),
-                    header: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: SvgPicture.asset(widget.image),
                       ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        widget.title,
+                        style: textNormalCustom(
+                          fontSize: 20.0.textScale(),
+                          color: fontColorTablet2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                collapsed: Container(
+                  color: Colors.red,
+                ),
+                expanded: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount:
+                      widget.cubit.menuItems[widget.index].children.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: const EdgeInsets.only(left: 45),
+                      margin: const EdgeInsets.only(top: 16),
                       decoration: BoxDecoration(
-                        border: Border.all(color: cellColorborder),
                         color: cellColor,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset(widget.image),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            widget.title,
-                            style: textNormalCustom(
-                              fontSize: 14.0.textScale(),
-                            ).copyWith(color: fontColorTablet2, fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                    collapsed: Container(
-                      color: Colors.red,
-                    ),
-                    expanded: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount:
-                          widget.cubit.menuItems[widget.index].children.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: const EdgeInsets.only(left: 45),
-                          margin: const EdgeInsets.only(top: 16),
-                          decoration: BoxDecoration(
-                            color: cellColor,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
+                      child: ListTile(
+                        title: Text(
+                          widget.cubit.menuItems[widget.index].children[index]
+                              .title,
+                          style: textNormalCustom(
+                            fontSize: 14.0.textScale(),
+                          ).copyWith(color: fontColorTablet2, fontSize: 20),
+                        ),
+                        trailing: Container(
+                          decoration: const BoxDecoration(
+                            color: numberColorTabletbg,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4),
                             ),
                           ),
-                          child: ListTile(
-                            title: Text(
+                          child: Container(
+                            margin: const EdgeInsets.all(4),
+                            child: Text(
                               widget.cubit.menuItems[widget.index]
-                                  .children[index].title,
-                              style: textNormalCustom(
-                                fontSize: 14.0.textScale(),
-                              ).copyWith(color: fontColorTablet2, fontSize: 20),
-                            ),
-                            trailing: Container(
-                              decoration: const BoxDecoration(
-                                color: numberColorTabletbg,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(4),
-                                ),
-                              ),
-                              child: Container(
-                                margin: const EdgeInsets.all(4),
-                                child: Text(
-                                  widget.cubit.menuItems[widget.index]
-                                      .children[index].number
-                                      .toString(),
-                                  style: const TextStyle(
-                                    color: numberColorTablet,
-                                    fontSize: 14,
-                                  ),
-                                ),
+                                  .children[index].number
+                                  .toString(),
+                              style: const TextStyle(
+                                color: numberColorTablet,
+                                fontSize: 14,
                               ),
                             ),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
                           ),
-                        );
-                      },
-                    ),
-                    builder: (_, collapsed, expanded) {
-                      return Expandable(
-                        collapsed: collapsed,
-                        expanded: expanded,
-                        // theme: const ExpandableThemeData(crossFadePoint: 0),
-                      );
-                    },
-                  ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    );
+                  },
                 ),
-              ],
+                builder: (_, collapsed, expanded) {
+                  return Expandable(
+                    collapsed: collapsed,
+                    expanded: expanded,
+                    // theme: const ExpandableThemeData(crossFadePoint: 0),
+                  );
+                },
+              ),
             ),
           ),
         ),
