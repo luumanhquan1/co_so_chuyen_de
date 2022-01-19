@@ -86,36 +86,37 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
         else
           GridView.count(
             shrinkWrap: true,
-            // crossAxisSpacing: 4.0,
-            // mainAxisSpacing: 8.0,
             crossAxisCount: 2,
+            childAspectRatio: 2.3,
             children: [
-              Container(
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: 20,
-                      width: 41,
-                      child: CustomCheckBox(
-                        title: '',
-                        isCheck: widget.row.value,
-                      ),
-                    ),
-                    AutoSizeText(
-                      widget.row.title,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xff667793),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              checkBoxCusTom(widget.row),
+              // checkBoxCusTom(widget.row),
             ],
           )
       ],
     );
   }
+}
+
+Widget checkBoxCusTom(DocumentDetailRow row) {
+  return  Row(
+    // mainAxisSize: MainAxisSize.min,
+    children: [
+      SizedBox(
+        height: 20,
+        width: 41,
+        child: CustomCheckBox(
+          title: '',
+          isCheck: row.value,
+        ),
+      ),
+      AutoSizeText(
+        row.title,
+        style: const TextStyle(
+          fontSize: 14,
+          color: Color(0xff667793),
+        ),
+      ),
+    ],
+  );
 }

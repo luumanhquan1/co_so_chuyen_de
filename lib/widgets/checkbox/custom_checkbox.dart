@@ -40,7 +40,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: widget.color == null
+                  color:  widget.color == null
                       ? widget.isAction
                       ? Colors.white
                       : const Color(0xffDBDFEF).withOpacity(0.3)

@@ -116,13 +116,9 @@ class DetailDocumentModel {
       DocumentDetailRow(
           'Phương thức nhận', phuongThucNhan, TypeDocumentDetailRow.text),
       DocumentDetailRow('Trích yếu', trichYeu, TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Văn bản QPPL', vanBanQlPL, TypeDocumentDetailRow.checkbox),
-      DocumentDetailRow(
-          'Hồi báo văn bản', hoiBao, TypeDocumentDetailRow.checkbox),
-      DocumentDetailRow(
-          'Đã nhận bản giấy', daNhanBanGiay, TypeDocumentDetailRow.checkbox),
+
     ];
+
 
     //   if (ProcessTypeName == 'Nhiệm vụ CP/VPCP') {
     //     list.insert(
@@ -158,5 +154,18 @@ class DetailDocumentModel {
     //   return list;
     // }
     return list;
+  }
+
+  List<DocumentDetailRow> toListCheckBox() {
+    final List<DocumentDetailRow> listCheckbox = [
+      DocumentDetailRow(
+          'Văn bản QPPL', vanBanQlPL, TypeDocumentDetailRow.checkbox),
+      DocumentDetailRow(
+          'Hồi báo văn bản', hoiBao, TypeDocumentDetailRow.checkbox),
+      DocumentDetailRow(
+          'Đã nhận bản giấy', daNhanBanGiay, TypeDocumentDetailRow.checkbox)
+    ];
+
+    return listCheckbox;
   }
 }

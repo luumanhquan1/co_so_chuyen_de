@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
@@ -7,7 +7,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/widget_phone/
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/history_widget/history_widget.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/send_comment_widget.dart';
+import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
@@ -61,20 +61,54 @@ class _DetailDocumentState extends State<DetailDocument> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
-                    children: snapshot.data!.toListRow().map(
-                      (row) {
-                        return DetailDocumentRow(
-                          row: row,
-                        );
-                      },
-                    ).toList(),
+                    children: [
+                      Column(
+                        children: snapshot.data!.toListRow().map(
+                          (row) {
+                            return DetailDocumentRow(
+                              row: row,
+                            );
+                          },
+                        ).toList(),
+                      ),
+                      GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        childAspectRatio: 3.9,
+                        children: snapshot.data!
+                            .toListCheckBox()
+                            .map((row) => Row(
+                                  // mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                      width: 41,
+                                      child: CustomCheckBox(
+                                        title: '',
+                                        isCheck: row.value,
+                                        onChange: (bool check) {},
+                                      ),
+                                    ),
+                                    AutoSizeText(
+                                      row.title,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Color(0xff667793),
+                                      ),
+                                    ),
+                                  ],
+                                ))
+                            .toList(),
+                      )
+                    ],
                   );
                 } else {
-                  return SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: Container(
+                  return const SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
                       height: 200,
-                      child: const Center(
+                      child: Center(
                         child: Text('Không có dữ liệu'),
                       ),
                     ),
@@ -112,7 +146,7 @@ class _DetailDocumentState extends State<DetailDocument> {
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    width: 1, color: const Color(0xffE2E8F0)),
+                                    color: const Color(0xffE2E8F0)),
                                 color: const Color(0xffE2E8F0).withOpacity(0.1),
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(6))),
@@ -191,25 +225,23 @@ class _DetailDocumentState extends State<DetailDocument> {
                 ),
                 child: const Text('Lịch sử cập nhật tình hình xử lý'),
               ),
-              child: Container(
-                child: StreamBuilder<HistoryProcessPage>(
-                  stream: cubit.screenJobProfilesStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
-                      return HistoryWidget(cubit);
-                    } else {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Container(
-                          height: 200,
-                          child: const Center(
-                            child: Text('Không có dữ liệu'),
-                          ),
+              child: StreamBuilder<HistoryProcessPage>(
+                stream: cubit.screenJobProfilesStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
+                    return HistoryWidget(cubit);
+                  } else {
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        height: 200,
+                        child: const Center(
+                          child: Text('Không có dữ liệu'),
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
+                    );
+                  }
+                },
               ),
               onChangeExpand: () {
                 setState(() {
@@ -271,25 +303,23 @@ class _DetailDocumentState extends State<DetailDocument> {
                 ),
                 child: const Text('Lịch sử thu hồi'),
               ),
-              child: Container(
-                child: StreamBuilder<HistoryProcessPage>(
-                  stream: cubit.screenJobProfilesStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
-                      return HistoryWidget(cubit);
-                    } else {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Container(
-                          height: 200,
-                          child: const Center(
-                            child: Text('Không có dữ liệu'),
-                          ),
+              child: StreamBuilder<HistoryProcessPage>(
+                stream: cubit.screenJobProfilesStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
+                    return HistoryWidget(cubit);
+                  } else {
+                    return const SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Text('Không có dữ liệu'),
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
+                    );
+                  }
+                },
               ),
               onChangeExpand: () {
                 setState(() {
