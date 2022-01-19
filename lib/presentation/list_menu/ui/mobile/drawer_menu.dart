@@ -71,22 +71,25 @@ class _BaseMenuPhoneState extends State<BaseMenuPhone> {
                                 itemCount: _cubit.menuItems.length,
                                 itemBuilder: (context, index) {
                                   return ItemDrawerMenu(
-                                      _cubit,
-                                      _cubit.img[index],
-                                      _cubit.menuItems[index].menuTitle,
-                                      index);
+                                    _cubit,
+                                    _cubit.img[index],
+                                    _cubit.menuItems[index].menuTitle,
+                                    index,
+                                  );
                                 },
                               ),
                               if (_cubit.menuItems.isEmpty)
                                 const SizedBox()
                               else
                                 Container(
-                                  margin: const EdgeInsets.only(bottom: 25,top: 8),
+                                  margin:
+                                      const EdgeInsets.only(bottom: 25, top: 8),
                                   height: 1,
                                   color: containerColor,
                                 ),
                               ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(), shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
                                 itemCount: _cubit.menuItems.length,
                                 itemBuilder: (context, index) {
                                   return ItemDropDownMenu(

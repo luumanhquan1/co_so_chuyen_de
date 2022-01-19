@@ -56,10 +56,11 @@ class _BaseMenuPhoneState extends State<BaseMenuTablet> {
                                 children: List.generate(
                                   _cubit.menuItems.length,
                                   (index) => ItemDrawerMenuTablet(
-                                      _cubit,
-                                      _cubit.img[index],
-                                      _cubit.menuItems[index].menuTitle,
-                                      index),
+                                    _cubit,
+                                    _cubit.img[index],
+                                    _cubit.menuItems[index].menuTitle,
+                                    index,
+                                  ),
                                 ),
                               ),
                               // ListView.builder(

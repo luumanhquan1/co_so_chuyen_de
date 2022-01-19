@@ -50,9 +50,10 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
             child: Row(
               children: [
                 SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: SvgPicture.asset(widget.image)),
+                  width: 24,
+                  height: 24,
+                  child: SvgPicture.asset(widget.image),
+                ),
                 const SizedBox(
                   width: 15,
                 ),
@@ -79,7 +80,9 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                         widget.cubit.menuItems[widget.index].badgeNumber
                             .toString(),
                         style: const TextStyle(
-                            color: numberColorTablet, fontSize: 14),
+                          color: numberColorTablet,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -112,7 +115,9 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                     ),
                     header: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: cellColorborder),
                         color: cellColor,
@@ -134,8 +139,7 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                             widget.title,
                             style: textNormalCustom(
                               fontSize: 14.0.textScale(),
-                            ).copyWith(
-                                color: fontColorTablet2, fontSize: 20),
+                            ).copyWith(color: fontColorTablet2, fontSize: 20),
                           ),
                         ],
                       ),
@@ -180,7 +184,9 @@ class ItemDropDownMenuTabletState extends State<ItemDropDownMenuTablet> {
                                       .children[index].number
                                       .toString(),
                                   style: const TextStyle(
-                                      color: numberColorTablet, fontSize: 14),
+                                    color: numberColorTablet,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                             ),

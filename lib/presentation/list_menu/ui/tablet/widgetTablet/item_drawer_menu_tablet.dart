@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ItemDrawerMenuTablet extends StatelessWidget {
+class ItemDrawerMenuTablet extends StatefulWidget {
   late String title;
   final String image;
   final ListMenuCubit cubit;
@@ -17,6 +17,11 @@ class ItemDrawerMenuTablet extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<ItemDrawerMenuTablet> createState() => _ItemDrawerMenuTabletState();
+}
+
+class _ItemDrawerMenuTabletState extends State<ItemDrawerMenuTablet> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
@@ -26,14 +31,14 @@ class ItemDrawerMenuTablet extends StatelessWidget {
         },
         child: Row(
           children: [
-            if (cubit.menuItems[index].badgeNumber == 0)
+            if (widget.cubit.menuItems[widget.index].badgeNumber == 0)
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.only(top: 15, bottom: 15, left: 30),
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(color: cellColorborder, width: 1),
-                      bottom: BorderSide(color: cellColorborder, width: 1),
+                      top: BorderSide(color: cellColorborder),
+                      bottom: BorderSide(color: cellColorborder),
                     ),
                   ),
                   child: Row(
@@ -41,13 +46,13 @@ class ItemDrawerMenuTablet extends StatelessWidget {
                       SizedBox(
                         height: 24,
                         width: 24,
-                        child: SvgPicture.asset(image),
+                        child: SvgPicture.asset(widget.image),
                       ),
                       const SizedBox(
                         width: 15,
                       ),
                       Text(
-                        title,
+                        widget.title,
                         style: textNormalCustom(
                           fontSize: 14.0.textScale(),
                         ).copyWith(color: fontColorTablet2, fontSize: 20),
@@ -72,13 +77,13 @@ class ItemDrawerMenuTablet extends StatelessWidget {
                       SizedBox(
                         width: 24,
                         height: 24,
-                        child: SvgPicture.asset(image),
+                        child: SvgPicture.asset(widget.image),
                       ),
                       const SizedBox(
                         width: 15,
                       ),
                       Text(
-                        title,
+                        widget.title,
                         style: textNormalCustom(
                           fontSize: 14.0.textScale(),
                         ).copyWith(color: fontColorTablet2, fontSize: 20),
@@ -95,9 +100,12 @@ class ItemDrawerMenuTablet extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.all(4),
                           child: Text(
-                            cubit.menuItems[index].badgeNumber.toString(),
+                            widget.cubit.menuItems[widget.index].badgeNumber
+                                .toString(),
                             style: const TextStyle(
-                                color: numberColorTablet, fontSize: 14),
+                              color: numberColorTablet,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),

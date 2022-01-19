@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'dinh_kem_widget.dart';
 
 class SendCommentWidgetMission extends StatefulWidget {
@@ -41,7 +40,7 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
     widget.cubit ??= DetailDocumentCubit();
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 110,
           child: Row(
             children: [
@@ -70,7 +69,6 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
                       ),
                       borderSide: BorderSide(
                         color: Color(0xffDBDFEF),
-                        width: 1,
                       ),
                     ),
                     enabledBorder: const OutlineInputBorder(
@@ -79,7 +77,6 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
                       ),
                       borderSide: BorderSide(
                         color: Color(0xffDBDFEF),
-                        width: 1,
                       ),
                     ),
                     contentPadding:
@@ -110,10 +107,11 @@ class _SendCommentWidgetState extends State<SendCommentWidgetMission> {
                         onPressed: () {
                           if (!isDisable) {
                             widget.onSendComment(
-                                widget.contentController.text,
-                                widget.isReComment
-                                    ? widget.cubit!.listIdFileReComment
-                                    : widget.cubit!.listIdFile);
+                              widget.contentController.text,
+                              widget.isReComment
+                                  ? widget.cubit!.listIdFileReComment
+                                  : widget.cubit!.listIdFile,
+                            );
                           }
                         },
                       );

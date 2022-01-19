@@ -90,11 +90,9 @@ class _ExpansionTitleCustomState extends State<ExpansionTitleCustom>
               border: Border(
                 bottom: BorderSide(
                   color: cellColorborder,
-                  width: 1,
                 ),
                 top: BorderSide(
                   color: cellColorborder,
-                  width: 1,
                 ),
               ),
             ),

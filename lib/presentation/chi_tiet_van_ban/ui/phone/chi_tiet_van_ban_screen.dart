@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/widget_phone/
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/history_widget/history_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/xem_luong.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
@@ -46,7 +47,7 @@ class _DetailDocumentState extends State<DetailDocument> {
 
   @override
   Widget build(BuildContext context) {
-    List<bool> openTab = [];
+    // List<bool> openTab = [];
 
     return Scaffold(
       // backgroundColor: Theme.of(context).backgroundColor,
@@ -78,27 +79,29 @@ class _DetailDocumentState extends State<DetailDocument> {
                         childAspectRatio: 3.9,
                         children: snapshot.data!
                             .toListCheckBox()
-                            .map((row) => Row(
-                                  // mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                      width: 41,
-                                      child: CustomCheckBox(
-                                        title: '',
-                                        isCheck: row.value,
-                                        onChange: (bool check) {},
-                                      ),
+                            .map(
+                              (row) => Row(
+                                // mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 41,
+                                    child: CustomCheckBox(
+                                      title: '',
+                                      isCheck: row.value,
+                                      onChange: (bool check) {},
                                     ),
-                                    AutoSizeText(
-                                      row.title,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff667793),
-                                      ),
+                                  ),
+                                  AutoSizeText(
+                                    row.title,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xff667793),
                                     ),
-                                  ],
-                                ))
+                                  ),
+                                ],
+                              ),
+                            )
                             .toList(),
                       )
                     ],
@@ -145,11 +148,12 @@ class _DetailDocumentState extends State<DetailDocument> {
                             margin: const EdgeInsets.only(top: 16),
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: const Color(0xffE2E8F0)),
-                                color: const Color(0xffE2E8F0).withOpacity(0.1),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(6))),
+                              border:
+                                  Border.all(color: const Color(0xffE2E8F0)),
+                              color: const Color(0xffE2E8F0).withOpacity(0.1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(6)),
+                            ),
                             child: Column(
                               children: snapshot.data!.toListRow().map(
                                 (row) {
@@ -163,11 +167,11 @@ class _DetailDocumentState extends State<DetailDocument> {
                         },
                       );
                     } else {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Container(
+                      return const SingleChildScrollView(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        child: SizedBox(
                           height: 200,
-                          child: const Center(
+                          child: Center(
                             child: Text('Không có dữ liệu'),
                           ),
                         ),
@@ -231,11 +235,11 @@ class _DetailDocumentState extends State<DetailDocument> {
                   if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
                     return HistoryWidget(cubit);
                   } else {
-                    return SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Container(
+                    return const SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
                         height: 200,
-                        child: const Center(
+                        child: Center(
                           child: Text('Không có dữ liệu'),
                         ),
                       ),
@@ -263,25 +267,23 @@ class _DetailDocumentState extends State<DetailDocument> {
                 ),
                 child: const Text('Lịch sử trả lại'),
               ),
-              child: Container(
-                child: StreamBuilder<HistoryProcessPage>(
-                  stream: cubit.screenJobProfilesStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
-                      return HistoryWidget(cubit);
-                    } else {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Container(
-                          height: 200,
-                          child: const Center(
-                            child: Text('Không có dữ liệu'),
-                          ),
+              child: StreamBuilder<HistoryProcessPage>(
+                stream: cubit.screenJobProfilesStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
+                    return HistoryWidget(cubit);
+                  } else {
+                    return const SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Text('Không có dữ liệu'),
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
+                    );
+                  }
+                },
               ),
               onChangeExpand: () {
                 setState(() {
@@ -341,25 +343,23 @@ class _DetailDocumentState extends State<DetailDocument> {
                 ),
                 child: const Text('Lịch sử văn bản liên thông'),
               ),
-              child: Container(
-                child: StreamBuilder<HistoryProcessPage>(
-                  stream: cubit.screenJobProfilesStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
-                      return HistoryWidget(cubit);
-                    } else {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Container(
-                          height: 200,
-                          child: const Center(
-                            child: Text('Không có dữ liệu'),
-                          ),
+              child: StreamBuilder<HistoryProcessPage>(
+                stream: cubit.screenJobProfilesStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && cubit.listHistory.isNotEmpty) {
+                    return HistoryWidget(cubit);
+                  } else {
+                    return const SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Text('Không có dữ liệu'),
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
+                    );
+                  }
+                },
               ),
               onChangeExpand: () {
                 setState(() {
@@ -372,7 +372,14 @@ class _DetailDocumentState extends State<DetailDocument> {
             padding:
                 const EdgeInsets.only(top: 25, left: 16, right: 16, bottom: 24),
             child: ButtonCustomBottom(
-                title: 'Xem luồng', onPressed: () {}, isColorBlue: true),
+              title: 'Xem luồng',
+              onPressed: () {
+                MaterialPageRoute(
+                  builder: (context) => StreamProcessScreen(),
+                );
+              },
+              isColorBlue: true,
+            ),
           )
         ],
       ),
