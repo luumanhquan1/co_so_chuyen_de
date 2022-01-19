@@ -63,7 +63,14 @@ class _HoiDapScreenState extends State<HoiDapScreen> {
                     tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
                     chuDe: cubit.listHoiDap[index].chuDe ?? '',
                     loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
-                    onTapXoa: () {},
+                    onTapXoa: () {
+                      DialogUtils.showDialogDelete(
+                        context,
+                        title: S.current.xoa_hdsd,
+                        icon: SvgPicture.asset(ImageAssets.icXoaHDSD),
+                        okBtnFunction: () {},
+                      );
+                    },
                     onTapEdit: () {
                       Navigator.push(
                         context,

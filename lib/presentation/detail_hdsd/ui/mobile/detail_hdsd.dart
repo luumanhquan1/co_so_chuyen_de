@@ -34,7 +34,7 @@ class _DetailHDSDScreenState extends State<DetailHDSDScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            spaceH36,
+            spaceH16,
             Text(
               S.current.thong_tin_chuong_trinh_hop,
               style: textNormalCustom(color: labelColor, fontSize: 16),

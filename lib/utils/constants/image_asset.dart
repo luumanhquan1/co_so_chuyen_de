@@ -39,6 +39,7 @@ class ImageAssets {
   static const String icImage = '$baseImg/ic_Image.svg';
   static const String icEditInfor = '$baseImg/ic_edit_infor.svg';
   static const String icTienIchTablet = '$baseImg/ic_tien_ich_tablet.svg';
+  static const String icXoaHDSD = '$baseImg/ic_xoa_hdsd.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -47,6 +48,7 @@ class ImageAssets {
   static const String icPlay = '$baseImg/ic_play.svg';
   static const String icMenuCalender = '$baseImg/menu_calender.svg';
   static const String icAddButtonCalender = '$baseImg/add_button_calender.svg';
+  static const String icAddButtonCalenderTablet = '$baseImg/add_button_calender_tablet.svg';
   static const String icTongSoLichLamviec =
       '$baseImg/tong_so_lich_lam_viec.svg';
   static const String icLichCongTacTrongNuoc =
