@@ -144,7 +144,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         : _calendarFormatMonth = _format;
                   });
                 },
-
                 selectedDayPredicate: (day) {
                   return isSameDay(_selectedDay, day);
                 },
