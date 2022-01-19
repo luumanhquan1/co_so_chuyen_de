@@ -15,6 +15,8 @@ class DetailHDSDScreenTablet extends StatefulWidget {
 }
 
 class _DetailHDSDScreenTabletState extends State<DetailHDSDScreenTablet> {
+  final DetailHDSDCubit cubit = DetailHDSDCubit();
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +24,6 @@ class _DetailHDSDScreenTabletState extends State<DetailHDSDScreenTablet> {
 
   @override
   Widget build(BuildContext context) {
-    final DetailHDSDCubit cubit = DetailHDSDCubit();
     return Scaffold(
       backgroundColor: bgTabletColor,
       resizeToAvoidBottomInset: true,

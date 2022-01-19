@@ -15,6 +15,8 @@ class DetailHDSDScreen extends StatefulWidget {
 }
 
 class _DetailHDSDScreenState extends State<DetailHDSDScreen> {
+  final DetailHDSDCubit cubit = DetailHDSDCubit();
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +24,6 @@ class _DetailHDSDScreenState extends State<DetailHDSDScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final DetailHDSDCubit cubit = DetailHDSDCubit();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarDefaultBack(S.current.xem_hdsd),
