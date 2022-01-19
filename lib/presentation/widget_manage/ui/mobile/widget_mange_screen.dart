@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
