@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,17 @@ class _SituationOfHandlingPeopleWidgetState
       },
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
+        listSelectKey: [
+          DialogData(
+            title: S.current.document,
+            key: [
+              SelectKey.HOM_NAY,
+              SelectKey.TUAN_NAY,
+              SelectKey.THANG_NAY,
+              SelectKey.NAM_NAY
+            ],
+          )
+        ],
       ),
       child: Column(
         children: [
