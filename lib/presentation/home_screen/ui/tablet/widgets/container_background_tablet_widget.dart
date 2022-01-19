@@ -66,7 +66,7 @@ class _ContainerBackgroudWidgetState
         children: [
           MouseRegion(
             onHover: (_) {
-              HomeProvider.of(context).homeCubit.showDialog(null);
+              HomeProvider.of(context).homeCubit.closeDialog();
             },
             child: Container(
               color: Colors.transparent,

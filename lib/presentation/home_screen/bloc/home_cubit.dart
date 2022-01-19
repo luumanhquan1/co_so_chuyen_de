@@ -46,8 +46,20 @@ class HomeCubit extends BaseCubit<HomeState> {
     _tinhHuongKhanCap.sink.add(FakeData.tinhKhanCap);
   }
 
-  void showDialog(WidgetType? type) {
-    _showDialogSetting.add(type);
+  void showDialog(WidgetType type) {
+    if (_showDialogSetting.hasValue) {
+      if (_showDialogSetting.value == type) {
+        closeDialog();
+      } else {
+        _showDialogSetting.add(type);
+      }
+    } else {
+      _showDialogSetting.add(type);
+    }
+  }
+
+  void closeDialog() {
+    _showDialogSetting.add(null);
   }
 
   Future<void> getDocument() async {
@@ -203,7 +215,10 @@ extension DanhSachCongViec on HomeCubit {
     final result = data.listTodoImportant.removeAt(
       index,
     );
-    data.listTodoImportant[index] = result..label = newLabel;
+    data.listTodoImportant.insert(0, result..label = newLabel);
+    _getTodoList.sink.add(
+      data,
+    );
     return newLabel;
   }
 
