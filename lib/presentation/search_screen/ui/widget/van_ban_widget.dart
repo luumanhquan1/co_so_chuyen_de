@@ -34,6 +34,8 @@ class VanBanWidget extends StatelessWidget {
             time: time,
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
             children: List.generate(listDocument.length, (index) {
               final data = listDocument[index];
               return Padding(

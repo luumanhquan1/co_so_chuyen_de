@@ -67,8 +67,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 10.0.textScale(),
+                margin: EdgeInsets.only(
+                  left: 10.0.textScale(),
+                  right: 12.0.textScale(),
+                  top: 12.0.textScale(),
+                  bottom: 16.0.textScale(),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,30 +91,27 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         ),
                       )
                     else
-                      Row(
-                        children: [
-                          Text(
-                            DateTime.now().toStringWithListFormat,
-                            style: textNormalCustom(
-                              fontSize: 14.0.textScale(),
-                              fontWeight: FontWeight.w500,
-                              color: titleColor,
+                      GestureDetector(
+                        onTap: () {
+                          isFomat = !isFomat;
+                          setState(() {});
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              DateTime.now().toStringWithListFormat,
+                              style: textNormalCustom(
+                                fontSize: 14.0.textScale(),
+                                fontWeight: FontWeight.w500,
+                                color: titleColor,
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(
+                            const Icon(
                               Icons.arrow_drop_down_sharp,
                               color: textBodyTime,
                             ),
-                            onPressed: () {
-                              isFomat = !isFomat;
-                              setState(() {});
-                            },
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     GestureDetector(
                       onTap: () {
@@ -121,9 +121,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       },
                       child: SvgPicture.asset(ImageAssets.ic_search_calendar),
                     ),
-                    SizedBox(
-                      width: 10.0.textScale(),
-                    ),
+
                   ],
                 ),
               ),

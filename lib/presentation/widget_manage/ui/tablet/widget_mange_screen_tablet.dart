@@ -60,15 +60,18 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                       vertical: 13,),
                     width: 185,
                     height: 44,
-                    child: Center(
-                      child: Text(
-                        S.current.dat_lai_mac_dinh,
-                        style: textNormalCustom(
-                          fontSize: 16,
-                           color:backgroundColorApp,
+                    child: GestureDetector(
+                      child: Center(
+                        child: Text(
+                          S.current.dat_lai_mac_dinh,
+                          style: textNormalCustom(
+                            fontSize: 16,
+                             color:backgroundColorApp,
+                        ),
                       ),
-                    ),
-                  ),),
+                  ),
+                      onTap: (){},
+                    ),),
                   const SizedBox(
                     height: 24,
                   ),
