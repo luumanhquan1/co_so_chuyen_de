@@ -142,10 +142,10 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
             flex: 4,
             child: TextField(
               onChanged: (text) {
-                widget.onChange!(text);
+                widget.onChange != null ? widget.onChange!(text) : null;
               },
               onSubmitted: (text) {
-               widget.onSubmit!(text);
+                widget.onChange != null ? widget.onSubmit!(text) : null;
               },
               decoration: InputDecoration(
                 prefixIcon: SizedBox(
