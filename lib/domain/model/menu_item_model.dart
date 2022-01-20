@@ -16,13 +16,14 @@ class ChildrenMenuItem {
   final bool isSelected;
   final String title;
   final int number;
+
   // List<ChildrenMenuItem> children;
 
-  ChildrenMenuItem(
-  {required this.isSelected,
+  ChildrenMenuItem({
+    required this.isSelected,
     required this.title,
     required this.number,
     // required this.children,
-  }
-  );
+  });
 }
+

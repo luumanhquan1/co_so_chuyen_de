@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
@@ -113,7 +114,14 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                     itemCount: cubitIncoming.listIncomingDocument.length,
                     itemBuilder: (context, index) {
                       return IncomingDocumentCell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (contetx) => DetailDocument(),
+                            ),
+                          );
+                        },
                         title: cubitIncoming
                             .listIncomingDocument[index].loaiVanBan,
                         dateTime:
@@ -168,7 +176,14 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                     itemCount: cubitOutgoing.listIncomingDocument.length,
                     itemBuilder: (context, index) {
                       return IncomingDocumentCell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (contetx) => DetailDocument(),
+                            ),
+                          );
+                        },
                         title: cubitOutgoing
                             .listIncomingDocument[index].loaiVanBan,
                         dateTime: cubitOutgoing

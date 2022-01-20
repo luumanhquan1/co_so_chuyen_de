@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/document/outgoing_document.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,14 @@ class _ListVBDiState extends State<ListVBDi> {
                 itemCount: widget.list.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCellTablet(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (contetx) => DetailDocumentTablet(),
+                        ),
+                      );
+                    },
                     title: widget.list[index].loaiVanBan,
                     dateTime: widget.list[index].ngayBanHanh,
                     userName: widget.list[index].nguoiSoanThao,

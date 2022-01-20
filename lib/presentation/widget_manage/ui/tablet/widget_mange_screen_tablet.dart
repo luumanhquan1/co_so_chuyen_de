@@ -7,7 +7,6 @@ import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
-import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -61,15 +60,18 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                       vertical: 13,),
                     width: 185,
                     height: 44,
-                    child: Center(
-                      child: Text(
-                        S.current.dat_lai_mac_dinh,
-                        style: textNormalCustom(
-                          fontSize: 16,
-                           color:backgroundColorApp,
+                    child: GestureDetector(
+                      child: Center(
+                        child: Text(
+                          S.current.dat_lai_mac_dinh,
+                          style: textNormalCustom(
+                            fontSize: 16,
+                             color:backgroundColorApp,
+                        ),
                       ),
-                    ),
-                  )),
+                  ),
+                      onTap: (){},
+                    ),),
                   const SizedBox(
                     height: 24,
                   ),
