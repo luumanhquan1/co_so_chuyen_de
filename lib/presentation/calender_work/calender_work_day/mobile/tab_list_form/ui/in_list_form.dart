@@ -1,9 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/widget/custom_item_calender_list.dart';
-import 'package:ccvc_mobile/presentation/calender_work/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/widget/custom_item_calender_list.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,6 @@ class _InListFormState extends State<InListForm> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -29,7 +28,7 @@ class _InListFormState extends State<InListForm> {
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Container(
+              child: SizedBox(
                 height: 88,
                 width: MediaQuery.of(context).size.width - 16,
                 child: ListView.builder(
@@ -39,15 +38,19 @@ class _InListFormState extends State<InListForm> {
                   itemBuilder: (context, index) {
                     if (_cubit.list.length == 5) {
                       _cubit.list.insert(
-                          0,
-                          DashboardSchedule(
-                              6, "22ssdssads2", "Tổng số lịch làm việc"));
+                        1,
+                        DashboardSchedule(
+                          6,
+                          '22ssdssads2',
+                          'Tổng số lịch làm việc',
+                        ),
+                      );
                     }
                     return CustomItemCalenderWork(
-                        image: _cubit.img[index],
-                        typeName: _cubit.list[index].typeName,
-                        numberOfCalendars:
-                            _cubit.list[index].numberOfCalendars);
+                      image: _cubit.img[index],
+                      typeName: _cubit.list[index].typeName,
+                      numberOfCalendars: _cubit.list[index].numberOfCalendars,
+                    );
                   },
                 ),
               ),
@@ -55,27 +58,29 @@ class _InListFormState extends State<InListForm> {
             Padding(
               padding:
                   const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
-              child: Text(_cubit.currentTime,
-                  style: textNormalCustom(color: textBodyTime)),
+              child: Text(
+                _cubit.currentTime,
+                style: textNormalCustom(color: textBodyTime),
+              ),
             ),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
               itemCount: _cubit.listMeeting.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: CustomItemCalenderList(
-                      title: _cubit.listMeeting[index].title,
-                      dateTimeFrom:
-                          DateTime.parse(_cubit.listMeeting[index].dateTimeFrom)
-                              .toStringWithAMPM,
-                      dateTimeTo:
-                          DateTime.parse(_cubit.listMeeting[index].dateTimeTo)
-                              .toStringWithAMPM,
-                      urlImage:
-                          "https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0"),
+                    title: _cubit.listMeeting[index].title,
+                    dateTimeFrom:
+                        DateTime.parse(_cubit.listMeeting[index].dateTimeFrom)
+                            .toStringWithAMPM,
+                    dateTimeTo:
+                        DateTime.parse(_cubit.listMeeting[index].dateTimeTo)
+                            .toStringWithAMPM,
+                    urlImage:
+                        'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                  ),
                 );
               },
             ),

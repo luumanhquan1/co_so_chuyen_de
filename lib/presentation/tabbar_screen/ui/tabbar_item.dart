@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/calender_work_day_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
@@ -66,7 +66,7 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.blue,
         );
       case TabBarType.calendarWork:
-        return const MainTabarCalenderWork();
+        return const CalenderWorkDayMobile();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,
