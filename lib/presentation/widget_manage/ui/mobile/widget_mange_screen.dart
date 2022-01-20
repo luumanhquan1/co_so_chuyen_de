@@ -147,8 +147,11 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                         isUsing: false,
                       );
                     } else {
-                      return Center(
-                        child: Text(S.current.no_data),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Center(
+                          child: Text(S.current.no_data),
+                        ),
                       );
                     }
                   },
