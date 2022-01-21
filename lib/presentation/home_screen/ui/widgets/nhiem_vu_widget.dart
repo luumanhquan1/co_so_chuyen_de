@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NhiemVuWidget extends StatelessWidget {
   final String urlIcon;
@@ -20,16 +22,24 @@ class NhiemVuWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(6)),
         color: backgroundRowColor,
       ),
+      padding: const EdgeInsets.symmetric(vertical: 18),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 56,
-            width: 56,
-            color: Colors.red,
+          SvgPicture.asset(urlIcon),
+          const SizedBox(
+            height: 12,
           ),
           Text(
             title,
-            style: textNormal(textTitle, 12),
+            style: textNormal(textTitle, 12.0.textScale(space: 4)),
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            '12,109',
+            style: titleText(color: numberOfCalenders, fontSize: 22),
           )
         ],
       ),

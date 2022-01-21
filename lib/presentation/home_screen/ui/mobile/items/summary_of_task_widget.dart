@@ -95,6 +95,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
               crossAxisCount: 2,
               mainAxisSpacing: 17,
               crossAxisSpacing: 17,
+              childAspectRatio: 1.1,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: List.generate(

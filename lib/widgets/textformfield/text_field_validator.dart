@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -16,7 +15,6 @@ class TextFieldValidator extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
   final int maxLine;
-
   const TextFieldValidator({
     Key? key,
     this.controller,
@@ -40,7 +38,17 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     formProvider = FormProvider.of(context);
-
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (formProvider != null) {
+        if (widget.validator != null) {
+          final validator =
+              widget.validator!(widget.controller?.text ?? '') == null;
+          formProvider?.validator.addAll({key: validator});
+        } else {
+          formProvider?.validator.addAll({key: true});
+        }
+      }
+    });
     if (formProvider != null) {
       formProvider?.validator.addAll({key: true});
     }

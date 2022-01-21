@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/nhiem_vu_widget.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -55,8 +56,8 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
           DialogData(
             onSelect: (value) {
               _nhiemVuCubit.selectDonVi(
-                  selectKey: value,
-                  );
+                selectKey: value,
+              );
             },
             title: S.current.nhiem_vu,
             key: [
@@ -83,8 +84,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
       ),
       padding: EdgeInsets.zero,
       child: Flexible(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollBarWidget(
           children: [
             StreamBuilder<List<DashboardSchedule>>(
               stream: _nhiemVuCubit.getTonghopNhiemVu,
@@ -93,14 +93,17 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
                 return GridView.count(
                   crossAxisCount: 2,
                   shrinkWrap: true,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.619,
+                  mainAxisSpacing: 24,
+                  crossAxisSpacing: 24,
                   physics: const NeverScrollableScrollPhysics(),
                   children: List.generate(data.length, (index) {
                     final img = FakeData.img[index];
                     final result = data[index];
-                    return Container(
-                      color: Colors.red,
+                    return NhiemVuWidget(
+                      value: result.numberOfCalendars.toString(),
+                      urlIcon: img,
+                      title: result.typeName,
                     );
                   }),
                 );
