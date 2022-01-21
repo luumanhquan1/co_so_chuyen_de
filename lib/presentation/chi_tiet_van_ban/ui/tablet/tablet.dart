@@ -399,7 +399,7 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
                       ),
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
-                    padding: const EdgeInsets.only(right: 30),
+                    margin: const EdgeInsets.only(right: 30),
                     child: ExpansionTitleCustom(
                       expand: expanded2,
                       paddingRightIcon: const EdgeInsets.only(right: 21),
