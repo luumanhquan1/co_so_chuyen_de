@@ -178,7 +178,8 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
                                                       .withOpacity(0.1),
                                                   borderRadius:
                                                       const BorderRadius.all(
-                                                          Radius.circular(6)),
+                                                    Radius.circular(6),
+                                                  ),
                                                 ),
                                                 child: Column(
                                                   children: snapshot.data!
@@ -398,7 +399,7 @@ class _DetailDocumentTabletState extends State<DetailDocumentTablet> {
                       ),
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
-                    margin: const EdgeInsets.only(right: 30),
+                    padding: const EdgeInsets.only(right: 30),
                     child: ExpansionTitleCustom(
                       expand: expanded2,
                       paddingRightIcon: const EdgeInsets.only(right: 21),
