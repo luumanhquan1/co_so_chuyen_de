@@ -1,5 +1,10 @@
+import 'dart:developer';
+
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -22,6 +27,7 @@ class DocumentWidget extends StatefulWidget {
 }
 
 class _DocumentWidgetState extends State<DocumentWidget> {
+  final VanBanCubit _vanBanCubit = VanBanCubit();
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
@@ -30,18 +36,26 @@ class _DocumentWidgetState extends State<DocumentWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+   selectKeyDialog: _vanBanCubit,
+      listSelect: const [
+        SelectKey.CHO_VAO_SO,
+        SelectKey.CHO_XU_LY_VB_DI,
+        SelectKey.CHO_XU_LY_VB_DEN,
+        SelectKey.CHO_TRINH_KY,
+        SelectKey.CHO_CHO_Y_KIEN_VB_DEN,
+        SelectKey.CHO_CAP_SO,
+        SelectKey.CHO_BAN_HANH
+      ],
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: <DialogData>[
           DialogData(
-            title: S.current.document,
-            key: [
-              SelectKey.CHO_XU_LY_VB_DEN,
-              SelectKey.CHO_CHO_Y_KIEN_VB_DEN,
-              SelectKey.CHO_TRINH_KY_VB_DI,
-            ],
-          ),
-          DialogData(
+            onSelect: (value) {
+              _vanBanCubit.selectDate(
+                  selectKey: value,
+                  startDate: DateTime.now(),
+                  endDate: DateTime.now());
+            },
             title: S.current.time,
             key: [
               SelectKey.HOM_NAY,

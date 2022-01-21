@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
@@ -22,6 +25,7 @@ class SituationOfHandlingPeopleWidget extends StatefulWidget {
 
 class _SituationOfHandlingPeopleWidgetState
     extends State<SituationOfHandlingPeopleWidget> {
+  final TinhHinhXuLyYKienCubit _yKienCubit = TinhHinhXuLyYKienCubit();
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
@@ -29,10 +33,17 @@ class _SituationOfHandlingPeopleWidgetState
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      selectKeyDialog: _yKienCubit,
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
+            onSelect: (value) {
+              _yKienCubit.selectDate(
+                  selectKey: value,
+                  startDate: DateTime.now(),
+                  endDate: DateTime.now());
+            },
             title: S.current.document,
             key: [
               SelectKey.HOM_NAY,

@@ -1,9 +1,11 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +22,8 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
   final EdgeInsetsGeometry paddingChild;
   final double? maxHeight;
   final double? minHeight;
+  final SelectKeyDialog? selectKeyDialog;
+  final bool isUnit;
   const ContainerBackgroundTabletWidget({
     Key? key,
     required this.child,
@@ -33,6 +37,8 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
     this.maxHeight,
     this.minHeight,
     this.paddingChild = const EdgeInsets.symmetric(vertical: 20),
+    this.selectKeyDialog,
+    this.isUnit = false,
   }) : super(key: key);
 
   @override
@@ -81,6 +87,7 @@ class _ContainerBackgroudWidgetState
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -91,12 +98,33 @@ class _ContainerBackgroudWidgetState
                                 padding: const EdgeInsets.only(right: 12),
                                 child: widget.leadingIcon,
                               ),
-                            Text(
-                              widget.title,
-                              style: textNormalCustom(
-                                fontSize: 16.0.textScale(space: 4),
-                                color: AppTheme.getInstance().titleColor(),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.title,
+                                  style: textNormalCustom(
+                                    fontSize: 16.0.textScale(space: 4),
+                                    color: AppTheme.getInstance().titleColor(),
+                                  ),
+                                ),
+                                if (widget.selectKeyDialog != null) ...[
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  StreamBuilder<bool>(
+                                    stream: widget.selectKeyDialog!
+                                        .selectKeyDialog.stream,
+                                    builder: (context, snapshot) {
+                                      return Text(
+                                        subTitle(),
+                                        style: textNormal(titleColumn, 16),
+                                      );
+                                    },
+                                  )
+                                ] else
+                                  const SizedBox()
+                              ],
                             ),
                           ],
                         ),
@@ -129,5 +157,13 @@ class _ContainerBackgroudWidgetState
         ],
       ),
     );
+  }
+
+  String subTitle() {
+    final data = widget.selectKeyDialog;
+    if (widget.isUnit) {
+      return '${data!.selectKeyDonVi.getText()} - ${data.selectKeyTime.getText()}';
+    }
+    return data!.selectKeyTime.getText();
   }
 }

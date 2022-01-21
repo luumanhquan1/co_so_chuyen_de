@@ -30,12 +30,13 @@ class SummaryOfTaskTabletWidget extends StatefulWidget {
 
 class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
   late HomeCubit cubit;
+  final TongHopNhiemVuCubit _nhiemVuCubit = TongHopNhiemVuCubit();
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
-    cubit.getDataTongHopNhiemVu();
+    _nhiemVuCubit.getDataTongHopNhiemVu();
   }
 
   @override
@@ -46,24 +47,30 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      isUnit: true,
+      selectKeyDialog: _nhiemVuCubit,
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            title: S.current.summary_of_tasks,
+            onSelect: (value) {
+              _nhiemVuCubit.selectDonVi(
+                  selectKey: value,
+                  );
+            },
+            title: S.current.nhiem_vu,
             key: [
-              SelectKey.TAT_CA,
+              SelectKey.CA_NHAN,
               SelectKey.DON_VI,
             ],
           ),
           DialogData(
-            title: S.current.misson,
-            key: [
-              SelectKey.CHO_XU_LY,
-              SelectKey.DANG_XU_LY,
-            ],
-          ),
-          DialogData(
+            onSelect: (value) {
+              _nhiemVuCubit.selectDate(
+                  selectKey: value,
+                  startDate: DateTime.now(),
+                  endDate: DateTime.now());
+            },
             title: S.current.time,
             key: [
               SelectKey.HOM_NAY,
@@ -79,20 +86,21 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-
             StreamBuilder<List<DashboardSchedule>>(
-              stream: cubit.getTonghopNhiemVu,
+              stream: _nhiemVuCubit.getTonghopNhiemVu,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? <DashboardSchedule>[];
-                return RowSumInfoWidget(
-                  padding: 24,
-                  data: List.generate(data.length, (index) {
+                return GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: List.generate(data.length, (index) {
                     final img = FakeData.img[index];
                     final result = data[index];
-                    return DataInfo(
-                      title: result.typeName,
-                      urlIcon: img,
-                      value: result.numberOfCalendars.toString(),
+                    return Container(
+                      color: Colors.red,
                     );
                   }),
                 );
@@ -101,43 +109,6 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
             const SizedBox(
               height: 20,
             ),
-            Flexible(
-              child: StreamBuilder<List<CalendarMeetingModel>>(
-                  stream: cubit.getNhiemVu,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? <CalendarMeetingModel>[];
-                    if (data.isNotEmpty) {
-                      return ScrollBarWidget(
-                        children: List.generate(data.length, (index) {
-                          final result = data[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: ContainerInfoWidget(
-                              status: result.codeStatus.getText(),
-                              colorStatus: result.codeStatus.getColor(),
-                              title: result.title,
-                              listData: [
-                                InfoData(
-                                  urlIcon: ImageAssets.icWork,
-                                    key: S.current.loai_nhiem_vu,
-                                    value: result.loaiNhiemVu,),
-                                InfoData(
-                                 urlIcon: ImageAssets.icCalendar,
-                                  key: S.current.han_xu_ly,
-                                  value: S.current.han_xu_ly,
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                      );
-                    }
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 100),
-                      child: NodataWidget(),
-                    );
-                  },),
-            )
           ],
         ),
       ),

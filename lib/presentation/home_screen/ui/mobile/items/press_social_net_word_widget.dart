@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
@@ -29,12 +31,20 @@ class PressSocialNetWork extends StatefulWidget {
 
 class _PressSocialNetWorkState extends State<PressSocialNetWork> {
   late HomeCubit cubit;
+  final BaoChiMangXaHoiCubit _xaHoiCubit = BaoChiMangXaHoiCubit();
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
-    cubit.getPress();
+    _xaHoiCubit.getPress();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _xaHoiCubit.dispose();
   }
 
   @override
@@ -44,6 +54,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      selectKeyDialog: _xaHoiCubit,
       dialogSelect: DialogSettingWidget(
         labelWidget: Padding(
           padding: const EdgeInsets.only(bottom: 16),
@@ -66,6 +77,12 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
+            onSelect: (value) {
+              _xaHoiCubit.selectDate(
+                  selectKey: value,
+                  startDate: DateTime.now(),
+                  endDate: DateTime.now());
+            },
             title: S.current.time,
             key: [
               SelectKey.HOM_NAY,
@@ -83,7 +100,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: StreamBuilder<List<PressNetWorkModel>>(
-              stream: cubit.getPressNetWork,
+              stream: _xaHoiCubit.getPressNetWork,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? <PressNetWorkModel>[];
                 if (data.isNotEmpty) {
@@ -127,7 +144,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
       height: 26,
       child: StreamBuilder<List<TagModel>>(
         initialData: const [],
-        stream: cubit.getTag,
+        stream: _xaHoiCubit.getTag,
         builder: (context, snapshot) {
           final data = snapshot.data ?? <TagModel>[];
           return ListView.builder(
@@ -137,7 +154,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
               final result = data[index];
               return GestureDetector(
                 onTap: () {
-                  cubit.selectTag(result);
+                  _xaHoiCubit.selectTag(result);
                 },
                 child: Container(
                   margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
