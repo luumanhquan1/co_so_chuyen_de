@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart'
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/widgets/a.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,9 +63,7 @@ extension TabbarEnum on TabBarType {
           ),
         );
       case TabBarType.report:
-        return const Scaffold(
-          backgroundColor: Colors.blue,
-        );
+        return const ABC();
       case TabBarType.calendarWork:
         return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
@@ -76,7 +75,6 @@ extension TabbarEnum on TabBarType {
           mobileScreen: const MenuScreen(),
           tabletScreen: const MenuTabletScreen(),
         );
-
     }
   }
 
@@ -87,7 +85,6 @@ extension TabbarEnum on TabBarType {
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
             height: 16,
-
           ),
           text: S.current.home,
         );
