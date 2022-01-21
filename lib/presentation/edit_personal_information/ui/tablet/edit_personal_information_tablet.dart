@@ -291,15 +291,13 @@ class _EditPersonalInformationTabletScreen
                               child: InputInfoUserWidget(
                                 title: user.keys.elementAt(11),
                                 child: CustomSelectItemsTablet(
+                                  key: UniqueKey(),
                                   title: S.current.quan_huyen,
                                   context: context,
                                   items: cubit.fakeDataHuyen,
                                   onChange: (indexes) {
                                     if (indexes >= 0) {
-                                      setState(() {
-                                        cubit.isCheckHuyenSubject.sink
-                                            .add(false);
-                                      });
+                                      cubit.isCheckHuyenSubject.sink.add(false);
                                     }
                                   },
                                   onRemove: () {
@@ -395,7 +393,7 @@ class _EditPersonalInformationTabletScreen
               spaceH48,
               DoubleButtonEditScreen(
                 onPressed1: () {
-                  Navigator.of(context);
+                  Navigator.pop(context);
                 },
                 onPressed2: () {
                   if (formKeyName.currentState!.validate() &&

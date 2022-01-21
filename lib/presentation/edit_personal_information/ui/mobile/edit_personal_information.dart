@@ -264,14 +264,13 @@ class _EditPersonalInformationScreen
                   child: InputInfoUserWidget(
                     title: user.keys.elementAt(11),
                     child: CustomSelectItems(
+                      key: UniqueKey(),
                       title: S.current.quan_huyen,
                       context: context,
                       items: cubit.fakeDataHuyen,
                       onChange: (indexes) {
                         if (indexes >= 0) {
-                          setState(() {
-                            cubit.isCheckHuyenSubject.sink.add(false);
-                          });
+                          cubit.isCheckHuyenSubject.sink.add(false);
                         }
                       },
                       onRemove: () {
