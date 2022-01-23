@@ -64,6 +64,8 @@ extension SelectKeyExt on SelectKey {
         return S.current.cho_duyet_xu_ly;
       case SelectKey.CHO_DUYET_TIEP_NHAN:
         return S.current.cho_duyet_tiep_nhan;
+      case SelectKey.TUY_CHON:
+        return S.current.tuy_chon;
     }
   }
 }

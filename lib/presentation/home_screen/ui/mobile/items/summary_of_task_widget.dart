@@ -14,10 +14,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_w
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/nhiem_vu_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/enum_ext.dart';
-import 'package:ccvc_mobile/widgets/listview/rows_sum_widget.dart';
-import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
+
 import 'package:flutter/material.dart';
 
 class SummaryOfTaskWidget extends StatefulWidget {
@@ -34,6 +31,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
   final TongHopNhiemVuCubit _nhiemVuCubit = TongHopNhiemVuCubit();
   @override
   void didChangeDependencies() {
+    log("message");
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
@@ -53,7 +51,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value) {
+            onSelect: (value, _, __) {
               _nhiemVuCubit.selectDonVi(
                 selectKey: value,
               );
@@ -66,21 +64,17 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
             ],
           ),
           DialogData(
-            onSelect: (value) {
+            onSelect: (value, startDate, endDate) {
               _nhiemVuCubit.selectDate(
                 selectKey: value,
-                startDate: DateTime.now(),
-                endDate: DateTime.now(),
+                startDate: startDate,
+                endDate: endDate,
               );
             },
+            startDate: _nhiemVuCubit.startDate,
+            endDate: _nhiemVuCubit.endDate,
             title: S.current.time,
             initValue: _nhiemVuCubit.selectKeyTime,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),

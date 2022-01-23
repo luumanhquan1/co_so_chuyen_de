@@ -37,19 +37,13 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
         type: widget.homeItemType,
         listSelectKey: <DialogData>[
           DialogData(
-            onSelect: (value) {
+            onSelect: (value,startDate,endDate) {
               _vanBanCubit.selectDate(
                   selectKey: value,
-                  startDate: DateTime.now(),
-                  endDate: DateTime.now());
+                  startDate: startDate,
+                  endDate: endDate);
             },
             title: S.current.time,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),

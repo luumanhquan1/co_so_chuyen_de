@@ -19,6 +19,7 @@ enum SelectKey {
   TUAN_NAY,
   THANG_NAY,
   NAM_NAY,
+  TUY_CHON,
   CHO_XU_LY_VB_DEN,
   CHO_XU_LY_VB_DI,
   CHO_CHO_Y_KIEN_VB_DEN,
@@ -120,6 +121,7 @@ class WidgetTypeConstant {
   static const String SU_KIEN_TRONG_NGAY = 'SuKienTrongNgay';
   static const String SINH_NHAT = 'SinhNhat';
   static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
+  static const String NHIEM_VU = 'NhienVuWidGet';
 }
 class DateFormatApp {
   static String date = 'dd/MM/yyyy';

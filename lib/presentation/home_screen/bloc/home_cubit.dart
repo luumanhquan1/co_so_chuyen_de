@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+
 import 'package:ccvc_mobile/domain/model/home/date_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
@@ -295,7 +295,10 @@ class SuKienTrongNgayCubit extends HomeCubit with SelectKeyDialog {}
 
 ///Tình hình xử lý ý kiến người dân
 class TinhHinhXuLyYKienCubit extends HomeCubit with SelectKeyDialog {}
+/// Nhiệm vụ
+class NhiemVuCubit extends HomeCubit with SelectKeyDialog{
 
+}
 ///Mixin SelectKey Dialog
 mixin SelectKeyDialog {
   SelectKey selectKeyTime = SelectKey.HOM_NAY;
@@ -309,6 +312,8 @@ mixin SelectKeyDialog {
     required DateTime endDate,
   }) {
     selectKeyTime = selectKey;
+    this.startDate = startDate;
+    this.endDate = endDate;
     selectKeyDialog.sink.add(true);
   }
 

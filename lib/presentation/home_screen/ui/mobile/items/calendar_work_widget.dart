@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -10,7 +10,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:flutter/material.dart';
@@ -41,19 +41,13 @@ class _CalendarWorkWidgetState extends State<CalendarWorkWidget> {
           return DialogSettingWidget(
             listSelectKey: [
               DialogData(
-                onSelect: (value) {
+                onSelect: (value,startDate,endDate) {
                   _lamViecCubit.selectDate(
                       selectKey: value,
-                      startDate: DateTime.now(),
-                      endDate: DateTime.now());
+                      startDate: startDate,
+                      endDate: endDate);
                 },
                 title: S.current.time,
-                key: [
-                  SelectKey.HOM_NAY,
-                  SelectKey.TUAN_NAY,
-                  SelectKey.THANG_NAY,
-                  SelectKey.NAM_NAY
-                ],
               )
             ],
             type: widget.homeItemType,

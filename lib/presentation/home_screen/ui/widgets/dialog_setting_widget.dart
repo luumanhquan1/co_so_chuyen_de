@@ -3,11 +3,13 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/custom_select_date_tuy_chon_widgte.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 
 import 'package:flutter/material.dart';
 
@@ -67,7 +69,32 @@ class DialogSettingWidget extends StatelessWidget {
                                 child: SelectCell(
                                   data: data,
                                   onSelect: (value) {
-                                    data.onSelect(value);
+                                    if (value == SelectKey.TUY_CHON) {
+                                      showBottomSheetCustom(
+                                        context,
+                                        child: CustomSelectDateWidget(
+                                          startDate:
+                                              data.startDate ?? DateTime.now(),
+                                          endDate:
+                                              data.endDate ?? DateTime.now(),
+                                          onXacNhan: (startDate, endDate) {
+                                            data.startDate = startDate;
+                                            data.endDate = endDate;
+                                            data.onSelect(
+                                              value,
+                                              startDate,
+                                              endDate,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    } else {
+                                      data.onSelect(
+                                        value,
+                                        DateTime.now(),
+                                        DateTime.now(),
+                                      );
+                                    }
                                   },
                                 ),
                               );
@@ -180,10 +207,21 @@ class DialogData {
   final String title;
   final List<SelectKey> key;
   final SelectKey initValue;
-  final Function(SelectKey) onSelect;
-  DialogData(
-      {required this.title,
-      required this.key,
-      this.initValue = SelectKey.HOM_NAY,
-      required this.onSelect,});
+  final Function(SelectKey, DateTime, DateTime) onSelect;
+  DateTime? startDate;
+  DateTime? endDate;
+  DialogData({
+    required this.title,
+    this.key = const [
+      SelectKey.HOM_NAY,
+      SelectKey.TUAN_NAY,
+      SelectKey.THANG_NAY,
+      SelectKey.NAM_NAY,
+      SelectKey.TUY_CHON
+    ],
+    this.startDate,
+    this.endDate,
+    this.initValue = SelectKey.HOM_NAY,
+    required this.onSelect,
+  });
 }

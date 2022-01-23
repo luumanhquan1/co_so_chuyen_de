@@ -1,22 +1,14 @@
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
-
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
-
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/tong_hop_nhiem_vu_cell.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/nhiem_vu_widget.dart';
-
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/enum_ext.dart';
-import 'package:ccvc_mobile/widgets/listview/rows_sum_widget.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +46,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value) {
+            onSelect: (value,_,__) {
               _nhiemVuCubit.selectDonVi(
                 selectKey: value,
               );
@@ -66,55 +58,44 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
             ],
           ),
           DialogData(
-            onSelect: (value) {
+            onSelect: (value,startDate,endDate) {
               _nhiemVuCubit.selectDate(
                   selectKey: value,
-                  startDate: DateTime.now(),
-                  endDate: DateTime.now());
+                  startDate: startDate,
+                  endDate: endDate);
             },
             title: S.current.time,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),
       padding: EdgeInsets.zero,
       child: Flexible(
-        child: ScrollBarWidget(
-          children: [
-            StreamBuilder<List<DashboardSchedule>>(
-              stream: _nhiemVuCubit.getTonghopNhiemVu,
-              builder: (context, snapshot) {
-                final data = snapshot.data ?? <DashboardSchedule>[];
-                return GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  childAspectRatio: 0.619,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 24,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: List.generate(data.length, (index) {
-                    final img = FakeData.img[index];
-                    final result = data[index];
-                    return NhiemVuWidget(
-                      value: result.numberOfCalendars.toString(),
-                      urlIcon: img,
-                      title: result.typeName,
-                    );
-                  }),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
-      ),
+          child: StreamBuilder<List<DashboardSchedule>>(
+        stream: _nhiemVuCubit.getTonghopNhiemVu,
+        builder: (context, snapshot) {
+          final data = snapshot.data ?? <DashboardSchedule>[];
+          if (data.isNotEmpty) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: TongHopNhiemVuCell(
+                builder: (context, index) {
+                  final img = FakeData.img[index];
+                  final result = data[index];
+                  return NhiemVuWidget(
+                    value: result.numberOfCalendars.toString(),
+                    urlIcon: img,
+                    title: result.typeName,
+                  );
+                },
+              ),
+            );
+          }
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 100),
+            child: NodataWidget(),
+          );
+        },
+      )),
     );
   }
 }

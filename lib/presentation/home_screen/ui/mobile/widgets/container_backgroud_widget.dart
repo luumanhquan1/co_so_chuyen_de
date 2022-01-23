@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/select_key_row.d
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/enum_ext.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -132,7 +133,7 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
                   const SizedBox()
                 else
                   Container(
-                    margin:const EdgeInsets.only(top: 17),
+                    margin: const EdgeInsets.only(top: 17),
                     height: 32,
                     color: Colors.transparent,
                     width: double.infinity,
@@ -172,6 +173,9 @@ class _ContainerBackgroudWidgetState extends State<ContainerBackgroundWidget> {
     final data = widget.selectKeyDialog;
     if (widget.isUnit) {
       return '${data!.selectKeyDonVi.getText()} - ${data.selectKeyTime.getText()}';
+    }
+    if (data?.selectKeyTime == SelectKey.TUY_CHON) {
+      return '${data!.startDate.toStringWithListFormat} - ${data.endDate.toStringWithListFormat}';
     }
     return data!.selectKeyTime.getText();
   }

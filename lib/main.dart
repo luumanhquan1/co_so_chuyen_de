@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
@@ -42,6 +45,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    checkDeviceType();
   }
 
   @override
@@ -95,5 +99,19 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+  void checkDeviceType() {
+    bool isTablet(MediaQueryData query) {
+      var size = query.size;
+      var diagonal =
+      sqrt((size.width * size.width) + (size.height * size.height));
+      var isTablet = diagonal > 1100.0;
+      return isTablet;
+    }
+
+    APP_DEVICE =
+    isTablet(MediaQueryData.fromWindow(WidgetsBinding.instance!.window))
+        ? DeviceType.TABLET
+        : DeviceType.MOBILE;
   }
 }

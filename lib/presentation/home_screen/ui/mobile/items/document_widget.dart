@@ -1,7 +1,4 @@
-import 'dart:developer';
 
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
@@ -50,19 +47,13 @@ class _DocumentWidgetState extends State<DocumentWidget> {
         type: widget.homeItemType,
         listSelectKey: <DialogData>[
           DialogData(
-            onSelect: (value) {
+            onSelect: (value,startDate,endDate) {
               _vanBanCubit.selectDate(
                   selectKey: value,
-                  startDate: DateTime.now(),
-                  endDate: DateTime.now());
+                  startDate: startDate,
+                  endDate: endDate);
             },
             title: S.current.time,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),

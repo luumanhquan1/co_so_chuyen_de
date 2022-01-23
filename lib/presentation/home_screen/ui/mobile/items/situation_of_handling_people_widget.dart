@@ -38,19 +38,13 @@ class _SituationOfHandlingPeopleWidgetState
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value) {
+            onSelect: (value,startDate,endDate) {
               _yKienCubit.selectDate(
                   selectKey: value,
-                  startDate: DateTime.now(),
-                  endDate: DateTime.now());
+                  startDate: startDate,
+                  endDate: endDate);
             },
             title: S.current.document,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),
