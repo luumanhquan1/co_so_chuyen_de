@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
@@ -8,7 +7,6 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
-
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
@@ -57,17 +55,14 @@ class _WordProcessingStateWidgetState
       onTapIcon: () {
         cubit.showDialog(widget.homeItemType);
       },
-
       selectKeyDialog: _xuLyCubit,
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: <DialogData>[
           DialogData(
-            onSelect: (value,startDate,endDate) {
+            onSelect: (value, startDate, endDate) {
               _xuLyCubit.selectDate(
-                  selectKey: value,
-                  startDate: startDate,
-                  endDate: endDate);
+                  selectKey: value, startDate: startDate, endDate: endDate);
             },
             title: S.current.time,
             initValue: _xuLyCubit.selectKeyTime,

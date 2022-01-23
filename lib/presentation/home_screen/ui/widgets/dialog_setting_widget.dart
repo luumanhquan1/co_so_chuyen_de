@@ -8,7 +8,9 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/custom_select_da
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 
 import 'package:ccvc_mobile/utils/enum_ext.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/radio/radio_button.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 
 import 'package:flutter/material.dart';
@@ -145,7 +147,7 @@ class _SelectCellState extends State<SelectCell> {
             final data = widget.data.key[index];
             return Padding(
               padding: EdgeInsets.only(top: index == 0 ? 12 : 8),
-              child: MenuSelectCell<SelectKey>(
+              child: screenDevice(mobileScreen: MenuSelectCell<SelectKey>(
                 value: data,
                 title: data.getText(),
                 groupValue: selectKey,
@@ -156,7 +158,18 @@ class _SelectCellState extends State<SelectCell> {
                   }
                   setState(() {});
                 },
-              ),
+              ), tabletScreen: RadioButton<SelectKey>(
+                value: data,
+                title: data.getText(),
+                groupValue: selectKey,
+                onChange: (value) {
+                  selectKey = value ?? SelectKey.HOM_NAY;
+                  if (widget.onSelect != null) {
+                    widget.onSelect!(selectKey);
+                  }
+                  setState(() {});
+                },
+              ),),
             );
           }),
         )

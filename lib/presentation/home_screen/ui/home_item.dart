@@ -15,6 +15,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/calendar_wo
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/document__tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/event_of_day_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/meeting_schedule__tablet_widget.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/nhiem_vu_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/people_opinions__tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/press_social_net_word__tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/items/sinh_nhat__tablet_widget.dart';
@@ -94,22 +95,19 @@ extension ItemExtension on WidgetType {
     switch (this) {
       case WidgetType.wordProcessState:
         return const WordProcessingStateTabletWidget(
-
+          key: ValueKey(WidgetType.wordProcessState),
           homeItemType: WidgetType.wordProcessState,
         );
       case WidgetType.document:
         return const DocumentTabletWidget(
-
           homeItemType: WidgetType.document,
         );
       case WidgetType.summaryOfTask:
         return const SummaryOfTaskTabletWidget(
-
           homeItemType: WidgetType.summaryOfTask,
         );
       case WidgetType.situationHandlingPeople:
         return const SituationOfHandlingPeopleTabletWidget(
-
           homeItemType: WidgetType.situationHandlingPeople,
         );
       case WidgetType.peopleOpinions:
@@ -118,37 +116,33 @@ extension ItemExtension on WidgetType {
         );
       case WidgetType.workSchedule:
         return const CalendarWorkTabletWidget(
-
           homeItemType: WidgetType.workSchedule,
         );
       case WidgetType.meetingSchedule:
         return const MeetingScheduleTabletWidget(
-
           homeItemType: WidgetType.meetingSchedule,
         );
       case WidgetType.pressSocialNetWork:
         return const PressSocialNetWorkTabletWidget(
-
           homeItemType: WidgetType.pressSocialNetWork,
         );
       case WidgetType.listWork:
         return const WorkListTabletWidget(
-
           homeItemType: WidgetType.listWork,
         );
       case WidgetType.eventOfDay:
         return const EventOfDayTabletWidget(
-
           homeItemType: WidgetType.eventOfDay,
         );
 
       case WidgetType.sinhNhat:
         return const SinhNhatTabletWidget(
-
           homeItemType: WidgetType.sinhNhat,
         );
       case WidgetType.nhiemVu:
-        return const SizedBox();
+        return const NhiemVuTabletWidget(
+          homeItemType: WidgetType.nhiemVu,
+        );
     }
   }
 }

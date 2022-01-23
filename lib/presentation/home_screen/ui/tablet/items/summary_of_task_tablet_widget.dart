@@ -62,7 +62,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
               _nhiemVuCubit.selectDate(
                   selectKey: value,
                   startDate: startDate,
-                  endDate: endDate);
+                  endDate: endDate,);
             },
             title: S.current.time,
           )
