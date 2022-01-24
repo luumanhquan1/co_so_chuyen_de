@@ -31,7 +31,7 @@ class _SelectSearchDonViWidgetState extends State<SelectSearchDonViWidget> {
           return SelectDonViCell(
             controller: controller,
             listSelect: data,
-            onChange: (value){
+            onChange: (value) {
               widget.themDonViCubit.onSearch(value);
             },
             onDelete: (value) {
@@ -87,6 +87,8 @@ class SelectDonViCell extends StatelessWidget {
                 style: textNormal(textTitle, 14),
                 decoration: const InputDecoration(
                   isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                  isCollapsed: true,
                   border: InputBorder.none,
                 ),
               ),
