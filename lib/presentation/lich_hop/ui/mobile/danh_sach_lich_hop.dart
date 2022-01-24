@@ -1,9 +1,15 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DanhSachLichHop extends StatefulWidget {
@@ -14,11 +20,31 @@ class DanhSachLichHop extends StatefulWidget {
 }
 
 class _DanhSachLichHopState extends State<DanhSachLichHop> {
+  LichHopCubit cubit = LichHopCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
+      appBar: AppBarWithTwoLeading(
         title: S.current.danh_sach_lich_hop,
+        leadingIcon: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: SvgPicture.asset(
+                ImageAssets.icBack,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                ImageAssets.icDayMonth,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -26,19 +52,45 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Padding(
+        padding: const EdgeInsets.only(right: 16.0, top: 16.0, left: 16.0),
+        child: Stack(
           children: [
-            TableCalendarWidget(),
-            WidgetItemLichHop(
-              ontap: (){
-
-              },
-              title: "sds",
-              dateTimeFrom: "2021-12-29T07:45:00",
-              dateTimeTo: '2021-12-29T07:45:00',
-              urlImage: "",
-            )
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 120,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    cubit.currentTime,
+                    style: textNormalCustom(color: textBodyTime),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: cubit.listLichHop.length,
+                    itemBuilder: (context, index) {
+                      return WidgetItemLichHop(
+                        ontap: () {},
+                        title: cubit.listLichHop[index].title,
+                        dateTimeFrom: DateTime.parse(
+                          cubit.listLichHop[index].dateTimeFrom,
+                        ).toStringWithAMPM,
+                        dateTimeTo:
+                            DateTime.parse(cubit.listLichHop[index].dateTimeTo)
+                                .toStringWithAMPM,
+                        urlImage: cubit.listLichHop[index].urlImage,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const TableCalendarWidget(),
           ],
         ),
       ),
