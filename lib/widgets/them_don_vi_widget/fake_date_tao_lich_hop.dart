@@ -1,5 +1,5 @@
 class FakeDataTaoLich {
-  final dataTree = [
+ static final dataTree = [
     {
       "id": "0bf3b2c3-76d7-4e05-a587-9165c3624d76",
       "tenDonVi": "UBND TỈNH ĐỒNG NAI",
