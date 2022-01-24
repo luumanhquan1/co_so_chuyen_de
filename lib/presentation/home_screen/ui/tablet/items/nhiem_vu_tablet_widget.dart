@@ -28,7 +28,13 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(
       maxHeight: 415,
-      title: S.current.people_opinions,
+      title: S.current.nhiem_vu,
+      isUnit: true,
+      listSelect: const [
+        SelectKey.CHO_PHAN_XU_LY,
+        SelectKey.DANG_THUC_HIEN,
+        SelectKey.DANH_SACH_CONG_VIEC
+      ],
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
@@ -37,7 +43,7 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value,startDate,endDate) {
+            onSelect: (value, startDate, endDate) {
               _danCubit.selectDate(
                 selectKey: value,
                 startDate: startDate,

@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 
 class TongHopNhiemVuCell extends StatefulWidget {
@@ -11,31 +12,56 @@ class TongHopNhiemVuCell extends StatefulWidget {
 class _TongHopNhiemVuCellState extends State<TongHopNhiemVuCell> {
   @override
   Widget build(BuildContext context) {
-    int indexCell = 0;
     return Column(
-      children: List.generate(
-        3,
-        (indexColunm) {
-          if (indexColunm != 0) {
-            indexCell = indexCell + 2;
-          }
-          return Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: widget.builder(context, 0 + indexCell),
-                ),
-                const SizedBox(
-                  width: 24,
-                ),
-                Expanded(
-                  child: widget.builder(context, 1 + indexCell),
-                )
-              ],
-            ),
-          );
-        },
-      ),
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: widget.builder(context, 0),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              Expanded(
+                child: widget.builder(context, 1),
+              )
+            ],
+          ),
+        ),
+        spaceH20,
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: widget.builder(context, 2),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              Expanded(
+                child: widget.builder(context, 3),
+              )
+            ],
+          ),
+        ),
+        spaceH20,
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: widget.builder(context, 4),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              Expanded(
+                child: widget.builder(context, 5),
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }

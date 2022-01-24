@@ -27,18 +27,25 @@ class NhiemVuWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(urlIcon),
-          const SizedBox(
-            height: 12,
+          SizedBox(
+            height: 12.0.textScale(space: 16),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              title,
+              style: textNormal(
+                textTitle,
+                12.0.textScale(space: 4),
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: 4.0.textScale(space: 8),
           ),
           Text(
-            title,
-            style: textNormal(textTitle, 12.0.textScale(space: 4)),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            '12,109',
+            value,
             style: titleText(color: numberOfCalenders, fontSize: 22),
           )
         ],

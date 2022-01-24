@@ -3,9 +3,12 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/select_key_row.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/enum_ext.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,6 +27,7 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
   final double? minHeight;
   final SelectKeyDialog? selectKeyDialog;
   final bool isUnit;
+  final List<SelectKey>? listSelect;
   const ContainerBackgroundTabletWidget({
     Key? key,
     required this.child,
@@ -39,6 +43,7 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
     this.paddingChild = const EdgeInsets.symmetric(vertical: 20),
     this.selectKeyDialog,
     this.isUnit = false,
+    this.listSelect,
   }) : super(key: key);
 
   @override
@@ -82,7 +87,7 @@ class _ContainerBackgroudWidgetState
                   Container(
                     padding: EdgeInsets.only(
                       left: 24,
-                      right: 24,
+
                       bottom: widget.spacingTitle,
                     ),
                     child: Row(
@@ -135,7 +140,7 @@ class _ContainerBackgroudWidgetState
                             } else {}
                           },
                           child: Container(
-                            width: 20,
+                            padding:const EdgeInsets.symmetric(horizontal: 24),
                             color: Colors.transparent,
                             alignment: Alignment.centerRight,
                             child: SvgPicture.asset(widget.urlIcon),
@@ -144,6 +149,18 @@ class _ContainerBackgroudWidgetState
                       ],
                     ),
                   ),
+                  if (widget.listSelect == null)
+                    const SizedBox()
+                  else
+                    Container(
+                      height: 32,
+                      margin:const EdgeInsets.only(bottom: 20),
+                      color: Colors.transparent,
+                      width: double.infinity,
+                      child: SelectKeyRow(
+                        listSelect: widget.listSelect!,
+                      ),
+                    ),
                   widget.child
                 ],
               ),
@@ -162,7 +179,13 @@ class _ContainerBackgroudWidgetState
   String subTitle() {
     final data = widget.selectKeyDialog;
     if (widget.isUnit) {
+      if (data?.selectKeyTime == SelectKey.TUY_CHON) {
+        return '${data!.selectKeyDonVi.getText()} - ${data.startDate.toStringWithListFormat} - ${data.endDate.toStringWithListFormat}';
+      }
       return '${data!.selectKeyDonVi.getText()} - ${data.selectKeyTime.getText()}';
+    }
+    if (data?.selectKeyTime == SelectKey.TUY_CHON) {
+      return '${data!.startDate.toStringWithListFormat} - ${data.endDate.toStringWithListFormat}';
     }
     return data!.selectKeyTime.getText();
   }

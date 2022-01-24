@@ -94,55 +94,81 @@ extension ItemExtension on WidgetType {
   Widget getItemsTablet() {
     switch (this) {
       case WidgetType.wordProcessState:
-        return const WordProcessingStateTabletWidget(
-          key: ValueKey(WidgetType.wordProcessState),
+        return WordProcessingStateTabletWidget(
           homeItemType: WidgetType.wordProcessState,
+          key: KeyKeepAlive._keyWordProcessState,
         );
       case WidgetType.document:
-        return const DocumentTabletWidget(
+        return DocumentTabletWidget(
+          key: KeyKeepAlive._keyDocument,
           homeItemType: WidgetType.document,
         );
       case WidgetType.summaryOfTask:
-        return const SummaryOfTaskTabletWidget(
+        return SummaryOfTaskTabletWidget(
+          key: KeyKeepAlive._keySummaryOfTask,
           homeItemType: WidgetType.summaryOfTask,
         );
       case WidgetType.situationHandlingPeople:
-        return const SituationOfHandlingPeopleTabletWidget(
+        return SituationOfHandlingPeopleTabletWidget(
+          key: KeyKeepAlive._keySituationHandlingPeople,
           homeItemType: WidgetType.situationHandlingPeople,
         );
       case WidgetType.peopleOpinions:
-        return const PeopleOpinionsTabletWidget(
+        return PeopleOpinionsTabletWidget(
+          key: KeyKeepAlive._keyPeopleOpinions,
           homeItemType: WidgetType.peopleOpinions,
         );
       case WidgetType.workSchedule:
-        return const CalendarWorkTabletWidget(
+        return CalendarWorkTabletWidget(
+          key: KeyKeepAlive._keyWorkSchedule,
           homeItemType: WidgetType.workSchedule,
         );
       case WidgetType.meetingSchedule:
-        return const MeetingScheduleTabletWidget(
+        return MeetingScheduleTabletWidget(
+          key: KeyKeepAlive._keyMeetingSchedule,
           homeItemType: WidgetType.meetingSchedule,
         );
       case WidgetType.pressSocialNetWork:
-        return const PressSocialNetWorkTabletWidget(
+        return PressSocialNetWorkTabletWidget(
+          key: KeyKeepAlive._keyPressSocialNetWork,
           homeItemType: WidgetType.pressSocialNetWork,
         );
       case WidgetType.listWork:
-        return const WorkListTabletWidget(
+        return WorkListTabletWidget(
+          key: KeyKeepAlive._keyListWork,
           homeItemType: WidgetType.listWork,
         );
       case WidgetType.eventOfDay:
-        return const EventOfDayTabletWidget(
+        return EventOfDayTabletWidget(
+          key: KeyKeepAlive._keyEventOfDay,
           homeItemType: WidgetType.eventOfDay,
         );
 
       case WidgetType.sinhNhat:
-        return const SinhNhatTabletWidget(
+        return SinhNhatTabletWidget(
+          key: KeyKeepAlive._keySinhNhat,
           homeItemType: WidgetType.sinhNhat,
         );
       case WidgetType.nhiemVu:
-        return const NhiemVuTabletWidget(
+        return NhiemVuTabletWidget(
+          key: KeyKeepAlive._keyNhiemVu,
           homeItemType: WidgetType.nhiemVu,
         );
     }
   }
+}
+
+class KeyKeepAlive {
+  static final _keyWordProcessState = GlobalKey();
+  static final _keyDocument = GlobalKey();
+  static final _keySummaryOfTask = GlobalKey();
+  static final _keyNhiemVu = GlobalKey();
+  static final _keySituationHandlingPeople = GlobalKey();
+  static final _keyPeopleOpinions = GlobalKey();
+  static final _keyWorkSchedule = GlobalKey();
+  static final _keyMeetingSchedule = GlobalKey();
+  static final _keyPressSocialNetWork = GlobalKey();
+  static final _keyListWork = GlobalKey();
+  static final _keyEventOfDay = GlobalKey();
+  static final _keySinhNhat = GlobalKey();
 }

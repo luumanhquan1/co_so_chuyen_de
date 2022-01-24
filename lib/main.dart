@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -101,17 +100,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
   void checkDeviceType() {
-    bool isTablet(MediaQueryData query) {
-      var size = query.size;
-      var diagonal =
-      sqrt((size.width * size.width) + (size.height * size.height));
-      var isTablet = diagonal > 1100.0;
-      return isTablet;
-    }
-
-    APP_DEVICE =
-    isTablet(MediaQueryData.fromWindow(WidgetsBinding.instance!.window))
-        ? DeviceType.TABLET
-        : DeviceType.MOBILE;
+    final shortestSide = MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.shortestSide;
+    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
   }
 }

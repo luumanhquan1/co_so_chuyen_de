@@ -33,6 +33,12 @@ class _PeopleOpinionsState extends State<PeopleOpinionsTabletWidget> {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       selectKeyDialog: _danCubit,
+      listSelect: const [
+        SelectKey.CHO_TIEP_NHAN,
+        SelectKey.CHO_PHAN_XU_LY,
+        SelectKey.CHO_DUYET_XU_LY,
+        SelectKey.CHO_DUYET_TIEP_NHAN,
+      ],
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: [

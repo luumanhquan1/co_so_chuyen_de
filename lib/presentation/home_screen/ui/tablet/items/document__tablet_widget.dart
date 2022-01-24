@@ -33,6 +33,15 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       selectKeyDialog: _vanBanCubit,
+      listSelect: const [
+        SelectKey.CHO_VAO_SO,
+        SelectKey.CHO_XU_LY_VB_DI,
+        SelectKey.CHO_XU_LY_VB_DEN,
+        SelectKey.CHO_TRINH_KY,
+        SelectKey.CHO_CHO_Y_KIEN_VB_DEN,
+        SelectKey.CHO_CAP_SO,
+        SelectKey.CHO_BAN_HANH
+      ],
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: <DialogData>[

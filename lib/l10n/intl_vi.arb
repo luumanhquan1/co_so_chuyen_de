@@ -226,6 +226,8 @@
   "tu_ngay" : "Từ ngày",
   "den_ngay" : "Đến ngày",
   "dong" : "Đóng",
-  "chon_khoang_thoi_gian" : "Chọn khoảng thời gian"
+  "chon_khoang_thoi_gian" : "Chọn khoảng thời gian",
+  "bo_qua" : "Bỏ qua",
+  "hien_thi" : "Hiện thị"
 
 }

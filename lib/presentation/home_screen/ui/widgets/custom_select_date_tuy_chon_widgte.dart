@@ -2,6 +2,8 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/selectdate/custom_selectdate.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,10 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return screenDevice(mobileScreen: _mobile(), tabletScreen: _tablet());
+  }
+
+  Widget _mobile() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -78,6 +84,80 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
     );
   }
 
+  Widget _tablet() {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Container(
+          width: 394,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: borderColor.withOpacity(0.5)),
+            boxShadow: [
+              BoxShadow(
+                color: shadowContainerColor.withOpacity(0.05),
+                offset: const Offset(0, 4),
+                blurRadius: 10,
+              )
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              spaceH20,
+              Text(
+                S.current.chon_khoang_thoi_gian,
+                style: textNormalCustom(fontSize: 16, color: textTitle),
+              ),
+              spaceH20,
+              Row(
+                children: [
+                  Expanded(
+                    child: dateSelectCell(
+                      value: startDate,
+                      title: S.current.tu_ngay,
+                      onSelect: selectStartDate,
+                    ),
+                  ),
+                  spaceW28,
+                  Expanded(
+                    child: dateSelectCell(
+                      value: endDate,
+                      title: S.current.den_ngay,
+                      onSelect: selectEndDate,
+                    ),
+                  ),
+                ],
+              ),
+              spaceH32,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  buttonWidget(
+                    S.current.bo_qua,
+                    () {},
+                  ),
+                  spaceW20,
+                  buttonWidget(
+                    S.current.hien_thi,
+                    () {
+                      widget.onXacNhan(startDate, endDate);
+                    },
+                    isClose: false,
+                  )
+                ],
+              ),
+              spaceH32,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget dateSelectCell({
     required String title,
     required Function(DateTime) onSelect,
@@ -88,7 +168,7 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
       children: [
         Text(
           title,
-          style: textNormal(titleItemEdit, 14),
+          style: textNormal(titleItemEdit, 14.0.textScale()),
         ),
         spaceH8,
         CustomSelectDate(
@@ -122,5 +202,30 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
       setState(() {});
     }
     endDate = value;
+  }
+
+  Widget buttonWidget(String title, Function() onTap, {bool isClose = true}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+        onTap();
+      },
+      child: Container(
+        width: 108,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color: isClose ? unFocusColor : labelColor,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: textNormalCustom(
+            fontSize: 16,
+            color: isClose ? indicatorColor : backgroundColorApp,
+          ),
+        ),
+      ),
+    );
   }
 }

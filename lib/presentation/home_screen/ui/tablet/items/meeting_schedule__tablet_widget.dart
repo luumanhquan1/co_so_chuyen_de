@@ -35,18 +35,20 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleTabletWidget> {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
       selectKeyDialog: _lichHopCubit,
+      listSelect: const [
+        SelectKey.LICH_HOP_CUA_TOI,
+        SelectKey.LICH_HOP_DUOC_MOI,
+        SelectKey.LICH_HOP_CAN_DUYET,
+      ],
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value,startDate,endDate) {
+            onSelect: (value, startDate, endDate) {
               _lichHopCubit.selectDate(
-                  selectKey: value,
-                  startDate: startDate,
-                  endDate: endDate);
+                  selectKey: value, startDate: startDate, endDate: endDate);
             },
             title: S.current.time,
-
           )
         ],
       ),

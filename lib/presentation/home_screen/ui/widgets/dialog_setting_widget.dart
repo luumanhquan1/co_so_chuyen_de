@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
@@ -71,32 +72,7 @@ class DialogSettingWidget extends StatelessWidget {
                                 child: SelectCell(
                                   data: data,
                                   onSelect: (value) {
-                                    if (value == SelectKey.TUY_CHON) {
-                                      showBottomSheetCustom(
-                                        context,
-                                        child: CustomSelectDateWidget(
-                                          startDate:
-                                              data.startDate ?? DateTime.now(),
-                                          endDate:
-                                              data.endDate ?? DateTime.now(),
-                                          onXacNhan: (startDate, endDate) {
-                                            data.startDate = startDate;
-                                            data.endDate = endDate;
-                                            data.onSelect(
-                                              value,
-                                              startDate,
-                                              endDate,
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    } else {
-                                      data.onSelect(
-                                        value,
-                                        DateTime.now(),
-                                        DateTime.now(),
-                                      );
-                                    }
+                                    selectCell(context, value, data);
                                   },
                                 ),
                               );
@@ -108,6 +84,52 @@ class DialogSettingWidget extends StatelessWidget {
               );
             },
           );
+  }
+
+  void selectCell(BuildContext context, SelectKey value, DialogData data) {
+    if (value == SelectKey.TUY_CHON) {
+      if (APP_DEVICE == DeviceType.MOBILE) {
+        showBottomSheetCustom(
+          context,
+          child: CustomSelectDateWidget(
+            startDate: data.startDate ?? DateTime.now(),
+            endDate: data.endDate ?? DateTime.now(),
+            onXacNhan: (startDate, endDate) {
+              data.startDate = startDate;
+              data.endDate = endDate;
+              data.onSelect(
+                value,
+                startDate,
+                endDate,
+              );
+            },
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => CustomSelectDateWidget(
+            startDate: data.startDate ?? DateTime.now(),
+            endDate: data.endDate ?? DateTime.now(),
+            onXacNhan: (startDate, endDate) {
+              data.startDate = startDate;
+              data.endDate = endDate;
+              data.onSelect(
+                value,
+                startDate,
+                endDate,
+              );
+            },
+          ),
+        );
+      }
+    } else {
+      data.onSelect(
+        value,
+        DateTime.now(),
+        DateTime.now(),
+      );
+    }
   }
 }
 
@@ -145,31 +167,37 @@ class _SelectCellState extends State<SelectCell> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: List.generate(widget.data.key.length, (index) {
             final data = widget.data.key[index];
-            return Padding(
-              padding: EdgeInsets.only(top: index == 0 ? 12 : 8),
-              child: screenDevice(mobileScreen: MenuSelectCell<SelectKey>(
-                value: data,
-                title: data.getText(),
-                groupValue: selectKey,
-                onChange: (value) {
-                  selectKey = value ?? SelectKey.HOM_NAY;
-                  if (widget.onSelect != null) {
-                    widget.onSelect!(selectKey);
-                  }
-                  setState(() {});
-                },
-              ), tabletScreen: RadioButton<SelectKey>(
-                value: data,
-                title: data.getText(),
-                groupValue: selectKey,
-                onChange: (value) {
-                  selectKey = value ?? SelectKey.HOM_NAY;
-                  if (widget.onSelect != null) {
-                    widget.onSelect!(selectKey);
-                  }
-                  setState(() {});
-                },
-              ),),
+            return screenDevice(
+              mobileScreen: Padding(
+                padding: EdgeInsets.only(top: index == 0 ? 12 : 8),
+                child: MenuSelectCell<SelectKey>(
+                  value: data,
+                  title: data.getText(),
+                  groupValue: selectKey,
+                  onChange: (value) {
+                    selectKey = value ?? SelectKey.HOM_NAY;
+                    if (widget.onSelect != null) {
+                      widget.onSelect!(selectKey);
+                    }
+                    setState(() {});
+                  },
+                ),
+              ),
+              tabletScreen: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: RadioButton<SelectKey>(
+                  value: data,
+                  title: data.getText(),
+                  groupValue: selectKey,
+                  onChange: (value) {
+                    selectKey = value ?? SelectKey.HOM_NAY;
+                    if (widget.onSelect != null) {
+                      widget.onSelect!(selectKey);
+                    }
+                    setState(() {});
+                  },
+                ),
+              ),
             );
           }),
         )

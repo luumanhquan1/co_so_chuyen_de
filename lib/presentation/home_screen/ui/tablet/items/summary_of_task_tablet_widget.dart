@@ -46,7 +46,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value,_,__) {
+            onSelect: (value, _, __) {
               _nhiemVuCubit.selectDonVi(
                 selectKey: value,
               );
@@ -58,11 +58,12 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
             ],
           ),
           DialogData(
-            onSelect: (value,startDate,endDate) {
+            onSelect: (value, startDate, endDate) {
               _nhiemVuCubit.selectDate(
-                  selectKey: value,
-                  startDate: startDate,
-                  endDate: endDate,);
+                selectKey: value,
+                startDate: startDate,
+                endDate: endDate,
+              );
             },
             title: S.current.time,
           )
@@ -70,32 +71,36 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
       ),
       padding: EdgeInsets.zero,
       child: Flexible(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 22),
           child: StreamBuilder<List<DashboardSchedule>>(
-        stream: _nhiemVuCubit.getTonghopNhiemVu,
-        builder: (context, snapshot) {
-          final data = snapshot.data ?? <DashboardSchedule>[];
-          if (data.isNotEmpty) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TongHopNhiemVuCell(
-                builder: (context, index) {
-                  final img = FakeData.img[index];
-                  final result = data[index];
-                  return NhiemVuWidget(
-                    value: result.numberOfCalendars.toString(),
-                    urlIcon: img,
-                    title: result.typeName,
-                  );
-                },
-              ),
-            );
-          }
-          return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 100),
-            child: NodataWidget(),
-          );
-        },
-      )),
+            stream: _nhiemVuCubit.getTonghopNhiemVu,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? <DashboardSchedule>[];
+              if (data.isNotEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: TongHopNhiemVuCell(
+                    builder: (context, index) {
+                      final img = FakeData.img[index];
+                      final result = data[index];
+                      return NhiemVuWidget(
+                        value: result.numberOfCalendars.toString(),
+                        urlIcon: img,
+                        title: result.typeName,
+                      );
+                    },
+                  ),
+                );
+              }
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 100),
+                child: NodataWidget(),
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }
