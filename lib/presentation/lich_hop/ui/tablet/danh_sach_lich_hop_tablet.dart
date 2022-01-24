@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/widget/widget_item_lich_hop.dart';
@@ -30,18 +31,17 @@ class _DanhSachLichHopTabletState extends State<DanhSachLichHopTablet> {
                   const EdgeInsets.only(top: 28.0, right: 30.0, left: 30.0),
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: cubit.listLichHop.length,
+                itemCount: listLichHop.length,
                 itemBuilder: (context, index) {
                   return WidgetItemLichHop(
                     ontap: () {},
-                    title: cubit.listLichHop[index].title,
+                    title: listLichHop[index].title,
                     dateTimeFrom:
-                        DateTime.parse(cubit.listLichHop[index].dateTimeFrom)
+                        DateTime.parse(listLichHop[index].dateTimeFrom)
                             .toStringWithAMPM,
-                    dateTimeTo:
-                        DateTime.parse(cubit.listLichHop[index].dateTimeTo)
-                            .toStringWithAMPM,
-                    urlImage: cubit.listLichHop[index].urlImage,
+                    dateTimeTo: DateTime.parse(listLichHop[index].dateTimeTo)
+                        .toStringWithAMPM,
+                    urlImage: listLichHop[index].urlImage,
                   );
                 },
               ),
