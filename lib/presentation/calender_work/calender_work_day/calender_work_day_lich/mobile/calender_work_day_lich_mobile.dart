@@ -1,9 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/base_choose_date/base_choose_date.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_lich/mobile/calender_work_day_lich_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_lich/tab_calender_form/ui/in_calender_form.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/tab_list_form/ui/in_list_form.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -13,14 +12,15 @@ import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widge
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CalenderWorkDayMobile extends StatefulWidget {
-  const CalenderWorkDayMobile({Key? key}) : super(key: key);
+class CalenderWorkDayLichMobile extends StatefulWidget {
+  const CalenderWorkDayLichMobile({Key? key}) : super(key: key);
 
   @override
-  _CalenderWorkDayMobileState createState() => _CalenderWorkDayMobileState();
+  _CalenderWorkDayLichMobileState createState() =>
+      _CalenderWorkDayLichMobileState();
 }
 
-class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
+class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
   CalenderCubit cubit = CalenderCubit();
   GlobalKey globalKey = GlobalKey();
   double hegihtCalendar = 120;
@@ -87,7 +87,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
           Container(
             margin: EdgeInsets.only(top: hegihtCalendar),
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: const InListForm(),
+            child: const InCalenderForm(),
           ),
           Column(
             children: [
@@ -101,14 +101,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CalenderWorkDayLichMobile(),
-            ),
-          );
-        },
+        onPressed: () {},
         backgroundColor: labelColor,
         child: SvgPicture.asset(ImageAssets.icVectorCalender),
       ),

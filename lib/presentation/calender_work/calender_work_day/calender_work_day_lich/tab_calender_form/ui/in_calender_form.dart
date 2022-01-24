@@ -24,62 +24,8 @@ class _InCalenderFormState extends State<InCalenderForm> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-      child: Stack(
+      child: Column(
         children: [
-          Positioned(
-            top: -12.0,
-            bottom: 0,
-            child: SfCalendar(
-              controller: _controller,
-              appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
-              todayHighlightColor: statusCalenderRed,
-              appointmentTimeTextFormat: 'hh:mm:ss a',
-              dataSource: _cubit.getCalenderDataSource(),
-              appointmentBuilder: (
-                BuildContext context,
-                CalendarAppointmentDetails calendarAppointmentDetails,
-              ) {
-                final Appointment appointment =
-                    calendarAppointmentDetails.appointments.first;
-                return Container(
-                  width: calendarAppointmentDetails.bounds.width,
-                  height: calendarAppointmentDetails.bounds.height,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: Colors.blue,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                      vertical: 4.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            appointment.subject,
-                            style: textNormalCustom(),
-                          ),
-                        ),
-                        const SizedBox(height: 4.0),
-                        Flexible(
-                          child: Text(
-                            '${appointment.startTime.toStringWithAMPM} -'
-                            '${appointment.endTime.toStringWithAMPM}',
-                            style: textNormalCustom(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
@@ -109,7 +55,59 @@ class _InCalenderFormState extends State<InCalenderForm> {
                 },
               ),
             ),
-          )
+          ),
+          SfCalendar(
+            viewHeaderHeight: 0,
+            headerHeight: 0,
+            controller: _controller,
+            appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
+            todayHighlightColor: statusCalenderRed,
+            appointmentTimeTextFormat: 'hh:mm:ss a',
+            dataSource: _cubit.getCalenderDataSource(),
+            appointmentBuilder: (
+              BuildContext context,
+              CalendarAppointmentDetails calendarAppointmentDetails,
+            ) {
+              final Appointment appointment =
+                  calendarAppointmentDetails.appointments.first;
+              return Container(
+                width: calendarAppointmentDetails.bounds.width,
+                height: calendarAppointmentDetails.bounds.height,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: Colors.blue,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          appointment.subject,
+                          style: textNormalCustom(),
+                        ),
+                      ),
+                      const SizedBox(height: 4.0),
+                      Flexible(
+                        child: Text(
+                          '${appointment.startTime.toStringWithAMPM} -'
+                          '${appointment.endTime.toStringWithAMPM}',
+                          style: textNormalCustom(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
