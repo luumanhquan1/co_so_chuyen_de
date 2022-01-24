@@ -215,5 +215,10 @@
   "thong_bao": "Thông báo",
   "vao_hop_truc_tuyen": "Vào họp trực tuyến :",
   "thong_bao_khan": "Thông báo khẩn",
-  "xem_truoc": "Xem trước"
-}
+  "xem_truoc": "Xem trước",
+  "tao_lich_cong_tac_trong_nuoc" : "Tạo lịch công tác trong nước",
+  "lich_cong_tac_trong_nuoc" : "Lịch công tác trong nước",
+  "lich_lam_viec" : "Lịch làm việc",
+  "lich_cong_tac_nuoc_ngoai" : "Lịch công tác nước ngoài",
+  "lich_tiep_dan" : "Lịch tiếp dân",
+  "admin_tao" : "Admin tạo"}
