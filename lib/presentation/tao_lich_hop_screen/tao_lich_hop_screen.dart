@@ -24,10 +24,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
           ThemDonViWidget(
             listSelectNode: list,
             onChange: (value) {
-              list = value;
-              setState(() {
 
-              });
             },
           ),
           Column(
