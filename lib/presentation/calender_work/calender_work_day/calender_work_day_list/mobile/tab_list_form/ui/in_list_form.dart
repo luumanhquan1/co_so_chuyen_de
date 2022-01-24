@@ -1,9 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/widget/custom_item_calender_work.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/widget/custom_item_calender_work_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/widget/custom_item_calender_work_mobile.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,16 +34,6 @@ class _InListFormState extends State<InListForm> {
                 scrollDirection: Axis.horizontal,
                 itemCount: _cubit.list.length,
                 itemBuilder: (context, index) {
-                  // if (_cubit.list.length == 7) {
-                  //   _cubit.list.insert(
-                  //     1,
-                  //     DashboardSchedule(
-                  //       8,
-                  //       '22ssdssads2',
-                  //       'Tổng số lịch làm việc',
-                  //     ),
-                  //   );
-                  // }
                   return CustomItemCalenderWork(
                     image: _cubit.img[index],
                     typeName: _cubit.list[index].typeName,

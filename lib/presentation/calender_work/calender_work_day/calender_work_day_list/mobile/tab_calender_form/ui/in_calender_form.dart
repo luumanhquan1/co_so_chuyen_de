@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,8 @@ class _InCalenderFormState extends State<InCalenderForm> {
                         const SizedBox(height: 4.0),
                         Flexible(
                           child: Text(
-                            '${appointment.startTime.toStringWithAMPM} - ${appointment.endTime.toStringWithAMPM}',
+                            '${appointment.startTime.toStringWithAMPM} -'
+                            '${appointment.endTime.toStringWithAMPM}',
                             style: textNormalCustom(
                               fontSize: 12.0,
                               fontWeight: FontWeight.w400,

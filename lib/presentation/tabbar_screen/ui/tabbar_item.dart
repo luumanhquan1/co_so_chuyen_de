@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/calender_work_day_mobile.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/tablet/calender_work_day_tablet.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/calender_work_day_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/tablet/calender_work_day_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
