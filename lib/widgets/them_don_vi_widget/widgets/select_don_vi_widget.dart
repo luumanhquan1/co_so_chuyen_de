@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
@@ -7,28 +9,40 @@ import 'package:ccvc_mobile/widgets/them_don_vi_widget/bloc/them_don_vi_cubit.da
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SelectSearchDonViWidget extends StatelessWidget {
+class SelectSearchDonViWidget extends StatefulWidget {
   final ThemDonViCubit themDonViCubit;
   const SelectSearchDonViWidget({Key? key, required this.themDonViCubit})
       : super(key: key);
 
   @override
+  State<SelectSearchDonViWidget> createState() =>
+      _SelectSearchDonViWidgetState();
+}
+
+class _SelectSearchDonViWidgetState extends State<SelectSearchDonViWidget> {
+  final TextEditingController controller = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Node<DonViModel>>>(
-      stream: themDonViCubit.selectDonVi,
+      stream: widget.themDonViCubit.selectDonVi,
       builder: (context, snapshot) {
         final data = snapshot.data ?? <Node<DonViModel>>[];
         if (data.isNotEmpty) {
           return SelectDonViCell(
+            controller: controller,
             listSelect: data,
+            onChange: (value){
+              widget.themDonViCubit.onSearch(value);
+            },
             onDelete: (value) {
-              themDonViCubit.removeTag(value);
+              widget.themDonViCubit.removeTag(value);
             },
           );
         } else {
           return BaseSearchBar(
+            controller: controller,
             onChange: (value) {
-              themDonViCubit.onSearch(value);
+              widget.themDonViCubit.onSearch(value);
             },
           );
         }
@@ -40,10 +54,14 @@ class SelectSearchDonViWidget extends StatelessWidget {
 class SelectDonViCell extends StatelessWidget {
   final List<Node<DonViModel>> listSelect;
   final Function(Node<DonViModel>) onDelete;
+  final TextEditingController controller;
+  final Function(String) onChange;
   const SelectDonViCell({
     Key? key,
     required this.listSelect,
     required this.onDelete,
+    required this.controller,
+    required this.onChange,
   }) : super(key: key);
 
   @override
@@ -58,7 +76,22 @@ class SelectDonViCell extends StatelessWidget {
       child: Wrap(
         spacing: 10,
         runSpacing: 10,
-        children: List.generate(listSelect.length, (index) {
+        children: List.generate(listSelect.length + 1, (index) {
+          if (index == listSelect.length) {
+            return Container(
+              width: 200,
+              color: Colors.transparent,
+              child: TextField(
+                onChanged: onChange,
+                controller: controller,
+                style: textNormal(textTitle, 14),
+                decoration: const InputDecoration(
+                  isDense: true,
+                  border: InputBorder.none,
+                ),
+              ),
+            );
+          }
           final data = listSelect[index];
           return tag(
             title: data.value.name,
