@@ -78,3 +78,18 @@ class _TaoLichLamViecChiTietScreenState
     );
   }
 }
+//
+// class WidgetInherited extends InheritedWidget {
+//   @override
+//   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+//     return true;
+//   }
+//
+//   static WidgetInherited of(BuildContext context) {
+//     final WidgetInherited? result =
+//     context.dependOnInheritedWidgetOfExactType<WidgetInherited>();
+//     assert(result != null, 'No elenment');
+//     return result!;
+//   }
+//
+// }

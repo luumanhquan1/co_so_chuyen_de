@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TitleWidget extends StatefulWidget {
   final String image;
   final String title;
+  final String? title2;
   final bool isExpand;
   final Icon icon;
   final Function onTap;
@@ -16,6 +17,7 @@ class TitleWidget extends StatefulWidget {
     Key? key,
     required this.image,
     required this.title,
+    this.title2,
     required this.isExpand,
     required this.onTap,
     required this.icon,
@@ -31,31 +33,48 @@ class _TitleWidgetState extends State<TitleWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            SvgPicture.asset(widget.image),
-            SizedBox(
-              width: 14.5.textScale(),
-            ),
-            Text(
-              widget.title,
-              style: textNormalCustom(
-                color: dateColor,
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
+        Expanded(
+          child: Row(
+            children: [
+              SvgPicture.asset(widget.image),
+              SizedBox(
+                width: 14.5.textScale(),
               ),
-            ),
-          ],
+              Text(
+                widget.title,
+                style: textNormalCustom(
+                  color: dateColor,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
         ),
-        if (widget.isExpand)
-          IconButton(
-            onPressed:(){
-              widget.onTap();
-            },
-            icon: widget.icon,
-          )
-        else
-          Container()
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.title2 ?? '',
+                style: textNormalCustom(
+                  color: dateColor,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+              if (widget.isExpand)
+                IconButton(
+                  onPressed: () {
+                    widget.onTap();
+                  },
+                  icon: widget.icon,
+                )
+              else
+                Container()
+            ],
+          ),
+        )
       ],
     );
   }
