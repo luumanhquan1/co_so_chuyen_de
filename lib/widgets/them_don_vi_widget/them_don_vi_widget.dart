@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:ccvc_mobile/widgets/them_don_vi_widget/bloc/them_don_vi_cubit.dart';
 import 'package:ccvc_mobile/widgets/them_don_vi_widget/widgets/select_don_vi_widget.dart';
 import 'package:ccvc_mobile/widgets/them_don_vi_widget/widgets/tree_widget.dart';
@@ -63,14 +64,16 @@ class _ThemDonViScreenState extends State<ThemDonViWidget> {
           if (value != null) {
             widget.onChange(value);
           }
+          _themDonViCubit.onSearch('');
         });
       },
       child: Container(
         width: 136,
         padding: const EdgeInsets.only(right: 18, left: 12, top: 6, bottom: 6),
         decoration: BoxDecoration(
-            color: buttonColor.withOpacity(0.1),
-            borderRadius: BorderRadius.all(Radius.circular(4))),
+          color: buttonColor.withOpacity(0.1),
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+        ),
         child: Row(
           children: [
             SvgPicture.asset(ImageAssets.icThemDonVi),
@@ -139,7 +142,11 @@ class TreeDonVi extends StatelessWidget {
                           ),
                         );
                       }
-                      return const SizedBox();
+                      return Column(
+                        children:const [
+                          NodataWidget()
+                        ],
+                      );
                     },
                   ),
                 )
