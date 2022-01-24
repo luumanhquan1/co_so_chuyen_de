@@ -1,14 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/base_choose_date/base_choose_date.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/tab_list_form/ui/in_list_form.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/tablet/grid_view.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/tablet/in_list_form_tablet.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,10 +61,17 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
         ),
       ),
       body: Column(
-        children: const [
-          GridViewExam(),
-          TableCalendarWidget(),
-          Expanded(child: InListForm()),
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 28, left: 30, right: 30),
+            child: GridViewExam(),
+          ),
+          spaceH28,
+          Expanded(
+            child: InListFormTablet(
+              isHindText: true,
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

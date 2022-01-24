@@ -3,13 +3,13 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CustomItemCalenderTablet extends StatelessWidget {
+class CustomItemCalenderMobile extends StatelessWidget {
   final String title;
   final String dateTimeFrom;
   final String dateTimeTo;
   final String urlImage;
 
-  const CustomItemCalenderTablet({
+  const CustomItemCalenderMobile({
     Key? key,
     required this.title,
     required this.dateTimeFrom,
@@ -20,10 +20,10 @@ class CustomItemCalenderTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 10, left: 10, bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: bgGridView,
+        color: backgroundColorApp,
         border: Border.all(color: cellColorborder),
       ),
       child: Row(
@@ -44,7 +44,7 @@ class CustomItemCalenderTablet extends StatelessWidget {
               ),
             ],
           ),
-          spaceW16,
+          spaceW8,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -54,11 +54,11 @@ class CustomItemCalenderTablet extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: textNormalCustom(
                   color: titleCalenderWork,
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 12),
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: Text(
                   '$dateTimeFrom - $dateTimeTo',
                   style: textNormalCustom(

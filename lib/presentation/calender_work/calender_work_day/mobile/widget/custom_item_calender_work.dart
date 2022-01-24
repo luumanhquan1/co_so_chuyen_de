@@ -9,12 +9,12 @@ class CustomItemCalenderWork extends StatelessWidget {
   final String typeName;
   final int numberOfCalendars;
 
-  const CustomItemCalenderWork(
-      {Key? key,
-      required this.image,
-      required this.typeName,
-      required this.numberOfCalendars})
-      : super(key: key);
+  const CustomItemCalenderWork({
+    Key? key,
+    required this.image,
+    required this.typeName,
+    required this.numberOfCalendars,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +49,16 @@ class CustomItemCalenderWork extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(typeName,
-                      softWrap: true,
-                      maxLines: 2,
-                      style: textNormalCustom(color: titleCalenderWork)),
-                  Text(numberOfCalendars.toString(),
-                      style:
-                          titleText(color: numberOfCalenders, fontSize: 26.0)),
+                  Text(
+                    typeName,
+                    softWrap: true,
+                    maxLines: 2,
+                    style: textNormalCustom(color: titleCalenderWork),
+                  ),
+                  Text(
+                    numberOfCalendars.toString(),
+                    style: titleText(color: numberOfCalenders, fontSize: 26.0),
+                  ),
                 ],
               ),
             )

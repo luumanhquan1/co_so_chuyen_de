@@ -28,12 +28,49 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     DashboardSchedule(3, '2dasda22', 'Lịch công tác nước ngoài'),
     DashboardSchedule(4, '2asdas22', 'Lịch tiếp dân'),
     DashboardSchedule(5, 'sdasdasd', 'admin tạo'),
+    DashboardSchedule(6, 'sdasdasd', 'admin tạo'),
   ];
   List<MeetingSchedule> listMeeting = [
-    MeetingSchedule('hung', '2021-12-29T07:45:00', '2021-12-29T08:45:00'),
-    MeetingSchedule('hung', '2021-12-29T09:45:00', '2021-12-29T10:45:00'),
-    MeetingSchedule('hung', '2021-12-29T11:45:00', '2021-12-29T12:45:00'),
-    MeetingSchedule('hung', '2021-12-29T13:45:00', '2021-12-29T15:45:00'),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T07:45:00',
+      '2021-12-29T08:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T09:45:00',
+      '2021-12-29T10:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T11:45:00',
+      '2021-12-29T12:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T13:45:00',
+      '2021-12-29T15:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T13:45:00',
+      '2021-12-29T15:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T13:45:00',
+      '2021-12-29T15:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T13:45:00',
+      '2021-12-29T15:45:00',
+    ),
+    MeetingSchedule(
+      'Họp nội bộ đơn vị',
+      '2021-12-29T13:45:00',
+      '2021-12-29T15:45:00',
+    ),
   ];
   dynamic currentTime = DateFormat.yMMMEd().format(DateTime.now());
 

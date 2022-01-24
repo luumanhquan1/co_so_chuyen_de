@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/base_choose_date/base_choose_date.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/mobile/tab_list_form/ui/in_list_form.dart';
@@ -20,6 +21,16 @@ class CalenderWorkDayMobile extends StatefulWidget {
 
 class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   CalenderCubit cubit = CalenderCubit();
+  GlobalKey globalKey = GlobalKey();
+  double hegihtCalendar = 120;
+  double x = 0.0;
+  double y = 0.0;
+  Offset? a;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +81,22 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
           )
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          if (cubit.isCheck) const BaseChooseDate() else Container(),
-          const TableCalendarWidget(),
-          const Expanded(child: InListForm()),
+          Container(
+            margin: EdgeInsets.only(top: hegihtCalendar),
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: const InListForm(),
+          ),
+          Column(
+            children: [
+              Container(
+                child: cubit.isCheck ? const BaseChooseDate() : Container(),
+              ),
+              const TableCalendarWidget(),
+            ],
+          ),
+          spaceH16,
         ],
       ),
       floatingActionButton: FloatingActionButton(
