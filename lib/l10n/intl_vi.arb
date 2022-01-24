@@ -221,5 +221,13 @@
   "them" : "Thêm",
   "them_don_vi" : "Thêm đơn vị",
   "danh_sach_lich_hop": "Danh sách lịch họp",
-  "truc_tiep": "Trực tiếp"
+  "truc_tiep": "Trực tiếp",
+  "ngay": "Ngày",
+  "tuan": "Tuần",
+  "thang": "Tháng",
+  "lich_hop_cua_toi": "Lịch họp của tôi",
+  "lich_chu_tri": "Lịch chủ trì",
+  "lich_can_klch": "Lịch cần KLCH",
+  "lich_sap_toi": "Lịch sắp tới",
+  "lich_bi_trung": "Lịch bị trùng"
 }
