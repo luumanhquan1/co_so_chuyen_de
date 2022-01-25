@@ -151,6 +151,7 @@ class ImageAssets {
   static const String icDayCalenderMonth = '$baseImg/ic_calender_work_month.svg';
   static const String lichCanKlch = '$baseImg/lich_can_klch.svg';
   static const String lichSapToi = '$baseImg/lich_sap_toi.svg';
+  static const String icAddCalenderWhite = '$baseImg/ic_add_calender_white.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

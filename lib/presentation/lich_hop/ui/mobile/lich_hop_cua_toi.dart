@@ -1,8 +1,11 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -20,82 +23,138 @@ class LichHopCuaToi extends StatefulWidget {
 }
 
 class _LichHopCuaToiState extends State<LichHopCuaToi> {
-  LichHopCubit cubit=LichHopCubit();
+  LichHopCubit cubit = LichHopCubit();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWithTwoLeading(
-        title: S.current.lich_hop_cua_toi,
-        leadingIcon: Row(
+      // appBar: AppBarWithTwoLeading(
+      //   title: S.current.lich_hop_cua_toi,
+      //   leadingIcon: Row(
+      //     children: [
+      //       IconButton(
+      //         onPressed: () {
+      //           Navigator.pop(context);
+      //         },
+      //         icon: SvgPicture.asset(
+      //           ImageAssets.icBack,
+      //         ),
+      //       ),
+      //       IconButton(
+      //         onPressed: () {
+      //           setState(() {});
+      //           cubit.isCheckNgay = !cubit.isCheckNgay;
+      //         },
+      //         icon: SvgPicture.asset(
+      //           ImageAssets.icDayMonth,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //       },
+      //       icon: SvgPicture.asset(ImageAssets.icMenuCalender),
+      //     )
+      //   ],
+      // ),
+      body: Container(
+        color: backgroundColorApp,
+        child: Stack(
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: SvgPicture.asset(
-                ImageAssets.icBack,
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(top: cubit.isCheckNgay ? 160 : 120),
+                      height: 88,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: listItemSchedule.length,
+                        itemBuilder: (context, index) {
+                          return CustomItemCalenderWork(
+                            image: cubit.listImageLichHopCuaToi[index],
+                            typeName: listItemSchedule[index].typeName,
+                            numberOfCalendars:
+                                listItemSchedule[index].numberOfSchedule,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      right: 16.0,
+                      bottom: 16.0,
+                    ),
+                    child: Text(
+                      cubit.currentTime,
+                      style: textNormalCustom(color: textBodyTime),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: listLichHop.length,
+                      itemBuilder: (context, index) {
+                        return WidgetItemLichHop(
+                          ontap: () {},
+                          title: listLichHop[index].title,
+                          dateTimeFrom: DateTime.parse(
+                            listLichHop[index].dateTimeFrom,
+                          ).toStringWithAMPM,
+                          dateTimeTo:
+                              DateTime.parse(listLichHop[index].dateTimeTo)
+                                  .toStringWithAMPM,
+                          urlImage: listLichHop[index].urlImage,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                ImageAssets.icDayMonth,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (cubit.isCheckNgay)
+                  ChooseDayWeedMonth(
+                    onTapDay: () {},
+                    onTapWeek: () {},
+                    onTapmonth: () {},
+                  )
+                else
+                  const SizedBox(),
+                const TableCalendarWidget(),
+              ],
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
-          )
-        ],
       ),
-      body: Padding(
-        padding:  const EdgeInsets.only(right: 16.0, top: 16.0, left: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 88,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: listItemSchedule.length,
-                itemBuilder: (context,index){
-                  return CustomItemCalenderWork(
-                    image: cubit.listImageLichHopCuaToi[index],
-                    typeName: listItemSchedule[index].typeName,
-                    numberOfCalendars: listItemSchedule[index].numberOfSchedule,
-                  );
-                },
-              ),
-            ),
+      // floatingActionButton:Container(
+      //   margin: const EdgeInsets.only(bottom: 16.0),
+      //   child: FloatingActionButton(
+      //     elevation: 0.0,
+      //     onPressed: () {},
+      //     backgroundColor: labelColor,
+      //     child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),
+      //   ),
+      // ),
 
-
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: listLichHop.length,
-                itemBuilder: (context, index) {
-                  return WidgetItemLichHop(
-                    ontap: () {},
-                    title:listLichHop[index].title,
-                    dateTimeFrom: DateTime.parse(
-                      listLichHop[index].dateTimeFrom,
-                    ).toStringWithAMPM,
-                    dateTimeTo:
-                    DateTime.parse(listLichHop[index].dateTimeTo)
-                        .toStringWithAMPM,
-                    urlImage: listLichHop[index].urlImage,
-                  );
-                },
-              ),
-            ),
-            const TableCalendarWidget(),
-          ],
-        )
-      ),
     );
   }
 }

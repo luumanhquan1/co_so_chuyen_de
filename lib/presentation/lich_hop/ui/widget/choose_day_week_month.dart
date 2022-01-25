@@ -6,21 +6,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChooseDayWeedMonth extends StatelessWidget {
-  const ChooseDayWeedMonth({Key? key}) : super(key: key);
+  final Function onTapDay;
+  final Function onTapWeek;
+  final Function onTapmonth;
+
+  const ChooseDayWeedMonth(
+      {Key? key,
+      required this.onTapDay,
+      required this.onTapWeek,
+      required this.onTapmonth})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: backgroundColorApp,
       padding: const EdgeInsets.only(bottom: 13),
       child: Row(
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                onTapDay();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(ImageAssets.icDayMonth),
+                  const SizedBox(
+                    width: 12.0,
+                  ),
                   Text(
                     S.current.ngay,
                     style: textNormal(linkColor, 14.0),
@@ -31,11 +46,16 @@ class ChooseDayWeedMonth extends StatelessWidget {
           ),
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                onTapWeek();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(ImageAssets.icDayCalenderWeek),
+                  const SizedBox(
+                    width: 12.0,
+                  ),
                   Text(
                     S.current.tuan,
                     style: textNormal(linkColor, 14.0),
@@ -46,11 +66,16 @@ class ChooseDayWeedMonth extends StatelessWidget {
           ),
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                onTapmonth();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(ImageAssets.icDayCalenderMonth),
+                  const SizedBox(
+                    width: 12.0,
+                  ),
                   Text(
                     S.current.thang,
                     style: textNormal(linkColor, 14.0),
