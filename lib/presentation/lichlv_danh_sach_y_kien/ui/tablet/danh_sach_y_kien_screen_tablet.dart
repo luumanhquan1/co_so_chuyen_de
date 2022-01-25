@@ -4,17 +4,17 @@ import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/bloc/y_kien_cubit.dart';
 import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/bloc/y_kien_state.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/mobile/widgets/item_y_kiem.dart';
+import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/tablet/item_y_kiem_tablet.dart';
 import 'package:flutter/material.dart';
 
-class DanhSachYKienScreen extends StatefulWidget {
-  const DanhSachYKienScreen({Key? key}) : super(key: key);
+class DanhSachYKienTabletScreen extends StatefulWidget {
+  const DanhSachYKienTabletScreen({Key? key}) : super(key: key);
 
   @override
-  _DanhSachYKienScreenState createState() => _DanhSachYKienScreenState();
+  _DanhSachYKienTabletScreenState createState() => _DanhSachYKienTabletScreenState();
 }
 
-class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
+class _DanhSachYKienTabletScreenState extends State<DanhSachYKienTabletScreen> {
   YKienCubit cubit = YKienCubit(YKienStateIntial());
 
   @override
@@ -32,10 +32,10 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
         children: [
           Text(
             S.current.danh_sach_y_kien,
-            style: titleText(color: textTitle,fontSize: 18),
+            style: titleText(color: textTitle),
           ),
           const SizedBox(
-            height: 20,
+            height: 24,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -51,7 +51,7 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: listData.length,
                       itemBuilder: (context, index) {
-                        return ItemYKien(
+                        return ItemYKienTablet(
                           time: listData[index].time,
                           name: listData[index].name,
                           imgAvatar: listData[index].imgAvatar,

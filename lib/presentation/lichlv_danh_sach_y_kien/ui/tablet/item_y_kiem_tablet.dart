@@ -1,15 +1,16 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
-class ItemYKien extends StatelessWidget {
+class ItemYKienTablet extends StatelessWidget {
   final String name;
   final String imgAvatar;
   final String? nameFile;
   final String time;
 
-  const ItemYKien({
+  const ItemYKienTablet({
     Key? key,
     required this.name,
     required this.imgAvatar,
@@ -23,9 +24,9 @@ class ItemYKien extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        color:bgDropDown.withOpacity(0.1),
-        border: Border.all(color: bgDropDown),
+        borderRadius: BorderRadius.circular(12),
+        color:bgTabletItem,
+        border: Border.all(color: cellColorborder),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -51,6 +52,7 @@ class ItemYKien extends StatelessWidget {
               Text(
                 name,
                 style: textNormalCustom(
+                  fontSize: 16,
                   color: titleColor,
                 ),
               ),
@@ -62,7 +64,7 @@ class ItemYKien extends StatelessWidget {
                     style: textNormalCustom(
                       color: infoColor,
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                      fontSize: 12.0.textScale(),
                     ),
                   ),
                 ),
@@ -75,7 +77,7 @@ class ItemYKien extends StatelessWidget {
             style: textNormalCustom(
               color: titleColor,
               fontWeight: FontWeight.w400,
-              fontSize: 14,
+              fontSize: 14.0.textScale(),
             ),
           ),
           const SizedBox(
@@ -86,7 +88,7 @@ class ItemYKien extends StatelessWidget {
             style: textNormalCustom(
               color: titleColor,
               fontWeight: FontWeight.w400,
-              fontSize: 12,
+              fontSize: 12.0.textScale(),
             ),
           ),
           const SizedBox(
@@ -97,7 +99,7 @@ class ItemYKien extends StatelessWidget {
             style: textNormalCustom(
               color: textColorMangXaHoi,
               fontWeight: FontWeight.w400,
-              fontSize: 12,
+              fontSize: 12.0.textScale(),
             ),
           ),
         ],
