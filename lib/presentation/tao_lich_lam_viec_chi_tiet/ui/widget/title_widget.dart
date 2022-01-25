@@ -1,24 +1,25 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TitleWidget extends StatefulWidget {
-  final String image;
+  final String? image;
   final String title;
   final String? title2;
-  final bool isExpand;
   final Icon icon;
+  final bool isColor;
   final Function onTap;
 
   const TitleWidget({
     Key? key,
-    required this.image,
+    this.image,
     required this.title,
     this.title2,
-    required this.isExpand,
+    required this.isColor,
     required this.onTap,
     required this.icon,
   }) : super(key: key);
@@ -36,7 +37,22 @@ class _TitleWidgetState extends State<TitleWidget> {
         Expanded(
           child: Row(
             children: [
-              SvgPicture.asset(widget.image),
+              if (widget.isColor)
+                Container(
+                  height: 12.0.textScale(),
+                  width: 12.0.textScale(),
+                  decoration: BoxDecoration(
+                    color: choTrinhKyColor,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                )
+              else
+                SizedBox(
+                  height: 18.0.textScale(),
+                  width: 18.0.textScale(),
+                  child:
+                      SvgPicture.asset(widget?.image ?? ImageAssets.icNhacLai),
+                ),
               SizedBox(
                 width: 14.5.textScale(),
               ),
@@ -63,15 +79,12 @@ class _TitleWidgetState extends State<TitleWidget> {
                   fontSize: 16,
                 ),
               ),
-              if (widget.isExpand)
-                IconButton(
-                  onPressed: () {
-                    widget.onTap();
-                  },
-                  icon: widget.icon,
-                )
-              else
-                Container()
+              IconButton(
+                onPressed: () {
+                  widget.onTap();
+                },
+                icon: widget.icon,
+              )
             ],
           ),
         )

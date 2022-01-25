@@ -1,9 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/item_select_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/title_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/slide_expand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,59 +23,58 @@ class _LoaiLichWidgetState extends State<LoaiLichWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TitleWidget(
-          image: ImageAssets.icCalendarUnFocus,
-          title: 'Loai lich',
-          isExpand: true,
-          onTap: () {
-            setState(() {
-              isCheck = !isCheck;
-            });
-          },
-          icon: isCheck
-              ? const Icon(
-                  Icons.keyboard_arrow_up_rounded,
-                  color: AqiColor,
-                )
-              : const Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  color: AqiColor,
+    return Container(
+      margin: EdgeInsets.only(top: 10.0.textScale()),
+      child: StreamBuilder<List<ItemSelectModel>>(
+          stream: WidgetTaoLichLVInherited.of(context)
+              .taoLichLamViecCubit
+              .listItemLoaiLichStream,
+          builder: (context, snapshot) {
+            return Column(
+              children: [
+                TitleWidget(
+                  image: ImageAssets.icCalendarUnFocus,
+                  title: S.current.loai_lich,
+                  onTap: () {
+                    setState(() {
+                      isCheck = !isCheck;
+                    });
+                  },
+                  icon: isCheck
+                      ? const Icon(
+                          Icons.keyboard_arrow_up_rounded,
+                          color: AqiColor,
+                        )
+                      : const Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          color: AqiColor,
+                        ), isColor: false,
                 ),
-        ),
-        if (isCheck)
-          Column(
-            children: listLoaiLich
-                .map(
-                  (e) => GestureDetector(
-                    onTap: () {
 
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          e.text,
-                          style: textNormalCustom(
-                            color: fontColorTablet2,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16.0.textScale(),
-                          ),
-                        ),
-                        if (e.isSelect) const Icon(
-                                Icons.check,
-                                color: numberColorTablet,
-                              ) else Container()
-                      ],
+                  ExpandedSection(
+                    expand: isCheck,
+                    child: Column(
+                      children: listLoaiLich
+                          .map(
+                            (e) => GestureDetector(
+                              onTap: () {
+                                WidgetTaoLichLVInherited.of(context)
+                                    .taoLichLamViecCubit
+                                    .selectLoaiLich(e);
+                              },
+                              child: ItemSelectWidget(
+                                isSelect: e.isSelect,
+                                text: e.text,
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
-                  ),
-                )
-                .toList(),
-          )
-        else
-          Container()
-      ],
+                  )
+
+              ],
+            );
+          },),
     );
   }
 }

@@ -143,6 +143,11 @@ class ImageAssets {
   static const String icDanger = '$baseImg/ic_danger.svg';
   static const String icMessenge = '$baseImg/ic_messenge.svg';
   static const String icVideo = '$baseImg/ic_video.svg';
+  static const String icCheck = '$baseImg/ic_check.svg';
+  static const String icDoublePerson = '$baseImg/ic_double_person.svg';
+  static const String icNhacLai = '$baseImg/ic_nhac_lai.svg';
+  static const String icViTri = '$baseImg/ic_vi_tri.svg';
+  static const String icDocument = '$baseImg/ic_document.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
