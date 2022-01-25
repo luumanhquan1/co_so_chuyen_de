@@ -41,46 +41,36 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
   }
 
   Widget _mobile() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 22,
-          ),
-          Text(
-            S.current.chon_khoang_thoi_gian,
-            style: textNormalCustom(color: textTitle, fontSize: 18),
-          ),
-          spaceH20,
-          dateSelectCell(
-            value: startDate,
-            title: S.current.tu_ngay,
-            onSelect: selectStartDate,
-          ),
-          spaceH20,
-          dateSelectCell(
-            value: endDate,
-            title: S.current.den_ngay,
-            onSelect: selectEndDate,
-          ),
-          spaceH24,
-          DoubleButtonBottom(
-            title1: S.current.dong,
-            title2: S.current.xac_nhan,
-            onPressed1: () {
-              Navigator.of(context).pop();
-            },
-            onPressed2: () {
-              Navigator.pop(context);
-              widget.onXacNhan(startDate, endDate);
-            },
-          ),
-          spaceH32
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        spaceH20,
+        dateSelectCell(
+          value: startDate,
+          title: S.current.tu_ngay,
+          onSelect: selectStartDate,
+        ),
+        spaceH20,
+        dateSelectCell(
+          value: endDate,
+          title: S.current.den_ngay,
+          onSelect: selectEndDate,
+        ),
+        spaceH24,
+        DoubleButtonBottom(
+          title1: S.current.dong,
+          title2: S.current.xac_nhan,
+          onPressed1: () {
+            Navigator.of(context).pop();
+          },
+          onPressed2: () {
+            Navigator.pop(context);
+            widget.onXacNhan(startDate, endDate);
+          },
+        ),
+        spaceH32
+      ],
     );
   }
 

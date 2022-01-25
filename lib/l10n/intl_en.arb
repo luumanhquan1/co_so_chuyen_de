@@ -230,6 +230,12 @@
   "dong" : "Đóng",
   "chon_khoang_thoi_gian" : "Chọn khoảng thời gian",
   "bo_qua" : "Bỏ qua",
-  "hien_thi" : "Hiện thị"
+  "hien_thi" : "Hiện thị",
+  "chon_thanh_phan_tham_gia" : "Chọn thành phần tham gia",
+  "danh_sach_don_vi_tham_gia" : "Danh sách đơn vị tham gia",
+  "them" : "Thêm",
+  "them_don_vi" : "Thêm đơn vị",
+  "danh_sach_lich_hop": "Danh sách lịch họp",
+  "truc_tiep": "Trực tiếp"
 
 }

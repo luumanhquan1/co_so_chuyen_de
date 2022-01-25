@@ -25,7 +25,7 @@ class ImageAssets {
   static const String icClose = '$baseImg/ic_close.svg';
   static const String icNext = '$baseImg/ic_next.svg';
   static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
-
+  static const String icThemDonVi = '$baseImg/ic_them_don_vi.svg';
   static const String icMore = '$baseImg/ic_more.svg';
   static const String icEdit = '$baseImg/ic_edit.svg';
   static const String icStarUnfocus = '$baseImg/ic_start_unfocus.svg';
@@ -148,6 +148,10 @@ class ImageAssets {
   static const String icDanger = '$baseImg/ic_danger.svg';
   static const String icMessenge = '$baseImg/ic_messenge.svg';
   static const String icVideo = '$baseImg/ic_video.svg';
+  static const String icDayMonth = '$baseImg/ic_day_month.svg';
+  static const String tongSoLichHop = '$baseImg/tong_so_lich_hop.svg';
+  static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
+  static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/custom_select_date_tuy_chon_widgte.dart';
 
@@ -104,6 +105,7 @@ class DialogSettingWidget extends StatelessWidget {
               );
             },
           ),
+          title: S.current.chon_khoang_thoi_gian,
         );
       } else {
         showDialog(

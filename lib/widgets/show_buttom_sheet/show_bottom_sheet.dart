@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:flutter/material.dart';
 
-void showBottomSheetCustom(BuildContext context,{required Widget child}) {
-  showModalBottomSheet(
+Future<T?> showBottomSheetCustom<T>(BuildContext context,
+    {required Widget child, required String title}) {
+ return showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,
     isScrollControlled: true,
@@ -21,7 +23,22 @@ void showBottomSheetCustom(BuildContext context,{required Widget child}) {
             height: 20,
           ),
           lineContainer(),
-          child
+          const SizedBox(
+            height: 22,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: textNormalCustom(fontSize: 18, color: textTitle),
+                ),
+                child
+              ],
+            ),
+          )
         ],
       );
     },
