@@ -33,37 +33,6 @@ class _LichHopCuaToiState extends State<LichHopCuaToi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBarWithTwoLeading(
-      //   title: S.current.lich_hop_cua_toi,
-      //   leadingIcon: Row(
-      //     children: [
-      //       IconButton(
-      //         onPressed: () {
-      //           Navigator.pop(context);
-      //         },
-      //         icon: SvgPicture.asset(
-      //           ImageAssets.icBack,
-      //         ),
-      //       ),
-      //       IconButton(
-      //         onPressed: () {
-      //           setState(() {});
-      //           cubit.isCheckNgay = !cubit.isCheckNgay;
-      //         },
-      //         icon: SvgPicture.asset(
-      //           ImageAssets.icDayMonth,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {
-      //       },
-      //       icon: SvgPicture.asset(ImageAssets.icMenuCalender),
-      //     )
-      //   ],
-      // ),
       body: Container(
         color: backgroundColorApp,
         child: Stack(
@@ -145,16 +114,6 @@ class _LichHopCuaToiState extends State<LichHopCuaToi> {
           ],
         ),
       ),
-      // floatingActionButton:Container(
-      //   margin: const EdgeInsets.only(bottom: 16.0),
-      //   child: FloatingActionButton(
-      //     elevation: 0.0,
-      //     onPressed: () {},
-      //     backgroundColor: labelColor,
-      //     child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),
-      //   ),
-      // ),
-
     );
   }
 }

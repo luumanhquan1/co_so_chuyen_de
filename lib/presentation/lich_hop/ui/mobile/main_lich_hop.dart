@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/calender_work/widget/custom_item_calend
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -15,6 +16,8 @@ import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widge
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'lich_hop_theo_ngay.dart';
 
 class MainLichHop extends StatefulWidget {
   const MainLichHop({Key? key}) : super(key: key);
@@ -58,7 +61,45 @@ class _MainLichHopState extends State<MainLichHop> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  reverseTransitionDuration:
+                  const Duration(milliseconds: 250),
+                  transitionDuration: const Duration(milliseconds: 250),
+                  pageBuilder: (_, animation, ___) {
+                    const begin = Offset(-1.0, 0.0);
+                    const end = Offset.zero;
+                    final tween = Tween(begin: begin, end: end);
+                    final offsetAnimation = animation.drive(tween);
+                    return FakeDrawerLichHop(
+                      offsetAnimation: offsetAnimation,
+                      title1: "lich theo dang lich",
+                      title2: "lich theo dang list",
+                      image1:ImageAssets.icMenuCalender ,
+                      image2:ImageAssets.icMenuCalender ,
+                      ontap1: (){
+                        setState(() {
+                          cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
+                          Navigator.pop(context);
+                        });
+
+
+                      },
+                      ontap2: (){
+                        setState(() {
+                          cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+                          Navigator.pop(context);
+                        });
+
+                      },
+                    );
+                  },
+                  opaque: false,
+                ),
+              );
+            },
             icon: SvgPicture.asset(ImageAssets.icMenuCalender),
           )
         ],
@@ -97,6 +138,7 @@ class _MainLichHopState extends State<MainLichHop> {
                       builder: (context, state) {
                         if (state is LichHopStateDangList) {
                           return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -134,15 +176,9 @@ class _MainLichHopState extends State<MainLichHop> {
                             ],
                           );
                         } else if (state is LichHopStateDangLich) {
-                          return Center(
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              color: Colors.blue,
-                            ),
-                          );
+                          return  LichHopTheoNgay();
                         } else {
-                          return SizedBox();
+                          return const SizedBox();
                         }
                       }),
                 ],

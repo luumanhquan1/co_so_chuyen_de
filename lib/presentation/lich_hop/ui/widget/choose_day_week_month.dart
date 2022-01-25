@@ -10,12 +10,12 @@ class ChooseDayWeedMonth extends StatelessWidget {
   final Function onTapWeek;
   final Function onTapmonth;
 
-  const ChooseDayWeedMonth(
-      {Key? key,
-      required this.onTapDay,
-      required this.onTapWeek,
-      required this.onTapmonth})
-      : super(key: key);
+  const ChooseDayWeedMonth({
+    Key? key,
+    required this.onTapDay,
+    required this.onTapWeek,
+    required this.onTapmonth,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
