@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/bloc/them_don_vi_state.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/bloc/them_don_vi_state.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ThemDonViCubit extends BaseCubit<ThemDonViState> {

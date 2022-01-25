@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/them_don_vi_widget.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/thanh_phan_tham_gia_widget.dart';
 import 'package:flutter/material.dart';
 
 class TaoLichHopScreen extends StatefulWidget {
@@ -21,12 +21,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
           const SizedBox(
             height: 100,
           ),
-          ThemDonViWidget(
-            listSelectNode: list,
-            onChange: (value) {
-
-            },
-          ),
+          ThanhPhanThamGiaWidget(),
           Column(
             children: List.generate(
               list.length,
