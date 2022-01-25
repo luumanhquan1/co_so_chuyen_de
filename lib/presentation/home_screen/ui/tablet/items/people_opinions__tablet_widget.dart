@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -22,6 +23,7 @@ class PeopleOpinionsTabletWidget extends StatefulWidget {
 }
 
 class _PeopleOpinionsState extends State<PeopleOpinionsTabletWidget> {
+  final YKienNguoiDanCubit _danCubit = YKienNguoiDanCubit();
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(
@@ -30,21 +32,25 @@ class _PeopleOpinionsState extends State<PeopleOpinionsTabletWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      selectKeyDialog: _danCubit,
+      listSelect: const [
+        SelectKey.CHO_TIEP_NHAN,
+        SelectKey.CHO_PHAN_XU_LY,
+        SelectKey.CHO_DUYET_XU_LY,
+        SelectKey.CHO_DUYET_TIEP_NHAN,
+      ],
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            title: S.current.people_opinions,
-            key: [SelectKey.CHO_TIEP_NHAN, SelectKey.CHO_XU_LY],
-          ),
-          DialogData(
+            onSelect: (value,startDate,endDate) {
+              _danCubit.selectDate(
+                selectKey: value,
+                startDate: startDate,
+                endDate: endDate,
+              );
+            },
             title: S.current.time,
-            key: [
-              SelectKey.HOM_NAY,
-              SelectKey.TUAN_NAY,
-              SelectKey.THANG_NAY,
-              SelectKey.NAM_NAY
-            ],
           )
         ],
       ),

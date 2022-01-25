@@ -89,6 +89,7 @@ const grapeColor = Color(0xff9B51E0);
 const pinkColor = Color(0xffFB7897);
 const smokeColor = Color(0xff636363);
 
+const bgTag = Color(0xffF2F0FF);
 
 
 const borderCaneder=Color(0xff586B8B);
@@ -125,7 +126,7 @@ const numberColorTablet = Color(0xff7966FF);
 const numberColorTabletbg = Color(0xffECEAFF);
 const iconColorDown = Color(0xffA2AEBD);
 Color cellColorborder = Color(0xffDBDFEF).withOpacity(0.5);
-Color cellColor = const Color(0xffDBDFEF).withOpacity(0.1);
+Color cellColor = Color(0xffDBDFEF).withOpacity(0.1);
 
 const dateColor = Color(0xFF667793);
 
@@ -143,6 +144,7 @@ const toDayColor = Color(0xFFDBDFEF);
 const gradientStart = Color(0xFF4D74FD);
 const gradientEnd = Color(0xFF4DFDF2);
 
+const unFocusColor = Color(0xffF2F0FF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
