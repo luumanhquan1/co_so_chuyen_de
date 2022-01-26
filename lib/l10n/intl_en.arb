@@ -248,6 +248,11 @@
   "them" : "Thêm",
   "them_don_vi" : "Thêm đơn vị",
   "danh_sach_lich_hop": "Danh sách lịch họp",
-  "truc_tiep": "Trực tiếp"
-
+  "truc_tiep": "Trực tiếp",
+  "tai_lieu_dinh_kem" : "Tài liệu đính kèm",
+  "ca_ngay" : "Cả ngày",
+  "bat_dau" : "Bắt đầu",
+  "ket_thuc" : "Kết thúc",
+  "tao_lich_lam_viec" : "Tạo lịch làm việc",
+  "vui_long_kiem_tra_lai_time" : "Vui lòng kiểm tra lại thời gian"
 }

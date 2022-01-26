@@ -1,10 +1,13 @@
 
+import 'dart:developer';
+
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -66,40 +69,41 @@ extension TabbarEnum on TabBarType {
         final key = GlobalKey<FormGroupState>();
         return  Scaffold(
           backgroundColor: Colors.blue,
-          body: FormGroup(
-            key: key,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 100,
-                ),
-                TextFieldValidator(
-                  validator: (value){
-                   if(value!.isEmpty){
-                     return "32131";
-                   }
-                  },
-                ),
-                TextFieldValidator(
-                  validator: (value){
-                    if(value!.isEmpty){
-                      return "32131";
-                    }
-                  },
-                ),
-                GestureDetector(
-                  onTap: (){
-                   log("${ key.currentState?.checkValidator()}");
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
-                  ),
-                )
-              ],
-            ),
-          ),
+          body: const TaoLichLamViecChiTietScreen(),
+          // body: FormGroup(
+          //   key: key,
+          //   child: Column(
+          //     children: [
+          //       const SizedBox(
+          //         height: 100,
+          //       ),
+          //       TextFieldValidator(
+          //         validator: (value){
+          //          if(value!.isEmpty){
+          //            return "32131";
+          //          }
+          //         },
+          //       ),
+          //       TextFieldValidator(
+          //         validator: (value){
+          //           if(value!.isEmpty){
+          //             return "32131";
+          //           }
+          //         },
+          //       ),
+          //       GestureDetector(
+          //         onTap: (){
+          //          log("${ key.currentState?.checkValidator()}");
+          //         },
+          //         child: Container(
+          //           height: 100,
+          //           width: 100,
+          //           color: Colors.red,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
         );
       case TabBarType.calendarWork:
         return const MainTabarCalenderWork();

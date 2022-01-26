@@ -1,5 +1,3 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
@@ -7,7 +5,6 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/it
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/title_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-import 'package:ccvc_mobile/widgets/slide_expand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,42 +32,26 @@ class _LoaiLichWidgetState extends State<LoaiLichWidget> {
                 TitleWidget(
                   image: ImageAssets.icCalendarUnFocus,
                   title: S.current.loai_lich,
-                  onTap: () {
-                    setState(() {
-                      isCheck = !isCheck;
-                    });
-                  },
-                  icon: isCheck
-                      ? const Icon(
-                          Icons.keyboard_arrow_up_rounded,
-                          color: AqiColor,
-                        )
-                      : const Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: AqiColor,
-                        ), isColor: false,
+                  child:  Column(
+                    children: listLoaiLich
+                        .map(
+                          (e) => GestureDetector(
+                        onTap: () {
+                          WidgetTaoLichLVInherited.of(context)
+                              .taoLichLamViecCubit
+                              .selectLoaiLich(e);
+                        },
+                        child: ItemSelectWidget(
+                          isSelect: e.isSelect,
+                          text: e.text,
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ),
                 ),
 
-                  ExpandedSection(
-                    expand: isCheck,
-                    child: Column(
-                      children: listLoaiLich
-                          .map(
-                            (e) => GestureDetector(
-                              onTap: () {
-                                WidgetTaoLichLVInherited.of(context)
-                                    .taoLichLamViecCubit
-                                    .selectLoaiLich(e);
-                              },
-                              child: ItemSelectWidget(
-                                isSelect: e.isSelect,
-                                text: e.text,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  )
+
 
               ],
             );

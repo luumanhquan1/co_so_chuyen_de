@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/slide_expand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,19 +10,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TitleWidget extends StatefulWidget {
   final String? image;
   final String title;
+  final Color? color;
   final String? title2;
-  final Icon icon;
   final bool isColor;
-  final Function onTap;
+  final bool isLine;
+  final Widget child;
 
   const TitleWidget({
     Key? key,
     this.image,
     required this.title,
+    this.color,
     this.title2,
-    required this.isColor,
-    required this.onTap,
-    required this.icon,
+    this.isColor = false,
+    this.isLine = false,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -29,65 +32,92 @@ class TitleWidget extends StatefulWidget {
 }
 
 class _TitleWidgetState extends State<TitleWidget> {
+  bool isExpand = false;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        Expanded(
-          child: Row(
-            children: [
-              if (widget.isColor)
-                Container(
-                  height: 12.0.textScale(),
-                  width: 12.0.textScale(),
-                  decoration: BoxDecoration(
-                    color: choTrinhKyColor,
-                    borderRadius: BorderRadius.circular(4),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  if (widget.isColor)
+                    Container(
+                      height: 12.0.textScale(),
+                      width: 12.0.textScale(),
+                      decoration: BoxDecoration(
+                        color: widget.color,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    )
+                  else
+                    SizedBox(
+                      height: 18.0.textScale(),
+                      width: 18.0.textScale(),
+                      child: SvgPicture.asset(
+                        widget.image ?? ImageAssets.icNhacLai,),
+                    ),
+                  SizedBox(
+                    width: widget.isColor ? 20.5.textScale() : 14.5.textScale(),
                   ),
-                )
-              else
-                SizedBox(
-                  height: 18.0.textScale(),
-                  width: 18.0.textScale(),
-                  child:
-                      SvgPicture.asset(widget?.image ?? ImageAssets.icNhacLai),
-                ),
-              SizedBox(
-                width: 14.5.textScale(),
+                  Text(
+                    widget.title,
+                    style: textNormalCustom(
+                      color: dateColor,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                widget.title,
-                style: textNormalCustom(
-                  color: dateColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.title2 ?? '',
+                    style: textNormalCustom(
+                      color: dateColor,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      isExpand = !isExpand;
+                      setState(() {
+
+                      });
+                    },
+                    icon: isExpand
+                        ? const Icon(
+                      Icons.keyboard_arrow_up_rounded,
+                      color: AqiColor,
+                    )
+                        : const Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: AqiColor,
+                    ),
+                  )
+                ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                widget.title2 ?? '',
-                style: textNormalCustom(
-                  color: dateColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  widget.onTap();
-                },
-                icon: widget.icon,
-              )
-            ],
+        if (widget.isLine) Container(
+          margin: EdgeInsets.only(
+              left: 32.5.textScale(), top: 5.0.textScale(),),
+          decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(color: lineColor)),
           ),
-        )
+        ) else
+          Container(),
+
+        ExpandedSection(expand: isExpand ,child: widget.child),
       ],
     );
   }

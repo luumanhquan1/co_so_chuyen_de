@@ -4,8 +4,6 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_sele
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/item_select_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/title_widget.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-import 'package:ccvc_mobile/widgets/slide_expand.dart';
 import 'package:flutter/material.dart';
 
 class MauMacDinhWidget extends StatefulWidget {
@@ -23,42 +21,28 @@ class _MauMacDinhWidgetState extends State<MauMacDinhWidget> {
     return Column(
       children: [
         TitleWidget(
+          color: choTrinhKyColor,
           title: S.current.mau_mac_dinh,
           isColor: true,
-          onTap: () {
-            isExpand = !isExpand;
-            setState(() {});
-          },
-          icon: isExpand
-              ? const Icon(
-                  Icons.keyboard_arrow_up_rounded,
-                  color: AqiColor,
-                )
-              : const Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  color: AqiColor,
-                ),
-        ),
-        StreamBuilder<List<ItemSelectModel>>(
-          stream: WidgetTaoLichLVInherited.of(context)
-              .taoLichLamViecCubit
-              .listColorDefaultStream,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Container();
-            }
+          child: StreamBuilder<List<ItemSelectModel>>(
+            stream: WidgetTaoLichLVInherited.of(context)
+                .taoLichLamViecCubit
+                .listColorDefaultStream,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Container();
+              }
 
-            final data = snapshot.data ?? [];
+              final data = snapshot.data ?? [];
 
-            return ExpandedSection(
-              expand: isExpand,
-              child: Column(
+              return Column(
                 children: data
                     .map(
                       (e) => GestureDetector(
                         onTap: () {
                           WidgetTaoLichLVInherited.of(context)
-                              .taoLichLamViecCubit.selectColor(e);
+                              .taoLichLamViecCubit
+                              .selectColor(e);
                         },
                         child: ItemSelectWidget(
                           text: e.text,
@@ -68,9 +52,9 @@ class _MauMacDinhWidgetState extends State<MauMacDinhWidget> {
                       ),
                     )
                     .toList(),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     );
