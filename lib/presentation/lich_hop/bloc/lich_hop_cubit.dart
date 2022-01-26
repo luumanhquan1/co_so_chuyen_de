@@ -21,9 +21,6 @@ enum Type_Choose_Option_List {
 
 class LichHopCubit extends BaseCubit<LichHopState> {
   bool isCheckNgay = false;
-  bool chooseDay = false;
-  bool chooseWeed = false;
-  bool chooseMonth = false;
   late BuildContext context;
 
   LichHopCubit() : super(LichHopStateIntial());
@@ -60,21 +57,19 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     return DataSource(appointments);
   }
 
-  chooseTypeList(Type_Choose_Option_List type) {
+  chooseTypeList( Type_Choose_Option_List type) {
     if (type == Type_Choose_Option_List.DANG_LICH) {
-      emit(const LichHopStateDangLich(Type_Choose_Option_List.DANG_LICH));
+        emit( const LichHopStateDangLich(Type_Choose_Option_Day.DAY));
     } else if(type == Type_Choose_Option_List.DANG_LIST) {
-      emit(const LichHopStateDangList(Type_Choose_Option_List.DANG_LIST));
+        emit( const LichHopStateDangList(Type_Choose_Option_Day.DAY));
     }
   }
-    // chooseTypeDay(Type_Choose_Option_Day type) {
-    //   if (type == Type_Choose_Option_Day.DAY) {
-    //     emit(const LichHopStateDay(Type_Choose_Option_Day.DAY));
-    //   }
-    //   else if(type==Type_Choose_Option_Day.WEEK){
-    //     emit(const LichHopStateDay(Type_Choose_Option_Day.WEEK));
-    //   }else{
-    //     emit(const LichHopStateDay(Type_Choose_Option_Day.MONTH));
-    //   }
-    // }
+    chooseTypeDay(Type_Choose_Option_Day type) {
+      if (state is LichHopStateDangLich) {
+        emit( LichHopStateDangLich(type));
+      }
+      else {
+        emit( LichHopStateDangList(type));
+      }
+    }
   }

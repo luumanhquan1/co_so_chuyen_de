@@ -2,54 +2,50 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class LichHopState extends Equatable {
-  const LichHopState();
+  const LichHopState(this.type);
+  final Type_Choose_Option_Day type;
 }
 
 class LichHopStateIntial extends LichHopState {
+  const LichHopStateIntial() : super(Type_Choose_Option_Day.DAY);
   @override
   List<Object?> get props => [];
 }
 
 class LichHopStateDangLich extends LichHopState {
-  final Type_Choose_Option_List type;
 
-  const LichHopStateDangLich(this.type);
+  const LichHopStateDangLich( Type_Choose_Option_Day type) : super(type);
 
   @override
   List<Object?> get props => [type];
 }
 
 class LichHopStateDangList extends LichHopState {
-  final Type_Choose_Option_List type;
-
-  const LichHopStateDangList(this.type);
+  const LichHopStateDangList( Type_Choose_Option_Day type) : super(type);
 
   @override
   List<Object?> get props => [type];
 }
 
 class LichHopStateDay extends LichHopState {
-  final Type_Choose_Option_Day type;
 
-  const LichHopStateDay(this.type);
+  const LichHopStateDay( Type_Choose_Option_Day type) : super(type);
 
   @override
   List<Object?> get props => [type];
 }
 
 class LichHopStateWeek extends LichHopState {
-  final Type_Choose_Option_Day type;
 
-  const LichHopStateWeek(this.type);
+  const LichHopStateWeek( Type_Choose_Option_Day type) : super(type);
 
   @override
   List<Object?> get props => [type];
 }
 
 class LichHopStateMonth extends LichHopState {
-  final Type_Choose_Option_Day type;
 
-  const LichHopStateMonth(this.type);
+  const LichHopStateMonth( Type_Choose_Option_Day type) : super(type);
 
   @override
   List<Object?> get props => [type];
