@@ -1,96 +1,97 @@
 
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
-import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
+import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/bloc/them_don_vi_cubit.dart';
-import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/select_don_vi_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/tree_widget.dart';
-import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/widgets/button_select.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class ThemDonViWidget extends StatefulWidget {
-  final Function(List<Node<DonViModel>>) onChange;
-  final List<DonViModel> listSelectNode;
-  const ThemDonViWidget({
-    Key? key,
-    required this.onChange,
-    this.listSelectNode = const [],
-  }) : super(key: key);
+class SelectDonVi extends StatefulWidget {
+  final Function(DonViModel) onChange;
+  const SelectDonVi({Key? key,required this.onChange}) : super(key: key);
 
   @override
-  State<ThemDonViWidget> createState() => _ThemDonViScreenState();
+  State<SelectDonVi> createState() => _SelectDonViState();
 }
 
-class _ThemDonViScreenState extends State<ThemDonViWidget> {
+class _SelectDonViState extends State<SelectDonVi> {
   final ThemDonViCubit _themDonViCubit = ThemDonViCubit();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      _themDonViCubit.getTreeDonVi();
-    });
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _themDonViCubit.dispose();
+  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    _themDonViCubit.getTreeDonVi();
+  });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ButtonSelectWidget(
-      onTap: () {
-        showSelect();
-      },
-      text: S.current.them_don_vi,
-      urlIcon: ImageAssets.icThemDonVi,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          S.current.don_vi_phong_ban,
+          style: textNormal(titleItemEdit, 14),
+        ),
+        spaceH8,
+        GestureDetector(
+          onTap: () {
+            showBottomSheetCustom<Node<DonViModel>>(
+              context,
+              title: S.current.chon_thanh_phan_tham_gia,
+              child: TreeDonVi(
+                themDonViCubit: _themDonViCubit,
+              ),
+            ).then((value) {
+              if (value != null) {
+                widget.onChange(value.value);
+                setState(() {});
+              }
+            });
+          },
+          child: Container(
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: borderColor),
+              borderRadius: const BorderRadius.all(Radius.circular(6)),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title(),
+                  style: textNormal(textTitle, 14),
+                ),
+                SvgPicture.asset(ImageAssets.icEditInfor)
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 
-  void showSelect() {
-    _themDonViCubit.initSelectNode(widget.listSelectNode);
-    if (APP_DEVICE == DeviceType.MOBILE) {
-      showBottomSheetCustom<List<Node<DonViModel>>>(
-        context,
-        title: S.current.chon_thanh_phan_tham_gia,
-        child: TreeDonVi(
-          themDonViCubit: _themDonViCubit,
-        ),
-      ).then((value) {
-        if (value != null) {
-          widget.onChange(value);
-        }
-        _themDonViCubit.onSearch('');
-      });
+  String title() {
+    if (_themDonViCubit.selectNodeOnlyValue == null) {
+      return S.current.chon_don_vi_phong_ban;
     } else {
-      showDiaLogTablet(
-        context,
-        title: S.current.chon_thanh_phan_tham_gia,
-        child: TreeDonVi(
-          themDonViCubit: _themDonViCubit,
-        ),
-        isBottomShow: true,
-        funcBtnOk: () {
-          Navigator.pop(context, _themDonViCubit.selectNode);
-        },
-      ).then((value) {
-        if (value != null) {
-          widget.onChange(value);
-        }
-        _themDonViCubit.onSearch('');
-      });
+      final Node<DonViModel> nodeDonVi = _themDonViCubit.selectNodeOnlyValue!;
+      if (nodeDonVi.children.isEmpty) {
+        return nodeDonVi.value.name;
+      }
+      return '${nodeDonVi.value.name} (${nodeDonVi.children.length})';
     }
   }
 }
@@ -109,8 +110,10 @@ class TreeDonVi extends StatelessWidget {
           SizedBox(
             height: 20.0.textScale(space: 4),
           ),
-          SelectSearchDonViWidget(
-            themDonViCubit: themDonViCubit,
+          BaseSearchBar(
+            onChange: (value) {
+              themDonViCubit.onSearch(value);
+            },
           ),
           SizedBox(
             height: 18.0.textScale(),
@@ -139,6 +142,7 @@ class TreeDonVi extends StatelessWidget {
                             children: List.generate(
                               data.length,
                               (index) => TreeViewWidget(
+                                selectOnly: true,
                                 themDonViCubit: themDonViCubit,
                                 node: data[index],
                               ),
@@ -162,12 +166,12 @@ class TreeDonVi extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: DoubleButtonBottom(
                 title1: S.current.dong,
-                title2: S.current.them,
+                title2: S.current.luu,
                 onPressed1: () {
                   Navigator.pop(context);
                 },
                 onPressed2: () {
-                  Navigator.pop(context, themDonViCubit.selectNode);
+                  Navigator.pop(context, themDonViCubit.selectNodeOnlyValue);
                 },
               ),
             ),

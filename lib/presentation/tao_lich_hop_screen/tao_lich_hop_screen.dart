@@ -12,42 +12,28 @@ class TaoLichHopScreen extends StatefulWidget {
 }
 
 class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
-  List<Node<DonViModel>> list = [];
+  List<DonViModel> list = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 100,
-          ),
-          ThanhPhanThamGiaWidget(),
-          Column(
-            children: List.generate(
-              list.length,
-              (index){
-                final data = list[index];
-                return Row(
-                  children: [Text(data.value.name),
-                  GestureDetector(
-                    onTap: (){
-                      data.isCheck.isCheck=false;
-                      list.removeAt(index);
-                      setState(() {
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 100,
+              ),
+              ThanhPhanThamGiaWidget(
+                onChange: (value) {
+                  list = value;
+                },
+              ),
 
-                      });
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      color: Colors.red,
-                    ),
-                  )],
-                );
-              },
-            ),
-          )
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

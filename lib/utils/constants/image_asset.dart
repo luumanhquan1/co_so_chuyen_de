@@ -40,7 +40,7 @@ class ImageAssets {
   static const String icEditInfor = '$baseImg/ic_edit_infor.svg';
   static const String icTienIchTablet = '$baseImg/ic_tien_ich_tablet.svg';
   static const String icXoaHDSD = '$baseImg/ic_xoa_hdsd.svg';
-
+  static const String icThemCanBo = '$baseImg/ic_them_can_bo.svg';
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';

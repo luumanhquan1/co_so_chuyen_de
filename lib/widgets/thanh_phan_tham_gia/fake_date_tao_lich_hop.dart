@@ -1,5 +1,7 @@
+import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
+
 class FakeDataTaoLich {
- static final dataTree = [
+  static final dataTree = [
     {
       "id": "0bf3b2c3-76d7-4e05-a587-9165c3624d76",
       "tenDonVi": "UBND TỈNH ĐỒNG NAI",
@@ -1776,5 +1778,57 @@ class FakeDataTaoLich {
         }
       ]
     }
+  ];
+  static final canBo = [
+    DonViModel(
+        id: "12312",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thư kí',
+        tenCanBo: "Lò Thị Hòa"),
+    DonViModel(
+        id: "12213312",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Sửa ống nước',
+        tenCanBo: "Lò Thị Lực"),
+    DonViModel(
+        id: "1231212312",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thầy giáo may mắn',
+        tenCanBo: "Lò Thị Hùng"),
+    DonViModel(
+        id: "1231qưe2",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Học sinh hư',
+        tenCanBo: "Lò Thị Tùng"),
+    DonViModel(
+        id: "12312213",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thợ sửa điện',
+        tenCanBo: "Lò Thị Hưng"),
+    DonViModel(
+        id: "1212321312",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Diễn viên chuyên nghiệp',
+        tenCanBo: "Lò Thị Nam"),
+    DonViModel(
+        id: "12312123",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thư kí',
+        tenCanBo: "Lò Thị Vũ"),
+    DonViModel(
+        id: "12312132",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thư kí',
+        tenCanBo: "Lò Thị Hải"),
+    DonViModel(
+        id: "1231ử2",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thư kí',
+        tenCanBo: "Lò Thị Lò"),
+    DonViModel(
+        id: "12311232",
+        name: "UBND TỈNH ĐỒNG NAI",
+        chucVu: 'Thư kí',
+        tenCanBo: "Lò Thị Bếp"),
   ];
 }
