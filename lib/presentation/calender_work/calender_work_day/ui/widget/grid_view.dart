@@ -1,18 +1,18 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/tablet/wigdet_calender_work_day.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/widget/wigdet_calender_work_day.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class GridViewExam extends StatefulWidget {
-  const GridViewExam({Key? key}) : super(key: key);
+class GridViewHeaderLich extends StatefulWidget {
+  const GridViewHeaderLich({Key? key}) : super(key: key);
 
   @override
-  _GridViewExamState createState() => _GridViewExamState();
+  _GridViewHeaderLichState createState() => _GridViewHeaderLichState();
 }
 
-class _GridViewExamState extends State<GridViewExam> {
+class _GridViewHeaderLichState extends State<GridViewHeaderLich> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(

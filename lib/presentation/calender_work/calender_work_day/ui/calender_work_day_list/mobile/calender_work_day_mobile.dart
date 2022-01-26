@@ -1,26 +1,27 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/base_choose_date/base_choose_date.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_lich/tab_calender_form/ui/in_calender_form.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_lich/mobile/calender_work_day_lich_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/mobile/widget/in_list_form.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/base_choose_date/base_choose_date.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CalenderWorkDayLichMobile extends StatefulWidget {
-  const CalenderWorkDayLichMobile({Key? key}) : super(key: key);
+class CalenderWorkDayMobile extends StatefulWidget {
+  const CalenderWorkDayMobile({Key? key}) : super(key: key);
 
   @override
-  _CalenderWorkDayLichMobileState createState() =>
-      _CalenderWorkDayLichMobileState();
+  _CalenderWorkDayMobileState createState() => _CalenderWorkDayMobileState();
 }
 
-class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
+class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   CalenderCubit cubit = CalenderCubit();
   GlobalKey globalKey = GlobalKey();
   double hegihtCalendar = 120;
@@ -37,7 +38,7 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: 'Lịch của tôi',
+        title: S.current.lich_cua_toi,
         leadingIcon: IconButton(
           onPressed: () {
             setState(() {
@@ -62,12 +63,12 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
                     return screenDevice(
                       mobileScreen: BaseMenuPhone(
                         offsetAnimation,
-                        'Lịch làm việc',
+                        S.current.calendar_work,
                         ImageAssets.icMenuCalender,
                       ),
                       tabletScreen: BaseMenuTablet(
                         offsetAnimation,
-                        'Lịch làm việc',
+                        S.current.calendar_work,
                         ImageAssets.icMenuCalender,
                       ),
                     );
@@ -87,7 +88,7 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
           Container(
             margin: EdgeInsets.only(top: hegihtCalendar),
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: const InCalenderForm(),
+            child: const InListForm(),
           ),
           Column(
             children: [
@@ -101,7 +102,14 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CalenderWorkDayLichMobile(),
+            ),
+          );
+        },
         backgroundColor: labelColor,
         child: SvgPicture.asset(ImageAssets.icVectorCalender),
       ),

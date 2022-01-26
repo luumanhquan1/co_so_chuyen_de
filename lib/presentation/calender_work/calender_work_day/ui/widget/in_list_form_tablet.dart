@@ -1,7 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/widget/custom_item_calender_list.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/mobile/widget/custom_item_calender_list.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,26 @@ class _InListFormTabletState extends State<InListFormTablet> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              height: 88,
+              width: MediaQuery.of(context).size.width - 16,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: _cubit.list.length,
+                itemBuilder: (context, index) {
+                  return CustomItemCalenderWorkTablet(
+                    image: _cubit.img[index],
+                    typeName: _cubit.list[index].typeName,
+                    numberOfCalendars: _cubit.list[index].numberOfCalendars,
+                  );
+                },
+              ),
+            ),
+          ),
+          spaceH28,
           Container(
             height: 1,
             color: bgDropDown,
@@ -51,14 +72,14 @@ class _InListFormTabletState extends State<InListFormTablet> {
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: CustomItemCalenderTablet(
                       title: _cubit.listMeeting[index].title,
-                      dateTimeFrom:
-                          DateTime.parse(_cubit.listMeeting[index].dateTimeFrom)
-                              .toStringWithAMPM,
+                      dateTimeFrom: DateTime.parse(
+                        _cubit.listMeeting[index].dateTimeFrom,
+                      ).toStringWithAMPM,
                       dateTimeTo:
                           DateTime.parse(_cubit.listMeeting[index].dateTimeTo)
                               .toStringWithAMPM,
                       urlImage:
-                          'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                          'https://lh3.googleusercontent.com/ogw/ADea4I7KuOHLBX4h7PqlUfbDpmYAuuvb9iBc5eaCvicoFg=s192-c-mo',
                     ),
                   );
                 },

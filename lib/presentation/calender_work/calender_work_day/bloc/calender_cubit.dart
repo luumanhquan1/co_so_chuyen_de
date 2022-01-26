@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_state.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_state.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -33,18 +33,18 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   List<MeetingSchedule> listMeeting = [
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2021-12-29T07:45:00',
-      '2021-12-29T08:45:00',
+      '2022-01-25T07:45:00',
+      '2022-01-25T08:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2021-12-29T09:45:00',
-      '2021-12-29T10:45:00',
+      '2022-01-25T09:45:00',
+      '2022-01-25T10:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2021-12-29T11:45:00',
-      '2021-12-29T12:45:00',
+      '2022-01-25T07:45:00',
+      '2022-01-25T08:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',

@@ -1,8 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/mobile/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/tablet/grid_view.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/calender_work_day_list/tablet/in_list_form_tablet.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_lich/tablet/widget/in_calender_form_tablet.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -11,21 +10,22 @@ import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CalenderWorkDayTablet extends StatefulWidget {
-  const CalenderWorkDayTablet({Key? key}) : super(key: key);
+class CalenderWorkDayLichTablet extends StatefulWidget {
+  const CalenderWorkDayLichTablet({Key? key}) : super(key: key);
 
   @override
-  _CalenderWorkDayTabletState createState() => _CalenderWorkDayTabletState();
+  _CalenderWorkDayLichTabletState createState() =>
+      _CalenderWorkDayLichTabletState();
 }
 
-class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
+class _CalenderWorkDayLichTabletState extends State<CalenderWorkDayLichTablet> {
   CalenderCubit cubit = CalenderCubit();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: 'Lịch của tôi',
+        title: S.current.lich_cua_toi,
         leadingIcon: IconButton(
           onPressed: () {
             Navigator.push(
@@ -41,12 +41,12 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   return screenDevice(
                     mobileScreen: BaseMenuPhone(
                       offsetAnimation,
-                      'Lịch làm việc',
+                      S.current.calendar_work,
                       ImageAssets.icMenuCalender,
                     ),
                     tabletScreen: BaseMenuTablet(
                       offsetAnimation,
-                      'Lịch làm việc',
+                      S.current.calendar_work,
                       ImageAssets.icMenuCalender,
                     ),
                   );
@@ -61,21 +61,19 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
         ),
       ),
       body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 28, left: 30, right: 30),
-            child: GridViewExam(),
-          ),
-          spaceH28,
-          Expanded(
-            child: InListFormTablet(
-              isHindText: true,
-            ),
-          ),
+        children: const [
+          Expanded(child: InCalenderFormTablet()),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CalenderWorkDayLichTablet(),
+            ),
+          );
+        },
         backgroundColor: labelColor,
         child: SvgPicture.asset(ImageAssets.icVectorCalender),
       ),
