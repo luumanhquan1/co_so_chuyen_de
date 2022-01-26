@@ -236,6 +236,15 @@
   "them" : "Thêm",
   "them_don_vi" : "Thêm đơn vị",
   "danh_sach_lich_hop": "Danh sách lịch họp",
-  "truc_tiep": "Trực tiếp"
+  "truc_tiep": "Trực tiếp",
+  "status": "Tình trạng",
+  "noidung": "Nội dung",
+  "file": "File",
+  "bao_cao_ket_qua": "Báo cáo kết quả",
+  "trung_binh": "Trung bình",
+  "dat": "Đạt",
+  "khong_dat": "Không đạt"
+
+
 
 }
