@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 
 class ThanhPhanThamGiaWidget extends StatefulWidget {
   final Function(List<DonViModel>) onChange;
-  const ThanhPhanThamGiaWidget({Key? key, required this.onChange})
+  final Function(bool) phuongThucNhan;
+  const ThanhPhanThamGiaWidget(
+      {Key? key, required this.onChange, required this.phuongThucNhan})
       : super(key: key);
 
   @override
@@ -27,7 +29,11 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
     _cubit.listPeopleThamGia.listen((event) {
       widget.onChange(event);
     });
+    _cubit.phuongThucNhanStream.listen((event) {
+      widget.phuongThucNhan(event);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,11 +68,18 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
               style: textNormal(textBodyTime, 14),
             ),
             spaceW25,
-            CustomCheckBox(
-              title: S.current.gui_email,
-              onChange: (isCheck) {},
-              isCheck: true,
-            )
+            StreamBuilder<bool>(
+                stream: _cubit.phuongThucNhanStream,
+                builder: (context, snapshot) {
+                  return CustomCheckBox(
+                    title: S.current.gui_email,
+                    onChange: (isCheck) {
+                      _cubit.changePhuongThucNhan(value: isCheck);
+
+                    },
+                    isCheck: snapshot.data ?? false,
+                  );
+                },)
           ],
         ),
         spaceH20,

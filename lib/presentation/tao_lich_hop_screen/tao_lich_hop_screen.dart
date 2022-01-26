@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/thanh_phan_tham_gia_widget.dart';
@@ -28,6 +28,9 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
               ThanhPhanThamGiaWidget(
                 onChange: (value) {
                   list = value;
+                },
+                phuongThucNhan: (value){
+
                 },
               ),
 

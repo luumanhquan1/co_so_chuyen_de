@@ -4,10 +4,12 @@ import 'package:rxdart/rxdart.dart';
 class ThanhPhanThamGiaCubit {
   final List<DonViModel> listPeople = [];
   final List<Node<DonViModel>> listNode = [];
+  bool phuongThucNhan = false;
   final BehaviorSubject<List<DonViModel>> _listPeopleThamGia =
       BehaviorSubject<List<DonViModel>>();
-
   Stream<List<DonViModel>> get listPeopleThamGia => _listPeopleThamGia.stream;
+  final BehaviorSubject<bool> _phuongThucNhan = BehaviorSubject.seeded(false);
+  Stream<bool> get phuongThucNhanStream => _phuongThucNhan.stream;
   void addPeopleThamGia(
       List<DonViModel> donViModel) {
     for (final vl in donViModel) {
@@ -25,5 +27,12 @@ void nhapNoiDungDonVi(String text,DonViModel donViModel){
 
 
     _listPeopleThamGia.sink.add(listPeople);
+  }
+  void changePhuongThucNhan({required bool value}){
+    _phuongThucNhan.sink.add(!value);
+  }
+  void dispose(){
+    _phuongThucNhan.close();
+    _listPeopleThamGia.close();
   }
 }
