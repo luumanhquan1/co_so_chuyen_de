@@ -1,3 +1,4 @@
+
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -11,15 +12,15 @@ import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/bloc/them_don_vi_cubit.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/widgets/select_don_vi_widget.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/widgets/tree_widget.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/bloc/them_don_vi_cubit.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/select_don_vi_widget.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/tree_widget.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/widgets/button_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ThemDonViWidget extends StatefulWidget {
   final Function(List<Node<DonViModel>>) onChange;
-  final List<Node<DonViModel>> listSelectNode;
+  final List<DonViModel> listSelectNode;
   const ThemDonViWidget({
     Key? key,
     required this.onChange,
@@ -40,14 +41,6 @@ class _ThemDonViScreenState extends State<ThemDonViWidget> {
       _themDonViCubit.getTreeDonVi();
     });
   }
-
-  @override
-  void didUpdateWidget(covariant ThemDonViWidget oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-    _themDonViCubit.initSelectNode(widget.listSelectNode);
-  }
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -57,36 +50,17 @@ class _ThemDonViScreenState extends State<ThemDonViWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ButtonSelectWidget(
       onTap: () {
         showSelect();
       },
-      child: Container(
-        width: 136.0.textScale(space: 8),
-        padding: APP_DEVICE == DeviceType.MOBILE
-            ? const EdgeInsets.only(right: 18, left: 12, top: 6, bottom: 6)
-            :const EdgeInsets.only(top: 10,bottom: 10,left: 16),
-        decoration: BoxDecoration(
-          color: buttonColor.withOpacity(0.1),
-          borderRadius: const BorderRadius.all(Radius.circular(4)),
-        ),
-        child: Row(
-          children: [
-            SvgPicture.asset(ImageAssets.icThemDonVi),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              S.current.them_don_vi,
-              style: textNormalCustom(color: labelColor, fontSize: 14),
-            )
-          ],
-        ),
-      ),
+      text: S.current.them_don_vi,
+      urlIcon: ImageAssets.icThemDonVi,
     );
   }
 
   void showSelect() {
+    _themDonViCubit.initSelectNode(widget.listSelectNode);
     if (APP_DEVICE == DeviceType.MOBILE) {
       showBottomSheetCustom<List<Node<DonViModel>>>(
         context,
