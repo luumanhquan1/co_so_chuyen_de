@@ -5,7 +5,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ImageAssets {
   ///Svg path
   static const String icBack = '$baseImg/ic_back.svg';
-
+  static const String icTongSoNhiemVu = '$baseImg/ic_tong_so_nhiem_vu.svg';
+  static const String icHoanThanhNhiemVu =
+      '$baseImg/ic_hoan_thanh-nhiem_vu.svg';
+  static const String icNhiemVuDangThucHien =
+      '$baseImg/ic_nhiem_vu_dang-thuc_hien.svg';
+  static const String icHoanThanhQuaHan = '$baseImg/ic_hoan_thanh_qua_han.svg';
+  static const String icDangThucHienTrongHan =
+      '$baseImg/ic_dang_thuc_hien_trong_han.svg';
+  static const String icDangThucHienQuaHan =
+      '$baseImg/ic_dang_thuc_hien_qua_han.svg';
   static const String icHomeFocus = '$baseImg/ic_home.svg';
   static const String icHomeUnFocus = '$baseImg/ic_home_unfocus.svg';
   static const String icChartUnFocus = '$baseImg/ic_chart.svg';
@@ -46,6 +55,7 @@ class ImageAssets {
   static const String icCalenderWorkMoth = '$baseImg/ic_calender_work_moth.svg';
   static const String icAdds = '$baseImg/ic_add.svg';
   static const String icVectorCalender = '$baseImg/ic_vector_calender.svg';
+  static const String icThemCanBo = '$baseImg/ic_them_can_bo.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -152,7 +162,8 @@ class ImageAssets {
   static const String icDayMonth = '$baseImg/ic_day_month.svg';
   static const String tongSoLichHop = '$baseImg/tong_so_lich_hop.svg';
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
-  static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
+  static const String soLichHopTrucTuyen =
+      '$baseImg/so_lich_hop_truc_tuyen.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

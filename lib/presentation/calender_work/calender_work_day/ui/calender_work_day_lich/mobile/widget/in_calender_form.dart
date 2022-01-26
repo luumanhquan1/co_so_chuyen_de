@@ -86,7 +86,7 @@ class _InCalenderFormState extends State<InCalenderForm> {
                           Flexible(
                             child: Text(
                               appointment.subject,
-                              style: textNormalCustom(),
+                              style: textNormalCustom(fontSize: 12.0),
                             ),
                           ),
                           const SizedBox(height: 4.0),
@@ -95,7 +95,7 @@ class _InCalenderFormState extends State<InCalenderForm> {
                               '${appointment.startTime.toStringWithAMPM} -'
                               ' ${appointment.endTime.toStringWithAMPM}',
                               style: textNormalCustom(
-                                fontSize: 12.0,
+                                fontSize: 10.0,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),

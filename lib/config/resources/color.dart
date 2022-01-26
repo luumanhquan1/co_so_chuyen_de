@@ -131,6 +131,7 @@ const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
 const bgTabletColor = Color(0xffF9FAFF);
 const toDayColor = Color(0xFFDBDFEF);
+const unFocusColor = Color(0xffF2F0FF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
