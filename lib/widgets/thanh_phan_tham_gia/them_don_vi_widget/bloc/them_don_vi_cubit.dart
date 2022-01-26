@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
-import 'package:ccvc_mobile/widgets/them_don_vi_widget/bloc/them_don_vi_state.dart';
+import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/bloc/them_don_vi_state.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ThemDonViCubit extends BaseCubit<ThemDonViState> {
@@ -11,6 +12,7 @@ class ThemDonViCubit extends BaseCubit<ThemDonViState> {
   List<Node<DonViModel>> listTree = [];
   Timer? _debounce;
   final List<Node<DonViModel>> selectNode = [];
+  Node<DonViModel>? selectNodeOnlyValue;
 
   ///
   final BehaviorSubject<List<Node<DonViModel>>> _getTree =
@@ -20,6 +22,10 @@ class ThemDonViCubit extends BaseCubit<ThemDonViState> {
   final BehaviorSubject<List<Node<DonViModel>>> _selectDonVi =
       BehaviorSubject<List<Node<DonViModel>>>();
   Stream<List<Node<DonViModel>>> get selectDonVi => _selectDonVi.stream;
+
+  final BehaviorSubject<Node<DonViModel>> _selectOnlyDonVi =
+      BehaviorSubject<Node<DonViModel>>();
+  Stream<Node<DonViModel>> get selectOnlyDonVi => _selectOnlyDonVi.stream;
 
   void getTreeDonVi() {
     final result = batTree();
@@ -36,6 +42,11 @@ class ThemDonViCubit extends BaseCubit<ThemDonViState> {
     _selectDonVi.sink.add(selectNode);
   }
 
+  void selectNodeOnly(Node<DonViModel> node) {
+    selectNodeOnlyValue = node;
+    _selectOnlyDonVi.sink.add(node);
+  }
+
   void removeTag(Node<DonViModel> node) {
     selectNode.remove(node);
     _selectDonVi.sink.add(selectNode);
@@ -44,9 +55,24 @@ class ThemDonViCubit extends BaseCubit<ThemDonViState> {
     _getTree.sink.add(listTree);
   }
 
-  void initSelectNode(List<Node<DonViModel>> value) {
+  void initSelectNode(List<DonViModel> value) {
+    selectNode.clear();
+    for (final element in listTree) {
+      element.removeCkeckBox();
+      for (final vl in value) {
+        final node = Node<DonViModel>(vl);
 
+        final result = element.search(node);
+        if (result != null) {
+          selectNode.add(result);
+          result.isCheck.isCheck = true;
+        }
+      }
+    }
+    for (final vl in value) {
 
+    }
+    _getTree.sink.add(listTree);
   }
 
   void onSearch(String search) {
