@@ -236,6 +236,9 @@
   "them" : "Thêm",
   "them_don_vi" : "Thêm đơn vị",
   "danh_sach_lich_hop": "Danh sách lịch họp",
-  "truc_tiep": "Trực tiếp"
+  "truc_tiep": "Trực tiếp",
+  "thong_tin_bo_sung": "Thông tin bổ sung",
+  "van_ban_dinh_kem": "Các văn bản đính kèm",
+  "danh_sach_y_kien": "Danh sách ý kiến"
 
 }
