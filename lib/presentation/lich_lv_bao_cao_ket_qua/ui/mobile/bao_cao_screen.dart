@@ -61,6 +61,8 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                             fileName: listData[index].fileName,
                             status: listData[index].status.getText().text,
                             content: listData[index].content,
+                            funcEdit: () {  },
+                            funcDelete: () {  },
                           );
                         },
                       ),
