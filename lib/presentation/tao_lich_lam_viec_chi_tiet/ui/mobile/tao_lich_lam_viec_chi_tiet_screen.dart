@@ -142,6 +142,8 @@ class _TaoLichLamViecChiTietScreenState
                   hint: S.current.noi_dung,
                 ),
 
+                const SizedBox(height: 20,),
+
                 const ThanhPhanThamGiaTLWidget(),
                 const TaiLieuWidget(),
 
