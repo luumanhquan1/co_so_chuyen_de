@@ -11,7 +11,7 @@ class LichHopTheoDanhSachNgay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LichHopCubit cubit=LichHopCubit();
+    final LichHopCubit cubit = LichHopCubit();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,8 @@ class LichHopTheoDanhSachNgay extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 16.0),
+              horizontal: 16.0,
+            ),
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

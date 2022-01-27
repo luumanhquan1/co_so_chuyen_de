@@ -14,7 +14,7 @@ enum Type_Choose_Option_Day {
   MONTH,
 }
 enum Type_Choose_Option_List {
-  // DANH_SACH,
+  DANH_SACH,
   DANG_LICH,
   DANG_LIST,
 }
@@ -62,6 +62,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         emit( const LichHopStateDangLich(Type_Choose_Option_Day.DAY));
     } else if(type == Type_Choose_Option_List.DANG_LIST) {
         emit( const LichHopStateDangList(Type_Choose_Option_Day.DAY));
+    }else if(type == Type_Choose_Option_List.DANH_SACH) {
+      emit( const LichHopStateDangDanhSach(Type_Choose_Option_Day.DAY));
     }
   }
     chooseTypeDay(Type_Choose_Option_Day type) {

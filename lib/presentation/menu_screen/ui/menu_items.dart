@@ -5,7 +5,6 @@ import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_passwo
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/tablet/hoi_dap_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_cua_toi.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/main_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/qlvb_mobile_screen.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/qlvb_tablet_screen.dart';
