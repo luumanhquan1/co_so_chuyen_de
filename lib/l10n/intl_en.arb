@@ -217,6 +217,10 @@
   "thong_bao": "Thông báo",
   "vao_hop_truc_tuyen": "Vào họp trực tuyến :",
   "thong_bao_khan": "Thông báo khẩn",
+  "ngay": "Ngày",
+  "tuan": "Tuần",
+  "thang": "Tháng",
+  "lich_cua_toi": "Lịch của tôi",
   "tao_lich_cong_tac_trong_nuoc" : "Tạo lịch công tác trong nước",
   "lich_cong_tac_trong_nuoc" : "Lịch công tác trong nước",
   "lich_lam_viec" : "Lịch làm việc",
@@ -248,6 +252,9 @@
   "them" : "Thêm",
   "them_don_vi" : "Thêm đơn vị",
   "danh_sach_lich_hop": "Danh sách lịch họp",
+  "danh_sach_y_kien": "Danh sách ý kiến",
+  "thong_tin_bo_sung": "Thông tin bổ sung",
+  "van_ban_dinh_kem": "Các văn bản đính kèm",
   "truc_tiep": "Trực tiếp",
   "tai_lieu_dinh_kem" : "Tài liệu đính kèm",
   "ca_ngay" : "Cả ngày",
@@ -265,5 +272,5 @@
   "nhap_noi_dung_cong_viec" : "Nhập nội dung công viêc",
   "dv_phoi_hop" : "ĐV phối hợp",
   "nguoi_pho_hop" : "Người phối hợp",
-  "gui_email" : "Gửi email"
+  "don_vi_phoi_hop" : "Đơn vị phối hợp"
 }

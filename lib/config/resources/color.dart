@@ -91,12 +91,12 @@ const smokeColor = Color(0xff636363);
 
 const bgTag = Color(0xffF2F0FF);
 
+const bgGridView = Color(0xffFBFCFD);
+const bgTabletItem = Color(0xffFBFCFD);
 
-const borderCaneder=Color(0xff586B8B);
+const borderCaneder = Color(0xff586B8B);
 
-const colorNumberCellQLVB = Color(0xff586B8B);
-
-
+const colorNumberCellQLVB = Color(0xffFCFDFD);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);

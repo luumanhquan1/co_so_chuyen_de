@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/bloc/thanh_phan_tham_gia_cubit.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_can_bo/them_can_bo_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/them_don_vi_widget.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 class ThanhPhanThamGiaWidget extends StatefulWidget {
   final Function(List<DonViModel>) onChange;
   final Function(bool) phuongThucNhan;
+
   final bool isPhuongThucNhan;
 
   const ThanhPhanThamGiaWidget(
@@ -27,7 +29,6 @@ class ThanhPhanThamGiaWidget extends StatefulWidget {
 
 class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
   final ThanhPhanThamGiaCubit _cubit = ThanhPhanThamGiaCubit();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -58,8 +59,8 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
             );
           },
         ),
-        const SizedBox(
-          height: 16,
+        SizedBox(
+          height: 16.0.textScale(space: 8),
         ),
         ThemCanBoWidget(
           onChange: (value) {

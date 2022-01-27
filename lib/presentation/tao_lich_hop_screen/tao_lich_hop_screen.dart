@@ -18,19 +18,23 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 100,
-              ),
-              ThanhPhanThamGiaWidget(
-                isPhuongThucNhan: true,
-                onChange: (value) {
-                  list = value;
-                },
-                phuongThucNhan: (value){
+        child: Row(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    ThanhPhanThamGiaWidget(
+                      isPhuongThucNhan: true,
+
+                      onChange: (value) {
+                        list = value;
+                      },
+                      phuongThucNhan: (value){
 
                 },
               ),

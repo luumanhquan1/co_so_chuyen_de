@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_can_bo/bloc/them_can_bo_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -46,16 +47,17 @@ class _CanBoWidgetState extends State<CanBoWidget> {
               ),
               Text(
                 widget.canBoModel.name,
-                style: textNormalCustom(color: titleColor, fontSize: 14),
+                style: textNormalCustom(
+                    color: titleColor, fontSize: 14.0.textScale(),),
               )
             ],
           ),
-          const SizedBox(
-            height: 11,
+           SizedBox(
+            height: 11.0.textScale(space: 11),
           ),
           rowInfo(key: S.current.ten_can_bo, value: widget.canBoModel.tenCanBo),
-          const SizedBox(
-            height: 11,
+           SizedBox(
+            height: 11.0.textScale(space: 9),
           ),
           rowInfo(key: S.current.chuc_vu, value: widget.canBoModel.chucVu)
         ],
@@ -70,14 +72,14 @@ class _CanBoWidgetState extends State<CanBoWidget> {
           flex: 2,
           child: Text(
             key,
-            style: textNormal(infoColor, 14),
+            style: textNormal(infoColor, 14.0.textScale()),
           ),
         ),
         Expanded(
           flex: 6,
           child: Text(
             value,
-            style: textNormal(titleColor, 14),
+            style: textNormal(titleColor, 14.0.textScale()),
           ),
         )
       ],

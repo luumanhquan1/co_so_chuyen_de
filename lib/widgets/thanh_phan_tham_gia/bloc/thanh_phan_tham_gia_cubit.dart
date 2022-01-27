@@ -10,10 +10,10 @@ class ThanhPhanThamGiaCubit {
 
   Stream<List<DonViModel>> get listPeopleThamGia => _listPeopleThamGia.stream;
   final BehaviorSubject<bool> _phuongThucNhan = BehaviorSubject.seeded(false);
-
   Stream<bool> get phuongThucNhanStream => _phuongThucNhan.stream;
-  
-  void addPeopleThamGia(List<DonViModel> donViModel) {
+  void addPeopleThamGia(
+    List<DonViModel> donViModel,
+  ) {
     for (final vl in donViModel) {
       if (listPeople.indexWhere((element) => element.id == vl.id) == -1) {
         listPeople.add(vl);
@@ -28,6 +28,7 @@ class ThanhPhanThamGiaCubit {
 
   void deletePeopleThamGia(DonViModel donViModel) {
     listPeople.remove(donViModel);
+
 
     _listPeopleThamGia.sink.add(listPeople);
   }
