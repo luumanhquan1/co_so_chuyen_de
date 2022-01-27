@@ -13,7 +13,8 @@ class DanhSachYKienTabletScreen extends StatefulWidget {
   const DanhSachYKienTabletScreen({Key? key}) : super(key: key);
 
   @override
-  _DanhSachYKienTabletScreenState createState() => _DanhSachYKienTabletScreenState();
+  _DanhSachYKienTabletScreenState createState() =>
+      _DanhSachYKienTabletScreenState();
 }
 
 class _DanhSachYKienTabletScreenState extends State<DanhSachYKienTabletScreen> {
