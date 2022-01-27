@@ -36,19 +36,26 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
             stream: cubit.listYKien,
             builder: (context, snapshot) {
               final listData = snapshot.data ?? [];
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: listData.length,
-                itemBuilder: (context, index) {
-                  return ItemYKien(
-                    time: listData[index].time,
-                    name: listData[index].name,
-                    imgAvatar: listData[index].imgAvatar,
-                    nameFile: listData[index].fileName,
-                  );
-                },
-              );
+               if(listData.isNotEmpty){
+                 return ListView.builder(
+                   shrinkWrap: true,
+                   physics: const NeverScrollableScrollPhysics(),
+                   itemCount: listData.length,
+                   itemBuilder: (context, index) {
+                     return ItemYKien(
+                       time: listData[index].time,
+                       name: listData[index].name,
+                       imgAvatar: listData[index].imgAvatar,
+                       nameFile: listData[index].fileName,
+                     );
+                   },
+                 );
+               }
+               else{
+                 return Center(
+                   child: Text(S.current.no_data),
+                 );
+               }
             },
           ),
         ),

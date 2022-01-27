@@ -3,6 +3,8 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/bloc/thanh_phan_tham_gia_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,14 +31,26 @@ class PeopleThamGiaWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              rowInfo(value: donVi.name, key: S.current.dv_phoi_hop),
-              spaceH10,
+              rowInfo(
+                value: donVi.name,
+                key: isMobile()
+                    ? S.current.dv_phoi_hop
+                    : S.current.don_vi_phoi_hop,
+              ),
+              SizedBox(
+                height: 10.0.textScale(space: 10),
+              ),
               rowInfo(value: donVi.tenCanBo, key: S.current.nguoi_pho_hop),
-              spaceH10,
+              SizedBox(
+                height: 10.0.textScale(space: 10),
+              ),
               Row(
+                crossAxisAlignment: isMobile()
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 2.0.textScale().toInt(),
                     child: Text(
                       S.current.noi_dung,
                       style: textNormal(infoColor, 14),
@@ -73,17 +87,17 @@ class PeopleThamGiaWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: 2.0.textScale().toInt(),
           child: Text(
             key,
-            style: textNormal(infoColor, 14),
+            style: textNormal(infoColor, 14.0.textScale()),
           ),
         ),
         Expanded(
           flex: 6,
           child: Text(
             value,
-            style: textNormal(titleColor, 14),
+            style: textNormal(titleColor, 14.0.textScale()),
           ),
         )
       ],
@@ -92,17 +106,18 @@ class PeopleThamGiaWidget extends StatelessWidget {
 
   Widget textField({required Function(String) onChange}) {
     return TextField(
-      style: textNormal(titleColor, 14),
+      style: textNormal(titleColor, 14.0.textScale()),
       onChanged: (value) {
         onChange(value);
       },
+      maxLines: 1.0.textScale(space: 3).toInt(),
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         isDense: true,
         hintText: S.current.nhap_noi_dung_cong_viec,
-        hintStyle: textNormal(textBodyTime, 14),
+        hintStyle: textNormal(textBodyTime, 14.0.textScale()),
         border: const OutlineInputBorder(
           borderSide: BorderSide(color: borderButtomColor),
           borderRadius: BorderRadius.all(Radius.circular(6)),

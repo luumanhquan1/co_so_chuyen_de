@@ -93,7 +93,7 @@ class ItemYKien extends StatelessWidget {
             height: 6,
           ),
           Text(
-            nameFile ?? 'link',
+            nameFile ??'',
             style: textNormalCustom(
               color: textColorMangXaHoi,
               fontWeight: FontWeight.w400,
