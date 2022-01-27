@@ -35,26 +35,6 @@ class _DanhSachYKienButtomState extends State<DanhSachYKienButtom> {
           },
         ),
       ),
-      // child: GestureDetector(
-      //   child: Row(
-      //     children:[
-      //      SvgPicture.asset(ImageAssets.ic_danhsachykien),
-      //       const SizedBox(width: 6,),
-      //       Text(S.current.danh_sach_y_kien,style: textNormalCustom(
-      //         fontSize: 14,
-      //         fontWeight: FontWeight.w500,
-      //         color: labelColor,
-      //       ),)
-      //     ],
-      //   ),
-      //   onTap: (){
-      //     showBottomSheetCustom(
-      //       context,
-      //       child: const DanhSachYKienScreen(),
-      //       title: S.current.danh_sach_y_kien,
-      //     );
-      //   },
-      // ),
     );
   }
 }
