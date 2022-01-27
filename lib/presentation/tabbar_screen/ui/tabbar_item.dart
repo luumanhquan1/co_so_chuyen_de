@@ -111,6 +111,7 @@ extension TabbarEnum on TabBarType {
         );
       case TabBarType.internalInteraction:
         return const Scaffold(
+          body: TaoLichLamViecChiTietScreen(),
           backgroundColor: Colors.cyanAccent,
         );
       case TabBarType.menu:
