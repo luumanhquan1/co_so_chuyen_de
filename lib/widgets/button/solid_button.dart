@@ -8,11 +8,11 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ButtonSelectWidget extends StatelessWidget {
+class SolidButton extends StatelessWidget {
   final Function() onTap;
   final String text;
   final String urlIcon;
-  const ButtonSelectWidget({
+  const SolidButton({
     Key? key,
     required this.onTap,
     required this.text,
@@ -29,7 +29,7 @@ class ButtonSelectWidget extends StatelessWidget {
 
         padding: APP_DEVICE == DeviceType.MOBILE
             ? const EdgeInsets.only(right: 18, left: 12, top: 6, bottom: 6)
-            : const EdgeInsets.only(top: 10, bottom: 10, left: 16),
+            : const EdgeInsets.only(top: 10, bottom: 10, left: 16,right: 20),
         decoration: BoxDecoration(
           color: buttonColor.withOpacity(0.1),
           borderRadius: const BorderRadius.all(Radius.circular(4)),

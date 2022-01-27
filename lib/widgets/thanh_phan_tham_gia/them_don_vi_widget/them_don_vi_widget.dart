@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -9,13 +8,13 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
+import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/bloc/them_don_vi_cubit.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/select_don_vi_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/widgets/tree_widget.dart';
-import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/widgets/button_select.dart';
 import 'package:flutter/material.dart';
 
 class ThemDonViWidget extends StatefulWidget {
@@ -41,6 +40,7 @@ class _ThemDonViScreenState extends State<ThemDonViWidget> {
       _themDonViCubit.getTreeDonVi();
     });
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -50,7 +50,7 @@ class _ThemDonViScreenState extends State<ThemDonViWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonSelectWidget(
+    return SolidButton(
       onTap: () {
         showSelect();
       },
@@ -133,8 +133,9 @@ class TreeDonVi extends StatelessWidget {
                       final data = snapshot.data ?? <Node<DonViModel>>[];
                       if (data.isNotEmpty) {
                         return SingleChildScrollView(
-                          keyboardDismissBehavior:
-                              ScrollViewKeyboardDismissBehavior.onDrag,
+                          keyboardDismissBehavior: isMobile()
+                              ? ScrollViewKeyboardDismissBehavior.onDrag
+                              : ScrollViewKeyboardDismissBehavior.manual,
                           child: Column(
                             children: List.generate(
                               data.length,
