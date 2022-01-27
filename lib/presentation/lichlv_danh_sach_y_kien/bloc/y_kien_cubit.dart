@@ -5,22 +5,45 @@ import 'package:rxdart/rxdart.dart';
 
 class YKienCubit extends BaseCubit<YKienState> {
   YKienCubit(YKienState initialState) : super(initialState);
-  final BehaviorSubject<List<YKienModel>>_listYKien =
+  final BehaviorSubject<List<YKienModel>> _listYKien =
       BehaviorSubject<List<YKienModel>>();
+
   Stream<List<YKienModel>> get listYKien => _listYKien.stream;
 
-  void fakeData(){
+  void fakeData() {
     _listYKien.sink.add(listDataFake);
   }
 
-
-  List<YKienModel>listDataFake=[
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
-    YKienModel(time: '01/01/2022', fileName: 'file', imgAvatar: '', name: 'Le Si Lam'),
+  List<YKienModel> listDataFake = [
+    YKienModel(
+      name: 'le si lam',
+      fileName: 'filename.doc',
+      imgAvatar: '',
+      time: '01/01/2022',
+    ),
+    YKienModel(
+      name: 'le si lam',
+      fileName: 'filename.doc',
+      imgAvatar: '',
+      time: '01/01/2022',
+    ),
+    YKienModel(
+      name: 'le si lam',
+      fileName: 'filename.doc',
+      imgAvatar: '',
+      time: '01/01/2022',
+    ),
+    YKienModel(
+      name: 'le si lam',
+      fileName: 'filename.doc',
+      imgAvatar: '',
+      time: '01/01/2022',
+    ),
+    YKienModel(
+      name: 'le si lam',
+      fileName: 'filename.doc',
+      imgAvatar: '',
+      time: '01/01/2022',
+    ),
   ];
-
 }

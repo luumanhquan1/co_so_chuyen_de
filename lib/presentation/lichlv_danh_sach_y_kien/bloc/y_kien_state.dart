@@ -6,10 +6,5 @@ abstract class YKienState extends Equatable {
 
 class YKienStateIntial extends YKienState {
   @override
-  List<Object> get props => [];
-}
-
-class Loading extends YKienState {
-  @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }

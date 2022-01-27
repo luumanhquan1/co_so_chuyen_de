@@ -162,24 +162,10 @@ class ImageAssets {
   static const String icDayMonth = '$baseImg/ic_day_month.svg';
   static const String tongSoLichHop = '$baseImg/tong_so_lich_hop.svg';
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
-<<<<<<< HEAD
   static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
   static const String ic_delete_book = '$baseImg/delete_book.svg';
-<<<<<<< HEAD
   static const String ic_danh_sach_y_kien = '$baseImg/ic_danhsachykien.svg';
-||||||| 37ae03d (fix)
   static const String ic_danhsachykien = '$baseImg/ic_danhsachykien.svg';
-=======
-  static const String ic_danhsachykien = '$baseImg/ic_danhsachykien.svg';
-||||||| fad0b17
-  static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
-  static const String ic_delete_book = '$baseImg/delete_book.svg';
-=======
-  static const String soLichHopTrucTuyen =
-      '$baseImg/so_lich_hop_truc_tuyen.svg';
->>>>>>> develop
-
->>>>>>> parent of 37ae03d (fix)
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 

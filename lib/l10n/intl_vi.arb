@@ -249,5 +249,9 @@
   "dv_phoi_hop": "ĐV phối hợp",
   "nguoi_pho_hop": "Người phối hợp",
   "gui_email": "Gửi email",
-  "truc_tiep": "Trực tiếp"
+  "truc_tiep": "Trực tiếp",
+  "danh_sach_y_kien": "Danh sách ý kiến",
+  "thong_tin_bo_sung": "Thông tin bổ sung",
+  "van_ban_dinh_kem": "Các văn bản đính kèm"
+
 }
