@@ -13,9 +13,11 @@ import 'package:flutter/material.dart';
 class ThanhPhanThamGiaWidget extends StatefulWidget {
   final Function(List<DonViModel>) onChange;
   final Function(bool) phuongThucNhan;
-  const ThanhPhanThamGiaWidget(
-      {Key? key, required this.onChange, required this.phuongThucNhan})
-      : super(key: key);
+  const ThanhPhanThamGiaWidget({
+    Key? key,
+    required this.onChange,
+    required this.phuongThucNhan,
+  }) : super(key: key);
 
   @override
   _ThanhPhanThamGiaWidgetState createState() => _ThanhPhanThamGiaWidgetState();
@@ -53,7 +55,7 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
             );
           },
         ),
-         SizedBox(
+        SizedBox(
           height: 16.0.textScale(space: 8),
         ),
         ThemCanBoWidget(
@@ -72,17 +74,17 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
             ),
             spaceW25,
             StreamBuilder<bool>(
-                stream: _cubit.phuongThucNhanStream,
-                builder: (context, snapshot) {
-                  return CustomCheckBox(
-                    title: S.current.gui_email,
-                    onChange: (isCheck) {
-                      _cubit.changePhuongThucNhan(value: isCheck);
-
-                    },
-                    isCheck: snapshot.data ?? false,
-                  );
-                },)
+              stream: _cubit.phuongThucNhanStream,
+              builder: (context, snapshot) {
+                return CustomCheckBox(
+                  title: S.current.gui_email,
+                  onChange: (isCheck) {
+                    _cubit.changePhuongThucNhan(value: isCheck);
+                  },
+                  isCheck: snapshot.data ?? false,
+                );
+              },
+            )
           ],
         ),
         SizedBox(

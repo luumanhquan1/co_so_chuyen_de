@@ -1,20 +1,21 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomItemCalenderWork extends StatelessWidget {
+class CustomItemCalenderWorkTablet extends StatelessWidget {
   final String image;
   final String typeName;
   final int numberOfCalendars;
 
-  const CustomItemCalenderWork(
-      {Key? key,
-      required this.image,
-      required this.typeName,
-      required this.numberOfCalendars})
-      : super(key: key);
+  const CustomItemCalenderWorkTablet({
+    Key? key,
+    required this.image,
+    required this.typeName,
+    required this.numberOfCalendars,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,8 @@ class CustomItemCalenderWork extends StatelessWidget {
         width: 274,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6.0),
-          color: backgroundItemCalender,
+          border: Border.all(color: cellColorborder),
+          color: bgGridView,
         ),
         child: Row(
           children: [
@@ -49,13 +51,19 @@ class CustomItemCalenderWork extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(typeName,
-                      softWrap: true,
-                      maxLines: 2,
-                      style: textNormalCustom(color: titleCalenderWork)),
-                  Text(numberOfCalendars.toString(),
-                      style:
-                          titleText(color: numberOfCalenders, fontSize: 26.0)),
+                  Text(
+                    typeName,
+                    softWrap: true,
+                    maxLines: 2,
+                    style: textNormalCustom(
+                      color: titleCalenderWork,
+                      fontSize: 14.0.textScale(),
+                    ),
+                  ),
+                  Text(
+                    numberOfCalendars.toString(),
+                    style: titleText(color: numberOfCalenders, fontSize: 26.0),
+                  ),
                 ],
               ),
             )
