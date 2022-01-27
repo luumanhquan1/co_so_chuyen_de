@@ -164,7 +164,7 @@ class ImageAssets {
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
   static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
   static const String ic_delete_book = '$baseImg/delete_book.svg';
-  static const String ic_danhsachykien = '$baseImg/ic_danhsachykien.svg';
+  static const String ic_danh_sach_y_kien = '$baseImg/ic_danhsachykien.svg';
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 
