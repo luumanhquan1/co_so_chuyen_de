@@ -1,8 +1,5 @@
 import 'dart:developer';
-
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/mobile/calender_work_day_mobile.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/tablet/calender_work_day_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
@@ -104,10 +101,7 @@ extension TabbarEnum on TabBarType {
           ),
         );
       case TabBarType.calendarWork:
-        return screenDevice(
-          mobileScreen: const CalenderWorkDayMobile(),
-          tabletScreen: const CalenderWorkDayTablet(),
-        );
+        // return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,
@@ -117,6 +111,7 @@ extension TabbarEnum on TabBarType {
           mobileScreen: const MenuScreen(),
           tabletScreen: const MenuTabletScreen(),
         );
+
     }
   }
 
@@ -127,6 +122,7 @@ extension TabbarEnum on TabBarType {
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
             height: 16,
+
           ),
           text: S.current.home,
         );
