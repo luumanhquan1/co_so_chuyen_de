@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
@@ -41,23 +42,14 @@ class _SelectDonViState extends State<SelectDonVi> {
       children: [
         Text(
           S.current.don_vi_phong_ban,
-          style: textNormal(titleItemEdit, 14),
+          style: textNormal(titleItemEdit, 14.0.textScale()),
         ),
-        spaceH8,
+        SizedBox(
+         height: 8.0.textScale(),
+       ),
         GestureDetector(
           onTap: () {
-            showBottomSheetCustom<Node<DonViModel>>(
-              context,
-              title: S.current.chon_thanh_phan_tham_gia,
-              child: TreeDonVi(
-                themDonViCubit: _themDonViCubit,
-              ),
-            ).then((value) {
-              if (value != null) {
-                widget.onChange(value.value);
-                setState(() {});
-              }
-            });
+            showSelect();
           },
           child: Container(
             width: double.maxFinite,
@@ -72,7 +64,7 @@ class _SelectDonViState extends State<SelectDonVi> {
               children: [
                 Text(
                   title(),
-                  style: textNormal(textTitle, 14),
+                  style: textNormal(textTitle, 14.0.textScale()),
                 ),
                 SvgPicture.asset(ImageAssets.icEditInfor)
               ],
@@ -81,6 +73,40 @@ class _SelectDonViState extends State<SelectDonVi> {
         )
       ],
     );
+  }
+  void showSelect() {
+
+    if (isMobile()) {
+      showBottomSheetCustom<Node<DonViModel>>(
+        context,
+        title: S.current.chon_thanh_phan_tham_gia,
+        child: TreeDonVi(
+          themDonViCubit: _themDonViCubit,
+        ),
+      ).then((value) {
+        if (value != null) {
+          widget.onChange(value.value);
+          setState(() {});
+        }
+      });
+    } else {
+      showDiaLogTablet<Node<DonViModel>>(
+        context,
+        title: S.current.chon_thanh_phan_tham_gia,
+        child: TreeDonVi(
+          themDonViCubit: _themDonViCubit,
+        ),
+        isBottomShow: true,
+        funcBtnOk: () {
+          Navigator.pop(context, _themDonViCubit.selectNodeOnlyValue);
+        },
+      ).then((value) {
+        if (value != null) {
+          widget.onChange(value.value);
+          setState(() {});
+        }
+      });
+    }
   }
 
   String title() {
@@ -136,8 +162,9 @@ class TreeDonVi extends StatelessWidget {
                       final data = snapshot.data ?? <Node<DonViModel>>[];
                       if (data.isNotEmpty) {
                         return SingleChildScrollView(
-                          keyboardDismissBehavior:
-                              ScrollViewKeyboardDismissBehavior.onDrag,
+                          keyboardDismissBehavior: isMobile()
+                              ? ScrollViewKeyboardDismissBehavior.onDrag
+                              : ScrollViewKeyboardDismissBehavior.manual,
                           child: Column(
                             children: List.generate(
                               data.length,
