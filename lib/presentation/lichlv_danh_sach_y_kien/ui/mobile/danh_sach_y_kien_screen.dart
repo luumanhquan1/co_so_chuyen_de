@@ -26,7 +26,7 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height*0.4,
+      height: MediaQuery.of(context).size.height*0.6,
       margin: const EdgeInsets.only(top: 20),
       child: SingleChildScrollView(
         child: MediaQuery.removePadding(
