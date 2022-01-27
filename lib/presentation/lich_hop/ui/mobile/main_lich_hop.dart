@@ -4,10 +4,6 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/danh_sach_lich_hop/danh_sach_lich_hop.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_danh_sach_ngay_tuan_thang/lich_hop_theo_danh_sach_ngay.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_theo_ngay_tuan_thang/lich_hop_theo_ngay.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_theo_ngay_tuan_thang/lich_hop_theo_tuan.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -16,6 +12,8 @@ import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widge
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'lich_hop_extension.dart';
 
 
 
@@ -162,29 +160,7 @@ class _MainLichHopState extends State<MainLichHop> {
                   child: BlocBuilder<LichHopCubit, LichHopState>(
                     bloc: cubit,
                     builder: (context, state) {
-                      if (state is LichHopStateDangList) {
-                        if (state.type == Type_Choose_Option_Day.DAY) {
-                          return const LichHopTheoDanhSachNgay();
-                        } else if (state.type == Type_Choose_Option_Day.WEEK) {
-                          return const LichHopTheoDanhSachNgay();
-                        } else if (state.type == Type_Choose_Option_Day.MONTH) {
-                          return const LichHopTheoDanhSachNgay();
-                        }
-                        return const SizedBox();
-                      } else if (state is LichHopStateDangLich) {
-                        if (state.type == Type_Choose_Option_Day.DAY) {
-                          return const LichHopTheoNgay();
-                        } else if (state.type == Type_Choose_Option_Day.WEEK) {
-                          return const LichHopTheoTuan();
-                        } else if (state.type == Type_Choose_Option_Day.MONTH) {
-                          return const LichHopTheoTuan();
-                        }
-                        return const SizedBox();
-                      } else if (state is LichHopStateDangDanhSach) {
-                        return const DanhSachLichHop();
-                      } else {
-                        return const SizedBox();
-                      }
+                     return state.lichHop();
                     },
                   ),
                 ),

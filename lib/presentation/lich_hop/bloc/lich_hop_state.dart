@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class LichHopState extends Equatable {
