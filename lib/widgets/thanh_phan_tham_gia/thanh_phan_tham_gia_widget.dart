@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/bloc/thanh_phan_tham_gia_cubit.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_can_bo/them_can_bo_widget.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/them_don_vi_widget/them_don_vi_widget.dart';
@@ -52,20 +53,22 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
             );
           },
         ),
-        const SizedBox(
-          height: 16,
+         SizedBox(
+          height: 16.0.textScale(space: 8),
         ),
         ThemCanBoWidget(
           onChange: (value) {
             _cubit.addPeopleThamGia(value);
           },
         ),
-        spaceH20,
+        SizedBox(
+          height: 20.0.textScale(space: -2),
+        ),
         Row(
           children: [
             Text(
               S.current.phuong_thuc_nhan_khac,
-              style: textNormal(textBodyTime, 14),
+              style: textNormal(textBodyTime, 14.0.textScale()),
             ),
             spaceW25,
             StreamBuilder<bool>(
@@ -82,7 +85,9 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
                 },)
           ],
         ),
-        spaceH20,
+        SizedBox(
+          height: 20.0.textScale(space: -2),
+        ),
         StreamBuilder<List<DonViModel>>(
           stream: _cubit.listPeopleThamGia,
           builder: (context, snapshot) {
