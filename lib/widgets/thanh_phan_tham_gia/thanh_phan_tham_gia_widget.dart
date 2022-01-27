@@ -16,12 +16,12 @@ class ThanhPhanThamGiaWidget extends StatefulWidget {
 
   final bool isPhuongThucNhan;
 
-  const ThanhPhanThamGiaWidget(
-      {Key? key,
-      required this.isPhuongThucNhan,
-      required this.onChange,
-      required this.phuongThucNhan,})
-      : super(key: key);
+  const ThanhPhanThamGiaWidget({
+    Key? key,
+    required this.isPhuongThucNhan,
+    required this.onChange,
+    required this.phuongThucNhan,
+  }) : super(key: key);
 
   @override
   _ThanhPhanThamGiaWidgetState createState() => _ThanhPhanThamGiaWidgetState();
@@ -29,6 +29,7 @@ class ThanhPhanThamGiaWidget extends StatefulWidget {
 
 class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
   final ThanhPhanThamGiaCubit _cubit = ThanhPhanThamGiaCubit();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -67,7 +68,9 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
             _cubit.addPeopleThamGia(value);
           },
         ),
-        spaceH20,
+        SizedBox(
+          height: 20.0.textScale(space: -2),
+        ),
         if (widget.isPhuongThucNhan)
           Column(
             children: [
@@ -92,12 +95,13 @@ class _ThanhPhanThamGiaWidgetState extends State<ThanhPhanThamGiaWidget> {
                   )
                 ],
               ),
-              spaceH20,
+              SizedBox(
+                height: 20.0.textScale(space: -2),
+              ),
             ],
           )
         else
           Container(),
-
         StreamBuilder<List<DonViModel>>(
           stream: _cubit.listPeopleThamGia,
           builder: (context, snapshot) {
