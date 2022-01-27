@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 class DanhSachYKienButtom extends StatefulWidget {
   const DanhSachYKienButtom({Key? key}) : super(key: key);
 
@@ -25,17 +26,22 @@ class _DanhSachYKienButtomState extends State<DanhSachYKienButtom> {
       width: 164,
       child: GestureDetector(
         child: Row(
-          children:[
-           SvgPicture.asset(ImageAssets.ic_danhsachykien),
-            const SizedBox(width: 6,),
-            Text(S.current.danh_sach_y_kien,style: textNormalCustom(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: labelColor,
-            ),)
+          children: [
+            SvgPicture.asset(ImageAssets.ic_danhsachykien),
+            const SizedBox(
+              width: 6,
+            ),
+            Text(
+              S.current.danh_sach_y_kien,
+              style: textNormalCustom(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: labelColor,
+              ),
+            )
           ],
         ),
-        onTap: (){
+        onTap: () {
           showBottomSheetCustom(
             context,
             child: const DanhSachYKienScreen(),
