@@ -169,6 +169,11 @@ class ImageAssets {
   static const String tongSoLichHop = '$baseImg/tong_so_lich_hop.svg';
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
   static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
+  static const String icDayCalenderWeek = '$baseImg/ic_calender_work_week.svg';
+  static const String icDayCalenderMonth = '$baseImg/ic_calender_work_month.svg';
+  static const String lichCanKlch = '$baseImg/lich_can_klch.svg';
+  static const String lichSapToi = '$baseImg/lich_sap_toi.svg';
+  static const String icAddCalenderWhite = '$baseImg/ic_add_calender_white.svg';
   static const String ic_delete_book = '$baseImg/delete_book.svg';
   static const String ic_danh_sach_y_kien = '$baseImg/ic_danhsachykien.svg';
   static const String ic_danhsachykien = '$baseImg/ic_danhsachykien.svg';
