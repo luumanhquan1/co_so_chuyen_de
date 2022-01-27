@@ -36,89 +36,93 @@ class _TitleWidgetState extends State<TitleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  if (widget.isColor)
-                    Container(
-                      height: 12.0.textScale(),
-                      width: 12.0.textScale(),
-                      decoration: BoxDecoration(
-                        color: widget.color,
-                        borderRadius: BorderRadius.circular(4),
+    return Container(
+      margin: EdgeInsets.only(top: 25.5.textScale()),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    if (widget.isColor)
+                      Container(
+                        height: 12.0.textScale(),
+                        width: 12.0.textScale(),
+                        decoration: BoxDecoration(
+                          color: widget.color,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      )
+                    else
+                      SizedBox(
+                        height: 12.0.textScale(),
+                        width: 12.0.textScale(),
+                        child: SvgPicture.asset(
+                          widget.image ?? ImageAssets.icNhacLai,
+                        ),
                       ),
-                    )
-                  else
                     SizedBox(
-                      height: 18.0.textScale(),
-                      width: 18.0.textScale(),
-                      child: SvgPicture.asset(
-                        widget.image ?? ImageAssets.icNhacLai,),
+                      width: 20.5.textScale(),
                     ),
-                  SizedBox(
-                    width: widget.isColor ? 20.5.textScale() : 14.5.textScale(),
-                  ),
-                  Text(
-                    widget.title,
-                    style: textNormalCustom(
-                      color: dateColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
+                    Text(
+                      widget.title,
+                      style: textNormalCustom(
+                        color: dateColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.title2 ?? '',
-                    style: textNormalCustom(
-                      color: dateColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.title2 ?? '',
+                      style: textNormalCustom(
+                        color: dateColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      isExpand = !isExpand;
-                      setState(() {
-
-                      });
-                    },
-                    icon: isExpand
-                        ? const Icon(
-                      Icons.keyboard_arrow_up_rounded,
-                      color: AqiColor,
-                    )
-                        : const Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: AqiColor,
+                    GestureDetector(
+                      onTap: () {
+                        isExpand = !isExpand;
+                        setState(() {});
+                      },
+                      child: Icon(
+                        isExpand
+                            ? Icons.keyboard_arrow_up_rounded
+                            : Icons.keyboard_arrow_down_outlined,
+                        color: AqiColor,
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
+              )
+            ],
+          ),
+          if (widget.isLine)
+            Container(
+              margin: EdgeInsets.only(
+                left: 32.5.textScale(),
+                top: 5.0.textScale(),
+              ),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: lineColor)),
               ),
             )
-          ],
-        ),
-        if (widget.isLine) Container(
-          margin: EdgeInsets.only(
-              left: 32.5.textScale(), top: 5.0.textScale(),),
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: lineColor)),
-          ),
-        ) else
-          Container(),
+          else
+            Container(),
 
-        ExpandedSection(expand: isExpand ,child: widget.child),
-      ],
+          SizedBox(height: 20.0.textScale(),),
+          ExpandedSection(expand: isExpand, child: widget.child),
+        ],
+      ),
     );
   }
 }

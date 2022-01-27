@@ -26,6 +26,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
                 height: 100,
               ),
               ThanhPhanThamGiaWidget(
+                isPhuongThucNhan: true,
                 onChange: (value) {
                   list = value;
                 },

@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +31,7 @@ class ItemSelectWidget extends StatelessWidget {
                 color: color, borderRadius: BorderRadius.circular(4),),
           ),
           SizedBox(
-            width: 14.5.textScale(),
+            width: 20.5.textScale(),
           ),
           Expanded(
             child: Row(
@@ -49,7 +50,7 @@ class ItemSelectWidget extends StatelessWidget {
                 if (isSelect)
                   SvgPicture.asset(ImageAssets.icCheck)
                 else
-                  Container()
+                  Container(),
               ],
             ),
           ),

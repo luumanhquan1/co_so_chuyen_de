@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/switch/custom_switch.dart';
@@ -25,9 +26,10 @@ class _IsCaNgayWidgetState extends State<IsCaNgayWidget> {
       child: Row(
         children: [
           SizedBox(
-              height: 18.0.textScale(),
-              width: 18.0.textScale(),
-              child: SvgPicture.asset(ImageAssets.icNhacLai),),
+            height: 18.0.textScale(),
+            width: 18.0.textScale(),
+            child: SvgPicture.asset(ImageAssets.icNhacLai),
+          ),
           SizedBox(
             width: 14.5.textScale(),
           ),
@@ -56,6 +58,9 @@ class _IsCaNgayWidgetState extends State<IsCaNgayWidget> {
                     value: isCheck,
                     onToggle: (bool value) {
                       isCheck = !isCheck;
+                      WidgetTaoLichLVInherited.of(context)
+                          .taoLichLamViecCubit
+                          .isDateTimeSubject.sink.add(isCheck);
                       setState(() {});
                     },
                   )

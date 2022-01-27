@@ -9,13 +9,13 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/ma
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nguoi_chu_tri_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nhac_lai_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/search_name_widget.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/tai_lieu_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/text_form_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/thanh_phan_tham_gia_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/pick_date_cupertino.dart';
-import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +31,7 @@ class _TaoLichLamViecChiTietScreenState
     extends State<TaoLichLamViecChiTietScreen> {
   final TaoLichLamViecCubit taoLichLamViecCubit = TaoLichLamViecCubit();
   TextEditingController tieuDeController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -61,49 +62,69 @@ class _TaoLichLamViecChiTietScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextFormWidget(
-                  controller: tieuDeController,
-                  image: ImageAssets.icEdit,
-                  hint: S.current.tieu_de,
-                  validator: (value) {
-                    return taoLichLamViecCubit.validateInputText(value!);
-                  },
+                Form(
+                  key: _formKey,
+                  child: TextFormWidget(
+                    controller: tieuDeController,
+                    image: ImageAssets.icEdit,
+                    hint: S.current.tieu_de,
+                  ),
                 ),
                 const LoaiLichWidget(),
                 const SearchNameWidget(),
                 const IsCaNgayWidget(),
-                StreamBuilder<DateTime>(
-                  stream: taoLichLamViecCubit.startDateSubject,
+
+                StreamBuilder<bool>(
+                  stream: taoLichLamViecCubit.isDateTimeStream,
                   builder: (context, snapshot) {
-                    final data = snapshot.data ?? DateTime.now();
+                    final dataBool = snapshot.data ?? true;
+                    return Column(
+                      children: [
+                        StreamBuilder<DateTime>(
+                          stream: taoLichLamViecCubit.startDateSubject,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? DateTime.now();
 
-                    return PicKDateCupertino(
-                      minimumDate: DateTime.now(),
-                      onDateTimeChanged: (DateTime value) {
-                        taoLichLamViecCubit.listeningStartDataTime(
-                          value,
-                        );
-                      },
-                      title: S.current.bat_dau,
-                      dateAndTime: data.formatDateTime,
-                    );
-                  },
-                ),
 
-                StreamBuilder<DateTime>(
-                  stream: taoLichLamViecCubit.endDateSubject,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? DateTime.now();
+                            return PicKDateCupertino(
+                              key: UniqueKey(),
+                              minimumDate: DateTime.now(),
+                              mode: dataBool
+                                  ? CupertinoDatePickerMode.date
+                                  : CupertinoDatePickerMode.dateAndTime,
+                              onDateTimeChanged: (DateTime value) {
+                                taoLichLamViecCubit.listeningStartDataTime(
+                                  value,
+                                );
+                              },
+                              title: S.current.bat_dau,
+                              dateAndTime: data.formatDateTime,
+                            );
+                          },
+                        ),
 
-                    return PicKDateCupertino(
-                      minimumDate: DateTime.now(),
-                      onDateTimeChanged: (DateTime value) {
-                        taoLichLamViecCubit.listeningEndDataTime(
-                          value,
-                        );
-                      },
-                      title: S.current.ket_thuc,
-                      dateAndTime: data.formatDateTime,
+                        StreamBuilder<DateTime>(
+                          stream: taoLichLamViecCubit.endDateSubject,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? DateTime.now();
+
+                            return PicKDateCupertino(
+                              key: UniqueKey(),
+                              minimumDate: DateTime.now(),
+                              mode: dataBool
+                                  ? CupertinoDatePickerMode.date
+                                  : CupertinoDatePickerMode.dateAndTime,
+                              onDateTimeChanged: (DateTime value) {
+                                taoLichLamViecCubit.listeningEndDataTime(
+                                  value,
+                                );
+                              },
+                              title: S.current.ket_thuc,
+                              dateAndTime: data.formatDateTime,
+                            );
+                          },
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -121,12 +142,11 @@ class _TaoLichLamViecChiTietScreenState
                   hint: S.current.noi_dung,
                 ),
 
-                const ThanhPhanThamGiaWidget(),
-                // const TaiLieuWidget(),
+                const ThanhPhanThamGiaTLWidget(),
+                const TaiLieuWidget(),
 
                 buttonTaoLich(
                   onTap: () {
-
                     if (taoLichLamViecCubit.checkValidateTime()) {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -134,6 +154,22 @@ class _TaoLichLamViecChiTietScreenState
                           backgroundColor: backgroundDrawerMenu,
                           content: Text(
                             S.current.vui_long_kiem_tra_lai_time,
+                            style: textNormalCustom(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+
+                    if (tieuDeController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: backgroundDrawerMenu,
+                          content: Text(
+                            S.current.khong_duoc_de_trong,
                             style: textNormalCustom(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,

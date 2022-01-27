@@ -10,6 +10,7 @@ class PicKDateCupertino extends StatefulWidget {
   final Color background;
   final DateTime? maximumDate;
   final DateTime? minimumDate;
+  final CupertinoDatePickerMode mode;
   const PicKDateCupertino({
     Key? key,
     required this.title,
@@ -17,6 +18,7 @@ class PicKDateCupertino extends StatefulWidget {
     this.maximumDate,
     this.minimumDate,
     this.background = bgBottomTab,
+    this.mode = CupertinoDatePickerMode.dateAndTime,
     required this.onDateTimeChanged,
   }) : super(key: key);
 
@@ -43,6 +45,7 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino> {
               maximumDate: widget.maximumDate,
               minimumDate: widget.minimumDate,
               backgroundColor: widget.background,
+              mode: widget.mode,
               use24hFormat: true,
               initialDateTime: DateTime.now(),
               onDateTimeChanged: (DateTime value) {

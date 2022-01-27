@@ -15,7 +15,7 @@ class TextFormWidget extends StatefulWidget {
     required this.image,
     required this.hint,
     this.validator,
-  }) : super(key : key);
+  }) : super(key: key);
 
   @override
   State<TextFormWidget> createState() => _TextFormWidgetState();
@@ -31,23 +31,21 @@ class _TextFormWidgetState extends State<TextFormWidget> {
           width: 14,
         ),
         Expanded(
-          child: Form(
-            child: TextFormField(
-              controller: widget.controller,
-              validator: widget.validator,
-              decoration: InputDecoration(
-                hintStyle: textNormalCustom(
-                  color: unselectLabelColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                ),
-                hintText: widget.hint,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: lineColor),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: lineColor),
-                ),
+          child: TextFormField(
+            controller: widget.controller,
+            validator: widget.validator,
+            decoration: InputDecoration(
+              hintStyle: textNormalCustom(
+                color: unselectLabelColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
+              hintText: widget.hint,
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: lineColor),
+              ),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: lineColor),
               ),
             ),
           ),

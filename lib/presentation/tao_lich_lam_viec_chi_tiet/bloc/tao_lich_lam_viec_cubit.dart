@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_state.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
-import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
@@ -18,8 +19,11 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   DateTime startDate = DateTime.now();
 
+  BehaviorSubject<bool> isDateTimeSubject = BehaviorSubject.seeded(true);
+
   BehaviorSubject<List<ItemSelectModel>> listItemLoaiLichSubject =
       BehaviorSubject.seeded(listLoaiLich);
+
   BehaviorSubject<List<String>> listItemPersonSubject =
       BehaviorSubject.seeded(listPerson);
 
@@ -37,6 +41,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   BehaviorSubject<List<ItemSelectModel>> listLinhVucSubject =
       BehaviorSubject.seeded(listLinhVuc);
+
+  Stream<bool> get isDateTimeStream => isDateTimeSubject.stream;
 
   Stream<DateTime> get startDateStream => startDateSubject.stream;
 
@@ -136,10 +142,18 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     return true;
   }
 
-  dynamic validateInputText(String inputText) {
+  String? validateInputText(String inputText) {
     if (inputText.isEmpty) {
       return S.current.khong_the_bo_trong;
     }
     return null;
+  }
+
+  Future<void> deleteFile(File deleteFile, List<File> list) async {
+    for(final e in list) {
+      if(e == deleteFile) {
+        list.remove(e);
+      }
+    }
   }
 }
