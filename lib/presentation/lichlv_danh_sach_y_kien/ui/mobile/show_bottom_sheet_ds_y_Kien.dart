@@ -1,12 +1,11 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/mobile/danh_sach_y_kien_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 class DanhSachYKienButtom extends StatefulWidget {
   const DanhSachYKienButtom({Key? key}) : super(key: key);
 
@@ -23,8 +22,8 @@ class _DanhSachYKienButtomState extends State<DanhSachYKienButtom> {
         borderRadius: BorderRadius.circular(4),
         color: labelColor.withOpacity(0.1),
       ),
-    child: Center(
-      child: SolidButton(
+      child: Center(
+        child: SolidButton(
           text: S.current.danh_sach_y_kien,
           urlIcon: ImageAssets.ic_danhsachykien,
           onTap: () {
@@ -34,8 +33,8 @@ class _DanhSachYKienButtomState extends State<DanhSachYKienButtom> {
               title: S.current.danh_sach_y_kien,
             );
           },
+        ),
       ),
-    )
       // child: GestureDetector(
       //   child: Row(
       //     children:[
