@@ -275,5 +275,6 @@
   "nguoi_pho_hop" : "Người phối hợp",
   "gui_email" : "Gửi email",
   "truc_tiep": "Trực tiếp",
-  "don_vi_phoi_hop" : "Đơn vị phối hợp"
+  "don_vi_phoi_hop" : "Đơn vị phối hợp",
+  "tao_lich_hop" : "Tạo lịch họp"
 }
