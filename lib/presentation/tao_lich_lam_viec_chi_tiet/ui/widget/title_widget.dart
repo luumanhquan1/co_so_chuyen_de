@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/slide_expand.dart';
@@ -15,6 +16,7 @@ class TitleWidget extends StatefulWidget {
   final bool isColor;
   final bool isLine;
   final Widget child;
+  final StartOfEnd optinal;
 
   const TitleWidget({
     Key? key,
@@ -25,6 +27,7 @@ class TitleWidget extends StatefulWidget {
     this.isColor = false,
     this.isLine = false,
     required this.child,
+    this.optinal = StartOfEnd.DIFFERENCE,
   }) : super(key: key);
 
   @override
@@ -81,14 +84,8 @@ class _TitleWidgetState extends State<TitleWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.title2 ?? '',
-                      style: textNormalCustom(
-                        color: dateColor,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
+                    widget.optinal
+                        .getText(context: context, title: widget.title2),
                     GestureDetector(
                       onTap: () {
                         isExpand = !isExpand;
@@ -118,8 +115,9 @@ class _TitleWidgetState extends State<TitleWidget> {
             )
           else
             Container(),
-
-          SizedBox(height: 20.0.textScale(),),
+          SizedBox(
+            height: 20.0.textScale(),
+          ),
           ExpandedSection(expand: isExpand, child: widget.child),
         ],
       ),

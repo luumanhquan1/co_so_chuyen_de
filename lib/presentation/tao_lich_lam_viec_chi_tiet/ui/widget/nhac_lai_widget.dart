@@ -31,6 +31,7 @@ class _NhacLaiWidgetState extends State<NhacLaiWidget> {
               return TitleWidget(
                   image: ImageAssets.icNhacLai,
                   title: S.current.nhac_lai,
+                  title2: snapshot.data?.text ?? '',
                   child: StreamBuilder<List<ItemSelectModel>>(
                     stream: WidgetTaoLichLVInherited.of(context)
                         .taoLichLamViecCubit
