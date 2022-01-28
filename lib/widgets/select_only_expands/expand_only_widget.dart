@@ -7,7 +7,7 @@ class ExpandOnlyWidget extends StatefulWidget {
   final Widget header;
   final Widget child;
   final bool isShowIcon;
-  final Function(AnimationController)? initController;
+  final AnimationController? initController;
   const ExpandOnlyWidget({
     Key? key,
     this.initExpand = false,
@@ -32,9 +32,6 @@ class _ExpandedSectionState extends State<ExpandOnlyWidget>
   void initState() {
     super.initState();
     prepareAnimations();
-    if(widget.initController != null){
-      widget.initController!(expandController);
-    }
   }
 
   @override
@@ -56,10 +53,11 @@ class _ExpandedSectionState extends State<ExpandOnlyWidget>
   }
 
   void prepareAnimations() {
-    expandController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
+    expandController = widget.initController ??
+        AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 300),
+        );
     animation = CurvedAnimation(
       parent: expandController,
       curve: Curves.linear,
