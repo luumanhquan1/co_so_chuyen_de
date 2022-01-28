@@ -5,12 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class ThongBaoTaoLichThanhCongWidget extends StatelessWidget {
+class NotifyWidget extends StatelessWidget {
   final String image;
   final String content;
   final String textButtom;
 
-  const ThongBaoTaoLichThanhCongWidget({
+  const NotifyWidget({
     Key? key,
     required this.image,
     required this.content,
