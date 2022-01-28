@@ -73,6 +73,7 @@ class ImageAssets {
   static const String icLichLamViec = '$baseImg/lich_lam_viec.svg';
   static const String icLichCongTacNuocNgoai =
       '$baseImg/lich_cong_tac_nuoc_ngoai.svg';
+  static const String icMucDoHop = '$baseImg/ic_muc_do_hop.svg';
   static const String icLichTiepDan = '$baseImg/lich_tiep_dan.svg';
   static const String icAdminTao = '$baseImg/admin_tao.svg';
   static const String icNextDropDown = '$baseImg/ic_next_drop_down.svg';

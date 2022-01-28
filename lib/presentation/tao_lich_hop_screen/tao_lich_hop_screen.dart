@@ -1,14 +1,14 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/fake_data_tao_lich.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/container_toggle_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/text_field_style.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
-import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/thanh_phan_tham_gia_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 class TaoLichHopScreen extends StatefulWidget {
   const TaoLichHopScreen({Key? key}) : super(key: key);
@@ -30,115 +30,64 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
             children: [
               TextFieldStyle(
                 urlIcon: ImageAssets.icEdit,
-                hintText: 'Tiêu đề',
+                hintText: S.current.tieu_de,
               ),
               spaceH5,
               ContainerToggleWidget(
-                title: 'Họp trực tiếp',
+                title: S.current.hop_truc_tiep,
                 onChange: (value) {},
               ),
               spaceH5,
               ContainerToggleWidget(
-                title: 'Trong đơn vị',
+                title: S.current.trong_don_vi,
                 onChange: (value) {},
               ),
               spaceH5,
               SelectOnlyExpand(
                 urlIcon: ImageAssets.icCalendar,
-                title: 'Loại họp',
-                value: 'Lịch công tác trong nước',
-                listSelect: [
-                  'Lịch công tác trong nước',
-                  'Lịch làm việc',
-                  'Lịch công tác nước ngoài',
-                  'Lịch tiếp dân',
-                  'Admin tạo',
-                  'Lịch công tác trong nước',
-                  'Lịch làm việc',
-                  'Lịch công tác nước ngoài',
-                  'Lịch tiếp dân',
-                  'Admin tạo',
-                  'Lịch công tác trong nước',
-                  'Lịch làm việc',
-                  'Lịch công tác nước ngoài',
-                  'Lịch tiếp dân',
-                  'Admin tạo'
-                ],
+                title: S.current.loai_hop,
+                value: FakeDataTaoLichHop.loaiHop.first,
+                listSelect: FakeDataTaoLichHop.loaiHop,
               ),
               spaceH5,
               SelectOnlyExpand(
                 urlIcon: ImageAssets.icWork,
-                title: 'Lĩnh vực',
-                value: 'Không bao giờ',
-                listSelect: [
-                  'Không bao giờ',
-                  'Trước 5 phút',
-                  'Trước 10 phút',
-                  'Trước 15 phút',
-                  'Trước 30 phút',
-                  'Trước 1 giờ'
-                ],
+                title: S.current.linh_vuc,
+                value: FakeDataTaoLichHop.linhVuc.first,
+                listSelect: FakeDataTaoLichHop.linhVuc,
               ),
               spaceH5,
               TextFieldStyle(
                 urlIcon: ImageAssets.icDoublePerson,
-                hintText: 'Thêm người',
+                hintText: S.current.them_nguoi,
               ),
               spaceH5,
               SelectOnlyExpand(
                 urlIcon: ImageAssets.icNhacLai,
-                title: 'Nhắc lại',
-                value: 'Không bao giờ',
-                listSelect: [
-                  'Không bao giờ',
-                  'Trước 5 phút',
-                  'Trước 10 phút',
-                  'Trước 15 phút',
-                  'Trước 30 phút',
-                  'Trước 1 giờ'
-                ],
+                title: S.current.nhac_lai,
+                value: FakeDataTaoLichHop.nhacLai.first,
+                listSelect:FakeDataTaoLichHop.nhacLai,
               ),
               spaceH5,
               SelectOnlyExpand(
                 urlIcon: ImageAssets.icNhacLai,
-                title: 'Lĩnh lặp',
-                value: 'Không bao giờ',
-                listSelect: [
-                  'Không bao giờ',
-                  'Trước 5 phút',
-                  'Trước 10 phút',
-                  'Trước 15 phút',
-                  'Trước 30 phút',
-                  'Trước 1 giờ'
-                ],
+                title: S.current.lich_lap,
+                value:  FakeDataTaoLichHop.nhacLai.first,
+                listSelect: FakeDataTaoLichHop.nhacLai,
               ),
               spaceH5,
               SelectOnlyExpand(
-                urlIcon: ImageAssets.icWork,
-                title: 'Mức độ họp',
-                value: '',
-                listSelect: [
-                  'Không bao giờ',
-                  'Trước 5 phút',
-                  'Trước 10 phút',
-                  'Trước 15 phút',
-                  'Trước 30 phút',
-                  'Trước 1 giờ'
-                ],
+                urlIcon: ImageAssets.icMucDoHop,
+                title: S.current.muc_do_hop,
+                value: FakeDataTaoLichHop.mucDoHop.first,
+                listSelect:FakeDataTaoLichHop.mucDoHop,
               ),
               spaceH5,
               SelectOnlyExpand(
                 urlIcon: ImageAssets.icPeople,
-                title: 'Người chủ trì',
-                value: '',
-                listSelect: [
-                  'Không bao giờ',
-                  'Trước 5 phút',
-                  'Trước 10 phút',
-                  'Trước 15 phút',
-                  'Trước 30 phút',
-                  'Trước 1 giờ'
-                ],
+                title: S.current.nguoi_chu_tri,
+                value:  FakeDataTaoLichHop.nguoiChuTri.last,
+                listSelect: FakeDataTaoLichHop.nguoiChuTri,
               ),
             ],
           ),
