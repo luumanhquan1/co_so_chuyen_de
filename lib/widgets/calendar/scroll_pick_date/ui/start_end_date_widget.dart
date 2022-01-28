@@ -6,7 +6,12 @@ import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/pick_date_cuper
 import 'package:flutter/cupertino.dart';
 
 class StartEndDateWidget extends StatefulWidget {
-  const StartEndDateWidget({Key? key}) : super(key: key);
+  final Function(DateTime value) onStartDateTimeChanged;
+  final Function(DateTime value) onEndDateTimeChanged;
+
+  const StartEndDateWidget(
+      {Key? key, required this.onStartDateTimeChanged,
+      required this.onEndDateTimeChanged,}) : super(key: key);
 
   @override
   _StartEndDateWidgetState createState() => _StartEndDateWidgetState();
@@ -37,6 +42,8 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
                   picKDateCupertinoCubit.listeningStartDataTime(
                     value,
                   );
+
+                  widget.onStartDateTimeChanged(value);
                 },
                 title: S.current.bat_dau,
                 startOfEnd: StartOfEnd.START,
@@ -51,6 +58,7 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
                   picKDateCupertinoCubit.listeningEndDataTime(
                     value,
                   );
+                  widget.onEndDateTimeChanged(value);
                 },
                 title: S.current.ket_thuc,
                 startOfEnd: StartOfEnd.END,

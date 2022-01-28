@@ -70,7 +70,10 @@ class _TaoLichLamViecChiTietScreenState
                 ),
                 const LoaiLichWidget(),
                 const SearchNameWidget(),
-                const StartEndDateWidget(),
+                StartEndDateWidget(
+                  onEndDateTimeChanged: (DateTime value) {},
+                  onStartDateTimeChanged: (DateTime value) {},
+                ),
                 const NhacLaiWidget(),
                 const MauMacDinhWidget(),
                 const NguoiChuTriWidget(),
