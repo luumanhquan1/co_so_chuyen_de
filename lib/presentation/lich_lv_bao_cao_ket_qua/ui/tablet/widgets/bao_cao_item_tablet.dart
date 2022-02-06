@@ -12,6 +12,8 @@ class BaoCaoItemTablet extends StatelessWidget {
   final String content;
   final Color statusColor;
   final String fileName;
+  final Function() funcEdit;
+  final Function() funcDelete;
 
   const BaoCaoItemTablet({
     Key? key,
@@ -19,6 +21,8 @@ class BaoCaoItemTablet extends StatelessWidget {
     required this.content,
     required this.statusColor,
     required this.fileName,
+    required this.funcEdit,
+    required this.funcDelete,
   }) : super(key: key);
 
   @override
@@ -61,11 +65,21 @@ class BaoCaoItemTablet extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset(ImageAssets.ic_edit),
+                          GestureDetector(
+                            child: SvgPicture.asset(ImageAssets.ic_edit),
+                            onTap: () {
+                              funcEdit();
+                            },
+                          ),
                           const SizedBox(
                             width: 28,
                           ),
-                          SvgPicture.asset(ImageAssets.ic_delete_do),
+                         GestureDetector(
+                           child:   SvgPicture.asset(ImageAssets.ic_delete_do),
+                           onTap: (){
+                             funcDelete();
+                           },
+                         )
                         ],
                       )
                     ],

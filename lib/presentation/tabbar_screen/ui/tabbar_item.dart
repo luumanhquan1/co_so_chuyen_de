@@ -1,9 +1,5 @@
 import 'dart:developer';
-
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/main_tabbar_calender_work.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/bao_cao_screen.dart';
@@ -11,6 +7,7 @@ import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widge
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/bao_cao_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/test.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -68,7 +65,7 @@ extension TabbarEnum on TabBarType {
         //     key: keyHomeTablet,
         //   ),
         // );
-        return const BaoCaoScreen();
+        return const Test();
       case TabBarType.report:
         final key = GlobalKey<FormGroupState>();
         return  Scaffold(
@@ -109,7 +106,7 @@ extension TabbarEnum on TabBarType {
           ),
         );
       case TabBarType.calendarWork:
-        return const MainTabarCalenderWork();
+        // return const MainTabarCalenderWork();
       case TabBarType.internalInteraction:
         return const Scaffold(
           backgroundColor: Colors.cyanAccent,

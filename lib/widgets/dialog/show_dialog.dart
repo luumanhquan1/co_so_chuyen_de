@@ -8,8 +8,8 @@ Future<T?> showDiaLogMobile<T>(BuildContext context, {
   required String title,
   required String textContent,
   required Widget icon,
-  String? btnRightTxt,
-  String? btnLeftTxt,
+  required String btnRightTxt,
+  required String btnLeftTxt,
   bool isBottomShow = true,
   required Function funcBtnRight,
 }) {
@@ -51,7 +51,7 @@ Future<T?> showDiaLogMobile<T>(BuildContext context, {
                   Expanded(
                     child: ButtonCustomBottom(
                       isColorBlue: false,
-                      title: btnLeftTxt ?? S.current.xoa,
+                      title: btnLeftTxt,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -63,9 +63,10 @@ Future<T?> showDiaLogMobile<T>(BuildContext context, {
                   Expanded(
                     child: ButtonCustomBottom(
                       isColorBlue: true,
-                      title: btnRightTxt ?? S.current.them,
+                      title: btnRightTxt,
                       onPressed: () {
                         funcBtnRight();
+                        Navigator.pop(context);
                       },
                     ),
                   ),

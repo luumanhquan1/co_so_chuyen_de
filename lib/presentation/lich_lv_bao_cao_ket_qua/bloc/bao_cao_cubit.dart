@@ -11,8 +11,11 @@ class BaoCaoCubit extends BaseCubit<BaoCaoState> {
 
   Stream<List<BaoCaoModel>> get listBaoCao => _listBaoCao.stream;
 
-  void getData() {
+  void initData() {
     _listBaoCao.sink.add(listDataFake);
+  }
+  void getData(List<BaoCaoModel>listBaoCao) {
+    _listBaoCao.sink.add(listBaoCao);
   }
 
   List<BaoCaoModel> listDataFake = [

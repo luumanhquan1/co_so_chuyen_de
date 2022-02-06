@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
@@ -20,7 +19,7 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
   @override
   void initState() {
     super.initState();
-    cubit.getData();
+    cubit.initData();
   }
 
   @override
@@ -38,37 +37,44 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
               height: 20,
             ),
             Expanded(
-                child: SingleChildScrollView(
-              child: StreamBuilder<List<BaoCaoModel>>(
-                stream: cubit.listBaoCao,
-                builder: (context, snapshot) {
-                  final listData = snapshot.data ?? [];
-                  if (listData.isNotEmpty) {
-                    return MediaQuery.removePadding(
-                      removeTop: true,
-                      context: context,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: listData.length,
-                        itemBuilder: (context, index) {
-                          return BaoCaoItemTablet(
-                            statusColor: listData[index].status.getText().color,
-                            fileName: listData[index].fileName,
-                            status: listData[index].status.getText().text,
-                            content: listData[index].content,
-                          );
-                        },
-                      ),
-                    );
-                  } else {
-                    return Center(
-                      child: Text(S.current.no_data),
-                    );
-                  }
-                },
+              child: SingleChildScrollView(
+                child: StreamBuilder<List<BaoCaoModel>>(
+                  stream: cubit.listBaoCao,
+                  builder: (context, snapshot) {
+                    final listData = snapshot.data ?? [];
+                    if (listData.isNotEmpty) {
+                      return MediaQuery.removePadding(
+                        removeTop: true,
+                        context: context,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: listData.length,
+                          itemBuilder: (context, index) {
+                            return BaoCaoItemTablet(
+                              statusColor:
+                                  listData[index].status.getText().color,
+                              fileName: listData[index].fileName,
+                              status: listData[index].status.getText().text,
+                              content: listData[index].content,
+                              funcDelete: () {
+                                listData.removeAt(index);
+                                cubit.getData(listData);
+                              },
+                              funcEdit: () {},
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text(S.current.no_data),
+                      );
+                    }
+                  },
+                ),
               ),
-            ),)
+            )
           ],
         ),
       ),
