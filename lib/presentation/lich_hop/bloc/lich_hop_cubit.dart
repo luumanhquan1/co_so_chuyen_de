@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -42,7 +43,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
           startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
           endTime: DateTime.parse(listMeeting[i].dateTimeTo),
           subject: listMeeting[i].title,
-          color: Colors.blue,
+          color: textColorMangXaHoi,
         ),
       );
     }
