@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_cubit.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/is_ca_ngay_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/linh_vuc_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/loai_lich_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/mau_mac_dinh_widget.dart';
@@ -13,9 +12,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/ta
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/text_form_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/thanh_phan_tham_gia_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/pick_date_cupertino.dart';
+import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -72,63 +70,10 @@ class _TaoLichLamViecChiTietScreenState
                 ),
                 const LoaiLichWidget(),
                 const SearchNameWidget(),
-                const IsCaNgayWidget(),
-
-                StreamBuilder<bool>(
-                  stream: taoLichLamViecCubit.isDateTimeStream,
-                  builder: (context, snapshot) {
-                    final dataBool = snapshot.data ?? true;
-                    return Column(
-                      children: [
-                        StreamBuilder<DateTime>(
-                          stream: taoLichLamViecCubit.startDateSubject,
-                          builder: (context, snapshot) {
-                            final data = snapshot.data ?? DateTime.now();
-
-
-                            return PicKDateCupertino(
-                              key: UniqueKey(),
-                              minimumDate: DateTime.now(),
-                              mode: dataBool
-                                  ? CupertinoDatePickerMode.date
-                                  : CupertinoDatePickerMode.dateAndTime,
-                              onDateTimeChanged: (DateTime value) {
-                                taoLichLamViecCubit.listeningStartDataTime(
-                                  value,
-                                );
-                              },
-                              title: S.current.bat_dau,
-                              dateAndTime: data.formatDateTime,
-                            );
-                          },
-                        ),
-
-                        StreamBuilder<DateTime>(
-                          stream: taoLichLamViecCubit.endDateSubject,
-                          builder: (context, snapshot) {
-                            final data = snapshot.data ?? DateTime.now();
-
-                            return PicKDateCupertino(
-                              key: UniqueKey(),
-                              minimumDate: DateTime.now(),
-                              mode: dataBool
-                                  ? CupertinoDatePickerMode.date
-                                  : CupertinoDatePickerMode.dateAndTime,
-                              onDateTimeChanged: (DateTime value) {
-                                taoLichLamViecCubit.listeningEndDataTime(
-                                  value,
-                                );
-                              },
-                              title: S.current.ket_thuc,
-                              dateAndTime: data.formatDateTime,
-                            );
-                          },
-                        ),
-                      ],
-                    );
-                  },
+                StartEndDateWidget(
+                  onEndDateTimeChanged: (DateTime value) {},
+                  onStartDateTimeChanged: (DateTime value) {},
                 ),
-
                 const NhacLaiWidget(),
                 const MauMacDinhWidget(),
                 const NguoiChuTriWidget(),
@@ -141,10 +86,11 @@ class _TaoLichLamViecChiTietScreenState
                   image: ImageAssets.icDocument,
                   hint: S.current.noi_dung,
                 ),
-
+                const SizedBox(
+                  height: 20,
+                ),
                 const ThanhPhanThamGiaTLWidget(),
                 const TaiLieuWidget(),
-
                 buttonTaoLich(
                   onTap: () {
                     if (taoLichLamViecCubit.checkValidateTime()) {

@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/title_widget.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,18 +7,18 @@ import 'package:flutter/cupertino.dart';
 class PicKDateCupertino extends StatefulWidget {
   final String title;
   final Function(DateTime value) onDateTimeChanged;
-  final String dateAndTime;
   final Color background;
   final DateTime? maximumDate;
   final DateTime? minimumDate;
+  final StartOfEnd startOfEnd;
   final CupertinoDatePickerMode mode;
   const PicKDateCupertino({
     Key? key,
     required this.title,
-    required this.dateAndTime,
     this.maximumDate,
     this.minimumDate,
     this.background = bgBottomTab,
+    required this.startOfEnd,
     this.mode = CupertinoDatePickerMode.dateAndTime,
     required this.onDateTimeChanged,
   }) : super(key: key);
@@ -36,8 +37,8 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino> {
         TitleWidget(
           isLine: true,
           isColor: true,
-          title2: widget.dateAndTime,
           title: widget.title,
+          optinal: widget.startOfEnd,
           child: Container(
             margin: EdgeInsets.only(left: 32.5.textScale()),
             height: 311.0.textScale(),
