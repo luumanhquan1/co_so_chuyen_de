@@ -18,6 +18,9 @@ class ButtonSelectFile extends StatefulWidget {
   final String title;
   final String? icon;
   final bool childDiffence;
+  final Function(List<File>) onChange;
+  final Widget? builder;
+  final bool isBuilder;
 
   const ButtonSelectFile({
     Key? key,
@@ -25,6 +28,9 @@ class ButtonSelectFile extends StatefulWidget {
     required this.title,
     this.icon,
     this.childDiffence = false,
+    this.builder,
+    required this.onChange,
+    this.isBuilder = false,
   }) : super(key: key);
 
   @override
@@ -51,6 +57,7 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
               // User canceled the picker
             }
 
+            widget.onChange(files);
             setState(() {});
           },
           child: Container(
@@ -82,15 +89,28 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
         SizedBox(
           height: 16.0.textScale(),
         ),
-        Column(
-          children: files.isNotEmpty ?
-              files.map((e) => itemListFile(file: e, onTap: () {
-                _cubit.deleteFile(e, files);
-                setState(() {
-
-                });
-              },),).toList() : [Container()],
-        )
+        if (widget.isBuilder)
+          Column(
+            children: files.isNotEmpty
+                ? files.map((e) => widget.builder ?? Container()).toList()
+                : [Container()],
+          )
+        else
+          Column(
+            children: files.isNotEmpty
+                ? files
+                    .map(
+                      (e) => itemListFile(
+                        file: e,
+                        onTap: () {
+                          _cubit.deleteFile(e, files);
+                          setState(() {});
+                        },
+                      ),
+                    )
+                    .toList()
+                : [Container()],
+          )
       ],
     );
   }

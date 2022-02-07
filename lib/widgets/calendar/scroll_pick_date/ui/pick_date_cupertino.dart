@@ -39,9 +39,8 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino> {
           isColor: true,
           title: widget.title,
           optinal: widget.startOfEnd,
-          child: Container(
-            margin: EdgeInsets.only(left: 32.5.textScale()),
-            height: 311.0.textScale(),
+          child: SizedBox(
+            height: 200.0.textScale(space: 20),
             child: CupertinoDatePicker(
               maximumDate: widget.maximumDate,
               minimumDate: widget.minimumDate,

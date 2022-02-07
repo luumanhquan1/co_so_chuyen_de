@@ -298,5 +298,8 @@
   "loai_hop" : "Loại họp",
   "muc_do_hop" : "Mức độ họp",
   "them_nguoi" : "Thêm người",
-  "lich_lap" : "Lịch lặp"
+  "lich_lap" : "Lịch lặp",
+  "chi_tiet_lich_lam_viec" : "Chi tiết lịch làm việc",
+  "hop_noi_bo_cong_ty" : "Họp nội bộ công ty",
+  "danh_sach_bao_cao_ket_qua" : "Danh sách báo cáo kết quả"
 }
