@@ -17,6 +17,7 @@ import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/thanh_phan_tham_gia_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SuaLichCongTacTrongNuocPhone extends StatefulWidget {
@@ -41,7 +42,7 @@ class _SuaLichCongTacTrongNuocPhoneState
       child: Container(
         height: MediaQuery.of(context).size.height * 0.85,
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.all( 16),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -68,7 +69,7 @@ class _SuaLichCongTacTrongNuocPhoneState
                       Align(
                         alignment: Alignment.topCenter,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 16),
+                          margin: const EdgeInsets.only(bottom: 16),
                           height: 6,
                           width: 57,
                           decoration: BoxDecoration(
@@ -119,9 +120,8 @@ class _SuaLichCongTacTrongNuocPhoneState
                       ButtonSelectFile(
                         title: S.current.tai_lieu_dinh_kem,
                         onChange: (List<File> files) {
-                          print(files);
                         },
-                        files: [],
+                        files: const [],
                       ),
                       ThanhPhanThamGiaWidget(
                         onChange: (value) {
@@ -137,14 +137,24 @@ class _SuaLichCongTacTrongNuocPhoneState
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      color: Colors.red,
-                      width: 100,
-                      height: 100,
+                    child: btnSuaLich(
+                      name: S.current.dong,
+                      bgr: buttonColor.withOpacity(0.1),
+                      colorName: textDefault,
+                      onTap: () {},
                     ),
-                  )
+                  ),
+
+                  const SizedBox(width: 16,),
+
+                  Expanded(
+                      child: btnSuaLich(
+                          name: S.current.luu,
+                          bgr: labelColor,
+                          colorName: Colors.white,
+                          onTap: () {},),)
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -153,3 +163,31 @@ class _SuaLichCongTacTrongNuocPhoneState
   }
 }
 
+Widget btnSuaLich({
+  required String name,
+  required Color bgr,
+  required Color colorName,
+  required Function onTap,
+}) {
+  return GestureDetector(
+    onTap: () {
+      onTap();
+    },
+    child: Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: bgr,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        name,
+        style: textNormalCustom(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: colorName,
+        ),
+      ),
+    ),
+  );
+}

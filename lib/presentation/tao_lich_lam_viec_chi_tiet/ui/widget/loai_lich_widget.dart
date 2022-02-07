@@ -24,7 +24,7 @@ class _LoaiLichWidgetState extends State<LoaiLichWidget> {
     return SelectOnlyExpand(
       urlIcon: ImageAssets.icCalendarUnFocus,
       listSelect: listLoaiLich.map<String>((e) => e.text).toList(),
-      title: S.current.loai_lich,
+      title: S.current.lich_cong_tac,
     );
   }
 }

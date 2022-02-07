@@ -23,41 +23,5 @@ class _LinhVucWidgetState extends State<LinhVucWidget> {
       listSelect: listLinhVuc.map<String>((e) => e.text).toList(),
       title: S.current.linh_vuc,
     );
-    // return Container(
-    //   child: TitleWidget(
-    //     image: ImageAssets.icWork,
-    //     title: S.current.linh_vuc,
-    //     child: StreamBuilder<List<ItemSelectModel>>(
-    //       stream: WidgetTaoLichLVInherited.of(context)
-    //           .taoLichLamViecCubit
-    //           .listLinhVucStream,
-    //       builder: (context, snapshot) {
-    //         if (!snapshot.hasData) {
-    //           return Container();
-    //         }
-    //
-    //         final data = snapshot.data ?? [];
-    //
-    //         return Column(
-    //           children: data
-    //               .map(
-    //                 (e) => GestureDetector(
-    //                   onTap: () {
-    //                     WidgetTaoLichLVInherited.of(context)
-    //                         .taoLichLamViecCubit
-    //                         .selectLinhVuc(e);
-    //                   },
-    //                   child: ItemSelectWidget(
-    //                     isSelect: e.isSelect,
-    //                     text: e.text,
-    //                   ),
-    //                 ),
-    //               )
-    //               .toList(),
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 }
