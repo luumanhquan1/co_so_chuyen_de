@@ -9,7 +9,12 @@ class BaoCaoCubit extends BaseCubit<BaoCaoState> {
   final BehaviorSubject<List<BaoCaoModel>> _listBaoCao =
       BehaviorSubject<List<BaoCaoModel>>();
 
+  final BehaviorSubject<BaoCaoModel>  _itemBacCao=
+  BehaviorSubject<BaoCaoModel>();
+
   Stream<List<BaoCaoModel>> get listBaoCao => _listBaoCao.stream;
+
+  Stream<BaoCaoModel> get itemBaoCao => _itemBacCao.stream;
 
   void initData() {
     _listBaoCao.sink.add(listDataFake);
@@ -45,4 +50,7 @@ class BaoCaoCubit extends BaseCubit<BaoCaoState> {
       fileName: ['file1','file2'],),
 
   ];
+  void editIteMBaoCao(BaoCaoModel baoCaoModel){
+    _itemBacCao.sink.add(baoCaoModel);
+  }
 }

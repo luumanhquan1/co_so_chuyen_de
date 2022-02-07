@@ -57,7 +57,9 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                           ),
                           title: S.current.chinh_sua_bao_cao_ket_qua,
                         ).then((value) {
-                          print('${value!.content}');
+                           setState(() {
+                               listData[index]=value!;
+                           });
                         });
                       },
                       funcDelete: () {

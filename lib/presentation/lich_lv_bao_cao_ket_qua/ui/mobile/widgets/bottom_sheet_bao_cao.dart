@@ -1,18 +1,20 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
-import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 
 class BaoCaoBottomSheet extends StatefulWidget {
   final BaoCaoModel baoCaoModel;
-  const BaoCaoBottomSheet({Key? key,required this.baoCaoModel}) : super(key: key);
+
+  const BaoCaoBottomSheet({Key? key, required this.baoCaoModel})
+      : super(key: key);
 
   @override
   _BaoCaoBottomSheetState createState() => _BaoCaoBottomSheetState();
@@ -21,10 +23,10 @@ class BaoCaoBottomSheet extends StatefulWidget {
 class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.6,
-        margin: const EdgeInsets.only(top: 20),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.6,
+      margin: const EdgeInsets.only(top: 20),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -71,18 +73,19 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
             const SizedBox(
               height: 8,
             ),
-              TextFieldValidator(
-               initialValue: widget.baoCaoModel.content,
-             ),
-            const SizedBox(height: 24,),
-
-            // SolidButton(
-            //   urlIcon: ImageAssets.ic_file,
-            //   text: S.current.dinh_kem_file,
-            //   onTap: () {},
-            // ),
-            ButtonSelectFile(title: S.current.tai_lieu_dinh_kem),
-            const SizedBox(height: 24,),
+            TextFieldValidator(
+              initialValue: widget.baoCaoModel.content,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            ButtonSelectFile(
+              title: S.current.tai_lieu_dinh_kem,
+              onChange: (List<File> files) {},
+            ),
+            const SizedBox(
+              height: 24,
+            ),
             Row(
               children: [
                 Expanded(
@@ -98,11 +101,19 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
                   width: 16,
                 ),
                 Expanded(
-                    child: ButtonCustomBottom(
-                  title: S.current.sua,
-                  isColorBlue: true,
-                  onPressed: () {},
-                ),),
+                  child: ButtonCustomBottom(
+                    title: S.current.sua,
+                    isColorBlue: true,
+                    onPressed: () {
+                      Navigator.pop(
+                          context,
+                          BaoCaoModel(
+                              status: BaoCaoStatus.DAT,
+                              content: 'contect',
+                              fileName: ['file'],),);
+                    },
+                  ),
+                ),
               ],
             )
           ],
