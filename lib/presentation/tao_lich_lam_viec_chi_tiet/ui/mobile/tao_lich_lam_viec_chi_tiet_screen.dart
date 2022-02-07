@@ -14,6 +14,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/th
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
+import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
+import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,80 +56,84 @@ class _TaoLichLamViecChiTietScreenState
             },
           ),
         ),
-        body: Container(
-          margin: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Form(
-                  key: _formKey,
-                  child: TextFormWidget(
-                    controller: tieuDeController,
-                    image: ImageAssets.icEdit,
-                    hint: S.current.tieu_de,
+        body: ExpandGroup(
+          child: Container(
+            margin: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Form(
+                    key: _formKey,
+                    child: TextFormWidget(
+                      controller: tieuDeController,
+                      image: ImageAssets.icEdit,
+                      hint: S.current.tieu_de,
+                    ),
                   ),
-                ),
-                const LoaiLichWidget(),
-                const SearchNameWidget(),
-                StartEndDateWidget(
-                  onEndDateTimeChanged: (DateTime value) {},
-                  onStartDateTimeChanged: (DateTime value) {},
-                ),
-                const NhacLaiWidget(),
-                const MauMacDinhWidget(),
-                const NguoiChuTriWidget(),
-                const LinhVucWidget(),
-                TextFormWidget(
-                  image: ImageAssets.icViTri,
-                  hint: S.current.dia_diem,
-                ),
-                TextFormWidget(
-                  image: ImageAssets.icDocument,
-                  hint: S.current.noi_dung,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const ThanhPhanThamGiaTLWidget(),
-                const TaiLieuWidget(),
-                buttonTaoLich(
-                  onTap: () {
-                    if (taoLichLamViecCubit.checkValidateTime()) {
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: backgroundDrawerMenu,
-                          content: Text(
-                            S.current.vui_long_kiem_tra_lai_time,
-                            style: textNormalCustom(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
 
-                    if (tieuDeController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: backgroundDrawerMenu,
-                          content: Text(
-                            S.current.khong_duoc_de_trong,
-                            style: textNormalCustom(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
+                const LoaiLichWidget(),
+                // SelectOnlyExpand(urlIcon: ImageAssets.icCalendar,listSelect: ['12123','123123','1232'],title: "23432",value: '12123',),
+                  const SearchNameWidget(),
+                  StartEndDateWidget(
+                    onEndDateTimeChanged: (DateTime value) {},
+                    onStartDateTimeChanged: (DateTime value) {},
+                  ),
+                  const NhacLaiWidget(),
+                  const MauMacDinhWidget(),
+                  const NguoiChuTriWidget(),
+                  const LinhVucWidget(),
+                  TextFormWidget(
+                    image: ImageAssets.icViTri,
+                    hint: S.current.dia_diem,
+                  ),
+                  TextFormWidget(
+                    image: ImageAssets.icDocument,
+                    hint: S.current.noi_dung,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const ThanhPhanThamGiaTLWidget(),
+                  const TaiLieuWidget(),
+                  buttonTaoLich(
+                    onTap: () {
+                      if (taoLichLamViecCubit.checkValidateTime()) {
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: backgroundDrawerMenu,
+                            content: Text(
+                              S.current.vui_long_kiem_tra_lai_time,
+                              style: textNormalCustom(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
+                        );
+                      }
+
+                      if (tieuDeController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: backgroundDrawerMenu,
+                            content: Text(
+                              S.current.khong_duoc_de_trong,
+                              style: textNormalCustom(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
