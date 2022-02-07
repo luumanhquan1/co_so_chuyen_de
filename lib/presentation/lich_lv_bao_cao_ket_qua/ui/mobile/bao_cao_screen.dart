@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
@@ -47,14 +46,18 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                   itemBuilder: (context, index) {
                     return BaoCaoItem(
                       statusColor: listData[index].status.getText().color,
-                      fileName: listData[index].fileName,
+                      fileNames: listData[index].fileName,
                       status: listData[index].status.getText().text,
                       content: listData[index].content,
                       funcEdit: () {
-                        showBottomSheetCustom<BaoCaoModel>(context,
-                            child: const BaoCaoBottomSheet(),
-                            title: S.current.chinh_sua_bao_cao_ket_qua,).then((value){
-                              print('${value!.content}');
+                        showBottomSheetCustom<BaoCaoModel>(
+                          context,
+                          child: BaoCaoBottomSheet(
+                            baoCaoModel: listData[index],
+                          ),
+                          title: S.current.chinh_sua_bao_cao_ket_qua,
+                        ).then((value) {
+                          print('${value!.content}');
                         });
                       },
                       funcDelete: () {
@@ -68,12 +71,11 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                             ImageAssets.ic_delete_baocao,
                           ),
                           title: S.current.xoa_bao_cao_ket_qua,
-                          textContent:
-                          S.current.chan_chan_xoa_bao_cao_khong,
+                          textContent: S.current.chan_chan_xoa_bao_cao_khong,
                           btnLeftTxt: S.current.huy,
                           btnRightTxt: S.current.xoa,
                         );
-                      },
+                      }
                     );
                   },
                 ),

@@ -1,7 +1,6 @@
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bao_cao_item.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/bao_cao_item_tablet.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
                             return BaoCaoItemTablet(
                               statusColor:
                                   listData[index].status.getText().color,
-                              fileName: listData[index].fileName,
+                              fileNames: listData[index].fileName,
                               status: listData[index].status.getText().text,
                               content: listData[index].content,
                               funcDelete: () {

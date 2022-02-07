@@ -20,32 +20,29 @@ class BaoCaoCubit extends BaseCubit<BaoCaoState> {
 
   List<BaoCaoModel> listDataFake = [
     BaoCaoModel(
-        status: BaoCaoStatus.TRUNG_BINH,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
+      status: BaoCaoStatus.TRUNG_BINH,
+      content: 'ke hoach nam 2022',
+      fileName: ['ke hoach nam 2022','file2'],),
     BaoCaoModel(
-        status: BaoCaoStatus.DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
+      status: BaoCaoStatus.DAT,
+      content: 'ke hoach nam 2022',
+      fileName: ['file1','file2'],),
     BaoCaoModel(
-        status: BaoCaoStatus.DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
+      status: BaoCaoStatus.DAT,
+      content: 'ke hoach nam 2022',
+      fileName: ['file1','file2'],),
     BaoCaoModel(
-        status: BaoCaoStatus.KHONG_DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file'),
+      status: BaoCaoStatus.KHONG_DAT,
+      content: 'ke hoach nam 2022',
+      fileName: ['file1','file2'],),
     BaoCaoModel(
-        status: BaoCaoStatus.KHONG_DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
+      status: BaoCaoStatus.KHONG_DAT,
+      content: 'ke hoach nam 2022',
+      fileName: ['file1','file2'],),
     BaoCaoModel(
-        status: BaoCaoStatus.KHONG_DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
-    BaoCaoModel(
-        status: BaoCaoStatus.KHONG_DAT,
-        content: 'ke hoach nam 2022',
-        fileName: 'file',),
+      status: BaoCaoStatus.KHONG_DAT,
+      content: 'ke hoach nam 2022',
+      fileName: ['file1','file2'],),
+
   ];
 }

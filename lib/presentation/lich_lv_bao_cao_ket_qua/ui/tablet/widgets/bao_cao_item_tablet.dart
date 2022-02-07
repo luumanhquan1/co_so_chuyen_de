@@ -11,7 +11,7 @@ class BaoCaoItemTablet extends StatelessWidget {
   final String status;
   final String content;
   final Color statusColor;
-  final String fileName;
+  final List<String> fileNames;
   final Function() funcEdit;
   final Function() funcDelete;
 
@@ -20,7 +20,7 @@ class BaoCaoItemTablet extends StatelessWidget {
     required this.status,
     required this.content,
     required this.statusColor,
-    required this.fileName,
+    required this.fileNames,
     required this.funcEdit,
     required this.funcDelete,
   }) : super(key: key);
@@ -132,13 +132,23 @@ class BaoCaoItemTablet extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Text(
-                    fileName,
-                    style: textNormalCustom(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: numberOfCalenders,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: fileNames.map((e) {
+                      return Column(
+                        children: [
+                          Text(
+                            e,
+                            style: textNormalCustom(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: numberOfCalenders,
+                            ),
+                          ),
+                          const SizedBox(height: 4,)
+                        ],
+                      );
+                    }).toList(),
                   ),
                 )
               ],

@@ -1,15 +1,18 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
+import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 
 class BaoCaoBottomSheet extends StatefulWidget {
-  const BaoCaoBottomSheet({Key? key}) : super(key: key);
+  final BaoCaoModel baoCaoModel;
+  const BaoCaoBottomSheet({Key? key,required this.baoCaoModel}) : super(key: key);
 
   @override
   _BaoCaoBottomSheetState createState() => _BaoCaoBottomSheetState();
@@ -20,7 +23,7 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.6,
         margin: const EdgeInsets.only(top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +48,7 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
               height: 8,
             ),
             CustomDropDown(
+              value: widget.baoCaoModel.status.getText().text,
               items: [
                 S.current.trung_binh,
                 S.current.dat,
@@ -67,13 +71,17 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
             const SizedBox(
               height: 8,
             ),
-            const TextFieldValidator(),
+              TextFieldValidator(
+               initialValue: widget.baoCaoModel.content,
+             ),
             const SizedBox(height: 24,),
-            SolidButton(
-              urlIcon: ImageAssets.ic_file,
-              text: S.current.dinh_kem_file,
-              onTap: () {},
-            ),
+
+            // SolidButton(
+            //   urlIcon: ImageAssets.ic_file,
+            //   text: S.current.dinh_kem_file,
+            //   onTap: () {},
+            // ),
+            ButtonSelectFile(title: S.current.tai_lieu_dinh_kem),
             const SizedBox(height: 24,),
             Row(
               children: [

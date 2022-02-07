@@ -90,8 +90,8 @@ class _CustomDropDownState extends State<CustomDropDown> {
                               setState(() {
                                 widget.value = value;
                               });
-                              final index = widget.items.indexOf(value ?? '');
-                              widget.onSelectItem!(index);
+                              // final index = widget.items.indexOf(value ?? '');
+                              // widget.onSelectItem!(index);
                             }
                           },
                           items: widget.items.isNotEmpty

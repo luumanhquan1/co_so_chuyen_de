@@ -25,7 +25,7 @@ class StatusText{
 class BaoCaoModel {
   BaoCaoStatus status;
   String content = '';
-  String fileName = '';
+  List<String> fileName =[];
 
   BaoCaoModel(
       {required this.status, required this.content, required this.fileName,});

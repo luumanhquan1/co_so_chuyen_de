@@ -7,6 +7,7 @@ class ThanhPhanThamGiaCubit {
   bool phuongThucNhan = false;
   final BehaviorSubject<List<DonViModel>> _listPeopleThamGia =
       BehaviorSubject<List<DonViModel>>();
+
   Stream<List<DonViModel>> get listPeopleThamGia => _listPeopleThamGia.stream;
   final BehaviorSubject<bool> _phuongThucNhan = BehaviorSubject.seeded(false);
   Stream<bool> get phuongThucNhanStream => _phuongThucNhan.stream;
@@ -27,6 +28,7 @@ class ThanhPhanThamGiaCubit {
 
   void deletePeopleThamGia(DonViModel donViModel) {
     listPeople.remove(donViModel);
+
 
     _listPeopleThamGia.sink.add(listPeople);
   }
