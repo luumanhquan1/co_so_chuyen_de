@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -54,8 +56,14 @@ class _TaiLieuWidgetState extends State<TaiLieuWidget> {
             height: 16.5.textScale(),
           ),
           ExpandedSection(
-              expand: isExpand,
-              child: ButtonSelectFile(title: S.current.tai_lieu_dinh_kem),)
+            expand: isExpand,
+            child: ButtonSelectFile(
+              title: S.current.tai_lieu_dinh_kem,
+              onChange: (List<File> files) {
+                print(files);
+              },
+            ),
+          )
         ],
       ),
     );

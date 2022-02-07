@@ -150,10 +150,6 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }
 
   Future<void> deleteFile(File deleteFile, List<File> list) async {
-    for(final e in list) {
-      if(e == deleteFile) {
-        list.remove(e);
-      }
-    }
+        list.remove(deleteFile);
   }
 }
