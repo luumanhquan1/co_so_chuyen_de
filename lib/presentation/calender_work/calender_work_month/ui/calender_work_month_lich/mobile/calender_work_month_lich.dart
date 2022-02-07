@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_lich/mobile/widget/in_calender_form.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_month/ui/calender_work_month_lich/mobile/widget/calender_form_month.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -21,7 +21,8 @@ class CalenderWorkMonthLichMobile extends StatefulWidget {
       _CalenderWorkMonthLichMobileState();
 }
 
-class _CalenderWorkMonthLichMobileState extends State<CalenderWorkMonthLichMobile> {
+class _CalenderWorkMonthLichMobileState
+    extends State<CalenderWorkMonthLichMobile> {
   CalenderCubit cubit = CalenderCubit();
   GlobalKey globalKey = GlobalKey();
   double hegihtCalendar = 120;
@@ -84,7 +85,7 @@ class _CalenderWorkMonthLichMobileState extends State<CalenderWorkMonthLichMobil
         children: [
           Container(
             margin: EdgeInsets.only(top: hegihtCalendar),
-            child: const InCalenderForm(),
+            child: const CalenderFormMonth(),
           ),
           Column(
             children: [
@@ -98,9 +99,7 @@ class _CalenderWorkMonthLichMobileState extends State<CalenderWorkMonthLichMobil
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-
-        },
+        onPressed: () {},
         backgroundColor: labelColor,
         child: SvgPicture.asset(ImageAssets.icVectorCalender),
       ),

@@ -53,6 +53,7 @@ class _InCalenderFormState extends State<InCalenderForm> {
               child: SfCalendar(
                 viewHeaderHeight: 0,
                 allowViewNavigation: true,
+                view: CalendarView.day,
                 headerHeight: 0,
                 controller: _controller,
                 appointmentTextStyle:

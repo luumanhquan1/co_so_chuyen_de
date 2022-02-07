@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_lich/mobile/widget/in_calender_form.dart';
+import 'package:ccvc_mobile/presentation/calender_work/calender_work_month/ui/calender_work_month_lich/mobile/calender_work_month_lich.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/mobile/drawer_menu.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -89,7 +90,19 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
           Column(
             children: [
               Container(
-                child: cubit.isCheck ? const BaseChooseDate() : Container(),
+                child: cubit.isCheck
+                    ? BaseChooseDate(
+                        onTapMonth: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CalenderWorkMonthLichMobile(),
+                            ),
+                          );
+                        },
+                      )
+                    : Container(),
               ),
               const TableCalendarWidget(),
             ],
@@ -98,9 +111,7 @@ class _CalenderWorkDayLichMobileState extends State<CalenderWorkDayLichMobile> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-
-        },
+        onPressed: () {},
         backgroundColor: labelColor,
         child: SvgPicture.asset(ImageAssets.icVectorCalender),
       ),
