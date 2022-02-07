@@ -24,95 +24,98 @@ class _LichHopTheoNgayTabletState extends State<LichHopTheoNgayTablet> {
         border: Border.all(color: cellColorborder),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: SfCalendar(
-        viewHeaderHeight: 0,
-        showDatePickerButton: true,
-        allowAppointmentResize: true,
-        headerHeight: 0,
-        controller: _controller,
-        cellEndPadding: 5,
-        timeSlotViewSettings: const TimeSlotViewSettings(
-          timeIntervalHeight: 88,
-        ),
-        selectionDecoration:
-        const BoxDecoration(color: Colors.transparent),
-        appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
-        todayHighlightColor: statusCalenderRed,
-        appointmentTimeTextFormat: 'hh:mm:ss a',
-        dataSource: cubit.getCalenderDataSource(),
-        appointmentBuilder: (
-            BuildContext context,
-            CalendarAppointmentDetails calendarAppointmentDetails,
-            ) {
-          final Appointment appointment =
-              calendarAppointmentDetails.appointments.first;
-          return Padding(
-            padding: const EdgeInsets.only(top: 28),
-            child: Container(
-              padding: const EdgeInsets.only(top: 8, left: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: Colors.blue,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 8,
-                        child: Text(
-                          appointment.subject,
-                          style: textNormalCustom(),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 20,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(
-                                  right: 4.0,
-                                ),
-                                height: 18.0,
-                                width: 18.0,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
+      child: Padding(
+        padding: const EdgeInsets.only(right: 20.0,left: 10.0),
+        child: SfCalendar(
+          viewHeaderHeight: 0,
+          showDatePickerButton: true,
+          allowAppointmentResize: true,
+          headerHeight: 0,
+          controller: _controller,
+          cellEndPadding: 5,
+          timeSlotViewSettings: const TimeSlotViewSettings(
+            timeIntervalHeight: 88,
+          ),
+          selectionDecoration:
+          const BoxDecoration(color: Colors.transparent),
+          appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
+          todayHighlightColor: statusCalenderRed,
+          appointmentTimeTextFormat: 'hh:mm:ss a',
+          dataSource: cubit.getCalenderDataSource(),
+          appointmentBuilder: (
+              BuildContext context,
+              CalendarAppointmentDetails calendarAppointmentDetails,
+              ) {
+            final Appointment appointment =
+                calendarAppointmentDetails.appointments.first;
+            return Padding(
+              padding: const EdgeInsets.only(top: 28),
+              child: Container(
+                padding: const EdgeInsets.only(top: 8, left: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 8,
+                          child: Text(
+                            appointment.subject,
+                            style: textNormalCustom(),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  Flexible(
-                    child: Text(
-                      '${appointment.startTime.toStringWithAMPM} -'
-                          ' ${appointment.endTime.toStringWithAMPM}',
-                      style: textNormalCustom(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                      ),
+                        Expanded(
+                          child: SizedBox(
+                            height: 20,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: const EdgeInsets.only(
+                                    right: 4.0,
+                                  ),
+                                  height: 18.0,
+                                  width: 18.0,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                        'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  )
-                ],
+                    const SizedBox(height: 4.0),
+                    Flexible(
+                      child: Text(
+                        '${appointment.startTime.toStringWithAMPM} -'
+                            ' ${appointment.endTime.toStringWithAMPM}',
+                        style: textNormalCustom(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

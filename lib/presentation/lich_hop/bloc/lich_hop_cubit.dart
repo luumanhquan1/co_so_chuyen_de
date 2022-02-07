@@ -47,6 +47,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
           endTime: DateTime.parse(listMeeting[i].dateTimeTo),
           subject: listMeeting[i].title,
           color: textColorMangXaHoi,
+          isAllDay: false
         ),
       );
     }
