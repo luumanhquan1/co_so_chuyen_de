@@ -56,6 +56,8 @@ class ImageAssets {
   static const String icAdds = '$baseImg/ic_add.svg';
   static const String icVectorCalender = '$baseImg/ic_vector_calender.svg';
   static const String icThemCanBo = '$baseImg/ic_them_can_bo.svg';
+  static const String icPerson = '$baseImg/ic_person.svg';
+  static const String icMenuDot = '$baseImg/ic_menu_dot.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -180,6 +182,11 @@ class ImageAssets {
   static const String ic_danhsachykien = '$baseImg/ic_danhsachykien.svg';
   static const String icShareFile = '$baseImg/ic_share_file.svg';
   static const String icDelete = '$baseImg/ic_delete.svg';
+  static const String icTreePerson = '$baseImg/ic_tree_person.svg';
+  static const String icMess = '$baseImg/ic_mess.svg';
+  static const String icGraph = '$baseImg/ic_graph.svg';
+  static const String icTickCircle = '$baseImg/ic_tick_circle.svg';
+  static const String icQuestionCircle = '$baseImg/ic_question_circle.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
@@ -191,6 +198,7 @@ class ImageAssets {
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
   static const String imgHeaderMenuTablet = '$baseImg/ic_header_menu_ipad.png';
   static const String imgCalendar = '$baseImg/img_calendar.png';
+  static const String imgCheckBox = '$baseImg/img_check_box.png';
 
   static SvgPicture svgAssets(
     String name, {
