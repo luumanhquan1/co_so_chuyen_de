@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cu
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bao_cao_item.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bottom_sheet_bao_cao.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 20),
       child: SingleChildScrollView(
         child: StreamBuilder<List<BaoCaoModel>>(
           stream: cubit.listBaoCao,
@@ -46,7 +47,9 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                   itemBuilder: (context, index) {
                     return BaoCaoItem(
                       statusColor: listData[index].status.getText().color,
-                      fileNames: listData[index].fileName,
+                      fileNames: listData[index].listFile.map<String>((e) {
+                        return e.path.convertNameFile();
+                      }).toList(),
                       status: listData[index].status.getText().text,
                       content: listData[index].content,
                       funcEdit: () {
@@ -57,9 +60,6 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                           ),
                           title: S.current.chinh_sua_bao_cao_ket_qua,
                         ).then((value) {
-                           setState(() {
-                               listData[index]=value!;
-                           });
                         });
                       },
                       funcDelete: () {
@@ -77,7 +77,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                           btnLeftTxt: S.current.huy,
                           btnRightTxt: S.current.xoa,
                         );
-                      }
+                      },
                     );
                   },
                 ),

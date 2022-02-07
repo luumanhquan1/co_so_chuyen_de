@@ -34,6 +34,12 @@ class BaoCaoItemTablet extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: cellColorborder),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: shadowContainerColor.withOpacity(0.05), // changes position of shadow
+            ),
+          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -58,8 +64,8 @@ class BaoCaoItemTablet extends StatelessWidget {
                       Text(
                         status,
                         style: textNormalCustom(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                           color: statusColor,
                         ),
                       ),
@@ -97,7 +103,7 @@ class BaoCaoItemTablet extends StatelessWidget {
                   child: Text(
                     S.current.noi_dung,
                     style: textNormalCustom(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: infoColor,
                     ),
@@ -125,7 +131,7 @@ class BaoCaoItemTablet extends StatelessWidget {
                   child: Text(
                     S.current.file,
                     style: textNormalCustom(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: infoColor,
                     ),
@@ -140,7 +146,7 @@ class BaoCaoItemTablet extends StatelessWidget {
                           Text(
                             e,
                             style: textNormalCustom(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               color: numberOfCalenders,
                             ),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
@@ -25,67 +24,11 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      margin: const EdgeInsets.only(top: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(top: 20),
+      child: Scaffold(
+        bottomNavigationBar:Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [
-                Text(
-                  S.current.trang_thai,
-                  style: tokenDetailAmount(
-                    fontSize: 14,
-                    color: titleItemEdit,
-                  ),
-                ),
-                const Text(
-                  ' *',
-                  style: TextStyle(color: canceledColor),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            CustomDropDown(
-              value: widget.baoCaoModel.status.getText().text,
-              items: [
-                S.current.trung_binh,
-                S.current.dat,
-                S.current.khong_dat,
-              ],
-              onSelectItem: (index) {
-                print(index);
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              S.current.noi_dung,
-              style: tokenDetailAmount(
-                fontSize: 14,
-                color: titleItemEdit,
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            TextFieldValidator(
-              initialValue: widget.baoCaoModel.content,
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            ButtonSelectFile(
-              title: S.current.tai_lieu_dinh_kem,
-              onChange: (List<File> files) {},
-            ),
-            const SizedBox(
-              height: 24,
-            ),
             Row(
               children: [
                 Expanded(
@@ -105,18 +48,74 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
                     title: S.current.sua,
                     isColorBlue: true,
                     onPressed: () {
-                      Navigator.pop(
-                          context,
-                          BaoCaoModel(
-                              status: BaoCaoStatus.DAT,
-                              content: 'contect',
-                              fileName: ['file'],),);
+                      Navigator.pop(context);
                     },
                   ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 32,)
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    S.current.trang_thai,
+                    style: tokenDetailAmount(
+                      fontSize: 14,
+                      color: titleItemEdit,
+                    ),
+                  ),
+                  const Text(
+                    ' *',
+                    style: TextStyle(color: canceledColor),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              CustomDropDown(
+                value: widget.baoCaoModel.status.getText().text,
+                items: [
+                  S.current.trung_binh,
+                  S.current.dat,
+                  S.current.khong_dat,
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                S.current.noi_dung,
+                style: tokenDetailAmount(
+                  fontSize: 14,
+                  color: titleItemEdit,
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              TextFieldValidator(
+                initialValue: widget.baoCaoModel.content,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              ButtonSelectFile(
+                files: widget.baoCaoModel.listFile,
+                title: S.current.tai_lieu_dinh_kem,
+                onChange: (List<File> files) {},
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +27,7 @@ class StatusText{
 class BaoCaoModel {
   BaoCaoStatus status;
   String content = '';
-  List<String> fileName =[];
-
+  List<File> listFile =[];
   BaoCaoModel(
-      {required this.status, required this.content, required this.fileName,});
+      {required this.status, required this.content, required this.listFile,});
 }
