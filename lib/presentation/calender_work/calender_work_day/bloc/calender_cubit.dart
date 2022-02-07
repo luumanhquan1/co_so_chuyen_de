@@ -11,6 +11,9 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(CalenderStateIntial());
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
+  BehaviorSubject<int> checkIndex = BehaviorSubject();
+
+  Stream<int> get checkIndexStream => checkIndex.stream;
 
   Stream<bool> get isCheckNgayStream => isCheckNgay.stream;
   bool isCheck = false;
@@ -45,16 +48,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       'Họp nội bộ đơn vị',
       '2022-01-25T07:45:00',
       '2022-01-25T08:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2021-12-29T13:45:00',
-      '2021-12-29T15:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2021-12-29T13:45:00',
-      '2021-12-29T15:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',

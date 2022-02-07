@@ -7,14 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class CalenderFormMonth extends StatefulWidget {
-  const CalenderFormMonth({Key? key}) : super(key: key);
+class CalenderFormLichMonthTablet extends StatefulWidget {
+  const CalenderFormLichMonthTablet({Key? key}) : super(key: key);
 
   @override
-  _CalenderFormMonthState createState() => _CalenderFormMonthState();
+  _CalenderFormLichMonthTabletState createState() =>
+      _CalenderFormLichMonthTabletState();
 }
 
-class _CalenderFormMonthState extends State<CalenderFormMonth> {
+class _CalenderFormLichMonthTabletState
+    extends State<CalenderFormLichMonthTablet> {
   final CalendarController _controller = CalendarController();
   final CalenderCubit _cubit = CalenderCubit();
 
@@ -54,6 +56,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
             headerHeight: 0.0,
             appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
             view: CalendarView.month,
+            monthCellBuilder: monthCellBuilder,
             todayHighlightColor: labelColor,
             appointmentTimeTextFormat: 'hh:mm:ss a',
             dataSource: _cubit.getCalenderDataSource(),
@@ -62,6 +65,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
                   textNormalCustom(fontSize: 13, color: unselectLabelColor),
             ),
             monthViewSettings: MonthViewSettings(
+              showTrailingAndLeadingDates: false,
               appointmentDisplayCount: 3,
               monthCellStyle: MonthCellStyle(
                 trailingDatesTextStyle:
@@ -72,48 +76,62 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
               // numberOfWeeksInView: 4,
               //showTrailingAndLeadingDates: false,
               //showAgenda: true,
-              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+              appointmentDisplayMode: MonthAppointmentDisplayMode.none,
             ),
             selectionDecoration: const BoxDecoration(color: Colors.transparent),
-            appointmentBuilder: (
-              BuildContext context,
-              CalendarAppointmentDetails calendarAppointmentDetails,
-            ) {
-              final Appointment appointment =
-                  calendarAppointmentDetails.appointments.first;
-              // final distanceTime =
-              //     appointment.startTime.difference(appointment.endTime);
-              return Padding(
-                padding: const EdgeInsets.only(left: 4, bottom: 2),
-                child: Container(
-                  height: 500,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2.0),
-                    color: textColorMangXaHoi,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 2.0,
-                      vertical: 2.0,
-                    ),
-                    child: Column(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            appointment.subject,
-                            style: textNormalCustom(fontSize: 8),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+            // appointmentBuilder: (
+            //   BuildContext context,
+            //   CalendarAppointmentDetails calendarAppointmentDetails,
+            // ) {
+            //   final Appointment appointment =
+            //       calendarAppointmentDetails.appointments.first;
+            //   // final distanceTime =
+            //   //     appointment.startTime.difference(appointment.endTime);
+            //   return Padding(
+            //     padding: const EdgeInsets.only(left: 4, bottom: 2),
+            //     child: Container(
+            //       height: 500,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(2.0),
+            //         color: textColorMangXaHoi,
+            //       ),
+            //       child: Padding(
+            //         padding: const EdgeInsets.symmetric(
+            //           horizontal: 2.0,
+            //           vertical: 2.0,
+            //         ),
+            //         child: Column(
+            //           children: [
+            //             Flexible(
+            //               child: Text(
+            //                 appointment.subject,
+            //                 style: textNormalCustom(fontSize: 8),
+            //                 overflow: TextOverflow.ellipsis,
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            // },
           ),
         ),
       ],
+    );
+  }
+
+  Widget monthCellBuilder(BuildContext context, MonthCellDetails details) {
+    if (details.appointments.isNotEmpty) {
+      final Appointment appointment = details.appointments[0] as Appointment;
+      return Container(
+        color: appointment.color,
+        child: Text(appointment.subject),
+      );
+    }
+    return Container(
+      color: Colors.blueGrey,
+      child: Text(details.date.day.toString()),
     );
   }
 }
