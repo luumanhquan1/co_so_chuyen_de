@@ -54,7 +54,7 @@ class _LichHopTheoNgayTabletState extends State<LichHopTheoNgayTablet> {
                 padding: const EdgeInsets.only(top: 8, left: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.0),
-                  color: Colors.blue,
+                  color: textColorBlog,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

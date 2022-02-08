@@ -43,9 +43,6 @@ class _LichHopTheoNgayState extends State<LichHopTheoNgay> {
           final Appointment appointment =
               calendarAppointmentDetails.appointments.first;
           return Container(
-            // width: calendarAppointmentDetails.bounds.width,
-            // height: calendarAppointmentDetails.bounds.height,
-            //height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.0),
               color: textColorMangXaHoi,
