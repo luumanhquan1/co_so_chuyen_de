@@ -69,6 +69,7 @@ class _CalenderFormLichMonthTabletState
                       textNormalCustom(fontSize: 13, color: unselectLabelColor),
                 ),
                 monthViewSettings: MonthViewSettings(
+                  showTrailingAndLeadingDates: false,
                   dayFormat: 'EEEE',
                   appointmentDisplayCount: 3,
                   monthCellStyle: MonthCellStyle(
