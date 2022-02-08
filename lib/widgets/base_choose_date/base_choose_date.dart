@@ -40,7 +40,7 @@ class _BaseChooseDateState extends State<BaseChooseDate> {
                   spaceW13,
                   Text(
                     S.current.ngay,
-                    style: textDetailHDSD(fontSize: 14, color: linkColor),
+                    style: textDetailHDSD(fontSize: 14, color: iconColorDown),
                   )
                 ],
               ),
@@ -58,7 +58,7 @@ class _BaseChooseDateState extends State<BaseChooseDate> {
                   spaceW13,
                   Text(
                     S.current.tuan,
-                    style: textDetailHDSD(fontSize: 14, color: textBodyTime),
+                    style: textDetailHDSD(fontSize: 14, color: iconColorDown),
                   )
                 ],
               ),
