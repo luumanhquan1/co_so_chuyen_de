@@ -1,7 +1,9 @@
+
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/bao_cao_item_tablet.dart';
+import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/dialog_bao_cao_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -65,8 +67,9 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
                               status: listData[index].status.getText().text,
                               content: listData[index].content,
                               funcDelete: () {
-                                showDiaLogMobile(
+                                showDiaLog(
                                   context,
+                                  showTablet: true,
                                   funcBtnRight: () {
                                     listData.removeAt(index);
                                     cubit.getData(listData);
@@ -75,12 +78,24 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
                                     ImageAssets.ic_delete_baocao,
                                   ),
                                   title: S.current.xoa_bao_cao_ket_qua,
-                                  textContent: S.current.chan_chan_xoa_bao_cao_khong,
+                                  textContent:
+                                      S.current.chan_chan_xoa_bao_cao_khong,
                                   btnLeftTxt: S.current.huy,
                                   btnRightTxt: S.current.xoa,
                                 );
                               },
-                              funcEdit: () {},
+                              funcEdit: () {
+                                showDiaLogTablet(
+                                  context,
+                                  child: BaoCaoDialogTablet(
+                                    baoCaoModel: listData[index],
+                                  ),
+                                  title: S.current.chinh_sua_bao_cao_ket_qua,
+                                  funcBtnOk: () {
+                                    Navigator.pop(context);
+                                  },
+                                );
+                              },
                             );
                           },
                         ),

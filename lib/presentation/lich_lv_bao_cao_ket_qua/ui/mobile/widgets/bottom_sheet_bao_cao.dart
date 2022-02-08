@@ -3,10 +3,10 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
-import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 
 class BaoCaoBottomSheet extends StatefulWidget {
@@ -20,6 +20,8 @@ class BaoCaoBottomSheet extends StatefulWidget {
 }
 
 class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
+  TextEditingController controller=TextEditingController();
+  GlobalKey<FormState> globalKey=GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,18 +92,10 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                S.current.noi_dung,
-                style: tokenDetailAmount(
-                  fontSize: 14,
-                  color: titleItemEdit,
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFieldValidator(
-                initialValue: widget.baoCaoModel.content,
+              BlockTextView(
+                title: S.current.noi_dung,
+                contentController: controller,
+                formKey: globalKey,
               ),
               const SizedBox(
                 height: 24,

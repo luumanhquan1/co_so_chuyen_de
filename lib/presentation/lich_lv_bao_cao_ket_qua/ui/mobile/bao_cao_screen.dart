@@ -63,7 +63,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                         });
                       },
                       funcDelete: () {
-                        showDiaLogMobile(
+                        showDiaLog(
                           context,
                           funcBtnRight: () {
                             listData.removeAt(index);
