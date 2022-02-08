@@ -37,7 +37,8 @@ class BaoCaoItemTablet extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: shadowContainerColor.withOpacity(0.05), // changes position of shadow
+              color: shadowContainerColor
+                  .withOpacity(0.05), // changes position of shadow
             ),
           ],
         ),
@@ -80,12 +81,12 @@ class BaoCaoItemTablet extends StatelessWidget {
                           const SizedBox(
                             width: 28,
                           ),
-                         GestureDetector(
-                           child:   SvgPicture.asset(ImageAssets.ic_delete_do),
-                           onTap: (){
-                             funcDelete();
-                           },
-                         )
+                          GestureDetector(
+                            child: SvgPicture.asset(ImageAssets.ic_delete_do),
+                            onTap: () {
+                              funcDelete();
+                            },
+                          )
                         ],
                       )
                     ],
@@ -151,7 +152,9 @@ class BaoCaoItemTablet extends StatelessWidget {
                               color: numberOfCalenders,
                             ),
                           ),
-                          const SizedBox(height: 4,)
+                          const SizedBox(
+                            height: 4,
+                          )
                         ],
                       );
                     }).toList(),

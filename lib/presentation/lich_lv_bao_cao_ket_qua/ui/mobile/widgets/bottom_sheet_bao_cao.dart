@@ -20,15 +20,16 @@ class BaoCaoBottomSheet extends StatefulWidget {
 }
 
 class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
-  TextEditingController controller=TextEditingController();
-  GlobalKey<FormState> globalKey=GlobalKey();
+  TextEditingController controller = TextEditingController();
+  GlobalKey<FormState> globalKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       padding: const EdgeInsets.only(top: 20),
       child: Scaffold(
-        bottomNavigationBar:Column(
+        bottomNavigationBar: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
@@ -56,7 +57,9 @@ class _BaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
                 ),
               ],
             ),
-            const SizedBox(height: 32,)
+            const SizedBox(
+              height: 32,
+            )
           ],
         ),
         body: SingleChildScrollView(

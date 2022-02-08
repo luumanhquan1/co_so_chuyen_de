@@ -59,8 +59,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                             baoCaoModel: listData[index],
                           ),
                           title: S.current.chinh_sua_bao_cao_ket_qua,
-                        ).then((value) {
-                        });
+                        ).then((value) {});
                       },
                       funcDelete: () {
                         showDiaLog(

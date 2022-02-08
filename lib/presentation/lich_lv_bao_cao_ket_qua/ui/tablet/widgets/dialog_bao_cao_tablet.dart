@@ -9,7 +9,6 @@ import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 
-
 class BaoCaoDialogTablet extends StatefulWidget {
   final BaoCaoModel baoCaoModel;
 
@@ -21,8 +20,8 @@ class BaoCaoDialogTablet extends StatefulWidget {
 }
 
 class _BaoCaoDialogTabletState extends State<BaoCaoDialogTablet> {
-  TextEditingController controller=TextEditingController();
-  GlobalKey<FormState> globalKey=GlobalKey();
+  TextEditingController controller = TextEditingController();
+  GlobalKey<FormState> globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _BaoCaoDialogTabletState extends State<BaoCaoDialogTablet> {
                 )
               ],
             ),
-             SizedBox(
+            SizedBox(
               height: 8.0.textScale(),
             ),
             CustomDropDown(
@@ -59,7 +58,7 @@ class _BaoCaoDialogTabletState extends State<BaoCaoDialogTablet> {
                 S.current.khong_dat,
               ],
             ),
-             SizedBox(
+            SizedBox(
               height: 20.0.textScale(space: 4),
             ),
             BlockTextView(

@@ -10,8 +10,8 @@ class BaoCaoItem extends StatelessWidget {
   final Color statusColor;
   final String content;
   final List<String> fileNames;
-  final Function ()funcEdit;
-  final Function ()funcDelete;
+  final Function() funcEdit;
+  final Function() funcDelete;
 
   const BaoCaoItem({
     Key? key,
@@ -69,19 +69,19 @@ class BaoCaoItem extends StatelessWidget {
                         children: [
                           GestureDetector(
                             child: SvgPicture.asset(ImageAssets.ic_edit),
-                            onTap: (){
+                            onTap: () {
                               funcEdit();
                             },
                           ),
                           const SizedBox(
                             width: 12,
                           ),
-                         GestureDetector(
-                           child:  SvgPicture.asset(ImageAssets.ic_delete_do),
-                           onTap: (){
-                             funcDelete();
-                           },
-                         )
+                          GestureDetector(
+                            child: SvgPicture.asset(ImageAssets.ic_delete_do),
+                            onTap: () {
+                              funcDelete();
+                            },
+                          )
                         ],
                       )
                     ],
@@ -143,19 +143,21 @@ class BaoCaoItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: fileNames.map((e) {
-                       return Column(
-                         children: [
-                           Text(
-                             e,
-                             style: textNormalCustom(
-                               fontSize: 14,
-                               fontWeight: FontWeight.w400,
-                               color: numberOfCalenders,
-                             ),
-                           ),
-                           const SizedBox(height: 4,)
-                         ],
-                       );
+                      return Column(
+                        children: [
+                          Text(
+                            e,
+                            style: textNormalCustom(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: numberOfCalenders,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          )
+                        ],
+                      );
                     }).toList(),
                   ),
                 )

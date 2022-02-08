@@ -7,14 +7,8 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tie
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/bao_cao_screen.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bao_cao_item.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/bao_cao_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
-import 'package:ccvc_mobile/presentation/test.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/tablet/tao_lich_lam_viec_chi_tiet_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -64,15 +58,14 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        // return screenDevice(
-        //   mobileScreen: HomeScreenMobile(
-        //     key: keyHomeMobile,
-        //   ),
-        //   tabletScreen: HomeScreenTablet(
-        //     key: keyHomeTablet,
-        //   ),
-        // );
-        return const Test();
+        return screenDevice(
+          mobileScreen: HomeScreenMobile(
+            key: keyHomeMobile,
+          ),
+          tabletScreen: HomeScreenTablet(
+            key: keyHomeTablet,
+          ),
+        );
       case TabBarType.report:
         final key = GlobalKey<FormGroupState>();
         return Scaffold(
