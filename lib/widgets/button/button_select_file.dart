@@ -18,13 +18,21 @@ class ButtonSelectFile extends StatefulWidget {
   final String title;
   final String? icon;
   final bool childDiffence;
+  final Function(List<File>) onChange;
+  final Widget? builder;
+  final bool isBuilder;
+  List<File> files;
 
-  const ButtonSelectFile({
+  ButtonSelectFile({
     Key? key,
     this.background,
     required this.title,
     this.icon,
     this.childDiffence = false,
+    this.builder,
+    required this.onChange,
+    this.isBuilder = false,
+    required this.files,
   }) : super(key: key);
 
   @override
@@ -32,7 +40,6 @@ class ButtonSelectFile extends StatefulWidget {
 }
 
 class _ButtonSelectFileState extends State<ButtonSelectFile> {
-  List<File> files = [];
   final TaoLichLamViecCubit _cubit = TaoLichLamViecCubit();
 
   @override
@@ -46,11 +53,12 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
                 await FilePicker.platform.pickFiles(allowMultiple: true);
 
             if (result != null) {
-              files = result.paths.map((path) => File(path!)).toList();
+              widget.files = result.paths.map((path) => File(path!)).toList();
             } else {
               // User canceled the picker
             }
 
+            widget.onChange(widget.files);
             setState(() {});
           },
           child: Container(
@@ -82,15 +90,30 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
         SizedBox(
           height: 16.0.textScale(),
         ),
-        Column(
-          children:
-              files.map((e) => itemListFile(file: e, onTap: () {
-                _cubit.deleteFile(e, files);
-                setState(() {
-
-                });
-              },),).toList(),
-        )
+        if (widget.isBuilder)
+          Column(
+            children: widget.files.isNotEmpty
+                ? widget.files
+                    .map((e) => widget.builder ?? Container())
+                    .toList()
+                : [Container()],
+          )
+        else
+          Column(
+            children: widget.files.isNotEmpty
+                ? widget.files
+                    .map(
+                      (e) => itemListFile(
+                        file: e,
+                        onTap: () {
+                          _cubit.deleteFile(e, widget.files);
+                          setState(() {});
+                        },
+                      ),
+                    )
+                    .toList()
+                : [Container()],
+          )
       ],
     );
   }
