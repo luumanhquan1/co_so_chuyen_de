@@ -2,27 +2,35 @@ import 'dart:io';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
-import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
-class BaoCaoBottomSheet extends StatefulWidget {
-  const BaoCaoBottomSheet({
-    Key? key,
-  }) : super(key: key);
+class ChinhSuaBaoCaoBottomSheet extends StatefulWidget {
+  final BaoCaoModel baoCaoModel;
+
+  const ChinhSuaBaoCaoBottomSheet({Key? key, required this.baoCaoModel})
+      : super(key: key);
 
   @override
   _ChinhSuaBaoCaoBottomSheetState createState() =>
       _ChinhSuaBaoCaoBottomSheetState();
 }
 
-class _ChinhSuaBaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
-  TextEditingController controller = TextEditingController();
+class _ChinhSuaBaoCaoBottomSheetState extends State<ChinhSuaBaoCaoBottomSheet> {
+  late TextEditingController controller;
   GlobalKey<FormState> globalKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController(text: widget.baoCaoModel.content);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +94,7 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
                 height: 8,
               ),
               CustomDropDown(
-                value: S.current.trung_binh,
+                value: widget.baoCaoModel.status.getText().text,
                 items: [
                   S.current.trung_binh,
                   S.current.dat,
@@ -105,9 +113,9 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
                 height: 24,
               ),
               ButtonSelectFile(
+                files: widget.baoCaoModel.listFile,
                 title: S.current.tai_lieu_dinh_kem,
                 onChange: (List<File> files) {},
-                files: const [],
               ),
               const SizedBox(
                 height: 24,
@@ -118,12 +126,4 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<BaoCaoBottomSheet> {
       ),
     );
   }
-}
-
-void showBaoCaoKetQua(BuildContext context) {
-  showBottomSheetCustom(
-    context,
-    child: const BaoCaoBottomSheet(),
-    title: S.current.bao_cao_ket_qua,
-  );
 }

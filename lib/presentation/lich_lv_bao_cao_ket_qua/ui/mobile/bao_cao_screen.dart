@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bao_cao_item.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bottom_sheet_bao_cao.dart';
+import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bottom_sheet_chinh_sua_bao_cao.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
@@ -55,7 +55,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                       funcEdit: () {
                         showBottomSheetCustom<BaoCaoModel>(
                           context,
-                          child: BaoCaoBottomSheet(
+                          child: ChinhSuaBaoCaoBottomSheet(
                             baoCaoModel: listData[index],
                           ),
                           title: S.current.chinh_sua_bao_cao_ket_qua,
