@@ -4,9 +4,9 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/select_option_header.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/lich_lv_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -46,7 +46,12 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
               cubit.isCheck = !cubit.isCheck;
             });
           },
-          icon: SvgPicture.asset(ImageAssets.icCalenderWorkDay),
+          icon: BlocBuilder<CalenderCubit, CalenderState>(
+            bloc: cubit,
+            builder: (context, state) {
+              return state.lichLamViecIconsMobile();
+            },
+          ),
         ),
         actions: [
           IconButton(
@@ -74,6 +79,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                           cubit.chooseTypeListLv(
                             Type_Choose_Option_List.DANG_LICH,
                           );
+                          cubit.index.sink.add(0);
                           Navigator.pop(context);
                         });
                       },
@@ -82,6 +88,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                           cubit.chooseTypeListLv(
                             Type_Choose_Option_List.DANG_LIST,
                           );
+                          cubit.index.sink.add(0);
                           Navigator.pop(context);
                         });
                       },
@@ -147,7 +154,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 BlocBuilder(
                   bloc: cubit,
                   builder: (context, state) {
-                    return ChooseDayWeedMonth(
+                    return SelectOptionHeader(
                       onTapDay: () {
                         setState(() {});
                         cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
@@ -160,6 +167,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                         setState(() {});
                         cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
                       },
+                      cubit: cubit,
                     );
                   },
                 )
