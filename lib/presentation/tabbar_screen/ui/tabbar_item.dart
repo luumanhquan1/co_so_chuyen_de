@@ -7,6 +7,9 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tie
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/btn_show_chinh_sua_bao_cao.dart';
+import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/btn_show_bao_cao_tablet.dart';
+import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/tablet/show_bottom_sheet_ds_y_Kien_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -58,14 +61,15 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return screenDevice(
-          mobileScreen: HomeScreenMobile(
-            key: keyHomeMobile,
-          ),
-          tabletScreen: HomeScreenTablet(
-            key: keyHomeTablet,
-          ),
-        );
+        // return screenDevice(
+        //   mobileScreen: HomeScreenMobile(
+        //     key: keyHomeMobile,
+        //   ),
+        //   tabletScreen: HomeScreenTablet(
+        //     key: keyHomeTablet,
+        //   ),
+        // );
+        return Center(child: BtnShowChinhSuaBaoCao());
       case TabBarType.report:
         final key = GlobalKey<FormGroupState>();
         return Scaffold(
