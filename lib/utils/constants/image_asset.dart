@@ -172,6 +172,8 @@ class ImageAssets {
   static const String tongSoLichHop = '$baseImg/tong_so_lich_hop.svg';
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
   static const String soLichHopTrucTuyen = '$baseImg/so_lich_hop_truc_tuyen.svg';
+  static const String ic_delete_do = '$baseImg/delete_do.svg';
+  static const String ic_edit = '$baseImg/edit.svg';
   static const String icDayCalenderWeek = '$baseImg/ic_calender_work_week.svg';
   static const String icDayCalenderMonth = '$baseImg/ic_calender_work_month.svg';
   static const String lichCanKlch = '$baseImg/lich_can_klch.svg';
@@ -201,6 +203,9 @@ class ImageAssets {
   static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
   static const String imgHeaderMenuTablet = '$baseImg/ic_header_menu_ipad.png';
+  static const String ic_baocao = '$baseImg/ic_graph.svg';
+  static const String ic_delete_baocao = '$baseImg/ic_delete_baocao.svg';
+  static const String ic_file = '$baseImg/file.svg';
   static const String imgCalendar = '$baseImg/img_calendar.png';
   static const String imgCheckBox = '$baseImg/img_check_box.png';
 
