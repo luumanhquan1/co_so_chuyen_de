@@ -8,7 +8,9 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/lich/calender_m
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/lich/calender_week_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/list/in_list_form_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 
 extension LichLVOpition on Type_Choose_Option_Day {
   Widget getLichLVDangList() {
@@ -60,11 +62,31 @@ extension LichLVOpition on Type_Choose_Option_Day {
   Widget getCalendarLvStateDangLichMobile() {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return  const InCalenderForm();
+        return const InCalenderForm();
       case Type_Choose_Option_Day.WEEK:
         return const CalenderWeekMobile();
       case Type_Choose_Option_Day.MONTH:
         return const CalenderFormMonth();
+      default:
+        return Container();
+    }
+  }
+
+// icons
+  Widget getCalendarIconsMobile() {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderDayBig,
+        );
+      case Type_Choose_Option_Day.WEEK:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderWeekBig,
+        );
+      case Type_Choose_Option_Day.MONTH:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderMonthBig,
+        );
       default:
         return Container();
     }
@@ -81,11 +103,22 @@ extension LichLv on CalenderState {
       return const SizedBox();
     }
   }
+
   Widget lichLamViecMobile() {
     if (this is LichLVStateDangList) {
       return type.getLichLVDangListMobile();
     } else if (this is LichLVStateDangLich) {
       return type.getCalendarLvStateDangLichMobile();
+    } else {
+      return const SizedBox();
+    }
+  }
+
+  Widget lichLamViecIconsMobile() {
+    if (this is LichLVStateDangList) {
+      return type.getCalendarIconsMobile();
+    } else if (this is LichLVStateDangLich) {
+      return type.getCalendarIconsMobile();
     } else {
       return const SizedBox();
     }

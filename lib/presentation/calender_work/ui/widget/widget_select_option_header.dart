@@ -1,20 +1,22 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class WidgetChooseDayWeekMonth extends StatefulWidget {
+class WidgetSelectOptionHeader extends StatefulWidget {
+  final CalenderCubit cubit;
   final Function createMeeting;
   final Function onTapDay;
   final Function onTapWeek;
   final Function onTapMonth;
 
-  const WidgetChooseDayWeekMonth({
+  const WidgetSelectOptionHeader({
     Key? key,
+    required this.cubit,
     required this.createMeeting,
     required this.onTapDay,
     required this.onTapWeek,
@@ -22,13 +24,11 @@ class WidgetChooseDayWeekMonth extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<WidgetChooseDayWeekMonth> createState() =>
-      _WidgetChooseDayWeekMonthState();
+  State<WidgetSelectOptionHeader> createState() =>
+      _WidgetSelectOptionHeaderState();
 }
 
-class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
-  final LichHopCubit cubit = LichHopCubit();
-
+class _WidgetSelectOptionHeaderState extends State<WidgetSelectOptionHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +57,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
               ),
               child: Center(
                 child: StreamBuilder<int>(
-                  stream: cubit.index.stream,
+                  stream: widget.cubit.index.stream,
                   builder: (context, snapshot) {
                     return Padding(
                       padding: const EdgeInsets.all(6.0),
@@ -67,7 +67,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                cubit.index.sink.add(0);
+                                widget.cubit.index.sink.add(0);
                                 widget.onTapDay();
                               },
                               child: Container(
@@ -75,7 +75,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  color: cubit.index.value == 0
+                                  color: widget.cubit.index.value == 0
                                       ? buttonColor
                                       : backgroundRowColor,
                                 ),
@@ -84,7 +84,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                     S.current.ngay,
                                     style: textNormalCustom(
                                       fontSize: 16.0,
-                                      color: cubit.index.value == 0
+                                      color: widget.cubit.index.value == 0
                                           ? backgroundColorApp
                                           : titleColor,
                                     ),
@@ -94,7 +94,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                             ),
                           ),
                           Container(
-                            color: cubit.index.value == 2
+                            color: widget.cubit.index.value == 2
                                 ? borderItemCalender
                                 : backgroundRowColor,
                             width: 1.0,
@@ -103,7 +103,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                cubit.index.sink.add(1);
+                                widget.cubit.index.sink.add(1);
                                 widget.onTapWeek();
                               },
                               child: Container(
@@ -111,7 +111,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  color: cubit.index.value == 1
+                                  color: widget.cubit.index.value == 1
                                       ? buttonColor
                                       : backgroundRowColor,
                                 ),
@@ -120,7 +120,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                     S.current.tuan,
                                     style: textNormalCustom(
                                       fontSize: 16.0,
-                                      color: cubit.index.value == 1
+                                      color: widget.cubit.index.value == 1
                                           ? backgroundColorApp
                                           : titleColor,
                                     ),
@@ -130,7 +130,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                             ),
                           ),
                           Container(
-                            color: cubit.index.value == 0
+                            color: widget.cubit.index.value == 0
                                 ? borderItemCalender
                                 : backgroundRowColor,
                             width: 1.0,
@@ -139,7 +139,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                cubit.index.sink.add(2);
+                                widget.cubit.index.sink.add(2);
                                 widget.onTapMonth();
                               },
                               child: Container(
@@ -147,7 +147,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  color: cubit.index.value == 2
+                                  color: widget.cubit.index.value == 2
                                       ? buttonColor
                                       : backgroundRowColor,
                                 ),
@@ -156,7 +156,7 @@ class _WidgetChooseDayWeekMonthState extends State<WidgetChooseDayWeekMonth> {
                                     S.current.thang,
                                     style: textNormalCustom(
                                       fontSize: 16.0,
-                                      color: cubit.index.value == 2
+                                      color: widget.cubit.index.value == 2
                                           ? backgroundColorApp
                                           : titleColor,
                                     ),

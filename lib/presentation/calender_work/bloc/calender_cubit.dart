@@ -13,6 +13,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(const CalenderStateIntial());
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
+  BehaviorSubject<int> index = BehaviorSubject.seeded(0);
 
   Stream<int> get checkIndexStream => checkIndex.stream;
 

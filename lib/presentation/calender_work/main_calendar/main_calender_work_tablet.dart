@@ -5,8 +5,8 @@ import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart'
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/lich_lv_extension.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/widget/widget_select_option_header.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/widget/wisget_choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -85,7 +85,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
       ),
       body: Column(
         children: [
-          WidgetChooseDayWeekMonth(
+          WidgetSelectOptionHeader(
             createMeeting: () {},
             onTapDay: () {
               setState(() {});
@@ -99,6 +99,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
               setState(() {});
               _cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
             },
+            cubit: _cubit,
           ),
           BlocBuilder<CalenderCubit, CalenderState>(
             bloc: _cubit,
