@@ -300,6 +300,15 @@
   "sua_lich_cong_tac_trong_nuoc" : "Sửa lịch công tác trong nước",
   "ubnd_tinh_dong_nai" : "UBND Tỉnh Đồng Nai",
   "bao_cao_thuong_vu" : "Báo cáo thường vụ",
-  "lich_cong_tac" : "Lịch công tác"
+  "lich_cong_tac" : "Lịch công tác",
+  "phong_hop_thuong" : "Phòng họp thường",
+  "phong_trung_tam_dieu_hanh" : "Phòng trung tâm điều hành",
+  "loai_phong_hop" : "Loại phòng họp",
+  "yeu_cau_them_thiet_bi" : "Yêu cầu thêm thiết bị",
+  "them_thiet_bi_trong_phong" : "Thêm thiết bị trong phòng",
+  "ten_thiet_bi" : "Tên thiết bị",
+  "so_luong" : "Số lượng",
+  "nhap_ten_thiet_bi" : "Nhập tên thiết bị",
+  "check_so_luong" : " Số lượng thiết bị chỉ có thể có các kí tự số"
 
 }
