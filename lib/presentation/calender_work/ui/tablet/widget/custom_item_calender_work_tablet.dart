@@ -22,8 +22,8 @@ class CustomItemCalenderWorkTablet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 28.0),
       child: Container(
-        height: 156.0,
-        width: 319.0,
+        height: 116,
+        width: 319,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(color: cellColorborder),

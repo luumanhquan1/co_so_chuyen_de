@@ -24,7 +24,14 @@ class CustomItemCalenderMobile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColorApp,
-        border: Border.all(color: cellColorborder),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.05),
+            blurRadius: 5,
+            spreadRadius: 2,
+          ),
+        ],
+        border: Border.all(color: borderItemCalender),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

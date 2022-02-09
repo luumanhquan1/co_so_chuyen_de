@@ -1,8 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/calender_work_day_list/mobile/widget/custom_item_calender_list.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/widget/custom_item_calender_work_tablet.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/list/widget/custom_item_calender_list.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,30 +25,6 @@ class _InListFormTabletState extends State<InListFormTablet> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SizedBox(
-              height: 88,
-              width: MediaQuery.of(context).size.width - 16,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: _cubit.list.length,
-                itemBuilder: (context, index) {
-                  return CustomItemCalenderWorkTablet(
-                    image: _cubit.img[index],
-                    typeName: _cubit.list[index].typeName,
-                    numberOfCalendars: _cubit.list[index].numberOfCalendars,
-                  );
-                },
-              ),
-            ),
-          ),
-          spaceH28,
-          Container(
-            height: 1,
-            color: bgDropDown,
-          ),
           spaceH28,
           if (widget.isHindText)
             Container()

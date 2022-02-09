@@ -1,21 +1,20 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/calender_work_day/ui/widget/custom_item_calender_work_tablet.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class InCalenderFormTablet extends StatefulWidget {
-  const InCalenderFormTablet({Key? key}) : super(key: key);
+class CalenderDayTablet extends StatefulWidget {
+  const CalenderDayTablet({Key? key}) : super(key: key);
 
   @override
-  _InCalenderFormTabletState createState() => _InCalenderFormTabletState();
+  _CalenderDayTabletState createState() => _CalenderDayTabletState();
 }
 
-class _InCalenderFormTabletState extends State<InCalenderFormTablet> {
+class _CalenderDayTabletState extends State<CalenderDayTablet> {
   final CalendarController _controller = CalendarController();
   final CalenderCubit _cubit = CalenderCubit();
 
@@ -23,36 +22,13 @@ class _InCalenderFormTabletState extends State<InCalenderFormTablet> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 28),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              color: backgroundColorApp,
-              height: 88,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: _cubit.list.length,
-                itemBuilder: (context, index) {
-                  return CustomItemCalenderWorkTablet(
-                    image: _cubit.img[index],
-                    typeName: _cubit.list[index].typeName,
-                    numberOfCalendars: _cubit.list[index].numberOfCalendars,
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
         spaceH28,
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(right: 30, left: 30),
             decoration: BoxDecoration(
               border: Border.all(color: cellColorborder),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: SfCalendar(
               viewHeaderHeight: 0,

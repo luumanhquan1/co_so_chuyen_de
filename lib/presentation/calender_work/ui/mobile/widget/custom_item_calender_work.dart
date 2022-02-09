@@ -19,7 +19,7 @@ class CustomItemCalenderWork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
+      padding: const EdgeInsets.only(right: 16),
       child: Container(
         height: 88.0,
         width: 274,

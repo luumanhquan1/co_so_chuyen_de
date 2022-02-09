@@ -32,13 +32,15 @@ class ChooseDayWeedMonth extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(ImageAssets.icDayMonth),
+                  SvgPicture.asset(
+                    ImageAssets.icCalenderDay,
+                  ),
                   const SizedBox(
                     width: 12.0,
                   ),
                   Text(
                     S.current.ngay,
-                    style: textNormal(linkColor, 14.0),
+                    style: textNormal(iconColorDown, 14.0),
                   )
                 ],
               ),
@@ -58,7 +60,7 @@ class ChooseDayWeedMonth extends StatelessWidget {
                   ),
                   Text(
                     S.current.tuan,
-                    style: textNormal(linkColor, 14.0),
+                    style: textNormal(iconColorDown, 14.0),
                   )
                 ],
               ),
@@ -78,7 +80,7 @@ class ChooseDayWeedMonth extends StatelessWidget {
                   ),
                   Text(
                     S.current.thang,
-                    style: textNormal(linkColor, 14.0),
+                    style: textNormal(iconColorDown, 14.0),
                   )
                 ],
               ),
