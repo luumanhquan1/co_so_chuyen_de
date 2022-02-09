@@ -10,7 +10,8 @@ class DanhSachLichHopNgayTablet extends StatefulWidget {
   const DanhSachLichHopNgayTablet({Key? key}) : super(key: key);
 
   @override
-  _DanhSachLichHopNgayTabletState createState() => _DanhSachLichHopNgayTabletState();
+  _DanhSachLichHopNgayTabletState createState() =>
+      _DanhSachLichHopNgayTabletState();
 }
 
 class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
@@ -23,8 +24,7 @@ class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-            const EdgeInsets.only( right: 30.0, left: 30.0),
+            padding: const EdgeInsets.only(right: 30.0, left: 30.0),
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -33,8 +33,7 @@ class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
                 return WidgetItemLichHop(
                   ontap: () {},
                   title: listLichHop[index].title,
-                  dateTimeFrom:
-                  DateTime.parse(listLichHop[index].dateTimeFrom)
+                  dateTimeFrom: DateTime.parse(listLichHop[index].dateTimeFrom)
                       .toStringWithAMPM,
                   dateTimeTo: DateTime.parse(listLichHop[index].dateTimeTo)
                       .toStringWithAMPM,

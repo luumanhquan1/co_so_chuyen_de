@@ -4,7 +4,9 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_danh_sach_n
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_ngay_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_thang_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_tuan_tablet.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 import 'danh_sach_lich_hop/danh_sach_lich_hop.dart';
 import 'lich_hop_danh_sach_ngay_tuan_thang/lich_hop_theo_danh_sach_ngay.dart';
 import 'lich_hop_theo_ngay_tuan_thang/lich_hop_theo_ngay.dart';
@@ -60,6 +62,25 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         return const SizedBox();
     }
   }
+  // icons
+  Widget getLichHopIconsMobile() {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderDayBig,
+        );
+      case Type_Choose_Option_Day.WEEK:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderWeekBig,
+        );
+      case Type_Choose_Option_Day.MONTH:
+        return SvgPicture.asset(
+          ImageAssets.icCalenderMonthBig,
+        );
+      default:
+        return Container();
+    }
+  }
 }
 
 extension lichHopCubit on LichHopState {
@@ -70,6 +91,17 @@ extension lichHopCubit on LichHopState {
       return type.getLichHopStateDangLich();
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSach();
+    } else {
+      return const SizedBox();
+    }
+  }
+  Widget lichLamViecIconsMobile() {
+    if (this is LichHopStateDangList) {
+      return type.getLichHopIconsMobile();
+    } else if (this is LichHopStateDangLich) {
+      return type.getLichHopIconsMobile();
+    }else if (this is LichHopStateDangDanhSach) {
+      return type.getLichHopIconsMobile();
     } else {
       return const SizedBox();
     }

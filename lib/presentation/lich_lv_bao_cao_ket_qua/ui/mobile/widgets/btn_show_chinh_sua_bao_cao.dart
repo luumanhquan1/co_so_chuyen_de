@@ -6,8 +6,8 @@ import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
-class BtnShowBaoCao extends StatelessWidget {
-  const BtnShowBaoCao({Key? key}) : super(key: key);
+class BtnShowChinhSuaBaoCao extends StatelessWidget {
+  const BtnShowChinhSuaBaoCao({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -34,13 +34,10 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
         S.current.bao_cao_ket_qua,
       ),
       body: Container(
-        margin: const EdgeInsets.all(28),
+        margin: const EdgeInsets.symmetric(vertical: 28, horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 20,
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: StreamBuilder<List<BaoCaoModel>>(

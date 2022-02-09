@@ -1,40 +1,45 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ChooseDayWeedMonth extends StatelessWidget {
+class SelectOptionHeader extends StatefulWidget {
+  final CalenderCubit cubit;
   final Function onTapDay;
   final Function onTapWeek;
   final Function onTapmonth;
-  final LichHopCubit cubit;
 
-  const ChooseDayWeedMonth({
+  const SelectOptionHeader({
     Key? key,
+    required this.cubit,
     required this.onTapDay,
     required this.onTapWeek,
     required this.onTapmonth,
-    required this.cubit,
   }) : super(key: key);
 
+  @override
+  State<SelectOptionHeader> createState() => _SelectOptionHeaderState();
+}
+
+class _SelectOptionHeaderState extends State<SelectOptionHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColorApp,
       padding: const EdgeInsets.only(bottom: 13),
       child: StreamBuilder<int>(
-        stream: cubit.index.stream,
+        stream: widget.cubit.index,
         builder: (context, snapshot) {
           return Row(
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    cubit.index.sink.add(0);
-                    onTapDay();
+                    widget.cubit.index.sink.add(0);
+                    widget.onTapDay();
                   },
                   child: Container(
                     color: Colors.transparent,
@@ -43,17 +48,21 @@ class ChooseDayWeedMonth extends StatelessWidget {
                       children: [
                         SvgPicture.asset(
                           ImageAssets.icCalenderDay,
-                          color: cubit.index.value == 0
+                          color: widget.cubit.index.value == 0
                               ? numberColorTablet
-                              : iconColorDown,),
+                              : iconColorDown,
+                        ),
                         const SizedBox(
                           width: 12.0,
                         ),
                         Text(
                           S.current.ngay,
-                          style: textNormal(cubit.index.value == 0
-                              ? numberColorTablet
-                              : iconColorDown, 14.0,),
+                          style: textNormal(
+                            widget.cubit.index.value == 0
+                                ? numberColorTablet
+                                : iconColorDown,
+                            14.0,
+                          ),
                         )
                       ],
                     ),
@@ -63,26 +72,31 @@ class ChooseDayWeedMonth extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    cubit.index.sink.add(1);
-                    onTapWeek();
+                    widget.cubit.index.sink.add(1);
+                    widget.onTapWeek();
                   },
                   child: Container(
                     color: Colors.transparent,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(ImageAssets.icDayCalenderWeek,
-                          color: cubit.index.value == 1
+                        SvgPicture.asset(
+                          ImageAssets.icDayCalenderWeek,
+                          color: widget.cubit.index.value == 1
                               ? numberColorTablet
-                              : iconColorDown,),
+                              : iconColorDown,
+                        ),
                         const SizedBox(
                           width: 12.0,
                         ),
                         Text(
                           S.current.tuan,
-                          style: textNormal(cubit.index.value == 1
-                              ? numberColorTablet
-                              : iconColorDown, 14.0),
+                          style: textNormal(
+                            widget.cubit.index.value == 1
+                                ? numberColorTablet
+                                : iconColorDown,
+                            14.0,
+                          ),
                         )
                       ],
                     ),
@@ -92,26 +106,31 @@ class ChooseDayWeedMonth extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    cubit.index.sink.add(2);
-                    onTapmonth();
+                    widget.cubit.index.sink.add(2);
+                    widget.onTapmonth();
                   },
                   child: Container(
                     color: Colors.transparent,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(ImageAssets.icDayCalenderMonth,
-                          color: cubit.index.value == 2
+                        SvgPicture.asset(
+                          ImageAssets.icDayCalenderMonth,
+                          color: widget.cubit.index.value == 2
                               ? numberColorTablet
-                              : iconColorDown,),
+                              : iconColorDown,
+                        ),
                         const SizedBox(
                           width: 12.0,
                         ),
                         Text(
                           S.current.thang,
-                          style: textNormal(cubit.index.value == 2
-                              ? numberColorTablet
-                              : iconColorDown, 14.0),
+                          style: textNormal(
+                            widget.cubit.index.value == 2
+                                ? numberColorTablet
+                                : iconColorDown,
+                            14.0,
+                          ),
                         )
                       ],
                     ),

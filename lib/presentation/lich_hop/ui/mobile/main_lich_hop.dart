@@ -54,8 +54,11 @@ class _MainLichHopState extends State<MainLichHop> {
                 setState(() {});
                 cubit.isCheckNgay = !cubit.isCheckNgay;
               },
-              icon: SvgPicture.asset(
-                ImageAssets.icDayMonth,
+              icon:  BlocBuilder<LichHopCubit, LichHopState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  return state.lichLamViecIconsMobile();
+                },
               ),
             ),
           ],

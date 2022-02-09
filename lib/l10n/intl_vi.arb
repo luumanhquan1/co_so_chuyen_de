@@ -312,5 +312,8 @@
   "don_vi_phoi_hop_khac" : "Đơn vị phối hợp khác",
   "them_thanh_phan_tham_gia" : "Thêm thành phần tham gia",
   "them_thong_tin_khach_moi" : "Thêm thông tin khách mời",
-  "khach_moi" : "Khách mời"
+  "khach_moi" : "Khách mời",
+  "bao_cao_ket_qua": "Báo cáo kết quả",
+  "y_kien": "Ý kiến"
+
 }
