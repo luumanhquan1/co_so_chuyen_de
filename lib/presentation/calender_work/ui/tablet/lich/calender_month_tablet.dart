@@ -72,7 +72,7 @@ class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
                         color: textColorMangXaHoi,
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
                             child: Padding(
