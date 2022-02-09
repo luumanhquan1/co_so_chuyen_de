@@ -50,6 +50,7 @@ class _InListFormState extends State<InListForm> {
                               .toStringWithAMPM,
                       urlImage:
                           'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                      onTap: () {},
                     ),
                   );
                 },
