@@ -63,6 +63,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANG_LICH,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -71,6 +72,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANG_LIST,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -79,6 +81,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANH_SACH,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -108,6 +111,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
         child: Column(
           children: [
             WidgetChooseDayWeekMonth(
+              cubit: cubit,
               createMeeting: () {},
               onTapDay: () {
                 setState(() {});

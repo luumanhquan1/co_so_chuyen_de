@@ -85,21 +85,21 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
       ),
       body: Column(
         children: [
-          WidgetChooseDayWeekMonth(
-            createMeeting: () {},
-            onTapDay: () {
-              setState(() {});
-              _cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
-            },
-            onTapMonth: () {
-              setState(() {});
-              _cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
-            },
-            onTapWeek: () {
-              setState(() {});
-              _cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
-            },
-          ),
+          // WidgetChooseDayWeekMonth(
+          //   createMeeting: () {},
+          //   onTapDay: () {
+          //     setState(() {});
+          //     _cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
+          //   },
+          //   onTapMonth: () {
+          //     setState(() {});
+          //     _cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
+          //   },
+          //   onTapWeek: () {
+          //     setState(() {});
+          //     _cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
+          //   },
+          // ),
           BlocBuilder<CalenderCubit, CalenderState>(
             bloc: _cubit,
             builder: (context, state) {

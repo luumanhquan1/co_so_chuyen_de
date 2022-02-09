@@ -6,14 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class DanhSachLichHopTablet extends StatefulWidget {
-  const DanhSachLichHopTablet({Key? key}) : super(key: key);
+class DanhSachLichHopNgayTablet extends StatefulWidget {
+  const DanhSachLichHopNgayTablet({Key? key}) : super(key: key);
 
   @override
-  _DanhSachLichHopTabletState createState() => _DanhSachLichHopTabletState();
+  _DanhSachLichHopNgayTabletState createState() => _DanhSachLichHopNgayTabletState();
 }
 
-class _DanhSachLichHopTabletState extends State<DanhSachLichHopTablet> {
+class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
   LichHopCubit cubit = LichHopCubit();
 
   @override

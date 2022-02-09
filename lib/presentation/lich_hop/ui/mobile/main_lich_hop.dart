@@ -86,6 +86,7 @@ class _MainLichHopState extends State<MainLichHop> {
                           cubit.chooseTypeList(
                             Type_Choose_Option_List.DANG_LICH,
                           );
+                          cubit.index.sink.add(0);
                           Navigator.pop(context);
                         });
                       },
@@ -94,6 +95,7 @@ class _MainLichHopState extends State<MainLichHop> {
                           cubit.chooseTypeList(
                             Type_Choose_Option_List.DANG_LIST,
                           );
+                          cubit.index.sink.add(0);
                           Navigator.pop(context);
                         });
                       },
@@ -102,6 +104,7 @@ class _MainLichHopState extends State<MainLichHop> {
                           cubit.chooseTypeList(
                             Type_Choose_Option_List.DANH_SACH,
                           );
+                          cubit.index.sink.add(0);
                           Navigator.pop(context);
                         });
                       },
@@ -129,15 +132,15 @@ class _MainLichHopState extends State<MainLichHop> {
                       return const SizedBox();
                     } else {
                       return Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Container(
                             margin: EdgeInsets.only(
-                              top: cubit.isCheckNgay ? 160 : 120,
+                              left: 16.0,
+                              top: cubit.isCheckNgay ? 150 : 120,
                             ),
                             height: 88,
-                            width: MediaQuery.of(context).size.width - 16,
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
@@ -174,6 +177,7 @@ class _MainLichHopState extends State<MainLichHop> {
                     bloc: cubit,
                     builder: (context, state) {
                       return ChooseDayWeedMonth(
+                        cubit: cubit,
                         onTapDay: () {
                           setState(() {});
                           cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
