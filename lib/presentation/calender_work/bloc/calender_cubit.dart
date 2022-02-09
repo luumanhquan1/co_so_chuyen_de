@@ -47,6 +47,11 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       '2022-01-25T10:45:00',
     ),
     MeetingSchedule(
+      'Họp nội',
+      '2022-01-27T09:45:00',
+      '2022-01-27T10:45:00',
+    ),
+    MeetingSchedule(
       'Họp nội bộ đơn vị',
       '2022-01-25T07:45:00',
       '2022-01-25T08:45:00',
