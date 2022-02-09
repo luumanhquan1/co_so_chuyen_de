@@ -60,6 +60,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         _cubit.chooseTypeListLv(
                           Type_Choose_Option_List.DANG_LICH,
                         );
+                        _cubit.index.sink.add(0);
                         Navigator.pop(context);
                       });
                     },
@@ -68,6 +69,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         _cubit.chooseTypeListLv(
                           Type_Choose_Option_List.DANG_LIST,
                         );
+                        _cubit.index.sink.add(0);
                         Navigator.pop(context);
                       });
                     },
