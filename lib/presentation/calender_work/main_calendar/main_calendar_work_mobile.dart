@@ -104,15 +104,15 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 bloc: cubit,
                 builder: (context, state) {
                   return Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 16),
+                    padding: const EdgeInsets.only(top: 16),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                         margin: EdgeInsets.only(
+                          left: 16.0,
                           top: cubit.isCheck ? 160 : 120,
                         ),
                         height: 88,
-                        width: MediaQuery.of(context).size.width - 16,
                         child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
