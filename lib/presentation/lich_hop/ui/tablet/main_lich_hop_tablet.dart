@@ -63,6 +63,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANG_LICH,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -71,6 +72,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANG_LIST,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -79,6 +81,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANH_SACH,
                             );
+                            cubit.index.sink.add(0);
                             Navigator.pop(context);
                           });
                         },
@@ -108,6 +111,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
         child: Column(
           children: [
             WidgetChooseDayWeekMonth(
+              cubit: cubit,
               createMeeting: () {},
               onTapDay: () {
                 setState(() {});
@@ -123,51 +127,53 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
               },
             ),
             BlocBuilder<LichHopCubit, LichHopState>(
-                bloc: cubit,
-                builder: (context, state) {
-                  if (state is LichHopStateDangDanhSach) {
-                    return const SizedBox();
-                  } else {
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 30.0),
-                        height: 116,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listItemSchedule.length,
-                          itemBuilder: (context, index) {
-                            return CustomItemCalenderWorkTablet(
-                              image: cubit.listImageLichHopCuaToi[index],
-                              typeName: listItemSchedule[index].typeName,
-                              numberOfCalendars:
-                                  listItemSchedule[index].numberOfSchedule,
-                            );
-                          },
-                        ),
+              bloc: cubit,
+              builder: (context, state) {
+                if (state is LichHopStateDangDanhSach) {
+                  return const SizedBox();
+                } else {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 30.0),
+                      height: 116,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: listItemSchedule.length,
+                        itemBuilder: (context, index) {
+                          return CustomItemCalenderWorkTablet(
+                            image: cubit.listImageLichHopCuaToi[index],
+                            typeName: listItemSchedule[index].typeName,
+                            numberOfCalendars:
+                                listItemSchedule[index].numberOfSchedule,
+                          );
+                        },
                       ),
-                    );
-                  }
-                }),
+                    ),
+                  );
+                }
+              },
+            ),
             BlocBuilder<LichHopCubit, LichHopState>(
-                bloc: cubit,
-                builder: (context, state) {
-                  if (state is LichHopStateDangDanhSach) {
-                    return const SizedBox();
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0,
-                        vertical: 28.0,
-                      ),
-                      child: Container(
-                        height: 1,
-                        color: bgDropDown,
-                      ),
-                    );
-                  }
-                }),
+              bloc: cubit,
+              builder: (context, state) {
+                if (state is LichHopStateDangDanhSach) {
+                  return const SizedBox();
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0,
+                      vertical: 28.0,
+                    ),
+                    child: Container(
+                      height: 1,
+                      color: bgDropDown,
+                    ),
+                  );
+                }
+              },
+            ),
             Expanded(
               child: BlocBuilder<LichHopCubit, LichHopState>(
                 bloc: cubit,
