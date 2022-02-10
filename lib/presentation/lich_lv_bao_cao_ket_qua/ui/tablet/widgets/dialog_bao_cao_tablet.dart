@@ -4,10 +4,10 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
+import 'package:ccvc_mobile/widgets/textformfield/block_textview.dart';
 import 'package:flutter/material.dart';
 
 class BaoCaoDialogTablet extends StatefulWidget {
