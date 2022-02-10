@@ -62,8 +62,6 @@ class _CalenderWeekTabletState extends State<CalenderWeekTablet> {
                 child: Text(
                   appointment.subject,
                   style: textNormalCustom(fontSize: 12),
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

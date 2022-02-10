@@ -43,8 +43,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2022-01-25T09:45:00',
-      '2022-01-25T10:45:00',
+      '2022-01-25T01:45:00',
+      '2022-01-25T02:45:00',
     ),
     MeetingSchedule(
       'Họp nội',
@@ -53,8 +53,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2022-01-25T07:45:00',
-      '2022-01-25T08:45:00',
+      '2022-01-25T05:45:00',
+      '2022-01-25T06:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
@@ -63,13 +63,13 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2021-12-29T13:45:00',
-      '2021-12-29T15:45:00',
+      '2021-12-29T16:45:00',
+      '2021-12-29T17:45:00',
     ),
     MeetingSchedule(
       'Họp nội bộ đơn vị',
-      '2021-12-29T13:45:00',
-      '2021-12-29T15:45:00',
+      '2021-12-29T18:45:00',
+      '2021-12-29T19:45:00',
     ),
   ];
   dynamic currentTime = DateFormat.MEd().format(DateTime.now());
