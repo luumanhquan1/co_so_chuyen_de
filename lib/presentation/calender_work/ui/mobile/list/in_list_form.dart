@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,13 @@ class _InListFormState extends State<InListForm> {
   final CalenderCubit _cubit = CalenderCubit();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _cubit.getDay();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 16, left: 16),
@@ -27,7 +35,7 @@ class _InListFormState extends State<InListForm> {
             padding:
                 const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
             child: Text(
-              _cubit.currentTime,
+              _cubit.textDay,
               style: textNormalCustom(color: textBodyTime),
             ),
           ),
@@ -50,6 +58,15 @@ class _InListFormState extends State<InListForm> {
                               .toStringWithAMPM,
                       urlImage:
                           'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                            const ChiTietLichLamViecScreen(),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
