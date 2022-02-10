@@ -114,12 +114,14 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                       state is LichLVStateDangList) {
                     if (state.type == Type_Choose_Option_Day.MONTH) {
                       return Padding(
-                        padding: const EdgeInsets.only(top: 16),
+                        padding: EdgeInsets.only(top: cubit.isCheck ? 44 : 34),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Container(
-                            margin:
-                                const EdgeInsets.only(left: 16.0, top: 88.0),
+                            margin: EdgeInsets.only(
+                              left: 16.0,
+                              top: cubit.isCheck ? 54 : 32,
+                            ),
                             height: 88,
                             child: ListView.builder(
                               shrinkWrap: true,

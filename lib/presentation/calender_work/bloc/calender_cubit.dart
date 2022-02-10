@@ -72,7 +72,18 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       '2021-12-29T15:45:00',
     ),
   ];
-  dynamic currentTime = DateFormat.yMMMEd().format(DateTime.now());
+  dynamic currentTime = DateFormat.MEd().format(DateTime.now());
+
+  String textDay = '';
+
+  void getDay() {
+    final DateTime textTime = DateTime.now();
+    textDay = getDateToString(textTime);
+  }
+
+  String getDateToString(DateTime time) {
+    return 'Thứ ${time.weekday},${time.day} tháng ${time.month}';
+  }
 
   DataSource getCalenderDataSource() {
     final List<Appointment> appointments = [];
