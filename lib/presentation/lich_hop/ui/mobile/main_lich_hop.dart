@@ -16,8 +16,6 @@ import 'package:flutter_svg/svg.dart';
 
 import 'lich_hop_extension.dart';
 
-
-
 class MainLichHop extends StatefulWidget {
   const MainLichHop({Key? key}) : super(key: key);
 
@@ -54,7 +52,7 @@ class _MainLichHopState extends State<MainLichHop> {
                 setState(() {});
                 cubit.isCheckNgay = !cubit.isCheckNgay;
               },
-              icon:  BlocBuilder<LichHopCubit, LichHopState>(
+              icon: BlocBuilder<LichHopCubit, LichHopState>(
                 bloc: cubit,
                 builder: (context, state) {
                   return state.lichLamViecIconsMobile();
@@ -132,7 +130,47 @@ class _MainLichHopState extends State<MainLichHop> {
                   bloc: cubit,
                   builder: (context, state) {
                     if (state is LichHopStateDangDanhSach) {
-                      return const SizedBox();
+                      if (state.type == Type_Choose_Option_Day.DAY ||
+                          state.type == Type_Choose_Option_Day.WEEK) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                              top: cubit.isCheckNgay ? 150 : 120),
+                          color: Colors.transparent,
+                        );
+                      } else {
+                        return Container(
+                          margin:
+                              EdgeInsets.only(top: cubit.isCheckNgay ? 80 : 50),
+                          color: Colors.transparent,
+                        );
+                      }
+                    } else if (state.type == Type_Choose_Option_Day.MONTH) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: 16.0,
+                              top: cubit.isCheckNgay ? 82 : 50,
+                            ),
+                            height: 88,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: listItemSchedule.length,
+                              itemBuilder: (context, index) {
+                                return CustomItemCalenderWork(
+                                  image: cubit.listImageLichHopCuaToi[index],
+                                  typeName: listItemSchedule[index].typeName,
+                                  numberOfCalendars:
+                                      listItemSchedule[index].numberOfSchedule,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      );
                     } else {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -167,7 +205,7 @@ class _MainLichHopState extends State<MainLichHop> {
                   child: BlocBuilder<LichHopCubit, LichHopState>(
                     bloc: cubit,
                     builder: (context, state) {
-                     return state.lichHop();
+                      return state.lichHop();
                     },
                   ),
                 ),
@@ -198,7 +236,20 @@ class _MainLichHopState extends State<MainLichHop> {
                   )
                 else
                   const SizedBox(),
-                const TableCalendarWidget(),
+                BlocBuilder<LichHopCubit, LichHopState>(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    if (state is LichHopStateDangLich ||
+                        state is LichHopStateDangList ||
+                        state is LichHopStateDangDanhSach) {
+                      if (state.type == Type_Choose_Option_Day.MONTH) {
+                        return const TableCalendarWidget(isCalendar: false);
+                      }
+                      return const TableCalendarWidget();
+                    }
+                    return Container();
+                  },
+                ),
               ],
             ),
           ],
