@@ -107,35 +107,67 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
         children: [
           Column(
             children: [
-              BlocBuilder(
+              BlocBuilder<CalenderCubit, CalenderState>(
                 bloc: cubit,
                 builder: (context, state) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          left: 16.0,
-                          top: cubit.isCheck ? 160 : 120,
-                        ),
-                        height: 88,
-                        child: ListView.builder(
-                          shrinkWrap: true,
+                  if (state is LichLVStateDangLich ||
+                      state is LichLVStateDangList) {
+                    if (state.type == Type_Choose_Option_Day.MONTH) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: cubit.isCheck ? 44 : 34),
+                        child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          itemCount: cubit.list.length,
-                          itemBuilder: (context, index) {
-                            return CustomItemCalenderWork(
-                              image: cubit.img[index],
-                              typeName: cubit.list[index].typeName,
-                              numberOfCalendars:
-                                  cubit.list[index].numberOfCalendars,
-                            );
-                          },
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: 16.0,
+                              top: cubit.isCheck ? 54 : 32,
+                            ),
+                            height: 88,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: cubit.list.length,
+                              itemBuilder: (context, index) {
+                                return CustomItemCalenderWork(
+                                  image: cubit.img[index],
+                                  typeName: cubit.list[index].typeName,
+                                  numberOfCalendars:
+                                      cubit.list[index].numberOfCalendars,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            left: 16.0,
+                            top: cubit.isCheck ? 150 : 120,
+                          ),
+                          height: 88,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: cubit.list.length,
+                            itemBuilder: (context, index) {
+                              return CustomItemCalenderWork(
+                                image: cubit.img[index],
+                                typeName: cubit.list[index].typeName,
+                                numberOfCalendars:
+                                    cubit.list[index].numberOfCalendars,
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  }
+                  return Container();
                 },
               ),
               Expanded(
@@ -173,7 +205,19 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 )
               else
                 Container(),
-              const TableCalendarWidget(),
+              BlocBuilder<CalenderCubit, CalenderState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  if (state is LichLVStateDangLich ||
+                      state is LichLVStateDangList) {
+                    if (state.type == Type_Choose_Option_Day.MONTH) {
+                      return const TableCalendarWidget(isCalendar: false);
+                    }
+                    return const TableCalendarWidget();
+                  }
+                  return Container();
+                },
+              ),
             ],
           ),
           spaceH16,

@@ -16,7 +16,6 @@ class CalenderStateIntial extends CalenderState {
 
 class LichLVStateDangLich extends CalenderState {
   const LichLVStateDangLich(Type_Choose_Option_Day type) : super(type);
-
   @override
   List<Object?> get props => [type];
 }

@@ -106,27 +106,25 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
           BlocBuilder<CalenderCubit, CalenderState>(
             bloc: _cubit,
             builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Container(
-                    color: backgroundColorApp,
-                    height: 116,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _cubit.list.length,
-                      itemBuilder: (context, index) {
-                        return CustomItemCalenderWorkTablet(
-                          image: _cubit.img[index],
-                          typeName: _cubit.list[index].typeName,
-                          numberOfCalendars:
-                              _cubit.list[index].numberOfCalendars,
-                        );
-                      },
-                    ),
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+
+                  color: backgroundColorApp,
+                  height: 116,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _cubit.list.length,
+                    itemBuilder: (context, index) {
+                      return CustomItemCalenderWorkTablet(
+                        image: _cubit.img[index],
+                        typeName: _cubit.list[index].typeName,
+                        numberOfCalendars:
+                            _cubit.list[index].numberOfCalendars,
+                      );
+                    },
                   ),
                 ),
               );
