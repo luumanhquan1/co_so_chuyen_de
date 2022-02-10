@@ -43,7 +43,9 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
           const SizedBox(width: 20,),
         ],
         leadingIcon: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back_ios,
             color: AqiColor,
