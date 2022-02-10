@@ -62,6 +62,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   ),
                 );
               },
+
               child: SvgPicture.asset(
                 ImageAssets.icSearchWhite,
                 height: 18,
@@ -131,7 +132,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                         return Column(
                           children: List.generate(data.length, (index) {
                             final type = data[index];
-                            return type.widgetType?.getItemsMobile() ??
+                            return type.widgetType?.getItemsMobile()??
                                 const SizedBox();
                           }),
                         );
