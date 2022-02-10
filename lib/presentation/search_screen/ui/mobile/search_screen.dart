@@ -93,7 +93,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           const SizedBox(
                             height: 16,
                           ),
-                          TuKhoaPhoBienWidget(listKeyWord: fakeTuKhoaThongDung),
+                          const TuKhoaPhoBienWidget(
+                              listKeyWord: fakeTuKhoaThongDung,),
                           const SizedBox(
                             height: 10,
                           ),

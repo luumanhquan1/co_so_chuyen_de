@@ -1,12 +1,13 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/prev_view_widget.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +21,7 @@ class WidgetManageScreen extends StatefulWidget {
 
 class _WidgetManageScreenState extends State<WidgetManageScreen> {
   WidgetManageCubit widgetManageCubit = WidgetManageCubit();
+
   @override
   void initState() {
     super.initState();
@@ -31,46 +33,46 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
     return WidgetManageProvider(
       widgetManageCubit: widgetManageCubit,
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              S.current.widget_manage,
-              style: textNormalCustom(
-                color: textTitle,
-                fontSize: 18.0.textScale(space: 6),
-              ),
-            ),
-            centerTitle: true,
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            actions: [
-              Row(
-                children: [
-                  Center(
-                    child: TextButton(
-                      child: Text(
-                        S.current.default_word,
-                        style: textNormalCustom(
-                          color: textDefault,
-                          fontSize: 14,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                ],
-              ),
-            ],
-            leading: IconButton(
-              onPressed: () => {Navigator.pop(context)},
-              icon: SvgPicture.asset(
-                ImageAssets.icBack,
-              ),
+        appBar: AppBar(
+          title: Text(
+            S.current.widget_manage,
+            style: textNormalCustom(
+              color: textTitle,
+              fontSize: 18.0.textScale(space: 6),
             ),
           ),
+          centerTitle: true,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          actions: [
+            Row(
+              children: [
+                Center(
+                  child: TextButton(
+                    child: Text(
+                      S.current.default_word,
+                      style: textNormalCustom(
+                        color: textDefault,
+                        fontSize: 14,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+          ],
+          leading: IconButton(
+            onPressed: () => {Navigator.pop(context)},
+            icon: SvgPicture.asset(
+              ImageAssets.icBack,
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
@@ -78,7 +80,6 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
                   height: 45,
@@ -148,12 +149,27 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                         isUsing: false,
                       );
                     } else {
-                      return Center(
-                        child: Text(S.current.no_data),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Center(
+                          child: Text(S.current.no_data),
+                        ),
                       );
                     }
                   },
                 ),
+                ButtonCustomBottom(
+                  title: S.current.xem_truoc,
+                  isColorBlue: true,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const PrevViewWidget(),
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -174,7 +190,7 @@ class WidgetManageProvider extends InheritedWidget {
 
   static WidgetManageProvider of(BuildContext context) {
     final WidgetManageProvider? result =
-    context.dependOnInheritedWidgetOfExactType<WidgetManageProvider>();
+        context.dependOnInheritedWidgetOfExactType<WidgetManageProvider>();
     assert(result != null, 'No elenment');
     return result!;
   }

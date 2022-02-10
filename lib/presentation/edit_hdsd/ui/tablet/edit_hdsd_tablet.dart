@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/hoi_dap/hoi_dap.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/detail_hdsd/ui/tablet/detail_hdsd_tablet.dart';
 import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/block_textview.dart';
 import 'package:ccvc_mobile/presentation/edit_hdsd/ui/widget/double_button_edit_hdsd.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -111,7 +112,14 @@ class _EditHDSDScreenTabletState extends State<EditHDSDScreenTablet> {
               DoubleButtonEditHDSDScreen(
                 onPressed2: () {},
                 title2: S.current.cap_nhat,
-                onPressed1: () {},
+                onPressed1: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailHDSDScreenTablet(),
+                    ),
+                  );
+                },
                 title1: S.current.xem_truoc,
               )
             ],

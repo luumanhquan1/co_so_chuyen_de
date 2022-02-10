@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -34,7 +35,14 @@ class _IncomingDocumentScreenTabletState
                 itemCount: cubit.listIncomingDocument.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCellTablet(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (contetx) => DetailDocumentTablet(),
+                        ),
+                      );
+                    },
                     title: cubit.listIncomingDocument[index].loaiVanBan,
                     dateTime: cubit.listIncomingDocument[index].ngayTao,
                     userName: cubit.listIncomingDocument[index].nguoiSoanThao,

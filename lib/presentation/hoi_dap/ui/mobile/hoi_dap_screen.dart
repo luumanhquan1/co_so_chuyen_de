@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/hoi_dap/widget/custom_hoi_dap_widget.da
 import 'package:ccvc_mobile/presentation/them_hdsd/ui/mobile/them_hdsd.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/dialog/dialog_utils.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,7 +63,14 @@ class _HoiDapScreenState extends State<HoiDapScreen> {
                     tieuDe: cubit.listHoiDap[index].tieuDe ?? '',
                     chuDe: cubit.listHoiDap[index].chuDe ?? '',
                     loaiHDSD: cubit.listHoiDap[index].loaiHDSD ?? '',
-                    onTapXoa: () {},
+                    onTapXoa: () {
+                      DialogUtils.showDialogDelete(
+                        context,
+                        title: S.current.xoa_hdsd,
+                        icon: SvgPicture.asset(ImageAssets.icXoaHDSD),
+                        okBtnFunction: () {},
+                      );
+                    },
                     onTapEdit: () {
                       Navigator.push(
                         context,

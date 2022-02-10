@@ -35,7 +35,9 @@ class _ManagerPersonalInformationTabletState
         title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset(ImageAssets.icVector),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(

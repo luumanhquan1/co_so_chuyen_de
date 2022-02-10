@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -31,7 +32,14 @@ class _OutgoingDocumentScreenState extends State<OutgoingDocumentScreen> {
                 itemCount: cubit.listIncomingDocument.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (contetx) => DetailDocument(),
+                        ),
+                      );
+                    },
                     title: cubit.listIncomingDocument[index].loaiVanBan,
                     dateTime: cubit.listIncomingDocument[index].ngayBanHanh,
                     userName: cubit.listIncomingDocument[index].nguoiSoanThao,

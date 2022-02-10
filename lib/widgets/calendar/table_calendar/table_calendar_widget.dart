@@ -11,8 +11,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
-  const TableCalendarWidget({Key? key,})
-      : super(key: key);
+  final bool isCalendar;
+
+  const TableCalendarWidget({
+    Key? key,
+    this.isCalendar = true,
+  }) : super(key: key);
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -49,25 +53,39 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: shadowContainerColor.withOpacity(0.1),
-                blurRadius: 20.0.textScale(),
-                offset: const Offset(0, 4),
-              ),
-            ],
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
+          decoration: widget.isCalendar
+              ? BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadowContainerColor.withOpacity(0.1),
+                      blurRadius: 20.0.textScale(),
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                )
+              : BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadowContainerColor.withOpacity(0.1),
+                      blurRadius: 20.0.textScale(),
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                  color: Colors.white,
+                ),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 10.0.textScale(),
+                margin: EdgeInsets.only(
+                  left: 10.0.textScale(),
+                  right: 12.0.textScale(),
+                  top: 12.0.textScale(),
+                  bottom: 16.0.textScale(),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,30 +105,27 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         ),
                       )
                     else
-                      Row(
-                        children: [
-                          Text(
-                            DateTime.now().toStringWithListFormat,
-                            style:  textNormalCustom(
-                              fontSize: 14.0.textScale(),
-                              fontWeight: FontWeight.w500,
-                              color: titleColor,
+                      GestureDetector(
+                        onTap: () {
+                          isFomat = !isFomat;
+                          setState(() {});
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              DateTime.now().toStringWithListFormat,
+                              style: textNormalCustom(
+                                fontSize: 14.0.textScale(),
+                                fontWeight: FontWeight.w500,
+                                color: titleColor,
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(
+                            const Icon(
                               Icons.arrow_drop_down_sharp,
                               color: textBodyTime,
                             ),
-                            onPressed: () {
-                              isFomat = !isFomat;
-                              setState(() {});
-                            },
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     GestureDetector(
                       onTap: () {
@@ -120,78 +135,84 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       },
                       child: SvgPicture.asset(ImageAssets.ic_search_calendar),
                     ),
-                     SizedBox(
-                      width: 10.0.textScale(),
-                    ),
                   ],
                 ),
               ),
-              TableCalendar(
-                eventLoader: _getEventsfromDay,
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                onDaySelected: (date, events) {
-                  if (!isSameDay(_selectedDay, date)) {
-                    setState(() {
-                      _selectedDay = date;
-                      _focusedDay.value = _selectedDay;
-                    });
-                  }
-                },
-                daysOfWeekVisible: true,
-                onFormatChanged: (CalendarFormat _format) {
-                  setState(() {
-                    isFomat
-                        ? _calendarFormatWeek = _format
-                        : _calendarFormatMonth = _format;
-                  });
-                },
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                calendarStyle: CalendarStyle(
-                  weekendTextStyle: textNormalCustom(
-                    color: titleCalenderWork,
-                    fontSize: 14.0.textScale(),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  defaultTextStyle: textNormalCustom(
-                    color: titleColor,
-                    fontSize: 14.0.textScale(),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  selectedTextStyle: textNormalCustom(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.0.textScale(),
-                    color: Colors.white,
-                  ),
-                  todayDecoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: toDayColor,
-                  ),
-                  todayTextStyle: textNormalCustom(
-                    fontSize: 14.0.textScale(),
-                    fontWeight: FontWeight.w500,
-                    color: buttonColor,
-                  ),
-                  selectedDecoration: const BoxDecoration(
-                    color: radioFocusColor,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                headerVisible: false,
-                calendarFormat:
-                    isFomat ? _calendarFormatWeek : _calendarFormatMonth,
-                firstDay: DateTime.utc(2021, 8, 20),
-                lastDay: DateTime.utc(2030, 8, 20),
-                focusedDay: _selectedDay,
-              ),
-              ..._getEventsfromDay(_selectedDay).map(
-                (Event event) => ListTile(
-                  title: Text(
-                    event.title,
-                  ),
-                ),
-              ),
+              if (widget.isCalendar)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TableCalendar(
+                      eventLoader: _getEventsfromDay,
+                      startingDayOfWeek: StartingDayOfWeek.monday,
+                      onDaySelected: (date, events) {
+                        if (!isSameDay(_selectedDay, date)) {
+                          setState(() {
+                            _selectedDay = date;
+                            _focusedDay.value = _selectedDay;
+                          });
+                        }
+                      },
+                      daysOfWeekVisible: true,
+                      onFormatChanged: (CalendarFormat _format) {
+                        setState(() {
+                          isFomat
+                              ? _calendarFormatWeek = _format
+                              : _calendarFormatMonth = _format;
+                        });
+                      },
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      calendarStyle: CalendarStyle(
+                        cellMargin: const EdgeInsets.all(11),
+                        weekendTextStyle: textNormalCustom(
+                          color: titleCalenderWork,
+                          fontSize: 14.0.textScale(),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        defaultTextStyle: textNormalCustom(
+                          color: titleColor,
+                          fontSize: 14.0.textScale(),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        selectedTextStyle: textNormalCustom(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.0.textScale(),
+                          color: Colors.white,
+                        ),
+                        todayDecoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: toDayColor,
+                        ),
+                        todayTextStyle: textNormalCustom(
+                          fontSize: 14.0.textScale(),
+                          fontWeight: FontWeight.w500,
+                          color: buttonColor,
+                        ),
+                        selectedDecoration: const BoxDecoration(
+                          color: radioFocusColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      headerVisible: false,
+                      calendarFormat:
+                          isFomat ? _calendarFormatWeek : _calendarFormatMonth,
+                      firstDay: DateTime.utc(2021, 8, 20),
+                      lastDay: DateTime.utc(2030, 8, 20),
+                      focusedDay: _selectedDay,
+                    ),
+                    ..._getEventsfromDay(_selectedDay).map(
+                      (Event event) => ListTile(
+                        title: Text(
+                          event.title,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              else
+                Container(),
             ],
           ),
         ),

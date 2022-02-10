@@ -50,7 +50,7 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
         type: widget.homeItemType,
         customDialog: AddToDoWidget(
           onTap: (value) {
-            cubit.showDialog(null);
+            cubit.closeDialog();
             cubit.addTodo(value);
           },
         ),
@@ -80,7 +80,6 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
                         onChange: (controller) {
                           final result = cubit.changeLabelTodo(
                               controller.text.trim(), todo,);
-                          controller.text = result;
                         },
                       );
                     }),

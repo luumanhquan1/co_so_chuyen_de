@@ -81,14 +81,22 @@ const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
 const editColor = Color(0xffEDF0FD);
 const dotColor = Color(0xffD4DAE3);
+const yellowColor = Color(0xffFDB000);
+const greenColor = Color(0xff058141);
+const blueberryColor = Color(0xff3E54AC);
+const lavenderColor = Color(0xff7A85CD);
+const grapeColor = Color(0xff9B51E0);
+const pinkColor = Color(0xffFB7897);
+const smokeColor = Color(0xff636363);
 
+const bgTag = Color(0xffF2F0FF);
 
+const bgGridView = Color(0xffFBFCFD);
+const bgTabletItem = Color(0xffFBFCFD);
 
-const borderCaneder=Color(0xff586B8B);
+const borderCaneder = Color(0xff586B8B);
 
-const colorNumberCellQLVB = Color(0xff586B8B);
-
-
+const colorNumberCellQLVB = Color(0xffFCFDFD);
 
 //tabbar color
 const labelColor = Color(0xff7966FF);
@@ -110,6 +118,16 @@ const greyHide = Color(0xFFF5F6FA);
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;
 const fontColor = Colors.white;
+const containerColor = Color(0xff4F4F4F);
+const containerColorTab = Color(0xffE2E8F0);
+const fontColorTablet = Colors.black;
+const fontColorTablet2 = Color(0xff3D5586);
+const numberColorTablet = Color(0xff7966FF);
+const numberColorTabletbg = Color(0xffECEAFF);
+const iconColorDown = Color(0xffA2AEBD);
+const bgCalenderColor = Color(0xffF9FAFF);
+Color cellColorborder = Color(0xffDBDFEF).withOpacity(0.5);
+Color cellColor = Color(0xffDBDFEF).withOpacity(0.1);
 
 const dateColor = Color(0xFF667793);
 
@@ -123,7 +141,12 @@ const textColorNguonKhac = Color(0xFFF57168);
 const titleColumn = Color(0xFF667793);
 const iconColor = Color(0xFFDADADA);
 const bgTabletColor = Color(0xffF9FAFF);
-const toDayColor = Color(0xFFF2F0FF);
+const toDayColor = Color(0xFFDBDFEF);
+const gradientStart = Color(0xFF4D74FD);
+const gradientEnd = Color(0xFF4DFDF2);
+
+const unFocusColor = Color(0xffF2F0FF);
+const colorImageLichHop = Color(0xffF1F7FF);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {

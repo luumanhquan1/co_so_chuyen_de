@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/manager_personal_information.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/bloc/menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/header_widget.dart';
@@ -21,6 +22,7 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   MenuCubit menuCubit = MenuCubit();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -44,8 +46,19 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HeaderMenuWidget(
-                    menuCubit: menuCubit,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const ManagerPersonalInformation(),
+                        ),
+                      );
+                    },
+                    child: HeaderMenuWidget(
+                      menuCubit: menuCubit,
+                    ),
                   ),
                   Column(
                     children: List.generate(listFeature.length, (index) {
