@@ -122,8 +122,11 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
                 ),
               ),
               spaceH24,
-              const ChonPhongHopScreen(),
+              ChonPhongHopScreen(
+                onChange: (value) {},
+              ),
               spaceH15,
+              const ThanhPhanThamGiaExpandWidget(),
               const ThanhPhanThamGiaExpandWidget(),
               const SizedBox(
                 height: 100,

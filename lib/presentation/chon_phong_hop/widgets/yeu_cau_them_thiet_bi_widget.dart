@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/chon_phong_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/bloc/chon_phong_hoc_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -19,7 +20,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class YeuCauThemThietBiWidget extends StatefulWidget {
   final ChonPhongHopCubit chonPhongHopCubit;
-  const YeuCauThemThietBiWidget({Key? key, required this.chonPhongHopCubit})
+  final Function() onClose;
+  const YeuCauThemThietBiWidget(
+      {Key? key, required this.chonPhongHopCubit, required this.onClose})
       : super(key: key);
 
   @override
@@ -50,7 +53,12 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
                   data.length,
                   (index) => Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: thietBiWidget(data[index]),
+                    child: thietBiWidget(
+                      value: data[index],
+                      onDelete: () {
+                        widget.chonPhongHopCubit.removeThietBi(data[index]);
+                      },
+                    ),
                   ),
                 ),
               );
@@ -71,10 +79,14 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
       if (value != null) {
         widget.chonPhongHopCubit.addThietBi(value);
       }
+      widget.onClose();
     });
   }
 
-  Widget thietBiWidget(ThietBiValue value) {
+  Widget thietBiWidget({
+    required ThietBiValue value,
+    required Function() onDelete,
+  }) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -84,11 +96,11 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
       child: Stack(
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: rowInfo(
-                    key: S.current.ten_thiet_bi, value: value.tenThietBi),
+              rowInfo(
+                key: S.current.ten_thiet_bi,
+                value: value.tenThietBi,
               ),
               spaceH10,
               rowInfo(
@@ -99,7 +111,15 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
               )
             ],
           ),
-          Positioned(right: 0, child: SvgPicture.asset(ImageAssets.icDeleteRed))
+          Positioned(
+            right: 0,
+            child: GestureDetector(
+              onTap: () {
+                onDelete();
+              },
+              child: SvgPicture.asset(ImageAssets.icDeleteRed),
+            ),
+          )
         ],
       ),
     );
@@ -117,9 +137,13 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
         ),
         Expanded(
           flex: 7,
-          child: Text(
-            value,
-            style: textNormal(titleColor, 14.0.textScale()),
+          child: Container(
+            color: Colors.transparent,
+            padding: const EdgeInsets.only(right: 16),
+            child: Text(
+              value,
+              style: textNormal(titleColor, 14.0.textScale()),
+            ),
           ),
         )
       ],
@@ -219,10 +243,12 @@ class _ThemThietBiScreenState extends State<ThemThietBiScreen> {
                 onPressed2: () {
                   if (_key.currentState!.validator()) {
                     Navigator.pop(
-                        context,
-                        ThietBiValue(
-                            tenThietBi: tenThietBi.text,
-                            soLuong: int.parse(soLuong.text)));
+                      context,
+                      ThietBiValue(
+                        tenThietBi: tenThietBi.text,
+                        soLuong: int.parse(soLuong.text),
+                      ),
+                    );
                   }
                 },
               ),
@@ -232,11 +258,4 @@ class _ThemThietBiScreenState extends State<ThemThietBiScreen> {
       ),
     );
   }
-}
-
-class ThietBiValue {
-  final String tenThietBi;
-  final int soLuong;
-
-  ThietBiValue({required this.tenThietBi, required this.soLuong});
 }

@@ -309,7 +309,9 @@
   "ten_thiet_bi" : "Tên thiết bị",
   "so_luong" : "Số lượng",
   "nhap_ten_thiet_bi" : "Nhập tên thiết bị",
-  "check_so_luong" : " Số lượng thiết bị chỉ có thể có các kí tự số"
+  "check_so_luong" : " Số lượng thiết bị chỉ có thể có các kí tự số",
+  "yeu_cau_de_chuan_bi_phong": "Yêu cầu khác để chuẩn bị phòng",
+  "chon_don_vi" : "Chọn đơn vị",
 
 
 }

@@ -1,11 +1,14 @@
+import 'package:ccvc_mobile/domain/model/chon_phong_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
 import 'package:ccvc_mobile/widgets/radio/radio_button.dart';
 import 'package:flutter/material.dart';
 
-enum LoaiPhongHopEnum { PHONG_HOP_THUONG, PHONG_TRUNG_TAM_DIEU_HANH }
-
 class LoaiPhongHopWidget extends StatefulWidget {
+  final Function(LoaiPhongHopEnum) onChange;
+
+  const LoaiPhongHopWidget({Key? key, required this.onChange})
+      : super(key: key);
   @override
   _LoaiPhongHopWidgetState createState() => _LoaiPhongHopWidgetState();
 }
@@ -15,12 +18,18 @@ class _LoaiPhongHopWidgetState extends State<LoaiPhongHopWidget> {
   Widget build(BuildContext context) {
     return InputInfoUserWidget(
       title: S.current.loai_phong_hop,
-      child: _LoaiPhongHopGroup(),
+      child: _LoaiPhongHopGroup(
+        onChange: widget.onChange,
+      ),
     );
   }
 }
 
 class _LoaiPhongHopGroup extends StatefulWidget {
+  final Function(LoaiPhongHopEnum) onChange;
+
+  const _LoaiPhongHopGroup({Key? key, required this.onChange})
+      : super(key: key);
   @override
   __LoaiPhongHopGroupState createState() => __LoaiPhongHopGroupState();
 }
@@ -37,6 +46,7 @@ class __LoaiPhongHopGroupState extends State<_LoaiPhongHopGroup> {
           title: S.current.phong_hop_thuong,
           onChange: (value) {
             selectLoaiPhong = value ?? LoaiPhongHopEnum.PHONG_HOP_THUONG;
+            widget.onChange(selectLoaiPhong);
             setState(() {});
           },
         ),
@@ -49,6 +59,8 @@ class __LoaiPhongHopGroupState extends State<_LoaiPhongHopGroup> {
           title: S.current.phong_trung_tam_dieu_hanh,
           onChange: (value) {
             selectLoaiPhong = value ?? LoaiPhongHopEnum.PHONG_HOP_THUONG;
+            widget.onChange(selectLoaiPhong);
+
             setState(() {});
           },
         )
