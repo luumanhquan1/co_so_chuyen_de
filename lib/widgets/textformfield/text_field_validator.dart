@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -76,10 +75,10 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
           fontSize: 14.0.textScale(),
           color: titleColor,
         ),
-
         enabled: widget.isEnabled,
         decoration: InputDecoration(
           hintText: widget.hintText,
+          hintStyle: textNormal(titleItemEdit.withOpacity(0.5), 14),
           contentPadding: widget.maxLine == 1
               ? const EdgeInsets.symmetric(vertical: 14, horizontal: 10)
               : null,
