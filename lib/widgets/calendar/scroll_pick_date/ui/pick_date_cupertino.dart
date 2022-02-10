@@ -35,13 +35,27 @@ class PicKDateCupertino extends StatefulWidget {
   _PicKDateCupertinoState createState() => _PicKDateCupertinoState();
 }
 
-class _PicKDateCupertinoState extends State<PicKDateCupertino> {
+class _PicKDateCupertinoState extends State<PicKDateCupertino>
+    with SingleTickerProviderStateMixin {
+  late AnimationController? expandController;
+
+  @override
+  void initState() {
+    super.initState();
+    expandController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ExpandOnlyWidget(
+          isShowIcon: false,
           header: header(),
+          initController: expandController,
           child: SizedBox(
             height: 200.0.textScale(space: 20),
             child: CupertinoDatePicker(
@@ -62,54 +76,66 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino> {
   }
 
   Widget header() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 32.5.textScale(),
-                  ),
-                  Text(
-                    widget.title,
-                    style: textNormalCustom(
-                      color: dateColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
+    return AnimatedBuilder(
+      animation: expandController!,
+      builder: (BuildContext context, Widget? child) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 32.5.textScale(),
                     ),
-                  ),
-                ],
+                    Text(
+                      widget.title,
+                      style: textNormalCustom(
+                        color: dateColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  widget.startOfEnd
-                      .getText(context: context, title: widget.title2),
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    widget.startOfEnd
+                        .getText(context: context, title: widget.title2),
+                    if (expandController!.value == 0)
+                      const Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: AqiColor,
+                      )
+                    else
+                      const Icon(
+                        Icons.keyboard_arrow_up_rounded,
+                        color: AqiColor,
+                      )
+                  ],
+                ),
+              )
+            ],
+          ),
+          if (widget.isUnderLine)
+            Container(
+              margin: EdgeInsets.only(
+                left: 32.5.textScale(),
+                top: 11.0.textScale(),
+              ),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: lineColor)),
               ),
             )
-          ],
-        ),
-        if (widget.isUnderLine)
-          Container(
-            margin: EdgeInsets.only(
-              left: 32.5.textScale(),
-              top: 5.0.textScale(),
-            ),
-            decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: lineColor)),
-            ),
-          )
-        else
-          Container(),
-
-      ],
+          else
+            Container(),
+        ],
+      ),
     );
   }
 }

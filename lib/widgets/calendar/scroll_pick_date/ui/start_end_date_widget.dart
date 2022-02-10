@@ -51,7 +51,7 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
                 title: S.current.bat_dau,
                 startOfEnd: StartOfEnd.START,
               ),
-              SizedBox(height: 13.0.textScale(),),
+              SizedBox(height: 16.0.textScale(),),
               PicKDateCupertino(
                 key: UniqueKey(),
                 isUnderLine: true,
