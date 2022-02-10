@@ -1,8 +1,8 @@
 
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chon_phong_hop/chon_phong_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/fake_data_tao_lich.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/chon_phong_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/container_toggle_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/text_field_style.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/thanh_phan_tham_gia_widget_expand.dart';
@@ -27,6 +27,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
       resizeToAvoidBottomInset: true,
       appBar: AppBarDefaultBack(S.current.tao_lich_hop),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ExpandGroup(
           child: Column(
@@ -122,8 +123,11 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
                 ),
               ),
               spaceH24,
-              const ChonPhongHopWidget(),
+              ChonPhongHopScreen(
+                onChange: (value) {},
+              ),
               spaceH15,
+              const ThanhPhanThamGiaExpandWidget(),
               const ThanhPhanThamGiaExpandWidget(),
               const SizedBox(
                 height: 100,
