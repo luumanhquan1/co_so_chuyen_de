@@ -37,7 +37,7 @@ class _SendMailScreenState extends State<SendMailScreen> {
                   key: keytextEmail,
                   child: CustomTextField(
                     controller: emailController,
-                    isPass: true,
+                    isPass: false,
                     textHint: S.current.email,
                     prefixIcon: SvgPicture.asset(ImageAssets.ic_email),
                     onChange: (text) {
@@ -55,11 +55,12 @@ class _SendMailScreenState extends State<SendMailScreen> {
                   onPressed: () {
                     keytextEmail.currentState?.validate();
                     if(emailController.value.text.isNotEmpty) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ResetPasswordScreen(),
-                        ),
-                      );
+                      Navigator.pop(context);
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const ResetPasswordScreen(),
+                      //   ),
+                      // );
                     }
                   },
                 ),

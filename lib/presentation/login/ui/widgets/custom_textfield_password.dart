@@ -1,74 +1,69 @@
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-class CustomTextField extends StatefulWidget {
-  final bool isPass;
+class CustomTextFieldPassWord extends StatefulWidget {
   final String? textHint;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final Function onPressSuffix;
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
   final String? Function(String?)? validate;
   final double? sizeWith;
   final TextEditingController? controller;
+  final bool obscureText;
+  final bool isInput;
 
-  const CustomTextField({
+  const CustomTextFieldPassWord({
     Key? key,
     this.onChange,
     this.onSubmit,
     this.textHint,
     this.prefixIcon,
+    this.suffixIcon,
+    required this.onPressSuffix,
     this.validate,
     this.sizeWith,
-    required this.isPass,
     this.controller,
+    required this.obscureText,
+    required this.isInput,
   }) : super(key: key);
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextFieldPassWord> createState() =>
+      _CustomTextFieldPassWordState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
-  bool obscureText = false;
-
+class _CustomTextFieldPassWordState extends State<CustomTextFieldPassWord> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.sizeWith,
       child: TextFormField(
         controller: widget.controller,
-        obscureText:
-            widget.isPass == true ? obscureText == false : obscureText == true,
+        obscureText: widget.obscureText,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: Colors.black12,
         style: textNormalCustom(
-            fontSize: 14.0.textScale(),
-            fontWeight: FontWeight.normal,
-            color: colorBlack),
+          fontSize: 14.0.textScale(),
+          fontWeight: FontWeight.normal,
+          color: colorBlack,
+        ),
         decoration: InputDecoration(
           prefixIcon: IconButton(
             icon: widget.prefixIcon!,
             onPressed: () {},
           ),
-          suffixIcon: Visibility(
-            visible: widget.isPass,
-            child: IconButton(
-              icon: obscureText
-                  ? SvgPicture.asset(ImageAssets.imgView)
-                  : SvgPicture.asset(ImageAssets.imgViewHide),
-              onPressed: () {
-                setState(() {
-                  obscureText = !obscureText;
-                });
-              },
-            ),
-          ),
+          suffixIcon: widget.isInput
+              ? IconButton(
+                  icon: widget.suffixIcon!,
+                  onPressed: () {
+                    widget.onPressSuffix();
+                  },
+                )
+              : const SizedBox(),
           contentPadding: const EdgeInsets.only(left: 20),
           isCollapsed: true,
           fillColor: bgDropDown.withOpacity(0.1),
@@ -76,7 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.textHint,
           hintStyle: textNormalCustom(
             fontSize: 14.0.textScale(),
-            color: unselectedLabelColor,
+            color: unselectedLabelColor.withOpacity(0.5),
             fontWeight: FontWeight.w400,
           ),
           errorBorder: const OutlineInputBorder(
