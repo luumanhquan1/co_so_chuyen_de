@@ -22,6 +22,13 @@ class EditPersonalInformationCubit
   bool gioiTinh = false;
   ManagerPersonalInformationModel managerPersonalInformationModel =
       ManagerPersonalInformationModel();
+  final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
+
+  Stream<int> get checkRadioStream => _checkRadioSubject.stream;
+
+  void checkRadioButton(int _index) {
+    _checkRadioSubject.sink.add(_index);
+  }
 
   Future<void> getCurrentUnit(
     ManagerPersonalInformationModel managerPersonalInformationModel,

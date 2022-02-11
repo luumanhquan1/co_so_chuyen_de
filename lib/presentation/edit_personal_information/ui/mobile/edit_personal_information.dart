@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/avatar.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
@@ -13,7 +14,6 @@ import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
-import 'package:ccvc_mobile/widgets/selectdate/custom_selectdate.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_form_field_widget.dart';
@@ -153,8 +153,9 @@ class _EditPersonalInformationScreen
               InputInfoUserWidget(
                 isObligatory: true,
                 title: user.keys.elementAt(4),
-                child: CustomSelectDate(
-                  icon: SvgPicture.asset(ImageAssets.icEditInfor),
+                child: SelectDate(
+                  paddings: 10,
+                  leadingIcon: SvgPicture.asset(ImageAssets.icEditInfor),
                   value: cubit.managerPersonalInformationModel.ngaySinh,
                   onSelectDate: (dateTime) {
                     cubit.selectBirthdayEvent(dateTime.toString());

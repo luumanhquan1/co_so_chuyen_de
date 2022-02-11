@@ -12,8 +12,9 @@ class CustomSelectDate extends StatefulWidget {
   final Function(DateTime) onSelectDate;
   final String? hintText;
   final Color? backgroundColor;
-  final Widget? icon;
+  final Widget? leadingIcon;
   final bool isObligatory;
+  final double? paddings;
 
   const CustomSelectDate({
     Key? key,
@@ -21,7 +22,8 @@ class CustomSelectDate extends StatefulWidget {
     required this.onSelectDate,
     this.hintText,
     this.backgroundColor,
-    this.icon,
+    this.leadingIcon,
+    this.paddings,
     this.isObligatory = false,
   }) : super(key: key);
 
@@ -74,7 +76,6 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                   );
                 },
               );
-
 
               if (selectedDate != null) {
                 dateSelect = selectedDate.toString();
@@ -129,15 +130,10 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                     ],
                   ),
                   Positioned(
-                    right: 8,
+                    right: widget.paddings ?? 3,
                     height: 44,
                     child: Center(
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Container(
-                          child: widget.icon,
-                        ),
-                      ),
+                      child: widget.leadingIcon ?? const SizedBox(),
                     ),
                   )
                 ],

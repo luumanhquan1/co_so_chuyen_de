@@ -1,6 +1,3 @@
-
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -16,6 +13,9 @@ class TextFieldValidator extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
   final int maxLine;
+  final String? hintText;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   const TextFieldValidator({
     Key? key,
@@ -26,6 +26,9 @@ class TextFieldValidator extends StatefulWidget {
     this.initialValue,
     this.maxLine = 1,
     this.textInputType,
+    this.hintText,
+    this.suffixIcon,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -40,7 +43,17 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     formProvider = FormProvider.of(context);
-
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (formProvider != null) {
+        if (widget.validator != null) {
+          final validator =
+              widget.validator!(widget.controller?.text ?? '') == null;
+          formProvider?.validator.addAll({key: validator});
+        } else {
+          formProvider?.validator.addAll({key: true});
+        }
+      }
+    });
     if (formProvider != null) {
       formProvider?.validator.addAll({key: true});
     }
@@ -69,9 +82,13 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
         ),
         enabled: widget.isEnabled,
         decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: textNormal(titleItemEdit.withOpacity(0.5), 14),
           contentPadding: widget.maxLine == 1
               ? const EdgeInsets.symmetric(vertical: 14, horizontal: 10)
               : null,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
           fillColor: widget.isEnabled
               ? Colors.transparent
               : borderColor.withOpacity(0.3),

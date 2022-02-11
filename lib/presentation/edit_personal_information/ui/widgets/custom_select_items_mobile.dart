@@ -1,9 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/radio_button.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -40,6 +43,253 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
   bool isSearching = false;
   double sizeWitdhTag = 0;
   BehaviorSubject<List<String>> searchItemSubject = BehaviorSubject();
+  final GlobalKey keyDiaLog = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      sizeWitdhTag = keyDiaLog.currentContext?.size?.width ?? 0;
+    });
+  }
+
+  EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.isCheckEnable
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
+                decoration: BoxDecoration(
+                  color: borderColor.withOpacity(0.2),
+                  border: Border.all(color: borderColor),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: selectedItems.isNotEmpty
+                    ? _buildTagView()
+                    : Text(
+                        widget.title ?? S.current.danh_sach_rong,
+                        style: tokenDetailAmount(
+                          fontSize: 14.0.textScale(),
+                          color: titleColor,
+                        ),
+                      ),
+              ),
+            ],
+          )
+        : GestureDetector(
+            onTap: () {
+              searchItemSubject = BehaviorSubject.seeded(widget.items);
+              showBottomSheetCustom(
+                context,
+                title: S.current.bao_cao_ket_qua,
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    decoration: const BoxDecoration(
+                      color: backgroundColorApp,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        spaceH20,
+                        // Container(
+                        //   height: 56,
+                        //   decoration: const BoxDecoration(
+                        //     border: Border(
+                        //       bottom: BorderSide(
+                        //         color: editColor,
+                        //       ),
+                        //     ),
+                        //   ),
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                        //     children: [
+                        //       Expanded(
+                        //         flex: 6,
+                        //         child: Container(
+                        //           alignment: Alignment.center,
+                        //           child: Text(
+                        //             widget.title ?? S.current.danh_sach_rong,
+                        //             style: tokenDetailAmount(
+                        //               fontSize: 12.0.textScale(),
+                        //               color: titleColor,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Expanded(
+                        //         child: IconButton(
+                        //           onPressed: () {
+                        //             Navigator.pop(context);
+                        //           },
+                        //           icon: SvgPicture.asset(ImageAssets.icClose),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        BaseSearchBar(
+                          onChange: (keySearch) async {
+                            searchList = widget.items
+                                .where(
+                                  (item) => item.trim().toLowerCase().contains(
+                                        keySearch.trim().toLowerCase(),
+                                      ),
+                                )
+                                .toList();
+                            searchItemSubject.sink.add(searchList);
+                          },
+                        ),
+                        spaceH4,
+                        Expanded(
+                          child: StreamBuilder<List<String>>(
+                            stream: searchItemSubject,
+                            builder: (context, snapshot) {
+                              final listData = snapshot.data ?? [];
+                              return listData.isEmpty
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Text(S.current.danh_sach_rong),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: listData.length,
+                                      itemBuilder: (context, index) {
+                                        final itemTitle =
+                                            snapshot.data?[index] ?? '';
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (selectedItems
+                                                  .contains(itemTitle)) {
+                                              } else {
+                                                selectedItems.clear();
+                                                selectedItems.add(itemTitle);
+                                              }
+                                            });
+                                            widget.onChange(index);
+                                            if (widget.onSelectItem != null) {
+                                              widget.onSelectItem!(index);
+                                            }
+                                            Navigator.of(context).pop();
+                                            searchItemSubject.close();
+                                          },
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                color: Colors.transparent,
+                                                padding: const EdgeInsets.only(
+                                                  top: 18,
+                                                  bottom: 18,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      itemTitle,
+                                                      style: tokenDetailAmount(
+                                                        color: titleColor,
+                                                        fontSize: 14
+                                                        // fontWeight: selectedItems
+                                                        //         .contains(itemTitle)
+                                                        //     ? FontWeight.w600
+                                                        //     : FontWeight.normal,
+                                                        ,
+                                                      ),
+                                                    ),
+                                                    StreamBuilder<int>(
+                                                      initialData: 1,
+                                                      stream: cubit
+                                                          .checkRadioStream,
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        return Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            CustomRadioButtonCheck(
+                                                              isCheck:
+                                                                  snapshot.data ==
+                                                                          1
+                                                                      ? true
+                                                                      : false,
+                                                              allowUnSelect:
+                                                                  true,
+                                                              onSelectItem:
+                                                                  (item) {
+                                                                cubit
+                                                                    .checkRadioButton(
+                                                                        1);
+                                                              },
+                                                              canSelect: false,
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 1,
+                                                color: cellColorborder,
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      // separatorBuilder: (context, index) {
+                                      //   return const Divider(
+                                      //     color: Colors.black,
+                                      //   );
+                                      // },
+                                      // itemCount: snapshot.data?.length ?? 0,
+                                    );
+                            },
+                          ),
+                        ),
+                        spaceH10
+                      ],
+                    ),
+                  ),
+                ),
+              );
+              //  showListItem(widget.context);
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  key: keyDiaLog,
+                  padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: borderColor),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: selectedItems.isNotEmpty
+                      ? _buildTagView()
+                      : Text(
+                          widget.title ?? S.current.danh_sach_rong,
+                          style: tokenDetailAmount(
+                            fontSize: 14.0.textScale(),
+                            color: titleColor,
+                          ),
+                        ),
+                ),
+              ],
+            ),
+          );
+  }
 
   void showListItem(BuildContext context) {
     searchItemSubject = BehaviorSubject.seeded(widget.items);
@@ -242,71 +492,5 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
       indexes.add(widget.items.indexOf(selectedItem));
     }
     return indexes;
-  }
-
-  final GlobalKey keyDiaLog = GlobalKey();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      sizeWitdhTag = keyDiaLog.currentContext?.size?.width ?? 0;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return widget.isCheckEnable
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
-                decoration: BoxDecoration(
-                  color: borderColor.withOpacity(0.2),
-                  border: Border.all(color: borderColor),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: selectedItems.isNotEmpty
-                    ? _buildTagView()
-                    : Text(
-                        widget.title ?? S.current.danh_sach_rong,
-                        style: tokenDetailAmount(
-                          fontSize: 14.0.textScale(),
-                          color: titleColor,
-                        ),
-                      ),
-              ),
-            ],
-          )
-        : GestureDetector(
-            onTap: () {
-              // showBottomSheet(Widgets.context);
-              showListItem(widget.context);
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  key: keyDiaLog,
-                  padding: const EdgeInsets.only(left: 8, top: 14, bottom: 14),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: borderColor),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: selectedItems.isNotEmpty
-                      ? _buildTagView()
-                      : Text(
-                          widget.title ?? S.current.danh_sach_rong,
-                          style: tokenDetailAmount(
-                            fontSize: 14.0.textScale(),
-                            color: titleColor,
-                          ),
-                        ),
-                ),
-              ],
-            ),
-          );
   }
 }
