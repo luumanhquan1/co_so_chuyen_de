@@ -77,7 +77,7 @@ const String FAIL = 'fail';
 
 const String STATUS_TRANSACTION_FAIL = '0';
 const String STATUS_TRANSACTION_SUCCESS = '1';
-
+const double kHeightKeyBoard = 160;
 const String TRANSACTION_TOKEN = '0';
 const String TRANSACTION_NFT = '1';
 

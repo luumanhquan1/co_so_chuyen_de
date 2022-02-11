@@ -1,5 +1,5 @@
-
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    SizeConfig.init(context);
   }
 
   @override
@@ -31,5 +32,4 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const MainTabBarView();
   }
-
 }
