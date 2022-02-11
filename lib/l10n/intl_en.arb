@@ -180,11 +180,11 @@
   "ma_can_bo": "Mã cán bộ",
   "thu_tus": "Thứ tự",
   "ngay_sinh": "Ngày sinh",
-  "cmnd": "Số cmnd",
+  "cmnd": "CMND/CCCD",
   "gioi_tinh": "Giới tính",
   "Email": "Email",
-  "sdt_co_quan": "SĐT cơ quan",
-  "sdt_lien_he": "SĐT liên hệ",
+  "sdt_co_quan": "Số điện thoại cơ quan",
+  "sdt_lien_he": "Số điện thoại",
   "dia_chi_lien_he": "Địa chỉ liên hệ",
   "trang_thai": "Trạng Thái",
   "hoat_dong": "Hoạt động",
@@ -217,6 +217,7 @@
   "thong_bao": "Thông báo",
   "vao_hop_truc_tuyen": "Vào họp trực tuyến :",
   "thong_bao_khan": "Thông báo khẩn",
-  "xem_truoc": "Xem trước"
+  "xem_truoc": "Xem trước",
+  "reset": "Reset"
 
 }

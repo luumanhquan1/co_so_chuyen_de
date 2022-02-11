@@ -121,13 +121,13 @@ class ManagerPersonalInformationModel {
       ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
-        ngaySinh,
+        DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
-        gioiTinh,
+        gioiTinh ?? false ? S.current.Nam : S.current.Nu,
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),

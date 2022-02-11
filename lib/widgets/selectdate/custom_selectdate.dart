@@ -12,7 +12,7 @@ class CustomSelectDate extends StatefulWidget {
   final Function(DateTime) onSelectDate;
   final String? hintText;
   final Color? backgroundColor;
-  final String? urlLeadingIcon;
+  final Widget? icon;
   final bool isObligatory;
 
   const CustomSelectDate({
@@ -21,7 +21,7 @@ class CustomSelectDate extends StatefulWidget {
     required this.onSelectDate,
     this.hintText,
     this.backgroundColor,
-    this.urlLeadingIcon,
+    this.icon,
     this.isObligatory = false,
   }) : super(key: key);
 
@@ -57,6 +57,7 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                   .format(DateTime.parse(dateSelect));
               final DateTime parseDate =
                   DateFormat(DateFormatApp.date).parse(date);
+
               final selectedDate = await showDatePicker(
                 context: context,
                 initialDate: parseDate,
@@ -73,6 +74,8 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                   );
                 },
               );
+
+
               if (selectedDate != null) {
                 dateSelect = selectedDate.toString();
                 dateSelect = selectedDate.toString();
@@ -93,48 +96,51 @@ class _CustomDropDownState extends State<CustomSelectDate> {
                 ),
                 borderRadius: BorderRadius.circular(6),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 14, bottom: 14),
-                          child: widget.value == null
-                              ? Text(
-                                  widget.hintText ?? S.current.vuiLongChon,
-                                  style: tokenDetailAmount(
-                                    fontSize: 14.0.textScale(),
-                                    color: titleColor,
-                                  ),
-                                )
-                              : Text(
-                                  widget.isObligatory
-                                      ? '${widget.value}'
-                                      : DateTime.parse(dateSelect)
-                                          .toStringWithListFormat,
-                                  style: tokenDetailAmount(
-                                    fontSize: 14.0.textScale(),
-                                    color: titleColor,
-                                  ),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          top: 14,
+                          bottom: 14,
+                          left: 10,
+                        ),
+                        child: widget.value == null
+                            ? Text(
+                                widget.hintText ?? S.current.vuiLongChon,
+                                style: tokenDetailAmount(
+                                  fontSize: 14.0.textScale(),
+                                  color: titleColor,
                                 ),
-                        )
-                      ],
-                    ),
-                    Positioned(
-                      right: 3,
-                      height: 44,
-                      child: Center(
+                              )
+                            : Text(
+                                widget.isObligatory
+                                    ? '${widget.value}'
+                                    : DateTime.parse(dateSelect)
+                                        .toStringWithListFormat,
+                                style: tokenDetailAmount(
+                                  fontSize: 14.0.textScale(),
+                                  color: titleColor,
+                                ),
+                              ),
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    right: 8,
+                    height: 44,
+                    child: Center(
+                      child: Container(
+                        color: Colors.transparent,
                         child: Container(
-                          color: Colors.transparent,
-                          child: Container(),
+                          child: widget.icon,
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),

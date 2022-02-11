@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -6,8 +7,9 @@ import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/av
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
-import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
@@ -16,6 +18,7 @@ import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EditPersonInformationScreen extends StatefulWidget {
   final ManagerPersonalInformationModel managerPersonalInformationModel;
@@ -75,7 +78,39 @@ class _EditPersonalInformationScreen
         cubit.managerPersonalInformationModel.getInfoToMap();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBarDefaultBack(S.current.chinh_sua_thong_tin),
+      appBar: BaseAppBar(
+        title: S.current.chinh_sua_thong_tin,
+        leadingIcon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            icon: SvgPicture.asset(ImageAssets.icBack),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: TextButton(
+              onPressed: () {
+                nameController.text = '';
+                maCanBoController.text = '';
+                thuTuController.text = '';
+                cmndController.text = '';
+                emailController.text = '';
+                sdtCoquanController.text = '';
+                sdtController.text = '';
+                diaChiLienHeController.text = '';
+              },
+              child: Text(
+                S.current.reset,
+                style: textNormalCustom(fontSize: 14, color: labelColor),
+              ),
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -119,6 +154,7 @@ class _EditPersonalInformationScreen
                 isObligatory: true,
                 title: user.keys.elementAt(4),
                 child: CustomSelectDate(
+                  icon: SvgPicture.asset(ImageAssets.icEditInfor),
                   value: cubit.managerPersonalInformationModel.ngaySinh,
                   onSelectDate: (dateTime) {
                     cubit.selectBirthdayEvent(dateTime.toString());
