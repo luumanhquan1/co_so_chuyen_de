@@ -23,7 +23,9 @@ class CustomItemCalenderMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap(),
+      onTap: () {
+        onTap();
+      },
       child: Container(
         padding: const EdgeInsets.only(top: 16, left: 10, bottom: 10),
         decoration: BoxDecoration(

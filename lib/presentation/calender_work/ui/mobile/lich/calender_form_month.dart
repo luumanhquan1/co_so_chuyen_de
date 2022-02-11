@@ -37,7 +37,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
                   textNormalCustom(fontSize: 13, color: unselectLabelColor),
             ),
             monthViewSettings: MonthViewSettings(
-              appointmentDisplayCount: 3,
+              appointmentDisplayCount: 2,
               monthCellStyle: MonthCellStyle(
                 trailingDatesTextStyle:
                     textNormalCustom(fontSize: 14, color: iconColorDown),

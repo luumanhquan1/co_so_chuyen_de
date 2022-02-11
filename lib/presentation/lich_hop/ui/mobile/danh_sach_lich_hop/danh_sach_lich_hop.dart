@@ -23,9 +23,6 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         SizedBox(
-          height: cubit.isCheckNgay ? 150 : 120,
-        ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

@@ -1,7 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -57,21 +56,8 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
                     child: Text(
                       appointment.subject,
                       style: textNormalCustom(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
                     ),
                   ),
-                  const SizedBox(height: 4.0),
-                  Flexible(
-                    child: Text(
-                      '${appointment.startTime.toStringWithAMPM}'
-                      ' - ${appointment.endTime.toStringWithAMPM}',
-                      style: textNormalCustom(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),

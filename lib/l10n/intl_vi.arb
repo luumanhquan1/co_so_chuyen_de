@@ -325,9 +325,10 @@
   "chinh_sua_bao_cao_ket_qua": "Chỉnh sửa báo cáo kết quả",
   "bao_cao_ket_qua": "Báo cáo kết quả",
   "y_kien": "Ý kiến",
-  "trung": "Trùng",
   "ten_don_vi" : "Tên đơn vị",
   "dau_moi_lam_viec" : "Đầu mối làm việc",
-  "noi_dung_lam_viec" : "Nội dung làm việc"
+  "noi_dung_lam_viec" : "Nội dung làm việc",
+  "xem_truoc_widget": "Xem trước quản lý widgets",
+  "trung": "Trùng"
 
 }
