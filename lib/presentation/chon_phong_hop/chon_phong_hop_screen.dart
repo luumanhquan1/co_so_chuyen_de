@@ -6,7 +6,9 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/bloc/chon_phong_hoc_cubit.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/widgets/loai_phong_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/widgets/yeu_cau_them_thiet_bi_widget.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
@@ -16,7 +18,8 @@ import 'package:flutter/material.dart';
 
 class ChonPhongHopScreen extends StatefulWidget {
   final Function(ChonPhongHopModel) onChange;
-  const ChonPhongHopScreen({Key? key,required this.onChange}) : super(key: key);
+  const ChonPhongHopScreen({Key? key, required this.onChange})
+      : super(key: key);
 
   @override
   _ChonPhongHopWidgetState createState() => _ChonPhongHopWidgetState();
@@ -61,13 +64,9 @@ class _ChonPhongHopScreen extends StatefulWidget {
 class __ChonPhongHopScreenState extends State<_ChonPhongHopScreen> {
   final TextEditingController controller = TextEditingController();
   final _key = GlobalKey<FormState>();
-  EdgeInsets _viewInsets = EdgeInsets.zero;
-  SingletonFlutterWindow? window;
   @override
   void initState() {
     super.initState();
-    window = WidgetsBinding.instance?.window;
-    window?.onMetricsChanged = listenKeyBoard;
   }
 
   @override
@@ -98,13 +97,14 @@ class __ChonPhongHopScreenState extends State<_ChonPhongHopScreen> {
             YeuCauThemThietBiWidget(
               chonPhongHopCubit: widget.chonPhongHopCubit,
               onClose: () {
-                window?.onMetricsChanged = listenKeyBoard;
               },
             ),
             spaceH20,
             Padding(
               padding: EdgeInsets.only(
-                bottom: _viewInsets.bottom,
+                bottom: SizeConfig.keyBoardHeight.bottom <= kHeightKeyBoard
+                    ? 0
+                    : SizeConfig.keyBoardHeight.bottom,
               ),
               child: BlockTextView(
                 formKey: _key,
@@ -114,7 +114,7 @@ class __ChonPhongHopScreenState extends State<_ChonPhongHopScreen> {
               ),
             ),
             Visibility(
-              visible: _viewInsets.bottom == 0,
+              visible: SizeConfig.keyBoardHeight.bottom <= kHeightKeyBoard,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: DoubleButtonBottom(
@@ -141,24 +141,5 @@ class __ChonPhongHopScreenState extends State<_ChonPhongHopScreen> {
         ),
       ),
     );
-  }
-
-  void listenKeyBoard() {
-    if (mounted) {
-      setState(() {
-        final window = this.window;
-        if (window != null) {
-          _viewInsets = EdgeInsets.fromWindowPadding(
-            window.viewInsets,
-            window.devicePixelRatio,
-          ).add(
-            EdgeInsets.fromWindowPadding(
-              window.padding,
-              window.devicePixelRatio,
-            ),
-          ) as EdgeInsets;
-        }
-      });
-    }
   }
 }

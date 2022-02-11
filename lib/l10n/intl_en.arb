@@ -325,5 +325,9 @@
   "bao_cao_thuong_vu": "Báo cáo thường vụ",
   "lich_cong_tac": "Lịch công tác",
   "y_kien": "Ý kiến",
-  "trung": "Trùng"
+  "trung": "Trùng",
+  "ten_don_vi" : "Tên đơn vị",
+  "dau_moi_lam_viec" : "Đầu mối làm việc",
+  "noi_dung_lam_viec" : "Nội dung làm việc"
+
 }
