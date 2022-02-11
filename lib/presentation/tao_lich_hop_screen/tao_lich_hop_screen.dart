@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/thanh_phan_
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/title_child_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +69,10 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
                     TextFieldStyle(
                       urlIcon: ImageAssets.icDoublePerson,
                       hintText: S.current.them_nguoi,
+                    ),
+                    StartEndDateWidget(
+                      onEndDateTimeChanged: (DateTime value) {},
+                      onStartDateTimeChanged: (DateTime value) {},
                     ),
                     spaceH5,
                     SelectOnlyExpand(

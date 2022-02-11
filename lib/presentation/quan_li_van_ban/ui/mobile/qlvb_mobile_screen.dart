@@ -128,7 +128,7 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                 .listIncomingDocument[index].nguoiSoanThao,
                             status: cubitIncoming
                                 .listIncomingDocument[index].doKhan,
-                            userImage: '',
+                            userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                           );
                         },
                       ),
@@ -183,7 +183,7 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                 .listIncomingDocument[index].nguoiSoanThao,
                             status: cubitOutgoing
                                 .listIncomingDocument[index].doKhan,
-                            userImage: '',
+                            userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                           );
                         },
                       ),

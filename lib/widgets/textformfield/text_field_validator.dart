@@ -14,6 +14,9 @@ class TextFieldValidator extends StatefulWidget {
   final TextInputType? textInputType;
   final int maxLine;
   final String? hintText;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+
   const TextFieldValidator({
     Key? key,
     this.controller,
@@ -24,6 +27,8 @@ class TextFieldValidator extends StatefulWidget {
     this.maxLine = 1,
     this.textInputType,
     this.hintText,
+    this.suffixIcon,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -82,6 +87,8 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
           contentPadding: widget.maxLine == 1
               ? const EdgeInsets.symmetric(vertical: 14, horizontal: 10)
               : null,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
           fillColor: widget.isEnabled
               ? Colors.transparent
               : borderColor.withOpacity(0.3),
