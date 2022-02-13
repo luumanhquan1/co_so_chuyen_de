@@ -215,6 +215,9 @@ class ImageAssets {
   static const String ic_file = '$baseImg/file.svg';
   static const String imgCalendar = '$baseImg/img_calendar.png';
   static const String imgCheckBox = '$baseImg/img_check_box.png';
+  static const String icClearLogin = '$baseImg/ic_clear_login.svg';
+  static const String icFaceId = '$baseImg/ic_face_id.svg';
+  static const String icFingerprint = '$baseImg/ic_fingerprint.svg';
 
   static SvgPicture svgAssets(
     String name, {
