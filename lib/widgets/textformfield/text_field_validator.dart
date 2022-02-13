@@ -16,7 +16,8 @@ class TextFieldValidator extends StatefulWidget {
   final String? hintText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
-
+  final bool? obscureText;
+ final Color? fillColor;
   const TextFieldValidator({
     Key? key,
     this.controller,
@@ -29,6 +30,8 @@ class TextFieldValidator extends StatefulWidget {
     this.hintText,
     this.suffixIcon,
     this.prefixIcon,
+    this.obscureText,
+    this.fillColor,
   }) : super(key: key);
 
   @override
@@ -38,6 +41,7 @@ class TextFieldValidator extends StatefulWidget {
 class _TextFormFieldWidgetState extends State<TextFieldValidator> {
   final key = GlobalKey<FormState>();
   FormProvider? formProvider;
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -65,6 +69,7 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
       key: key,
       child: TextFormField(
         controller: widget.controller,
+        obscureText: widget.obscureText??false,
         onChanged: (value) {
           if (formProvider != null) {
             formProvider?.validator[key] = key.currentState!.validate();
@@ -90,7 +95,7 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           fillColor: widget.isEnabled
-              ? Colors.transparent
+              ? widget.fillColor ?? Colors.transparent
               : borderColor.withOpacity(0.3),
           filled: true,
           border: const OutlineInputBorder(
