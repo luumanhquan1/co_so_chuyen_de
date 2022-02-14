@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/account/LoginModel.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/reset_password/ui/mobile/send_mail_screen.dart';
@@ -174,6 +176,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   isColorBlue: true,
                   onPressed: () {
                     keyGroup.currentState!.validator();
+
+
+                    loginCubit.loginAndSaveinfo(
+                        context: context,
+                        passWord: textPasswordController.text,
+                        userName: textTaiKhoanController.text,
+                        appCode: 'APPDIEUHANH');
+                    if (loginCubit.isSuccess == true) {
+                      print("thanh cong");
+                    } else {
+                      print("that bai");
+                    }
                   },
                 ),
                 const SizedBox(
@@ -200,7 +214,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 20,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+
+                        });
+                       // final login=   PrefsService.getDataUser();
+                        final login=   PrefsService.getLogin();
+                        print(login);
+
+                      },
                       child: Container(
                         height: 48,
                         width: 48,
