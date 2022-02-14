@@ -329,6 +329,13 @@
   "trung": "Trùng",
   "ten_don_vi" : "Tên đơn vị",
   "dau_moi_lam_viec" : "Đầu mối làm việc",
-  "noi_dung_lam_viec" : "Nội dung làm việc"
+  "noi_dung_lam_viec" : "Nội dung làm việc",
+  "thong_tin_khach_moi" : "Thông tin khách mời",
+  "tong_so_luong_khach" : "Tông số lượng khách",
+  "nhap_so_luong" : "Nhập số lượng",
+  "chuong_trinh_hop" : "Chương trình họp",
+  "them_phien_hop" : "Thêm phiên họp"
+
+
 
 }

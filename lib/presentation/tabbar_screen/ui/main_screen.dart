@@ -1,6 +1,8 @@
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +47,9 @@ class _MainTabBarViewState extends State<MainTabBarView> {
           bottomNavigationBar: BottomTabBarWidget(
             selectItemIndex: type.index,
             onChange: (value) {
+              CupertinoRoundedDatePickerWidget.show(context,
+                  textStyle:
+                      textNormalCustom(color: Color(0xff3D5586), fontSize: 18));
               _addScreen(value);
               _cubit.selectTab(value);
             },

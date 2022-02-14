@@ -111,4 +111,16 @@ extension CheckValidate on String {
     }
     return null;
   }
+
+  String? checkInt() {
+    final result = checkNull();
+    if (result != null) {
+      return result;
+    }
+    try {
+      int.parse(this);
+    } catch (e) {
+      return S.current.check_so_luong;
+    }
+  }
 }
