@@ -1,15 +1,21 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbden_model.dart';
+import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_state.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 class QLVBCCubit extends BaseCubit<QLVBState> {
   QLVBCCubit() : super(QLVbStateInitial());
   final BehaviorSubject<DocumentDashboardModel> _getVbDen =
       BehaviorSubject<DocumentDashboardModel>();
+  final BehaviorSubject<VBDenModel> _getVbDenAPI =
+  BehaviorSubject<VBDenModel>();
 
   final BehaviorSubject<DocumentDashboardModel> _getVbDi =
       BehaviorSubject<DocumentDashboardModel>();
@@ -67,6 +73,23 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
       dataVbDi.soLuongDaXuLy!.toDouble(),daXuLyColor,),);
     _getVbDi.sink.add(dataVbDi);
  }
+  QLVBRepository get _QLVBRepo => Get.find();
+
+  void getVbDenAPI({
+    required String walletAddress,
+    required String signature,
+  }) async {
+    final result = await _QLVBRepo.getVBDen('2022-02-18', '2022-03-14');
+    await result.when(
+      success: (res) async {
+
+      },
+      error: (err) {
+        return;
+      },
+    );
+
+  }
 
 }
 

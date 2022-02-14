@@ -1,7 +1,12 @@
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_den_response.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_di_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:injectable/injectable.dart';
+import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+
+part 'qlvb_service.g.dart';
+
 
 @RestApi()
 abstract class QuanLyVanBanClient {
@@ -13,6 +18,6 @@ abstract class QuanLyVanBanClient {
       @Field('NgayCuoiCung') String endDate,);
 
   @GET(ApiConstants.DASH_BOARD_VBDi)
-  Future<VBDenResponse> getVbDi(@Field('NgayDauTien') String startDate,
+  Future<VBDiResponse> getVbDi(@Field('NgayDauTien') String startDate,
       @Field('NgayCuoiCung') String endDate,);
 }
