@@ -1,11 +1,20 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
+import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
+import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
+import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-void configureDependencies() {}
+void configureDependencies() {
+
+  Get.put(QuanLyVanBanClient(provideDio()));
+  Get.put<QLVBRepository>(
+    QLVBImlp(Get.find()),
+  );
+}
 int _connectTimeOut = 60000;
 
 Dio provideDio() {
