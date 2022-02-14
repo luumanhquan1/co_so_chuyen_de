@@ -25,18 +25,25 @@ class LoginCubit extends BaseCubit<LoginState> {
     required BuildContext context,
   }) async {
     final result = await _loginRepo.getAccessToken(userName, passWord, appCode);
-    await result.when(success: (res) async {
-      final LoginModel token = LoginModel(
-          refreshToken: res.refreshToken, accessToken: res.accessToken);
-      await PrefsService.saveLogin(loginToJson(token));
-      final DataUser dataUser = DataUser(
+     result.when(
+      success: (res)  {
+        isSuccess=true;
+        final LoginModel token = LoginModel(
+          refreshToken: res.refreshToken,
+          accessToken: res.accessToken,
+        );
+         PrefsService.saveLogin(loginToJson(token));
+        final DataUser dataUser = DataUser(
           userId: res.userId,
           username: res.username,
-          userInformation: res.userInformation);
-      await PrefsService.saveDataUser(dataUserToJson(dataUser));
-      isSuccess = true;
-    }, error: (err) {
-      isSuccess = false;
-    });
+          userInformation: res.userInformation,
+        );
+         PrefsService.saveDataUser(dataUserToJson(dataUser));
+
+      },
+      error: (err) {
+        isSuccess=false;
+      },
+    );
   }
 }

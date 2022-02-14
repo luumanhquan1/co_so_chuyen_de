@@ -1,10 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
-import 'package:ccvc_mobile/domain/model/account/LoginModel.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/reset_password/ui/mobile/send_mail_screen.dart';
+import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
@@ -174,20 +173,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ButtonCustomBottom(
                   title: S.current.login,
                   isColorBlue: true,
-                  onPressed: () {
+                  onPressed: ()async {
                     keyGroup.currentState!.validator();
-
-
-                    loginCubit.loginAndSaveinfo(
+                    await loginCubit.loginAndSaveinfo(
                         context: context,
                         passWord: textPasswordController.text,
                         userName: textTaiKhoanController.text,
                         appCode: 'APPDIEUHANH');
-                    if (loginCubit.isSuccess == true) {
-                      print("thanh cong");
-                    } else {
-                      print("that bai");
-                    }
+                    if (loginCubit.isSuccess=true) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainTabBarView(),
+                        ),
+                      );
+                    } else {}
                   },
                 ),
                 const SizedBox(
@@ -215,13 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-
-                        });
-                       // final login=   PrefsService.getDataUser();
-                        final login=   PrefsService.getLogin();
-                        print(login);
-
+                        setState(() {});
                       },
                       child: Container(
                         height: 48,

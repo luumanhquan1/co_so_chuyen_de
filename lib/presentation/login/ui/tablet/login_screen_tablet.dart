@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/reset_password/ui/tablet/send_mail_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -25,9 +26,6 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
   TextEditingController textTaiKhoanController = TextEditingController();
   TextEditingController textPasswordController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
-
-  // final keytextTaiKhoan = GlobalKey<FormState>();
-  // final keytextPassword = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -193,8 +191,21 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                       ButtonCustomBottom(
                         title: S.current.login,
                         isColorBlue: true,
-                        onPressed: () {
+                        onPressed: () async {
                           keyGroup.currentState!.validator();
+                          await loginCubit.loginAndSaveinfo(
+                              context: context,
+                              passWord: textPasswordController.text,
+                              userName: textTaiKhoanController.text,
+                              appCode: 'APPDIEUHANH');
+                          if (loginCubit.isSuccess = true) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MainTabBarView(),
+                              ),
+                            );
+                          } else {}
                         },
                       ),
                       const SizedBox(
