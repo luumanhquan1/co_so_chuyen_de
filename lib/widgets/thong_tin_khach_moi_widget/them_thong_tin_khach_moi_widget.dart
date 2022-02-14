@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -18,8 +17,8 @@ import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ThemDonViPhoiHopKhacWidget extends StatefulWidget {
-  const ThemDonViPhoiHopKhacWidget({Key? key}) : super(key: key);
+class ThemThongTinKhachMoiWidget extends StatefulWidget {
+  const ThemThongTinKhachMoiWidget({Key? key}) : super(key: key);
 
   @override
   _ThemDonViPhoiHopKhacWidgetState createState() =>
@@ -27,40 +26,35 @@ class ThemDonViPhoiHopKhacWidget extends StatefulWidget {
 }
 
 class _ThemDonViPhoiHopKhacWidgetState
-    extends State<ThemDonViPhoiHopKhacWidget> {
+    extends State<ThemThongTinKhachMoiWidget> {
   @override
   Widget build(BuildContext context) {
     return SolidButton(
       onTap: () {
         showBottomSheetCustom(
           context,
-          child: const ThemDonViPhoiHopKhacScreen(),
-          title: S.current.don_vi_phoi_hop_khac,
+          child: const ThemThongTinKhachMoiScreen(),
+          title: S.current.thong_tin_khach_moi,
         );
       },
-      text: S.current.them_thanh_phan_tham_gia,
+      text: S.current.them_thong_tin_khach_moi,
       urlIcon: ImageAssets.icAddButtonCalenderTablet,
     );
   }
 }
 
-class ThemDonViPhoiHopKhacScreen extends StatefulWidget {
-  const ThemDonViPhoiHopKhacScreen({Key? key}) : super(key: key);
+class ThemThongTinKhachMoiScreen extends StatefulWidget {
+  const ThemThongTinKhachMoiScreen({Key? key}) : super(key: key);
 
   @override
-  State<ThemDonViPhoiHopKhacScreen> createState() =>
+  State<ThemThongTinKhachMoiScreen> createState() =>
       _ThemDonViPhoiHopKhacScreenState();
 }
 
 class _ThemDonViPhoiHopKhacScreenState
-    extends State<ThemDonViPhoiHopKhacScreen> {
+    extends State<ThemThongTinKhachMoiScreen> {
   final _key = GlobalKey<FormState>();
   final _keyFormGroup = GlobalKey<FormGroupState>();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +71,9 @@ class _ThemDonViPhoiHopKhacScreenState
               Navigator.pop(context);
             },
             onPressed2: () {
-              if (_keyFormGroup.currentState!.validator()) {}
+              if (_keyFormGroup.currentState!.validator()) {
+                Navigator.pop(context);
+              }
             },
           ),
         ),
@@ -142,6 +138,25 @@ class _ThemDonViPhoiHopKhacScreenState
                           ),
                           validator: (value) {
                             return (value ?? '').checkSdt();
+                          },
+                        ),
+                      ),
+                      InputInfoUserWidget(
+                        title: S.current.tong_so_luong_khach,
+                        isObligatory: true,
+                        child: TextFieldValidator(
+                          hintText: S.current.nhap_so_luong,
+                          textInputType: TextInputType.number,
+                          suffixIcon: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                              child:
+                                  SvgPicture.asset(ImageAssets.icGroupPeople),
+                            ),
+                          ),
+                          validator: (value) {
+                            return (value ?? '').checkInt();
                           },
                         ),
                       ),

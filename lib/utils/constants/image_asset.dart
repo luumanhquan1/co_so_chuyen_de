@@ -61,7 +61,9 @@ class ImageAssets {
   static const String icCalenderDayBig = '$baseImg/ic_calender_day_big.svg';
   static const String icCalenderWeekBig = '$baseImg/ic_calender_week_big.svg';
   static const String icCalenderMonthBig = '$baseImg/ic_calender_month_big.svg';
- static const String icPhone = '$baseImg/ic_phone.svg';
+  static const String icPhone = '$baseImg/ic_phone.svg';
+  static const String icGroupPeople = '$baseImg/ic_group_people.svg';
+  static const String icClock = '$baseImg/ic_clock.svg';
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';
