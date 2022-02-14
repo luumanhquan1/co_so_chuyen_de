@@ -25,7 +25,10 @@ class _TimeDateInputWidgetState extends State<TimeDateInputWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const TimeDatePickerWidget(),
+          TimeDatePickerWidget(
+            timeFocus: FocusNode(),
+            minuetFocus: FocusNode(),
+          ),
           SvgPicture.asset(ImageAssets.icClock)
         ],
       ),
@@ -53,7 +56,9 @@ class TimeDatePickerWidget extends StatelessWidget {
             child: Center(
                 child: Stack(
               children: [
-                TimeTextFieldWidget(focusNode: timeFocus,),
+                TimeTextFieldWidget(
+                  focusNode: timeFocus,
+                ),
                 buildPicker(),
               ],
             )),
@@ -68,7 +73,9 @@ class TimeDatePickerWidget extends StatelessWidget {
             child: Center(
                 child: Stack(
               children: [
-                TimeTextFieldWidget(focusNode: ,),
+                TimeTextFieldWidget(
+                  focusNode: timeFocus,
+                ),
                 buildPicker(),
               ],
             )),

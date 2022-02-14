@@ -47,9 +47,6 @@ class _MainTabBarViewState extends State<MainTabBarView> {
           bottomNavigationBar: BottomTabBarWidget(
             selectItemIndex: type.index,
             onChange: (value) {
-              CupertinoRoundedDatePickerWidget.show(context,
-                  textStyle:
-                      textNormalCustom(color: Color(0xff3D5586), fontSize: 18));
               _addScreen(value);
               _cubit.selectTab(value);
             },
