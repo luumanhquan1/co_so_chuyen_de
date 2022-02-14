@@ -3,19 +3,20 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
+import 'package:ccvc_mobile/widgets/calendar/cupertino_date_picker/cupertino_date_picker.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SelectDate extends StatefulWidget {
   final String? value;
-  final Function(DateTime) onSelectDate;
+  final Function(String) onSelectDate;
   final String? hintText;
   final Color? backgroundColor;
   final Widget? leadingIcon;
   final bool isObligatory;
   final double? paddings;
-
 
   const SelectDate({
     Key? key,
@@ -35,17 +36,18 @@ class SelectDate extends StatefulWidget {
 class _CustomDropDownState extends State<SelectDate> {
   String dateSelect = '';
 
-  @override
-  void didUpdateWidget(covariant SelectDate oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-    dateSelect = widget.value ?? DateTime.now().toString();
-  }
+  //
+  // @override
+  // void didUpdateWidget(covariant SelectDate oldWidget) {
+  //   // TODO: implement didUpdateWidget
+  //   super.didUpdateWidget(oldWidget);
+  //   dateSelect = widget.value ?? DateTime.now().toString();
+  // }
 
   @override
   void initState() {
     if (!widget.isObligatory) {
-      dateSelect = widget.value ?? DateTime.now().toString();
+      dateSelect = widget.value.toString();
     }
     super.initState();
   }
@@ -104,10 +106,44 @@ class _CustomDropDownState extends State<SelectDate> {
                     onTap: () {
                       showBottomSheetCustom(
                         context,
-                        title: S.current.bao_cao_ket_qua,
-                        child: Container(
-                          height: 50,
-                          color: Colors.black,
+                        title: S.current.chon_ngay,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              child: FlutterRoundedCupertinoDatePickerWidget(
+                                onDateTimeChanged: (value) {
+                                  dateSelect = value.toString();
+                                },
+                                initialDateTime: DateTime.now(),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(
+                                top: 24,
+                                bottom: 32,
+                              ),
+                              child: DoubleButtonBottom(
+                                title2: S.current.chon,
+                                title1: S.current.dong,
+                                onPressed2: () {
+                                  // if (selectedDate != null) {
+                                  //   dateSelect = selectedDate.toString();
+                                  //   dateSelect = selectedDate.toString();
+                                  //   setState(() {});
+                                  //   widget.onSelectDate(selectedDate);
+                                  // }
+                                  setState(() {
+                                    widget.onSelectDate(dateSelect);
+                                  });
+                                  Navigator.pop(context);
+                                },
+                                onPressed1: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
                         ),
                       );
                     },

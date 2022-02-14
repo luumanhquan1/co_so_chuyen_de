@@ -11,6 +11,7 @@ import 'package:rxdart/subjects.dart';
 
 // ignore: must_be_immutable
 class CustomSelectItemsTablet extends StatefulWidget {
+  final String? value;
   final BuildContext context;
   final List<String> items;
   String? title;
@@ -21,6 +22,7 @@ class CustomSelectItemsTablet extends StatefulWidget {
 
   CustomSelectItemsTablet({
     Key? key,
+    this.value,
     this.onSelectItem,
     this.onRemove,
     this.title,

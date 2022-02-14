@@ -32,6 +32,7 @@ class _ManagerPersonalInformationTabletState
     return Scaffold(
       backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
+        backGroundColor: bgCalenderColor,
         title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset(ImageAssets.icVector),
@@ -65,7 +66,8 @@ class _ManagerPersonalInformationTabletState
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: borderItemCalender.withOpacity(0.5)),
           ),
-          margin: const EdgeInsets.only(top: 28, left: 30, right: 30),
+          margin:
+              const EdgeInsets.only(top: 28, left: 30, right: 30, bottom: 156),
           padding:
               const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 33),
           child: Column(
@@ -109,7 +111,7 @@ class _ManagerPersonalInformationTabletState
                 color: borderItemCalender,
               ),
               spaceH28,
-              const WigetImage()
+              const WigetImage(),
             ],
           ),
         ),

@@ -13,7 +13,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
   final Widget? leadingIcon;
   final String title;
-
+  final Color? backGroundColor;
   final List<Widget>? actions;
 
   BaseAppBar({
@@ -21,6 +21,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
     required this.title,
     this.leadingIcon,
     this.actions,
+    this.backGroundColor,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -30,7 +31,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
       ),
-      backgroundColor: backgroundColorApp,
+      backgroundColor: backGroundColor ?? backgroundColorApp,
       bottomOpacity: 0.0,
       elevation: APP_DEVICE == DeviceType.MOBILE ? 0 : 0.7,
       shadowColor: bgDropDown,

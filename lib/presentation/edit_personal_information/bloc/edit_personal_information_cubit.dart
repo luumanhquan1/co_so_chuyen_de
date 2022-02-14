@@ -19,12 +19,18 @@ class EditPersonalInformationCubit
 
   Stream<bool> get isCheckHuyenStream => isCheckHuyenSubject.stream;
   String ngaySinh = '';
+  String tinh = '';
+  String huyen = '';
+  String xa = '';
   bool gioiTinh = false;
   ManagerPersonalInformationModel managerPersonalInformationModel =
       ManagerPersonalInformationModel();
   final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
 
   Stream<int> get checkRadioStream => _checkRadioSubject.stream;
+
+  BehaviorSubject<String> isCheckRadioButton = BehaviorSubject();
+  BehaviorSubject<bool> isCheckButtonReset = BehaviorSubject.seeded(true);
 
   void checkRadioButton(int _index) {
     _checkRadioSubject.sink.add(_index);
@@ -36,6 +42,9 @@ class EditPersonalInformationCubit
     this.managerPersonalInformationModel = managerPersonalInformationModel;
     ngaySinh = managerPersonalInformationModel.ngaySinh ?? '';
     gioiTinh = managerPersonalInformationModel.gioiTinh ?? false;
+    tinh = managerPersonalInformationModel.tinh ?? '';
+    huyen = managerPersonalInformationModel.huyen ?? '';
+    xa = managerPersonalInformationModel.xa ?? '';
   }
 
   Future<void> selectGTEvent(bool gioiTinh) async {
@@ -60,22 +69,22 @@ class EditPersonalInformationCubit
   List<String> fakeDataTinh = [
     'hà nôi',
     'lam loi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
+    'phú tho',
+    'hà nam',
+    'an giang',
+    'phúc thọ',
+    'bình thuận',
+    'phú mỹ',
   ];
   List<String> fakeDataHuyen = [
     'hà nôi',
     'lam loi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
-    'hà nôi',
+    'phú tho',
+    'hà nam',
+    'an giang',
+    'phúc thọ',
+    'bình thuận',
+    'phú mỹ',
   ];
 
   void dispose() {}

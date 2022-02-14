@@ -330,5 +330,9 @@
   "trung": "Trùng",
   "ten_don_vi": "Tên đơn vị",
   "dau_moi_lam_viec": "Đầu mối làm việc",
-  "noi_dung_lam_viec": "Nội dung làm việc"
+  "noi_dung_lam_viec": "Nội dung làm việc",
+  "chon_tinh_thanh_pho": "Chọn Tỉnh/Thành phố",
+  "chon": "Chọn",
+  "dong": "Đóng"
+
 }

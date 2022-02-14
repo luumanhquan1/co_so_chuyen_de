@@ -330,5 +330,8 @@
   "dau_moi_lam_viec": "Đầu mối làm việc",
   "noi_dung_lam_viec": "Nội dung làm việc",
   "xem_truoc_widget": "Xem trước quản lý widgets",
-  "trung": "Trùng"
+  "trung": "Trùng",
+  "chon_tinh_thanh_pho": "Chọn Tỉnh/Thành phố",
+  "chon": "Chọn",
+  "dong": "Đóng"
 }

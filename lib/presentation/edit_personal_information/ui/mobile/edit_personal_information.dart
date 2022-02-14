@@ -94,14 +94,25 @@ class _EditPersonalInformationScreen
             padding: const EdgeInsets.only(right: 8),
             child: TextButton(
               onPressed: () {
-                nameController.text = '';
-                maCanBoController.text = '';
-                thuTuController.text = '';
-                cmndController.text = '';
-                emailController.text = '';
-                sdtCoquanController.text = '';
-                sdtController.text = '';
-                diaChiLienHeController.text = '';
+                nameController.text =
+                    widget.managerPersonalInformationModel.hoTen ?? '';
+                maCanBoController.text =
+                    widget.managerPersonalInformationModel.maCanBo ?? '';
+                thuTuController.text =
+                    widget.managerPersonalInformationModel.thuTu.toString();
+                cmndController.text =
+                    widget.managerPersonalInformationModel.cmtnd ?? '';
+                emailController.text =
+                    widget.managerPersonalInformationModel.email ?? '';
+                sdtCoquanController.text =
+                    widget.managerPersonalInformationModel.phoneCoQuan ?? '';
+                sdtController.text =
+                    widget.managerPersonalInformationModel.phoneDiDong ?? '';
+                diaChiLienHeController.text =
+                    widget.managerPersonalInformationModel.diaChi ?? '';
+                cubit.isCheckButtonReset.sink.add(
+                  !cubit.isCheckButtonReset.value,
+                );
               },
               child: Text(
                 S.current.reset,
@@ -150,17 +161,23 @@ class _EditPersonalInformationScreen
                   controller: thuTuController,
                 ),
               ),
-              InputInfoUserWidget(
-                isObligatory: true,
-                title: user.keys.elementAt(4),
-                child: SelectDate(
-                  paddings: 10,
-                  leadingIcon: SvgPicture.asset(ImageAssets.icEditInfor),
-                  value: cubit.managerPersonalInformationModel.ngaySinh,
-                  onSelectDate: (dateTime) {
-                    cubit.selectBirthdayEvent(dateTime.toString());
-                  },
-                ),
+              StreamBuilder<bool>(
+                stream: cubit.isCheckButtonReset,
+                builder: (context, snapshot) {
+                  return InputInfoUserWidget(
+                    isObligatory: true,
+                    title: user.keys.elementAt(4),
+                    child: SelectDate(
+                      key: UniqueKey(),
+                      paddings: 10,
+                      leadingIcon: SvgPicture.asset(ImageAssets.icEditInfor),
+                      value: cubit.managerPersonalInformationModel.ngaySinh,
+                      onSelectDate: (dateTime) {
+                        cubit.selectBirthdayEvent(dateTime);
+                      },
+                    ),
+                  );
+                },
               ),
               InputInfoUserWidget(
                 title: user.keys.elementAt(5),
@@ -174,22 +191,28 @@ class _EditPersonalInformationScreen
                   },
                 ),
               ),
-              InputInfoUserWidget(
-                isObligatory: true,
-                title: user.keys.elementAt(6),
-                child: CustomDropDown(
-                  value: cubit.managerPersonalInformationModel.gioiTinh ?? false
-                      ? S.current.Nam
-                      : S.current.Nu,
-                  items: cubit.fakeDataGioiTinh,
-                  onSelectItem: (value) {
-                    if (value == 0) {
-                      cubit.selectGTEvent(true);
-                    } else {
-                      cubit.selectGTEvent(false);
-                    }
-                  },
-                ),
+              StreamBuilder<bool>(
+                stream: cubit.isCheckButtonReset,
+                builder: (context, snapshot) {
+                  return InputInfoUserWidget(
+                    isObligatory: true,
+                    title: user.keys.elementAt(6),
+                    child: CustomDropDown(
+                      value: cubit.managerPersonalInformationModel.gioiTinh ??
+                              false
+                          ? S.current.Nam
+                          : S.current.Nu,
+                      items: cubit.fakeDataGioiTinh,
+                      onSelectItem: (value) {
+                        if (value == 0) {
+                          cubit.selectGTEvent(true);
+                        } else {
+                          cubit.selectGTEvent(false);
+                        }
+                      },
+                    ),
+                  );
+                },
               ),
               InputInfoUserWidget(
                 title: user.keys.elementAt(7),

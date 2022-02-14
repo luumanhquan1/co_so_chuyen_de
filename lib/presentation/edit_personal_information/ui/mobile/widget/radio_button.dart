@@ -3,19 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomRadioButtonCheck extends StatefulWidget {
-  bool isCheck;
-  final bool allowUnSelect;
-  final bool canSelect;
-  final String title;
-  final Function(bool) onSelectItem;
+  final Function() onSelectItem;
+  bool isCheckButton = false;
 
   CustomRadioButtonCheck({
     Key? key,
-    this.isCheck = false,
-    this.title = '',
-    this.allowUnSelect = false,
     required this.onSelectItem,
-    required this.canSelect,
+    this.isCheckButton = false,
   }) : super(key: key);
 
   @override
@@ -25,40 +19,16 @@ class CustomRadioButtonCheck extends StatefulWidget {
 class _CustomRadioButtonCheckState extends State<CustomRadioButtonCheck> {
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: widget.canSelect ? 1 : 0.5,
-      child: GestureDetector(
-        onTap: () {
-          if (widget.canSelect) {
-            if (widget.allowUnSelect) {
-              setState(() {
-                widget.isCheck = !widget.isCheck;
-              });
-            } else {
-              if (!widget.isCheck) {
-                setState(() {
-                  widget.isCheck = true;
-                });
-              }
-            }
-            widget.onSelectItem(widget.isCheck);
-          }
-        },
-        child: Container(
-          color: Colors.transparent,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
-                widget.isCheck
-                    ? ImageAssets.ic_CheckedDate
-                    : ImageAssets.ic_unChecked,
-              ),
-              const SizedBox(width: 10),
-              Text(widget.title),
-            ],
-          ),
-        ),
+    return GestureDetector(
+      onTap: () {
+        widget.onSelectItem();
+        // setState(() {});
+        widget.isCheckButton = !widget.isCheckButton;
+      },
+      child: SvgPicture.asset(
+        widget.isCheckButton
+            ? ImageAssets.ic_CheckedDate
+            : ImageAssets.ic_unChecked,
       ),
     );
   }
