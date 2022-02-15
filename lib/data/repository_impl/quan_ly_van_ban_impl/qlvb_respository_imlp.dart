@@ -11,14 +11,14 @@ class QLVBImlp implements QLVBRepository {
 
   QLVBImlp(this._quanLyVanBanClient);
 
-  @override
-  Future<Result<VBDenModel>> getVBDen(
-      String startTime, String endTime) {
-    return runCatchingAsync<VBDenResponse, VBDenModel>(
-      () => _quanLyVanBanClient.getVbDen(startTime, endTime),
-      (response) => response.toDomain(),
-    );
-  }
+  // @override
+  // Future<Result<VBDenModel>> getVBDen(
+  //     String startTime, String endTime) {
+  //   return runCatchingAsync<VBDenResponse, VBDenModel>(
+  //     () => _quanLyVanBanClient.getVbDen(startTime, endTime),
+  //     (response) => response.toDomain(),
+  //   );
+  // }
 
   @override
   Future<Result<VBDiModel>> getVBDi(String startTime, String endTime) {

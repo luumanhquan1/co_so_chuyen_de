@@ -75,22 +75,22 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
  }
   QLVBRepository get _QLVBRepo => Get.find();
 
-  void getVbDenAPI({
-    required String walletAddress,
-    required String signature,
+   Future<void> getVbDiAPI({
+    required String startDate,
+    required String endDate,
   }) async {
-    final result = await _QLVBRepo.getVBDen('2022-02-18', '2022-03-14');
+    final result = await _QLVBRepo.getVBDi(startDate, endDate);
     await result.when(
       success: (res) async {
-
+        print (res);
       },
       error: (err) {
-        return;
+        print(err);
       },
     );
 
   }
-
+ 
 }
 
 

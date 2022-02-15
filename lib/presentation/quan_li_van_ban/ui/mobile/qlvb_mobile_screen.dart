@@ -39,6 +39,11 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
       appBar: AppBarDefaultBack(
         S.current.thong_tin_chung,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          qlvbCubit.getVbDiAPI(startDate: '2022-01-05', endDate: '2022-03-11');
+        },
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
