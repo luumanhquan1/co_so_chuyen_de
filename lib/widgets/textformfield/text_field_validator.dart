@@ -31,7 +31,10 @@ class TextFieldValidator extends StatefulWidget {
     this.hintText,
     this.suffixIcon,
     this.prefixIcon,
+
     this.onTap,
+
+
     this.obscureText,
     this.fillColor,
   }) : super(key: key);

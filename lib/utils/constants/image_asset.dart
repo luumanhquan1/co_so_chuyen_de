@@ -98,7 +98,11 @@ class ImageAssets {
   static const String imgView = '$baseImg/ic_view.svg';
   static const String imgBackGroundLogin =
       '$baseImg/image_login_background.svg';
+
   static const String icThoiTiet = '$baseImg/ic_thoi_tiet.png';
+
+  static const String imgLoginPng = '$baseImg/img_login.png';
+
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
   static const String icBaoChiMangXaHoi = '$baseImg/ic_bao_chi_mang_xa_hoi.svg';
@@ -217,6 +221,9 @@ class ImageAssets {
   static const String ic_file = '$baseImg/file.svg';
   static const String imgCalendar = '$baseImg/img_calendar.png';
   static const String imgCheckBox = '$baseImg/img_check_box.png';
+  static const String icClearLogin = '$baseImg/ic_clear_login.svg';
+  static const String icFaceId = '$baseImg/ic_face_id.svg';
+  static const String icFingerprint = '$baseImg/ic_fingerprint.svg';
 
   static SvgPicture svgAssets(
     String name, {

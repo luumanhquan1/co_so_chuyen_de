@@ -4,7 +4,8 @@ class BaseUrlConstants{
   static const baseURLProduct = 'https://api-ccvc-uat.chinhquyendientu.vn';
 }
 class ApiConstants {
-  static const LOGIN = '/example_view';
+
+  static const LOGIN = '/api/auth/login';
   static const int DEFAULT_PAGE_SIZE = 45;
   static const int PAGE_BEGIN = 1;
   static const int NOT_SAVED_ID = -1;

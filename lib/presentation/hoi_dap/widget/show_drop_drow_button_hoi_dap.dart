@@ -94,7 +94,7 @@ class _ShowDropDownButtonHoiDapState extends State<ShowDropDownButtonHoiDap> {
     return showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.transparent, // user must tap button!
+      barrierColor: Colors.transparent, // account must tap button!
       builder: (BuildContext context) {
         return GestureDetector(
           onTap: () {
