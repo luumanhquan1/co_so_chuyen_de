@@ -79,7 +79,6 @@ class _EditPersonalInformationTabletScreen
       resizeToAvoidBottomInset: true,
       appBar: AppBarDefaultBack(
         S.current.chinh_sua_thong_tin,
-        backGroundColors: bgCalenderColor,
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

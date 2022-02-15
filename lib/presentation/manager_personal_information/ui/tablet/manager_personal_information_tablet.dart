@@ -32,7 +32,6 @@ class _ManagerPersonalInformationTabletState
     return Scaffold(
       backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
-        backGroundColor: bgCalenderColor,
         title: S.current.manager_information,
         leadingIcon: IconButton(
           icon: SvgPicture.asset(ImageAssets.icVector),

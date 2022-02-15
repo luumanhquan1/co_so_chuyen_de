@@ -1,8 +1,8 @@
-
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/chon_phong_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/fake_data_tao_lich.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/container_toggle_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/text_field_style.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/thanh_phan_tham_gia_widget_expand.dart';
@@ -12,6 +12,7 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
+import 'package:ccvc_mobile/widgets/calendar/time_date_widget.dart';
 import 'package:flutter/material.dart';
 
 class TaoLichHopScreen extends StatefulWidget {
@@ -133,7 +134,8 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
               ),
               spaceH15,
               const ThanhPhanThamGiaExpandWidget(),
-              const ThanhPhanThamGiaExpandWidget(),
+              const ChuongTrinhHopWidget(),
+              TimeDateInputWidget(),
               const SizedBox(
                 height: 100,
               )

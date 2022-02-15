@@ -26,7 +26,8 @@ class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
       ),
-      backgroundColor: backGroundColors ?? backgroundColorApp,
+      backgroundColor:
+          APP_DEVICE == DeviceType.MOBILE ? backgroundColorApp : bgQLVBTablet,
       bottomOpacity: 0.0,
       elevation: APP_DEVICE == DeviceType.MOBILE ? 0 : 0.7,
       shadowColor: bgDropDown,

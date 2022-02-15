@@ -105,7 +105,7 @@
   "dat_lai_mat_khau": "Đặt lại mật khẩu",
   "mat_khau_hien_tai": "Mật khẩu hiện tại",
   "mat_khau_moi": "Mật khẩu mới",
-  "nhap_lai_mat_khau": "Nhập lại mật khẩu",
+  "nhap_lai_mat_khau": "Nhập lại mật khẩu mới",
   "quen_mat_khau": "Quên mật khẩu",
   "cap_nhat": "Cập nhật",
   "tiep_theo": "Tiếp theo",
@@ -244,7 +244,6 @@
   "tuy_chon": "Tùy chọn",
   "tu_ngay": "Từ ngày",
   "den_ngay": "Đến ngày",
-  "dong": "Đóng",
   "chon_khoang_thoi_gian": "Chọn khoảng thời gian",
   "bo_qua": "Bỏ qua",
   "hien_thi": "Hiện thị",
@@ -333,5 +332,10 @@
   "trung": "Trùng",
   "chon_tinh_thanh_pho": "Chọn Tỉnh/Thành phố",
   "chon": "Chọn",
-  "dong": "Đóng"
+  "dong": "Đóng",
+  "thong_tin_khach_moi": "Thông tin khách mời",
+  "tong_so_luong_khach": "Tông số lượng khách",
+  "nhap_so_luong": "Nhập số lượng",
+  "chuong_trinh_hop": "Chương trình họp",
+  "them_phien_hop": "Thêm phiên họp"
 }
