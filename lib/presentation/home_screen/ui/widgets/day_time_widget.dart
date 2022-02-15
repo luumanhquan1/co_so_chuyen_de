@@ -37,19 +37,22 @@ class DayTimeWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (data.dateMore.isNotEmpty) Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: FittedBox(
-                        child: Text(
-                          data.dateMore,
-                          style: textNormalCustom(
-                            color: AppTheme.getInstance().titleColor(),
-                            fontSize: 14.0.textScale(),
-                            fontWeight: FontWeight.w600,
+                    if (data.dateMore.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: FittedBox(
+                          child: Text(
+                            data.dateMore,
+                            style: textNormalCustom(
+                              color: AppTheme.getInstance().titleColor(),
+                              fontSize: 14.0.textScale(),
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                    ) else const SizedBox(),
+                      )
+                    else
+                      const SizedBox(),
                     Text(
                       data.lunarDate,
                       style: textNormal(
@@ -57,7 +60,6 @@ class DayTimeWidget extends StatelessWidget {
                         14.0.textScale(),
                       ),
                     ),
-
                   ],
                 );
               },
@@ -67,12 +69,14 @@ class DayTimeWidget extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-          Image.asset(ImageAssets.icThoiTiet),
+            Image.asset(ImageAssets.icThoiTiet),
             spaceW12,
-            Text('32°C',style: textNormalCustom(fontSize: 16,color: titleColor),)
+            Text(
+              '32°C',
+              style: textNormalCustom(fontSize: 16, color: titleColor),
+            )
           ],
         )
-
       ],
     );
   }
