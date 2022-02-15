@@ -110,11 +110,12 @@ class _CustomDropDownState extends State<SelectDate> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.4,
                               child: FlutterRoundedCupertinoDatePickerWidget(
                                 onDateTimeChanged: (value) {
                                   dateSelect = value.toString();
                                 },
+                                textStyleDate: titleAppbar(),
                                 initialDateTime: DateTime.now(),
                               ),
                             ),
