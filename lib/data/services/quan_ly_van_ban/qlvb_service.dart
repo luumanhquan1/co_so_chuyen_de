@@ -13,9 +13,9 @@ abstract class QuanLyVanBanClient {
   @factoryMethod
   factory QuanLyVanBanClient(Dio dio, {String baseUrl}) =_QuanLyVanBanClient;
 
-  // @GET(ApiConstants.DASH_BOARD_VBDEN)
-  // Future<VBDenResponse> getVbDen(@Field('NgayDauTien') String startDate,
-  //     @Field('NgayCuoiCung') String endDate,);
+  @GET(ApiConstants.DASH_BOARD_VBDEN)
+  Future<VBDenResponse> getVbDen(@Field('NgayDauTien') String startDate,
+      @Field('NgayCuoiCung') String endDate,);
 
   @GET(
     ApiConstants.DASH_BOARD_VBDi,
