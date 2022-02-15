@@ -106,7 +106,7 @@ extension CheckValidate on String {
   }
 
   String? checkNull() {
-    if (isEmpty) {
+    if (trim().isEmpty) {
       return S.current.khong_duoc_de_trong;
     }
     return null;
