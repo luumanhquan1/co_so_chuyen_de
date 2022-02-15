@@ -11,6 +11,11 @@ import 'package:rxdart/subjects.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LichHopCubit extends BaseCubit<LichHopState> {
+  DateTime focusedDay = DateTime.now();
+  DateTime? selectedDay;
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
+
   bool isCheckNgay = false;
   late BuildContext context;
   BehaviorSubject<int> index=BehaviorSubject.seeded(0);
