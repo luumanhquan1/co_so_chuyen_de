@@ -165,8 +165,8 @@ class ImageAssets {
   static const String ic_gui_y_kien = '$baseImg/icon_send.svg';
 
   //
-  static const String ic_CheckedDate = '$baseImg/ic_checkDate.svg';
-  static const String ic_unChecked = '$baseImg/ic_unChecked.svg';
+  static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';
+  static const String ic_unChecked = '$baseImg/ic_unchecked.svg';
 
   static const String icKetNoiTablet = '$baseImg/ic_ket-noi_tablet.svg';
 
