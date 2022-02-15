@@ -1,4 +1,6 @@
-import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
+import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
+import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
 import 'package:flutter/material.dart';
@@ -30,6 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const MainTabBarView();
+    return screenDevice(
+      mobileScreen: const LoginScreen(),
+      tabletScreen: const LoginTabletScreen(),
+    );
   }
 }
