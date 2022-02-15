@@ -36,14 +36,6 @@ class SelectDate extends StatefulWidget {
 class _CustomDropDownState extends State<SelectDate> {
   String dateSelect = '';
 
-  //
-  // @override
-  // void didUpdateWidget(covariant SelectDate oldWidget) {
-  //   // TODO: implement didUpdateWidget
-  //   super.didUpdateWidget(oldWidget);
-  //   dateSelect = widget.value ?? DateTime.now().toString();
-  // }
-
   @override
   void initState() {
     if (!widget.isObligatory) {
@@ -128,12 +120,6 @@ class _CustomDropDownState extends State<SelectDate> {
                                 title2: S.current.chon,
                                 title1: S.current.dong,
                                 onPressed2: () {
-                                  // if (selectedDate != null) {
-                                  //   dateSelect = selectedDate.toString();
-                                  //   dateSelect = selectedDate.toString();
-                                  //   setState(() {});
-                                  //   widget.onSelectDate(selectedDate);
-                                  // }
                                   setState(() {
                                     widget.onSelectDate(dateSelect);
                                   });

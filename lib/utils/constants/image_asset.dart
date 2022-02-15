@@ -99,6 +99,9 @@ class ImageAssets {
   static const String imgView = '$baseImg/ic_view.svg';
   static const String imgBackGroundLogin =
       '$baseImg/image_login_background.svg';
+
+  static const String icThoiTiet = '$baseImg/ic_thoi_tiet.png';
+
   static const String imgLoginPng = '$baseImg/img_login.png';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';

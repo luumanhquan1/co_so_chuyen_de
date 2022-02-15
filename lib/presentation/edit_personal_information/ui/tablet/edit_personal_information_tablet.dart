@@ -82,7 +82,6 @@ class _EditPersonalInformationTabletScreen
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        //   padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Container(
           decoration: BoxDecoration(
             color: backgroundColorApp,

@@ -92,7 +92,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                 )
                                 .toList();
                             searchItemSubject.sink.add(searchList);
-                            //cubit.isCheckRadioButton.sink.add('');
                           },
                         ),
                         spaceH4,
@@ -198,12 +197,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                           ],
                                         );
                                       },
-                                      // separatorBuilder: (context, index) {
-                                      //   return const Divider(
-                                      //     color: Colors.black,
-                                      //   );
-                                      // },
-                                      // itemCount: snapshot.data?.length ?? 0,
                                     );
                             },
                           ),
@@ -214,7 +207,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                   ),
                 ),
               );
-              //  showListItem(widget.context);
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -298,7 +290,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                     )
                                     .toList();
                                 searchItemSubject.sink.add(searchList);
-                                //cubit.isCheckRadioButton.sink.add('');
                               },
                             ),
                             spaceH4,
@@ -412,12 +403,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                               ],
                                             );
                                           },
-                                          // separatorBuilder: (context, index) {
-                                          //   return const Divider(
-                                          //     color: Colors.black,
-                                          //   );
-                                          // },
-                                          // itemCount: snapshot.data?.length ?? 0,
                                         );
                                 },
                               ),
@@ -428,7 +413,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                       ),
                     ),
                   );
-                  //  showListItem(widget.context);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -445,13 +429,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                         stream: cubit.isCheckRadioButton,
                         initialData: widget.title,
                         builder: (context, snapshot) {
-                          // return Text(
-                          //   snapshot.data ?? '',
-                          //   style: tokenDetailAmount(
-                          //     fontSize: 16,
-                          //     color: fontColorTablet2,
-                          //   ),
-                          // );
                           return selectedItems.isNotEmpty
                               ? _buildTagView()
                               : Text(
@@ -462,15 +439,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                   ),
                                 );
                         },
-                      )
-                      // : Text(
-                      //     widget.title ?? S.current.danh_sach_rong,
-                      //     style: tokenDetailAmount(
-                      //       fontSize: 14.0.textScale(),
-                      //       color: titleColor,
-                      //     ),
-                      //   ),
-                      ,
+                      ),
                     ),
                   ],
                 ),

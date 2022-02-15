@@ -292,7 +292,6 @@ class _CustomSelectItemsTabletState extends State<CustomSelectItemsTablet> {
           )
         : GestureDetector(
             onTap: () {
-              // showBottomSheet(Widgets.context);
               showListItem(widget.context);
             },
             child: Column(
