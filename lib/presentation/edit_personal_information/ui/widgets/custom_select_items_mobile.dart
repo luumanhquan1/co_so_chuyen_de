@@ -230,13 +230,15 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                     stream: cubit.isCheckRadioButton,
                     initialData: contents,
                     builder: (context, snapshot) {
-                      return Text(
-                        snapshot.data ?? '',
-                        style: tokenDetailAmount(
-                          fontSize: 16,
-                          color: fontColorTablet2,
-                        ),
-                      );
+                      return selectedItems.isNotEmpty
+                          ? _buildTagView()
+                          : Text(
+                              snapshot.data ?? S.current.danh_sach_rong,
+                              style: tokenDetailAmount(
+                                fontSize: 14.0.textScale(),
+                                color: titleColor,
+                              ),
+                            );
                     },
                   ),
                 ),
@@ -443,13 +445,22 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                         stream: cubit.isCheckRadioButton,
                         initialData: widget.title,
                         builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data ?? '',
-                            style: tokenDetailAmount(
-                              fontSize: 16,
-                              color: fontColorTablet2,
-                            ),
-                          );
+                          // return Text(
+                          //   snapshot.data ?? '',
+                          //   style: tokenDetailAmount(
+                          //     fontSize: 16,
+                          //     color: fontColorTablet2,
+                          //   ),
+                          // );
+                          return selectedItems.isNotEmpty
+                              ? _buildTagView()
+                              : Text(
+                                  widget.title ?? S.current.danh_sach_rong,
+                                  style: tokenDetailAmount(
+                                    fontSize: 14.0.textScale(),
+                                    color: titleColor,
+                                  ),
+                                );
                         },
                       )
                       // : Text(

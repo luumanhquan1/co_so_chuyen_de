@@ -77,7 +77,10 @@ class _EditPersonalInformationTabletScreen
     return Scaffold(
       backgroundColor: bgManagerColor,
       resizeToAvoidBottomInset: true,
-      appBar: AppBarDefaultBack(S.current.chinh_sua_thong_tin),
+      appBar: AppBarDefaultBack(
+        S.current.chinh_sua_thong_tin,
+        backGroundColors: bgCalenderColor,
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         //   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -129,7 +132,7 @@ class _EditPersonalInformationTabletScreen
                         cubit.isCheckButtonReset.sink.add(
                           !cubit.isCheckButtonReset.value,
                         );
-
+                        cubit.isCheckData();
                       },
                       child: Text(
                         S.current.reset,
@@ -175,20 +178,26 @@ class _EditPersonalInformationTabletScreen
                               isEnabled: true,
                             ),
                           ),
-                          InputInfoUserWidget(
-                            isObligatory: true,
-                            title: user.keys.elementAt(4),
-                            child: SelectDate(
-                              key: UniqueKey(),
-                              paddings: 10,
-                              leadingIcon:
-                                  SvgPicture.asset(ImageAssets.icEditInfor),
-                              value: cubit
-                                  .managerPersonalInformationModel.ngaySinh,
-                              onSelectDate: (dateTime) {
-                                cubit.selectBirthdayEvent(dateTime);
-                              },
-                            ),
+                          StreamBuilder<bool>(
+                            stream: cubit.isCheckButtonReset,
+                            builder: (context, snapshot) {
+                              return InputInfoUserWidget(
+                                isObligatory: true,
+                                title: user.keys.elementAt(4),
+                                child: SelectDate(
+                                  key: UniqueKey(),
+                                  paddings: 10,
+                                  leadingIcon: SvgPicture.asset(
+                                    ImageAssets.icEditInfor,
+                                  ),
+                                  value: cubit
+                                      .managerPersonalInformationModel.ngaySinh,
+                                  onSelectDate: (dateTime) {
+                                    cubit.selectBirthdayEvent(dateTime);
+                                  },
+                                ),
+                              );
+                            },
                           ),
                           InputInfoUserWidget(
                             title: user.keys.elementAt(5),
@@ -199,24 +208,29 @@ class _EditPersonalInformationTabletScreen
                               },
                             ),
                           ),
-                          InputInfoUserWidget(
-                            isObligatory: true,
-                            title: user.keys.elementAt(6),
-                            child: CustomDropDown(
-                              value: cubit.managerPersonalInformationModel
-                                          .gioiTinh ??
-                                      false
-                                  ? S.current.Nam
-                                  : S.current.Nu,
-                              items: cubit.fakeDataGioiTinh,
-                              onSelectItem: (value) {
-                                if (value == 0) {
-                                  cubit.selectGTEvent(true);
-                                } else {
-                                  cubit.selectGTEvent(false);
-                                }
-                              },
-                            ),
+                          StreamBuilder<bool>(
+                            stream: cubit.isCheckButtonReset,
+                            builder: (context, snapshot) {
+                              return InputInfoUserWidget(
+                                isObligatory: true,
+                                title: user.keys.elementAt(6),
+                                child: CustomDropDown(
+                                  value: cubit.managerPersonalInformationModel
+                                              .gioiTinh ??
+                                          false
+                                      ? S.current.Nam
+                                      : S.current.Nu,
+                                  items: cubit.fakeDataGioiTinh,
+                                  onSelectItem: (value) {
+                                    if (value == 0) {
+                                      cubit.selectGTEvent(true);
+                                    } else {
+                                      cubit.selectGTEvent(false);
+                                    }
+                                  },
+                                ),
+                              );
+                            },
                           ),
                           InputInfoUserWidget(
                             title: user.keys.elementAt(7),
@@ -255,27 +269,31 @@ class _EditPersonalInformationTabletScreen
                               },
                             ),
                           ),
-                          InputInfoUserWidget(
-                            title: user.keys.elementAt(10),
-                            child: CustomSelectItems(
-                              title: S.current.tinh_thanh,
-                              value: cubit.managerPersonalInformationModel.tinh,
-                              context: context,
-                              items: cubit.fakeDataTinh,
-                              onChange: (indexes) {
-                                if (indexes >= 0) {
-                                  setState(() {
-                                    // cubit.isCheckH(false);
-                                    cubit.isCheckTinhSubject.sink.add(false);
-                                  });
-                                }
-                              },
-                              onRemove: () {
-                                cubit.isCheckTinhSubject.sink.add(true);
-                                cubit.isCheckHuyenSubject.sink.add(true);
-                              },
-                              isCheckEnable: false,
-                            ),
+                          StreamBuilder<bool>(
+                            stream: cubit.isCheckButtonReset,
+                            builder: (context, snapshot) {
+                              return InputInfoUserWidget(
+                                title: user.keys.elementAt(10),
+                                child: CustomSelectItems(
+                                  title: S.current.tinh_thanh,
+                                  key: UniqueKey(),
+                                  value: cubit
+                                      .managerPersonalInformationModel.tinh,
+                                  context: context,
+                                  items: cubit.fakeDataTinh,
+                                  onChange: (indexes) {
+                                    if (indexes >= 0) {
+                                      cubit.isCheckTinhSubject.sink.add(false);
+                                    }
+                                  },
+                                  onRemove: () {
+                                    cubit.isCheckTinhSubject.sink.add(true);
+                                    cubit.isCheckHuyenSubject.sink.add(true);
+                                  },
+                                  isCheckEnable: false,
+                                ),
+                              );
+                            },
                           ),
                           StreamBuilder<bool>(
                             stream: cubit.isCheckTinhStream,

@@ -113,6 +113,7 @@ class _EditPersonalInformationScreen
                 cubit.isCheckButtonReset.sink.add(
                   !cubit.isCheckButtonReset.value,
                 );
+                cubit.isCheckData();
               },
               child: Text(
                 S.current.reset,
@@ -244,28 +245,30 @@ class _EditPersonalInformationScreen
                   },
                 ),
               ),
-              Form(
-                child: InputInfoUserWidget(
-                  title: user.keys.elementAt(10),
-                  child: CustomSelectItems(
-                    title: S.current.tinh_thanh,
-                    context: context,
-                    items: cubit.fakeDataTinh,
-                    onChange: (indexes) {
-                      if (indexes >= 0) {
-                        setState(() {
-                          // cubit.isCheckH(false);
+              StreamBuilder<bool>(
+                stream: cubit.isCheckButtonReset,
+                builder: (context, snapshot) {
+                  return InputInfoUserWidget(
+                    title: user.keys.elementAt(10),
+                    child: CustomSelectItems(
+                      title: S.current.tinh_thanh,
+                      key: UniqueKey(),
+                      value: cubit.managerPersonalInformationModel.tinh,
+                      context: context,
+                      items: cubit.fakeDataTinh,
+                      onChange: (indexes) {
+                        if (indexes >= 0) {
                           cubit.isCheckTinhSubject.sink.add(false);
-                        });
-                      }
-                    },
-                    onRemove: () {
-                      cubit.isCheckTinhSubject.sink.add(true);
-                      cubit.isCheckHuyenSubject.sink.add(true);
-                    },
-                    isCheckEnable: false,
-                  ),
-                ),
+                        }
+                      },
+                      onRemove: () {
+                        cubit.isCheckTinhSubject.sink.add(true);
+                        cubit.isCheckHuyenSubject.sink.add(true);
+                      },
+                      isCheckEnable: false,
+                    ),
+                  );
+                },
               ),
               StreamBuilder<bool>(
                 stream: cubit.isCheckTinhStream,
@@ -276,6 +279,7 @@ class _EditPersonalInformationScreen
                       title: user.keys.elementAt(11),
                       child: CustomSelectItems(
                         key: UniqueKey(),
+                        value: cubit.managerPersonalInformationModel.huyen,
                         title: S.current.quan_huyen,
                         context: context,
                         items: cubit.fakeDataHuyen,
@@ -302,12 +306,11 @@ class _EditPersonalInformationScreen
                       title: user.keys.elementAt(12),
                       child: CustomSelectItems(
                         key: UniqueKey(),
+                        value: cubit.managerPersonalInformationModel.xa,
                         title: S.current.phuong_xa,
                         context: context,
                         items: cubit.fakeDataTinh,
-                        onChange: (indexes) {
-                          //  widget._viewModel.selectGroup(indexes);
-                        },
+                        onChange: (indexes) {},
                         isCheckEnable: snap,
                       ),
                     ),

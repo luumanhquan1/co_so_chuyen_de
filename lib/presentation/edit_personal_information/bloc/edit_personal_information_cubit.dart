@@ -36,6 +36,17 @@ class EditPersonalInformationCubit
     _checkRadioSubject.sink.add(_index);
   }
 
+  void isCheckData() {
+    if (managerPersonalInformationModel.tinh == '') {
+      isCheckTinhSubject.sink.add(true);
+      isCheckHuyenSubject.sink.add(true);
+    } else {
+      tinh = managerPersonalInformationModel.tinh ?? '';
+      isCheckTinhSubject.sink.add(true);
+      isCheckHuyenSubject.sink.add(true);
+    }
+  }
+
   Future<void> getCurrentUnit(
     ManagerPersonalInformationModel managerPersonalInformationModel,
   ) async {
