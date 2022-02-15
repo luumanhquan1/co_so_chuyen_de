@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -5,12 +7,12 @@ class AppState {
   String token = '';
   final BehaviorSubject<String> getToken = BehaviorSubject<String>();
   void getTokenPrefs() {
-     token = PrefsService.getLogin();
+     token = PrefsService.getToken();
     getToken.sink.add(token);
   }
 
   void setToken(String token) {
-    PrefsService.saveLogin(token);
+    PrefsService.saveToken(token);
     this.token = token;
     getToken.sink.add(token);
   }
