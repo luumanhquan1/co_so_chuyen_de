@@ -3,15 +3,26 @@ import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respo
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
+import 'package:ccvc_mobile/data/repository_impl/login/login_impl.dart';
+import 'package:ccvc_mobile/data/services/login_service.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/account/LoginModel.dart';
+import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 void configureDependencies() {
+
   Get.put(QuanLyVanBanClient(provideDio()));
   Get.put<QLVBRepository>(
     QLVBImlp(Get.find()),
+  );
+  //login
+  Get.put(LoginClient(provideDio()));
+  Get.put<LoginRepository>(
+    LoginImpl(Get.find()),
   );
 }
 int _connectTimeOut = 60000;
@@ -31,6 +42,9 @@ Dio provideDio() {
       onRequest:
           (RequestOptions options, RequestInterceptorHandler handler) async {
         options.baseUrl = appConstants.baseUrl;
+        final loginJson = PrefsService.getLogin();
+        final accessToken = loginFromJson(loginJson).accessToken ?? '';
+        options.headers['Authorization'] = 'Bearer $accessToken';
         options.headers['Content-Type'] = 'application/json';
         return handler.next(options);
       },
