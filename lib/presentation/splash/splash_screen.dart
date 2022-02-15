@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
@@ -36,6 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<String>(
+      initialData: AppStateCt.of(context).appState.token,
       stream: AppStateCt.of(context).appState.getToken,
       builder: (context, snapshot) {
         final data = snapshot.data ?? '';
