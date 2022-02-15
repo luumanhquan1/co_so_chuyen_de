@@ -35,7 +35,7 @@ class _ManagerPersonalInformationState
         leadingIcon: Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(
-            icon: SvgPicture.asset(ImageAssets.icVector),
+            icon: SvgPicture.asset(ImageAssets.icBack),
             onPressed: () {
               Navigator.pop(context);
             },

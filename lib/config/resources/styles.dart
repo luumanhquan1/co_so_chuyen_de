@@ -31,6 +31,7 @@ const spaceH48 = SizedBox(height: 48);
 const spaceH50 = SizedBox(height: 50);
 const spaceH60 = SizedBox(height: 60);
 const spaceH70 = SizedBox(height: 70);
+const spaceH156 = SizedBox(height: 156);
 
 ///W
 const spaceW2 = SizedBox(width: 2);
