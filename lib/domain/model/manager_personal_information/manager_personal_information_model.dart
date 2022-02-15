@@ -114,6 +114,60 @@ class ManagerPersonalInformationModel {
     ungDung: 'a',
   );
 
+  ManagerPersonalInformationModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    maCanBo = json['maCanBo'];
+    hoTen = json['hoTen'];
+    phoneDiDong = json['phone_DiDong'];
+    phoneCoQuan = json['phone_CoQuan'];
+    phoneNhaRieng = json['phone_NhaRieng'];
+    email = json['email'];
+    gioiTinh = json['gioiTinh'];
+    ngaySinh = json['ngaySinh'];
+    iDDonViHoatDong = json['iD_DonVi_HoatDong'];
+    cmtnd = json['cmtnd'];
+    anhDaiDienFilePath = json['anhDaiDien_FilePath'];
+    anhChuKyFilePath = json['anhChuKy_FilePath'];
+    anhChuKyNhayFilePath = json['anhChuKyNhay_FilePath'];
+    thoiGianCapNhat = json['thoiGian_CapNhat'];
+    chucVu = json['chucVu'];
+    donVi = json['donVi'];
+    diaChi = json['diaChi'];
+    thuTu = json['thuTu'];
+    iThuTu = json['_ThuTu'];
+    tinh = json['tinh'];
+    huyen = json['huyen'];
+    xa = json['xa'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['maCanBo'] = maCanBo;
+    data['hoTen'] = hoTen;
+    data['phone_DiDong'] = phoneDiDong;
+    data['phone_CoQuan'] = phoneCoQuan;
+    data['phone_NhaRieng'] = phoneNhaRieng;
+    data['email'] = email;
+    data['gioiTinh'] = gioiTinh;
+    data['ngaySinh'] = ngaySinh;
+    data['iD_DonVi_HoatDong'] = iDDonViHoatDong;
+    data['cmtnd'] = cmtnd;
+    data['anhDaiDien_FilePath'] = anhDaiDienFilePath;
+    data['anhChuKy_FilePath'] = anhChuKyFilePath;
+    data['anhChuKyNhay_FilePath'] = anhChuKyNhayFilePath;
+    data['thoiGian_CapNhat'] = thoiGianCapNhat;
+    data['chucVu'] = chucVu;
+    data['donVi'] = donVi;
+    data['diaChi'] = diaChi;
+    data['thuTu'] = thuTu;
+    data['_ThuTu'] = iThuTu;
+    data['tinh'] = tinh;
+    data['huyen'] = huyen;
+    data['xa'] = xa;
+    return data;
+  }
+
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
