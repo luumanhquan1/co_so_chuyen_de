@@ -40,11 +40,12 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  color: Colors.red,
                   height: 200,
-                  // child: SvgPicture.network(
-                  //   'https://ccvc-uat.chinhquyendientu.vn/img/login-v2.72cd8a26.svg',
-                  // ),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(ImageAssets.imgLoginPng)
+                      )
+                  ),
                 ),
                 const SizedBox(
                   height: 32,
@@ -180,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         passWord: textPasswordController.text,
                         userName: textTaiKhoanController.text,
                         appCode: 'APPDIEUHANH');
-                    if (loginCubit.isSuccess=true) {
+                    if (loginCubit.isSuccess==true) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

@@ -44,11 +44,12 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 100),
                     child: Container(
-                      color: Colors.red,
                       height: 350,
-                      // child: SvgPicture.network(
-                      //   'https://ccvc-uat.chinhquyendientu.vn/img/login-v2.72cd8a26.svg',
-                      // ),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(ImageAssets.imgLoginPng)
+                        )
+                      ),
                     ),
                   ),
                 ),
@@ -198,7 +199,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                               passWord: textPasswordController.text,
                               userName: textTaiKhoanController.text,
                               appCode: 'APPDIEUHANH');
-                          if (loginCubit.isSuccess = true) {
+                          if (loginCubit.isSuccess == true) {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
