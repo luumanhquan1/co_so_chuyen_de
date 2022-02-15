@@ -33,18 +33,14 @@ class ManagerPersonalInformationModel {
   String? thoiGianCapNhat;
   String? chucVu;
   String? donVi;
-
-  //bool? bitThuTruongDonVi;
-  // bool? bitDauMoiPAKN;
   String? diaChi;
   int? thuTu;
   int? iThuTu;
   String? tinh;
   String? huyen;
   String? xa;
-  bool? isDefault;
-  int? trangThai;
-  String? ungDung;
+  List<Departments>? departments;
+  List<UserAccounts>? userAccounts;
   Status status = Status.OFFLINE;
 
   ManagerPersonalInformationModel({
@@ -65,119 +61,26 @@ class ManagerPersonalInformationModel {
     this.thoiGianCapNhat,
     this.chucVu,
     this.donVi,
-    //  this.bitThuTruongDonVi,
-    //  this.bitDauMoiPAKN,
     this.diaChi,
     this.thuTu,
     this.iThuTu,
     this.tinh,
     this.huyen,
     this.xa,
-    this.isDefault,
-    this.trangThai,
-    this.ungDung,
-  }) {
-    if (trangThai == 1) {
-      status = Status.OFFLINE;
-    } else {
-      status = Status.ONLINME;
-    }
-  } // List<UserAccounts>? userAccounts;
-
-  static ManagerPersonalInformationModel fakeData =
-      ManagerPersonalInformationModel(
-    id: 'a',
-    maCanBo: '123',
-    hoTen: 'luc',
-    phoneDiDong: '01234567689',
-    phoneCoQuan: '0123456789',
-    phoneNhaRieng: '01234346567',
-    email: 'luc@gmail.com',
-    gioiTinh: false,
-    ngaySinh: '2001-04-01',
-    iDDonViHoatDong: 'a',
-    cmtnd: '1234567890',
-    anhDaiDienFilePath: 'a',
-    anhChuKyFilePath: 'a',
-    anhChuKyNhayFilePath: 'a',
-    thoiGianCapNhat: 'a',
-    chucVu: 'bi thu',
-    donVi: 'lanh dao',
-    diaChi: 'lam loi',
-    thuTu: 2,
-    iThuTu: 3,
-    tinh: 'a',
-    huyen: 'aaaa',
-    xa: 'aa',
-    isDefault: false,
-    trangThai: 1,
-    ungDung: 'a',
-  );
-
-  ManagerPersonalInformationModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    maCanBo = json['maCanBo'];
-    hoTen = json['hoTen'];
-    phoneDiDong = json['phone_DiDong'];
-    phoneCoQuan = json['phone_CoQuan'];
-    phoneNhaRieng = json['phone_NhaRieng'];
-    email = json['email'];
-    gioiTinh = json['gioiTinh'];
-    ngaySinh = json['ngaySinh'];
-    iDDonViHoatDong = json['iD_DonVi_HoatDong'];
-    cmtnd = json['cmtnd'];
-    anhDaiDienFilePath = json['anhDaiDien_FilePath'];
-    anhChuKyFilePath = json['anhChuKy_FilePath'];
-    anhChuKyNhayFilePath = json['anhChuKyNhay_FilePath'];
-    thoiGianCapNhat = json['thoiGian_CapNhat'];
-    chucVu = json['chucVu'];
-    donVi = json['donVi'];
-    diaChi = json['diaChi'];
-    thuTu = json['thuTu'];
-    iThuTu = json['_ThuTu'];
-    tinh = json['tinh'];
-    huyen = json['huyen'];
-    xa = json['xa'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = id;
-    data['maCanBo'] = maCanBo;
-    data['hoTen'] = hoTen;
-    data['phone_DiDong'] = phoneDiDong;
-    data['phone_CoQuan'] = phoneCoQuan;
-    data['phone_NhaRieng'] = phoneNhaRieng;
-    data['email'] = email;
-    data['gioiTinh'] = gioiTinh;
-    data['ngaySinh'] = ngaySinh;
-    data['iD_DonVi_HoatDong'] = iDDonViHoatDong;
-    data['cmtnd'] = cmtnd;
-    data['anhDaiDien_FilePath'] = anhDaiDienFilePath;
-    data['anhChuKy_FilePath'] = anhChuKyFilePath;
-    data['anhChuKyNhay_FilePath'] = anhChuKyNhayFilePath;
-    data['thoiGian_CapNhat'] = thoiGianCapNhat;
-    data['chucVu'] = chucVu;
-    data['donVi'] = donVi;
-    data['diaChi'] = diaChi;
-    data['thuTu'] = thuTu;
-    data['_ThuTu'] = iThuTu;
-    data['tinh'] = tinh;
-    data['huyen'] = huyen;
-    data['xa'] = xa;
-    return data;
-  }
+    this.departments,
+    this.userAccounts,
+  }); // List<UserAccounts>? userAccounts;
 
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
       ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
       ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
-      ManagerPersonalInformationRow(
-        S.current.ngay_sinh,
-        DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-        TypeRow.text,
-      ),
+      // ManagerPersonalInformationRow(
+      //   S.current.ngay_sinh,
+      //   DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      //   TypeRow.text,
+      // ),
       ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
@@ -261,35 +164,36 @@ class ManagerPersonalInformationModel {
     return list;
   }
 
+  //
   List<ManagerPersonalInformationRow> toListDonVi() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.stt, thuTu, TypeRow.text),
       ManagerPersonalInformationRow(S.current.don_vi, donVi, TypeRow.text),
       ManagerPersonalInformationRow(S.current.chuc_vu, chucVu, TypeRow.text),
-      ManagerPersonalInformationRow(
-        S.current.mac_dinh,
-        isDefault,
-        TypeRow.checkbox,
-      ),
+      // ManagerPersonalInformationRow(
+      //   S.current.mac_dinh,
+      //   departments,
+      //   TypeRow.checkbox,
+      // ),
     ];
-    if (trangThai == 1) {
-      list.insert(
-        3,
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    } else {
-      list.add(
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.k_hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    }
+    // if (departments == 1) {
+    //   list.insert(
+    //     3,
+    //     ManagerPersonalInformationRow(
+    //       S.current.trang_thai,
+    //       S.current.hoat_dong,
+    //       TypeRow.status,
+    //     ),
+    //   );
+    // } else {
+    //   list.add(
+    //     ManagerPersonalInformationRow(
+    //       S.current.trang_thai,
+    //       S.current.k_hoat_dong,
+    //       TypeRow.status,
+    //     ),
+    //   );
+    // }
     return list;
   }
 
@@ -301,25 +205,29 @@ class ManagerPersonalInformationModel {
         hoTen,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.ung_dung, ungDung, TypeRow.list),
+      // ManagerPersonalInformationRow(
+      //   S.current.ung_dung,
+      //   userAccounts,
+      //   TypeRow.list,
+      // ),
     ];
-    if (trangThai == 1) {
-      list.add(
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    } else {
-      list.add(
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.k_hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    }
+    // if (trangThai == 1) {
+    //   list.add(
+    //     ManagerPersonalInformationRow(
+    //       S.current.trang_thai,
+    //       S.current.hoat_dong,
+    //       TypeRow.status,
+    //     ),
+    //   );
+    // } else {
+    //   list.add(
+    //     ManagerPersonalInformationRow(
+    //       S.current.trang_thai,
+    //       S.current.k_hoat_dong,
+    //       TypeRow.status,
+    //     ),
+    //   );
+    // }
     return list;
   }
 
@@ -345,4 +253,60 @@ class ManagerPersonalInformationModel {
       S.current.dia_chi_lien_he: diaChi ?? '',
     };
   }
+}
+
+class Departments {
+  String? id;
+  String? chucVuId;
+  String? tenChucVu;
+  String? tenChucVuKhongDau;
+  String? donViId;
+  String? tenDonVi;
+  bool? isDefault;
+  String? tenDonViKhongDau;
+  int? trangThai;
+  String? updatedAt;
+
+  Departments({
+    this.id,
+    this.chucVuId,
+    this.tenChucVu,
+    this.tenChucVuKhongDau,
+    this.donViId,
+    this.tenDonVi,
+    this.isDefault,
+    this.tenDonViKhongDau,
+    this.trangThai,
+    this.updatedAt,
+  });
+}
+
+class UserAccounts {
+  String? id;
+  String? userName;
+  String? userId;
+  String? password;
+  List<Applications>? applications;
+  int? trangThai;
+
+  UserAccounts({
+    this.id,
+    this.userName,
+    this.userId,
+    this.password,
+    this.applications,
+    this.trangThai,
+  });
+}
+
+class Applications {
+  String? applicationName;
+  String? applicationId;
+  String? userId;
+
+  Applications({
+    this.applicationName,
+    this.applicationId,
+    this.userId,
+  });
 }

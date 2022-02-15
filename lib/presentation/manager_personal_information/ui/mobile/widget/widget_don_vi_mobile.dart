@@ -7,16 +7,15 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class WidgetDonVibMobile extends StatefulWidget {
-  const WidgetDonVibMobile({Key? key}) : super(key: key);
+  final ManagerPersonalInformationCubit cubit;
+
+  const WidgetDonVibMobile({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _WidgetDonVibMobileState createState() => _WidgetDonVibMobileState();
 }
 
 class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
-  final ManagerPersonalInformationCubit _cubit =
-      ManagerPersonalInformationCubit();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +39,7 @@ class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Column(
-                  children: _cubit.managerPersonalInformationModel
+                  children: widget.cubit.managerPersonalInformationModel
                       .toListDonVi()
                       .map(
                         (row) => WidgetRowItemMobile(

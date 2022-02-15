@@ -12,6 +12,7 @@ class PieChart extends StatelessWidget {
   final Function(int)? onTap;
   final bool isSubjectInfo;
   final double paddingLeftSubTitle;
+
   const PieChart({
     Key? key,
     required this.chartData,
@@ -121,7 +122,7 @@ class PieChart extends StatelessWidget {
             ),
           )
         else
-           const SizedBox()
+          const SizedBox()
       ],
     );
   }
@@ -138,6 +139,7 @@ class PieChart extends StatelessWidget {
 
 class ChartData {
   ChartData(this.title, this.value, this.color);
+
   final String title;
   final double value;
   final Color color;

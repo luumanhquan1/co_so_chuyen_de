@@ -27,6 +27,13 @@ class _ManagerPersonalInformationState
       ManagerPersonalInformationCubit();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _cubit.getInfo();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
@@ -65,23 +72,33 @@ class _ManagerPersonalInformationState
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          color: backgroundColorApp,
-          padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              WidgetThongTinMobile(),
-              spaceH20,
-              WidgetDonVibMobile(),
-              spaceH20,
-              WidgetUngDungMobile(),
-              spaceH20,
-              WidgetImageMobile(),
-              spaceH24,
-            ],
-          ),
-        ),
+        child: StreamBuilder(
+            stream: _cubit.managerStream,
+            builder: (context, snapshot) {
+              return Container(
+                color: backgroundColorApp,
+                padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    WidgetThongTinMobile(
+                      cubit: _cubit,
+                    ),
+                    spaceH20,
+                    WidgetDonVibMobile(
+                      cubit: _cubit,
+                    ),
+                    spaceH20,
+                    WidgetUngDungMobile(
+                      cubit: _cubit,
+                    ),
+                    spaceH20,
+                    WidgetImageMobile(),
+                    spaceH24,
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }

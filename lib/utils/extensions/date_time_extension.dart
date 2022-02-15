@@ -19,8 +19,8 @@ extension DateFormatString on DateTime {
   }
 
   String get formatDateTime {
-    final dateString = (DateFormat('HH:mm ,dd-MM').format(this))
-        .replaceAll('-', ' tháng ');
+    final dateString =
+        (DateFormat('HH:mm ,dd-MM').format(this)).replaceAll('-', ' tháng ');
 
     return dateString;
   }

@@ -4,6 +4,7 @@ class ChonPhongHopModel {
   final LoaiPhongHopEnum loaiPhongHopEnum;
   final List<ThietBiValue> listThietBi;
   final String yeuCauKhac;
+
   ChonPhongHopModel({
     required this.loaiPhongHopEnum,
     required this.listThietBi,

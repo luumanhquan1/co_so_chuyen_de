@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_state.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
 class EditPersonalInformationCubit
@@ -23,9 +25,9 @@ class EditPersonalInformationCubit
   String huyen = '';
   String xa = '';
   bool gioiTinh = false;
-  ManagerPersonalInformationModel managerPersonalInformationModel =
-      ManagerPersonalInformationModel();
   final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
+  late final ManagerPersonalInformationModel managerPersonalInformationModel;
+  ManagerRepository get _managerRepo => Get.find();
 
   Stream<int> get checkRadioStream => _checkRadioSubject.stream;
 
@@ -34,6 +36,16 @@ class EditPersonalInformationCubit
 
   void checkRadioButton(int _index) {
     _checkRadioSubject.sink.add(_index);
+  }
+
+  Future<void> getInfo(String id) async {
+    final result = await _managerRepo.getInfo(id);
+    result.when(
+      success: (res) {
+        managerPersonalInformationModel = res;
+      },
+      error: (error) {},
+    );
   }
 
   void isCheckData() {

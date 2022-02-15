@@ -100,7 +100,7 @@ TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
   );
 }
 
-TextStyle textNormalCustom( {
+TextStyle textNormalCustom({
   Color? color,
   double? fontSize,
   FontWeight? fontWeight,

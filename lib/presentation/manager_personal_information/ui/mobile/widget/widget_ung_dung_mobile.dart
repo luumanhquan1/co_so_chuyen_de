@@ -7,23 +7,22 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class WidgetUngDungMobile extends StatefulWidget {
-  const WidgetUngDungMobile({Key? key}) : super(key: key);
+  final ManagerPersonalInformationCubit cubit;
+
+  const WidgetUngDungMobile({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _WidgetUngDungMobileState createState() => _WidgetUngDungMobileState();
 }
 
 class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
-  final ManagerPersonalInformationCubit _cubit =
-      ManagerPersonalInformationCubit();
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-        S.current.ung_dung,
+          S.current.ung_dung,
           style: titleAppbar(fontSize: 14.0.textScale()),
         ),
         spaceH16,
@@ -40,7 +39,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Column(
-                  children: _cubit.managerPersonalInformationModel
+                  children: widget.cubit.managerPersonalInformationModel
                       .toListUngDung()
                       .map(
                         (row) => WidgetRowUngDungMobile(

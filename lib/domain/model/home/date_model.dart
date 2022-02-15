@@ -5,6 +5,7 @@ class DateModel {
   final String dayLunar;
   final String aqi;
   final String aqiStatus;
+
   DateModel({
     this.dateMore = '',
     this.lunarDate = '',

@@ -1,6 +1,3 @@
-import 'package:ccvc_mobile/domain/model/account/LoginModel.dart';
-import 'package:ccvc_mobile/domain/model/account/data_user.dart';
-import 'package:ccvc_mobile/domain/model/account/user_infomation.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,14 +27,17 @@ class PrefsService {
     final prefs = await _instance;
     return prefs.setString(_PREF_TOKEN, token);
   }
+
   static Future<bool> saveRefreshToken(String token) async {
     final prefs = await _instance;
     return prefs.setString(_PREF_REFRESH_TOKEN, token);
   }
+
   static Future<bool> saveDataUser(String data) async {
     final prefs = await _instance;
     return prefs.setString(_PREF_DATA_USER, data);
   }
+
   static Future<bool> saveLanguage(String code) async {
     final prefs = await _instance;
     return prefs.setString(_PREF_LANGUAGE, code);
