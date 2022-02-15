@@ -11,6 +11,7 @@ class TextFieldValidator extends StatefulWidget {
   final bool isEnabled;
   final Function(String)? onChange;
   final String? Function(String?)? validator;
+  final Function()? onTap;
   final TextInputType? textInputType;
   final int maxLine;
   final String? hintText;
@@ -29,6 +30,7 @@ class TextFieldValidator extends StatefulWidget {
     this.hintText,
     this.suffixIcon,
     this.prefixIcon,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -76,6 +78,11 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
         initialValue: widget.initialValue,
         keyboardType: widget.textInputType,
         maxLines: widget.maxLine,
+        onTap: (){
+          if(widget.onTap != null){
+            widget.onTap!();
+          }
+        },
         style: tokenDetailAmount(
           fontSize: 14.0.textScale(),
           color: titleColor,

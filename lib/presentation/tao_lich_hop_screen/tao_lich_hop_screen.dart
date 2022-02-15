@@ -12,7 +12,7 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
-import 'package:ccvc_mobile/widgets/calendar/time_date_widget.dart';
+import 'package:ccvc_mobile/widgets/timer/time_date_widget.dart';
 import 'package:flutter/material.dart';
 
 class TaoLichHopScreen extends StatefulWidget {
@@ -29,7 +29,6 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
       resizeToAvoidBottomInset: true,
       appBar: AppBarDefaultBack(S.current.tao_lich_hop),
       body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ExpandGroup(
           child: Column(
@@ -135,7 +134,6 @@ class _TaoLichHopScreenState extends State<TaoLichHopScreen> {
               spaceH15,
               const ThanhPhanThamGiaExpandWidget(),
               const ChuongTrinhHopWidget(),
-              TimeDateInputWidget(),
               const SizedBox(
                 height: 100,
               )

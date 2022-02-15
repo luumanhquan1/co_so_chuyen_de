@@ -334,6 +334,12 @@
   "tong_so_luong_khach" : "Tông số lượng khách",
   "nhap_so_luong" : "Nhập số lượng",
   "chuong_trinh_hop" : "Chương trình họp",
-  "them_phien_hop" : "Thêm phiên họp"
+  "them_phien_hop" : "Thêm phiên họp",
+  "den" : "đến",
+  "nhap_ten_phien_hop" : "Nhập tên phiên họp",
+  "thoi_gian_hop" : "Thời gian họp",
+  "chon_nguoi_chu_tri" : "Chọn người chủ trì",
+  "noi_dung_phien_hop" : "Nội dung phiên họp"
+
 
 }
