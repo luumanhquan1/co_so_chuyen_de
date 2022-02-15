@@ -1,19 +1,20 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/bloc/base_choose_time_cubit.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/ui/widgets/form_display_text.dart';
+import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
+import 'package:ccvc_mobile/presentation/choose_time/ui/widgets/form_display_text.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ShowDropDownButton extends StatefulWidget {
   final Function(String) onChanged;
-  final BaseChooseTimeCubit baseChooseTimeCubit;
+  final ChooseTimeCubit chooseTimeCubit;
 
   const ShowDropDownButton({
     Key? key,
     required this.onChanged,
-    required this.baseChooseTimeCubit,
+    required this.chooseTimeCubit,
   }) : super(key: key);
 
   @override
@@ -62,11 +63,11 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
             children: [
               Expanded(
                 flex: 7,
-                child: FormDisplayText(widget.baseChooseTimeCubit.textContent),
+                child: FormDisplayText(widget.chooseTimeCubit.textContent),
               ),
               Expanded(
                 flex: 4,
-                child: widget.baseChooseTimeCubit.isCheck
+                child: widget.chooseTimeCubit.isCheck
                     ? RotatedBox(
                         quarterTurns: 2,
                         child: IconButton(
@@ -78,7 +79,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
                         onPressed: () {
                           _showMyDialog(getPosition());
                           setState(() {
-                            widget.baseChooseTimeCubit.isCheck = true;
+                            widget.chooseTimeCubit.isCheck = true;
                           });
                         },
                         icon: SvgPicture.asset(ImageAssets.icDropDownButton),
@@ -101,7 +102,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
           onTap: () {
             Navigator.pop(context);
             setState(() {
-              widget.baseChooseTimeCubit.isCheck = false;
+              widget.chooseTimeCubit.isCheck = false;
             });
           },
           child: Scaffold(
@@ -126,13 +127,13 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
                         (index) => GestureDetector(
                           onTap: () {
                             setState(() {
-                              widget.baseChooseTimeCubit.textContent =
-                                  widget.baseChooseTimeCubit.listText[index];
+                              widget.chooseTimeCubit.textContent =
+                                  widget.chooseTimeCubit.listText[index];
                             });
                             Navigator.pop(context);
-                            widget.baseChooseTimeCubit.isCheck = false;
+                            widget.chooseTimeCubit.isCheck = false;
                             widget.onChanged(
-                              widget.baseChooseTimeCubit.textContent,
+                              widget.chooseTimeCubit.textContent,
                             );
                           },
                           child: Container(
@@ -143,7 +144,7 @@ class _ShowDropDownButtonState extends State<ShowDropDownButton> {
                                 Container(
                                   padding: const EdgeInsets.all(8),
                                   child: Text(
-                                    widget.baseChooseTimeCubit.listText[index],
+                                    widget.chooseTimeCubit.listText[index],
                                     style: textNormal(textDropDownColor, 14),
                                   ),
                                 ),

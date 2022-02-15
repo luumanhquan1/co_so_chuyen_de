@@ -14,11 +14,10 @@ class AppBarDefaultBack extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
   final String title;
+  final Color? backGroundColors;
 
-  AppBarDefaultBack(
-    this.title, {
-    Key? key,
-  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
+  AppBarDefaultBack(this.title, {Key? key, this.backGroundColors})
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override

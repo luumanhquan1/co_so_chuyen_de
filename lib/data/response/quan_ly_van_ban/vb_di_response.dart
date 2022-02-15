@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbdi_model.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_qlvb_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,28 +6,15 @@ part 'vb_di_response.g.dart';
 
 @JsonSerializable()
 class VBDiResponse extends Equatable {
-  @JsonKey(name: 'soLuongChoTrinhKy')
-  int? soLuongChoTrinhKy;
-  @JsonKey(name: 'soLuongChoXuLy')
-  int? soLuongChoXuLy;
-  @JsonKey(name: 'soLuongDaXuLy')
-  int? soLuongDaXuLy;
-  @JsonKey(name: 'soLuongThuongKhan')
-  int? soLuongThuongKhan;
+  @JsonKey(name: 'Data')
+  DataVBDiResponse data;
 
-  VBDiResponse();
+  VBDiResponse(this.data);
 
   factory VBDiResponse.fromJson(Map<String, dynamic> json) =>
       _$VBDiResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$VBDiResponseToJson(this);
-
-  VBDiModel toDomain() => VBDiModel(
-      soLuongChoTrinhKy: soLuongChoTrinhKy,
-      soLuongChoXuLy: soLuongChoXuLy,
-      soLuongDaXuLy: soLuongDaXuLy,
-      soLuongThuongKhan: soLuongThuongKhan,
-      );
 
   @override
   // TODO: implement props

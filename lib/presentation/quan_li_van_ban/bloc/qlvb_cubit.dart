@@ -80,12 +80,12 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
     required String endDate,
   }) async {
     final result = await _QLVBRepo.getVBDi(startDate, endDate);
-    await result.when(
-      success: (res) async {
-        print (res);
+     result.when(
+      success: (res)  {
+        print (res.soLuongChoTrinhKy);
       },
       error: (err) {
-        print(err);
+        print('err');
       },
     );
 
