@@ -1,4 +1,6 @@
+import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_den_request.dart';
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_di_request.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_danhsach_vb_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_den_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_di_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -14,11 +16,13 @@ abstract class QuanLyVanBanClient {
   factory QuanLyVanBanClient(Dio dio, {String baseUrl}) =_QuanLyVanBanClient;
 
   @GET(ApiConstants.DASH_BOARD_VBDEN)
-  Future<VBDenResponse> getVbDen(@Field('NgayDauTien') String startDate,
-      @Field('NgayCuoiCung') String endDate,);
+  Future<VBDenResponse> getVbDen(@Body() VBDenRequest vbDenRequest);
 
   @GET(
     ApiConstants.DASH_BOARD_VBDi,
   )
   Future<VBDiResponse> getVbDi(@Body() VBDiRequest vbDiRequest);
+
+  @POST(ApiConstants.DANH_SACH_VB_DEN)
+  Future<DanhSachVanBanResponse> getListVBDen();
 }

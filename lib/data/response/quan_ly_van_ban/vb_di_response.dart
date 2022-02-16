@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_qlvb_response.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_vbdi_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 

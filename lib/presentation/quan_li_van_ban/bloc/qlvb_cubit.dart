@@ -1,8 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_vbden_response.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
-import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbden_model.dart';
-import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbdi_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_state.dart';
@@ -15,9 +14,6 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
   QLVBCCubit() : super(QLVbStateInitial());
   final BehaviorSubject<DocumentDashboardModel> _getVbDen =
       BehaviorSubject<DocumentDashboardModel>();
-  final BehaviorSubject<VBDenModel> _getVbDenAPI =
-      BehaviorSubject<VBDenModel>();
-
   final BehaviorSubject<DocumentDashboardModel> _getVbDi =
       BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<ChartData> _dataChartVBDen =
@@ -36,58 +32,18 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
   Stream<ChartData> get dataChatVbDi => _dataChartVBDi.stream;
 
   void callAPi() {
-    fakeDataVbDen();
     dataVBDi(startDate: '2022-02-01', endDate: '2022-02-28');
+    dataVBDen(startDate: '2022-02-01', endDate: '2022-02-28');
   }
 
-  void fakeDataVbDen() {
-    final dataVbDen = DocumentDashboardModel(
-      soLuongChoXuLy: 30,
-      soLuongDangXuLy: 10,
-      soLuongDaXuLy: 14,
-      soLuongChoVaoSo: 7,
-      soLuongTrongHan: 6,
-      soLuongQuaHan: 20,
-      soLuongThuongKhan: 12,
-    );
-    chartDataVbDen.add(
-      ChartData(
-        S.current.cho_xu_ly,
-        dataVbDen.soLuongChoXuLy!.toDouble(),
-        choXuLyColor,
-      ),
-    );
-    chartDataVbDen.add(
-      ChartData(
-        S.current.dang_xu_ly,
-        dataVbDen.soLuongDangXuLy!.toDouble(),
-        dangXyLyColor,
-      ),
-    );
-    chartDataVbDen.add(
-      ChartData(
-        S.current.da_xu_ly,
-        dataVbDen.soLuongDaXuLy!.toDouble(),
-        daXuLyColor,
-      ),
-    );
-    chartDataVbDen.add(
-      ChartData(
-        S.current.cho_vao_so,
-        dataVbDen.soLuongChoVaoSo!.toDouble(),
-        choVaoSoColor,
-      ),
-    );
+  final QLVBRepository _QLVBRepo = Get.find();
 
-    _getVbDen.sink.add(dataVbDen);
-  }
-  QLVBRepository get _QLVBRepo => Get.find();
   Future<void> dataVBDi(
-      {required String startDate, required String endDate}) async {
+      {required String startDate, required String endDate,}) async {
     final result = await _QLVBRepo.getVBDi(startDate, endDate);
     result.when(
       success: (res) {
-       final dataVbDi=DocumentDashboardModel(
+        final dataVbDi = DocumentDashboardModel(
           soLuongChoTrinhKy: res.soLuongChoTrinhKy,
           soLuongChoXuLy: res.soLuongChoXuLy,
           soLuongDaXuLy: res.soLuongDaXuLy,
@@ -96,7 +52,7 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
         chartDataVbDi.add(
           ChartData(
             S.current.cho_trinh_ky,
-             dataVbDi.soLuongChoTrinhKy!.toDouble(),
+            dataVbDi.soLuongChoTrinhKy!.toDouble(),
             choTrinhKyColor,
           ),
         );
@@ -120,7 +76,61 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
         return;
       },
     );
-
   }
 
+  Future<void> dataVBDen({
+    required String startDate,
+    required String endDate,
+  }) async {
+    final result = await _QLVBRepo.getVBDen(startDate, endDate);
+    result.when(
+      success: (res) {
+        final Map<String, int> mapData = {};
+        for (final DataVBDenResponse element in res.listVBDen ?? []) {
+          mapData['${element.code}'] = element.value ?? 0;
+        }
+        final dataVbDen = DocumentDashboardModel(
+          soLuongChoXuLy: mapData[VBDenDocumentType.CHO_XU_LY.getName()],
+          soLuongDangXuLy: mapData[VBDenDocumentType.DANG_XU_LY.getName()],
+          soLuongDaXuLy: mapData[VBDenDocumentType.DA_XU_LY.getName()],
+          soLuongChoVaoSo: mapData[VBDenDocumentType.CHO_VAO_SO.getName()],
+          soLuongTrongHan: mapData[VBDenDocumentType.TRONG_HAN.getName()],
+          soLuongQuaHan: mapData[VBDenDocumentType.QUA_HAN.getName()],
+          soLuongThuongKhan: mapData[VBDenDocumentType.THUONG_KHAN.getName()],
+        );
+        chartDataVbDen.add(
+          ChartData(
+            S.current.cho_xu_ly,
+            dataVbDen.soLuongChoXuLy!.toDouble(),
+            choXuLyColor,
+          ),
+        );
+        chartDataVbDen.add(
+          ChartData(
+            S.current.dang_xu_ly,
+            dataVbDen.soLuongDangXuLy!.toDouble(),
+            dangXyLyColor,
+          ),
+        );
+        chartDataVbDen.add(
+          ChartData(
+            S.current.da_xu_ly,
+            dataVbDen.soLuongDaXuLy!.toDouble(),
+            daXuLyColor,
+          ),
+        );
+        chartDataVbDen.add(
+          ChartData(
+            S.current.cho_vao_so,
+            dataVbDen.soLuongChoVaoSo!.toDouble(),
+            choVaoSoColor,
+          ),
+        );
+        _getVbDen.sink.add(dataVbDen);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
 }

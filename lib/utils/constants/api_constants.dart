@@ -9,6 +9,8 @@ class ApiConstants {
       '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const DASH_BOARD_VBDi =
       '/qlvb/api/van-ban-di/so-luong';
+  static const DANH_SACH_VB_DEN =
+      '/qlvb/api/vanban/getdanhsachvanban';
   static const LOGIN = '/api/auth/login';
   static const int DEFAULT_PAGE_SIZE = 45;
   static const int PAGE_BEGIN = 1;

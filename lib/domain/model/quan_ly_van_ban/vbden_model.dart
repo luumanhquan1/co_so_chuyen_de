@@ -1,17 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
-@JsonSerializable()
-class VBDenModel {
-  List<DataVBDen>? listVBDen = [];
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_vbden_response.dart';
 
+class VBDenModel {
+  List<DataVBDenResponse>? listVBDen = [];
   VBDenModel({this.listVBDen});
 }
-@JsonSerializable()
 class DataVBDen {
-  @JsonKey(name: 'Id')
   String? id = '';
-  @JsonKey(name: 'Code')
   String? code = '';
-  @JsonKey(name: 'Value')
   int? value = 0;
   DataVBDen({this.id, this.code, this.value});
 }
