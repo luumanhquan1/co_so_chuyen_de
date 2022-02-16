@@ -64,6 +64,7 @@ class ImageAssets {
   static const String icPhone = '$baseImg/ic_phone.svg';
   static const String icGroupPeople = '$baseImg/ic_group_people.svg';
   static const String icClock = '$baseImg/ic_clock.svg';
+
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';
@@ -162,6 +163,10 @@ class ImageAssets {
   static const String icBaoChiTablet = '$baseImg/ic_bao_chi_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
   static const String ic_gui_y_kien = '$baseImg/icon_send.svg';
+
+  //
+  static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';
+  static const String ic_unChecked = '$baseImg/ic_unchecked.svg';
 
   static const String icKetNoiTablet = '$baseImg/ic_ket-noi_tablet.svg';
 

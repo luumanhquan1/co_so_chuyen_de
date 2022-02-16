@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/ui/base_choose_time_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
+import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -29,7 +29,7 @@ class _OutgoingDocumentScreenTabletState
           children: [
             Container(
               color: backgroundColorApp,
-              child: BaseChooseTimeScreen(
+              child: ChooseTimeScreen(
                 today: DateTime.now(),
               ),
             ),

@@ -1,20 +1,20 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/bloc/base_choose_time_cubit.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/ui/widgets/show_drop_down_button.dart';
+import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
+import 'package:ccvc_mobile/presentation/choose_time/ui/widgets/show_drop_down_button.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class BaseChooseTimeScreen extends StatefulWidget {
+class ChooseTimeScreen extends StatefulWidget {
   final DateTime today;
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
 
-  const BaseChooseTimeScreen({
+  const ChooseTimeScreen({
     Key? key,
     required this.today,
     this.onChange,
@@ -22,11 +22,11 @@ class BaseChooseTimeScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BaseChooseTimeScreenState createState() => _BaseChooseTimeScreenState();
+  _ChooseTimeScreenState createState() => _ChooseTimeScreenState();
 }
 
-class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
-  final BaseChooseTimeCubit baseChooseTimeCubit = BaseChooseTimeCubit();
+class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
+  final ChooseTimeCubit baseChooseTimeCubit = ChooseTimeCubit();
 
   @override
   void initState() {
@@ -131,7 +131,7 @@ class _BaseChooseTimeScreenState extends State<BaseChooseTimeScreen> {
                     onChanged: (value) {
                       baseChooseTimeCubit.changeOption = value;
                     },
-                    baseChooseTimeCubit: BaseChooseTimeCubit(),
+                    chooseTimeCubit: ChooseTimeCubit(),
                   ),
                 ),
                 spaceW8,

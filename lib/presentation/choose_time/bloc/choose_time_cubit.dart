@@ -1,10 +1,10 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/presentation/base_choose_time/bloc/base_choose_time_state.dart';
+import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_state.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
-class BaseChooseTimeCubit extends BaseCubit<BaseChooseTimeState> {
-  BaseChooseTimeCubit() : super(BaseChooseTimeInitial());
+class ChooseTimeCubit extends BaseCubit<ChooseTimeState> {
+  ChooseTimeCubit() : super(ChooseTimeInitial());
 
   //
   bool isCheck = false;
