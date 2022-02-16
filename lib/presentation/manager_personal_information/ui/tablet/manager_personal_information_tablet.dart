@@ -25,10 +25,18 @@ class ManagerPersonalInformationTablet extends StatefulWidget {
 
 class _ManagerPersonalInformationTabletState
     extends State<ManagerPersonalInformationTablet> {
+  final ManagerPersonalInformationCubit _cubit =
+      ManagerPersonalInformationCubit();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _cubit.getInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ManagerPersonalInformationCubit _cubit =
-        ManagerPersonalInformationCubit();
     return Scaffold(
       backgroundColor: bgManagerColor,
       appBar: BaseAppBar(
@@ -59,60 +67,83 @@ class _ManagerPersonalInformationTabletState
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          decoration: BoxDecoration(
-            color: backgroundColorApp,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: borderItemCalender.withOpacity(0.5)),
-          ),
-          margin:
-              const EdgeInsets.only(top: 28, left: 30, right: 30, bottom: 156),
-          padding:
-              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 33),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                S.current.thong_tin,
-                style: titleAppbar(fontSize: 16.0.textScale()),
+        child: StreamBuilder<Object>(
+          stream: _cubit.managerStream,
+          builder: (context, snapshot) {
+            return Container(
+              decoration: BoxDecoration(
+                color: backgroundColorApp,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: borderItemCalender.withOpacity(0.5)),
               ),
-              Row(
+              margin: const EdgeInsets.only(
+                top: 28,
+                left: 30,
+                right: 30,
+                bottom: 156,
+              ),
+              padding: const EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: 33,
+              ),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Expanded(
-                    child: WidgetThongTinLeft(),
+                children: [
+                  Text(
+                    S.current.thong_tin,
+                    style: titleAppbar(fontSize: 16.0.textScale()),
                   ),
-                  Expanded(
-                    child: WidgetThongTinRight(),
-                  )
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: WidgetThongTinLeft(
+                          cubit: _cubit,
+                        ),
+                      ),
+                      Expanded(
+                        child: WidgetThongTinRight(
+                          cubit: _cubit,
+                        ),
+                      )
+                    ],
+                  ),
+                  spaceH28,
+                  Container(
+                    height: 1,
+                    color: borderItemCalender,
+                  ),
+                  spaceH28,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: WidgetDonVi(
+                          cubit: _cubit,
+                        ),
+                      ),
+                      Expanded(
+                        child: WidgetUngDung(
+                          cubit: _cubit,
+                        ),
+                      )
+                    ],
+                  ),
+                  spaceH28,
+                  Container(
+                    height: 1,
+                    color: borderItemCalender,
+                  ),
+                  spaceH28,
+                  WigetImage(
+                    cubit: _cubit,
+                  ),
                 ],
               ),
-              spaceH28,
-              Container(
-                height: 1,
-                color: borderItemCalender,
-              ),
-              spaceH28,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Expanded(
-                    child: WidgetDonVi(),
-                  ),
-                  Expanded(
-                    child: WidgetUngDung(),
-                  )
-                ],
-              ),
-              spaceH28,
-              Container(
-                height: 1,
-                color: borderItemCalender,
-              ),
-              spaceH28,
-              const WigetImage(),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

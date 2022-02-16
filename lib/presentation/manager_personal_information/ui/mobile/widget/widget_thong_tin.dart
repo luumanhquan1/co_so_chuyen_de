@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 
 class WidgetThongTinMobile extends StatefulWidget {
   final ManagerPersonalInformationCubit cubit;
-  const WidgetThongTinMobile({Key? key,required this.cubit}) : super(key: key);
+
+  const WidgetThongTinMobile({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<WidgetThongTinMobile> createState() => _WidgetThongTinMobileState();
 }
 
 class _WidgetThongTinMobileState extends State<WidgetThongTinMobile> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(

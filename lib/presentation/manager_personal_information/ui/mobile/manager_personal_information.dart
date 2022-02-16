@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/edit_personal_information.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
@@ -72,33 +73,36 @@ class _ManagerPersonalInformationState
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: StreamBuilder(
-            stream: _cubit.managerStream,
-            builder: (context, snapshot) {
-              return Container(
-                color: backgroundColorApp,
-                padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WidgetThongTinMobile(
-                      cubit: _cubit,
-                    ),
-                    spaceH20,
-                    WidgetDonVibMobile(
-                      cubit: _cubit,
-                    ),
-                    spaceH20,
-                    WidgetUngDungMobile(
-                      cubit: _cubit,
-                    ),
-                    spaceH20,
-                    WidgetImageMobile(),
-                    spaceH24,
-                  ],
-                ),
-              );
-            }),
+        child: StreamBuilder<ManagerPersonalInformationModel>(
+          stream: _cubit.managerStream,
+          builder: (context, snapshot) {
+            return Container(
+              color: backgroundColorApp,
+              padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WidgetThongTinMobile(
+                    cubit: _cubit,
+                  ),
+                  spaceH20,
+                  WidgetDonVibMobile(
+                    cubit: _cubit,
+                  ),
+                  spaceH20,
+                  WidgetUngDungMobile(
+                    cubit: _cubit,
+                  ),
+                  spaceH20,
+                  WidgetImageMobile(
+                    cubit: _cubit,
+                  ),
+                  spaceH24,
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

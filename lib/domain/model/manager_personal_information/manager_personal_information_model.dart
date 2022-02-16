@@ -70,17 +70,16 @@ class ManagerPersonalInformationModel {
     this.departments,
     this.userAccounts,
   }); // List<UserAccounts>? userAccounts;
-
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
       ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
       ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
-      // ManagerPersonalInformationRow(
-      //   S.current.ngay_sinh,
-      //   DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      //   TypeRow.text,
-      // ),
+      ManagerPersonalInformationRow(
+        S.current.ngay_sinh,
+        DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
@@ -164,36 +163,43 @@ class ManagerPersonalInformationModel {
     return list;
   }
 
-  //
   List<ManagerPersonalInformationRow> toListDonVi() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.stt, thuTu, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.don_vi, donVi, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.chuc_vu, chucVu, TypeRow.text),
-      // ManagerPersonalInformationRow(
-      //   S.current.mac_dinh,
-      //   departments,
-      //   TypeRow.checkbox,
-      // ),
+      ManagerPersonalInformationRow(
+        S.current.don_vi,
+        departments?[0].tenDonVi,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.chuc_vu,
+        departments?[0].tenChucVu,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.mac_dinh,
+        departments?[0].isDefault ?? '',
+        TypeRow.checkbox,
+      ),
     ];
-    // if (departments == 1) {
-    //   list.insert(
-    //     3,
-    //     ManagerPersonalInformationRow(
-    //       S.current.trang_thai,
-    //       S.current.hoat_dong,
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // } else {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       S.current.trang_thai,
-    //       S.current.k_hoat_dong,
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // }
+    if (departments?[0].trangThai == 1) {
+      list.insert(
+        3,
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    } else {
+      list.add(
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.k_hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    }
     return list;
   }
 
@@ -205,29 +211,29 @@ class ManagerPersonalInformationModel {
         hoTen,
         TypeRow.text,
       ),
-      // ManagerPersonalInformationRow(
-      //   S.current.ung_dung,
-      //   userAccounts,
-      //   TypeRow.list,
-      // ),
+      ManagerPersonalInformationRow(
+        S.current.ung_dung,
+        userAccounts?[0].applications?[0].applicationName,
+        TypeRow.list,
+      ),
     ];
-    // if (trangThai == 1) {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       S.current.trang_thai,
-    //       S.current.hoat_dong,
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // } else {
-    //   list.add(
-    //     ManagerPersonalInformationRow(
-    //       S.current.trang_thai,
-    //       S.current.k_hoat_dong,
-    //       TypeRow.status,
-    //     ),
-    //   );
-    // }
+    if (userAccounts?[0].trangThai == 1) {
+      list.add(
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    } else {
+      list.add(
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.k_hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    }
     return list;
   }
 
@@ -279,6 +285,38 @@ class Departments {
     this.trangThai,
     this.updatedAt,
   });
+
+  List<ManagerPersonalInformationRow> toListDonVi() {
+    final List<ManagerPersonalInformationRow> list = [
+      ManagerPersonalInformationRow(S.current.stt, '1', TypeRow.text),
+      ManagerPersonalInformationRow(S.current.don_vi, tenDonVi, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.chuc_vu, tenChucVu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.mac_dinh,
+        isDefault,
+        TypeRow.checkbox,
+      ),
+    ];
+    if (trangThai == 1) {
+      list.insert(
+        3,
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    } else {
+      list.add(
+        ManagerPersonalInformationRow(
+          S.current.trang_thai,
+          S.current.k_hoat_dong,
+          TypeRow.status,
+        ),
+      );
+    }
+    return list;
+  }
 }
 
 class UserAccounts {
@@ -297,6 +335,14 @@ class UserAccounts {
     this.applications,
     this.trangThai,
   });
+
+  String paserString(int status) {
+    if (status == 1) {
+      return S.current.hoat_dong;
+    } else {
+      return S.current.k_hoat_dong;
+    }
+  }
 }
 
 class Applications {
