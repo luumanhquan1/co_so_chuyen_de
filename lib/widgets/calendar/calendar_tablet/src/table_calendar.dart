@@ -3,6 +3,9 @@
 
 import 'dart:math';
 
+import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/main_lich_hop_tablet.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
@@ -201,12 +204,15 @@ class TableCalendar<T> extends StatefulWidget {
   /// Called when the calendar is created. Exposes its PageController.
   final void Function(PageController pageController)? onCalendarCreated;
 
+  final Type_Choose_Option_Day typeCalendar;
+
   /// Creates a `TableCalendar` widget.
   TableCalendar({
     Key? key,
     required DateTime focusedDay,
     required DateTime firstDay,
     required DateTime lastDay,
+    required this.typeCalendar,
     DateTime? currentDay,
     this.locale,
     this.rangeStartDay,
@@ -273,6 +279,7 @@ class TableCalendar<T> extends StatefulWidget {
 }
 
 class _TableCalendarState<T> extends State<TableCalendar<T>> {
+  late LichHopCubit cubit;
   late final PageController _pageController;
   late final ValueNotifier<DateTime> _focusedDay;
   late RangeSelectionMode _rangeSelectionMode;
@@ -428,21 +435,57 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   }
 
   void _onLeftChevronTap() {
-    _pageController.previousPage(
-      duration: widget.pageAnimationDuration,
-      curve: widget.pageAnimationCurve,
-    );
+
+    if (widget.typeCalendar == Type_Choose_Option_Day.MONTH) {
+      _pageController.animateToPage(
+          _pageController.page!.toInt() - cubit.nextPageMonth(),
+          duration: widget.pageAnimationDuration,
+          curve: Curves.easeIn);
+    } else if (widget.typeCalendar == Type_Choose_Option_Day.WEEK) {
+      _pageController.previousPage(
+        duration: widget.pageAnimationDuration,
+        curve: widget.pageAnimationCurve,
+      );
+    } else {
+      if (cubit.selectedDay.weekday == 7) {
+        _pageController.previousPage(
+          duration: widget.pageAnimationDuration,
+          curve: widget.pageAnimationCurve,
+        );
+      }
+    }
+
+    cubit.onLeft(widget.typeCalendar);
+
   }
 
   void _onRightChevronTap() {
-    _pageController.nextPage(
-      duration: widget.pageAnimationDuration,
-      curve: widget.pageAnimationCurve,
-    );
+    if (widget.typeCalendar == Type_Choose_Option_Day.MONTH) {
+
+      _pageController.animateToPage(
+          _pageController.page!.toInt() + cubit.nextPageMonth(),
+          duration: widget.pageAnimationDuration,
+          curve: Curves.easeIn);
+    } else if (widget.typeCalendar == Type_Choose_Option_Day.WEEK) {
+      _pageController.nextPage(
+        duration: widget.pageAnimationDuration,
+        curve: widget.pageAnimationCurve,
+      );
+    } else {
+      if (cubit.selectedDay.weekday == 6) {
+        _pageController.nextPage(
+          duration: widget.pageAnimationDuration,
+          curve: widget.pageAnimationCurve,
+        );
+      }
+    }
+
+    cubit.onRight(widget.typeCalendar);
   }
 
   @override
   Widget build(BuildContext context) {
+    cubit = TableCalendarTabletInherited.of(context).cubit;
     return Column(
       children: [
         if (widget.headerVisible)

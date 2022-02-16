@@ -27,7 +27,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   LichHopCubit cubit = LichHopCubit();
 
   late final ValueNotifier<List<Event>> _selectedEvents;
-  CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
   // DateTime _focusedDay = DateTime.now();
@@ -102,7 +101,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
 
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
-      cubit.selectedDay = null;
       cubit.focusedDay = focusedDay;
       cubit.rangeStart = start;
       cubit.rangeEnd = end;
@@ -119,95 +117,95 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
     cubit.selectedDay = cubit.focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(cubit.selectedDay!));
+    _selectedEvents = ValueNotifier(_getEventsForDay(cubit.selectedDay));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: S.current.lich_hop_cua_toi,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    reverseTransitionDuration:
-                        const Duration(milliseconds: 250),
-                    transitionDuration: const Duration(milliseconds: 250),
-                    pageBuilder: (_, animation, ___) {
-                      const begin = Offset(-1.0, 0.0);
-                      const end = Offset.zero;
-                      final tween = Tween(begin: begin, end: end);
-                      final offsetAnimation = animation.drive(tween);
-                      return FakeDrawerLichHop(
-                        offsetAnimation: offsetAnimation,
-                        title1: 'lich theo dang lich',
-                        title2: 'lich theo dang list',
-                        title3: 'lich theo danh sach',
-                        image1: ImageAssets.icMenuCalender,
-                        image2: ImageAssets.icMenuCalender,
-                        image3: ImageAssets.icMenuCalender,
-                        ontap1: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANG_LICH,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
-                        ontap2: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANG_LIST,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
-                        ontap3: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANH_SACH,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
-                      );
-                    },
-                    opaque: false,
-                  ),
-                );
-              },
-              icon: SvgPicture.asset(
-                ImageAssets.icMenuLichHopTablet,
+    return TableCalendarTabletInherited(
+      cubit: cubit,
+      child: Scaffold(
+        appBar: BaseAppBar(
+          title: S.current.lich_hop_cua_toi,
+          actions: [
+            Padding(
+
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      reverseTransitionDuration:
+                      const Duration(milliseconds: 250),
+                      transitionDuration: const Duration(milliseconds: 250),
+                      pageBuilder: (_, animation, ___) {
+                        const begin = Offset(-1.0, 0.0);
+                        const end = Offset.zero;
+                        final tween = Tween(begin: begin, end: end);
+                        final offsetAnimation = animation.drive(tween);
+                        return FakeDrawerLichHop(
+                          offsetAnimation: offsetAnimation,
+                          title1: 'lich theo dang lich',
+                          title2: 'lich theo dang list',
+                          title3: 'lich theo danh sach',
+                          image1: ImageAssets.icMenuCalender,
+                          image2: ImageAssets.icMenuCalender,
+                          image3: ImageAssets.icMenuCalender,
+                          ontap1: () {
+                            setState(() {
+                              cubit.chooseTypeList(
+                                Type_Choose_Option_List.DANG_LICH,
+                              );
+                              cubit.index.sink.add(0);
+                              Navigator.pop(context);
+                            });
+                          },
+                          ontap2: () {
+                            setState(() {
+                              cubit.chooseTypeList(
+                                Type_Choose_Option_List.DANG_LIST,
+                              );
+                              cubit.index.sink.add(0);
+                              Navigator.pop(context);
+                            });
+                          },
+                          ontap3: () {
+                            setState(() {
+                              cubit.chooseTypeList(
+                                Type_Choose_Option_List.DANH_SACH,
+                              );
+                              cubit.index.sink.add(0);
+                              Navigator.pop(context);
+                            });
+                          },
+                        );
+                      },
+                      opaque: false,
+                    ),
+                  );
+                },
+                icon: SvgPicture.asset(
+                  ImageAssets.icMenuLichHopTablet,
+                ),
               ),
             ),
-          ),
-        ],
-        leadingIcon: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: SvgPicture.asset(
-            ImageAssets.icBack,
+          ],
+          leadingIcon: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: SvgPicture.asset(
+              ImageAssets.icBack,
+            ),
           ),
         ),
-      ),
-      body: TableCalendarInherited(
-        cubit: cubit,
-        child: Container(
+        body: Container(
           color: backgroundColorApp,
           child: Column(
             children: [
@@ -227,36 +225,38 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
                 },
               ),
-              TableCalendar<Event>(
-                firstDay: kFirstDay,
-                lastDay: kLastDay,
-                focusedDay: cubit.focusedDay,
-                selectedDayPredicate: (day) => isSameDay(cubit.selectedDay, day),
-                rangeStartDay: cubit.rangeStart,
-                rangeEndDay: cubit.rangeEnd,
-                calendarFormat: CalendarFormat.week,
-                rangeSelectionMode: _rangeSelectionMode,
-                eventLoader: _getEventsForDay,
-                startingDayOfWeek: StartingDayOfWeek.sunday,
-                // calendarStyle: CalendarStyle(
-                //   // Use `CalendarStyle` to customize the UI
-                //   outsideDaysVisible: false,
-                //
-                // ),
-                onDaySelected: _onDaySelected,
-                onRangeSelected: _onRangeSelected,
-                // onFormatChanged: (format) {
-                //   if (_calendarFormat != format) {
-                //     setState(() {
-                //       _calendarFormat = format;
-                //     });
-                //   }
-                // },
-                onPageChanged: (focusedDay) {
-                  cubit.focusedDay = focusedDay;
+              BlocBuilder<LichHopCubit, LichHopState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  return
+                    StreamBuilder<DateTime>(
+                        stream: cubit.moveTimeSubject.stream,
+                        builder: (context, snapshot) {
+                          return TableCalendar<Event>(
+                            firstDay: kFirstDay,
+                            lastDay: kLastDay,
+                            focusedDay: cubit.focusedDay,
+                            typeCalendar: state.type,
+                            // selectedDayPredicate: (day) =>
+                            //     isSameDay(cubit.selectedDay, day),
+                            selectedDayPredicate: (day) => cubit.selectDay(day),
+                            rangeStartDay: cubit.rangeStart,
+                            rangeEndDay: cubit.rangeEnd,
+                            calendarFormat: CalendarFormat.week,
+                            rangeSelectionMode: _rangeSelectionMode,
+                            eventLoader: _getEventsForDay,
+                            startingDayOfWeek: StartingDayOfWeek.sunday,
+                            onDaySelected: _onDaySelected,
+                            onRangeSelected: _onRangeSelected,
+                            onPageChanged: (focusedDay) {
+                              print(focusedDay.day);
+                              cubit.focusedDay = focusedDay;
+                            },
+                          );
+                        }
+                    );
                 },
               ),
-
               BlocBuilder<LichHopCubit, LichHopState>(
                 bloc: cubit,
                 builder: (context, state) {
@@ -277,7 +277,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                               image: cubit.listImageLichHopCuaToi[index],
                               typeName: listItemSchedule[index].typeName,
                               numberOfCalendars:
-                                  listItemSchedule[index].numberOfSchedule,
+                              listItemSchedule[index].numberOfSchedule,
                             );
                           },
                         ),
@@ -321,24 +321,26 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   }
 }
 
+class TableCalendarTabletInherited extends InheritedWidget {
+  final LichHopCubit cubit;
 
-class TableCalendarInherited extends InheritedWidget {
-  LichHopCubit cubit;
-
-  TableCalendarInherited({
+  const TableCalendarTabletInherited({
     Key? key,
     required this.cubit,
     required Widget child,
   }) : super(key: key, child: child);
 
-  static TableCalendarInherited? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<TableCalendarInherited>();
+  static TableCalendarTabletInherited of(BuildContext context) {
+    final TableCalendarTabletInherited? result =
+    context
+        .dependOnInheritedWidgetOfExactType<TableCalendarTabletInherited>();
+    assert(result != null, 'No elenment');
+    return result!;
   }
 
   @override
-  bool updateShouldNotify(TableCalendarInherited old) => true;
+  bool updateShouldNotify(TableCalendarTabletInherited old) => true;
 }
-
 
 // class MainLichHopTabLet extends StatefulWidget {
 //   const MainLichHopTabLet({Key? key}) : super(key: key);
