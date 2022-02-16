@@ -33,7 +33,11 @@ Future<T?> showDiaLog<T>(
               : double.maxFinite,
           // padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
           padding: EdgeInsets.fromLTRB(
-              24, showTablet ? 24 : 40, 24, showTablet ? 32 : 40,),
+            24,
+            showTablet ? 24 : 40,
+            24,
+            showTablet ? 32 : 40,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

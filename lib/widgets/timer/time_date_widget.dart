@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TimeDateInputWidget extends StatefulWidget {
   final TimerData? initTimerData;
   final Function(TimerData) onChange;
+
   const TimeDateInputWidget({
     Key? key,
     this.initTimerData,
@@ -23,6 +23,7 @@ class TimeDateInputWidget extends StatefulWidget {
 class _TimeDateInputWidgetState extends State<TimeDateInputWidget> {
   final timeFocus = FocusNode();
   final minuteFocus = FocusNode();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -82,6 +83,7 @@ class TimeDatePickerWidget extends StatefulWidget {
   final FocusNode minuteFocus;
   final TimerData initTimer;
   final Function(TimerData) onChange;
+
   const TimeDatePickerWidget({
     Key? key,
     required this.timeFocus,
@@ -98,6 +100,7 @@ class _TimeDatePickerWidgetState extends State<TimeDatePickerWidget> {
   final timeController = FixedExtentScrollController();
   final minusController = FixedExtentScrollController();
   late TimerData selectDate;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -164,6 +167,7 @@ class TimePickerinputWidget extends StatefulWidget {
   final int itemCount;
   final Function(int) onChange;
   final TextAlign textAlign;
+
   const TimePickerinputWidget({
     Key? key,
     required this.focusNode,
@@ -180,6 +184,7 @@ class TimePickerinputWidget extends StatefulWidget {
 class _TimePickerinputWidgetState extends State<TimePickerinputWidget> {
   double opacity = 0;
   final TextEditingController controller = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -259,6 +264,7 @@ class BuildPicker extends StatefulWidget {
   final FixedExtentScrollController controller;
   final Function(int) onChange;
   final int itemCount;
+
   const BuildPicker({
     Key? key,
     required this.focusNode,
@@ -328,6 +334,7 @@ class TimeTextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final Function(int) onChange;
   final TextAlign textAlign;
+
   const TimeTextFieldWidget({
     Key? key,
     required this.focusNode,
@@ -344,6 +351,7 @@ class TimeTextFieldWidget extends StatefulWidget {
 class _TimeTextFieldWidgetState extends State<TimeTextFieldWidget> {
   late final TextEditingController textEditing;
   int selectTime = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -395,5 +403,6 @@ class _TimeTextFieldWidgetState extends State<TimeTextFieldWidget> {
 class TimerData {
   int hour;
   int minutes;
+
   TimerData({required this.hour, required this.minutes});
 }

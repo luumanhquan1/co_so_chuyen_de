@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class BaseChooseTimerWidget extends StatefulWidget {
   final String? Function()? validator;
+
   const BaseChooseTimerWidget({Key? key, this.validator}) : super(key: key);
 
   @override
@@ -26,6 +27,7 @@ class BaseChooseTimerWidgetState extends State<BaseChooseTimerWidget> {
   }
 
   String? validatorString;
+
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -123,6 +123,7 @@ class WidgetTypeConstant {
   static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
   static const String NHIEM_VU = 'NhienVuWidGet';
 }
+
 class DateFormatApp {
   static String date = 'dd/MM/yyyy';
   static String dateTime = 'dd/MM/yyyy HH:mm:ss';

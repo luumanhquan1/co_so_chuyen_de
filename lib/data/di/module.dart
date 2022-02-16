@@ -1,11 +1,12 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
-
+import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
-
+import 'package:ccvc_mobile/data/services/manager_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
+import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
@@ -16,6 +17,10 @@ void configureDependencies() {
   Get.put(AccountService(provideDio()));
   Get.put<AccountRepository>(
     AccountImpl(Get.find()),
+  );
+  Get.put(ManagerService(provideDio()));
+  Get.put<ManagerRepository>(
+    ManagerRepositoryImpl(Get.find()),
   );
 }
 

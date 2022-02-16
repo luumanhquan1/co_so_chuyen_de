@@ -7,8 +7,6 @@ import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/wid
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/widget/avatar_tablet.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/double_button_edit_seen.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_don_vi.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_ung_dung.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -376,7 +374,7 @@ class _EditPersonalInformationTabletScreen
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(color: borderItemCalender),
                         ),
-                        child: const WidgetDonVi(),
+                        // child: const WidgetDonVi(),
                       ),
                     ),
                     spaceW28,
@@ -392,7 +390,7 @@ class _EditPersonalInformationTabletScreen
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(color: borderItemCalender),
                         ),
-                        child: const WidgetUngDung(),
+                        // child: const WidgetUngDung(),
                       ),
                     )
                   ],

@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 class HiveLocal {
   static const USER_INFO = 'USER_INFO';
   static late Box<DataUser> _userBox;
+
   static Future<void> init() async {
     Hive.registerAdapter(DataUserAdapter());
     Hive.registerAdapter(UserInformationAdapter());
@@ -13,15 +14,15 @@ class HiveLocal {
     _userBox = await Hive.openBox(USER_INFO);
   }
 
- static void saveDataUser(DataUser dataUser) {
+  static void saveDataUser(DataUser dataUser) {
     _userBox.add(dataUser);
   }
 
- static void clearData() {
+  static void clearData() {
     _userBox.clear();
   }
 
- static DataUser? getDataUser() {
+  static DataUser? getDataUser() {
     final data = _userBox.values;
     if (data.isNotEmpty) {
       return data.first;
