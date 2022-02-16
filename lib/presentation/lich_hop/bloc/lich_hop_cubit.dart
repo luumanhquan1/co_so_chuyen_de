@@ -20,7 +20,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
 
+  BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
+      BehaviorSubject();
+
   BehaviorSubject<DateTime> moveTimeSubject = BehaviorSubject();
+
+  Stream<List<MeetingSchedule>> get listMeetingStream =>
+      listMeetTingScheduleSubject.stream;
 
   LichHopCubit() : super(LichHopStateIntial());
   List<String> listImageLichHopCuaToi = [
@@ -88,45 +94,74 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         selectedDay.day == b.day;
   }
 
+  bool isSameNextWeek(DateTime a, DateTime b) {
+    if (DateTime(a.year, a.month + 1, 0).day == 29 && a.day == 29) {
+      return true;
+    } else if (b.weekday == 7) {
+      return false;
+    } else if (a.weekday < b.weekday || a.weekday == 7) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool isSameLeftWeek(DateTime a, DateTime b) {
+    if ((b.day + DateTime(a.year, a.month + 1, 0).day) == 35) {
+      return false;
+    } else if (b.weekday == 7) {
+      return true;
+    } else if (a.weekday == 7) {
+      return false;
+    } else if (a.weekday > b.weekday) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  int leftPageMonth() {
+    final int day = selectedDay.day;
+    final int month = selectedDay.month;
+    final int year = selectedDay.year;
+    final int rangeBeetwenTwoDay = DateTime(year, month, 0).day + day;
+    final int rangeWeekBeetwenTwoDay = rangeBeetwenTwoDay ~/ 7;
+
+    if (isSameLeftWeek(DateTime(year, month - 1, 1), selectedDay)) {
+      return rangeWeekBeetwenTwoDay + 1;
+    } else {
+      if ((day + DateTime(year, month, 0).day) == 35 &&
+          DateTime(year, month - 1, 1).weekday == 7) {
+        return rangeWeekBeetwenTwoDay - 1;
+      }
+      return rangeWeekBeetwenTwoDay;
+    }
+  }
+
   int nextPageMonth() {
     final int day = selectedDay.day;
     final int month = selectedDay.month;
     final int year = selectedDay.year;
-    final int rangeDay = DateTime(year, month+1, 1).day - day;
-    final int checkDay = (rangeDay / 7).toInt() ;
-    print( '$checkDay ??????????????');
-    return 0;
+    final int rangeBeetwenTwoDay = DateTime(year, month + 1, 0).day - day;
+    final int rangeWeekBeetwenTwoDay = rangeBeetwenTwoDay ~/ 7;
+    final int surplusDay = rangeBeetwenTwoDay - rangeWeekBeetwenTwoDay * 7;
 
-    // if (day <= 7) {
-    //   if (DateTime(year, month, 1).weekday > DateTime(year, month, day).weekday) {
-    //     return 3;
-    //   } else {
-    //     return 4;
-    //   }
-    // } else if (day >= 8 && day <= 14) {
-    //   if (DateTime(year, month, 8).weekday >
-    //       DateTime(year, month, day).weekday) {
-    //     return 2;
-    //   } else {
-    //     return 3;
-    //   }
-    // } else if (day >= 15 && day <= 21) {
-    //   if (DateTime(year, month, 15).weekday >
-    //       DateTime(year, month, day).weekday) {
-    //     return 1;
-    //   } else {
-    //     return 2;
-    //   }
-    // } else if (day >= 22 && day <= 28) {
-    //   if (DateTime(year, month, 22).weekday >
-    //       DateTime(year, month, day).weekday) {
-    //     return 0;
-    //   } else {
-    //     return 1;
-    //   }
-    // } else {
-    //   return 0;
-    // }
+    if (isSameNextWeek(
+      DateTime(year, month, DateTime(year, month + 1, 0).day - surplusDay),
+      DateTime(year, month + 1, 0),
+    )) {
+      if (DateTime(year, month + 1, 0).day == 29 && day == 29) {
+        return rangeWeekBeetwenTwoDay;
+      }
+
+      if (DateTime(year, month + 1, 0).weekday == 6) {
+        return rangeWeekBeetwenTwoDay + 1;
+      }
+
+      return rangeWeekBeetwenTwoDay;
+    } else {
+      return rangeWeekBeetwenTwoDay + 1;
+    }
   }
 
   void onRight(Type_Choose_Option_Day type) {
@@ -150,7 +185,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       selectedDay = DateTime(
         selectedDay.year,
         selectedDay.month,
-        selectedDay.day - selectedDay.weekday - 7,
+        selectedDay.day - selectedDay.weekday - 7 + 1,
       );
     } else {
       selectedDay = DateTime(

@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/main_lich_hop_tablet.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_gesture_detector/simple_gesture_detector.dart';
@@ -435,10 +436,9 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   }
 
   void _onLeftChevronTap() {
-
     if (widget.typeCalendar == Type_Choose_Option_Day.MONTH) {
       _pageController.animateToPage(
-          _pageController.page!.toInt() - cubit.nextPageMonth(),
+          _pageController.page!.toInt() - cubit.leftPageMonth(),
           duration: widget.pageAnimationDuration,
           curve: Curves.easeIn);
     } else if (widget.typeCalendar == Type_Choose_Option_Day.WEEK) {
@@ -456,21 +456,21 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
 
     cubit.onLeft(widget.typeCalendar);
-
   }
 
   void _onRightChevronTap() {
     if (widget.typeCalendar == Type_Choose_Option_Day.MONTH) {
-
       _pageController.animateToPage(
           _pageController.page!.toInt() + cubit.nextPageMonth(),
           duration: widget.pageAnimationDuration,
           curve: Curves.easeIn);
     } else if (widget.typeCalendar == Type_Choose_Option_Day.WEEK) {
-      _pageController.nextPage(
-        duration: widget.pageAnimationDuration,
-        curve: widget.pageAnimationCurve,
-      );
+      if (cubit.selectedDay.weekday != 7) {
+        _pageController.nextPage(
+          duration: widget.pageAnimationDuration,
+          curve: widget.pageAnimationCurve,
+        );
+      }
     } else {
       if (cubit.selectedDay.weekday == 6) {
         _pageController.nextPage(
@@ -512,6 +512,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
                   widget.onFormatChanged?.call(format);
                 },
+                typeCalendar: widget.typeCalendar,
               );
             },
           ),
@@ -661,7 +662,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
         if (!isDisabled) {
           final events = widget.eventLoader?.call(day) ?? [];
           Widget? markerWidget =
-              widget.calendarBuilders.markerBuilder?.call(context, day, events);
+          widget.calendarBuilders.markerBuilder?.call(context, day, events);
 
           if (events.isNotEmpty && markerWidget == null) {
             final center = constraints.maxHeight / 2;

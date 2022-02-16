@@ -1,13 +1,18 @@
 // Copyright 2019 Aleksander Woźniak
 // SPDX-License-Identifier: Apache-2.0
 
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/main_lich_hop_tablet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 import '../customization/header_style.dart';
 import '../shared/utils.dart' show CalendarFormat, DayBuilder;
 import 'custom_icon_button.dart';
-import 'format_button.dart';
 
 class CalendarHeader extends StatelessWidget {
   final dynamic locale;
@@ -21,6 +26,7 @@ class CalendarHeader extends StatelessWidget {
   final ValueChanged<CalendarFormat> onFormatButtonTap;
   final Map<CalendarFormat, String> availableCalendarFormats;
   final DayBuilder? headerTitleBuilder;
+  final Type_Choose_Option_Day typeCalendar;
 
   const CalendarHeader({
     Key? key,
@@ -34,6 +40,7 @@ class CalendarHeader extends StatelessWidget {
     required this.onHeaderLongPress,
     required this.onFormatButtonTap,
     required this.availableCalendarFormats,
+    required this.typeCalendar,
     this.headerTitleBuilder,
   }) : super(key: key);
 
@@ -42,13 +49,41 @@ class CalendarHeader extends StatelessWidget {
     final text = headerStyle.titleTextFormatter?.call(focusedMonth, locale) ??
         DateFormat.yMMMM(locale).format(focusedMonth);
 
+    final LichHopCubit cubit = TableCalendarTabletInherited.of(context).cubit;
+
     return Container(
       decoration: headerStyle.decoration,
       margin: headerStyle.headerMargin,
       padding: headerStyle.headerPadding,
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         children: [
+          const SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            child: headerTitleBuilder?.call(context, focusedMonth) ??
+                GestureDetector(
+                    onTap: onHeaderTap,
+                    onLongPress: onHeaderLongPress,
+                    child: Row(
+                      children: [
+                        StreamBuilder<DateTime>(
+                            stream: cubit.moveTimeSubject.stream,
+                            builder: (context, snapshot) {
+                              final data = snapshot.data ?? cubit.selectedDay;
+
+                              return Text(
+                                'Tháng ${data.month} - ${data.year}',
+                                style: textNormalCustom(
+                                  color: textTitle,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 32,
+                                ),
+                              );
+                            },)
+                      ],
+                    ),),
+          ),
           if (headerStyle.leftChevronVisible)
             CustomIconButton(
               icon: headerStyle.leftChevronIcon,
@@ -56,34 +91,7 @@ class CalendarHeader extends StatelessWidget {
               margin: headerStyle.leftChevronMargin,
               padding: headerStyle.leftChevronPadding,
             ),
-          Expanded(
-            child: headerTitleBuilder?.call(context, focusedMonth) ??
-                GestureDetector(
-                  onTap: onHeaderTap,
-                  onLongPress: onHeaderLongPress,
-                  child: Text(
-                    text,
-                    style: headerStyle.titleTextStyle,
-                    textAlign: headerStyle.titleCentered
-                        ? TextAlign.center
-                        : TextAlign.start,
-                  ),
-                ),
-          ),
-          if (headerStyle.formatButtonVisible &&
-              availableCalendarFormats.length > 1)
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: FormatButton(
-                onTap: onFormatButtonTap,
-                availableCalendarFormats: availableCalendarFormats,
-                calendarFormat: calendarFormat,
-                decoration: headerStyle.formatButtonDecoration,
-                padding: headerStyle.formatButtonPadding,
-                textStyle: headerStyle.formatButtonTextStyle,
-                showsNextFormat: headerStyle.formatButtonShowsNext,
-              ),
-            ),
+          typeCalendar.getTextWidget(cubit),
           if (headerStyle.rightChevronVisible)
             CustomIconButton(
               icon: headerStyle.rightChevronIcon,

@@ -18,9 +18,30 @@ extension DateFormatString on DateTime {
     return dateString;
   }
 
+  String get formatDayCalendar {
+    final dateString =
+        (DateFormat(' dd-MM, yyyy').format(this)).replaceAll('-', ' tháng ');
+
+    return dateString;
+  }
+
+  String startEndWeek(DateTime day) {
+    final startDate = day.subtract(Duration(days: day.weekday - 1));
+    final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+
+    return '${startDate.formatMonth} - ${endDate.formatDayCalendar}';
+  }
+
   String get formatDateTime {
-    final dateString = (DateFormat('HH:mm ,dd-MM').format(this))
-        .replaceAll('-', ' tháng ');
+    final dateString =
+        (DateFormat('HH:mm ,dd-MM').format(this)).replaceAll('-', ' tháng ');
+
+    return dateString;
+  }
+
+  String get formatMonth {
+    final dateString =
+        (DateFormat('dd-MM').format(this)).replaceAll('-', ' tháng ');
 
     return dateString;
   }

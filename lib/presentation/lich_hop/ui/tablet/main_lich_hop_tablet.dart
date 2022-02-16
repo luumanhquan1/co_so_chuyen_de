@@ -29,18 +29,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   late final ValueNotifier<List<Event>> _selectedEvents;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
-  // DateTime _focusedDay = DateTime.now();
-  // DateTime? _selectedDay;
-  // DateTime? _rangeStart;
-  // DateTime? _rangeEnd;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  //   _selectedDay = _focusedDay;
-  //   _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
-  // }
 
   @override
   void dispose() {
@@ -237,19 +225,15 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             lastDay: kLastDay,
                             focusedDay: cubit.focusedDay,
                             typeCalendar: state.type,
-                            // selectedDayPredicate: (day) =>
-                            //     isSameDay(cubit.selectedDay, day),
                             selectedDayPredicate: (day) => cubit.selectDay(day),
                             rangeStartDay: cubit.rangeStart,
                             rangeEndDay: cubit.rangeEnd,
                             calendarFormat: CalendarFormat.week,
                             rangeSelectionMode: _rangeSelectionMode,
                             eventLoader: _getEventsForDay,
-                            startingDayOfWeek: StartingDayOfWeek.sunday,
                             onDaySelected: _onDaySelected,
                             onRangeSelected: _onRangeSelected,
                             onPageChanged: (focusedDay) {
-                              print(focusedDay.day);
                               cubit.focusedDay = focusedDay;
                             },
                           );
