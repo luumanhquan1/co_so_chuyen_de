@@ -76,6 +76,9 @@ class _ManagerPersonalInformationState
         child: StreamBuilder<ManagerPersonalInformationModel>(
           stream: _cubit.managerStream,
           builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return Container(
               color: backgroundColorApp,
               padding: const EdgeInsets.only(top: 2, left: 16, right: 16),

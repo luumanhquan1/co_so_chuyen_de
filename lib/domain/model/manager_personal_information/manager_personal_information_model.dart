@@ -15,6 +15,14 @@ extension CheckStatus on Status {
   }
 }
 
+String paserString(int status) {
+  if (status == 1) {
+    return S.current.hoat_dong;
+  } else {
+    return S.current.k_hoat_dong;
+  }
+}
+
 class ManagerPersonalInformationModel {
   String? id;
   String? maCanBo;
@@ -335,14 +343,6 @@ class UserAccounts {
     this.applications,
     this.trangThai,
   });
-
-  String paserString(int status) {
-    if (status == 1) {
-      return S.current.hoat_dong;
-    } else {
-      return S.current.k_hoat_dong;
-    }
-  }
 }
 
 class Applications {

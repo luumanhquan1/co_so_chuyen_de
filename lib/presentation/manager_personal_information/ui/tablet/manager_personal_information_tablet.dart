@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/edit_personal_information_tablet.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
@@ -67,9 +68,12 @@ class _ManagerPersonalInformationTabletState
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: StreamBuilder<Object>(
+        child: StreamBuilder<ManagerPersonalInformationModel>(
           stream: _cubit.managerStream,
           builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return Container(
               decoration: BoxDecoration(
                 color: backgroundColorApp,

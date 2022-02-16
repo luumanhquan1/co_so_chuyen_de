@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -192,13 +193,14 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                                       ),
                                     ),
                                     child: Text(
-                                      widget
-                                              .cubit
-                                              .managerPersonalInformationModel
-                                              .userAccounts?[index]
-                                              .trangThai
-                                              .toString() ??
-                                          '',
+                                      paserString(
+                                        widget
+                                                .cubit
+                                                .managerPersonalInformationModel
+                                                .userAccounts?[index]
+                                                .trangThai ??
+                                            0,
+                                      ),
                                       style: tokenDetailAmount(
                                         fontSize: 10.0.textScale(),
                                       ),
