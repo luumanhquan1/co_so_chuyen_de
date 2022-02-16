@@ -1,6 +1,6 @@
-
 import 'package:ccvc_mobile/domain/model/account/user_infomation.dart';
 import 'package:hive/hive.dart';
+
 part 'data_user.g.dart';
 
 @HiveType(typeId: 0)

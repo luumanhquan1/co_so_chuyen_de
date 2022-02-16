@@ -149,7 +149,7 @@ class _EditPersonalInformationScreen
                 child: TextFieldValidator(
                   controller: maCanBoController,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if ((value ?? '').isEmpty) {
                       return S.current.khong_duoc_de_trong;
                     }
                     return null;
@@ -325,9 +325,9 @@ class _EditPersonalInformationScreen
                 ),
               ),
               spaceH20,
-              const WidgetDonVibMobile(),
+            //  WidgetDonVibMobile(cubit: ,),
               spaceH20,
-              const WidgetUngDungMobile(),
+           //   WidgetUngDungMobile(),
               spaceH20,
               AvatarAndSignature(
                 editPersonalInformationCubit: EditPersonalInformationCubit(),

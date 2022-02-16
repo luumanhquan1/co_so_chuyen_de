@@ -9,7 +9,6 @@ class LoginResponse extends Equatable {
   @JsonKey(name: 'data')
   DataLoginResponse data;
 
-
   LoginResponse(this.data);
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>

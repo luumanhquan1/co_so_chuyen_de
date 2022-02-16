@@ -123,6 +123,7 @@ class WidgetTypeConstant {
   static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
   static const String NHIEM_VU = 'NhienVuWidGet';
 }
+
 class DocumentState{
   static const String CHO_XU_LY = 'CHO_XU_LY';
   static const String DANG_XU_LY = 'DANG_XU_LY';
@@ -132,6 +133,7 @@ class DocumentState{
 class SelectKeyPath{
   static const KEY_DASH_BOARD_TONG_HOP_NV = 'KEY_DASHBOARD_TONGHOPNV_TYPE';
 }
+
 class DateFormatApp {
   static String date = 'dd/MM/yyyy';
   static String dateTime = 'dd/MM/yyyy HH:mm:ss';
