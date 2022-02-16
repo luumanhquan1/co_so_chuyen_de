@@ -11,7 +11,8 @@ class ManagerPersonalInformationResponse {
   ManagerPersonalInformationResponse(this.data);
 
   factory ManagerPersonalInformationResponse.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$ManagerPersonalInformationResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>

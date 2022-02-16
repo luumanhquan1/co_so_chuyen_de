@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/radio_button.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
@@ -59,7 +59,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
     contents = widget.value.toString();
   }
 
-  EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
+  ManagerPersonalInformationCubit cubit = ManagerPersonalInformationCubit();
 
   @override
   Widget build(BuildContext context) {

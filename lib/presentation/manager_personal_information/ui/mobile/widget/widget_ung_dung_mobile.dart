@@ -30,7 +30,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
         ),
         spaceH16,
         Container(
-          padding: const EdgeInsets.only(top: 6, left: 16),
+          padding: const EdgeInsets.only(top: 6, left: 16, right: 16),
           decoration: BoxDecoration(
             color: borderItemCalender.withOpacity(0.1),
             borderRadius: BorderRadius.circular(6),
@@ -57,7 +57,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                               child: Text(
                                 S.current.stt,
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleItemEdit,
                                   textHeight: 2.5,
                                 ),
@@ -69,7 +69,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                               child: Text(
                                 '0',
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleCalenderWork,
                                   textHeight: 2.5,
                                 ),
@@ -87,7 +87,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                               child: Text(
                                 S.current.ten_dang_nhap,
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleItemEdit,
                                   textHeight: 2.5,
                                 ),
@@ -101,7 +101,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                                         .userAccounts?[index].userName ??
                                     '',
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleCalenderWork,
                                   textHeight: 2.5,
                                 ),
@@ -119,7 +119,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                               child: Text(
                                 S.current.ung_dung,
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleItemEdit,
                                   textHeight: 2.5,
                                 ),
@@ -147,7 +147,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                                             .applicationName ??
                                         '',
                                     style: textDetailHDSD(
-                                      fontSize: 12.0.textScale(),
+                                      fontSize: 14.0,
                                       color: titleCalenderWork,
                                     ),
                                     maxLines: 3,
@@ -160,16 +160,15 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                         ),
                         spaceH6,
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(
                               flex: 4,
                               child: Text(
                                 S.current.trang_thai,
                                 style: textDetailHDSD(
-                                  fontSize: 12.0.textScale(),
+                                  fontSize: 14.0,
                                   color: titleItemEdit,
-                                  textHeight: 2.5,
+                                 // textHeight: 2.5,
                                 ),
                                 maxLines: 2,
                               ),

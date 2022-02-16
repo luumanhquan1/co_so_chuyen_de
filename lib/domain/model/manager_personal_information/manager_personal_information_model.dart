@@ -251,19 +251,15 @@ class ManagerPersonalInformationModel {
       S.current.ho_va_ten: hoTen ?? '',
       S.current.ma_can_bo: maCanBo ?? '',
       S.current.thu_tus: thuTu.toString(),
-      S.current.ngay_sinh:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.ngay_sinh: ngaySinh ?? '',
       S.current.cmnd: cmtnd ?? '',
       S.current.gioi_tinh: gioiTinh ?? false ? S.current.Nam : S.current.Nu,
       S.current.email: email ?? '',
       S.current.sdt_co_quan: phoneCoQuan ?? '',
       S.current.sdt_lien_he: phoneDiDong ?? '',
-      S.current.tinh_thanh:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      S.current.quan_huyen:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      S.current.phuong_xa:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.tinh_thanh: tinh ?? '',
+      S.current.quan_huyen: huyen ?? '',
+      S.current.phuong_xa: xa ?? '',
       S.current.dia_chi_lien_he: diaChi ?? '',
     };
   }

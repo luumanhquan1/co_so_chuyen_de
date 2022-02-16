@@ -2,11 +2,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/widget/avatar_tablet.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/double_button_edit_seen.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -32,7 +32,7 @@ class EditPersonInformationTabletScreen extends StatefulWidget {
 
 class _EditPersonalInformationTabletScreen
     extends State<EditPersonInformationTabletScreen> {
-  EditPersonalInformationCubit cubit = EditPersonalInformationCubit();
+  ManagerPersonalInformationCubit cubit = ManagerPersonalInformationCubit();
   TextEditingController nameController = TextEditingController();
   TextEditingController maCanBoController = TextEditingController();
   TextEditingController thuTuController = TextEditingController();
@@ -62,11 +62,11 @@ class _EditPersonalInformationTabletScreen
     super.initState();
   }
 
-  @override
-  void dispose() {
-    cubit.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   cubit.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -402,7 +402,7 @@ class _EditPersonalInformationTabletScreen
                 ),
                 spaceH28,
                 AvatarAndSignatureTablet(
-                  editPersonalInformationCubit: EditPersonalInformationCubit(),
+                  cubit: cubit,
                 ),
                 spaceH48,
                 DoubleButtonEditScreen(

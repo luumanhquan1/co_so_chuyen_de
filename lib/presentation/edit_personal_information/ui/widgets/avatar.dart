@@ -1,9 +1,10 @@
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/bloc/edit_personal_information_cubit.dart';
+import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:file_picker/file_picker.dart';
@@ -11,11 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AvatarAndSignature extends StatelessWidget {
-  final EditPersonalInformationCubit editPersonalInformationCubit;
+  final ManagerPersonalInformationCubit cubit;
 
   const AvatarAndSignature({
     Key? key,
-    required this.editPersonalInformationCubit,
+    required this.cubit,
   }) : super(key: key);
 
   @override
@@ -29,9 +30,7 @@ class AvatarAndSignature extends StatelessWidget {
           () async {
             await upLoadImg(context, 1);
           },
-          editPersonalInformationCubit
-                  .managerPersonalInformationModel.anhDaiDienFilePath ??
-              '',
+          cubit.managerPersonalInformationModel.anhDaiDienFilePath ?? '',
           true,
         ),
         treeWidget(
@@ -40,9 +39,7 @@ class AvatarAndSignature extends StatelessWidget {
           () async {
             await upLoadImg(context, 2);
           },
-          editPersonalInformationCubit
-                  .managerPersonalInformationModel.anhChuKyFilePath ??
-              '',
+          cubit.managerPersonalInformationModel.anhChuKyFilePath ?? '',
           true,
         ),
         treeWidget(
@@ -51,9 +48,7 @@ class AvatarAndSignature extends StatelessWidget {
           () async {
             await upLoadImg(context, 3);
           },
-          editPersonalInformationCubit
-                  .managerPersonalInformationModel.anhChuKyNhayFilePath ??
-              '',
+          cubit.managerPersonalInformationModel.anhChuKyNhayFilePath ?? '',
           true,
         )
       ],
@@ -66,10 +61,8 @@ class AvatarAndSignature extends StatelessWidget {
     );
     if (result != null) {
       final File file = File(result.files.single.path ?? '');
-      await editPersonalInformationCubit.uploadImage(xFile: file);
+      await cubit.uploadImage(xFile: file);
     } else {}
-
-    //print(result);
   }
 
   Widget treeWidget(BuildContext context, String text, Function() onTap,
