@@ -169,7 +169,7 @@ class ImageAssets {
   static const String ic_unChecked = '$baseImg/ic_unchecked.svg';
 
   static const String icKetNoiTablet = '$baseImg/ic_ket-noi_tablet.svg';
-
+ static const String anhDaiDienMacDinh = '$baseImg/anh_dai_dien.png';
   static const String icDeleteRed = '$baseImg/ic_delete_red.svg';
   static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
   static const String icCloseSquare = '$baseImg/ic_close_square.svg';
