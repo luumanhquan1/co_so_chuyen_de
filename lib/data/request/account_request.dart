@@ -13,7 +13,9 @@ class LoginRequest {
     required this.password,
     required this.appCode,
   });
+
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
       _$LoginRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$LoginRequestToJson(this);
 }

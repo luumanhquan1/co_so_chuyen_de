@@ -30,7 +30,7 @@ class UserInformation {
   @HiveField(12)
   String? ngaySinh;
   @HiveField(13)
-  int? soDienThoai;
+  String? soDienThoai;
   UserInformation(
       {this.id,
       this.canBoDepartmentId,
