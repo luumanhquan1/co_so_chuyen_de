@@ -2,13 +2,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/domain/model/home/date_model.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/clock_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class DayTimeWidget extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
@@ -54,7 +52,7 @@ class DayTimeWidget extends StatelessWidget {
                     else
                       const SizedBox(),
                     Text(
-                      data.lunarDate,
+                      data.lunarDate.isNotEmpty ? '(${data.lunarDate})' : '',
                       style: textNormal(
                         AqiColor.withOpacity(0.8),
                         14.0.textScale(),
