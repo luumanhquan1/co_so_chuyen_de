@@ -28,7 +28,9 @@ extension DateFormatString on DateTime {
     return dateString;
   }
 
-  String startEndWeek(DateTime day) {
+  String get startEndWeek {
+    final day = DateTime(year, month, this.day);
+
     final startDate = day.subtract(Duration(days: day.weekday - 1));
     final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
 

@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/main.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/main_lich_hop_tablet.dart';
 import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
 
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       return screenDevice(
         mobileScreen: const LoginScreen(),
-        tabletScreen: const LoginTabletScreen(),
+        tabletScreen: const MainLichHopTabLet(),
       );
     }
   }

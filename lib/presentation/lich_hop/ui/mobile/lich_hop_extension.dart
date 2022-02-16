@@ -65,7 +65,7 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
             builder: (context, snapshot) {
               final data = snapshot.data ?? cubit.selectedDay;
               return Text(
-                '${data.startEndWeek}',
+                data.startEndWeek,
                 style: textNormalCustom(
                   color: textDefault,
                   fontSize: 16,
