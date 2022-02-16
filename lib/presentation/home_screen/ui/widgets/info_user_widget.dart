@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/user_infomation_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -16,10 +17,11 @@ class InfoUserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<UserInformationModel>(
+    return StreamBuilder<DataUser>(
         stream: HomeProvider.of(context).homeCubit.getUserInformation,
         builder: (context, snapshot) {
-          final data = snapshot.data ?? UserInformationModel();
+          final data = snapshot.data ?? DataUser();
+          final result = data.userInformation;
           return Row(
             mainAxisAlignment: mainAxisAlignment,
             children: [
@@ -36,7 +38,7 @@ class InfoUserWidget extends StatelessWidget {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: data.hoTen ?? '',
+                          text: result?.hoTen ?? '',
                           style: titleText(
                             color: AppTheme.getInstance().titleColor(),
                             fontSize: 16.0.textScale(),
@@ -49,7 +51,7 @@ class InfoUserWidget extends StatelessWidget {
                     height: 4,
                   ),
                   Text(
-                    data.chucVu ?? '',
+                    result?.chucVu ?? '',
                     style: textNormal(
                       subTitle,
                       14.0.textScale(),

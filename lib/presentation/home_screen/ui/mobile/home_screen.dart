@@ -37,7 +37,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
-    homeCubit.configWidget();
   }
 
   @override

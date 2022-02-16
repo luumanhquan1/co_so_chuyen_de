@@ -1,10 +1,13 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 
 import 'package:ccvc_mobile/data/services/account_service.dart';
+import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
@@ -17,6 +20,8 @@ void configureDependencies() {
   Get.put<AccountRepository>(
     AccountImpl(Get.find()),
   );
+  Get.put(HomeService(provideDio()));
+  Get.put<HomeRepository>(HomeImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
@@ -35,7 +40,7 @@ Dio provideDio() {
     InterceptorsWrapper(
       onRequest:
           (RequestOptions options, RequestInterceptorHandler handler) async {
-        options.baseUrl = appConstants.baseUrl;
+        options.baseUrl = options.baseUrl;
         final token = PrefsService.getToken();
         if (token.isNotEmpty) {
           options.headers['Authorization'] = 'Bearer $token';
