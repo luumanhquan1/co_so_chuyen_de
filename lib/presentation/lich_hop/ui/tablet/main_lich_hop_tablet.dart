@@ -50,20 +50,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     ];
   }
 
-  // void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-  //   if (!isSameDay(_selectedDay, selectedDay)) {
-  //     setState(() {
-  //       _selectedDay = selectedDay;
-  //       _focusedDay = focusedDay;
-  //       _rangeStart = null; // Important to clean those
-  //       _rangeEnd = null;
-  //       _rangeSelectionMode = RangeSelectionMode.toggledOff;
-  //     });
-  //
-  //     _selectedEvents.value = _getEventsForDay(selectedDay);
-  //   }
-  // }
-
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(cubit.selectedDay, selectedDay)) {
       setState(() {
@@ -73,19 +59,10 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
         cubit.rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
-
+      cubit.moveTimeSubject.add(cubit.selectedDay);
       _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
-
-  // void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-  //   setState(() {
-  //     _selectedDay = null;
-  //     _focusedDay = focusedDay;
-  //     _rangeStart = start;
-  //     _rangeEnd = end;
-  //     _rangeSelectionMode = RangeSelectionMode.toggledOn;
-  //   });
 
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
