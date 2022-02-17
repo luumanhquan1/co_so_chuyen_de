@@ -342,5 +342,9 @@
   "nhap_ten_phien_hop": "Nhập tên phiên họp",
   "thoi_gian_hop": "Thời gian họp",
   "chon_nguoi_chu_tri": "Chọn người chủ trì",
-  "noi_dung_phien_hop": "Nội dung phiên họp"
+  "noi_dung_phien_hop": "Nội dung phiên họp",
+  "theo_dang_danh_sach" : "Theo dạng danh sách",
+  "lich_theo_trang_thai" : "Lịch theo trạng thái",
+  "lich_theo_lanh_dao" : "Lịch theo lãnh đạo",
+  "menu_lich_lam_viec" : "Menu Lịch làm việc"
 }
