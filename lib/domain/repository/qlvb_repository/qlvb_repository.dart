@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/page_vb_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vb_item_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbden_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vbdi_model.dart';
@@ -10,7 +11,7 @@ mixin QLVBRepository {
   Future<Result<VBDiModel>> getVBDi(
       String startTime, String endTime,);
 
-  Future<Result<VBItemModel>> getDanhSachVbDen();
+  Future<Result<PageVBModel>> getDanhSachVbDen();
 
   Future<Result<VBItemModel>> getDanhSachVbDi();
 }

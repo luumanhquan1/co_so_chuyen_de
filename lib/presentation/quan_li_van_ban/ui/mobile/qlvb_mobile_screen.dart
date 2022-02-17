@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_do
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +33,7 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
   void initState() {
     super.initState();
     qlvbCubit.callAPi();
+    cubitIncoming.callAPi();
   }
 
   @override
@@ -113,23 +116,34 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         ],
                       ),
                       const SizedBox(height: 16.0),
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: cubitIncoming.listIncomingDocument.length,
-                        itemBuilder: (context, index) {
-                          return IncomingDocumentCell(
-                            onTap: () {},
-                            title: cubitIncoming
-                                .listIncomingDocument[index].loaiVanBan,
-                            dateTime: cubitIncoming
-                                .listIncomingDocument[index].ngayTao,
-                            userName: cubitIncoming
-                                .listIncomingDocument[index].nguoiSoanThao,
-                            status: cubitIncoming
-                                .listIncomingDocument[index].doKhan,
-                            userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                          );
+                      StreamBuilder<List<IncomingDocument>>(
+                        stream: cubitIncoming.getListVbDen,
+                        builder: (context, snapshot) {
+                          final List<IncomingDocument> listData =
+                              snapshot.data ?? [];
+                          if (listData.isNotEmpty) {
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount:
+                                  listData.length < 3 ? listData.length : 3,
+                              itemBuilder: (context, index) {
+                                return IncomingDocumentCell(
+                                  onTap: () {},
+                                  title: listData[index].loaiVanBan,
+                                  dateTime:
+                                      DateTime.parse(listData[index].ngayTao)
+                                          .toStringWithListFormat,
+                                  userName: listData[index].nguoiSoanThao,
+                                  status: listData[index].doKhan,
+                                  userImage:
+                                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                );
+                              },
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
                         },
                       ),
                     ],
@@ -183,7 +197,8 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                 .listIncomingDocument[index].nguoiSoanThao,
                             status: cubitOutgoing
                                 .listIncomingDocument[index].doKhan,
-                            userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                            userImage:
+                                'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                           );
                         },
                       ),

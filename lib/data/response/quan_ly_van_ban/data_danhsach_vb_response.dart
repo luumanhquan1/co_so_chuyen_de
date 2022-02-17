@@ -9,7 +9,7 @@ part 'data_danhsach_vb_response.g.dart';
 // ignore: must_be_immutable
 class DanhSachVanBanResponse extends Equatable {
   @JsonKey(name: 'PageData')
-  List<DataVanBanResponse>?danhSachVB;
+  List<DataVanBanResponse>? danhSachVB;
   DanhSachVanBanResponse();
 
   factory DanhSachVanBanResponse.fromJson(Map<String, dynamic> json) =>

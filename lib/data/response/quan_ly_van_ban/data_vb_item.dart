@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/vb_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -11,7 +12,7 @@ class DataVanBanResponse extends Equatable {
   String? doKhan;
   @JsonKey(name: 'LoaiVanBan')
   String? loaiVanBan;
-  @JsonKey(name: 'NgayDen')
+  @JsonKey(name: 'NgayDen_')
   String? ngayDen;
   @JsonKey(name: 'ChuTri')
   String? nguoiSoanThao;
@@ -23,11 +24,11 @@ class DataVanBanResponse extends Equatable {
 
   Map<String, dynamic> toJson() => _$DataVanBanResponseToJson(this);
 
-  VBItemModel toDomainVanBan() => VBItemModel(
-        doKhan: doKhan,
-        loaiVanBan: loaiVanBan,
-        ngayTao: ngayDen,
-        nguoiSoanThao: nguoiSoanThao,
+  IncomingDocument toDomainVanBan() => IncomingDocument(
+        doKhan ??'',
+        loaiVanBan??'',
+         ngayDen??'',
+        nguoiSoanThao??'',
       );
 
   @override

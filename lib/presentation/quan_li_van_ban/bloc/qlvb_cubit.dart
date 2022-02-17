@@ -34,6 +34,7 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
   void callAPi() {
     dataVBDi(startDate: '2022-02-01', endDate: '2022-02-28');
     dataVBDen(startDate: '2022-02-01', endDate: '2022-02-28');
+    listDataVBDen();
   }
 
   final QLVBRepository _QLVBRepo = Get.find();
@@ -130,6 +131,19 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
       },
       error: (err) {
         return;
+      },
+    );
+  }
+
+  Future<void> listDataVBDen() async {
+    final result = await _QLVBRepo.getDanhSachVbDen();
+    print('----------------------------------------------');
+    result.when(
+      success: (res) {
+        print(res.listBVanBan!.danhSachVB!.length);
+      },
+      error: (err) {
+        print('that bai');
       },
     );
   }

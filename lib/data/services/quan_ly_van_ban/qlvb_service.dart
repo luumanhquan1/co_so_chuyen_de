@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_den_request.dart';
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_di_request.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_danhsach_vb_response.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/ds_vbden_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_den_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/vb_di_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -24,5 +25,5 @@ abstract class QuanLyVanBanClient {
   Future<VBDiResponse> getVbDi(@Body() VBDiRequest vbDiRequest);
 
   @POST(ApiConstants.DANH_SACH_VB_DEN)
-  Future<DanhSachVanBanResponse> getListVBDen();
+  Future<DanhSachVBDenResponse> getListVBDen();
 }

@@ -9,14 +9,14 @@ part 'ds_vbden_response.g.dart';
 @JsonSerializable()
 class DanhSachVBDenResponse extends Equatable {
   @JsonKey(name: 'Data')
-  List<DanhSachVanBanResponse>? listData;
+  DanhSachVanBanResponse? data;
   DanhSachVBDenResponse();
   factory DanhSachVBDenResponse.fromJson(Map<String, dynamic> json) =>
       _$DanhSachVBDenResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DanhSachVBDenResponseToJson(this);
   PageVBModel toDomain() => PageVBModel(
-      listBVanBan: listData,);
+      listBVanBan: data,);
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
