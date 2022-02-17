@@ -29,4 +29,5 @@ class ApiConstants {
   static const DASH_BOARD_VBDEN = '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const DASH_BOARD_VBDi = '/qlvb/api/van-ban-di/so-luong';
   static const DANH_SACH_VB_DEN = '/qlvb/api/vanban/getdanhsachvanban';
+  static const DANH_SACH_VB_DI = '/qlvb/api/van-ban-di/search';
 }
