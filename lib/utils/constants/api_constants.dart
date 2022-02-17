@@ -1,11 +1,9 @@
 class BaseUrlConstants {
-
   static const baseURLCCVC = 'https://api-ccvc-uat.chinhquyendientu.vn';
   static const baseUrlGateway =
       'https://api-gateway-ccvc-uat.chinhquyendientu.vn';
   static const baseUrlCommon =
       'https://api-common-ccvc-uat.chinhquyendientu.vn';
-
 }
 
 class ApiConstants {
@@ -28,5 +26,13 @@ class ApiConstants {
   static const String GET_VB_DI_SO_LUONG = '/qlvb/api/van-ban-di/so-luong?';
 
   static const String GET_INFO = 'api/CanBo';
-
+  static const String GET_DANH_SACH_VAN_BAN =
+      '/qlvb/api/vanban/getdanhsachvanban';
+  static const String GET_DANH_SACH_VAN_BAN_SEARCH =
+      '/qlvb/api/van-ban-di/search';
+  static const String TONG_HOP_NHIEM_VU =
+      '/qlvb/api/qlnv/nhiem-vu/get-tong-hop-nhiem-vu?';
+  static const String NHIEM_VU_GET_ALL = '/qlvb/api/qlnv/nhiem-vu/get-all';
+  static const TINH_HINH_XU_LY_TRANG_CHU ='/pakn/api/IocApi/thong-ke-tinh-hinh-xu-ly-trang-chu?';
+  static const DANH_SACH_PAKN ='/pakn/api/IocApi/danh-sach-pakn?';
 }
