@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
@@ -22,6 +21,7 @@ import 'package:rxdart/rxdart.dart';
 
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(MainStateInitial());
+
   HomeRepository get homeRep => Get.find();
   final BehaviorSubject<List<WidgetModel>> _getConfigWidget =
       BehaviorSubject<List<WidgetModel>>();
@@ -85,12 +85,13 @@ class HomeCubit extends BaseCubit<HomeState> {
   Future<void> getUserInFor() async {
     final result = await homeRep.getPhamVi();
     result.when(
-        success: (res) {
-          final dataUser = HiveLocal.getDataUser();
-          dataUser?.userInformation?.chucVu = res.chucVu;
-          _getUserInformation.sink.add(dataUser ?? DataUser());
-        },
-        error: (err) {});
+      success: (res) {
+        final dataUser = HiveLocal.getDataUser();
+        dataUser?.userInformation?.chucVu = res.chucVu;
+        _getUserInformation.sink.add(dataUser ?? DataUser());
+      },
+      error: (err) {},
+    );
   }
 
   Future<void> getDate() async {
@@ -115,12 +116,18 @@ class HomeCubit extends BaseCubit<HomeState> {
   }
 
   Stream<DateModel> get getDateStream => _getDate.stream;
+
   Stream<DataUser> get getUserInformation => _getUserInformation.stream;
+
   Stream<List<WidgetModel>> get getConfigWidget => _getConfigWidget.stream;
+
   Stream<DataUser> get userInformation => _userInformation;
+
   Stream<List<TinhHuongKhanCapModel>> get tinhHuongKhanCap =>
       _tinhHuongKhanCap.stream;
+
   Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
+
   Stream<TodoListModel> get getTodoList => _getTodoList.stream;
 }
 
@@ -143,6 +150,7 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<List<PressNetWorkModel>>();
   final BehaviorSubject<List<TagModel>> _getTag =
       BehaviorSubject<List<TagModel>>();
+
   void getPress() {
     _getTag.sink.add(FakeData.tag);
     _getPressNetWork.sink.add(FakeData.fakeDataPress);
@@ -161,10 +169,12 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
   }
 
   void showAddTag() {}
+
   Stream<List<TagModel>> get getTag => _getTag.stream;
 
   Stream<List<PressNetWorkModel>> get getPressNetWork =>
       _getPressNetWork.stream;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -278,12 +288,14 @@ extension DanhSachCongViec on HomeCubit {
 class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<DashboardSchedule>> _getTongHopNhiemVu =
       BehaviorSubject<List<DashboardSchedule>>();
+
   void getDataTongHopNhiemVu() {
     _getTongHopNhiemVu.sink.add(FakeData.listCalendarWork);
   }
 
   Stream<List<DashboardSchedule>> get getTonghopNhiemVu =>
       _getTongHopNhiemVu.stream;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -297,6 +309,7 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<DocumentDashboardModel> _getDocumentVBDi =
       BehaviorSubject<DocumentDashboardModel>();
+
   void getDocument() {
     final data = HiveLocal.getSelect(SelectKeyPath.KEY_DASH_BOARD_TONG_HOP_NV);
     if (data != null) {
@@ -367,8 +380,10 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
   }
 
   Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
+
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
       _getDocumentVBDen.stream;
+
   @override
   void dispose() {
     _getDocumentVBDen.close();
@@ -407,6 +422,7 @@ mixin SelectKeyDialog {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   final BehaviorSubject<bool> selectKeyDialog = BehaviorSubject();
+
   void selectDate({
     required SelectKey selectKey,
     required DateTime startDate,

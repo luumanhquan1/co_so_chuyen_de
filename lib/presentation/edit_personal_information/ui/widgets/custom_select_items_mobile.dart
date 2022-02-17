@@ -21,18 +21,20 @@ class CustomSelectItems extends StatefulWidget {
   Function(int)? onSelectItem;
   Function? onRemove;
   bool isCheckEnable = false;
+  ManagerPersonalInformationCubit cubit;
 
-  CustomSelectItems({
-    Key? key,
-    this.value,
-    this.onSelectItem,
-    this.onRemove,
-    this.title,
-    required this.context,
-    required this.items,
-    required this.onChange,
-    required this.isCheckEnable,
-  }) : super(key: key);
+  CustomSelectItems(
+      {Key? key,
+      this.value,
+      this.onSelectItem,
+      this.onRemove,
+      this.title,
+      required this.context,
+      required this.items,
+      required this.onChange,
+      required this.isCheckEnable,
+      required this.cubit})
+      : super(key: key);
 
   @override
   _CustomSelectItemsState createState() => _CustomSelectItemsState();
@@ -58,8 +60,6 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
     });
     contents = widget.value.toString();
   }
-
-  ManagerPersonalInformationCubit cubit = ManagerPersonalInformationCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                                               .end,
                                                       children: [
                                                         StreamBuilder<String>(
-                                                          stream: cubit
+                                                          stream: widget.cubit
                                                               .isCheckRadioButton,
                                                           builder: (
                                                             context,
@@ -150,8 +150,33 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                                                       listData[
                                                                           index],
                                                               onSelectItem: () {
+                                                                print(
+                                                                    'lcccc${widget.cubit.tinhHuyenXaModel[index].id}');
+
+                                                                widget.cubit.getDataTinhHuyenXaChild(
+                                                                    parentId: widget
+                                                                            .cubit
+                                                                            .tinhHuyenXaModel[index]
+                                                                            .id ??
+                                                                        '');
+//
+                                                                widget.cubit.getDataTinhHuyenXaChildHuyen(
+                                                                    parentId: widget
+                                                                            .cubit
+                                                                            .tinhHuyenXaModel[index]
+                                                                            .id ??
+                                                                        '');
+//
+                                                                widget.cubit.getDataTinhHuyenXaChildXa(
+                                                                    parentId: widget
+                                                                            .cubit
+                                                                            .tinhHuyenXaModel[index]
+                                                                            .id ??
+                                                                        '');
+
                                                                 setState(() {});
-                                                                cubit
+                                                                widget
+                                                                    .cubit
                                                                     .isCheckRadioButton
                                                                     .sink
                                                                     .add(
@@ -219,7 +244,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: StreamBuilder<String>(
-                    stream: cubit.isCheckRadioButton,
+                    stream: widget.cubit.isCheckRadioButton,
                     initialData: contents,
                     builder: (context, snapshot) {
                       return selectedItems.isNotEmpty
@@ -339,7 +364,8 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                                           children: [
                                                             StreamBuilder<
                                                                 String>(
-                                                              stream: cubit
+                                                              stream: widget
+                                                                  .cubit
                                                                   .isCheckRadioButton,
                                                               builder: (
                                                                 context,
@@ -352,7 +378,10 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                                                                           index],
                                                                   onSelectItem:
                                                                       () {
-                                                                    cubit
+                                                                    print(
+                                                                        'lcccc${widget.cubit.tinhHuyenXaModel[index].id}');
+                                                                    widget
+                                                                        .cubit
                                                                         .isCheckRadioButton
                                                                         .sink
                                                                         .add(
@@ -426,7 +455,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: StreamBuilder<String>(
-                        stream: cubit.isCheckRadioButton,
+                        stream: widget.cubit.isCheckRadioButton,
                         initialData: widget.title,
                         builder: (context, snapshot) {
                           return selectedItems.isNotEmpty
@@ -477,7 +506,7 @@ class _CustomSelectItemsState extends State<CustomSelectItems> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              cubit.isCheckRadioButton.sink.add('');
+              widget.cubit.isCheckRadioButton.sink.add('');
               if (widget.onRemove != null) {
                 widget.onRemove!();
               }

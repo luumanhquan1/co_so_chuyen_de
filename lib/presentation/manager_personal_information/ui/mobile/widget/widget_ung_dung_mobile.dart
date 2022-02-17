@@ -43,6 +43,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: ListView.builder(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.cubit.managerPersonalInformationModel
                           .userAccounts?.length ??
                       0,
@@ -67,7 +68,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                             Expanded(
                               flex: 6,
                               child: Text(
-                                '0',
+                                '${index + 1}',
                                 style: textDetailHDSD(
                                   fontSize: 14.0,
                                   color: titleCalenderWork,
@@ -130,6 +131,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                               flex: 6,
                               child: ListView.builder(
                                 shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: widget
                                         .cubit
                                         .managerPersonalInformationModel
@@ -168,7 +170,7 @@ class _WidgetUngDungMobileState extends State<WidgetUngDungMobile> {
                                 style: textDetailHDSD(
                                   fontSize: 14.0,
                                   color: titleItemEdit,
-                                 // textHeight: 2.5,
+                                  // textHeight: 2.5,
                                 ),
                                 maxLines: 2,
                               ),

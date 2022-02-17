@@ -287,6 +287,7 @@ class _EditPersonalInformationTabletScreen
                                     cubit.isCheckHuyenSubject.sink.add(true);
                                   },
                                   isCheckEnable: false,
+                                  cubit: cubit,
                                 ),
                               );
                             },
@@ -299,6 +300,7 @@ class _EditPersonalInformationTabletScreen
                                 child: InputInfoUserWidget(
                                   title: user.keys.elementAt(11),
                                   child: CustomSelectItems(
+                                    cubit: cubit,
                                     key: UniqueKey(),
                                     value: cubit
                                         .managerPersonalInformationModel.huyen,
@@ -328,6 +330,7 @@ class _EditPersonalInformationTabletScreen
                                 child: InputInfoUserWidget(
                                   title: user.keys.elementAt(12),
                                   child: CustomSelectItems(
+                                    cubit: cubit,
                                     key: UniqueKey(),
                                     value: cubit
                                         .managerPersonalInformationModel.xa,

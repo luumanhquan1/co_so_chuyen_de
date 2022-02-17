@@ -43,6 +43,7 @@ class _WidgetDonVibMobileState extends State<WidgetDonVibMobile> {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: ListView.builder(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.cubit.managerPersonalInformationModel
                           .departments?.length ??
                       0,

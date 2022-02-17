@@ -47,6 +47,9 @@ class ManagerPersonalInformationModel {
   String? tinh;
   String? huyen;
   String? xa;
+  String? tinhId;
+  String? huyenId;
+  String? xaId;
   List<Departments>? departments;
   List<UserAccounts>? userAccounts;
   Status status = Status.OFFLINE;
@@ -75,9 +78,13 @@ class ManagerPersonalInformationModel {
     this.tinh,
     this.huyen,
     this.xa,
+    this.tinhId,
+    this.huyenId,
+    this.xaId,
     this.departments,
     this.userAccounts,
-  }); // List<UserAccounts>? userAccounts;
+  });
+
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
@@ -289,38 +296,6 @@ class Departments {
     this.trangThai,
     this.updatedAt,
   });
-
-  List<ManagerPersonalInformationRow> toListDonVi() {
-    final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow(S.current.stt, '1', TypeRow.text),
-      ManagerPersonalInformationRow(S.current.don_vi, tenDonVi, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.chuc_vu, tenChucVu, TypeRow.text),
-      ManagerPersonalInformationRow(
-        S.current.mac_dinh,
-        isDefault,
-        TypeRow.checkbox,
-      ),
-    ];
-    if (trangThai == 1) {
-      list.insert(
-        3,
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    } else {
-      list.add(
-        ManagerPersonalInformationRow(
-          S.current.trang_thai,
-          S.current.k_hoat_dong,
-          TypeRow.status,
-        ),
-      );
-    }
-    return list;
-  }
 }
 
 class UserAccounts {
