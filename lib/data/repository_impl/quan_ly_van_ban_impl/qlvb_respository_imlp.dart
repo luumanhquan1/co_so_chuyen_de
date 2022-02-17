@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/danh_sach_vb_di_request.dart';
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_den_request.dart';
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/dash_board_vb_di_request.dart';
-import 'package:ccvc_mobile/data/response/quan_ly_van_ban/ds_vbden_response.dart';
+import 'package:ccvc_mobile/data/response/quan_ly_van_ban/danh_sach_van_ban/ds_vbden_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
