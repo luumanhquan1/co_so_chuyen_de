@@ -44,49 +44,6 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                 builder: (context) => const CalendarWorkMenuTablet(),
               ),
             );
-
-            // Navigator.push(
-            //   context,
-            //   PageRouteBuilder(
-            //     reverseTransitionDuration: const Duration(milliseconds: 250),
-            //     transitionDuration: const Duration(milliseconds: 250),
-            //     pageBuilder: (_, animation, ___) {
-            //       const begin = Offset(-1.0, 0.0);
-            //       const end = Offset.zero;
-            //       final tween = Tween(begin: begin, end: end);
-            //       final offsetAnimation = animation.drive(tween);
-            //       return FakeDrawerLichHop(
-            //         offsetAnimation: offsetAnimation,
-            //         title1: 'lich theo dang lich',
-            //         title2: 'lich theo dang list',
-            //         title3: '',
-            //         image1: ImageAssets.icMenuCalender,
-            //         image2: ImageAssets.icMenuCalender,
-            //         image3: ImageAssets.icMenuCalender,
-            //         ontap1: () {
-            //           setState(() {
-            //             _cubit.chooseTypeListLv(
-            //               Type_Choose_Option_List.DANG_LICH,
-            //             );
-            //             _cubit.index.sink.add(0);
-            //             Navigator.pop(context);
-            //           });
-            //         },
-            //         ontap2: () {
-            //           setState(() {
-            //             _cubit.chooseTypeListLv(
-            //               Type_Choose_Option_List.DANG_LIST,
-            //             );
-            //             _cubit.index.sink.add(0);
-            //             Navigator.pop(context);
-            //           });
-            //         },
-            //         ontap3: () {},
-            //       );
-            //     },
-            //     opaque: false,
-            //   ),
-            // );
           },
           icon: SvgPicture.asset(
             ImageAssets.icMenuCalender,
