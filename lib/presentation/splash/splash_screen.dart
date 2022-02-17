@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
