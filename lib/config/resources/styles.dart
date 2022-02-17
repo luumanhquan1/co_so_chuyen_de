@@ -14,6 +14,7 @@ const spaceH6 = SizedBox(height: 6);
 const spaceH8 = SizedBox(height: 8);
 const spaceH10 = SizedBox(height: 10);
 const spaceH12 = SizedBox(height: 12);
+const spaceH14 = SizedBox(height: 14);
 const spaceH15 = SizedBox(height: 15);
 const spaceH16 = SizedBox(height: 16);
 const spaceH20 = SizedBox(height: 20);
@@ -100,7 +101,7 @@ TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
   );
 }
 
-TextStyle textNormalCustom( {
+TextStyle textNormalCustom({
   Color? color,
   double? fontSize,
   FontWeight? fontWeight,

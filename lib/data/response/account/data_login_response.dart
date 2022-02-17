@@ -65,7 +65,7 @@ class UserInformationResponse {
   @JsonKey(name: 'ngaySinh')
   String? ngaySinh;
   @JsonKey(name: 'soDienThoai')
-  int? soDienThoai;
+  String? soDienThoai;
   UserInformation toDomain() => UserInformation(
         id: id,
         hoTen: hoTen,

@@ -32,7 +32,7 @@ class ButtonSelectFile extends StatefulWidget {
     this.builder,
     required this.onChange,
     this.isBuilder = false,
-     this.files = const [],
+    this.files = const [],
   }) : super(key: key);
 
   @override
@@ -64,7 +64,7 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
           child: Container(
             decoration: BoxDecoration(
               color: widget.background ?? labelColor.withOpacity(0.1),
-              borderRadius:const BorderRadius.all(Radius.circular(4)),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
             ),
             padding: EdgeInsets.symmetric(
               vertical: 6.0.textScale(),
