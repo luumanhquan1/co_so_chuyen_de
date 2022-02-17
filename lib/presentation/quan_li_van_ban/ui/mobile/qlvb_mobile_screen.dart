@@ -187,12 +187,11 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         ],
                       ),
                       const SizedBox(height: 16.0),
-                      StreamBuilder<List<IncomingDocument>>(
+                      StreamBuilder<List<VanBanModel>>(
                         stream: cubitOutgoing.getListVbDi,
                         builder: (context, snapshot) {
-                          final List<IncomingDocument> listData =
+                          final List<VanBanModel> listData =
                               snapshot.data ?? [];
-                          log('?????????????????>>>>>>>>>>>>>>>>>${listData}');
                           if (listData.isNotEmpty) {
                             return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -202,12 +201,12 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                               itemBuilder: (context, index) {
                                 return IncomingDocumentCell(
                                   onTap: () {},
-                                  title: listData[index].loaiVanBan,
+                                  title: listData[index].loaiVanBan??'',
                                   dateTime:
-                                  DateTime.parse(listData[index].ngayTao)
+                                  DateTime.parse(listData[index].ngayDen??'')
                                       .toStringWithListFormat,
-                                  userName: listData[index].nguoiSoanThao,
-                                  status: listData[index].doKhan,
+                                  userName: listData[index].nguoiSoanThao??'',
+                                  status: listData[index].doKhan??'',
                                   userImage:
                                   'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                                 );

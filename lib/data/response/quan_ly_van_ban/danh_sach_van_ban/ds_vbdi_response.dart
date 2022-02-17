@@ -1,37 +1,37 @@
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ds_vbden_response.g.dart';
+part 'ds_vbdi_response.g.dart';
 
 @JsonSerializable()
-class DanhSachVBDenResponse {
+class DanhSachVBDiResponse {
   @JsonKey(name: 'Data')
-  DataResponseVBDen danhSachVB;
+  DataResponseVBDi danhSachVB;
 
-  DanhSachVBDenResponse(this.danhSachVB);
+  DanhSachVBDiResponse(this.danhSachVB);
 
-  factory DanhSachVBDenResponse.fromJson(Map<String, dynamic> json) =>
-      _$DanhSachVBDenResponseFromJson(json);
+  factory DanhSachVBDiResponse.fromJson(Map<String, dynamic> json) =>
+      _$DanhSachVBDiResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DanhSachVBDenResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DanhSachVBDiResponseToJson(this);
 
   @override
   List<Object?> get props => [];
 }
 
 @JsonSerializable()
-class DataResponseVBDen {
+class DataResponseVBDi {
   @JsonKey(name: 'PageData')
-  List<PageDataResponseVBDen> pageData;
+  List<PageDataResponseVBDi> pageData;
 
-  DataResponseVBDen(
+  DataResponseVBDi(
     this.pageData,
   );
 
-  factory DataResponseVBDen.fromJson(Map<String, dynamic> json) =>
-      _$DataResponseVBDenFromJson(json);
+  factory DataResponseVBDi.fromJson(Map<String, dynamic> json) =>
+      _$DataResponseVBDiFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataResponseVBDenToJson(this);
+  Map<String, dynamic> toJson() => _$DataResponseVBDiToJson(this);
 
   DanhSachVanBanModel toDomain() => DanhSachVanBanModel(
         pageDataRespone: pageData.map((e) => VanBanModel(
@@ -46,23 +46,23 @@ class DataResponseVBDen {
 }
 
 @JsonSerializable()
-class PageDataResponseVBDen {
+class PageDataResponseVBDi {
   @JsonKey(name: 'DoKhan')
   String? doKhan;
   @JsonKey(name: 'LoaiVanBan')
   String? loaiVanBan;
-  @JsonKey(name: 'NgayDen_')
+  @JsonKey(name: 'NgayTao')
   String? ngayDen;
   @JsonKey(name: 'ChuTri')
   String? nguoiSoanThao;
 
-  PageDataResponseVBDen(
+  PageDataResponseVBDi(
       this.doKhan, this.loaiVanBan, this.ngayDen, this.nguoiSoanThao);
 
-  factory PageDataResponseVBDen.fromJson(Map<String, dynamic> json) =>
-      _$PageDataResponseVBDenFromJson(json);
+  factory PageDataResponseVBDi.fromJson(Map<String, dynamic> json) =>
+      _$PageDataResponseVBDiFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PageDataResponseVBDenToJson(this);
+  Map<String, dynamic> toJson() => _$PageDataResponseVBDiToJson(this);
 
   VanBanModel toDomain() => VanBanModel(
         nguoiSoanThao: nguoiSoanThao,

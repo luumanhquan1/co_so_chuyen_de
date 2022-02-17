@@ -24,7 +24,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     final result = await _QLVBRepo.getVanBanModel();
     result.when(
       success: (res) {
-        listVbDen=res.pageDataRespone?.map((e) => e.toDomain()).toList() ?? [];
+        listVbDen=res.pageDataRespone ?? [];
         _getListVBDen.sink.add(listVbDen);
       },
       error: (err) {
