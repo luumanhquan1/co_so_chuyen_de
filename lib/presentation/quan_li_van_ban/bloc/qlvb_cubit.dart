@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/data/response/quan_ly_van_ban/data_vbden_response.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -13,13 +12,13 @@ import 'package:rxdart/rxdart.dart';
 class QLVBCCubit extends BaseCubit<QLVBState> {
   QLVBCCubit() : super(QLVbStateInitial());
   final BehaviorSubject<DocumentDashboardModel> _getVbDen =
-      BehaviorSubject<DocumentDashboardModel>();
+  BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<DocumentDashboardModel> _getVbDi =
-      BehaviorSubject<DocumentDashboardModel>();
+  BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<ChartData> _dataChartVBDen =
-      BehaviorSubject<ChartData>();
+  BehaviorSubject<ChartData>();
   final BehaviorSubject<ChartData> _dataChartVBDi =
-      BehaviorSubject<ChartData>();
+  BehaviorSubject<ChartData>();
   final List<ChartData> chartDataVbDen = [];
   final List<ChartData> chartDataVbDi = [];
 
@@ -32,119 +31,106 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
   Stream<ChartData> get dataChatVbDi => _dataChartVBDi.stream;
 
   void callAPi() {
-    dataVBDi(startDate: '2022-02-01', endDate: '2022-02-28');
-    dataVBDen(startDate: '2022-02-01', endDate: '2022-02-28');
-    listDataVBDen();
+    // dataVBDi(startDate: '2022-02-01', endDate: '2022-02-28');
+    // dataVBDen(startDate: '2022-02-01', endDate: '2022-02-28');
+    // listDataVBDen();
   }
 
   final QLVBRepository _QLVBRepo = Get.find();
 
-  Future<void> dataVBDi(
-      {required String startDate, required String endDate,}) async {
-    final result = await _QLVBRepo.getVBDi(startDate, endDate);
-    result.when(
-      success: (res) {
-        final dataVbDi = DocumentDashboardModel(
-          soLuongChoTrinhKy: res.soLuongChoTrinhKy,
-          soLuongChoXuLy: res.soLuongChoXuLy,
-          soLuongDaXuLy: res.soLuongDaXuLy,
-          soLuongThuongKhan: res.soLuongThuongKhan,
-        );
-        chartDataVbDi.add(
-          ChartData(
-            S.current.cho_trinh_ky,
-            dataVbDi.soLuongChoTrinhKy!.toDouble(),
-            choTrinhKyColor,
-          ),
-        );
-        chartDataVbDi.add(
-          ChartData(
-            S.current.cho_xu_ly,
-            dataVbDi.soLuongChoXuLy!.toDouble(),
-            choXuLyColor,
-          ),
-        );
-        chartDataVbDi.add(
-          ChartData(
-            S.current.da_xu_ly,
-            dataVbDi.soLuongDaXuLy!.toDouble(),
-            daXuLyColor,
-          ),
-        );
-        _getVbDi.sink.add(dataVbDi);
-      },
-      error: (err) {
-        return;
-      },
-    );
-  }
-
-  Future<void> dataVBDen({
-    required String startDate,
-    required String endDate,
-  }) async {
-    final result = await _QLVBRepo.getVBDen(startDate, endDate);
-    result.when(
-      success: (res) {
-        final Map<String, int> mapData = {};
-        for (final DataVBDenResponse element in res.listVBDen ?? []) {
-          mapData['${element.code}'] = element.value ?? 0;
-        }
-        final dataVbDen = DocumentDashboardModel(
-          soLuongChoXuLy: mapData[VBDenDocumentType.CHO_XU_LY.getName()],
-          soLuongDangXuLy: mapData[VBDenDocumentType.DANG_XU_LY.getName()],
-          soLuongDaXuLy: mapData[VBDenDocumentType.DA_XU_LY.getName()],
-          soLuongChoVaoSo: mapData[VBDenDocumentType.CHO_VAO_SO.getName()],
-          soLuongTrongHan: mapData[VBDenDocumentType.TRONG_HAN.getName()],
-          soLuongQuaHan: mapData[VBDenDocumentType.QUA_HAN.getName()],
-          soLuongThuongKhan: mapData[VBDenDocumentType.THUONG_KHAN.getName()],
-        );
-        chartDataVbDen.add(
-          ChartData(
-            S.current.cho_xu_ly,
-            dataVbDen.soLuongChoXuLy!.toDouble(),
-            choXuLyColor,
-          ),
-        );
-        chartDataVbDen.add(
-          ChartData(
-            S.current.dang_xu_ly,
-            dataVbDen.soLuongDangXuLy!.toDouble(),
-            dangXyLyColor,
-          ),
-        );
-        chartDataVbDen.add(
-          ChartData(
-            S.current.da_xu_ly,
-            dataVbDen.soLuongDaXuLy!.toDouble(),
-            daXuLyColor,
-          ),
-        );
-        chartDataVbDen.add(
-          ChartData(
-            S.current.cho_vao_so,
-            dataVbDen.soLuongChoVaoSo!.toDouble(),
-            choVaoSoColor,
-          ),
-        );
-        _getVbDen.sink.add(dataVbDen);
-      },
-      error: (err) {
-        return;
-      },
-    );
-  }
-
-  Future<void> listDataVBDen() async {
-    final result = await _QLVBRepo.getDanhSachVbDen();
-    print('----------------------------------------------');
-    result.when(
-      success: (res) {
-        print(res.listBVanBan!.danhSachVB!.length);
-      },
-      error: (err) {
-        print('that bai');
-      },
-    );
-  }
+// Future<void> dataVBDi(
+//     {required String startDate, required String endDate,}) async {
+//   final result = await _QLVBRepo.getVBDi(startDate, endDate);
+//   result.when(
+//     success: (res) {
+//       final dataVbDi = DocumentDashboardModel(
+//         soLuongChoTrinhKy: res.soLuongChoTrinhKy,
+//         soLuongChoXuLy: res.soLuongChoXuLy,
+//         soLuongDaXuLy: res.soLuongDaXuLy,
+//         soLuongThuongKhan: res.soLuongThuongKhan,
+//       );
+//       chartDataVbDi.add(
+//         ChartData(
+//           S.current.cho_trinh_ky,
+//           dataVbDi.soLuongChoTrinhKy!.toDouble(),
+//           choTrinhKyColor,
+//         ),
+//       );
+//       chartDataVbDi.add(
+//         ChartData(
+//           S.current.cho_xu_ly,
+//           dataVbDi.soLuongChoXuLy!.toDouble(),
+//           choXuLyColor,
+//         ),
+//       );
+//       chartDataVbDi.add(
+//         ChartData(
+//           S.current.da_xu_ly,
+//           dataVbDi.soLuongDaXuLy!.toDouble(),
+//           daXuLyColor,
+//         ),
+//       );
+//       _getVbDi.sink.add(dataVbDi);
+//     },
+//     error: (err) {
+//       return;
+//     },
+//   );
+// }
+//
+// Future<void> dataVBDen({
+//   required String startDate,
+//   required String endDate,
+// }) async {
+//   final result = await _QLVBRepo.getVBDen(startDate, endDate);
+//   result.when(
+//     success: (res) {
+//       final Map<String, int> mapData = {};
+//       for (final DataVBDenResponse element in res.listVBDen ?? []) {
+//         mapData['${element.code}'] = element.value ?? 0;
+//       }
+//       final dataVbDen = DocumentDashboardModel(
+//         soLuongChoXuLy: mapData[VBDenDocumentType.CHO_XU_LY.getName()],
+//         soLuongDangXuLy: mapData[VBDenDocumentType.DANG_XU_LY.getName()],
+//         soLuongDaXuLy: mapData[VBDenDocumentType.DA_XU_LY.getName()],
+//         soLuongChoVaoSo: mapData[VBDenDocumentType.CHO_VAO_SO.getName()],
+//         soLuongTrongHan: mapData[VBDenDocumentType.TRONG_HAN.getName()],
+//         soLuongQuaHan: mapData[VBDenDocumentType.QUA_HAN.getName()],
+//         soLuongThuongKhan: mapData[VBDenDocumentType.THUONG_KHAN.getName()],
+//       );
+//       chartDataVbDen.add(
+//         ChartData(
+//           S.current.cho_xu_ly,
+//           dataVbDen.soLuongChoXuLy!.toDouble(),
+//           choXuLyColor,
+//         ),
+//       );
+//       chartDataVbDen.add(
+//         ChartData(
+//           S.current.dang_xu_ly,
+//           dataVbDen.soLuongDangXuLy!.toDouble(),
+//           dangXyLyColor,
+//         ),
+//       );
+//       chartDataVbDen.add(
+//         ChartData(
+//           S.current.da_xu_ly,
+//           dataVbDen.soLuongDaXuLy!.toDouble(),
+//           daXuLyColor,
+//         ),
+//       );
+//       chartDataVbDen.add(
+//         ChartData(
+//           S.current.cho_vao_so,
+//           dataVbDen.soLuongChoVaoSo!.toDouble(),
+//           choVaoSoColor,
+//         ),
+//       );
+//       _getVbDen.sink.add(dataVbDen);
+//     },
+//     error: (err) {
+//       return;
+//     },
+//   );
+// }
 }

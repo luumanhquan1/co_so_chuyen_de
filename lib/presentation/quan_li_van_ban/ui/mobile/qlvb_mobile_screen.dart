@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
@@ -34,6 +37,8 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
     super.initState();
     qlvbCubit.callAPi();
     cubitIncoming.callAPi();
+    cubitOutgoing.callAPi();
+
   }
 
   @override
@@ -116,10 +121,10 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         ],
                       ),
                       const SizedBox(height: 16.0),
-                      StreamBuilder<List<IncomingDocument>>(
+                      StreamBuilder<List<VanBanModel>>(
                         stream: cubitIncoming.getListVbDen,
                         builder: (context, snapshot) {
-                          final List<IncomingDocument> listData =
+                          final List<VanBanModel> listData =
                               snapshot.data ?? [];
                           if (listData.isNotEmpty) {
                             return ListView.builder(
@@ -130,12 +135,12 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                               itemBuilder: (context, index) {
                                 return IncomingDocumentCell(
                                   onTap: () {},
-                                  title: listData[index].loaiVanBan,
+                                  title: listData[index].loaiVanBan??'',
                                   dateTime:
-                                      DateTime.parse(listData[index].ngayTao)
+                                      DateTime.parse(listData[index].ngayDen??'')
                                           .toStringWithListFormat,
-                                  userName: listData[index].nguoiSoanThao,
-                                  status: listData[index].doKhan,
+                                  userName: listData[index].nguoiSoanThao??'',
+                                  status: listData[index].doKhan??'',
                                   userImage:
                                       'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                                 );
@@ -182,24 +187,35 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         ],
                       ),
                       const SizedBox(height: 16.0),
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: cubitOutgoing.listIncomingDocument.length,
-                        itemBuilder: (context, index) {
-                          return IncomingDocumentCell(
-                            onTap: () {},
-                            title: cubitOutgoing
-                                .listIncomingDocument[index].loaiVanBan,
-                            dateTime: cubitOutgoing
-                                .listIncomingDocument[index].ngayBanHanh,
-                            userName: cubitOutgoing
-                                .listIncomingDocument[index].nguoiSoanThao,
-                            status: cubitOutgoing
-                                .listIncomingDocument[index].doKhan,
-                            userImage:
-                                'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                          );
+                      StreamBuilder<List<IncomingDocument>>(
+                        stream: cubitOutgoing.getListVbDi,
+                        builder: (context, snapshot) {
+                          final List<IncomingDocument> listData =
+                              snapshot.data ?? [];
+                          log('?????????????????>>>>>>>>>>>>>>>>>${listData}');
+                          if (listData.isNotEmpty) {
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount:
+                              listData.length < 3 ? listData.length : 3,
+                              itemBuilder: (context, index) {
+                                return IncomingDocumentCell(
+                                  onTap: () {},
+                                  title: listData[index].loaiVanBan,
+                                  dateTime:
+                                  DateTime.parse(listData[index].ngayTao)
+                                      .toStringWithListFormat,
+                                  userName: listData[index].nguoiSoanThao,
+                                  status: listData[index].doKhan,
+                                  userImage:
+                                  'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                );
+                              },
+                            );
+                          } else {
+                            return Container(height: 100,color: Colors.red,);
+                          }
                         },
                       ),
                     ],
