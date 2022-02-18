@@ -42,7 +42,7 @@ class _LichTaoHoTabletScreenState extends State<LichTaoHoTabletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: S.current.lich_cua_toi,
+        title: S.current.lich_tao_ho,
         actions: [
           IconButton(
             onPressed: () {
