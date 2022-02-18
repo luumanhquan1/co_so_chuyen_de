@@ -368,6 +368,9 @@
   "so_noi_vu" : "Sở Nội vụ",
   "phong_tai_chinh_noi_chinh" : "Phòng Tài chính - Nội chính",
   "phong_kinh_te_nghanh" : "Phòng Kinh tế ngành",
-  "so_tai_chinh" : "Sở Tài chính"
+  "so_tai_chinh" : "Sở Tài chính",
+  "chinh_sua_tag" : "Chỉnh sửa tag",
+  "them_tag" : "Thêm tag"
+
 
 }
