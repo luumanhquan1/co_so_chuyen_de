@@ -83,7 +83,7 @@ class _ManagerPersonalInformationState
           stream: _cubit.stateStream,
           child: RefreshIndicator(
             onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 2));
+              await _cubit.loadApi(id: id);
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),

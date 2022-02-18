@@ -56,14 +56,14 @@ class _EditPersonalInformationScreen
     super.initState();
     cubit.managerStream.listen((event) {
       cubit.getCurrentUnit(event);
-      nameController.text = event.hoTen ?? '';
-      maCanBoController.text = event.maCanBo ?? '';
+      nameController.text = event.hoTen ?? 'Họ tên';
+      maCanBoController.text = event.maCanBo ?? 'Mã cán bộ';
       thuTuController.text = event.thuTu.toString();
       cmndController.text = event.cmtnd ?? 'Số CMND';
-      emailController.text = event.email ?? '';
-      sdtCoquanController.text = event.phoneCoQuan ?? '';
+      emailController.text = event.email ?? 'Email';
+      sdtCoquanController.text = event.phoneCoQuan ?? 'Số điện thoại cơ quan';
       sdtController.text = event.phoneDiDong ?? 'Số điện thoại';
-      diaChiLienHeController.text = event.diaChi ?? '';
+      diaChiLienHeController.text = event.diaChi ?? 'Địa chỉ';
     });
   }
 
@@ -91,6 +91,8 @@ class _EditPersonalInformationScreen
             child: TextButton(
               onPressed: () {
                 cubit.getInfo(id: widget.id);
+                if (keyGroup.currentState!.validator()) {
+                } else {}
               },
               child: Text(
                 S.current.reset,
@@ -109,7 +111,9 @@ class _EditPersonalInformationScreen
           stream: cubit.stateStream,
           child: RefreshIndicator(
             onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 2));
+              await cubit.getInfo(id: widget.id);
+              if (keyGroup.currentState!.validator()) {
+              } else {}
             },
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -233,101 +237,103 @@ class _EditPersonalInformationScreen
                           ),
                         ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                            stream: cubit.tinhStream,
-                            builder: (context, snapshot) {
-                              final data = snapshot.data ?? [];
-                              return InputInfoUserWidget(
-                                title: user.keys.elementAt(10),
-                                child: CustomSelectTinh(
-                                  initialValue: cubit
-                                      .managerPersonalInformationModel.tinh,
-                                  key: UniqueKey(),
-                                  title:  S.current.tinh_thanh,
-                                  items: data,
-                                  onChange: (indexes, id) {
-
-
-                                    cubit.huyenSubject.sink.add([]);
-                                    cubit.xaSubject.sink.add([]);
-
-                                    cubit.getDataHuyenXa(
-                                        isXa: false,
-                                        parentId:
-                                            cubit.tinhModel[indexes].id ?? '');
-                                    if (indexes >= 0) {
-                                      cubit.isCheckTinhSubject.sink.add(false);
-                                    }
-                                  },
-                                  onRemove: () {
-                                    cubit.huyenSubject.sink.add([]);
-                                    cubit.isCheckTinhSubject.sink.add(true);
-                                    cubit.isCheckHuyenSubject.sink.add(true);
-                                  },
-                                  // du lieu null hoac k
-                                  cubit: cubit,
-                                ),
-                              );
-                            }),
+                          stream: cubit.tinhStream,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
+                            return InputInfoUserWidget(
+                              title: user.keys.elementAt(10),
+                              child: CustomSelectTinh(
+                                initialValue:
+                                    cubit.managerPersonalInformationModel.tinh,
+                                key: UniqueKey(),
+                                title: S.current.tinh_thanh,
+                                items: data,
+                                onChange: (indexes, id) {
+                                  cubit.huyenSubject.sink.add([]);
+                                  cubit.xaSubject.sink.add([]);
+                                  cubit.getDataHuyenXa(
+                                    isXa: false,
+                                    parentId: cubit.tinhModel[indexes].id ?? '',
+                                  );
+                                  if (indexes >= 0) {
+                                    cubit.isCheckTinhSubject.sink.add(false);
+                                  }
+                                },
+                                onRemove: () {
+                                  cubit.huyenSubject.sink.add([]);
+                                  cubit.isCheckTinhSubject.sink.add(true);
+                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                },
+                                cubit: cubit,
+                                isEnable: cubit.huyenSubject.value.isEmpty,
+                              ),
+                            );
+                          },
+                        ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                            stream: cubit.huyenStream,
-                            builder: (context, snapshot) {
-                              final data = snapshot.data ?? [];
-                              // if (data.isEmpty) {
-                              //   cubit.xaSubject.sink.add([]);
-                              // }
-                              return InputInfoUserWidget(
-                                title: user.keys.elementAt(11),
-                                child: CustomSelectTinh(
-                                  initialValue: cubit
-                                      .managerPersonalInformationModel.huyen,
-                                  key: UniqueKey(),
-                                  title: S.current.quan_huyen,
-                                  items: data,
-                                  onChange: (indexes, id) {
-                                    cubit.xaSubject.sink.add([]);
-                                    cubit.getDataHuyenXa(
-                                        isXa: true,
-                                        parentId:
-                                            cubit.huyenModel[indexes].id ?? '');
-                                    if (indexes >= 0) {
-                                      cubit.isCheckTinhSubject.sink.add(false);
-                                    }
-                                  },
-                                  onRemove: () {
-                                    cubit.xaSubject.sink.add([]);
-                                    cubit.isCheckTinhSubject.sink.add(true);
-                                    cubit.isCheckHuyenSubject.sink.add(true);
-                                  },
-                                  // du lieu null hoac k
-                                  cubit: cubit,
-                                ),
-                              );
-                            }),
+                          stream: cubit.huyenStream,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
+                            if (data.isEmpty) {
+                              cubit.xaSubject.sink.add([]);
+                            }
+                            return InputInfoUserWidget(
+                              title: user.keys.elementAt(11),
+                              child: CustomSelectTinh(
+                                initialValue:
+                                    cubit.managerPersonalInformationModel.huyen,
+                                key: UniqueKey(),
+                                title: S.current.quan_huyen,
+                                items: data,
+                                onChange: (indexes, id) {
+                                  cubit.xaSubject.sink.add([]);
+                                  cubit.getDataHuyenXa(
+                                    isXa: true,
+                                    parentId:
+                                        cubit.huyenModel[indexes].id ?? '',
+                                  );
+                                  if (indexes >= 0) {
+                                    cubit.isCheckTinhSubject.sink.add(false);
+                                  }
+                                },
+                                onRemove: () {
+                                  cubit.xaSubject.sink.add([]);
+                                  cubit.isCheckTinhSubject.sink.add(true);
+                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                },
+                                cubit: cubit,
+                                isEnable: cubit.huyenSubject.value.isEmpty,
+                              ),
+                            );
+                          },
+                        ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                            stream: cubit.xaStream,
-                            builder: (context, snapshot) {
-                              final data = snapshot.data ?? [];
-                              return InputInfoUserWidget(
-                                title: user.keys.elementAt(12),
-                                child: CustomSelectTinh(
-                                  initialValue: cubit.managerPersonalInformationModel.xa,
-                                  key: UniqueKey(),
-                                  title:S.current.phuong_xa,
-                                  items: data,
-                                  onChange: (indexes, id) {
-                                    if (indexes >= 0) {
-                                      cubit.isCheckTinhSubject.sink.add(false);
-                                    }
-                                  },
-                                  onRemove: () {
-                                    cubit.isCheckTinhSubject.sink.add(true);
-                                    cubit.isCheckHuyenSubject.sink.add(true);
-                                  },
-                                  // du lieu null hoac k
-                                  cubit: cubit,
-                                ),
-                              );
-                            }),
+                          stream: cubit.xaStream,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
+                            return InputInfoUserWidget(
+                              title: user.keys.elementAt(12),
+                              child: CustomSelectTinh(
+                                initialValue:
+                                    cubit.managerPersonalInformationModel.xa,
+                                key: UniqueKey(),
+                                title: S.current.phuong_xa,
+                                items: data,
+                                onChange: (indexes, id) {
+                                  if (indexes >= 0) {
+                                    cubit.isCheckTinhSubject.sink.add(false);
+                                  }
+                                },
+                                onRemove: () {
+                                  cubit.isCheckTinhSubject.sink.add(true);
+                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                },
+                                cubit: cubit,
+                                isEnable: cubit.xaSubject.value.isEmpty,
+                              ),
+                            );
+                          },
+                        ),
 
                         InputInfoUserWidget(
                           title: user.keys.elementAt(13),

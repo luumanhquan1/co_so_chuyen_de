@@ -87,41 +87,61 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ho_va_ten,
+        hoTen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.ma_can_bo,
+        maCanBo ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.thu_tus,
+        thuTu ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.cmnd, cmtnd ?? '', TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
         gioiTinh ?? false ? S.current.Nam : S.current.Nu,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.email, email ?? '', TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.sdt_co_quan,
-        phoneCoQuan,
+        phoneCoQuan ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.sdt_lien_he,
-        phoneDiDong,
+        phoneDiDong ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.tinh_thanh,
-        tinh,
+        tinh ?? '',
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.quan_huyen,
+        huyen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.phuong_xa,
+        xa ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.dia_chi_lien_he,
-        diaChi,
+        diaChi ?? '',
         TypeRow.text,
       ),
     ];
@@ -130,21 +150,37 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListRowDetailJob() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ho_va_ten,
+        hoTen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.ma_can_bo,
+        maCanBo ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.thu_tus,
+        thuTu ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.cmnd,
+        cmtnd ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
         gioiTinh ?? false ? S.current.Nam : S.current.Nu,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.email, email ?? '', TypeRow.text),
     ];
     return list;
   }
@@ -153,24 +189,32 @@ class ManagerPersonalInformationModel {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(
         S.current.sdt_co_quan,
-        phoneCoQuan,
+        phoneCoQuan ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.sdt_lien_he,
-        phoneDiDong,
+        phoneDiDong ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.tinh_thanh,
-        tinh,
+        tinh ?? '',
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.quan_huyen,
+        huyen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.phuong_xa,
+        xa ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.dia_chi_lien_he,
-        diaChi,
+        diaChi ?? '',
         TypeRow.text,
       ),
     ];

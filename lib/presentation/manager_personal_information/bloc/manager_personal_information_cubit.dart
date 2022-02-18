@@ -24,7 +24,9 @@ class ManagerPersonalInformationCubit
       managerPersonSubject.stream;
 
 //tinh huyen sss
-  BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded([]);
+  BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded(
+    [],
+  );
   List<TinhHuyenXaModel> tinhModel = [];
 
   Stream<List<TinhHuyenXaModel>> get tinhStream => tinhSubject.stream;
@@ -55,51 +57,36 @@ class ManagerPersonalInformationCubit
     result.when(
       success: (res) {
         tinhModel = res;
-        // List<String> tenTinhHuyenXa = [];
-        // for (TinhHuyenXaModel obj in tinhModel) {
-        //   tenTinhHuyenXa.add(obj.name ?? '');
-        // }
         tinhSubject.sink.add(tinhModel);
       },
       error: (error) {},
     );
   }
 
-
-
-  // huyen
   BehaviorSubject<List<TinhHuyenXaModel>> huyenSubject =
       BehaviorSubject.seeded([]);
 
-  Stream<List<TinhHuyenXaModel>> get huyenStream =>
-      huyenSubject.stream;
+  Stream<List<TinhHuyenXaModel>> get huyenStream => huyenSubject.stream;
   List<TinhHuyenXaModel> huyenModel = [];
 
-  // xa
-  BehaviorSubject<List<TinhHuyenXaModel>> xaSubject = BehaviorSubject.seeded([]);
+  BehaviorSubject<List<TinhHuyenXaModel>> xaSubject =
+      BehaviorSubject.seeded([]);
 
-  Stream<List<TinhHuyenXaModel>> get xaStream =>
-      xaSubject.stream;
+  Stream<List<TinhHuyenXaModel>> get xaStream => xaSubject.stream;
   List<TinhHuyenXaModel> xaModel = [];
 
-  //tinh
-  Future<void> getDataHuyenXa({String parentId = '',required bool isXa}) async {
+  Future<void> getDataHuyenXa({
+    String parentId = '',
+    required bool isXa,
+  }) async {
     final result = await _tinhHuyenXaRepo.getDataChild(parentId);
     result.when(
       success: (res) {
-        if (isXa){
+        if (isXa) {
           xaModel = res;
-          // List<String> tenTinhHuyenXa = [];
-          // for (TinhHuyenXaModel obj in xaModel) {
-          //   tenTinhHuyenXa.add(obj.name ?? '');
-          // }
           xaSubject.sink.add(xaModel);
-        }else {
+        } else {
           huyenModel = res;
-          // List<String> tenTinhHuyenXa = [];
-          // for (TinhHuyenXaModel obj in huyenModel) {
-          //   tenTinhHuyenXa.add(obj.name ?? '');
-          // }
           huyenSubject.sink.add(huyenModel);
         }
       },
@@ -107,10 +94,12 @@ class ManagerPersonalInformationCubit
     );
   }
 
-
-
   //
   BehaviorSubject<File> saveFile = BehaviorSubject();
+
+  final BehaviorSubject<String> avatarPathSubject = BehaviorSubject();
+  final BehaviorSubject<String> chuKyPathSubject = BehaviorSubject();
+  final BehaviorSubject<String> kyNhayPathSubject = BehaviorSubject();
 
   Stream<File> get saveFileStream => saveFile.stream;
   BehaviorSubject<bool> isCheckTinhSubject = BehaviorSubject();
@@ -118,9 +107,8 @@ class ManagerPersonalInformationCubit
   Stream<bool> get isCheckTinhStream => isCheckTinhSubject.stream;
 
   BehaviorSubject<bool> isCheckHuyenSubject = BehaviorSubject();
+
   Stream<bool> get isCheckHuyenStream => isCheckHuyenSubject.stream;
-
-
 
   final BehaviorSubject<WidgetType?> _showDialogSetting =
       BehaviorSubject<WidgetType?>();
@@ -142,17 +130,6 @@ class ManagerPersonalInformationCubit
   void checkRadioButton(int _index) {
     _checkRadioSubject.sink.add(_index);
   }
-
-  // void isCheckData() {
-  //   if (managerPersonalInformationModel.tinh == '') {
-  //     isCheckTinhSubject.sink.add(true);
-  //     isCheckHuyenSubject.sink.add(true);
-  //   } else {
-  //     tinh = managerPersonalInformationModel.tinh ?? '';
-  //     isCheckTinhSubject.sink.add(true);
-  //     isCheckHuyenSubject.sink.add(true);
-  //   }
-  // }
 
   Future<void> getCurrentUnit(
     ManagerPersonalInformationModel managerPersonalInformationModel,
