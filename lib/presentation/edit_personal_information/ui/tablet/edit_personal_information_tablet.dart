@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_pe
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/widget/avatar_tablet.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/custom_select_tinh.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/double_button_edit_seen.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -128,7 +128,7 @@ class _EditPersonalInformationTabletScreen
                         cubit.isCheckButtonReset.sink.add(
                           !cubit.isCheckButtonReset.value,
                         );
-                        cubit.isCheckData();
+                     //   cubit.isCheckData();
                       },
                       child: Text(
                         S.current.reset,
@@ -265,85 +265,85 @@ class _EditPersonalInformationTabletScreen
                               },
                             ),
                           ),
-                          StreamBuilder<bool>(
-                            stream: cubit.isCheckButtonReset,
-                            builder: (context, snapshot) {
-                              return InputInfoUserWidget(
-                                title: user.keys.elementAt(10),
-                                child: CustomSelectItems(
-                                  title: S.current.tinh_thanh,
-                                  key: UniqueKey(),
-                                  value: cubit
-                                      .managerPersonalInformationModel.tinh,
-                                  context: context,
-                                  items: cubit.fakeDataTinh,
-                                  onChange: (indexes) {
-                                    if (indexes >= 0) {
-                                      cubit.isCheckTinhSubject.sink.add(false);
-                                    }
-                                  },
-                                  onRemove: () {
-                                    cubit.isCheckTinhSubject.sink.add(true);
-                                    cubit.isCheckHuyenSubject.sink.add(true);
-                                  },
-                                  isCheckEnable: false,
-                                  cubit: cubit,
-                                ),
-                              );
-                            },
-                          ),
-                          StreamBuilder<bool>(
-                            stream: cubit.isCheckTinhStream,
-                            builder: (context, snapshot) {
-                              final snap = snapshot.data ?? true;
-                              return Form(
-                                child: InputInfoUserWidget(
-                                  title: user.keys.elementAt(11),
-                                  child: CustomSelectItems(
-                                    cubit: cubit,
-                                    key: UniqueKey(),
-                                    value: cubit
-                                        .managerPersonalInformationModel.huyen,
-                                    title: S.current.quan_huyen,
-                                    context: context,
-                                    items: cubit.fakeDataHuyen,
-                                    onChange: (indexes) {
-                                      if (indexes >= 0) {
-                                        cubit.isCheckHuyenSubject.sink
-                                            .add(false);
-                                      }
-                                    },
-                                    onRemove: () {
-                                      cubit.isCheckHuyenSubject.sink.add(true);
-                                    },
-                                    isCheckEnable: snap,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          StreamBuilder<bool>(
-                            stream: cubit.isCheckHuyenStream,
-                            builder: (context, snapshot) {
-                              final snap = snapshot.data ?? true;
-                              return Form(
-                                child: InputInfoUserWidget(
-                                  title: user.keys.elementAt(12),
-                                  child: CustomSelectItems(
-                                    cubit: cubit,
-                                    key: UniqueKey(),
-                                    value: cubit
-                                        .managerPersonalInformationModel.xa,
-                                    title: S.current.phuong_xa,
-                                    context: context,
-                                    items: cubit.fakeDataTinh,
-                                    onChange: (indexes) {},
-                                    isCheckEnable: snap,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                          // StreamBuilder<bool>(
+                          //   stream: cubit.isCheckButtonReset,
+                          //   builder: (context, snapshot) {
+                          //     return InputInfoUserWidget(
+                          //       title: user.keys.elementAt(10),
+                          //       child: CustomSelectItems(
+                          //         title: S.current.tinh_thanh,
+                          //         key: UniqueKey(),
+                          //         value: cubit
+                          //             .managerPersonalInformationModel.tinh,
+                          //         context: context,
+                          //         items: cubit.fakeDataTinh,
+                          //         onChange: (indexes) {
+                          //           if (indexes >= 0) {
+                          //             cubit.isCheckTinhSubject.sink.add(false);
+                          //           }
+                          //         },
+                          //         onRemove: () {
+                          //           cubit.isCheckTinhSubject.sink.add(true);
+                          //           cubit.isCheckHuyenSubject.sink.add(true);
+                          //         },
+                          //         isCheckDisable: false,
+                          //         cubit: cubit,
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
+                          // StreamBuilder<bool>(
+                          //   stream: cubit.isCheckTinhStream,
+                          //   builder: (context, snapshot) {
+                          //     final snap = snapshot.data ?? true;
+                          //     return Form(
+                          //       child: InputInfoUserWidget(
+                          //         title: user.keys.elementAt(11),
+                          //         child: CustomSelectItems(
+                          //           cubit: cubit,
+                          //           key: UniqueKey(),
+                          //           value: cubit
+                          //               .managerPersonalInformationModel.huyen,
+                          //           title: S.current.quan_huyen,
+                          //           context: context,
+                          //           items: cubit.fakeDataHuyen,
+                          //           // onChange: (indexes) {
+                          //           //   if (indexes >= 0) {
+                          //           //     cubit.isCheckHuyenSubject.sink
+                          //           //         .add(false);
+                          //           //   }
+                          //           // },
+                          //           onRemove: () {
+                          //             cubit.isCheckHuyenSubject.sink.add(true);
+                          //           },
+                          //           isCheckDisable: snap,
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
+                          // StreamBuilder<bool>(
+                          //   stream: cubit.isCheckHuyenStream,
+                          //   builder: (context, snapshot) {
+                          //     final snap = snapshot.data ?? true;
+                          //     return Form(
+                          //       child: InputInfoUserWidget(
+                          //         title: user.keys.elementAt(12),
+                          //         child: CustomSelectItems(
+                          //           cubit: cubit,
+                          //           key: UniqueKey(),
+                          //           value: cubit
+                          //               .managerPersonalInformationModel.xa,
+                          //           title: S.current.phuong_xa,
+                          //           context: context,
+                          //           items: cubit.fakeDataTinh,
+                          //           onChange: (indexes) {},
+                          //           isCheckDisable: snap,
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
                           InputInfoUserWidget(
                             title: user.keys.elementAt(13),
                             child: TextFormFieldWidget(

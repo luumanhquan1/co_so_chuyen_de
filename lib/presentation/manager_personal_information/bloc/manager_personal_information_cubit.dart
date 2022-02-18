@@ -24,10 +24,10 @@ class ManagerPersonalInformationCubit
       managerPersonSubject.stream;
 
 //tinh huyen sss
-  BehaviorSubject<List<String>> tinhHuyenXaSubject = BehaviorSubject();
-  List<TinhHuyenXaModel> tinhHuyenXaModel = [];
+  BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded([]);
+  List<TinhHuyenXaModel> tinhModel = [];
 
-  Stream<List<String>> get tinhHuyenXaStream => tinhHuyenXaSubject.stream;
+  Stream<List<TinhHuyenXaModel>> get tinhStream => tinhSubject.stream;
 
   ManagerRepository get _managerRepo => Get.find();
 
@@ -50,90 +50,64 @@ class ManagerPersonalInformationCubit
     );
   }
 
-  Future<void> getDataTinhHuyenXa() async {
+  Future<void> getDataTinh() async {
     final result = await _tinhHuyenXaRepo.getData();
     result.when(
       success: (res) {
-        tinhHuyenXaModel = res;
-        List<String> tenTinhHuyenXa = [];
-        for (TinhHuyenXaModel obj in tinhHuyenXaModel) {
-          tenTinhHuyenXa.add(obj.name ?? '');
-        }
-        tinhHuyenXaSubject.sink.add(tenTinhHuyenXa);
+        tinhModel = res;
+        // List<String> tenTinhHuyenXa = [];
+        // for (TinhHuyenXaModel obj in tinhModel) {
+        //   tenTinhHuyenXa.add(obj.name ?? '');
+        // }
+        tinhSubject.sink.add(tinhModel);
       },
       error: (error) {},
     );
   }
 
-  //// tinh
-  BehaviorSubject<List<String>> tinhHuyenXaChildSubject = BehaviorSubject();
 
-  Stream<List<String>> get tinhHuyenXaChildStream =>
-      tinhHuyenXaChildSubject.stream;
-  List<TinhHuyenXaModel> tinhHuyenXaChildModel = [];
 
   // huyen
-  BehaviorSubject<List<String>> tinhHuyenXaChildHuyenSubject =
-      BehaviorSubject();
+  BehaviorSubject<List<TinhHuyenXaModel>> huyenSubject =
+      BehaviorSubject.seeded([]);
 
-  Stream<List<String>> get tinhHuyenXaChildHuyenStream =>
-      tinhHuyenXaChildHuyenSubject.stream;
-  List<TinhHuyenXaModel> tinhHuyenXaChildHuyenModel = [];
+  Stream<List<TinhHuyenXaModel>> get huyenStream =>
+      huyenSubject.stream;
+  List<TinhHuyenXaModel> huyenModel = [];
 
   // xa
-  BehaviorSubject<List<String>> tinhHuyenXaChildXaSubject = BehaviorSubject();
+  BehaviorSubject<List<TinhHuyenXaModel>> xaSubject = BehaviorSubject.seeded([]);
 
-  Stream<List<String>> get tinhHuyenXaChildXaStream =>
-      tinhHuyenXaChildXaSubject.stream;
-  List<TinhHuyenXaModel> tinhHuyenXaChildXaModel = [];
+  Stream<List<TinhHuyenXaModel>> get xaStream =>
+      xaSubject.stream;
+  List<TinhHuyenXaModel> xaModel = [];
 
   //tinh
-  Future<void> getDataTinhHuyenXaChild({String parentId = ''}) async {
+  Future<void> getDataHuyenXa({String parentId = '',required bool isXa}) async {
     final result = await _tinhHuyenXaRepo.getDataChild(parentId);
     result.when(
       success: (res) {
-        tinhHuyenXaChildModel = res;
-        List<String> tenTinhHuyenXa = [];
-        for (TinhHuyenXaModel obj in tinhHuyenXaChildModel) {
-          tenTinhHuyenXa.add(obj.name ?? '');
+        if (isXa){
+          xaModel = res;
+          // List<String> tenTinhHuyenXa = [];
+          // for (TinhHuyenXaModel obj in xaModel) {
+          //   tenTinhHuyenXa.add(obj.name ?? '');
+          // }
+          xaSubject.sink.add(xaModel);
+        }else {
+          huyenModel = res;
+          // List<String> tenTinhHuyenXa = [];
+          // for (TinhHuyenXaModel obj in huyenModel) {
+          //   tenTinhHuyenXa.add(obj.name ?? '');
+          // }
+          huyenSubject.sink.add(huyenModel);
         }
-        tinhHuyenXaChildSubject.sink.add(tenTinhHuyenXa);
       },
       error: (error) {},
     );
   }
 
-  //huyen
-  Future<void> getDataTinhHuyenXaChildHuyen({String parentId = ''}) async {
-    final result = await _tinhHuyenXaRepo.getDataChild(parentId);
-    result.when(
-      success: (res) {
-        tinhHuyenXaChildHuyenModel = res;
-        List<String> tenTinhHuyenXa = [];
-        for (TinhHuyenXaModel obj in tinhHuyenXaChildHuyenModel) {
-          tenTinhHuyenXa.add(obj.name ?? '');
-        }
-        tinhHuyenXaChildHuyenSubject.sink.add(tenTinhHuyenXa);
-      },
-      error: (error) {},
-    );
-  }
 
-  //xa
-  Future<void> getDataTinhHuyenXaChildXa({String parentId = ''}) async {
-    final result = await _tinhHuyenXaRepo.getDataChild(parentId);
-    result.when(
-      success: (res) {
-        tinhHuyenXaChildXaModel = res;
-        List<String> tenTinhHuyenXa = [];
-        for (TinhHuyenXaModel obj in tinhHuyenXaChildXaModel) {
-          tenTinhHuyenXa.add(obj.name ?? '');
-        }
-        tinhHuyenXaChildXaSubject.sink.add(tenTinhHuyenXa);
-      },
-      error: (error) {},
-    );
-  }
 
   //
   BehaviorSubject<File> saveFile = BehaviorSubject();
@@ -144,12 +118,15 @@ class ManagerPersonalInformationCubit
   Stream<bool> get isCheckTinhStream => isCheckTinhSubject.stream;
 
   BehaviorSubject<bool> isCheckHuyenSubject = BehaviorSubject();
+  Stream<bool> get isCheckHuyenStream => isCheckHuyenSubject.stream;
+
+
+
   final BehaviorSubject<WidgetType?> _showDialogSetting =
       BehaviorSubject<WidgetType?>();
 
   Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
 
-  Stream<bool> get isCheckHuyenStream => isCheckHuyenSubject.stream;
   String ngaySinh = '';
   String tinh = '';
   String huyen = '';
@@ -166,16 +143,16 @@ class ManagerPersonalInformationCubit
     _checkRadioSubject.sink.add(_index);
   }
 
-  void isCheckData() {
-    if (managerPersonalInformationModel.tinh == '') {
-      isCheckTinhSubject.sink.add(true);
-      isCheckHuyenSubject.sink.add(true);
-    } else {
-      tinh = managerPersonalInformationModel.tinh ?? '';
-      isCheckTinhSubject.sink.add(true);
-      isCheckHuyenSubject.sink.add(true);
-    }
-  }
+  // void isCheckData() {
+  //   if (managerPersonalInformationModel.tinh == '') {
+  //     isCheckTinhSubject.sink.add(true);
+  //     isCheckHuyenSubject.sink.add(true);
+  //   } else {
+  //     tinh = managerPersonalInformationModel.tinh ?? '';
+  //     isCheckTinhSubject.sink.add(true);
+  //     isCheckHuyenSubject.sink.add(true);
+  //   }
+  // }
 
   Future<void> getCurrentUnit(
     ManagerPersonalInformationModel managerPersonalInformationModel,
@@ -193,7 +170,7 @@ class ManagerPersonalInformationCubit
 
     showLoading();
     unawaited(queue.add(() => getInfo(id: id)));
-    unawaited(queue.add(() => getDataTinhHuyenXa()));
+    await queue.add(() => getDataTinh());
     await queue.onComplete;
     showContent();
     queue.dispose();

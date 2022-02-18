@@ -2,10 +2,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/custom_select_tinh.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/avatar.dart';
-import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/custom_select_items_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_provider.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
@@ -47,6 +48,7 @@ class _EditPersonalInformationScreen
   TextEditingController sdtController = TextEditingController();
   TextEditingController diaChiLienHeController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
+  List<String> listData = [];
 
   @override
   void initState() {
@@ -88,50 +90,7 @@ class _EditPersonalInformationScreen
             padding: const EdgeInsets.only(right: 8),
             child: TextButton(
               onPressed: () {
-                // nameController.text = '';
-                // maCanBoController.text = '';
-                // thuTuController.text = '';
-                // cmndController.text = '';
-                // emailController.text = '';
-                // sdtCoquanController.text = '';
-                // sdtController.text = '';
-                // diaChiLienHeController.text = '';
                 cubit.getInfo(id: widget.id);
-                // cubit.managerStream.listen((event) {
-                //   cubit.getCurrentUnit(event);
-                //   nameController.text = event.hoTen ?? '';
-                //   maCanBoController.text = event.maCanBo ?? '';
-                //   thuTuController.text = event.thuTu.toString();
-                //   cmndController.text = event.cmtnd ?? 'Số CMND';
-                //   emailController.text = event.email ?? '';
-                //   sdtCoquanController.text = event.phoneCoQuan ?? '';
-                //   sdtController.text = event.phoneDiDong ?? 'Số điện thoại';
-                //   diaChiLienHeController.text = event.diaChi ?? '';
-                // });
-                // nameController.text =
-                //     widget.cubit.managerPersonalInformationModel.hoTen ?? '';
-                // maCanBoController.text =
-                //     widget.cubit.managerPersonalInformationModel.maCanBo ?? '';
-                // thuTuController.text = widget
-                //     .cubit.managerPersonalInformationModel.thuTu
-                //     .toString();
-                // cmndController.text =
-                //     widget.cubit.managerPersonalInformationModel.cmtnd ??
-                //         'Số CMND';
-                // emailController.text =
-                //     widget.cubit.managerPersonalInformationModel.email ?? '';
-                // sdtCoquanController.text =
-                //     widget.cubit.managerPersonalInformationModel.phoneCoQuan ??
-                //         '';
-                // sdtController.text =
-                //     widget.cubit.managerPersonalInformationModel.phoneDiDong ??
-                //         'Số điện thoại';
-                // diaChiLienHeController.text =
-                //     widget.cubit.managerPersonalInformationModel.diaChi ?? '';
-                // cubit.isCheckButtonReset.sink.add(
-                //   !cubit.isCheckButtonReset.value,
-                // );
-                // cubit.isCheckData();
               },
               child: Text(
                 S.current.reset,
@@ -171,7 +130,6 @@ class _EditPersonalInformationScreen
                           child: TextFieldValidator(
                             controller: nameController,
                             validator: (value) {
-                              print(value);
                               if (value!.isEmpty) {
                                 return S.current.khong_duoc_de_trong;
                               }
@@ -198,25 +156,20 @@ class _EditPersonalInformationScreen
                             controller: thuTuController,
                           ),
                         ),
-                        StreamBuilder<bool>(
-                          stream: cubit.isCheckButtonReset,
-                          builder: (context, snapshot) {
-                            return InputInfoUserWidget(
-                              isObligatory: true,
-                              title: user.keys.elementAt(4),
-                              child: SelectDate(
-                                key: UniqueKey(),
-                                paddings: 10,
-                                leadingIcon:
-                                    SvgPicture.asset(ImageAssets.icEditInfor),
-                                value: cubit
-                                    .managerPersonalInformationModel.ngaySinh,
-                                onSelectDate: (dateTime) {
-                                  cubit.selectBirthdayEvent(dateTime);
-                                },
-                              ),
-                            );
-                          },
+                        InputInfoUserWidget(
+                          isObligatory: true,
+                          title: user.keys.elementAt(4),
+                          child: SelectDate(
+                            key: UniqueKey(),
+                            paddings: 10,
+                            leadingIcon:
+                                SvgPicture.asset(ImageAssets.icEditInfor),
+                            value:
+                                cubit.managerPersonalInformationModel.ngaySinh,
+                            onSelectDate: (dateTime) {
+                              cubit.selectBirthdayEvent(dateTime);
+                            },
+                          ),
                         ),
                         InputInfoUserWidget(
                           title: user.keys.elementAt(5),
@@ -230,29 +183,24 @@ class _EditPersonalInformationScreen
                             },
                           ),
                         ),
-                        StreamBuilder<bool>(
-                          stream: cubit.isCheckButtonReset,
-                          builder: (context, snapshot) {
-                            return InputInfoUserWidget(
-                              isObligatory: true,
-                              title: user.keys.elementAt(6),
-                              child: CustomDropDown(
-                                value: cubit.managerPersonalInformationModel
-                                            .gioiTinh ??
-                                        false
-                                    ? S.current.Nam
-                                    : S.current.Nu,
-                                items: cubit.fakeDataGioiTinh,
-                                onSelectItem: (value) {
-                                  if (value == 0) {
-                                    cubit.selectGTEvent(true);
-                                  } else {
-                                    cubit.selectGTEvent(false);
-                                  }
-                                },
-                              ),
-                            );
-                          },
+                        InputInfoUserWidget(
+                          isObligatory: true,
+                          title: user.keys.elementAt(6),
+                          child: CustomDropDown(
+                            value: cubit.managerPersonalInformationModel
+                                        .gioiTinh ??
+                                    false
+                                ? S.current.Nam
+                                : S.current.Nu,
+                            items: cubit.fakeDataGioiTinh,
+                            onSelectItem: (value) {
+                              if (value == 0) {
+                                cubit.selectGTEvent(true);
+                              } else {
+                                cubit.selectGTEvent(false);
+                              }
+                            },
+                          ),
                         ),
                         InputInfoUserWidget(
                           title: user.keys.elementAt(7),
@@ -284,86 +232,102 @@ class _EditPersonalInformationScreen
                             },
                           ),
                         ),
-                        StreamBuilder<List<String>>(
-                            stream: cubit.tinhHuyenXaChildStream,
+                        StreamBuilder<List<TinhHuyenXaModel>>(
+                            stream: cubit.tinhStream,
                             builder: (context, snapshot) {
+                              final data = snapshot.data ?? [];
                               return InputInfoUserWidget(
                                 title: user.keys.elementAt(10),
-                                child: StreamBuilder<List<String>>(
-                                    stream: cubit.tinhHuyenXaStream,
-                                    builder: (context, snapshot) {
-                                      final data = snapshot.data ?? [];
-                                      return CustomSelectItems(
-                                        title: S.current.tinh_thanh,
-                                        //key: UniqueKey(),
-                                        value: cubit
-                                            .managerPersonalInformationModel
-                                            .tinh,
-                                        context: context,
-                                        items: data,
-                                        onChange: (indexes) {
-                                          if (indexes >= 0) {
-                                            cubit.isCheckTinhSubject.sink
-                                                .add(false);
-                                          }
-                                        },
-                                        onRemove: () {
-                                          cubit.isCheckTinhSubject.sink
-                                              .add(true);
-                                          cubit.isCheckHuyenSubject.sink
-                                              .add(true);
-                                        },
-                                        isCheckEnable: false,
-                                        cubit: cubit,
-                                      );
-                                    }),
-                              );
-                            }),
-                        InputInfoUserWidget(
-                          title: user.keys.elementAt(11),
-                          child: StreamBuilder<List<String>>(
-                              stream: cubit.tinhHuyenXaChildHuyenStream,
-                              builder: (context, snapshot) {
-                                final data = snapshot.data ?? [];
-                                return CustomSelectItems(
-                                //  key: UniqueKey(),
-                                  value: cubit
-                                      .managerPersonalInformationModel.huyen,
-                                  title: S.current.quan_huyen,
-                                  context: context,
+                                child: CustomSelectTinh(
+                                  initialValue: cubit
+                                      .managerPersonalInformationModel.tinh,
+                                  key: UniqueKey(),
+                                  title:  S.current.tinh_thanh,
                                   items: data,
-                                  onChange: (indexes) {
+                                  onChange: (indexes, id) {
+
+
+                                    cubit.huyenSubject.sink.add([]);
+                                    cubit.xaSubject.sink.add([]);
+
+                                    cubit.getDataHuyenXa(
+                                        isXa: false,
+                                        parentId:
+                                            cubit.tinhModel[indexes].id ?? '');
                                     if (indexes >= 0) {
-                                      cubit.isCheckHuyenSubject.sink.add(false);
+                                      cubit.isCheckTinhSubject.sink.add(false);
                                     }
                                   },
                                   onRemove: () {
+                                    cubit.huyenSubject.sink.add([]);
+                                    cubit.isCheckTinhSubject.sink.add(true);
                                     cubit.isCheckHuyenSubject.sink.add(true);
                                   },
-                                  isCheckEnable: false,
+                                  // du lieu null hoac k
                                   cubit: cubit,
-                                );
-                              }),
-                        ),
-                        InputInfoUserWidget(
-                          title: user.keys.elementAt(12),
-                          child: StreamBuilder<List<String>>(
-                            stream: cubit.tinhHuyenXaChildXaSubject,
+                                ),
+                              );
+                            }),
+                        StreamBuilder<List<TinhHuyenXaModel>>(
+                            stream: cubit.huyenStream,
                             builder: (context, snapshot) {
                               final data = snapshot.data ?? [];
-                              return CustomSelectItems(
-                               // key: UniqueKey(),
-                                value: cubit.managerPersonalInformationModel.xa,
-                                title: S.current.phuong_xa,
-                                context: context,
-                                items: data,
-                                onChange: (indexes) {},
-                                isCheckEnable: false,
-                                cubit: cubit,
+                              // if (data.isEmpty) {
+                              //   cubit.xaSubject.sink.add([]);
+                              // }
+                              return InputInfoUserWidget(
+                                title: user.keys.elementAt(11),
+                                child: CustomSelectTinh(
+                                  initialValue: cubit
+                                      .managerPersonalInformationModel.huyen,
+                                  key: UniqueKey(),
+                                  title: S.current.quan_huyen,
+                                  items: data,
+                                  onChange: (indexes, id) {
+                                    cubit.xaSubject.sink.add([]);
+                                    cubit.getDataHuyenXa(
+                                        isXa: true,
+                                        parentId:
+                                            cubit.huyenModel[indexes].id ?? '');
+                                    if (indexes >= 0) {
+                                      cubit.isCheckTinhSubject.sink.add(false);
+                                    }
+                                  },
+                                  onRemove: () {
+                                    cubit.xaSubject.sink.add([]);
+                                    cubit.isCheckTinhSubject.sink.add(true);
+                                    cubit.isCheckHuyenSubject.sink.add(true);
+                                  },
+                                  // du lieu null hoac k
+                                  cubit: cubit,
+                                ),
                               );
-                            },
-                          ),
-                        ),
+                            }),
+                        StreamBuilder<List<TinhHuyenXaModel>>(
+                            stream: cubit.xaStream,
+                            builder: (context, snapshot) {
+                              final data = snapshot.data ?? [];
+                              return InputInfoUserWidget(
+                                title: user.keys.elementAt(12),
+                                child: CustomSelectTinh(
+                                  initialValue: cubit.managerPersonalInformationModel.xa,
+                                  key: UniqueKey(),
+                                  title:S.current.phuong_xa,
+                                  items: data,
+                                  onChange: (indexes, id) {
+                                    if (indexes >= 0) {
+                                      cubit.isCheckTinhSubject.sink.add(false);
+                                    }
+                                  },
+                                  onRemove: () {
+                                    cubit.isCheckTinhSubject.sink.add(true);
+                                    cubit.isCheckHuyenSubject.sink.add(true);
+                                  },
+                                  // du lieu null hoac k
+                                  cubit: cubit,
+                                ),
+                              );
+                            }),
 
                         InputInfoUserWidget(
                           title: user.keys.elementAt(13),
