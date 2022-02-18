@@ -26,6 +26,8 @@ class ApiConstants {
   static const String GET_VB_DI_SO_LUONG = '/qlvb/api/van-ban-di/so-luong?';
 
   static const String GET_INFO = 'api/CanBo';
+  static const String GET_TINH_HUYEN_XA = 'api/DanhMuc/tinh-thanh';
+  static const String GET_TINH_HUYEN_XA_CHILD = 'api/DanhMuc/tinh-thanh';
 
   static const DASH_BOARD_VBDEN = '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const DASH_BOARD_VBDi = '/qlvb/api/van-ban-di/so-luong';
@@ -47,9 +49,11 @@ class ApiConstants {
   static const TODO_LIST_CREATE = '/api/TodoList/create';
   static const SEARCH_NEW = '/api/NewsNetViews/search_news?';
   static const DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
-  static const CANLENDAR_LIST_MEETING = '/vpdt/api/MeetingSchedule/calendar-list';
-
+  static const CANLENDAR_LIST_MEETING =
+      '/vpdt/api/MeetingSchedule/calendar-list';
 }
-class ImageConstants{
- static const String noImageFound ='https://ccvc-uat.chinhquyendientu.vn/img/no-image-found.816e59fa.png';
+
+class ImageConstants {
+  static const String noImageFound =
+      'https://ccvc-uat.chinhquyendientu.vn/img/no-image-found.816e59fa.png';
 }

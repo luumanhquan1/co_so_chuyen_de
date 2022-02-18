@@ -156,6 +156,7 @@ class _LichDuocMoiTabletScreenState extends State<LichDuocMoiTabletScreen> {
                                   .toStringWithAMPM,
                               urlImage:
                                   'https://lh3.googleusercontent.com/ogw/ADea4I7KuOHLBX4h7PqlUfbDpmYAuuvb9iBc5eaCvicoFg=s192-c-mo',
+                              onTap: () {},
                             ),
                           );
                         },

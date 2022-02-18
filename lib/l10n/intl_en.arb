@@ -380,7 +380,10 @@
   "danh_sach_y_kien_nguoi_Dan": "Danh sách ý kiến người dân",
   "chinh_sua_tag" : "Chỉnh sửa tag",
   "them_tag" : "Thêm tag",
-  "tu_choi" : "Từ chối"
+  "tu_choi" : "Từ chối",
+  "luu_lai": "Lưu lại "
+
+
 
 
 }

@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/widget/wisget_choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
@@ -118,7 +119,14 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
           children: [
             WidgetChooseDayWeekMonth(
               cubit: cubit,
-              createMeeting: () {},
+              createMeeting: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+                  ),
+                );
+              },
               onTapDay: () {
                 setState(() {});
                 cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
