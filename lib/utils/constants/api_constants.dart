@@ -33,6 +33,10 @@ class ApiConstants {
   static const String TONG_HOP_NHIEM_VU =
       '/qlvb/api/qlnv/nhiem-vu/get-tong-hop-nhiem-vu?';
   static const String NHIEM_VU_GET_ALL = '/qlvb/api/qlnv/nhiem-vu/get-all';
-  static const TINH_HINH_XU_LY_TRANG_CHU ='/pakn/api/IocApi/thong-ke-tinh-hinh-xu-ly-trang-chu?';
-  static const DANH_SACH_PAKN ='/pakn/api/IocApi/danh-sach-pakn?';
+  static const TINH_HINH_XU_LY_TRANG_CHU =
+      '/pakn/api/IocApi/thong-ke-tinh-hinh-xu-ly-trang-chu?';
+  static const DANH_SACH_PAKN = '/pakn/api/IocApi/danh-sach-pakn?';
+  static const TODO_LIST_CURRENT_USER = '/api/TodoList/get-current-user';
+  static const TODO_LIST_UPDATE = '/api/TodoList/update';
+  static const TODO_LIST_CREATE = '/api/TodoList/create';
 }
