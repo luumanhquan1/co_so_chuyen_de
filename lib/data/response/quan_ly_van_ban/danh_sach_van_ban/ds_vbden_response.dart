@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'ds_vbden_response.g.dart';
 
 @JsonSerializable()
-class DanhSachVBDenResponse  {
+class DanhSachVBDenResponse {
   @JsonKey(name: 'Data')
   DataResponseVBDen danhSachVB;
 
@@ -34,19 +34,21 @@ class DataResponseVBDen {
   Map<String, dynamic> toJson() => _$DataResponseVBDenToJson(this);
 
   DanhSachVanBanModel toDomain() => DanhSachVanBanModel(
-        pageDataRespone:  pageData.map((e) => VanBanModel(
-            doKhan: e.doKhan,
-            loaiVanBan: e.loaiVanBan,
-            ngayDen: e.ngayDen,
-            nguoiSoanThao: e.nguoiSoanThao)).toList(),
+        pageData: pageData
+            .map((e) => VanBanModel(
+                doKhan: e.doKhan,
+                loaiVanBan: e.loaiVanBan,
+                ngayDen: e.ngayDen,
+                nguoiSoanThao: e.nguoiSoanThao))
+            .toList(),
       );
 
   @override
-  List<Object?> get props =>[];
+  List<Object?> get props => [];
 }
 
 @JsonSerializable()
-class PageDataResponseVBDen  {
+class PageDataResponseVBDen {
   @JsonKey(name: 'DoKhan')
   String? doKhan;
   @JsonKey(name: 'LoaiVanBan')
@@ -55,7 +57,6 @@ class PageDataResponseVBDen  {
   String? ngayDen;
   @JsonKey(name: 'ChuTri')
   String? nguoiSoanThao;
-
 
   PageDataResponseVBDen(
       this.doKhan, this.loaiVanBan, this.ngayDen, this.nguoiSoanThao);
