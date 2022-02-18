@@ -8,6 +8,8 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../item_thong_bao.dart';
+
 class CalendarWorkMenu extends StatefulWidget {
   const CalendarWorkMenu({Key? key}) : super(key: key);
 
@@ -84,20 +86,19 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                               child: ContainerMenuWidget(
                                 name: S.current.lich_theo_trang_thai,
                                 icon: ImageAssets.icLichTheoTrangThai,
-                                childExpand: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 10,
-                                  itemBuilder: (context, index) {
-                                    return ContainerMenuWidget(
-                                      isIcon: false,
-                                      name: S.current.lich_theo_trang_thai,
-                                      icon: ImageAssets.icLichTheoTrangThai,
-                                      index: 15,
-                                      childExpand: Container(),
-                                      onTap: () {},
-                                    );
-                                  },
+                                childExpand: Column(
+                                  children: lichTheoTrangThai
+                                      .map(
+                                        (e) => ContainerMenuWidget(
+                                          name: e.name,
+                                          onTap: () {
+                                            e.navigator();
+                                          },
+                                          icon: '',
+                                          index: e.index,
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
                                 type: TypeContainer.expand,
                                 onTap: () {},
@@ -109,20 +110,19 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                               child: ContainerMenuWidget(
                                 name: S.current.lich_theo_lanh_dao,
                                 icon: ImageAssets.icLichLanhDao,
-                                childExpand: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 6,
-                                  itemBuilder: (context, index) {
-                                    return ContainerMenuWidget(
-                                      isIcon: false,
-                                      name: S.current.lich_theo_trang_thai,
-                                      icon: ImageAssets.icLichTheoTrangThai,
-                                      index: 15,
-                                      childExpand: Container(),
-                                      onTap: () {},
-                                    );
-                                  },
+                                childExpand: Column(
+                                  children: lichLanhDao
+                                      .map(
+                                        (e) => ContainerMenuWidget(
+                                          onTap: () {
+                                            e.navigator();
+                                          },
+                                          icon: '',
+                                          name: e.name,
+                                          index: e.index,
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
                                 type: TypeContainer.expand,
                                 onTap: () {},
@@ -148,7 +148,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
         const SizedBox(
           width: 12,
         ),
-        SvgPicture.asset(ImageAssets.icCalendarFocus),
+        SvgPicture.asset(ImageAssets.icHeaderLVVV),
         const SizedBox(
           width: 12,
         ),
