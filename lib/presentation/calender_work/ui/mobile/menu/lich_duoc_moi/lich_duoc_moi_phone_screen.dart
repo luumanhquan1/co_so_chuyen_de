@@ -22,8 +22,10 @@ import 'package:flutter_svg/svg.dart';
 class LichDuocMoiPhoneScreen extends StatefulWidget {
   final CalenderCubit cubit;
 
-  const LichDuocMoiPhoneScreen({Key? key, required this.cubit})
-      : super(key: key);
+  const LichDuocMoiPhoneScreen({
+    Key? key,
+    required this.cubit,
+  }) : super(key: key);
 
   @override
   _LichDuocMoiPhoneScreenState createState() => _LichDuocMoiPhoneScreenState();
@@ -73,69 +75,61 @@ class _LichDuocMoiPhoneScreenState extends State<LichDuocMoiPhoneScreen> {
               ),
               Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 16, left: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding:
-                          const EdgeInsets.only(
-                              right: 16.0, top: 16.0, bottom: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                widget.cubit.textDay,
-                                style: textNormalCustom(color: textBodyTime),
-                              ),
-
-                              stateLDM.ChoXacNhan.getState(3),
-                            ],
+                padding: const EdgeInsets.only(right: 16, left: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 16.0, top: 16.0, bottom: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.cubit.textDay,
+                            style: textNormalCustom(color: textBodyTime),
                           ),
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: widget.cubit.listMeeting.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: CustomItemCalenderMobile(
-                                    title: widget.cubit.listMeeting[index]
-                                        .title,
-                                    dateTimeFrom:
-                                    DateTime
-                                        .parse(widget.cubit.listMeeting[index]
-                                        .dateTimeFrom)
-                                        .toStringWithAMPM,
-                                    dateTimeTo:
-                                    DateTime
-                                        .parse(widget.cubit.listMeeting[index]
-                                        .dateTimeTo)
-                                        .toStringWithAMPM,
-                                    urlImage:
-                                    'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                          const ChiTietLichLamViecScreen(),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                          stateLDM.ChoXacNhan.getState(3),
+                        ],
+                      ),
                     ),
-                  )
-              ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: widget.cubit.listMeeting.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: CustomItemCalenderMobile(
+                                title: widget.cubit.listMeeting[index].title,
+                                dateTimeFrom: DateTime.parse(widget
+                                        .cubit.listMeeting[index].dateTimeFrom)
+                                    .toStringWithAMPM,
+                                dateTimeTo: DateTime.parse(widget
+                                        .cubit.listMeeting[index].dateTimeTo)
+                                    .toStringWithAMPM,
+                                urlImage:
+                                    'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChiTietLichLamViecScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
             ],
           ),
           Column(
