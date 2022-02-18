@@ -45,5 +45,11 @@ class ApiConstants {
   static const TODO_LIST_CURRENT_USER = '/api/TodoList/get-current-user';
   static const TODO_LIST_UPDATE = '/api/TodoList/update';
   static const TODO_LIST_CREATE = '/api/TodoList/create';
+  static const SEARCH_NEW = '/api/NewsNetViews/search_news?';
+  static const DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
+  static const CANLENDAR_LIST_MEETING = '/vpdt/api/MeetingSchedule/calendar-list';
 
+}
+class ImageConstants{
+ static const String noImageFound ='https://ccvc-uat.chinhquyendientu.vn/img/no-image-found.816e59fa.png';
 }

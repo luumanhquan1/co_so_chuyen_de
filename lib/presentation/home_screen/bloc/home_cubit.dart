@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/home/nhiem_vu_request.dart';
 import 'package:ccvc_mobile/data/request/home/to_do_list_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
@@ -20,7 +21,6 @@ import 'package:ccvc_mobile/domain/model/select_key/select_key_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
-import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get.dart';
@@ -147,27 +147,90 @@ extension GetConfigWidget on HomeCubit {
 class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<PressNetWorkModel>> _getPressNetWork =
       BehaviorSubject<List<PressNetWorkModel>>();
-  final BehaviorSubject<List<TagModel>> _getTag =
-      BehaviorSubject<List<TagModel>>();
-  void getPress() {
-    _getTag.sink.add(FakeData.tag);
-    _getPressNetWork.sink.add(FakeData.fakeDataPress);
+  final BehaviorSubject<List<String>> _getTag = BehaviorSubject<List<String>>();
+  final BehaviorSubject<bool> showAddTagStream = BehaviorSubject.seeded(false);
+  bool isShowTag = false;
+  String tagKey = 'Covid-19';
+  String nameUser = '';
+  BaoChiMangXaHoiCubit() {
+    final dataUser = HiveLocal.getDataUser();
+    if (dataUser != null) {
+      nameUser = dataUser.userInformation?.hoTen ?? '';
+    }
+  }
+  void showAddTag() {
+    showAddTagStream.sink.add(true);
+  }
+void removeTag(String tag){
+    final value  = _getTag.value;
+    HiveLocal.removeTag(tag);
+    value.remove(tag);
+    _getTag.sink.add(value);
+
+}
+  void addTag(String value) {
+    final data = _getTag.value;
+    showAddTagStream.sink.add(false);
+    if (data
+        .where((element) => element.toLowerCase() == value.toLowerCase())
+        .isEmpty) {
+      HiveLocal.addTag(value);
+
+      _getTag.sink.add(data..add(value));
+    }
   }
 
-  void selectTag(TagModel tagModel) {
-    final oldSelect = _getTag.value.indexWhere(
-      (element) => element.select == true,
+  void getPress() async {
+    List<String> listTag = HiveLocal.getTag();
+    if (listTag.isEmpty) {
+      final listDataDefault = ['Covid-19', 'Vaccine', nameUser];
+      await HiveLocal.addTagList(['Covid-19', 'Vaccine', nameUser]);
+      listTag = listDataDefault;
+    }
+    _getTag.sink.add(listTag);
+    await callApi();
+  }
+
+  Future<void> callApi() async {
+    showLoading();
+    final result = await homeRep.getBaoChiMangXaHoi(
+      1,
+      5,
+      startDate.formatApiSS,
+      endDate.formatApiSS,
+      tagKey,
     );
-    _getTag.value[oldSelect].select = false;
-    final newSelect = _getTag.value.indexWhere(
-      (element) => element.title == tagModel.title,
+    showContent();
+    result.when(
+      success: (res) {
+        _getPressNetWork.sink.add(res);
+      },
+      error: (err) {},
     );
-    _getTag.value[newSelect].select = true;
+  }
+
+  void selectTag(String tag) {
+    tagKey = tag;
+    callApi();
     _getTag.sink.add(_getTag.value);
   }
 
-  void showAddTag() {}
-  Stream<List<TagModel>> get getTag => _getTag.stream;
+  @override
+  void selectDate({
+    required SelectKey selectKey,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
+    if (selectKey != selectKeyTime) {
+      selectKeyTime = selectKey;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      callApi();
+      selectKeyDialog.sink.add(true);
+    }
+  }
+
+  Stream<List<String>> get getTag => _getTag.stream;
 
   Stream<List<PressNetWorkModel>> get getPressNetWork =>
       _getPressNetWork.stream;
@@ -783,10 +846,124 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
 }
 
 ///Lịch làm việc
-class LichLamViecCubit extends HomeCubit with SelectKeyDialog {}
+class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
+  final BehaviorSubject<List<CalendarMeetingModel>> _getListLichLamViec =
+      BehaviorSubject<List<CalendarMeetingModel>>();
+
+  Stream<List<CalendarMeetingModel>> get getListLichLamViec =>
+      _getListLichLamViec.stream;
+  Future<void> callApi() async {
+    showLoading();
+    final result = await homeRep.getListLichLamViec(
+      LichLamViecRequest(
+        dateFrom: startDate.formatApi,
+        dateTo: endDate.formatApi,
+        isTatCa: true,
+      ),
+    );
+    result.when(
+      success: (res) {
+        _getListLichLamViec.sink.add(res);
+      },
+      error: (err) {},
+    );
+    showContent();
+  }
+
+  @override
+  void selectDate({
+    required SelectKey selectKey,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
+    if (selectKey != selectKeyTime) {
+      selectKeyTime = selectKey;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      selectKeyDialog.sink.add(true);
+      callApi();
+    }
+  }
+}
 
 ///Lịch Họp
-class LichHopCubit extends HomeCubit with SelectKeyDialog {}
+class LichHopCubit extends HomeCubit with SelectKeyDialog {
+  final BehaviorSubject<List<CalendarMeetingModel>> _getLichHop =
+      BehaviorSubject<List<CalendarMeetingModel>>();
+
+  Stream<List<CalendarMeetingModel>> get getLichHop => _getLichHop.stream;
+  SelectKey trangThaiLichHop = SelectKey.LICH_HOP_CUA_TOI;
+  bool isLichHopCuaToi = true;
+  bool isLichDuocMoi = false;
+  bool isDuyetLich = false;
+  bool isChoXacNhan = false;
+  Future<void> callApi() async {
+    showLoading();
+    final result = await homeRep.getLichHop(
+      LichHopRequest(
+        isChoXacNhan: isChoXacNhan,
+        isDuyetLich: isDuyetLich,
+        isLichDuocMoi: isLichDuocMoi,
+        isLichCuaToi: isLichHopCuaToi,
+        dateFrom: startDate.formatApi,
+        dateTo: endDate.formatApi,
+      ),
+    );
+    showContent();
+    result.when(
+        success: (res) {
+          _getLichHop.sink.add(res);
+        },
+        error: (err) {});
+  }
+
+  void selectTrangThaiHop(SelectKey selectKey) {
+    if(trangThaiLichHop == selectKey){
+      return;
+    }
+    trangThaiLichHop = selectKey;
+
+    switch (selectKey) {
+      case SelectKey.LICH_HOP_CUA_TOI:
+        isLichHopCuaToi = true;
+        isLichDuocMoi = false;
+        isDuyetLich = false;
+        isChoXacNhan = false;
+        callApi();
+        break;
+      case SelectKey.LICH_HOP_DUOC_MOI:
+        isLichHopCuaToi = false;
+        isLichDuocMoi = true;
+        isDuyetLich = false;
+        isChoXacNhan = false;
+        callApi();
+        break;
+      case SelectKey.LICH_HOP_CAN_DUYET:
+        isLichHopCuaToi = false;
+        isLichDuocMoi = false;
+        isDuyetLich = true;
+        isChoXacNhan = true;
+        callApi();
+        break;
+      default:
+        {}
+    }
+  }
+  @override
+  void selectDate({
+    required SelectKey selectKey,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
+    if (selectKey != selectKeyTime) {
+      selectKeyTime = selectKey;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      selectKeyDialog.sink.add(true);
+      callApi();
+    }
+  }
+}
 
 /// SinhNhat
 class SinhNhatCubit extends HomeCubit with SelectKeyDialog {}

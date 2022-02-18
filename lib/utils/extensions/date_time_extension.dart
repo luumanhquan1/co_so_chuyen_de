@@ -30,6 +30,9 @@ extension DateFormatString on DateTime {
   String get formatApi{
     return DateFormat('yyyy-MM-dd').format(this);
   }
+  String get formatApiSS {
+    return DateFormat('yyyy/MM/dd HH:mm:ss').format(this);
+  }
   String get startEndWeek {
     final day = DateTime(year, month, this.day);
 

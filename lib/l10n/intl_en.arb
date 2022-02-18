@@ -377,12 +377,10 @@
   "thu_dien_tu_hai": "Thư điện tử banbientap@mpi.gov.vn",
   "ung_dung_chi_dao_dieu_hanh": "Ứng dụng chỉ đạo điều hành",
   "he_thong_quan_ly_van_ban": "Hệ thống quản lý văn bản",
-  "danh_sach_y_kien_nguoi_Dan": "Danh sách ý kiến người dân"
-
-
-
-
-
+  "danh_sach_y_kien_nguoi_Dan": "Danh sách ý kiến người dân",
+  "chinh_sua_tag" : "Chỉnh sửa tag",
+  "them_tag" : "Thêm tag",
+  "tu_choi" : "Từ chối"
 
 
 }

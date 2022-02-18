@@ -1,9 +1,14 @@
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/home/nhiem_vu_request.dart';
 import 'package:ccvc_mobile/data/request/home/to_do_list_request.dart';
+import 'package:ccvc_mobile/data/response/home/bao_chi_mang_xa_hoi_response.dart';
 import 'package:ccvc_mobile/data/response/home/config_widget_dash_board_response.dart';
 import 'package:ccvc_mobile/data/response/home/danh_sach_van_ban_response.dart';
 import 'package:ccvc_mobile/data/response/home/dash_board_van_ban_den_response.dart';
+import 'package:ccvc_mobile/data/response/home/lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/home/lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/home/list_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
@@ -118,4 +123,21 @@ abstract class HomeService {
   Future<ToDoListUpdateResponse> createTodoList(
     @Body() CreateToDoRequest createToDoRequest,
   );
+
+  @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.SEARCH_NEW)
+  @FormUrlEncoded()
+  Future<BaoChiMangXaHoiResponse> getBaoChiMangXaHoi(
+      @Query('pageIndex') int pageIndex,
+      @Query('pageSize') int pageSize,
+      @Query('fromDate') String fromDate,
+      @Query('toDate') String toDate,
+      @Query('keyword') String keyWord,
+      );
+  @POST(BaseUrlConstants.baseUrlGateway+ ApiConstants.DANH_SACH_LICH_LAM_VIEC)
+  @FormUrlEncoded()
+  Future<LichLamViecResponse> getLichLamViec(@Body() LichLamViecRequest lamViecRequest);
+
+  @POST(BaseUrlConstants.baseUrlGateway+ ApiConstants.CANLENDAR_LIST_MEETING)
+  @FormUrlEncoded()
+  Future<LichHopResponse> getLichHop(@Body() LichHopRequest lichHopRequest);
 }
