@@ -15,7 +15,7 @@ class ContainerMenuWidgetTablet extends StatefulWidget {
   final int index;
   final bool isTypeContainer;
   final TypeContainer type;
-  final Widget childExpand;
+  final Widget? childExpand;
   final Function onTap;
 
   const ContainerMenuWidgetTablet({
@@ -26,7 +26,7 @@ class ContainerMenuWidgetTablet extends StatefulWidget {
     this.type = TypeContainer.number,
     this.index = 0,
     this.isTypeContainer = true,
-    required this.childExpand,
+    this.childExpand,
     required this.onTap,
   }) : super(key: key);
 
@@ -129,7 +129,7 @@ class _ContainerMenuWidgetTabletState extends State<ContainerMenuWidgetTablet> {
           if (widget.type == TypeContainer.expand)
             ExpandedSection(
               expand: isExpand,
-              child: widget.childExpand,
+              child: widget.childExpand ?? Container(),
             ),
         ],
       ),

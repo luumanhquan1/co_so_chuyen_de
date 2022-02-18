@@ -65,6 +65,7 @@ class ImageAssets {
   static const String icGroupPeople = '$baseImg/ic_group_people.svg';
   static const String icClock = '$baseImg/ic_clock.svg';
   static const String icTheoDangLich = '$baseImg/ic_theo_dang_lich.svg';
+  static const String icHeaderLVVV = '$baseImg/ic_header_lvv.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
