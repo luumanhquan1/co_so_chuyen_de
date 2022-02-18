@@ -3,9 +3,11 @@
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/di/di.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/main_lich_hop_tablet.dart';
+import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -49,8 +51,7 @@ class CalendarHeader extends StatelessWidget {
     final text = headerStyle.titleTextFormatter?.call(focusedMonth, locale) ??
         DateFormat.yMMMM(locale).format(focusedMonth);
 
-    final LichHopCubit cubit = TableCalendarTabletInherited.of(context).cubit;
-
+    final TableCalendarTabletCubit cubit = getIt<TableCalendarTabletCubit>();
     return Container(
       decoration: headerStyle.decoration,
       margin: headerStyle.headerMargin,
