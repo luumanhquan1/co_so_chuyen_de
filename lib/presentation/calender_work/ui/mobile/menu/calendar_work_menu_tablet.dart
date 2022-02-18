@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
@@ -111,20 +112,19 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                             child: ContainerMenuWidgetTablet(
                               name: S.current.lich_theo_trang_thai,
                               icon: ImageAssets.icTheoDangLichCir,
-                              childExpand: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                                  return ContainerMenuWidgetTablet(
-                                    isIcon: false,
-                                    name: S.current.lich_theo_trang_thai,
-                                    icon: ImageAssets.icLichLanhDaoCir,
-                                    index: 15,
-                                    childExpand: Container(),
-                                    onTap: () {},
-                                  );
-                                },
+                              childExpand: Column(
+                                children: lichTheoTrangThai
+                                    .map(
+                                      (e) => ContainerMenuWidgetTablet(
+                                        name: e.name,
+                                        onTap: () {
+                                          e.navigator();
+                                        },
+                                        icon: '',
+                                        index: e.index,
+                                      ),
+                                    )
+                                    .toList(),
                               ),
                               type: TypeContainer.expand,
                               onTap: () {},
@@ -136,20 +136,17 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                             child: ContainerMenuWidgetTablet(
                               name: S.current.lich_theo_lanh_dao,
                               icon: ImageAssets.icLichLanhDaoCir,
-                              childExpand: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return ContainerMenuWidgetTablet(
-                                    isIcon: false,
-                                    name: S.current.lich_theo_trang_thai,
-                                    icon: ImageAssets.icLichTheoTrangThai,
-                                    index: 15,
-                                    childExpand: Container(),
-                                    onTap: () {},
-                                  );
-                                },
+                              childExpand: Column(
+                                children: lichLanhDao
+                                    .map((e) => ContainerMenuWidgetTablet(
+                                          onTap: () {
+                                            e.navigator();
+                                          },
+                                          icon: '',
+                                          name: e.name,
+                                          index: e.index,
+                                        ))
+                                    .toList(),
                               ),
                               type: TypeContainer.expand,
                               onTap: () {},
