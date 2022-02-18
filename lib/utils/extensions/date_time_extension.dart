@@ -93,38 +93,21 @@ extension DateFormatString on DateTime {
   }
 
   List<DateTime> _thangNay() {
-    DateTime now = DateTime.now();
-    final firstDayThisMonth = DateTime(now.year, now.month, now.day);
-    final firstDayNextMonth = DateTime(
-      firstDayThisMonth.year,
-      firstDayThisMonth.month + 1,
-      firstDayThisMonth.day,
-    );
-    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
-    int b = now.millisecondsSinceEpoch;
-    b = b - (c * 24 * 60 * 60 * 1000);
-    now = DateTime.fromMillisecondsSinceEpoch(b);
-
-    final startDate = DateTime.fromMillisecondsSinceEpoch(
-      DateTime.utc(
-        now.year,
-        now.month,
-      ).millisecondsSinceEpoch,
-    );
+    final startDate = DateTime(year,month,);
     final endDate = DateTime.fromMillisecondsSinceEpoch(
       DateTime.utc(
-        now.year,
-        now.month + 1,
+        year,
+        month + 1,
       ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
     );
     return [startDate, endDate];
   }
 
   List<DateTime> _namNay() {
-    DateTime now = DateTime.now();
-    final startDate = DateTime(now.year, 1, 1);
 
-    return [startDate, DateTime(DateTime.now().year, 12, 31)];
+    final startDate = DateTime(year, 1, 1);
+
+    return [startDate, DateTime(year, 12, 31)];
   }
 
   DateTime _getDate(DateTime d) => DateTime(d.year, d.month, d.day);
