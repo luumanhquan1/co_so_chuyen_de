@@ -40,18 +40,18 @@ class _ContainerMenuWidgetTabletState extends State<ContainerMenuWidgetTablet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 24),
-      decoration: BoxDecoration(
-        color: toDayColor.withOpacity(0.1),
-        border: Border.all(
-          color: toDayColor.withOpacity(0.5),
-        ),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          GestureDetector(
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 24),
+          decoration: BoxDecoration(
+            color: toDayColor.withOpacity(0.1),
+            border: Border.all(
+              color: toDayColor.withOpacity(0.5),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: GestureDetector(
             onTap: () {
               isExpand = !isExpand;
               setState(() {});
@@ -126,13 +126,14 @@ class _ContainerMenuWidgetTabletState extends State<ContainerMenuWidgetTablet> {
               ),
             ),
           ),
-          if (widget.type == TypeContainer.expand)
-            ExpandedSection(
-              expand: isExpand,
-              child: widget.childExpand ?? Container(),
-            ),
-        ],
-      ),
+        ),
+
+        if (widget.type == TypeContainer.expand)
+          ExpandedSection(
+            expand: isExpand,
+            child: widget.childExpand ?? Container(),
+          ),
+      ],
     );
   }
 }
