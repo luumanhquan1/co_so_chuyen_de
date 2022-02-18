@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_i
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/lich_lv_extension.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/widget_select_option_header.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/tablet/tao_lich_lam_viec_chi_tiet_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
@@ -53,7 +54,13 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
       body: Column(
         children: [
           WidgetSelectOptionHeader(
-            createMeeting: () {},
+            createMeeting: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TaoLichLamViecChiTietTablet(),
+                  ));
+            },
             onTapDay: () {
               setState(() {});
               cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
