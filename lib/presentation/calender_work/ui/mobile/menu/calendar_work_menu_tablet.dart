@@ -119,7 +119,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                                       (e) => ContainerMenuWidgetTablet(
                                         name: e.name,
                                         onTap: () {
-                                          e.navigator();
+                                          e.navigator(context, cubit);
                                         },
                                         icon: '',
                                         index: e.index,
@@ -141,7 +141,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                                 children: lichLanhDao
                                     .map((e) => ContainerMenuWidgetTablet(
                                           onTap: () {
-                                            e.navigator();
+                                            e.navigator(context, cubit);
                                           },
                                           icon: '',
                                           name: e.name,
