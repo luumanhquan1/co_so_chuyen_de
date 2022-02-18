@@ -14,9 +14,9 @@ class VanBanModel {
 }
 
 class DanhSachVanBanModel {
-  List<VanBanModel>? pageDataRespone;
+  List<VanBanModel>? pageData;
 
   DanhSachVanBanModel({
-    this.pageDataRespone,
+    this.pageData,
   });
 }

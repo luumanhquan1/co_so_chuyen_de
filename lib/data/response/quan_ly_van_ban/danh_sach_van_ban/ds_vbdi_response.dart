@@ -34,7 +34,7 @@ class DataResponseVBDi {
   Map<String, dynamic> toJson() => _$DataResponseVBDiToJson(this);
 
   DanhSachVanBanModel toDomain() => DanhSachVanBanModel(
-        pageDataRespone: pageData.map((e) => VanBanModel(
+        pageData: pageData.map((e) => VanBanModel(
             doKhan: e.doKhan,
             loaiVanBan: e.loaiVanBan,
             ngayDen: e.ngayDen,

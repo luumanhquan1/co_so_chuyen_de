@@ -38,7 +38,7 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
         await _QLVBRepo.getDanhSachVbDi(startDate, endDate, index, size);
     result.when(
       success: (res) {
-        listVbDi=res.pageDataRespone??[];
+        listVbDi=res.pageData??[];
         _getListVBDi.sink.add(listVbDi);
       },
       error: (err) {
