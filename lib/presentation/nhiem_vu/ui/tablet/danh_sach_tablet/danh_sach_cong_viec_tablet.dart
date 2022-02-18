@@ -33,32 +33,33 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
               today: DateTime.now(),
             ),
           ),
-          const SizedBox(
-            height: 28.0,
-          ),
+
           Expanded(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 30.0, left: 30.0),
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: listDanhSachCongViec.length,
-                  itemBuilder: (context, index) {
-                    return NhiemVuCellTablet(
-                      onTap: () {},
-                      title: listDanhSachCongViec[index].title ?? '',
-                      noiDung: listDanhSachCongViec[index].noiDung ?? '',
-                      dateTimeStart:
-                          listDanhSachCongViec[index].timeStart ?? '',
-                      dateTimeEnd: listDanhSachCongViec[index].timeEnd ?? '',
-                      userName: listDanhSachCongViec[index].nguoiTao ?? '',
-                      status: listDanhSachCongViec[index].trangThai ?? '',
-                      userImage:
-                          'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                      index: index + 1,
-                    );
-                  },
+              child: Container(
+                margin: const EdgeInsets.only(top:28.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 30.0, left: 30.0),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: listDanhSachCongViec.length,
+                    itemBuilder: (context, index) {
+                      return NhiemVuCellTablet(
+                        onTap: () {},
+                        title: listDanhSachCongViec[index].title ?? '',
+                        noiDung: listDanhSachCongViec[index].noiDung ?? '',
+                        dateTimeStart:
+                            listDanhSachCongViec[index].timeStart ?? '',
+                        dateTimeEnd: listDanhSachCongViec[index].timeEnd ?? '',
+                        userName: listDanhSachCongViec[index].nguoiTao ?? '',
+                        status: listDanhSachCongViec[index].trangThai ?? '',
+                        userImage:
+                            'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                        index: index + 1,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

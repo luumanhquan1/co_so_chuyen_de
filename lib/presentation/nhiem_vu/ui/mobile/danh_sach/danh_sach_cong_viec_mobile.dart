@@ -24,26 +24,28 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
           children: [
             const SizedBox(height: 16.0,),
             const BaseSearchBar(),
-            const SizedBox(height: 16.0,),
             Expanded(
               child: SingleChildScrollView(
-                child:  ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount:listDanhSachCongViec.length,
-                  itemBuilder: (context, index) {
-                    return NhiemVuItemMobile(
-                      onTap: () {},
-                      title: listDanhSachCongViec[index].noiDung??'',
-                      timeStart: listDanhSachCongViec[index].timeStart??'',
-                      timeEnd:
-                      listDanhSachCongViec[index].timeEnd??'',
-                      userName: listDanhSachCongViec[index].nguoiTao??'',
-                      status: listDanhSachCongViec[index].trangThai??'',
-                      userImage:
-                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                    );
-                  },
+                child:  Container(
+                  margin: const EdgeInsets.only(top: 16.0),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount:listDanhSachCongViec.length,
+                    itemBuilder: (context, index) {
+                      return NhiemVuItemMobile(
+                        onTap: () {},
+                        title: listDanhSachCongViec[index].noiDung??'',
+                        timeStart: listDanhSachCongViec[index].timeStart??'',
+                        timeEnd:
+                        listDanhSachCongViec[index].timeEnd??'',
+                        userName: listDanhSachCongViec[index].nguoiTao??'',
+                        status: listDanhSachCongViec[index].trangThai??'',
+                        userImage:
+                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
