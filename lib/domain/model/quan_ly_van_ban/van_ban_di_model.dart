@@ -1,22 +1,22 @@
 
-class VanBanModel {
+class VanBanDiModel {
   String? doKhan;
   String? loaiVanBan;
-  String? ngayDen;
+  String? ngayTao;
   String? nguoiSoanThao;
 
-  VanBanModel({
+  VanBanDiModel({
     this.doKhan,
     this.loaiVanBan,
-    this.ngayDen,
+    this.ngayTao,
     this.nguoiSoanThao,
   });
 }
 
-class DanhSachVanBanModel {
-  List<VanBanModel>? pageData;
+class DanhSachVanBanDiModel {
+  List<VanBanDiModel>? pageData;
 
-  DanhSachVanBanModel({
+  DanhSachVanBanDiModel({
     this.pageData,
   });
 }

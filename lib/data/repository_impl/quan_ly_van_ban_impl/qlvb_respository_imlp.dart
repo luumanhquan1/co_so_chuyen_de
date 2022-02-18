@@ -9,6 +9,9 @@ import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 class QLVBImlp implements QLVBRepository {
@@ -51,20 +54,34 @@ class QLVBImlp implements QLVBRepository {
   }
 
 
+  @override
+  Future<Result<DanhSachVanBanModel>> getDanhSachVbDen(
+      String startDate, String endDate, int index, int size) {
+    return runCatchingAsync<DanhSachVBDenResponse, DanhSachVanBanModel>(
+            () => _quanLyVanBanClient.getDanhSachVanBanDen(
+          DanhSachVBDiRequest(
+              ThoiGianStartFilter: startDate,
+              ThoiGianEndFilter: endDate,
+              Size: size,
+              Index: index,),
+        ), (response) {
+      return response.danhSachVB.toDomain();
+    });
+  }
 
   @override
-  Future<Result<DanhSachVanBanModel>> getDanhSachVbDi(
-      String startDate, String endDate, int index, int size,) {
-    return runCatchingAsync<DanhSachVBDiResponse, DanhSachVanBanModel>(
-      () => _quanLyVanBanClient.getListVBDi(DanhSachVBDiRequest(
-          ThoiGianStartFilter: startDate,
-          ThoiGianEndFilter: endDate,
-          Size: size,
-          Index: index,
-         ),),
-      (response) {
-        return response.danhSachVB.toDomain();
-      },
-    );
+  Future<Result<DanhSachVanBanDiModel>> getDanhSachVbDi(
+      String startDate, String endDate, int index, int size) {
+    return runCatchingAsync<DanhSachVBDiResponse, DanhSachVanBanDiModel>(
+        () => _quanLyVanBanClient.getDanhSachVanBanDi(
+              DanhSachVBDiRequest(
+                  ThoiGianStartFilter: startDate,
+                  ThoiGianEndFilter: endDate,
+                  Size: size,
+                  Index: index,),
+            ), (response) {
+      return response.danhSachVB.toDomain();
+    });
   }
+
 }

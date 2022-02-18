@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/document/outgoing_document.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_state.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
@@ -16,36 +19,52 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
 
   Stream<List<VanBanModel>> get getListVbDi => _getListVBDi.stream;
 
-  void callAPi() {
-    listDataVBDi(
-      startDate: '2022-01-13',
-      endDate: '2022-02-18',
-      index: 1,
-      size: 10,
+
+  final BehaviorSubject<List<VanBanDiModel>> _getDanhSachVBDi =
+      BehaviorSubject<List<VanBanDiModel>>();
+
+  Stream<List<VanBanDiModel>> get getDanhSachVbDi => _getDanhSachVBDi.stream;
+
+  void callAPi() async{
+    final queue = Queue(parallel: 1);
+    showLoading();
+    unawaited(
+      queue.add(
+        () => listDataDanhSachVBDi(
+          startDate: '2022-02-01',
+          endDate: '2022-02-28',
+          index: 1,
+          size: 10,
+        ),
+      ),
     );
+    await queue.onComplete;
+    showContent();
+    queue.dispose();
   }
 
   final QLVBRepository _QLVBRepo = Get.find();
 
-  Future<void> listDataVBDi({
+
+  Future<void> listDataDanhSachVBDi({
     required String startDate,
     required String endDate,
     required int index,
     required int size,
   }) async {
-    List<VanBanModel> listVbDi = [];
+    List<VanBanDiModel> listVbDi = [];
     final result =
         await _QLVBRepo.getDanhSachVbDi(startDate, endDate, index, size);
     result.when(
       success: (res) {
         listVbDi=res.pageData??[];
-        _getListVBDi.sink.add(listVbDi);
+        _getDanhSachVBDi.sink.add(listVbDi);
+
       },
       error: (err) {
         return err;
       },
     );
-
   }
 
   List<OutgoingDocument> listIncomingDocument = [
