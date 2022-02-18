@@ -24,6 +24,7 @@ class HiveLocal {
 
   static void clearData() {
     _userBox.clear();
+    _selectKey.clear();
   }
 
   static DataUser? getDataUser() {
