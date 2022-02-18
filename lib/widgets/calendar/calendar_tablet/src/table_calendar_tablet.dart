@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/data/di/di.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/shared/utils.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar.dart';
@@ -16,7 +15,7 @@ class TableCandarTablet extends StatefulWidget {
 }
 
 class _TableCandarTabletState extends State<TableCandarTablet> {
-  TableCalendarTabletCubit cubitCalendar = getIt<TableCalendarTabletCubit>();
+  TableCalendarTabletCubit cubitCalendar = TableCalendarTabletCubit();
   late final ValueNotifier<List<Event>> _selectedEvents;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -90,6 +89,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
           firstDay: kFirstDay,
           lastDay: kLastDay,
           focusedDay: cubitCalendar.focusedDay,
+          cubitCalendar: cubitCalendar,
           typeCalendar: widget.type,
           selectedDayPredicate: (day) => cubitCalendar.selectDay(day),
           rangeStartDay: cubitCalendar.rangeStart,
