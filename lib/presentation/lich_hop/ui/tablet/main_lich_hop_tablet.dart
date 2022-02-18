@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/widget/wisget_choose
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +23,11 @@ class MainLichHopTabLet extends StatefulWidget {
 
 class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   LichHopCubit cubit = LichHopCubit();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -124,6 +130,14 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
               onTapMonth: () {
                 setState(() {});
                 cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
+              },
+            ),
+            BlocBuilder<LichHopCubit, LichHopState>(
+              bloc: cubit,
+              builder: (context, state) {
+                return TableCandarTablet(
+                  type: state.type,
+                );
               },
             ),
             BlocBuilder<LichHopCubit, LichHopState>(

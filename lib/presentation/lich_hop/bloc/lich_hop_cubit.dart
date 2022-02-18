@@ -13,7 +13,13 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 class LichHopCubit extends BaseCubit<LichHopState> {
   bool isCheckNgay = false;
   late BuildContext context;
-  BehaviorSubject<int> index=BehaviorSubject.seeded(0);
+  BehaviorSubject<int> index = BehaviorSubject.seeded(0);
+
+  BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
+      BehaviorSubject();
+
+  Stream<List<MeetingSchedule>> get listMeetingStream =>
+      listMeetTingScheduleSubject.stream;
 
   LichHopCubit() : super(LichHopStateIntial());
   List<String> listImageLichHopCuaToi = [
@@ -25,8 +31,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [
-
-    MeetingSchedule("hung hung hung", "2022-02-07T07:45:00", "2022-02-07T08:45:00"),
+    MeetingSchedule(
+        "hung hung hung", "2022-02-07T07:45:00", "2022-02-07T08:45:00"),
     MeetingSchedule("hung", "2022-02-07T09:45:00", "2022-02-07T10:45:00"),
     MeetingSchedule("hung", "2022-02-07T11:45:00", "2022-02-07T12:45:00"),
     MeetingSchedule("hung", "2022-02-07T13:45:00", "2022-02-07T15:45:00"),
@@ -43,12 +49,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     for (int i = 0; i < listMeeting.length; i++) {
       appointments.add(
         Appointment(
-          startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
-          endTime: DateTime.parse(listMeeting[i].dateTimeTo),
-          subject: listMeeting[i].title,
-          color: textColorMangXaHoi,
-          isAllDay: false
-        ),
+            startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
+            endTime: DateTime.parse(listMeeting[i].dateTimeTo),
+            subject: listMeeting[i].title,
+            color: textColorMangXaHoi,
+            isAllDay: false),
       );
     }
     return DataSource(appointments);
@@ -67,9 +72,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   chooseTypeDay(Type_Choose_Option_Day type) {
     if (state is LichHopStateDangLich) {
       emit(LichHopStateDangLich(type));
-    }if(state is LichHopStateDangList)  {
+    }
+    if (state is LichHopStateDangList) {
       emit(LichHopStateDangList(type));
-    }if(state is LichHopStateDangDanhSach) {
+    }
+    if (state is LichHopStateDangDanhSach) {
       emit(LichHopStateDangDanhSach(type));
     }
   }
