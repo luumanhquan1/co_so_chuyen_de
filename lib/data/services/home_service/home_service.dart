@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
 import 'package:ccvc_mobile/data/request/home/nhiem_vu_request.dart';
+import 'package:ccvc_mobile/data/request/home/to_do_list_request.dart';
 import 'package:ccvc_mobile/data/response/home/config_widget_dash_board_response.dart';
 import 'package:ccvc_mobile/data/response/home/danh_sach_van_ban_response.dart';
 import 'package:ccvc_mobile/data/response/home/dash_board_van_ban_den_response.dart';
@@ -8,6 +9,7 @@ import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
 import 'package:ccvc_mobile/data/response/home/pham_vi_response.dart';
 import 'package:ccvc_mobile/data/response/home/tinh_huong_khan_cap_response.dart';
+import 'package:ccvc_mobile/data/response/home/todo_current_user_response.dart';
 import 'package:ccvc_mobile/data/response/home/tong_hop_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/data/response/home/van_ban_si_so_luong_response.dart';
 import 'package:ccvc_mobile/data/response/home/y_kien_nguoi_dan_response.dart';
@@ -43,14 +45,16 @@ abstract class HomeService {
   @GET(BaseUrlConstants.baseUrlGateway + ApiConstants.GET_DASHBOARD_VB_DEN)
   @FormUrlEncoded()
   Future<DashBoardVBDenResponse> getDashBoardVBDen(
-      @Query('NgayDauTien') String ngayDauTien,
-      @Query('NgayCuoiCung') String ngayCuoiCung);
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
 
   @GET(BaseUrlConstants.baseUrlGateway + ApiConstants.GET_VB_DI_SO_LUONG)
   @FormUrlEncoded()
   Future<VanBanDiSoLuongResponse> getDashBoardVBDi(
-      @Query('NgayDauTien') String ngayDauTien,
-      @Query('NgayCuoiCung') String ngayCuoiCung);
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
 
   @POST(BaseUrlConstants.baseUrlGateway + ApiConstants.GET_DANH_SACH_VAN_BAN)
   @FormUrlEncoded()
@@ -58,8 +62,9 @@ abstract class HomeService {
     @Body() DanhSachVBRequest danhSachVBRequestm,
   );
 
-  @POST(BaseUrlConstants.baseUrlGateway +
-      ApiConstants.GET_DANH_SACH_VAN_BAN_SEARCH)
+  @POST(
+    BaseUrlConstants.baseUrlGateway + ApiConstants.GET_DANH_SACH_VAN_BAN_SEARCH,
+  )
   @FormUrlEncoded()
   Future<SearchDanhSachVanBanResponse> searchDanhSachVanBan(
     @Body() SearchVBRequest searchVBRequest,
@@ -80,20 +85,37 @@ abstract class HomeService {
   @GET(BaseUrlConstants.baseUrlGateway + ApiConstants.TINH_HINH_XU_LY_TRANG_CHU)
   @FormUrlEncoded()
   Future<YKienNguoiDanResponse> getYKienNguoiDan(
-      @Query('DonViId') String donViId,
-      @Query('TuNgay') String tuNgay,
-      @Query('DenNgay') String denNgay);
+    @Query('DonViId') String donViId,
+    @Query('TuNgay') String tuNgay,
+    @Query('DenNgay') String denNgay,
+  );
 
   @GET(BaseUrlConstants.baseUrlGateway + ApiConstants.DANH_SACH_PAKN)
   @FormUrlEncoded()
   Future<ListYKienNguoiDanResponse> getListYKienNguoiDan(
-      @Query('pageSize') int pageSize,
-      @Query('page') int page,
-      @Query('trangThai') String trangThai,
-      @Query('tuNgay') String tuNgay,
-      @Query('denNgay') String denNgay,
-      @Query('donViId') String donViId,
-      @Query('userId') String userId,
-      @Query('loaiMenu') String? loaiMenu
-      );
+    @Query('pageSize') int pageSize,
+    @Query('page') int page,
+    @Query('trangThai') String trangThai,
+    @Query('tuNgay') String tuNgay,
+    @Query('denNgay') String denNgay,
+    @Query('donViId') String donViId,
+    @Query('userId') String userId,
+    @Query('loaiMenu') String? loaiMenu,
+  );
+
+  @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.TODO_LIST_CURRENT_USER)
+  @FormUrlEncoded()
+  Future<ToDoListResponse> getTodoList();
+
+  @PUT(BaseUrlConstants.baseURLCCVC + ApiConstants.TODO_LIST_UPDATE)
+  @FormUrlEncoded()
+  Future<ToDoListUpdateResponse> updateTodoList(
+    @Body() ToDoListRequest toDoListRequest,
+  );
+
+  @POST(BaseUrlConstants.baseURLCCVC + ApiConstants.TODO_LIST_CREATE)
+  @FormUrlEncoded()
+  Future<ToDoListUpdateResponse> createTodoList(
+    @Body() CreateToDoRequest createToDoRequest,
+  );
 }
