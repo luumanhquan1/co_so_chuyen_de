@@ -1,9 +1,14 @@
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/home/nhiem_vu_request.dart';
 import 'package:ccvc_mobile/data/request/home/to_do_list_request.dart';
+import 'package:ccvc_mobile/data/response/home/bao_chi_mang_xa_hoi_response.dart';
 import 'package:ccvc_mobile/data/response/home/config_widget_dash_board_response.dart';
 import 'package:ccvc_mobile/data/response/home/danh_sach_van_ban_response.dart';
 import 'package:ccvc_mobile/data/response/home/dash_board_van_ban_den_response.dart';
+import 'package:ccvc_mobile/data/response/home/lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/home/lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/home/list_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
@@ -21,6 +26,7 @@ import 'package:ccvc_mobile/domain/model/home/date_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/home/pham_vi_model.dart';
+import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_hinh_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
@@ -178,6 +184,39 @@ class HomeImpl extends HomeRepository {
     return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
       () => _homeService.createTodoList(createToDoRequest),
       (res) => res.data?.toDomain() ?? TodoModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<PressNetWorkModel>>> getBaoChiMangXaHoi(int pageIndex,
+      int pageSize, String fromDate, String toDate, String keyWord) {
+    return runCatchingAsync<BaoChiMangXaHoiResponse, List<PressNetWorkModel>>(
+      () => _homeService.getBaoChiMangXaHoi(
+        pageIndex,
+        pageSize,
+        fromDate,
+        toDate,
+        keyWord,
+      ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<List<CalendarMeetingModel>>> getListLichLamViec(
+      LichLamViecRequest lamViecRequest) {
+    return runCatchingAsync<LichLamViecResponse, List<CalendarMeetingModel>>(
+      () => _homeService.getLichLamViec(lamViecRequest),
+      (res) => res.data?.toDomain() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<CalendarMeetingModel>>> getLichHop(
+      LichHopRequest lichHopRequest) {
+    return runCatchingAsync<LichHopResponse, List<CalendarMeetingModel>>(
+      () => _homeService.getLichHop(lichHopRequest),
+      (res) => res.data?.toDomain() ?? [],
     );
   }
 }

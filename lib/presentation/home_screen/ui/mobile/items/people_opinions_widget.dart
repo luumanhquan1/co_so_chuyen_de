@@ -35,6 +35,7 @@ class _PeopleOpinionsState extends State<PeopleOpinions> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
+      minHeight: 250,
       title: S.current.people_opinions,
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
