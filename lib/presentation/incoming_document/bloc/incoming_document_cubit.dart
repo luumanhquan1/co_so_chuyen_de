@@ -58,8 +58,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     final result = await _QLVBRepo.getVanBanModel();
     result.when(
       success: (res) {
-        listVbDen =
-            res.pageDataRespone ?? [];
+        listVbDen=res.pageData ?? [];
         _getListVBDen.sink.add(listVbDen);
       },
       error: (err) {
@@ -80,7 +79,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     result.when(
       success: (res) {
         listVbDen =
-            res.pageDataRespone?? [];
+            res.pageData?? [];
         _getListVBDen.sink.add(listVbDen);
 
       },

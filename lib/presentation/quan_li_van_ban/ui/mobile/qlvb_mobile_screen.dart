@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
@@ -187,12 +188,11 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                         ],
                       ),
                       const SizedBox(height: 16.0),
-                      StreamBuilder<List<IncomingDocument>>(
-                        stream: cubitOutgoing.getListVbDi,
+                      StreamBuilder<List<VanBanDiModel>>(
+                        stream: cubitOutgoing.getDanhSachVbDi,
                         builder: (context, snapshot) {
-                          final List<IncomingDocument> listData =
+                          final List<VanBanDiModel> listData =
                               snapshot.data ?? [];
-                          log('?????????????????>>>>>>>>>>>>>>>>>${listData}');
                           if (listData.isNotEmpty) {
                             return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -202,12 +202,12 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                               itemBuilder: (context, index) {
                                 return IncomingDocumentCell(
                                   onTap: () {},
-                                  title: listData[index].loaiVanBan,
+                                  title: listData[index].loaiVanBan??'',
                                   dateTime:
-                                  DateTime.parse(listData[index].ngayTao)
+                                  DateTime.parse(listData[index].ngayTao??'')
                                       .toStringWithListFormat,
-                                  userName: listData[index].nguoiSoanThao,
-                                  status: listData[index].doKhan,
+                                  userName: listData[index].nguoiSoanThao??'',
+                                  status: listData[index].doKhan??'',
                                   userImage:
                                   'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                                 );

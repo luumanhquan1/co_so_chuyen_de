@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/document/outgoing_document.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_state.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,10 +14,11 @@ import 'package:rxdart/rxdart.dart';
 class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
   OutgoingDocumentCubit() : super(IncomingDocumentStateIntial());
 
-  final BehaviorSubject<List<IncomingDocument>> _getListVBDi =
-      BehaviorSubject<List<IncomingDocument>>();
+  final BehaviorSubject<List<VanBanModel>> _getListVBDi =
+      BehaviorSubject<List<VanBanModel>>();
 
-  Stream<List<IncomingDocument>> get getListVbDi => _getListVBDi.stream;
+  Stream<List<VanBanModel>> get getListVbDi => _getListVBDi.stream;
+
 
   final BehaviorSubject<List<VanBanDiModel>> _getDanhSachVBDi =
       BehaviorSubject<List<VanBanDiModel>>();
@@ -44,6 +45,7 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
 
   final QLVBRepository _QLVBRepo = Get.find();
 
+
   Future<void> listDataDanhSachVBDi({
     required String startDate,
     required String endDate,
@@ -55,8 +57,9 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
         await _QLVBRepo.getDanhSachVbDi(startDate, endDate, index, size);
     result.when(
       success: (res) {
-        listVbDi = res.pageDataRespone ?? [];
+        listVbDi=res.pageData??[];
         _getDanhSachVBDi.sink.add(listVbDi);
+
       },
       error: (err) {
         return err;
