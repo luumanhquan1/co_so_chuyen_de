@@ -53,6 +53,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
           builder: (context, snapshot) {
             return Column(
               children: [
+                const SizedBox(height: 24,),
                 TheoDangLichWidget(
                   icon: ImageAssets.icTheoDangLich,
                   name: S.current.lich_lam_viec,
