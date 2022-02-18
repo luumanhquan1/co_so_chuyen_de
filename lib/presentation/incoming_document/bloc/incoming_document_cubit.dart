@@ -59,7 +59,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     result.when(
       success: (res) {
         listVbDen =
-            res.pageDataRespone?.map((e) => e.toDomain()).toList() ?? [];
+            res.pageDataRespone ?? [];
         _getListVBDen.sink.add(listVbDen);
       },
       error: (err) {
@@ -80,7 +80,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     result.when(
       success: (res) {
         listVbDen =
-            res.pageDataRespone?.map((e) => e.toDomain()).toList() ?? [];
+            res.pageDataRespone?? [];
         _getListVBDen.sink.add(listVbDen);
 
       },

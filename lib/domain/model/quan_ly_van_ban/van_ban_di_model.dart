@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/data/response/quan_ly_van_ban/ds_vbdi_response.dart';
 
 class VanBanDiModel {
   String? doKhan;
@@ -15,7 +14,7 @@ class VanBanDiModel {
 }
 
 class DanhSachVanBanDiModel {
-  List<PageDataResponseVBDi>? pageDataRespone;
+  List<VanBanDiModel>? pageDataRespone;
 
   DanhSachVanBanDiModel({
     this.pageDataRespone,
