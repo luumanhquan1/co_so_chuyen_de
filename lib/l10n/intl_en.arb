@@ -353,6 +353,11 @@
   "lich_theo_trang_thai" : "Lịch theo trạng thái",
   "lich_theo_lanh_dao" : "Lịch theo lãnh đạo",
   "menu_lich_lam_viec" : "Menu Lịch làm việc",
+  "nhiem_vu_ca_nhan" : "Nhiệm vụ cá nhân",
+  "nhiem_vu_don_vi" : "Nhiệm vụ đơn vị",
+  "cong_viec" : "Công việc",
+  "da_thuc_hien" : "Đã thực hiện",
+  "danh_sach_nhiem_vu" : "Danh sách nhiệm vụ",
   "xoa_cong_viec" : "Xóa công việc",
   "ban_chac_chan_muon_xoa" : "Bạn có chắc muốn xóa?",
   "dang_nhap_that_bai" : "Đăng nhập thất bại hãy thử lại",
@@ -382,8 +387,5 @@
   "them_tag" : "Thêm tag",
   "tu_choi" : "Từ chối",
   "luu_lai": "Lưu lại "
-
-
-
 
 }
