@@ -1,10 +1,13 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/lich_duoc_moi_phone_screen.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/lich_duoc_moi/lich_duoc_moi_phone_screen.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/lich_duoc_moi/lich_duoc_moi_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/lich_tao_ho/lich_tao_ho_tablet_screen.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'mobile/menu/lich_tao_ho_phone_screen.dart';
+import 'mobile/menu/lich_tao_ho/lich_tao_ho_phone_screen.dart';
 
 class ItemThongBao {
   String name;
@@ -26,8 +29,13 @@ List<ItemThongBao> lichTheoTrangThai = [
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LichDuocMoiPhoneScreen(
-            cubit: cubit,
+          builder: (context) => screenDevice(
+            mobileScreen: LichDuocMoiPhoneScreen(
+              cubit: cubit,
+            ),
+            tabletScreen: LichDuocMoiTabletScreen(
+              cubit: cubit,
+            ),
           ),
         ),
       );
@@ -40,10 +48,14 @@ List<ItemThongBao> lichTheoTrangThai = [
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LichTaoHoPhoneScreen(
-            cubit: cubit,
-          ),
-        ),
+            builder: (context) => screenDevice(
+                  mobileScreen: LichTaoHoPhoneScreen(
+                    cubit: cubit,
+                  ),
+                  tabletScreen: LichTaoHoTabletScreen(
+                    cubit: cubit,
+                  ),
+                )),
       );
     },
   ),
