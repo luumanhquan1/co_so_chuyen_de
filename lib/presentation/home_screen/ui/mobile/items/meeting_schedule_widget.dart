@@ -91,7 +91,7 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
                       InfoData(
                         urlIcon: ImageAssets.icTime,
                         key: S.current.time,
-                        value: result.time,
+                        value: result.convertTime(),
                       ),
                       InfoData(
                         urlIcon: ImageAssets.icPeople,
