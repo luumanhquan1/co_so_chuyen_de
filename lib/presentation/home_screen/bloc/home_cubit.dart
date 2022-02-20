@@ -430,7 +430,7 @@ class DanhSachCongViecCubit extends HomeCubit {
   }
 }
 
-///  hợp nhiệm vụ
+/// Tổng hợp nhiệm vụ
 class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<TongHopNhiemVuModel>> _getTongHopNhiemVu =
       BehaviorSubject<List<TongHopNhiemVuModel>>();
@@ -439,16 +439,12 @@ class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
   }
   void _getKey() {
     final data = HiveLocal.getSelect(SelectKeyPath.KEY_DASHBOARDNV_TIME);
-    final type =
-        HiveLocal.getSelect(SelectKeyPath.KEY_DASHBOARD_TONGHOPNV_TYPE);
     if (data != null) {
       startDate = DateTime.parse(data.startDate);
       endDate = DateTime.parse(data.endDate);
       selectKeyTime = data.selectKey;
     }
-    if (type != null) {
-      selectKeyDonVi = type.selectKey;
-    }
+
   }
 
   Future<void> getDataTongHopNhiemVu() async {
@@ -523,14 +519,7 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<DocumentDashboardModel> _getDocumentVBDi =
       BehaviorSubject<DocumentDashboardModel>();
-  TinhHinhXuLyCubit() {
-    final data = HiveLocal.getSelect(SelectKeyPath.KEY_DASH_BOARD_TONG_HOP_NV);
-    if (data != null) {
-      startDate = DateTime.parse(data.startDate);
-      endDate = DateTime.parse(data.endDate);
-      selectKeyTime = data.selectKey;
-    }
-  }
+  TinhHinhXuLyCubit() {}
   void getDocument() {
     callApi(startDate.toString(), endDate.toString());
   }

@@ -31,7 +31,7 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
           color: bgQLVBTablet,
-          padding: const EdgeInsets.fromLTRB(30, 60, 30, 20),
+          padding: const EdgeInsets.fromLTRB(30, 60, 30,0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

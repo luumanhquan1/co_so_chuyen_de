@@ -9,8 +9,6 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart'
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
-import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/y_kien_nguoidan_screen.dart';
-import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/yknd_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -60,15 +58,14 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        // return screenDevice(
-        //   mobileScreen: HomeScreenMobile(
-        //     key: keyHomeMobile,
-        //   ),
-        //   tabletScreen: HomeScreenTablet(
-        //     key: keyHomeTablet,
-        //   ),
-        // );
-        return const YKNDScreenTablet();
+        return screenDevice(
+          mobileScreen: HomeScreenMobile(
+            key: keyHomeMobile,
+          ),
+          tabletScreen: HomeScreenTablet(
+            key: keyHomeTablet,
+          ),
+        );
       case TabBarType.report:
         final key = GlobalKey<FormGroupState>();
         return Scaffold(

@@ -8,13 +8,10 @@ import 'package:flutter/material.dart';
 class RowIndicatorTablet extends StatelessWidget {
   final double? paddingleft;
   final List<ChartData> chartData;
-  final bool isSmall;
-
   const RowIndicatorTablet(
       {Key? key,
       this.paddingleft,
-      required this.chartData,
-      this.isSmall = false,})
+      required this.chartData,})
       : super(key: key);
 
   @override
@@ -22,12 +19,12 @@ class RowIndicatorTablet extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: paddingleft ?? 16),
       child: Directionality(
-        textDirection: isSmall ? TextDirection.ltr: TextDirection.rtl,
+        textDirection:TextDirection.rtl,
         child: GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          childAspectRatio: isSmall? 3:5,
+          childAspectRatio:5,
           mainAxisSpacing: 10.0.textScale(space: 4),
           crossAxisSpacing: 10,
           children: List.generate(chartData.length, (index) {
@@ -69,3 +66,59 @@ class RowIndicatorTablet extends StatelessWidget {
     );
   }
 }
+class RowIndicatorSmallTablet extends StatelessWidget {
+  final double? paddingleft;
+  final List<ChartData> chartData;
+  const RowIndicatorSmallTablet(
+      {Key? key,
+        this.paddingleft,
+        required this.chartData,})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: EdgeInsets.only(left:paddingleft??16),
+      child: GridView.count(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: 2,
+        childAspectRatio: 3,
+        mainAxisSpacing: 10.0.textScale(space: 4),
+        crossAxisSpacing: 10,
+        children: List.generate(chartData.length, (index) {
+          final result = chartData[index];
+          // ignore: avoid_unnecessary_containers
+          return GestureDetector(
+            onTap: () {},
+            child: Row(
+              children: [
+                Container(
+                  height: 14,
+                  width: 14,
+                  decoration: BoxDecoration(
+                    color: result.color,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                  child: Text(
+                    '${result.title} (${result.value.toInt()})',
+                    style: textNormal(
+                      infoColor,
+                      14.0.textScale(),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+

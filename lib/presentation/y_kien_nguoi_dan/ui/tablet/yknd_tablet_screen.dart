@@ -120,8 +120,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 chartData: cubit.chartPhanLoaiYKND,
                                 onTap: (int value) {},
                               ),
-                              RowIndicatorTablet(
-                                isSmall: true,
+                              RowIndicatorSmallTablet(
                                 chartData: cubit.chartPhanLoaiYKND,
                               ),
                             ],
