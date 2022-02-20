@@ -21,8 +21,7 @@ class BieuDoNhiemVuMobile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BieuDoNhiemVuMobileState createState() =>
-      _BieuDoNhiemVuMobileState();
+  _BieuDoNhiemVuMobileState createState() => _BieuDoNhiemVuMobileState();
 }
 
 class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
@@ -44,46 +43,44 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
         children: [
           PieChart(
             title: widget.title ?? '',
-            chartData:widget.chartData,
+            chartData: widget.chartData,
             onTap: (int value) {},
           ),
           Container(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: BoxStatusVanBan(
-                    value:
-                    widget.nhiemVuDashBoardModel.soLuongTrongHan ?? 0,
-                    onTap: () {},
-                    color: numberOfCalenders,
-                    statusName: S.current.trong_han,
-                  ),
+          Row(
+            children: [
+              Expanded(
+                child: BoxStatusVanBan(
+                  value: widget.nhiemVuDashBoardModel.soLuongTrongHan ?? 0,
+                  onTap: () {},
+                  color: numberOfCalenders,
+                  statusName: S.current.trong_han,
                 ),
-                const SizedBox(
-                  width: 16,
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: BoxStatusVanBan(
+                  value: widget.nhiemVuDashBoardModel.soLuongQuaHan ?? 0,
+                  onTap: () {},
+                  color: dangXyLyColor,
+                  statusName: S.current.den_han,
                 ),
-
-                Expanded(
-                  child: BoxStatusVanBan(
-                    value: widget.nhiemVuDashBoardModel.soLuongQuaHan ?? 0,
-                    onTap: () {},
-                    color: dangXyLyColor,
-                    statusName: S.current.den_han,
-                  ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: BoxStatusVanBan(
+                  value: widget.nhiemVuDashBoardModel.soLuongDenHan ?? 0,
+                  onTap: () {},
+                  color: statusCalenderRed,
+                  statusName: S.current.qua_han,
                 ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: BoxStatusVanBan(
-                    value: widget.nhiemVuDashBoardModel.soLuongDenHan ?? 0,
-                    onTap: () {},
-                    color: statusCalenderRed,
-                    statusName: S.current.qua_han,
-                  ),
-                ),
-              ],
-            )
+              ),
+            ],
+          )
         ],
       ),
     );

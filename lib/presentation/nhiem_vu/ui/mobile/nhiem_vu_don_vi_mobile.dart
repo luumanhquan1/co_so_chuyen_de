@@ -6,6 +6,8 @@ import 'package:ccvc_mobile/domain/model/nhiem_vu/nhiem_vu_dashboard_model.dart'
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
+import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
+import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/widget/bieu_do_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
@@ -22,7 +24,6 @@ class NhiemVuDonViMobile extends StatefulWidget {
 }
 
 class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
-  //  = NhiemVuCubit();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -59,7 +60,11 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                 color: homeColor,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                  left: 16.0,
+                  bottom: 20.0,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -74,19 +79,18 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                         ),
                         IconButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //     const IncomingDocumentScreen(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const DanhSachNhiemVuMobile(),
+                              ),
+                            );
                           },
                           icon: SvgPicture.asset(ImageAssets.ic_next_color),
                         )
                       ],
                     ),
-                    const SizedBox(height: 16.0),
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -111,7 +115,11 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                 color: homeColor,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                  left: 16.0,
+                  bottom: 20.0,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -126,19 +134,18 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                         ),
                         IconButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //     const OutgoingDocumentScreen(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const DanhSachCongViecMobile(),
+                              ),
+                            );
                           },
                           icon: SvgPicture.asset(ImageAssets.ic_next_color),
                         )
                       ],
                     ),
-                    const SizedBox(height: 16.0),
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
