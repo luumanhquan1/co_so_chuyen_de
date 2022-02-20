@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
@@ -34,31 +33,32 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
               today: DateTime.now(),
             ),
           ),
-          const SizedBox(
-            height: 28.0,
-          ),
+
           Expanded(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 30.0, left: 30.0),
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: listDanhSachNhiemVu.length,
-                  itemBuilder: (context, index) {
-                    return NhiemVuCellTablet(
-                      onTap: () {},
-                      title: listDanhSachNhiemVu[index].title ?? '',
-                      noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
-                      dateTimeStart: listDanhSachNhiemVu[index].timeStart ?? '',
-                      dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
-                      userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
-                      status: listDanhSachNhiemVu[index].trangThai ?? '',
-                      userImage:
-                          'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                      index: index + 1,
-                    );
-                  },
+              child: Container(
+                margin: const EdgeInsets.only(top:28.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 30.0, left: 30.0),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: listDanhSachNhiemVu.length,
+                    itemBuilder: (context, index) {
+                      return NhiemVuCellTablet(
+                        onTap: () {},
+                        title: listDanhSachNhiemVu[index].title ?? '',
+                        noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
+                        dateTimeStart: listDanhSachNhiemVu[index].timeStart ?? '',
+                        dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
+                        userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
+                        status: listDanhSachNhiemVu[index].trangThai ?? '',
+                        userImage:
+                            'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                        index: index + 1,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
