@@ -1,4 +1,9 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
@@ -121,6 +126,131 @@ extension CheckValidate on String {
       int.parse(this);
     } catch (e) {
       return S.current.check_so_luong;
+    }
+  }
+}
+
+extension GetScreenMenu on String {
+  Widget getHeader({
+    required CalenderCubit cubit,
+  }) {
+    switch (this) {
+      case 'Lịch của tôi':
+        return Padding(
+          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+          child: Text(
+            cubit.textDay,
+            style: textNormalCustom(color: textBodyTime),
+          ),
+        );
+
+      case 'Lịch được mời':
+        return Padding(
+          padding: const EdgeInsets.only(right: 16, left: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                  top: 16.0,
+                  bottom: 16.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      cubit.textDay,
+                      style: textNormalCustom(color: textBodyTime),
+                    ),
+                    stateLDM.ChoXacNhan.getState(3),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+
+      case 'Lịch tạo hộ':
+        return Padding(
+          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+          child: Text(
+            cubit.textDay,
+            style: textNormalCustom(color: textBodyTime),
+          ),
+        );
+
+      default:
+        return Padding(
+          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+          child: Text(
+            cubit.textDay,
+            style: textNormalCustom(color: textBodyTime),
+          ),
+        );
+    }
+  }
+
+  Widget getHeaderTablet({
+    required bool isHindText,
+    required CalenderCubit cubit,
+  }) {
+    switch (this) {
+      case 'Lịch của tôi':
+        return isHindText
+            ? Container()
+            : Container(
+                padding: const EdgeInsets.only(bottom: 28),
+                child: Text(
+                  cubit.textDay,
+                  style: textNormalCustom(color: textBodyTime),
+                ),
+              );
+
+      case 'Lịch được mời':
+        return isHindText
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(),
+                  stateLDM.ChoXacNhan.getState(3),
+                ],
+              )
+            : Container(
+                padding: const EdgeInsets.only(bottom: 28),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      cubit.textDay,
+                      style: textNormalCustom(color: textBodyTime),
+                    ),
+                    stateLDM.ChoXacNhan.getState(3),
+                  ],
+                ),
+              );
+
+      case 'Lịch tạo hộ':
+        return isHindText
+            ? Container()
+            : Container(
+                padding: const EdgeInsets.only(bottom: 28),
+                child: Text(
+                  cubit.textDay,
+                  style: textNormalCustom(color: textBodyTime),
+                ),
+              );
+
+      default:
+        return isHindText
+            ? Container()
+            : Container(
+                padding: const EdgeInsets.only(bottom: 28),
+                child: Text(
+                  cubit.textDay,
+                  style: textNormalCustom(color: textBodyTime),
+                ),
+              );
     }
   }
 }

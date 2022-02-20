@@ -11,130 +11,119 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../item_thong_bao.dart';
 
 class CalendarWorkMenu extends StatefulWidget {
-  const CalendarWorkMenu({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const CalendarWorkMenu({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<CalendarWorkMenu> createState() => _CalendarWorkMenuState();
 }
 
 class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
-  CalenderCubit cubit = CalenderCubit();
-
   @override
   Widget build(BuildContext context) {
-    return CalendarWorkPhoneInher(
-      cubit: cubit,
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 58,
-            ),
-            headerWidget(menu: S.current.lich_lam_viec),
-            const SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              flex: 8,
-              child: StreamBuilder<List<bool>>(
-                stream: cubit.selectTypeCalendarSubject.stream,
-                builder: (context, snapshot) {
-                  return Column(
-                    children: [
-                      TheoDangLichWidget(
-                        icon: ImageAssets.icTheoDangLich,
-                        name: S.current.lich_lam_viec,
-                        onTap: () {
-                          cubit.selectTypeCalendarSubject.add([true, false]);
-                        },
-                        isSelect: snapshot.data![0],
-                      ),
-                      TheoDangLichWidget(
-                        icon: ImageAssets.icTheoDangDanhSachGrey,
-                        name: S.current.theo_dang_danh_sach,
-                        onTap: () {
-                          cubit.selectTypeCalendarSubject.add([false, true]);
-                        },
-                        isSelect: snapshot.data![1],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: bgDropDown,
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 58,
+          ),
+          headerWidget(menu: S.current.lich_lam_viec),
+          const SizedBox(
+            height: 24,
+          ),
+          Expanded(
+            flex: 8,
+            child: Column(
+              children: [
+                StreamBuilder<List<bool>>(
+                  stream: widget.cubit.selectTypeCalendarSubject.stream,
+                  builder: (context, snapshot) {
+                    return Column(
+                      children: [
+                        TheoDangLichWidget(
+                          icon: ImageAssets.icTheoDangLich,
+                          name: S.current.lich_lam_viec,
+                          onTap: () {
+                            widget.cubit.selectTypeCalendarSubject
+                                .add([true, false]);
+                          },
+                          isSelect: snapshot.data?[0] ?? true,
+                        ),
+                        TheoDangLichWidget(
+                          icon: ImageAssets.icTheoDangDanhSachGrey,
+                          name: S.current.theo_dang_danh_sach,
+                          onTap: () {
+                            widget.cubit.selectTypeCalendarSubject
+                                .add([false, true]);
+                          },
+                          isSelect: snapshot.data?[1] ?? true,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: bgDropDown,
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ContainerMenuWidget(
-                                name: S.current.lich_cua_toi,
-                                icon: ImageAssets.icPerson,
-                                childExpand: Container(),
-                                onTap: () {},
-                              ),
-                              MediaQuery.removePadding(
-                                context: context,
-                                removeTop: true,
-                                child: ContainerMenuWidget(
-                                  name: S.current.lich_theo_trang_thai,
-                                  icon: ImageAssets.icLichTheoTrangThai,
-                                  childExpand: Column(
-                                    children: lichTheoTrangThai
+                      ],
+                    );
+                  },
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: listThongBao
+                          .map(
+                            (e) => ContainerMenuWidget(
+                              name: e.name,
+                              icon: e.icon,
+                              type: e.type,
+                              index: e.index ?? 0,
+                              childExpand: Column(
+                                children: e.itemMenu == ItemMenu.Item2
+                                    ? listTheoTrangThai
                                         .map(
                                           (e) => ContainerMenuWidget(
+                                            icon: e.icon,
                                             name: e.name,
+                                            index: e.index ?? 0,
+                                            isIcon: false,
                                             onTap: () {
-                                              e.navigator(context, cubit);
+                                              e.onTap(context, widget.cubit);
                                             },
-                                            icon: '',
-                                            index: e.index,
+                                          ),
+                                        )
+                                        .toList()
+                                    : listLanhDao
+                                        .map(
+                                          (e) => ContainerMenuWidget(
+                                            icon: e.icon,
+                                            name: e.name,
+                                            index: e.index ?? 0,
+                                            isIcon: false,
+                                            onTap: () {
+                                              e.onTap(context, widget.cubit);
+                                            },
                                           ),
                                         )
                                         .toList(),
-                                  ),
-                                  type: TypeContainer.expand,
-                                  onTap: () {},
-                                ),
                               ),
-                              MediaQuery.removePadding(
-                                context: context,
-                                removeTop: true,
-                                child: ContainerMenuWidget(
-                                  name: S.current.lich_theo_lanh_dao,
-                                  icon: ImageAssets.icLichLanhDao,
-                                  childExpand: Column(
-                                    children: lichLanhDao
-                                        .map(
-                                          (e) => ContainerMenuWidget(
-                                            onTap: () {
-                                              e.navigator(context, cubit);
-                                            },
-                                            icon: '',
-                                            name: e.name,
-                                            index: e.index,
-                                          ),
-                                        )
-                                        .toList(),
-                                  ),
-                                  type: TypeContainer.expand,
-                                  onTap: () {},
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                },
-              ),
+                              onTap: () {
+                                e.onTap(context, widget.cubit);
+                              },
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -159,27 +148,5 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
         )
       ],
     );
-  }
-}
-
-class CalendarWorkPhoneInher extends InheritedWidget {
-  final CalenderCubit cubit;
-
-  const CalendarWorkPhoneInher({
-    Key? key,
-    required this.cubit,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
-  }
-
-  static CalendarWorkPhoneInher of(BuildContext context) {
-    final CalendarWorkPhoneInher? result =
-    context.dependOnInheritedWidgetOfExactType<CalendarWorkPhoneInher>();
-    assert(result != null, 'No elenment');
-    return result!;
   }
 }

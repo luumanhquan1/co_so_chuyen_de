@@ -53,7 +53,7 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
                 Expanded(
                   child: BoxStatusVanBan(
                     value:
-                    widget.nhiemVuDashBoardModel.soLuongTrongHan.toString(),
+                    widget.nhiemVuDashBoardModel.soLuongTrongHan ?? 0,
                     onTap: () {},
                     color: numberOfCalenders,
                     statusName: S.current.trong_han,
@@ -65,8 +65,7 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
 
                 Expanded(
                   child: BoxStatusVanBan(
-                    value: widget.nhiemVuDashBoardModel.soLuongQuaHan
-                        .toString(),
+                    value: widget.nhiemVuDashBoardModel.soLuongQuaHan ?? 0,
                     onTap: () {},
                     color: dangXyLyColor,
                     statusName: S.current.den_han,
@@ -77,7 +76,7 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
                 ),
                 Expanded(
                   child: BoxStatusVanBan(
-                    value: widget.nhiemVuDashBoardModel.soLuongDenHan.toString(),
+                    value: widget.nhiemVuDashBoardModel.soLuongDenHan ?? 0,
                     onTap: () {},
                     color: statusCalenderRed,
                     statusName: S.current.qua_han,

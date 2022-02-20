@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CalendarWorkMenuTablet extends StatefulWidget {
-  const CalendarWorkMenuTablet({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+  const CalendarWorkMenuTablet({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _CalendarWorkMenuTabletState createState() => _CalendarWorkMenuTabletState();
@@ -23,6 +24,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
   @override
   void initState() {
     super.initState();
+    cubit = widget.cubit;
     cubit.selectTypeCalendarSubject.add([true, false]);
   }
 
@@ -53,14 +55,16 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
           builder: (context, snapshot) {
             return Column(
               children: [
-                const SizedBox(height: 24,),
+                const SizedBox(
+                  height: 24,
+                ),
                 TheoDangLichWidget(
                   icon: ImageAssets.icTheoDangLich,
                   name: S.current.lich_lam_viec,
                   onTap: () {
                     cubit.selectTypeCalendarSubject.add([true, false]);
                   },
-                  isSelect: snapshot.data![0],
+                  isSelect: snapshot.data?[0] ?? true,
                 ),
                 const SizedBox(
                   height: 16,
@@ -78,7 +82,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                   onTap: () {
                     cubit.selectTypeCalendarSubject.add([false, true]);
                   },
-                  isSelect: snapshot.data![1],
+                  isSelect: snapshot.data?[1] ?? true,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -100,60 +104,100 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
-                        children: [
-                          ContainerMenuWidgetTablet(
-                            name: S.current.lich_cua_toi,
-                            icon: ImageAssets.icPersonWork,
-                            childExpand: Container(),
-                            onTap: () {},
-                          ),
-                          MediaQuery.removePadding(
-                            context: context,
-                            removeTop: true,
-                            child: ContainerMenuWidgetTablet(
-                              name: S.current.lich_theo_trang_thai,
-                              icon: ImageAssets.icTheoDangLichCir,
-                              childExpand: Column(
-                                children: lichTheoTrangThai
-                                    .map(
-                                      (e) => ContainerMenuWidgetTablet(
-                                        name: e.name,
-                                        onTap: () {
-                                          e.navigator(context, cubit);
-                                        },
-                                        icon: '',
-                                        index: e.index,
-                                      ),
-                                    )
-                                    .toList(),
+                        children: listThongBaoTablet
+                            .map(
+                              (e) => ContainerMenuWidgetTablet(
+                                name: e.name,
+                                icon: e.icon,
+                                type: e.type,
+                                index: e.index ?? 0,
+                                childExpand: Column(
+                                  children: e.itemMenu == ItemMenu.Item2
+                                      ? listTheoTrangThai
+                                          .map(
+                                            (e) => ContainerMenuWidgetTablet(
+                                              icon: e.icon,
+                                              name: e.name,
+                                              index: e.index ?? 0,
+                                              isIcon: false,
+                                              onTap: () {
+                                                e.onTap(context, cubit);
+                                              },
+                                            ),
+                                          )
+                                          .toList()
+                                      : listLanhDao
+                                          .map(
+                                            (e) => ContainerMenuWidgetTablet(
+                                              icon: e.icon,
+                                              name: e.name,
+                                              index: e.index ?? 0,
+                                              isIcon: false,
+                                              onTap: () {
+                                                e.onTap(context, cubit);
+                                              },
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                                onTap: () {
+                                  e.onTap(context, cubit);
+                                },
                               ),
-                              type: TypeContainer.expand,
-                              onTap: () {},
-                            ),
-                          ),
-                          MediaQuery.removePadding(
-                            context: context,
-                            removeTop: true,
-                            child: ContainerMenuWidgetTablet(
-                              name: S.current.lich_theo_lanh_dao,
-                              icon: ImageAssets.icLichLanhDaoCir,
-                              childExpand: Column(
-                                children: lichLanhDao
-                                    .map((e) => ContainerMenuWidgetTablet(
-                                          onTap: () {
-                                            e.navigator(context, cubit);
-                                          },
-                                          icon: '',
-                                          name: e.name,
-                                          index: e.index,
-                                        ))
-                                    .toList(),
-                              ),
-                              type: TypeContainer.expand,
-                              onTap: () {},
-                            ),
-                          ),
-                        ],
+                            )
+                            .toList(),
+                        // ContainerMenuWidgetTablet(
+                        //   name: S.current.lich_cua_toi,
+                        //   icon: ImageAssets.icPersonWork,
+                        //   childExpand: Container(),
+                        //   onTap: () {},
+                        // ),
+                        // MediaQuery.removePadding(
+                        //   context: context,
+                        //   removeTop: true,
+                        //   child: ContainerMenuWidgetTablet(
+                        //     name: S.current.lich_theo_trang_thai,
+                        //     icon: ImageAssets.icTheoDangLichCir,
+                        //     childExpand: Column(
+                        //       children: lichTheoTrangThai
+                        //           .map(
+                        //             (e) => ContainerMenuWidgetTablet(
+                        //               name: e.name,
+                        //               onTap: () {
+                        //                 e.navigator(context, cubit);
+                        //               },
+                        //               icon: '',
+                        //               index: e.index,
+                        //             ),
+                        //           )
+                        //           .toList(),
+                        //     ),
+                        //     type: TypeContainer.expand,
+                        //     onTap: () {},
+                        //   ),
+                        // ),
+                        // MediaQuery.removePadding(
+                        //   context: context,
+                        //   removeTop: true,
+                        //   child: ContainerMenuWidgetTablet(
+                        //     name: S.current.lich_theo_lanh_dao,
+                        //     icon: ImageAssets.icLichLanhDaoCir,
+                        //     childExpand: Column(
+                        //       children: lichLanhDao
+                        //           .map((e) => ContainerMenuWidgetTablet(
+                        //                 onTap: () {
+                        //                   e.navigator(context, cubit);
+                        //                 },
+                        //                 icon: '',
+                        //                 name: e.name,
+                        //                 index: e.index,
+                        //               ),)
+                        //           .toList(),
+                        //     ),
+                        //     type: TypeContainer.expand,
+                        //     onTap: () {},
+                        //   ),
+                        // ),
                       ),
                     ),
                   ),

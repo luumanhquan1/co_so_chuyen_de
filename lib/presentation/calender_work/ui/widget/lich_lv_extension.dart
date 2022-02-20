@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/lich/calender_form_month.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/lich/calender_week_mobile.dart';
@@ -13,19 +14,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 extension LichLVOpition on Type_Choose_Option_Day {
-  Widget getLichLVDangList() {
+  Widget getLichLVDangList(CalenderCubit cubit) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
         return InListFormTablet(
           isHindText: true,
+          cubit: cubit,
         );
       case Type_Choose_Option_Day.WEEK:
         return InListFormTablet(
           isHindText: true,
+          cubit: cubit,
         );
       case Type_Choose_Option_Day.MONTH:
         return InListFormTablet(
           isHindText: true,
+          cubit: cubit,
         );
       default:
         return Container();
@@ -46,14 +50,20 @@ extension LichLVOpition on Type_Choose_Option_Day {
   }
 
 //mobile
-  Widget getLichLVDangListMobile() {
+  Widget getLichLVDangListMobile(CalenderCubit cubit) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const InListForm();
+        return InListForm(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const InListForm();
+        return InListForm(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.MONTH:
-        return const InListForm();
+        return InListForm(
+          cubit: cubit,
+        );
       default:
         return Container();
     }
@@ -94,9 +104,9 @@ extension LichLVOpition on Type_Choose_Option_Day {
 }
 
 extension LichLv on CalenderState {
-  Widget lichLamViec() {
+  Widget lichLamViec(CalenderCubit cubit) {
     if (this is LichLVStateDangList) {
-      return type.getLichLVDangList();
+      return type.getLichLVDangList(cubit);
     } else if (this is LichLVStateDangLich) {
       return type.getCalendarLvStateDangLich();
     } else {
@@ -104,9 +114,9 @@ extension LichLv on CalenderState {
     }
   }
 
-  Widget lichLamViecMobile() {
+  Widget lichLamViecMobile(CalenderCubit cubit) {
     if (this is LichLVStateDangList) {
-      return type.getLichLVDangListMobile();
+      return type.getLichLVDangListMobile(cubit);
     } else if (this is LichLVStateDangLich) {
       return type.getCalendarLvStateDangLichMobile();
     } else {
