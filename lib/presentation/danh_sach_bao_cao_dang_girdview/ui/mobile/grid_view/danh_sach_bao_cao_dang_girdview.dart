@@ -34,8 +34,8 @@ class _DanhSachBaoCaoDangGirdviewMobileState
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+          mainAxisSpacing: 17,
+          crossAxisSpacing: 17,
           childAspectRatio: 1.5,
           mainAxisExtent: 130,
         ),

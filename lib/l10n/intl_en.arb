@@ -389,5 +389,14 @@
   "luu_lai": "Lưu lại ",
   "bac_cao": "Báo cáo",
   "xem_danh_sah_chi_tiet": "Xem danh sách chi tiết",
-  "phan_loai_yknd": "Phân loại YKND theo nguồn nhận của đơn vị"
+  "phan_loai_yknd": "Phân loại YKND theo nguồn nhận của đơn vị",
+  "don_vi_giao_viec": "ĐV giao việc",
+  "nguoi_giao_viec": "Người giao việc",
+  "dv_ca_nhan_thuc_hien": "ĐV/Cá nhân thực hiện",
+  "muc_do_cong_viec": "Mức độ công việc",
+  "chi_tiet_cong_viec": "Chi tiết công việc",
+  "so_nhiem_vu" : "Số nhiệm vụ",
+  "tinh_hinh_thuc_hien" : "Tình hình thực hiện",
+  "nguoi_giao" : "Người giao",
+  "chi_tiet_nhiem_vu" : "Chi tiết nhiệm vụ"
 }
