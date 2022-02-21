@@ -12,13 +12,16 @@ class EditPersonInformationResponse extends Equatable {
 
   EditPersonInformationResponse(this.data);
 
-  factory EditPersonInformationResponse.fromJson(Map<String, dynamic> json) =>
+  factory EditPersonInformationResponse.fromJson(Map<String, dynamic> json,) =>
       _$EditPersonInformationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EditPersonInformationResponseToJson(this);
 
   @override
   List<Object?> get props => throw UnimplementedError();
 }
 
+@JsonSerializable()
 class DataEditPersonInformationResponse {
   @JsonKey(name: 'data')
   String? data;
@@ -28,8 +31,7 @@ class DataEditPersonInformationResponse {
   DataEditPersonInformationResponse();
 
   factory DataEditPersonInformationResponse.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+      Map<String, dynamic> json,) =>
       _$DataEditPersonInformationResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
