@@ -1,11 +1,10 @@
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
@@ -139,7 +138,8 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => DetailDocument(),
+                                        builder: (context) =>
+                                            const ChiTietVanBanMobile(),
                                       ),
                                     );
                                   },
@@ -212,7 +212,8 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => DetailDocument(),
+                                        builder: (context) =>
+                                            const ChiTietVanBanMobile(),
                                       ),
                                     );
                                   },
