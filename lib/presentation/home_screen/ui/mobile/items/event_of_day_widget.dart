@@ -27,6 +27,13 @@ class EventOfDayWidget extends StatefulWidget {
 class _EventOfDayWidgetState extends State<EventOfDayWidget> {
   final SuKienTrongNgayCubit _suKienTrongNgayCubit = SuKienTrongNgayCubit();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _suKienTrongNgayCubit.callApi();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
       minHeight: 350,
@@ -53,32 +60,31 @@ class _EventOfDayWidgetState extends State<EventOfDayWidget> {
       child: LoadingOnly(
         stream: _suKienTrongNgayCubit.stateStream,
         child: StreamBuilder<List<SuKienModel>>(
-          stream: _suKienTrongNgayCubit.getSuKien,
-          builder: (context, snapshot) {
-            final result = snapshot.data ?? <SuKienModel>[];
-            if (result.isEmpty) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 100),
-                child: NodataWidget(),
+            stream: _suKienTrongNgayCubit.getSuKien,
+            builder: (context, snapshot) {
+              final result = snapshot.data ?? <SuKienModel>[];
+              if (result.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 100),
+                  child: NodataWidget(),
+                );
+              }
+              return Column(
+                children: List.generate(
+                  result.length,
+                  (index) {
+                    final suKien = result[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: EventWidget(
+                        onTap: () {},
+                        title: suKien.title ?? '',
+                      ),
+                    );
+                  },
+                ),
               );
-            }
-            return Column(
-              children: List.generate(
-                FakeData.suKienTrongNgay.length,
-                (index) {
-                  final data = FakeData.suKienTrongNgay[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: EventWidget(
-                      onTap: () {},
-                      title: data.name,
-                    ),
-                  );
-                },
-              ),
-            );
-          }
-        ),
+            }),
       ),
     );
   }

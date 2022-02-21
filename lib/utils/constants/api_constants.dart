@@ -52,6 +52,7 @@ class ApiConstants {
   static const CANLENDAR_LIST_MEETING =
       '/vpdt/api/MeetingSchedule/calendar-list';
   static const SU_KIEN_TRONG_NGAY ='/api/DashBoardHome/su-kien-trong-ngay?';
+  static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
 }
 
 class ImageConstants {

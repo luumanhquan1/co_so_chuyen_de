@@ -28,6 +28,7 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
   final SelectKeyDialog? selectKeyDialog;
   final bool isUnit;
   final List<SelectKey>? listSelect;
+  final Function(SelectKey)? onChangeKey;
   const ContainerBackgroundTabletWidget({
     Key? key,
     required this.child,
@@ -44,6 +45,7 @@ class ContainerBackgroundTabletWidget extends StatefulWidget {
     this.selectKeyDialog,
     this.isUnit = false,
     this.listSelect,
+    this.onChangeKey,
   }) : super(key: key);
 
   @override
@@ -87,7 +89,6 @@ class _ContainerBackgroudWidgetState
                   Container(
                     padding: EdgeInsets.only(
                       left: 24,
-
                       bottom: widget.spacingTitle,
                     ),
                     child: Row(
@@ -140,7 +141,7 @@ class _ContainerBackgroudWidgetState
                             } else {}
                           },
                           child: Container(
-                            padding:const EdgeInsets.symmetric(horizontal: 24),
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
                             color: Colors.transparent,
                             alignment: Alignment.centerRight,
                             child: SvgPicture.asset(widget.urlIcon),
@@ -154,12 +155,15 @@ class _ContainerBackgroudWidgetState
                   else
                     Container(
                       height: 32,
-                      margin:const EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       color: Colors.transparent,
                       width: double.infinity,
                       child: SelectKeyRow(
-                        onChange: (value){
-
+                        onChange: (value) {
+                          HomeProvider.of(context).homeCubit.closeDialog();
+                          if (widget.onChangeKey != null) {
+                            widget.onChangeKey!(value);
+                          }
                         },
                         listSelect: widget.listSelect!,
                       ),

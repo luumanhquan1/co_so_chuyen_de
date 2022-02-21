@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/data/response/home/list_y_kien_nguoi_dan_response.da
 import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
 import 'package:ccvc_mobile/data/response/home/pham_vi_response.dart';
+import 'package:ccvc_mobile/data/response/home/sinh_nhat_user_response.dart';
 import 'package:ccvc_mobile/data/response/home/su_kien_response.dart';
 import 'package:ccvc_mobile/data/response/home/tinh_huong_khan_cap_response.dart';
 import 'package:ccvc_mobile/data/response/home/todo_current_user_response.dart';
@@ -148,6 +149,13 @@ abstract class HomeService {
   @FormUrlEncoded()
   Future<SuKienResponse> getSuKien(
     @Query('DateFrom') String dataFrom,
+    @Query('DateTo') String dateTo,
+  );
+
+  @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.SINH_NHAT_DASHBOARD)
+  @FormUrlEncoded()
+  Future<SinhNhatUserResponse> getSinhNhat(
+    @Query('DateFrom') String dateFrom,
     @Query('DateTo') String dateTo,
   );
 }
