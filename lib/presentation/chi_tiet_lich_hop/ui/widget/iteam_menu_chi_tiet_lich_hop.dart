@@ -15,17 +15,17 @@ enum ChiTietLichHop {
 }
 
 List<MenuChiTietLichHopView> listChiTietLichHop = [
-  MenuChiTietLichHopView(ImageAssets.ic_baocao, S.current.huy_lich_hop,
+  MenuChiTietLichHopView(ImageAssets.icmot, S.current.huy_lich_hop,
       ChiTietLichHop.huyLichHop),
   MenuChiTietLichHopView(
-      ImageAssets.ic_baocao, S.current.xoa_lich, ChiTietLichHop.xoaLich),
+      ImageAssets.icHai, S.current.xoa_lich, ChiTietLichHop.xoaLich),
   MenuChiTietLichHopView(
-      ImageAssets.ic_baocao, S.current.sua_lich, ChiTietLichHop.suaLich),
+      ImageAssets.icba, S.current.sua_lich, ChiTietLichHop.suaLich),
   MenuChiTietLichHopView(
-      ImageAssets.ic_baocao, S.current.thu_hoi, ChiTietLichHop.thuhoi),
-  MenuChiTietLichHopView(ImageAssets.ic_baocao, S.current.phan_cong_thu_ky,
+      ImageAssets.ic4, S.current.thu_hoi, ChiTietLichHop.thuhoi),
+  MenuChiTietLichHopView(ImageAssets.icNam, S.current.phan_cong_thu_ky,
       ChiTietLichHop.phanCongThuKy),
-  MenuChiTietLichHopView(ImageAssets.ic_baocao, S.current.tao_boc_bang_cuoc_hop,
+  MenuChiTietLichHopView(ImageAssets.icSau, S.current.tao_boc_bang_cuoc_hop,
       ChiTietLichHop.taoBocBang),
 ];
 
