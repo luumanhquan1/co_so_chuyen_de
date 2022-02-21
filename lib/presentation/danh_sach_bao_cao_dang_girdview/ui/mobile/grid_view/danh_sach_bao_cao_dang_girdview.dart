@@ -1,7 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/list/danh_sach_bao_cao_dang_list_view.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/bloc/danh_sach_bao_cao_dang_girdview_cubit.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/list/widget/item_list.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/mobile/base_app_bar_mobile.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class DanhSachBaoCaoDangGirdviewMobile extends StatefulWidget {
 
 class _DanhSachBaoCaoDangGirdviewMobileState
     extends State<DanhSachBaoCaoDangGirdviewMobile> {
+  DanhSachBaoCaoCubit cubit = DanhSachBaoCaoCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,61 +28,89 @@ class _DanhSachBaoCaoDangGirdviewMobileState
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const DanhSachBaoCaoDangListViewMobile(),
-                ),
-              );
+              setState(() {
+                cubit.isCheckList = !cubit.isCheckList;
+              });
             },
-            child: Container(
-              padding: const EdgeInsets.only(top: 16, right: 16, bottom: 16),
-              child: SvgPicture.asset(ImageAssets.icGridView),
-            ),
+            child: cubit.isCheckList
+                ? Container(
+                    padding:
+                        const EdgeInsets.only(top: 16, right: 16, bottom: 16),
+                    child: SvgPicture.asset(ImageAssets.icGridView),
+                  )
+                : Container(
+                    padding:
+                        const EdgeInsets.only(top: 16, right: 16, bottom: 16),
+                    child: SvgPicture.asset(ImageAssets.icListHopMobile),
+                  ),
           )
         ],
       ),
-      body: GridView.builder(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 17,
-          crossAxisSpacing: 17,
-          childAspectRatio: 1.5,
-          mainAxisExtent: 130,
-        ),
-        itemCount: 16,
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: backgroundColorApp,
-              border: Border.all(color: borderColor.withOpacity(0.5)),
-              boxShadow: [
-                BoxShadow(
-                  color: shadowContainerColor.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 24, bottom: 16),
-                  child: Image.asset(ImageAssets.icGroundMobile),
-                ),
-                Text(
-                  S.current.bac_cao,
-                  style: textNormal(textTitle, 16),
-                ),
-              ],
-            ),
-          );
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 2));
         },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: cubit.isCheckList
+              ? GridView.builder(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 17,
+                    crossAxisSpacing: 17,
+                    childAspectRatio: 1.5,
+                    mainAxisExtent: 130,
+                  ),
+                  itemCount: 16,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        color: backgroundColorApp,
+                        border: Border.all(color: borderColor.withOpacity(0.5)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: shadowContainerColor.withOpacity(0.05),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(top: 24, bottom: 16),
+                            child: Image.asset(ImageAssets.icGroundMobile),
+                          ),
+                          Text(
+                            S.current.bac_cao,
+                            style: textNormal(textTitle, 16),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                )
+              : Container(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: ListView.builder(
+                    itemCount: 10,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return const ItemList();
+                    },
+                  ),
+                ),
+        ),
       ),
     );
   }
