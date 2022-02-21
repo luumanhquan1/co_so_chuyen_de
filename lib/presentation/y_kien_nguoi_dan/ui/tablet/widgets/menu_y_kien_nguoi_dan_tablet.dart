@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
+import 'package:ccvc_mobile/presentation/nhiem_vu/widget/widget_item_menu_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -31,7 +31,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
             height: 10,
             width: 10,
             child: Container(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(20),
               child: SvgPicture.asset(
                 ImageAssets.icExit,
               ),
@@ -40,22 +40,26 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
         ),
       ),
       body: StreamBuilder<List<bool>>(
-        stream: widget.cubit.selectTypeNhiemVuSubject.stream,
+        stream: widget.cubit.selectTypeYKNDSubject.stream,
         builder: (context, snapshot) {
           final data = snapshot.data ?? [true, false];
           return Column(
             children: [
-              TheoDangLichWidget(
+              const SizedBox(
+                height: 28,
+              ),
+              ItemMenuNhiemVuWidgetTablet(
                 icon: ImageAssets.icPerson,
+                number: 20,
                 name: S.current.thong_tin_chung,
                 onTap: () {
-                  widget.cubit.selectItemMenu([true, false]);
+                  widget.cubit.selectTypeYKNDSubject.add([true, false]);
                   Navigator.pop(context);
                 },
                 isSelect: data[0],
               ),
               const SizedBox(
-                height: 16,
+                height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -64,11 +68,12 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                   ),
                 ),
               ),
-              TheoDangLichWidget(
+              ItemMenuNhiemVuWidgetTablet(
                 icon: ImageAssets.ic_baocao,
+                number: 20,
                 name: S.current.bao_cao_thong_ke,
                 onTap: () {
-                  widget.cubit.selectItemMenu([false, true]);
+                  widget.cubit.selectTypeYKNDSubject.add([false,true]);
                   Navigator.pop(context);
                 },
                 isSelect: data[1],

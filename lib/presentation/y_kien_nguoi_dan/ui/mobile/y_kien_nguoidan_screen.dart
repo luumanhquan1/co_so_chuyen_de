@@ -43,7 +43,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
-                screen: const YKienNguoiDanMenu(),
+                screen:  YKienNguoiDanMenu(cubit: cubit,),
               );
             },
             icon: SvgPicture.asset(
