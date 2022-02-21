@@ -13,9 +13,10 @@ class PhanCongThuKyWidget extends StatefulWidget {
 }
 
 class _PhanCongThuKyWidgetState extends State<PhanCongThuKyWidget> {
+  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
   @override
   Widget build(BuildContext context) {
-    DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
