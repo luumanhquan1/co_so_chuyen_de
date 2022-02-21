@@ -139,6 +139,7 @@ class ImageAssets {
   static const String icImageChangePasswordTablet =
       '$baseImg/image_change_pass_tablet.svg';
   static const String icImageLockReset = '$baseImg/image_lock_reset.svg';
+  static const String icSucces = '$baseImg/ic_succes.svg';
   static const String icBaoChi = '$baseImg/ic_bao_chi.svg';
   static const String icBlog = '$baseImg/ic_blog.svg';
   static const String icForum = '$baseImg/ic_forum.svg';
