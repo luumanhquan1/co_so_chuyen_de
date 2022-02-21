@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_hea
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_cap_nhat_thth.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_tra_lai.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nv_state.dart';
 import 'package:rxdart/rxdart.dart';
@@ -27,11 +28,17 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   BehaviorSubject<List<LichSuCapNhatTHTHModel>> lichSuCapNhatTHTHSubject =
       BehaviorSubject();
 
+  BehaviorSubject<List<LichSuTraLaiModel>> lichSuTraLaiSubject =
+      BehaviorSubject();
+
   Stream<VanBanLienQuanModel> get vanBanLienQuanStream =>
       vanBanLienQuanSubject.stream;
 
   Stream<List<DanhSachCongViecModel>> get danhSachCongViecStream =>
       danhsachCongViecSubject.stream;
+
+  Stream<List<LichSuTraLaiModel>> get lichSuTraLaiStream =>
+      lichSuTraLaiSubject.stream;
 
   Stream<List<LichSuPhanXuLyModel>> get lichSuPhanXuLyModelStream =>
       lichSuPhanXuLySubject.stream;
@@ -44,21 +51,36 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
 
   List<LichSuCapNhatTHTHModel> fakeLSCNTHTH = [
     LichSuCapNhatTHTHModel(
-        id: '',
-        thoiGian: '27/07/2021 | 17:02:22',
-        trangThai: 'DANG_THUC_HIEN',
-        donViCapNhat: 'UBND Đồng Nai',
-        dvBiTraLai: 'UBND Đồng Nai',
-        nguoiCapNhat: 'chanhvpboqlvb',
-        noiDungCapNhat: 'chanhvpboqlvb',),
+      id: '',
+      thoiGian: '27/07/2021 | 17:02:22',
+      trangThai: 'DANG_THUC_HIEN',
+      donViCapNhat: 'UBND Đồng Nai',
+      dvBiTraLai: 'UBND Đồng Nai',
+      nguoiCapNhat: 'chanhvpboqlvb',
+      noiDungCapNhat: 'chanhvpboqlvb',
+    ),
     LichSuCapNhatTHTHModel(
-        id: '',
-        thoiGian: '27/07/2021 | 17:02:22',
-        trangThai: 'DANG_THUC_HIEN',
-        donViCapNhat: 'UBND Đồng Nai',
-        dvBiTraLai: 'UBND Đồng Nai',
-        nguoiCapNhat: 'chanhvpboqlvb',
-        noiDungCapNhat: 'chanhvpboqlvb',),
+      id: '',
+      thoiGian: '27/07/2021 | 17:02:22',
+      trangThai: 'DANG_THUC_HIEN',
+      donViCapNhat: 'UBND Đồng Nai',
+      dvBiTraLai: 'UBND Đồng Nai',
+      nguoiCapNhat: 'chanhvpboqlvb',
+      noiDungCapNhat: 'chanhvpboqlvb',
+    ),
+  ];
+
+  List<LichSuTraLaiModel> fakeLSTL = [
+    LichSuTraLaiModel(
+      id: '',
+      nguoiCapNhat: 'chanhvpboqlvb',
+      dvBiTraLai: 'UBND Đồng Nai',
+      thoiGian: '27/07/2021 | 17:02:22',
+      fileDinhKem: File('Mô tả dự án.docx'),
+      donViTraLai: 'UBND Đồng Nai',
+      nguoiBiTraLai: 'Hà Kiều Anh',
+      noiDungTraLai: 'Chưa có',
+    ),
   ];
 
   ChiTietNhiemVuHeader fakeHeader = ChiTietNhiemVuHeader(
@@ -213,5 +235,6 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     danhsachCongViecSubject.add(fakeDSCV);
     lichSuPhanXuLySubject.add(fakeLSPXL);
     lichSuCapNhatTHTHSubject.add(fakeLSCNTHTH);
+    lichSuTraLaiSubject.add(fakeLSTL);
   }
 }

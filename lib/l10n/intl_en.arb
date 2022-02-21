@@ -423,5 +423,10 @@
   "don_vi_cap_nhat" : "Đơn vị cập nhật",
   "noi_dung_cap_nhat" : "Nội dung cập nhật",
   "dv_bi_tra_lai" : "Đơn vị bị trả lại",
-  "lich_su_cap_nhat_thth" : "Lịch sử cập nhật THTH"
+  "lich_su_cap_nhat_thth" : "Lịch sử cập nhật THTH",
+  "don_vi_tra_lai" : "Đơn vị trả lại",
+  "noi_dung_tra_lai" : "Nội dung trả lại",
+  "nguoi_bi_tra_lai" : "Người bị trả lại",
+  "don_vi_bi_tra_lai" : "đon vị bị trả lại",
+  "lich_su_tra_lai" : "Lịch sử trả lại"
 }
