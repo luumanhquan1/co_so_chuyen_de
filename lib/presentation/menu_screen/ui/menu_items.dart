@@ -12,7 +12,7 @@ import 'package:ccvc_mobile/presentation/nhiem_vu/ui/main_nhiem_vu/main_nhiem_vu
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/qlvb_mobile_screen.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/qlvb_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/y_kien_nguoidan_screen.dart';
-import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/widgets/yknd_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/yknd_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
