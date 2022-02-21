@@ -3,5 +3,5 @@ import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/bloc/da
 
 class DanhSachBaoCaoCubit extends BaseCubit<DanhSachBaoCaoState> {
   DanhSachBaoCaoCubit() : super(DanhSachBaoCaoInitial());
-  bool isCheckList = false;
+  bool isCheckList = true;
 }

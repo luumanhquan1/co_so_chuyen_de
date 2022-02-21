@@ -85,17 +85,28 @@ class _DanhSachBaoCaoDangGirdviewMobileState
                           ),
                         ],
                       ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 24, bottom: 16),
-                            child: Image.asset(ImageAssets.icGroundMobile),
-                          ),
-                          Text(
-                            S.current.bac_cao,
-                            style: textNormal(textTitle, 16),
-                          ),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ItemChiTiet(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(top: 24, bottom: 16),
+                              child: Image.asset(ImageAssets.icGroundMobile),
+                            ),
+                            Text(
+                              S.current.bac_cao,
+                              style: textNormal(textTitle, 16),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -109,7 +120,12 @@ class _DanhSachBaoCaoDangGirdviewMobileState
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          const ItemChiTiet();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ItemChiTiet(),
+                            ),
+                          );
                         },
                         child: const ItemList(),
                       );
