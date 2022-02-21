@@ -1,6 +1,5 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -8,14 +7,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InListForm extends StatefulWidget {
-  const InListForm({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const InListForm({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _InListFormState createState() => _InListFormState();
 }
 
 class _InListFormState extends State<InListForm> {
-  final CalenderCubit _cubit = CalenderCubit();
+  late final CalenderCubit _cubit = widget.cubit;
 
   @override
   void initState() {
@@ -31,14 +32,9 @@ class _InListFormState extends State<InListForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
-            child: Text(
-              _cubit.textDay,
-              style: textNormalCustom(color: textBodyTime),
-            ),
-          ),
+          _cubit.changeItemMenuSubject.value.getTypeEnum().getHeader(
+                cubit: _cubit,
+              ),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(
@@ -63,7 +59,7 @@ class _InListFormState extends State<InListForm> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                            const ChiTietLichLamViecScreen(),
+                                const ChiTietLichLamViecScreen(),
                           ),
                         );
                       },
