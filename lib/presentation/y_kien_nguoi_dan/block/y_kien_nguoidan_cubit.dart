@@ -16,9 +16,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       BehaviorSubject.seeded([true, false]);
   bool isCheck = false;
 
-  void selectItemMenu(List<bool> listSelect) {
-    selectTypeYKNDSubject.sink.add(listSelect);
-  }
+  // void selectItemMenu(List<bool> listSelect) {
+  //   selectTypeYKNDSubject.sink.add(listSelect);
+  // }
 
   List<DashboardSchedule> list = [
     DashboardSchedule(1, '22ssads2', 'Chờ duyệt'),

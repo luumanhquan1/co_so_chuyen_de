@@ -12,7 +12,6 @@ import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/widgets/row_
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
-import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -48,10 +47,12 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
         actions: [
           IconButton(
             onPressed: () {
-              DrawerSlide.navigatorSlide(
-                context: context,
-                screen: MenuYKIenNguoiDanTablet(
-                  cubit: cubit,
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MenuYKIenNguoiDanTablet(
+                    cubit: cubit,
+                  ),
                 ),
               );
             },
