@@ -434,5 +434,15 @@
   "noi_dung_tra_lai" : "Nội dung trả lại",
   "nguoi_bi_tra_lai" : "Người bị trả lại",
   "don_vi_bi_tra_lai" : "đon vị bị trả lại",
-  "lich_su_tra_lai" : "Lịch sử trả lại"
+  "lich_su_tra_lai" : "Lịch sử trả lại",
+  "lich_su_thu_hoi" : "Lịch sử thu hồi",
+  "nguoi_thu_hoi" : "Người thu hồi",
+  "don_vi_thu_hoi" : "Đơn vị thu hồi",
+  "nguoi_bi_thu_hoi" : "Người bị thu hồi",
+  "don_vi_bi_thu_hoi" : "Đơn vị bị thu hồi",
+  "lich_su_don_doc" : "Lịch sử đôn đốc",
+  "nguoi_don_doc" : "Người đôn đốc",
+  "don_vi_don_doc": "Đơn vị đôn đốc",
+  "noi_dung_don_doc" : "Nội dung đôn đốc",
+  "nguoi_bi_don_doc" : "Người bị đôn đốc"
 }
