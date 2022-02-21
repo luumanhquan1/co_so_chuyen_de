@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/data/response/home/list_y_kien_nguoi_dan_response.da
 import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
 import 'package:ccvc_mobile/data/response/home/pham_vi_response.dart';
+import 'package:ccvc_mobile/data/response/home/su_kien_response.dart';
 import 'package:ccvc_mobile/data/response/home/tinh_huong_khan_cap_response.dart';
 import 'package:ccvc_mobile/data/response/home/todo_current_user_response.dart';
 import 'package:ccvc_mobile/data/response/home/tong_hop_nhiem_vu_response.dart';
@@ -27,6 +28,7 @@ import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/home/pham_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/domain/model/home/su_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_hinh_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
@@ -149,18 +151,28 @@ class HomeImpl extends HomeRepository {
 
   @override
   Future<Result<List<DocumentModel>>> getYKienNguoidan(
-      int pageSize,
-      int page,
-      String trangThai,
-      String tuNgay,
-      String denNgay,
-      String donViId,
-      String userId,
-      [String? loaiMenu]) {
+    int pageSize,
+    int page,
+    String trangThai,
+    String tuNgay,
+    String denNgay,
+    String donViId,
+    String userId, [
+    String? loaiMenu,
+  ]) {
     return runCatchingAsync<ListYKienNguoiDanResponse, List<DocumentModel>>(
-        () => _homeService.getListYKienNguoiDan(pageSize, page, trangThai,
-            tuNgay, denNgay, donViId, userId, loaiMenu),
-        (res) => res.danhSachKetQua?.map((e) => e.toDomain()).toList() ?? []);
+      () => _homeService.getListYKienNguoiDan(
+        pageSize,
+        page,
+        trangThai,
+        tuNgay,
+        denNgay,
+        donViId,
+        userId,
+        loaiMenu,
+      ),
+      (res) => res.danhSachKetQua?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 
   @override
@@ -188,8 +200,13 @@ class HomeImpl extends HomeRepository {
   }
 
   @override
-  Future<Result<List<PressNetWorkModel>>> getBaoChiMangXaHoi(int pageIndex,
-      int pageSize, String fromDate, String toDate, String keyWord) {
+  Future<Result<List<PressNetWorkModel>>> getBaoChiMangXaHoi(
+    int pageIndex,
+    int pageSize,
+    String fromDate,
+    String toDate,
+    String keyWord,
+  ) {
     return runCatchingAsync<BaoChiMangXaHoiResponse, List<PressNetWorkModel>>(
       () => _homeService.getBaoChiMangXaHoi(
         pageIndex,
@@ -204,7 +221,8 @@ class HomeImpl extends HomeRepository {
 
   @override
   Future<Result<List<CalendarMeetingModel>>> getListLichLamViec(
-      LichLamViecRequest lamViecRequest) {
+    LichLamViecRequest lamViecRequest,
+  ) {
     return runCatchingAsync<LichLamViecResponse, List<CalendarMeetingModel>>(
       () => _homeService.getLichLamViec(lamViecRequest),
       (res) => res.data?.toDomain() ?? [],
@@ -213,10 +231,19 @@ class HomeImpl extends HomeRepository {
 
   @override
   Future<Result<List<CalendarMeetingModel>>> getLichHop(
-      LichHopRequest lichHopRequest) {
+    LichHopRequest lichHopRequest,
+  ) {
     return runCatchingAsync<LichHopResponse, List<CalendarMeetingModel>>(
       () => _homeService.getLichHop(lichHopRequest),
       (res) => res.data?.toDomain() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<SuKienModel>>> getSuKien(String dateFrom, String dateTo) {
+    return runCatchingAsync<SuKienResponse, List<SuKienModel>>(
+      () => _homeService.getSuKien(dateFrom, dateTo),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 }

@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/domain/model/home/date_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/domain/model/home/su_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_hinh_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
@@ -161,13 +162,14 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
   void showAddTag() {
     showAddTagStream.sink.add(true);
   }
-void removeTag(String tag){
-    final value  = _getTag.value;
+
+  void removeTag(String tag) {
+    final value = _getTag.value;
     HiveLocal.removeTag(tag);
     value.remove(tag);
     _getTag.sink.add(value);
+  }
 
-}
   void addTag(String value) {
     final data = _getTag.value;
     showAddTagStream.sink.add(false);
@@ -444,7 +446,6 @@ class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
       endDate = DateTime.parse(data.endDate);
       selectKeyTime = data.selectKey;
     }
-
   }
 
   Future<void> getDataTongHopNhiemVu() async {
@@ -907,7 +908,7 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
   }
 
   void selectTrangThaiHop(SelectKey selectKey) {
-    if(trangThaiLichHop == selectKey){
+    if (trangThaiLichHop == selectKey) {
       return;
     }
     trangThaiLichHop = selectKey;
@@ -938,6 +939,7 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
         {}
     }
   }
+
   @override
   void selectDate({
     required SelectKey selectKey,
@@ -958,7 +960,22 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
 class SinhNhatCubit extends HomeCubit with SelectKeyDialog {}
 
 /// Sự kiện trong ngày
-class SuKienTrongNgayCubit extends HomeCubit with SelectKeyDialog {}
+class SuKienTrongNgayCubit extends HomeCubit with SelectKeyDialog {
+  final BehaviorSubject<List<SuKienModel>> _getSuKien =
+      BehaviorSubject<List<SuKienModel>>();
+
+  Stream<List<SuKienModel>> get getSuKien => _getSuKien.stream;
+  Future<void> callApi() async {
+    final result =
+        await homeRep.getSuKien(startDate.formatApi, endDate.formatApi);
+    result.when(
+      success: (res) {
+        _getSuKien.sink.add(res);
+      },
+      error: (err) {},
+    );
+  }
+}
 
 ///Tình hình xử lý ý kiến người dân
 class TinhHinhXuLyYKienCubit extends HomeCubit with SelectKeyDialog {

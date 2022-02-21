@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/home/pham_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/domain/model/home/su_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_hinh_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_huong_khan_cap_model.dart';
 import 'package:ccvc_mobile/domain/model/home/todo_model.dart';
@@ -69,8 +70,11 @@ abstract class HomeRepository {
     String toDate,
     String keyWord,
   );
-  Future<Result<List<CalendarMeetingModel>>> getListLichLamViec(LichLamViecRequest lamViecRequest);
+  Future<Result<List<CalendarMeetingModel>>> getListLichLamViec(
+      LichLamViecRequest lamViecRequest);
 
-  Future<Result<List<CalendarMeetingModel>>> getLichHop(LichHopRequest lichHopRequest);
+  Future<Result<List<CalendarMeetingModel>>> getLichHop(
+      LichHopRequest lichHopRequest);
 
+  Future<Result<List<SuKienModel>>> getSuKien(String dateFrom, String dateTo);
 }

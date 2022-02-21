@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/home/su_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
@@ -10,6 +11,8 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_w
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/event_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
+import 'package:ccvc_mobile/widgets/views/loading_only.dart';
 import 'package:flutter/material.dart';
 
 class EventOfDayWidget extends StatefulWidget {
@@ -27,7 +30,7 @@ class _EventOfDayWidgetState extends State<EventOfDayWidget> {
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
       minHeight: 350,
-      title: S.current.event_of_day,
+      title: S.current.su_kien,
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
@@ -35,7 +38,7 @@ class _EventOfDayWidgetState extends State<EventOfDayWidget> {
         type: widget.homeItemType,
         listSelectKey: [
           DialogData(
-            onSelect: (value,startDate,endDate) {
+            onSelect: (value, startDate, endDate) {
               _suKienTrongNgayCubit.selectDate(
                 selectKey: value,
                 startDate: startDate,
@@ -47,19 +50,34 @@ class _EventOfDayWidgetState extends State<EventOfDayWidget> {
         ],
       ),
       selectKeyDialog: _suKienTrongNgayCubit,
-      child: Column(
-        children: List.generate(
-          FakeData.suKienTrongNgay.length,
-          (index) {
-            final data = FakeData.suKienTrongNgay[index];
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: EventWidget(
-                onTap: () {},
-                title: data.name,
+      child: LoadingOnly(
+        stream: _suKienTrongNgayCubit.stateStream,
+        child: StreamBuilder<List<SuKienModel>>(
+          stream: _suKienTrongNgayCubit.getSuKien,
+          builder: (context, snapshot) {
+            final result = snapshot.data ?? <SuKienModel>[];
+            if (result.isEmpty) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 100),
+                child: NodataWidget(),
+              );
+            }
+            return Column(
+              children: List.generate(
+                FakeData.suKienTrongNgay.length,
+                (index) {
+                  final data = FakeData.suKienTrongNgay[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: EventWidget(
+                      onTap: () {},
+                      title: data.name,
+                    ),
+                  );
+                },
               ),
             );
-          },
+          }
         ),
       ),
     );
