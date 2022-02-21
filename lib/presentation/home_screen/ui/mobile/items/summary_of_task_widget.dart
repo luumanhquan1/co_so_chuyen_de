@@ -32,9 +32,15 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
-    _nhiemVuCubit.getDataTongHopNhiemVu();
+
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _nhiemVuCubit.getDataTongHopNhiemVu();
+  }
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
