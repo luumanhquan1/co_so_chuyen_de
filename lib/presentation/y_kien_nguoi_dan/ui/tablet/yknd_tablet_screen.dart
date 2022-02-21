@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/y%20_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_y_kien_nd/ui/tablet/danh_sach_yknd_tablet.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/tablet/widget/list_danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
@@ -145,7 +147,6 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 chartData: cubit.chartYKienNduoiDan,
                               ),
                               Container(height: 20),
-
                             ],
                           ),
                         ),
@@ -155,12 +156,12 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                       children: [
                         Expanded(
                           flex: 4,
-                          child:Row(
+                          child: Row(
                             children: [
                               Expanded(
                                 child: BoxStatusVanBan(
                                   value:
-                                  cubit.dashboardModel.soLuongTrongHan ?? 0,
+                                      cubit.dashboardModel.soLuongTrongHan ?? 0,
                                   onTap: () {},
                                   color: numberOfCalenders,
                                   statusName: S.current.trong_han,
@@ -172,7 +173,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                               Expanded(
                                 child: BoxStatusVanBan(
                                   value:
-                                  cubit.dashboardModel.soLuongDenHan ?? 0,
+                                      cubit.dashboardModel.soLuongDenHan ?? 0,
                                   onTap: () {},
                                   color: statusCalenderRed,
                                   statusName: S.current.den_han,
@@ -184,8 +185,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                               Expanded(
                                 child: BoxStatusVanBan(
                                   value:
-                                  cubit.dashboardModel.soLuongQuaHan ??
-                                      0,
+                                      cubit.dashboardModel.soLuongQuaHan ?? 0,
                                   onTap: () {},
                                   color: textColorForum,
                                   statusName: S.current.qua_han,
@@ -194,13 +194,15 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                             ],
                           ),
                         ),
-                        const SizedBox(width: 100,),
+                        const SizedBox(
+                          width: 100,
+                        ),
                         Expanded(
                           flex: 6,
-                          child:  Row(
+                          child: Row(
                             children: [
                               const Expanded(
-                                child:  SizedBox(),
+                                child: SizedBox(),
                               ),
                               Expanded(
                                 flex: 4,
@@ -208,8 +210,9 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                   children: [
                                     Expanded(
                                       child: BoxStatusVanBan(
-                                        value:
-                                        cubit.dashboardModel.soLuongTrongHan ?? 0,
+                                        value: cubit.dashboardModel
+                                                .soLuongTrongHan ??
+                                            0,
                                         onTap: () {},
                                         color: numberOfCalenders,
                                         statusName: S.current.trong_han,
@@ -220,8 +223,9 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                     ),
                                     Expanded(
                                       child: BoxStatusVanBan(
-                                        value:
-                                        cubit.dashboardModel.soLuongQuaHan ?? 0,
+                                        value: cubit
+                                                .dashboardModel.soLuongQuaHan ??
+                                            0,
                                         onTap: () {},
                                         color: statusCalenderRed,
                                         statusName: S.current.qua_han,
@@ -232,8 +236,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                     ),
                                     Expanded(
                                       child: BoxStatusVanBan(
-                                        value:
-                                        cubit.dashboardModel.soLuongThuongKhan ??
+                                        value: cubit.dashboardModel
+                                                .soLuongThuongKhan ??
                                             0,
                                         onTap: () {},
                                         color: textColorForum,
@@ -244,7 +248,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 ),
                               ),
                               const Expanded(
-                                child:  SizedBox(),
+                                child: SizedBox(),
                               ),
                             ],
                           ),
@@ -273,7 +277,14 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      buttonChitiet(S.current.xem_danh_sah_chi_tiet, () {}),
+                      buttonChitiet(S.current.xem_danh_sah_chi_tiet, () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DanhSachYKNDTablet(),
+                          ),
+                        );
+                      }),
                     ],
                   ),
                   const SizedBox(
@@ -292,7 +303,12 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                         dateTime:
                             cubit.listYKienNguoiDan[index].ngayThang ?? '',
                         userName: cubit.listYKienNguoiDan[index].ten ?? '',
-                        status: cubit.listYKienNguoiDan[index].trangThai ?? '',
+                        stausColor: cubit.listYKienNguoiDan[index].statusData
+                            .getText()
+                            .color,
+                        status: cubit.listYKienNguoiDan[index].statusData
+                            .getText()
+                            .text,
                         userImage:
                             'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                       );

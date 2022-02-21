@@ -63,22 +63,20 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
   List<NguoiDanModel> listYKienNguoiDan = [
     NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
-    ),
+        ngheNghiep: 'Nhan vien van phong that nghiep',
+        ngayThang: '18/10/2021',
+        ten: 'Ha Kieu Anh',
+        statusData: StatusYKien.DANG_XU_LY),
+    NguoiDanModel(
+        ngheNghiep: 'Nhan vien van phong that nghiep',
+        ngayThang: '18/10/2021',
+        ten: 'Ha Kieu Anh',
+        statusData: StatusYKien.QUA_HAN),
     NguoiDanModel(
       ngheNghiep: 'Nhan vien van phong that nghiep',
       ngayThang: '18/10/2021',
       ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
-    ),
-    NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
+      statusData: StatusYKien.DANG_XU_LY,
     ),
   ];
 }

@@ -8,23 +8,24 @@ import 'package:flutter/material.dart';
 class RowIndicatorTablet extends StatelessWidget {
   final double? paddingleft;
   final List<ChartData> chartData;
-  const RowIndicatorTablet(
-      {Key? key,
-      this.paddingleft,
-      required this.chartData,})
-      : super(key: key);
+
+  const RowIndicatorTablet({
+    Key? key,
+    this.paddingleft,
+    required this.chartData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: paddingleft ?? 16),
       child: Directionality(
-        textDirection:TextDirection.rtl,
+        textDirection: TextDirection.rtl,
         child: GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          childAspectRatio:5,
+          childAspectRatio: 5,
           mainAxisSpacing: 10.0.textScale(space: 4),
           crossAxisSpacing: 10,
           children: List.generate(chartData.length, (index) {
@@ -66,19 +67,21 @@ class RowIndicatorTablet extends StatelessWidget {
     );
   }
 }
+
 class RowIndicatorSmallTablet extends StatelessWidget {
   final double? paddingleft;
   final List<ChartData> chartData;
-  const RowIndicatorSmallTablet(
-      {Key? key,
-        this.paddingleft,
-        required this.chartData,})
-      : super(key: key);
+
+  const RowIndicatorSmallTablet({
+    Key? key,
+    this.paddingleft,
+    required this.chartData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: EdgeInsets.only(left:paddingleft??16),
+    return Padding(
+      padding: EdgeInsets.only(left: paddingleft ?? 16),
       child: GridView.count(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -121,4 +124,3 @@ class RowIndicatorSmallTablet extends StatelessWidget {
     );
   }
 }
-

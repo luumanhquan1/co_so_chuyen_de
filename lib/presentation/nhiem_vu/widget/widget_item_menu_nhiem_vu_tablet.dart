@@ -52,7 +52,7 @@ class ItemMenuNhiemVuWidgetTablet extends StatelessWidget {
                   color: isSelect ? backgroundColorApp : textDefault,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: SvgPicture.asset(
                     icon,
                     color: !isSelect ? backgroundColorApp : textDefault,

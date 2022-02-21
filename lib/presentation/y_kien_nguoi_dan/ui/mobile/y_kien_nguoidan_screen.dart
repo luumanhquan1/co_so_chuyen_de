@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/y%20_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_y_kien_nd/ui/mobile/danh_sach_yknd_screen.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/indicator_chart.dart';
@@ -201,7 +203,15 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      const DanhSachYKND(),
+                                ),
+                              );
+                            },
                             icon: SvgPicture.asset(ImageAssets.ic_next_color),
                           )
                         ],
@@ -221,8 +231,13 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                             dateTime:
                                 cubit.listYKienNguoiDan[index].ngayThang ?? '',
                             userName: cubit.listYKienNguoiDan[index].ten ?? '',
-                            status:
-                                cubit.listYKienNguoiDan[index].trangThai ?? '',
+                            stausColor: cubit
+                                .listYKienNguoiDan[index].statusData
+                                .getText()
+                                .color,
+                            status: cubit.listYKienNguoiDan[index].statusData
+                                .getText()
+                                .text,
                             userImage:
                                 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                           );
