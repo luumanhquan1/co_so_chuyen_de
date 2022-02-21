@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/list/danh_sach_bao_cao_dang_list_view.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/mobile/base_app_bar_mobile.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,20 @@ class _DanhSachBaoCaoDangGirdviewMobileState
       appBar: BaseAppBarMobile(
         title: S.current.bac_cao,
         actions: [
-          Container(
-            padding: const EdgeInsets.only(top: 16, right: 16, bottom: 16),
-            child: SvgPicture.asset(ImageAssets.icGridView),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const DanhSachBaoCaoDangListViewMobile(),
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.only(top: 16, right: 16, bottom: 16),
+              child: SvgPicture.asset(ImageAssets.icGridView),
+            ),
           )
         ],
       ),
