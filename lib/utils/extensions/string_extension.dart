@@ -1,4 +1,9 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
@@ -106,9 +111,21 @@ extension CheckValidate on String {
   }
 
   String? checkNull() {
-    if (isEmpty) {
+    if (trim().isEmpty) {
       return S.current.khong_duoc_de_trong;
     }
     return null;
+  }
+
+  String? checkInt() {
+    final result = checkNull();
+    if (result != null) {
+      return result;
+    }
+    try {
+      int.parse(this);
+    } catch (e) {
+      return S.current.check_so_luong;
+    }
   }
 }

@@ -15,6 +15,14 @@ extension CheckStatus on Status {
   }
 }
 
+String paserString(int status) {
+  if (status == 1) {
+    return S.current.hoat_dong;
+  } else {
+    return S.current.k_hoat_dong;
+  }
+}
+
 class ManagerPersonalInformationModel {
   String? id;
   String? maCanBo;
@@ -33,18 +41,17 @@ class ManagerPersonalInformationModel {
   String? thoiGianCapNhat;
   String? chucVu;
   String? donVi;
-
-  //bool? bitThuTruongDonVi;
-  // bool? bitDauMoiPAKN;
   String? diaChi;
   int? thuTu;
   int? iThuTu;
   String? tinh;
   String? huyen;
   String? xa;
-  bool? isDefault;
-  int? trangThai;
-  String? ungDung;
+  String? tinhId;
+  String? huyenId;
+  String? xaId;
+  List<Departments>? departments;
+  List<UserAccounts>? userAccounts;
   Status status = Status.OFFLINE;
 
   ManagerPersonalInformationModel({
@@ -65,92 +72,76 @@ class ManagerPersonalInformationModel {
     this.thoiGianCapNhat,
     this.chucVu,
     this.donVi,
-    //  this.bitThuTruongDonVi,
-    //  this.bitDauMoiPAKN,
     this.diaChi,
     this.thuTu,
     this.iThuTu,
     this.tinh,
     this.huyen,
     this.xa,
-    this.isDefault,
-    this.trangThai,
-    this.ungDung,
-  }) {
-    if (trangThai == 1) {
-      status = Status.OFFLINE;
-    } else {
-      status = Status.ONLINME;
-    }
-  } // List<UserAccounts>? userAccounts;
-
-  static ManagerPersonalInformationModel fakeData =
-      ManagerPersonalInformationModel(
-    id: 'a',
-    maCanBo: '123',
-    hoTen: 'luc',
-    phoneDiDong: '01234567689',
-    phoneCoQuan: '0123456789',
-    phoneNhaRieng: '01234346567',
-    email: 'luc@gmail.com',
-    gioiTinh: false,
-    ngaySinh: '2001-04-01',
-    iDDonViHoatDong: 'a',
-    cmtnd: '1234567890',
-    anhDaiDienFilePath: 'a',
-    anhChuKyFilePath: 'a',
-    anhChuKyNhayFilePath: 'a',
-    thoiGianCapNhat: 'a',
-    chucVu: 'bi thu',
-    donVi: 'lanh dao',
-    diaChi: 'lam loi',
-    thuTu: 2,
-    iThuTu: 3,
-    tinh: '',
-    huyen: '',
-    xa: '',
-    isDefault: false,
-    trangThai: 1,
-    ungDung: 'a',
-  );
+    this.tinhId,
+    this.huyenId,
+    this.xaId,
+    this.departments,
+    this.userAccounts,
+  });
 
   List<ManagerPersonalInformationRow> toListMobile() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ho_va_ten,
+        hoTen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.ma_can_bo,
+        maCanBo ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.thu_tus,
+        thuTu ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.cmnd, cmtnd ?? '', TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
         gioiTinh ?? false ? S.current.Nam : S.current.Nu,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.email, email ?? '', TypeRow.text),
       ManagerPersonalInformationRow(
         S.current.sdt_co_quan,
-        phoneCoQuan,
+        phoneCoQuan ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.sdt_lien_he,
-        phoneDiDong,
+        phoneDiDong ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.tinh_thanh,
-        tinh,
+        tinh ?? '',
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.quan_huyen,
+        huyen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.phuong_xa,
+        xa ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.dia_chi_lien_he,
-        diaChi,
+        diaChi ?? '',
         TypeRow.text,
       ),
     ];
@@ -159,21 +150,37 @@ class ManagerPersonalInformationModel {
 
   List<ManagerPersonalInformationRow> toListRowDetailJob() {
     final List<ManagerPersonalInformationRow> list = [
-      ManagerPersonalInformationRow(S.current.ho_va_ten, hoTen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.ma_can_bo, maCanBo, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.thu_tus, thuTu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.ho_va_ten,
+        hoTen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.ma_can_bo,
+        maCanBo ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.thu_tus,
+        thuTu ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
         DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.cmnd, cmtnd, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.cmnd,
+        cmtnd ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.gioi_tinh,
         gioiTinh ?? false ? S.current.Nam : S.current.Nu,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.email, email, TypeRow.text),
+      ManagerPersonalInformationRow(S.current.email, email ?? '', TypeRow.text),
     ];
     return list;
   }
@@ -182,24 +189,32 @@ class ManagerPersonalInformationModel {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(
         S.current.sdt_co_quan,
-        phoneCoQuan,
+        phoneCoQuan ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.sdt_lien_he,
-        phoneDiDong,
+        phoneDiDong ?? '',
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(
         S.current.tinh_thanh,
-        tinh,
+        tinh ?? '',
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.quan_huyen, huyen, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.phuong_xa, xa, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.quan_huyen,
+        huyen ?? '',
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.phuong_xa,
+        xa ?? '',
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.dia_chi_lien_he,
-        diaChi,
+        diaChi ?? '',
         TypeRow.text,
       ),
     ];
@@ -210,15 +225,23 @@ class ManagerPersonalInformationModel {
   List<ManagerPersonalInformationRow> toListDonVi() {
     final List<ManagerPersonalInformationRow> list = [
       ManagerPersonalInformationRow(S.current.stt, thuTu, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.don_vi, donVi, TypeRow.text),
-      ManagerPersonalInformationRow(S.current.chuc_vu, chucVu, TypeRow.text),
+      ManagerPersonalInformationRow(
+        S.current.don_vi,
+        departments?[0].tenDonVi,
+        TypeRow.text,
+      ),
+      ManagerPersonalInformationRow(
+        S.current.chuc_vu,
+        departments?[0].tenChucVu,
+        TypeRow.text,
+      ),
       ManagerPersonalInformationRow(
         S.current.mac_dinh,
-        isDefault,
+        departments?[0].isDefault ?? '',
         TypeRow.checkbox,
       ),
     ];
-    if (trangThai == 1) {
+    if (departments?[0].trangThai == 1) {
       list.insert(
         3,
         ManagerPersonalInformationRow(
@@ -247,9 +270,13 @@ class ManagerPersonalInformationModel {
         hoTen,
         TypeRow.text,
       ),
-      ManagerPersonalInformationRow(S.current.ung_dung, ungDung, TypeRow.list),
+      ManagerPersonalInformationRow(
+        S.current.ung_dung,
+        userAccounts?[0].applications?[0].applicationName,
+        TypeRow.list,
+      ),
     ];
-    if (trangThai == 1) {
+    if (userAccounts?[0].trangThai == 1) {
       list.add(
         ManagerPersonalInformationRow(
           S.current.trang_thai,
@@ -275,20 +302,72 @@ class ManagerPersonalInformationModel {
       S.current.ho_va_ten: hoTen ?? '',
       S.current.ma_can_bo: maCanBo ?? '',
       S.current.thu_tus: thuTu.toString(),
-      S.current.ngay_sinh:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.ngay_sinh: ngaySinh ?? '',
       S.current.cmnd: cmtnd ?? '',
       S.current.gioi_tinh: gioiTinh ?? false ? S.current.Nam : S.current.Nu,
       S.current.email: email ?? '',
       S.current.sdt_co_quan: phoneCoQuan ?? '',
       S.current.sdt_lien_he: phoneDiDong ?? '',
-      S.current.tinh_thanh:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      S.current.quan_huyen:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
-      S.current.phuong_xa:
-          DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+      S.current.tinh_thanh: tinh ?? '',
+      S.current.quan_huyen: huyen ?? '',
+      S.current.phuong_xa: xa ?? '',
       S.current.dia_chi_lien_he: diaChi ?? '',
     };
   }
+}
+
+class Departments {
+  String? id;
+  String? chucVuId;
+  String? tenChucVu;
+  String? tenChucVuKhongDau;
+  String? donViId;
+  String? tenDonVi;
+  bool? isDefault;
+  String? tenDonViKhongDau;
+  int? trangThai;
+  String? updatedAt;
+
+  Departments({
+    this.id,
+    this.chucVuId,
+    this.tenChucVu,
+    this.tenChucVuKhongDau,
+    this.donViId,
+    this.tenDonVi,
+    this.isDefault,
+    this.tenDonViKhongDau,
+    this.trangThai,
+    this.updatedAt,
+  });
+}
+
+class UserAccounts {
+  String? id;
+  String? userName;
+  String? userId;
+  String? password;
+  List<Applications>? applications;
+  int? trangThai;
+
+  UserAccounts({
+    this.id,
+    this.userName,
+    this.userId,
+    this.password,
+    this.applications,
+    this.trangThai,
+  });
+}
+
+class Applications {
+  String? applicationName;
+  String? applicationId;
+  String? userId;
+
+  Applications({
+    this.applicationName,
+    this.applicationId,
+    this.userId,
+  });
 }

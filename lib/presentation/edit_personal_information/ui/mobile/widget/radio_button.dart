@@ -22,7 +22,6 @@ class _CustomRadioButtonCheckState extends State<CustomRadioButtonCheck> {
     return GestureDetector(
       onTap: () {
         widget.onSelectItem();
-        // setState(() {});
         widget.isCheckButton = !widget.isCheckButton;
       },
       child: SvgPicture.asset(

@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/chon_phong_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/bloc/chon_phong_hoc_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -21,9 +22,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 class YeuCauThemThietBiWidget extends StatefulWidget {
   final ChonPhongHopCubit chonPhongHopCubit;
   final Function() onClose;
-  const YeuCauThemThietBiWidget(
-      {Key? key, required this.chonPhongHopCubit, required this.onClose})
-      : super(key: key);
+  const YeuCauThemThietBiWidget({
+    Key? key,
+    required this.chonPhongHopCubit,
+    required this.onClose,
+  }) : super(key: key);
 
   @override
   State<YeuCauThemThietBiWidget> createState() =>
@@ -90,9 +93,10 @@ class _YeuCauThemThietBiWidgetState extends State<YeuCauThemThietBiWidget> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: containerColorTab.withOpacity(0.1),
-          border: Border.all(color: borderItemCalender),
-          borderRadius: const BorderRadius.all(Radius.circular(6))),
+        color: containerColorTab.withOpacity(0.1),
+        border: Border.all(color: borderItemCalender),
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+      ),
       child: Stack(
         children: [
           Column(
@@ -159,43 +163,22 @@ class ThemThietBiScreen extends StatefulWidget {
 }
 
 class _ThemThietBiScreenState extends State<ThemThietBiScreen> {
-  EdgeInsets _viewInsets = EdgeInsets.zero;
-  SingletonFlutterWindow? window;
   TextEditingController tenThietBi = TextEditingController();
   TextEditingController soLuong = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    window = WidgetsBinding.instance?.window;
-    window?.onMetricsChanged = () {
-      if (mounted) {
-        setState(() {
-          final window = this.window;
-          if (window != null) {
-            _viewInsets = EdgeInsets.fromWindowPadding(
-              window.viewInsets,
-              window.devicePixelRatio,
-            ).add(
-              EdgeInsets.fromWindowPadding(
-                window.padding,
-                window.devicePixelRatio,
-              ),
-            ) as EdgeInsets;
-          }
-        });
-      }
-    };
-  }
-
   final _key = GlobalKey<FormGroupState>();
+  EdgeInsets _viewInsert = EdgeInsets.zero;
   @override
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    _viewInsert = mediaQuery.viewPadding.copyWith(
+      bottom: mediaQuery.viewInsets.bottom,
+    );
     return FormGroup(
       key: _key,
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: _viewInsets.bottom),
+            padding: EdgeInsets.only(bottom: _viewInsert.bottom),
             child: Column(
               children: [
                 InputInfoUserWidget(
@@ -231,7 +214,7 @@ class _ThemThietBiScreenState extends State<ThemThietBiScreen> {
             ),
           ),
           Visibility(
-            visible: _viewInsets.bottom == 0,
+            visible: _viewInsert.bottom <= kHeightKeyBoard,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: DoubleButtonBottom(

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/textformfield/block_textview.dart';
+import 'package:ccvc_mobile/widgets/textformfield/follow_key_board_widget.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
@@ -65,120 +67,92 @@ class _ThemDonViPhoiHopKhacScreenState
     return Container(
       constraints:
           BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.85),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            child: SingleChildScrollView(
-              reverse: true,
-              child: FormGroup(
-                key: _keyFormGroup,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InputInfoUserWidget(
-                      title: S.current.ten_don_vi,
-                      child: TextFieldValidator(
-                        hintText: S.current.ten_don_vi,
-                        validator: (value) {
-                          return (value ?? '').checkNull();
-                        },
-                      ),
-                    ),
-                    InputInfoUserWidget(
-                      title: S.current.dau_moi_lam_viec,
-                      child: TextFieldValidator(
-                        hintText: S.current.dau_moi_lam_viec,
-                      ),
-                    ),
-                    spaceH20,
-                    BlockTextView(
-                      formKey: _key,
-                      title: S.current.noi_dung_lam_viec,
-                      isRequired: false,
-                      contentController: TextEditingController(),
-                    ),
-                    InputInfoUserWidget(
-                      title: S.current.email,
-                      child: TextFieldValidator(
-                        hintText: S.current.email,
-                        suffixIcon: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: Center(
-                              child: SvgPicture.asset(ImageAssets.ic_email)),
+      child: FollowKeyBoardWidget(
+        bottomWidget: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: DoubleButtonBottom(
+            title1: S.current.dong,
+            title2: S.current.them,
+            onPressed1: () {
+              Navigator.pop(context);
+            },
+            onPressed2: () {
+              if (_keyFormGroup.currentState!.validator()) {}
+            },
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: FormGroup(
+                  key: _keyFormGroup,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InputInfoUserWidget(
+                        title: S.current.ten_don_vi,
+                        child: TextFieldValidator(
+                          hintText: S.current.ten_don_vi,
+                          validator: (value) {
+                            return (value ?? '').checkNull();
+                          },
                         ),
-                        validator: (value) {
-                          return (value ?? '').checkEmail();
-                        },
                       ),
-                    ),
-                    InputInfoUserWidget(
-                      title: S.current.so_dien_thoai,
-                      child: TextFieldValidator(
-                        hintText: S.current.so_dien_thoai,
-                        suffixIcon: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: Center(
-                              child: SvgPicture.asset(ImageAssets.icPhone)),
+                      InputInfoUserWidget(
+                        title: S.current.dau_moi_lam_viec,
+                        child: TextFieldValidator(
+                          hintText: S.current.dau_moi_lam_viec,
                         ),
-                        validator: (value) {
-                          return (value ?? '').checkSdt();
-                        },
                       ),
-                    ),
-                    SizedBox(
-                      height: SizeConfig.keyBoardHeight.bottom,
-                    ),
-                  ],
+                      spaceH20,
+                      BlockTextView(
+                        formKey: _key,
+                        title: S.current.noi_dung_lam_viec,
+                        isRequired: false,
+                        contentController: TextEditingController(),
+                      ),
+                      InputInfoUserWidget(
+                        title: S.current.email,
+                        child: TextFieldValidator(
+                          hintText: S.current.email,
+                          suffixIcon: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                                child: SvgPicture.asset(ImageAssets.ic_email)),
+                          ),
+                          validator: (value) {
+                            return (value ?? '').checkEmail();
+                          },
+                        ),
+                      ),
+                      InputInfoUserWidget(
+                        title: S.current.so_dien_thoai,
+                        child: TextFieldValidator(
+                          hintText: S.current.so_dien_thoai,
+                          suffixIcon: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                                child: SvgPicture.asset(ImageAssets.icPhone)),
+                          ),
+                          validator: (value) {
+                            return (value ?? '').checkSdt();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: SizeConfig.keyBoardHeight.bottom <= kHeightKeyBoard,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: DoubleButtonBottom(
-                title1: S.current.dong,
-                title2: S.current.them,
-                onPressed1: () {
-                  Navigator.pop(context);
-                },
-                onPressed2: () {
-                  if (_keyFormGroup.currentState!.validator()) {}
-                },
-              ),
-            ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
-
-//  void listenKeyBoard() {
-//    EdgeInsets _viewInsets = EdgeInsets.zero;
-//    if (mounted) {
-//      final window = this.window;
-//      if (window != null) {
-//        _viewInsets = EdgeInsets.fromWindowPadding(
-//          window.viewInsets,
-//          window.devicePixelRatio,
-//        ).add(
-//          EdgeInsets.fromWindowPadding(
-//            window.padding,
-//            window.devicePixelRatio,
-//          ),
-//        ) as EdgeInsets;
-//      }
-//      if (_viewInsets.bottom != 0) {
-//        insertPadding = _viewInsets.bottom;
-//      } else {
-//        insertPadding = 0;
-//      }
-//      setState(() {});
-//    }
-//  }
 }
