@@ -1,12 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-<<<<<<< HEAD
-import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/tablet/list/danh_sach_bao_cao_dang_list_view.dart';
-=======
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/bloc/danh_sach_bao_cao_dang_girdview_cubit.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/tablet/list/widget/item_list_tablet.dart';
->>>>>>> develop
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:flutter/material.dart';
@@ -34,20 +30,6 @@ class _DanhSachBaoCaoDangGirdviewTabletState
         actions: [
           GestureDetector(
             onTap: () {
-<<<<<<< HEAD
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const DanhSachBaoCaoDangListViewTablet(),
-                ),
-              );
-            },
-            child: Container(
-              padding: const EdgeInsets.only(top: 16, right: 30, bottom: 16),
-              child: SvgPicture.asset(ImageAssets.icGridTablet),
-            ),
-=======
               setState(() {
                 cubit.isCheckList = !cubit.isCheckList;
               });
@@ -63,7 +45,6 @@ class _DanhSachBaoCaoDangGirdviewTabletState
                         const EdgeInsets.only(top: 16, right: 30, bottom: 16),
                     child: SvgPicture.asset(ImageAssets.icListHopTablet),
                   ),
->>>>>>> develop
           )
         ],
       ),
