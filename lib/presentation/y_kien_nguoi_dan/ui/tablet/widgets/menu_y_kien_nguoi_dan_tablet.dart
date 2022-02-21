@@ -49,7 +49,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                 icon: ImageAssets.icPerson,
                 name: S.current.thong_tin_chung,
                 onTap: () {
-                  widget.cubit.selectItemMenu([true,false]);
+                  widget.cubit.selectItemMenu([true, false]);
                   Navigator.pop(context);
                 },
                 isSelect: data[0],
@@ -68,7 +68,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                 icon: ImageAssets.ic_baocao,
                 name: S.current.bao_cao_thong_ke,
                 onTap: () {
-                  widget.cubit.selectItemMenu([false,true]);
+                  widget.cubit.selectItemMenu([false, true]);
                   Navigator.pop(context);
                 },
                 isSelect: data[1],
