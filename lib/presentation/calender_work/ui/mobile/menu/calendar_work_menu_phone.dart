@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,10 +45,13 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                       children: [
                         TheoDangLichWidget(
                           icon: ImageAssets.icTheoDangLich,
-                          name: S.current.lich_lam_viec,
+                          name: S.current.theo_dang_lich,
                           onTap: () {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([true, false]);
+                            widget.cubit.chooseTypeListLv(
+                                Type_Choose_Option_List.DANG_LICH);
+                            Navigator.pop(context);
                           },
                           isSelect: snapshot.data?[0] ?? true,
                         ),
@@ -57,6 +61,9 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                           onTap: () {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([false, true]);
+                            widget.cubit.chooseTypeListLv(
+                                Type_Choose_Option_List.DANG_LIST);
+                            Navigator.pop(context);
                           },
                           isSelect: snapshot.data?[1] ?? true,
                         ),

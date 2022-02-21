@@ -115,9 +115,10 @@ extension LichLv on CalenderState {
       return const SizedBox();
     }
   }
-  Widget tableCalendar(CalenderCubit cubit){
-    if(this is LichLVStateDangLich ||this is LichLVStateDangList ){
-      if(type ==Type_Choose_Option_Day.MONTH){
+
+  Widget tableCalendar(CalenderCubit cubit) {
+    if (this is LichLVStateDangLich || this is LichLVStateDangList) {
+      if (type == Type_Choose_Option_Day.MONTH) {
         return const TableCalendarWidget(
           isCalendar: false,
         );
@@ -126,9 +127,10 @@ extension LichLv on CalenderState {
     }
     return Container();
   }
-  Widget itemCalendarWork(CalenderCubit cubit){
-    if(this is LichLVStateDangLich || this is LichLVStateDangList){
-      if(type==Type_Choose_Option_Day.MONTH){
+
+  Widget itemCalendarWork(CalenderCubit cubit) {
+    if (this is LichLVStateDangLich || this is LichLVStateDangList) {
+      if (type == Type_Choose_Option_Day.MONTH) {
         return itemCalendarWorkIscheck(cubit);
       }
       return itemCalendarWorkDefault(cubit);

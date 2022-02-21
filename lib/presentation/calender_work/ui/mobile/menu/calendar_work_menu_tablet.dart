@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +61,11 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                 ),
                 TheoDangLichWidget(
                   icon: ImageAssets.icTheoDangLich,
-                  name: S.current.lich_lam_viec,
+                  name: S.current.theo_dang_lich,
                   onTap: () {
                     cubit.selectTypeCalendarSubject.add([true, false]);
+                    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
+                    Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[0] ?? true,
                 ),
@@ -81,6 +84,8 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                   name: S.current.theo_dang_danh_sach,
                   onTap: () {
                     cubit.selectTypeCalendarSubject.add([false, true]);
+                    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+                    Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[1] ?? true,
                 ),

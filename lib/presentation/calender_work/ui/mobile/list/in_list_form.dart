@@ -1,11 +1,9 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
+
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calendar_work_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +16,7 @@ class InListForm extends StatefulWidget {
 }
 
 class _InListFormState extends State<InListForm> {
-  late CalenderCubit _cubit = widget.cubit;
+  late final CalenderCubit _cubit = widget.cubit;
 
   @override
   void initState() {
