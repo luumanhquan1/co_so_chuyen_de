@@ -84,22 +84,27 @@ extension GetStatusNV on String {
 }
 
 Widget StatusChiTietNhiemVu({required String name, required Color background}) {
-  return Container(
-    padding: EdgeInsets.symmetric(
-      horizontal: 16.0.textScale(),
-      vertical: 4.0.textScale(),
-    ),
-    decoration: BoxDecoration(
-      color: background,
-      borderRadius: BorderRadius.circular(30),
-    ),
-    child: Text(
-      name,
-      style: textNormalCustom(
-        color: Colors.white,
-        fontSize: 12.0.textScale(),
-        fontWeight: FontWeight.w500,
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 15.0.textScale(),
+          vertical: 4.0.textScale(),
+        ),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Text(
+          name,
+          style: textNormalCustom(
+            color: Colors.white,
+            fontSize: 12.0.textScale(),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
-    ),
+    ],
   );
 }
