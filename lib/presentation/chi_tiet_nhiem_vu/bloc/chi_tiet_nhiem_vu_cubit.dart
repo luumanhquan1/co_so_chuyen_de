@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_header.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nv_state.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,20 +12,25 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   ChiTietNVCubit() : super(ChiTietNVInitial());
 
   BehaviorSubject<ChiTietNhiemVuHeader> chiTietHeaderSubject =
-      BehaviorSubject();
+  BehaviorSubject();
 
   BehaviorSubject<VanBanLienQuanModel> vanBanLienQuanSubject =
-      BehaviorSubject();
+  BehaviorSubject();
 
-BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
-      BehaviorSubject();
+  BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
+  BehaviorSubject();
+
+  BehaviorSubject<List<LichSuPhanXuLyModel>> lichSuPhanXuLySubject =
+  BehaviorSubject();
 
   Stream<VanBanLienQuanModel> get vanBanLienQuanStream =>
       vanBanLienQuanSubject.stream;
 
-
   Stream<List<DanhSachCongViecModel>> get danhSachCongViecStream =>
       danhsachCongViecSubject.stream;
+
+  Stream<List<LichSuPhanXuLyModel>> get lichSuPhanXuLyModelStream =>
+      lichSuPhanXuLySubject.stream;
 
   Stream<ChiTietNhiemVuHeader> get chiTietHeaderStream =>
       chiTietHeaderSubject.stream;
@@ -62,6 +68,47 @@ BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
     ],
     vanBanKhac: [],
   );
+
+  List<LichSuPhanXuLyModel> fakeLSPXL = [
+    LichSuPhanXuLyModel(
+      id: '',
+      stt: 1,
+      donViNhan: 'Đơn vị nhận',
+      nguoiGui: 'Lương Minh Trang',
+      nguoiNhan: 'Nguyễn Như Sơn',
+      thoiGian: '27/07/2021 | 17:02:22',
+      vaiTroXuLy: 'Chủ trì',
+      trangThai: 'QUA_HAN',),
+    LichSuPhanXuLyModel(
+      id: '',
+      stt: 1,
+      donViNhan: 'Đơn vị nhận',
+      nguoiGui: 'Lương Minh Trang',
+      nguoiNhan: 'Nguyễn Như Sơn',
+      thoiGian: '27/07/2021 | 17:02:22',
+      vaiTroXuLy: 'Chủ trì',
+      trangThai: 'QUA_HAN',),
+    LichSuPhanXuLyModel(
+      id: '',
+      stt: 1,
+      donViNhan: 'Đơn vị nhận',
+      nguoiGui: 'Lương Minh Trang',
+      nguoiNhan: 'Nguyễn Như Sơn',
+      thoiGian: '27/07/2021 | 17:02:22',
+      vaiTroXuLy: 'Chủ trì',
+      trangThai: 'QUA_HAN',),
+    LichSuPhanXuLyModel(
+      id: '',
+      stt: 1,
+      donViNhan: 'Đơn vị nhận',
+      nguoiGui: 'Lương Minh Trang',
+      nguoiNhan: 'Nguyễn Như Sơn',
+      thoiGian: '27/07/2021 | 17:02:22',
+      vaiTroXuLy: 'Chủ trì',
+      trangThai: 'QUA_HAN',),
+
+
+  ];
 
   List<DanhSachCongViecModel> fakeDSCV = [
     DanhSachCongViecModel(
@@ -136,5 +183,6 @@ BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
     chiTietHeaderSubject.add(fakeHeader);
     vanBanLienQuanSubject.add(fakeVBLQ);
     danhsachCongViecSubject.add(fakeDSCV);
+    lichSuPhanXuLySubject.add(fakeLSPXL);
   }
 }

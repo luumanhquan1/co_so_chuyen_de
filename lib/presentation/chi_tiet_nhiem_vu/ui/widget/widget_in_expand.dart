@@ -43,7 +43,7 @@ class WidgetInExpand extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Text(
                         e.key,
                         style: textNormalCustom(
@@ -57,7 +57,7 @@ class WidgetInExpand extends StatelessWidget {
                       width: 14.0.textScale(),
                     ),
                     Expanded(
-                        flex: 4, child: e.type.getWidget(row: e, cubit: cubit)),
+                        flex: 5, child: e.type.getWidget(row: e, cubit: cubit)),
                   ],
                 ),
               ),
