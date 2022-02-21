@@ -50,11 +50,11 @@ class _DanhSachBaoCaoDangGirdviewTabletState
               borderRadius: BorderRadius.circular(12.0),
               color: backgroundColorApp,
               border: Border.all(color: borderItemCalender.withOpacity(0.5)),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(101, 102, 233, 0.05),
-                  blurRadius: 5,
-                  spreadRadius: 2,
+                  color: shadowContainerColor.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
