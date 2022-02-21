@@ -1,4 +1,7 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +15,8 @@ class ThuHoiLichWidget extends StatefulWidget {
 }
 
 class _ThuHoiLichWidgetState extends State<ThuHoiLichWidget> {
+  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,14 +25,16 @@ class _ThuHoiLichWidgetState extends State<ThuHoiLichWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDropDown(
-            items: const [],
+            items: cubit.fakeDataDropdown,
             onSelectItem: (value) {},
           ),
           const SizedBox(
             height: 36,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100),
+            padding: APP_DEVICE == DeviceType.MOBILE
+                ? const EdgeInsets.all(0)
+                : const EdgeInsets.symmetric(horizontal: 100),
             child: DoubleButtonBottom(
               title1: S.current.dong,
               title2: S.current.thu_hoi,
