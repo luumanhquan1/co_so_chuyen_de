@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/chi_tiet_lich_hop_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -31,7 +32,13 @@ class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
               itemCount: listLichHop.length,
               itemBuilder: (context, index) {
                 return WidgetItemLichHop(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DetailMeetCalenderTablet(),
+                      ),
+                    );
+                  },
                   title: listLichHop[index].title,
                   dateTimeFrom: DateTime.parse(listLichHop[index].dateTimeFrom)
                       .toStringWithAMPM,
