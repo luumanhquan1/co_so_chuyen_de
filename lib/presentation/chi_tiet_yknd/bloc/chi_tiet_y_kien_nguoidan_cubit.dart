@@ -30,6 +30,40 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     quyDinhLuat: 'Luật Tổ chức Chính phủ',
     taiLieuCongDan: 'file.pdf',
   );
+  final fakeDataNguoiPhanAnh = NguoiPhanAnhModel(
+    doiTuong:'',
+    tenCaNhan: 'PAKN 2',
+    cmnd: '017496898',
+    diaChiEmail: 'chuyenviendonvi@gmail.com',
+    soDienthoai: '0964950763',
+    diaChiChiTiet: 'Khu phố 6, Phường Trung Dũng, Thành phố Biên Hòa - Đồng Nai',
+  );
+  List<DataHeader> getMapDataNguoiPhananh(){
+    List<DataHeader>listData=[];
+    listData.add( DataHeader(
+        title: S.current.ten_ca_nhan_tc,
+        content: fakeDataNguoiPhanAnh.tenCaNhan??''
+    ),);
+    listData.add( DataHeader(
+        title: S.current.cmt_can_cuoc,
+        content: fakeDataNguoiPhanAnh.cmnd??''
+    ),);
+    listData.add( DataHeader(
+      title: S.current.dia_chi_mail,
+      content: fakeDataNguoiPhanAnh.diaChiEmail??'',
+    ),);
+    listData.add( DataHeader(
+      title: S.current.so_dien_thoai,
+      content: fakeDataNguoiPhanAnh.soDienthoai??'',
+    ),);
+    listData.add( DataHeader(
+      title: S.current.dia_chi_chi_tiet,
+      content: fakeDataNguoiPhanAnh.diaChiChiTiet??'',
+    ),);
+    return listData;
+
+  }
+
   List<DataHeader> getMapDataHeader(){
     List<DataHeader>listData=[];
     listData.add( DataHeader(
