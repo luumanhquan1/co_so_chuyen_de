@@ -11,7 +11,7 @@ class ChiTietCongViecNhiemVuCubit
           dvGiaoviec: 'UBND tỉnh Đồng Nai',
           nguoiGiaoViec: 'Nguyễn Kim Long',
           dvCaNhanThucHien: 'UBND tỉnh Đồng Nai',
-          hanXuLy: '09/12/2021',
+          hanXuLy: '2022-01-11T00:00:00',
           mucDoCongViec: 'Thường',
           noiDung: 'Chủ trì, phối hợp với các cơ quan chức năng');
 }

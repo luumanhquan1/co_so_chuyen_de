@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/widget/bieu_do_nhiem_vu_mobile.dart';
+import 'package:ccvc_mobile/presentation/nhiem_vu/widget/nhiem_vu_item_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                const DanhSachNhiemVuMobile(),
+                                    const DanhSachNhiemVuMobile(),
                               ),
                             );
                           },
@@ -97,10 +98,12 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                       shrinkWrap: true,
                       itemCount: listDanhSachNhiemVu.length,
                       itemBuilder: (context, index) {
-                        return IncomingDocumentCell(
+                        return NhiemVuItemMobile(
                           onTap: () {},
                           title: listDanhSachNhiemVu[index].noiDung ?? '',
-                          dateTime: listDanhSachNhiemVu[index].timeStart ?? '',
+                          timeStart:
+                              listDanhSachCongViec[index].timeStart ?? '',
+                          timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
                           userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
                           status: listDanhSachNhiemVu[index].trangThai ?? '',
                           userImage:
@@ -139,7 +142,7 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                const DanhSachCongViecMobile(),
+                                    const DanhSachCongViecMobile(),
                               ),
                             );
                           },
@@ -152,18 +155,20 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                       shrinkWrap: true,
                       itemCount: listDanhSachCongViec.length,
                       itemBuilder: (context, index) {
-                        return IncomingDocumentCell(
+                        return NhiemVuItemMobile(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                const ChitietCongViecNhiemVuMobile(),
+                                    const ChitietCongViecNhiemVuMobile(),
                               ),
                             );
                           },
                           title: listDanhSachCongViec[index].noiDung ?? '',
-                          dateTime: listDanhSachCongViec[index].timeStart ?? '',
+                          timeStart:
+                              listDanhSachCongViec[index].timeStart ?? '',
+                          timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
                           userName: listDanhSachCongViec[index].nguoiTao ?? '',
                           status: listDanhSachCongViec[index].trangThai ?? '',
                           userImage:
