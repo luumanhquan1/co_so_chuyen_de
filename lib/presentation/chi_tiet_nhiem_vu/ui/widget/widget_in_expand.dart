@@ -7,7 +7,7 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class WidgetInExpand extends StatelessWidget {
-  final ItemVanBanLienQuanModel row;
+  final List<RowDataExpandModel> row;
   final ChiTietNVCubit cubit;
 
   const WidgetInExpand({
@@ -37,7 +37,6 @@ class WidgetInExpand extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: row
-            .dataRowVBLQ()
             .map(
               (e) => Container(
                 margin: const EdgeInsets.only(bottom: 10),
@@ -57,7 +56,8 @@ class WidgetInExpand extends StatelessWidget {
                     SizedBox(
                       width: 14.0.textScale(),
                     ),
-                    Expanded(flex: 4,child: e.type.getWidget(row: e, cubit: cubit)),
+                    Expanded(
+                        flex: 4, child: e.type.getWidget(row: e, cubit: cubit)),
                   ],
                 ),
               ),
