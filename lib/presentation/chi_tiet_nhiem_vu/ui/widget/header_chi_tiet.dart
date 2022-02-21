@@ -18,10 +18,10 @@ class HeaderChiTiet extends StatelessWidget {
     return Container(
       padding: APP_DEVICE == DeviceType.TABLET
           ? const EdgeInsets.all(20)
-          : const EdgeInsets.all(0),
+          : const EdgeInsets.all(16),
       decoration: APP_DEVICE == DeviceType.TABLET
           ? BoxDecoration(
-              color: Colors.white,
+              color: Colors.white, 
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: toDayColor.withOpacity(0.5),

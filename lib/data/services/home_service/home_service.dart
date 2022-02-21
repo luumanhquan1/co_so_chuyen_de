@@ -13,6 +13,8 @@ import 'package:ccvc_mobile/data/response/home/list_y_kien_nguoi_dan_response.da
 import 'package:ccvc_mobile/data/response/home/lunar_date_response.dart';
 import 'package:ccvc_mobile/data/response/home/nhiem_vu_response.dart';
 import 'package:ccvc_mobile/data/response/home/pham_vi_response.dart';
+import 'package:ccvc_mobile/data/response/home/sinh_nhat_user_response.dart';
+import 'package:ccvc_mobile/data/response/home/su_kien_response.dart';
 import 'package:ccvc_mobile/data/response/home/tinh_huong_khan_cap_response.dart';
 import 'package:ccvc_mobile/data/response/home/todo_current_user_response.dart';
 import 'package:ccvc_mobile/data/response/home/tong_hop_nhiem_vu_response.dart';
@@ -127,17 +129,33 @@ abstract class HomeService {
   @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.SEARCH_NEW)
   @FormUrlEncoded()
   Future<BaoChiMangXaHoiResponse> getBaoChiMangXaHoi(
-      @Query('pageIndex') int pageIndex,
-      @Query('pageSize') int pageSize,
-      @Query('fromDate') String fromDate,
-      @Query('toDate') String toDate,
-      @Query('keyword') String keyWord,
-      );
-  @POST(BaseUrlConstants.baseUrlGateway+ ApiConstants.DANH_SACH_LICH_LAM_VIEC)
+    @Query('pageIndex') int pageIndex,
+    @Query('pageSize') int pageSize,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+    @Query('keyword') String keyWord,
+  );
+  @POST(BaseUrlConstants.baseUrlGateway + ApiConstants.DANH_SACH_LICH_LAM_VIEC)
   @FormUrlEncoded()
-  Future<LichLamViecResponse> getLichLamViec(@Body() LichLamViecRequest lamViecRequest);
+  Future<LichLamViecResponse> getLichLamViec(
+    @Body() LichLamViecRequest lamViecRequest,
+  );
 
-  @POST(BaseUrlConstants.baseUrlGateway+ ApiConstants.CANLENDAR_LIST_MEETING)
+  @POST(BaseUrlConstants.baseUrlGateway + ApiConstants.CANLENDAR_LIST_MEETING)
   @FormUrlEncoded()
   Future<LichHopResponse> getLichHop(@Body() LichHopRequest lichHopRequest);
+
+  @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.SU_KIEN_TRONG_NGAY)
+  @FormUrlEncoded()
+  Future<SuKienResponse> getSuKien(
+    @Query('DateFrom') String dataFrom,
+    @Query('DateTo') String dateTo,
+  );
+
+  @GET(BaseUrlConstants.baseURLCCVC + ApiConstants.SINH_NHAT_DASHBOARD)
+  @FormUrlEncoded()
+  Future<SinhNhatUserResponse> getSinhNhat(
+    @Query('DateFrom') String dateFrom,
+    @Query('DateTo') String dateTo,
+  );
 }

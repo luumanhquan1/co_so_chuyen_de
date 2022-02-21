@@ -1,5 +1,5 @@
 {
-  "@@locale": "en",
+  "@@locale": "vi",
   "ok": "Đồng ý",
   "cancel": "Hủy",
   "something_went_wrong": "Something went wrong. Please try again later.",
@@ -387,6 +387,9 @@
   "tu_choi" : "Từ chối",
   "luu_lai": "Lưu lại ",
   "theo_dang_lich" : "Theo dạng lịch",
+  "su_kien" : "Sự kiện",
+  "ong" : "Ông",
+  "ba" : "Bà",
   "bac_cao": "Báo cáo",
   "xem_danh_sah_chi_tiet": "Xem danh sách chi tiết",
   "phan_loai_yknd": "Phân loại YKND theo nguồn nhận của đơn vị",
@@ -396,8 +399,21 @@
   "dv_ca_nhan_thuc_hien": "ĐV/Cá nhân thực hiện",
   "muc_do_cong_viec": "Mức độ công việc",
   "chi_tiet_cong_viec": "Chi tiết công việc",
-  "so_nhiem_vu": "Số nhiệm vụ",
-  "tinh_hinh_thuc_hien": "Tình hình thực hiện",
-  "nguoi_giao": "Người giao",
-  "chi_tiet_nhiem_vu": "Chi tiết nhiệm vụ"
+  "ngay_vb": "Ngày VB",
+  "trich_yeu": "Trích yếu",
+  "file_dinh_kem": "File đính kèm",
+  "van_ban_lien_quan": "Văn bản liên quan",
+  "van_ban_giao_nhiem_vu": "Văn bản giao nhiệm vụ",
+  "van_ban_khac": "Văn bản khác",
+  "nguoi_xu_ly" : "Người xử lý",
+  "don_vi_xu_ly" : "Đơn vị xử lý",
+  "thoi_gian_giao_viec" : "Thời gian giao việc",
+  "noi_dung_cong_viec" : "Nội dung công việc",
+  "nguoi_gui" : "Người gửi",
+  "thoi_gian" : "Thời gian",
+  "nguoi_nhan" : "Người nhận",
+  "don_vi_nhan" : "Đơn vị nhận",
+  "vai_tro_xu_ly" : "Vai trò xử lý",
+  "lich_su_phan_xu_ly" : "Lịch sử phân xử lý"
+
 }

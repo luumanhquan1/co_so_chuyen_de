@@ -12,13 +12,13 @@ import 'package:rxdart/rxdart.dart';
 
 class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   YKienNguoiDanCubitt() : super(YKienNguoiDanStateInitial());
-  BehaviorSubject<List<bool>> selectTypeNhiemVuSubject =
+  BehaviorSubject<List<bool>> selectTypeYKNDSubject =
       BehaviorSubject.seeded([true, false]);
   bool isCheck = false;
 
-  void selectItemMenu(List<bool> listSelect) {
-    selectTypeNhiemVuSubject.sink.add(listSelect);
-  }
+  // void selectItemMenu(List<bool> listSelect) {
+  //   selectTypeYKNDSubject.sink.add(listSelect);
+  // }
 
   List<DashboardSchedule> list = [
     DashboardSchedule(1, '22ssads2', 'Chờ duyệt'),
