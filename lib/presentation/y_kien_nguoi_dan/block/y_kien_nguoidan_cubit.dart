@@ -8,7 +8,6 @@ import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/indicator_chart.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
 class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
@@ -64,22 +63,20 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
   List<NguoiDanModel> listYKienNguoiDan = [
     NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
-    ),
+        ngheNghiep: 'Nhan vien van phong that nghiep',
+        ngayThang: '18/10/2021',
+        ten: 'Ha Kieu Anh',
+        statusData: StatusYKien.DANG_XU_LY),
+    NguoiDanModel(
+        ngheNghiep: 'Nhan vien van phong that nghiep',
+        ngayThang: '18/10/2021',
+        ten: 'Ha Kieu Anh',
+        statusData: StatusYKien.QUA_HAN),
     NguoiDanModel(
       ngheNghiep: 'Nhan vien van phong that nghiep',
       ngayThang: '18/10/2021',
       ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
-    ),
-    NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      trangThai: 'dang xu ly',
+      statusData: StatusYKien.DANG_XU_LY,
     ),
   ];
 }
