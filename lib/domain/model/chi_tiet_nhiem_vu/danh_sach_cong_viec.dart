@@ -9,7 +9,6 @@ class DanhSachCongViecModel {
   String nguoiXuLy = '';
   String donViXuLy = '';
   String thoiGianGiaoViec = '';
-
   String hanXuLy = '';
   String ndCongViec = '';
   String nguoiGiaoViec = '';
