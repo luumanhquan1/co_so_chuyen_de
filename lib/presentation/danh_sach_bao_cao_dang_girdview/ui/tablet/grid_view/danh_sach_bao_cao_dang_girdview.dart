@@ -2,42 +2,46 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/appbar/mobile/base_app_bar_mobile.dart';
+import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class DanhSachBaoCaoDangGirdviewMobile extends StatefulWidget {
-  const DanhSachBaoCaoDangGirdviewMobile({Key? key}) : super(key: key);
+class DanhSachBaoCaoDangGirdviewTablet extends StatefulWidget {
+  const DanhSachBaoCaoDangGirdviewTablet({Key? key}) : super(key: key);
 
   @override
-  _DanhSachBaoCaoDangGirdviewMobileState createState() =>
-      _DanhSachBaoCaoDangGirdviewMobileState();
+  _DanhSachBaoCaoDangGirdviewTabletState createState() =>
+      _DanhSachBaoCaoDangGirdviewTabletState();
 }
 
-class _DanhSachBaoCaoDangGirdviewMobileState
-    extends State<DanhSachBaoCaoDangGirdviewMobile> {
+class _DanhSachBaoCaoDangGirdviewTabletState
+    extends State<DanhSachBaoCaoDangGirdviewTablet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBarMobile(
+      backgroundColor: bgWidgets,
+      appBar: AppBarWithTwoLeading(
+        backGroundColorTablet: bgWidgets,
         title: S.current.bac_cao,
         actions: [
           Container(
-            padding: const EdgeInsets.only(top: 16, right: 16, bottom: 16),
-            child: SvgPicture.asset(ImageAssets.icGridView),
+            padding: const EdgeInsets.only(top: 16, right: 30, bottom: 16),
+            child: SvgPicture.asset(ImageAssets.icGridTablet),
           )
         ],
       ),
       body: GridView.builder(
+        cacheExtent: 100,
+        semanticChildCount: 100,
         padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+            const EdgeInsets.only(left: 30, right: 30, top: 28, bottom: 28),
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 4,
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
           childAspectRatio: 1.5,
-          mainAxisExtent: 130,
+          mainAxisExtent: 138,
         ),
         itemCount: 16,
         itemBuilder: (context, index) {
@@ -57,13 +61,13 @@ class _DanhSachBaoCaoDangGirdviewMobileState
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 24, bottom: 16),
-                  child: Image.asset(ImageAssets.icGroundMobile),
+                  padding: const EdgeInsets.only(top: 20, bottom: 14),
+                  child: Image.asset(ImageAssets.icMenuGridTablet),
                 ),
                 Text(
                   S.current.bac_cao,
-                  style: tokenDetailAmount(color: textTitle, fontSize: 16),
-                ),
+                  style: textNormalCustom(color: textTitle, fontSize: 18),
+                )
               ],
             ),
           );

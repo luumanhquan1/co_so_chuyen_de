@@ -107,9 +107,12 @@ class ImageAssets {
   static const String imgBackGroundLogin =
       '$baseImg/image_login_background.svg';
 
-  static const String icGridView = '$baseImg/ ic_gird_view.svg';
-  static const String icItemGridView = '$baseImg/   ic_item_gird_view.svg';
+  static const String icGridTablet = '$baseImg/ic_gird_tablet.svg';
+  static const String icGridView = '$baseImg/ic_gird_view.svg';
+  static const String icItemGridView = '$baseImg/ic_item_gird_view.svg';
   static const String icThoiTiet = '$baseImg/ic_thoi_tiet.png';
+  static const String icMenuGridTablet = '$baseImg/ic_menu_grid_tablet.png';
+  static const String icGroundMobile = '$baseImg/ic_group_mobile.png';
 
   static const String imgLoginPng = '$baseImg/img_login.png';
 
