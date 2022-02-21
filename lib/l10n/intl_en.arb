@@ -405,5 +405,12 @@
   "file_dinh_kem" : "File đính kèm",
   "van_ban_lien_quan" : "Văn bản liên quan",
   "van_ban_giao_nhiem_vu" : "Văn bản giao nhiệm vụ",
-  "van_ban_khac" : "Văn bản khác"
+  "van_ban_khac" : "Văn bản khác",
+  "chi_tiet_lich_hop" : "Chi tiết lịch họp",
+  "thu_hoi": "Thu hồi",
+  "phan_cong_thu_ky": "Phân công thư ký",
+  "tao_boc_bang_cuoc_hop": "Tạo bóc băng cuộc họp",
+  "huy_lich_hop": "Hủy lịch họp",
+  "xoa_lich": "Xóa lịch",
+  "sua_lich": "Sửa lịch"
 }
