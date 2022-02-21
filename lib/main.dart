@@ -56,12 +56,7 @@ class _MyAppState extends State<MyApp> {
     checkDeviceType();
   }
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    MessageConfig.init(context);
-  }
+
 
   @override
   Widget build(BuildContext context) {

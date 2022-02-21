@@ -1,6 +1,8 @@
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/mess_dialog_pop_up.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
+enum MessState {error,success}
 class MessageConfig {
   static BuildContext? _context;
   static void init(BuildContext context) {
@@ -11,11 +13,20 @@ class MessageConfig {
   }
 
   static void show() {
-    final entry = OverlayEntry(
+    final OverlayState? overlayState = Overlay.of(_context!);
+    late OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(
       builder: (context) {
-        return MessageDialogPopup();
+        return MessageDialogPopup(
+          onDismiss: () {
+            overlayEntry.remove();
+          },
+          urlIcon: ImageAssets.ic_delete_do,
+          title: 'Thay đổi thành công',
+        );
       },
     );
-    Overlay.of(_context!)?.insert(entry);
+
+    overlayState?.insert(overlayEntry);
   }
 }

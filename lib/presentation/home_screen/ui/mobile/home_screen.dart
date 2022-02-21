@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.d
 import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/mess_dialog_pop_up.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     super.initState();
     homeCubit.loadApi();
   }
-
   @override
   void dispose() {
     // TODO: implement dispose
