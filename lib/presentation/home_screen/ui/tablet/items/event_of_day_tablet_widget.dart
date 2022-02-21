@@ -55,35 +55,37 @@ class _EventOfDayWidgetState extends State<EventOfDayTabletWidget> {
           )
         ],
       ),
-      child: LoadingOnly(
-        stream: _suKienTrongNgayCubit.stateStream,
-        child: StreamBuilder<List<SuKienModel>>(
-            stream: _suKienTrongNgayCubit.getSuKien,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? <SuKienModel>[];
-              if (data.isEmpty) {
-                return Container(
-                  color: Colors.transparent,
-                  alignment: Alignment.center,
-                  child: const NodataWidget(),
-                );
-              }
-              return ScrollBarWidget(
-                children: List.generate(
-              data.length,
-              (index) {
-                final result = data[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: EventWidget(
-                    onTap: () {},
-                    title: result.title ?? '',
+      child: Flexible(
+        child: LoadingOnly(
+          stream: _suKienTrongNgayCubit.stateStream,
+          child: StreamBuilder<List<SuKienModel>>(
+              stream: _suKienTrongNgayCubit.getSuKien,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <SuKienModel>[];
+                if (data.isEmpty) {
+                  return Container(
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: const NodataWidget(),
+                  );
+                }
+                return ScrollBarWidget(
+                  children: List.generate(
+                data.length,
+                (index) {
+                  final result = data[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: EventWidget(
+                      onTap: () {},
+                      title: result.title ?? '',
+                    ),
+                  );
+                },
                   ),
                 );
-              },
-                ),
-              );
-            }),
+              }),
+        ),
       ),
     );
   }
