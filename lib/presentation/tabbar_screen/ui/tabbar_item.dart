@@ -5,6 +5,8 @@ import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calend
 import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart';
@@ -113,8 +115,8 @@ extension TabbarEnum on TabBarType {
       case TabBarType.internalInteraction:
         return Scaffold(
           body: screenDevice(
-            mobileScreen: const ChiTietLichLamViecScreen(),
-            tabletScreen: const ChiTietLamViecTablet(),
+            mobileScreen: const ChiTietNhiemVuPhoneScreen(),
+            tabletScreen: const ChiTietNhiemVuTabletScreen(),
           ),
           backgroundColor: Colors.cyanAccent,
         );

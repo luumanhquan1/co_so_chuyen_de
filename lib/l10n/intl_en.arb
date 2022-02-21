@@ -393,5 +393,9 @@
   "nguoi_giao_viec": "Người giao việc",
   "dv_ca_nhan_thuc_hien": "ĐV/Cá nhân thực hiện",
   "muc_do_cong_viec": "Mức độ công việc",
-  "chi_tiet_cong_viec": "Chi tiết công việc"
+  "chi_tiet_cong_viec": "Chi tiết công việc",
+  "so_nhiem_vu" : "Số nhiệm vụ",
+  "tinh_hinh_thuc_hien" : "Tình hình thực hiện",
+  "nguoi_giao" : "Người giao",
+  "chi_tiet_nhiem_vu" : "Chi tiết nhiệm vụ"
 }
