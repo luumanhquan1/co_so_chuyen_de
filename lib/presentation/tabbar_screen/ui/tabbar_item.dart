@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/presentation/menu_screen/ui/mobile/menu_screen.dart'
 import 'package:ccvc_mobile/presentation/menu_screen/ui/tablet/menu_tablet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -96,7 +97,7 @@ extension TabbarEnum on TabBarType {
         return TabBarItem(
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
-            height: 16,
+            height: 16.0.textScale(),
           ),
           text: S.current.home,
         );
@@ -104,7 +105,7 @@ extension TabbarEnum on TabBarType {
         return TabBarItem(
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icChartFocus : ImageAssets.icChartUnFocus,
-            height: 16,
+            height: 16.0.textScale(),
           ),
           text: S.current.report,
         );
@@ -114,7 +115,7 @@ extension TabbarEnum on TabBarType {
             isSelect
                 ? ImageAssets.icCalendarFocus
                 : ImageAssets.icCalendarUnFocus,
-            height: 16,
+            height: 16.0.textScale(),
           ),
           text: S.current.calendar_work,
         );
@@ -124,7 +125,7 @@ extension TabbarEnum on TabBarType {
             isSelect
                 ? ImageAssets.icMessageFocus
                 : ImageAssets.icMessageUnFocus,
-            height: 16,
+            height: 16.0.textScale(),
           ),
           text: S.current.internal_interaction,
         );
@@ -132,7 +133,7 @@ extension TabbarEnum on TabBarType {
         return TabBarItem(
           icon: SvgPicture.asset(
             isSelect ? ImageAssets.icMenuFocus : ImageAssets.icMenuUnFocus,
-            height: 16,
+            height: 16.0.textScale(),
           ),
           text: S.current.menu,
         );

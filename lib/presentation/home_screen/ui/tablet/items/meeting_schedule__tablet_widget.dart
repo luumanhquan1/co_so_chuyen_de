@@ -66,42 +66,44 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleTabletWidget> {
           )
         ],
       ),
-      child: LoadingOnly(
-        stream: _lichHopCubit.stateStream,
-        child: StreamBuilder<List<CalendarMeetingModel>>(
-            stream: _lichHopCubit.getLichHop,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? <CalendarMeetingModel>[];
-              if (data.isEmpty) {
-                return const NodataWidget();
-              }
-              return ScrollBarWidget(
-                children: List.generate(data.length, (index) {
-                  final result = data[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: ContainerInfoWidget(
-                      status: result.codeStatus.getText(),
-                      colorStatus: result.codeStatus.getColor(),
-                      backGroundStatus: true,
-                      title: result.title,
-                      listData: [
-                        InfoData(
-                          urlIcon: ImageAssets.icTime,
-                          key: S.current.time,
-                          value: result.convertTime(),
-                        ),
-                        InfoData(
-                          urlIcon: ImageAssets.icPeople,
-                          key: S.current.nguoi_chu_tri,
-                          value: result.nguoiChuTri,
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              );
-            }),
+      child: Flexible(
+        child: LoadingOnly(
+          stream: _lichHopCubit.stateStream,
+          child: StreamBuilder<List<CalendarMeetingModel>>(
+              stream: _lichHopCubit.getLichHop,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <CalendarMeetingModel>[];
+                if (data.isEmpty) {
+                  return const NodataWidget();
+                }
+                return ScrollBarWidget(
+                  children: List.generate(data.length, (index) {
+                    final result = data[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ContainerInfoWidget(
+                        status: result.codeStatus.getText(),
+                        colorStatus: result.codeStatus.getColor(),
+                        backGroundStatus: true,
+                        title: result.title,
+                        listData: [
+                          InfoData(
+                            urlIcon: ImageAssets.icTime,
+                            key: S.current.time,
+                            value: result.convertTime(),
+                          ),
+                          InfoData(
+                            urlIcon: ImageAssets.icPeople,
+                            key: S.current.nguoi_chu_tri,
+                            value: result.nguoiChuTri,
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                );
+              }),
+        ),
       ),
     );
   }

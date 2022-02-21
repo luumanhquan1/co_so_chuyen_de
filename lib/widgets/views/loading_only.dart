@@ -80,26 +80,24 @@ class _ModalProgressHUDState extends State<ModalProgressHUD> {
   }
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        color: Colors.transparent,
-        child: Stack(
-          children: [
-            widget.child,
-            StreamBuilder<bool>(
-              stream: _isAsyncCall.stream,
-              builder: (context, snapshot) {
-                return Visibility(
-                  visible: widget.inAsyncCall,
-                  child: Positioned(
-                      top: size.height / 2 -50,
-                      right: size.width / 2 - 50,
-                      child: Center(child: widget.progressIndicator)),
-                );
-              }
-            )
-          ],
-        ),
+    return Container(
+      color: Colors.transparent,
+      child: Stack(
+        children: [
+          widget.child,
+          StreamBuilder<bool>(
+            stream: _isAsyncCall.stream,
+            builder: (context, snapshot) {
+              return Visibility(
+                visible: widget.inAsyncCall,
+                child: Positioned(
+                    top: size.height / 2 -50,
+                    right: size.width / 2 - 50,
+                    child: Center(child: widget.progressIndicator)),
+              );
+            }
+          )
+        ],
       ),
     );
   }
