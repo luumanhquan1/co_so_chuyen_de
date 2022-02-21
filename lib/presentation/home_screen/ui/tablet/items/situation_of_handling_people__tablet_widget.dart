@@ -59,35 +59,37 @@ class _SituationOfHandlingPeopleWidgetState
             )
           ],
         ),
-      child: LoadingOnly(
-        stream: _yKienCubit.stateStream,
-        child: StreamBuilder<List<TinhHinhYKienModel>>(
-            stream: _yKienCubit.getTinhHinhXuLy,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? <TinhHinhYKienModel>[];
-              if (data.isEmpty) {
-                return Container(
-                  color: Colors.transparent,
-                  alignment: Alignment.center,
-                  child: const NodataWidget(),
+      child: Flexible(
+        child: LoadingOnly(
+          stream: _yKienCubit.stateStream,
+          child: StreamBuilder<List<TinhHinhYKienModel>>(
+              stream: _yKienCubit.getTinhHinhXuLy,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <TinhHinhYKienModel>[];
+                if (data.isEmpty) {
+                  return Container(
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: const NodataWidget(),
+                  );
+                }
+                return PieChart(
+                  paddingLeftSubTitle: 15.w,
+                  chartData: List.generate(
+                    data.length,
+                        (index) {
+                      final result = data[index];
+                      final color = TinhHinhYKienModel.listColor[index];
+                      return ChartData(
+                        result.status,
+                        result.soLuong.toDouble(),
+                        color,
+                      );
+                    },
+                  ),
                 );
-              }
-              return PieChart(
-                paddingLeftSubTitle: 15.w,
-                chartData: List.generate(
-                  data.length,
-                      (index) {
-                    final result = data[index];
-                    final color = TinhHinhYKienModel.listColor[index];
-                    return ChartData(
-                      result.status,
-                      result.soLuong.toDouble(),
-                      color,
-                    );
-                  },
-                ),
-              );
-            }),
+              }),
+        ),
       ),
     );
   }
