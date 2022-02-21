@@ -113,8 +113,11 @@ class ImageAssets {
   static const String icThoiTiet = '$baseImg/ic_thoi_tiet.png';
   static const String icMenuGridTablet = '$baseImg/ic_menu_grid_tablet.png';
   static const String icGroundMobile = '$baseImg/ic_group_mobile.png';
-
+  static const String icListHopMobile = '$baseImg/ic_list_hop_mobile.svg';
+  static const String icListHopTablet = '$baseImg/ic_list_hop_tablet.svg';
   static const String imgLoginPng = '$baseImg/img_login.png';
+  static const String icListGroundMobile = '$baseImg/ic_list_group_mobile.png';
+  static const String icMenuListBaoCaoTab = '$baseImg/ic_menu_list_bao_cao.png';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
