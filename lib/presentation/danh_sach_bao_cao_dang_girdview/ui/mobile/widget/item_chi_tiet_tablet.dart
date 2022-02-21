@@ -6,19 +6,20 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ItemChiTiet extends StatelessWidget {
-  const ItemChiTiet({Key? key}) : super(key: key);
+class ItemChiTietTablet extends StatelessWidget {
+  const ItemChiTietTablet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgWidgets,
       appBar: AppBarDefaultBack(S.current.bac_cao),
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
         },
         child: Container(
-          padding: const EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 30, right: 30),
           child: ListView.builder(
             itemCount: 10,
             shrinkWrap: true,
@@ -28,7 +29,7 @@ class ItemChiTiet extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16),
+                        padding: const EdgeInsets.only(top: 28, bottom: 28),
                         child: SvgPicture.asset(ImageAssets.icNameFile),
                       ),
                       Container(
@@ -42,7 +43,7 @@ class ItemChiTiet extends StatelessWidget {
                                 S.current.phuong_xa,
                                 style: textNormalCustom(
                                   color: textTitle,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
@@ -50,7 +51,7 @@ class ItemChiTiet extends StatelessWidget {
                               S.current.k_hoat_dong,
                               style: tokenDetailAmount(
                                 color: AqiColor,
-                                fontSize: 12,
+                                fontSize: 14,
                               ),
                             ),
                           ],
