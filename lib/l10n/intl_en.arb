@@ -399,5 +399,11 @@
   "so_nhiem_vu" : "Số nhiệm vụ",
   "tinh_hinh_thuc_hien" : "Tình hình thực hiện",
   "nguoi_giao" : "Người giao",
-  "chi_tiet_nhiem_vu" : "Chi tiết nhiệm vụ"
+  "chi_tiet_nhiem_vu" : "Chi tiết nhiệm vụ",
+  "ngay_vb" : "Ngày VB",
+  "trich_yeu" : "Trích yếu",
+  "file_dinh_kem" : "File đính kèm",
+  "van_ban_lien_quan" : "Văn bản liên quan",
+  "van_ban_giao_nhiem_vu" : "Văn bản giao nhiệm vụ",
+  "van_ban_khac" : "Văn bản khác"
 }
