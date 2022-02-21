@@ -8,10 +8,19 @@ import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/indicator_chart.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:rxdart/rxdart.dart';
 
 class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   YKienNguoiDanCubitt() : super(YKienNguoiDanStateInitial());
+  BehaviorSubject<List<bool>> selectTypeNhiemVuSubject =
+      BehaviorSubject.seeded([true, false]);
   bool isCheck = false;
+
+  void selectItemMenu(List<bool> listSelect) {
+    selectTypeNhiemVuSubject.sink.add(listSelect);
+  }
+
   List<DashboardSchedule> list = [
     DashboardSchedule(1, '22ssads2', 'Chờ duyệt'),
     DashboardSchedule(2, '2dasdsd22', 'Thời gian'),
