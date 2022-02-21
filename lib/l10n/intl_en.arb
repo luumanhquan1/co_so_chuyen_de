@@ -412,5 +412,11 @@
   "nguoi_xu_ly" : "Người xử lý",
   "don_vi_xu_ly" : "Đơn vị xử lý",
   "thoi_gian_giao_viec" : "Thời gian giao việc",
-  "noi_dung_cong_viec" : "Nội dung công việc"
+  "noi_dung_cong_viec" : "Nội dung công việc",
+  "nguoi_gui" : "Người gửi",
+  "thoi_gian" : "Thời gian",
+  "nguoi_nhan" : "Người nhận",
+  "don_vi_nhan" : "Đơn vị nhận",
+  "vai_tro_xu_ly" : "Vai trò xử lý",
+  "lich_su_phan_xu_ly" : "Lịch sử phân xử lý"
 }
