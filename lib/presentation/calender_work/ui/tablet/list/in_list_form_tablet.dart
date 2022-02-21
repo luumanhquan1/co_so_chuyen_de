@@ -1,6 +1,6 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/list/widget/custom_item_calender_list.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -9,20 +9,23 @@ import 'package:flutter/material.dart';
 
 class InListFormTablet extends StatefulWidget {
   bool isHindText = false;
+  final CalenderCubit cubit;
 
-  InListFormTablet({Key? key, required this.isHindText}) : super(key: key);
+  InListFormTablet({Key? key, required this.isHindText, required this.cubit})
+      : super(key: key);
 
   @override
   _InListFormTabletState createState() => _InListFormTabletState();
 }
 
 class _InListFormTabletState extends State<InListFormTablet> {
-  final CalenderCubit _cubit = CalenderCubit();
+  CalenderCubit _cubit = CalenderCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _cubit = widget.cubit;
     _cubit.getDay();
   }
 
@@ -34,16 +37,13 @@ class _InListFormTabletState extends State<InListFormTablet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           spaceH28,
-          if (widget.isHindText)
-            Container()
-          else
-            Container(
-              padding: const EdgeInsets.only(bottom: 28),
-              child: Text(
-                _cubit.textDay,
-                style: textNormalCustom(color: textBodyTime),
+          _cubit.changeItemMenuSubject.value.getTypeEnum().getHeaderTablet(
+                cubit: _cubit,
+                isHindText: widget.isHindText,
               ),
-            ),
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(
