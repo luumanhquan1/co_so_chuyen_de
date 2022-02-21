@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
@@ -854,7 +855,16 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
     );
     result.when(
       success: (res) {
-        _getListLichLamViec.sink.add(res);
+        final listResult = <CalendarMeetingModel>[];
+        int index= 0;
+        for(final vl in res){
+          listResult.add(vl);
+          index ++ ;
+          if(index>=20){
+            break;
+          }
+        }
+        _getListLichLamViec.sink.add(listResult);
       },
       error: (err) {},
     );
@@ -903,7 +913,16 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
     showContent();
     result.when(
         success: (res) {
-          _getLichHop.sink.add(res);
+          int index = 0;
+          final listResult = <CalendarMeetingModel>[];
+          for(final vl in res){
+            listResult.add(vl);
+            index ++;
+            if(index >=20){
+              break;
+            }
+          }
+          _getLichHop.sink.add(listResult);
         },
         error: (err) {});
   }
