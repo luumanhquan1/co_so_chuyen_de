@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_cong_viec_model.dart
 import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/domain/model/nhiem_vu/nhiem_vu_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_cong_viec_nhiem_vu/ui/mobile/chi_tiet_cong_viec_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
@@ -152,7 +153,15 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                       itemCount: listDanhSachCongViec.length,
                       itemBuilder: (context, index) {
                         return IncomingDocumentCell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const ChitietCongViecNhiemVuMobile(),
+                              ),
+                            );
+                          },
                           title: listDanhSachCongViec[index].noiDung ?? '',
                           dateTime: listDanhSachCongViec[index].timeStart ?? '',
                           userName: listDanhSachCongViec[index].nguoiTao ?? '',
