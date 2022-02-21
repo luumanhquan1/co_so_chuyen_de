@@ -20,7 +20,7 @@ class _ThuHoiLichWidgetState extends State<ThuHoiLichWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDropDown(
-            items: const ['Thu hồi 1', 'Thu hồi 2'],
+            items: const [],
             onSelectItem: (value) {},
           ),
           const SizedBox(

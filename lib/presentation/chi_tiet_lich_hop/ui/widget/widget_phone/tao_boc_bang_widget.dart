@@ -19,7 +19,7 @@ class _TaoBocBangWidgetState extends State<TaoBocBangWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDropDown(
-            items: const ['Bóc băng 1', 'Bóc băng 2'],
+            items: const [],
             onSelectItem: (value) {},
           ),
           const SizedBox(
