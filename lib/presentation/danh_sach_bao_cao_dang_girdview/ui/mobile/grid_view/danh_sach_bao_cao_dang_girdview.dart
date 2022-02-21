@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/bloc/danh_sach_bao_cao_dang_girdview_cubit.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/list/widget/item_list.dart';
+import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/widget/item_chi_tiet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/mobile/base_app_bar_mobile.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,12 @@ class _DanhSachBaoCaoDangGirdviewMobileState
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return const ItemList();
+                      return GestureDetector(
+                        onTap: () {
+                          const ItemChiTiet();
+                        },
+                        child: const ItemList(),
+                      );
                     },
                   ),
                 ),
