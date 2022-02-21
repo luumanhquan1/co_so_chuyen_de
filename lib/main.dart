@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -53,6 +54,13 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     appStateCubit.getTokenPrefs();
     checkDeviceType();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    MessageConfig.init(context);
   }
 
   @override
