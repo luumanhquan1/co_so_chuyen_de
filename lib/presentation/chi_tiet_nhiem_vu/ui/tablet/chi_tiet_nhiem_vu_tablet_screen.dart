@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_hea
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_cap_nhat_thth.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_thu_hoi.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/lich_su_tra_lai.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/danh_sach_c
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/header_chi_tiet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/lich_su_cap_nhat_thth.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/lich_su_phan_xu_ly.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/lich_su_thu_hoi.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/lich_su_tra_lai.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/van_ban_lien_quan_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -143,6 +145,17 @@ class _ChiTietNhiemVuTabletScreenState
                                 final data = snapshot.data ?? [];
 
                                 return LichSuTraLaiWidget(
+                                  dataModel: data,
+                                  cubit: cubit,
+                                );
+                              },
+                            ),
+                            StreamBuilder<List<LichSuThuHoiModel>>(
+                              stream: cubit.lichSuThuHoiStream,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ?? [];
+
+                                return LichSuThuHoiWidget(
                                   dataModel: data,
                                   cubit: cubit,
                                 );
