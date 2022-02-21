@@ -133,7 +133,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                       bloc: cubit,
                       builder: (context, state) {
                         return state.tableCalendar(cubit);
-                      }
+                      },
                     ),
                   ],
                 ),
