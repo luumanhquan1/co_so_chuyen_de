@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/incoming_documment_provider.dart';
@@ -65,7 +66,7 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (contetx) => DetailDocument(),
+                                      builder: (context) => const ChiTietVanBanMobile(),
                                     ),
                                   );
                                 },

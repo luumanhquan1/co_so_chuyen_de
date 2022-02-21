@@ -33,7 +33,6 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen> {
                 cubit: cubit,
               ),
               ExpandOnlyWidget(
-                expand: expanded3,
                 initExpand: true,
                 isShowIcon: false,
                 header: Row(

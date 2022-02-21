@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
@@ -33,11 +34,10 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
               today: DateTime.now(),
             ),
           ),
-
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.only(top:28.0),
+                margin: const EdgeInsets.only(top: 28.0),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0, left: 30.0),
                   child: ListView.builder(
@@ -46,10 +46,19 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
                     itemCount: listDanhSachNhiemVu.length,
                     itemBuilder: (context, index) {
                       return NhiemVuCellTablet(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ChiTietNhiemVuTabletScreen(),
+                            ),
+                          );
+                        },
                         title: listDanhSachNhiemVu[index].title ?? '',
                         noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
-                        dateTimeStart: listDanhSachNhiemVu[index].timeStart ?? '',
+                        dateTimeStart:
+                            listDanhSachNhiemVu[index].timeStart ?? '',
                         dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
                         userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
                         status: listDanhSachNhiemVu[index].trangThai ?? '',
