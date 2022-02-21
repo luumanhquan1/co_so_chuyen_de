@@ -54,35 +54,37 @@ class _EventOfDayWidgetState extends State<SinhNhatTabletWidget> {
           )
         ],
       ),
-      child: LoadingOnly(
-        stream: sinhNhatCubit.stateStream,
-        child: StreamBuilder<List<SinhNhatUserModel>>(
-            stream: sinhNhatCubit.getSinhNhat,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? <SinhNhatUserModel>[];
-              if (data.isEmpty) {
-                return Container(
-                  color: Colors.transparent,
-                  alignment: Alignment.center,
-                  child: const NodataWidget(),
+      child: Flexible(
+        child: LoadingOnly(
+          stream: sinhNhatCubit.stateStream,
+          child: StreamBuilder<List<SinhNhatUserModel>>(
+              stream: sinhNhatCubit.getSinhNhat,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <SinhNhatUserModel>[];
+                if (data.isEmpty) {
+                  return Container(
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: const NodataWidget(),
+                  );
+                }
+                return ScrollBarWidget(
+                  children: List.generate(
+                    data.length,
+                    (index) {
+                      final result = data[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: EventWidget(
+                          onTap: () {},
+                          title: result.title(),
+                        ),
+                      );
+                    },
+                  ),
                 );
-              }
-              return ScrollBarWidget(
-                children: List.generate(
-                  data.length,
-                  (index) {
-                    final result = data[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: EventWidget(
-                        onTap: () {},
-                        title: result.title(),
-                      ),
-                    );
-                  },
-                ),
-              );
-            }),
+              }),
+        ),
       ),
     );
   }

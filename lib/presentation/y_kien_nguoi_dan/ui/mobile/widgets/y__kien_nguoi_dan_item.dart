@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class YKienNguoiDanCell extends StatelessWidget {
   final String title;
@@ -26,7 +28,12 @@ class YKienNguoiDanCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTap();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ChiTietYKNDScreen(),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20.0),

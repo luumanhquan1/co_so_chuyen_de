@@ -95,44 +95,50 @@ class _ContainerBackgroudWidgetState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            if (widget.leadingIcon == null)
-                              const SizedBox()
-                            else
-                              Padding(
-                                padding: const EdgeInsets.only(right: 12),
-                                child: widget.leadingIcon,
-                              ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.title,
-                                  style: textNormalCustom(
-                                    fontSize: 16.0.textScale(space: 4),
-                                    color: AppTheme.getInstance().titleColor(),
-                                  ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              if (widget.leadingIcon == null)
+                                const SizedBox()
+                              else
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 12),
+                                  child: widget.leadingIcon,
                                 ),
-                                if (widget.selectKeyDialog != null) ...[
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  StreamBuilder<bool>(
-                                    stream: widget.selectKeyDialog!
-                                        .selectKeyDialog.stream,
-                                    builder: (context, snapshot) {
-                                      return Text(
-                                        subTitle(),
-                                        style: textNormal(titleColumn, 16),
-                                      );
-                                    },
-                                  )
-                                ] else
-                                  const SizedBox()
-                              ],
-                            ),
-                          ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.title,
+                                      style: textNormalCustom(
+                                        fontSize: 16.0.textScale(space: 4),
+                                        color:
+                                            AppTheme.getInstance().titleColor(),
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    if (widget.selectKeyDialog != null) ...[
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      StreamBuilder<bool>(
+                                        stream: widget.selectKeyDialog!
+                                            .selectKeyDialog.stream,
+                                        builder: (context, snapshot) {
+                                          return Text(
+                                            subTitle(),
+                                            style: textNormal(titleColumn, 16),
+                                          );
+                                        },
+                                      )
+                                    ] else
+                                      const SizedBox()
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
