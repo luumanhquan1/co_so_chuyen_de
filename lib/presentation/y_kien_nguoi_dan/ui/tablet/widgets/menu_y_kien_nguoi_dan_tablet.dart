@@ -40,7 +40,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
         ),
       ),
       body: StreamBuilder<List<bool>>(
-        stream: widget.cubit.selectTypeNhiemVuSubject.stream,
+        stream: widget.cubit.selectTypeYKNDSubject.stream,
         builder: (context, snapshot) {
           final data = snapshot.data ?? [true, false];
           return Column(
