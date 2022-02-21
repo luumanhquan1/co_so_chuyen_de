@@ -30,7 +30,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
           const SizedBox(
             height: 58,
           ),
-          headerWidget(menu: S.current.lich_lam_viec),
+          headerWidget(menu: S.current.hop),
           const SizedBox(
             height: 24,
           ),

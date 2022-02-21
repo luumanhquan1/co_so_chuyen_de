@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -23,6 +25,7 @@ class MainLichHopTabLet extends StatefulWidget {
 }
 
 class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
+  final CalenderCubit calenderCubit = CalenderCubit();
   LichHopCubit cubit = LichHopCubit();
 
   @override
@@ -57,41 +60,44 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                       const end = Offset.zero;
                       final tween = Tween(begin: begin, end: end);
                       final offsetAnimation = animation.drive(tween);
-                      return FakeDrawerLichHop(
-                        offsetAnimation: offsetAnimation,
-                        title1: 'lich theo dang lich',
-                        title2: 'lich theo dang list',
-                        title3: 'lich theo danh sach',
-                        image1: ImageAssets.icMenuCalender,
-                        image2: ImageAssets.icMenuCalender,
-                        image3: ImageAssets.icMenuCalender,
-                        ontap1: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANG_LICH,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
-                        ontap2: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANG_LIST,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
-                        ontap3: () {
-                          setState(() {
-                            cubit.chooseTypeList(
-                              Type_Choose_Option_List.DANH_SACH,
-                            );
-                            cubit.index.sink.add(0);
-                            Navigator.pop(context);
-                          });
-                        },
+                      // return FakeDrawerLichHop(
+                      //   offsetAnimation: offsetAnimation,
+                      //   title1: 'lich theo dang lich',
+                      //   title2: 'lich theo dang list',
+                      //   title3: 'lich theo danh sach',
+                      //   image1: ImageAssets.icMenuCalender,
+                      //   image2: ImageAssets.icMenuCalender,
+                      //   image3: ImageAssets.icMenuCalender,
+                      //   ontap1: () {
+                      //     setState(() {
+                      //       cubit.chooseTypeList(
+                      //         Type_Choose_Option_List.DANG_LICH,
+                      //       );
+                      //       cubit.index.sink.add(0);
+                      //       Navigator.pop(context);
+                      //     });
+                      //   },
+                      //   ontap2: () {
+                      //     setState(() {
+                      //       cubit.chooseTypeList(
+                      //         Type_Choose_Option_List.DANG_LIST,
+                      //       );
+                      //       cubit.index.sink.add(0);
+                      //       Navigator.pop(context);
+                      //     });
+                      //   },
+                      //   ontap3: () {
+                      //     setState(() {
+                      //       cubit.chooseTypeList(
+                      //         Type_Choose_Option_List.DANH_SACH,
+                      //       );
+                      //       cubit.index.sink.add(0);
+                      //       Navigator.pop(context);
+                      //     });
+                      //   },
+                      // );
+                      return CalendarWorkMenuTablet(
+                        cubit: calenderCubit,
                       );
                     },
                     opaque: false,

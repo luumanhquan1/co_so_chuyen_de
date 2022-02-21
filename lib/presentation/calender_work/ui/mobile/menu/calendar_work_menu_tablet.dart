@@ -33,7 +33,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: S.current.menu_lich_lam_viec,
+        title: S.current.hop,
         leadingIcon: GestureDetector(
           onTap: () {
             Navigator.pop(context);
