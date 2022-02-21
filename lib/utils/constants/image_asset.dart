@@ -118,6 +118,7 @@ class ImageAssets {
   static const String imgLoginPng = '$baseImg/img_login.png';
   static const String icListGroundMobile = '$baseImg/ic_list_group_mobile.png';
   static const String icMenuListBaoCaoTab = '$baseImg/ic_menu_list_bao_cao.png';
+  static const String icNameFile = '$baseImg/ic_name_file.svg';
 
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
@@ -238,6 +239,14 @@ class ImageAssets {
   static const String icQuestionCircle = '$baseImg/ic_question_circle.svg';
   static const String icCuocGoi = '$baseImg/ic_cuoc_goi.svg';
   static const String icChonPhongHop = '$baseImg/ic_chon_phong_hop.svg';
+
+  static const String icBacham = '$baseImg/Group.svg';
+  static const String icHai = '$baseImg/Delete.svg';
+  static const String icmot = '$baseImg/CloseSquare.svg';
+  static const String icba = '$baseImg/Edit3.svg';
+  static const String ic4 = '$baseImg/Group4.svg';
+  static const String icNam = '$baseImg/Swap5.svg';
+  static const String icSau = '$baseImg/Video6.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
