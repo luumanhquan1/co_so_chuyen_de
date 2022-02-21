@@ -72,30 +72,42 @@ class _DanhSachBaoCaoDangGirdviewMobileState
                   ),
                   itemCount: 16,
                   itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
-                        color: backgroundColorApp,
-                        border: Border.all(color: borderColor.withOpacity(0.5)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: shadowContainerColor.withOpacity(0.05),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ItemChiTiet(),
                           ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 24, bottom: 16),
-                            child: Image.asset(ImageAssets.icGroundMobile),
-                          ),
-                          Text(
-                            S.current.bac_cao,
-                            style: textNormal(textTitle, 16),
-                          ),
-                        ],
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: backgroundColorApp,
+                          border:
+                              Border.all(color: borderColor.withOpacity(0.5)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: shadowContainerColor.withOpacity(0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(top: 24, bottom: 16),
+                              child: Image.asset(ImageAssets.icGroundMobile),
+                            ),
+                            Text(
+                              S.current.bac_cao,
+                              style: textNormal(textTitle, 16),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -109,7 +121,12 @@ class _DanhSachBaoCaoDangGirdviewMobileState
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          const ItemChiTiet();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ItemChiTiet(),
+                            ),
+                          );
                         },
                         child: const ItemList(),
                       );
