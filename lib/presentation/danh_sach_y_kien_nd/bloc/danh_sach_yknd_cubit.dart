@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/y%20_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_state.dart';
 import 'package:rxdart/rxdart.dart';
 
