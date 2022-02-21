@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class InListForm extends StatefulWidget {
   final CalenderCubit cubit;
+
   const InListForm({Key? key, required this.cubit}) : super(key: key);
 
   @override
@@ -32,9 +32,9 @@ class _InListFormState extends State<InListForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _cubit.changeItemMenuSubject.value.getHeader(
-            cubit: _cubit,
-          ),
+          _cubit.changeItemMenuSubject.value.getTypeEnum().getHeader(
+                cubit: _cubit,
+              ),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(

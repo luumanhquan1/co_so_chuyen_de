@@ -200,12 +200,29 @@ List<ItemThongBaoModel> listLanhDao = [
   ),
 ];
 
-extension GetScreenMenu on String {
+enum TypeCalendar {
+  LichCuaToi,
+  LichDuocMoi,
+  LichTaoHo,
+  LichHuy,
+  LichThuHoi,
+  LichDaCoBaoCao,
+  LichLichChuaCoBaoCao,
+  LanhDaoUBNDTinh,
+  VanPhongUBNDTinh,
+  SoKeHoachDauVaDauTu,
+  SoNoiVu,
+  PhongTaiChinhNoiChinh,
+  PhongKinhTeNghanh,
+  SoTaiChinh,
+}
+
+extension GetScreenMenu on TypeCalendar {
   Widget getHeader({
     required CalenderCubit cubit,
   }) {
     switch (this) {
-      case 'Lịch của tôi':
+      case TypeCalendar.LichCuaToi:
         return Padding(
           padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
           child: Text(
@@ -214,7 +231,7 @@ extension GetScreenMenu on String {
           ),
         );
 
-      case 'Lịch được mời':
+      case TypeCalendar.LichDuocMoi:
         return Padding(
           padding: const EdgeInsets.only(right: 16, left: 16),
           child: Column(
@@ -241,7 +258,7 @@ extension GetScreenMenu on String {
           ),
         );
 
-      case 'Lịch tạo hộ':
+      case TypeCalendar.LichTaoHo:
         return Padding(
           padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
           child: Text(
@@ -266,7 +283,7 @@ extension GetScreenMenu on String {
     required CalenderCubit cubit,
   }) {
     switch (this) {
-      case 'Lịch của tôi':
+      case TypeCalendar.LichCuaToi:
         return isHindText
             ? Container()
             : Container(
@@ -277,7 +294,7 @@ extension GetScreenMenu on String {
                 ),
               );
 
-      case 'Lịch được mời':
+      case TypeCalendar.LichDuocMoi:
         return isHindText
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -300,7 +317,7 @@ extension GetScreenMenu on String {
                 ),
               );
 
-      case 'Lịch tạo hộ':
+      case TypeCalendar.LichTaoHo:
         return isHindText
             ? Container()
             : Container(
@@ -321,6 +338,24 @@ extension GetScreenMenu on String {
                   style: textNormalCustom(color: textBodyTime),
                 ),
               );
+    }
+  }
+}
+
+extension GetTypeScreenMenu on String {
+  TypeCalendar getTypeEnum() {
+    switch (this) {
+      case 'Lịch của tôi':
+        return TypeCalendar.LichCuaToi;
+
+      case 'Lịch được mời':
+        return TypeCalendar.LichDuocMoi;
+
+      case 'Lịch tạo hộ':
+        return TypeCalendar.LichTaoHo;
+
+      default:
+        return TypeCalendar.LichCuaToi;
     }
   }
 }

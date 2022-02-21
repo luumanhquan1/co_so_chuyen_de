@@ -37,10 +37,10 @@ class _InListFormTabletState extends State<InListFormTablet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           spaceH28,
-          _cubit.changeItemMenuSubject.value.getHeaderTablet(
-            cubit: _cubit,
-            isHindText: widget.isHindText,
-          ),
+          _cubit.changeItemMenuSubject.value.getTypeEnum().getHeaderTablet(
+                cubit: _cubit,
+                isHindText: widget.isHindText,
+              ),
           const SizedBox(
             height: 20,
           ),
