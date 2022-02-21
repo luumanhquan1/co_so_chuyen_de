@@ -240,6 +240,14 @@ class ImageAssets {
   static const String icCuocGoi = '$baseImg/ic_cuoc_goi.svg';
   static const String icChonPhongHop = '$baseImg/ic_chon_phong_hop.svg';
 
+  static const String icBacham = '$baseImg/Group.svg';
+  static const String icHai = '$baseImg/Delete.svg';
+  static const String icmot = '$baseImg/CloseSquare.svg';
+  static const String icba = '$baseImg/Edit3.svg';
+  static const String ic4 = '$baseImg/Group4.svg';
+  static const String icNam = '$baseImg/Swap5.svg';
+  static const String icSau = '$baseImg/Video6.svg';
+
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 
