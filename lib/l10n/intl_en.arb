@@ -418,5 +418,10 @@
   "nguoi_nhan" : "Người nhận",
   "don_vi_nhan" : "Đơn vị nhận",
   "vai_tro_xu_ly" : "Vai trò xử lý",
-  "lich_su_phan_xu_ly" : "Lịch sử phân xử lý"
+  "lich_su_phan_xu_ly" : "Lịch sử phân xử lý",
+  "nguoi_cap_nhat" : "Người cập nhật",
+  "don_vi_cap_nhat" : "Đơn vị cập nhật",
+  "noi_dung_cap_nhat" : "Nội dung cập nhật",
+  "dv_bi_tra_lai" : "Đơn vị bị trả lại",
+  "lich_su_cap_nhat_thth" : "Lịch sử cập nhật THTH"
 }
