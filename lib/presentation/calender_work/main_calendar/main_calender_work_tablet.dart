@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/lich_lv_extension.dart';
@@ -34,18 +34,21 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<String>(
+    return StreamBuilder<TypeCalendarMenu>(
         stream: cubit.changeItemMenuStream,
         builder: (context, snapshot) {
           return Scaffold(
             appBar: BaseAppBar(
-              title: snapshot.data ?? S.current.lich_cua_toi,
+              title: snapshot.data?.getTitle() ??
+                  TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CalendarWorkMenuTablet(cubit: cubit,),
+                      builder: (context) => CalendarWorkMenuTablet(
+                        cubit: cubit,
+                      ),
                     ),
                   );
                 },
@@ -59,11 +62,12 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                 WidgetSelectOptionHeader(
                   createMeeting: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TaoLichLamViecChiTietTablet(),
-                        ),);
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const TaoLichLamViecChiTietTablet(),
+                      ),
+                    );
                   },
                   onTapDay: () {
                     setState(() {});
@@ -87,7 +91,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     );
                   },
                 ),
-                if (snapshot.data == S.current.lich_cua_toi)
+                if (snapshot.data == TypeCalendarMenu.LichCuaToi)
                   BlocBuilder<CalenderCubit, CalenderState>(
                     bloc: cubit,
                     builder: (context, state) {
@@ -133,6 +137,6 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
               ],
             ),
           );
-        });
+        },);
   }
 }

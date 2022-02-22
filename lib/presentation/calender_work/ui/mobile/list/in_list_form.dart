@@ -32,7 +32,7 @@ class _InListFormState extends State<InListForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _cubit.changeItemMenuSubject.value.getTypeEnum().getHeader(
+          _cubit.changeItemMenuSubject.value.getHeader(
                 cubit: _cubit,
               ),
           Expanded(

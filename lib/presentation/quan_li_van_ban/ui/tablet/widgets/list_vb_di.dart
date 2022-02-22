@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/document/outgoing_document.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -49,7 +50,7 @@ class _ListVBDiState extends State<ListVBDi> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (contetx) => DetailDocumentTablet(),
+                          builder: (context) => const ChiTietVanBanTablet(),
                         ),
                       );
                     },

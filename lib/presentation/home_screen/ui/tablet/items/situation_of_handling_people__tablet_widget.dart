@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/tinh_hinh_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -7,7 +6,6 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:ccvc_mobile/widgets/views/loading_only.dart';
@@ -40,6 +38,7 @@ class _SituationOfHandlingPeopleWidgetState
     return ContainerBackgroundTabletWidget(
         spacingTitle: 0,
         minHeight: 415,
+        maxHeight: 415,
         title: S.current.situation_of_handling_people,
         onTapIcon: () {
           HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
@@ -67,11 +66,7 @@ class _SituationOfHandlingPeopleWidgetState
               builder: (context, snapshot) {
                 final data = snapshot.data ?? <TinhHinhYKienModel>[];
                 if (data.isEmpty) {
-                  return Container(
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: const NodataWidget(),
-                  );
+                  return const NodataWidget();
                 }
                 return PieChart(
                   paddingLeftSubTitle: 15.w,

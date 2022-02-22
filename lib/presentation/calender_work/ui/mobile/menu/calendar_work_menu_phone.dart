@@ -85,17 +85,17 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                       children: listThongBao
                           .map(
                             (e) => ContainerMenuWidget(
-                              name: e.name,
+                              name: e.typeMenu.getTitle(),
                               icon: e.icon,
                               type: e.type,
                               index: e.index ?? 0,
                               childExpand: Column(
-                                children: e.itemMenu == ItemMenu.Item2
+                                children: e.typeMenu == TypeCalendarMenu.LichTheoTrangThai
                                     ? listTheoTrangThai
                                         .map(
                                           (e) => ContainerMenuWidget(
                                             icon: e.icon,
-                                            name: e.name,
+                                            name: e.typeMenu.getTitle(),
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {
@@ -108,7 +108,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                                         .map(
                                           (e) => ContainerMenuWidget(
                                             icon: e.icon,
-                                            name: e.name,
+                                            name: e.typeMenu.getTitle(),
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {

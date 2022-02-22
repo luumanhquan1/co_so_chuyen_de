@@ -2,7 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_tablet.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/incoming_documment_provider.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
@@ -73,7 +73,7 @@ class _IncomingDocumentScreenTabletState
                                       context,
                                       MaterialPageRoute(
                                         builder: (contetx) =>
-                                            DetailDocumentTablet(),
+                                            ChiTietVanBanTablet(),
                                       ),
                                     );
                                   },

@@ -31,9 +31,10 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                 flex: 4,
                 child: AutoSizeText(
                   widget.row.title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xff667793),
+                  style: textNormalCustom(
+                    color: titleItemEdit,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -51,6 +52,7 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                               style: textNormalCustom(
                                 fontSize: 14,
                                 color: titleColor,
+                                fontWeight: FontWeight.w400,
                               ),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -71,20 +73,6 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                               ),
                             ),
                           )
-                    // : Row(
-                    //     mainAxisSize: MainAxisSize.min,
-                    //     children: [
-                    //       SizedBox(
-                    //         height: 20,
-                    //         width: 41,
-                    //         child: CustomCheckBox(
-                    //           title: '',
-                    //           isCheck: widget.row.value,
-                    //         ),
-                    //       ),
-                    //       Container()
-                    //     ],
-                    //   ),
                     : const SizedBox(),
               )
             ],
@@ -119,7 +107,7 @@ Widget checkBoxCusTom(DocumentDetailRow row) {
       AutoSizeText(row.title,
           style: textNormalCustom(
             fontSize: 14,
-            color: const Color(0xff667793),
+            color: titleItemEdit,
           )),
     ],
   );
