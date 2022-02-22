@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 class YKienXuLyExpandWidget extends StatelessWidget {
   final DetailDocumentCubit cubit;
 
-  const YKienXuLyExpandWidget({Key? key, required this.cubit}) : super(key: key);
+  const YKienXuLyExpandWidget({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +29,10 @@ class YKienXuLyExpandWidget extends StatelessWidget {
           ),
         ],
       ),
-      child:  YKienXuLyExpand(
-        onSendComment: (text, listFileId) {
-
-        },
+      child: YKienXuLyExpand(
+        onSendComment: (text, listFileId) {},
         miss: cubit.info,
-      )
+      ),
     );
   }
 }

@@ -32,7 +32,7 @@ class _LichSuTraLaiWidgetExpandTabletState
           top: 10.5,
           bottom: 10.5,
         ),
-        child:  Text(S.current.lich_su_tra_lai),
+        child: Text(S.current.lich_su_tra_lai),
       ),
       child: StreamBuilder<HistoryProcessPage>(
         stream: widget.cubit.screenJobProfilesStream,

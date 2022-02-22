@@ -1,8 +1,6 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
-import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/history_widget/history_widget.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
@@ -33,8 +31,7 @@ class _LichSuVanBanLienThongWidgetExpandTabletState extends State<LichSuVanBanLi
           top: 10.5,
           bottom: 10.5,
         ),
-        child: const Text(
-            'Lịch sử văn bản liên thông'),
+        child: Text(S.current.lich_su_van_ban_lien_thong),
       ),
       child: StreamBuilder<HistoryProcessPage>(
         stream: widget.cubit.screenJobProfilesStream,
