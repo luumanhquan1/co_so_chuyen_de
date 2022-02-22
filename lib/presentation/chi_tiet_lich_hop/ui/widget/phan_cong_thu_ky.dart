@@ -29,7 +29,7 @@ class _PhanCongThuKyWidgetState extends State<PhanCongThuKyWidget> {
         children: [
           if (APP_DEVICE == DeviceType.MOBILE) Text(
                   S.current.chon_thu_ky_cuoc_hop,
-                  style: textNormalCustom(color: titleItemEdit),
+                  style: textNormalCustom(color: textTitle),
                 ) else SizedBox(),
           const SizedBox(
             height: 8,
