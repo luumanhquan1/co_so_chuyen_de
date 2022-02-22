@@ -1,11 +1,3 @@
-class BaseUrlConstants {
-  static const baseURLCCVC = 'https://api-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlGateway =
-      'https://api-gateway-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlCommon =
-      'https://api-common-ccvc-uat.chinhquyendientu.vn';
-}
-
 class ApiConstants {
   static const LOGIN = '/api/auth/login';
   static const int DEFAULT_PAGE_SIZE = 45;
@@ -51,7 +43,7 @@ class ApiConstants {
   static const DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
   static const CANLENDAR_LIST_MEETING =
       '/vpdt/api/MeetingSchedule/calendar-list';
-  static const SU_KIEN_TRONG_NGAY ='/api/DashBoardHome/su-kien-trong-ngay?';
+  static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
 }
 
