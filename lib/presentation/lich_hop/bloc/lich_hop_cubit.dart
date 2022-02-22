@@ -1,5 +1,8 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
@@ -16,6 +19,10 @@ import 'package:rxdart/subjects.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LichHopCubit extends BaseCubit<LichHopState> {
+  LichHopCubit() : super(LichHopStateIntial());
+
+  DanhSachLichHopRequest danhSachLichHopRequest = fakeDataBody;
+
   bool isCheckNgay = false;
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -25,42 +32,64 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
 
-  BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
+  final BehaviorSubject<DanhSachCongViecModel> danhSachCongViecSubject =
+      BehaviorSubject();
 
-  Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
+  final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
+      BehaviorSubject();
+
+  BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
 
   Stream<List<MeetingSchedule>> get listMeetingStream =>
       listMeetTingScheduleSubject.stream;
 
-  Future<void> getDashboard(
-      {required String dateStart, required String dateTo,}) async {
+  Stream<DanhSachCongViecModel> get danhSachCongViecStream =>
+      danhSachCongViecSubject.stream;
+
+  Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
+      danhSachLichHopSubject.stream;
+
+  Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
+
+  Future<void> getDashboard({
+    required String dateStart,
+    required String dateTo,
+  }) async {
     showLoading();
 
     final result = await hopRepo.getDashBoardLichHop(dateStart, dateTo);
 
-    result.when(success: (value) {
-      listItemSchedule[0].numberOfSchedule = value.soLichChuTri ?? 0;
-      listItemSchedule[2].numberOfSchedule = value.soLichSapToi ?? 0;
-      listItemSchedule[3].numberOfSchedule = value.soLichTrung ?? 0;
-      dashBoardSubject.add(value);
-    }, error: (error) {},);
+    result.when(
+      success: (value) {
+        listItemSchedule[0].numberOfSchedule = value.soLichChuTri ?? 0;
+        listItemSchedule[2].numberOfSchedule = value.soLichSapToi ?? 0;
+        listItemSchedule[3].numberOfSchedule = value.soLichTrung ?? 0;
+        dashBoardSubject.add(value);
+      },
+      error: (error) {},
+    );
 
     showContent();
   }
 
-  LichHopCubit() : super(LichHopStateIntial());
+  Future<void> postDanhSachCongViec(
+      {required DanhSachLichHopRequest body}) async {
+    showLoading();
+    final result = await hopRepo.postDanhSachLichHop(body);
+    result.when(
+      success: (value) {
+        danhSachLichHopSubject.add(value);
+      },
+      error: (error) {},
+    );
+    showContent();
+  }
+
   List<String> listImageLichHopCuaToi = [
     ImageAssets.icLichCongTacTrongNuoc,
     ImageAssets.lichCanKlch,
     ImageAssets.lichSapToi,
     ImageAssets.icLichCongTacNuocNgoai,
-  ];
-
-  List<LichHopItem> listItemSchedule = [
-    LichHopItem(20, '22', 'Lịch chủ trì'),
-    LichHopItem(12, '22', 'Lịch cần KLCH'),
-    LichHopItem(9, '22', 'Lịch sắp tới'),
-    LichHopItem(26, '22', 'Lịch bị trùng'),
   ];
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());

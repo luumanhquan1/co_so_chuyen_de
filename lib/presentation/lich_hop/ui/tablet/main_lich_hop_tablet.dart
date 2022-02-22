@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -62,58 +61,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
               padding: const EdgeInsets.only(right: 16.0),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   PageRouteBuilder(
-                  //     reverseTransitionDuration:
-                  //         const Duration(milliseconds: 250),
-                  //     transitionDuration: const Duration(milliseconds: 250),
-                  //     pageBuilder: (_, animation, ___) {
-                  //       const begin = Offset(-1.0, 0.0);
-                  //       const end = Offset.zero;
-                  //       final tween = Tween(begin: begin, end: end);
-                  //       final offsetAnimation = animation.drive(tween);
-                  //       return FakeDrawerLichHop(
-                  //         offsetAnimation: offsetAnimation,
-                  //         title1: 'lich theo dang lich',
-                  //         title2: 'lich theo dang list',
-                  //         title3: 'lich theo danh sach',
-                  //         image1: ImageAssets.icMenuCalender,
-                  //         image2: ImageAssets.icMenuCalender,
-                  //         image3: ImageAssets.icMenuCalender,
-                  //         ontap1: () {
-                  //           setState(() {
-                  //             cubit.chooseTypeList(
-                  //               Type_Choose_Option_List.DANG_LICH,
-                  //             );
-                  //             cubit.index.sink.add(0);
-                  //             Navigator.pop(context);
-                  //           });
-                  //         },
-                  //         ontap2: () {
-                  //           setState(() {
-                  //             cubit.chooseTypeList(
-                  //               Type_Choose_Option_List.DANG_LIST,
-                  //             );
-                  //             cubit.index.sink.add(0);
-                  //             Navigator.pop(context);
-                  //           });
-                  //         },
-                  //         ontap3: () {
-                  //           setState(() {
-                  //             cubit.chooseTypeList(
-                  //               Type_Choose_Option_List.DANH_SACH,
-                  //             );
-                  //             cubit.index.sink.add(0);
-                  //             Navigator.pop(context);
-                  //           });
-                  //         },
-                  //       );
-                  //
-                  //     },
-                  //     opaque: false,
-                  //   ),
-                  // );
                   DrawerSlide.navigatorSlide(
                     context: context,
                     screen: MyCalendarMenuTablet(
@@ -188,13 +135,13 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: cubit.listItemSchedule.length,
+                              itemCount: listItemSchedule.length,
                               itemBuilder: (context, index) {
                                 return CustomItemCalenderWorkTablet(
                                   image: cubit.listImageLichHopCuaToi[index],
-                                  typeName: cubit.listItemSchedule[index].typeName,
+                                  typeName: listItemSchedule[index].typeName,
                                   numberOfCalendars:
-                                  cubit.listItemSchedule[index].numberOfSchedule,
+                                  listItemSchedule[index].numberOfSchedule,
                                 );
                               },
                             ),
@@ -228,7 +175,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                 child: BlocBuilder<LichHopCubit, LichHopState>(
                   bloc: cubit,
                   builder: (context, state) {
-                    return state.lichHopTablet();
+                    return state.lichHopTablet(cubit);
                   },
                 ),
               ),

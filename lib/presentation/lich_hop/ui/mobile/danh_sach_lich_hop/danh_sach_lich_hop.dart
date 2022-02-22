@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DanhSachLichHop extends StatefulWidget {
-  const DanhSachLichHop({Key? key}) : super(key: key);
+  final LichHopCubit cubit;
+
+  const DanhSachLichHop({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _DanhSachLichHopState createState() => _DanhSachLichHopState();
@@ -32,36 +35,40 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-            ),
-            child: SingleChildScrollView(
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: listLichHop.length,
-                itemBuilder: (context, index) {
-                  return WidgetItemLichHop(
-                    ontap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DetailMeetCalenderScreen(),
-                        ),
+          child: StreamBuilder<DanhSachLichHopModel>(
+              stream: widget.cubit.danhSachLichHopStream,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? DanhSachLichHopModel.empty();
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data.items?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return WidgetItemLichHop(
+                        ontap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => DetailMeetCalenderScreen(),
+                            ),
+                          );
+                        },
+                        title: data.items?[index].title ?? '',
+                        dateTimeFrom: DateTime.parse(
+                          data.items?[index].dateTimeFrom ?? '',
+                        ).toStringWithAMPM,
+                        dateTimeTo: DateTime.parse(
+                          data.items?[index].dateTimeTo ?? '',
+                        ).toStringWithAMPM,
+                        urlImage: listLichHop[index].urlImage,
                       );
                     },
-                    title: listLichHop[index].title,
-                    dateTimeFrom: DateTime.parse(
-                      listLichHop[index].dateTimeFrom,
-                    ).toStringWithAMPM,
-                    dateTimeTo: DateTime.parse(listLichHop[index].dateTimeTo)
-                        .toStringWithAMPM,
-                    urlImage: listLichHop[index].urlImage,
-                  );
-                },
-              ),
-            ),
-          ),
+                  ),
+                );
+              }),
         ),
       ],
     );

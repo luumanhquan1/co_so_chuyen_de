@@ -1,6 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_phone.dart';
@@ -34,6 +37,8 @@ class _MainLichHopState extends State<MainLichHop> {
   void initState() {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
+    cubit.postDanhSachCongViec(body: fakeDataBody);
   }
 
   @override
@@ -141,15 +146,14 @@ class _MainLichHopState extends State<MainLichHop> {
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: cubit.listItemSchedule.length,
+                                      itemCount: listItemSchedule.length,
                                       itemBuilder: (context, index) {
                                         return CustomItemCalenderWork(
                                           image: cubit
                                               .listImageLichHopCuaToi[index],
-                                          typeName: cubit
-                                              .listItemSchedule[index].typeName,
-                                          numberOfCalendars: cubit
-                                              .listItemSchedule[index]
+                                          typeName: listItemSchedule[index].typeName,
+                                          numberOfCalendars:
+                                              listItemSchedule[index]
                                               .numberOfSchedule,
                                         );
                                       },
@@ -175,15 +179,13 @@ class _MainLichHopState extends State<MainLichHop> {
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: cubit.listItemSchedule.length,
+                                      itemCount: listItemSchedule.length,
                                       itemBuilder: (context, index) {
                                         return CustomItemCalenderWork(
                                           image: cubit
                                               .listImageLichHopCuaToi[index],
-                                          typeName: cubit
-                                              .listItemSchedule[index].typeName,
-                                          numberOfCalendars: cubit
-                                              .listItemSchedule[index]
+                                          typeName: listItemSchedule[index].typeName,
+                                          numberOfCalendars: listItemSchedule[index]
                                               .numberOfSchedule,
                                         );
                                       },
@@ -199,7 +201,7 @@ class _MainLichHopState extends State<MainLichHop> {
                     child: BlocBuilder<LichHopCubit, LichHopState>(
                       bloc: cubit,
                       builder: (context, state) {
-                        return state.lichHop();
+                        return state.lichHop(cubit: cubit);
                       },
                     ),
                   ),
