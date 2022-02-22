@@ -150,58 +150,6 @@ class _MyCalendarMenuTabletState extends State<MyCalendarMenuTablet> {
                               ),
                             )
                             .toList(),
-                        // ContainerMenuWidgetTablet(
-                        //   name: S.current.lich_cua_toi,
-                        //   icon: ImageAssets.icPersonWork,
-                        //   childExpand: Container(),
-                        //   onTap: () {},
-                        // ),
-                        // MediaQuery.removePadding(
-                        //   context: context,
-                        //   removeTop: true,
-                        //   child: ContainerMenuWidgetTablet(
-                        //     name: S.current.lich_theo_trang_thai,
-                        //     icon: ImageAssets.icTheoDangLichCir,
-                        //     childExpand: Column(
-                        //       children: lichTheoTrangThai
-                        //           .map(
-                        //             (e) => ContainerMenuWidgetTablet(
-                        //               name: e.name,
-                        //               onTap: () {
-                        //                 e.navigator(context, cubit);
-                        //               },
-                        //               icon: '',
-                        //               index: e.index,
-                        //             ),
-                        //           )
-                        //           .toList(),
-                        //     ),
-                        //     type: TypeContainer.expand,
-                        //     onTap: () {},
-                        //   ),
-                        // ),
-                        // MediaQuery.removePadding(
-                        //   context: context,
-                        //   removeTop: true,
-                        //   child: ContainerMenuWidgetTablet(
-                        //     name: S.current.lich_theo_lanh_dao,
-                        //     icon: ImageAssets.icLichLanhDaoCir,
-                        //     childExpand: Column(
-                        //       children: lichLanhDao
-                        //           .map((e) => ContainerMenuWidgetTablet(
-                        //                 onTap: () {
-                        //                   e.navigator(context, cubit);
-                        //                 },
-                        //                 icon: '',
-                        //                 name: e.name,
-                        //                 index: e.index,
-                        //               ),)
-                        //           .toList(),
-                        //     ),
-                        //     type: TypeContainer.expand,
-                        //     onTap: () {},
-                        //   ),
-                        // ),
                       ),
                     ),
                   ),
