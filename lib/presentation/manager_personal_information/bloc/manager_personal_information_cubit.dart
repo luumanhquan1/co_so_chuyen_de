@@ -2,9 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/edit_person_information/edit_person_information_request.dart';
+import 'package:ccvc_mobile/domain/model/edit_personal_information/data_edit_person_information.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/domain/repository/edit_person/edit_person_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/tinh_huyen_xa_repository.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_state.dart';
@@ -22,7 +25,7 @@ class ManagerPersonalInformationCubit
 
   Stream<ManagerPersonalInformationModel> get managerStream =>
       managerPersonSubject.stream;
-
+  EditPersonInformationRequest editPersonInformationRequest = EditPersonInformationRequest();
 //tinh huyen sss
   BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded(
     [],
@@ -34,6 +37,8 @@ class ManagerPersonalInformationCubit
   ManagerRepository get _managerRepo => Get.find();
 
   TinhHuyenXaRepository get _tinhHuyenXaRepo => Get.find();
+
+  EditPersonRepository get _editPersonRepo => Get.find();
 
   //
   ManagerPersonalInformationModel managerPersonalInformationModel =
@@ -89,6 +94,26 @@ class ManagerPersonalInformationCubit
           huyenModel = res;
           huyenSubject.sink.add(huyenModel);
         }
+      },
+      error: (error) {},
+    );
+  }
+
+  //
+  DataEditPersonInformation dataEditPersonInformation =
+      DataEditPersonInformation();
+  BehaviorSubject<DataEditPersonInformation> dataEditSubject =
+      BehaviorSubject();
+
+  Future<void> getEditPerson(
+    EditPersonInformationRequest editPersonInformationRequest,
+  ) async {
+    final result =
+        await _editPersonRepo.getEditPerson(editPersonInformationRequest);
+    result.when(
+      success: (res) {
+        dataEditPersonInformation = res;
+        dataEditSubject.sink.add(dataEditPersonInformation);
       },
       error: (error) {},
     );

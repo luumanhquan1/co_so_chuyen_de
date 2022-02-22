@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/data/request/edit_person_information/edit_person_information_request.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -49,6 +50,11 @@ class _EditPersonalInformationScreen
   TextEditingController diaChiLienHeController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
   List<String> listData = [];
+  String tinh = '';
+  String huyen = '';
+  String xa = '';
+  String dateTimes = '';
+  bool gioiTinh = true;
 
   @override
   void initState() {
@@ -172,6 +178,7 @@ class _EditPersonalInformationScreen
                                 cubit.managerPersonalInformationModel.ngaySinh,
                             onSelectDate: (dateTime) {
                               cubit.selectBirthdayEvent(dateTime);
+                              //   dateTimes = dateTime;
                             },
                           ),
                         ),
@@ -200,8 +207,10 @@ class _EditPersonalInformationScreen
                             onSelectItem: (value) {
                               if (value == 0) {
                                 cubit.selectGTEvent(true);
+                                gioiTinh = true;
                               } else {
                                 cubit.selectGTEvent(false);
+                                gioiTinh = false;
                               }
                             },
                           ),
@@ -258,6 +267,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  tinh = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.huyenSubject.sink.add([]);
@@ -295,6 +305,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  huyen = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.xaSubject.sink.add([]);
@@ -323,6 +334,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  xa = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.isCheckTinhSubject.sink.add(true);
@@ -361,7 +373,56 @@ class _EditPersonalInformationScreen
                           },
                           onPressed2: () {
                             if (keyGroup.currentState!.validator()) {
-                            } else {}
+                              EditPersonInformationRequest editPerson =
+                                  EditPersonInformationRequest(
+                                id: widget.id,
+                                maCanBo: maCanBoController.text,
+                                hoTen: nameController.text,
+                                phoneDiDong: '',
+                                phoneCoQuan: sdtCoquanController.text,
+                                phoneNhaRieng: sdtController.text,
+                                email: emailController.text,
+                                gioiTinh: gioiTinh,
+                                ngaySinh: dateTimes,
+                                userName: '',
+                                userId: '',
+                                iDDonViHoatDong: '',
+                                cmtnd: cmndController.text,
+                                anhDaiDienFilePath: '',
+                                anhChuKyFilePath: '',
+                                anhChuKyNhayFilePath: '',
+                                bitChuyenCongTac: true,
+                                thoiGianCapNhat: '',
+                                bitNhanTinBuonEmail: true,
+                                bitNhanTinBuonSMS: true,
+                                bitDanhBa: true,
+                                chucVu: '',
+                                donVi: '',
+                                bitThuTruongDonVi: true,
+                                bitDauMoiPAKN: true,
+                                diaChi: diaChiLienHeController.text,
+                                donViDetail: cubit
+                                    .editPersonInformationRequest.donViDetail,
+                                chucVuDetail: '',
+                                nhomChucVuDetail: '',
+                                thuTu: 7,
+                                iThuTu: 0,
+                                tinh: tinh,
+                                huyen: huyen,
+                                xa: xa,
+                                tinhId: '',
+                                huyenId: '',
+                                xaId: '',
+                                departments: [],
+                                userAccounts: [],
+                                lsCanBoKiemNhiemResponse: [],
+                              );
+
+                              cubit.getEditPerson(editPerson);
+                              print('aaaa');
+                            } else {
+                              print('llll');
+                            }
                           },
                           title1: S.current.dong,
                           title2: S.current.luu_lai,

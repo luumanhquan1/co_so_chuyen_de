@@ -1,6 +1,7 @@
-import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+
+import 'manager_personal_information_row.dart';
 
 enum Status { OFFLINE, ONLINME }
 
