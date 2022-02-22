@@ -67,20 +67,32 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                     children: listChiTietLichHop
                         .map(
                           (e) => GestureDetector(
-                        onTap: () {
-                          showBottomSheetCustom(
-                            context,
-                            title: e.name,
-                            child: e.chiTietLichHop
-                                .getScreenChiTietLichHop(),
-                          );
-                        },
-                        child: itemListKetThuc(
-                          name: e.name,
-                          icon: e.icon,
-                        ),
-                      ),
-                    )
+                            onTap: () {
+                              showBottomSheetCustom(
+                                context,
+                                title: e.name == S.current.thu_hoi
+                                    ? S.current.thu_hoi_lich
+                                    : e.name,
+                                child:
+                                    e.chiTietLichHop.getScreenChiTietLichHop(),
+                              );
+                            },
+                            child: itemListKetThuc(
+                              name: e.name,
+                              icon: e.icon,
+                              onTap: () {
+                                showBottomSheetCustom(
+                                  context,
+                                  title: e.name == S.current.thu_hoi
+                                      ? S.current.thu_hoi_lich
+                                      : e.name,
+                                  child:
+                                  e.chiTietLichHop.getScreenChiTietLichHop(),
+                                );
+                              },
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
                 )
@@ -168,45 +180,53 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
     );
   }
 
-  Widget itemListKetThuc({required String icon, required String name}) {
-    return SizedBox(
-      width: 170,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(child: SvgPicture.asset(icon)),
-          SizedBox(
-            width: 10.0.textScale(),
-          ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: textNormalCustom(
-                    color: textTitle,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14.0.textScale(),
-                  ),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-                Container(
-                  height: 1,
-                  color: borderColor.withOpacity(0.5),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-              ],
+  Widget itemListKetThuc({
+    required String icon,
+    required String name,
+    required Function() onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: backgroundColorApp,
+        width: 170,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(child: SvgPicture.asset(icon)),
+            SizedBox(
+              width: 10.0.textScale(),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: textNormalCustom(
+                      color: textTitle,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0.textScale(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 14.0.textScale(),
+                  ),
+                  Container(
+                    height: 1,
+                    color: borderColor.withOpacity(0.5),
+                  ),
+                  SizedBox(
+                    height: 14.0.textScale(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
