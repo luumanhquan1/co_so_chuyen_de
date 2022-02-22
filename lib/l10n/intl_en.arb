@@ -469,6 +469,7 @@
   "nguoi_bi_don_doc" : "Người bị đôn đốc",
   "don_vi_bi_don_doc" : "Đơn vị bị đôn đốc",
   "lich_hop_lanh_dao" : "Lịch họp lãnh đạo",
-  "bao_cao_thong_ke" : "Báo cáo thống kê"
-
+  "bao_cao_thong_ke" : "Báo cáo thống kê",
+  "xem_luong" : "Xem luồng",
+  "don_vi_gui" : "Đơn vị gửi"
 }

@@ -15,6 +15,7 @@ import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
+import 'package:ccvc_mobile/widgets/views/loading_only.dart';
 import 'package:flutter/material.dart';
 
 class WordProcessingStateTabletWidget extends StatefulWidget {
@@ -81,90 +82,96 @@ class _WordProcessingStateWidgetState
             Expanded(
               child: titleChart(
                 S.current.document_incoming,
-                StreamBuilder<DocumentDashboardModel>(
-                  stream: _xuLyCubit.getDocumentVBDen,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? DocumentDashboardModel();
-                    if (snapshot.hasData) {
-                      return PieChart(
-                        paddingTop: 0,
-                        chartData: [
-                          ChartData(
-                            S.current.cho_xu_ly,
-                            data.soLuongChoXuLy?.toDouble() ?? 0,
-                            choXuLyColor,
-                          ),
-                          ChartData(
-                            S.current.dang_xu_ly,
-                            data.soLuongDangXuLy?.toDouble() ?? 0,
-                            dangXyLyColor,
-                          ),
-                          ChartData(
-                            S.current.da_xu_ly,
-                            data.soLuongDaXuLy?.toDouble() ?? 0,
-                            daXuLyColor,
-                          ),
-                          ChartData(
-                            S.current.cho_vao_so,
-                            data.soLuongChoVaoSo?.toDouble() ?? 0,
-                            choVaoSoColor,
-                          ),
-                        ],
-                        onTap: (value) {},
+                LoadingOnly(
+                  stream: _xuLyCubit.stateStream,
+                  child: StreamBuilder<DocumentDashboardModel>(
+                    stream: _xuLyCubit.getDocumentVBDen,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? DocumentDashboardModel();
+                      if (snapshot.hasData) {
+                        return PieChart(
+                          paddingTop: 0,
+                          chartData: [
+                            ChartData(
+                              S.current.cho_xu_ly,
+                              data.soLuongChoXuLy?.toDouble() ?? 0,
+                              choXuLyColor,
+                            ),
+                            ChartData(
+                              S.current.dang_xu_ly,
+                              data.soLuongDangXuLy?.toDouble() ?? 0,
+                              dangXyLyColor,
+                            ),
+                            ChartData(
+                              S.current.da_xu_ly,
+                              data.soLuongDaXuLy?.toDouble() ?? 0,
+                              daXuLyColor,
+                            ),
+                            ChartData(
+                              S.current.cho_vao_so,
+                              data.soLuongChoVaoSo?.toDouble() ?? 0,
+                              choVaoSoColor,
+                            ),
+                          ],
+                          onTap: (value) {},
+                        );
+                      }
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 100),
+                        child: NodataWidget(),
                       );
-                    }
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 100),
-                      child: NodataWidget(),
-                    );
-                  },
+                    },
+                  ),
                 ),
               ),
             ),
             Expanded(
               child: titleChart(
                 S.current.document_out_going,
-                StreamBuilder<DocumentDashboardModel>(
-                  stream: _xuLyCubit.getDocumentVBDi,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final data = snapshot.data!;
-                      return PieChart(
-                        paddingTop: 0,
-                        chartData: [
-                          ChartData(
-                            S.current.cho_trinh_ky,
-                            data.soLuongChoTrinhKy?.toDouble() ?? 0,
-                            choTrinhKyColor,
-                          ),
-                          ChartData(
-                            S.current.cho_xu_ly,
-                            data.soLuongChoXuLy?.toDouble() ?? 0,
-                            choXuLyColor,
-                          ),
-                          ChartData(
-                            S.current.da_xu_ly,
-                            data.soLuongDaXuLy?.toDouble() ?? 0,
-                            daXuLyColor,
-                          ),
-                          ChartData(
-                            S.current.cho_cap_so,
-                            data.soLuongChoCapSo?.toDouble() ?? 0,
-                            choCapSoColor,
-                          ),
-                          ChartData(
-                            S.current.cho_ban_hanh,
-                            data.soLuongChoTrinhKy?.toDouble() ?? 0,
-                            choBanHanhColor,
-                          )
-                        ],
+                LoadingOnly(
+                  stream: _xuLyCubit.stateStream,
+                  child: StreamBuilder<DocumentDashboardModel>(
+                    stream: _xuLyCubit.getDocumentVBDi,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final data = snapshot.data!;
+                        return PieChart(
+                          paddingTop: 0,
+                          chartData: [
+                            ChartData(
+                              S.current.cho_trinh_ky,
+                              data.soLuongChoTrinhKy?.toDouble() ?? 0,
+                              choTrinhKyColor,
+                            ),
+                            ChartData(
+                              S.current.cho_xu_ly,
+                              data.soLuongChoXuLy?.toDouble() ?? 0,
+                              choXuLyColor,
+                            ),
+                            ChartData(
+                              S.current.da_xu_ly,
+                              data.soLuongDaXuLy?.toDouble() ?? 0,
+                              daXuLyColor,
+                            ),
+                            ChartData(
+                              S.current.cho_cap_so,
+                              data.soLuongChoCapSo?.toDouble() ?? 0,
+                              choCapSoColor,
+                            ),
+                            ChartData(
+                              S.current.cho_ban_hanh,
+                              data.soLuongChoTrinhKy?.toDouble() ?? 0,
+                              choBanHanhColor,
+                            )
+                          ],
+                        );
+                      }
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 100),
+                        child: NodataWidget(),
                       );
-                    }
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 100),
-                      child: NodataWidget(),
-                    );
-                  },
+                    },
+                  ),
                 ),
               ),
             )
