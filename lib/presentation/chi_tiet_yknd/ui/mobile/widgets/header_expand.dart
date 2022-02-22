@@ -20,7 +20,7 @@ class _HeaderExpanedState extends State<HeaderExpaned> {
       height: 40,
       decoration: BoxDecoration(
         color: cellColor,
-        border:Border.all(color: cellColorborder),
+        border: Border.all(color: cellColorborder),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
@@ -34,13 +34,16 @@ class _HeaderExpanedState extends State<HeaderExpaned> {
               fontSize: 16,
             ),
           ),
-          if (isExpandIcon) const Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                  color: AqiColor,
-                ) else const Icon(
-                  Icons.keyboard_arrow_up_rounded,
-                  color: AqiColor,
-                ),
+          if (isExpandIcon)
+            const Icon(
+              Icons.keyboard_arrow_down_outlined,
+              color: AqiColor,
+            )
+          else
+            const Icon(
+              Icons.keyboard_arrow_up_rounded,
+              color: AqiColor,
+            ),
         ],
       ),
     );

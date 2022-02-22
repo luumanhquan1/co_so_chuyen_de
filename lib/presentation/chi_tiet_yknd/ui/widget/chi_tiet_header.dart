@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/bloc/chi_tiet_y_kien_nguoidan_cubit.dart';
-import 'package:ccvc_mobile/widgets/dialog/cupertino_loading.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietYKNDHeader extends StatefulWidget {
@@ -45,9 +44,7 @@ class ItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isFile;
-    textColor.contains(title)
-        ? isFile = true
-        : isFile = false;
+    textColor.contains(title) ? isFile = true : isFile = false;
     return Column(
       children: [
         Row(
