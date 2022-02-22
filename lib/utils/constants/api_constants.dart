@@ -1,11 +1,3 @@
-class BaseUrlConstants {
-  static const baseURLCCVC = 'https://api-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlGateway =
-      'https://api-gateway-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlCommon =
-      'https://api-common-ccvc-uat.chinhquyendientu.vn';
-}
-
 class ApiConstants {
   static const LOGIN = '/api/auth/login';
   static const int DEFAULT_PAGE_SIZE = 45;

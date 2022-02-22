@@ -39,13 +39,14 @@ import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 
 class HomeImpl extends HomeRepository {
-  final HomeService _homeService;
-  HomeImpl(this._homeService);
+  final HomeServiceGateWay _homeServiceGateWay;
+  final HomeServiceCCVC _homeServiceCCVC;
+  HomeImpl(this._homeServiceGateWay, this._homeServiceCCVC);
 
   @override
   Future<Result<PhamViModel>> getPhamVi() {
     return runCatchingAsync<PhamViResponse, PhamViModel>(
-      () => _homeService.getPhamVi(),
+      () => _homeServiceGateWay.getPhamVi(),
       (res) => res.toDomain(),
     );
   }
@@ -53,7 +54,7 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<DateModel>> getLunarDate(String inputDate) {
     return runCatchingAsync<LunarDateResponse, DateModel>(
-      () => _homeService.getLunarDate(inputDate),
+      () => _homeServiceCCVC.getLunarDate(inputDate),
       (res) => res.resultObj?.toDomain() ?? DateModel(),
     );
   }
@@ -62,7 +63,7 @@ class HomeImpl extends HomeRepository {
   Future<Result<List<TinhHuongKhanCapModel>>> getTinhHuongKhanCap() {
     return runCatchingAsync<TinhHuongKhanCapResponse,
         List<TinhHuongKhanCapModel>>(
-      () => _homeService.getTinhHuongKhanCap(),
+      () => _homeServiceCCVC.getTinhHuongKhanCap(),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -70,7 +71,7 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<List<WidgetModel>>> getDashBoardConfig() {
     return runCatchingAsync<DashBoardResponse, List<WidgetModel>>(
-      () => _homeService.getDashBoard(),
+      () => _homeServiceCCVC.getDashBoard(),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -81,7 +82,7 @@ class HomeImpl extends HomeRepository {
     String ngayCuoiCung,
   ) {
     return runCatchingAsync<DashBoardVBDenResponse, DocumentDashboardModel>(
-      () => _homeService.getDashBoardVBDen(ngayDauTien, ngayCuoiCung),
+      () => _homeServiceGateWay.getDashBoardVBDen(ngayDauTien, ngayCuoiCung),
       (res) => res.toDomain(),
     );
   }
@@ -92,7 +93,7 @@ class HomeImpl extends HomeRepository {
     String ngayCuoiCung,
   ) {
     return runCatchingAsync<VanBanDiSoLuongResponse, DocumentDashboardModel>(
-      () => _homeService.getDashBoardVBDi(ngayDauTien, ngayCuoiCung),
+      () => _homeServiceGateWay.getDashBoardVBDi(ngayDauTien, ngayCuoiCung),
       (res) => res.data?.toDomain() ?? DocumentDashboardModel(),
     );
   }
@@ -102,7 +103,7 @@ class HomeImpl extends HomeRepository {
     DanhSachVBRequest danhSachVBRequest,
   ) {
     return runCatchingAsync<DanhSachVanBanResponse, List<DocumentModel>>(
-      () => _homeService.getDanhSachVanBan(danhSachVBRequest),
+      () => _homeServiceGateWay.getDanhSachVanBan(danhSachVBRequest),
       (res) => res.data?.pageData?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -112,7 +113,7 @@ class HomeImpl extends HomeRepository {
     SearchVBRequest searchVBRequest,
   ) {
     return runCatchingAsync<SearchDanhSachVanBanResponse, List<DocumentModel>>(
-      () => _homeService.searchDanhSachVanBan(searchVBRequest),
+      () => _homeServiceGateWay.searchDanhSachVanBan(searchVBRequest),
       (res) => res.data?.pageData?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -124,7 +125,8 @@ class HomeImpl extends HomeRepository {
     String ngayCuoiCung,
   ) {
     return runCatchingAsync<TongHopNhiemVuResponse, List<TongHopNhiemVuModel>>(
-      () => _homeService.getTongHopNhiemVu(isCaNhan, ngayDauTien, ngayCuoiCung),
+      () => _homeServiceGateWay.getTongHopNhiemVu(
+          isCaNhan, ngayDauTien, ngayCuoiCung,),
       (res) => res.toDomain(),
     );
   }
@@ -134,7 +136,7 @@ class HomeImpl extends HomeRepository {
     NhiemVuRequest nhiemVuRequest,
   ) {
     return runCatchingAsync<NhiemVuResponse, List<CalendarMeetingModel>>(
-      () => _homeService.getNhiemVu(nhiemVuRequest),
+      () => _homeServiceGateWay.getNhiemVu(nhiemVuRequest),
       (res) => res.pageData?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -146,7 +148,7 @@ class HomeImpl extends HomeRepository {
     String denNgay,
   ) {
     return runCatchingAsync<YKienNguoiDanResponse, List<TinhHinhYKienModel>>(
-      () => _homeService.getYKienNguoiDan(donViId, tuNgay, denNgay),
+      () => _homeServiceGateWay.getYKienNguoiDan(donViId, tuNgay, denNgay),
       (res) => res.toDomain(),
     );
   }
@@ -163,7 +165,7 @@ class HomeImpl extends HomeRepository {
     String? loaiMenu,
   ]) {
     return runCatchingAsync<ListYKienNguoiDanResponse, List<DocumentModel>>(
-      () => _homeService.getListYKienNguoiDan(
+      () => _homeServiceGateWay.getListYKienNguoiDan(
         pageSize,
         page,
         trangThai,
@@ -180,7 +182,7 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<TodoListModel>> getListTodo() {
     return runCatchingAsync<ToDoListResponse, TodoListModel>(
-      () => _homeService.getTodoList(),
+      () => _homeServiceCCVC.getTodoList(),
       (res) => res.toDomain(),
     );
   }
@@ -188,7 +190,7 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<TodoModel>> upDateTodo(ToDoListRequest toDoListRequest) {
     return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
-      () => _homeService.updateTodoList(toDoListRequest),
+      () => _homeServiceCCVC.updateTodoList(toDoListRequest),
       (res) => res.data?.toDomain() ?? TodoModel(),
     );
   }
@@ -196,7 +198,7 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<TodoModel>> createTodo(CreateToDoRequest createToDoRequest) {
     return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
-      () => _homeService.createTodoList(createToDoRequest),
+      () => _homeServiceCCVC.createTodoList(createToDoRequest),
       (res) => res.data?.toDomain() ?? TodoModel(),
     );
   }
@@ -210,7 +212,7 @@ class HomeImpl extends HomeRepository {
     String keyWord,
   ) {
     return runCatchingAsync<BaoChiMangXaHoiResponse, List<PressNetWorkModel>>(
-      () => _homeService.getBaoChiMangXaHoi(
+      () => _homeServiceCCVC.getBaoChiMangXaHoi(
         pageIndex,
         pageSize,
         fromDate,
@@ -226,7 +228,7 @@ class HomeImpl extends HomeRepository {
     LichLamViecRequest lamViecRequest,
   ) {
     return runCatchingAsync<LichLamViecResponse, List<CalendarMeetingModel>>(
-      () => _homeService.getLichLamViec(lamViecRequest),
+      () => _homeServiceGateWay.getLichLamViec(lamViecRequest),
       (res) => res.data?.toDomain() ?? [],
     );
   }
@@ -236,7 +238,7 @@ class HomeImpl extends HomeRepository {
     LichHopRequest lichHopRequest,
   ) {
     return runCatchingAsync<LichHopResponse, List<CalendarMeetingModel>>(
-      () => _homeService.getLichHop(lichHopRequest),
+      () => _homeServiceGateWay.getLichHop(lichHopRequest),
       (res) => res.data?.toDomain() ?? [],
     );
   }
@@ -244,16 +246,16 @@ class HomeImpl extends HomeRepository {
   @override
   Future<Result<List<SuKienModel>>> getSuKien(String dateFrom, String dateTo) {
     return runCatchingAsync<SuKienResponse, List<SuKienModel>>(
-      () => _homeService.getSuKien(dateFrom, dateTo),
+      () => _homeServiceCCVC.getSuKien(dateFrom, dateTo),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<SinhNhatUserModel>>> getSinhNhat(
-      String dataFrom, String dateTo) {
+      String dataFrom, String dateTo,) {
     return runCatchingAsync<SinhNhatUserResponse, List<SinhNhatUserModel>>(
-      () => _homeService.getSinhNhat(dataFrom, dateTo),
+      () => _homeServiceCCVC.getSinhNhat(dataFrom, dateTo),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
