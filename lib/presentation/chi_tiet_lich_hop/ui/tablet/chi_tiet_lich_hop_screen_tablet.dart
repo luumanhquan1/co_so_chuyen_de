@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
-
 // todo chi tiet van ban
 class DetailMeetCalenderTablet extends StatefulWidget {
   @override
@@ -63,29 +62,53 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     children: listChiTietLichHop
                         .map(
                           (e) => GestureDetector(
-                        onTap: () {
-                          showDiaLogTablet(
-                            context,
-                            title: e.name,
-                            child: e.chiTietLichHop
-                                .getScreenChiTietLichHop(),
-                            isBottomShow: false,
-                            funcBtnOk: () {
-                              Navigator.pop(context);
+                            onTap: () {
+                              showDiaLogTablet(
+                                context,
+                                title: e.name == S.current.thu_hoi
+                                    ? S.current.thu_hoi_lich
+                                    : e.name,
+                                child:
+                                    e.chiTietLichHop.getScreenChiTietLichHop(),
+                                isBottomShow: false,
+                                funcBtnOk: () {
+                                  Navigator.pop(context);
+                                },
+                                maxHeight: e.name == S.current.thu_hoi ||
+                                        e.name == S.current.phan_cong_thu_ky ||
+                                        e.name ==
+                                            S.current.tao_boc_bang_cuoc_hop
+                                    ? 270
+                                    : 878,
+                              );
                             },
-                            maxHeight: e.name == S.current.thu_hoi ||
-                                e.name == S.current.phan_cong_thu_ky ||
-                                e.name == S.current.tao_boc_bang_cuoc_hop
-                                ? 270
-                                : 878,
-                          );
-                        },
-                        child: itemListKetThuc(
-                          name: e.name,
-                          icon: e.icon,
-                        ),
-                      ),
-                    )
+                            child: itemListKetThuc(
+                              name: e.name,
+                              icon: e.icon,
+                              onTap: () {
+                                showDiaLogTablet(
+                                  context,
+                                  title: e.name == S.current.thu_hoi
+                                      ? S.current.thu_hoi_lich
+                                      : e.name,
+                                  child: e.chiTietLichHop
+                                      .getScreenChiTietLichHop(),
+                                  isBottomShow: false,
+                                  funcBtnOk: () {
+                                    Navigator.pop(context);
+                                  },
+                                  maxHeight: e.name == S.current.thu_hoi ||
+                                          e.name ==
+                                              S.current.phan_cong_thu_ky ||
+                                          e.name ==
+                                              S.current.tao_boc_bang_cuoc_hop
+                                      ? 270
+                                      : 878,
+                                );
+                              },
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
                 )
@@ -107,9 +130,9 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
             length: 7,
             child: NestedScrollView(
               headerSliverBuilder: (
-                  BuildContext context,
-                  bool innerBoxIsScrolled,
-                  ) {
+                BuildContext context,
+                bool innerBoxIsScrolled,
+              ) {
                 return <Widget>[
                   SliverToBoxAdapter(
                     child: DetailMeetCalendarInherited(
@@ -130,15 +153,15 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                                   final data = snapshot.data;
 
                                   final listText = data
-                                      ?.dataRow()
-                                      .where((element) =>
-                                  element.type == typeData.text)
-                                      .toList() ??
+                                          ?.dataRow()
+                                          .where((element) =>
+                                              element.type == typeData.text)
+                                          .toList() ??
                                       [];
 
                                   final listText1 = listText.sublist(0, 2);
                                   final listText2 =
-                                  listText.sublist(3, listText.length);
+                                      listText.sublist(3, listText.length);
 
                                   return Column(
                                     children: [
@@ -167,47 +190,47 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                                       ),
                                       Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 4,
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   children: listText1
                                                       .map(
                                                         (e) => Container(
-                                                      margin:
-                                                      const EdgeInsets
-                                                          .only(
-                                                        bottom: 24,
-                                                      ),
-                                                      child: RowValueWidget(
-                                                        row: e,
-                                                        isTablet: true,
-                                                        isMarinLeft: true,
-                                                      ),
-                                                    ),
-                                                  )
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            bottom: 24,
+                                                          ),
+                                                          child: RowValueWidget(
+                                                            row: e,
+                                                            isTablet: true,
+                                                            isMarinLeft: true,
+                                                          ),
+                                                        ),
+                                                      )
                                                       .toList(),
                                                 ),
                                                 Column(
                                                   children: listText2
                                                       .map(
                                                         (e) => Container(
-                                                      margin:
-                                                      const EdgeInsets
-                                                          .only(
-                                                        bottom: 24,
-                                                      ),
-                                                      child: RowValueWidget(
-                                                        row: e,
-                                                        isTablet: true,
-                                                      ),
-                                                    ),
-                                                  )
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            bottom: 24,
+                                                          ),
+                                                          child: RowValueWidget(
+                                                            row: e,
+                                                            isTablet: true,
+                                                          ),
+                                                        ),
+                                                      )
                                                       .toList(),
                                                 ),
                                               ],
@@ -234,27 +257,27 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                                                       flex: 7,
                                                       child: Column(
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: (data
-                                                            ?.dataRow()
-                                                            .where(
-                                                              (element) =>
-                                                          element
-                                                              .type ==
-                                                              typeData
-                                                                  .listperson,
-                                                        )
-                                                            .toList())
-                                                            ?.map(
-                                                              (e) =>
-                                                              RowValueWidget(
-                                                                row: e,
-                                                                isTablet:
-                                                                true,
-                                                              ),
-                                                        )
-                                                            .toList() ??
+                                                                    ?.dataRow()
+                                                                    .where(
+                                                                      (element) =>
+                                                                          element
+                                                                              .type ==
+                                                                          typeData
+                                                                              .listperson,
+                                                                    )
+                                                                    .toList())
+                                                                ?.map(
+                                                                  (e) =>
+                                                                      RowValueWidget(
+                                                                    row: e,
+                                                                    isTablet:
+                                                                        true,
+                                                                  ),
+                                                                )
+                                                                .toList() ??
                                                             [
                                                               Container(),
                                                             ],
@@ -349,45 +372,53 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     );
   }
 
-  Widget itemListKetThuc({required String icon, required String name}) {
-    return SizedBox(
-      width: 170,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(child: SvgPicture.asset(icon)),
-          SizedBox(
-            width: 10.0.textScale(),
-          ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: textNormalCustom(
-                    color: textTitle,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14.0.textScale(),
-                  ),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-                Container(
-                  height: 1,
-                  color: borderColor.withOpacity(0.5),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-              ],
+  Widget itemListKetThuc({
+    required String icon,
+    required String name,
+    required Function() onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: backgroundColorApp,
+        width: 170,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(child: SvgPicture.asset(icon)),
+            SizedBox(
+              width: 10.0.textScale(),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: textNormalCustom(
+                      color: textTitle,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0.textScale(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 14.0.textScale(),
+                  ),
+                  Container(
+                    height: 1,
+                    color: borderColor.withOpacity(0.5),
+                  ),
+                  SizedBox(
+                    height: 14.0.textScale(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

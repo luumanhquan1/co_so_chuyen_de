@@ -29,7 +29,7 @@ class _TaoBocBangWidgetState extends State<TaoBocBangWidget> {
           if (APP_DEVICE == DeviceType.MOBILE)
             Text(
               S.current.Chon_can_bo_boc_bang,
-              style: textNormalCustom(color: titleItemEdit),
+              style: textNormalCustom(color: textTitle),
             )
           else
             const SizedBox(),

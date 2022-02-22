@@ -137,6 +137,6 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
               ],
             ),
           );
-        });
+        },);
   }
 }
