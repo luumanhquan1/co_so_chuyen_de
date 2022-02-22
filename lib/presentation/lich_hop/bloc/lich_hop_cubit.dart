@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
@@ -40,6 +42,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       BehaviorSubject();
 
   BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
+
+  Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
 
   Stream<List<MeetingSchedule>> get listMeetingStream =>
       listMeetTingScheduleSubject.stream;
