@@ -21,6 +21,11 @@ class ChiTietVanBanMobile extends StatefulWidget {
 class _ChiTietVanBanMobileState extends State<ChiTietVanBanMobile> {
   DetailDocumentCubit cubit=DetailDocumentCubit();
   @override
+  void initState() {
+    cubit.getChiTietVanBanDi('3f68dcea-f9d4-462a-b1dd-4d30a6551195');
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

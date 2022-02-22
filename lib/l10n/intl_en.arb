@@ -469,5 +469,20 @@
   "nguoi_bi_don_doc" : "Người bị đôn đốc",
   "don_vi_bi_don_doc" : "Đơn vị bị đôn đốc",
   "xem_luong" : "Xem luồng",
-  "don_vi_gui" : "Đơn vị gửi"
+  "don_vi_gui" : "Đơn vị gửi",
+  "so_van_ban" : "Sổ văn bản",
+  "so_den" : "Số đến",
+  "so_phu" : "Số phụ",
+  "loai_van_ban" : "Loại văn bản",
+  "ngay_ban_hanh" : "Ngày BH",
+  "ngay_den" : "Ngày đến",
+  "do_khan" : "Độ khẩn",
+  "ngay_han_xu_ly" : "Ngày hạn XL",
+  "nguoi_ky" : "Người ký",
+  "so_ban" : "Số bản",
+  "so_trang" : "Số trang",
+  "phuong_thuc_nhan" : "Phương thức nhận",
+  "van_ban_qppl" : "Văn bản QPPL",
+  "hoi_bao_van_ban" : "Hồi báo văn bản",
+  "da_nhan_ban_giay" : "Đã nhận bản giấy"
 }
