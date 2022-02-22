@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
@@ -37,6 +38,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   void initState() {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
   }
 
   @override
@@ -160,25 +162,30 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                 if (state is LichHopStateDangDanhSach) {
                   return const SizedBox();
                 } else {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 30.0),
-                      height: 116,
-                      child: ListView.builder(
-                        shrinkWrap: true,
+                  return StreamBuilder<DashBoardLichHopModel>(
+                    stream: cubit.dashBoardStream,
+                    builder: (context, snapshot) {
+                      return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        itemCount: listItemSchedule.length,
-                        itemBuilder: (context, index) {
-                          return CustomItemCalenderWorkTablet(
-                            image: cubit.listImageLichHopCuaToi[index],
-                            typeName: listItemSchedule[index].typeName,
-                            numberOfCalendars:
-                                listItemSchedule[index].numberOfSchedule,
-                          );
-                        },
-                      ),
-                    ),
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 30.0),
+                          height: 116,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: cubit.listItemSchedule.length,
+                            itemBuilder: (context, index) {
+                              return CustomItemCalenderWorkTablet(
+                                image: cubit.listImageLichHopCuaToi[index],
+                                typeName: cubit.listItemSchedule[index].typeName,
+                                numberOfCalendars:
+                                cubit.listItemSchedule[index].numberOfSchedule,
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    }
                   );
                 }
               },
