@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+part 'danh_sach_lich_hop_request.g.dart';
+
 
 @JsonSerializable()
 class DanhSachLichHopRequest {

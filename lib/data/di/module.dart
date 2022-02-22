@@ -55,9 +55,7 @@ void configureDependencies() {
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
   Get.put(HopServices(
-    provideDio(),
-    baseUrl: BaseUrlConstants.baseUrlGateway,
-  ));
+    provideDio(baseOption: BaseURLOption.GATE_WAY),));
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
 }
 
