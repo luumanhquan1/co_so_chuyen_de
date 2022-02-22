@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
       BehaviorSubject.seeded([true, false]);
-  BehaviorSubject<String> changeItemMenuSubject =
-      BehaviorSubject.seeded(S.current.lich_cua_toi);
+  BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
+      BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
 
   Stream<int> get checkIndexStream => checkIndex.stream;
 
   Stream<bool> get isCheckNgayStream => isCheckNgay.stream;
 
-  Stream<String> get changeItemMenuStream => changeItemMenuSubject.stream;
+  Stream<TypeCalendarMenu> get changeItemMenuStream => changeItemMenuSubject.stream;
 
   bool isCheck = false;
   List<String> img = [
@@ -84,8 +85,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   String textDay = '';
 
-  void changeScreenMenu(String title) {
-    changeItemMenuSubject.add(title);
+  void changeScreenMenu(TypeCalendarMenu typeMenu) {
+    changeItemMenuSubject.add(typeMenu);
   }
 
   void getDay() {

@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/select_option_header.dart';
@@ -11,7 +12,6 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,12 +39,13 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<String>(
+    return StreamBuilder<TypeCalendarMenu>(
       stream: cubit.changeItemMenuStream,
       builder: (context, snapshot) {
         return Scaffold(
           appBar: BaseAppBar(
-            title: snapshot.data ?? S.current.lich_cua_toi,
+            title: snapshot.data?.getTitle() ??
+                TypeCalendarMenu.LichCuaToi.getTitle(),
             leadingIcon: IconButton(
               onPressed: () {
                 setState(() {
@@ -76,7 +77,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
             children: [
               Column(
                 children: [
-                  if (snapshot.data == S.current.lich_cua_toi)
+                  if (snapshot.data == TypeCalendarMenu.LichCuaToi)
                     BlocBuilder<CalenderCubit, CalenderState>(
                       bloc: cubit,
                       builder: (context, state) {

@@ -8,54 +8,72 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-enum ItemMenu { Item1, Item2, Item3 }
-
 class ItemThongBaoModel {
   String icon;
-  String name;
+  TypeCalendarMenu typeMenu;
   TypeContainer type;
   int? index;
   List<ItemThongBaoModel>? listWidget;
-  ItemMenu? itemMenu;
   Function(BuildContext context, CalenderCubit cubit) onTap;
 
   ItemThongBaoModel({
     required this.icon,
-    required this.name,
+    required this.typeMenu,
     required this.type,
     required this.onTap,
     this.index,
     this.listWidget,
-    this.itemMenu,
   });
 }
 
 List<ItemThongBaoModel> listThongBao = [
   ItemThongBaoModel(
     icon: ImageAssets.icPerson,
-    name: S.current.lich_cua_toi,
+    typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
     index: 3,
-    itemMenu: ItemMenu.Item1,
     onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(S.current.lich_cua_toi);
+      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
       Navigator.pop(context);
     },
   ),
   ItemThongBaoModel(
     icon: ImageAssets.icLichTheoTrangThai,
-    name: S.current.lich_theo_trang_thai,
+    typeMenu: TypeCalendarMenu.LichTheoTrangThai,
     type: TypeContainer.expand,
-    itemMenu: ItemMenu.Item2,
     listWidget: listTheoTrangThai,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: ImageAssets.icLichLanhDao,
-    name: S.current.lich_theo_lanh_dao,
+    typeMenu: TypeCalendarMenu.LichTheoLanhDao,
     type: TypeContainer.expand,
-    itemMenu: ItemMenu.Item3,
     listWidget: listLanhDao,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+];
+
+List<ItemThongBaoModel> listThongBaoMyCalendar = [
+  ItemThongBaoModel(
+    icon: ImageAssets.icPerson,
+    typeMenu: TypeCalendarMenu.LichCuaToi,
+    type: TypeContainer.expand,
+    onTap: (BuildContext context, CalenderCubit cubit) {
+      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
+    },
+  ),
+  ItemThongBaoModel(
+    icon: ImageAssets.icLichTheoTrangThai,
+    typeMenu: TypeCalendarMenu.LichHopLanhDao,
+    type: TypeContainer.expand,
+    listWidget: listTheoTrangThai,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+  ItemThongBaoModel(
+    icon: ImageAssets.icLichLanhDao,
+    typeMenu: TypeCalendarMenu.BaoCaoThongKe,
+    type: TypeContainer.expand,
+    listWidget: listBaoCaoThongKe,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
 ];
@@ -63,28 +81,25 @@ List<ItemThongBaoModel> listThongBao = [
 List<ItemThongBaoModel> listThongBaoTablet = [
   ItemThongBaoModel(
     icon: ImageAssets.icPersonWork,
-    name: S.current.lich_cua_toi,
+    typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
     index: 3,
-    itemMenu: ItemMenu.Item1,
     onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(S.current.lich_cua_toi);
+      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
       Navigator.pop(context);
     },
   ),
   ItemThongBaoModel(
     icon: ImageAssets.icTheoDangLichCir,
-    name: S.current.lich_theo_trang_thai,
+    typeMenu: TypeCalendarMenu.LichTheoTrangThai,
     type: TypeContainer.expand,
-    itemMenu: ItemMenu.Item2,
     listWidget: listTheoTrangThai,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: ImageAssets.icLichLanhDaoCir,
-    name: S.current.lich_theo_lanh_dao,
+    typeMenu: TypeCalendarMenu.LichTheoLanhDao,
     type: TypeContainer.expand,
-    itemMenu: ItemMenu.Item3,
     listWidget: listLanhDao,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
@@ -93,48 +108,48 @@ List<ItemThongBaoModel> listThongBaoTablet = [
 List<ItemThongBaoModel> listTheoTrangThai = [
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_duoc_moi,
+    typeMenu: TypeCalendarMenu.LichDuocMoi,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(S.current.lich_duoc_moi);
+      cubit.changeScreenMenu(TypeCalendarMenu.LichDuocMoi);
       Navigator.pop(context);
     },
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_tao_ho,
+    typeMenu: TypeCalendarMenu.LichTaoHo,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(S.current.lich_tao_ho);
+      cubit.changeScreenMenu(TypeCalendarMenu.LichTaoHo);
       Navigator.pop(context);
     },
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_huy,
+    typeMenu: TypeCalendarMenu.LichHuy,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_thu_hoi,
+    typeMenu: TypeCalendarMenu.LichThuHoi,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_da_co_bao_cao,
+    typeMenu: TypeCalendarMenu.LichDaCoBaoCao,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lich_chua_co_bao_cao,
+    typeMenu: TypeCalendarMenu.LichChuaCoBaoCao,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
@@ -144,70 +159,89 @@ List<ItemThongBaoModel> listTheoTrangThai = [
 List<ItemThongBaoModel> listLanhDao = [
   ItemThongBaoModel(
     icon: '',
-    name: S.current.lanh_dao_ubnd_tinh,
+    typeMenu: TypeCalendarMenu.LanhDaoUBNDTinh,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.van_phong_ubnd_tinh,
+    typeMenu: TypeCalendarMenu.VanPhongUBNDTinh,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.so_ke_hoach_va_dau_tu,
+    typeMenu: TypeCalendarMenu.SoKeHoachDauVaDauTu,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.so_noi_vu,
+    typeMenu: TypeCalendarMenu.SoNoiVu,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.phong_tai_chinh_noi_chinh,
+    typeMenu: TypeCalendarMenu.PhongTaiChinhNoiChinh,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.phong_kinh_te_nghanh,
+    typeMenu: TypeCalendarMenu.PhongKinhTeNghanh,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.so_tai_chinh,
+    typeMenu: TypeCalendarMenu.SoTaiChinh,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
   ItemThongBaoModel(
     icon: '',
-    name: S.current.so_noi_vu,
+    typeMenu: TypeCalendarMenu.SoNoiVu,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
 ];
 
-enum TypeCalendar {
+List<ItemThongBaoModel> listBaoCaoThongKe = [
+  ItemThongBaoModel(
+    icon: '',
+    typeMenu: TypeCalendarMenu.ThongKeLichHop,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+  ItemThongBaoModel(
+    icon: '',
+    typeMenu: TypeCalendarMenu.DanhSachLichHop,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+];
+
+enum TypeCalendarMenu {
   LichCuaToi,
+  LichTheoTrangThai,
+  LichTheoLanhDao,
   LichDuocMoi,
   LichTaoHo,
   LichHuy,
   LichThuHoi,
   LichDaCoBaoCao,
-  LichLichChuaCoBaoCao,
+  LichChuaCoBaoCao,
   LanhDaoUBNDTinh,
   VanPhongUBNDTinh,
   SoKeHoachDauVaDauTu,
@@ -215,14 +249,78 @@ enum TypeCalendar {
   PhongTaiChinhNoiChinh,
   PhongKinhTeNghanh,
   SoTaiChinh,
+  LichHopLanhDao,
+  BaoCaoThongKe,
+  ThongKeLichHop,
+  DanhSachLichHop
 }
 
-extension GetScreenMenu on TypeCalendar {
+extension GetScreenMenu on TypeCalendarMenu {
+  String getTitle() {
+    switch (this) {
+      case TypeCalendarMenu.LichCuaToi:
+        return S.current.lich_cua_toi;
+
+      case TypeCalendarMenu.LichTheoTrangThai:
+        return S.current.lich_theo_trang_thai;
+
+      case TypeCalendarMenu.LichTheoLanhDao:
+        return S.current.lich_theo_lanh_dao;
+
+      case TypeCalendarMenu.LichDuocMoi:
+        return S.current.lich_duoc_moi;
+
+      case TypeCalendarMenu.LichTaoHo:
+        return S.current.lich_tao_ho;
+
+      case TypeCalendarMenu.LichHuy:
+        return S.current.lich_huy;
+      case TypeCalendarMenu.LichChuaCoBaoCao:
+        return S.current.lich_chua_co_bao_cao;
+
+      case TypeCalendarMenu.LichThuHoi:
+        return S.current.lich_thu_hoi;
+
+      case TypeCalendarMenu.LichDaCoBaoCao:
+        return S.current.lich_da_co_bao_cao;
+
+      case TypeCalendarMenu.LanhDaoUBNDTinh:
+        return S.current.lanh_dao_ubnd_tinh;
+
+      case TypeCalendarMenu.VanPhongUBNDTinh:
+        return S.current.van_phong_ubnd_tinh;
+
+      case TypeCalendarMenu.SoKeHoachDauVaDauTu:
+        return S.current.so_ke_hoach_va_dau_tu;
+
+      case TypeCalendarMenu.SoNoiVu:
+        return S.current.so_noi_vu;
+
+      case TypeCalendarMenu.PhongTaiChinhNoiChinh:
+        return S.current.phong_tai_chinh_noi_chinh;
+
+      case TypeCalendarMenu.PhongKinhTeNghanh:
+        return S.current.phong_kinh_te_nghanh;
+
+      case TypeCalendarMenu.SoTaiChinh:
+        return S.current.so_tai_chinh;
+
+      case TypeCalendarMenu.LichHopLanhDao:
+        return S.current.lich_hop_lanh_dao;
+
+      case TypeCalendarMenu.BaoCaoThongKe:
+        return S.current.bao_cao_thong_ke;
+
+      default:
+        return S.current.lich_cua_toi;
+    }
+  }
+
   Widget getHeader({
     required CalenderCubit cubit,
   }) {
     switch (this) {
-      case TypeCalendar.LichCuaToi:
+      case TypeCalendarMenu.LichCuaToi:
         return Padding(
           padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
           child: Text(
@@ -231,7 +329,7 @@ extension GetScreenMenu on TypeCalendar {
           ),
         );
 
-      case TypeCalendar.LichDuocMoi:
+      case TypeCalendarMenu.LichDuocMoi:
         return Padding(
           padding: const EdgeInsets.only(right: 16, left: 16),
           child: Column(
@@ -258,7 +356,7 @@ extension GetScreenMenu on TypeCalendar {
           ),
         );
 
-      case TypeCalendar.LichTaoHo:
+      case TypeCalendarMenu.LichTaoHo:
         return Padding(
           padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
           child: Text(
@@ -283,7 +381,7 @@ extension GetScreenMenu on TypeCalendar {
     required CalenderCubit cubit,
   }) {
     switch (this) {
-      case TypeCalendar.LichCuaToi:
+      case TypeCalendarMenu.LichCuaToi:
         return isHindText
             ? Container()
             : Container(
@@ -294,7 +392,7 @@ extension GetScreenMenu on TypeCalendar {
                 ),
               );
 
-      case TypeCalendar.LichDuocMoi:
+      case TypeCalendarMenu.LichDuocMoi:
         return isHindText
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -317,7 +415,7 @@ extension GetScreenMenu on TypeCalendar {
                 ),
               );
 
-      case TypeCalendar.LichTaoHo:
+      case TypeCalendarMenu.LichTaoHo:
         return isHindText
             ? Container()
             : Container(
@@ -338,24 +436,6 @@ extension GetScreenMenu on TypeCalendar {
                   style: textNormalCustom(color: textBodyTime),
                 ),
               );
-    }
-  }
-}
-
-extension GetTypeScreenMenu on String {
-  TypeCalendar getTypeEnum() {
-    switch (this) {
-      case 'Lịch của tôi':
-        return TypeCalendar.LichCuaToi;
-
-      case 'Lịch được mời':
-        return TypeCalendar.LichDuocMoi;
-
-      case 'Lịch tạo hộ':
-        return TypeCalendar.LichTaoHo;
-
-      default:
-        return TypeCalendar.LichCuaToi;
     }
   }
 }
