@@ -51,7 +51,7 @@ class ManagerPersonalInformationModel {
   String? tinhId;
   String? huyenId;
   String? xaId;
-  List<Departments>? departments;
+  List<DepartmentsModel>? departments;
   List<UserAccounts>? userAccounts;
   Status status = Status.OFFLINE;
 
@@ -105,7 +105,7 @@ class ManagerPersonalInformationModel {
       ),
       ManagerPersonalInformationRow(
         S.current.ngay_sinh,
-        DateTime.parse(ngaySinh ?? '').toStringWithListFormat,
+        ngaySinh,
         TypeRow.text,
       ),
       ManagerPersonalInformationRow(S.current.cmnd, cmtnd ?? '', TypeRow.text),
@@ -317,7 +317,7 @@ class ManagerPersonalInformationModel {
   }
 }
 
-class Departments {
+class DepartmentsModel {
   String? id;
   String? chucVuId;
   String? tenChucVu;
@@ -329,7 +329,7 @@ class Departments {
   int? trangThai;
   String? updatedAt;
 
-  Departments({
+  DepartmentsModel({
     this.id,
     this.chucVuId,
     this.tenChucVu,

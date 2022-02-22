@@ -25,13 +25,13 @@ class ManagerPersonalInformationCubit
 
   Stream<ManagerPersonalInformationModel> get managerStream =>
       managerPersonSubject.stream;
-  EditPersonInformationRequest editPersonInformationRequest = EditPersonInformationRequest();
+  EditPersonInformationRequest editPersonInformationRequest =
+      EditPersonInformationRequest();
+
 //tinh huyen sss
   BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded(
     [],
   );
-  Departments hh=Departments();
-  List<Departments>? list = [];
 
   List<TinhHuyenXaModel> tinhModel = [];
 
@@ -46,6 +46,8 @@ class ManagerPersonalInformationCubit
   //
   ManagerPersonalInformationModel managerPersonalInformationModel =
       ManagerPersonalInformationModel();
+
+  //List<DepartmentsModel> list = [DepartmentsModel(id: ,chucVuId: ,)];
 
   Future<void> getInfo({
     String id = '',

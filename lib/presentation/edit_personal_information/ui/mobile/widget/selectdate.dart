@@ -50,7 +50,7 @@ class _CustomDropDownState extends State<SelectDate> {
       onTap: () {
         showBottomSheetCustom(
           context,
-          title: S.current.chon_ngay,
+          title: 'S.current.chon_ngay',
           child: Column(
             children: [
               SizedBox(
@@ -58,6 +58,7 @@ class _CustomDropDownState extends State<SelectDate> {
                 child: FlutterRoundedCupertinoDatePickerWidget(
                   onDateTimeChanged: (value) {
                     dateSelect = value.toString();
+                    widget.onSelectDate(dateSelect);
                   },
                   textStyleDate: titleAppbar(),
                   initialDateTime: DateTime.now(),
