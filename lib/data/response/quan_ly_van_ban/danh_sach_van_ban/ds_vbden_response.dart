@@ -39,7 +39,7 @@ class DataResponseVBDen {
                 doKhan: e.doKhan,
                 loaiVanBan: e.loaiVanBan,
                 ngayDen: e.ngayDen,
-                nguoiSoanThao: e.nguoiSoanThao))
+                nguoiSoanThao: e.nguoiSoanThao),)
             .toList(),
       );
 
