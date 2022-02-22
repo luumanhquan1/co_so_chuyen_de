@@ -49,6 +49,11 @@ class _EditPersonalInformationScreen
   TextEditingController diaChiLienHeController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
   List<String> listData = [];
+  String tinh = '';
+  String huyen = '';
+  String xa = '';
+  String dateTimes = '';
+  bool gioiTinh = true;
 
   @override
   void initState() {
@@ -64,6 +69,7 @@ class _EditPersonalInformationScreen
       sdtCoquanController.text = event.phoneCoQuan ?? 'Số điện thoại cơ quan';
       sdtController.text = event.phoneDiDong ?? 'Số điện thoại';
       diaChiLienHeController.text = event.diaChi ?? 'Địa chỉ';
+      dateTimes = cubit.managerPersonalInformationModel.ngaySinh ?? '';
     });
   }
 
@@ -168,10 +174,12 @@ class _EditPersonalInformationScreen
                             paddings: 10,
                             leadingIcon:
                                 SvgPicture.asset(ImageAssets.icEditInfor),
-                            value:
-                                cubit.managerPersonalInformationModel.ngaySinh,
+                            value: cubit
+                                    .managerPersonalInformationModel.ngaySinh ??
+                                '',
                             onSelectDate: (dateTime) {
                               cubit.selectBirthdayEvent(dateTime);
+                              dateTimes = dateTime;
                             },
                           ),
                         ),
@@ -200,8 +208,10 @@ class _EditPersonalInformationScreen
                             onSelectItem: (value) {
                               if (value == 0) {
                                 cubit.selectGTEvent(true);
+                                gioiTinh = true;
                               } else {
                                 cubit.selectGTEvent(false);
+                                gioiTinh = false;
                               }
                             },
                           ),
@@ -258,6 +268,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  tinh = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.huyenSubject.sink.add([]);
@@ -295,6 +306,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  huyen = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.xaSubject.sink.add([]);
@@ -323,6 +335,7 @@ class _EditPersonalInformationScreen
                                   if (indexes >= 0) {
                                     cubit.isCheckTinhSubject.sink.add(false);
                                   }
+                                  xa = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
                                   cubit.isCheckTinhSubject.sink.add(true);
@@ -361,6 +374,23 @@ class _EditPersonalInformationScreen
                           },
                           onPressed2: () {
                             if (keyGroup.currentState!.validator()) {
+                              cubit.getEditPerson(
+                                  id: widget.id,
+                                  maCanBo: maCanBoController.value.text,
+                                  name: nameController.value.text,
+                                  sdtCoQuan: sdtCoquanController.value.text,
+                                  sdt: sdtController.value.text,
+                                  email: emailController.value.text,
+                                  gioitinh: gioiTinh,
+                                  ngaySinh: dateTimes,
+                                  cmnt: cmndController.value.text,
+                                  diaChiLienHe:
+                                      diaChiLienHeController.value.text,
+                                  donViDetail: cubit
+                                      .editPersonInformationRequest.donViDetail,
+                                  tinh: tinh,
+                                  huyen: huyen,
+                                  xa: xa);
                             } else {}
                           },
                           title1: S.current.dong,

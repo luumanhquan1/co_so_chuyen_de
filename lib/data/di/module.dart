@@ -1,11 +1,13 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/edit_person_information/edit_person_information_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
+import 'package:ccvc_mobile/data/services/edit_person_information_service/edit_person_information_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/manager_service/manager_service.dart';
@@ -13,6 +15,7 @@ import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/edit_person/edit_person_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
@@ -45,19 +48,29 @@ void configureDependencies() {
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
 
-  Get.put(ManagerService(provideDio()));
+  Get.put(ManagerService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<ManagerRepository>(
     ManagerRepositoryImpl(Get.find()),
   );
 
-  Get.put(TinhHuyenXaService(provideDio()));
+  Get.put(TinhHuyenXaService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
+
   Get.put(HopServices(
     provideDio(baseOption: BaseURLOption.GATE_WAY),
   ));
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
+
+  Get.put(
+    EditPersonInformationService(
+      provideDio(baseOption: BaseURLOption.COMMON),
+    ),
+  );
+  Get.put<EditPersonRepository>(
+    EditPersonRepositoryImpl(Get.find()),
+  );
 }
 
 int _connectTimeOut = 60000;

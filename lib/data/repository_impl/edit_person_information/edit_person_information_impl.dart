@@ -11,11 +11,12 @@ class EditPersonRepositoryImpl implements EditPersonRepository {
   EditPersonRepositoryImpl(this._editPersonService);
 
   @override
-  Future<Result<DataEditPersonInformation>> getEditPerson(String id) {
+  Future<Result<DataEditPersonInformation>> getEditPerson(
+      EditPersonInformationRequest editPersonInformationRequest,
+  ) {
     return runCatchingAsync<EditPersonInformationResponse,
         DataEditPersonInformation>(
-      () => _editPersonService
-          .editPerson(EditPersonInformationRequest(data: id, isSuccess: true)),
+      () => _editPersonService.editPerson(editPersonInformationRequest),
       (response) => response.data.toDomain(),
     );
   }

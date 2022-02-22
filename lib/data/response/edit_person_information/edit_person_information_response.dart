@@ -18,11 +18,11 @@ class EditPersonInformationResponse extends Equatable {
   Map<String, dynamic> toJson() => _$EditPersonInformationResponseToJson(this);
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 @JsonSerializable()
-class DataEditPersonInformationResponse {
+class DataEditPersonInformationResponse extends Equatable{
   @JsonKey(name: 'data')
   String? data;
   @JsonKey(name: 'isSuccess')
@@ -39,4 +39,9 @@ class DataEditPersonInformationResponse {
 
   DataEditPersonInformation toDomain() =>
       DataEditPersonInformation(data: data, isSuccess: isSuccess);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+
 }
