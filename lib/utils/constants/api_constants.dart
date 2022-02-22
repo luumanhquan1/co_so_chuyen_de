@@ -45,6 +45,8 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/calendar-list';
   static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
+  static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
+  static const SEARCH_CAN_BO ='/vpdt/api/CanBo/search';
 }
 
 class ImageConstants {
