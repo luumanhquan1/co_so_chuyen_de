@@ -1,4 +1,5 @@
-enum DoiTuongType {CANHAN,DOANHNGHIEP,TOCHUC,COQUANNHANUOC}
+enum DoiTuongType { CANHAN, DOANHNGHIEP, TOCHUC, COQUANNHANUOC }
+
 class HeaderChiTietYKNDModel {
   final String? tieuDe;
   final String? noiDung;
@@ -21,11 +22,11 @@ class HeaderChiTietYKNDModel {
   });
 }
 
-class DataHeader {
+class DataRow {
   final String title;
   final String? content;
 
-  DataHeader({required this.title, this.content});
+  DataRow({required this.title, this.content});
 }
 
 class NguoiPhanAnhModel {
@@ -44,4 +45,30 @@ class NguoiPhanAnhModel {
     this.soDienthoai,
     this.diaChiChiTiet,
   });
+}
+
+class ThongTinXuLy {
+  String? tenDonVi;
+  String? vaiTro;
+
+  ThongTinXuLy({this.vaiTro, this.tenDonVi});
+}
+
+class KetQuaXuLy {
+  final String? yKienXuLy;
+  final String? thoiGianThaoTac;
+  final String? donViThaoTac;
+  final String? taiKhoanThaoTac;
+  final String? trangThaiXuLy;
+  final String? noiDungXuLy;
+  final String? fileDinhKem;
+
+  KetQuaXuLy(
+      {this.yKienXuLy,
+      this.thoiGianThaoTac,
+      this.donViThaoTac,
+      this.taiKhoanThaoTac,
+      this.trangThaiXuLy,
+      this.noiDungXuLy,
+      this.fileDinhKem,});
 }

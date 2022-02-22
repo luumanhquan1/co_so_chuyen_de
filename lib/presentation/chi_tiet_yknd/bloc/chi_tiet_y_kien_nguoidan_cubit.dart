@@ -17,7 +17,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   void getDataHeader(){
     _headerChiTIet.sink.add(fakeDataHeadler);
   }
-
+  late String yKienXuLy;
   final fakeDataHeadler = HeaderChiTietYKNDModel(
     tieuDe:
         'Làm nhân viên văn phòng thất nghiệp gần 4 tháng nhưng chưa được nhận hỗ trợ do dịch Covid19',
@@ -38,25 +38,82 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     soDienthoai: '0964950763',
     diaChiChiTiet: 'Khu phố 6, Phường Trung Dũng, Thành phố Biên Hòa - Đồng Nai',
   );
-  List<DataHeader> getMapDataNguoiPhananh(){
-    List<DataHeader>listData=[];
-    listData.add( DataHeader(
+  final fakeThongTinXuLY=ThongTinXuLy(
+    tenDonVi: 'UBND Đồng Nai',
+    vaiTro: 'Chuyên viên',
+  );
+  final fakeKetQuaXuLy=KetQuaXuLy(
+    yKienXuLy: 'Giám sát tiến độ',
+    thoiGianThaoTac: '23:27 16/09/2021',
+    donViThaoTac: 'UBND Đồng Nai',
+    taiKhoanThaoTac: 'Chuyên viên',
+    trangThaiXuLy: 'Đã tạo PAKN',
+    noiDungXuLy: 'Không có',
+    fileDinhKem: 'file.pdf',
+
+  );
+  List<DataRow> getMapDataKetQuaXuLy(){
+    yKienXuLy=fakeKetQuaXuLy.yKienXuLy??'';
+    final List<DataRow>listData=[];
+    listData.add( DataRow(
+      title: S.current.thoi_gian_thao_tac,
+      content: fakeKetQuaXuLy.thoiGianThaoTac??'',
+    ),);
+    listData.add( DataRow(
+      title: S.current.don_vi_thao_tac,
+      content: fakeKetQuaXuLy.donViThaoTac??'',
+    ),);
+    listData.add( DataRow(
+      title: S.current.tai_khoan_thao_tac,
+      content: fakeKetQuaXuLy.taiKhoanThaoTac??'',
+    ),);
+    listData.add( DataRow(
+      title: S.current.trang_thai_xu_ly,
+      content: fakeKetQuaXuLy.trangThaiXuLy??'',
+    ),);
+    listData.add( DataRow(
+      title: S.current.noi_dung_xu_ly,
+      content: fakeKetQuaXuLy.noiDungXuLy??'',
+    ),);
+    listData.add( DataRow(
+      title: S.current.file_dinh_kem,
+      content: fakeKetQuaXuLy.fileDinhKem??'',
+    ),);
+    return listData;
+  }
+
+  List<DataRow> getMapDataThongTinXuLy(){
+    final List<DataRow>listData=[];
+    listData.add( DataRow(
+        title: S.current.nhap_ten_don_vi_phong_ban,
+        content: fakeThongTinXuLY.tenDonVi??'',
+    ),);
+    listData.add( DataRow(
+        title: S.current.vai_tro,
+        content: fakeThongTinXuLY.vaiTro??'',
+    ),);
+    return listData;
+  }
+
+  List<DataRow> getMapDataNguoiPhananh(){
+    final List<DataRow>listData=[];
+    listData.add( DataRow(
         title: S.current.ten_ca_nhan_tc,
         content: fakeDataNguoiPhanAnh.tenCaNhan??''
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.cmt_can_cuoc,
         content: fakeDataNguoiPhanAnh.cmnd??''
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
       title: S.current.dia_chi_mail,
       content: fakeDataNguoiPhanAnh.diaChiEmail??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
       title: S.current.so_dien_thoai,
       content: fakeDataNguoiPhanAnh.soDienthoai??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
       title: S.current.dia_chi_chi_tiet,
       content: fakeDataNguoiPhanAnh.diaChiChiTiet??'',
     ),);
@@ -64,37 +121,37 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
 
   }
 
-  List<DataHeader> getMapDataHeader(){
-    List<DataHeader>listData=[];
-    listData.add( DataHeader(
+  List<DataRow> getMapDataHeader(){
+    final List<DataRow>listData=[];
+    listData.add( DataRow(
         title: S.current.tieu_de,
         content: fakeDataHeadler.tieuDe??''
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.noidung,
         content: fakeDataHeadler.noiDung??''
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.nguon_pakn,
         content: fakeDataHeadler.nguonPAKN??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.phan_loai_pakn,
         content: fakeDataHeadler.phanLoaiPAKN??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.ngay_phan_anh,
         content: fakeDataHeadler.ngayPhanAnh??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.han_xu_ly,
         content: fakeDataHeadler.hanXuLy??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.lien_quan_quy_dinh,
         content: fakeDataHeadler.quyDinhLuat??'',
     ),);
-    listData.add( DataHeader(
+    listData.add( DataRow(
         title: S.current.tai_lieu_dinh_kem_cong_dan,
         content: fakeDataHeadler.taiLieuCongDan??'',
     ),);
