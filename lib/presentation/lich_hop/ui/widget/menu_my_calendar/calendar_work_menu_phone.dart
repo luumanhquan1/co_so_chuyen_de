@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -9,18 +10,16 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../item_thong_bao.dart';
-
-class CalendarWorkMenu extends StatefulWidget {
+class MyCalendarMenu extends StatefulWidget {
   final CalenderCubit cubit;
 
-  const CalendarWorkMenu({Key? key, required this.cubit}) : super(key: key);
+  const MyCalendarMenu({Key? key, required this.cubit}) : super(key: key);
 
   @override
-  State<CalendarWorkMenu> createState() => _CalendarWorkMenuState();
+  State<MyCalendarMenu> createState() => _MyCalendarMenuState();
 }
 
-class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
+class _MyCalendarMenuState extends State<MyCalendarMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +81,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
-                      children: listThongBao
+                      children: listThongBaoMyCalendar
                           .map(
                             (e) => ContainerMenuWidget(
                               name: e.typeMenu.getTitle(),
@@ -90,7 +89,9 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                               type: e.type,
                               index: e.index ?? 0,
                               childExpand: Column(
-                                children: e.typeMenu == TypeCalendarMenu.LichTheoTrangThai
+                                children: e.typeMenu ==
+                                        TypeCalendarMenu.LichCuaToi || e.typeMenu ==
+                                    TypeCalendarMenu.LichHopLanhDao
                                     ? listTheoTrangThai
                                         .map(
                                           (e) => ContainerMenuWidget(
@@ -99,12 +100,13 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {
-                                              e.onTap(context, widget.cubit);
+                                              e.onTap(
+                                                  context, widget.cubit);
                                             },
                                           ),
                                         )
                                         .toList()
-                                    : listLanhDao
+                                    : listBaoCaoThongKe
                                         .map(
                                           (e) => ContainerMenuWidget(
                                             icon: e.icon,
@@ -112,7 +114,8 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {
-                                              e.onTap(context, widget.cubit);
+                                              e.onTap(
+                                                  context, widget.cubit);
                                             },
                                           ),
                                         )

@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -11,17 +10,15 @@ import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CalendarWorkMenuTablet extends StatefulWidget {
+class MyCalendarMenuTablet extends StatefulWidget {
   final CalenderCubit cubit;
-
-  const CalendarWorkMenuTablet({Key? key, required this.cubit})
-      : super(key: key);
+  const MyCalendarMenuTablet({Key? key, required this.cubit}) : super(key: key);
 
   @override
-  _CalendarWorkMenuTabletState createState() => _CalendarWorkMenuTabletState();
+  _MyCalendarMenuTabletState createState() => _MyCalendarMenuTabletState();
 }
 
-class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
+class _MyCalendarMenuTabletState extends State<MyCalendarMenuTablet> {
   CalenderCubit cubit = CalenderCubit();
 
   @override
@@ -111,7 +108,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
-                        children: listThongBaoTablet
+                        children: listThongBaoMyCalendar
                             .map(
                               (e) => ContainerMenuWidgetTablet(
                                 name: e.typeMenu.getTitle(),
@@ -119,8 +116,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                                 type: e.type,
                                 index: e.index ?? 0,
                                 childExpand: Column(
-                                  children: e.typeMenu ==
-                                          TypeCalendarMenu.LichTheoTrangThai
+                                  children: e.typeMenu == TypeCalendarMenu.LichTheoLanhDao
                                       ? listTheoTrangThai
                                           .map(
                                             (e) => ContainerMenuWidgetTablet(

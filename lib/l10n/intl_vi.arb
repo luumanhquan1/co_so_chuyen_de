@@ -475,5 +475,12 @@
   "noi_dung_xu_ly": "Nội dung xử lý",
   "don_vi_thao_tac": "Đơn vị thao tác",
   "ket_qua_xu_ly": "Kết quả xử lý",
-  "tien_trinh_xu_ly": "Tiến trình xử lý"
+  "tien_trinh_xu_ly": "Tiến trình xử lý",
+  "lich_hop_lanh_dao" : "Lịch họp lãnh đạo",
+  "xem_luong" : "Xem luồng",
+  "don_vi_gui" : "Đơn vị gửi",
+  "chon_can_bo_hoac_don_vi_de_thu_hoi" : "Chọn cán bộ hoặc đơn vị để thu hồi",
+  "chon_thu_ky_cuoc_hop" : "Chọn thư ký cuộc họp",
+  "Chon_can_bo_boc_bang" : "Chọn cán sử dụng bóc băng",
+  "Chon_don_vi_su_dung" : "Chọn đơn vị sử dụng"
 }

@@ -61,17 +61,12 @@ dependencies:
   expandable: 5.0.1
   queue: ^3.1.0+1
 
-
   dots_indicator: ^2.0.0
   dotted_border:
   #svg
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
   dart_ipify: ^1.1.0
-
-
-
-
 
   # GETX
   get: ^4.1.4
