@@ -27,10 +27,11 @@ import 'package:flutter_svg/svg.dart';
 
 class EditPersonInformationScreen extends StatefulWidget {
   final String id;
-
+  final ManagerPersonalInformationCubit cubit;
   const EditPersonInformationScreen({
     Key? key,
     required this.id,
+    required this.cubit
   }) : super(key: key);
 
   @override
@@ -39,7 +40,7 @@ class EditPersonInformationScreen extends StatefulWidget {
 
 class _EditPersonalInformationScreen
     extends State<EditPersonInformationScreen> {
-  ManagerPersonalInformationCubit cubit = ManagerPersonalInformationCubit();
+  // ManagerPersonalInformationCubit cubit = ManagerPersonalInformationCubit();
   TextEditingController nameController = TextEditingController();
   TextEditingController maCanBoController = TextEditingController();
   TextEditingController thuTuController = TextEditingController();
@@ -58,10 +59,10 @@ class _EditPersonalInformationScreen
 
   @override
   void initState() {
-    cubit.loadApi(id: widget.id);
+    widget.cubit.loadApi(id: widget.id);
     super.initState();
-    cubit.managerStream.listen((event) {
-      cubit.getCurrentUnit(event);
+    widget.cubit.managerStream.listen((event) {
+      widget.cubit.getCurrentUnit(event);
       nameController.text = event.hoTen ?? 'Họ tên';
       maCanBoController.text = event.maCanBo ?? 'Mã cán bộ';
       thuTuController.text = event.thuTu.toString();
@@ -76,7 +77,7 @@ class _EditPersonalInformationScreen
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> user =
-        cubit.managerPersonalInformationModel.getInfoToMap();
+    widget.cubit.managerPersonalInformationModel.getInfoToMap();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -96,7 +97,7 @@ class _EditPersonalInformationScreen
             padding: const EdgeInsets.only(right: 8),
             child: TextButton(
               onPressed: () {
-                cubit.getInfo(id: widget.id);
+                widget.cubit.getInfo(id: widget.id);
                 if (keyGroup.currentState!.validator()) {
                 } else {}
               },
@@ -109,15 +110,15 @@ class _EditPersonalInformationScreen
         ],
       ),
       body: ManagerProvider(
-        managerCubit: cubit,
+        managerCubit: widget.cubit,
         child: StateStreamLayout(
           textEmpty: S.current.khong_co_du_lieu,
           retry: () {},
           error: AppException('1', ''),
-          stream: cubit.stateStream,
+          stream: widget.cubit.stateStream,
           child: RefreshIndicator(
             onRefresh: () async {
-              await cubit.getInfo(id: widget.id);
+              await widget.cubit.getInfo(id: widget.id);
               if (keyGroup.currentState!.validator()) {
               } else {}
             },
@@ -127,7 +128,7 @@ class _EditPersonalInformationScreen
               child: FormGroup(
                 key: keyGroup,
                 child: StreamBuilder<ManagerPersonalInformationModel>(
-                  stream: cubit.managerStream,
+                  stream: widget.cubit.managerStream,
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const SizedBox();
@@ -175,9 +176,9 @@ class _EditPersonalInformationScreen
                             leadingIcon:
                                 SvgPicture.asset(ImageAssets.icEditInfor),
                             value:
-                                cubit.managerPersonalInformationModel.ngaySinh,
+                            widget.cubit.managerPersonalInformationModel.ngaySinh,
                             onSelectDate: (dateTime) {
-                              cubit.selectBirthdayEvent(dateTime);
+                              widget.cubit.selectBirthdayEvent(dateTime);
                               //   dateTimes = dateTime;
                             },
                           ),
@@ -198,18 +199,18 @@ class _EditPersonalInformationScreen
                           isObligatory: true,
                           title: user.keys.elementAt(6),
                           child: CustomDropDown(
-                            value: cubit.managerPersonalInformationModel
+                            value: widget.cubit.managerPersonalInformationModel
                                         .gioiTinh ??
                                     false
                                 ? S.current.Nam
                                 : S.current.Nu,
-                            items: cubit.fakeDataGioiTinh,
+                            items: widget.cubit.fakeDataGioiTinh,
                             onSelectItem: (value) {
                               if (value == 0) {
-                                cubit.selectGTEvent(true);
+                                widget.cubit.selectGTEvent(true);
                                 gioiTinh = true;
                               } else {
-                                cubit.selectGTEvent(false);
+                                widget.cubit.selectGTEvent(false);
                                 gioiTinh = false;
                               }
                             },
@@ -246,102 +247,102 @@ class _EditPersonalInformationScreen
                           ),
                         ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                          stream: cubit.tinhStream,
+                          stream: widget.cubit.tinhStream,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? [];
                             return InputInfoUserWidget(
                               title: user.keys.elementAt(10),
                               child: CustomSelectTinh(
                                 initialValue:
-                                    cubit.managerPersonalInformationModel.tinh,
+                                widget.cubit.managerPersonalInformationModel.tinh,
                                 key: UniqueKey(),
                                 title: S.current.tinh_thanh,
                                 items: data,
                                 onChange: (indexes, id) {
-                                  cubit.huyenSubject.sink.add([]);
-                                  cubit.xaSubject.sink.add([]);
-                                  cubit.getDataHuyenXa(
+                                  widget.cubit.huyenSubject.sink.add([]);
+                                  widget.cubit.xaSubject.sink.add([]);
+                                  widget.cubit.getDataHuyenXa(
                                     isXa: false,
-                                    parentId: cubit.tinhModel[indexes].id ?? '',
+                                    parentId: widget.cubit.tinhModel[indexes].id ?? '',
                                   );
                                   if (indexes >= 0) {
-                                    cubit.isCheckTinhSubject.sink.add(false);
+                                    widget.cubit.isCheckTinhSubject.sink.add(false);
                                   }
                                   tinh = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
-                                  cubit.huyenSubject.sink.add([]);
-                                  cubit.isCheckTinhSubject.sink.add(true);
-                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                  widget.cubit.huyenSubject.sink.add([]);
+                                  widget.cubit.isCheckTinhSubject.sink.add(true);
+                                  widget.cubit.isCheckHuyenSubject.sink.add(true);
                                 },
-                                cubit: cubit,
-                                isEnable: cubit.huyenSubject.value.isEmpty,
+                                cubit: widget.cubit,
+                                isEnable: widget.cubit.huyenSubject.value.isEmpty,
                               ),
                             );
                           },
                         ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                          stream: cubit.huyenStream,
+                          stream: widget.cubit.huyenStream,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? [];
                             if (data.isEmpty) {
-                              cubit.xaSubject.sink.add([]);
+                              widget.cubit.xaSubject.sink.add([]);
                             }
                             return InputInfoUserWidget(
                               title: user.keys.elementAt(11),
                               child: CustomSelectTinh(
                                 initialValue:
-                                    cubit.managerPersonalInformationModel.huyen,
+                                widget.cubit.managerPersonalInformationModel.huyen,
                                 key: UniqueKey(),
                                 title: S.current.quan_huyen,
                                 items: data,
                                 onChange: (indexes, id) {
-                                  cubit.xaSubject.sink.add([]);
-                                  cubit.getDataHuyenXa(
+                                  widget.cubit.xaSubject.sink.add([]);
+                                  widget.cubit.getDataHuyenXa(
                                     isXa: true,
                                     parentId:
-                                        cubit.huyenModel[indexes].id ?? '',
+                                    widget.cubit.huyenModel[indexes].id ?? '',
                                   );
                                   if (indexes >= 0) {
-                                    cubit.isCheckTinhSubject.sink.add(false);
+                                    widget.cubit.isCheckTinhSubject.sink.add(false);
                                   }
                                   huyen = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
-                                  cubit.xaSubject.sink.add([]);
-                                  cubit.isCheckTinhSubject.sink.add(true);
-                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                  widget.cubit.xaSubject.sink.add([]);
+                                  widget.cubit.isCheckTinhSubject.sink.add(true);
+                                  widget.cubit.isCheckHuyenSubject.sink.add(true);
                                 },
-                                cubit: cubit,
-                                isEnable: cubit.huyenSubject.value.isEmpty,
+                                cubit: widget.cubit,
+                                isEnable: widget.cubit.huyenSubject.value.isEmpty,
                               ),
                             );
                           },
                         ),
                         StreamBuilder<List<TinhHuyenXaModel>>(
-                          stream: cubit.xaStream,
+                          stream: widget.cubit.xaStream,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? [];
                             return InputInfoUserWidget(
                               title: user.keys.elementAt(12),
                               child: CustomSelectTinh(
                                 initialValue:
-                                    cubit.managerPersonalInformationModel.xa,
+                                widget.cubit.managerPersonalInformationModel.xa,
                                 key: UniqueKey(),
                                 title: S.current.phuong_xa,
                                 items: data,
                                 onChange: (indexes, id) {
                                   if (indexes >= 0) {
-                                    cubit.isCheckTinhSubject.sink.add(false);
+                                    widget.cubit.isCheckTinhSubject.sink.add(false);
                                   }
                                   xa = data[indexes].name ?? '';
                                 },
                                 onRemove: () {
-                                  cubit.isCheckTinhSubject.sink.add(true);
-                                  cubit.isCheckHuyenSubject.sink.add(true);
+                                  widget.cubit.isCheckTinhSubject.sink.add(true);
+                                  widget.cubit.isCheckHuyenSubject.sink.add(true);
                                 },
-                                cubit: cubit,
-                                isEnable: cubit.xaSubject.value.isEmpty,
+                                cubit: widget.cubit,
+                                isEnable: widget.cubit.xaSubject.value.isEmpty,
                               ),
                             );
                           },
@@ -356,15 +357,15 @@ class _EditPersonalInformationScreen
                         ),
                         spaceH20,
                         WidgetDonVibMobile(
-                          cubit: cubit,
+                          cubit: widget.cubit,
                         ),
                         spaceH20,
                         WidgetUngDungMobile(
-                          cubit: cubit,
+                          cubit: widget.cubit,
                         ),
                         spaceH20,
                         AvatarAndSignature(
-                          cubit: cubit,
+                          cubit: widget.cubit,
                         ),
                         spaceH20,
                         DoubleButtonBottom(
@@ -376,18 +377,18 @@ class _EditPersonalInformationScreen
                               EditPersonInformationRequest editPerson =
                                   EditPersonInformationRequest(
                                 id: widget.id,
-                                maCanBo: maCanBoController.text,
-                                hoTen: nameController.text,
+                                maCanBo: maCanBoController.value.text,
+                                hoTen: nameController.value.text,
                                 phoneDiDong: '',
-                                phoneCoQuan: sdtCoquanController.text,
-                                phoneNhaRieng: sdtController.text,
-                                email: emailController.text,
+                                phoneCoQuan: sdtCoquanController.value.text,
+                                phoneNhaRieng: sdtController.value.text,
+                                email: emailController.value.text,
                                 gioiTinh: gioiTinh,
                                 ngaySinh: dateTimes,
                                 userName: '',
                                 userId: '',
                                 iDDonViHoatDong: '',
-                                cmtnd: cmndController.text,
+                                cmtnd: cmndController.value.text,
                                 anhDaiDienFilePath: '',
                                 anhChuKyFilePath: '',
                                 anhChuKyNhayFilePath: '',
@@ -400,8 +401,8 @@ class _EditPersonalInformationScreen
                                 donVi: '',
                                 bitThuTruongDonVi: true,
                                 bitDauMoiPAKN: true,
-                                diaChi: diaChiLienHeController.text,
-                                donViDetail: cubit
+                                diaChi: diaChiLienHeController.value.text,
+                                donViDetail: widget.cubit
                                     .editPersonInformationRequest.donViDetail,
                                 chucVuDetail: '',
                                 nhomChucVuDetail: '',
@@ -413,12 +414,13 @@ class _EditPersonalInformationScreen
                                 tinhId: '',
                                 huyenId: '',
                                 xaId: '',
-                                departments: [],
+                                departments: widget.cubit
+                                    .editPersonInformationRequest.departments,
                                 userAccounts: [],
                                 lsCanBoKiemNhiemResponse: [],
                               );
 
-                              cubit.getEditPerson(editPerson);
+                              widget.cubit.getEditPerson(editPerson);
                               print('aaaa');
                             } else {
                               print('llll');

@@ -30,6 +30,9 @@ class ManagerPersonalInformationCubit
   BehaviorSubject<List<TinhHuyenXaModel>> tinhSubject = BehaviorSubject.seeded(
     [],
   );
+  Departments hh=Departments();
+  List<Departments>? list = [];
+
   List<TinhHuyenXaModel> tinhModel = [];
 
   Stream<List<TinhHuyenXaModel>> get tinhStream => tinhSubject.stream;

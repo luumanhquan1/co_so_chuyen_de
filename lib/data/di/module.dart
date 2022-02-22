@@ -45,16 +45,21 @@ void configureDependencies() {
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
 
-  Get.put(ManagerService(provideDio()));
+  Get.put(ManagerService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<ManagerRepository>(
     ManagerRepositoryImpl(Get.find()),
   );
 
-  Get.put(TinhHuyenXaService(provideDio()));
+  Get.put(TinhHuyenXaService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
-  Get.put(EditPersonInformationService(provideDio()));
+
+  Get.put(
+    EditPersonInformationService(
+      provideDio(baseOption: BaseURLOption.COMMON),
+    ),
+  );
   Get.put<EditPersonRepository>(
     EditPersonRepositoryImpl(Get.find()),
   );

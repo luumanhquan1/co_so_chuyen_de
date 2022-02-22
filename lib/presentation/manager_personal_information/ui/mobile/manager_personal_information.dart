@@ -61,6 +61,7 @@ class _ManagerPersonalInformationState
                 MaterialPageRoute(
                   builder: (context) => EditPersonInformationScreen(
                     id: id,
+                    cubit: _cubit,
                   ),
                 ),
               );
