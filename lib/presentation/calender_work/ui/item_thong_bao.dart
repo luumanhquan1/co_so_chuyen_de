@@ -53,6 +53,31 @@ List<ItemThongBaoModel> listThongBao = [
   ),
 ];
 
+List<ItemThongBaoModel> listThongBaoMyCalendar = [
+  ItemThongBaoModel(
+    icon: ImageAssets.icPerson,
+    typeMenu: TypeCalendarMenu.LichCuaToi,
+    type: TypeContainer.expand,
+    onTap: (BuildContext context, CalenderCubit cubit) {
+      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
+    },
+  ),
+  ItemThongBaoModel(
+    icon: ImageAssets.icLichTheoTrangThai,
+    typeMenu: TypeCalendarMenu.LichHopLanhDao,
+    type: TypeContainer.expand,
+    listWidget: listTheoTrangThai,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+  ItemThongBaoModel(
+    icon: ImageAssets.icLichLanhDao,
+    typeMenu: TypeCalendarMenu.BaoCaoThongKe,
+    type: TypeContainer.expand,
+    listWidget: listBaoCaoThongKe,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+];
+
 List<ItemThongBaoModel> listThongBaoTablet = [
   ItemThongBaoModel(
     icon: ImageAssets.icPersonWork,
@@ -190,6 +215,23 @@ List<ItemThongBaoModel> listLanhDao = [
   ),
 ];
 
+List<ItemThongBaoModel> listBaoCaoThongKe = [
+  ItemThongBaoModel(
+    icon: '',
+    typeMenu: TypeCalendarMenu.ThongKeLichHop,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+  ItemThongBaoModel(
+    icon: '',
+    typeMenu: TypeCalendarMenu.DanhSachLichHop,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+];
+
 enum TypeCalendarMenu {
   LichCuaToi,
   LichTheoTrangThai,
@@ -207,6 +249,10 @@ enum TypeCalendarMenu {
   PhongTaiChinhNoiChinh,
   PhongKinhTeNghanh,
   SoTaiChinh,
+  LichHopLanhDao,
+  BaoCaoThongKe,
+  ThongKeLichHop,
+  DanhSachLichHop
 }
 
 extension GetScreenMenu on TypeCalendarMenu {
@@ -258,6 +304,12 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.SoTaiChinh:
         return S.current.so_tai_chinh;
+
+      case TypeCalendarMenu.LichHopLanhDao:
+        return S.current.lich_hop_lanh_dao;
+
+      case TypeCalendarMenu.BaoCaoThongKe:
+        return S.current.bao_cao_thong_ke;
 
       default:
         return S.current.lich_cua_toi;
