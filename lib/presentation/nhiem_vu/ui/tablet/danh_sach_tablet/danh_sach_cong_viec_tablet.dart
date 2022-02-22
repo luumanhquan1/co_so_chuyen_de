@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
@@ -46,7 +47,15 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
                     itemCount: listDanhSachCongViec.length,
                     itemBuilder: (context, index) {
                       return NhiemVuCellTablet(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                              const ChiTietNhiemVuTabletScreen(),
+                            ),
+                          );
+                        },
                         title: listDanhSachCongViec[index].title ?? '',
                         noiDung: listDanhSachCongViec[index].noiDung ?? '',
                         dateTimeStart:

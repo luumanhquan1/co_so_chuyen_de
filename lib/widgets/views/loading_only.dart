@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/widgets/dialog/cupertino_loading.dart';
 import 'package:ccvc_mobile/widgets/views/state_layout.dart';
 import 'package:flutter/material.dart';
@@ -80,26 +79,24 @@ class _ModalProgressHUDState extends State<ModalProgressHUD> {
   }
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        color: Colors.transparent,
-        child: Stack(
-          children: [
-            widget.child,
-            StreamBuilder<bool>(
-              stream: _isAsyncCall.stream,
-              builder: (context, snapshot) {
-                return Visibility(
-                  visible: widget.inAsyncCall,
-                  child: Positioned(
-                      top: size.height / 2 -50,
-                      right: size.width / 2 - 50,
-                      child: Center(child: widget.progressIndicator)),
-                );
-              }
-            )
-          ],
-        ),
+    return Container(
+      color: Colors.transparent,
+      child: Stack(
+        children: [
+          widget.child,
+          StreamBuilder<bool>(
+            stream: _isAsyncCall.stream,
+            builder: (context, snapshot) {
+              return Visibility(
+                visible: widget.inAsyncCall,
+                child: Positioned(
+                    top: size.height / 2 -50,
+                    right: size.width / 2 - 50,
+                    child: Center(child: widget.progressIndicator)),
+              );
+            }
+          )
+        ],
       ),
     );
   }

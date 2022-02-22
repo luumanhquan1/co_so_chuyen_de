@@ -25,22 +25,42 @@ class BottomTabBarWidget extends StatelessWidget {
         border: const Border(top: BorderSide(color: fittingBg)),
       ),
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(listItem.length, (index) {
-            final tab = listItem[index];
+        child: screenDevice(
+          mobileScreen: Row(
+            children: List.generate(listItem.length, (index) {
+              final tab = listItem[index];
 
-            return GestureDetector(
-              onTap: () {
-                onChange(tab);
-              },
-              child: tabBarItem(
-                context: context,
-                item: tab,
-                isSelect: index == selectItemIndex,
-              ),
-            );
-          }),
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    onChange(tab);
+                  },
+                  child: tabBarItem(
+                    context: context,
+                    item: tab,
+                    isSelect: index == selectItemIndex,
+                  ),
+                ),
+              );
+            }),
+          ),
+          tabletScreen: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(listItem.length, (index) {
+              final tab = listItem[index];
+
+              return GestureDetector(
+                onTap: () {
+                  onChange(tab);
+                },
+                child: tabBarItem(
+                  context: context,
+                  item: tab,
+                  isSelect: index == selectItemIndex,
+                ),
+              );
+            }),
+          ),
         ),
       ),
     );

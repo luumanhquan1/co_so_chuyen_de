@@ -16,7 +16,7 @@ class HeaderChiTietYKNDModel {
       this.ngayPhanAnh,
       this.hanXuLy,
       this.quyDinhLuat,
-      this.taiLieuCongDan});
+      this.taiLieuCongDan,});
 }
 class DataHeader{
   final String title;

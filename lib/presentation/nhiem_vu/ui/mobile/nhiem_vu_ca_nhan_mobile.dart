@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/domain/model/nhiem_vu/danh_sach_nhiem_vu_model.dart'
 import 'package:ccvc_mobile/domain/model/nhiem_vu/nhiem_vu_dashboard_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_cong_viec_nhiem_vu/ui/mobile/chi_tiet_cong_viec_nhiem_vu.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_nhiem_vu_mobile.dart';
@@ -103,7 +104,13 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                       itemCount: listDanhSachNhiemVu.length,
                       itemBuilder: (context, index) {
                         return NhiemVuItemMobile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ChiTietNhiemVuPhoneScreen(),),);
+                          },
                           title: listDanhSachNhiemVu[index].noiDung ?? '',
                           timeStart: listDanhSachNhiemVu[index].timeStart ?? '',
                           timeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
