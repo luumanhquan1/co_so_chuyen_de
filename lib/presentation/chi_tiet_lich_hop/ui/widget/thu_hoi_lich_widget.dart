@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -25,6 +27,10 @@ class _ThuHoiLichWidgetState extends State<ThuHoiLichWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDropDown(
+            hint: Text(
+              S.current.chon_can_bo_hoac_don_vi_de_thu_hoi,
+              style: textNormalCustom(color: titleItemEdit),
+            ),
             items: cubit.fakeDataDropdown,
             onSelectItem: (value) {},
           ),

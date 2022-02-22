@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -22,8 +24,16 @@ class _PhanCongThuKyWidgetState extends State<PhanCongThuKyWidget> {
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          if (APP_DEVICE == DeviceType.MOBILE) Text(
+                  S.current.chon_thu_ky_cuoc_hop,
+                  style: textNormalCustom(color: titleItemEdit),
+                ) else SizedBox(),
+          const SizedBox(
+            height: 8,
+          ),
           CacLuaChonDonViWidget(detailMeetCalenderCubit: cubit),
           const SizedBox(
             height: 36,

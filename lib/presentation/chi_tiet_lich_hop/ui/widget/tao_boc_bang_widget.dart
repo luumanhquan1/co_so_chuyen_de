@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -21,9 +23,24 @@ class _TaoBocBangWidgetState extends State<TaoBocBangWidget> {
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (APP_DEVICE == DeviceType.MOBILE)
+            Text(
+              S.current.Chon_can_bo_boc_bang,
+              style: textNormalCustom(color: titleItemEdit),
+            )
+          else
+            const SizedBox(),
+          const SizedBox(
+            height: 8,
+          ),
           CustomDropDown(
+            hint: Text(
+              S.current.Chon_don_vi_su_dung,
+              style: textNormalCustom(color: titleItemEdit),
+            ),
             items: cubit.fakeDataDropdown,
             onSelectItem: (value) {},
           ),
