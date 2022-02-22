@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -15,6 +16,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
+import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,185 +46,194 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: S.current.lich_hop_cua_toi,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: IconButton(
-              onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   PageRouteBuilder(
-                //     reverseTransitionDuration:
-                //         const Duration(milliseconds: 250),
-                //     transitionDuration: const Duration(milliseconds: 250),
-                //     pageBuilder: (_, animation, ___) {
-                //       const begin = Offset(-1.0, 0.0);
-                //       const end = Offset.zero;
-                //       final tween = Tween(begin: begin, end: end);
-                //       final offsetAnimation = animation.drive(tween);
-                //       return FakeDrawerLichHop(
-                //         offsetAnimation: offsetAnimation,
-                //         title1: 'lich theo dang lich',
-                //         title2: 'lich theo dang list',
-                //         title3: 'lich theo danh sach',
-                //         image1: ImageAssets.icMenuCalender,
-                //         image2: ImageAssets.icMenuCalender,
-                //         image3: ImageAssets.icMenuCalender,
-                //         ontap1: () {
-                //           setState(() {
-                //             cubit.chooseTypeList(
-                //               Type_Choose_Option_List.DANG_LICH,
-                //             );
-                //             cubit.index.sink.add(0);
-                //             Navigator.pop(context);
-                //           });
-                //         },
-                //         ontap2: () {
-                //           setState(() {
-                //             cubit.chooseTypeList(
-                //               Type_Choose_Option_List.DANG_LIST,
-                //             );
-                //             cubit.index.sink.add(0);
-                //             Navigator.pop(context);
-                //           });
-                //         },
-                //         ontap3: () {
-                //           setState(() {
-                //             cubit.chooseTypeList(
-                //               Type_Choose_Option_List.DANH_SACH,
-                //             );
-                //             cubit.index.sink.add(0);
-                //             Navigator.pop(context);
-                //           });
-                //         },
-                //       );
-                //
-                //     },
-                //     opaque: false,
-                //   ),
-                // );
-                DrawerSlide.navigatorSlide(
-                  context: context,
-                  screen: MyCalendarMenuTablet(
-                    cubit: calenderCubit,
-                  ),
-                );
-              },
-              icon: SvgPicture.asset(
-                ImageAssets.icMenuLichHopTablet,
-              ),
-            ),
-          ),
-        ],
-        leadingIcon: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: SvgPicture.asset(
-            ImageAssets.icBack,
-          ),
-        ),
+    return StateStreamLayout(
+      stream: cubit.stateStream,
+      retry: () {},
+      textEmpty: S.current.khong_co_du_lieu,
+      error: AppException(
+        S.current.error,
+        S.current.error,
       ),
-      body: Container(
-        color: backgroundColorApp,
-        child: Column(
-          children: [
-            WidgetChooseDayWeekMonth(
-              cubit: cubit,
-              createMeeting: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
-                  ),
-                );
-              },
-              onTapDay: () {
-                setState(() {});
-                cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
-              },
-              onTapWeek: () {
-                setState(() {});
-                cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
-              },
-              onTapMonth: () {
-                setState(() {});
-                cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
-              },
-            ),
-            BlocBuilder<LichHopCubit, LichHopState>(
-              bloc: cubit,
-              builder: (context, state) {
-                return TableCandarTablet(
-                  type: state.type,
-                );
-              },
-            ),
-            BlocBuilder<LichHopCubit, LichHopState>(
-              bloc: cubit,
-              builder: (context, state) {
-                if (state is LichHopStateDangDanhSach) {
-                  return const SizedBox();
-                } else {
-                  return StreamBuilder<DashBoardLichHopModel>(
-                    stream: cubit.dashBoardStream,
-                    builder: (context, snapshot) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 30.0),
-                          height: 116,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: cubit.listItemSchedule.length,
-                            itemBuilder: (context, index) {
-                              return CustomItemCalenderWorkTablet(
-                                image: cubit.listImageLichHopCuaToi[index],
-                                typeName: cubit.listItemSchedule[index].typeName,
-                                numberOfCalendars:
-                                cubit.listItemSchedule[index].numberOfSchedule,
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                  );
-                }
-              },
-            ),
-            BlocBuilder<LichHopCubit, LichHopState>(
-              bloc: cubit,
-              builder: (context, state) {
-                if (state is LichHopStateDangDanhSach) {
-                  return const SizedBox();
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 28.0,
-                    ),
-                    child: Container(
-                      height: 1,
-                      color: bgDropDown,
+      child: Scaffold(
+        appBar: BaseAppBar(
+          title: S.current.lich_hop_cua_toi,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   PageRouteBuilder(
+                  //     reverseTransitionDuration:
+                  //         const Duration(milliseconds: 250),
+                  //     transitionDuration: const Duration(milliseconds: 250),
+                  //     pageBuilder: (_, animation, ___) {
+                  //       const begin = Offset(-1.0, 0.0);
+                  //       const end = Offset.zero;
+                  //       final tween = Tween(begin: begin, end: end);
+                  //       final offsetAnimation = animation.drive(tween);
+                  //       return FakeDrawerLichHop(
+                  //         offsetAnimation: offsetAnimation,
+                  //         title1: 'lich theo dang lich',
+                  //         title2: 'lich theo dang list',
+                  //         title3: 'lich theo danh sach',
+                  //         image1: ImageAssets.icMenuCalender,
+                  //         image2: ImageAssets.icMenuCalender,
+                  //         image3: ImageAssets.icMenuCalender,
+                  //         ontap1: () {
+                  //           setState(() {
+                  //             cubit.chooseTypeList(
+                  //               Type_Choose_Option_List.DANG_LICH,
+                  //             );
+                  //             cubit.index.sink.add(0);
+                  //             Navigator.pop(context);
+                  //           });
+                  //         },
+                  //         ontap2: () {
+                  //           setState(() {
+                  //             cubit.chooseTypeList(
+                  //               Type_Choose_Option_List.DANG_LIST,
+                  //             );
+                  //             cubit.index.sink.add(0);
+                  //             Navigator.pop(context);
+                  //           });
+                  //         },
+                  //         ontap3: () {
+                  //           setState(() {
+                  //             cubit.chooseTypeList(
+                  //               Type_Choose_Option_List.DANH_SACH,
+                  //             );
+                  //             cubit.index.sink.add(0);
+                  //             Navigator.pop(context);
+                  //           });
+                  //         },
+                  //       );
+                  //
+                  //     },
+                  //     opaque: false,
+                  //   ),
+                  // );
+                  DrawerSlide.navigatorSlide(
+                    context: context,
+                    screen: MyCalendarMenuTablet(
+                      cubit: calenderCubit,
                     ),
                   );
-                }
-              },
-            ),
-            Expanded(
-              child: BlocBuilder<LichHopCubit, LichHopState>(
-                bloc: cubit,
-                builder: (context, state) {
-                  return state.lichHopTablet();
                 },
+                icon: SvgPicture.asset(
+                  ImageAssets.icMenuLichHopTablet,
+                ),
               ),
             ),
           ],
+          leadingIcon: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: SvgPicture.asset(
+              ImageAssets.icBack,
+            ),
+          ),
+        ),
+        body: Container(
+          color: backgroundColorApp,
+          child: Column(
+            children: [
+              WidgetChooseDayWeekMonth(
+                cubit: cubit,
+                createMeeting: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+                    ),
+                  );
+                },
+                onTapDay: () {
+                  setState(() {});
+                  cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
+                },
+                onTapWeek: () {
+                  setState(() {});
+                  cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
+                },
+                onTapMonth: () {
+                  setState(() {});
+                  cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
+                },
+              ),
+              BlocBuilder<LichHopCubit, LichHopState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  return TableCandarTablet(
+                    type: state.type,
+                  );
+                },
+              ),
+              BlocBuilder<LichHopCubit, LichHopState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  if (state is LichHopStateDangDanhSach) {
+                    return const SizedBox();
+                  } else {
+                    return StreamBuilder<DashBoardLichHopModel>(
+                      stream: cubit.dashBoardStream,
+                      builder: (context, snapshot) {
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 30.0),
+                            height: 116,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: cubit.listItemSchedule.length,
+                              itemBuilder: (context, index) {
+                                return CustomItemCalenderWorkTablet(
+                                  image: cubit.listImageLichHopCuaToi[index],
+                                  typeName: cubit.listItemSchedule[index].typeName,
+                                  numberOfCalendars:
+                                  cubit.listItemSchedule[index].numberOfSchedule,
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      }
+                    );
+                  }
+                },
+              ),
+              BlocBuilder<LichHopCubit, LichHopState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  if (state is LichHopStateDangDanhSach) {
+                    return const SizedBox();
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                        vertical: 28.0,
+                      ),
+                      child: Container(
+                        height: 1,
+                        color: bgDropDown,
+                      ),
+                    );
+                  }
+                },
+              ),
+              Expanded(
+                child: BlocBuilder<LichHopCubit, LichHopState>(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    return state.lichHopTablet();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
