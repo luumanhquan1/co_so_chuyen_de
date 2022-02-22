@@ -1,12 +1,15 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -25,7 +28,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   Stream<bool> get isCheckNgayStream => isCheckNgay.stream;
 
-  Stream<TypeCalendarMenu> get changeItemMenuStream => changeItemMenuSubject.stream;
+  Stream<TypeCalendarMenu> get changeItemMenuStream =>
+      changeItemMenuSubject.stream;
 
   bool isCheck = false;
   List<String> img = [
@@ -135,6 +139,35 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     } else {
       emit(LichLVStateDangList(type));
     }
+  }
+
+  //tong dashbroad
+
+  BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
+      BehaviorSubject();
+
+  Stream<LichLamViecDashBroad> get streamLichLamViec =>
+      lichLamViecDashBroadSubject.stream;
+  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad();
+
+  LichLamViecDashBroadRepository get _lichLamViec => Get.find();
+  void callAPi() {
+    dataLichLamViec(startDate: '2022-02-01', endDate: '2022-02-28');
+  }
+  Future<void> dataLichLamViec({
+    required String startDate,
+    required String endDate,
+  }) async {
+    final result = await _lichLamViec.getLichLv(startDate, endDate);
+    result.when(
+      success: (res) {
+        lichLamViecDashBroads = res;
+        lichLamViecDashBroadSubject.sink.add(lichLamViecDashBroads);
+      },
+      error: (err) {
+        return;
+      },
+    );
   }
 }
 

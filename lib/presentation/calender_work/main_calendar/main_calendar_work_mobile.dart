@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
@@ -35,6 +35,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+    cubit.callAPi();
   }
 
   @override
@@ -215,10 +216,27 @@ Widget itemCalendarWorkDefault(CalenderCubit cubit) {
           scrollDirection: Axis.horizontal,
           itemCount: cubit.list.length,
           itemBuilder: (context, index) {
-            return CustomItemCalenderWork(
-              image: cubit.img[index],
-              typeName: cubit.list[index].typeName,
-              numberOfCalendars: cubit.list[index].numberOfCalendars,
+            return Row(
+              children: [
+                StreamBuilder<LichLamViecDashBroad>(
+                  initialData: LichLamViecDashBroad(countScheduleCaNhan: 0),
+                  stream: cubit.streamLichLamViec,
+                  builder: (context, snapshot) {
+                    return CustomItemCalenderWork(
+                      image: 'ssssss',
+                      typeName: 'ssssssss',
+                      numberOfCalendars: cubit.lichLamViecDashBroadSubject.value
+                              .countScheduleCaNhan ??
+                          0,
+                    );
+                  },
+                ),
+                CustomItemCalenderWork(
+                  image: cubit.img[index],
+                  typeName: cubit.list[index].typeName,
+                  numberOfCalendars: cubit.list[index].numberOfCalendars,
+                ),
+              ],
             );
           },
         ),
