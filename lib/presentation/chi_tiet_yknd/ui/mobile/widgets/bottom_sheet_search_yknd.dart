@@ -90,7 +90,7 @@ class _BottomSheetSearchYKNDState extends State<BottomSheetSearchYKND> {
                   key: UniqueKey(),
                   paddings: 10,
                   leadingIcon: SvgPicture.asset(ImageAssets.ic_Calendar_tui),
-                  value: '2022-01-01',
+                  value: DateTime.now().toString(),
                   onSelectDate: (dateTime) {},
                 ),
               ),
