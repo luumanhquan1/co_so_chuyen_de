@@ -196,7 +196,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            S.current.danh_sach_van_ban_di,
+                            S.current.danh_sach_y_kien_nguoi_Dan,
                             style: textNormalCustom(
                               fontSize: 16,
                               color: textDropDownColor,
