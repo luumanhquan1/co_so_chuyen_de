@@ -55,7 +55,11 @@ void configureDependencies() {
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
 
-  Get.put(LichLamViecDashBroadService(provideDio()));
+  Get.put(
+    LichLamViecDashBroadService(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
+    ),
+  );
   Get.put<LichLamViecDashBroadRepository>(
     LichLamViecDashBroadImlp(Get.find()),
   );

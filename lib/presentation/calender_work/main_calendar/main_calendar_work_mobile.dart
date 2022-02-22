@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
@@ -211,34 +212,33 @@ Widget itemCalendarWorkDefault(CalenderCubit cubit) {
           top: cubit.isCheck ? 150 : 120,
         ),
         height: 88,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: cubit.list.length,
-          itemBuilder: (context, index) {
-            return Row(
-              children: [
-                StreamBuilder<LichLamViecDashBroad>(
-                  initialData: LichLamViecDashBroad(countScheduleCaNhan: 0),
-                  stream: cubit.streamLichLamViec,
-                  builder: (context, snapshot) {
-                    return CustomItemCalenderWork(
-                      image: 'ssssss',
-                      typeName: 'ssssssss',
-                      numberOfCalendars: cubit.lichLamViecDashBroadSubject.value
-                              .countScheduleCaNhan ??
-                          0,
-                    );
-                  },
-                ),
-                CustomItemCalenderWork(
+        child: Row(
+          children: [
+            StreamBuilder<LichLamViecDashBroad>(
+              stream: cubit.streamLichLamViec,
+              builder: (context, snapshot) {
+                return CustomItemCalenderWork(
+                  image: ImageAssets.icTongSoLichLamviec,
+                  typeName: S.current.tong_so_lich_lam_viec,
+                  numberOfCalendars: cubit.lichLamViecDashBroadSubject.value
+                          .countScheduleCaNhan ??
+                      0,
+                );
+              },
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: cubit.list.length,
+              itemBuilder: (context, index) {
+                return CustomItemCalenderWork(
                   image: cubit.img[index],
                   typeName: cubit.list[index].typeName,
                   numberOfCalendars: cubit.list[index].numberOfCalendars,
-                ),
-              ],
-            );
-          },
+                );
+              },
+            ),
+          ],
         ),
       ),
     ),

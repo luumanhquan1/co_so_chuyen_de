@@ -144,7 +144,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   //tong dashbroad
 
   BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
-      BehaviorSubject();
+      BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
 
   Stream<LichLamViecDashBroad> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
