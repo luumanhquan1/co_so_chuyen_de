@@ -8,6 +8,12 @@ import 'package:file_picker/file_picker.dart';
 
 class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   DetailDocumentCubit() : super(DetailDocumentInitial());
+  bool expanded = false;
+  bool expanded2 = false;
+  bool expanded3 = false;
+  bool expanded4 = false;
+  bool expanded5 = false;
+  bool expanded6 = false;
 
   BehaviorSubject<DetailDocumentModel> detailDocumentSubject =
       BehaviorSubject<DetailDocumentModel>();

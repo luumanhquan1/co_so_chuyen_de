@@ -10,12 +10,13 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/fake_drawer_lich_hop.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/calendar_work_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/drawer_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
-import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
+import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,7 +38,6 @@ class _MainLichHopState extends State<MainLichHop> {
   void initState() {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
-    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
   }
 
   @override
