@@ -2,12 +2,15 @@ import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/list_lich_lv_impl/list_lich_lv_repo.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
+import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
+import 'package:ccvc_mobile/data/services/list_lv/list_lich_lv_service.dart';
 import 'package:ccvc_mobile/data/services/manager_service/manager_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
@@ -15,6 +18,7 @@ import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
+import 'package:ccvc_mobile/domain/repository/list_lich_lv/list_lich_lv_responsitory.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -58,6 +62,11 @@ void configureDependencies() {
     provideDio(baseOption: BaseURLOption.GATE_WAY),
   ));
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
+
+  Get.put(ListLichLvService(
+    provideDio(baseOption: BaseURLOption.GATE_WAY),
+  ));
+  Get.put<ListLichLvRepository>(ListLichLvRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;

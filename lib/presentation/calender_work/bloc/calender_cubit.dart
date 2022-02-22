@@ -1,12 +1,16 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/domain/repository/list_lich_lv/list_lich_lv_responsitory.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -25,9 +29,55 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   Stream<bool> get isCheckNgayStream => isCheckNgay.stream;
 
-  Stream<TypeCalendarMenu> get changeItemMenuStream => changeItemMenuSubject.stream;
+  Stream<TypeCalendarMenu> get changeItemMenuStream =>
+      changeItemMenuSubject.stream;
 
   bool isCheck = false;
+  BehaviorSubject<DataLichLvModel> listLichSubject = BehaviorSubject();
+  DataLichLvModel dataLichLvModel = DataLichLvModel();
+  int page = 1;
+  int totalPage = 10;
+
+  Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
+
+  ListLichLvRepository get listLichLv => Get.find();
+
+  Future<void> callApi() async {
+    await getListLichHop(
+      dateFrom: '2022-02-01',
+      dateTo: '2022-02-28',
+      isLichCuaToi: true,
+      pageIndex: page,
+      pageSize: totalPage,
+    );
+  }
+
+  Future<void> getListLichHop({
+    required String dateFrom,
+    required String dateTo,
+    required int pageIndex,
+    required int pageSize,
+    required bool isLichCuaToi,
+  }) async {
+    final ListLichLvRequest lichLvRequest = ListLichLvRequest(
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      isLichCuaToi: isLichCuaToi,
+    );
+    final result = await listLichLv.getListLichLamViec(lichLvRequest);
+    result.when(
+      success: (res) {
+        showLoading();
+        dataLichLvModel = res;
+        listLichSubject.sink.add(dataLichLvModel);
+        showContent();
+      },
+      error: (error) {},
+    );
+  }
+
   List<String> img = [
     ImageAssets.icTongSoLichLamviec,
     ImageAssets.icLichCongTacTrongNuoc,
