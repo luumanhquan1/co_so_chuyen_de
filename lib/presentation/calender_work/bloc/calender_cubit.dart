@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_right_respository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -151,9 +153,16 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad();
 
   LichLamViecDashBroadRepository get _lichLamViec => Get.find();
+
   void callAPi() {
     dataLichLamViec(startDate: '2022-02-01', endDate: '2022-02-28');
+    dataLichLamViecRight(
+      startDate: '2022-02-01',
+      endDate: '2022-02-28',
+      type: 3,
+    );
   }
+
   Future<void> dataLichLamViec({
     required String startDate,
     required String endDate,
@@ -163,6 +172,36 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       success: (res) {
         lichLamViecDashBroads = res;
         lichLamViecDashBroadSubject.sink.add(lichLamViecDashBroads);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  BehaviorSubject<List<LichLamViecDashBroadItem>>
+      lichLamViecDashBroadRightSubject = BehaviorSubject();
+
+  Stream<List<LichLamViecDashBroadItem>> get streamLichLamViecRight =>
+      lichLamViecDashBroadRightSubject.stream;
+  List<LichLamViecDashBroadItem> lichLamViecDashBroadRight = [];
+
+  LichLamViecDashBroadRightRepository get _lichLamViecRight => Get.find();
+
+  Future<void> dataLichLamViecRight({
+    required String startDate,
+    required String endDate,
+    required int type,
+  }) async {
+    final result = await _lichLamViecRight.getLichLvRight(
+      startDate,
+      endDate,
+      type,
+    );
+    result.when(
+      success: (res) {
+        lichLamViecDashBroadRight = res;
+        lichLamViecDashBroadRightSubject.sink.add(lichLamViecDashBroadRight);
       },
       error: (err) {
         return;

@@ -2,11 +2,13 @@ import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_dashbroad_impl/lich_lam_viec_dashbroad_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_dashbroad_impl/lich_lam_viec_dashbroad_right_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
+import 'package:ccvc_mobile/data/services/lich_lam_viec_dashbroad_service/lich_lam_viec_dashbroad_right_service.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_dashbroad_service/lich_lam_viec_dashbroad_service.dart';
 import 'package:ccvc_mobile/data/services/manager_service/manager_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
@@ -15,6 +17,7 @@ import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_right_respository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -62,6 +65,15 @@ void configureDependencies() {
   );
   Get.put<LichLamViecDashBroadRepository>(
     LichLamViecDashBroadImlp(Get.find()),
+  );
+
+  Get.put(
+    LichLamViecDashBroadRightService(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
+    ),
+  );
+  Get.put<LichLamViecDashBroadRightRepository>(
+    LichLamViecDashBroadRightImlp(Get.find()),
   );
 }
 

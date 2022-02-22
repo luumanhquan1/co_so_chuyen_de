@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
@@ -226,16 +227,26 @@ Widget itemCalendarWorkDefault(CalenderCubit cubit) {
                 );
               },
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: cubit.list.length,
-              itemBuilder: (context, index) {
-                return CustomItemCalenderWork(
-                  image: cubit.img[index],
-                  typeName: cubit.list[index].typeName,
-                  numberOfCalendars: cubit.list[index].numberOfCalendars,
-                );
+            StreamBuilder<List<LichLamViecDashBroadItem>>(
+              stream: cubit.streamLichLamViecRight,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? [];
+                if (data.isNotEmpty) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return CustomItemCalenderWork(
+                        image: cubit.img[index],
+                        typeName: data[index].typeName ?? '',
+                        numberOfCalendars: data[index].numberOfCalendars ?? 0,
+                      );
+                    },
+                  );
+                } else {
+                  return Container();
+                }
               },
             ),
           ],

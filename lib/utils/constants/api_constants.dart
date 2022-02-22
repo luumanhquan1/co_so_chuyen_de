@@ -47,6 +47,8 @@ class ApiConstants {
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
   static const LICH_LAM_VIEC_DASHBOARD =
       '/vpdt/api/Schedules/count-in-dashboard';
+  static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
+      '/vpdt/api/Schedules/dashboard-schedule';
 }
 
 class ImageConstants {
