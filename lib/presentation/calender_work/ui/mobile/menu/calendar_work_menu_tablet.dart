@@ -13,7 +13,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CalendarWorkMenuTablet extends StatefulWidget {
   final CalenderCubit cubit;
-  const CalendarWorkMenuTablet({Key? key, required this.cubit}) : super(key: key);
+
+  const CalendarWorkMenuTablet({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   _CalendarWorkMenuTabletState createState() => _CalendarWorkMenuTabletState();
@@ -112,17 +114,18 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                         children: listThongBaoTablet
                             .map(
                               (e) => ContainerMenuWidgetTablet(
-                                name: e.name,
+                                name: e.typeMenu.getTitle(),
                                 icon: e.icon,
                                 type: e.type,
                                 index: e.index ?? 0,
                                 childExpand: Column(
-                                  children: e.itemMenu == ItemMenu.Item2
+                                  children: e.typeMenu ==
+                                          TypeCalendarMenu.LichTheoTrangThai
                                       ? listTheoTrangThai
                                           .map(
                                             (e) => ContainerMenuWidgetTablet(
                                               icon: e.icon,
-                                              name: e.name,
+                                              name: e.typeMenu.getTitle(),
                                               index: e.index ?? 0,
                                               isIcon: false,
                                               onTap: () {
@@ -135,7 +138,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                                           .map(
                                             (e) => ContainerMenuWidgetTablet(
                                               icon: e.icon,
-                                              name: e.name,
+                                              name: e.typeMenu.getTitle(),
                                               index: e.index ?? 0,
                                               isIcon: false,
                                               onTap: () {
@@ -151,58 +154,6 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
                               ),
                             )
                             .toList(),
-                        // ContainerMenuWidgetTablet(
-                        //   name: S.current.lich_cua_toi,
-                        //   icon: ImageAssets.icPersonWork,
-                        //   childExpand: Container(),
-                        //   onTap: () {},
-                        // ),
-                        // MediaQuery.removePadding(
-                        //   context: context,
-                        //   removeTop: true,
-                        //   child: ContainerMenuWidgetTablet(
-                        //     name: S.current.lich_theo_trang_thai,
-                        //     icon: ImageAssets.icTheoDangLichCir,
-                        //     childExpand: Column(
-                        //       children: lichTheoTrangThai
-                        //           .map(
-                        //             (e) => ContainerMenuWidgetTablet(
-                        //               name: e.name,
-                        //               onTap: () {
-                        //                 e.navigator(context, cubit);
-                        //               },
-                        //               icon: '',
-                        //               index: e.index,
-                        //             ),
-                        //           )
-                        //           .toList(),
-                        //     ),
-                        //     type: TypeContainer.expand,
-                        //     onTap: () {},
-                        //   ),
-                        // ),
-                        // MediaQuery.removePadding(
-                        //   context: context,
-                        //   removeTop: true,
-                        //   child: ContainerMenuWidgetTablet(
-                        //     name: S.current.lich_theo_lanh_dao,
-                        //     icon: ImageAssets.icLichLanhDaoCir,
-                        //     childExpand: Column(
-                        //       children: lichLanhDao
-                        //           .map((e) => ContainerMenuWidgetTablet(
-                        //                 onTap: () {
-                        //                   e.navigator(context, cubit);
-                        //                 },
-                        //                 icon: '',
-                        //                 name: e.name,
-                        //                 index: e.index,
-                        //               ),)
-                        //           .toList(),
-                        //     ),
-                        //     type: TypeContainer.expand,
-                        //     onTap: () {},
-                        //   ),
-                        // ),
                       ),
                     ),
                   ),
