@@ -471,5 +471,10 @@
   "lich_hop_lanh_dao" : "Lịch họp lãnh đạo",
   "bao_cao_thong_ke" : "Báo cáo thống kê",
   "xem_luong" : "Xem luồng",
-  "don_vi_gui" : "Đơn vị gửi"
+  "don_vi_gui" : "Đơn vị gửi",
+  "chon_can_bo_hoac_don_vi_de_thu_hoi" : "Chọn cán bộ hoặc đơn vị để thu hồi",
+  "chon_thu_ky_cuoc_hop" : "Chọn thư ký cuộc họp",
+  "Chon_can_bo_boc_bang" : "Chọn cán sử dụng bóc băng",
+  "Chon_don_vi_su_dung" : "Chọn đơn vị sử dụng"
+
 }
