@@ -56,8 +56,6 @@ void configureDependencies() {
   );
   Get.put(HopServices(
     provideDio(baseOption: BaseURLOption.GATE_WAY),));
-    provideDio(baseOption: BaseURLOption.GATE_WAY),
-  ));
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
 }
 

@@ -54,8 +54,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
 
-  Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
-
   Future<void> getDashboard({
     required String dateStart,
     required String dateTo,

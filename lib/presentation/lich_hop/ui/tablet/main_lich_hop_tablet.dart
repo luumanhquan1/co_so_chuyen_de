@@ -39,6 +39,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   @override
   void initState() {
     super.initState();
+    cubit.page = 1;
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
     cubit.getDashboard(dateStart: '2022-02-10', dateTo: '2022-02-10');
   }
