@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'danh_sach_lich_hop_request.g.dart';
 
+part 'danh_sach_lich_hop_request.g.dart';
 
 @JsonSerializable()
 class DanhSachLichHopRequest {
@@ -61,26 +61,27 @@ class DanhSachLichHopRequest {
 }
 
 DanhSachLichHopRequest fakeDataBody = DanhSachLichHopRequest(
-    DateFrom: '2022-01-01',
-    DateTo: '2022-02-11',
-    UserId: '39227131-3db7-48f8-a1b2-57697430cc69',
-    DonViId: '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-    IsLichLanhDao: null,
-    PageIndex: 1,
-    PageSize: 1000,
-    Title: null,
-    isLichCuaToi: true,
-    isChoXacNhan: null,
-    isLichDuocMoi: null,
-    isLichHuyBo: null,
-    isLichTaoHo: null,
-    isLichThamGia: null,
-    isLichThuHoi: null,
-    isLichTuChoi: null,
-    isPublish: null,
-    isDuyetLich: null,
-    isDuyetPhong: null,
-    isDuyetThietBi: null,
-    isLichYeuCauChuanBi: null,
-    isChuaCoBaoCao: null,
-    isDaCoBaoCao: null,);
+  DateFrom: "2022-02-11",
+  DateTo: "2022-02-11",
+  DonViId: "0bf3b2c3-76d7-4e05-a587-9165c3624d76",
+  IsLichLanhDao: null,
+  PageIndex: 1,
+  PageSize: 10,
+  Title: null,
+  UserId: "39227131-3db7-48f8-a1b2-57697430cc69",
+  isChoXacNhan: null,
+  isChuaCoBaoCao: null,
+  isDaCoBaoCao: null,
+  isDuyetLich: null,
+  isDuyetPhong: null,
+  isDuyetThietBi: null,
+  isLichCuaToi: true,
+  isLichDuocMoi: null,
+  isLichHuyBo: null,
+  isLichTaoHo: null,
+  isLichThamGia: null,
+  isLichThuHoi: null,
+  isLichTuChoi: null,
+  isLichYeuCauChuanBi: null,
+  isPublish: null,
+);

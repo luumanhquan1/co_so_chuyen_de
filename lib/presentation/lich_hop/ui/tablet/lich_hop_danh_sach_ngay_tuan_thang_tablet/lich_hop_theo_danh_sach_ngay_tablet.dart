@@ -6,7 +6,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 
-class LichHopTheoDanhSachNgayTablet extends StatelessWidget {
+class LichHopTheoDanhSachNgayTablet extends StatefulWidget {
   final LichHopCubit cubit;
 
   const LichHopTheoDanhSachNgayTablet({
@@ -15,19 +15,45 @@ class LichHopTheoDanhSachNgayTablet extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<LichHopTheoDanhSachNgayTablet> createState() => _LichHopTheoDanhSachNgayTabletState();
+}
+
+class _LichHopTheoDanhSachNgayTabletState extends State<LichHopTheoDanhSachNgayTablet> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+
+        if (widget.cubit.page < widget.cubit.totalPage) {
+          widget.cubit.page = widget.cubit.page+1;
+          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
+          widget.cubit
+              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
+        }
+      }
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StreamBuilder<DanhSachLichHopModel>(
-              stream: cubit.danhSachLichHopStream,
+              stream: widget.cubit.danhSachLichHopStream,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? DanhSachLichHopModel.empty();
 
                 return Padding(
                   padding: const EdgeInsets.only(right: 30.0, left: 30.0),
                   child: ListView.builder(
+                    controller: _scrollController,
                     shrinkWrap: true,
                     itemCount: data.items?.length ?? 0,
                     itemBuilder: (context, index) {
@@ -46,7 +72,7 @@ class LichHopTheoDanhSachNgayTablet extends StatelessWidget {
                         dateTimeTo: DateTime.parse(
                           data.items?[index].dateTimeTo ?? '',
                         ).toStringWithAMPM,
-                        urlImage: listLichHop[index].urlImage,
+                        urlImage: urlImage,
                       );
                     },
                   ),

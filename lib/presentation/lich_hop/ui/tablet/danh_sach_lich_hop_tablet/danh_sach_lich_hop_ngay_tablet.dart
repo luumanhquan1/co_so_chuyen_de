@@ -22,8 +22,24 @@ class DanhSachLichHopNgayTablet extends StatefulWidget {
 }
 
 class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
-  LichHopCubit cubit = LichHopCubit();
+  final ScrollController _scrollController = ScrollController();
 
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+
+        if (widget.cubit.page < widget.cubit.totalPage) {
+          widget.cubit.page = widget.cubit.page+1;
+          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
+          widget.cubit
+              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
+        }
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -33,13 +49,14 @@ class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
           Padding(
             padding: const EdgeInsets.only(right: 30.0, left: 30.0),
             child: StreamBuilder<DanhSachLichHopModel>(
-                stream: cubit.danhSachLichHopStream,
+                stream: widget.cubit.danhSachLichHopStream,
                 builder: (context, snapshot) {
                   final data = snapshot.data ?? DanhSachLichHopModel.empty();
 
                   return Padding(
                     padding: const EdgeInsets.only(right: 30.0, left: 30.0),
                     child: ListView.builder(
+                      controller: _scrollController,
                       shrinkWrap: true,
                       itemCount: data.items?.length ?? 0,
                       itemBuilder: (context, index) {
@@ -59,7 +76,7 @@ class _DanhSachLichHopNgayTabletState extends State<DanhSachLichHopNgayTablet> {
                           dateTimeTo: DateTime.parse(
                             data.items?[index].dateTimeTo ?? '',
                           ).toStringWithAMPM,
-                          urlImage: listLichHop[index].urlImage,
+                          urlImage: urlImage,
                         );
                       },
                     ),

@@ -6,24 +6,19 @@ part 'danh_sach_lich_hop_response.g.dart';
 
 @JsonSerializable()
 class DanhSachLichHopResponse extends Equatable {
+  @JsonKey(name: 'code')
+  String? code;
+  @JsonKey(name: 'data')
+  DanhSachLichHopItemResponse? data;
+  @JsonKey(name: 'message')
+  String? message;
   @JsonKey(name: 'statusCode')
   int? statusCode;
   @JsonKey(name: 'succeeded')
   bool? succeeded;
-  @JsonKey(name: 'code')
-  String? code;
-  @JsonKey(name: 'message')
-  String? message;
-  @JsonKey(name: 'data')
-  DanhSachLichHopItemResponse? data;
 
   DanhSachLichHopResponse(
-    this.statusCode,
-    this.succeeded,
-    this.code,
-    this.message,
-    this.data,
-  );
+      this.code, this.data, this.message, this.statusCode, this.succeeded);
 
   factory DanhSachLichHopResponse.fromJson(Map<String, dynamic> json) =>
       _$DanhSachLichHopResponseFromJson(json);

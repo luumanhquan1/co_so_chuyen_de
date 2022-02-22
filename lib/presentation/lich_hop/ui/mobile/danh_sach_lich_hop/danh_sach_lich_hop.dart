@@ -20,7 +20,25 @@ class DanhSachLichHop extends StatefulWidget {
 }
 
 class _DanhSachLichHopState extends State<DanhSachLichHop> {
-  LichHopCubit cubit = LichHopCubit();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+
+        if (widget.cubit.page < widget.cubit.totalPage) {
+          widget.cubit.page = widget.cubit.page+1;
+          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
+          widget.cubit
+              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
+          print('================= ${widget.cubit.danhSachLichHopRequest.PageIndex}');
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +48,7 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            cubit.currentTime,
+            widget.cubit.currentTime,
             style: textNormalCustom(color: textBodyTime),
           ),
         ),
@@ -45,6 +63,7 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
                     horizontal: 16.0,
                   ),
                   child: ListView.builder(
+                    controller: _scrollController,
                     shrinkWrap: true,
                     itemCount: data.items?.length ?? 0,
                     itemBuilder: (context, index) {
@@ -63,7 +82,7 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
                         dateTimeTo: DateTime.parse(
                           data.items?[index].dateTimeTo ?? '',
                         ).toStringWithAMPM,
-                        urlImage: listLichHop[index].urlImage,
+                        urlImage: urlImage,
                       );
                     },
                   ),

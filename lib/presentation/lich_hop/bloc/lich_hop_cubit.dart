@@ -22,7 +22,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   LichHopCubit() : super(LichHopStateIntial());
 
   DanhSachLichHopRequest danhSachLichHopRequest = fakeDataBody;
-
+  int page = 1;
+  int totalPage = 1;
   bool isCheckNgay = false;
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -72,12 +73,14 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showContent();
   }
 
-  Future<void> postDanhSachCongViec(
-      {required DanhSachLichHopRequest body}) async {
+  Future<void> postDanhSachLichHop({
+    required DanhSachLichHopRequest body,
+  }) async {
     showLoading();
     final result = await hopRepo.postDanhSachLichHop(body);
     result.when(
       success: (value) {
+        totalPage = value.totalPage ?? 1;
         danhSachLichHopSubject.add(value);
       },
       error: (error) {},
@@ -95,10 +98,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [
     MeetingSchedule(
-        "hung hung hung", "2022-02-07T07:45:00", "2022-02-07T08:45:00"),
-    MeetingSchedule("hung", "2022-02-07T09:45:00", "2022-02-07T10:45:00"),
-    MeetingSchedule("hung", "2022-02-07T11:45:00", "2022-02-07T12:45:00"),
-    MeetingSchedule("hung", "2022-02-07T13:45:00", "2022-02-07T15:45:00"),
+        'hung hung hung', '2022-02-07T07:45:00', '2022-02-07T08:45:00'),
+    MeetingSchedule('hung', '2022-02-07T09:45:00', '2022-02-07T10:45:00'),
+    MeetingSchedule('hung', '2022-02-07T11:45:00', '2022-02-07T12:45:00'),
+    MeetingSchedule('hung', '2022-02-07T13:45:00', '2022-02-07T15:45:00'),
   ];
 
   DataSource getCalenderDataSource() {

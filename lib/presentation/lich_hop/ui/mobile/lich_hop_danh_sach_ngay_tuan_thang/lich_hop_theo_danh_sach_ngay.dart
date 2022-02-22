@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
@@ -22,28 +23,27 @@ class LichHopTheoDanhSachNgay extends StatefulWidget {
 }
 
 class _LichHopTheoDanhSachNgayState extends State<LichHopTheoDanhSachNgay> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    // _scrollController.addListener(() {
-    //   if (_scrollController.position.pixels ==
-    //       _scrollController.position.maxScrollExtent) {
-    //     if (widget.cubit.danhSachLichHopRequest.PageIndex <
-    //         widget.cubit.danhSachLichHopSubject.value.totalPage) {
-    //       widget.cubit.danhSachLichHopRequest.PageIndex =
-    //           widget.cubit.danhSachLichHopRequest.PageIndex + 1;
-    //       widget.cubit
-    //           .postDanhSachCongViec(body: widget.cubit.danhSachLichHopRequest);
-    //     }
-    //   }
-    // });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+
+        if (widget.cubit.page < widget.cubit.totalPage) {
+          widget.cubit.page = widget.cubit.page+1;
+          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
+          widget.cubit
+              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
+        }
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final LichHopCubit cubit = LichHopCubit();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,44 +54,46 @@ class _LichHopTheoDanhSachNgayState extends State<LichHopTheoDanhSachNgay> {
             bottom: 16.0,
           ),
           child: Text(
-            cubit.currentTime,
+            widget.cubit.currentTime,
             style: textNormalCustom(color: textBodyTime),
           ),
         ),
         Expanded(
           child: StreamBuilder<DanhSachLichHopModel>(
-              stream: cubit.danhSachLichHopStream,
-              builder: (context, snapshot) {
-                final data = snapshot.data ?? DanhSachLichHopModel.empty();
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: data.items?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return WidgetItemLichHop(
-                        ontap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => DetailMeetCalenderScreen(),
-                            ),
-                          );
-                        },
-                        title: data.items?[index].title ?? '',
-                        dateTimeFrom: DateTime.parse(
-                          data.items?[index].dateTimeFrom ?? '',
-                        ).toStringWithAMPM,
-                        dateTimeTo: DateTime.parse(
-                          data.items?[index].dateTimeTo ?? '',
-                        ).toStringWithAMPM,
-                        urlImage: listLichHop[index].urlImage,
-                      );
-                    },
-                  ),
-                );
-              }),
+            stream: widget.cubit.danhSachLichHopStream,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? DanhSachLichHopModel.empty();
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                ),
+                child: ListView.builder(
+                  controller: _scrollController,
+                  shrinkWrap: true,
+                  itemCount: data.items?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return WidgetItemLichHop(
+                      ontap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DetailMeetCalenderScreen(),
+                          ),
+                        );
+                      },
+                      title: data.items?[index].title ?? '',
+                      dateTimeFrom: DateTime.parse(
+                        data.items?[index].dateTimeFrom ?? '',
+                      ).toStringWithAMPM,
+                      dateTimeTo: DateTime.parse(
+                        data.items?[index].dateTimeTo ?? '',
+                      ).toStringWithAMPM,
+                      urlImage: urlImage,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ],
     );

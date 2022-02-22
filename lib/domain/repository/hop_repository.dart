@@ -9,5 +9,7 @@ mixin HopRepository {
     String dateTo,
   );
 
-  Future<Result<DanhSachLichHopModel>> postDanhSachLichHop(DanhSachLichHopRequest body);
+  Future<Result<DanhSachLichHopModel>> postDanhSachLichHop(
+    DanhSachLichHopRequest body,
+  );
 }
