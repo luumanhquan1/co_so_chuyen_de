@@ -10,8 +10,6 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-
 class MyCalendarMenu extends StatefulWidget {
   final CalenderCubit cubit;
 
@@ -83,37 +81,41 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
-                      children: listThongBao
+                      children: listThongBaoMyCalendar
                           .map(
                             (e) => ContainerMenuWidget(
-                              name: e.name,
+                              name: e.typeMenu.getTitle(),
                               icon: e.icon,
                               type: e.type,
                               index: e.index ?? 0,
                               childExpand: Column(
-                                children: e.itemMenu == ItemMenu.Item2
+                                children: e.typeMenu ==
+                                        TypeCalendarMenu.LichCuaToi || e.typeMenu ==
+                                    TypeCalendarMenu.LichHopLanhDao
                                     ? listTheoTrangThai
                                         .map(
                                           (e) => ContainerMenuWidget(
                                             icon: e.icon,
-                                            name: e.name,
+                                            name: e.typeMenu.getTitle(),
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {
-                                              e.onTap(context, widget.cubit);
+                                              e.onTap(
+                                                  context, widget.cubit);
                                             },
                                           ),
                                         )
                                         .toList()
-                                    : listLanhDao
+                                    : listBaoCaoThongKe
                                         .map(
                                           (e) => ContainerMenuWidget(
                                             icon: e.icon,
-                                            name: e.name,
+                                            name: e.typeMenu.getTitle(),
                                             index: e.index ?? 0,
                                             isIcon: false,
                                             onTap: () {
-                                              e.onTap(context, widget.cubit);
+                                              e.onTap(
+                                                  context, widget.cubit);
                                             },
                                           ),
                                         )

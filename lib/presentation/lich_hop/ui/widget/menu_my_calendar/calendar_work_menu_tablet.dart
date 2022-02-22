@@ -108,20 +108,20 @@ class _MyCalendarMenuTabletState extends State<MyCalendarMenuTablet> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
-                        children: listThongBaoTablet
+                        children: listThongBaoMyCalendar
                             .map(
                               (e) => ContainerMenuWidgetTablet(
-                                name: e.name,
+                                name: e.typeMenu.getTitle(),
                                 icon: e.icon,
                                 type: e.type,
                                 index: e.index ?? 0,
                                 childExpand: Column(
-                                  children: e.itemMenu == ItemMenu.Item2
+                                  children: e.typeMenu == TypeCalendarMenu.LichTheoLanhDao
                                       ? listTheoTrangThai
                                           .map(
                                             (e) => ContainerMenuWidgetTablet(
                                               icon: e.icon,
-                                              name: e.name,
+                                              name: e.typeMenu.getTitle(),
                                               index: e.index ?? 0,
                                               isIcon: false,
                                               onTap: () {
@@ -134,7 +134,7 @@ class _MyCalendarMenuTabletState extends State<MyCalendarMenuTablet> {
                                           .map(
                                             (e) => ContainerMenuWidgetTablet(
                                               icon: e.icon,
-                                              name: e.name,
+                                              name: e.typeMenu.getTitle(),
                                               index: e.index ?? 0,
                                               isIcon: false,
                                               onTap: () {
