@@ -48,7 +48,6 @@ extension TabbarEnum on TabBarType {
         return 3;
       case TabBarType.menu:
         return 4;
-
       default:
         return 1;
     }
