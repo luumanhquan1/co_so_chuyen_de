@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
@@ -35,16 +37,15 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Future<void> getDashboard(
       {required String dateStart, required String dateTo,}) async {
     showLoading();
-
+log("2131313");
     final result = await hopRepo.getDashBoardLichHop(dateStart, dateTo);
-
+log("ketThiuc");
     result.when(success: (value) {
       listItemSchedule[0].numberOfSchedule = value.soLichChuTri ?? 0;
       listItemSchedule[2].numberOfSchedule = value.soLichSapToi ?? 0;
       listItemSchedule[3].numberOfSchedule = value.soLichTrung ?? 0;
       dashBoardSubject.add(value);
     }, error: (error) {},);
-
     showContent();
   }
 

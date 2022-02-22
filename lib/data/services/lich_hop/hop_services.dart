@@ -11,6 +11,7 @@ part 'hop_services.g.dart';
 abstract class HopServices {
   @factoryMethod
   factory HopServices(Dio dio, {String baseUrl}) = _HopServices;
+
   @GET(ApiConstants.GET_DASH_BOARD_LH)
   Future<DashBoardLichHopResponse> getData(
     @Query('dateStart') String dateStart,
