@@ -29,7 +29,7 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
   @override
   void initState() {
     super.initState();
-    chiTietLichLamViecCubit.initData();
+    chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
   }
 
   @override
@@ -49,7 +49,11 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                       showTablet: true,
                       textContent: S.current.ban_chan_chan_huy_lich_nay,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        chiTietLichLamViecCubit
+                            .cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                        Navigator.pop(context);
+                      },
                       title: S.current.huy_lich,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icHuyLich),
@@ -72,7 +76,11 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                       showTablet: true,
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        chiTietLichLamViecCubit
+                            .dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                        Navigator.pop(context);
+                      },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icDeleteLichHop),
@@ -204,7 +212,9 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 24),
-                              child: const BtnShowBaoCaoTablet(),
+                              child: BtnShowBaoCaoTablet(
+                                cubit: chiTietLichLamViecCubit,
+                              ),
                             ),
                             const DanhSachYKienButtomTablet(),
                           ],

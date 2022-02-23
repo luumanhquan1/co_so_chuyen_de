@@ -30,7 +30,7 @@ class _MessageDialogPopupState extends State<MessageDialogPopup>
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 150),
     )..addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
           await Future.delayed(const Duration(seconds: 2));
@@ -47,45 +47,58 @@ class _MessageDialogPopupState extends State<MessageDialogPopup>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
-        child: AnimatedBuilder(
-          animation: animationController,
-          builder: (context, _) => Opacity(
-            opacity: animationController.value,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-              decoration: BoxDecoration(
-                color: backgroundColorApp,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
+    return GestureDetector(
+      onTap: () {
+        animationController.reverse();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: AnimatedBuilder(
+            animation: animationController,
+            builder: (context, _) => Opacity(
+              opacity: animationController.value,
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..scale(animationController.value, animationController.value),
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 50),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 45),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: backgroundColorApp,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    border: Border.all(color: borderItemCalender),
+                    boxShadow: [
+                      BoxShadow(
+                        color: shadowContainerColor.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset:
+                            const Offset(0, 4), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        widget.urlIcon,
+                        width: 56,
+                        height: 56,
+                      ),
+                      spaceH32,
+                      Text(
+                        widget.title,
+                        style:
+                            textNormalCustom(fontSize: 18, color: titleColor),
+                      )
+                    ],
+                  ),
                 ),
-                border: Border.all(color: borderItemCalender),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadowContainerColor.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4), // changes position of shadow
-                  ),
-                ],
-
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    widget.urlIcon,
-                    width: 56,
-                    height: 56,
-                  ),
-                  spaceH32,
-                  Text(
-                    widget.title,
-                    style: textNormalCustom(fontSize: 18, color: titleColor),
-                  )
-                ],
               ),
             ),
           ),

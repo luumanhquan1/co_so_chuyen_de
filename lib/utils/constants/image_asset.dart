@@ -219,7 +219,7 @@ class ImageAssets {
   static const String soLichHopTrucTuyen =
       '$baseImg/so_lich_hop_truc_tuyen.svg';
   static const String ic_delete_do = '$baseImg/delete_do.svg';
-  static const String ic_edit = '$baseImg/edit.svg';
+  static const String ic_edit = '$baseImg/Edit.svg';
   static const String icDayCalenderWeek = '$baseImg/ic_calender_work_week.svg';
   static const String icDayCalenderMonth =
       '$baseImg/ic_calender_work_month.svg';
