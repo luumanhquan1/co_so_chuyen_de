@@ -48,6 +48,10 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/calendar-list';
   static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
+  static const LICH_LAM_VIEC_DASHBOARD =
+      '/vpdt/api/Schedules/count-in-dashboard';
+  static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
+      '/vpdt/api/Schedules/dashboard-schedule';
   static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
   static const SEARCH_CAN_BO = '/vpdt/api/CanBo/search';
   static const CATEGORY_LIST = '/vpdt/api/Category/list';
