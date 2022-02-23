@@ -49,7 +49,10 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                       showTablet: true,
                       textContent: S.current.ban_chan_chan_huy_lich_nay,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        chiTietLichLamViecCubit.cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                        Navigator.pop(context);
+                      },
                       title: S.current.huy_lich,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icHuyLich),
