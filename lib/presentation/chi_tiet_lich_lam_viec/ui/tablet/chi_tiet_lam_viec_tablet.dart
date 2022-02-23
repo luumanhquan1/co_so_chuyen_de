@@ -204,7 +204,9 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 24),
-                              child: const BtnShowBaoCaoTablet(),
+                              child: BtnShowBaoCaoTablet(
+                                cubit: chiTietLichLamViecCubit,
+                              ),
                             ),
                             const DanhSachYKienButtomTablet(),
                           ],

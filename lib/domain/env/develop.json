@@ -1,6 +1,6 @@
 {
   "type": "develop",
-  "base_url_gate_way": "https://api-gateway-ccvc-uat.chinhquyendientu.vn",
-  "base_url_common": "https://api-common-ccvc-uat.chinhquyendientu.vn",
-  "base_url_CCVC": "https://api-ccvc-uat.chinhquyendientu.vn"
+  "base_url_gate_way": "http://api-gateway.dongnai.edsolabs.vn",
+  "base_url_common": "http://api-common.dongnai.edsolabs.vn",
+  "base_url_CCVC": "http://api-ccvc.dongnai.edsolabs.vn"
 }

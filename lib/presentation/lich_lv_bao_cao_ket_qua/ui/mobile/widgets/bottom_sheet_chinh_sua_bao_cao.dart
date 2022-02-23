@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/textformfield/block_textview.dart';
+import 'package:ccvc_mobile/widgets/textformfield/follow_key_board_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChinhSuaBaoCaoBottomSheet extends StatefulWidget {
@@ -35,10 +36,12 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<ChinhSuaBaoCaoBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.8,
+      ),
       padding: const EdgeInsets.only(top: 20),
-      child: Scaffold(
-        bottomNavigationBar: Column(
+      child: FollowKeyBoardWidget(
+        bottomWidget: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
@@ -71,7 +74,7 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<ChinhSuaBaoCaoBottomSheet> {
             )
           ],
         ),
-        body: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -113,13 +116,10 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<ChinhSuaBaoCaoBottomSheet> {
                 height: 24,
               ),
               ButtonSelectFile(
-                files: widget.baoCaoModel.listFile,
                 title: S.current.tai_lieu_dinh_kem,
-                onChange: (List<File> files) {},
+                onChange: (files) {},
               ),
-              const SizedBox(
-                height: 24,
-              ),
+
             ],
           ),
         ),
