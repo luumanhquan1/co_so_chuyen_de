@@ -3,12 +3,11 @@ import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/edit_person_information/edit_person_information_request.dart';
+import 'package:ccvc_mobile/domain/model/account/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/domain/model/edit_personal_information/data_edit_person_information.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
-import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
-import 'package:ccvc_mobile/domain/repository/tinh_huyen_xa_repository.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_state.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -38,8 +37,6 @@ class ManagerPersonalInformationCubit
   Stream<List<TinhHuyenXaModel>> get tinhStream => tinhSubject.stream;
 
   AccountRepository get _managerRepo => Get.find();
-
-  TinhHuyenXaRepository get _tinhHuyenXaRepo => Get.find();
 
   //
   ManagerPersonalInformationModel managerPersonalInformationModel =
@@ -72,7 +69,7 @@ class ManagerPersonalInformationCubit
   }
 
   Future<void> getDataTinh() async {
-    final result = await _tinhHuyenXaRepo.getData();
+    final result = await _managerRepo.getData();
     result.when(
       success: (res) {
         tinhModel = res;
@@ -98,7 +95,7 @@ class ManagerPersonalInformationCubit
     String parentId = '',
     required bool isXa,
   }) async {
-    final result = await _tinhHuyenXaRepo.getDataChild(parentId);
+    final result = await _managerRepo.getDataChild(parentId);
     result.when(
       success: (res) {
         if (isXa) {
