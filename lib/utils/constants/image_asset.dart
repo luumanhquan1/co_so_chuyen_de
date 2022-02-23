@@ -72,6 +72,8 @@ class ImageAssets {
   static const String icChoDuyetYKND = '$baseImg/cho_duyen_yknd.svg';
   static const String icDongHoYKND = '$baseImg/dong_ho_yknd.svg';
   static const String ic_Calendar_tui = '$baseImg/ic_calendar_tui.svg';
+  static const String icChoYKien = '$baseImg/ic_cho_y_kien.svg';
+  static const String icHuyLich = '$baseImg/ic_huy_lich.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -241,6 +243,7 @@ class ImageAssets {
   static const String icQuestionCircle = '$baseImg/ic_question_circle.svg';
   static const String icCuocGoi = '$baseImg/ic_cuoc_goi.svg';
   static const String icChonPhongHop = '$baseImg/ic_chon_phong_hop.svg';
+  static const String icHuy = '$baseImg/CloseSquare.svg';
 
   static const String icBacham = '$baseImg/Group.svg';
   static const String icHai = '$baseImg/Delete.svg';

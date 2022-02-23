@@ -1,12 +1,14 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 
 mixin LichLamViecRepository {
   Future<Result<LichLamViecDashBroad>> getLichLv(
@@ -33,5 +35,9 @@ mixin LichLamViecRepository {
 
   Future<Result<List<LoaiSelectModel>>> getLinhVuc(
     CatogoryListRequest catogoryListRequest,
+  );
+
+  Future<Result<DataLichLvModel>> getListLichLamViec(
+    ListLichLvRequest lichLvRequest,
   );
 }
