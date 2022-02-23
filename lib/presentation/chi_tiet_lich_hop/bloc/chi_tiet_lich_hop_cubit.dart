@@ -98,6 +98,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     ),
   ];
 
+  List<String> fakeDataDropdown = ["item 1", "item 2","item 3"];
+
 
   void dispose() {}
 }

@@ -1,18 +1,11 @@
-class BaseUrlConstants {
-  static const baseURLCCVC = 'https://api-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlGateway =
-      'https://api-gateway-ccvc-uat.chinhquyendientu.vn';
-  static const baseUrlCommon =
-      'https://api-common-ccvc-uat.chinhquyendientu.vn';
-}
-
 class ApiConstants {
   static const LOGIN = '/api/auth/login';
   static const int DEFAULT_PAGE_SIZE = 45;
   static const int PAGE_BEGIN = 1;
   static const int NOT_SAVED_ID = -1;
   static const int TIME_OUT = 30;
-
+  static const String GET_DASH_BOARD_LH =
+      '/vpdt/api/MeetingSchedule/count-in-dashboard';
   static const String GET_LIST_TOKEN = '/market/coin-list';
   static const String GET_PRICE_TOKEN_BY_SYMBOL = '/market/coin-price/';
   static const String GET_PHAM_VI = '/common/auth/list-pham-vi';
@@ -51,7 +44,7 @@ class ApiConstants {
   static const DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
   static const CANLENDAR_LIST_MEETING =
       '/vpdt/api/MeetingSchedule/calendar-list';
-  static const SU_KIEN_TRONG_NGAY ='/api/DashBoardHome/su-kien-trong-ngay?';
+  static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
 }

@@ -8,10 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class YKienNguoiDanMenu extends StatefulWidget {
- final YKienNguoiDanCubitt cubit;
+  final YKienNguoiDanCubitt cubit;
 
   const YKienNguoiDanMenu({Key? key, required this.cubit}) : super(key: key);
-
 
   @override
   _YKienNguoiDanMenuState createState() => _YKienNguoiDanMenuState();
@@ -22,54 +21,51 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-          children: [
-            const SizedBox(
-              height: 58,
-            ),
-            headerWidget(menu: S.current.y_kien_nguoi_dan),
-            const SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              flex: 8,
-              child: StreamBuilder<List<bool>>(
-                stream: widget.cubit.selectTypeYKNDSubject.stream,
-                builder: (context, snapshot) {
-                  final data = snapshot.data ?? [true, false];
-                  return Column(
-                    children: [
-                      ItemMenuNhiemVuWidgetMobile(
-                        icon: ImageAssets.icPersonItemMenu,
-                        name: S.current.thong_tin_chung,
-                        onTap: () {
-                          widget.cubit.selectTypeYKNDSubject.add(
-                            [true, false],
-                          );
-                          Navigator.pop(context);
-                        },
-                        isSelect: data[0],
-                      ),
-                      ItemMenuNhiemVuWidgetMobile(
-                        icon: ImageAssets.icBaoCaoItemNenu,
-                        name: S.current.bao_cao_thong_ke,
-                        onTap: () {
-                          widget.cubit.selectTypeYKNDSubject.add(
-                            [false, true],
-
-                          );
-                          Navigator.pop(context);
-                        },
-                        isSelect: data[1],
-                      ),
-                    ],
-                  );
-
-                },
-              ),
-            ),
-          ],
-        )
-    );
+      children: [
+        const SizedBox(
+          height: 58,
+        ),
+        headerWidget(menu: S.current.y_kien_nguoi_dan),
+        const SizedBox(
+          height: 24,
+        ),
+        Expanded(
+          flex: 8,
+          child: StreamBuilder<List<bool>>(
+            stream: widget.cubit.selectTypeYKNDSubject.stream,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? [true, false];
+              return Column(
+                children: [
+                  ItemMenuNhiemVuWidgetMobile(
+                    icon: ImageAssets.icPersonItemMenu,
+                    name: S.current.thong_tin_chung,
+                    onTap: () {
+                      widget.cubit.selectTypeYKNDSubject.add(
+                        [true, false],
+                      );
+                      Navigator.pop(context);
+                    },
+                    isSelect: data[0],
+                  ),
+                  ItemMenuNhiemVuWidgetMobile(
+                    icon: ImageAssets.icBaoCaoItemNenu,
+                    name: S.current.bao_cao_thong_ke,
+                    onTap: () {
+                      widget.cubit.selectTypeYKNDSubject.add(
+                        [false, true],
+                      );
+                      Navigator.pop(context);
+                    },
+                    isSelect: data[1],
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    ));
 
     // child: Column(
     //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,9 +92,8 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
     //     ),
     //   ],
     // ),
-
-
   }
+
   Widget headerWidget({required String menu}) {
     return Row(
       children: [

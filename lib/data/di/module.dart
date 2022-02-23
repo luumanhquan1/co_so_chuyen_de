@@ -2,12 +2,14 @@ import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_van_ban_di_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
 import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
+import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/manager_service/manager_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
@@ -15,21 +17,22 @@ import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
+import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/domain/repository/tinh_huyen_xa_repository.dart';
-import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+enum BaseURLOption { GATE_WAY, COMMON, CCVC }
+
 void configureDependencies() {
   Get.put(
     QuanLyVanBanClient(
-      provideDio(),
-      baseUrl: BaseUrlConstants.baseUrlGateway,
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
     ),
   );
   Get.put<QLVBRepository>(
@@ -41,8 +44,9 @@ void configureDependencies() {
     AccountImpl(Get.find()),
   );
 
-  Get.put(HomeService(provideDio()));
-  Get.put<HomeRepository>(HomeImpl(Get.find()));
+  Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+  Get.put(HomeServiceCCVC(provideDio()));
+  Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
 
   Get.put(ManagerService(provideDio()));
   Get.put<ManagerRepository>(
@@ -53,19 +57,34 @@ void configureDependencies() {
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
-  Get.put(ChiTietVanBanDiService(provideDio(),
-      baseUrl: BaseUrlConstants.baseUrlGateway));
+  Get.put(ChiTietVanBanDiService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put<ChiTietVanBanRepository>(
     ChiTietVanBanDiImpl(Get.find()),
   );
+  Get.put(HopServices(
+    provideDio(baseOption: BaseURLOption.GATE_WAY),
+  ));
+  Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
 
-Dio provideDio() {
+Dio provideDio({BaseURLOption baseOption = BaseURLOption.CCVC}) {
   final appConstants = Get.find<AppConstants>();
+  String baseUrl = appConstants.baseUrlCCVC;
+  switch (baseOption) {
+    case BaseURLOption.GATE_WAY:
+      baseUrl = appConstants.baseUrlGateWay;
+      break;
+    case BaseURLOption.COMMON:
+      baseUrl = appConstants.baseUrlCommon;
+      break;
+    case BaseURLOption.CCVC:
+      baseUrl = appConstants.baseUrlCCVC;
+      break;
+  }
   final options = BaseOptions(
-    baseUrl: appConstants.baseUrl,
+    baseUrl: baseUrl,
     receiveTimeout: _connectTimeOut,
     connectTimeout: _connectTimeOut,
     followRedirects: false,
