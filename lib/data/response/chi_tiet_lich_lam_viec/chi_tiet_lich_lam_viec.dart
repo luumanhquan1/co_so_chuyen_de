@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'chi_tiet_lich_lam_viec.g.dart';
@@ -129,15 +129,14 @@ class DetailCalenderWorkResponseData extends Equatable {
 
   Map<String, dynamic> toJson() => _$DetailCalenderWorkResponseDataToJson(this);
 
-
-
   @override
   List<Object?> get props => throw [];
 
   ChiTietLichLamViecModel toModel() => ChiTietLichLamViecModel(
         id: id ?? '',
         time: '$timeFrom - $timeTo',
-        date: dateTimeFrom ?? '',
+        date: DateTime.parse(dateTimeFrom ?? DateTime.now().toString())
+            .formatDayCalendar,
         loaiLich: typeScheduleName ?? '',
         // listPerSon: fakeDataListPerson(),
         nhacLai: '',
