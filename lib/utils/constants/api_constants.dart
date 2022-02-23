@@ -62,6 +62,9 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
+  static const POST_DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
+
+
   static const CANCEL_TIET_LICH_LAM_VIEC =
       '/vpdt/api/Schedules/change-status?scheduleId={id}&statusId=8&isMulti=false';
   static const SCHEDULE_REPORT_LIST = '/vpdt/api/ScheduleReport/list';
