@@ -484,9 +484,6 @@
   "chon_thu_ky_cuoc_hop": "Chọn thư ký cuộc họp",
   "Chon_can_bo_boc_bang": "Chọn cán sử dụng bóc băng",
   "Chon_don_vi_su_dung": "Chọn đơn vị sử dụng",
-  "lich_hop_lanh_dao": "Lịch họp lãnh đạo",
-  "xem_luong": "Xem luồng",
-  "don_vi_gui": "Đơn vị gửi",
   "so_van_ban": "Sổ văn bản",
   "so_den": "Số đến",
   "so_phu": "Số phụ",
@@ -503,7 +500,22 @@
   "hoi_bao_van_ban": "Hồi báo văn bản",
   "da_nhan_ban_giay": "Đã nhận bản giấy",
   "nhap_ten_don_vi": "Nhập tên đơn vị",
-  "thu_hoi_lich": "Thu hồi lịch"
 
+  "thu_hoi_lich": "Thu hồi lịch",
+  "cho_y_kien": "Cho ý kiến",
+  "ban_chan_chan_huy_lich_nay" : "Bạn có chắc muốn hủy lịch này?",
+  "khong" : "Không",
+  "huy_lich" : "Hủy lịch",
+  "dong_y" : "Đồng ý",
+  "xoa_lich_lam_viec" : "Xóa lịch làm việc",
+  "ban_co_muon_xoa_lich_lam_viec" : "Bạn có muốn xóa lịch làm việc?",
+  "xoa_thanh_cong" : "Xóa thành công"
+
+
+
+
+
+
+}
 
 

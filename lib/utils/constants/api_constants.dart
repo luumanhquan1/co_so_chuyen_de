@@ -20,9 +20,9 @@ class ApiConstants {
       '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const String GET_VB_DI_SO_LUONG = '/qlvb/api/van-ban-di/so-luong?';
 
-  static const String GET_INFO = 'api/CanBo';
-  static const String GET_TINH_HUYEN_XA = 'api/DanhMuc/tinh-thanh';
-  static const String GET_TINH_HUYEN_XA_CHILD = 'api/DanhMuc/tinh-thanh';
+  static const String GET_INFO = '/api/CanBo';
+  static const String GET_TINH_HUYEN_XA = '/api/DanhMuc/tinh-thanh';
+  static const String GET_TINH_HUYEN_XA_CHILD = '/api/DanhMuc/tinh-thanh';
 
   static const DASH_BOARD_VBDEN = '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const DASH_BOARD_VBDi = '/qlvb/api/van-ban-di/so-luong';
@@ -48,6 +48,8 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/calendar-list';
   static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
+  static const EDIT_PERSON_INFORMATION = '/api/CanBo/add-or-update';
+
   static const LICH_LAM_VIEC_DASHBOARD =
       '/vpdt/api/Schedules/count-in-dashboard';
   static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
@@ -60,7 +62,8 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
-
+  static const SCHEDULE_REPORT_LIST = '/vpdt/api/ScheduleReport/list';
+  static const DELETE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/delete';
 }
 
 class ImageConstants {

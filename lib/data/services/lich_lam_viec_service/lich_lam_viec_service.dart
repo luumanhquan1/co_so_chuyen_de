@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
-import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_response.dart';
-import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -26,7 +28,14 @@ abstract class LichLamViecService {
     @Query('type') int type,
   );
 
-
   @GET(ApiConstants.CHI_TIET_LICH_LAM_VIEC)
   Future<DetailCalenderWorkResponse> detailCalenderWork(@Path('id') String id);
+
+  @GET(ApiConstants.SCHEDULE_REPORT_LIST)
+  Future<DanhSachBaoCaoResponse> getDanhSachBaoCaoKetQua(
+    @Query('scheduleId') String scheduleId,
+  );
+
+  @DELETE(ApiConstants.DELETE_SCHEDULE_REPORT)
+  Future<XoaBaoCaoKetQuaResponse> deleteBaoCaoKetQua(@Query('id') String id);
 }

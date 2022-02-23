@@ -501,5 +501,17 @@
   "Chon_don_vi_su_dung" : "Chọn đơn vị sử dụng",
   "nhap_ten_don_vi": "Nhập tên đơn vị",
   "thu_hoi_lich" : "Thu hồi lịch",
-  "bao_cao_thong_ke": "Báo cáo thống kê"
+  "bao_cao_thong_ke": "Báo cáo thống kê",
+  "cho_y_kien" : "Cho ý kiến",
+  "ban_chan_chan_huy_lich_nay" : "Bạn có chắc muốn hủy lịch này?",
+  "khong" : "Không",
+ "huy_lich" : "Hủy lịch",
+  "dong_y" : "Đồng ý",
+  "xoa_lich_lam_viec" : "Xóa lịch làm việc",
+  "ban_co_muon_xoa_lich_lam_viec" : "Bạn có muốn xóa lịch làm việc?",
+  "xoa_thanh_cong" : "Xóa thành công"
+
+
+
+
 }

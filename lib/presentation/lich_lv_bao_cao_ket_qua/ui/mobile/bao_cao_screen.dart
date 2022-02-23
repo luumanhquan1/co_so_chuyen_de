@@ -1,31 +1,24 @@
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bao_cao_item.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bottom_sheet_chinh_sua_bao_cao.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BaoCaoScreen extends StatefulWidget {
-  const BaoCaoScreen({Key? key}) : super(key: key);
+  final ChiTietLichLamViecCubit cubit;
+  const BaoCaoScreen({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _BaoCaoScreenState createState() => _BaoCaoScreenState();
 }
 
 class _BaoCaoScreenState extends State<BaoCaoScreen> {
-  BaoCaoCubit cubit = BaoCaoCubit();
-
-  @override
-  void initState() {
-    super.initState();
-    cubit.initData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +26,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
       padding: const EdgeInsets.only(top: 20),
       child: SingleChildScrollView(
         child: StreamBuilder<List<BaoCaoModel>>(
-          stream: cubit.listBaoCao,
+          stream: widget.cubit.listBaoCaoKetQua,
           builder: (context, snapshot) {
             final listData = snapshot.data ?? [];
             if (listData.isNotEmpty) {
@@ -47,9 +40,10 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                   itemBuilder: (context, index) {
                     return BaoCaoItem(
                       statusColor: listData[index].status.getText().color,
-                      fileNames: listData[index].listFile.map<String>((e) {
-                        return e.path.convertNameFile();
-                      }).toList(),
+                      fileNames: listData[index]
+                          .listFile
+                          .map((e) => e.name ?? '')
+                          .toList(),
                       status: listData[index].status.getText().text,
                       content: listData[index].content,
                       funcEdit: () {
@@ -65,8 +59,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                         showDiaLog(
                           context,
                           funcBtnRight: () {
-                            listData.removeAt(index);
-                            cubit.getData(listData);
+                            widget.cubit.xoaBaoCaoKetQua(listData[index].id);
                           },
                           icon: SvgPicture.asset(
                             ImageAssets.ic_delete_baocao,
