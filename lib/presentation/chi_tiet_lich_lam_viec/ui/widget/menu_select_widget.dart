@@ -138,7 +138,7 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
                           color: Colors.transparent,
                           child: selectCell(
                             widget.listSelect[index],
-                            isShowBorder: index != widget.listSelect.length,
+                            isShowBorder: index != widget.listSelect.length-1,
                           ),
                         ),
                       ),
