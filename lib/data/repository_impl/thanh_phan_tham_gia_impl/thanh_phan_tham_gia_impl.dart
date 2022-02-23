@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/data/request/hop/search_can_bo_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/search_can_bo_request.dart';
 import 'package:ccvc_mobile/data/response/thanh_phan_tham_gia/can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/thanh_phan_tham_gia/tree_don_vi_tham_gia_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';

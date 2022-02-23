@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/data/request/hop/search_can_bo_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/search_can_bo_request.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/repository/thanh_phan_tham_gia_reponsitory.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
