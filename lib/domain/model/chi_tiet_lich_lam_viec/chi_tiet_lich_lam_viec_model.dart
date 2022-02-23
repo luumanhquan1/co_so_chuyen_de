@@ -7,7 +7,6 @@ class ChiTietLichLamViecModel {
   String date = '';
   String loaiLich = '';
 
-  ListPerSon listPerSon = ListPerSon.Empty();
 
   String nhacLai = '';
 
@@ -23,7 +22,6 @@ class ChiTietLichLamViecModel {
     required this.time,
     required this.date,
     required this.loaiLich,
-    required this.listPerSon,
     required this.nhacLai,
     required this.chuTri,
     required this.linhVuc,
@@ -42,10 +40,6 @@ class ChiTietLichLamViecModel {
           icon: ImageAssets.icCalendarUnFocus,
           value: loaiLich,
           type: typeData.text),
-      TypeData(
-          icon: ImageAssets.icDoublePerson,
-          value: listPerSon,
-          type: typeData.listperson),
       TypeData(
           icon: ImageAssets.icNhacLai, value: nhacLai, type: typeData.text),
       TypeData(icon: ImageAssets.icPerson, value: chuTri, type: typeData.text),
@@ -100,54 +94,15 @@ class TypeData {
 }
 
 
+
+
 ListPerSon fakeDataListPerson() {
   ListPerSon fakeDataListPersona = ListPerSon(
-      tongSoNguoi: 8,
-      soNguoiDongY: 3,
-      soNguoiChoXacNhan: 5,
+      tongSoNguoi: 0,
+      soNguoiDongY: 0,
+      soNguoiChoXacNhan: 0,
       listPerson: listFake);
   return fakeDataListPersona;
 }
 
-List<Person> listFake = [
-  Person(
-    name: 'Nguyễn Minh Hoàng',
-    isConnect: true,
-    color: Colors.blue,
-  ),
-  Person(
-    name: 'Nguyễn Minh Hoàng',
-    isConnect: true,
-    color: Colors.blue,
-  ),
-  Person(
-    name: 'Nguyễn Minh Hoàng',
-    isConnect: true,
-    color: Colors.blue,
-  ),
-  Person(
-    name: 'Hoàng Mai Linh',
-    isConnect: false,
-    color: Colors.red,
-  ),
-  Person(
-    name: 'Hoàng Mai Linh',
-    isConnect: false,
-    color: Colors.red,
-  ),
-  Person(
-    name: 'Hoàng Mai Linh',
-    isConnect: false,
-    color: Colors.red,
-  ),
-  Person(
-    name: 'Hoàng Mai Linh',
-    isConnect: false,
-    color: Colors.red,
-  ),
-  Person(
-    name: 'Hoàng Mai Linh',
-    isConnect: false,
-    color: Colors.red,
-  ),
-];
+List<Person> listFake = [];
