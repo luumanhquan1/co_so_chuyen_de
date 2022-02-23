@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_van_ban_di_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_dashbroad_impl/lich_lam_viec_dashbroad_impl.dart';
@@ -8,6 +10,8 @@ import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repos
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
+import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
+import 'package:ccvc_mobile/data/services/chi_tiet_lich_lam_viec_service/detail_lich_lam_viec_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_dashbroad_service/lich_lam_viec_dashbroad_right_service.dart';
@@ -17,6 +21,8 @@ import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
@@ -47,6 +53,12 @@ void configureDependencies() {
     AccountImpl(Get.find()),
   );
 
+  Get.put(
+      DetailLichLamViecService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+  Get.put<DetailLichLamViecRepository>(
+    DetailLichLamViecImpl(Get.find()),
+  );
+
   Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
@@ -60,6 +72,7 @@ void configureDependencies() {
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
+
   Get.put(
     LichLamViecDashBroadService(
       provideDio(baseOption: BaseURLOption.GATE_WAY),
@@ -76,6 +89,12 @@ void configureDependencies() {
   );
   Get.put<LichLamViecDashBroadRightRepository>(
     LichLamViecDashBroadRightImlp(Get.find()),
+  );
+
+  Get.put(
+      ChiTietVanBanDiService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+  Get.put<ChiTietVanBanRepository>(
+    ChiTietVanBanDiImpl(Get.find()),
   );
 
   Get.put(HopServices(

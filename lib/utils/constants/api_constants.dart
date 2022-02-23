@@ -4,6 +4,8 @@ class ApiConstants {
   static const int PAGE_BEGIN = 1;
   static const int NOT_SAVED_ID = -1;
   static const int TIME_OUT = 30;
+  static const String POST_DANH_SACH_LICH_HOP =
+      '/vpdt/api/MeetingSchedule/calendar-list';
   static const String GET_DASH_BOARD_LH =
       '/vpdt/api/MeetingSchedule/count-in-dashboard';
   static const String GET_LIST_TOKEN = '/market/coin-list';
@@ -50,6 +52,8 @@ class ApiConstants {
       '/vpdt/api/Schedules/count-in-dashboard';
   static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
       '/vpdt/api/Schedules/dashboard-schedule';
+  static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
+  static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
 }
 
 class ImageConstants {
