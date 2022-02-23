@@ -8,9 +8,7 @@ import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
-
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -1,27 +1,95 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
+import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LichHopCubit extends BaseCubit<LichHopState> {
+  LichHopCubit() : super(LichHopStateIntial());
+
+  DanhSachLichHopRequest danhSachLichHopRequest = fakeDataBody;
+  int page = 1;
+  int totalPage = 1;
   bool isCheckNgay = false;
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
 
+  HopRepository get hopRepo => Get.find();
+
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
+
+  final BehaviorSubject<DanhSachCongViecModel> danhSachCongViecSubject =
+      BehaviorSubject();
+
+  final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
+      BehaviorSubject();
+
+  BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
+
+  Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
 
   Stream<List<MeetingSchedule>> get listMeetingStream =>
       listMeetTingScheduleSubject.stream;
 
-  LichHopCubit() : super(LichHopStateIntial());
+  Stream<DanhSachCongViecModel> get danhSachCongViecStream =>
+      danhSachCongViecSubject.stream;
+
+  Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
+      danhSachLichHopSubject.stream;
+
+  Future<void> getDashboard({
+    required String dateStart,
+    required String dateTo,
+  }) async {
+    showLoading();
+
+    final result = await hopRepo.getDashBoardLichHop(dateStart, dateTo);
+
+    result.when(
+      success: (value) {
+        listItemSchedule[0].numberOfSchedule = value.soLichChuTri ?? 0;
+        listItemSchedule[2].numberOfSchedule = value.soLichSapToi ?? 0;
+        listItemSchedule[3].numberOfSchedule = value.soLichTrung ?? 0;
+        dashBoardSubject.add(value);
+      },
+      error: (error) {},
+    );
+
+    showContent();
+  }
+
+  Future<void> postDanhSachLichHop({
+    required DanhSachLichHopRequest body,
+  }) async {
+    showLoading();
+    final result = await hopRepo.postDanhSachLichHop(body);
+    result.when(
+      success: (value) {
+        totalPage = value.totalPage ?? 1;
+        danhSachLichHopSubject.add(value);
+      },
+      error: (error) {},
+    );
+    showContent();
+  }
+
   List<String> listImageLichHopCuaToi = [
     ImageAssets.icLichCongTacTrongNuoc,
     ImageAssets.lichCanKlch,
@@ -32,10 +100,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [
     MeetingSchedule(
-        "hung hung hung", "2022-02-07T07:45:00", "2022-02-07T08:45:00"),
-    MeetingSchedule("hung", "2022-02-07T09:45:00", "2022-02-07T10:45:00"),
-    MeetingSchedule("hung", "2022-02-07T11:45:00", "2022-02-07T12:45:00"),
-    MeetingSchedule("hung", "2022-02-07T13:45:00", "2022-02-07T15:45:00"),
+        'hung hung hung', '2022-02-07T07:45:00', '2022-02-07T08:45:00'),
+    MeetingSchedule('hung', '2022-02-07T09:45:00', '2022-02-07T10:45:00'),
+    MeetingSchedule('hung', '2022-02-07T11:45:00', '2022-02-07T12:45:00'),
+    MeetingSchedule('hung', '2022-02-07T13:45:00', '2022-02-07T15:45:00'),
   ];
 
   DataSource getCalenderDataSource() {

@@ -27,7 +27,8 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
   @override
   void initState() {
     super.initState();
-    chiTietLichLamViecCubit.initData();
+    // chiTietLichLamViecCubit.initData();
+    chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
   }
 
   @override

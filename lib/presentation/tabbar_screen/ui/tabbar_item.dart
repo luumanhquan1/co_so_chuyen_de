@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calend
 import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/mobile/grid_view/danh_sach_bao_cao_dang_girdview.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_bao_cao_dang_girdview/ui/tablet/grid_view/danh_sach_bao_cao_dang_girdview.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
@@ -48,7 +49,6 @@ extension TabbarEnum on TabBarType {
         return 3;
       case TabBarType.menu:
         return 4;
-
       default:
         return 1;
     }
@@ -65,6 +65,7 @@ extension TabbarEnum on TabBarType {
             key: keyHomeTablet,
           ),
         );
+        return const ChiTietYKNDScreen();
       case TabBarType.report:
         return screenDevice(
           mobileScreen: const DanhSachBaoCaoDangGirdviewMobile(),

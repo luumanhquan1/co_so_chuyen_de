@@ -1,22 +1,40 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_van_ban_di_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
+<<<<<<< HEAD
 import 'package:ccvc_mobile/data/repository_impl/hop_impl/hop_impl.dart';
+=======
+import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
+>>>>>>> develop
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
+import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
+import 'package:ccvc_mobile/data/services/chi_tiet_lich_lam_viec_service/detail_lich_lam_viec_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
+<<<<<<< HEAD
 import 'package:ccvc_mobile/data/services/hop_service/hop_service.dart';
+=======
+import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
+>>>>>>> develop
 import 'package:ccvc_mobile/data/services/manager_service/manager_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/thanh_phan_tham_gia/thanh_phan_tham_gia_service.dart';
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
+<<<<<<< HEAD
 import 'package:ccvc_mobile/domain/repository/hop_repository/hop_repository.dart';
+=======
+import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
+>>>>>>> develop
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -44,6 +62,11 @@ void configureDependencies() {
     AccountImpl(Get.find()),
   );
 
+  Get.put(DetailLichLamViecService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+  Get.put<DetailLichLamViecRepository>(
+    DetailLichLamViecImpl(Get.find()),
+  );
+
   Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
@@ -57,12 +80,22 @@ void configureDependencies() {
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
+<<<<<<< HEAD
   Get.put(HopService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put<HopRepository>(HopImpl(Get.find()));
   Get.put(
     ThanhPhanThamGiaService(provideDio(baseOption: BaseURLOption.GATE_WAY)),
   );
   Get.put<ThanhPhanThamGiaReponsitory>(ThanhPhanThamGiaImpl(Get.find()));
+=======
+  Get.put(ChiTietVanBanDiService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+  Get.put<ChiTietVanBanRepository>(
+    ChiTietVanBanDiImpl(Get.find()),
+  );
+  Get.put(HopServices(
+    provideDio(baseOption: BaseURLOption.GATE_WAY),));
+  Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
+>>>>>>> develop
 }
 
 int _connectTimeOut = 60000;
