@@ -1,3 +1,11 @@
+
+import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
+
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
@@ -33,6 +41,24 @@ abstract class LichLamViecService {
     @Query('type') int type,
   );
 
+
+  @POST(ApiConstants.POST_DANH_SACH_LICH_LAM_VIEC)
+  Future<DanhSachLichLamViecResponse> postData(
+    @Body() DanhSachLichLamViecRequest bodyDanhSachLichLamViec,
+  );
+
+  @POST(ApiConstants.CATEGORY_LIST)
+  Future<CatogoryListResponse> getLoaiLichLamViec(
+    @Body() CatogoryListRequest catogoryListRequest,
+  );
+
+  @POST(ApiConstants.SEARCH_CAN_BO)
+  Future<NguoiChuTriResponse> getNguoiChuTri(
+      @Body() NguoiChuTriRequest nguoiChuTriRequest);
+
+  @POST(ApiConstants.SCHEDULE_FIELD)
+  Future<CatogoryListResponse> getLinhVuc(
+      @Body() CatogoryListRequest catogoryListRequest);
 
   @GET(ApiConstants.CHI_TIET_LICH_LAM_VIEC)
   Future<DetailCalenderWorkResponse> detailCalenderWork(@Path('id') String id);
