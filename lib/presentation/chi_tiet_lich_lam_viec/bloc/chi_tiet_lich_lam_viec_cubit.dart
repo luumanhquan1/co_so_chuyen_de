@@ -1,9 +1,11 @@
-import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/share_key.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/trang_thai_lv.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChiTietLichLamViecCubit {
   BehaviorSubject<ChiTietLichLamViecModel> chiTietLichLamViecSubject =
@@ -21,6 +23,40 @@ class ChiTietLichLamViecCubit {
           chiTietLichLamViecSubject.add(data);
         },
         error: (error) {});
+  }
+
+  BehaviorSubject<List<TrangThaiLvModel>> listTrangThaiSubject =
+      BehaviorSubject();
+
+  Stream<List<TrangThaiLvModel>> get streamListTrangThai =>
+      listTrangThaiSubject.stream;
+  List<TrangThaiLvModel> listTrangThai = [];
+
+//
+//   void writeState() async {
+//     final prefs = await SharedPreferences.getInstance();
+//     final myList = <TrangThaiLvModel>[];
+//
+//     print(prefs.getStringList("myList")); // [foobar]
+//   }
+
+  List<String> nameTrangThai = [];
+
+  Future<void> dataTrangThai() async {
+    final rs = await detailLichLamViec.trangThaiLV();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    rs.when(
+      success: (data) {
+        listTrangThai = data;
+        listTrangThaiSubject.sink.add(listTrangThai);
+        for (final name in listTrangThai) {
+          nameTrangThai.add(name.displayName ?? '');
+        }
+        prefs.setStringList(ShareKey.shareKey, nameTrangThai);
+      },
+      error: (error) {},
+    );
   }
 
   void initData() {

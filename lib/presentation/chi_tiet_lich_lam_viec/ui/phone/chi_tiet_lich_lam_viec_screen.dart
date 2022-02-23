@@ -31,6 +31,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
     super.initState();
     // chiTietLichLamViecCubit.initData();
     chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+    chiTietLichLamViecCubit.dataTrangThai();
   }
 
   @override
@@ -59,8 +60,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
               QData(
                   urlImage: ImageAssets.icChartFocus,
                   text: S.current.bao_cao_ket_qua,
-                  onTap: () {
-                  }),
+                  onTap: () {}),
               QData(
                   urlImage: ImageAssets.icChoYKien,
                   text: S.current.cho_y_kien,
