@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.d
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
-import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_right_respository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -190,14 +189,12 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       lichLamViecDashBroadRightSubject.stream;
   List<LichLamViecDashBroadItem> lichLamViecDashBroadRight = [];
 
-  LichLamViecDashBroadRightRepository get _lichLamViecRight => Get.find();
-
   Future<void> dataLichLamViecRight({
     required String startDate,
     required String endDate,
     required int type,
   }) async {
-    final result = await _lichLamViecRight.getLichLvRight(
+    final result = await _lichLamViec.getLichLvRight(
       startDate,
       endDate,
       type,
