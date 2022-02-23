@@ -50,7 +50,8 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                     textContent: S.current.ban_chan_chan_huy_lich_nay,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
-                      chiTietLichLamViecCubit.cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                      chiTietLichLamViecCubit
+                          .cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
                       Navigator.pop(context);
                     },
                     title: S.current.huy_lich,
@@ -76,6 +77,9 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
                       funcBtnRight: () {
+                        chiTietLichLamViecCubit
+                            .dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+
                         Navigator.pop(context);
                       },
                       title: S.current.xoa_lich_lam_viec,

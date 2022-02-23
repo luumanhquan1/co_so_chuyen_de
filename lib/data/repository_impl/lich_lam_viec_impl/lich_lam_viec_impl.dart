@@ -1,21 +1,21 @@
-
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
-
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
-import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/delete_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/xoa_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
@@ -120,10 +120,11 @@ return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
   @override
   Future<Result<MessageModel>> deleteBaoCaoKetQua(String id) {
     return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
-          () => lichLamViecService.deleteBaoCaoKetQua(id),
-          (res) => res.toDomain(),
+      () => lichLamViecService.deleteBaoCaoKetQua(id),
+      (res) => res.toDomain(),
     );
   }
+
   @override
   Future<Result<DataLichLvModel>> getListLichLamViec(
       ListLichLvRequest lichLvRequest) {
@@ -132,11 +133,20 @@ return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
       (response) => response.data.toDomain(),
     );
   }
+
+  @override
+  Future<Result<DeleteTietLichLamViecModel>> deleteCalenderWork(String id) {
+    return runCatchingAsync<DeleteCalenderWorkResponse,
+        DeleteTietLichLamViecModel>(
+      () => lichLamViecService.deleteCalenderWork(id),
+      (response) => response.toDelete(),
+    );
+  }
+
   @override
   Future<Result<CancelLichLamViecModel>> cancelCalenderWork(String id) {
     return runCatchingAsync<CancelCalenderWorkResponse, CancelLichLamViecModel>(
-            () => lichLamViecService.cancelCalenderWork(id),
-            (response) => response.toSucceeded());
+        () => lichLamViecService.cancelCalenderWork(id),
+        (response) => response.toSucceeded());
   }
 }
-
