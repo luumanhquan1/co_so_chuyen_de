@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_li
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
@@ -34,10 +36,15 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
         error: (error) {});
   }
 
-  void loadApi(String id) {
+  Future<void> loadApi(String id) async {
+    final queue = Queue(parallel: 2);
+    showLoading();
     idLichLamViec = id;
-    data(id);
-    getDanhSachBaoCaoKetQua(id);
+    unawaited(queue.add(() => data(id)));
+    unawaited(queue.add(() => getDanhSachBaoCaoKetQua(id)));
+
+    await queue.onComplete;
+    showContent();
   }
 
   Future<void> getDanhSachBaoCaoKetQua(String id) async {
