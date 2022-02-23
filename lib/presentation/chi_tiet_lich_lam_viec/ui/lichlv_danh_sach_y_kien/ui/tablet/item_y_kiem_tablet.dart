@@ -1,20 +1,16 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
-class ItemYKien extends StatelessWidget {
-  final String name;
-  final String imgAvatar;
-  final String? nameFile;
-  final String time;
-
-  const ItemYKien({
+class ItemYKienTablet extends StatelessWidget {
+ final YKienModel yKienModel;
+  const ItemYKienTablet({
     Key? key,
-    required this.name,
-    required this.imgAvatar,
-    required this.time,
-    this.nameFile,
+   required this.yKienModel
   }) : super(key: key);
 
   @override
@@ -23,9 +19,9 @@ class ItemYKien extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        color: bgDropDown.withOpacity(0.1),
-        border: Border.all(color: bgDropDown),
+        borderRadius: BorderRadius.circular(12),
+        color: bgTabletItem,
+        border: Border.all(color: cellColorborder),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,8 +45,9 @@ class ItemYKien extends StatelessWidget {
                 width: 14,
               ),
               Text(
-                name,
+                yKienModel.name,
                 style: textNormalCustom(
+                  fontSize: 16,
                   color: titleColor,
                 ),
               ),
@@ -58,11 +55,11 @@ class ItemYKien extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    time,
+                    DateTime.parse(yKienModel.time).toStringWithListFormat,
                     style: textNormalCustom(
                       color: infoColor,
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                      fontSize: 12.0.textScale(),
                     ),
                   ),
                 ),
@@ -73,33 +70,11 @@ class ItemYKien extends StatelessWidget {
             height: 12,
           ),
           Text(
-            S.current.thong_tin_bo_sung,
+            yKienModel.content,
             style: textNormalCustom(
               color: titleColor,
               fontWeight: FontWeight.w400,
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            S.current.van_ban_dinh_kem,
-            style: textNormalCustom(
-              color: titleColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-            ),
-          ),
-          const SizedBox(
-            height: 6,
-          ),
-          Text(
-            nameFile ?? '',
-            style: textNormalCustom(
-              color: textColorMangXaHoi,
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
+              fontSize: 14.0.textScale(),
             ),
           ),
         ],

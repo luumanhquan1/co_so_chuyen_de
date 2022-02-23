@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
@@ -26,6 +27,7 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.d
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 
 class LichLamViecImlp implements LichLamViecRepository {
@@ -75,13 +77,13 @@ class LichLamViecImlp implements LichLamViecRepository {
   Future<Result<List<LoaiSelectModel>>> getLoaiLich(
     CatogoryListRequest catogoryListRequest,
   ) {
-return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-() => lichLamViecService.getLoaiLichLamViec(catogoryListRequest),
-(res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
-);
-}
+    return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
+      () => lichLamViecService.getLoaiLichLamViec(catogoryListRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+    );
+  }
 
-@override
+  @override
   Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(String id) {
     return runCatchingAsync<DetailCalenderWorkResponse,
             ChiTietLichLamViecModel>(
@@ -148,5 +150,12 @@ return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
     return runCatchingAsync<CancelCalenderWorkResponse, CancelLichLamViecModel>(
         () => lichLamViecService.cancelCalenderWork(id),
         (response) => response.toSucceeded());
+  }
+
+  @override
+  Future<Result<List<YKienModel>>> getDanhSachYKien(String id) {
+    return runCatchingAsync<DanhSachYKienResponse, List<YKienModel>>(
+        () => lichLamViecService.getDanhSachYKien(id),
+        (res) => res.data?.map((e) => e.toDomain()).toList() ?? []);
   }
 }

@@ -1,11 +1,14 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/tablet/danh_sach_y_kien_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lichlv_danh_sach_y_kien/ui/tablet/danh_sach_y_kien_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/solid_button.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachYKienButtomTablet extends StatefulWidget {
-  const DanhSachYKienButtomTablet({Key? key}) : super(key: key);
+  final ChiTietLichLamViecCubit cubit;
+  const DanhSachYKienButtomTablet({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   _DanhSachYKienButtomTabletState createState() =>
@@ -22,7 +25,9 @@ class _DanhSachYKienButtomTabletState extends State<DanhSachYKienButtomTablet> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const DanhSachYKienTabletScreen(),
+            builder: (context) => DanhSachYKienTabletScreen(
+              cubit: widget.cubit,
+            ),
           ),
         );
       },

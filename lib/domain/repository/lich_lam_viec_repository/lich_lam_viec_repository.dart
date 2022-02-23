@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.d
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 
 
 mixin LichLamViecRepository {
@@ -61,6 +62,8 @@ mixin LichLamViecRepository {
 
 
   Future<Result<CancelLichLamViecModel>> cancelCalenderWork(String id);
+
+  Future<Result<List<YKienModel>>> getDanhSachYKien(String id);
 
 
 }
