@@ -57,13 +57,17 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
   }
 
   Future<void> xoaBaoCaoKetQua(String id) async {
+    showLoading();
     final result = await detailLichLamViec.deleteBaoCaoKetQua(id);
     result.when(
         success: (res) {
           if (res.succeeded ?? false) {
             getDanhSachBaoCaoKetQua(idLichLamViec).whenComplete(() {
+              showContent();
               MessageConfig.show(title: S.current.xoa_thanh_cong);
             });
+          } else {
+            showContent();
           }
         },
         error: (err) {});
