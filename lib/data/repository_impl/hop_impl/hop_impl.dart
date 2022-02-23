@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/request/hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/response/hop/catogory_list_response.dart';
+import 'package:ccvc_mobile/data/response/hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/hop_service/hop_service.dart';
@@ -13,25 +14,41 @@ class HopImpl extends HopRepository {
   HopImpl(this._service);
   @override
   Future<Result<List<LoaiSelectModel>>> getLoaiHop(
-      CatogoryListRequest catogoryListRequest) {
+    CatogoryListRequest catogoryListRequest,
+  ) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-        () => _service.getLoaiHop(catogoryListRequest),
-        (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? []);
+      () => _service.getLoaiHop(catogoryListRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 
   @override
   Future<Result<List<LoaiSelectModel>>> getLinhVuc(
-      CatogoryListRequest catogoryListRequest) {
+    CatogoryListRequest catogoryListRequest,
+  ) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-        () => _service.getLinhVuc(catogoryListRequest),
-        (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? []);
+      () => _service.getLinhVuc(catogoryListRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 
   @override
   Future<Result<List<NguoiChutriModel>>> getNguoiChuTri(
-      NguoiChuTriRequest nguoiChuTriRequest) {
+    NguoiChuTriRequest nguoiChuTriRequest,
+  ) {
     return runCatchingAsync<NguoiChuTriResponse, List<NguoiChutriModel>>(
-        () => _service.getNguoiChuTri(nguoiChuTriRequest),
-        (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? []);
+      () => _service.getNguoiChuTri(nguoiChuTriRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
+    String id,
+  ) {
+    return runCatchingAsync<DanhSachCanBoHopResponse, List<NguoiChutriModel>>(
+      () => _service.getDanhSachChuTri(id),
+      (res) => res.data?.listCanBo?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 }
