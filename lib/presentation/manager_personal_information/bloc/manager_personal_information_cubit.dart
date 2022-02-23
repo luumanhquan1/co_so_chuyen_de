@@ -7,7 +7,7 @@ import 'package:ccvc_mobile/domain/model/edit_personal_information/data_edit_per
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
-import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
+import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/tinh_huyen_xa_repository.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_state.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -37,7 +37,7 @@ class ManagerPersonalInformationCubit
 
   Stream<List<TinhHuyenXaModel>> get tinhStream => tinhSubject.stream;
 
-  ManagerRepository get _managerRepo => Get.find();
+  AccountRepository get _managerRepo => Get.find();
 
   TinhHuyenXaRepository get _tinhHuyenXaRepo => Get.find();
 
