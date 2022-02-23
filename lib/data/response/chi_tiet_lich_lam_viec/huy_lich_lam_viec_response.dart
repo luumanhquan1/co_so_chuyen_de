@@ -8,8 +8,12 @@ part 'huy_lich_lam_viec_response.g.dart';
 class CancelCalenderWorkResponse extends Equatable {
   @JsonKey(name: 'succeeded')
   bool? succeeded;
+  @JsonKey(name: 'code')
+  String? code;
+  @JsonKey(name: 'message')
+  String? message;
 
-  CancelCalenderWorkResponse(this.succeeded);
+  CancelCalenderWorkResponse(this.succeeded, this.code, this.message);
 
   factory CancelCalenderWorkResponse.fromJson(
     Map<String, dynamic> json,
@@ -24,5 +28,7 @@ class CancelCalenderWorkResponse extends Equatable {
 
   CancelLichLamViecModel toSucceeded() => CancelLichLamViecModel(
         succeeded: succeeded,
+        code: code,
+        message: message,
       );
 }

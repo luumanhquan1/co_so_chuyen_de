@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
-import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/cancel_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
@@ -26,7 +26,7 @@ class ChiTietLichLamViecCubit {
   }
 
   // huy lich lam viec
-  CancelLichLamViecRepository get cancelLichLamViec => Get.find();
+  LichLamViecRepository get cancelLichLamViec => Get.find();
 
   Future<void> cancel(String id) async {
     final rs = await cancelLichLamViec.cancelCalenderWork(id);
