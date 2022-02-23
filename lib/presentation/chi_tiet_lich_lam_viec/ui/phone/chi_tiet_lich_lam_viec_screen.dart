@@ -62,8 +62,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
               QData(
                   urlImage: ImageAssets.icChartFocus,
                   text: S.current.bao_cao_ket_qua,
-                  onTap: () {
-                  }),
+                  onTap: () {}),
               QData(
                   urlImage: ImageAssets.icChoYKien,
                   text: S.current.cho_y_kien,
@@ -76,7 +75,9 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       context,
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        Navigator.pop(context);
+                      },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icDeleteLichHop),
@@ -156,7 +157,8 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 24),
-                child: const BtnShowChinhSuaBaoCao(),
+                child: BtnShowChinhSuaBaoCao(
+                    chiTietLichLamViecCubit: chiTietLichLamViecCubit),
               ),
               const DanhSachYKienButtom(),
             ],

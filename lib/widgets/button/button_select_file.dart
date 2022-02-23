@@ -22,7 +22,7 @@ class ButtonSelectFile extends StatefulWidget {
   final Widget? builder;
   final bool isBuilder;
   List<File> files;
-
+  final bool showFileSelect;
   ButtonSelectFile({
     Key? key,
     this.background,
@@ -33,6 +33,7 @@ class ButtonSelectFile extends StatefulWidget {
     required this.onChange,
     this.isBuilder = false,
     this.files = const [],
+    this.showFileSelect = true,
   }) : super(key: key);
 
   @override
@@ -93,7 +94,7 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
         SizedBox(
           height: 16.0.textScale(),
         ),
-        if (widget.isBuilder)
+      if (widget.isBuilder)
           Column(
             children: widget.files.isNotEmpty
                 ? widget.files

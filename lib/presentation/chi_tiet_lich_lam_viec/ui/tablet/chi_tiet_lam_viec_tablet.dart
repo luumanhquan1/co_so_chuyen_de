@@ -29,7 +29,7 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
   @override
   void initState() {
     super.initState();
-    chiTietLichLamViecCubit.initData();
+    chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
   }
 
   @override
@@ -207,7 +207,9 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 24),
-                              child: const BtnShowBaoCaoTablet(),
+                              child: BtnShowBaoCaoTablet(
+                                cubit: chiTietLichLamViecCubit,
+                              ),
                             ),
                             const DanhSachYKienButtomTablet(),
                           ],

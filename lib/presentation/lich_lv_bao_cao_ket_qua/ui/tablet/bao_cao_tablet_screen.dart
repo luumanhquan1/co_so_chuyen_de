@@ -1,10 +1,9 @@
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/bloc/bao_cao_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/bao_cao_item_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/tablet/widgets/dialog_bao_cao_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
@@ -12,19 +11,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BaoCaoTabletScreen extends StatefulWidget {
-  const BaoCaoTabletScreen({Key? key}) : super(key: key);
+  final ChiTietLichLamViecCubit cubit;
+  const BaoCaoTabletScreen({Key? key,required this.cubit}) : super(key: key);
 
   @override
   _BaoCaoTabletScreenState createState() => _BaoCaoTabletScreenState();
 }
 
 class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
-  BaoCaoCubit cubit = BaoCaoCubit();
+
 
   @override
   void initState() {
     super.initState();
-    cubit.initData();
+
   }
 
   @override
@@ -41,7 +41,7 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: StreamBuilder<List<BaoCaoModel>>(
-                  stream: cubit.listBaoCao,
+                  stream: widget.cubit.listBaoCaoKetQua,
                   builder: (context, snapshot) {
                     final listData = snapshot.data ?? [];
                     if (listData.isNotEmpty) {
@@ -58,7 +58,7 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
                                   listData[index].status.getText().color,
                               fileNames:
                                   listData[index].listFile.map<String>((e) {
-                                return e.path.convertNameFile();
+                                return e.name ?? '';
                               }).toList(),
                               status: listData[index].status.getText().text,
                               content: listData[index].content,
@@ -67,8 +67,7 @@ class _BaoCaoTabletScreenState extends State<BaoCaoTabletScreen> {
                                   context,
                                   showTablet: true,
                                   funcBtnRight: () {
-                                    listData.removeAt(index);
-                                    cubit.getData(listData);
+
                                   },
                                   icon: SvgPicture.asset(
                                     ImageAssets.ic_delete_baocao,
