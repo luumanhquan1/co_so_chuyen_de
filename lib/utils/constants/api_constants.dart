@@ -65,6 +65,8 @@ class ApiConstants {
   static const POST_DANH_SACH_LICH_LAM_VIEC = '/vpdt/api/Schedules/danh-sach-lich';
 
 
+  static const SCHEDULE_REPORT_LIST = '/vpdt/api/ScheduleReport/list';
+  static const DELETE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/delete';
 }
 
 class ImageConstants {

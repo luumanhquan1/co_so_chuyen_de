@@ -40,7 +40,7 @@ class _MenuSelectWidgetState extends State<MenuSelectWidget>
   void showSelect(BuildContext context) {
     // ignore: cast_nullable_to_non_nullable
     final box = _key.currentContext?.findRenderObject() as RenderBox;
-    Offset position = box.localToGlobal(Offset.zero); //this is global position
+    final Offset position = box.localToGlobal(Offset.zero);
     late OverlayEntry overlayEntry;
     overlayEntry = OverlayEntry(
       builder: (BuildContext overlayContext) {
@@ -81,8 +81,9 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
     // TODO: implement initState
     super.initState();
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100))
-      ..forward();
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    )..forward();
   }
 
   @override
@@ -110,9 +111,16 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
               animation: _animationController,
               builder: (context, _) => Opacity(
                 opacity: _animationController.value,
-                child: Container(
-                  width: 179,
-                  decoration: BoxDecoration(
+                child: Transform(
+                  transform: Matrix4.identity()
+                    ..scale(
+                      _animationController.value,
+                      _animationController.value,
+                    ),
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    width: 179,
+                    decoration: BoxDecoration(
                       color: backgroundColorApp,
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                       border: Border.all(color: borderColor.withOpacity(0.5)),
@@ -122,23 +130,26 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         )
-                      ]),
-                  padding: const EdgeInsets.only(right: 17, left: 17, top: 3),
-                  child: Column(
-                    children: List.generate(
-                      widget.listSelect.length,
-                      (index) => InkWell(
-                        onTap: () {
-                          widget.listSelect[index].onTap.call();
-                          _animationController.reverse().whenComplete(() {
-                            widget.onDismis();
-                          });
-                        },
-                        child: Container(
-                          color: Colors.transparent,
-                          child: selectCell(
-                            widget.listSelect[index],
-                            isShowBorder: index != widget.listSelect.length-1,
+                      ],
+                    ),
+                    padding: const EdgeInsets.only(right: 17, left: 17, top: 3),
+                    child: Column(
+                      children: List.generate(
+                        widget.listSelect.length,
+                        (index) => InkWell(
+                          onTap: () {
+                            widget.listSelect[index].onTap.call();
+                            _animationController.reverse().whenComplete(() {
+                              widget.onDismis();
+                            });
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            child: selectCell(
+                              widget.listSelect[index],
+                              isShowBorder:
+                                  index != widget.listSelect.length - 1,
+                            ),
                           ),
                         ),
                       ),
