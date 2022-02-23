@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
@@ -17,13 +19,15 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(const CalenderStateIntial());
+  int page = 1;
+  int totalPage = 1;
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
-      BehaviorSubject.seeded([true, false]);
+  BehaviorSubject.seeded([true, false]);
   BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
-      BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
+  BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
 
   Stream<int> get checkIndexStream => checkIndex.stream;
 
@@ -31,6 +35,11 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   Stream<TypeCalendarMenu> get changeItemMenuStream =>
       changeItemMenuSubject.stream;
+  final BehaviorSubject<DanhSachLichlamViecModel> danhSachLichLamViecSubject =
+      BehaviorSubject();
+
+  Stream<DanhSachLichlamViecModel> get danhSachLichLamViecStream =>
+      danhSachLichLamViecSubject.stream;
 
   bool isCheck = false;
   List<String> img = [
@@ -106,7 +115,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DataSource getCalenderDataSource() {
     final List<Appointment> appointments = [];
     final RecurrenceProperties recurrence =
-        RecurrenceProperties(startDate: DateTime.now());
+    RecurrenceProperties(startDate: DateTime.now());
     recurrence.recurrenceType = RecurrenceType.daily;
     recurrence.interval = 2;
     recurrence.recurrenceRange = RecurrenceRange.noEndDate;
@@ -145,7 +154,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   //tong dashbroad
 
   BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
-      BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
+  BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
 
   Stream<LichLamViecDashBroad> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
@@ -210,6 +219,20 @@ class CalenderCubit extends BaseCubit<CalenderState> {
         return;
       },
     );
+  }
+
+  Future<void> postDanhSachLichlamViec({
+    required DanhSachLichLamViecRequest body
+  }) async {
+    final result = await _lichLamViec.postDanhSachLichLamViec(body);
+    result.when(success: (value) {
+      totalPage=value.totalPage??1;
+      danhSachLichLamViecSubject.add(value);
+
+    }, error: (error){
+
+    }
+    ,);
   }
 }
 
