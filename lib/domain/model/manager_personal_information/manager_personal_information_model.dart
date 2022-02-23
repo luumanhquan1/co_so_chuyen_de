@@ -1,6 +1,7 @@
-import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_row.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+
+import 'manager_personal_information_row.dart';
 
 enum Status { OFFLINE, ONLINME }
 
@@ -50,7 +51,7 @@ class ManagerPersonalInformationModel {
   String? tinhId;
   String? huyenId;
   String? xaId;
-  List<Departments>? departments;
+  List<DepartmentsModel>? departments;
   List<UserAccounts>? userAccounts;
   Status status = Status.OFFLINE;
 
@@ -316,7 +317,7 @@ class ManagerPersonalInformationModel {
   }
 }
 
-class Departments {
+class DepartmentsModel {
   String? id;
   String? chucVuId;
   String? tenChucVu;
@@ -328,7 +329,7 @@ class Departments {
   int? trangThai;
   String? updatedAt;
 
-  Departments({
+  DepartmentsModel({
     this.id,
     this.chucVuId,
     this.tenChucVu,
