@@ -3,7 +3,6 @@ import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart'
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
-import 'package:ccvc_mobile/domain/repository/list_lich_lv/list_lich_lv_responsitory.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
@@ -45,8 +44,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
 
-  ListLichLvRepository get listLichLv => Get.find();
-
   void callApi() {
     getListLichHop(
       dateFrom: '2022-02-01',
@@ -78,7 +75,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       pageSize: pageSize,
     );
     showLoading();
-    final result = await listLichLv.getListLichLamViec(data);
+    final result = await _lichLamViec.getListLichLamViec(data);
     result.when(
       success: (res) {
         totalPage = res.totalPage ?? 1;

@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
-import 'package:ccvc_mobile/data/repository_impl/list_lich_lv_impl/list_lich_lv_repo.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_impl/lich_lam_viec_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
@@ -16,7 +15,6 @@ import 'package:ccvc_mobile/data/services/chi_tiet_lich_lam_viec_service/detail_
 
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
-import 'package:ccvc_mobile/data/services/list_lv/list_lich_lv_service.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/thanh_phan_tham_gia/thanh_phan_tham_gia_service.dart';
@@ -27,7 +25,6 @@ import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_ti
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
-import 'package:ccvc_mobile/domain/repository/list_lich_lv/list_lich_lv_responsitory.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -95,11 +92,6 @@ void configureDependencies() {
     ),
   );
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
-
-  Get.put(ListLichLvService(
-    provideDio(baseOption: BaseURLOption.GATE_WAY),
-  ));
-  Get.put<ListLichLvRepository>(ListLichLvRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
