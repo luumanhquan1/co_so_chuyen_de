@@ -4,6 +4,8 @@ class ApiConstants {
   static const int PAGE_BEGIN = 1;
   static const int NOT_SAVED_ID = -1;
   static const int TIME_OUT = 30;
+  static const String POST_DANH_SACH_LICH_HOP =
+      '/vpdt/api/MeetingSchedule/calendar-list';
   static const String GET_DASH_BOARD_LH =
       '/vpdt/api/MeetingSchedule/count-in-dashboard';
   static const String GET_LIST_TOKEN = '/market/coin-list';
@@ -47,6 +49,19 @@ class ApiConstants {
   static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
   static const EDIT_PERSON_INFORMATION = '/api/CanBo/add-or-update';
+
+  static const LICH_LAM_VIEC_DASHBOARD =
+      '/vpdt/api/Schedules/count-in-dashboard';
+  static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
+      '/vpdt/api/Schedules/dashboard-schedule';
+  static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
+  static const SEARCH_CAN_BO = '/vpdt/api/CanBo/search';
+  static const CATEGORY_LIST = '/vpdt/api/Category/list';
+  static const SCHEDULE_FIELD = '/vpdt/api/ScheduleField/list';
+  static const DANH_SACH_CAN_BO_LICH_HOP =
+      '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
+  static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
+  static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
 }
 
 class ImageConstants {

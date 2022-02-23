@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
@@ -16,9 +17,9 @@ class WidgetHeadChiTietVanBan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DetailDocumentModel>(
-      initialData: cubit.detailDocumentModel,
-      stream: cubit.detailDocumentSubject,
+    return StreamBuilder<ChiTietVanBanDiModel>(
+      initialData: cubit.chiTietVanBanDiModel,
+      stream: cubit.chiTietVanBanSubject,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(

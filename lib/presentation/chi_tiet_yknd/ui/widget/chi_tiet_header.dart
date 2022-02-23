@@ -18,10 +18,11 @@ class _ChiTietYKNDHeaderState extends State<ChiTietYKNDHeader> {
   Widget build(BuildContext context) {
     final data = widget.cubit.getMapDataHeader();
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: data.length,
       itemBuilder: (context, index) {
-        return  ItemHeader(
+        return ItemRow(
           title: data[index].title,
           content: data[index].content,
         );
@@ -30,10 +31,11 @@ class _ChiTietYKNDHeaderState extends State<ChiTietYKNDHeader> {
   }
 }
 
-class ItemHeader extends StatelessWidget {
+class ItemRow extends StatelessWidget {
   final String title;
   final String? content;
-  const ItemHeader({
+
+  const ItemRow({
     Key? key,
     required this.title,
     this.content,
@@ -42,7 +44,7 @@ class ItemHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isFile;
-    title==S.current.tai_lieu_dinh_kem_cong_dan? isFile=true : isFile=false;
+    textColor.contains(title) ? isFile = true : isFile = false;
     return Column(
       children: [
         Row(
@@ -68,7 +70,7 @@ class ItemHeader extends StatelessWidget {
                 style: textNormalCustom(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: isFile?numberOfCalenders:titleCalenderWork,
+                  color: isFile ? numberOfCalenders : titleCalenderWork,
                 ),
               ),
             ),
@@ -81,3 +83,8 @@ class ItemHeader extends StatelessWidget {
     );
   }
 }
+
+List<String> textColor = [
+  S.current.tai_lieu_dinh_kem_cong_dan,
+  S.current.file_dinh_kem
+];

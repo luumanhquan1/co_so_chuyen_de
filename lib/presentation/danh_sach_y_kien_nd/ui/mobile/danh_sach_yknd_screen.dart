@@ -67,33 +67,38 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
         ],
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: StreamBuilder<List<NguoiDanModel>>(
-          stream: cubit.listYKienNguoiDan,
-          builder: (context, snapshot) {
-            final List<NguoiDanModel> listData = snapshot.data ?? [];
-            if (listData.isNotEmpty) {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: listData.length,
-                itemBuilder: (context, index) {
-                  return YKienNguoiDanCell(
-                    onTap: () {},
-                    title: listData[index].ngheNghiep ?? '',
-                    dateTime: listData[index].ngayThang ?? '',
-                    userName: listData[index].ten ?? '',
-                    status: listData[index].statusData.getText().text,
-                    stausColor: listData[index].statusData.getText().color,
-                    userImage:
-                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                  );
-                },
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 2));
+        },
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: StreamBuilder<List<NguoiDanModel>>(
+            stream: cubit.listYKienNguoiDan,
+            builder: (context, snapshot) {
+              final List<NguoiDanModel> listData = snapshot.data ?? [];
+              if (listData.isNotEmpty) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: listData.length,
+                  itemBuilder: (context, index) {
+                    return YKienNguoiDanCell(
+                      onTap: () {},
+                      title: listData[index].ngheNghiep ?? '',
+                      dateTime: listData[index].ngayThang ?? '',
+                      userName: listData[index].ten ?? '',
+                      status: listData[index].statusData.getText().text,
+                      stausColor: listData[index].statusData.getText().color,
+                      userImage:
+                          'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    );
+                  },
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
         ),
       ),
     );
