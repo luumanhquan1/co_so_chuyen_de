@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
-import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_dashbroad_impl/lich_lam_viec_dashbroad_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_impl/lich_lam_viec_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
@@ -23,7 +23,7 @@ import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_ti
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/hop_repository.dart';
-import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -75,8 +75,8 @@ void configureDependencies() {
       provideDio(baseOption: BaseURLOption.GATE_WAY),
     ),
   );
-  Get.put<LichLamViecDashBroadRepository>(
-    LichLamViecDashBroadImlp(Get.find()),
+  Get.put<LichLamViecRepository>(
+    LichLamViecImlp(Get.find()),
   );
 
   Get.put(

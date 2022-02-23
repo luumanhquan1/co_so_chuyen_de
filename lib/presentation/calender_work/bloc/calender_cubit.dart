@@ -3,7 +3,7 @@ import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
-import 'package:ccvc_mobile/domain/repository/lich_lam_viec_dashbroad_repository/lich_lam_viec_dashbroad_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -151,7 +151,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       lichLamViecDashBroadSubject.stream;
   LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad();
 
-  LichLamViecDashBroadRepository get _lichLamViec => Get.find();
+  LichLamViecRepository get _lichLamViec => Get.find();
 
   void callAPi() {
     showLoading();
