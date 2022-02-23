@@ -622,8 +622,8 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
         index: 1,
         isChoYKien: isChoYKien,
         isSortByDoKhan: true,
-        thoiGianStartFilter: startDate.toString(),
-        thoiGianEndFilter: endDate.toString(),
+        thoiGianStartFilter: startDate.formatApi,
+        thoiGianEndFilter: endDate.formatApi,
         size: 10,
       ),
     );

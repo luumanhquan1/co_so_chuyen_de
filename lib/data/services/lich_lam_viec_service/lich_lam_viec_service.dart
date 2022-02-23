@@ -11,11 +11,9 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qu
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
-
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
-
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
-
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -75,5 +73,8 @@ abstract class LichLamViecService {
   Future<ListLichLvResponse> getListLichLv(
     @Body() ListLichLvRequest lichLvRequest,
   );
+
+  @GET(ApiConstants.CANCEL_TIET_LICH_LAM_VIEC)
+  Future<CancelCalenderWorkResponse> cancelCalenderWork(@Path('id') String id);
 
 }
