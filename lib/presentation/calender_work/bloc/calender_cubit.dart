@@ -35,7 +35,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   bool isCheck = false;
   List<String> img = [
-    ImageAssets.icTongSoLichLamviec,
+    //ImageAssets.icTongSoLichLamviec,
     ImageAssets.icLichCongTacTrongNuoc,
     ImageAssets.icLichLamViec,
     ImageAssets.icLichCongTacNuocNgoai,
@@ -155,12 +155,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   LichLamViecDashBroadRepository get _lichLamViec => Get.find();
 
   void callAPi() {
+    showLoading();
     dataLichLamViec(startDate: '2022-02-01', endDate: '2022-02-28');
     dataLichLamViecRight(
       startDate: '2022-02-01',
       endDate: '2022-02-28',
       type: 3,
     );
+    showContent();
   }
 
   Future<void> dataLichLamViec({
@@ -170,8 +172,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     final result = await _lichLamViec.getLichLv(startDate, endDate);
     result.when(
       success: (res) {
+        showLoading();
         lichLamViecDashBroads = res;
         lichLamViecDashBroadSubject.sink.add(lichLamViecDashBroads);
+        showContent();
       },
       error: (err) {
         return;
@@ -200,8 +204,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     );
     result.when(
       success: (res) {
+        showLoading();
         lichLamViecDashBroadRight = res;
         lichLamViecDashBroadRightSubject.sink.add(lichLamViecDashBroadRight);
+        showContent();
       },
       error: (err) {
         return;
