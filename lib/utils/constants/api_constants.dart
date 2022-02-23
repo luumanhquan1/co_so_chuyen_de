@@ -48,6 +48,8 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/calendar-list';
   static const SU_KIEN_TRONG_NGAY = '/api/DashBoardHome/su-kien-trong-ngay?';
   static const SINH_NHAT_DASHBOARD = '/api/DashBoardHome/sinh-nhat?';
+  static const EDIT_PERSON_INFORMATION = '/api/CanBo/add-or-update';
+
   static const LICH_LAM_VIEC_DASHBOARD =
       '/vpdt/api/Schedules/count-in-dashboard';
   static const LICH_LAM_VIEC_DASHBOARD_RIGHT =
@@ -60,7 +62,6 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
-
 }
 
 class ImageConstants {

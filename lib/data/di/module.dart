@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respo
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
+
 import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
 import 'package:ccvc_mobile/data/services/chi_tiet_lich_lam_viec_service/detail_lich_lam_viec_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
@@ -57,7 +58,7 @@ void configureDependencies() {
     QLVBImlp(Get.find()),
   );
   //login
-  Get.put(AccountService(provideDio()));
+  Get.put(AccountService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<AccountRepository>(
     AccountImpl(Get.find()),
   );
@@ -72,16 +73,10 @@ void configureDependencies() {
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
 
-  Get.put(ManagerService(provideDio(baseOption: BaseURLOption.COMMON)));
-  Get.put<ManagerRepository>(
-    ManagerRepositoryImpl(Get.find()),
-  );
-
   Get.put(TinhHuyenXaService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<TinhHuyenXaRepository>(
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
-
   Get.put(
     LichLamViecService(
       provideDio(baseOption: BaseURLOption.GATE_WAY),
@@ -104,9 +99,11 @@ void configureDependencies() {
     ChiTietVanBanDiImpl(Get.find()),
   );
 
-  Get.put(HopServices(
-    provideDio(baseOption: BaseURLOption.GATE_WAY),
-  ));
+  Get.put(
+    HopServices(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
+    ),
+  );
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
 }
 
