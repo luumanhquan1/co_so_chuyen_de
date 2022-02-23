@@ -8,7 +8,7 @@ part 'chi_tiet_lich_lam_viec.g.dart';
 
 @JsonSerializable()
 class DetailCalenderWorkResponse extends Equatable {
-  @JsonKey(name: 'data')
+  @JsonKey(name: 'data' )
   DetailCalenderWorkResponseData data;
 
   DetailCalenderWorkResponse(this.data);
@@ -137,7 +137,7 @@ class DetailCalenderWorkResponseData extends Equatable {
         time: '$timeFrom - $timeTo',
         date: DateTime.parse(dateTimeFrom ?? DateTime.now().toString())
             .formatDayCalendar,
-        loaiLich: typeScheduleName ?? '',
+        loaiLich: '$typeScheduleName',
         // listPerSon: fakeDataListPerson(),
         nhacLai: '',
         chuTri: (createBy?.toModel() ?? Departments()).tenDonVi ?? '',

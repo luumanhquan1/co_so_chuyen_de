@@ -48,6 +48,7 @@ void configureDependencies() {
     AccountImpl(Get.find()),
   );
 
+
   Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
