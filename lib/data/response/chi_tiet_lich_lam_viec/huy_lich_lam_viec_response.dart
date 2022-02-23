@@ -1,23 +1,28 @@
-
-
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/cancel_lich_lam_viec_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'huy_lich_lam_viec_response.g.dart';
+
 @JsonSerializable()
-class DetailCalenderWorkResponse extends Equatable {
-  @JsonKey(name: 'data' )
-  DetailCalenderWorkResponseData data;
+class CancelCalenderWorkResponse extends Equatable {
+  @JsonKey(name: 'succeeded')
+  bool? succeeded;
 
-  DetailCalenderWorkResponse(this.data);
+  CancelCalenderWorkResponse(this.succeeded);
 
-  factory DetailCalenderWorkResponse.fromJson(
-      Map<String, dynamic> json,
-      ) =>
-      _$DetailCalenderWorkResponseFromJson(json);
+  factory CancelCalenderWorkResponse.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$CancelCalenderWorkResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DetailCalenderWorkResponseToJson(this);
+  Map<String, dynamic> toJson() => _$CancelCalenderWorkResponseToJson(this);
 
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
+
+  CancelLichLamViecModel toSucceeded() => CancelLichLamViecModel(
+        succeeded: succeeded,
+      );
 }

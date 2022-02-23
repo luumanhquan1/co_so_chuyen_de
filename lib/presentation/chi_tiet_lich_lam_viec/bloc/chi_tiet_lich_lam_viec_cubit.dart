@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/cancel_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ class ChiTietLichLamViecCubit {
   BehaviorSubject<ChiTietLichLamViecModel> chiTietLichLamViecSubject =
       BehaviorSubject();
 
+  // chi tiet lich lam viec
   Stream<ChiTietLichLamViecModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
 
@@ -19,6 +21,18 @@ class ChiTietLichLamViecCubit {
     rs.when(
         success: (data) {
           chiTietLichLamViecSubject.add(data);
+        },
+        error: (error) {});
+  }
+
+  // huy lich lam viec
+  CancelLichLamViecRepository get cancelLichLamViec => Get.find();
+
+  Future<void> cancel(String id) async {
+    final rs = await cancelLichLamViec.cancelCalenderWork(id);
+    rs.when(
+        success: (data) {
+          print('trang thai huy: $data');
         },
         error: (error) {});
   }
