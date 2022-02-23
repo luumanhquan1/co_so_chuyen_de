@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/data/result/result.dart';
-import 'package:ccvc_mobile/domain/model/tinh_huyen_xa/tinh_huyen_xa_model.dart';
+import 'package:ccvc_mobile/domain/model/account/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 
 mixin TinhHuyenXaRepository {
   Future<Result<List<TinhHuyenXaModel>>> getData();

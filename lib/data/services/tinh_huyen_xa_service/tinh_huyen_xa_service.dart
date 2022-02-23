@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/data/response/tinh_huyen_xa/tinh_huyen_xa_response.dart';
+import 'package:ccvc_mobile/data/response/account/tinh_huyen_xa/tinh_huyen_xa_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
