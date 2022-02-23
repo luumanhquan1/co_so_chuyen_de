@@ -11,7 +11,7 @@ part 'lich_lam_viec_service.g.dart';
 abstract class LichLamViecService {
   @factoryMethod
   factory LichLamViecService(Dio dio, {String baseUrl}) =
-      _LichLamViecDashBroadService;
+      _LichLamViecService;
 
   @GET(ApiConstants.LICH_LAM_VIEC_DASHBOARD)
   Future<LichLamViecDashBroadResponse> getLichLamViec(

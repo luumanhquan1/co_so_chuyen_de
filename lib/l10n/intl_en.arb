@@ -72,7 +72,6 @@
   "default_word": "Mặc định",
   "no_data": "Không có dữ liệu",
   "widget_manage": "Quản lý widgets",
-  "bao_cao_thong_ke": "Báo cáo thống kê",
   "den_han": "Đến hạn",
   "qua_han": "Quá hạn",
   "hoan_thanh": "Hoàn thành",
@@ -501,5 +500,6 @@
   "Chon_can_bo_boc_bang" : "Chọn cán bộ sử dụng bóc băng",
   "Chon_don_vi_su_dung" : "Chọn đơn vị sử dụng",
   "nhap_ten_don_vi": "Nhập tên đơn vị",
-  "thu_hoi_lich" : "Thu hồi lịch"
+  "thu_hoi_lich" : "Thu hồi lịch",
+  "bao_cao_thong_ke": "Báo cáo thống kê"
 }
