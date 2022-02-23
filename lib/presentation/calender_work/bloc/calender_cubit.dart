@@ -4,6 +4,9 @@ import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/list_lich_lv/list_lich_lv_responsitory.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -32,44 +35,53 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   Stream<TypeCalendarMenu> get changeItemMenuStream =>
       changeItemMenuSubject.stream;
 
+  /// ListLichLvRequest lichLvRequest = fakeData;
+
   bool isCheck = false;
   BehaviorSubject<DataLichLvModel> listLichSubject = BehaviorSubject();
   DataLichLvModel dataLichLvModel = DataLichLvModel();
   int page = 1;
-  int totalPage = 10;
+  int totalPage = 1;
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
 
   ListLichLvRepository get listLichLv => Get.find();
 
-  Future<void> callApi() async {
-    await getListLichHop(
+  void callApi() {
+    getListLichHop(
       dateFrom: '2022-02-01',
       dateTo: '2022-02-28',
       isLichCuaToi: true,
       pageIndex: page,
-      pageSize: totalPage,
+      pageSize: 10,
+    );
+    dataLichLamViec(startDate: '2022-02-01', endDate: '2022-02-28');
+    dataLichLamViecRight(
+      startDate: '2022-02-01',
+      endDate: '2022-02-28',
+      type: 3,
     );
   }
 
   Future<void> getListLichHop({
     required String dateFrom,
     required String dateTo,
+    required bool isLichCuaToi,
     required int pageIndex,
     required int pageSize,
-    required bool isLichCuaToi,
   }) async {
-    final ListLichLvRequest lichLvRequest = ListLichLvRequest(
+    final ListLichLvRequest data = ListLichLvRequest(
       dateFrom: dateFrom,
       dateTo: dateTo,
+      isLichCuaToi: isLichCuaToi,
       pageIndex: pageIndex,
       pageSize: pageSize,
-      isLichCuaToi: isLichCuaToi,
     );
-    final result = await listLichLv.getListLichLamViec(lichLvRequest);
+    showLoading();
+    final result = await listLichLv.getListLichLamViec(data);
     result.when(
       success: (res) {
-        showLoading();
+        totalPage = res.totalPage ?? 1;
         dataLichLvModel = res;
         listLichSubject.sink.add(dataLichLvModel);
         showContent();
@@ -79,7 +91,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   List<String> img = [
-    ImageAssets.icTongSoLichLamviec,
+    //ImageAssets.icTongSoLichLamviec,
     ImageAssets.icLichCongTacTrongNuoc,
     ImageAssets.icLichLamViec,
     ImageAssets.icLichCongTacNuocNgoai,
@@ -185,6 +197,71 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     } else {
       emit(LichLVStateDangList(type));
     }
+  }
+
+  //tong dashbroad
+
+  BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
+      BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
+
+  Stream<LichLamViecDashBroad> get streamLichLamViec =>
+      lichLamViecDashBroadSubject.stream;
+  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad();
+
+  LichLamViecRepository get _lichLamViec => Get.find();
+
+  Future<void> dataLichLamViec({
+    required String startDate,
+    required String endDate,
+  }) async {
+    showLoading();
+    final result = await _lichLamViec.getLichLv(startDate, endDate);
+    result.when(
+      success: (res) {
+        lichLamViecDashBroads = res;
+        lichLamViecDashBroadSubject.sink.add(lichLamViecDashBroads);
+      },
+      error: (err) {
+        return;
+      },
+    );
+    showContent();
+  }
+
+  BehaviorSubject<List<LichLamViecDashBroadItem>>
+      lichLamViecDashBroadRightSubject = BehaviorSubject.seeded([
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    )
+  ]);
+
+  Stream<List<LichLamViecDashBroadItem>> get streamLichLamViecRight =>
+      lichLamViecDashBroadRightSubject.stream;
+  List<LichLamViecDashBroadItem> lichLamViecDashBroadRight = [];
+
+  Future<void> dataLichLamViecRight({
+    required String startDate,
+    required String endDate,
+    required int type,
+  }) async {
+    showLoading();
+    final result = await _lichLamViec.getLichLvRight(
+      startDate,
+      endDate,
+      type,
+    );
+    result.when(
+      success: (res) {
+        lichLamViecDashBroadRight = res;
+        lichLamViecDashBroadRightSubject.sink.add(lichLamViecDashBroadRight);
+      },
+      error: (err) {
+        return;
+      },
+    );
+    showContent();
   }
 }
 

@@ -4,11 +4,11 @@ part 'list_lich_lv_request.g.dart';
 
 @JsonSerializable()
 class ListLichLvRequest {
-  final String dateFrom;
-  final String dateTo;
-  final int pageIndex;
-  final int pageSize;
-  final bool isLichCuaToi;
+  String dateFrom;
+  String dateTo;
+  int pageIndex;
+  int pageSize;
+  bool isLichCuaToi;
 
   ListLichLvRequest({
     required this.dateFrom,

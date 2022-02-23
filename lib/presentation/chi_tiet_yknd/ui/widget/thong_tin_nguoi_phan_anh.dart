@@ -23,7 +23,6 @@ class _ThongTinNguoiPhanAnhState extends State<ThongTinNguoiPhanAnh> {
     final data = widget.cubit.getMapDataNguoiPhananh();
     return Column(
       children: [
-        const SizedBox(height: 10,),
         Row(
           children: [
             Expanded(
@@ -80,10 +79,11 @@ class _ThongTinNguoiPhanAnhState extends State<ThongTinNguoiPhanAnh> {
           height: 10,
         ),
         ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: data.length,
           itemBuilder: (context, index) {
-            return ItemHeader(
+            return ItemRow(
               title: data[index].title,
               content: data[index].content,
             );
