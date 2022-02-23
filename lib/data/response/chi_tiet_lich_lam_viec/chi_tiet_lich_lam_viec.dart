@@ -138,12 +138,12 @@ class DetailCalenderWorkResponseData extends Equatable {
         time: '$timeFrom - $timeTo',
         date: dateTimeFrom ?? '',
         loaiLich: typeScheduleName ?? '',
-        listPerSon: fakeDataListPerson(),
-        nhacLai: timeFrom ?? '',
-        chuTri: (createBy?.toModel() ?? Departments()).tenDonVi ?? 'Lê sĩ lâm',
+        // listPerSon: fakeDataListPerson(),
+        nhacLai: '',
+        chuTri: (createBy?.toModel() ?? Departments()).tenDonVi ?? '',
         linhVuc: linhVuc ?? '',
         diaDiem: location ?? '',
-        noiDung: dateTimeTo ?? '',
+        noiDung: content ?? '',
       );
 }
 

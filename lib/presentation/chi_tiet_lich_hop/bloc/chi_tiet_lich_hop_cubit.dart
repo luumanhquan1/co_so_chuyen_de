@@ -36,7 +36,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         time: '11:30 AM - 12:00 AM',
         date: '8 tháng 12,2021',
         loaiLich: '11:30 AM - 12:00 AM',
-        listPerSon: fakeDataListPerson(),
         nhacLai: '10 phút sau',
         chuTri: 'Lê Sĩ Lâm - Văn thư',
         linhVuc: 'Xúc tiến thương mại',
