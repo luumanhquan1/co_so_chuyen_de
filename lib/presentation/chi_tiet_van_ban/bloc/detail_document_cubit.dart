@@ -1,9 +1,12 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
+import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
-import 'datai_doccument_state.dart';
+import 'detai_doccument_state.dart';
 import 'package:file_picker/file_picker.dart';
 
 class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
@@ -14,6 +17,8 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   bool expanded4 = false;
   bool expanded5 = false;
   bool expanded6 = false;
+
+  ChiTietVanBanRepository get _chiTietVanBanDiRepo => Get.find();
 
   BehaviorSubject<DetailDocumentModel> detailDocumentSubject =
       BehaviorSubject<DetailDocumentModel>();
@@ -43,6 +48,22 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
 
   Stream<HistoryProcessPage> get screenJobProfilesStream =>
       _subjectJobPriliesProcess.stream;
+
+  //chi tiet van ban di
+  BehaviorSubject<ChiTietVanBanDiModel> chiTietVanBanSubject =
+      BehaviorSubject();
+  ChiTietVanBanDiModel chiTietVanBanDiModel = ChiTietVanBanDiModel();
+
+  Future<void> getChiTietVanBanDi(String id) async {
+    final result = await _chiTietVanBanDiRepo.getDataChiTietVanBanDi(id);
+    result.when(
+      success: (res) {
+        chiTietVanBanDiModel = res;
+        chiTietVanBanSubject.sink.add(chiTietVanBanDiModel);
+      },
+      error: (error) {},
+    );
+  }
 
   DetailDocumentModel detailDocumentModel = DetailDocumentModel(
       soVanBan: 'M123',
