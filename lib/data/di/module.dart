@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/hop_impl/hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/manager_repo_impl/manager_repository_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
@@ -15,6 +16,7 @@ import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_se
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
+import 'package:ccvc_mobile/domain/repository/hop_repository/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/manager_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
@@ -37,7 +39,7 @@ void configureDependencies() {
     QLVBImlp(Get.find()),
   );
   //login
-  Get.put(AccountService(provideDio()));
+  Get.put(AccountService(provideDio(baseOption: BaseURLOption.COMMON)));
   Get.put<AccountRepository>(
     AccountImpl(Get.find()),
   );
@@ -56,7 +58,7 @@ void configureDependencies() {
     TinhXaHuyenRepositoryImpl(Get.find()),
   );
   Get.put(HopService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
-
+  Get.put<HopRepository>(HopImpl(Get.find()));
   Get.put(
     ThanhPhanThamGiaService(provideDio(baseOption: BaseURLOption.GATE_WAY)),
   );

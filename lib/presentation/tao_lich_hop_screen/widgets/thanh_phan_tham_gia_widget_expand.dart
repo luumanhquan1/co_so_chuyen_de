@@ -38,6 +38,7 @@ class ThanhPhanThamGiaExpandWidget extends StatelessWidget {
             onChange: (value) {},
             phuongThucNhan: (value) {},
           ),
+          spaceH16,
           TitleChildWidget(
             title: S.current.don_vi_phoi_hop_khac,
             sizeTitle: 14,

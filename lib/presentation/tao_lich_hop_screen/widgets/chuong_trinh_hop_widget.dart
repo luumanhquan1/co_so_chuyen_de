@@ -124,9 +124,12 @@ class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
                 ),
                 InputInfoUserWidget(
                   title: S.current.nguoi_chu_tri,
-                  child: const DropDownSearch(
+                  child: DropDownSearch(
+                    title: S.current.nguoi_chu_tri,
+                    hintText: S.current.chon_nguoi_chu_tri,
+                    onChange: (value) {},
                     listSelect: [
-                     "Tokuda",
+                      "Tokuda",
                       'Thầy ông nội',
                       'Lực ô da woa',
                       "Hòa dâm dê",
