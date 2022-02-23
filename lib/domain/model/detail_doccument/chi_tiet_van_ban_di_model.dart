@@ -108,12 +108,7 @@ class ChiTietVanBanDiModel {
       DocumentDetailRow(S.current.so_den, 'soDen', TypeDocumentDetailRow.text),
       DocumentDetailRow(S.current.so_phu, 'soPhu', TypeDocumentDetailRow.text),
       DocumentDetailRow(S.current.noi_gui, 'noiGui', TypeDocumentDetailRow.text),
-      DocumentDetailRow(S.current.loai_van_ban, convertStatus(
-        isLaVanBanTraLoi: isLaVanBanTraLoi??false,
-        isVanBanChiDao: isVanBanChiDao??false,
-        isVanBanDiBanHanh: isVanBanDiBanHanh??false,
-        isVanBanQppl: isVanBanQppl??false
-      ) , TypeDocumentDetailRow.text),
+      DocumentDetailRow(S.current.loai_van_ban, 'loaivanBan',TypeDocumentDetailRow.text),
       DocumentDetailRow(S.current.so_ky_hieu, 'soKyHieu', TypeDocumentDetailRow.text),
       DocumentDetailRow(S.current.ngay_ban_hanh, ngayBanHanh, TypeDocumentDetailRow.text),
       DocumentDetailRow(S.current.ngay_den, 'ngayDen', TypeDocumentDetailRow.text),
@@ -131,27 +126,21 @@ class ChiTietVanBanDiModel {
     return list;
   }
 
-  String convertStatus({bool isLaVanBanTraLoi = true, bool isVanBanQppl = false, bool isVanBanDiBanHanh = false, bool isVanBanChiDao = false}){
-    if(isLaVanBanTraLoi==true){
-      return 'Van ban di ban hanh';
-    }else if(isVanBanQppl==true){
-      return 'Van ban qppl';
-    }else if(isVanBanDiBanHanh==true){
-      return 'Văn Bản Ban Hành';
-    }else{
-      return 'VanBanChiDao';
-    }
-    // (IsVanBanQppl ?? false) ? 'Van ban qppl' : 'AA';
-  }
 
   List<DocumentDetailRow> toListCheckBox() {
     final List<DocumentDetailRow> listCheckbox = [
       DocumentDetailRow(
-          S.current.van_ban_qppl, isVanBanQppl, TypeDocumentDetailRow.checkbox),
-      // DocumentDetailRow(
-      //     S.current.hoi_bao_van_ban, 'hoiBao', TypeDocumentDetailRow.checkbox),
-      // DocumentDetailRow(
-      //     S.current.da_nhan_ban_giay, 'daNhanBanGiay', TypeDocumentDetailRow.checkbox)
+          S.current.van_ban_qppl, isVanBanQppl??false, TypeDocumentDetailRow.checkbox),
+      DocumentDetailRow(
+        S.current.hoi_bao_van_ban,
+        isLaVanBanTraLoi??false,
+        TypeDocumentDetailRow.checkbox,
+      ),
+      DocumentDetailRow(
+        S.current.da_nhan_ban_giay,
+        isVanBanChiDao??false,
+        TypeDocumentDetailRow.checkbox,
+      )
     ];
 
     return listCheckbox;
