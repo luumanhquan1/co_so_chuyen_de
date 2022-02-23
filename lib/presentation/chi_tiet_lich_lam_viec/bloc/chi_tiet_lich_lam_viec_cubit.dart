@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
@@ -16,15 +17,18 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
   BehaviorSubject<ChiTietLichLamViecModel> chiTietLichLamViecSubject =
       BehaviorSubject();
 
-
   // chi tiet lich lam viec
 
   ChiTietLichLamViecCubit() : super(DetailDocumentInitial());
 
-
   Stream<ChiTietLichLamViecModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
-  BehaviorSubject<List<BaoCaoModel>> _listBaoCaoKetQua = BehaviorSubject();
+  final BehaviorSubject<List<BaoCaoModel>> _listBaoCaoKetQua =
+      BehaviorSubject<List<BaoCaoModel>>();
+  final BehaviorSubject<List<YKienModel>> _listYKien =
+      BehaviorSubject<List<YKienModel>>();
+
+  Stream<List<YKienModel>> get listYKien => _listYKien.stream;
 
   Stream<List<BaoCaoModel>> get listBaoCaoKetQua => _listBaoCaoKetQua.stream;
 
@@ -38,7 +42,6 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
         },
         error: (error) {});
   }
-
 
   // xoa lich lam viec
   LichLamViecRepository get deleteLichLamViec => Get.find();
@@ -57,15 +60,15 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
           print('trang thai huy: $data');
         },
         error: (error) {});
-
   }
+
   Future<void> loadApi(String id) async {
-    final queue = Queue(parallel: 2);
+    final queue = Queue(parallel: 3);
     showLoading();
     idLichLamViec = id;
     unawaited(queue.add(() => data(id)));
     unawaited(queue.add(() => getDanhSachBaoCaoKetQua(id)));
-
+    unawaited(queue.add(() => getDanhSachYKien(id)));
     await queue.onComplete;
     showContent();
   }
@@ -75,6 +78,15 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
     result.when(
         success: (res) {
           _listBaoCaoKetQua.sink.add(res);
+        },
+        error: (err) {});
+  }
+
+  Future<void> getDanhSachYKien(String id) async {
+    final result = await detailLichLamViec.getDanhSachYKien(id);
+    result.when(
+        success: (res) {
+          _listYKien.sink.add(res);
         },
         error: (err) {});
   }
@@ -94,13 +106,11 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
           }
         },
         error: (err) {});
-
   }
-
-
 
   void dispose() {
     _listBaoCaoKetQua.close();
     chiTietLichLamViecSubject.close();
+    _listYKien.close();
   }
 }

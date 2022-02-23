@@ -1,25 +1,20 @@
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/bloc/y_kien_cubit.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/bloc/y_kien_state.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/mobile/widgets/item_y_kiem.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lichlv_danh_sach_y_kien/ui/mobile/widgets/item_y_kiem.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachYKienScreen extends StatefulWidget {
-  const DanhSachYKienScreen({Key? key}) : super(key: key);
+  final ChiTietLichLamViecCubit cubit;
+  const DanhSachYKienScreen({Key? key,required this.cubit}) : super(key: key);
 
   @override
   _DanhSachYKienScreenState createState() => _DanhSachYKienScreenState();
 }
 
 class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
-  YKienCubit cubit = YKienCubit(YKienStateIntial());
 
-  @override
-  void initState() {
-    super.initState();
-    cubit.fakeData();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +26,7 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
           context: context,
           removeTop: true,
           child: StreamBuilder<List<YKienModel>>(
-            stream: cubit.listYKien,
+            stream: widget.cubit.listYKien,
             builder: (context, snapshot) {
               final listData = snapshot.data ?? [];
               if (listData.isNotEmpty) {
@@ -41,17 +36,12 @@ class _DanhSachYKienScreenState extends State<DanhSachYKienScreen> {
                   itemCount: listData.length,
                   itemBuilder: (context, index) {
                     return ItemYKien(
-                      time: listData[index].time,
-                      name: listData[index].name,
-                      imgAvatar: listData[index].imgAvatar,
-                      nameFile: listData[index].fileName,
+                      yKienModel: listData[index],
                     );
                   },
                 );
               } else {
-                return Center(
-                  child: Text(S.current.no_data),
-                );
+                return const NodataWidget();
               }
             },
           ),

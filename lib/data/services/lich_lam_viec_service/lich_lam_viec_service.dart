@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
@@ -8,6 +7,7 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_
 
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
@@ -40,7 +40,6 @@ abstract class LichLamViecService {
     @Query('dateTo') String dateTo,
     @Query('type') int type,
   );
-
 
   @POST(ApiConstants.POST_DANH_SACH_LICH_LAM_VIEC)
   Future<DanhSachLichLamViecResponse> postData(
@@ -76,12 +75,13 @@ abstract class LichLamViecService {
     @Body() ListLichLvRequest lichLvRequest,
   );
 
-
   @DELETE(ApiConstants.XOA_LICH_LAM_VIEC)
   Future<DeleteCalenderWorkResponse> deleteCalenderWork(@Path('id') String id);
 
   @GET(ApiConstants.CANCEL_TIET_LICH_LAM_VIEC)
   Future<CancelCalenderWorkResponse> cancelCalenderWork(@Path('id') String id);
 
-
+  @GET(ApiConstants.SCHEDULE_OPINION_LIST)
+  Future<DanhSachYKienResponse> getDanhSachYKien(
+      @Query('scheduleId') String scheduleId);
 }
