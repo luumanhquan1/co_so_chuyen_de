@@ -1,7 +1,9 @@
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
@@ -37,5 +39,13 @@ class LichLamViecImlp implements LichLamViecRepository {
       ),
       (response) => response.toDomain(),
     );
+  }
+
+  @override
+  Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(String id) {
+    return runCatchingAsync<DetailCalenderWorkResponse,
+        ChiTietLichLamViecModel>(
+            () => lichLamViecService.detailCalenderWork(id),
+            (response) => response.data.toModel());
   }
 }

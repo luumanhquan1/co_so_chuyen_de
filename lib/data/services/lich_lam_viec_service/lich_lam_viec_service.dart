@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec_dashbroad/lich_lam_viec_dashbroad_right_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -10,8 +11,7 @@ part 'lich_lam_viec_service.g.dart';
 @RestApi()
 abstract class LichLamViecService {
   @factoryMethod
-  factory LichLamViecService(Dio dio, {String baseUrl}) =
-      _LichLamViecService;
+  factory LichLamViecService(Dio dio, {String baseUrl}) = _LichLamViecService;
 
   @GET(ApiConstants.LICH_LAM_VIEC_DASHBOARD)
   Future<LichLamViecDashBroadResponse> getLichLamViec(
@@ -25,4 +25,8 @@ abstract class LichLamViecService {
     @Query('dateTo') String dateTo,
     @Query('type') int type,
   );
+
+
+  @GET(ApiConstants.CHI_TIET_LICH_LAM_VIEC)
+  Future<DetailCalenderWorkResponse> detailCalenderWork(@Path('id') String id);
 }
