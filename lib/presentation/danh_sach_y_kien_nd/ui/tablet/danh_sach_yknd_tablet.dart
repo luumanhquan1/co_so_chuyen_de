@@ -26,48 +26,49 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarDefaultBack(
-          S.current.danh_sach_y_kien_nguoi_Dan,
+      appBar: AppBarDefaultBack(
+        S.current.danh_sach_y_kien_nguoi_Dan,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ChooseTimeScreen(
+              today: DateTime.now(),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(30, 28, 30, 0),
+              child: StreamBuilder<List<NguoiDanModel>>(
+                stream: cubit.listYKienNguoiDan,
+                builder: (context, snapshot) {
+                  final List<NguoiDanModel> listData = snapshot.data ?? [];
+                  if (listData.isNotEmpty) {
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: listData.length,
+                      itemBuilder: (context, index) {
+                        return YKienNguoiDanCell(
+                          onTap: () {},
+                          title: listData[index].ngheNghiep ?? '',
+                          dateTime: listData[index].ngayThang ?? '',
+                          userName: listData[index].ten ?? '',
+                          status: listData[index].statusData.getText().text,
+                          stausColor:
+                              listData[index].statusData.getText().color,
+                          userImage:
+                              'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                        );
+                      },
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
+            ),
+          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ChooseTimeScreen(
-                today: DateTime.now(),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(30, 28, 30, 0),
-                child: StreamBuilder<List<NguoiDanModel>>(
-                  stream: cubit.listYKienNguoiDan,
-                  builder: (context, snapshot) {
-                    final List<NguoiDanModel> listData = snapshot.data ?? [];
-                    if (listData.isNotEmpty) {
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: listData.length,
-                        itemBuilder: (context, index) {
-                          return YKienNguoiDanCell(
-                            onTap: () {},
-                            title: listData[index].ngheNghiep ?? '',
-                            dateTime: listData[index].ngayThang ?? '',
-                            userName: listData[index].ten ?? '',
-                            status: listData[index].statusData.getText().text,
-                            stausColor:
-                                listData[index].statusData.getText().color,
-                            userImage:
-                                'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                          );
-                        },
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),);
+      ),
+    );
   }
 }

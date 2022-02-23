@@ -14,9 +14,6 @@ class DanhSachVBDenResponse {
       _$DanhSachVBDenResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DanhSachVBDenResponseToJson(this);
-
-  @override
-  List<Object?> get props => [];
 }
 
 @JsonSerializable()
@@ -39,12 +36,10 @@ class DataResponseVBDen {
                 doKhan: e.doKhan,
                 loaiVanBan: e.loaiVanBan,
                 ngayDen: e.ngayDen,
-                nguoiSoanThao: e.nguoiSoanThao))
+                iD: e.iD,
+                nguoiSoanThao: e.nguoiSoanThao,),)
             .toList(),
       );
-
-  @override
-  List<Object?> get props => [];
 }
 
 @JsonSerializable()
@@ -57,9 +52,11 @@ class PageDataResponseVBDen {
   String? ngayDen;
   @JsonKey(name: 'ChuTri')
   String? nguoiSoanThao;
+  @JsonKey(name: 'Id')
+  String? iD;
 
   PageDataResponseVBDen(
-      this.doKhan, this.loaiVanBan, this.ngayDen, this.nguoiSoanThao);
+      this.iD,this.doKhan, this.loaiVanBan, this.ngayDen, this.nguoiSoanThao,);
 
   factory PageDataResponseVBDen.fromJson(Map<String, dynamic> json) =>
       _$PageDataResponseVBDenFromJson(json);
@@ -67,12 +64,10 @@ class PageDataResponseVBDen {
   Map<String, dynamic> toJson() => _$PageDataResponseVBDenToJson(this);
 
   VanBanModel toDomain() => VanBanModel(
+        iD: iD,
         nguoiSoanThao: nguoiSoanThao,
         loaiVanBan: loaiVanBan,
         doKhan: doKhan,
         ngayDen: ngayDen,
       );
-
-  @override
-  List<Object?> get props => [];
 }
