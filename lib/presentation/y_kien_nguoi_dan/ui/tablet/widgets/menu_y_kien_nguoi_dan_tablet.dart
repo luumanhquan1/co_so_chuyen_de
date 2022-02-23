@@ -73,7 +73,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                 number: 20,
                 name: S.current.bao_cao_thong_ke,
                 onTap: () {
-                  widget.cubit.selectTypeYKNDSubject.add([false,true]);
+                  widget.cubit.selectTypeYKNDSubject.add([false, true]);
                   Navigator.pop(context);
                 },
                 isSelect: data[1],

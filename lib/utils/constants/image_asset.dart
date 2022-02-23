@@ -71,6 +71,7 @@ class ImageAssets {
   static const String icBaoCaoItemNenu = '$baseImg/ic_baocao_y_kien_menu.svg';
   static const String icChoDuyetYKND = '$baseImg/cho_duyen_yknd.svg';
   static const String icDongHoYKND = '$baseImg/dong_ho_yknd.svg';
+  static const String ic_Calendar_tui = '$baseImg/ic_calendar_tui.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
