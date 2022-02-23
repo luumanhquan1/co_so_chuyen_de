@@ -375,22 +375,22 @@ class _EditPersonalInformationScreen
                           onPressed2: () {
                             if (keyGroup.currentState!.validator()) {
                               cubit.getEditPerson(
-                                  id: widget.id,
-                                  maCanBo: maCanBoController.value.text,
-                                  name: nameController.value.text,
-                                  sdtCoQuan: sdtCoquanController.value.text,
-                                  sdt: sdtController.value.text,
-                                  email: emailController.value.text,
-                                  gioitinh: gioiTinh,
-                                  ngaySinh: dateTimes,
-                                  cmnt: cmndController.value.text,
-                                  diaChiLienHe:
-                                      diaChiLienHeController.value.text,
-                                  donViDetail: cubit
-                                      .editPersonInformationRequest.donViDetail,
-                                  tinh: tinh,
-                                  huyen: huyen,
-                                  xa: xa);
+                                id: widget.id,
+                                maCanBo: maCanBoController.value.text,
+                                name: nameController.value.text,
+                                sdtCoQuan: sdtCoquanController.value.text,
+                                sdt: sdtController.value.text,
+                                email: emailController.value.text,
+                                gioitinh: gioiTinh,
+                                ngaySinh: dateTimes,
+                                cmnt: cmndController.value.text,
+                                diaChiLienHe: diaChiLienHeController.value.text,
+                                donViDetail: cubit
+                                    .editPersonInformationRequest.donViDetail,
+                                tinh: tinh,
+                                huyen: huyen,
+                                xa: xa,
+                              );
                             } else {}
                           },
                           title1: S.current.dong,

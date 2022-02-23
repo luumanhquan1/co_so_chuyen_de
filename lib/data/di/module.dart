@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
-import 'package:ccvc_mobile/data/repository_impl/edit_person_information/edit_person_information_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/chi_tiet_van_ban_impl/chi_tiet_van_ban_di_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
@@ -13,7 +12,6 @@ import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respo
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/tinh_xa_huyen_impl/tinh_xa_huyen_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
-import 'package:ccvc_mobile/data/services/edit_person_information_service/edit_person_information_service.dart';
 
 import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
 import 'package:ccvc_mobile/data/services/chi_tiet_lich_lam_viec_service/detail_lich_lam_viec_service.dart';
@@ -29,7 +27,6 @@ import 'package:ccvc_mobile/data/services/thanh_phan_tham_gia/thanh_phan_tham_gi
 import 'package:ccvc_mobile/data/services/tinh_huyen_xa_service/tinh_huyen_xa_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
-import 'package:ccvc_mobile/domain/repository/edit_person/edit_person_repository.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
@@ -98,24 +95,20 @@ void configureDependencies() {
   Get.put<ThanhPhanThamGiaReponsitory>(ThanhPhanThamGiaImpl(Get.find()));
 
   Get.put(
-      ChiTietVanBanDiService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+    ChiTietVanBanDiService(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
+    ),
+  );
   Get.put<ChiTietVanBanRepository>(
     ChiTietVanBanDiImpl(Get.find()),
   );
 
-  Get.put(HopServices(
-    provideDio(baseOption: BaseURLOption.GATE_WAY),
-  ));
-  Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
-
   Get.put(
-    EditPersonInformationService(
-      provideDio(baseOption: BaseURLOption.COMMON),
+    HopServices(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
     ),
   );
-  Get.put<EditPersonRepository>(
-    EditPersonRepositoryImpl(Get.find()),
-  );
+  Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
