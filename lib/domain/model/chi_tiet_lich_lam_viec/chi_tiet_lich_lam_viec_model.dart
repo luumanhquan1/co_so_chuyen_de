@@ -98,3 +98,56 @@ class TypeData {
 
   TypeData({required this.icon, required this.value, required this.type});
 }
+
+
+ListPerSon fakeDataListPerson() {
+  ListPerSon fakeDataListPersona = ListPerSon(
+      tongSoNguoi: 8,
+      soNguoiDongY: 3,
+      soNguoiChoXacNhan: 5,
+      listPerson: listFake);
+  return fakeDataListPersona;
+}
+
+List<Person> listFake = [
+  Person(
+    name: 'Nguyễn Minh Hoàng',
+    isConnect: true,
+    color: Colors.blue,
+  ),
+  Person(
+    name: 'Nguyễn Minh Hoàng',
+    isConnect: true,
+    color: Colors.blue,
+  ),
+  Person(
+    name: 'Nguyễn Minh Hoàng',
+    isConnect: true,
+    color: Colors.blue,
+  ),
+  Person(
+    name: 'Hoàng Mai Linh',
+    isConnect: false,
+    color: Colors.red,
+  ),
+  Person(
+    name: 'Hoàng Mai Linh',
+    isConnect: false,
+    color: Colors.red,
+  ),
+  Person(
+    name: 'Hoàng Mai Linh',
+    isConnect: false,
+    color: Colors.red,
+  ),
+  Person(
+    name: 'Hoàng Mai Linh',
+    isConnect: false,
+    color: Colors.red,
+  ),
+  Person(
+    name: 'Hoàng Mai Linh',
+    isConnect: false,
+    color: Colors.red,
+  ),
+];
