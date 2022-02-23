@@ -5,12 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'lich_lam_viec_dashbroad_service.g.dart';
+part 'lich_lam_viec_service.g.dart';
 
 @RestApi()
-abstract class LichLamViecDashBroadService {
+abstract class LichLamViecService {
   @factoryMethod
-  factory LichLamViecDashBroadService(Dio dio, {String baseUrl}) =
+  factory LichLamViecService(Dio dio, {String baseUrl}) =
       _LichLamViecDashBroadService;
 
   @GET(ApiConstants.LICH_LAM_VIEC_DASHBOARD)
