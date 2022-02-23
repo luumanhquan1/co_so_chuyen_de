@@ -73,7 +73,10 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       context,
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        chiTietLichLamViecCubit.dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                        Navigator.pop(context);
+                      },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icDeleteLichHop),

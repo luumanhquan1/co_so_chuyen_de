@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/repository_impl/detail_lich_lam_viec/detail_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/repository/chi_tiet_lich_lam_viec_repository/detail_lich_lam_viec_repository.dart';
+import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
@@ -21,6 +22,14 @@ class ChiTietLichLamViecCubit {
           chiTietLichLamViecSubject.add(data);
         },
         error: (error) {});
+  }
+
+  // xoa lich lam viec
+  LichLamViecRepository get deleteLichLamViec => Get.find();
+
+  Future<void> dataDelete(String id) async {
+    final rs = await deleteLichLamViec.deleteCalenderWork(id);
+    rs.when(success: (data) {}, error: (error) {});
   }
 
   void initData() {
