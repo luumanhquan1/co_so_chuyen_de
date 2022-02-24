@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_cubit.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/linh_vuc_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/loai_lich_widget.dart';
@@ -15,10 +17,12 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/th
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TaoLichLamViecChiTietScreen extends StatefulWidget {
   const TaoLichLamViecChiTietScreen({Key? key}) : super(key: key);
@@ -59,7 +63,7 @@ class _TaoLichLamViecChiTietScreenState
           ),
         ),
         body: TaoLichLamViecProvider(
-          taoLichLamViecCubit:taoLichLamViecCubit,
+          taoLichLamViecCubit: taoLichLamViecCubit,
           child: StateStreamLayout(
             textEmpty: S.current.khong_co_du_lieu,
             retry: () {},
@@ -89,8 +93,12 @@ class _TaoLichLamViecChiTietScreenState
                         ),
                         const SearchNameWidget(),
                         StartEndDateWidget(
-                          onEndDateTimeChanged: (DateTime value) {},
-                          onStartDateTimeChanged: (DateTime value) {},
+                          onEndDateTimeChanged: (DateTime value) {
+                            print('$value ==========');
+                          },
+                          onStartDateTimeChanged: (DateTime value) {
+                            print('$value ????????????');
+                          },
                         ),
                         const SizedBox(
                           height: 26,
@@ -133,7 +141,40 @@ class _TaoLichLamViecChiTietScreenState
                                 ),
                               );
                             }
-
+                            taoLichLamViecCubit.taoLichLamViec(
+                              title: 'tao6ddd',
+                              typeScheduleId:
+                                  'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
+                              linhVucId: 'aed033ae-3eba-4d7b-a2d4-28defdc20d0a',
+                              TenTinh: '',
+                              TenHuyen: '',
+                              TenXa: '',
+                              dateFrom: '2022-02-24',
+                              timeFrom: '13:45',
+                              dateTo: '2022-02-24',
+                              timeTo: '15:45',
+                              content: '',
+                              location: 'assd',
+                              vehicle: '',
+                              expectedResults: '',
+                              results: '',
+                              status: 2,
+                              rejectReason: '',
+                              publishSchedule: false,
+                              tags: '',
+                              isLichDonVi: false,
+                              canBoChuTriId:
+                                  '19266143-feee-44d0-828a-e29df215f481',
+                              donViId: '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+                              note: '',
+                              isAllDay: false,
+                              isSendMail: true,
+                              typeRemider: 1,
+                              typeRepeat: 1,
+                              dateRepeat: '2022-02-24',
+                              dateRepeat1: '2022-02-24',
+                              only: true,
+                            );
                             if (tieuDeController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

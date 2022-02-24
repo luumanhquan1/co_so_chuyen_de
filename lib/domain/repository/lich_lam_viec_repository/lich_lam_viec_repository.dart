@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/trang_thai_lv.dart';
@@ -46,9 +47,11 @@ mixin LichLamViecRepository {
   Future<Result<List<LoaiSelectModel>>> getLinhVuc(
     CatogoryListRequest catogoryListRequest,
   );
+
   Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(
     String id,
   );
+
   Future<Result<List<BaoCaoModel>>> getDanhSachBaoCao(String scheduleId);
 
   Future<Result<MessageModel>> deleteBaoCaoKetQua(String id);
@@ -77,4 +80,37 @@ mixin LichLamViecRepository {
   Future<Result<List<TrangThaiLvModel>>> trangThaiLV();
 
   Future<Result<List<TinhTrangBaoCaoModel>>> getListTinhTrangBaoCao();
+
+  Future<Result<MessageModel>> taoLichLamViec(
+      String title,
+      String typeScheduleId,
+      String linhVucId,
+      String TenTinh,
+      String TenHuyen,
+      String TenXa,
+      String dateFrom,
+      String timeFrom,
+      String dateTo,
+      String timeTo,
+      String content,
+      String location,
+      String vehicle,
+      String expectedResults,
+      String results,
+      int status,
+      String rejectReason,
+      bool publishSchedule,
+      String tags,
+      bool isLichDonVi,
+      String canBoChuTriId,
+      String donViId,
+      String note,
+      bool isAllDay,
+      bool isSendMail,
+      int typeRemider,
+      int typeRepeat,
+      String dateRepeat,
+      String dateRepeat1,
+      bool only,
+      );
 }

@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/trang_thai/trang_thai_lv_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
@@ -14,6 +16,7 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qu
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tinh_trang_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
@@ -90,7 +93,6 @@ abstract class LichLamViecService {
   Future<DanhSachYKienResponse> getDanhSachYKien(
       @Query('scheduleId') String scheduleId);
 
-
   @PUT(ApiConstants.UPDATE_SCHEDULE_REPORT)
   @MultiPart()
   Future<ChinhSuaBaoCaoKetQuaResponse> updateBaoCaoKetQua(
@@ -108,6 +110,37 @@ abstract class LichLamViecService {
   @GET(ApiConstants.TRANG_THAI)
   Future<TrangThaiLVResponse> detailTrangThai();
 
-
-
+  @POST(ApiConstants.TAO_LICH_LAM_VIEC)
+  Future<TaoLichLamViecResponse> taoLichLamviec(
+    @Part() String title,
+    @Part() String typeScheduleId,
+    @Part() String linhVucId,
+    @Part() String TenTinh,
+    @Part() String TenHuyen,
+    @Part() String TenXa,
+    @Part() String dateFrom,
+    @Part() String timeFrom,
+    @Part() String dateTo,
+    @Part() String timeTo,
+    @Part() String content,
+    @Part() String location,
+    @Part() String vehicle,
+    @Part() String expectedResults,
+    @Part() String results,
+    @Part() int    status,
+    @Part() String rejectReason,
+    @Part() bool   publishSchedule,
+    @Part() String tags,
+    @Part() bool   isLichDonVi,
+    @Part() String canBoChuTriId,
+    @Part() String donViId,
+    @Part() String note,
+    @Part() bool   isAllDay,
+    @Part() bool   isSendMail,
+    @Part(name: 'scheduleReminderRequest.typeRemider') int typeRemider,
+    @Part(name: 'repeatCalendar.typeRepeat') int typeRepeat,
+    @Part(name: 'repeatCalendar.dateRepeat[0]') String dateRepeat,
+    @Part(name: 'repeatCalendar.dateRepeat[1]') String dateRepeat1,
+    @Part(name: 'repeatCalendar.only') bool only,
+  );
 }

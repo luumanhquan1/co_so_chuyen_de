@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
@@ -78,11 +79,11 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Future<void> deleteFile(File deleteFile, List<File> list) async {
     list.remove(deleteFile);
   }
+
   final BehaviorSubject<WidgetType?> _showDialogSetting =
-  BehaviorSubject<WidgetType?>();
+      BehaviorSubject<WidgetType?>();
 
   Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
-
 
   Future<void> loadData() async {
     final queue = Queue(parallel: 3);
@@ -141,10 +142,78 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
         error: (err) {});
   }
 
+  Future<void> taoLichLamViec({
+    required String title,
+    required String typeScheduleId,
+    required String linhVucId,
+    required String TenTinh,
+    required String TenHuyen,
+    required String TenXa,
+    required String dateFrom,
+    required String timeFrom,
+    required String dateTo,
+    required String timeTo,
+    required String content,
+    required String location,
+    required String vehicle,
+    required String expectedResults,
+    required String results,
+    required int status,
+    required String rejectReason,
+    required bool publishSchedule,
+    required String tags,
+    required bool isLichDonVi,
+    required String canBoChuTriId,
+    required String donViId,
+    required String note,
+    required bool isAllDay,
+    required bool isSendMail,
+    required int typeRemider,
+    required int typeRepeat,
+    required String dateRepeat,
+    required String dateRepeat1,
+    required bool only,
+  }) async {
+    final result = await _lichLamViec.taoLichLamViec(
+      title,
+      typeScheduleId,
+      linhVucId,
+      TenTinh,
+      TenHuyen,
+      TenXa,
+      dateFrom,
+      timeFrom,
+      dateTo,
+      timeTo,
+      content,
+      location,
+      vehicle,
+      expectedResults,
+      results,
+      status,
+      rejectReason,
+      publishSchedule,
+      tags,
+      isLichDonVi,
+      canBoChuTriId,
+      donViId,
+      note,
+      isAllDay,
+      isSendMail,
+      typeRemider,
+      typeRepeat,
+      dateRepeat,
+      dateRepeat1,
+      only,
+    );
+    result.when(success: (res) {}, error: (error) {});
+  }
+
   void dispose() {
     _loaiLich.close();
     _nguoiChuTri.close();
   }
+
   void showDialog(WidgetType type) {
     if (_showDialogSetting.hasValue) {
       if (_showDialogSetting.value == type) {
