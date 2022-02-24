@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
@@ -7,6 +5,7 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.d
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -72,6 +71,28 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       error: (error) {},
     );
 
+    showContent();
+  }
+
+
+  void callApi() {
+    getDanhSachPhienHop(id: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+  }
+  BehaviorSubject<List<ListPhienHopModel>> phienHopSubject = BehaviorSubject();
+  List<ListPhienHopModel> listPhienHop = [];
+
+  Future<void> getDanhSachPhienHop({
+    required String id,
+  }) async {
+    showLoading();
+    final result = await hopRepo.getDanhSachPhienHop(id);
+    result.when(
+      success: (value) {
+        listPhienHop = value;
+        phienHopSubject.sink.add(listPhienHop);
+      },
+      error: (error) {},
+    );
     showContent();
   }
 
