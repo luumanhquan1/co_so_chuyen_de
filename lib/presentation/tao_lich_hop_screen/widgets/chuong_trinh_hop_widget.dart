@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -20,6 +21,7 @@ import 'package:flutter/material.dart';
 
 class ChuongTrinhHopWidget extends StatelessWidget {
   final TaoLichHopCubit cubit;
+
   const ChuongTrinhHopWidget({Key? key, required this.cubit}) : super(key: key);
 
   @override
@@ -45,7 +47,9 @@ class ChuongTrinhHopWidget extends StatelessWidget {
             onTap: () {
               showBottomSheetCustom(
                 context,
-                child: const ThemPhienHopScreen(cubit: null,),
+                child: ThemPhienHopScreen(
+                  cubit: cubit,
+                ),
                 title: S.current.them_phien_hop,
               );
             },
@@ -60,6 +64,7 @@ class ChuongTrinhHopWidget extends StatelessWidget {
 
 class ThemPhienHopScreen extends StatefulWidget {
   final TaoLichHopCubit cubit;
+
   const ThemPhienHopScreen({Key? key, required this.cubit}) : super(key: key);
 
   @override
@@ -69,6 +74,13 @@ class ThemPhienHopScreen extends StatefulWidget {
 class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
   final _key = GlobalKey<FormGroupState>();
   final _keyBaseTime = GlobalKey<BaseChooseTimerWidgetState>();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.cubit.getChuongTrinhHop('7b4f68c6-f835-4bea-b6f2-06250412ae70');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -125,12 +137,23 @@ class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
                 ),
                 InputInfoUserWidget(
                   title: S.current.nguoi_chu_tri,
-                  child: DropDownSearch(
-                    title: S.current.nguoi_chu_tri,
-                    hintText: S.current.chon_nguoi_chu_tri,
-                    onChange: (value) {},
-                    listSelect: [],
-                  ),
+                  child: StreamBuilder<ChuongTrinhHopModel>(
+                      stream: widget.cubit.chuongTrinhHopStream,
+                      builder: (context, snapshot) {
+                        final data =
+                            snapshot.data ?? ChuongTrinhHopModel.empty();
+                        final dataString = data.listCanBo
+                                ?.map((e) => e.tenCanBo ?? '')
+                                .toList() ??
+                            [];
+
+                        return DropDownSearch(
+                          title: S.current.nguoi_chu_tri,
+                          hintText: S.current.chon_nguoi_chu_tri,
+                          onChange: (value) {},
+                          listSelect: dataString,
+                        );
+                      },),
                 ),
                 InputInfoUserWidget(
                   title: S.current.noi_dung_phien_hop,

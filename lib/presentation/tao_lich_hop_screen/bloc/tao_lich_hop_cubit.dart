@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -13,11 +14,18 @@ import 'package:rxdart/rxdart.dart';
 
 class TaoLichHopCubit extends BaseCubit<TaoLichHopState> {
   TaoLichHopCubit() : super(MainStateInitial());
+
   HopRepository get hopRp => Get.find();
   final BehaviorSubject<List<LoaiSelectModel>> _loaiLich = BehaviorSubject();
+  final BehaviorSubject<ChuongTrinhHopModel> chuongTrinhHopSubject =
+      BehaviorSubject();
+
+  Stream<ChuongTrinhHopModel> get chuongTrinhHopStream =>
+      chuongTrinhHopSubject.stream;
 
   Stream<List<LoaiSelectModel>> get loaiLich => _loaiLich.stream;
   final BehaviorSubject<List<LoaiSelectModel>> _linhVuc = BehaviorSubject();
+
   Stream<List<LoaiSelectModel>> get linhVuc => _linhVuc.stream;
   final BehaviorSubject<List<NguoiChutriModel>> _nguoiChuTri =
       BehaviorSubject();
@@ -26,6 +34,7 @@ class TaoLichHopCubit extends BaseCubit<TaoLichHopState> {
   LoaiSelectModel? selectLoaiHop;
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
+
   void loadData() {
     _getLoaiLich();
     _getPhamVi();
@@ -42,7 +51,15 @@ class TaoLichHopCubit extends BaseCubit<TaoLichHopState> {
           }
           _loaiLich.sink.add(res);
         },
-        error: (err) {});
+        error: (err) {},);
+  }
+
+  Future<void> getChuongTrinhHop(String id) async {
+    final result = await hopRp.getChuongTrinhHop(id);
+
+    result.when(success: (value) {
+      chuongTrinhHopSubject.add(value);
+    }, error: (error) {},);
   }
 
   Future<void> _getPhamVi() async {

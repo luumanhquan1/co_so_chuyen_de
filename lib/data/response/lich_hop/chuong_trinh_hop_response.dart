@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dar
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'chuong_trinh_hop_response.g.dart';
 
 @JsonSerializable()
@@ -99,8 +100,11 @@ class CanBoItemResponse extends Equatable {
   bool? isThamGiaBocBang;
   @JsonKey(name: 'createAt')
   String? createAt;
+  @JsonKey(name: 'tenCanBo')
+  String? tenCanBo;
 
   CanBoModel toModel() => CanBoModel(
+        tenCanBo: tenCanBo,
         tenChucVu: tenChucVu,
         diemDanh: diemDanh,
         disable: disable,

@@ -27,6 +27,7 @@ class CanBoModel {
   String? soDienThoai;
   String? dauMoiLienHe;
   String? tenCoQuan;
+  String? tenCanBo;
   bool? isThuKy;
   bool? isThamGiaBocBang;
   String? createAt;
@@ -42,6 +43,7 @@ class CanBoModel {
     required this.donViId,
     required this.canBoId,
     required this.vaiTro,
+    required this.tenCanBo,
     required this.ghiChu,
     required this.parentId,
     required this.vaiTroThamGia,
