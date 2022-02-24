@@ -21,6 +21,7 @@ class BaoCaoScreen extends StatefulWidget {
 }
 
 class _BaoCaoScreenState extends State<BaoCaoScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,6 +54,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
                           context,
                           child: ChinhSuaBaoCaoBottomSheet(
                             baoCaoModel: listData[index],
+                            cubit: widget.cubit,
                           ),
                           title: S.current.chinh_sua_bao_cao_ket_qua,
                         ).then((value) {});
