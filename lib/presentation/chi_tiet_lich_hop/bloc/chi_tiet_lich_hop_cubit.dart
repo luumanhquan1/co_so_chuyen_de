@@ -11,6 +11,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   DetailMeetCalenderCubit() : super(DetailMeetCalenderInitial());
 
   HopRepository get hopRp => Get.find();
+
   //
   BehaviorSubject<ChiTietLichHopModel> chiTietLichLamViecSubject =
       BehaviorSubject();
@@ -95,6 +96,29 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   ];
 
   List<String> fakeDataDropdown = ["item 1", "item 2", "item 3"];
+  final HopRepository _hopRepo = Get.find();
+
+  Future<void> getTongPhienHop() async {
+    final result =
+        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    result.when(
+      success: (res) {},
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> selectPhienHop() async {
+    final result =
+        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    result.when(
+      success: (res) {},
+      error: (err) {
+        return;
+      },
+    );
+  }
 
   void dispose() {}
 }

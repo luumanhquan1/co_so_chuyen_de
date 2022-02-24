@@ -8,16 +8,20 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dar
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -107,6 +111,22 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
       () => _hopServices.getChuongTrinhHop(id),
       (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
+    );
+  }
+
+  @override
+  Future<Result<TongPhienHopModel>> getTongPhienHop(String id) {
+    return runCatchingAsync<TongPhienHopResponse, TongPhienHopModel>(
+      () => _hopServices.getTongPhienHop(id),
+      (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<SelectPhienHopModel>> slectPhienHop(String id) {
+    return runCatchingAsync<SelectPhienHopResponse, SelectPhienHopModel>(
+      () => _hopServices.selectPhienHop(id),
+      (response) => response.toModel(),
     );
   }
 }
