@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_state.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:queue/queue.dart';
@@ -54,11 +55,19 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
 
+  String dateFrom='';
+  String timeFrom='';
+  String dateEnd='';
+  String timeEnd='';
+
   void listeningStartDataTime(DateTime dateAndTime) {
+    dateFrom= dateAndTime.hour.toString();
+    timeFrom=dateAndTime.minute.toString();
     startDateSubject.add(dateAndTime);
   }
 
   void listeningEndDataTime(DateTime dateAndTime) {
+    dateEnd=dateAndTime.hour.toString();
     endDateSubject.add(dateAndTime);
   }
 
@@ -174,6 +183,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     required String dateRepeat1,
     required bool only,
   }) async {
+    showLoading();
     final result = await _lichLamViec.taoLichLamViec(
       title,
       typeScheduleId,
@@ -207,6 +217,24 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       only,
     );
     result.when(success: (res) {}, error: (error) {});
+  }
+  Future<void> taoBaoCaoKetQua({
+    required String reportStatusId,
+    required String scheduleId,
+    required List<File> files,
+
+  }) async {
+    showLoading();
+    await _lichLamViec
+        .taoBaoCaoKetQua(
+        reportStatusId, scheduleId,files,)
+        .then((value) {
+      value.when(
+        success: (res) {
+        },
+        error: (err) {},
+      );
+    });
   }
 
   void dispose() {

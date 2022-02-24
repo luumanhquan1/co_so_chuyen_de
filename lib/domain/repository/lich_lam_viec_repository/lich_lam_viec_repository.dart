@@ -113,4 +113,9 @@ mixin LichLamViecRepository {
       String dateRepeat1,
       bool only,
       );
+  Future<Result<MessageModel>> taoBaoCaoKetQua(
+      String reportStatusId,
+      String scheduleId,
+      List<File> files,
+      );
 }

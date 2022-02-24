@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qu
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tinh_trang_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
@@ -143,4 +144,10 @@ abstract class LichLamViecService {
     @Part(name: 'repeatCalendar.dateRepeat[1]') String dateRepeat1,
     @Part(name: 'repeatCalendar.only') bool only,
   );
+  @POST(ApiConstants.TAO_BAO_KET_QUA)
+  Future<TaoBaoCaoKetQuaResponse> taoBaoCaoKetQua(
+      @Part() String ReportStatusId,
+      @Part() String ScheduleId,
+      @Part() List<File> Files,
+      );
 }

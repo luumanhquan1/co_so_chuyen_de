@@ -22,6 +22,7 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qu
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tinh_trang_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
@@ -279,6 +280,19 @@ class LichLamViecImlp implements LichLamViecRepository {
         dateRepeat1,
         only,
       ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<MessageModel>> taoBaoCaoKetQua(
+    String reportStatusId,
+    String scheduleId,
+    List<File> files,
+  ) {
+    return runCatchingAsync<TaoBaoCaoKetQuaResponse, MessageModel>(
+      () =>
+          lichLamViecService.taoBaoCaoKetQua(reportStatusId, scheduleId, files),
       (res) => res.toDomain(),
     );
   }
