@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/tinh_trang_bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +23,7 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
   // chi tiet lich lam viec
 
   ChiTietLichLamViecCubit() : super(DetailDocumentInitial());
-
+  List<TinhTrangBaoCaoModel> listTinhTrang = [];
   Stream<ChiTietLichLamViecModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
   final BehaviorSubject<List<BaoCaoModel>> _listBaoCaoKetQua =
@@ -43,18 +46,13 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
         error: (error) {});
   }
 
-  // xoa lich lam viec
-  LichLamViecRepository get deleteLichLamViec => Get.find();
-
   Future<void> dataDelete(String id) async {
-    final rs = await deleteLichLamViec.deleteCalenderWork(id);
+    final rs = await detailLichLamViec.deleteCalenderWork(id);
     rs.when(success: (data) {}, error: (error) {});
   }
 
-  // huy lich lam viec
-  LichLamViecRepository get cancelLichLamViec => Get.find();
   Future<void> cancel(String id) async {
-    final rs = await cancelLichLamViec.cancelCalenderWork(id);
+    final rs = await detailLichLamViec.cancelCalenderWork(id);
     rs.when(
         success: (data) {
           print('trang thai huy: $data');
@@ -62,13 +60,24 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
         error: (error) {});
   }
 
+  Future<void> getListTinhTrang() async {
+    await detailLichLamViec.getListTinhTrangBaoCao().then((value) {
+      value.when(
+          success: (res) {
+            listTinhTrang = res;
+          },
+          error: (err) {});
+    });
+  }
+
   Future<void> loadApi(String id) async {
-    final queue = Queue(parallel: 3);
+    final queue = Queue(parallel: 4);
     showLoading();
     idLichLamViec = id;
     unawaited(queue.add(() => data(id)));
     unawaited(queue.add(() => getDanhSachBaoCaoKetQua(id)));
     unawaited(queue.add(() => getDanhSachYKien(id)));
+    unawaited(queue.add(() => getListTinhTrang()));
     await queue.onComplete;
     showContent();
   }
@@ -106,6 +115,35 @@ class ChiTietLichLamViecCubit extends BaseCubit<ChiTietLichLamViecState> {
           }
         },
         error: (err) {});
+  }
+
+  Future<void> updateBaoCaoKetQua({
+    required String reportStatusId,
+    required String scheduleId,
+    required String content,
+    required List<File> files,
+    required List<String> filesDelete,
+    required String id,
+  }) async {
+    showLoading();
+    await detailLichLamViec
+        .updateBaoCaoKetQua(
+            reportStatusId, scheduleId, content, files, filesDelete, id)
+        .then((value) {
+      value.when(
+        success: (res) {
+          if (res.succeeded ?? false) {
+            getDanhSachBaoCaoKetQua(idLichLamViec).whenComplete(() {
+              showContent();
+              MessageConfig.show(title: S.current.sua_thanh_cong);
+            });
+          } else {
+            showContent();
+          }
+        },
+        error: (err) {},
+      );
+    });
   }
 
   void dispose() {

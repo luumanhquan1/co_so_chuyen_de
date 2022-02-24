@@ -19,21 +19,17 @@ class ButtonSelectFile extends StatefulWidget {
   final String? icon;
   final bool childDiffence;
   final Function(List<File>) onChange;
-  final Widget? builder;
-  final bool isBuilder;
+  final Widget Function(BuildContext, File)? builder;
   List<File> files;
-  final bool showFileSelect;
   ButtonSelectFile({
     Key? key,
     this.background,
     required this.title,
     this.icon,
     this.childDiffence = false,
-    this.builder,
     required this.onChange,
-    this.isBuilder = false,
+    this.builder,
     this.files = const [],
-    this.showFileSelect = true,
   }) : super(key: key);
 
   @override
@@ -94,30 +90,22 @@ class _ButtonSelectFileState extends State<ButtonSelectFile> {
         SizedBox(
           height: 16.0.textScale(),
         ),
-      if (widget.isBuilder)
-          Column(
-            children: widget.files.isNotEmpty
-                ? widget.files
-                    .map((e) => widget.builder ?? Container())
-                    .toList()
-                : [Container()],
-          )
-        else
-          Column(
-            children: widget.files.isNotEmpty
-                ? widget.files
-                    .map(
-                      (e) => itemListFile(
-                        file: e,
-                        onTap: () {
-                          _cubit.deleteFile(e, widget.files);
-                          setState(() {});
-                        },
-                      ),
-                    )
-                    .toList()
-                : [Container()],
-          )
+        Column(
+          children: widget.files.isNotEmpty
+              ? widget.files.map((e) {
+                  if (widget.builder == null) {
+                    return itemListFile(
+                      file: e,
+                      onTap: () {
+                        _cubit.deleteFile(e, widget.files);
+                        setState(() {});
+                      },
+                    );
+                  }
+                  return widget.builder!(context, e);
+                }).toList()
+              : [Container()],
+        )
       ],
     );
   }

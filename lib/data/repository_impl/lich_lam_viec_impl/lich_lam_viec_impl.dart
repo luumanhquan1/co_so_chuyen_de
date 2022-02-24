@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/response/home/tinh_huong_khan_cap_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/chinh_sua_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/tinh_trang_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/delete_lich_lam_viec_response.dart';
@@ -25,6 +30,7 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_la
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/tinh_trang_bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
@@ -157,5 +163,27 @@ class LichLamViecImlp implements LichLamViecRepository {
     return runCatchingAsync<DanhSachYKienResponse, List<YKienModel>>(
         () => lichLamViecService.getDanhSachYKien(id),
         (res) => res.data?.map((e) => e.toDomain()).toList() ?? []);
+  }
+
+  @override
+  Future<Result<MessageModel>> updateBaoCaoKetQua(
+      String reportStatusId,
+      String scheduleId,
+      String content,
+      List<File> files,
+      List<String> filesDelete,
+      String id) {
+    return runCatchingAsync<ChinhSuaBaoCaoKetQuaResponse, MessageModel>(
+        () => lichLamViecService.updateBaoCaoKetQua(
+            reportStatusId, scheduleId, content, files, filesDelete, id),
+        (res) => res.toDomain());
+  }
+
+  @override
+  Future<Result<List<TinhTrangBaoCaoModel>>> getListTinhTrangBaoCao() {
+    return runCatchingAsync<ListTinhTrangResponse, List<TinhTrangBaoCaoModel>>(
+      () => lichLamViecService.getListTinhTrangBaoCao(),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 }
