@@ -249,9 +249,9 @@ class ImageAssets {
   static const String icHai = '$baseImg/Delete.svg';
   static const String icmot = '$baseImg/CloseSquare.svg';
   static const String icba = '$baseImg/Edit3.svg';
-  static const String ic4 = '$baseImg/Group4.svg';
-  static const String icNam = '$baseImg/Swap5.svg';
-  static const String icSau = '$baseImg/Video6.svg';
+  static const String icThuHoi = '$baseImg/Group4.svg';
+  static const String icPhanCongThuKy = '$baseImg/Swap5.svg';
+  static const String icTaoBocBang = '$baseImg/Video6.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
