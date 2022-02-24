@@ -90,6 +90,7 @@ class Data {
         content: content?.parseHtml() ?? '',
         listFile: files?.map((e) => e.toDomain()).toList() ?? [],
         id: id ?? '',
+    reportStatusCode: reportStatusCode ?? '',
       );
 }
 
@@ -100,7 +101,7 @@ class Files {
   String? path;
   String? entityId;
   Files.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['Id'];
     name = json['Name'];
     extension = json['Extension'];
     path = json['Path'];
