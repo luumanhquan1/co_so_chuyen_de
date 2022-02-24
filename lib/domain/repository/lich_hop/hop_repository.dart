@@ -1,12 +1,14 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -35,8 +37,8 @@ mixin HopRepository {
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
-  // Future<Result<List<ThemPhienHopChiTietModel>>> getThemPhienHop(
-  //   String lichHopId,
-  //   ThemPhienHopRequest themPhienHopRequest,
-  // );
+  Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
+    String lichHopId,
+    TaoPhienHopRepuest taoPhienHopRepuest,
+  );
 }

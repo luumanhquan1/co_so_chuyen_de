@@ -1,12 +1,12 @@
-
-
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -96,59 +96,59 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     ImageAssets.lichSapToi,
     ImageAssets.icLichCongTacNuocNgoai,
   ];
-  // BehaviorSubject<List<ThemPhienHopChiTietModel>> themPhienSubject =
-  //     BehaviorSubject();
-  // List<ThemPhienHopChiTietModel> listThemPhien = [];
-  //
-  // void callApi() {
-  //   themPhemHop(
-  //       lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
-  //       canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
-  //       donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-  //       thoiGian_BatDau: '2022-02-24T09:45:00',
-  //       thoiGian_KetThuc: '2022-02-24T10:45:00',
-  //       noiDung: 'en cô vid',
-  //       tieuDe: 'bất tử',
-  //       hoTen: 'luc',
-  //       IsMultipe: true,
-  //       File: []);
-  // }
-  //
-  // Future<void> themPhemHop({
-  //   required String canBoId,
-  //   required String donViId,
-  //   required String lichHopId,
-  //   required String thoiGian_BatDau,
-  //   required String thoiGian_KetThuc,
-  //   required String noiDung,
-  //   required String tieuDe,
-  //   required String hoTen,
-  //   required bool IsMultipe,
-  //   required List<File> File,
-  // }) async {
-  //   showLoading();
-  //   final ThemPhienHopRequest themPhienHopRequest = ThemPhienHopRequest(
-  //       canBoId,
-  //       donViId,
-  //       thoiGian_BatDau,
-  //       thoiGian_KetThuc,
-  //       noiDung,
-  //       tieuDe,
-  //       hoTen,
-  //       IsMultipe, []);
-  //   final result =
-  //       await hopRepo.getThemPhienHop(lichHopId, themPhienHopRequest);
-  //
-  //   result.when(
-  //     success: (value) {
-  //       listThemPhien = value;
-  //       themPhienSubject.sink.add(listThemPhien);
-  //     },
-  //     error: (error) {},
-  //   );
-  //
-  //   showContent();
-  // }
+  BehaviorSubject<List<TaoPhienHopModel>> themPhienSubject = BehaviorSubject();
+  List<TaoPhienHopModel> listThemPhien = [];
+
+  void callApi() {
+    themPhemHop(
+      lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
+      canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+      donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
+      thoiGian_BatDau: '2022-02-24T09:45:00',
+      thoiGian_KetThuc: '2022-02-24T10:45:00',
+      noiDung: 'en cô vid',
+      tieuDe: 'bất tử',
+      hoTen: 'luc',
+      IsMultipe: false,
+      file: [],
+    );
+  }
+
+  Future<void> themPhemHop({
+    required String canBoId,
+    required String donViId,
+    required String lichHopId,
+    required String thoiGian_BatDau,
+    required String thoiGian_KetThuc,
+    required String noiDung,
+    required String tieuDe,
+    required String hoTen,
+    required bool IsMultipe,
+    required List<Files> file,
+  }) async {
+    showLoading();
+    final TaoPhienHopRepuest taoPhienHopRepuest = TaoPhienHopRepuest(
+        canBoId,
+        donViId,
+        thoiGian_BatDau,
+        thoiGian_KetThuc,
+        noiDung,
+        tieuDe,
+        hoTen,
+        IsMultipe,
+        file);
+    final result = await hopRepo.getThemPhienHop(lichHopId, taoPhienHopRepuest);
+
+    result.when(
+      success: (value) {
+        listThemPhien = value;
+        themPhienSubject.sink.add(listThemPhien);
+      },
+      error: (error) {},
+    );
+
+    showContent();
+  }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [
