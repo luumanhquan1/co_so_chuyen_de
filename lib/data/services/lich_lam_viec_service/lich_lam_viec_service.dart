@@ -20,10 +20,8 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_moi_ban_ghi_response
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/delete_lich_lam_viec_response.dart';
-
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
-import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -61,11 +59,11 @@ abstract class LichLamViecService {
 
   @POST(ApiConstants.SEARCH_CAN_BO)
   Future<NguoiChuTriResponse> getNguoiChuTri(
-      @Body() NguoiChuTriRequest nguoiChuTriRequest);
+      @Body() NguoiChuTriRequest nguoiChuTriRequest,);
 
   @POST(ApiConstants.SCHEDULE_FIELD)
   Future<CatogoryListResponse> getLinhVuc(
-      @Body() CatogoryListRequest catogoryListRequest);
+      @Body() CatogoryListRequest catogoryListRequest,);
 
   @GET(ApiConstants.CHI_TIET_LICH_LAM_VIEC)
   Future<DetailCalenderWorkResponse> detailCalenderWork(@Path('id') String id);
@@ -91,8 +89,7 @@ abstract class LichLamViecService {
 
   @GET(ApiConstants.SCHEDULE_OPINION_LIST)
   Future<DanhSachYKienResponse> getDanhSachYKien(
-      @Query('scheduleId') String scheduleId);
-
+      @Query('scheduleId') String scheduleId,);
 
   @PUT(ApiConstants.UPDATE_SCHEDULE_REPORT)
   @MultiPart()
@@ -107,9 +104,6 @@ abstract class LichLamViecService {
 
   @GET(ApiConstants.REPORT_STATUS_LIST)
   Future<ListTinhTrangResponse> getListTinhTrangBaoCao();
-
-    @Query('scheduleId') String scheduleId,
-  );
 
   @GET(ApiConstants.TRANG_THAI)
   Future<TrangThaiLVResponse> detailTrangThai();
