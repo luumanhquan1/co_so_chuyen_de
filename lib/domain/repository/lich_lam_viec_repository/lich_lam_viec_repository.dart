@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
@@ -14,6 +16,7 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_la
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/tinh_trang_bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
@@ -46,8 +49,8 @@ mixin LichLamViecRepository {
     CatogoryListRequest catogoryListRequest,
   );
   Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(
-      String id,
-      );
+    String id,
+  );
   Future<Result<List<BaoCaoModel>>> getDanhSachBaoCao(String scheduleId);
 
   Future<Result<MessageModel>> deleteBaoCaoKetQua(String id);
@@ -66,7 +69,18 @@ mixin LichLamViecRepository {
   Future<Result<CancelLichLamViecModel>> cancelCalenderWork(String id);
 
   Future<Result<List<YKienModel>>> getDanhSachYKien(String id);
+
+  Future<Result<MessageModel>> updateBaoCaoKetQua(
+    String reportStatusId,
+    String scheduleId,
+    String content,
+    List<File> files,
+    List<String> filesDelete,
+    String id,
+  );
+
   Future<Result<List<TrangThaiLvModel>>> trangThaiLV();
 
   Future<Result<MessageModel>> postTaoMoiBanGhi(TaoMoiBanGhiRequest body);
+  Future<Result<List<TinhTrangBaoCaoModel>>> getListTinhTrangBaoCao();
 }
