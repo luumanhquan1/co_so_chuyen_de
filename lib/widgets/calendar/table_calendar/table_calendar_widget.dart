@@ -14,11 +14,12 @@ class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)?
       onChangeRange;
+  final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
 
   const TableCalendarWidget({
     Key? key,
     this.isCalendar = true,
-    this.onChangeRange,
+    this.onChangeRange, required this.onDaySelected,
   }) : super(key: key);
 
   @override
@@ -158,6 +159,8 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             _focusedDay.value = _selectedDay;
                           });
                         }
+
+                        widget.onDaySelected(date, events);
                       },
                       rangeSelectionMode: RangeSelectionMode.toggledOff,
                       rangeStartDay: _startTime,

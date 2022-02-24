@@ -251,7 +251,9 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
               ],
             ),
           ),
-          const TableCalendarWidget(),
+          TableCalendarWidget(
+            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          ),
         ],
       ),
     );

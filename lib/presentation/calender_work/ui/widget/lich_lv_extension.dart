@@ -119,11 +119,14 @@ extension LichLv on CalenderState {
   Widget tableCalendar(CalenderCubit cubit) {
     if (this is LichLVStateDangLich || this is LichLVStateDangList) {
       if (type == Type_Choose_Option_Day.MONTH) {
-        return const TableCalendarWidget(
+        return TableCalendarWidget(
           isCalendar: false,
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
         );
       }
-      return const TableCalendarWidget();
+      return TableCalendarWidget(
+        onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+      );
     }
     return Container();
   }
