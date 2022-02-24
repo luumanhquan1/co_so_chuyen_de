@@ -30,7 +30,10 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
   void initState() {
     super.initState();
     // chiTietLichLamViecCubit.initData();
+    chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+    chiTietLichLamViecCubit.dataTrangThai();
     chiTietLichLamViecCubit.loadApi('9c19029a-fa5c-4434-9e48-1e39c0c18b4c');
+
   }
 
   @override
