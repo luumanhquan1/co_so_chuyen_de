@@ -4,16 +4,20 @@ import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
@@ -86,6 +90,15 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
+  Future<Result<List<ListPhienHopModel>>> getDanhSachPhienHop(
+    String id,
+  ) {
+    return runCatchingAsync<ListPhienHopRespone, List<ListPhienHopModel>>(
+      () => _hopServices.getDanhSachPhienHop(id),
+      (res) => res.toDomain(),
+    );
+  }
+
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id) {
     return runCatchingAsync<ChiTietLichHopResponse, ChiTietLichHopModel>(
         () => _hopServices.getChiTietLichHop(id),
@@ -97,8 +110,15 @@ class HopRepositoryImpl implements HopRepository {
     TaoPhienHopRepuest taoPhienHopRepuest,
   ) {
     return runCatchingAsync<TaoPhienHopResponse, List<TaoPhienHopModel>>(
-      () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
-      (res) => res.toMoDel(),
+        () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
+        (res) => res.toMoDel());
+  }
+
+  @override
+  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
+    return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
+      () => _hopServices.getChuongTrinhHop(id),
+      (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
   }
 }

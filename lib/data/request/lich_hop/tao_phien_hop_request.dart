@@ -13,7 +13,7 @@ class TaoPhienHopRepuest {
   String? tieuDe;
   String? hoTen;
   bool? IsMultipe;
-  List<Files>? file;
+  List<FilesRepuest>? file;
 
   TaoPhienHopRepuest(
       this.canBoId,
@@ -33,7 +33,7 @@ class TaoPhienHopRepuest {
 }
 
 @JsonSerializable()
-class Files {
+class FilesRepuest {
   String? id;
   String? name;
   String? extension;
@@ -42,7 +42,7 @@ class Files {
   String? entityId;
   String? entityName;
 
-  Files({
+  FilesRepuest({
     this.id,
     this.name,
     this.extension,
@@ -52,7 +52,8 @@ class Files {
     this.entityName,
   });
 
-  factory Files.fromJson(Map<String, dynamic> json) => _$FilesFromJson(json);
+  factory FilesRepuest.fromJson(Map<String, dynamic> json) =>
+      _$FilesRepuestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FilesToJson(this);
+  Map<String, dynamic> toJson() => _$FilesRepuestToJson(this);
 }

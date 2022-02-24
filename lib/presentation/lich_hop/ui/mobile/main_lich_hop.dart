@@ -37,8 +37,8 @@ class _MainLichHopState extends State<MainLichHop> {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
     cubit.page = 1;
-    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
-    cubit.postDanhSachLichHop(body: fakeDataBody);
+    cubit.getDashboard();
+    cubit.postDanhSachLichHop();
   }
 
   @override
@@ -244,9 +244,28 @@ class _MainLichHopState extends State<MainLichHop> {
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
                         if (state.type == Type_Choose_Option_Day.MONTH) {
-                          return const TableCalendarWidget(isCalendar: false);
+                          return TableCalendarWidget(
+                            isCalendar: false,
+                            onDaySelected:
+                                (DateTime selectedDay, DateTime focusedDay) {
+                              cubit.startDate = selectedDay;
+                              cubit.endDate = selectedDay;
+                              cubit.getDashboard();
+
+                              cubit.postDanhSachLichHop();
+                            },
+                          );
                         }
-                        return const TableCalendarWidget();
+                        return TableCalendarWidget(
+                          onDaySelected:
+                              (DateTime selectedDay, DateTime focusedDay) {
+                            cubit.startDate = selectedDay;
+                            cubit.endDate = selectedDay;
+
+                            cubit.postDanhSachLichHop();
+                            cubit.getDashboard();
+                          },
+                        );
                       }
                       return Container();
                     },
@@ -261,12 +280,13 @@ class _MainLichHopState extends State<MainLichHop> {
           child: FloatingActionButton(
             elevation: 0.0,
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
-                ),
-              );
+              cubit.callApi();
+              // Navigator.push(
+              //   context,
+              //   PageRouteBuilder(
+              //     pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+              //   ),
+              // );
             },
             backgroundColor: labelColor,
             child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),

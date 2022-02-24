@@ -2,16 +2,19 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -21,12 +24,22 @@ import 'package:rxdart/subjects.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LichHopCubit extends BaseCubit<LichHopState> {
-  LichHopCubit() : super(LichHopStateIntial());
+  LichHopCubit() : super(LichHopStateIntial()) {
+    final user = HiveLocal.getDataUser();
+    if (user != null) {
+      userId = user.userId ?? '';
+      donViId = user.userInformation?.donViTrucThuoc?.id ?? '';
+    }
+  }
 
-  DanhSachLichHopRequest danhSachLichHopRequest = fakeDataBody;
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
+  String userId = '';
+  String donViId = '';
   int page = 1;
-  int totalPage = 1;
+  int totalPage = 2;
   bool isCheckNgay = false;
+
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
 
@@ -54,13 +67,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
 
-  Future<void> getDashboard({
-    required String dateStart,
-    required String dateTo,
-  }) async {
+  Future<void> getDashboard() async {
     showLoading();
 
-    final result = await hopRepo.getDashBoardLichHop(dateStart, dateTo);
+    final result = await hopRepo.getDashBoardLichHop(
+      startDate.formatApi,
+      endDate.formatApi,
+    );
 
     result.when(
       success: (value) {
@@ -75,11 +88,51 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showContent();
   }
 
-  Future<void> postDanhSachLichHop({
-    required DanhSachLichHopRequest body,
+  void callApi() {
+    getDanhSachPhienHop(id: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    themPhemHop(
+        lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
+        canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+        donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
+        thoiGian_BatDau: '2022-02-24T09:45:00',
+        thoiGian_KetThuc: '2022-02-24T10:45:00',
+        noiDung: 'en cô vid',
+        tieuDe: 'bất tử',
+        hoTen: 'luc',
+        IsMultipe: false,
+        file: []);
+  }
+
+  BehaviorSubject<List<ListPhienHopModel>> phienHopSubject = BehaviorSubject();
+  List<ListPhienHopModel> listPhienHop = [];
+
+  Future<void> getDanhSachPhienHop({
+    required String id,
   }) async {
     showLoading();
-    final result = await hopRepo.postDanhSachLichHop(body);
+    final result = await hopRepo.getDanhSachPhienHop(id);
+    result.when(
+      success: (value) {
+        listPhienHop = value;
+        phienHopSubject.sink.add(listPhienHop);
+      },
+      error: (error) {},
+    );
+    showContent();
+  }
+
+  Future<void> postDanhSachLichHop() async {
+    showLoading();
+    final result = await hopRepo.postDanhSachLichHop(
+      DanhSachLichHopRequest(
+        DateFrom: startDate.formatApi,
+        DateTo: endDate.formatApi,
+        DonViId: donViId,
+        PageIndex: page,
+        PageSize: 1000,
+        UserId: userId,
+      ),
+    );
     result.when(
       success: (value) {
         totalPage = value.totalPage ?? 1;
@@ -99,21 +152,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   BehaviorSubject<List<TaoPhienHopModel>> themPhienSubject = BehaviorSubject();
   List<TaoPhienHopModel> listThemPhien = [];
 
-  void callApi() {
-    themPhemHop(
-      lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
-      canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
-      donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-      thoiGian_BatDau: '2022-02-24T09:45:00',
-      thoiGian_KetThuc: '2022-02-24T10:45:00',
-      noiDung: 'en cô vid',
-      tieuDe: 'bất tử',
-      hoTen: 'luc',
-      IsMultipe: false,
-      file: [],
-    );
-  }
-
   Future<void> themPhemHop({
     required String canBoId,
     required String donViId,
@@ -124,7 +162,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     required String tieuDe,
     required String hoTen,
     required bool IsMultipe,
-    required List<Files> file,
+    required List<FilesRepuest> file,
   }) async {
     showLoading();
     final TaoPhienHopRepuest taoPhienHopRepuest = TaoPhienHopRepuest(

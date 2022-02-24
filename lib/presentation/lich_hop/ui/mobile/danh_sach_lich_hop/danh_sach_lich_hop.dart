@@ -30,11 +30,7 @@ class _DanhSachLichHopState extends State<DanhSachLichHop> {
           _scrollController.position.maxScrollExtent) {
         if (widget.cubit.page < widget.cubit.totalPage) {
           widget.cubit.page = widget.cubit.page + 1;
-          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
-          widget.cubit
-              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
-          print(
-              '================= ${widget.cubit.danhSachLichHopRequest.PageIndex}');
+          widget.cubit.postDanhSachLichHop();
         }
       }
     });
