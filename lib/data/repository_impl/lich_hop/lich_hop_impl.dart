@@ -88,4 +88,15 @@ class HopRepositoryImpl implements HopRepository {
         () => _hopServices.getChiTietLichHop(id),
         (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
   }
+
+  Future<Result<List<ThemPhienHopChiTietModel>>> getThemPhienHop(
+    String lichHopId,
+    ThemPhienHopRequest themPhienHopRequest,
+  ) {
+    return runCatchingAsync<ThemPhienHopChiTietResponse,
+        List<ThemPhienHopChiTietModel>>(
+      () => _hopServices.getThemPhienHop(lichHopId, themPhienHopRequest),
+      (res) => res.toDoMain(),
+    );
+  }
 }

@@ -1,16 +1,20 @@
+import 'dart:convert';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_phien_hop_chi_tiet_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_phien_hop_chi_tiet_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
-import 'package:dio/dio.dart';
 
 part 'hop_services.g.dart';
 
@@ -48,4 +52,10 @@ abstract class HopServices {
 
   @GET(ApiConstants.DETAIL_MEETING_SCHEDULE)
   Future<ChiTietLichHopResponse> getChiTietLichHop(@Query('id') String id);
+
+  @POST(ApiConstants.THEM_PHIEN_HOP_CHI_TIET)
+  Future<ThemPhienHopChiTietResponse> getThemPhienHop(
+    @Query('lichHopId') String lichHopId,
+    @Part() ThemPhienHopRequest themPhienHopRequest,
+  );
 }
