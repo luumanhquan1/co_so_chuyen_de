@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -96,59 +96,59 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     ImageAssets.lichSapToi,
     ImageAssets.icLichCongTacNuocNgoai,
   ];
-  BehaviorSubject<List<ThemPhienHopChiTietModel>> themPhienSubject =
-      BehaviorSubject();
-  List<ThemPhienHopChiTietModel> listThemPhien = [];
-
-  void callApi() {
-    themPhemHop(
-        lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
-        canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
-        donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-        thoiGian_BatDau: '2022-02-24T09:45:00',
-        thoiGian_KetThuc: '2022-02-24T10:45:00',
-        noiDung: 'en cô vid',
-        tieuDe: 'bất tử',
-        hoTen: 'luc',
-        IsMultipe: true,
-        File: []);
-  }
-
-  Future<void> themPhemHop({
-    required String canBoId,
-    required String donViId,
-    required String lichHopId,
-    required String thoiGian_BatDau,
-    required String thoiGian_KetThuc,
-    required String noiDung,
-    required String tieuDe,
-    required String hoTen,
-    required bool IsMultipe,
-    required List<File> File,
-  }) async {
-    showLoading();
-    final ThemPhienHopRequest themPhienHopRequest = ThemPhienHopRequest(
-        canBoId,
-        donViId,
-        thoiGian_BatDau,
-        thoiGian_KetThuc,
-        noiDung,
-        tieuDe,
-        hoTen,
-        IsMultipe, []);
-    final result =
-        await hopRepo.getThemPhienHop(lichHopId, themPhienHopRequest);
-
-    result.when(
-      success: (value) {
-        listThemPhien = value;
-        themPhienSubject.sink.add(listThemPhien);
-      },
-      error: (error) {},
-    );
-
-    showContent();
-  }
+  // BehaviorSubject<List<ThemPhienHopChiTietModel>> themPhienSubject =
+  //     BehaviorSubject();
+  // List<ThemPhienHopChiTietModel> listThemPhien = [];
+  //
+  // void callApi() {
+  //   themPhemHop(
+  //       lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
+  //       canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+  //       donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
+  //       thoiGian_BatDau: '2022-02-24T09:45:00',
+  //       thoiGian_KetThuc: '2022-02-24T10:45:00',
+  //       noiDung: 'en cô vid',
+  //       tieuDe: 'bất tử',
+  //       hoTen: 'luc',
+  //       IsMultipe: true,
+  //       File: []);
+  // }
+  //
+  // Future<void> themPhemHop({
+  //   required String canBoId,
+  //   required String donViId,
+  //   required String lichHopId,
+  //   required String thoiGian_BatDau,
+  //   required String thoiGian_KetThuc,
+  //   required String noiDung,
+  //   required String tieuDe,
+  //   required String hoTen,
+  //   required bool IsMultipe,
+  //   required List<File> File,
+  // }) async {
+  //   showLoading();
+  //   final ThemPhienHopRequest themPhienHopRequest = ThemPhienHopRequest(
+  //       canBoId,
+  //       donViId,
+  //       thoiGian_BatDau,
+  //       thoiGian_KetThuc,
+  //       noiDung,
+  //       tieuDe,
+  //       hoTen,
+  //       IsMultipe, []);
+  //   final result =
+  //       await hopRepo.getThemPhienHop(lichHopId, themPhienHopRequest);
+  //
+  //   result.when(
+  //     success: (value) {
+  //       listThemPhien = value;
+  //       themPhienSubject.sink.add(listThemPhien);
+  //     },
+  //     error: (error) {},
+  //   );
+  //
+  //   showContent();
+  // }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [

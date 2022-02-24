@@ -266,7 +266,7 @@ class _MainLichHopState extends State<MainLichHop> {
               //     builder: (context) => DetailMeetCalenderScreen(),
               //   ),
               // );
-               cubit.callApi();
+              // cubit.callApi();
               // Navigator.push(
               //   context,
               //   PageRouteBuilder(
