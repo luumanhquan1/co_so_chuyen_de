@@ -6,6 +6,4 @@ mixin DetailLichLamViecRepository {
   Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(
     String id,
   );
-
-  Future<Result<List<TrangThaiLvModel>>> trangThaiLV();
 }

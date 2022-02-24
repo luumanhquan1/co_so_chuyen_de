@@ -3,10 +3,10 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/btn_show_chinh_sua_bao_cao.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lichlv_danh_sach_y_kien/ui/mobile/show_bottom_sheet_ds_y_Kien.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/row_value_widget.dart';
-import 'package:ccvc_mobile/presentation/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/btn_show_chinh_sua_bao_cao.dart';
-import 'package:ccvc_mobile/presentation/lichlv_danh_sach_y_kien/ui/mobile/show_bottom_sheet_ds_y_Kien.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
@@ -32,6 +32,8 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
     // chiTietLichLamViecCubit.initData();
     chiTietLichLamViecCubit.data('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
     chiTietLichLamViecCubit.dataTrangThai();
+    chiTietLichLamViecCubit.loadApi('9c19029a-fa5c-4434-9e48-1e39c0c18b4c');
+
   }
 
   @override
@@ -50,7 +52,11 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                     context,
                     textContent: S.current.ban_chan_chan_huy_lich_nay,
                     btnLeftTxt: S.current.khong,
-                    funcBtnRight: () {},
+                    funcBtnRight: () {
+                      chiTietLichLamViecCubit
+                          .cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                      Navigator.pop(context);
+                    },
                     title: S.current.huy_lich,
                     btnRightTxt: S.current.dong_y,
                     icon: SvgPicture.asset(ImageAssets.icHuyLich),
@@ -73,7 +79,12 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       context,
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
-                      funcBtnRight: () {},
+                      funcBtnRight: () {
+                        chiTietLichLamViecCubit
+                            .dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+
+                        Navigator.pop(context);
+                      },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,
                       icon: SvgPicture.asset(ImageAssets.icDeleteLichHop),
@@ -122,7 +133,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
-                  )
+                  ),
                 ],
               ),
               StreamBuilder<ChiTietLichLamViecModel>(
@@ -153,9 +164,10 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 24),
-                child: const BtnShowChinhSuaBaoCao(),
+                child: BtnShowChinhSuaBaoCao(
+                    chiTietLichLamViecCubit: chiTietLichLamViecCubit),
               ),
-              const DanhSachYKienButtom(),
+               DanhSachYKienButtom(cubit: chiTietLichLamViecCubit,),
             ],
           ),
         ),

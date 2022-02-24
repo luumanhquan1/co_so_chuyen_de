@@ -62,7 +62,20 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
+
   static const TRANG_THAI = '/vpdt/api/ReportStatus/list';
+
+  static const XOA_LICH_LAM_VIEC =
+      '/vpdt/api/Schedules/delete-schedule?scheduleId={id}&only=true&isLichLap=true&?';
+
+  static const POST_DANH_SACH_LICH_LAM_VIEC =
+      '/vpdt/api/Schedules/danh-sach-lich';
+
+  static const CANCEL_TIET_LICH_LAM_VIEC =
+      '/vpdt/api/Schedules/change-status?scheduleId={id}&statusId=8&isMulti=false';
+  static const SCHEDULE_REPORT_LIST = '/vpdt/api/ScheduleReport/list';
+  static const DELETE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/delete';
+  static const SCHEDULE_OPINION_LIST = '/vpdt/api/ScheduleOpinion/list';
 }
 
 class ImageConstants {

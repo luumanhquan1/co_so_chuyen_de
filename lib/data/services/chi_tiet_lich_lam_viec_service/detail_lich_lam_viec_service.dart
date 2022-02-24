@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
-import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/trang_thai/trang_thai_lv_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -15,7 +14,4 @@ abstract class DetailLichLamViecService {
 
   @GET(ApiConstants.CHI_TIET_LICH_LAM_VIEC)
   Future<DetailCalenderWorkResponse> detailCalenderWork(@Path('id') String id);
-
-  @GET(ApiConstants.TRANG_THAI)
-  Future<TrangThaiLVResponse> detailTrangThai();
 }

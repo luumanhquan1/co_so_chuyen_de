@@ -19,11 +19,4 @@ class DetailLichLamViecImpl implements DetailLichLamViecRepository {
         (response) => response.data.toModel());
   }
 
-  @override
-  Future<Result<List<TrangThaiLvModel>>> trangThaiLV() {
-    return runCatchingAsync<TrangThaiLVResponse, List<TrangThaiLvModel>>(
-      () => _accountService.detailTrangThai(),
-      (response) => response.toDomain(),
-    );
-  }
 }
