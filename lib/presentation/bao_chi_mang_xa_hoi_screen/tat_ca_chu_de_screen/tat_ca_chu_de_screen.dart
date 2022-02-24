@@ -124,12 +124,13 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       'Bản tin tiêu dùng ngày 27/12: Loại gà ăn thực đơn “hạng sang” được săn lùng trong dịp Tết',
                       '5/11/2021  9:10:03 PM',
                       'Ngưng hoạt động gần 3 tháng do dịch, lãnh đạo '
-                          'nhà máy Chang ''Shin Việt Nam (huyện Vĩnh Cửu ...',
+                          'nhà máy Chang '
+                          'Shin Việt Nam (huyện Vĩnh Cửu ...',
                     ),
                     const SizedBox(
                       height: 16,
                       child: Divider(
-                        color:lineColor,
+                        color: lineColor,
                         height: 1,
                       ),
                     ),
@@ -161,8 +162,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                 ),
               ),
             ),
-
-            const TableCalendarWidget(),
+            TableCalendarWidget(
+              onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+            ),
           ],
         ),
       ),

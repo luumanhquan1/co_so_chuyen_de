@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
@@ -48,4 +49,7 @@ abstract class HopServices {
 
   @GET(ApiConstants.DETAIL_MEETING_SCHEDULE)
   Future<ChiTietLichHopResponse> getChiTietLichHop(@Query('id') String id);
+
+  @GET(ApiConstants.CHUONG_TRINH_HOP)
+  Future<ChuongTrinhHopResponse> getChuongTrinhHop(@Query('id') String id);
 }
