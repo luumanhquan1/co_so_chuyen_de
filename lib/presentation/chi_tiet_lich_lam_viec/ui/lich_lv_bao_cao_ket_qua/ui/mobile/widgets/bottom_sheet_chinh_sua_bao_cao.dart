@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -120,6 +121,7 @@ class _ChinhSuaBaoCaoBottomSheetState extends State<ChinhSuaBaoCaoBottomSheet> {
                     .map((e) => e.displayName ?? '')
                     .toList(),
                 onSelectItem: (value) {
+
                   cubit
                       .selectReport(widget.cubit.listTinhTrang[value].id ?? '');
                 },

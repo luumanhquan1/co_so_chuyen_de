@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/trang_thai_lv.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/xoa_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
@@ -63,6 +64,7 @@ mixin LichLamViecRepository {
   Future<Result<CancelLichLamViecModel>> cancelCalenderWork(String id);
 
   Future<Result<List<YKienModel>>> getDanhSachYKien(String id);
+
   Future<Result<MessageModel>> updateBaoCaoKetQua(
     String reportStatusId,
     String scheduleId,
@@ -71,6 +73,8 @@ mixin LichLamViecRepository {
     List<String> filesDelete,
     String id,
   );
+
+  Future<Result<List<TrangThaiLvModel>>> trangThaiLV();
 
   Future<Result<List<TinhTrangBaoCaoModel>>> getListTinhTrangBaoCao();
 }
