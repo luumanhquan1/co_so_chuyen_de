@@ -241,7 +241,9 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
               ],
             ),
           ),
-          const TableCalendarWidget(),
+          TableCalendarWidget(
+            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          ),
         ],
       ),
     );

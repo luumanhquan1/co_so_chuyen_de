@@ -106,10 +106,12 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                         return NhiemVuItemMobile(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChiTietNhiemVuPhoneScreen(),),);
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ChiTietNhiemVuPhoneScreen(),
+                              ),
+                            );
                           },
                           title: listDanhSachNhiemVu[index].noiDung ?? '',
                           timeStart: listDanhSachNhiemVu[index].timeStart ?? '',
@@ -189,7 +191,9 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
             ],
           ),
         ),
-        const TableCalendarWidget(),
+        TableCalendarWidget(
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+        ),
       ],
     );
   }

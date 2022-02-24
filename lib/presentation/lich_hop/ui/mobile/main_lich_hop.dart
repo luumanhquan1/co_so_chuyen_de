@@ -244,9 +244,16 @@ class _MainLichHopState extends State<MainLichHop> {
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
                         if (state.type == Type_Choose_Option_Day.MONTH) {
-                          return const TableCalendarWidget(isCalendar: false);
+                          return TableCalendarWidget(
+                            isCalendar: false,
+                            onDaySelected:
+                                (DateTime selectedDay, DateTime focusedDay) {},
+                          );
                         }
-                        return const TableCalendarWidget();
+                        return TableCalendarWidget(
+                          onDaySelected:
+                              (DateTime selectedDay, DateTime focusedDay) {},
+                        );
                       }
                       return Container();
                     },
