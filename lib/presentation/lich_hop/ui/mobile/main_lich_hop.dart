@@ -36,8 +36,8 @@ class _MainLichHopState extends State<MainLichHop> {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
     cubit.page = 1;
-    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
-    cubit.postDanhSachLichHop(body: fakeDataBody);
+    cubit.getDashboard();
+    cubit.postDanhSachLichHop();
   }
 
   @override
@@ -246,12 +246,24 @@ class _MainLichHopState extends State<MainLichHop> {
                           return TableCalendarWidget(
                             isCalendar: false,
                             onDaySelected:
-                                (DateTime selectedDay, DateTime focusedDay) {},
+                                (DateTime selectedDay, DateTime focusedDay) {
+                              cubit.startDate = selectedDay;
+                              cubit.endDate = selectedDay;
+                              cubit.getDashboard();
+
+                              cubit.postDanhSachLichHop();
+                            },
                           );
                         }
                         return TableCalendarWidget(
                           onDaySelected:
-                              (DateTime selectedDay, DateTime focusedDay) {},
+                              (DateTime selectedDay, DateTime focusedDay) {
+                            cubit.startDate = selectedDay;
+                            cubit.endDate = selectedDay;
+
+                            cubit.postDanhSachLichHop();
+                            cubit.getDashboard();
+                          },
                         );
                       }
                       return Container();

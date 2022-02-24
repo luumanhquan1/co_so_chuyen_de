@@ -15,10 +15,12 @@ class LichHopTheoDanhSachNgayTablet extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LichHopTheoDanhSachNgayTablet> createState() => _LichHopTheoDanhSachNgayTabletState();
+  State<LichHopTheoDanhSachNgayTablet> createState() =>
+      _LichHopTheoDanhSachNgayTabletState();
 }
 
-class _LichHopTheoDanhSachNgayTabletState extends State<LichHopTheoDanhSachNgayTablet> {
+class _LichHopTheoDanhSachNgayTabletState
+    extends State<LichHopTheoDanhSachNgayTablet> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -27,17 +29,13 @@ class _LichHopTheoDanhSachNgayTabletState extends State<LichHopTheoDanhSachNgayT
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-
         if (widget.cubit.page < widget.cubit.totalPage) {
-          widget.cubit.page = widget.cubit.page+1;
-          widget.cubit.danhSachLichHopRequest.PageIndex = widget.cubit.page;
-          widget.cubit
-              .postDanhSachLichHop(body: widget.cubit.danhSachLichHopRequest);
+          widget.cubit.page = widget.cubit.page + 1;
+          widget.cubit.postDanhSachLichHop();
         }
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
