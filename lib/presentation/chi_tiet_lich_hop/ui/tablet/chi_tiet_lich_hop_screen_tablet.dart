@@ -5,12 +5,11 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/double_button.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/iteam_menu_chi_tiet_lich_hop.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/row_value_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,68 +51,35 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
           ),
         ),
         actions: [
-          PopupMenuButton(
-            icon: SvgPicture.asset(ImageAssets.icBacham),
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: listChiTietLichHop
-                        .map(
-                          (e) => GestureDetector(
-                            onTap: () {
-                              showDiaLogTablet(
-                                context,
-                                title: e.name == S.current.thu_hoi
-                                    ? S.current.thu_hoi_lich
-                                    : e.name,
-                                child:
-                                    e.chiTietLichHop.getScreenChiTietLichHop(),
-                                isBottomShow: false,
-                                funcBtnOk: () {
-                                  Navigator.pop(context);
-                                },
-                                maxHeight: e.name == S.current.thu_hoi ||
-                                        e.name == S.current.phan_cong_thu_ky ||
-                                        e.name ==
-                                            S.current.tao_boc_bang_cuoc_hop
-                                    ? 270
-                                    : 878,
-                              );
-                            },
-                            child: itemListKetThuc(
-                              name: e.name,
-                              icon: e.icon,
-                              onTap: () {
-                                showDiaLogTablet(
-                                  context,
-                                  title: e.name == S.current.thu_hoi
-                                      ? S.current.thu_hoi_lich
-                                      : e.name,
-                                  child: e.chiTietLichHop
-                                      .getScreenChiTietLichHop(),
-                                  isBottomShow: false,
-                                  funcBtnOk: () {
-                                    Navigator.pop(context);
-                                  },
-                                  maxHeight: e.name == S.current.thu_hoi ||
-                                          e.name ==
-                                              S.current.phan_cong_thu_ky ||
-                                          e.name ==
-                                              S.current.tao_boc_bang_cuoc_hop
-                                      ? 270
-                                      : 878,
-                                );
-                              },
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-              ];
-            },
+          MenuSelectWidget(
+            listSelect: [
+              QData(
+                urlImage: ImageAssets.icHuy,
+                text: S.current.huy_lich_hop,
+                onTap: () {},
+              ),
+              QData(
+                  urlImage: ImageAssets.ic_delete_do,
+                  text: S.current.xoa_lich,
+                  onTap: () {}),
+              QData(
+                  urlImage: ImageAssets.icEditBlue,
+                  text: S.current.sua_lich,
+                  onTap: () {}),
+              QData(
+                urlImage: ImageAssets.icThuHoi,
+                text: S.current.xoa_lich,
+                onTap: () {},
+              ),
+              QData(
+                  urlImage: ImageAssets.icPhanCongThuKy,
+                  text: S.current.phan_cong_thu_ky,
+                  onTap: () {}),
+              QData(
+                  urlImage: ImageAssets.icTaoBocBang,
+                  text: S.current.phan_cong_thu_ky,
+                  onTap: () {}),
+            ],
           ),
         ],
       ),
@@ -143,157 +109,160 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 25),
                             child: SingleChildScrollView(
-                              child: StreamBuilder<ChiTietLichLamViecModel>(
-                                stream: cubit.chiTietLichLamViecStream,
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Container();
-                                  }
-
-                                  final data = snapshot.data;
-
-                                  final listText = data
-                                          ?.dataRow()
-                                          .where((element) =>
-                                              element.type == typeData.text)
-                                          .toList() ??
-                                      [];
-
-                                  final listText1 = listText.sublist(0, 2);
-                                  final listText2 =
-                                      listText.sublist(3, listText.length);
-
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.circle,
-                                            size: 16,
-                                            color: statusCalenderRed,
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          Text(
-                                            S.current.hop_noi_bo_cong_ty,
-                                            style: textNormalCustom(
-                                              color: textTitle,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 28,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 4,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  children: listText1
-                                                      .map(
-                                                        (e) => Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                            bottom: 24,
-                                                          ),
-                                                          child: RowValueWidget(
-                                                            row: e,
-                                                            isTablet: true,
-                                                            isMarinLeft: true,
-                                                          ),
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                ),
-                                                Column(
-                                                  children: listText2
-                                                      .map(
-                                                        (e) => Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                            bottom: 24,
-                                                          ),
-                                                          child: RowValueWidget(
-                                                            row: e,
-                                                            isTablet: true,
-                                                          ),
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Column(
-                                              children: [
-                                                DoubleButtonWidget(
-                                                  onPressed1: () {},
-                                                  onPressed2: () {},
-                                                ),
-                                                const SizedBox(
-                                                  height: 28,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Expanded(
-                                                      flex: 3,
-                                                      child: SizedBox(),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 7,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: (data
-                                                                    ?.dataRow()
-                                                                    .where(
-                                                                      (element) =>
-                                                                          element
-                                                                              .type ==
-                                                                          typeData
-                                                                              .listperson,
-                                                                    )
-                                                                    .toList())
-                                                                ?.map(
-                                                                  (e) =>
-                                                                      RowValueWidget(
-                                                                    row: e,
-                                                                    isTablet:
-                                                                        true,
-                                                                  ),
-                                                                )
-                                                                .toList() ??
-                                                            [
-                                                              Container(),
-                                                            ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                },
+                              child: Column(
+                                children: [],
                               ),
+                              // child: StreamBuilder<ChiTietLichLamViecModel>(
+                              //   stream: cubit.chiTietLichLamViecStream,
+                              //   builder: (context, snapshot) {
+                              //     if (!snapshot.hasData) {
+                              //       return Container();
+                              //     }
+                              //
+                              //     final data = snapshot.data;
+                              //
+                              //     final listText = data
+                              //             ?.dataRow()
+                              //             .where((element) =>
+                              //                 element.type == typeData.text)
+                              //             .toList() ??
+                              //         [];
+                              //
+                              //     final listText1 = listText.sublist(0, 2);
+                              //     final listText2 =
+                              //         listText.sublist(3, listText.length);
+                              //
+                              //     return Column(
+                              //       children: [
+                              //         Row(
+                              //           children: [
+                              //             const Icon(
+                              //               Icons.circle,
+                              //               size: 16,
+                              //               color: statusCalenderRed,
+                              //             ),
+                              //             const SizedBox(
+                              //               width: 16,
+                              //             ),
+                              //             Text(
+                              //               S.current.hop_noi_bo_cong_ty,
+                              //               style: textNormalCustom(
+                              //                 color: textTitle,
+                              //                 fontSize: 20,
+                              //                 fontWeight: FontWeight.w500,
+                              //               ),
+                              //             )
+                              //           ],
+                              //         ),
+                              //         const SizedBox(
+                              //           height: 28,
+                              //         ),
+                              //         Row(
+                              //           crossAxisAlignment:
+                              //               CrossAxisAlignment.start,
+                              //           children: [
+                              //             Expanded(
+                              //               flex: 4,
+                              //               child: Column(
+                              //                 crossAxisAlignment:
+                              //                     CrossAxisAlignment.start,
+                              //                 children: [
+                              //                   Column(
+                              //                     children: listText1
+                              //                         .map(
+                              //                           (e) => Container(
+                              //                             margin:
+                              //                                 const EdgeInsets
+                              //                                     .only(
+                              //                               bottom: 24,
+                              //                             ),
+                              //                             child: RowValueWidget(
+                              //                               row: e,
+                              //                               isTablet: true,
+                              //                               isMarinLeft: true,
+                              //                             ),
+                              //                           ),
+                              //                         )
+                              //                         .toList(),
+                              //                   ),
+                              //                   Column(
+                              //                     children: listText2
+                              //                         .map(
+                              //                           (e) => Container(
+                              //                             margin:
+                              //                                 const EdgeInsets
+                              //                                     .only(
+                              //                               bottom: 24,
+                              //                             ),
+                              //                             child: RowValueWidget(
+                              //                               row: e,
+                              //                               isTablet: true,
+                              //                             ),
+                              //                           ),
+                              //                         )
+                              //                         .toList(),
+                              //                   ),
+                              //                 ],
+                              //               ),
+                              //             ),
+                              //             Expanded(
+                              //               flex: 3,
+                              //               child: Column(
+                              //                 children: [
+                              //                   DoubleButtonWidget(
+                              //                     onPressed1: () {},
+                              //                     onPressed2: () {},
+                              //                   ),
+                              //                   const SizedBox(
+                              //                     height: 28,
+                              //                   ),
+                              //                   Row(
+                              //                     children: [
+                              //                       const Expanded(
+                              //                         flex: 3,
+                              //                         child: SizedBox(),
+                              //                       ),
+                              //                       Expanded(
+                              //                         flex: 7,
+                              //                         child: Column(
+                              //                           crossAxisAlignment:
+                              //                               CrossAxisAlignment
+                              //                                   .start,
+                              //                           children: (data
+                              //                                       ?.dataRow()
+                              //                                       .where(
+                              //                                         (element) =>
+                              //                                             element
+                              //                                                 .type ==
+                              //                                             typeData
+                              //                                                 .listperson,
+                              //                                       )
+                              //                                       .toList())
+                              //                                   ?.map(
+                              //                                     (e) =>
+                              //                                         RowValueWidget(
+                              //                                       row: e,
+                              //                                       isTablet:
+                              //                                           true,
+                              //                                     ),
+                              //                                   )
+                              //                                   .toList() ??
+                              //                               [
+                              //                                 Container(),
+                              //                               ],
+                              //                         ),
+                              //                       ),
+                              //                     ],
+                              //                   ),
+                              //                 ],
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ],
+                              //     );
+                              //   },
+                              // ),
                             ),
                           ),
                         ),
