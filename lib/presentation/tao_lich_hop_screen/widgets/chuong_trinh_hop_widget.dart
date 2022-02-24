@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
@@ -18,7 +19,8 @@ import 'package:ccvc_mobile/widgets/timer/base_timer_picker.dart';
 import 'package:flutter/material.dart';
 
 class ChuongTrinhHopWidget extends StatelessWidget {
-  const ChuongTrinhHopWidget({Key? key}) : super(key: key);
+  final TaoLichHopCubit cubit;
+  const ChuongTrinhHopWidget({Key? key, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class ChuongTrinhHopWidget extends StatelessWidget {
             onTap: () {
               showBottomSheetCustom(
                 context,
-                child: const ThemPhienHopScreen(),
+                child: const ThemPhienHopScreen(cubit: null,),
                 title: S.current.them_phien_hop,
               );
             },
@@ -57,7 +59,8 @@ class ChuongTrinhHopWidget extends StatelessWidget {
 }
 
 class ThemPhienHopScreen extends StatefulWidget {
-  const ThemPhienHopScreen({Key? key}) : super(key: key);
+  final TaoLichHopCubit cubit;
+  const ThemPhienHopScreen({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _ThemPhienHopScreenState createState() => _ThemPhienHopScreenState();

@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
@@ -27,5 +28,7 @@ mixin HopRepository {
       NguoiChuTriRequest nguoiChuTriRequest);
 
   Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
-      String id);
+      String id,);
+
+  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id,);
 }
