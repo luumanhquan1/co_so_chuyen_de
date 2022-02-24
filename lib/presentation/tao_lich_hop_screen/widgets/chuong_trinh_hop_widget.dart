@@ -24,6 +24,8 @@ class ChuongTrinhHopWidget extends StatelessWidget {
 
   const ChuongTrinhHopWidget({Key? key, required this.cubit}) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
     return ExpandOnlyWidget(
