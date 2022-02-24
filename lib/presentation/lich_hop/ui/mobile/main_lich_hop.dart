@@ -280,13 +280,12 @@ class _MainLichHopState extends State<MainLichHop> {
           child: FloatingActionButton(
             elevation: 0.0,
             onPressed: () {
-              cubit.callApi();
-              // Navigator.push(
-              //   context,
-              //   PageRouteBuilder(
-              //     pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+                ),
+              );
             },
             backgroundColor: labelColor,
             child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),
