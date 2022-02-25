@@ -153,14 +153,15 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                             children: data
                                 .valueData()
                                 .map(
-                                  (e) => Container(
+                                  (e) =>
+                                  Container(
                                     margin: const EdgeInsets.only(top: 24),
                                     child: RowDataWidget(
                                       urlIcon: e.urlIcon,
                                       text: e.text,
                                     ),
                                   ),
-                                )
+                            )
                                 .toList(),
                           );
                         },

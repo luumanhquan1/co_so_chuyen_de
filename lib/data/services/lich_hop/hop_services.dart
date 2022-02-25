@@ -25,7 +25,10 @@ import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dar
 import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -112,8 +115,12 @@ abstract class HopServices {
 
   @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<DanhSachPhienHopResponse> getListPhienHop(
-    @Query('LichHopId') String id,
-  );
+      @Query('LichHopId') String id);
+
+  @POST(ApiConstants.THEM_BIEU_QUYET_HOP)
+  Future<ThemMoiBieuQuyetResponse> themBieuQuyet(
+      @Body() BieuQuyetRequest bieuQuyetRequest);
+
 
   @POST(ApiConstants.MOI_HOP)
   Future<MoiHopResponse> postMoiHop(
@@ -134,6 +141,6 @@ abstract class HopServices {
   );
   @POST(ApiConstants.CHON_MAU_BIEN_BAN)
   Future<ChonBienBanCuocHopResponse> postChonMauBienBan(
-      @Body() ChonBienBanHopRequest chonBienBanHopRequest,
-      );
+    @Body() ChonBienBanHopRequest chonBienBanHopRequest,
+  );
 }

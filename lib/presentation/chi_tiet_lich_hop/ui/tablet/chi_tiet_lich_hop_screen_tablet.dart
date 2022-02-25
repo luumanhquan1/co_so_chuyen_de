@@ -36,22 +36,6 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     cubit.initData();
     cubit.postMoiHop(
       lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
-      IsMultipe: false,
-      isSendMail: true,
-      body: [
-        MoiHopRequest(
-          CanBoId: '4da4b3a3-0d1f-41f8-a70d-dc6c48904747',
-          DonViId: '43c679ab-149f-4017-afd5-a6401ff60616',
-          VaiTroThamGia: 2,
-          chucVu: 'Giám đốc sở',
-          hoTen: 'Trần Vũ Hoài Hạ',
-          id: null,
-          status: 0,
-          tenDonVi: 'Sở Kế hoạch và Đầu tư',
-          type: 1,
-          userId: '4da4b3a3-0d1f-41f8-a70d-dc6c48904747',
-        ),
-      ],
     );
     super.initState();
   }

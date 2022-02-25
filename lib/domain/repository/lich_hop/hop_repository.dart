@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
@@ -10,6 +11,8 @@ import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/bieu_quyet_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
@@ -61,6 +64,10 @@ mixin HopRepository {
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
+  Future<Result<ThemYKiemModel>> themYKienHop(
+    ThemYKienRequest themYKienRequest,
+  );
+
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
     String id,
   );
@@ -83,6 +90,10 @@ mixin HopRepository {
     String lichHopId,
     TaoPhienHopRepuest taoPhienHopRepuest,
   );
+  Future<Result<BieuQuyetModel>> themBieuQuyet(
+      BieuQuyetRequest bieuQuyetRequest,
+      );
+
 
   Future<Result<List<MoiHopModel>>> postMoiHop(
     String lichHopId,
@@ -103,6 +114,12 @@ mixin HopRepository {
       getDanhSachBieuQuyetLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
+  Future<Result<List<MoiHopModel>>> postMoiHop(
+    String lichHopId,
+    bool IsMultipe,
+    bool isSendMail,
+    List<MoiHopRequest> body,
+  );
 
   Future<Result<MessageModel>> suaKetLuan(
     String scheduleId,

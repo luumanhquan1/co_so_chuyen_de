@@ -1,13 +1,17 @@
 import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +39,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   BehaviorSubject<ChuongTrinhHopModel> danhSachCanBoTPTGSubject =
       BehaviorSubject();
 
-  BehaviorSubject<DanhSachPhatBieuLichHopModel> danhSachPhatbieuLichHopModelSubject =
-  BehaviorSubject();
+  BehaviorSubject<DanhSachPhatBieuLichHopModel>
+      danhSachPhatbieuLichHopModelSubject = BehaviorSubject();
 
   Stream<DanhSachPhatBieuLichHopModel> get danhSachPhatbieuLichHopStream =>
       danhSachPhatbieuLichHopModelSubject.stream;
@@ -50,6 +54,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<ChuongTrinhHopModel> get danhSachCanBoTPTGStream =>
       danhSachCanBoTPTGSubject.stream;
+
+  final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
+
+  Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
 
   List<String> cacLuaChonBieuQuyet = [];
 
@@ -115,21 +123,15 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     getDanhSachPhatBieuLichHop('e908def0-e519-4f3b-b9c7-ef841ef15331');
     getDanhSachBieuQuyetLichHop('e908def0-e519-4f3b-b9c7-ef841ef15331');
   }
-  Future<void>getDanhSachPhatBieuLichHop(String lichHopId)async{
-    final result=await hopRp.getDanhSachPhatBieuLichHop(lichHopId);
-    result.when(
-        success: (res) {
 
-        },
-        error: (err) {});
+  Future<void> getDanhSachPhatBieuLichHop(String lichHopId) async {
+    final result = await hopRp.getDanhSachPhatBieuLichHop(lichHopId);
+    result.when(success: (res) {}, error: (err) {});
   }
-  Future<void>getDanhSachBieuQuyetLichHop(String id)async{
-    final result=await hopRp.getDanhSachBieuQuyetLichHop(id);
-    result.when(
-        success: (res) {
 
-        },
-        error: (err) {});
+  Future<void> getDanhSachBieuQuyetLichHop(String id) async {
+    final result = await hopRp.getDanhSachBieuQuyetLichHop(id);
+    result.when(success: (res) {}, error: (err) {});
   }
 
   Future<void> danhSachCanBoTPTG({required String id}) async {
@@ -150,11 +152,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   ListPerSon fakeDataListPerson() {
-    final ListPerSon fakeDataListPersona = ListPerSon(
-        tongSoNguoi: 8,
-        soNguoiDongY: 3,
-        soNguoiChoXacNhan: 5,
-        listPerson: listFake);
+    ListPerSon fakeDataListPersona = ListPerSon(
+      tongSoNguoi: 8,
+      soNguoiDongY: 3,
+      soNguoiChoXacNhan: 5,
+      listPerson: listFake,
+    );
     return fakeDataListPersona;
   }
 
@@ -206,7 +209,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> getTongPhienHop() async {
     final result =
-        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
     result.when(
       success: (res) {},
       error: (err) {
@@ -217,7 +220,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> selectPhienHop() async {
     final result =
-        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
     result.when(
       success: (res) {},
       error: (err) {
@@ -241,5 +244,37 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  void dispose() {}
+  Future<void> themBieuQuyetHop() async {
+    final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
+        dateStart:'01/01/1900',
+        lichHopId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1',
+        loaiBieuQuyet: false,
+        noiDung: 'noi dung',
+        quyenBieuQuyet: true,
+        thoiGianBatDau: '1900-01-01T09:55',
+        thoiGianKetThuc: '1900-01-01T10:30',
+        trangThai: 0,
+        danhSachLuaChon:[DanhSachLuaChon(
+          tenLuaChon: 'gio tay',
+          mauBieuQuyet: 'primary',
+        )],
+      danhSachThanhPhanThamGia: [DanhSachThanhPhanThamGia(
+          canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+          donViId: '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+          idPhienhopCanbo: '904c6a02-1540-4768-8b72-db8aa3aabb8d',
+      )]
+
+    );
+    final result = await _HopRepo.themBieuQuyet(bieuQuyetRequest);
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+
+void dispose() {}
 }

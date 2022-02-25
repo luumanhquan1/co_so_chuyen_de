@@ -91,7 +91,9 @@ class ApiConstants {
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
   static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const THEM_BIEU_QUYET_HOP = '/vpdt/api/BieuQuyet/them-moi-bieuquyet';
   static const MOI_HOP = '/vpdt/api/MeetingSchedule/moi-hop';
+
   static const SUA_KET_LUAN = '/vpdt/api/ScheduleReport/update-meet-report';
   static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
 
