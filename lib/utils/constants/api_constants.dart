@@ -84,9 +84,12 @@ class ApiConstants {
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
+  static const SO_LUONG_PHAT_BIEU =
+      '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
 }
 
 class ImageConstants {
   static const String noImageFound =
       'https://ccvc-uat.chinhquyendientu.vn/img/no-image-found.816e59fa.png';
+
 }
