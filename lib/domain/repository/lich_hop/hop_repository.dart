@@ -17,6 +17,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/gui_mail_ket_luat_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
@@ -94,6 +95,9 @@ mixin HopRepository {
       getDanhSachBieuQuyetLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
+
+  Future<Result<GuiMailKetLuatHopModel>> sendMailKetLuanHop(String id);
+
   Future<Result<List<MoiHopModel>>> postMoiHop(
     String lichHopId,
     bool IsMultipe,

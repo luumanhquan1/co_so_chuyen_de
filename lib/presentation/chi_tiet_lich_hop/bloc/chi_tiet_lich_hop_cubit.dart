@@ -225,6 +225,17 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       },
     );
   }
+  Future<void> sendMailKetLuatHop() async {
+    final result =
+    await _hopRepo.sendMailKetLuanHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
 
   Future<void> themBieuQuyetHop() async {
     final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
