@@ -6,8 +6,15 @@ import 'package:flutter/material.dart';
 class RowDataWidget extends StatelessWidget {
   final String keyTxt;
   final String value;
-  const RowDataWidget({Key? key, required this.keyTxt, required this.value})
-      : super(key: key);
+  final bool isStatus;
+  final Color? color;
+  const RowDataWidget({
+    Key? key,
+    required this.keyTxt,
+    required this.value,
+    this.isStatus = false,
+    this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +27,32 @@ class RowDataWidget extends StatelessWidget {
             style: textNormal(infoColor, 14.0.textScale()),
           ),
         ),
+        const SizedBox(
+          width: 14,
+        ),
         Expanded(
           flex: 6,
-          child: Text(
-            value,
-            style: textNormal(titleColor, 14.0.textScale()),
-          ),
+          child: isStatus
+              ? Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: color ?? Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30))),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
+                    child: Text(
+                      value,
+                      style: textNormalCustom(
+                          color: backgroundColorApp, fontSize: 12),
+                    ),
+                  ),
+                )
+              : Text(
+                  value,
+                  style: textNormal(titleColor, 14.0.textScale()),
+                ),
         )
       ],
     );

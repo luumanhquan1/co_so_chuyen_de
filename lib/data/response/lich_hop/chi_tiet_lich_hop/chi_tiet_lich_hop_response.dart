@@ -11,7 +11,7 @@ class ChiTietLichHopResponse {
       {this.data, this.statusCode, this.succeeded, this.code, this.message});
 
   ChiTietLichHopResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
     statusCode = json['statusCode'];
     succeeded = json['succeeded'];
     code = json['code'];

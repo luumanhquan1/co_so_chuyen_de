@@ -148,7 +148,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                CongTacChuanBiWidget()
+                CongTacChuanBiWidget(cubit: cubit,)
 
               ],
             ),

@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thiet_bi_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
@@ -124,12 +125,22 @@ class HopRepositoryImpl implements HopRepository {
     );
   }
 
-  // @override
-  // Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
-  //     String idLichHop) {
-  //   return runCatchingAsync<ThongTinPhongHopResponse,
-  //           List<ThongTinPhongHopModel>>(
-  //       () => _hopServices.getDanhSachPhongHop(idLichHop),
-  //       (res) => res.data?.toDomain() ?? ThongTinPhongHopModel());
-  // }
+  @override
+  Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+      String idLichHop) {
+    return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel>(
+      () => _hopServices.getDanhSachPhongHop(idLichHop),
+      (res) => res.data?.toDomain() ?? ThongTinPhongHopModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
+      String lichHopId) {
+    return runCatchingAsync<ThietBiPhongHopResponse,
+        List<ThietBiPhongHopModel>>(
+      () => _hopServices.getListThietBiPhongHop(lichHopId),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
+    );
+  }
 }

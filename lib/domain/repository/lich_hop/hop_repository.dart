@@ -54,6 +54,9 @@ mixin HopRepository {
     String id,
   );
 
-  // Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
-  //     String idLichHop);
+  Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+      String idLichHop);
+
+  Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
+      String lichHopId);
 }
