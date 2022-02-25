@@ -94,7 +94,7 @@ class ApiConstants {
   static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
   static const MOI_HOP = '/vpdt/api/MeetingSchedule/moi-hop';
-
+  static const SUA_KET_LUAN = '/vpdt/api/ScheduleReport/update-meet-report';
 }
 
 class ImageConstants {

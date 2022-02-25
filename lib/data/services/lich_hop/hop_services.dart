@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
@@ -17,6 +18,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
@@ -100,5 +102,15 @@ abstract class HopServices {
     @Query('IsMultipe') bool IsMultipe,
     @Query('isSendMail') bool isSendMail,
     @Body() List<MoiHopRequest> body,
+  );
+
+  @PUT(ApiConstants.SUA_KET_LUAN)
+  @MultiPart()
+  Future<SuaKetLuanResponse> suaKetLuan(
+    @Part() String scheduleId,
+    @Part() String content,
+    @Part() String reportStatusId,
+    @Part() String reportTemplateId,
+    @Part() List<File> files,
   );
 }

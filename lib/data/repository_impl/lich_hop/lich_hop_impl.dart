@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
@@ -14,6 +16,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
@@ -31,8 +34,9 @@ import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -162,7 +166,8 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest) {
+    ThemYKienRequest themYKienRequest,
+  ) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
       () => _hopServices.themYKien(themYKienRequest),
       (response) => response.toModel(),
@@ -179,6 +184,26 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<MoiHopResponse, List<MoiHopModel>>(
       () => _hopServices.postMoiHop(lichHopId, IsMultipe, isSendMail, body),
       (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<MessageModel>> suaKetLuan(
+    String scheduleId,
+    String content,
+    String reportStatusId,
+    String reportTemplateId,
+    List<File>? files,
+  ) {
+    return runCatchingAsync<SuaKetLuanResponse, MessageModel>(
+      () => _hopServices.suaKetLuan(
+        scheduleId,
+        content,
+        reportStatusId,
+        reportTemplateId,
+        files ?? [],
+      ),
+      (response) => response.toDomain(),
     );
   }
 }

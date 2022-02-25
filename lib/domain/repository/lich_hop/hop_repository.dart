@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
@@ -18,6 +20,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -78,5 +81,13 @@ mixin HopRepository {
     bool IsMultipe,
     bool isSendMail,
     List<MoiHopRequest> body,
+  );
+
+  Future<Result<MessageModel>> suaKetLuan(
+    String scheduleId,
+    String content,
+    String reportStatusId,
+    String reportTemplateId,
+    List<File>? files,
   );
 }
