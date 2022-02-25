@@ -86,7 +86,7 @@ abstract class HopServices {
     @Body() String entityName,
     @Body() String entityId,
     @Body() bool isMutil,
-    @Body() List<File> file,
+    @Part() List<File> file,
   );
 
   @GET(ApiConstants.DANH_SACH_PHIEN_HOP)
