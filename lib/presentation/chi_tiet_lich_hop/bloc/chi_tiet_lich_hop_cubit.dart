@@ -1,7 +1,10 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +17,13 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   HopRepository get hopRp => Get.find();
 
   //
+
+  BehaviorSubject<List<MoiHopModel>> listMoiHopSubject = BehaviorSubject();
+
+  Stream<List<MoiHopModel>> get listMoiHopStream => listMoiHopSubject.stream;
+
   BehaviorSubject<ChiTietLichHopModel> chiTietLichLamViecSubject =
-      BehaviorSubject();
+  BehaviorSubject();
 
   Stream<ChiTietLichHopModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
@@ -36,20 +44,38 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> initData() async {
     final result =
-        await hopRp.getChiTietLichHop('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    await hopRp.getChiTietLichHop('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
     result.when(
-        success: (res) {
-          chiTietLichLamViecSubject.add(res);
-        },
-        error: (err) {});
+      success: (res) {
+        chiTietLichLamViecSubject.add(res);
+      },
+      error: (err) {},
+    );
+  }
+
+  Future<void> postMoiHop({
+    required String lichHopId,
+    required bool IsMultipe,
+    required bool isSendMail,
+    required List<MoiHopRequest> body,
+  }) async {
+    final result = await hopRp.postMoiHop(
+        lichHopId, IsMultipe, isSendMail, body);
+
+    result.when(
+      success: (value) {
+        listMoiHopSubject.add(value);
+      },
+      error: (error) {},
+    );
   }
 
   ListPerSon fakeDataListPerson() {
     ListPerSon fakeDataListPersona = ListPerSon(
-        tongSoNguoi: 8,
-        soNguoiDongY: 3,
-        soNguoiChoXacNhan: 5,
-        listPerson: listFake);
+      tongSoNguoi: 8,
+      soNguoiDongY: 3,
+      soNguoiChoXacNhan: 5,
+      listPerson: listFake,);
     return fakeDataListPersona;
   }
 
@@ -101,11 +127,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> getTongPhienHop() async {
     final result =
-        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
     result.when(
-      success: (res) {
-
-      },
+      success: (res) {},
       error: (err) {
         return;
       },
@@ -114,10 +138,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> selectPhienHop() async {
     final result =
-        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
     result.when(
-      success: (res) {
-      },
+      success: (res) {},
       error: (err) {
         return;
       },
@@ -132,14 +155,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         scheduleId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1');
     final result = await _HopRepo.themYKienHop(themYKienRequest);
     result.when(
-      success: (res) {
-      },
+      success: (res) {},
       error: (err) {
         return;
       },
     );
   }
 
-
-void dispose() {}
+  void dispose() {}
 }

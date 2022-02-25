@@ -88,6 +88,7 @@ class ApiConstants {
   static const TONG_PHIEN_HOP ='/vpdt/api/MeetingSection/get-total-phien-hop';
   static const SELECT_PHIEN_HOP ='/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const MOI_HOP = '/vpdt/api/MeetingSchedule/moi-hop';
 
 }
 
