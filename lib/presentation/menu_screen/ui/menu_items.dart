@@ -154,7 +154,7 @@ extension GetScreen on MenuType {
       case MenuType.hop:
         return screenDevice(
           mobileScreen: const MainLichHop(),
-          tabletScreen: const DetailMeetCalenderTablet(),
+          tabletScreen: const MainLichHopTabLet(),
         );
       case MenuType.quanLyNhiemVu:
         return screenDevice(
