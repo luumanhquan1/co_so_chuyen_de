@@ -34,7 +34,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
-
+import 'dart:io';
 class HopRepositoryImpl implements HopRepository {
   final HopServices _hopServices;
 
@@ -104,9 +104,13 @@ class HopRepositoryImpl implements HopRepository {
   @override
   Future<Result<AddFileModel>> postFileTaoLichHop(
     AddFileTaoLichHopRequest body,
+    List<File> files,
   ) {
     return runCatchingAsync<AddFileTaoLichHopResponse, AddFileModel>(
-      () => _hopServices.postFile(body),
+      () => _hopServices.postFile(
+        body,
+        files,
+      ),
       (response) => response.toModel(),
     );
   }
@@ -146,7 +150,7 @@ class HopRepositoryImpl implements HopRepository {
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id) {
     return runCatchingAsync<SoLuongPhatBieuResponse, SoLuongPhatBieuModel>(
         () => _hopServices.getSoLuongPhatBieu(id),
-        (res) => res.data?.toDomain() ?? SoLuongPhatBieuModel());
+        (res) => res.data.toDomain());
   }
 
   @override

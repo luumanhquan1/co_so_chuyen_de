@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
@@ -61,9 +62,12 @@ abstract class HopServices {
   Future<DanhSachCanBoHopResponse> getDanhSachChuTri(@Query('id') String id);
 
   @POST(ApiConstants.POST_DANH_SACH_LICH_HOP)
+  @MultiPart()
   Future<AddFileTaoLichHopResponse> postFile(
     @Body() AddFileTaoLichHopRequest addFileTaoLichHopRequest,
+    @Body() List<File> file,
   );
+
   @GET(ApiConstants.DANH_SACH_PHIEN_HOP)
   Future<ListPhienHopRespone> getDanhSachPhienHop(@Query('id') String id);
 
@@ -95,5 +99,4 @@ abstract class HopServices {
   @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<DanhSachPhienHopResponse> getListPhienHop(
       @Query('LichHopId') String id);
-
 }

@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
@@ -186,6 +188,21 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     );
 
     showContent();
+  }
+
+  // them tai lieu tao lich hop
+  final HopRepository _HopRepo = Get.find();
+
+  Future<void> postFile(List<File> files) async {
+    AddFileTaoLichHopRequest addFileRequest = AddFileTaoLichHopRequest(
+        DateFrom: '', DateTo: '', UserId: '', DonViId: '');
+    final result = await _HopRepo.postFileTaoLichHop(addFileRequest, files);
+    result.when(
+      success: (res) {},
+      error: (err) {
+        return;
+      },
+    );
   }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
