@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -52,4 +53,7 @@ mixin HopRepository {
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
     String id,
   );
+
+  // Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+  //     String idLichHop);
 }

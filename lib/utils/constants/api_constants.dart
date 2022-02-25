@@ -85,6 +85,7 @@ class ApiConstants {
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
+  static const MEETING_ROOM_DANH_SACH_PHONG_HOP = '/vpdt/api/MeetingRoom/danh-sach-phong-hop';
 }
 
 class ImageConstants {

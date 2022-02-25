@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,9 +15,15 @@ class RowDataWidget extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-            width: 16,
-            height: 16,
-            child: Center(child: SvgPicture.asset(urlIcon))),
+          width: 17.0.textScale(),
+          height: 17.0.textScale(),
+          child: Center(
+              child: SvgPicture.asset(
+            urlIcon,
+            width: 17.0.textScale(),
+            height: 17.0.textScale(),
+          )),
+        ),
         const SizedBox(
           width: 14,
         ),

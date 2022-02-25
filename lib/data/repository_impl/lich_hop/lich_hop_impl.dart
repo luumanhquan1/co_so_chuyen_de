@@ -3,7 +3,8 @@ import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dar
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
@@ -21,6 +22,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -121,4 +123,13 @@ class HopRepositoryImpl implements HopRepository {
       (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
   }
+
+  // @override
+  // Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+  //     String idLichHop) {
+  //   return runCatchingAsync<ThongTinPhongHopResponse,
+  //           List<ThongTinPhongHopModel>>(
+  //       () => _hopServices.getDanhSachPhongHop(idLichHop),
+  //       (res) => res.data?.toDomain() ?? ThongTinPhongHopModel());
+  // }
 }

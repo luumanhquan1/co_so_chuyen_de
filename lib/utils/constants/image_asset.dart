@@ -74,6 +74,7 @@ class ImageAssets {
   static const String ic_Calendar_tui = '$baseImg/ic_calendar_tui.svg';
   static const String icChoYKien = '$baseImg/ic_cho_y_kien.svg';
   static const String icHuyLich = '$baseImg/ic_huy_lich.svg';
+  static const String icCalling = '$baseImg/ic_calling.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
@@ -109,6 +110,7 @@ class ImageAssets {
   static const String imgView = '$baseImg/ic_view.svg';
   static const String imgBackGroundLogin =
       '$baseImg/image_login_background.svg';
+  static const String icCanlendarTablet = '$baseImg/ic_calendar_tablet.svg';
 
   static const String icGridTablet = '$baseImg/ic_gird_tablet.svg';
   static const String icGridView = '$baseImg/ic_gird_view.svg';
