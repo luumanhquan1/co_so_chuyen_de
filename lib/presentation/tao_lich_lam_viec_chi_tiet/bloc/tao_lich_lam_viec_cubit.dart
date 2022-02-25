@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
@@ -14,6 +15,7 @@ import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_state.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:queue/queue.dart';
@@ -65,11 +67,20 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
 
+  String dateFrom=DateTime.now().formatApi;
+  String timeFrom='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+  String dateEnd=DateTime.now().formatApi;
+  String timeEnd='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+
   void listeningStartDataTime(DateTime dateAndTime) {
+    dateFrom= dateAndTime.formatApi;
+    timeFrom='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     startDateSubject.add(dateAndTime);
   }
 
   void listeningEndDataTime(DateTime dateAndTime) {
+    dateEnd=dateAndTime.formatApi;
+    timeEnd='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     endDateSubject.add(dateAndTime);
   }
 
@@ -162,6 +173,71 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
           _nguoiChuTri.sink.add(res);
         },
         error: (err) {});
+  }
+
+  Future<void> taoLichLamViec({
+    required String title,
+    required String typeScheduleId,
+
+    required String content,
+    required String location,
+  }) async {
+    showLoading();
+    final result = await _lichLamViec.taoLichLamViec(
+      title ?? '',
+      typeScheduleId,
+      selectLinhVuc?.id ?? '',
+      '',
+      '',
+      '',
+      dateFrom,
+      timeFrom,
+      dateEnd,
+      timeEnd,
+      content,
+      location,
+      '',
+      '',
+      '',
+      2,
+      '',
+      false,
+      '',
+      false,
+      selectNguoiChuTri?.id ?? '',
+      selectNguoiChuTri?.donViId ?? '',
+      '',
+      false,
+      true,
+      1,
+      1,
+      dateFrom,
+      dateEnd,
+      true,
+    );
+    result.when(success: (res) {
+      showContent();
+    }, error: (error) {
+      showContent();
+    });
+  }
+  Future<void> taoBaoCaoKetQua({
+    required String reportStatusId,
+    required String scheduleId,
+    required List<File> files,
+
+  }) async {
+    showLoading();
+    await _lichLamViec
+        .taoBaoCaoKetQua(
+        reportStatusId, scheduleId,files,)
+        .then((value) {
+      value.when(
+        success: (res) {
+        },
+        error: (err) {},
+      );
+    });
   }
 
   void dispose() {

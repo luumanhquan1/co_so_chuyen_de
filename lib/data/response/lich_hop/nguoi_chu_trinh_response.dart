@@ -90,11 +90,13 @@ class Items {
     userName = json['userName'];
     userTaoHoId = json['userTaoHoId'];
   }
+
   NguoiChutriModel toDomain() => NguoiChutriModel(
         id: id ?? '',
         hoTen: hoTen ?? '',
         userTaoHoId: userTaoHoId ?? '',
         userId: userId ?? '',
         tenDonVi: tenDonVi ?? '',
+        donViId: donViId,
       );
 }
