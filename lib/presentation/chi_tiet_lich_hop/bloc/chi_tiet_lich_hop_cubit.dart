@@ -106,10 +106,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     final result = await _HopRepo.themYKienHop(themYKienRequest);
     result.when(
       success: (res) {
-        print('thanh conggggggggggggggggggggggggggggggggggg');
       },
       error: (err) {
-        print('that baiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
         return;
       },
     );

@@ -28,6 +28,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
     super.initState();
     cubit = DetailMeetCalenderCubit();
     cubit.initData();
+    cubit.themYKien();
   }
 
   @override
