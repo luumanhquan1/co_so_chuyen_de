@@ -66,7 +66,6 @@ extension TabbarEnum on TabBarType {
             key: keyHomeTablet,
           ),
         );
-        return const ChiTietYKNDScreen();
       case TabBarType.report:
         return screenDevice(
           mobileScreen: const DanhSachBaoCaoDangGirdviewMobile(),

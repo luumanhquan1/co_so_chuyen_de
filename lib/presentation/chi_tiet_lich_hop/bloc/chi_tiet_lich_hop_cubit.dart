@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -96,5 +97,22 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   List<String> fakeDataDropdown = ["item 1", "item 2", "item 3"];
 
-  void dispose() {}
+  final HopRepository _HopRepo = Get.find();
+
+  Future<void> themYKien() async {
+    ThemYKienRequest themYKienRequest = ThemYKienRequest(
+        content: 'them y kien',
+        scheduleId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1');
+    final result = await _HopRepo.themYKienHop(themYKienRequest);
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+
+void dispose() {}
 }
