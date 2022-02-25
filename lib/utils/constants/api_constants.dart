@@ -87,6 +87,7 @@ class ApiConstants {
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop?';
+  static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
 }
 
 class ImageConstants {

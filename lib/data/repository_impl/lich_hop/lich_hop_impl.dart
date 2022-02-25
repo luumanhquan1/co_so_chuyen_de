@@ -1,29 +1,32 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -126,10 +129,21 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest) {
+  Future<Result<ThemYKiemModel>> themYKienHop(
+      ThemYKienRequest themYKienRequest) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
-          () => _hopServices.themYKien(themYKienRequest),
-          (response) => response.toModel(),
+      () => _hopServices.themYKien(themYKienRequest),
+      (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
+      ChonBienBanHopRequest chonBienBanHopRequest) {
+    return runCatchingAsync<ChonBienBanCuocHopResponse,
+        ChonBienBanCuocHopModel>(
+      () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
+      (response) => response.data.toDomain(),
     );
   }
 }

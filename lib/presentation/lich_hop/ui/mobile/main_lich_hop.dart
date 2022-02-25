@@ -1,17 +1,14 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
@@ -281,12 +278,13 @@ class _MainLichHopState extends State<MainLichHop> {
           child: FloatingActionButton(
             elevation: 0.0,
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
-                ),
-              );
+              cubit.callApi();
+              // Navigator.push(
+              //   context,
+              //   PageRouteBuilder(
+              //     pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+              //   ),
+              // );
             },
             backgroundColor: labelColor,
             child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),
