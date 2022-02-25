@@ -68,6 +68,7 @@ class ApiConstants {
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
 
+  static const THEM_PHIEN_HOP_CHI_TIET = '/vpdt/api/meetingsection/them-moi';
   static const TRANG_THAI = '/vpdt/api/ReportStatus/list';
 
   static const XOA_LICH_LAM_VIEC =
