@@ -87,6 +87,9 @@ class ApiConstants {
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
   static const DANH_SACH_PHAT_BIEU_LICH_HOP = '/vpdt/api/MeetingSection/danh-sach-phat-bieu';
   static const DANH_SACH_BIEU_QUYET_LICH_HOP = '/vpdt/api/MeetingSchedule/danh-sach-can-bo-bieu-quyet';
+  static const TONG_PHIEN_HOP ='/vpdt/api/MeetingSection/get-total-phien-hop';
+  static const SELECT_PHIEN_HOP ='/vpdt/api/ScheduleOpinion/list';
+  static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
 }
 
 class ImageConstants {
