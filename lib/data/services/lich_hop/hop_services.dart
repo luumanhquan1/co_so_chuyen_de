@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
@@ -18,6 +19,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dar
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -82,11 +84,16 @@ abstract class HopServices {
   @GET(ApiConstants.SELECT_PHIEN_HOP)
   Future<SelectPhienHopResponse> selectPhienHop(@Query('scheduleId') String id);
 
+  @GET(ApiConstants.DANH_SACH_LICH_HOP_TPTG)
+  Future<ChuongTrinhHopResponse> getDanhSachCuocHopTPTH(@Query('id') String id);
+
   @POST(ApiConstants.THEM_Y_KIEN_HOP)
   Future<ThemYKienResponse> themYKien(
-      @Body() ThemYKienRequest themYKienRequest);
+    @Body() ThemYKienRequest themYKienRequest,
+  );
 
   @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<DanhSachPhienHopResponse> getListPhienHop(
-      @Query('LichHopId') String id);
+    @Query('LichHopId') String id,
+  );
 }
