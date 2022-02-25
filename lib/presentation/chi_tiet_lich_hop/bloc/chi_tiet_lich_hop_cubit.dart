@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
@@ -102,7 +103,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     ),
   ];
 
-  List<String> fakeDataDropdown = ["item 1", "item 2", "item 3"];
+  List<String> fakeDataDropdown = ['item 1', 'item 2', 'item 3'];
   final HopRepository _hopRepo = Get.find();
 
   Future<void> getTongPhienHop() async {
@@ -137,6 +138,37 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         content: 'them y kien',
         scheduleId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1');
     final result = await _HopRepo.themYKienHop(themYKienRequest);
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> themBieuQuyetHop() async {
+    final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
+        dateStart:'01/01/1900',
+        lichHopId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1',
+        loaiBieuQuyet: false,
+        noiDung: 'noi dung',
+        quyenBieuQuyet: true,
+        thoiGianBatDau: '1900-01-01T09:55',
+        thoiGianKetThuc: '1900-01-01T10:30',
+        trangThai: 0,
+        danhSachLuaChon:[DanhSachLuaChon(
+          tenLuaChon: 'gio tay',
+          mauBieuQuyet: 'primary',
+        )],
+      danhSachThanhPhanThamGia: [DanhSachThanhPhanThamGia(
+          canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+          donViId: '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+          idPhienhopCanbo: '904c6a02-1540-4768-8b72-db8aa3aabb8d',
+      )]
+
+    );
+    final result = await _HopRepo.themBieuQuyet(bieuQuyetRequest);
     result.when(
       success: (res) {
       },

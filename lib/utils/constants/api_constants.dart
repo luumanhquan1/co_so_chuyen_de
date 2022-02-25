@@ -91,6 +91,7 @@ class ApiConstants {
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
   static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const THEM_BIEU_QUYET_HOP = '/vpdt/api/BieuQuyet/them-moi-bieuquyet';
 }
 
 class ImageConstants {
