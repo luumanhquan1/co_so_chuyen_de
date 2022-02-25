@@ -131,8 +131,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showLoading();
     final result = await hopRepo.postDanhSachLichHop(
       DanhSachLichHopRequest(
-        DateFrom: startDate.formatApi,
-        DateTo: endDate.formatApi,
+        DateFrom: '2022-02-24',
+        DateTo: '2022-02-24',
         DonViId: donViId,
         PageIndex: page,
         PageSize: 1000,

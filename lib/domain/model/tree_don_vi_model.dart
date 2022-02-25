@@ -1,5 +1,3 @@
-import 'package:ccvc_mobile/widgets/thanh_phan_tham_gia/fake_date_tao_lich_hop.dart';
-import 'package:get/get.dart';
 
 class DonViModel {
   String id = '';
@@ -92,26 +90,4 @@ class CheckBox {
   CheckBox({this.isCheck = false});
 }
 
-List<Node<DonViModel>> batTree() {
-  final data = FakeDataTaoLich.dataTree;
-  List<Node<DonViModel>> listTree = [];
-  data.forEach((element) {
-    Node<DonViModel> tree = Node(DonViModel.fromJson(element));
-    tree.expand = true;
-    final childern = element['children'] as List<dynamic>;
-    _makeBuildTree(tree, childern);
-    listTree.add(tree);
-  });
-  return listTree;
-}
 
-void _makeBuildTree(Node<DonViModel> tree, List<dynamic> list) {
-  if (list.isNotEmpty) {
-    for (var vl in list) {
-      Node<DonViModel> treeNode = Node(DonViModel.fromJson(vl));
-      final childern = vl['children'] as List<dynamic>;
-      tree.addChild(treeNode);
-      _makeBuildTree(treeNode, childern);
-    }
-  }
-}
