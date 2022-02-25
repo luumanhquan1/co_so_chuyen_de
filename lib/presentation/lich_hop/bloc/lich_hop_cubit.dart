@@ -191,18 +191,22 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   }
 
   // them tai lieu tao lich hop
-  final HopRepository _HopRepo = Get.find();
-
-  Future<void> postFile(List<File> files) async {
-    AddFileTaoLichHopRequest addFileRequest = AddFileTaoLichHopRequest(
-        DateFrom: '', DateTo: '', UserId: '', DonViId: '');
-    final result = await _HopRepo.postFileTaoLichHop(addFileRequest, files);
-    result.when(
-      success: (res) {},
-      error: (err) {
-        return;
-      },
-    );
+  Future<void> postFileTaoLichHop({
+    required int entityType,
+    required String entityName,
+    required String entityId,
+    required bool isMutil,
+    required List<File> files,
+  }) async {
+    showLoading();
+    await hopRepo
+        .postFileTaoLichHop(entityType, entityName, entityId, isMutil, files)
+        .then((value) {
+      value.when(
+        success: (res) {},
+        error: (err) {},
+      );
+    });
   }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());

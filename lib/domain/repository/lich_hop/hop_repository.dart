@@ -48,7 +48,10 @@ mixin HopRepository {
       String id);
 
   Future<Result<AddFileModel>> postFileTaoLichHop(
-    AddFileTaoLichHopRequest body,
+    int entityType,
+    String entityName,
+    String entityId,
+    bool isMutil,
     List<File> files,
   );
 

@@ -102,6 +102,8 @@ class ApiConstants {
       '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
   static const DANH_SACH_LICH_HOP_TPTG =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
+  static const ADD_FILE_TAI_LIEU_TAO_LICH_HOP =
+      '/vpdt/api/Files/add-file-with-meeting';
 }
 
 class ImageConstants {

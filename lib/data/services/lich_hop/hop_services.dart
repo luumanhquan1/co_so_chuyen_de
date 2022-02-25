@@ -65,10 +65,13 @@ abstract class HopServices {
   @GET(ApiConstants.DANH_SACH_CAN_BO_LICH_HOP)
   Future<DanhSachCanBoHopResponse> getDanhSachChuTri(@Query('id') String id);
 
-  @POST(ApiConstants.POST_DANH_SACH_LICH_HOP)
+  @POST(ApiConstants.ADD_FILE_TAI_LIEU_TAO_LICH_HOP)
   @MultiPart()
   Future<AddFileTaoLichHopResponse> postFile(
-    @Body() AddFileTaoLichHopRequest addFileTaoLichHopRequest,
+    @Body() int entityType,
+    @Body() String entityName,
+    @Body() String entityId,
+    @Body() bool isMutil,
     @Body() List<File> file,
   );
 
@@ -87,7 +90,6 @@ abstract class HopServices {
   @GET(ApiConstants.CHUONG_TRINH_HOP)
   Future<ChuongTrinhHopResponse> getChuongTrinhHop(@Query('id') String id);
 
-
   @GET(ApiConstants.DANH_SACH_PHAT_BIEU_LICH_HOP)
   Future<DanhSachPhatBieuLichHopDataResponse> getDanhSachPhatBieuLichHop(
     @Query('lichHopId') String lichHopId,
@@ -97,6 +99,7 @@ abstract class HopServices {
   Future<DanhSachBieuQuyetLichHopDataResponse> getDanhSachBieuQuyetLichHop(
     @Query('id') String id,
   );
+
   @GET(ApiConstants.SO_LUONG_PHAT_BIEU)
   Future<SoLuongPhatBieuResponse> getSoLuongPhatBieu(@Query('id') String id);
 

@@ -29,10 +29,10 @@ class AddFileTaoLichHopResponse extends Equatable {
   Map<String, dynamic> toJson() => _$AddFileTaoLichHopResponseToJson(this);
 
   AddFileModel toModel() => AddFileModel(
-        entityType: 2,
-        entityName: '',
-        entityId: '',
-        isMutil: true,
+        entityType: entityType,
+        entityName: entityName,
+        entityId: entityId,
+        isMutil: isMutil,
       );
 
   //todo convert to Model to use

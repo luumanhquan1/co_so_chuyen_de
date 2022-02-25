@@ -40,6 +40,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'dart:io';
+
 class HopRepositoryImpl implements HopRepository {
   final HopServices _hopServices;
 
@@ -108,19 +109,23 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<AddFileModel>> postFileTaoLichHop(
-    AddFileTaoLichHopRequest body,
+    int entityType,
+    String entityName,
+    String entityId,
+    bool isMutil,
     List<File> files,
   ) {
     return runCatchingAsync<AddFileTaoLichHopResponse, AddFileModel>(
       () => _hopServices.postFile(
-        body,
+        entityType,
+        entityName,
+        entityId,
+        isMutil,
         files,
       ),
       (response) => response.toModel(),
     );
   }
-
-
 
   Future<Result<List<ListPhienHopModel>>> getDanhSachPhienHop(
     String id,
@@ -153,20 +158,24 @@ class HopRepositoryImpl implements HopRepository {
       (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
   }
+
   Future<Result<List<DanhSachPhatBieuLichHopModel>>> getDanhSachPhatBieuLichHop(
-      String lichHopId,
-      ) {
-    return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse, List<DanhSachPhatBieuLichHopModel>>(
-            () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
-            (res) => res.toModel());
+    String lichHopId,
+  ) {
+    return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
+            List<DanhSachPhatBieuLichHopModel>>(
+        () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
+        (res) => res.toModel());
   }
-  Future<Result<List<DanhSachBieuQuyetLichHopModel>>> getDanhSachBieuQuyetLichHop(
-      String id,
-      ) {
+
+  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
+      getDanhSachBieuQuyetLichHop(
+    String id,
+  ) {
     return runCatchingAsync<DanhSachBieuQuyetLichHopDataResponse,
-        List<DanhSachBieuQuyetLichHopModel>>(
-            () => _hopServices.getDanhSachBieuQuyetLichHop(id),
-            (res) => res.toModel());
+            List<DanhSachBieuQuyetLichHopModel>>(
+        () => _hopServices.getDanhSachBieuQuyetLichHop(id),
+        (res) => res.toModel());
   }
 
   @override
@@ -180,11 +189,9 @@ class HopRepositoryImpl implements HopRepository {
   @override
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id) {
     return runCatchingAsync<SoLuongPhatBieuResponse, SoLuongPhatBieuModel>(
-
       () => _hopServices.getSoLuongPhatBieu(id),
       (res) => res.data.toDomain(),
     );
-
   }
 
   @override
@@ -204,7 +211,8 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest) {
+  Future<Result<ThemYKiemModel>> themYKienHop(
+      ThemYKienRequest themYKienRequest) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
       () => _hopServices.themYKien(themYKienRequest),
       (response) => response.toModel(),
