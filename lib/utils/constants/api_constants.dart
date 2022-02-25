@@ -87,12 +87,19 @@ class ApiConstants {
   static const TAO_LICH_LAM_VIEC = '/vpdt/api/Schedules';
   static const TAO_BAO_KET_QUA = '/vpdt/api/ScheduleReport/create';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
-  static const SO_LUONG_PHAT_BIEU =
-      '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
 
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
   static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
+
+  static const SO_LUONG_PHAT_BIEU =
+      '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
+  static const DANH_SACH_PHAT_BIEU_LICH_HOP =
+      '/vpdt/api/MeetingSection/danh-sach-phat-bieu';
+  static const DANH_SACH_BIEU_QUYET_LICH_HOP =
+      '/vpdt/api/MeetingSchedule/danh-sach-can-bo-bieu-quyet';
+
   static const DANH_SACH_LICH_HOP_TPTG =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const SEND_EMAIL_KL_HOP = '/vpdt/api/ScheduleReport/send-email-bao-cao';
