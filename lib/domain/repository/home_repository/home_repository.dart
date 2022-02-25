@@ -80,4 +80,5 @@ abstract class HomeRepository {
   Future<Result<List<SuKienModel>>> getSuKien(String dateFrom, String dateTo);
 
   Future<Result<List<SinhNhatUserModel>>> getSinhNhat(String dataFrom,String dateTo);
+
 }

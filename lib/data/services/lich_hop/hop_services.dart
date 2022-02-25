@@ -20,6 +20,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.d
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
@@ -129,6 +130,11 @@ abstract class HopServices {
     @Query('IsMultipe') bool IsMultipe,
     @Query('isSendMail') bool isSendMail,
     @Body() List<MoiHopRequest> body,
+  );
+
+  @POST(ApiConstants.SEND_EMAIL_KL_HOP)
+  Future<GuiMailKetLuanHopResponse> sendMailKetLuatHop(
+    @Query('id') String id,
   );
 
   @PUT(ApiConstants.SUA_KET_LUAN)
