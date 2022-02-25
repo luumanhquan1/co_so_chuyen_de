@@ -84,6 +84,8 @@ class ApiConstants {
   static const SCHEDULE_OPINION_LIST = '/vpdt/api/ScheduleOpinion/list';
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
+  static const TAO_LICH_LAM_VIEC = '/vpdt/api/Schedules';
+  static const TAO_BAO_KET_QUA = '/vpdt/api/ScheduleReport/create';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
 
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
@@ -93,6 +95,13 @@ class ApiConstants {
 
   static const SO_LUONG_PHAT_BIEU =
       '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
+  static const DANH_SACH_PHAT_BIEU_LICH_HOP =
+      '/vpdt/api/MeetingSection/danh-sach-phat-bieu';
+  static const DANH_SACH_BIEU_QUYET_LICH_HOP =
+      '/vpdt/api/MeetingSchedule/danh-sach-can-bo-bieu-quyet';
+
+  static const DANH_SACH_LICH_HOP_TPTG =
+      '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
 }
 
 class ImageConstants {

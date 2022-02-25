@@ -9,7 +9,9 @@ import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bi
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_bieu_quyet_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
@@ -52,7 +54,8 @@ mixin HopRepository {
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
   Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest);
+    ThemYKienRequest themYKienRequest,
+  );
 
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
     String id,
@@ -76,4 +79,13 @@ mixin HopRepository {
   Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
     ChonBienBanHopRequest chonBienBanHopRequest,
   );
+
+  Future<Result<List<DanhSachPhatBieuLichHopModel>>> getDanhSachPhatBieuLichHop(
+    String lichHopId,
+  );
+
+  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
+      getDanhSachBieuQuyetLichHop(String id);
+
+  Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
 }
