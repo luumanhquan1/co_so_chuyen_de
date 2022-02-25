@@ -145,9 +145,10 @@ class HopRepositoryImpl implements HopRepository {
     String lichHopId,
   ) {
     return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
-            List<DanhSachPhatBieuLichHopModel>>(
-        () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
-        (res) => res.toModel(),);
+        List<DanhSachPhatBieuLichHopModel>>(
+      () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
+      (res) => res.toModel(),
+    );
   }
 
   Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
@@ -155,9 +156,10 @@ class HopRepositoryImpl implements HopRepository {
     String id,
   ) {
     return runCatchingAsync<DanhSachBieuQuyetLichHopDataResponse,
-            List<DanhSachBieuQuyetLichHopModel>>(
-        () => _hopServices.getDanhSachBieuQuyetLichHop(id),
-        (res) => res.toModel(),);
+        List<DanhSachBieuQuyetLichHopModel>>(
+      () => _hopServices.getDanhSachBieuQuyetLichHop(id),
+      (res) => res.toModel(),
+    );
   }
 
   @override
@@ -171,8 +173,9 @@ class HopRepositoryImpl implements HopRepository {
   @override
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id) {
     return runCatchingAsync<SoLuongPhatBieuResponse, SoLuongPhatBieuModel>(
-        () => _hopServices.getSoLuongPhatBieu(id),
-        (res) => res.data.toDomain(),);
+      () => _hopServices.getSoLuongPhatBieu(id),
+      (res) => res.data.toDomain(),
+    );
   }
 
   @override
@@ -193,7 +196,8 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest,) {
+    ThemYKienRequest themYKienRequest,
+  ) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
       () => _hopServices.themYKien(themYKienRequest),
       (response) => response.toModel(),
@@ -210,6 +214,17 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<MoiHopResponse, List<MoiHopModel>>(
       () => _hopServices.postMoiHop(lichHopId, IsMultipe, isSendMail, body),
       (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
+    ChonBienBanHopRequest chonBienBanHopRequest,
+  ) {
+    return runCatchingAsync<ChonBienBanCuocHopResponse,
+        ChonBienBanCuocHopModel>(
+      () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
+      (response) => response.data.toDomain(),
     );
   }
 }
