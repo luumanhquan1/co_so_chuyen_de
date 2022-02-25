@@ -34,6 +34,8 @@ class _TaoLichLamViecChiTietScreenState
     extends State<TaoLichLamViecChiTietScreen> {
   final TaoLichLamViecCubit taoLichLamViecCubit = TaoLichLamViecCubit();
   TextEditingController tieuDeController = TextEditingController();
+  TextEditingController noiDungController = TextEditingController();
+  TextEditingController diaDiemController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -91,8 +93,14 @@ class _TaoLichLamViecChiTietScreenState
                         ),
                         const SearchNameWidget(),
                         StartEndDateWidget(
-                          onEndDateTimeChanged: (DateTime value) {},
-                          onStartDateTimeChanged: (DateTime value) {},
+                          onEndDateTimeChanged: (DateTime value) {
+                            taoLichLamViecCubit.listeningEndDataTime(value);
+                            print('$value');
+                          },
+                          onStartDateTimeChanged: (DateTime value) {
+                            print('$value');
+                            taoLichLamViecCubit.listeningStartDataTime(value);
+                          },
                         ),
                         const SizedBox(
                           height: 26,
@@ -105,10 +113,12 @@ class _TaoLichLamViecChiTietScreenState
                           taoLichLamViecCubit: taoLichLamViecCubit,
                         ),
                         TextFormWidget(
+                          controller: diaDiemController,
                           image: ImageAssets.icViTri,
                           hint: S.current.dia_diem,
                         ),
                         TextFormWidget(
+                          controller: noiDungController,
                           image: ImageAssets.icDocument,
                           hint: S.current.noi_dung,
                         ),
@@ -123,6 +133,14 @@ class _TaoLichLamViecChiTietScreenState
                               taoLichLamViecCubit.requestBanGhi,
                             );
                             if (taoLichLamViecCubit.checkValidateTime()) {
+                              taoLichLamViecCubit.taoLichLamViec(
+                                title: tieuDeController.value.text,
+                                typeScheduleId:
+                                'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
+                                content: noiDungController.value.text,
+                                location: diaDiemController.value.text,
+                              );
+
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

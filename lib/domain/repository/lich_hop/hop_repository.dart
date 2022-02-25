@@ -51,10 +51,15 @@ mixin HopRepository {
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
+  Future<Result<ThemYKiemModel>> themYKienHop(
+      ThemYKienRequest themYKienRequest);
 
-  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id,);
+  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
+    String id,
+  );
 
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id);
+
   Future<Result<TongPhienHopModel>> getTongPhienHop(
     String id,
   );
@@ -62,7 +67,7 @@ mixin HopRepository {
   Future<Result<SelectPhienHopModel>> slectPhienHop(
     String id,
   );
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest);
+
   Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
     String lichHopId,
     TaoPhienHopRepuest taoPhienHopRepuest,
@@ -71,6 +76,5 @@ mixin HopRepository {
       BieuQuyetRequest bieuQuyetRequest,
       );
 
-
-
+  Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
 }
