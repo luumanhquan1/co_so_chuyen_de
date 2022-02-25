@@ -1,10 +1,12 @@
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
@@ -92,16 +94,19 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   void callApi() {
     getDanhSachPhienHop(id: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
     themPhemHop(
-        lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
-        canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
-        donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-        thoiGian_BatDau: '2022-02-24T09:45:00',
-        thoiGian_KetThuc: '2022-02-24T10:45:00',
-        noiDung: 'en cô vid',
-        tieuDe: 'bất tử',
-        hoTen: 'luc',
-        IsMultipe: false,
-        file: []);
+      lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
+      canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
+      donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
+      thoiGian_BatDau: '2022-02-24T09:45:00',
+      thoiGian_KetThuc: '2022-02-24T10:45:00',
+      noiDung: 'en cô vid',
+      tieuDe: 'bất tử',
+      hoTen: 'luc',
+      IsMultipe: false,
+      file: [],
+    );
+
+    postChonMauHop(pageIndex: 1, pageSize: 10);
   }
 
   BehaviorSubject<List<ListPhienHopModel>> phienHopSubject = BehaviorSubject();
@@ -182,6 +187,30 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       success: (value) {
         listThemPhien = value;
         themPhienSubject.sink.add(listThemPhien);
+      },
+      error: (error) {},
+    );
+
+    showContent();
+  }
+
+  BehaviorSubject<ChonBienBanCuocHopModel> chonBienBanHopSubject =
+      BehaviorSubject();
+  ChonBienBanCuocHopModel chonBienBanCuocHopModel = ChonBienBanCuocHopModel();
+
+  Future<void> postChonMauHop({
+    required int pageIndex,
+    required int pageSize,
+  }) async {
+    showLoading();
+    final ChonBienBanHopRequest chonBienBanHopRequest =
+        ChonBienBanHopRequest(pageIndex, pageSize);
+    final result = await hopRepo.postChonMauBienBanHop(chonBienBanHopRequest);
+
+    result.when(
+      success: (value) {
+        chonBienBanCuocHopModel = value;
+        chonBienBanHopSubject.sink.add(chonBienBanCuocHopModel);
       },
       error: (error) {},
     );

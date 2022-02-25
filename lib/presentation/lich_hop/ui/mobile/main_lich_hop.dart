@@ -10,7 +10,6 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_ho
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_with_two_leading.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
@@ -31,7 +30,7 @@ class MainLichHop extends StatefulWidget {
 class _MainLichHopState extends State<MainLichHop> {
   final CalenderCubit calenderCubit = CalenderCubit();
   LichHopCubit cubit = LichHopCubit();
-  DetailMeetCalenderCubit detailMeetCalenderCubit=DetailMeetCalenderCubit();
+  DetailMeetCalenderCubit detailMeetCalenderCubit = DetailMeetCalenderCubit();
 
   @override
   void initState() {
@@ -284,12 +283,13 @@ class _MainLichHopState extends State<MainLichHop> {
           child: FloatingActionButton(
             elevation: 0.0,
             onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
-                ),
-              );
+              cubit.callApi();
+              // Navigator.push(
+              //   context,
+              //   PageRouteBuilder(
+              //     pageBuilder: (_, __, ___) => const TaoLichHopScreen(),
+              //   ),
+              // );
             },
             backgroundColor: labelColor,
             child: SvgPicture.asset(ImageAssets.icAddCalenderWhite),

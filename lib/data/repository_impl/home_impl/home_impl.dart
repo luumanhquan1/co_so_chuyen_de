@@ -72,7 +72,7 @@ class HomeImpl extends HomeRepository {
   Future<Result<List<WidgetModel>>> getDashBoardConfig() {
     return runCatchingAsync<DashBoardResponse, List<WidgetModel>>(
       () => _homeServiceCCVC.getDashBoard(),
-      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
+      (res) => res.toDomain(),
     );
   }
 
