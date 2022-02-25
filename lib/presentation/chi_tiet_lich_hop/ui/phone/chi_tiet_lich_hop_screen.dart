@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
@@ -30,6 +32,9 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
     super.initState();
     cubit = DetailMeetCalenderCubit();
     cubit.initData();
+    cubit.postMoiHop(
+      lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
+    );
   }
 
   @override

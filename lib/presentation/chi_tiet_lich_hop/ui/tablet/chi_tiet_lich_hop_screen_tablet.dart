@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+
+
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
@@ -24,6 +26,9 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     cubit = DetailMeetCalenderCubit();
 
     cubit.initData();
+    cubit.postMoiHop(
+      lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
+    );
     super.initState();
   }
 
