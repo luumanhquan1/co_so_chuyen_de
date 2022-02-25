@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -34,10 +35,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<DanhSachPhatBieuLichHopModel> get danhSachPhatbieuLichHopStream =>
       danhSachPhatbieuLichHopModelSubject.stream;
-
-  final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
-
-  Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
 
   Stream<ChiTietLichHopModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;

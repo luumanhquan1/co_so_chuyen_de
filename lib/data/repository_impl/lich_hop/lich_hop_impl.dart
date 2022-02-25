@@ -134,10 +134,6 @@ class HopRepositoryImpl implements HopRepository {
     );
   }
 
-  @override
-  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
-    String id,
-  ) {
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
       () => _hopServices.getChuongTrinhHop(id),
@@ -151,7 +147,7 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
             List<DanhSachPhatBieuLichHopModel>>(
         () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
-        (res) => res.toModel());
+        (res) => res.toModel(),);
   }
 
   Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
@@ -161,47 +157,48 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<DanhSachBieuQuyetLichHopDataResponse,
             List<DanhSachBieuQuyetLichHopModel>>(
         () => _hopServices.getDanhSachBieuQuyetLichHop(id),
-        (res) => res.toModel());
+        (res) => res.toModel(),);
   }
 
   @override
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
-          () => _hopServices.getChuongTrinhHop(id),
-          (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
+      () => _hopServices.getChuongTrinhHop(id),
+      (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
   }
 
   @override
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id) {
     return runCatchingAsync<SoLuongPhatBieuResponse, SoLuongPhatBieuModel>(
-            () => _hopServices.getSoLuongPhatBieu(id),
-            (res) => res.data?.toDomain() ?? SoLuongPhatBieuModel());
+        () => _hopServices.getSoLuongPhatBieu(id),
+        (res) => res.data.toDomain(),);
   }
 
   @override
   Future<Result<TongPhienHopModel>> getTongPhienHop(String id) {
     return runCatchingAsync<TongPhienHopResponse, TongPhienHopModel>(
-          () => _hopServices.getTongPhienHop(id),
-          (response) => response.toModel(),
+      () => _hopServices.getTongPhienHop(id),
+      (response) => response.toModel(),
     );
   }
 
   @override
   Future<Result<SelectPhienHopModel>> slectPhienHop(String id) {
     return runCatchingAsync<SelectPhienHopResponse, SelectPhienHopModel>(
-          () => _hopServices.selectPhienHop(id),
-          (response) => response.toModel(),
+      () => _hopServices.selectPhienHop(id),
+      (response) => response.toModel(),
     );
   }
 
   @override
   Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest) {
+      ThemYKienRequest themYKienRequest,) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
-          () => _hopServices.themYKien(themYKienRequest),
-          (response) => response.toModel(),
+      () => _hopServices.themYKien(themYKienRequest),
+      (response) => response.toModel(),
     );
+  }
 
   @override
   Future<Result<List<MoiHopModel>>> postMoiHop(

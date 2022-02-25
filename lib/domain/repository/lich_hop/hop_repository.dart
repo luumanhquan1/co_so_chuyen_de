@@ -71,7 +71,7 @@ mixin HopRepository {
   Future<Result<SelectPhienHopModel>> slectPhienHop(
     String id,
   );
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest);
+
   Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
     String lichHopId,
     TaoPhienHopRepuest taoPhienHopRepuest,
