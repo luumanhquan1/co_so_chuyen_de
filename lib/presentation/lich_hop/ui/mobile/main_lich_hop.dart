@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -32,6 +31,7 @@ class MainLichHop extends StatefulWidget {
 class _MainLichHopState extends State<MainLichHop> {
   final CalenderCubit calenderCubit = CalenderCubit();
   LichHopCubit cubit = LichHopCubit();
+  DetailMeetCalenderCubit detailMeetCalenderCubit=DetailMeetCalenderCubit();
 
   @override
   void initState() {
@@ -40,6 +40,9 @@ class _MainLichHopState extends State<MainLichHop> {
     cubit.page = 1;
     cubit.getDashboard();
     cubit.postDanhSachLichHop();
+    detailMeetCalenderCubit.themYKien();
+    detailMeetCalenderCubit.getTongPhienHop();
+    detailMeetCalenderCubit.selectPhienHop();
   }
 
   @override

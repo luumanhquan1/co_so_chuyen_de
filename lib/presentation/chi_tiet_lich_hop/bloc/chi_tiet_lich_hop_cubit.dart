@@ -62,6 +62,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
+  Future<void> soLuongPhatBieuData() async {
+    final result =
+        await hopRp.getSoLuongPhatBieu('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    result.when(success: (res) {}, error: (err) {});
+  }
+
   ListPerSon fakeDataListPerson() {
     final ListPerSon fakeDataListPersona = ListPerSon(
         tongSoNguoi: 8,
@@ -115,6 +121,32 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   ];
 
   List<String> fakeDataDropdown = ["item 1", "item 2", "item 3"];
+  final HopRepository _hopRepo = Get.find();
+
+  Future<void> getTongPhienHop() async {
+    final result =
+        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    result.when(
+      success: (res) {
+
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> selectPhienHop() async {
+    final result =
+        await _hopRepo.getTongPhienHop('f6b9aae0-23b1-497d-8096-866c964f2e17');
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
 
   final HopRepository _HopRepo = Get.find();
 
