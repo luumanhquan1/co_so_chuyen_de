@@ -137,39 +137,18 @@ class _TaoLichLamViecChiTietScreenState
                                 title: tieuDeController.value.text,
                                 typeScheduleId:
                                 'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
-                                linhVucId:
-                                taoLichLamViecCubit.selectLinhVuc?.id ?? '',
                                 TenTinh: '',
                                 TenHuyen: '',
                                 TenXa: '',
-                                dateFrom: taoLichLamViecCubit.dateFrom,
-                                timeFrom: taoLichLamViecCubit.timeFrom,
-                                dateTo: taoLichLamViecCubit.dateEnd,
-                                timeTo: taoLichLamViecCubit.timeEnd,
                                 content: noiDungController.value.text,
                                 location: diaDiemController.value.text,
                                 vehicle: '',
                                 expectedResults: '',
                                 results: '',
-                                status: 2,
                                 rejectReason: '',
-                                publishSchedule: false,
                                 tags: '',
                                 isLichDonVi: false,
-                                canBoChuTriId:
-                                taoLichLamViecCubit.selectNguoiChuTri?.id ??
-                                    '',
-                                donViId: taoLichLamViecCubit
-                                    .selectNguoiChuTri?.donViId ??
-                                    '',
                                 note: '',
-                                isAllDay: false,
-                                isSendMail: true,
-                                typeRemider: 1,
-                                typeRepeat: 1,
-                                dateRepeat: '2022-02-24',
-                                dateRepeat1: '2022-02-24',
-                                only: true,
                               );
 
                             } else {
