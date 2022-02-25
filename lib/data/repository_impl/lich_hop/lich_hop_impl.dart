@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
@@ -111,8 +113,9 @@ class HopRepositoryImpl implements HopRepository {
     TaoPhienHopRepuest taoPhienHopRepuest,
   ) {
     return runCatchingAsync<TaoPhienHopResponse, List<TaoPhienHopModel>>(
-        () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
-        (res) => res.toMoDel());
+      () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
+      (res) => res.toMoDel(),
+    );
   }
 
   @override
@@ -132,10 +135,12 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest) {
+  Future<Result<ThemYKiemModel>> themYKienHop(
+    ThemYKienRequest themYKienRequest,
+  ) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
-          () => _hopServices.themYKien(themYKienRequest),
-          (response) => response.toModel(),
+      () => _hopServices.themYKien(themYKienRequest),
+      (response) => response.toModel(),
     );
   }
 }

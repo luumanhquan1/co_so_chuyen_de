@@ -124,14 +124,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         scheduleId: 'ab675c7d-fb86-4ec1-806f-5308b0f97af1');
     final result = await _HopRepo.themYKienHop(themYKienRequest);
     result.when(
-      success: (res) {
-      },
+      success: (res) {},
       error: (err) {
         return;
       },
     );
   }
 
-
-void dispose() {}
+  void dispose() {}
 }
