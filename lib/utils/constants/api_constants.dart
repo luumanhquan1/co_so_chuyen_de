@@ -68,6 +68,7 @@ class ApiConstants {
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
 
+  static const THEM_PHIEN_HOP_CHI_TIET = '/vpdt/api/meetingsection/them-moi';
   static const TRANG_THAI = '/vpdt/api/ReportStatus/list';
 
   static const XOA_LICH_LAM_VIEC =
@@ -88,6 +89,12 @@ class ApiConstants {
       '/vpdt/api/Files/add-file-with-meeting';
 
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
+  static const SO_LUONG_PHAT_BIEU =
+      '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
+
+  static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
+  static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
+  static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
 }
 
 class ImageConstants {
