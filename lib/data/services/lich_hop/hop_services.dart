@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
@@ -28,6 +29,9 @@ import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.da
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
@@ -146,9 +150,17 @@ abstract class HopServices {
     @Query('id') String id,
   );
 
+  @PUT(ApiConstants.SUA_KET_LUAN)
+  @MultiPart()
+  Future<SuaKetLuanResponse> suaKetLuan(
+    @Part() String scheduleId,
+    @Part() String content,
+    @Part() String reportStatusId,
+    @Part() String reportTemplateId,
+    @Part() List<File> files,
+  );
   @POST(ApiConstants.CHON_MAU_BIEN_BAN)
   Future<ChonBienBanCuocHopResponse> postChonMauBienBan(
     @Body() ChonBienBanHopRequest chonBienBanHopRequest,
   );
-
 }

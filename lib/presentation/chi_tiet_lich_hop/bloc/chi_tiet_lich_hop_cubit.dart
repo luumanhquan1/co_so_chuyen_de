@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
@@ -5,7 +6,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
-
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
@@ -15,6 +16,9 @@ import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -29,6 +33,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   HopRepository get hopRp => Get.find();
 
   //
+
+  BehaviorSubject<MessageModel> messageSubject = BehaviorSubject();
+
+  Stream<MessageModel> get messageStream => messageSubject.stream;
 
   BehaviorSubject<List<MoiHopModel>> listMoiHopSubject = BehaviorSubject();
 
@@ -46,13 +54,16 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   Stream<DanhSachPhatBieuLichHopModel> get danhSachPhatbieuLichHopStream =>
       danhSachPhatbieuLichHopModelSubject.stream;
 
+  final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
+
+  Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
+
   Stream<ChiTietLichHopModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
 
   Stream<ChuongTrinhHopModel> get danhSachCanBoTPTGStream =>
       danhSachCanBoTPTGSubject.stream;
 
-  final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
   final BehaviorSubject<ThongTinPhongHopModel> _getThongTinPhongHop =
       BehaviorSubject<ThongTinPhongHopModel>();
 
@@ -63,7 +74,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<List<ThietBiPhongHopModel>> get getListThietBi =>
       _getListThietBiPhongHop.stream;
-  Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
 
   List<String> cacLuaChonBieuQuyet = [];
 
@@ -99,29 +109,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> postMoiHop({
     required String lichHopId,
-    // required bool IsMultipe,
-    // required bool isSendMail,
-    // required List<MoiHopRequest> body,
+    required bool IsMultipe,
+    required bool isSendMail,
+    required List<MoiHopRequest> body,
   }) async {
-    final result = await hopRp.postMoiHop(
-      lichHopId,
-      false,
-      true,
-      [
-        MoiHopRequest(
-          CanBoId: '4da4b3a3-0d1f-41f8-a70d-dc6c48904747',
-          DonViId: '43c679ab-149f-4017-afd5-a6401ff60616',
-          VaiTroThamGia: 2,
-          chucVu: 'Giám đốc sở',
-          hoTen: 'Trần Vũ Hoài Hạ',
-          id: null,
-          status: 0,
-          tenDonVi: 'Sở Kế hoạch và Đầu tư',
-          type: 1,
-          userId: '4da4b3a3-0d1f-41f8-a70d-dc6c48904747',
-        ),
-      ],
-    );
+    final result =
+        await hopRp.postMoiHop(lichHopId, IsMultipe, isSendMail, body);
 
     result.when(
       success: (value) {
@@ -131,7 +124,29 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  void getDanhSachPhatBieu() {
+  Future<void> suaKetLuan({
+    required String scheduleId,
+    required String content,
+    required String reportStatusId,
+    required String reportTemplateId,
+    required List<File> files,
+  }) async {
+    final result = await hopRp.suaKetLuan(
+      scheduleId,
+      content,
+      reportStatusId,
+      reportTemplateId,
+      files,
+    );
+
+    result.when(
+      success: (value) {
+        messageSubject.add(value);
+      },
+      error: (error) {},
+    );
+  }
+  void getDanhSachPhatBieu(){
     getDanhSachPhatBieuLichHop('e908def0-e519-4f3b-b9c7-ef841ef15331');
     getDanhSachBieuQuyetLichHop('e908def0-e519-4f3b-b9c7-ef841ef15331');
   }
