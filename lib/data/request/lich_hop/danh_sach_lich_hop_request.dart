@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'danh_sach_lich_hop_request.g.dart';
@@ -29,29 +30,29 @@ class DanhSachLichHopRequest {
   bool? isDuyetPhong;
 
   DanhSachLichHopRequest({
-    required this.DateFrom,
-    required this.DateTo,
-    required this.UserId,
-    required this.DonViId,
-    required this.IsLichLanhDao,
-    required this.PageIndex,
-    required this.PageSize,
-    required this.Title,
-    required this.isLichCuaToi,
-    required this.isLichDuocMoi,
-    required this.isLichHuyBo,
-    required this.isLichTaoHo,
-    required this.isLichThamGia,
-    required this.isLichThuHoi,
-    required this.isLichTuChoi,
-    required this.isPublish,
-    required this.isDuyetLich,
-    required this.isDuyetThietBi,
-    required this.isLichYeuCauChuanBi,
-    required this.isChuaCoBaoCao,
-    required this.isDaCoBaoCao,
-    required this.isChoXacNhan,
-    required this.isDuyetPhong,
+     this.DateFrom,
+     this.DateTo,
+     this.UserId,
+     this.DonViId,
+     this.IsLichLanhDao,
+     this.PageIndex,
+     this.PageSize,
+     this.Title,
+     this.isLichCuaToi,
+     this.isLichDuocMoi,
+     this.isLichHuyBo,
+     this.isLichTaoHo,
+     this.isLichThamGia,
+     this.isLichThuHoi,
+     this.isLichTuChoi,
+     this.isPublish,
+     this.isDuyetLich,
+     this.isDuyetThietBi,
+     this.isLichYeuCauChuanBi,
+     this.isChuaCoBaoCao,
+     this.isDaCoBaoCao,
+     this.isChoXacNhan,
+     this.isDuyetPhong,
   });
 
   factory DanhSachLichHopRequest.fromJson(Map<String, dynamic> json) =>
@@ -59,29 +60,3 @@ class DanhSachLichHopRequest {
 
   Map<String, dynamic> toJson() => _$DanhSachLichHopRequestToJson(this);
 }
-
-DanhSachLichHopRequest fakeDataBody = DanhSachLichHopRequest(
-  DateFrom: "2022-02-11",
-  DateTo: "2022-02-11",
-  DonViId: "0bf3b2c3-76d7-4e05-a587-9165c3624d76",
-  IsLichLanhDao: null,
-  PageIndex: 1,
-  PageSize: 10,
-  Title: null,
-  UserId: "39227131-3db7-48f8-a1b2-57697430cc69",
-  isChoXacNhan: null,
-  isChuaCoBaoCao: null,
-  isDaCoBaoCao: null,
-  isDuyetLich: null,
-  isDuyetPhong: null,
-  isDuyetThietBi: null,
-  isLichCuaToi: true,
-  isLichDuocMoi: null,
-  isLichHuyBo: null,
-  isLichTaoHo: null,
-  isLichThamGia: null,
-  isLichThuHoi: null,
-  isLichTuChoi: null,
-  isLichYeuCauChuanBi: null,
-  isPublish: null,
-);

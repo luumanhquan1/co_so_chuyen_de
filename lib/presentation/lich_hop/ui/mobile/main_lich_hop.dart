@@ -18,6 +18,7 @@ import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'lich_hop_extension.dart';
 
 class MainLichHop extends StatefulWidget {
@@ -36,8 +37,8 @@ class _MainLichHopState extends State<MainLichHop> {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
     cubit.page = 1;
-    cubit.getDashboard(dateStart: '2022-02-13', dateTo: '2022-02-13');
-    cubit.postDanhSachLichHop(body: fakeDataBody);
+    cubit.getDashboard();
+    cubit.postDanhSachLichHop();
   }
 
   @override
@@ -132,66 +133,71 @@ class _MainLichHopState extends State<MainLichHop> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: StreamBuilder<DashBoardLichHopModel>(
-                              stream: cubit.dashBoardStream,
-                              builder: (context, snapshot) {
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                      left: 16.0,
-                                      top: cubit.isCheckNgay ? 82 : 50,
-                                    ),
-                                    height: 88,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: listItemSchedule.length,
-                                      itemBuilder: (context, index) {
-                                        return CustomItemCalenderWork(
-                                          image: cubit
-                                              .listImageLichHopCuaToi[index],
-                                          typeName: listItemSchedule[index].typeName,
-                                          numberOfCalendars:
-                                              listItemSchedule[index]
-                                              .numberOfSchedule,
-                                        );
-                                      },
-                                    ),
+                            stream: cubit.dashBoardStream,
+                            builder: (context, snapshot) {
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: 16.0,
+                                    top: cubit.isCheckNgay ? 82 : 50,
                                   ),
-                                );
-                              },),
+                                  height: 88,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: listItemSchedule.length,
+                                    itemBuilder: (context, index) {
+                                      return CustomItemCalenderWork(
+                                        image:
+                                            cubit.listImageLichHopCuaToi[index],
+                                        typeName:
+                                            listItemSchedule[index].typeName,
+                                        numberOfCalendars:
+                                            listItemSchedule[index]
+                                                .numberOfSchedule,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         );
                       } else {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: StreamBuilder<DashBoardLichHopModel>(
-                              stream: cubit.dashBoardStream,
-                              builder: (context, snapshot) {
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                      left: 16.0,
-                                      top: cubit.isCheckNgay ? 150 : 120,
-                                    ),
-                                    height: 88,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: listItemSchedule.length,
-                                      itemBuilder: (context, index) {
-                                        return CustomItemCalenderWork(
-                                          image: cubit
-                                              .listImageLichHopCuaToi[index],
-                                          typeName: listItemSchedule[index].typeName,
-                                          numberOfCalendars: listItemSchedule[index]
-                                              .numberOfSchedule,
-                                        );
-                                      },
-                                    ),
+                            stream: cubit.dashBoardStream,
+                            builder: (context, snapshot) {
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: 16.0,
+                                    top: cubit.isCheckNgay ? 150 : 120,
                                   ),
-                                );
-                              },),
+                                  height: 88,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: listItemSchedule.length,
+                                    itemBuilder: (context, index) {
+                                      return CustomItemCalenderWork(
+                                        image:
+                                            cubit.listImageLichHopCuaToi[index],
+                                        typeName:
+                                            listItemSchedule[index].typeName,
+                                        numberOfCalendars:
+                                            listItemSchedule[index]
+                                                .numberOfSchedule,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         );
                       }
                     },
@@ -238,9 +244,28 @@ class _MainLichHopState extends State<MainLichHop> {
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
                         if (state.type == Type_Choose_Option_Day.MONTH) {
-                          return const TableCalendarWidget(isCalendar: false);
+                          return TableCalendarWidget(
+                            isCalendar: false,
+                            onDaySelected:
+                                (DateTime selectedDay, DateTime focusedDay) {
+                              cubit.startDate = selectedDay;
+                              cubit.endDate = selectedDay;
+                              cubit.getDashboard();
+
+                              cubit.postDanhSachLichHop();
+                            },
+                          );
                         }
-                        return const TableCalendarWidget();
+                        return TableCalendarWidget(
+                          onDaySelected:
+                              (DateTime selectedDay, DateTime focusedDay) {
+                            cubit.startDate = selectedDay;
+                            cubit.endDate = selectedDay;
+
+                            cubit.postDanhSachLichHop();
+                            cubit.getDashboard();
+                          },
+                        );
                       }
                       return Container();
                     },

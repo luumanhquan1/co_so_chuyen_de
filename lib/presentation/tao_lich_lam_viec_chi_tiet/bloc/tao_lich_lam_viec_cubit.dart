@@ -5,9 +5,11 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -24,9 +26,17 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   LichLamViecRepository get _lichLamViec => Get.find();
 
+  TaoMoiBanGhiRequest requestBanGhi = TaoMoiBanGhiRequest(
+      content: '<p>ưq</p>',
+      phienHopId: null,
+      scheduleId: '7765603d-4493-4f7c-8a06-2d2b7511eedb',
+      scheduleOpinionId: null,);
+
   BehaviorSubject<DateTime> startDateSubject = BehaviorSubject.seeded(
     DateTime.now(),
   );
+
+  BehaviorSubject<MessageModel> taoMoiBanGhiSubject = BehaviorSubject();
 
   BehaviorSubject<DateTime> endDateSubject = BehaviorSubject.seeded(
     DateTime.now(),
@@ -34,6 +44,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   BehaviorSubject<List<String>> listItemPersonSubject =
       BehaviorSubject.seeded(listPerson);
+
+  Stream<MessageModel> get taoMoiBanGhiStream => taoMoiBanGhiSubject.stream;
 
   Stream<DateTime> get startDateStream => startDateSubject.stream;
 
@@ -70,6 +82,17 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     dateEnd=dateAndTime.formatApi;
     timeEnd='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     endDateSubject.add(dateAndTime);
+  }
+
+  Future<void> taoMoiBanGhi(TaoMoiBanGhiRequest request) async {
+    final result = await _lichLamViec.postTaoMoiBanGhi(request);
+
+    result.when(
+      success: (value) {
+        taoMoiBanGhiSubject.add(value);
+      },
+      error: (error) {},
+    );
   }
 
   bool checkValidateTime() {
