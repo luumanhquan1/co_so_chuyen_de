@@ -43,4 +43,6 @@ mixin HopRepository {
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id,);
+
+  Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
 }

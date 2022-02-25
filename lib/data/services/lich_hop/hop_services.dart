@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.d
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -56,4 +57,7 @@ abstract class HopServices {
 
   @GET(ApiConstants.CHUONG_TRINH_HOP)
   Future<ChuongTrinhHopResponse> getChuongTrinhHop(@Query('id') String id);
+
+  @GET(ApiConstants.DANH_SACH_LICH_HOP_TPTG)
+  Future<ChuongTrinhHopResponse> getDanhSachCuocHopTPTH(@Query('id') String id);
 }

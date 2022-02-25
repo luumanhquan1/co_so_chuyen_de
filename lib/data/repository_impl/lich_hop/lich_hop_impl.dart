@@ -109,4 +109,12 @@ class HopRepositoryImpl implements HopRepository {
       (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
   }
+
+  @override
+  Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id) {
+    return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
+      () => _hopServices.getChuongTrinhHop(id),
+      (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
+    );
+  }
 }
