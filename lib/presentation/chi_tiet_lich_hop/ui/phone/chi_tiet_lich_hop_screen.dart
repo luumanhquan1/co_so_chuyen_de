@@ -28,6 +28,9 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
     super.initState();
     cubit = DetailMeetCalenderCubit();
     cubit.initData();
+    cubit.getDanhSachPhatBieu();
+    cubit.danhSachCanBoTPTG(id: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    cubit.themYKien();
   }
 
   @override

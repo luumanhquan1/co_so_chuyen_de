@@ -8,8 +8,10 @@ import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/add_file_model.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_bieu_quyet_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
@@ -60,6 +62,9 @@ mixin HopRepository {
     String id,
   );
 
+  Future<Result<ThemYKiemModel>> themYKienHop(
+      ThemYKienRequest themYKienRequest);
+
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id);
 
   Future<Result<TongPhienHopModel>> getTongPhienHop(
@@ -70,11 +75,16 @@ mixin HopRepository {
     String id,
   );
 
-  Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest);
-
   Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
     String lichHopId,
     TaoPhienHopRepuest taoPhienHopRepuest,
   );
+
+  Future<Result<List<DanhSachPhatBieuLichHopModel>>> getDanhSachPhatBieuLichHop(
+      String lichHopId);
+
+  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
+      getDanhSachBieuQuyetLichHop(String id);
+
+  Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
 }
