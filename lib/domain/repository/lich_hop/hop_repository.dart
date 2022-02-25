@@ -27,6 +27,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -60,15 +61,12 @@ mixin HopRepository {
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
-  Future<Result<ThemYKiemModel>> themYKienHop(
-    ThemYKienRequest themYKienRequest,
-  );
-
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
     String id,
   );
 
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id);
+
   Future<Result<TongPhienHopModel>> getTongPhienHop(
     String id,
   );
@@ -78,7 +76,8 @@ mixin HopRepository {
   );
 
   Future<Result<ThemYKiemModel>> themYKienHop(
-      ThemYKienRequest themYKienRequest);
+    ThemYKienRequest themYKienRequest,
+  );
 
   Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
     String lichHopId,
@@ -91,6 +90,7 @@ mixin HopRepository {
     bool isSendMail,
     List<MoiHopRequest> body,
   );
+
   Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
     ChonBienBanHopRequest chonBienBanHopRequest,
   );
@@ -103,6 +103,7 @@ mixin HopRepository {
       getDanhSachBieuQuyetLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
+
   Future<Result<MessageModel>> suaKetLuan(
     String scheduleId,
     String content,
