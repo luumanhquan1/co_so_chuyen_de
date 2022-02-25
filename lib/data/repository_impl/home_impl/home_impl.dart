@@ -126,7 +126,10 @@ class HomeImpl extends HomeRepository {
   ) {
     return runCatchingAsync<TongHopNhiemVuResponse, List<TongHopNhiemVuModel>>(
       () => _homeServiceGateWay.getTongHopNhiemVu(
-          isCaNhan, ngayDauTien, ngayCuoiCung,),
+        isCaNhan,
+        ngayDauTien,
+        ngayCuoiCung,
+      ),
       (res) => res.toDomain(),
     );
   }
@@ -253,7 +256,9 @@ class HomeImpl extends HomeRepository {
 
   @override
   Future<Result<List<SinhNhatUserModel>>> getSinhNhat(
-      String dataFrom, String dateTo,) {
+    String dataFrom,
+    String dateTo,
+  ) {
     return runCatchingAsync<SinhNhatUserResponse, List<SinhNhatUserModel>>(
       () => _homeServiceCCVC.getSinhNhat(dataFrom, dateTo),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],

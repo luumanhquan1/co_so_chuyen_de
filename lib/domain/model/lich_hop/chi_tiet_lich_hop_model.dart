@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:intl/intl.dart';
 
 const _BINH_THUONG = 1;
@@ -25,30 +26,103 @@ class ChiTietLichHopModel {
   int? mucDoHop;
   ChuTriModel chuTriModel;
   PhongHopMode phongHopMode;
-  ChiTietLichHopModel(
-      {this.id = '',
-      this.loaiLich = '',
-      this.linhVuc = '',
-      this.noiDung = '',
-      this.title = '',
-      this.ngayBatDau = '',
-      this.ngayKetThuc = '',
-      this.timeStart = '',
-      this.timeTo = '',
-      this.tenLinhVuc = '',
-      this.loaiHop = '',
-      this.mucDoHop,
-      this.chuTriModel = const ChuTriModel(),
-      this.phongHopMode = const PhongHopMode()});
+  String typeScheduleId;
+  ChiTietLichHopModel({
+    this.id = '',
+    this.loaiLich = '',
+    this.linhVuc = '',
+    this.noiDung = '',
+    this.title = '',
+    this.ngayBatDau = '',
+    this.ngayKetThuc = '',
+    this.timeStart = '',
+    this.timeTo = '',
+    this.tenLinhVuc = '',
+    this.loaiHop = '',
+    this.mucDoHop,
+    this.chuTriModel = const ChuTriModel(),
+    this.phongHopMode = const PhongHopMode(),
+    this.typeScheduleId = '',
+  });
   List<ChiTietDataRow> valueData() {
+    if (isMobile()) {
+      return _valueDateMobile();
+    }
+    return _valueDateTablet();
+  }
+
+  List<ChiTietDataRow> _valueDateTablet() {
+    final DateFormat dateFormat = DateFormat(DateTimeFormat.DATE_MM_DD_YYYY);
+    final List<ChiTietDataRow> data = [];
+    if (loaiHop.isNotEmpty) {
+      data.add(ChiTietDataRow(urlIcon: ImageAssets.icMucDoHop, text: loaiHop));
+    }
+    if (mucDoHop != null) {
+      data.add(
+          ChiTietDataRow(urlIcon: ImageAssets.icMucDoHop, text: _mucDoHop()));
+    }
+    if (dateFormat.parse(ngayBatDau).toStringWithListFormat ==
+        dateFormat.parse(ngayKetThuc).toStringWithListFormat) {
+      final timeStartFormat = DateFormat.jm().parse(timeStart).toStringWithAMPM;
+      final timeEnd = DateFormat.jm().parse(timeTo).toStringWithAMPM;
+      data.add(
+        ChiTietDataRow(
+          urlIcon: ImageAssets.icClock,
+          text: '$timeStartFormat - $timeEnd',
+        ),
+      );
+      final dateTime = dateFormat.parse(ngayKetThuc);
+      final String calendar =
+          '${dateTime.getDayofWeekTxt()}, ${dateTime.toStringWithListFormat}';
+      data.add(ChiTietDataRow(
+          urlIcon: ImageAssets.icCanlendarTablet, text: calendar));
+    } else {
+      final startDate = dateFormat.parse(ngayBatDau);
+      final endDate = dateFormat.parse(ngayKetThuc);
+      final startCalendar = '${startDate.toStringWithListFormat} $timeStart';
+      final endCalendar = '${endDate.toStringWithListFormat} $timeTo';
+      data.add(
+        ChiTietDataRow(
+          urlIcon: ImageAssets.icCalendar,
+          text: '$startCalendar - $endCalendar',
+        ),
+      );
+    }
+
+    if (linhVuc.isNotEmpty) {
+      data.add(ChiTietDataRow(urlIcon: ImageAssets.icWork, text: linhVuc));
+    }
+    if (phongHopMode.ten.isNotEmpty) {
+      data.add(
+        ChiTietDataRow(urlIcon: ImageAssets.icAddress, text: phongHopMode.ten),
+      );
+    }
+
+    data.add(
+      ChiTietDataRow(
+        urlIcon: ImageAssets.icPeople,
+        text: '${chuTriModel.tenCanBo} - ${chuTriModel.tenChucVu}',
+      ),
+    );
+    data.add(ChiTietDataRow(urlIcon: ImageAssets.icDocument, text: noiDung));
+    return data;
+  }
+
+  List<ChiTietDataRow> _valueDateMobile() {
     final DateFormat dateFormat = DateFormat(DateTimeFormat.DATE_MM_DD_YYYY);
     final List<ChiTietDataRow> data = [];
     if (dateFormat.parse(ngayBatDau).toStringWithListFormat ==
         dateFormat.parse(ngayKetThuc).toStringWithListFormat) {
-      data.add(ChiTietDataRow(
-          urlIcon: ImageAssets.icClock, text: '$timeStart - $timeTo'));
+      final timeStartFormat = DateFormat.jm().parse(timeStart).toStringWithAMPM;
+      final timeEnd = DateFormat.jm().parse(timeTo).toStringWithAMPM;
+      data.add(
+        ChiTietDataRow(
+          urlIcon: ImageAssets.icClock,
+          text: '$timeStartFormat - $timeEnd',
+        ),
+      );
       final dateTime = dateFormat.parse(ngayKetThuc);
-      String calendar =
+      final String calendar =
           '${dateTime.day} ${S.current.thang} ${dateTime.month},${dateTime.year}';
       data.add(ChiTietDataRow(urlIcon: ImageAssets.icCalendar, text: calendar));
     } else {
@@ -64,7 +138,7 @@ class ChiTietLichHopModel {
       );
     }
     if (loaiHop.isNotEmpty) {
-      data.add(ChiTietDataRow(urlIcon: ImageAssets.icCalendar, text: loaiHop));
+      data.add(ChiTietDataRow(urlIcon: ImageAssets.icMucDoHop, text: loaiHop));
     }
     if (linhVuc.isNotEmpty) {
       data.add(ChiTietDataRow(urlIcon: ImageAssets.icWork, text: linhVuc));
@@ -104,7 +178,14 @@ class ChuTriModel {
   final String id;
   final String tenChucVu;
   final String tenCanBo;
-  const ChuTriModel({this.id = '', this.tenChucVu = '', this.tenCanBo = ''});
+  final String dauMoiLienHe;
+  final String soDienThoai;
+  const ChuTriModel(
+      {this.id = '',
+      this.tenChucVu = '',
+      this.tenCanBo = '',
+      this.dauMoiLienHe = '',
+      this.soDienThoai = ''});
 }
 
 class PhongHopMode {

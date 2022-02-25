@@ -184,7 +184,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }) async {
     showLoading();
     final result = await _lichLamViec.taoLichLamViec(
-      title ?? '',
+      title ,
       typeScheduleId,
       selectLinhVuc?.id ?? '',
       '',

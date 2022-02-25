@@ -48,7 +48,6 @@ class _EditPersonalInformationScreen
   TextEditingController sdtController = TextEditingController();
   TextEditingController diaChiLienHeController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
-  List<String> listData = [];
   String tinh = '';
   String huyen = '';
   String xa = '';
