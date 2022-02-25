@@ -78,6 +78,10 @@ class ApiConstants {
   static const SCHEDULE_OPINION_LIST = '/vpdt/api/ScheduleOpinion/list';
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
+
+  static const String POST_FILE_TAO_LICH_HOP =
+      '/vpdt/api/Files/add-file-with-meeting';
+
 }
 
 class ImageConstants {

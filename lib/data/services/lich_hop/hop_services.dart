@@ -1,6 +1,8 @@
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
@@ -44,4 +46,9 @@ abstract class HopServices {
 
   @GET(ApiConstants.DANH_SACH_CAN_BO_LICH_HOP)
   Future<DanhSachCanBoHopResponse> getDanhSachChuTri(@Query('id') String id);
+
+  @POST(ApiConstants.POST_DANH_SACH_LICH_HOP)
+  Future<AddFileTaoLichHopResponse> postFile(
+    @Body() AddFileTaoLichHopRequest addFileTaoLichHopRequest,
+  );
 }
