@@ -85,8 +85,9 @@ class ApiConstants {
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
+  static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
+  static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
-  static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop?';
   static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
 }
 
