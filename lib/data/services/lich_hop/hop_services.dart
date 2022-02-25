@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
@@ -21,6 +22,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
@@ -110,8 +112,12 @@ abstract class HopServices {
 
   @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<DanhSachPhienHopResponse> getListPhienHop(
-    @Query('LichHopId') String id,
-  );
+      @Query('LichHopId') String id);
+
+  @POST(ApiConstants.THEM_BIEU_QUYET_HOP)
+  Future<ThemMoiBieuQuyetResponse> themBieuQuyet(
+      @Body() BieuQuyetRequest bieuQuyetRequest);
+
 
   @POST(ApiConstants.MOI_HOP)
   Future<MoiHopResponse> postMoiHop(
