@@ -55,19 +55,20 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
 
-  String dateFrom='';
-  String timeFrom='';
-  String dateEnd='';
-  String timeEnd='';
+  String dateFrom=DateTime.now().formatApi;
+  String timeFrom='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+  String dateEnd=DateTime.now().formatApi;
+  String timeEnd='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
 
   void listeningStartDataTime(DateTime dateAndTime) {
-    dateFrom= dateAndTime.hour.toString();
-    timeFrom=dateAndTime.minute.toString();
+    dateFrom= dateAndTime.formatApi;
+    timeFrom='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     startDateSubject.add(dateAndTime);
   }
 
   void listeningEndDataTime(DateTime dateAndTime) {
-    dateEnd=dateAndTime.hour.toString();
+    dateEnd=dateAndTime.formatApi;
+    timeEnd='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     endDateSubject.add(dateAndTime);
   }
 
@@ -216,7 +217,11 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       dateRepeat1,
       only,
     );
-    result.when(success: (res) {}, error: (error) {});
+    result.when(success: (res) {
+      showContent();
+    }, error: (error) {
+      showContent();
+    });
   }
   Future<void> taoBaoCaoKetQua({
     required String reportStatusId,

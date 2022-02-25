@@ -93,8 +93,10 @@ class _TaoLichLamViecChiTietScreenState
                         StartEndDateWidget(
                           onEndDateTimeChanged: (DateTime value) {
                             taoLichLamViecCubit.listeningEndDataTime(value);
+                            print('$value');
                           },
                           onStartDateTimeChanged: (DateTime value) {
+                            print('$value');
                             taoLichLamViecCubit.listeningStartDataTime(value);
                           },
                         ),
@@ -164,6 +166,7 @@ class _TaoLichLamViecChiTietScreenState
                                 dateRepeat1: '2022-02-24',
                                 only: true,
                               );
+
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
