@@ -137,18 +137,8 @@ class _TaoLichLamViecChiTietScreenState
                                 title: tieuDeController.value.text,
                                 typeScheduleId:
                                 'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
-                                TenTinh: '',
-                                TenHuyen: '',
-                                TenXa: '',
                                 content: noiDungController.value.text,
                                 location: diaDiemController.value.text,
-                                vehicle: '',
-                                expectedResults: '',
-                                results: '',
-                                rejectReason: '',
-                                tags: '',
-                                isLichDonVi: false,
-                                note: '',
                               );
 
                             } else {
