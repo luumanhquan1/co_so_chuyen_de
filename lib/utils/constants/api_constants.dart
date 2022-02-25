@@ -87,10 +87,11 @@ class ApiConstants {
   static const TAO_LICH_LAM_VIEC = '/vpdt/api/Schedules';
   static const TAO_BAO_KET_QUA = '/vpdt/api/ScheduleReport/create';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
-
   static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
   static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const MOI_HOP = '/vpdt/api/MeetingSchedule/moi-hop';
+
   static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
 
   static const SO_LUONG_PHAT_BIEU =
