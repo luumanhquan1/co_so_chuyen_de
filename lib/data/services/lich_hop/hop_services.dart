@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
@@ -74,6 +75,9 @@ abstract class HopServices {
   @GET(ApiConstants.CHUONG_TRINH_HOP)
   Future<ChuongTrinhHopResponse> getChuongTrinhHop(@Query('id') String id);
 
+  @GET(ApiConstants.SO_LUONG_PHAT_BIEU)
+  Future<SoLuongPhatBieuResponse> getSoLuongPhatBieu(@Query('id') String id);
+
   @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<TongPhienHopResponse> getTongPhienHop(@Query('LichHopId') String id);
 
@@ -82,10 +86,20 @@ abstract class HopServices {
 
   @POST(ApiConstants.THEM_Y_KIEN_HOP)
   Future<ThemYKienResponse> themYKien(
+      @Body() ThemYKienRequest themYKienRequest);
+
+  @GET(ApiConstants.TONG_PHIEN_HOP)
+  Future<DanhSachPhienHopResponse> getListPhienHop(
+      @Query('LichHopId') String id);
+  Future<ThemYKienResponse> themYKien(
+      @Body() ThemYKienRequest themYKienRequest);
+
+  Future<ThemYKienResponse> themYKien(
     @Body() ThemYKienRequest themYKienRequest,
   );
 
-  @GET(ApiConstants.TONG_PHIEN_HOP)
+  Future<DanhSachPhienHopResponse> getListPhienHop(
+      @Query('LichHopId') String id);
   Future<DanhSachPhienHopResponse> getListPhienHop(
     @Query('LichHopId') String id,
   );
