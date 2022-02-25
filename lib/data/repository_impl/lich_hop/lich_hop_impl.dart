@@ -1,6 +1,8 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
@@ -10,6 +12,8 @@ import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
@@ -22,6 +26,8 @@ import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -106,6 +112,15 @@ class HopRepositoryImpl implements HopRepository {
         (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
   }
 
+  Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
+    String lichHopId,
+    TaoPhienHopRepuest taoPhienHopRepuest,
+  ) {
+    return runCatchingAsync<TaoPhienHopResponse, List<TaoPhienHopModel>>(
+        () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
+        (res) => res.toMoDel());
+  }
+
   @override
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
@@ -127,6 +142,14 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<SelectPhienHopResponse, SelectPhienHopModel>(
       () => _hopServices.selectPhienHop(id),
       (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest) {
+    return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
+          () => _hopServices.themYKien(themYKienRequest),
+          (response) => response.toModel(),
     );
   }
 }

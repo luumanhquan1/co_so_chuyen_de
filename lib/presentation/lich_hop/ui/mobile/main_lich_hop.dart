@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/choose_day_week_month.dart';
@@ -30,6 +31,7 @@ class MainLichHop extends StatefulWidget {
 class _MainLichHopState extends State<MainLichHop> {
   final CalenderCubit calenderCubit = CalenderCubit();
   LichHopCubit cubit = LichHopCubit();
+  DetailMeetCalenderCubit detailMeetCalenderCubit=DetailMeetCalenderCubit();
 
   @override
   void initState() {
@@ -38,6 +40,9 @@ class _MainLichHopState extends State<MainLichHop> {
     cubit.page = 1;
     cubit.getDashboard();
     cubit.postDanhSachLichHop();
+    detailMeetCalenderCubit.themYKien();
+    detailMeetCalenderCubit.getTongPhienHop();
+    detailMeetCalenderCubit.selectPhienHop();
   }
 
   @override
