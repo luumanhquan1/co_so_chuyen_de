@@ -33,6 +33,7 @@ class _WidgetDonViState extends State<WidgetDonVi> {
           children: [
             ListView.builder(
               shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.cubit.managerPersonalInformationModel
                       .departments?.length ??
                   0,

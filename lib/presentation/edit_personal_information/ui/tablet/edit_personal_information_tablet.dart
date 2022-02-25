@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/account/tinh_huyen_xa/tinh_huyen_xa_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/custom_select_tinh.dart';
@@ -7,7 +8,6 @@ import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/wid
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/tablet/widget/avatar_tablet.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/widgets/double_button_edit_seen.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_provider.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_form_field_widget.dart';
+import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -43,6 +44,11 @@ class _EditPersonalInformationTabletScreen
   TextEditingController sdtController = TextEditingController();
   TextEditingController diaChiLienHeController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
+  String tinh = '';
+  String huyen = '';
+  String xa = '';
+  String dateTimes = '';
+  bool gioiTinh = true;
 
   @override
   void initState() {
@@ -58,6 +64,7 @@ class _EditPersonalInformationTabletScreen
       sdtCoquanController.text = event.phoneCoQuan ?? 'Số điện thoại cơ quan';
       sdtController.text = event.phoneDiDong ?? 'Số điện thoại';
       diaChiLienHeController.text = event.diaChi ?? 'Địa chỉ';
+      dateTimes = cubit.managerPersonalInformationModel.ngaySinh ?? '';
     });
     super.initState();
   }
@@ -72,8 +79,11 @@ class _EditPersonalInformationTabletScreen
       appBar: AppBarDefaultBack(
         S.current.chinh_sua_thong_tin,
       ),
-      body: ManagerProvider(
-        managerCubit: cubit,
+      body: StateStreamLayout(
+        textEmpty: S.current.khong_co_du_lieu,
+        retry: () {},
+        error: AppException('1', ''),
+        stream: cubit.stateStream,
         child: RefreshIndicator(
           onRefresh: () async {
             await cubit.getInfo(id: widget.id);
