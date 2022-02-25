@@ -95,6 +95,8 @@ class ApiConstants {
   static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
   static const DANH_SACH_LICH_HOP_TPTG =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
+  static const SEND_EMAIL_KL_HOP = '/vpdt/api/ScheduleReport/send-email-bao-cao';
+
 }
 
 class ImageConstants {
