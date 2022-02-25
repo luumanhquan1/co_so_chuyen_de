@@ -1,16 +1,22 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_bieu_quyet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
@@ -23,16 +29,20 @@ import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/bieu_quyet_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_bieu_quyet_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -122,11 +132,11 @@ class HopRepositoryImpl implements HopRepository {
     TaoPhienHopRepuest taoPhienHopRepuest,
   ) {
     return runCatchingAsync<TaoPhienHopResponse, List<TaoPhienHopModel>>(
-        () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
-        (res) => res.toMoDel());
+      () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
+      (res) => res.toMoDel(),
+    );
   }
 
-  @override
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
       () => _hopServices.getChuongTrinhHop(id),
@@ -134,13 +144,24 @@ class HopRepositoryImpl implements HopRepository {
     );
   }
 
-  @override
-  Future<Result<ThemYKiemModel>> themYKienHop(
-    ThemYKienRequest themYKienRequest,
+  Future<Result<List<DanhSachPhatBieuLichHopModel>>> getDanhSachPhatBieuLichHop(
+    String lichHopId,
   ) {
-    return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
-      () => _hopServices.themYKien(themYKienRequest),
-      (response) => response.toModel(),
+    return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
+        List<DanhSachPhatBieuLichHopModel>>(
+      () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
+      (res) => res.toModel(),
+    );
+  }
+
+  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
+      getDanhSachBieuQuyetLichHop(
+    String id,
+  ) {
+    return runCatchingAsync<DanhSachBieuQuyetLichHopDataResponse,
+        List<DanhSachBieuQuyetLichHopModel>>(
+      () => _hopServices.getDanhSachBieuQuyetLichHop(id),
+      (res) => res.toModel(),
     );
   }
 
@@ -184,5 +205,39 @@ class HopRepositoryImpl implements HopRepository {
           (response) => response.data.todoMain(),
     );
 
+  }
+
+  @override
+  Future<Result<ThemYKiemModel>> themYKienHop(
+    ThemYKienRequest themYKienRequest,
+  ) {
+    return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
+      () => _hopServices.themYKien(themYKienRequest),
+      (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<MoiHopModel>>> postMoiHop(
+    String lichHopId,
+    bool IsMultipe,
+    bool isSendMail,
+    List<MoiHopRequest> body,
+  ) {
+    return runCatchingAsync<MoiHopResponse, List<MoiHopModel>>(
+      () => _hopServices.postMoiHop(lichHopId, IsMultipe, isSendMail, body),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
+    ChonBienBanHopRequest chonBienBanHopRequest,
+  ) {
+    return runCatchingAsync<ChonBienBanCuocHopResponse,
+        ChonBienBanCuocHopModel>(
+      () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
+      (response) => response.data.toDomain(),
+    );
   }
 }
