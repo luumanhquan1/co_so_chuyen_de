@@ -85,10 +85,12 @@ class ApiConstants {
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
-  static const TONG_PHIEN_HOP ='/vpdt/api/MeetingSection/get-total-phien-hop';
-  static const SELECT_PHIEN_HOP ='/vpdt/api/ScheduleOpinion/list';
-  static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
+  static const SO_LUONG_PHAT_BIEU =
+      '/vpdt/api/MeetingSection/so-luong-phat-bieu?LichHop';
 
+  static const TONG_PHIEN_HOP = '/vpdt/api/MeetingSection/get-total-phien-hop';
+  static const SELECT_PHIEN_HOP = '/vpdt/api/ScheduleOpinion/list';
+  static const THEM_Y_KIEN_HOP = '/vpdt/api/ScheduleOpinion/create';
 }
 
 class ImageConstants {

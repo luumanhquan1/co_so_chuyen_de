@@ -44,6 +44,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         error: (err) {});
   }
 
+  Future<void> soLuongPhatBieuData() async {
+    final result =
+        await hopRp.getSoLuongPhatBieu('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    result.when(success: (res) {}, error: (err) {});
+  }
+
   ListPerSon fakeDataListPerson() {
     ListPerSon fakeDataListPersona = ListPerSon(
         tongSoNguoi: 8,

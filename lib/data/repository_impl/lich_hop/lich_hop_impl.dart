@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
@@ -17,6 +18,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
@@ -36,120 +38,119 @@ class HopRepositoryImpl implements HopRepository {
   HopRepositoryImpl(this._hopServices);
 
   @override
-  Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
-    String dateStart,
-    String dateTo,
-  ) {
+  Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(String dateStart,
+      String dateTo,) {
     return runCatchingAsync<DashBoardLichHopResponse, DashBoardLichHopModel>(
-      () => _hopServices.getData(dateStart, dateTo),
-      (response) => response.data?.toModel() ?? DashBoardLichHopModel.empty(),
+          () => _hopServices.getData(dateStart, dateTo),
+          (response) =>
+      response.data?.toModel() ?? DashBoardLichHopModel.empty(),
     );
   }
 
   @override
   Future<Result<DanhSachLichHopModel>> postDanhSachLichHop(
-    DanhSachLichHopRequest body,
-  ) {
+      DanhSachLichHopRequest body,) {
     return runCatchingAsync<DanhSachLichHopResponse, DanhSachLichHopModel>(
-      () => _hopServices.postData(body),
-      (response) => response.data?.toModel() ?? DanhSachLichHopModel.empty(),
+          () => _hopServices.postData(body),
+          (response) =>
+      response.data?.toModel() ?? DanhSachLichHopModel.empty(),
     );
   }
 
   @override
   Future<Result<List<LoaiSelectModel>>> getLoaiHop(
-    CatogoryListRequest catogoryListRequest,
-  ) {
+      CatogoryListRequest catogoryListRequest,) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-      () => _hopServices.getLoaiHop(catogoryListRequest),
-      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+          () => _hopServices.getLoaiHop(catogoryListRequest),
+          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<LoaiSelectModel>>> getLinhVuc(
-    CatogoryListRequest catogoryListRequest,
-  ) {
+      CatogoryListRequest catogoryListRequest,) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-      () => _hopServices.getLinhVuc(catogoryListRequest),
-      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+          () => _hopServices.getLinhVuc(catogoryListRequest),
+          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<NguoiChutriModel>>> getNguoiChuTri(
-    NguoiChuTriRequest nguoiChuTriRequest,
-  ) {
+      NguoiChuTriRequest nguoiChuTriRequest,) {
     return runCatchingAsync<NguoiChuTriResponse, List<NguoiChutriModel>>(
-      () => _hopServices.getNguoiChuTri(nguoiChuTriRequest),
-      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+          () => _hopServices.getNguoiChuTri(nguoiChuTriRequest),
+          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
-    String id,
-  ) {
+      String id,) {
     return runCatchingAsync<DanhSachCanBoHopResponse, List<NguoiChutriModel>>(
-      () => _hopServices.getDanhSachChuTri(id),
-      (res) => res.data?.listCanBo?.map((e) => e.toDomain()).toList() ?? [],
+          () => _hopServices.getDanhSachChuTri(id),
+          (res) => res.data?.listCanBo?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
-  Future<Result<List<ListPhienHopModel>>> getDanhSachPhienHop(
-    String id,
-  ) {
+  Future<Result<List<ListPhienHopModel>>> getDanhSachPhienHop(String id,) {
     return runCatchingAsync<ListPhienHopRespone, List<ListPhienHopModel>>(
-      () => _hopServices.getDanhSachPhienHop(id),
-      (res) => res.toDomain(),
+          () => _hopServices.getDanhSachPhienHop(id),
+          (res) => res.toDomain(),
     );
   }
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id) {
     return runCatchingAsync<ChiTietLichHopResponse, ChiTietLichHopModel>(
-        () => _hopServices.getChiTietLichHop(id),
-        (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
+            () => _hopServices.getChiTietLichHop(id),
+            (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
   }
 
-  Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
-    String lichHopId,
-    TaoPhienHopRepuest taoPhienHopRepuest,
-  ) {
+  Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(String lichHopId,
+      TaoPhienHopRepuest taoPhienHopRepuest,) {
     return runCatchingAsync<TaoPhienHopResponse, List<TaoPhienHopModel>>(
-        () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
-        (res) => res.toMoDel());
+            () => _hopServices.getThemPhienHop(lichHopId, taoPhienHopRepuest),
+            (res) => res.toMoDel());
   }
 
   @override
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
-      () => _hopServices.getChuongTrinhHop(id),
-      (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
+          () => _hopServices.getChuongTrinhHop(id),
+          (response) => response.data?.toModel() ?? ChuongTrinhHopModel.empty(),
     );
+  }
+
+  Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id) {
+    return runCatchingAsync<SoLuongPhatBieuResponse, SoLuongPhatBieuModel>(
+            () => _hopServices.getSoLuongPhatBieu(id),
+            (res) => res.data?.toDomain() ?? SoLuongPhatBieuModel());
   }
 
   @override
   Future<Result<TongPhienHopModel>> getTongPhienHop(String id) {
     return runCatchingAsync<TongPhienHopResponse, TongPhienHopModel>(
-      () => _hopServices.getTongPhienHop(id),
-      (response) => response.toModel(),
+          () => _hopServices.getTongPhienHop(id),
+          (response) => response.toModel(),
     );
   }
 
   @override
   Future<Result<SelectPhienHopModel>> slectPhienHop(String id) {
     return runCatchingAsync<SelectPhienHopResponse, SelectPhienHopModel>(
-      () => _hopServices.selectPhienHop(id),
-      (response) => response.toModel(),
+          () => _hopServices.selectPhienHop(id),
+          (response) => response.toModel(),
     );
   }
 
   @override
-  Future<Result<ThemYKiemModel>> themYKienHop(ThemYKienRequest themYKienRequest) {
+  Future<Result<ThemYKiemModel>> themYKienHop(
+      ThemYKienRequest themYKienRequest) {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
           () => _hopServices.themYKien(themYKienRequest),
           (response) => response.toModel(),
     );
+
   }
 }
