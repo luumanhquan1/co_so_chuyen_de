@@ -5,7 +5,9 @@ import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/cong_tac_chuan_bi_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thong_tin_lien_he_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -38,7 +40,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).backgroundColor,
       appBar: BaseAppBar(
         leadingIcon: IconButton(
           onPressed: () {
@@ -94,67 +95,66 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.circle,
-                            size: 12,
-                            color: statusCalenderRed,
-                          ),
-                          const SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            S.current.hop_noi_bo_cong_ty,
-                            style: textNormalCustom(
-                              color: textTitle,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                StreamBuilder<ChiTietLichHopModel>(
+                  stream: cubit.chiTietLichLamViecStream,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Container();
+                    }
+
+                    final data = snapshot.data ?? ChiTietLichHopModel();
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.circle,
+                              size: 12,
+                              color: statusCalenderRed,
                             ),
-                          )
-                        ],
-                      ),
-                      StreamBuilder<ChiTietLichHopModel>(
-                        stream: cubit.chiTietLichLamViecStream,
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return Container();
-                          }
-
-                          final data = snapshot.data ?? ChiTietLichHopModel();
-
-                          return Column(
-                            children: data
-                                .valueData()
-                                .map(
-                                  (e) => Container(
-                                    margin: const EdgeInsets.only(top: 24),
-                                    child: RowDataWidget(
-                                      urlIcon: e.urlIcon,
-                                      text: e.text,
-                                    ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              data.title,
+                              style: textNormalCustom(
+                                color: titleCalenderWork,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: data
+                              .valueData()
+                              .map(
+                                (e) => Container(
+                                  margin: const EdgeInsets.only(top: 16),
+                                  child: RowDataWidget(
+                                    urlIcon: e.urlIcon,
+                                    text: e.text,
                                   ),
-                                )
-                                .toList(),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                        spaceH16,
+                        ThongTinLienHeWidget(
+                          thongTinTxt: data.chuTriModel.dauMoiLienHe,
+                          sdtTxt: data.chuTriModel.soDienThoai,
+                        )
+                      ],
+                    );
+                  },
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CongTacChuanBiWidget(cubit: cubit,)
 
-                // CongTacChuanBiWidget(),
-                // MoiNguoiThamGiaWidget(),
-                // TaiLieuWidget(),
-                // PhatBieuWidget(),
-                // BieuQuyetWidget(),
-                // KetLuanHopWidget(),
-                // YKienCuocHopWidget(),
               ],
             ),
           ),

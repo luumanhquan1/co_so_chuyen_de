@@ -55,14 +55,14 @@
   "enterkeysearch": "Nhập từ khóa tìm kiếm",
   "inlistform": "Theo dạng list",
   "incalenderform": "Theo dạng lịch",
-  "thu_hai": "T.Hai",
-  "thu_ba": "T.Ba",
-  "thu_tu": "T.Tư",
-  "thu_nam": "T.Năm",
-  "thu_sau": "T.Sáu",
-  "thu_bay": "T.Bảy",
+  "thu_hai": "Thứ hai",
+  "thu_ba": "Thứ ba",
+  "thu_tu": "Thứ tư",
+  "thu_nam": "Thứ năm",
+  "thu_sau": "Thứ sáu",
+  "thu_bay": "Thứ bảy",
   "hello": "Xin chào",
-  "chu_nhat": "CN",
+  "chu_nhat": "Chủ nhật",
   "chon_ngay": "Chọn ngày",
   "da_hoan_thanh": "Đã hoàn thành",
   "them_cong_viec": "Thêm công việc",
@@ -500,7 +500,6 @@
   "hoi_bao_van_ban": "Hồi báo văn bản",
   "da_nhan_ban_giay": "Đã nhận bản giấy",
   "nhap_ten_don_vi": "Nhập tên đơn vị",
-
   "thu_hoi_lich": "Thu hồi lịch",
   "cho_y_kien": "Cho ý kiến",
   "ban_chan_chan_huy_lich_nay" : "Bạn có chắc muốn hủy lịch này?",
@@ -516,7 +515,15 @@
   "dinh_kem" : "Đính kèm",
   "sua_thanh_cong" : "Sửa thành công",
   "binh_thuong" : "Bình thường",
-  "dot_xuat" : "Đột xuất"
+  "dot_xuat" : "Đột xuất",
+  "cong_tac_chuan_bi": "Công tác chuẩn bị",
+  "thong_tin_phong" : "Thông tin phòng",
+  "cho_duyet" : "Chờ duyệt",
+  "da_duyet" : "Đã duyệt",
+  "ten_phong" : "Tên phòng",
+  "suc_chua" : "Sức chứa",
+  "thiet_bi_san_co" : "Thiết bị sẵn có",
+  "loai_thiet_bi":"Loại thiết bị"
 }
 
 

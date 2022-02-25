@@ -1,12 +1,22 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+
+import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
+
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
+
+import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
+
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +53,22 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       danhSachCanBoTPTGSubject.stream;
 
   final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
+  final BehaviorSubject<ThongTinPhongHopModel> _getThongTinPhongHop =
+      BehaviorSubject<ThongTinPhongHopModel>();
 
+  Stream<ThongTinPhongHopModel> get getThongTinPhongHop =>
+      _getThongTinPhongHop.stream;
+  final BehaviorSubject<List<ThietBiPhongHopModel>> _getListThietBiPhongHop =
+      BehaviorSubject<List<ThietBiPhongHopModel>>();
+
+  Stream<List<ThietBiPhongHopModel>> get getListThietBi =>
+      _getListThietBiPhongHop.stream;
   Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
 
   List<String> cacLuaChonBieuQuyet = [];
 
+  String id = '434d4166-4732-4a90-b6ff-a783d65d7fd6';
+  List<LoaiSelectModel> listLoaiHop = [];
   void addValueToList(String value) {
     cacLuaChonBieuQuyet.add(value);
   }
@@ -57,14 +78,23 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   Future<void> initData() async {
-    final result =
-        await hopRp.getChiTietLichHop('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
+    getThongTinPhongHopApi();
+    getDanhSachThietBi();
+    final loaiHop = await hopRp
+        .getLoaiHop(CatogoryListRequest(pageIndex: 1, pageSize: 100, type: 1));
+    loaiHop.when(
+        success: (res) {
+          listLoaiHop = res;
+        },
+        error: (err) {});
+    final result = await hopRp.getChiTietLichHop(id);
     result.when(
-      success: (res) {
-        chiTietLichLamViecSubject.add(res);
-      },
-      error: (err) {},
-    );
+        success: (res) {
+          res.loaiHop = _findLoaiHop(res.typeScheduleId)?.name ?? '';
+          chiTietLichLamViecSubject.add(res);
+        },
+        error: (err) {});
+
   }
 
   Future<void> postMoiHop({
@@ -131,6 +161,32 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     final result =
         await hopRp.getSoLuongPhatBieu('8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
     result.when(success: (res) {}, error: (err) {});
+  }
+
+  LoaiSelectModel? _findLoaiHop(String id) {
+    final loaiHopType =
+        listLoaiHop.where((element) => element.id == id).toList();
+    if (loaiHopType.isNotEmpty) {
+      return loaiHopType.first;
+    }
+  }
+
+  Future<void> getThongTinPhongHopApi() async {
+    final result = await hopRp.getListThongTinPhongHop(id);
+    result.when(
+        success: (res) {
+          _getThongTinPhongHop.sink.add(res);
+        },
+        error: (err) {});
+  }
+
+  Future<void> getDanhSachThietBi() async {
+    final result = await hopRp.getListThietBiPhongHop(id);
+    result.when(
+        success: (res) {
+          _getListThietBiPhongHop.sink.add(res);
+        },
+        error: (err) {});
   }
 
   ListPerSon fakeDataListPerson() {

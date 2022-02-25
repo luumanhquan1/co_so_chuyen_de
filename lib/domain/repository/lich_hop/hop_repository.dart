@@ -24,7 +24,11 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
+
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -104,4 +108,10 @@ mixin HopRepository {
     bool isSendMail,
     List<MoiHopRequest> body,
   );
+
+  Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+      String idLichHop);
+
+  Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
+      String lichHopId);
 }
