@@ -21,6 +21,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
@@ -199,16 +200,15 @@ class HopRepositoryImpl implements HopRepository {
       () => _hopServices.selectPhienHop(id),
       (response) => response.toModel(),
     );
-
   }
 
   @override
-  Future<Result<BieuQuyetModel>> themBieuQuyet(BieuQuyetRequest bieuQuyetRequest) {
+  Future<Result<BieuQuyetModel>> themBieuQuyet(
+      BieuQuyetRequest bieuQuyetRequest) {
     return runCatchingAsync<ThemMoiBieuQuyetResponse, BieuQuyetModel>(
-          () => _hopServices.themBieuQuyet(bieuQuyetRequest),
-          (response) => response.data.todoMain(),
+      () => _hopServices.themBieuQuyet(bieuQuyetRequest),
+      (response) => response.data.todoMain(),
     );
-
   }
 
   @override
@@ -218,27 +218,6 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<ThemYKienResponse, ThemYKiemModel>(
       () => _hopServices.themYKien(themYKienRequest),
       (response) => response.toModel(),
-    );
-  }
-  @override
-  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
-      ChonBienBanHopRequest chonBienBanHopRequest) {
-    return runCatchingAsync<ChonBienBanCuocHopResponse,
-        ChonBienBanCuocHopModel>(
-          () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
-          (response) => response.data.toDomain(),
-    );
-  }
-  @override
-  Future<Result<List<MoiHopModel>>> postMoiHop(
-    String lichHopId,
-    bool IsMultipe,
-    bool isSendMail,
-    List<MoiHopRequest> body,
-  ) {
-    return runCatchingAsync<MoiHopResponse, List<MoiHopModel>>(
-      () => _hopServices.postMoiHop(lichHopId, IsMultipe, isSendMail, body),
-      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
     );
   }
 
@@ -254,6 +233,19 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
+  Future<Result<List<MoiHopModel>>> postMoiHop(
+    String lichHopId,
+    bool IsMultipe,
+    bool isSendMail,
+    List<MoiHopRequest> body,
+  ) {
+    return runCatchingAsync<MoiHopResponse, List<MoiHopModel>>(
+      () => _hopServices.postMoiHop(lichHopId, IsMultipe, isSendMail, body),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
   Future<Result<MessageModel>> suaKetLuan(
     String scheduleId,
     String content,
@@ -262,15 +254,14 @@ class HopRepositoryImpl implements HopRepository {
     List<File>? files,
   ) {
     return runCatchingAsync<SuaKetLuanResponse, MessageModel>(
-          () =>
-          _hopServices.suaKetLuan(
-            scheduleId,
-            content,
-            reportStatusId,
-            reportTemplateId,
-            files ?? [],
-          ),
-          (response) => response.toDomain(),
+      () => _hopServices.suaKetLuan(
+        scheduleId,
+        content,
+        reportStatusId,
+        reportTemplateId,
+        files ?? [],
+      ),
+      (response) => response.toDomain(),
     );
   }
 }

@@ -36,6 +36,9 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     cubit.initData();
     cubit.postMoiHop(
       lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
+      body: [],
+      isSendMail: true,
+      IsMultipe: false,
     );
     super.initState();
   }
