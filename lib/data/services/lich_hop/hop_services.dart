@@ -86,20 +86,10 @@ abstract class HopServices {
 
   @POST(ApiConstants.THEM_Y_KIEN_HOP)
   Future<ThemYKienResponse> themYKien(
-      @Body() ThemYKienRequest themYKienRequest);
-
-  @GET(ApiConstants.TONG_PHIEN_HOP)
-  Future<DanhSachPhienHopResponse> getListPhienHop(
-      @Query('LichHopId') String id);
-  Future<ThemYKienResponse> themYKien(
-      @Body() ThemYKienRequest themYKienRequest);
-
-  Future<ThemYKienResponse> themYKien(
     @Body() ThemYKienRequest themYKienRequest,
   );
 
-  Future<DanhSachPhienHopResponse> getListPhienHop(
-      @Query('LichHopId') String id);
+  @GET(ApiConstants.TONG_PHIEN_HOP)
   Future<DanhSachPhienHopResponse> getListPhienHop(
     @Query('LichHopId') String id,
   );

@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
@@ -52,10 +51,12 @@ mixin HopRepository {
 
   Future<Result<ChiTietLichHopModel>> getChiTietLichHop(String id);
 
-
-  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id,);
+  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
+    String id,
+  );
 
   Future<Result<SoLuongPhatBieuModel>> getSoLuongPhatBieu(String id);
+
   Future<Result<TongPhienHopModel>> getTongPhienHop(
     String id,
   );
@@ -70,10 +71,6 @@ mixin HopRepository {
   Future<Result<List<TaoPhienHopModel>>> getThemPhienHop(
     String lichHopId,
     TaoPhienHopRepuest taoPhienHopRepuest,
-  );
-
-  Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(
-    String id,
   );
 
   Future<Result<List<MoiHopModel>>> postMoiHop(
