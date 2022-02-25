@@ -163,8 +163,8 @@ class HopRepositoryImpl implements HopRepository {
   Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
       String idLichHop) {
     return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel>(
-          () => _hopServices.getDanhSachPhongHop(idLichHop),
-          (res) => res.data?.toDomain() ?? ThongTinPhongHopModel(),
+      () => _hopServices.getDanhSachPhongHop(idLichHop),
+      (res) => res.data?.toDomain() ?? ThongTinPhongHopModel(),
     );
   }
 
@@ -219,27 +219,24 @@ class HopRepositoryImpl implements HopRepository {
       () => _hopServices.selectPhienHop(id),
       (response) => response.toModel(),
     );
-
   }
 
   @override
-  Future<Result<BieuQuyetModel>> themBieuQuyet(BieuQuyetRequest bieuQuyetRequest) {
+  Future<Result<BieuQuyetModel>> themBieuQuyet(
+      BieuQuyetRequest bieuQuyetRequest) {
     return runCatchingAsync<ThemMoiBieuQuyetResponse, BieuQuyetModel>(
-          () => _hopServices.themBieuQuyet(bieuQuyetRequest),
-          (response) => response.data.todoMain(),
+      () => _hopServices.themBieuQuyet(bieuQuyetRequest),
+      (response) => response.data.todoMain(),
     );
-
   }
-
 
   @override
   Future<Result<GuiMailKetLuatHopModel>> sendMailKetLuanHop(String id) {
     return runCatchingAsync<GuiMailKetLuanHopResponse, GuiMailKetLuatHopModel>(
-          () => _hopServices.sendMailKetLuatHop(id),
-          (response) => response.toModel(),
+      () => _hopServices.sendMailKetLuatHop(id),
+      (response) => response.toModel(),
     );
   }
-
 
   @override
   Future<Result<ThemYKiemModel>> themYKienHop(
@@ -294,24 +291,14 @@ class HopRepositoryImpl implements HopRepository {
       (response) => response.toDomain(),
     );
   }
-  @override
 
+  @override
   Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
       String lichHopId) {
     return runCatchingAsync<ThietBiPhongHopResponse,
         List<ThietBiPhongHopModel>>(
-          () => _hopServices.getListThietBiPhongHop(lichHopId),
-          (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
-    );
-  }
-  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
-      ChonBienBanHopRequest chonBienBanHopRequest,
-      ) {
-    return runCatchingAsync<ChonBienBanCuocHopResponse,
-        ChonBienBanCuocHopModel>(
-          () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
-          (response) => response.data.toDomain(),
-
+      () => _hopServices.getListThietBiPhongHop(lichHopId),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 }

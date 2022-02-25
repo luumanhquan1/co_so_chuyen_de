@@ -64,7 +64,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   Stream<ChuongTrinhHopModel> get danhSachCanBoTPTGStream =>
       danhSachCanBoTPTGSubject.stream;
 
-  final BehaviorSubject<String> _themBieuQuyet = BehaviorSubject<String>();
   final BehaviorSubject<ThongTinPhongHopModel> _getThongTinPhongHop =
       BehaviorSubject<ThongTinPhongHopModel>();
 
@@ -75,7 +74,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<List<ThietBiPhongHopModel>> get getListThietBi =>
       _getListThietBiPhongHop.stream;
-  Stream<String> get themBieuQuyet => _themBieuQuyet.stream;
 
   List<String> cacLuaChonBieuQuyet = [];
 
