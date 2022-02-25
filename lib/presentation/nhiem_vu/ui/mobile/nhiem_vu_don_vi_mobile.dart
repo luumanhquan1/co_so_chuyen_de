@@ -189,7 +189,9 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
             ],
           ),
         ),
-        const TableCalendarWidget(),
+        TableCalendarWidget(
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+        ),
       ],
     );
   }

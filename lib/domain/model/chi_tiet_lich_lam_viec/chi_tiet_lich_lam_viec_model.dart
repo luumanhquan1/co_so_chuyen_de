@@ -7,7 +7,6 @@ class ChiTietLichLamViecModel {
   String date = '';
   String loaiLich = '';
 
-
   String nhacLai = '';
 
   String chuTri = '';
@@ -92,9 +91,6 @@ class TypeData {
 
   TypeData({required this.icon, required this.value, required this.type});
 }
-
-
-
 
 ListPerSon fakeDataListPerson() {
   ListPerSon fakeDataListPersona = ListPerSon(

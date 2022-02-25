@@ -1,22 +1,20 @@
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/iteam_menu_chi_tiet_lich_hop.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/row_value_widget.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
-import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-// todo chi tiet van ban
 class DetailMeetCalenderScreen extends StatefulWidget {
+  const DetailMeetCalenderScreen({Key? key}) : super(key: key);
+
   @override
   State<DetailMeetCalenderScreen> createState() =>
       _DetailMeetCalenderScreenState();
@@ -36,68 +34,51 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
+      appBar: BaseAppBar(
+        leadingIcon: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(ImageAssets.icBack),
         ),
-        backgroundColor: backgroundColorApp,
-        bottomOpacity: 0.0,
-        elevation: APP_DEVICE == DeviceType.MOBILE ? 0 : 0.7,
-        shadowColor: bgDropDown,
-        automaticallyImplyLeading: false,
-        title: Text(
-          S.current.chi_tiet_lich_hop,
-          style: titleAppbar(fontSize: 18.0.textScale(space: 6.0)),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => {Navigator.pop(context)},
-          icon: SvgPicture.asset(
-            ImageAssets.icBack,
-          ),
-        ),
+        title: S.current.chi_tiet_lich_hop,
         actions: [
-          PopupMenuButton(
-            icon: SvgPicture.asset(ImageAssets.icBacham),
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: listChiTietLichHop
-                        .map(
-                          (e) => GestureDetector(
-                            onTap: () {
-                              showBottomSheetCustom(
-                                context,
-                                title: e.name == S.current.thu_hoi
-                                    ? S.current.thu_hoi_lich
-                                    : e.name,
-                                child:
-                                    e.chiTietLichHop.getScreenChiTietLichHop(),
-                              );
-                            },
-                            child: itemListKetThuc(
-                              name: e.name,
-                              icon: e.icon,
-                              onTap: () {
-                                showBottomSheetCustom(
-                                  context,
-                                  title: e.name == S.current.thu_hoi
-                                      ? S.current.thu_hoi_lich
-                                      : e.name,
-                                  child:
-                                  e.chiTietLichHop.getScreenChiTietLichHop(),
-                                );
-                              },
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-              ];
-            },
+          MenuSelectWidget(
+            listSelect: [
+              QData(
+                urlImage: ImageAssets.icHuy,
+                text: S.current.huy_lich_hop,
+                onTap: () {},
+              ),
+              QData(
+                urlImage: ImageAssets.ic_delete_do,
+                text: S.current.xoa_lich,
+                onTap: () {},
+              ),
+              QData(
+                urlImage: ImageAssets.icEditBlue,
+                text: S.current.sua_lich,
+                onTap: () {},
+              ),
+              QData(
+                urlImage: ImageAssets.icThuHoi,
+                text: S.current.xoa_lich,
+                onTap: () {},
+              ),
+              QData(
+                urlImage: ImageAssets.icPhanCongThuKy,
+                text: S.current.phan_cong_thu_ky,
+                onTap: () {},
+              ),
+              QData(
+                urlImage: ImageAssets.icTaoBocBang,
+                text: S.current.tao_boc_bang_cuoc_hop,
+                onTap: () {},
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 16,
           )
         ],
       ),
@@ -110,61 +91,58 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              size: 12,
-                              color: statusCalenderRed,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.circle,
+                            size: 12,
+                            color: statusCalenderRed,
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            S.current.hop_noi_bo_cong_ty,
+                            style: textNormalCustom(
+                              color: textTitle,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
                             ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              S.current.hop_noi_bo_cong_ty,
-                              style: textNormalCustom(
-                                color: textTitle,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
-                        StreamBuilder<ChiTietLichLamViecModel>(
-                          stream: cubit.chiTietLichLamViecStream,
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return Container();
-                            }
+                          )
+                        ],
+                      ),
+                      StreamBuilder<ChiTietLichHopModel>(
+                        stream: cubit.chiTietLichLamViecStream,
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Container();
+                          }
 
-                            final data = snapshot.data;
+                          final data = snapshot.data ?? ChiTietLichHopModel();
 
-                            return Column(
-                              children: data
-                                      ?.dataRow()
-                                      .map(
-                                        (e) => Container(
-                                          margin:
-                                              const EdgeInsets.only(top: 24),
-                                          child: RowValueWidget(
-                                            row: e,
-                                            isTablet: false,
-                                          ),
-                                        ),
-                                      )
-                                      .toList() ??
-                                  [Container()],
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                          return Column(
+                            children: data
+                                .valueData()
+                                .map(
+                                  (e) => Container(
+                                    margin: const EdgeInsets.only(top: 24),
+                                    child: RowDataWidget(
+                                      urlIcon: e.urlIcon,
+                                      text: e.text,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
+
                 // CongTacChuanBiWidget(),
                 // MoiNguoiThamGiaWidget(),
                 // TaiLieuWidget(),

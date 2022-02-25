@@ -60,6 +60,11 @@ class ApiConstants {
   static const SCHEDULE_FIELD = '/vpdt/api/ScheduleField/list';
   static const DANH_SACH_CAN_BO_LICH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
+  static const DANH_SACH_PHIEN_HOP =
+      '/vpdt/api/meetingsection/get-list-phien-hop';
+
+  static const CHUONG_TRINH_HOP =
+      '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
   static const CHI_TIET_LICH_LAM_VIEC = '/vpdt/api/Schedules/{id}?';
 
@@ -70,7 +75,7 @@ class ApiConstants {
 
   static const POST_DANH_SACH_LICH_LAM_VIEC =
       '/vpdt/api/Schedules/danh-sach-lich';
-
+  static const TAO_MOI_BAN_GHI = '/vpdt/api/ScheduleOpinion/create';
   static const CANCEL_TIET_LICH_LAM_VIEC =
       '/vpdt/api/Schedules/change-status?scheduleId={id}&statusId=8&isMulti=false';
   static const SCHEDULE_REPORT_LIST = '/vpdt/api/ScheduleReport/list';
@@ -82,6 +87,7 @@ class ApiConstants {
   static const String POST_FILE_TAO_LICH_HOP =
       '/vpdt/api/Files/add-file-with-meeting';
 
+  static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
 }
 
 class ImageConstants {

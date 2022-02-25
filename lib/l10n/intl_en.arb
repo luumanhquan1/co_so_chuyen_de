@@ -514,7 +514,9 @@
   "cac_van_ban_dinh_kem" : "Các văn bản đính kèm",
   "nhap_y_kien_cua_ban" : "Nhập ý kiến của bạn",
   "dinh_kem" : "Đính kèm",
-  "sua_thanh_cong" : "Sửa thành công"
+  "sua_thanh_cong" : "Sửa thành công",
+  "binh_thuong" : "Bình thường",
+  "dot_xuat" : "Đột xuất"
 
 
 
