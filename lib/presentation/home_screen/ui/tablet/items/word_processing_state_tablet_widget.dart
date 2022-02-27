@@ -40,6 +40,11 @@ class _WordProcessingStateWidgetState
     // TODO: implement initState
     super.initState();
     _xuLyCubit.getDocument();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _xuLyCubit.getDocument();
+      });
+    });
   }
 
   @override

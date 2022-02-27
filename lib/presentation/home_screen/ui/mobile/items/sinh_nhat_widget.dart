@@ -29,6 +29,11 @@ class _EventOfDayWidgetState extends State<SinhNhatWidget> {
     // TODO: implement initState
     super.initState();
     sinhNhatCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        sinhNhatCubit.callApi();
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {

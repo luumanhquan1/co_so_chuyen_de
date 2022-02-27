@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/tablet/manager_personal_information_tablet.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/bloc/menu_cubit.dart';
 import 'package:ccvc_mobile/presentation/menu_screen/ui/menu_items.dart';
@@ -10,6 +12,7 @@ import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/menu_cell_widget
 import 'package:ccvc_mobile/presentation/menu_screen/ui/widgets/text_button_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/button/button_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -138,6 +141,20 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                 ],
               ),
             ),
+            Align(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: SizedBox(
+                    width: 100,
+                    child: ButtonBottom(
+                      text:S.current.dang_xuat,
+                      onPressed: () {
+                        AppStateCt.of(context).appState.setToken('');
+                        HiveLocal.clearData();
+                      },
+                    )),
+              ),
+            )
           ],
         ),
       ),
