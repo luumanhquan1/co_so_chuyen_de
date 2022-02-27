@@ -33,6 +33,13 @@ class _DocumentWidgetState extends State<DocumentWidget> {
     // TODO: implement initState
     super.initState();
     _vanBanCubit.selectTrangThaiVanBan(SelectKey.CHO_VAO_SO);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _vanBanCubit.selectTrangThaiVanBan(
+          _vanBanCubit.selectKey ?? SelectKey.CHO_VAO_SO,
+        );
+      });
+    });
   }
 
   @override
@@ -44,7 +51,10 @@ class _DocumentWidgetState extends State<DocumentWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
-      onChangeKey: (value){
+      onChangeKey: (value) {
+        if (_vanBanCubit.selectKey == value) {
+          return;
+        }
         _vanBanCubit.selectTrangThaiVanBan(value);
       },
       selectKeyDialog: _vanBanCubit,

@@ -43,6 +43,11 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
     // TODO: implement initState
     super.initState();
     danhSachCVCubit.getToDoList();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        danhSachCVCubit.getToDoList();
+      });
+    });
   }
 
   @override
@@ -73,7 +78,8 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
               StreamBuilder<TodoListModel>(
                 stream: danhSachCVCubit.getTodoList,
                 builder: (context, snapshot) {
-                  final data = snapshot.data?.listTodoImportant ?? <TodoModel>[];
+                  final data =
+                      snapshot.data?.listTodoImportant ?? <TodoModel>[];
                   if (data.isNotEmpty) {
                     return Column(
                       key: UniqueKey(),

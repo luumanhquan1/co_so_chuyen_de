@@ -30,7 +30,13 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _vanBanCubit.selectTrangThaiVanBan(SelectKey.CHO_VAO_SO);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _vanBanCubit.selectTrangThaiVanBan(
+          _vanBanCubit.selectKey ?? SelectKey.CHO_VAO_SO,
+        );
+      });
+    });
   }
 
   @override
@@ -52,6 +58,9 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
         SelectKey.CHO_BAN_HANH
       ],
       onChangeKey: (value) {
+        if (_vanBanCubit.selectKey == value) {
+          return;
+        }
         _vanBanCubit.selectTrangThaiVanBan(value);
       },
       dialogSelect: DialogSettingWidget(

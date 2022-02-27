@@ -120,7 +120,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
           ),
           body: RefreshIndicator(
             onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 2));
+              await homeCubit.refreshData();
             },
             child: SizedBox.expand(
               child: SingleChildScrollView(

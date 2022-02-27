@@ -31,6 +31,11 @@ class _CalendarWorkWidgetState extends State<CalendarWorkWidget> {
     // TODO: implement initState
     super.initState();
     _lamViecCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _lamViecCubit.callApi();
+      });
+    });
   }
 
   @override
