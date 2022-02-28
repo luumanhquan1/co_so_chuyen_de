@@ -185,7 +185,7 @@
   "sdt_co_quan": "Số điện thoại cơ quan",
   "sdt_lien_he": "Số điện thoại",
   "dia_chi_lien_he": "Địa chỉ liên hệ",
-  "trang_thai": "Trạng Thái",
+  "trang_thai": "Trạng thái",
   "hoat_dong": "Hoạt động",
   "k_hoat_dong": "Không hoạt động",
   "stt": "STT",
@@ -517,9 +517,5 @@
   "sua_thanh_cong" : "Sửa thành công",
   "binh_thuong" : "Bình thường",
   "dot_xuat" : "Đột xuất",
-
-
-
-
-
+  "sua_that_bai" : "Sửa thất bại"
 }

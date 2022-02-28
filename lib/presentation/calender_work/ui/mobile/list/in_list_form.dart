@@ -84,8 +84,8 @@ class _InListFormState extends State<InListForm> {
                             ),
                           );
                         },
-                        isTrung: _cubit.dataLichLvModel
-                                .listLichLVModel?[index].isLichLap ??
+                        isTrung: _cubit.dataLichLvModel.listLichLVModel?[index]
+                                .isLichLap ??
                             true,
                       ),
                     );
