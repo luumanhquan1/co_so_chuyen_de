@@ -18,6 +18,7 @@ enum LoadMoreType {
 class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
   IncomingDocumentCubit() : super(IncomingDocumentStateIntial());
   int nextPage = 1;
+  int totalPage = 1;
   final BehaviorSubject<LoadMoreType> canLoadMoreSubject =
       BehaviorSubject<LoadMoreType>();
 
@@ -28,9 +29,8 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
 
   Stream<List<VanBanModel>> get getListVbDen => _getListVBDen.stream;
 
-  void callAPi() async {
+  Future<void> callAPi({int? nextPage}) async {
     final queue = Queue(parallel: 2);
-    showLoading();
     unawaited(
       queue.add(
         () => listDataVBDen(),
@@ -41,7 +41,7 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
         () => listDataDanhSachVBDen(
           startDate: '2022-02-01',
           endDate: '2022-02-28',
-          index: nextPage,
+          index: nextPage??1,
           size: 10,
         ),
       ),
@@ -78,9 +78,10 @@ class IncomingDocumentCubit extends BaseCubit<IncomingDocumentState> {
         await _QLVBRepo.getDanhSachVbDen(startDate, endDate, index, size);
     result.when(
       success: (res) {
+         totalPage=res.totalPage??1;
         listVbDen =
             res.pageData?? [];
-        _getListVBDen.sink.add(listVbDen);
+        _getListVBDen.sink.add([..._getListVBDen.value, ...listVbDen]);
 
       },
       error: (err) {

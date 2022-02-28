@@ -46,30 +46,30 @@ class _TaoLichLamViecChiTietScreenState
 
   @override
   Widget build(BuildContext context) {
-    return WidgetTaoLichLVInherited(
+    return TaoLichLamViecProvider(
       taoLichLamViecCubit: taoLichLamViecCubit,
-      child: Scaffold(
-        appBar: BaseAppBar(
-          title: S.current.tao_lich_cong_tac_trong_nuoc,
-          leadingIcon: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: unselectLabelColor,
-              size: 18,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: TaoLichLamViecProvider(
+      child: StateStreamLayout(
+        textEmpty: S.current.khong_co_du_lieu,
+        retry: () {},
+        error: AppException('1', ''),
+        stream: taoLichLamViecCubit.stateStream,
+        child: WidgetTaoLichLVInherited(
           taoLichLamViecCubit: taoLichLamViecCubit,
-          child: StateStreamLayout(
-            textEmpty: S.current.khong_co_du_lieu,
-            retry: () {},
-            error: AppException('1', ''),
-            stream: taoLichLamViecCubit.stateStream,
-            child: RefreshIndicator(
+          child: Scaffold(
+            appBar: BaseAppBar(
+              title: S.current.tao_lich_cong_tac_trong_nuoc,
+              leadingIcon: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: unselectLabelColor,
+                  size: 18,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            body: RefreshIndicator(
               onRefresh: () async {
                 await taoLichLamViecCubit.loadData();
               },
@@ -95,10 +95,8 @@ class _TaoLichLamViecChiTietScreenState
                         StartEndDateWidget(
                           onEndDateTimeChanged: (DateTime value) {
                             taoLichLamViecCubit.listeningEndDataTime(value);
-                            print('$value');
                           },
                           onStartDateTimeChanged: (DateTime value) {
-                            print('$value');
                             taoLichLamViecCubit.listeningStartDataTime(value);
                           },
                         ),
@@ -136,11 +134,10 @@ class _TaoLichLamViecChiTietScreenState
                               taoLichLamViecCubit.taoLichLamViec(
                                 title: tieuDeController.value.text,
                                 typeScheduleId:
-                                'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
+                                    'bfa0c6db-01c5-4836-bc13-4e41fd32108b',
                                 content: noiDungController.value.text,
                                 location: diaDiemController.value.text,
                               );
-
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

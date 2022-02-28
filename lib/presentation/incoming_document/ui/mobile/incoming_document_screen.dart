@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/incoming_documment_provider.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
@@ -21,30 +20,46 @@ class IncomingDocumentScreen extends StatefulWidget {
 
 class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
   IncomingDocumentCubit cubit = IncomingDocumentCubit();
-  final ScrollController _listCollectionController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    cubit.callAPi();
+   cubit.callAPi(nextPage: 1);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+
+        if (cubit.nextPage < cubit.totalPage) {
+          cubit.nextPage =cubit.nextPage+1;
+        cubit.listDataDanhSachVBDen(
+          startDate: '2022-02-01',
+          endDate: '2022-02-28',
+          index: cubit.nextPage,
+          size: 10,
+        );
+        }
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        cubit.callAPi();
-      },
-      child: InComingDocumentProvider(
-        outGoingCubit: cubit,
-        child: StateStreamLayout(
-          textEmpty: S.current.khong_co_du_lieu,
-          retry: () {},
-          error: AppException('1', ''),
-          stream: cubit.stateStream,
-          child: Scaffold(
-            appBar: AppBarDefaultBack(S.current.danh_sach_van_ban_den),
-            body: SingleChildScrollView(
+    return InComingDocumentProvider(
+      outGoingCubit: cubit,
+      child: StateStreamLayout(
+        textEmpty: S.current.khong_co_du_lieu,
+        retry: () {},
+        error: AppException('1', ''),
+        stream: cubit.stateStream,
+        child: Scaffold(
+          appBar: AppBarDefaultBack(S.current.danh_sach_van_ban_den),
+          body: RefreshIndicator(
+            onRefresh: () async {
+              await cubit.callAPi(nextPage: 1);
+            },
+            child: SingleChildScrollView(
+                controller: _scrollController,
               physics: const AlwaysScrollableScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -66,7 +81,8 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const ChiTietVanBanMobile(),
+                                      builder: (context) =>
+                                          const ChiTietVanBanMobile(),
                                     ),
                                   );
                                 },
