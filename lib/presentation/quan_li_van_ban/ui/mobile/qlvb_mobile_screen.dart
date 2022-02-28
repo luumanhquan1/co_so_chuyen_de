@@ -19,14 +19,14 @@ import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widge
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class QLVBScreenMobile extends StatefulWidget {
-  const QLVBScreenMobile({Key? key}) : super(key: key);
+class QLVBMobileScreen extends StatefulWidget {
+  const QLVBMobileScreen({Key? key}) : super(key: key);
 
   @override
-  _QLVBScreenMobileState createState() => _QLVBScreenMobileState();
+  _QLVBMobileScreenState createState() => _QLVBMobileScreenState();
 }
 
-class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
+class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
   QLVBCCubit qlvbCubit = QLVBCCubit();
   OutgoingDocumentCubit cubitOutgoing = OutgoingDocumentCubit();
   IncomingDocumentCubit cubitIncoming = IncomingDocumentCubit();
