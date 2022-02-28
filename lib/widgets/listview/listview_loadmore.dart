@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ListViewLoadMore extends StatelessWidget {
   final BaseCubit<dynamic> cubit;
   final Function(int page) callApi;
-  final Widget Function(dynamic) viewItem;
+  final Widget Function(dynamic,int?) viewItem;
   final bool isListView;
 
   ListViewLoadMore({
@@ -104,7 +104,7 @@ class ListViewLoadMore extends StatelessWidget {
                           ? ListView.builder(
                               itemCount: snapshot.data?.length ?? 0,
                               itemBuilder: (ctx, index) {
-                                return viewItem(snapshot.data![index]);
+                                return viewItem(snapshot.data![index],index);
                               },
                             )
                           : GridView.builder(
@@ -123,7 +123,7 @@ class ListViewLoadMore extends StatelessWidget {
                               ),
                               itemCount: snapshot.data?.length ?? 0,
                               itemBuilder: (_, index) {
-                                return viewItem(snapshot.data![index]);
+                                return viewItem(snapshot.data![index],index);
                               },
                             );
                     },

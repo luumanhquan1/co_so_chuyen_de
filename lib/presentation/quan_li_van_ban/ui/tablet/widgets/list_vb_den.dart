@@ -45,22 +45,25 @@ class _ListVBDenState extends State<ListVBDen> {
                 shrinkWrap: true,
                 itemCount: widget.list.length > 3 ? 3 : widget.list.length,
                 itemBuilder: (context, index) {
-                  return IncomingDocumentCellTablet(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (contetx) => ChiTietVanBanTablet(),
-                        ),
-                      );
-                    },
-                    title: widget.list[index].loaiVanBan ?? '',
-                    dateTime: widget.list[index].ngayDen ?? '',
-                    userName: widget.list[index].nguoiSoanThao ?? '',
-                    status: widget.list[index].doKhan ?? '',
-                    userImage:
-                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                    index: index,
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 24.0),
+                    child: IncomingDocumentCellTablet(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (contetx) => ChiTietVanBanTablet(),
+                          ),
+                        );
+                      },
+                      title: widget.list[index].loaiVanBan ?? '',
+                      dateTime: widget.list[index].ngayDen ?? '',
+                      userName: widget.list[index].nguoiSoanThao ?? '',
+                      status: widget.list[index].doKhan ?? '',
+                      userImage:
+                          'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                      index: index,
+                    ),
                   );
                 },
               ),

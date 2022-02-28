@@ -20,6 +20,6 @@ mixin QLVBRepository {
   Future<Result<DanhSachVanBanModel>> getDanhSachVbDen(
       String startDate, String endDate, int index, int size);
 
-  Future<Result<DanhSachVanBanDiModel>> getDanhSachVbDi(
+  Future<Result<DanhSachVanBanModel>> getDanhSachVbDi(
       String startDate, String endDate, int index, int size);
 }

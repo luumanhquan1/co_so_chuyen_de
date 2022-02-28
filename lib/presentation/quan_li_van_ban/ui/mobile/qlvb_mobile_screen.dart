@@ -9,7 +9,6 @@ import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_documen
 import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/presentation/outgoing_document/bloc/outgoing_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/outgoing_document/ui/mobile/outgoing_document_screen.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/bloc/qlvb_cubit.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/widgets/common_infor_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -112,7 +111,10 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const IncomingDocumentScreen(),
+                                       IncomingDocumentScreen(
+                                      title: S.current.danh_sach_van_ban_den,
+                                         type: TypeScreen.VAN_BAN_DEN,
+                                      ),
                                 ),
                               );
                             },
@@ -188,7 +190,10 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const OutgoingDocumentScreen(),
+                                      IncomingDocumentScreen(
+                                        title: S.current.danh_sach_van_ban_di,
+                                        type: TypeScreen.VAN_BAN_DI,
+                                      ),
                                 ),
                               );
                             },
@@ -196,10 +201,10 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                           )
                         ],
                       ),
-                      StreamBuilder<List<VanBanDiModel>>(
+                      StreamBuilder<List<VanBanModel>>(
                         stream: cubitOutgoing.getDanhSachVbDi,
                         builder: (context, snapshot) {
-                          final List<VanBanDiModel> listData =
+                          final List<VanBanModel> listData =
                               snapshot.data ?? [];
                           if (listData.isNotEmpty) {
                             return ListView.builder(
@@ -222,7 +227,7 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                                     },
                                     title: listData[index].loaiVanBan ?? '',
                                     dateTime: DateTime.parse(
-                                            listData[index].ngayTao ?? '')
+                                            listData[index].ngayDen ?? '')
                                         .toStringWithListFormat,
                                     userName: listData[index].nguoiSoanThao ?? '',
                                     status: listData[index].doKhan ?? '',

@@ -1,5 +1,5 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
@@ -11,7 +11,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IncomingDocumentScreen extends StatefulWidget {
-  const IncomingDocumentScreen({Key? key}) : super(key: key);
+  final String title;
+  final TypeScreen type;
+
+  const IncomingDocumentScreen({
+    Key? key,
+    required this.title,
+    required this.type,
+  }) : super(key: key);
 
   @override
   _IncomingDocumentScreenState createState() => _IncomingDocumentScreenState();
@@ -35,10 +42,8 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBarDefaultBack(
-        S.current.danh_sach_van_ban_den,
-      ),
+      backgroundColor: backgroundColorApp,
+      appBar: AppBarDefaultBack(widget.title),
       body: SafeArea(
         child: _content(),
       ),
@@ -46,26 +51,33 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
   }
 
   void callApi(int page, String startDate, String endDate) {
-    cubit.listDataDanhSachVBDen(
-      startDate: startDate,
-      endDate: endDate,
-      page: page,
-      size: ApiConstants.DEFAULT_PAGE_SIZE,
-    );
+    if (widget.type == TypeScreen.VAN_BAN_DEN) {
+      cubit.listDataDanhSachVBDen(
+        startDate: startDate,
+        endDate: endDate,
+        page: page,
+        size: ApiConstants.DEFAULT_PAGE_SIZE,
+      );
+    } else {
+      cubit.listDataDanhSachVBDi(
+        startDate: startDate,
+        endDate: endDate,
+        index: page,
+        size: ApiConstants.DEFAULT_PAGE_SIZE,
+      );
+    }
   }
 
   Widget _content() {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: true,
-      callApi: (page) => {
-        callApi(page, '2022-02-01', '2022-02-28')
-      },
-      viewItem: (value) => itemVanBan(value as VanBanModel),
+      callApi: (page) => {callApi(page, '2022-02-01', '2022-02-28')},
+      viewItem: (value, index) => itemVanBan(value as VanBanModel, index ?? 0),
     );
   }
 
-  Widget itemVanBan(VanBanModel data) {
+  Widget itemVanBan(VanBanModel data, int index) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 16,

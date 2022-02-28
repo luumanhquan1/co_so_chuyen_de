@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
+import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_state.dart';
@@ -13,20 +14,12 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
-enum LoadMoreType {
-  CAN_LOAD_MORE,
-  LOAD_MORE_FAIL,
-  NOT_CAN_LOAD_MORE,
-}
+enum TypeScreen { VAN_BAN_DEN, VAN_BAN_DI }
 
 class IncomingDocumentCubit extends BaseCubit<BaseState> {
   IncomingDocumentCubit() : super(IncomingDocumentStateIntial());
   int nextPage = 1;
   int totalPage = 1;
-  final BehaviorSubject<LoadMoreType> canLoadMoreSubject =
-      BehaviorSubject<LoadMoreType>();
-
-  Stream<LoadMoreType> get canLoadMoreStream => canLoadMoreSubject.stream;
 
   final BehaviorSubject<List<VanBanModel>> _getListVBDen =
       BehaviorSubject<List<VanBanModel>>();
@@ -77,9 +70,6 @@ class IncomingDocumentCubit extends BaseCubit<BaseState> {
     required int page,
     required int size,
   }) async {
-    if (page == ApiConstants.PAGE_BEGIN) {
-      showLoading();
-    }
     loadMorePage = page;
     final result =
         await _QLVBRepo.getDanhSachVbDen(startDate, endDate, page, size);
@@ -97,7 +87,37 @@ class IncomingDocumentCubit extends BaseCubit<BaseState> {
         }
       },
       error: (error) {
+        emit(const CompletedLoadMore(CompleteType.ERROR));
         showError();
+      },
+    );
+  }
+
+  Future<void> listDataDanhSachVBDi({
+    required String startDate,
+    required String endDate,
+    required int index,
+    required int size,
+  }) async {
+    if (index == ApiConstants.PAGE_BEGIN) {}
+    loadMorePage = index;
+    final result =
+        await _QLVBRepo.getDanhSachVbDi(startDate, endDate, index, size);
+    result.when(
+      success: (res) {
+        if (index == ApiConstants.PAGE_BEGIN) {
+          if (res.pageData?.isEmpty ?? true) {
+            showEmpty();
+          } else {
+            showContent();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+          }
+        } else {
+          emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+        }
+      },
+      error: (err) {
+        return err;
       },
     );
   }

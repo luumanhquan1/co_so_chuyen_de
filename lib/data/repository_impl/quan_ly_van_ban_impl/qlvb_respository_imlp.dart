@@ -70,9 +70,9 @@ class QLVBImlp implements QLVBRepository {
   }
 
   @override
-  Future<Result<DanhSachVanBanDiModel>> getDanhSachVbDi(
+  Future<Result<DanhSachVanBanModel>> getDanhSachVbDi(
       String startDate, String endDate, int index, int size) {
-    return runCatchingAsync<DanhSachVBDiResponse, DanhSachVanBanDiModel>(
+    return runCatchingAsync<DanhSachVBDiResponse, DanhSachVanBanModel>(
         () => _quanLyVanBanClient.getDanhSachVanBanDi(
               DanhSachVBDiRequest(
                 thoiGianStartFilter: startDate,
