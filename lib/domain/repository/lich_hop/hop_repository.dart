@@ -1,5 +1,5 @@
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'dart:io';
-
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/domain/model/add_file_model.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/bieu_quyet_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
@@ -26,12 +27,9 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
-
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
-
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
-
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -56,7 +54,14 @@ mixin HopRepository {
   );
 
   Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
-    String id,
+      String id);
+
+  Future<Result<AddFileModel>> postFileTaoLichHop(
+    int entityType,
+    String entityName,
+    String entityId,
+    bool isMutil,
+    List<File> files,
   );
 
   Future<Result<List<ListPhienHopModel>>> getDanhSachPhienHop(
