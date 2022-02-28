@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
@@ -149,7 +150,9 @@ extension GetConfigWidget on HomeCubit {
     final result = await homeRep.getDashBoardConfig();
     result.when(
       success: (res) {
-        _getConfigWidget.sink.add(res);
+        final data =
+            res.where((element) => element.widgetType != null).toList();
+        _getConfigWidget.sink.add(data);
       },
       error: (err) {},
     );

@@ -160,11 +160,11 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+  Future<Result<ThongTinPhongHopModel?>> getListThongTinPhongHop(
       String idLichHop) {
-    return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel>(
+    return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel?>(
       () => _hopServices.getDanhSachPhongHop(idLichHop),
-      (res) => res.data?.toDomain() ?? ThongTinPhongHopModel(),
+      (res) => res.data?.toDomain(),
     );
   }
 
