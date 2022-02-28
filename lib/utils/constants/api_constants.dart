@@ -23,7 +23,7 @@ class ApiConstants {
   static const String GET_TINH_HUYEN_XA = '/api/DanhMuc/tinh-thanh';
   static const String GET_TINH_HUYEN_XA_CHILD = '/api/DanhMuc/tinh-thanh';
   static const String LIST_LICH_LV = '/vpdt/api/Schedules/danh-sach-lich';
-
+static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcongvieccanhan';
   static const DASH_BOARD_VBDEN = '/qlvb/api/danh-muc/dashboard-van-ban-den';
   static const DASH_BOARD_VBDi = '/qlvb/api/van-ban-di/so-luong';
   static const DANH_SACH_VB_DEN = '/qlvb/api/vanban/getdanhsachvanban';

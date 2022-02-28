@@ -187,15 +187,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
             width: 110,
             height: 106,
             clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(10),
-              ),
-              image: DecorationImage(
-                image: NetworkImage(
-                  data.avatar,
-                ),
-                fit: BoxFit.cover,
               ),
             ),
             child: CachedNetworkImage(

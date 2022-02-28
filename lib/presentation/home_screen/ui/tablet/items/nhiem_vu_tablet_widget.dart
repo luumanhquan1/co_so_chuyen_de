@@ -42,6 +42,7 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(
       maxHeight: 415,
+      minHeight: 415,
       title: S.current.nhiem_vu,
       isUnit: true,
       listSelect: const [
@@ -109,7 +110,9 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
                       listData: [
                         InfoData(
                           urlIcon: ImageAssets.icWork,
-                          key: S.current.loai_nhiem_vu,
+                          key: _nhiemVuCubit.isCongViec
+                              ? S.current.nguoi_giao_viec
+                              : S.current.loai_nhiem_vu,
                           value: result.loaiNhiemVu,
                         ),
                         InfoData(

@@ -1,4 +1,5 @@
 
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -88,8 +89,12 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
                 return Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: ContainerInfoWidget(
-                    status: result.codeStatus.getText(),
-                    colorStatus: result.codeStatus.getColor(),
+                    status: result.isHopTrucTuyen
+                        ? S.current.truc_tuyen
+                        : S.current.truc_tiep,
+                    colorStatus: result.isHopTrucTuyen
+                        ? sideBtnSelected.withOpacity(0.5)
+                        : choXuLyColor,
                     backGroundStatus: true,
                     title: result.title,
                     listData: [
