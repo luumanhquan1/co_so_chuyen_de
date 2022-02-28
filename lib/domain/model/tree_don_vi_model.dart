@@ -1,4 +1,3 @@
-
 class DonViModel {
   String id = '';
   String name = '';
@@ -36,21 +35,6 @@ class Node<T> {
     expand = node.expand;
     isCheck = node.isCheck;
   }
-  Node.copyWith(Node<T> node) {
-    value = node.value;
-    parent = node.parent;
-    expand = node.expand;
-    isCheck = node.isCheck;
-    level = node.level;
-  }
-  Node<T> coppyWith() {
-    final Node<T> node = Node.copyWith(this);
-    for (final vl in children) {
-      node.addChild(vl.coppyWith());
-    }
-    return node;
-  }
-
   Node<DonViModel>? search(Node<DonViModel> node) {
     final nodeTree = value as DonViModel;
     if (node.value.id == nodeTree.id) {
@@ -82,6 +66,21 @@ class Node<T> {
     children.add(child);
     child.parent = this;
   }
+
+  Node.copyWith(Node<T> node) {
+    value = node.value;
+    parent = node.parent;
+    expand = node.expand;
+    isCheck = node.isCheck;
+    level = node.level;
+  }
+  Node<T> coppyWith() {
+    final Node<T> node = Node.copyWith(this);
+    for (final vl in children) {
+      node.addChild(vl.coppyWith());
+    }
+    return node;
+  }
 }
 
 class CheckBox {
@@ -89,5 +88,3 @@ class CheckBox {
   bool isCheck = false;
   CheckBox({this.isCheck = false});
 }
-
-

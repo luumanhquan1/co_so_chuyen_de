@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 
-
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
@@ -11,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DetailMeetCalenderTablet extends StatefulWidget {
-  const DetailMeetCalenderTablet({Key? key}) : super(key: key);
+  final String id;
+  const DetailMeetCalenderTablet({Key? key, required this.id})
+      : super(key: key);
 
   @override
   State<DetailMeetCalenderTablet> createState() =>
@@ -25,13 +26,8 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
   void initState() {
     cubit = DetailMeetCalenderCubit();
 
-    cubit.initData();
-    cubit.postMoiHop(
-      lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
-      body: [],
-      isSendMail: true,
-      IsMultipe: false,
-    );
+    cubit.initData(widget.id);
+
     super.initState();
   }
 

@@ -108,7 +108,8 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
             },
             child: SizedBox.expand(
               child: SingleChildScrollView(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 physics: const ClampingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
@@ -155,8 +156,9 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
                                         100 * (1.0 - animation.value),
                                         0.0,
                                       ),
-                                      child: type.widgetType?.getItemsTablet() ??
-                                          const SizedBox(),
+                                      child:
+                                          type.widgetType?.getItemsTablet() ??
+                                              const SizedBox(),
                                     ),
                                   );
                                 },

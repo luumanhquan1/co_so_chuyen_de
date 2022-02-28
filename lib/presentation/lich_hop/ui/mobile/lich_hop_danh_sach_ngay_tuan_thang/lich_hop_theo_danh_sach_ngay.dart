@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
@@ -73,7 +75,9 @@ class _LichHopTheoDanhSachNgayState extends State<LichHopTheoDanhSachNgay> {
                       ontap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => DetailMeetCalenderScreen(),
+                            builder: (context) => DetailMeetCalenderScreen(
+                              id: data.items?[index].id ?? '',
+                            ),
                           ),
                         );
                       },

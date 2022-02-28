@@ -71,7 +71,6 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
         listSelectKey: <DialogData>[
           DialogData(
             onSelect: (value, startDate, endDate) {
-
               _xuLyCubit.selectDate(
                   selectKey: value, startDate: startDate, endDate: endDate);
             },

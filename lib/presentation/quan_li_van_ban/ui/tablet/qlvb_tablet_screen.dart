@@ -31,7 +31,7 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
     with SingleTickerProviderStateMixin {
   QLVBCCubit qlvbCubit = QLVBCCubit();
   OutgoingDocumentCubit outgoingDocumentCubit = OutgoingDocumentCubit();
-  IncomingDocumentCubit incomingDocumentCubit = IncomingDocumentCubit();
+  IncomingDocumentCubit cubitIncoming = IncomingDocumentCubit();
   late TabController controller;
 
   late ScrollController scrollController;
@@ -43,7 +43,7 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
     super.initState();
     qlvbCubit.callAPi();
     outgoingDocumentCubit.callAPi();
-    incomingDocumentCubit.callAPi();
+    cubitIncoming.callAPi();
   }
 
   @override
@@ -156,7 +156,7 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
             content: TabBarView(
               children: [
                 StreamBuilder<List<VanBanModel>>(
-                  stream: incomingDocumentCubit.getListVbDen,
+                  stream: cubitIncoming.getListVbDen,
                   builder: (context, snapshot) {
                     final List<VanBanModel> listData = snapshot.data ?? [];
                     if (listData.isNotEmpty) {

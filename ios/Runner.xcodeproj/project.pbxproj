@@ -493,7 +493,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = ZC2SH479VM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main_develop.dart;
+				FLUTTER_TARGET = "/Users/macbook/Documents/EdsoLabs/ccvc-mobile/lib/main_develop.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,7 +595,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = ZC2SH479VM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main_develop.dart;
+				FLUTTER_TARGET = "/Users/macbook/Documents/EdsoLabs/ccvc-mobile/lib/main_develop.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,7 +671,7 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = ZC2SH479VM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_TARGET = lib/main_develop.dart;
+				FLUTTER_TARGET = "/Users/macbook/Documents/EdsoLabs/ccvc-mobile/lib/main_develop.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

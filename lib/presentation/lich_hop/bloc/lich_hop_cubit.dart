@@ -1,6 +1,8 @@
-
+import 'dart:io';
+import 'dart:developer';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
@@ -91,24 +93,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showContent();
   }
 
-  void callApi() {
-    getDanhSachPhienHop(id: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377');
-    themPhemHop(
-      lichHopId: '8bbd89ee-57fb-4f41-a6f9-06aa86fa4377',
-      canBoId: '39227131-3db7-48f8-a1b2-57697430cc69',
-      donViId: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-      thoiGian_BatDau: '2022-02-24T09:45:00',
-      thoiGian_KetThuc: '2022-02-24T10:45:00',
-      noiDung: 'en cô vid',
-      tieuDe: 'bất tử',
-      hoTen: 'luc',
-      IsMultipe: false,
-      file: [],
-    );
-
-    postChonMauHop(pageIndex: 1, pageSize: 10);
-  }
-
   BehaviorSubject<List<ListPhienHopModel>> phienHopSubject = BehaviorSubject();
   List<ListPhienHopModel> listPhienHop = [];
 
@@ -131,8 +115,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showLoading();
     final result = await hopRepo.postDanhSachLichHop(
       DanhSachLichHopRequest(
-        DateFrom: '2022-02-24',
-        DateTo: '2022-02-24',
+        DateFrom: startDate.formatApi,
+        DateTo: endDate.formatApi,
         DonViId: donViId,
         PageIndex: page,
         PageSize: 1000,
@@ -142,6 +126,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     result.when(
       success: (value) {
         totalPage = value.totalPage ?? 1;
+        log("${value.items?.map((e) => e.id).toList()}");
         danhSachLichHopSubject.add(value);
       },
       error: (error) {},
@@ -192,6 +177,25 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     );
 
     showContent();
+  }
+
+  // them tai lieu tao lich hop
+  Future<void> postFileTaoLichHop({
+    required int entityType,
+    required String entityName,
+    required String entityId,
+    required bool isMutil,
+    required List<File> files,
+  }) async {
+    showLoading();
+    await hopRepo
+        .postFileTaoLichHop(entityType, entityName, entityId, isMutil, files)
+        .then((value) {
+      value.when(
+        success: (res) {},
+        error: (err) {},
+      );
+    });
   }
 
   BehaviorSubject<ChonBienBanCuocHopModel> chonBienBanHopSubject =
