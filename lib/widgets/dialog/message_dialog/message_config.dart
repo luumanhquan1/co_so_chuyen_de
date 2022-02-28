@@ -41,7 +41,7 @@ class MessageConfig {
       case MessState.error:
         return ImageAssets.icSucces;
       case MessState.success:
-        return ImageAssets.icSucces;
+        return ImageAssets.icError;
       case MessState.customIcon:
         return urlIcon;
     }
