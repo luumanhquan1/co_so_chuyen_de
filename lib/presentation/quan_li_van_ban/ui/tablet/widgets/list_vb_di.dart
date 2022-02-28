@@ -44,7 +44,7 @@ class _ListVBDiState extends State<ListVBDi> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: widget.list.length,
+                itemCount: widget.list.length > 3 ? 3 : widget.list.length,
                 itemBuilder: (context, index) {
                   return IncomingDocumentCellTablet(
                     onTap: () {

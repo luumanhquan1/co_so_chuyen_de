@@ -172,7 +172,7 @@ extension GetScreen on MenuType {
         );
       case MenuType.quanLyVanBan:
         return screenDevice(
-          mobileScreen: const QLVBScreenMobile(),
+          mobileScreen: const QLVBMobileScreen(),
           tabletScreen: const QLVBScreenTablet(),
         );
       case MenuType.baoChiMangXaHoi:
