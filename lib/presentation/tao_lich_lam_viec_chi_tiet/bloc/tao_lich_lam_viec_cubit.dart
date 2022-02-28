@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
-import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
@@ -27,10 +26,11 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   LichLamViecRepository get _lichLamViec => Get.find();
 
   TaoMoiBanGhiRequest requestBanGhi = TaoMoiBanGhiRequest(
-      content: '<p>ưq</p>',
-      phienHopId: null,
-      scheduleId: '7765603d-4493-4f7c-8a06-2d2b7511eedb',
-      scheduleOpinionId: null,);
+    content: '<p>ưq</p>',
+    phienHopId: null,
+    scheduleId: '7765603d-4493-4f7c-8a06-2d2b7511eedb',
+    scheduleOpinionId: null,
+  );
 
   BehaviorSubject<DateTime> startDateSubject = BehaviorSubject.seeded(
     DateTime.now(),
@@ -67,20 +67,23 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
 
-  String dateFrom=DateTime.now().formatApi;
-  String timeFrom='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
-  String dateEnd=DateTime.now().formatApi;
-  String timeEnd='${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+  String dateFrom = DateTime.now().formatApi;
+  String timeFrom =
+      '${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+  String dateEnd = DateTime.now().formatApi;
+  String timeEnd =
+      '${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
 
   void listeningStartDataTime(DateTime dateAndTime) {
-    dateFrom= dateAndTime.formatApi;
-    timeFrom='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
+    dateFrom = dateAndTime.formatApi;
+    timeFrom =
+        '${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     startDateSubject.add(dateAndTime);
   }
 
   void listeningEndDataTime(DateTime dateAndTime) {
-    dateEnd=dateAndTime.formatApi;
-    timeEnd='${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
+    dateEnd = dateAndTime.formatApi;
+    timeEnd = '${dateAndTime.hour.toString()}:${dateAndTime.minute.toString()}';
     endDateSubject.add(dateAndTime);
   }
 
@@ -178,13 +181,12 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Future<void> taoLichLamViec({
     required String title,
     required String typeScheduleId,
-
     required String content,
     required String location,
   }) async {
     showLoading();
     final result = await _lichLamViec.taoLichLamViec(
-      title ,
+      title,
       typeScheduleId,
       selectLinhVuc?.id ?? '',
       '',
@@ -221,20 +223,22 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       showContent();
     });
   }
+
   Future<void> taoBaoCaoKetQua({
     required String reportStatusId,
     required String scheduleId,
     required List<File> files,
-
   }) async {
     showLoading();
     await _lichLamViec
         .taoBaoCaoKetQua(
-        reportStatusId, scheduleId,files,)
+      reportStatusId,
+      scheduleId,
+      files,
+    )
         .then((value) {
       value.when(
-        success: (res) {
-        },
+        success: (res) {},
         error: (err) {},
       );
     });

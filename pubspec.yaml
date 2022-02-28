@@ -68,7 +68,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dart_ipify: ^1.1.0
 
-  # GETX
+  # GET
   get: ^4.1.4
   pretty_dio_logger: ^1.1.1
 

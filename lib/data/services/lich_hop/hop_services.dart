@@ -1,12 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
@@ -77,6 +81,16 @@ abstract class HopServices {
   @GET(ApiConstants.DANH_SACH_CAN_BO_LICH_HOP)
   Future<DanhSachCanBoHopResponse> getDanhSachChuTri(@Query('id') String id);
 
+  @POST(ApiConstants.ADD_FILE_TAI_LIEU_TAO_LICH_HOP)
+  @MultiPart()
+  Future<AddFileTaoLichHopResponse> postFile(
+    @Query('entityType') int entityType,
+    @Query('entityName') String entityName,
+    @Query('entityId') String entityId,
+    @Query('isMutil') bool isMutil,
+    @Part() List<File> file,
+  );
+
   @GET(ApiConstants.DANH_SACH_PHIEN_HOP)
   Future<ListPhienHopRespone> getDanhSachPhienHop(@Query('id') String id);
 
@@ -91,7 +105,6 @@ abstract class HopServices {
 
   @GET(ApiConstants.CHUONG_TRINH_HOP)
   Future<ChuongTrinhHopResponse> getChuongTrinhHop(@Query('id') String id);
-
   @GET(ApiConstants.MEETING_ROOM_DANH_SACH_PHONG_HOP)
   Future<ThongTinPhongHopResponse> getDanhSachPhongHop(
       @Query('lichHopId') String lichHopId);
@@ -99,7 +112,6 @@ abstract class HopServices {
   @GET(ApiConstants.MEETING_ROOM_DANH_SACH_THIET_BI)
   Future<ThietBiPhongHopResponse> getListThietBiPhongHop(
       @Query('lichHopId') String lichHopId);
-
   @GET(ApiConstants.DANH_SACH_PHAT_BIEU_LICH_HOP)
   Future<DanhSachPhatBieuLichHopDataResponse> getDanhSachPhatBieuLichHop(
     @Query('lichHopId') String lichHopId,

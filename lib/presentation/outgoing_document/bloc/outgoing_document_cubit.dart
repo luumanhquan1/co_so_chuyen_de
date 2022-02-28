@@ -26,7 +26,6 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
   Stream<List<VanBanDiModel>> get getDanhSachVbDi => _getDanhSachVBDi.stream;
 
   void callAPi() async{
-    print('--------------------------------------?????-------------------------------------------');
     final queue = Queue(parallel: 1);
     showLoading();
     unawaited(
@@ -59,12 +58,10 @@ class OutgoingDocumentCubit extends BaseCubit<IncomingDocumentState> {
     result.when(
       success: (res) {
         listVbDi=res.pageData??[];
-        print('hahhhhhhhhhhhhhhhhhhhhhhhhhhhhhahaa ${listVbDi.length}');
         _getDanhSachVBDi.sink.add(listVbDi);
 
       },
       error: (err) {
-        print('--------------------------------------loi-------------------- ${listVbDi.length}');
         return err;
       },
     );

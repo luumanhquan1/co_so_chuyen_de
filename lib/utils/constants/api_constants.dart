@@ -84,8 +84,14 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
   static const SCHEDULE_OPINION_LIST = '/vpdt/api/ScheduleOpinion/list';
   static const UPDATE_SCHEDULE_REPORT = '/vpdt/api/ScheduleReport/update';
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
+
+  static const String POST_FILE_TAO_LICH_HOP =
+      '/vpdt/api/Files/add-file-with-meeting';
+
+
   static const TAO_LICH_LAM_VIEC = '/vpdt/api/Schedules';
   static const TAO_BAO_KET_QUA = '/vpdt/api/ScheduleReport/create';
+
   static const DETAIL_MEETING_SCHEDULE = '/vpdt/api/MeetingSchedule/detail';
   static const MEETING_ROOM_DANH_SACH_PHONG_HOP =
       '/vpdt/api/MeetingRoom/danh-sach-phong-hop';
@@ -108,8 +114,11 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-bieu-quyet';
   static const DANH_SACH_LICH_HOP_TPTG =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
+  static const ADD_FILE_TAI_LIEU_TAO_LICH_HOP =
+      '/vpdt/api/Files/add-file-with-meeting';
   static const SEND_EMAIL_KL_HOP =
       '/vpdt/api/ScheduleReport/send-email-bao-cao';
+
 }
 
 class ImageConstants {
