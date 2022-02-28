@@ -103,6 +103,7 @@ class ApiConstants {
   static const THEM_BIEU_QUYET_HOP = '/vpdt/api/BieuQuyet/them-moi-bieuquyet';
   static const MOI_HOP = '/vpdt/api/MeetingSchedule/moi-hop';
 
+  static const SUA_KET_LUAN = '/vpdt/api/ScheduleReport/update-meet-report';
   static const CHON_MAU_BIEN_BAN = '/vpdt/api/ReportTemplate/list';
 
   static const SO_LUONG_PHAT_BIEU =
@@ -115,8 +116,6 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const ADD_FILE_TAI_LIEU_TAO_LICH_HOP =
       '/vpdt/api/Files/add-file-with-meeting';
-
-
   static const SEND_EMAIL_KL_HOP =
       '/vpdt/api/ScheduleReport/send-email-bao-cao';
 

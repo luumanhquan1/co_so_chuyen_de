@@ -30,6 +30,11 @@ class _EventOfDayWidgetState extends State<EventOfDayTabletWidget> {
     // TODO: implement initState
     super.initState();
     _suKienTrongNgayCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _suKienTrongNgayCubit.callApi();
+      });
+    });
   }
 
   @override

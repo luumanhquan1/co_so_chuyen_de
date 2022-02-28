@@ -31,6 +31,11 @@ class _PeopleOpinionsState extends State<PeopleOpinions> {
     // TODO: implement initState
     super.initState();
     _danCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _danCubit.callApi();
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {

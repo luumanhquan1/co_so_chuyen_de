@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
+
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/cong_tac_chuan_bi_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thong_tin_lien_he_widget.dart';
@@ -17,7 +20,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DetailMeetCalenderScreen extends StatefulWidget {
-  const DetailMeetCalenderScreen({Key? key}) : super(key: key);
+  final String id;
+  const DetailMeetCalenderScreen({Key? key, required this.id})
+      : super(key: key);
 
   @override
   State<DetailMeetCalenderScreen> createState() =>
@@ -31,15 +36,13 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
   void initState() {
     super.initState();
     cubit = DetailMeetCalenderCubit();
-    cubit.initData();
-    cubit.postMoiHop(
-      lichHopId: '01deb932-db51-4d25-8904-223d44e76f4e',
-    );
+    cubit.initData(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Theme.of(context).backgroundColor,
       appBar: BaseAppBar(
         leadingIcon: IconButton(
           onPressed: () {
@@ -153,8 +156,17 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                CongTacChuanBiWidget(cubit: cubit,)
-
+                CongTacChuanBiWidget(
+                  cubit: cubit,
+                ),
+                const ChuongTrinhHopWidget()
+                // CongTacChuanBiWidget(),
+                // MoiNguoiThamGiaWidget(),
+                // TaiLieuWidget(),
+                // PhatBieuWidget(),
+                // BieuQuyetWidget(),
+                // KetLuanHopWidget(),
+                // YKienCuocHopWidget(),
               ],
             ),
           ),

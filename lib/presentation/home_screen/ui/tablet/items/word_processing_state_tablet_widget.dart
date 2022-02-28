@@ -40,6 +40,11 @@ class _WordProcessingStateWidgetState
     // TODO: implement initState
     super.initState();
     _xuLyCubit.getDocument();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _xuLyCubit.getDocument();
+      });
+    });
   }
 
   @override
@@ -160,7 +165,7 @@ class _WordProcessingStateWidgetState
                             ),
                             ChartData(
                               S.current.cho_ban_hanh,
-                              data.soLuongChoTrinhKy?.toDouble() ?? 0,
+                              data.soLuongChoBanHanh?.toDouble() ?? 0,
                               choBanHanhColor,
                             )
                           ],

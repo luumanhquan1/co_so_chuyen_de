@@ -75,6 +75,7 @@ class ImageAssets {
   static const String icChoYKien = '$baseImg/ic_cho_y_kien.svg';
   static const String icHuyLich = '$baseImg/ic_huy_lich.svg';
   static const String icCalling = '$baseImg/ic_calling.svg';
+  static const String icError = '$baseImg/ic_error.svg';
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';

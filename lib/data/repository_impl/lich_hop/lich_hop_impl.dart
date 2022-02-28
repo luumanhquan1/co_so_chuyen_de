@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
+import 'dart:io';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
@@ -26,6 +27,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.da
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
@@ -53,6 +55,8 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'dart:io';
 
@@ -167,6 +171,7 @@ class HopRepositoryImpl implements HopRepository {
     );
   }
 
+  @override
   Future<Result<ChuongTrinhHopModel>> getChuongTrinhHop(String id) {
     return runCatchingAsync<ChuongTrinhHopResponse, ChuongTrinhHopModel>(
       () => _hopServices.getChuongTrinhHop(id),
@@ -175,11 +180,11 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<ThongTinPhongHopModel>> getListThongTinPhongHop(
+  Future<Result<ThongTinPhongHopModel?>> getListThongTinPhongHop(
       String idLichHop) {
-    return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel>(
+    return runCatchingAsync<ThongTinPhongHopResponse, ThongTinPhongHopModel?>(
       () => _hopServices.getDanhSachPhongHop(idLichHop),
-      (res) => res.data?.toDomain() ?? ThongTinPhongHopModel(),
+      (res) => res.data?.toDomain(),
     );
   }
 
@@ -264,6 +269,17 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
+  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
+    ChonBienBanHopRequest chonBienBanHopRequest,
+  ) {
+    return runCatchingAsync<ChonBienBanCuocHopResponse,
+        ChonBienBanCuocHopModel>(
+      () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
+      (response) => response.data.toDomain(),
+    );
+  }
+
+  @override
   Future<Result<List<MoiHopModel>>> postMoiHop(
     String lichHopId,
     bool IsMultipe,
@@ -277,22 +293,32 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
+  Future<Result<MessageModel>> suaKetLuan(
+    String scheduleId,
+    String content,
+    String reportStatusId,
+    String reportTemplateId,
+    List<File>? files,
+  ) {
+    return runCatchingAsync<SuaKetLuanResponse, MessageModel>(
+      () => _hopServices.suaKetLuan(
+        scheduleId,
+        content,
+        reportStatusId,
+        reportTemplateId,
+        files ?? [],
+      ),
+      (response) => response.toDomain(),
+    );
+  }
+
+  @override
   Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
       String lichHopId) {
     return runCatchingAsync<ThietBiPhongHopResponse,
         List<ThietBiPhongHopModel>>(
       () => _hopServices.getListThietBiPhongHop(lichHopId),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
-    );
-  }
-
-  Future<Result<ChonBienBanCuocHopModel>> postChonMauBienBanHop(
-    ChonBienBanHopRequest chonBienBanHopRequest,
-  ) {
-    return runCatchingAsync<ChonBienBanCuocHopResponse,
-        ChonBienBanCuocHopModel>(
-      () => _hopServices.postChonMauBienBan(chonBienBanHopRequest),
-      (response) => response.data.toDomain(),
     );
   }
 }
