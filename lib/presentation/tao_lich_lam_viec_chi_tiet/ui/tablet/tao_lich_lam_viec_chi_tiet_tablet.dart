@@ -45,31 +45,31 @@ class _TaoLichLamViecChiTietTabletState
 
   @override
   Widget build(BuildContext context) {
-    return WidgetTaoLichLVInherited(
+    return TaoLichLamViecProvider(
       taoLichLamViecCubit: taoLichLamViecCubit,
-      child: Scaffold(
-        backgroundColor: bgWidgets,
-        appBar: BaseAppBar(
-          title: S.current.tao_lich_cong_tac_trong_nuoc,
-          leadingIcon: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: unselectLabelColor,
-              size: 24,
+      child: StateStreamLayout(
+        textEmpty: S.current.khong_co_du_lieu,
+        retry: () {},
+        error: AppException('1', ''),
+        stream: taoLichLamViecCubit.stateStream,
+        child: WidgetTaoLichLVInherited(
+          taoLichLamViecCubit: taoLichLamViecCubit,
+          child: Scaffold(
+            backgroundColor: bgWidgets,
+            appBar: BaseAppBar(
+              title: S.current.tao_lich_cong_tac_trong_nuoc,
+              leadingIcon: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: unselectLabelColor,
+                  size: 24,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: TaoLichLamViecProvider(
-          taoLichLamViecCubit:taoLichLamViecCubit,
-          child:  StateStreamLayout(
-            textEmpty: S.current.khong_co_du_lieu,
-            retry: () {},
-            error: AppException('1', ''),
-            stream: taoLichLamViecCubit.stateStream,
-            child: RefreshIndicator(
+            body: RefreshIndicator(
               onRefresh: () async {
                 await taoLichLamViecCubit.loadData();
               },
@@ -78,8 +78,10 @@ class _TaoLichLamViecChiTietTabletState
                   children: [
                     Container(
                       padding: const EdgeInsets.all(20),
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 28, horizontal: 30),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 28,
+                        horizontal: 30,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: borderColor.withOpacity(0.5)),
@@ -178,10 +180,12 @@ class _TaoLichLamViecChiTietTabletState
                             textColor: Colors.white,
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SuaLichCongTacTrongNuocTablet()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SuaLichCongTacTrongNuocTablet(),
+                                ),
+                              );
                             },
                           ),
                         ],

@@ -166,7 +166,10 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const IncomingDocumentScreenTablet(),
+                                     IncomingDocumentScreenTablet(
+                                      title: S.current.danh_sach_van_ban_den,
+                                      type: TypeScreen.VAN_BAN_DEN,
+                                    ),
                               ),
                             );
                           },
@@ -177,10 +180,10 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                     }
                   },
                 ),
-                StreamBuilder<List<VanBanDiModel>>(
+                StreamBuilder<List<VanBanModel>>(
                   stream: outgoingDocumentCubit.getDanhSachVbDi,
                   builder: (context, snapshot) {
-                    final List<VanBanDiModel> listData = snapshot.data ?? [];
+                    final List<VanBanModel> listData = snapshot.data ?? [];
                     if (listData.isNotEmpty) {
                       return ListVBDi(
                           onTap: () {
@@ -188,7 +191,10 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                const IncomingDocumentScreenTablet(),
+                                 IncomingDocumentScreenTablet(
+                                   title: S.current.danh_sach_van_ban_di,
+                                   type: TypeScreen.VAN_BAN_DI,
+                                 ),
                               ),
                             );
                           },

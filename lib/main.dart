@@ -54,8 +54,6 @@ class _MyAppState extends State<MyApp> {
     checkDeviceType();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return AppStateCt(
