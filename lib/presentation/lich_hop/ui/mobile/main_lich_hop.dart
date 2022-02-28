@@ -31,7 +31,6 @@ class MainLichHop extends StatefulWidget {
 class _MainLichHopState extends State<MainLichHop> {
   final CalenderCubit calenderCubit = CalenderCubit();
   LichHopCubit cubit = LichHopCubit();
-  DetailMeetCalenderCubit detailMeetCalenderCubit = DetailMeetCalenderCubit();
 
   @override
   void initState() {
@@ -40,9 +39,6 @@ class _MainLichHopState extends State<MainLichHop> {
     cubit.page = 1;
     cubit.getDashboard();
     cubit.postDanhSachLichHop();
-    detailMeetCalenderCubit.themYKien();
-    detailMeetCalenderCubit.getTongPhienHop();
-    detailMeetCalenderCubit.selectPhienHop();
   }
 
   @override
@@ -284,7 +280,6 @@ class _MainLichHopState extends State<MainLichHop> {
           child: FloatingActionButton(
             elevation: 0.0,
             onPressed: () {
-
               Navigator.push(
                 context,
                 PageRouteBuilder(
