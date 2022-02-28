@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/home/danh_sach_cong_viec_resquest.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
 import 'package:ccvc_mobile/data/request/home/lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/home/nhiem_vu_request.dart';
 import 'package:ccvc_mobile/data/request/home/to_do_list_request.dart';
+import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
@@ -26,6 +28,7 @@ import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.da
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
@@ -869,15 +872,19 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
     result.when(
       success: (res) {
         final listResult = <CalendarMeetingModel>[];
-        int index = 0;
-        for (final vl in res) {
-          listResult.add(vl);
-          index++;
-          if (index >= 20) {
-            break;
+        if (isMobile()) {
+          int index = 0;
+          for (final vl in res) {
+            listResult.add(vl);
+            index++;
+            if (index >= 20) {
+              break;
+            }
           }
+          _getListLichLamViec.sink.add(listResult);
+        } else {
+          _getListLichLamViec.sink.add(res);
         }
-        _getListLichLamViec.sink.add(listResult);
       },
       error: (err) {},
     );
@@ -926,16 +933,20 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
     showContent();
     result.when(
         success: (res) {
-          int index = 0;
-          final listResult = <CalendarMeetingModel>[];
-          for (final vl in res) {
-            listResult.add(vl);
-            index++;
-            if (index >= 20) {
-              break;
+          if (isMobile()) {
+            int index = 0;
+            final listResult = <CalendarMeetingModel>[];
+            for (final vl in res) {
+              listResult.add(vl);
+              index++;
+              if (index >= 20) {
+                break;
+              }
             }
+            _getLichHop.sink.add(listResult);
+          } else {
+            _getLichHop.sink.add(res);
           }
-          _getLichHop.sink.add(listResult);
         },
         error: (err) {});
   }
@@ -1115,18 +1126,23 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
   Stream<List<CalendarMeetingModel>> get getNhiemVu => _getNhiemVu.stream;
   SelectKey selectTrangThai = SelectKey.CHO_PHAN_XU_LY;
   List<String> mangTrangThai = ['CHUA_THUC_HIEN', 'CHO_PHAN_XU_LY'];
+  bool isCongViec = false;
   void selectTrangThaiNhiemVu(SelectKey selectKey) {
     selectTrangThai = selectKey;
     switch (selectKey) {
       case SelectKey.CHO_PHAN_XU_LY:
         mangTrangThai = ['CHUA_THUC_HIEN', 'CHO_PHAN_XU_LY'];
+        isCongViec = false;
         callApi();
         break;
       case SelectKey.DANG_THUC_HIEN:
         mangTrangThai = ['DANG_THUC_HIEN'];
+        isCongViec = false;
         callApi();
         break;
       case SelectKey.DANH_SACH_CONG_VIEC:
+        isCongViec = true;
+        callApi();
         break;
       default:
         {}
@@ -1175,19 +1191,7 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
     } else {
       isCaNhan = true;
     }
-    final result = await homeRep.getNhiemVu(
-      NhiemVuRequest(
-        size: 10,
-        index: 1,
-        isNhiemVuCaNhan: isCaNhan,
-        mangTrangThai: mangTrangThai,
-        isSortByHanXuLy: true,
-        ngayTaoNhiemVu: NgayTaoNhiemVu(
-          fromDate: startDate.toString(),
-          toDate: endDate.toString(),
-        ),
-      ),
-    );
+    final result = await getDataApi(isCaNhan: isCaNhan);
     showContent();
     result.when(
       success: (res) {
@@ -1208,6 +1212,36 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
     if (type != null) {
       selectKeyDonVi = type.selectKey;
     }
+  }
+
+  Future<Result<List<CalendarMeetingModel>>> getDataApi(
+      {bool isCaNhan = false}) {
+    if (isCongViec) {
+      return homeRep.getDanhSachCongViec(
+        DanhSachCongViecRequest(
+            isSortByHanXuLy: true,
+            isCaNhan: isCaNhan,
+            size: 10,
+            index: 1,
+            mangTrangThai: ["CHUA_THUC_HIEN", "DANG_THUC_HIEN"],
+            trangThaiFilter: ["DANH_SACH_CONG_VIEC"],
+            hanXuLy: HanXuLy(
+                fromDate: startDate.formatApi, toDate: endDate.formatApi)),
+      );
+    }
+    return homeRep.getNhiemVu(
+      NhiemVuRequest(
+        size: 10,
+        index: 1,
+        isNhiemVuCaNhan: isCaNhan,
+        mangTrangThai: mangTrangThai,
+        isSortByHanXuLy: true,
+        ngayTaoNhiemVu: NgayTaoNhiemVu(
+          fromDate: startDate.toString(),
+          toDate: endDate.toString(),
+        ),
+      ),
+    );
   }
 }
 

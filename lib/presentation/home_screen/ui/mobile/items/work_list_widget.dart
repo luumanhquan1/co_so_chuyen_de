@@ -101,7 +101,6 @@ class _WorkListWidgetState extends State<WorkListWidget> {
                           showDiaLog(
                             context,
                             funcBtnRight: () {
-                              Navigator.pop(context);
                               danhSachCVCubit.deleteCongViec(
                                 todo,
                                 removeDone: false,
@@ -161,8 +160,6 @@ class _WorkListWidgetState extends State<WorkListWidget> {
                               showDiaLog(
                                 context,
                                 funcBtnRight: () {
-                                  Navigator.pop(context);
-
                                   danhSachCVCubit.deleteCongViec(todo);
                                 },
                                 icon: SvgPicture.asset(

@@ -515,8 +515,6 @@
   "nhap_y_kien_cua_ban" : "Nhập ý kiến của bạn",
   "dinh_kem" : "Đính kèm",
   "sua_thanh_cong" : "Sửa thành công",
-  "binh_thuong" : "Bình thường",
-
   "dot_xuat" : "Đột xuất",
   "cong_tac_chuan_bi": "Công tác chuẩn bị",
   "thong_tin_phong" : "Thông tin phòng",
@@ -525,7 +523,12 @@
   "ten_phong" : "Tên phòng",
   "suc_chua" : "Sức chứa",
   "thiet_bi_san_co" : "Thiết bị sẵn có",
-  "loai_thiet_bi":"Loại thiết bị"
+  "loai_thiet_bi":"Loại thiết bị",
+  "hoa_toc" : "Hỏa tốc",
+  "khan" : "Khẩn",
+  "binh_thuong" : "Bình thường",
+  "truc_tuyen" : "Trực tuyến"
+
 
 
 }

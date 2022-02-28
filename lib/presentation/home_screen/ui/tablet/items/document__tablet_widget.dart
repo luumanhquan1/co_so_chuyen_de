@@ -43,6 +43,7 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(
       maxHeight: 415,
+      minHeight: 415,
       title: S.current.document,
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
