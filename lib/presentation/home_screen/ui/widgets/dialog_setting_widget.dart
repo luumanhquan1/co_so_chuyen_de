@@ -113,7 +113,7 @@ class DialogSettingWidget extends StatelessWidget {
         break;
       default:
         {
-          data.onSelect(value,DateTime.now(),DateTime.now());
+          data.onSelect(value, DateTime.now(), DateTime.now());
           return;
         }
     }

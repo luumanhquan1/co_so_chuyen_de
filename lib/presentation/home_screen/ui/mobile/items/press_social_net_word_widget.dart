@@ -45,6 +45,11 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
     // TODO: implement initState
     super.initState();
     _xaHoiCubit.getPress();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _xaHoiCubit.getPress();
+      });
+    });
   }
 
   @override
@@ -52,6 +57,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
     // TODO: implement dispose
     super.dispose();
     _xaHoiCubit.dispose();
+
   }
 
   @override

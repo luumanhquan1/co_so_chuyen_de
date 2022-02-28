@@ -11,7 +11,7 @@ class ChiTietLichHopResponse {
       {this.data, this.statusCode, this.succeeded, this.code, this.message});
 
   ChiTietLichHopResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
     statusCode = json['statusCode'];
     succeeded = json['succeeded'];
     code = json['code'];
@@ -145,20 +145,19 @@ class Data {
     typeScheduleId = json['typeScheduleId'];
   }
   ChiTietLichHopModel toDomain() => ChiTietLichHopModel(
-        id: id ?? '',
-        loaiLich: "Họp sơ kết,tổng kết",
-        chuTriModel: chuTri?.toDomain() ?? const ChuTriModel(),
-        linhVuc: tenLinhVuc ?? '',
-        noiDung: noiDung ?? '',
-        title: '',
-        phongHopMode: phongHop?.toDomain() ?? const PhongHopMode(),
-        tenLinhVuc: tenLinhVuc ?? '',
-        timeTo: timeTo ?? '',
-        timeStart: timeStart ?? '',
-        ngayBatDau: ngayBatDau ?? DateTime.now().toString(),
-        ngayKetThuc: ngayKetThuc ?? DateTime.now().toString(),
-    mucDoHop: mucDo
-      );
+      id: id ?? '',
+      typeScheduleId: typeScheduleId ?? '',
+      chuTriModel: chuTri?.toDomain() ?? const ChuTriModel(),
+      linhVuc: tenLinhVuc ?? '',
+      noiDung: noiDung ?? '',
+      title: title ?? '',
+      phongHopMode: phongHop?.toDomain() ?? const PhongHopMode(),
+      tenLinhVuc: tenLinhVuc ?? '',
+      timeTo: timeTo ?? '',
+      timeStart: timeStart ?? '',
+      ngayBatDau: ngayBatDau ?? DateTime.now().toString(),
+      ngayKetThuc: ngayKetThuc ?? DateTime.now().toString(),
+      mucDoHop: mucDo);
 }
 
 class ChuTri {
@@ -203,6 +202,8 @@ class ChuTri {
         id: id ?? '',
         tenCanBo: tenCanBo ?? '',
         tenChucVu: tenCoQuan ?? '',
+        dauMoiLienHe: dauMoiLienHe ?? '',
+        soDienThoai: soDienThoai ?? '',
       );
 }
 

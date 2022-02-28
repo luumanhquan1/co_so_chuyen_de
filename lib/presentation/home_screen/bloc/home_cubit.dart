@@ -41,13 +41,11 @@ class HomeCubit extends BaseCubit<HomeState> {
       BehaviorSubject<List<TinhHuongKhanCapModel>>();
   final BehaviorSubject<DataUser> _userInformation =
       BehaviorSubject<DataUser>();
-
   final BehaviorSubject<bool> _showAddTag = BehaviorSubject<bool>();
-
   final BehaviorSubject<DataUser> _getUserInformation =
       BehaviorSubject<DataUser>();
   final BehaviorSubject<DateModel> _getDate = BehaviorSubject<DateModel>();
-
+  final PublishSubject<bool> refreshListen = PublishSubject<bool>();
   Future<void> _getTinhHuongKhanCap() async {
     final result = await homeRep.getTinhHuongKhanCap();
     result.when(
@@ -87,6 +85,18 @@ class HomeCubit extends BaseCubit<HomeState> {
     queue.dispose();
   }
 
+  Future<void> refreshData() async {
+    final queue = Queue(parallel: 4);
+
+    unawaited(queue.add(() => getUserInFor()));
+    unawaited(queue.add(() => getDate()));
+    unawaited(queue.add(() => _getTinhHuongKhanCap()));
+    unawaited(queue.add(() => configWidget()));
+    await queue.onComplete.catchError((er) {});
+    refreshListen.sink.add(true);
+    queue.dispose();
+  }
+
   void orderWidget(List<WidgetModel> listWidgetConfig) {
     _getConfigWidget.sink.add(listWidgetConfig);
   }
@@ -122,6 +132,7 @@ class HomeCubit extends BaseCubit<HomeState> {
     _showAddTag.close();
     _getUserInformation.close();
     _getDate.close();
+    refreshListen.close();
   }
 
   Stream<DateModel> get getDateStream => _getDate.stream;
@@ -139,7 +150,9 @@ extension GetConfigWidget on HomeCubit {
     final result = await homeRep.getDashBoardConfig();
     result.when(
       success: (res) {
-        _getConfigWidget.sink.add(res);
+        final data =
+            res.where((element) => element.widgetType != null).toList();
+        _getConfigWidget.sink.add(data);
       },
       error: (err) {},
     );
@@ -173,7 +186,7 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
   }
 
   void addTag(String value) {
-    if(value.trim().isEmpty){
+    if (value.trim().isEmpty) {
       return;
     }
     final data = _getTag.value;
@@ -662,9 +675,6 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
   }
 
   void selectTrangThaiVanBan(SelectKey selectKey, {bool filterTime = false}) {
-    if (this.selectKey == selectKey && !filterTime) {
-      return;
-    }
     this.selectKey = selectKey;
 
     switch (selectKey) {
@@ -859,11 +869,11 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
     result.when(
       success: (res) {
         final listResult = <CalendarMeetingModel>[];
-        int index= 0;
-        for(final vl in res){
+        int index = 0;
+        for (final vl in res) {
           listResult.add(vl);
-          index ++ ;
-          if(index>=20){
+          index++;
+          if (index >= 20) {
             break;
           }
         }
@@ -918,10 +928,10 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
         success: (res) {
           int index = 0;
           final listResult = <CalendarMeetingModel>[];
-          for(final vl in res){
+          for (final vl in res) {
             listResult.add(vl);
-            index ++;
-            if(index >=20){
+            index++;
+            if (index >= 20) {
               break;
             }
           }

@@ -37,6 +37,11 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
     // TODO: implement initState
     super.initState();
     _xuLyCubit.getDocument();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _xuLyCubit.getDocument();
+      });
+    });
   }
 
   @override
@@ -66,7 +71,6 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
         listSelectKey: <DialogData>[
           DialogData(
             onSelect: (value, startDate, endDate) {
-
               _xuLyCubit.selectDate(
                   selectKey: value, startDate: startDate, endDate: endDate);
             },

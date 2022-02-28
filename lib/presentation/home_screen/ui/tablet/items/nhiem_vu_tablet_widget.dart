@@ -31,6 +31,11 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
     // TODO: implement initState
     super.initState();
     _nhiemVuCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _nhiemVuCubit.callApi();
+      });
+    });
   }
 
   @override

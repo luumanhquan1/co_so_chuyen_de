@@ -42,9 +42,18 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
-    _xaHoiCubit.getPress();
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _xaHoiCubit.getPress();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _xaHoiCubit.getPress();
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(

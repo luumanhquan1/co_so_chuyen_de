@@ -35,6 +35,11 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
     // TODO: implement initState
     super.initState();
     _nhiemVuCubit.getDataTongHopNhiemVu();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _nhiemVuCubit.getDataTongHopNhiemVu();
+      });
+    });
   }
 
   @override
@@ -98,6 +103,7 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskTabletWidget> {
                           value: result.value.toString(),
                           urlIcon:result.tongHopNhiemVuModel.urlImg(),
                           title: result.tongHopNhiemVuModel.getText(),
+                          type: result.tongHopNhiemVuModel,
                         );
                       },
                     ),

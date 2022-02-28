@@ -30,6 +30,11 @@ class _CalendarWorkWidgetState extends State<CalendarWorkTabletWidget> {
     // TODO: implement initState
     super.initState();
     _lamViecCubit.callApi();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      HomeProvider.of(context).homeCubit.refreshListen.listen((value) {
+        _lamViecCubit.callApi();
+      });
+    });
   }
 
   @override
@@ -37,6 +42,7 @@ class _CalendarWorkWidgetState extends State<CalendarWorkTabletWidget> {
     return ContainerBackgroundTabletWidget(
       title: S.current.calendar_work,
       maxHeight: 415,
+      minHeight: 415,
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
