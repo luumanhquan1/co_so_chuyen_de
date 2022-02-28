@@ -55,98 +55,106 @@ class LichLamViecImlp implements LichLamViecRepository {
   LichLamViecImlp(this.lichLamViecService);
 
   @override
-  Future<Result<LichLamViecDashBroad>> getLichLv(String startTime,
-      String endTime,) {
+  Future<Result<LichLamViecDashBroad>> getLichLv(
+    String startTime,
+    String endTime,
+  ) {
     return runCatchingAsync<LichLamViecDashBroadResponse, LichLamViecDashBroad>(
-          () => lichLamViecService.getLichLamViec(startTime, endTime),
-          (response) => response.data.toDomain(),
+      () => lichLamViecService.getLichLamViec(startTime, endTime),
+      (response) => response.data.toDomain(),
     );
   }
 
   @override
   Future<Result<List<LichLamViecDashBroadItem>>> getLichLvRight(
-      String dateStart,
-      String dateTo,
-      int type,) {
+    String dateStart,
+    String dateTo,
+    int type,
+  ) {
     return runCatchingAsync<LichLamViecDashBroadRightResponse,
         List<LichLamViecDashBroadItem>>(
-          () =>
-          lichLamViecService.getLichLamViecRight(
-            dateStart,
-            dateTo,
-            type,
-          ),
-          (response) => response.toDomain(),
+      () => lichLamViecService.getLichLamViecRight(
+        dateStart,
+        dateTo,
+        type,
+      ),
+      (response) => response.toDomain(),
     );
   }
 
   @override
   Future<Result<DanhSachLichlamViecModel>> postDanhSachLichLamViec(
-      DanhSachLichLamViecRequest body,) {
+    DanhSachLichLamViecRequest body,
+  ) {
     return runCatchingAsync<DanhSachLichLamViecResponse,
         DanhSachLichlamViecModel>(
-            () => lichLamViecService.postData(body),
-            (response) =>
-        response.data?.toModel() ?? DanhSachLichlamViecModel.empty(),);
+      () => lichLamViecService.postData(body),
+      (response) =>
+          response.data?.toModel() ?? DanhSachLichlamViecModel.empty(),
+    );
   }
 
   @override
   Future<Result<List<LoaiSelectModel>>> getLoaiLich(
-      CatogoryListRequest catogoryListRequest,) {
+    CatogoryListRequest catogoryListRequest,
+  ) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-          () => lichLamViecService.getLoaiLichLamViec(catogoryListRequest),
-          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+      () => lichLamViecService.getLoaiLichLamViec(catogoryListRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<ChiTietLichLamViecModel>> detailCalenderWork(String id) {
     return runCatchingAsync<DetailCalenderWorkResponse,
-        ChiTietLichLamViecModel>(
-            () => lichLamViecService.detailCalenderWork(id),
-            (response) => response.data.toModel());
+            ChiTietLichLamViecModel>(
+        () => lichLamViecService.detailCalenderWork(id),
+        (response) => response.data.toModel());
   }
 
   @override
   Future<Result<List<BaoCaoModel>>> getDanhSachBaoCao(String scheduleId) {
     return runCatchingAsync<DanhSachBaoCaoResponse, List<BaoCaoModel>>(
-          () => lichLamViecService.getDanhSachBaoCaoKetQua(scheduleId),
-          (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
+      () => lichLamViecService.getDanhSachBaoCaoKetQua(scheduleId),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<NguoiChutriModel>>> getNguoiChuTri(
-      NguoiChuTriRequest nguoiChuTriRequest,) {
+    NguoiChuTriRequest nguoiChuTriRequest,
+  ) {
     return runCatchingAsync<NguoiChuTriResponse, List<NguoiChutriModel>>(
-          () => lichLamViecService.getNguoiChuTri(nguoiChuTriRequest),
-          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+      () => lichLamViecService.getNguoiChuTri(nguoiChuTriRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<List<LoaiSelectModel>>> getLinhVuc(
-      CatogoryListRequest catogoryListRequest,) {
+    CatogoryListRequest catogoryListRequest,
+  ) {
     return runCatchingAsync<CatogoryListResponse, List<LoaiSelectModel>>(
-          () => lichLamViecService.getLinhVuc(catogoryListRequest),
-          (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
+      () => lichLamViecService.getLinhVuc(catogoryListRequest),
+      (res) => res.data?.items?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 
   @override
   Future<Result<MessageModel>> deleteBaoCaoKetQua(String id) {
     return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
-          () => lichLamViecService.deleteBaoCaoKetQua(id),
-          (res) => res.toDomain(),
+      () => lichLamViecService.deleteBaoCaoKetQua(id),
+      (res) => res.toDomain(),
     );
   }
 
   @override
   Future<Result<DataLichLvModel>> getListLichLamViec(
-      ListLichLvRequest lichLvRequest,) {
+    ListLichLvRequest lichLvRequest,
+  ) {
     return runCatchingAsync<ListLichLvResponse, DataLichLvModel>(
-          () => lichLamViecService.getListLichLv(lichLvRequest),
-          (response) => response.data.toDomain(),
+      () => lichLamViecService.getListLichLv(lichLvRequest),
+      (response) => response.data.toDomain(),
     );
   }
 
@@ -154,37 +162,47 @@ class LichLamViecImlp implements LichLamViecRepository {
   Future<Result<DeleteTietLichLamViecModel>> deleteCalenderWork(String id) {
     return runCatchingAsync<DeleteCalenderWorkResponse,
         DeleteTietLichLamViecModel>(
-          () => lichLamViecService.deleteCalenderWork(id),
-          (response) => response.toDelete(),
+      () => lichLamViecService.deleteCalenderWork(id),
+      (response) => response.toDelete(),
     );
   }
 
   @override
   Future<Result<CancelLichLamViecModel>> cancelCalenderWork(String id) {
     return runCatchingAsync<CancelCalenderWorkResponse, CancelLichLamViecModel>(
-            () => lichLamViecService.cancelCalenderWork(id),
-            (response) => response.toSucceeded(),);
+      () => lichLamViecService.cancelCalenderWork(id),
+      (response) => response.toSucceeded(),
+    );
   }
 
   @override
   Future<Result<List<YKienModel>>> getDanhSachYKien(String id) {
     return runCatchingAsync<DanhSachYKienResponse, List<YKienModel>>(
-        () => lichLamViecService.getDanhSachYKien(id),
-        (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],);
+      () => lichLamViecService.getDanhSachYKien(id),
+      (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
+    );
   }
 
   @override
   Future<Result<MessageModel>> updateBaoCaoKetQua(
-      String reportStatusId,
-      String scheduleId,
-      String content,
-      List<File> files,
-      List<String> filesDelete,
-      String id,) {
+    String reportStatusId,
+    String scheduleId,
+    String content,
+    List<File> files,
+    List<String> filesDelete,
+    String id,
+  ) {
     return runCatchingAsync<ChinhSuaBaoCaoKetQuaResponse, MessageModel>(
-        () => lichLamViecService.updateBaoCaoKetQua(
-            reportStatusId, scheduleId, content, files, filesDelete, id),
-        (res) => res.toDomain(),);
+      () => lichLamViecService.updateBaoCaoKetQua(
+        reportStatusId,
+        scheduleId,
+        content,
+        files,
+        filesDelete,
+        id,
+      ),
+      (res) => res.toDomain(),
+    );
   }
 
   @override
@@ -296,7 +314,8 @@ class LichLamViecImlp implements LichLamViecRepository {
   @override
   Future<Result<MessageModel>> postTaoMoiBanGhi(TaoMoiBanGhiRequest body) {
     return runCatchingAsync<TaoMoiBanGhiResponse, MessageModel>(
-          () => lichLamViecService.taoMoiBanGhi(body), (response) =>
-        response.toDomain(),);
+      () => lichLamViecService.taoMoiBanGhi(body),
+      (response) => response.toDomain(),
+    );
   }
 }

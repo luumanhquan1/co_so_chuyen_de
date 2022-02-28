@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'dart:developer';
-
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
@@ -176,6 +177,25 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     );
 
     showContent();
+  }
+
+  // them tai lieu tao lich hop
+  Future<void> postFileTaoLichHop({
+    required int entityType,
+    required String entityName,
+    required String entityId,
+    required bool isMutil,
+    required List<File> files,
+  }) async {
+    showLoading();
+    await hopRepo
+        .postFileTaoLichHop(entityType, entityName, entityId, isMutil, files)
+        .then((value) {
+      value.when(
+        success: (res) {},
+        error: (err) {},
+      );
+    });
   }
 
   BehaviorSubject<ChonBienBanCuocHopModel> chonBienBanHopSubject =
