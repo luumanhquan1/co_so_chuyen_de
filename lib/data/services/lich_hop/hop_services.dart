@@ -84,10 +84,10 @@ abstract class HopServices {
   @POST(ApiConstants.ADD_FILE_TAI_LIEU_TAO_LICH_HOP)
   @MultiPart()
   Future<AddFileTaoLichHopResponse> postFile(
-    @Body() int entityType,
-    @Body() String entityName,
-    @Body() String entityId,
-    @Body() bool isMutil,
+    @Query('entityType') int entityType,
+    @Query('entityName') String entityName,
+    @Query('entityId') String entityId,
+    @Query('isMutil') bool isMutil,
     @Part() List<File> file,
   );
 
