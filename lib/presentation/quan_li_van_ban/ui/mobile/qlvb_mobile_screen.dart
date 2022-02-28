@@ -120,7 +120,6 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 16.0),
                       StreamBuilder<List<VanBanModel>>(
                         stream: cubitIncoming.getListVbDen,
                         builder: (context, snapshot) {
@@ -133,24 +132,27 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                               itemCount:
                                   listData.length < 3 ? listData.length : 3,
                               itemBuilder: (context, index) {
-                                return IncomingDocumentCell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ChiTietVanBanMobile(),
-                                      ),
-                                    );
-                                  },
-                                  title: listData[index].loaiVanBan ?? '',
-                                  dateTime: DateTime.parse(
-                                          listData[index].ngayDen ?? '')
-                                      .toStringWithListFormat,
-                                  userName: listData[index].nguoiSoanThao ?? '',
-                                  status: listData[index].doKhan ?? '',
-                                  userImage:
-                                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16,),
+                                  child: IncomingDocumentCell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ChiTietVanBanMobile(),
+                                        ),
+                                      );
+                                    },
+                                    title: listData[index].loaiVanBan ?? '',
+                                    dateTime: DateTime.parse(
+                                            listData[index].ngayDen ?? '')
+                                        .toStringWithListFormat,
+                                    userName: listData[index].nguoiSoanThao ?? '',
+                                    status: listData[index].doKhan ?? '',
+                                    userImage:
+                                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                  ),
                                 );
                               },
                             );
@@ -194,7 +196,6 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 16.0),
                       StreamBuilder<List<VanBanDiModel>>(
                         stream: cubitOutgoing.getDanhSachVbDi,
                         builder: (context, snapshot) {
@@ -207,24 +208,27 @@ class _QLVBScreenMobileState extends State<QLVBScreenMobile> {
                               itemCount:
                                   listData.length < 3 ? listData.length : 3,
                               itemBuilder: (context, index) {
-                                return IncomingDocumentCell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ChiTietVanBanMobile(),
-                                      ),
-                                    );
-                                  },
-                                  title: listData[index].loaiVanBan ?? '',
-                                  dateTime: DateTime.parse(
-                                          listData[index].ngayTao ?? '')
-                                      .toStringWithListFormat,
-                                  userName: listData[index].nguoiSoanThao ?? '',
-                                  status: listData[index].doKhan ?? '',
-                                  userImage:
-                                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16,),
+                                  child: IncomingDocumentCell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ChiTietVanBanMobile(),
+                                        ),
+                                      );
+                                    },
+                                    title: listData[index].loaiVanBan ?? '',
+                                    dateTime: DateTime.parse(
+                                            listData[index].ngayTao ?? '')
+                                        .toStringWithListFormat,
+                                    userName: listData[index].nguoiSoanThao ?? '',
+                                    status: listData[index].doKhan ?? '',
+                                    userImage:
+                                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                  ),
                                 );
                               },
                             );
