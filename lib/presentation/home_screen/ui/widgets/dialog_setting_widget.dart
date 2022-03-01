@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -10,6 +9,7 @@ import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/custom_select_date_tuy_chon_widgte.dart';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
 import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -19,8 +19,9 @@ import 'package:ccvc_mobile/widgets/radio/radio_button.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-class DialogSettingWidget extends StatelessWidget {
+class DialogSettingWidget extends StatefulWidget {
   final List<DialogData>? listSelectKey;
   final Function(SelectKey)? onSelect;
   final Widget? customDialog;
@@ -36,15 +37,165 @@ class DialogSettingWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DialogSettingWidget> createState() => _DialogSettingWidgetState();
+}
+
+class _DialogSettingWidgetState extends State<DialogSettingWidget> {
+  final _key = GlobalKey();
+  final LayerLink _layerLink = LayerLink();
+  late ScrollController controller;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    controller = HomeProvider.of(context).controller;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return listSelectKey == null && customDialog == null
-        ? const SizedBox()
-        : StreamBuilder<WidgetType?>(
+    return widget.customDialog != null
+        ? StreamBuilder(
             stream: HomeProvider.of(context).homeCubit.showDialogSetting,
             builder: (context, snapshot) {
               return Visibility(
                 maintainState: true,
-                visible: snapshot.data == type,
+                visible: snapshot.data == widget.type,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: AppTheme.getInstance().backGroundColor(),
+                      boxShadow: [
+                        BoxShadow(
+                          color: shadowContainerColor.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                      border: Border.all(color: borderColor.withOpacity(0.5)),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(12))),
+                  child: widget.customDialog!,
+                ),
+              );
+            },
+          )
+        : GestureDetector(
+            onTap: () {
+              HomeProvider.of(context).homeCubit.closeDialog();
+              showSelect(context);
+            },
+            child: CompositedTransformTarget(
+              link: _layerLink,
+              child: Container(
+                key: _key,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                color: Colors.transparent,
+                alignment: Alignment.centerRight,
+                child: SvgPicture.asset(ImageAssets.icMore),
+              ),
+            ),
+          );
+  }
+
+  void showSelect(BuildContext context) {
+    // ignore: cast_nullable_to_non_nullable
+    final box = _key.currentContext?.findRenderObject() as RenderBox;
+    final Offset position = box.localToGlobal(Offset.zero);
+    late OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(
+      builder: (BuildContext overlayContext) {
+        return DialogSelectWidget(
+          listSelectKey: widget.listSelectKey,
+          offset: position,
+          layerLink: _layerLink,
+          controller: controller,
+          labelWidget: widget.labelWidget,
+          customDialog: widget.customDialog,
+          onDismis: () {
+            overlayEntry.remove();
+          },
+        );
+      },
+    );
+    Overlay.of(context)?.insert(overlayEntry);
+  }
+}
+
+class DialogSelectWidget extends StatefulWidget {
+  final List<DialogData>? listSelectKey;
+  final Function(SelectKey)? onSelect;
+  final Widget? customDialog;
+  final Offset offset;
+  final Widget? labelWidget;
+  final Function() onDismis;
+  final LayerLink layerLink;
+  final ScrollController controller;
+  const DialogSelectWidget({
+    Key? key,
+    this.listSelectKey,
+    this.onSelect,
+    this.customDialog,
+    this.labelWidget,
+    required this.offset,
+    required this.onDismis,
+    required this.layerLink,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  State<DialogSelectWidget> createState() => _DialogSelectWidgetState();
+}
+
+class _DialogSelectWidgetState extends State<DialogSelectWidget> {
+  final _key = GlobalKey();
+  double insertBottom = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      final offsetDialog = _key.currentContext?.size?.height ?? 0;
+      final double insertBottomDialog = insertBottom - offsetDialog - 120;
+      if (insertBottomDialog < 0) {
+        widget.controller.jumpTo(
+          widget.controller.offset + (-insertBottomDialog),
+        );
+      }
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    insertBottom = MediaQuery.of(context).size.height - widget.offset.dy;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              widget.onDismis();
+            },
+            child: SizedBox.expand(
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            child: CompositedTransformFollower(
+              link: widget.layerLink,
+              showWhenUnlinked: false,
+              followerAnchor: Alignment.topRight,
+              offset: Offset(10.0.textScale(space: -7), 20),
+              child: Container(
+                key: _key,
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -59,16 +210,16 @@ class DialogSettingWidget extends StatelessWidget {
                     border: Border.all(color: borderColor.withOpacity(0.5)),
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
-                  child: customDialog ??
+                  child: widget.customDialog ??
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          labelWidget ?? const SizedBox(),
+                          widget.labelWidget ?? const SizedBox(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(listSelectKey?.length ?? 0,
-                                (index) {
-                              final data = listSelectKey![index];
+                            children: List.generate(
+                                widget.listSelectKey?.length ?? 0, (index) {
+                              final data = widget.listSelectKey![index];
                               return Padding(
                                 padding: EdgeInsets.only(
                                   top: index == 0 ? 0 : 20,
@@ -85,9 +236,12 @@ class DialogSettingWidget extends StatelessWidget {
                         ],
                       ),
                 ),
-              );
-            },
-          );
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void selectTime(SelectKey value, DialogData data) {
@@ -121,6 +275,7 @@ class DialogSettingWidget extends StatelessWidget {
 
   void selectCell(BuildContext context, SelectKey value, DialogData data) {
     if (value == SelectKey.TUY_CHON) {
+      widget.onDismis();
       if (APP_DEVICE == DeviceType.MOBILE) {
         showBottomSheetCustom(
           context,

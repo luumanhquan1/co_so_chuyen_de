@@ -61,6 +61,7 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      isCustomDialog: true,
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         customDialog: AddToDoWidget(
@@ -100,7 +101,8 @@ class _WorkListWidgetState extends State<WorkListTabletWidget> {
                             showDiaLog(
                               context,
                               funcBtnRight: () {
-                                danhSachCVCubit.deleteCongViec(todo,removeDone: false);
+                                danhSachCVCubit.deleteCongViec(todo,
+                                    removeDone: false);
                               },
                               showTablet: true,
                               icon: SvgPicture.asset(

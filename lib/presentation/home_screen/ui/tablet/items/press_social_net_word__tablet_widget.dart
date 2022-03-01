@@ -64,51 +64,57 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
       },
       spacingTitle: 0,
       selectKeyDialog: _xaHoiCubit,
-      dialogSelect: DialogSettingWidget(
-        labelWidget: Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: Row(
-            children: [
-              SvgPicture.asset(ImageAssets.icTag),
-              const SizedBox(
-                width: 9,
-              ),
-              GestureDetector(
-                onTap: () {
-                  cubit.closeDialog();
-                  _xaHoiCubit.showAddTag();
-                  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                    scrollController.animateTo(
-                      scrollController.position.maxScrollExtent,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                  });
-                },
-                child: Text(
-                  S.current.chinh_sua_tag,
-                  style: textNormalCustom(
-                    fontSize: 14,
-                    color: textDefault,
+      dialogSelect: StreamBuilder(
+        stream: _xaHoiCubit.selectKeyDialog,
+        builder: (context, snapshot) {
+          return DialogSettingWidget(
+            labelWidget: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Row(
+                children: [
+                  SvgPicture.asset(ImageAssets.icTag),
+                  const SizedBox(
+                    width: 9,
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      cubit.closeDialog();
+                      _xaHoiCubit.showAddTag();
+                      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                        scrollController.animateTo(
+                          scrollController.position.maxScrollExtent,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.linear,
+                        );
+                      });
+                    },
+                    child: Text(
+                      S.current.chinh_sua_tag,
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: textDefault,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            type: widget.homeItemType,
+            listSelectKey: [
+              DialogData(
+                onSelect: (value, startDate, endDate) {
+                  _xaHoiCubit.selectDate(
+                    selectKey: value,
+                    startDate: startDate,
+                    endDate: endDate,
+                  );
+                },
+                title: S.current.time,
+                initValue: _xaHoiCubit.selectKeyTime
               )
             ],
-          ),
-        ),
-        type: widget.homeItemType,
-        listSelectKey: [
-          DialogData(
-            onSelect: (value, startDate, endDate) {
-              _xaHoiCubit.selectDate(
-                selectKey: value,
-                startDate: startDate,
-                endDate: endDate,
-              );
-            },
-            title: S.current.time,
-          )
-        ],
+          );
+        }
       ),
       padding: EdgeInsets.zero,
       child: Flexible(

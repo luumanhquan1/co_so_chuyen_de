@@ -33,13 +33,13 @@ class HomeScreenMobile extends StatefulWidget {
 class _HomeScreenMobileState extends State<HomeScreenMobile> {
   ScrollController scrollController = ScrollController();
   HomeCubit homeCubit = HomeCubit();
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -51,6 +51,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   Widget build(BuildContext context) {
     return HomeProvider(
       homeCubit: homeCubit,
+      controller: scrollController,
       child: StateStreamLayout(
         textEmpty: S.current.khong_co_du_lieu,
         retry: () {},
@@ -124,6 +125,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
             },
             child: SizedBox.expand(
               child: SingleChildScrollView(
+                controller: scrollController,
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
                 physics: const ClampingScrollPhysics(
