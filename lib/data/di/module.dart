@@ -7,7 +7,7 @@ import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_impl/lich_lam_vie
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
-import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_di_service.dart';
+import 'package:ccvc_mobile/data/services/chi_tiet_van_ban/chi_tiet_van_ban_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
@@ -64,9 +64,9 @@ void configureDependencies() {
   Get.put<ThanhPhanThamGiaReponsitory>(ThanhPhanThamGiaImpl(Get.find()));
 
   Get.put(
-      ChiTietVanBanDiService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
+      ChiTietVanBanService(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put<ChiTietVanBanRepository>(
-    ChiTietVanBanDiImpl(Get.find()),
+    ChiTietVanBanImpl(Get.find()),
   );
 
   Get.put(

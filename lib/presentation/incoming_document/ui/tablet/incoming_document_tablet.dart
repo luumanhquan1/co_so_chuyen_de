@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_den_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_tablet.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_dell_tablet.dart';
@@ -13,9 +14,11 @@ class IncomingDocumentScreenTablet extends StatefulWidget {
   final String title;
   final TypeScreen type;
 
-  const IncomingDocumentScreenTablet(
-      {Key? key, required this.title, required this.type})
-      : super(key: key);
+  const IncomingDocumentScreenTablet({
+    Key? key,
+    required this.title,
+    required this.type,
+  }) : super(key: key);
 
   @override
   _IncomingDocumentScreenTabletState createState() =>
@@ -76,7 +79,7 @@ class _IncomingDocumentScreenTabletState
 
   Widget itemVanBan(VanBanModel data, int index) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 24.0,
         right: 30.0,
         left: 30.0,
@@ -86,7 +89,16 @@ class _IncomingDocumentScreenTabletState
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ChiTietVanBanTablet(),
+              builder: (context) {
+                if (widget.type == TypeScreen.VAN_BAN_DEN) {
+                  return ChiTietVanBanDenTablet(
+                    processId: data.iD ?? '',
+                    taskId: data.taskId ?? '',
+                  );
+                } else {
+                  return const ChiTietVanBanTablet();
+                }
+              },
             ),
           );
         },
