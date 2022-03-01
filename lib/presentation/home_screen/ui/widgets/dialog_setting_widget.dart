@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -27,6 +26,7 @@ class DialogSettingWidget extends StatefulWidget {
   final Widget? customDialog;
   final WidgetType type;
   final Widget? labelWidget;
+  final Function()? onLabel;
   const DialogSettingWidget({
     Key? key,
     this.listSelectKey,
@@ -34,6 +34,7 @@ class DialogSettingWidget extends StatefulWidget {
     required this.type,
     this.customDialog,
     this.labelWidget,
+    this.onLabel,
   }) : super(key: key);
 
   @override
@@ -111,6 +112,7 @@ class _DialogSettingWidgetState extends State<DialogSettingWidget> {
           controller: controller,
           labelWidget: widget.labelWidget,
           customDialog: widget.customDialog,
+          onLabel: widget.onLabel,
           onDismis: () {
             overlayEntry.remove();
           },
@@ -130,6 +132,7 @@ class DialogSelectWidget extends StatefulWidget {
   final Function() onDismis;
   final LayerLink layerLink;
   final ScrollController controller;
+  final Function()? onLabel;
   const DialogSelectWidget({
     Key? key,
     this.listSelectKey,
@@ -140,6 +143,7 @@ class DialogSelectWidget extends StatefulWidget {
     required this.onDismis,
     required this.layerLink,
     required this.controller,
+    this.onLabel,
   }) : super(key: key);
 
   @override
@@ -214,7 +218,15 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          widget.labelWidget ?? const SizedBox(),
+                          GestureDetector(
+                            onTap: () {
+                              if (widget.onLabel != null) {
+                                widget.onDismis();
+                                widget.onLabel!();
+                              }
+                            },
+                            child: widget.labelWidget ?? const SizedBox(),
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
