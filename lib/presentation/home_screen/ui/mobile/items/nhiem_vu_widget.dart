@@ -56,34 +56,39 @@ class _NhiemVuWidgetState extends State<NhiemVuWidget> {
           _nhiemVuCubit.selectTrangThaiNhiemVu(value);
         }
       },
-      dialogSelect: DialogSettingWidget(
-        type: widget.homeItemType,
-        listSelectKey: <DialogData>[
-          DialogData(
-            onSelect: (value,_,__) {
-              _nhiemVuCubit.selectDonVi(
-                selectKey: value,
-              );
-            },
-            title: S.current.nhiem_vu,
-            initValue: _nhiemVuCubit.selectKeyDonVi,
-            key: [
-              SelectKey.CA_NHAN,
-              SelectKey.DON_VI,
-            ],
-          ),
-          DialogData(
-            onSelect: (value,startDate,endDate) {
-              _nhiemVuCubit.selectDate(
-                selectKey: value,
-                startDate: startDate,
-                endDate: endDate,
-              );
-            },
-            initValue: _nhiemVuCubit.selectKeyTime,
-            title: S.current.time,
-          )
-        ],
+      dialogSelect: StreamBuilder(
+          stream: _nhiemVuCubit.selectKeyDialog,
+          builder: (context, snapshot) {
+            return DialogSettingWidget(
+              type: widget.homeItemType,
+              listSelectKey: [
+                DialogData(
+                  onSelect: (value, _, __) {
+                    _nhiemVuCubit.selectDonVi(
+                      selectKey: value,
+                    );
+                  },
+                  title: S.current.nhiem_vu,
+                  initValue: _nhiemVuCubit.selectKeyDonVi,
+                  key: [
+                    SelectKey.CA_NHAN,
+                    SelectKey.DON_VI,
+                  ],
+                ),
+                DialogData(
+                  onSelect: (value, startDate, endDate) {
+                    _nhiemVuCubit.selectDate(
+                      selectKey: value,
+                      startDate: startDate,
+                      endDate: endDate,
+                    );
+                  },
+                  initValue: _nhiemVuCubit.selectKeyTime,
+                  title: S.current.time,
+                )
+              ],
+            );
+          }
       ),
       child: LoadingOnly(
         stream: _nhiemVuCubit.stateStream,
