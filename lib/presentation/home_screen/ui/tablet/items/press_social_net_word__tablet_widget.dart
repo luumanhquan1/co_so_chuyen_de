@@ -43,7 +43,8 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
     super.didChangeDependencies();
     cubit = HomeProvider.of(context).homeCubit;
   }
-@override
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -54,6 +55,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundTabletWidget(
@@ -65,57 +67,53 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
       spacingTitle: 0,
       selectKeyDialog: _xaHoiCubit,
       dialogSelect: StreamBuilder(
-        stream: _xaHoiCubit.selectKeyDialog,
-        builder: (context, snapshot) {
-          return DialogSettingWidget(
-            labelWidget: Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Row(
-                children: [
-                  SvgPicture.asset(ImageAssets.icTag),
-                  const SizedBox(
-                    width: 9,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      cubit.closeDialog();
-                      _xaHoiCubit.showAddTag();
-                      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                        scrollController.animateTo(
-                          scrollController.position.maxScrollExtent,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.linear,
-                        );
-                      });
-                    },
-                    child: Text(
+          stream: _xaHoiCubit.selectKeyDialog,
+          builder: (context, snapshot) {
+            return DialogSettingWidget(
+              onLabel: () {
+                cubit.closeDialog();
+                _xaHoiCubit.showAddTag();
+                WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                  scrollController.animateTo(
+                    scrollController.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear,
+                  );
+                });
+              },
+              labelWidget: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(ImageAssets.icTag),
+                    const SizedBox(
+                      width: 9,
+                    ),
+                    Text(
                       S.current.chinh_sua_tag,
                       style: textNormalCustom(
                         fontSize: 14,
                         color: textDefault,
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            type: widget.homeItemType,
-            listSelectKey: [
-              DialogData(
-                onSelect: (value, startDate, endDate) {
-                  _xaHoiCubit.selectDate(
-                    selectKey: value,
-                    startDate: startDate,
-                    endDate: endDate,
-                  );
-                },
-                title: S.current.time,
-                initValue: _xaHoiCubit.selectKeyTime
-              )
-            ],
-          );
-        }
-      ),
+              type: widget.homeItemType,
+              listSelectKey: [
+                DialogData(
+                    onSelect: (value, startDate, endDate) {
+                      _xaHoiCubit.selectDate(
+                        selectKey: value,
+                        startDate: startDate,
+                        endDate: endDate,
+                      );
+                    },
+                    title: S.current.time,
+                    initValue: _xaHoiCubit.selectKeyTime)
+              ],
+            );
+          }),
       padding: EdgeInsets.zero,
       child: Flexible(
         child: LoadingOnly(
