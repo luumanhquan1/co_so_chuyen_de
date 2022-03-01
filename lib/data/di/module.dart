@@ -40,8 +40,9 @@ void configureDependencies() {
   );
   //login
   Get.put(AccountService(provideDio(baseOption: BaseURLOption.COMMON)));
+  Get.put(AccountServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put<AccountRepository>(
-    AccountImpl(Get.find()),
+    AccountImpl(Get.find(),Get.find()),
   );
 
 
