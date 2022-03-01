@@ -18,12 +18,9 @@ class TabbarNewspaper extends StatefulWidget {
 
 class _TabbarNewspaperState extends State<TabbarNewspaper> {
   var _controller = TabController(vsync: AnimatedListState(), length: 4);
-  BaoChiMangXaHoiBloc baoChiMangXaHoiBloc = BaoChiMangXaHoiBloc();
-
   @override
   void initState() {
     _controller = TabController(vsync: AnimatedListState(), length: 4);
-    baoChiMangXaHoiBloc.getListTatCaCuDe();
   }
 
   @override
