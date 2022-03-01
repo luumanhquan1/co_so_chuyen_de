@@ -121,6 +121,9 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
   static const DASH_BOARD_TAT_CA_CHU_DE =
       '/api/NewsNetViews/dashboard';
 
+  static const GET_LIST_TAT_CA_CHU_DE =
+      '/api/NewsNetViews/search_news';
+
 }
 
 class ImageConstants {

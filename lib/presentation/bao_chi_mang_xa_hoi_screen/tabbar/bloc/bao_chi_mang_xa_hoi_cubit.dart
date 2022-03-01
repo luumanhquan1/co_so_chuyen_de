@@ -18,7 +18,6 @@ class BaoChiMangXaHoiBloc {
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
   Future<void> getDasBoardTatCaCuDe() async {
-    // print(DateTime.now().formatApiSS);
     final result =
         await _BCMXHRepo.getDashBoardTatCaChuDe(1,30,0,true,'2022/02/22 20:17:01','2022/02/22 20:17:01');
     result.when(
@@ -27,6 +26,18 @@ class BaoChiMangXaHoiBloc {
       },
       error: (err) {
         print('that baiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+        return;
+      },
+    );
+  }
+
+  Future<void> getListTatCaCuDe() async {
+    final result =
+    await _BCMXHRepo.getDashListChuDe(1,30,233,true,'2022/02/14 00:00:00','2022/02/14 23:59:59');
+    result.when(
+      success: (res) {
+      },
+      error: (err) {
         return;
       },
     );

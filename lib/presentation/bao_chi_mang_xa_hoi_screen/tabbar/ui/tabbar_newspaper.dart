@@ -23,7 +23,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
   @override
   void initState() {
     _controller = TabController(vsync: AnimatedListState(), length: 4);
-    baoChiMangXaHoiBloc.getDasBoardTatCaCuDe();
+    baoChiMangXaHoiBloc.getListTatCaCuDe();
   }
 
   @override
