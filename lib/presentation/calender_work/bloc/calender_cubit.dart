@@ -1,18 +1,18 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
-import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
-import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -28,9 +28,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
-  BehaviorSubject.seeded([true, false]);
+      BehaviorSubject.seeded([true, false]);
   BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
-  BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
+      BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
 
   Stream<int> get checkIndexStream => checkIndex.stream;
 
@@ -47,23 +47,26 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   /// ListLichLvRequest lichLvRequest = fakeData;
 
   bool isCheck = false;
-  BehaviorSubject<DataLichLvModel> listLichSubject = BehaviorSubject();
+  BehaviorSubject<DataLichLvModel> listLichSubject =
+      BehaviorSubject.seeded(DataLichLvModel());
   DataLichLvModel dataLichLvModel = DataLichLvModel();
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
 
   void callApi() {
     getListLichHop(
-      dateFrom: '2022-02-01',
-      dateTo: '2022-02-28',
+      dateFrom: startDate.formatApi,
+      dateTo: endDate.formatApi,
       isLichCuaToi: true,
       pageIndex: page,
       pageSize: 10,
     );
-    dataLichLamViec(startDate: '2022-02-01', endDate: '2022-02-28');
+    dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
     dataLichLamViecRight(
-      startDate: '2022-02-01',
-      endDate: '2022-02-28',
+      startDate: startDate.formatApi,
+      endDate: endDate.formatApi,
       type: 3,
     );
   }
@@ -93,6 +96,32 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       },
       error: (error) {},
     );
+  }
+
+  DataSource getCalenderDataSource(DataLichLvModel dataLichLvModels) {
+    final List<Appointment> appointments = [];
+    final RecurrenceProperties recurrence =
+        RecurrenceProperties(startDate: DateTime.now());
+    recurrence.recurrenceType = RecurrenceType.daily;
+    recurrence.interval = 2;
+    recurrence.recurrenceRange = RecurrenceRange.noEndDate;
+    recurrence.recurrenceCount = 10;
+    for (int i = 0; i < (dataLichLvModels.listLichLVModel?.length ?? 0); i++) {
+      appointments.add(
+        Appointment(
+          startTime: DateTime.parse(
+            dataLichLvModels.listLichLVModel?[i].dateTimeFrom ?? '',
+          ),
+          endTime: DateTime.parse(
+            dataLichLvModels.listLichLVModel?[i].dateTimeTo ?? '',
+          ),
+          subject: dataLichLvModels.listLichLVModel?[i].title ?? '',
+          color: Colors.blue,
+        ),
+      );
+    }
+    print("sssssssssssssssssssssssss${appointments}");
+    return DataSource(appointments);
   }
 
   List<String> img = [
@@ -165,27 +194,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     return 'Thứ ${time.weekday},${time.day} tháng ${time.month}';
   }
 
-  DataSource getCalenderDataSource() {
-    final List<Appointment> appointments = [];
-    final RecurrenceProperties recurrence =
-    RecurrenceProperties(startDate: DateTime.now());
-    recurrence.recurrenceType = RecurrenceType.daily;
-    recurrence.interval = 2;
-    recurrence.recurrenceRange = RecurrenceRange.noEndDate;
-    recurrence.recurrenceCount = 10;
-    for (int i = 0; i < listMeeting.length; i++) {
-      appointments.add(
-        Appointment(
-          startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
-          endTime: DateTime.parse(listMeeting[i].dateTimeTo),
-          subject: listMeeting[i].title,
-          color: Colors.blue,
-        ),
-      );
-    }
-    return DataSource(appointments);
-  }
-
   void chooseTypeListLv(Type_Choose_Option_List type) {
     if (type == Type_Choose_Option_List.DANG_LICH) {
       emit(const LichLVStateDangLich(Type_Choose_Option_Day.DAY));
@@ -207,7 +215,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   //tong dashbroad
 
   BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
-  BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
+      BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
 
   Stream<LichLamViecDashBroad> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
@@ -269,18 +277,16 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     showContent();
   }
 
-  Future<void> postDanhSachLichlamViec({
-    required DanhSachLichLamViecRequest body
-  }) async {
+  Future<void> postDanhSachLichlamViec(
+      {required DanhSachLichLamViecRequest body}) async {
     final result = await _lichLamViec.postDanhSachLichLamViec(body);
-    result.when(success: (value) {
-      totalPage=value.totalPage??1;
-      danhSachLichLamViecSubject.add(value);
-
-    }, error: (error){
-
-    }
-    ,);
+    result.when(
+      success: (value) {
+        totalPage = value.totalPage ?? 1;
+        danhSachLichLamViecSubject.add(value);
+      },
+      error: (error) {},
+    );
   }
 }
 

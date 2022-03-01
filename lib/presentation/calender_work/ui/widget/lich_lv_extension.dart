@@ -74,9 +74,13 @@ extension LichLVOpition on Type_Choose_Option_Day {
   Widget getCalendarLvStateDangLichMobile() {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const InCalenderForm();
+        return InCalenderForm(
+          cubit: CalenderCubit(),
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const CalenderWeekMobile();
+        return CalenderWeekMobile(
+          cubit: CalenderCubit(),
+        );
       case Type_Choose_Option_Day.MONTH:
         return const CalenderFormMonth();
       default:
