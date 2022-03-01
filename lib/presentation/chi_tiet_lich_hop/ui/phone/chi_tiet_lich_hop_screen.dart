@@ -163,6 +163,9 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                   cubit: cubit,
                 ),
                 const ChuongTrinhHopWidget(),
+                const SizedBox(
+                  height: 8,
+                ),
                 const MoiNguoiThamGiaWidget(),
                 const TaiLieuWidget(),
                 // PhatBieuWidget(),
