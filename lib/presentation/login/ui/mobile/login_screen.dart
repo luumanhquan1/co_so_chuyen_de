@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/main.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_provider.dart';
@@ -213,18 +214,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             title: S.current.login,
                             isColorBlue: true,
                             onPressed: () async {
-                              if (keyGroup.currentState!.validator()) {
-                                await loginCubit.loginAndSaveinfo(
-                                  context: context,
-                                  passWord: textPasswordController.text,
-                                  userName: textTaiKhoanController.text,
-                                  appCode: APP_CODE,
-                                );
-                              } else {}
-
-                              if (loginCubit.passIsError == true) {
-                                _showToast(context);
-                              }
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DetailMeetCalenderScreen(id: '',)),
+                              );
+                              // if (keyGroup.currentState!.validator()) {
+                              //   await loginCubit.loginAndSaveinfo(
+                              //     context: context,
+                              //     passWord: textPasswordController.text,
+                              //     userName: textTaiKhoanController.text,
+                              //     appCode: APP_CODE,
+                              //   );
+                              // } else {}
+                              //
+                              // if (loginCubit.passIsError == true) {
+                              //   _showToast(context);
+                              // }
                             },
                           );
                         },
