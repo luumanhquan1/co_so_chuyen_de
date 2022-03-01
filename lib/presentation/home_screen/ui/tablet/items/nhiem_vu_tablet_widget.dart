@@ -59,34 +59,39 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
           _nhiemVuCubit.selectTrangThaiNhiemVu(value);
         }
       },
-      dialogSelect: DialogSettingWidget(
-        type: widget.homeItemType,
-        listSelectKey: [
-          DialogData(
-            onSelect: (value, _, __) {
-              _nhiemVuCubit.selectDonVi(
-                selectKey: value,
-              );
-            },
-            title: S.current.nhiem_vu,
-            initValue: _nhiemVuCubit.selectKeyDonVi,
-            key: [
-              SelectKey.CA_NHAN,
-              SelectKey.DON_VI,
+      dialogSelect: StreamBuilder(
+        stream: _nhiemVuCubit.selectKeyDialog,
+        builder: (context, snapshot) {
+          return DialogSettingWidget(
+            type: widget.homeItemType,
+            listSelectKey: [
+              DialogData(
+                onSelect: (value, _, __) {
+                  _nhiemVuCubit.selectDonVi(
+                    selectKey: value,
+                  );
+                },
+                title: S.current.nhiem_vu,
+                initValue: _nhiemVuCubit.selectKeyDonVi,
+                key: [
+                  SelectKey.CA_NHAN,
+                  SelectKey.DON_VI,
+                ],
+              ),
+              DialogData(
+                onSelect: (value, startDate, endDate) {
+                  _nhiemVuCubit.selectDate(
+                    selectKey: value,
+                    startDate: startDate,
+                    endDate: endDate,
+                  );
+                },
+                initValue: _nhiemVuCubit.selectKeyTime,
+                title: S.current.time,
+              )
             ],
-          ),
-          DialogData(
-            onSelect: (value, startDate, endDate) {
-              _nhiemVuCubit.selectDate(
-                selectKey: value,
-                startDate: startDate,
-                endDate: endDate,
-              );
-            },
-            initValue: _nhiemVuCubit.selectKeyTime,
-            title: S.current.time,
-          )
-        ],
+          );
+        }
       ),
       child: Flexible(
         child: LoadingOnly(

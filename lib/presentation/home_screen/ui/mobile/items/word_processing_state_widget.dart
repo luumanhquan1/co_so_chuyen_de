@@ -66,18 +66,23 @@ class _WordProcessingStateWidgetState extends State<WordProcessingStateWidget> {
         cubit.showDialog(widget.homeItemType);
       },
       selectKeyDialog: _xuLyCubit,
-      dialogSelect: DialogSettingWidget(
-        type: widget.homeItemType,
-        listSelectKey: <DialogData>[
-          DialogData(
-            onSelect: (value, startDate, endDate) {
-              _xuLyCubit.selectDate(
-                  selectKey: value, startDate: startDate, endDate: endDate);
-            },
-            title: S.current.document,
-            initValue: _xuLyCubit.selectKeyTime,
-          )
-        ],
+      dialogSelect: StreamBuilder(
+          stream: _xuLyCubit.selectKeyDialog,
+          builder: (context, snapshot) {
+            return DialogSettingWidget(
+              type: widget.homeItemType,
+              listSelectKey: <DialogData>[
+                DialogData(
+                  onSelect: (value, startDate, endDate) {
+                    _xuLyCubit.selectDate(
+                        selectKey: value, startDate: startDate, endDate: endDate);
+                  },
+                  title: S.current.time,
+                  initValue: _xuLyCubit.selectKeyTime,
+                )
+              ],
+            );
+          }
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
