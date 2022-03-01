@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lic
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thanh_phan_tham_gia_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
@@ -84,13 +85,11 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
                   },
                 );
               } else {
-                return SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
+                return const SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
                     height: 200,
-                    child: Center(
-                      child: Text(S.current.khong_co_du_lieu),
-                    ),
+                    child: NodataWidget(),
                   ),
                 );
               }

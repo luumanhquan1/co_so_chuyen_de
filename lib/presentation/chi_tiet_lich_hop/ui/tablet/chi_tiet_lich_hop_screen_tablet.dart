@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/chuong_trinh_hop_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_lieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cong_tac_chuan_bi_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/moi_nguoi_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
@@ -169,6 +170,11 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     ),
                     Tab(
                       child: Text(
+                        S.current.chuong_trinh_hop
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
                         S.current.thanh_phan_tham_gia,
                       ),
                     ),
@@ -205,7 +211,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     CongTacChuanBiWidgetTablet(),
                     ChuongTrinhHopWidget(),
                     MoiNguoiThamGiaWidgetTablet(),
-                    // TaiLieuWidgetTablet(),
+                    TaiLieuWidget(),
                     // PhatBieuWidgetTablet(),
                     // BieuQuyetWidgetTablet(),
                     // KetLuanHopWidgetTablet(),

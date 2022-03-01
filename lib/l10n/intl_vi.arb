@@ -538,7 +538,9 @@
   "diem_danh" : "Điểm danh",
   "huy_diem_danh" : "Huỷ điểm danh",
   "tim_kiem_can_bo" : "Tìm kiếm cán bộ",
-  "chon_tat_ca" : "Chọn tất cả"
+  "chon_tat_ca" : "Chọn tất cả",
+  "them_tai_lieu_cuoc_hop" : "Thêm tài liệu cuộc họp",
+  "chuong_trinh_hop" : "Chương trình họp"
 }
 
 
