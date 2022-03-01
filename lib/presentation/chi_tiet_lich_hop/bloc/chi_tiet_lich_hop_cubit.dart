@@ -8,16 +8,19 @@ import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get.dart';
@@ -29,6 +32,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   HopRepository get hopRp => Get.find();
   bool check = false;
+
   //
 
   BehaviorSubject<MessageModel> messageSubject = BehaviorSubject();
@@ -420,6 +424,74 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       statusDiemDanh: false,
     ),
   ];
+
+  HistoryProcessPage? process;
+
+  List<HistoryDetailDocument> get listHistory =>
+      process == null ? [] : process!.listDetailDocumentHistory;
+
+  PhatBieuModel phatBieu = PhatBieuModel(
+    tthoiGian: '5/11/2021  9:10:03 PM',
+    nguoiPhatBieu: 'Lê Sĩ Lâm',
+    ndPhatBieu: 'Cán bộ chủ trì',
+    phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+  );
+
+  List<String> fakeList = ['1','2','3'];
+
+  List<PhatBieuModel> listPhatBieu = [
+    PhatBieuModel(
+      tthoiGian: '11:00, 14/01/2021',
+      nguoiPhatBieu: 'Lê Sĩ Lâm',
+      ndPhatBieu: 'Cán bộ chủ trì',
+      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+    ),
+    PhatBieuModel(
+      tthoiGian: '11:00, 14/01/2021',
+      nguoiPhatBieu: 'Lê Sĩ Lâm',
+      ndPhatBieu: 'Cán bộ chủ trì',
+      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+    ),
+    PhatBieuModel(
+      tthoiGian: '11:00, 14/01/2021',
+      nguoiPhatBieu: 'Lê Sĩ Lâm',
+      ndPhatBieu: 'Cán bộ chủ trì',
+      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+    ),
+  ];
+
+  BehaviorSubject<List<PhatBieuModel>> phatbieu =
+  BehaviorSubject<List<PhatBieuModel>>();
+
+  Stream<List<PhatBieuModel>> get streamPhatBieu => phatbieu.stream;
+
+  final BehaviorSubject<String> typeStatus =
+  BehaviorSubject.seeded(S.current.danh_sach_phat_bieu);
+
+  Stream<String> get getTypeStatus => typeStatus.stream;
+
+  void getValueStatus(String value) {
+    if (value == S.current.danh_sach_phat_bieu) {
+      phatbieu.sink.add(listPhatBieu);
+    } else if (value == S.current.cho_duyet) {
+      phatbieu.sink.add(listPhatBieu);
+    } else if (value == S.current.da_duyet){
+      phatbieu.sink.add(listPhatBieu);
+    } else {
+      phatbieu.sink.add(listPhatBieu);
+    }
+    phatbieu.sink.add(listPhatBieu);
+    typeStatus.sink.add(value);
+    print(value);
+  }
+
+  final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
+
+  Stream<int> get checkRadioStream => _checkRadioSubject.stream;
+
+  void checkRadioButton(int _index) {
+    _checkRadioSubject.sink.add(_index);
+  }
 
 
 
