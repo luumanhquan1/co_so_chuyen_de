@@ -10,13 +10,16 @@ import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
@@ -25,7 +28,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   DetailMeetCalenderCubit() : super(DetailMeetCalenderInitial());
 
   HopRepository get hopRp => Get.find();
-
+  bool check = false;
   //
 
   BehaviorSubject<MessageModel> messageSubject = BehaviorSubject();
@@ -253,6 +256,22 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
+  CongTacChuanBiModel thongTinPhong = CongTacChuanBiModel(
+    tenPhong: 'Phòng họp',
+    sucChua: '3',
+    diaDiem: 'UBND Đồng Nai',
+    trangThai: 'Đã duyệt',
+    loaiThietBi: 'Máy chiếu',
+  );
+
+  CongTacChuanBiModel thongTinYeuCauThietBi = CongTacChuanBiModel(
+    tenPhong: '',
+    sucChua: '20',
+    diaDiem: '',
+    trangThai: 'Chờ duyệt',
+    loaiThietBi: 'Máy chiếu',
+  );
+
   Future<void> themBieuQuyetHop() async {
     final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
         dateStart: '01/01/1900',
@@ -284,6 +303,125 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       },
     );
   }
+
+  ThanhPhanThamGiaModel thanhPhanThamGiaModel = ThanhPhanThamGiaModel(
+    tebCanBo: 'Lê Sĩ Lâm',
+    trangThai: 'Chờ xác nhận',
+    diemDanh: 'Có mặt',
+    tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+    ndCongViec: 'Họp nội bộ',
+    vaiTro: 'Cán bộ chủ trì',
+    statusDiemDanh: false,
+  );
+
+  void search(String text) {
+    final searchTxt = text.trim().toLowerCase().vietNameseParse();
+    bool isListCanBo(ThanhPhanThamGiaModel canBo) {
+      return canBo.tebCanBo!
+          .toLowerCase()
+          .vietNameseParse()
+          .contains(searchTxt);
+    }
+
+    final value = listFakeThanhPhanThamGiaModel
+        .where((element) => isListCanBo(element))
+        .toList();
+    thanhPhanThamGia.sink.add(value);
+  }
+
+  BehaviorSubject<List<ThanhPhanThamGiaModel>> thanhPhanThamGia =
+  BehaviorSubject<List<ThanhPhanThamGiaModel>>();
+
+  Stream<List<ThanhPhanThamGiaModel>> get streamthanhPhanThamGia =>
+      thanhPhanThamGia.stream;
+
+  final BehaviorSubject<bool> checkBoxCheck = BehaviorSubject();
+
+  Stream<bool> get checkBoxCheckBool => checkBoxCheck.stream;
+
+  void checkBoxButton() {
+    checkBoxCheck.sink.add(check);
+  }
+  List<String> selectedIds = [];
+  bool checkIsSelected(String id) {
+    bool vl = false;
+    if (selectedIds.contains(id)) {
+      vl = true;
+    }
+    validateCheckAll();
+    return vl;
+  }
+
+  void addOrRemoveId({
+    required bool isSelected,
+    required String id,
+  }) {
+    if (isSelected) {
+      selectedIds.remove(id);
+    } else {
+      selectedIds.add(id);
+      final temp = selectedIds.toSet();
+      selectedIds = temp.toList();
+    }
+    validateCheckAll();
+  }
+
+  void checkAll() {
+    selectedIds.clear();
+    if (check) {
+      selectedIds =
+          listFakeThanhPhanThamGiaModel.map((e) => e.id ?? '').toList();
+      log('LEN : ${selectedIds.length}');
+    }
+    List<ThanhPhanThamGiaModel> _tempList = [];
+    if (thanhPhanThamGia.hasValue) {
+      _tempList = thanhPhanThamGia.value;
+    } else {
+      _tempList = listFakeThanhPhanThamGiaModel;
+    }
+    thanhPhanThamGia.sink.add(_tempList);
+  }
+
+  void validateCheckAll() {
+    check = selectedIds.length == listFakeThanhPhanThamGiaModel.length;
+    log(check.toString());
+    checkBoxCheck.sink.add(check);
+  }
+
+  List<ThanhPhanThamGiaModel> listFakeThanhPhanThamGiaModel = [
+    ThanhPhanThamGiaModel(
+      id: '0',
+      tebCanBo: 'Lê Sĩ Lâm',
+      trangThai: 'Chờ xác nhận',
+      diemDanh: 'Có mặt',
+      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+      ndCongViec: 'Họp nội bộ',
+      vaiTro: 'Cán bộ chủ trì',
+      statusDiemDanh: false,
+    ),
+    ThanhPhanThamGiaModel(
+      id: '1',
+      tebCanBo: 'Lê Sĩ Lâm2',
+      trangThai: 'Chờ xác nhận',
+      diemDanh: 'Có mặt',
+      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+      ndCongViec: 'Họp nội bộ',
+      vaiTro: 'Cán bộ chủ trì',
+      statusDiemDanh: false,
+    ),
+    ThanhPhanThamGiaModel(
+      id: '2',
+      tebCanBo: 'vu thi tuyet',
+      trangThai: 'xác nhận',
+      diemDanh: 'Có mặt',
+      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
+      ndCongViec: 'Họp nội bộ',
+      vaiTro: 'Cán bộ chủ trì',
+      statusDiemDanh: false,
+    ),
+  ];
+
+
 
   void dispose() {}
 }
