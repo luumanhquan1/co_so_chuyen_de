@@ -13,11 +13,15 @@ import 'package:flutter/material.dart';
 class IncomingDocumentScreenTablet extends StatefulWidget {
   final String title;
   final TypeScreen type;
+  final String startDate;
+  final String endDate;
 
   const IncomingDocumentScreenTablet({
     Key? key,
     required this.title,
     required this.type,
+    required this.startDate,
+    required this.endDate,
   }) : super(key: key);
 
   @override
@@ -72,7 +76,7 @@ class _IncomingDocumentScreenTabletState
     return ListViewLoadMore(
       cubit: cubit,
       isListView: true,
-      callApi: (page) => {callApi(page, '2022-02-01', '2022-02-28')},
+      callApi: (page) => {callApi(page, widget.startDate ,widget.endDate)},
       viewItem: (value, index) => itemVanBan(value as VanBanModel, index ?? 0),
     );
   }

@@ -113,6 +113,8 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                                   builder: (context) => IncomingDocumentScreen(
                                     title: S.current.danh_sach_van_ban_den,
                                     type: TypeScreen.VAN_BAN_DEN,
+                                    startDate: qlvbCubit.startDate,
+                                    endDate: qlvbCubit.endDate,
                                   ),
                                 ),
                               );
@@ -198,6 +200,8 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                                   builder: (context) => IncomingDocumentScreen(
                                     title: S.current.danh_sach_van_ban_di,
                                     type: TypeScreen.VAN_BAN_DI,
+                                    startDate: qlvbCubit.startDate,
+                                    endDate: qlvbCubit.endDate,
                                   ),
                                 ),
                               );

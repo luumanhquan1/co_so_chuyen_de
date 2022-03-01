@@ -14,11 +14,15 @@ import 'package:flutter/material.dart';
 class IncomingDocumentScreen extends StatefulWidget {
   final String title;
   final TypeScreen type;
+  final String startDate;
+  final String endDate;
 
   const IncomingDocumentScreen({
     Key? key,
     required this.title,
     required this.type,
+    required this.startDate,
+    required this.endDate,
   }) : super(key: key);
 
   @override
@@ -73,7 +77,7 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: true,
-      callApi: (page) => {callApi(page, '2022-02-01', '2022-03-03')},
+      callApi: (page) => {callApi(page, widget.startDate, widget.endDate)},
       viewItem: (value, index) => itemVanBan(value as VanBanModel, index ?? 0),
     );
   }

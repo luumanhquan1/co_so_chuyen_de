@@ -7,7 +7,7 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
-import 'package:ccvc_mobile/domain/repository/chi_tiet_van_ban_repository/chi_tiet_van_ban_di_repository.dart';
+import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
@@ -23,7 +23,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   bool expanded5 = false;
   bool expanded6 = false;
 
-  ChiTietVanBanRepository get _chiTietVanBanDiRepo => Get.find();
+  final QLVBRepository _QLVBRepo = Get.find();
 
   BehaviorSubject<DetailDocumentModel> detailDocumentSubject =
       BehaviorSubject<DetailDocumentModel>();
@@ -77,7 +77,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   }
 
   Future<void> getChiTietVanBanDi(String id) async {
-    final result = await _chiTietVanBanDiRepo.getDataChiTietVanBanDi(id);
+    final result = await _QLVBRepo.getDataChiTietVanBanDi(id);
     result.when(
       success: (res) {
         chiTietVanBanDiModel = res;
@@ -87,7 +87,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     );
   }
   Future<void> getChiTietVanBanDen(String processId, String taskId,) async {
-    final result = await _chiTietVanBanDiRepo.getDataChiTietVanBanDen(processId,taskId,false);
+    final result = await _QLVBRepo.getDataChiTietVanBanDen(processId,taskId,false);
     result.when(
       success: (res) {
         chiTietVanBanDenModel = res;
