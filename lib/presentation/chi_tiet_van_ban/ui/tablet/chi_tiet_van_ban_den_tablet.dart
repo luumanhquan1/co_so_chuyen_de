@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/chi_tiet_van_ban_provider.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_thu_hoi_widget_expand_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_tra_lai_widget_expand_tablet.dart';
@@ -11,6 +10,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expan
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/y_kien_xu_ly_widget_expand_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_tablet/widget_head_chi_tiet_van_ban_den_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/xem_luong.dart';
+import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -33,7 +33,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
 
   @override
   void initState() {
-    // cubit.getChiTietVanBanDen(widget.processId, widget.taskId);
     cubit.loadDataVanBanDen(taskId: widget.taskId, processId: widget.processId);
     super.initState();
   }
@@ -49,12 +48,15 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
           await cubit.loadDataVanBanDen(
               taskId: widget.taskId, processId: widget.processId);
         },
-        child: ChiTietVanBanProvider(
-          chiTietVanBanCubit: cubit,
+        child: ProviderWidget<DetailDocumentCubit>(
+          cubit: cubit,
           child: StateStreamLayout(
             textEmpty: S.current.khong_co_du_lieu,
             retry: () {},
-            error: AppException('1', ''),
+            error: AppException(
+              S.current.error,
+              S.current.error,
+            ),
             stream: cubit.stateStream,
             child: SingleChildScrollView(
               child: Padding(
