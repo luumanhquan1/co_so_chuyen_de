@@ -52,7 +52,7 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                       funcBtnRight: () {
                         chiTietLichLamViecCubit
                             .cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
-                        Navigator.pop(context);
+                
                       },
                       title: S.current.huy_lich,
                       btnRightTxt: S.current.dong_y,
@@ -79,7 +79,6 @@ class _ChiTietLamViecTabletState extends State<ChiTietLamViecTablet> {
                       funcBtnRight: () {
                         chiTietLichLamViecCubit
                             .dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
-                        Navigator.pop(context);
                       },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,

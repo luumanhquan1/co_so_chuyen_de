@@ -57,19 +57,23 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
       onChangeKey: (value){
           _lichHopCubit.selectTrangThaiHop(value);
       },
-      dialogSelect: DialogSettingWidget(
-        type: widget.homeItemType,
-        listSelectKey: [
-          DialogData(
-            onSelect: (value,startDate,endDate) {
-              _lichHopCubit.selectDate(
-                  selectKey: value,
-                  startDate: startDate,
-                  endDate: endDate);
-            },
-            title: S.current.time,
-          )
-        ],
+      dialogSelect: StreamBuilder(
+          stream: _lichHopCubit.selectKeyDialog,
+          builder: (context, snapshot) {
+            return DialogSettingWidget(
+              type: widget.homeItemType,
+              listSelectKey: [
+                DialogData(
+                  onSelect: (value, startDate, endDate) {
+                    _lichHopCubit.selectDate(
+                        selectKey: value, startDate: startDate, endDate: endDate);
+                  },
+                  initValue: _lichHopCubit.selectKeyTime,
+                  title: S.current.time,
+                )
+              ],
+            );
+          }
       ),
       child: LoadingOnly(
         stream: _lichHopCubit.stateStream,

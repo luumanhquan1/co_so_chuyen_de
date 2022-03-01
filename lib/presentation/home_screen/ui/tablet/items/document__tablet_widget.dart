@@ -64,17 +64,23 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
         }
         _vanBanCubit.selectTrangThaiVanBan(value);
       },
-      dialogSelect: DialogSettingWidget(
-        type: widget.homeItemType,
-        listSelectKey: <DialogData>[
-          DialogData(
-            onSelect: (value, startDate, endDate) {
-              _vanBanCubit.selectDate(
-                  selectKey: value, startDate: startDate, endDate: endDate);
-            },
-            title: S.current.time,
-          )
-        ],
+      dialogSelect: StreamBuilder<Object>(
+        stream: _vanBanCubit.selectKeyDialog,
+        builder: (context, snapshot) {
+          return DialogSettingWidget(
+            type: widget.homeItemType,
+            listSelectKey: <DialogData>[
+              DialogData(
+                initValue: _vanBanCubit.selectKeyTime,
+                onSelect: (value, startDate, endDate) {
+                  _vanBanCubit.selectDate(
+                      selectKey: value, startDate: startDate, endDate: endDate);
+                },
+                title: S.current.time,
+              )
+            ],
+          );
+        }
       ),
       child: Flexible(
         child: LoadingOnly(
