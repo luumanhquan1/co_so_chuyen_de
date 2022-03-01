@@ -59,6 +59,7 @@ class _WorkListWidgetState extends State<WorkListWidget> {
       onTapIcon: () {
         HomeProvider.of(context).homeCubit.showDialog(widget.homeItemType);
       },
+      isCustomDialog: true,
       dialogSelect: DialogSettingWidget(
         type: widget.homeItemType,
         customDialog: AddToDoWidget(

@@ -59,6 +59,7 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
   Widget build(BuildContext context) {
     return HomeProvider(
       homeCubit: homeCubit,
+      controller: scrollController,
       child: StateStreamLayout(
         textEmpty: S.current.khong_co_du_lieu,
         retry: () {},
@@ -108,6 +109,7 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
             },
             child: SizedBox.expand(
               child: SingleChildScrollView(
+                controller: scrollController,
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
                 physics: const ClampingScrollPhysics(
