@@ -47,122 +47,128 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
         appBar: BaseAppBar(
           title: S.current.menu,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const ManagerPersonalInformationTablet(),
-                    ),
-                  );
-                },
-                child: HeaderMenuWidget(
-                  paddingVertical: 20,
-                  urlBackGround: ImageAssets.imgHeaderMenuTablet,
-                  menuCubit: menuCubit,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: TextQuanLyWidget(),
-              ),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisSpacing: 28,
-                mainAxisSpacing: 28,
-                childAspectRatio: 1.25,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                children: List.generate(listFeature.length, (index) {
-                  final type = listFeature[index];
-                  return containerType(type, () {
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await menuCubit.refeshUser();
+          },
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 28),
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
                     Navigator.push(
                       context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => type.getScreen(),
+                      MaterialPageRoute(
+                        builder: (context) =>
+                             ManagerPersonalInformationTablet(id: menuCubit.id,),
                       ),
                     );
-                  });
-                }),
-              ),
-              const SizedBox(
-                height: 28,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  color: AppTheme.getInstance().backGroundColor(),
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 10,
-                      color: colorBlack.withOpacity(0.05),
-                    )
-                  ],
-                  border: Border.all(color: borderColor.withOpacity(0.5)),
+                  },
+                  child: HeaderMenuWidget(
+                    paddingVertical: 20,
+                    urlBackGround: ImageAssets.imgHeaderMenuTablet,
+                    menuCubit: menuCubit,
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: lineColor),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: TextQuanLyWidget(),
+                ),
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisSpacing: 28,
+                  mainAxisSpacing: 28,
+                  childAspectRatio: 1.25,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 4,
+                  children: List.generate(listFeature.length, (index) {
+                    final type = listFeature[index];
+                    return containerType(type, () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => type.getScreen(),
                         ),
-                      ),
-                      child: Text(
-                        S.current.cai_dat,
-                        style: textNormalCustom(
-                          color: labelColor,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      children: List.generate(listFeatureAccount.length, (index) {
-                        final type = listFeatureAccount[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => type.getScreen(),
-                              ),
-                            );
-                          },
-                          child: MenuCellWidget(
-                            title: type.getItem().title,
-                            urlIcon: type.getItem().url,
-                            isBorder: index != listFeatureAccount.length - 1,
+                      );
+                    });
+                  }),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: AppTheme.getInstance().backGroundColor(),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        color: colorBlack.withOpacity(0.05),
+                      )
+                    ],
+                    border: Border.all(color: borderColor.withOpacity(0.5)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: lineColor),
                           ),
-                        );
-                      }),
-                    ),
-                  ],
+                        ),
+                        child: Text(
+                          S.current.cai_dat,
+                          style: textNormalCustom(
+                            color: labelColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: List.generate(listFeatureAccount.length, (index) {
+                          final type = listFeatureAccount[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => type.getScreen(),
+                                ),
+                              );
+                            },
+                            child: MenuCellWidget(
+                              title: type.getItem().title,
+                              urlIcon: type.getItem().url,
+                              isBorder: index != listFeatureAccount.length - 1,
+                            ),
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Align(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 24),
-                  child: SizedBox(
-                      width: 100,
-                      child: ButtonBottom(
-                        text:S.current.dang_xuat,
-                        onPressed: () {
-                          AppStateCt.of(context).appState.setToken('');
-                          HiveLocal.clearData();
-                        },
-                      )),
-                ),
-              )
-            ],
+                Align(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: SizedBox(
+                        width: 100,
+                        child: ButtonBottom(
+                          text:S.current.dang_xuat,
+                          onPressed: () {
+                            AppStateCt.of(context).appState.setToken('');
+                            HiveLocal.clearData();
+                          },
+                        )),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

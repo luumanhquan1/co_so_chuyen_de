@@ -43,4 +43,25 @@ class MenuCubit extends BaseCubit<MenuState> {
     _getInforUser.sink.add(UserInformationModel(
         hoTen: hoTen, chucVu: phamViTxt, anhDaiDienFilePath: anhDaiDien));
   }
+  Future<void> refeshUser() async {
+    String hoTen = '';
+    String phamViTxt = '';
+    String anhDaiDien = '';
+    final result = await accountRp.getInfo(id);
+    final phamVi = await accountRp.getPhamVi();
+    result.when(
+        success: (res) {
+          hoTen = res.hoTen ?? '';
+          anhDaiDien = res.anhDaiDienFilePath ?? '';
+        },
+        error: (err) {});
+    phamVi.when(
+        success: (res) {
+          phamViTxt = res.chucVu;
+        },
+        error: (err) {});
+
+    _getInforUser.sink.add(UserInformationModel(
+        hoTen: hoTen, chucVu: phamViTxt, anhDaiDienFilePath: anhDaiDien));
+  }
 }

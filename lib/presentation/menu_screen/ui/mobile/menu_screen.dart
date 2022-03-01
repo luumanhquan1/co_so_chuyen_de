@@ -45,101 +45,107 @@ class _MenuScreenState extends State<MenuScreen> {
         appBar: BaseAppBar(
           title: S.current.menu,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                color: AppTheme.getInstance().backGroundColor(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const ManagerPersonalInformation(),
-                          ),
-                        );
-                      },
-                      child: HeaderMenuWidget(
-                        menuCubit: menuCubit,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await menuCubit.refeshUser();
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  color: AppTheme.getInstance().backGroundColor(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                   ManagerPersonalInformation(id: menuCubit.id,),
+                            ),
+                          );
+                        },
+                        child: HeaderMenuWidget(
+                          menuCubit: menuCubit,
+                        ),
                       ),
-                    ),
-                    Column(
-                      children: List.generate(listFeature.length, (index) {
-                        final type = listFeature[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => type.getScreen(),
-                              ),
-                            );
-                          },
-                          child: MenuCellWidget(
-                            title: type.getItem().title,
-                            urlIcon: type.getItem().url,
-                          ),
-                        );
-                      }),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 16, bottom: 24),
-                      child: TextQuanLyWidget(),
-                    )
-                  ],
+                      Column(
+                        children: List.generate(listFeature.length, (index) {
+                          final type = listFeature[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => type.getScreen(),
+                                ),
+                              );
+                            },
+                            child: MenuCellWidget(
+                              title: type.getItem().title,
+                              urlIcon: type.getItem().url,
+                            ),
+                          );
+                        }),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 16, bottom: 24),
+                        child: TextQuanLyWidget(),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Container(
-                color: AppTheme.getInstance().backGroundColor(),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    Column(
-                      children: List.generate(listFeatureAccount.length, (index) {
-                        final type = listFeatureAccount[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => type.getScreen(),
-                              ),
-                            );
-                          },
-                          child: MenuCellWidget(
-                            title: type.getItem().title,
-                            urlIcon: type.getItem().url,
-                            isBorder: index != listFeatureAccount.length - 1,
-                          ),
-                        );
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ButtonCustomBottom(
-                      title: S.current.dang_xuat,
-                      onPressed: () {
-                        AppStateCt.of(context).appState.setToken('');
-                        HiveLocal.clearData();
-                      },
-                      isColorBlue: false,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    )
-                  ],
+                const SizedBox(
+                  height: 6,
                 ),
-              ),
-            ],
+                Container(
+                  color: AppTheme.getInstance().backGroundColor(),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      Column(
+                        children: List.generate(listFeatureAccount.length, (index) {
+                          final type = listFeatureAccount[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => type.getScreen(),
+                                ),
+                              );
+                            },
+                            child: MenuCellWidget(
+                              title: type.getItem().title,
+                              urlIcon: type.getItem().url,
+                              isBorder: index != listFeatureAccount.length - 1,
+                            ),
+                          );
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ButtonCustomBottom(
+                        title: S.current.dang_xuat,
+                        onPressed: () {
+                          AppStateCt.of(context).appState.setToken('');
+                          HiveLocal.clearData();
+                        },
+                        isColorBlue: false,
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
