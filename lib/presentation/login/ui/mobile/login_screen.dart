@@ -214,22 +214,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             title: S.current.login,
                             isColorBlue: true,
                             onPressed: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DetailMeetCalenderScreen(id: '',)),
-                              );
-                              // if (keyGroup.currentState!.validator()) {
-                              //   await loginCubit.loginAndSaveinfo(
-                              //     context: context,
-                              //     passWord: textPasswordController.text,
-                              //     userName: textTaiKhoanController.text,
-                              //     appCode: APP_CODE,
-                              //   );
-                              // } else {}
-                              //
-                              // if (loginCubit.passIsError == true) {
-                              //   _showToast(context);
-                              // }
+                              if (keyGroup.currentState!.validator()) {
+                                await loginCubit.loginAndSaveinfo(
+                                  context: context,
+                                  passWord: textPasswordController.text,
+                                  userName: textTaiKhoanController.text,
+                                  appCode: APP_CODE,
+                                );
+                              } else {}
+
+                              if (loginCubit.passIsError == true) {
+                                _showToast(context);
+                              }
                             },
                           );
                         },
