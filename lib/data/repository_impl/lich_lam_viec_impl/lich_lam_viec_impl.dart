@@ -2,26 +2,17 @@ import 'dart:io';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
-import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
-
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/chinh_sua_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
-
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
 import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
-import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/delete_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/trang_thai/trang_thai_lv_response.dart';
-
-import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
-import 'package:ccvc_mobile/data/response/lich_lam_viec/chinh_sua_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_bao_cao_ket_qua_response.dart';
-import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
@@ -46,8 +37,10 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_i
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/tinh_trang_bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
+import 'package:dio/dio.dart';
 
 class LichLamViecImlp implements LichLamViecRepository {
   LichLamViecService lichLamViecService;
@@ -255,45 +248,73 @@ class LichLamViecImlp implements LichLamViecRepository {
     String note,
     bool isAllDay,
     bool isSendMail,
+    List<DonViModel> scheduleCoperativeRequest,
     int typeRemider,
     int typeRepeat,
     String dateRepeat,
     String dateRepeat1,
     bool only,
   ) {
+    final _data = FormData();
+    _data.fields.add(MapEntry('title', title));
+    _data.fields.add(MapEntry('typeScheduleId', typeScheduleId));
+    _data.fields.add(MapEntry('linhVucId', linhVucId));
+    _data.fields.add(MapEntry('TenTinh', TenTinh));
+    _data.fields.add(MapEntry('TenHuyen', TenHuyen));
+    _data.fields.add(MapEntry('TenXa', TenXa));
+    _data.fields.add(MapEntry('dateFrom', dateFrom));
+    _data.fields.add(MapEntry('timeFrom', timeFrom));
+    _data.fields.add(MapEntry('dateTo', dateTo));
+    _data.fields.add(MapEntry('timeTo', timeTo));
+    _data.fields.add(MapEntry('content', content));
+    _data.fields.add(MapEntry('vehicle', vehicle));
+    _data.fields.add(MapEntry('expectedResults', expectedResults));
+    _data.fields.add(MapEntry('results', results));
+    _data.fields.add(MapEntry('status', status.toString()));
+    _data.fields.add(MapEntry('rejectReason', rejectReason));
+    _data.fields.add(MapEntry('publishSchedule', publishSchedule.toString()));
+    _data.fields.add(MapEntry('tags', tags));
+    _data.fields.add(MapEntry('isLichDonVi', isLichDonVi.toString()));
+    _data.fields.add(MapEntry('canBoChuTriId', canBoChuTriId));
+    _data.fields.add(MapEntry('donViId', donViId));
+    _data.fields.add(MapEntry('note', note));
+    _data.fields.add(MapEntry('isAllDay', isAllDay.toString()));
+    _data.fields.add(MapEntry('isSendMail', isSendMail.toString()));
+
+    for (int i = 0; i < scheduleCoperativeRequest.length; i++) {
+      _data.fields.add(
+        MapEntry(
+          'ScheduleCoperativeRequest[$i].donViId',
+          scheduleCoperativeRequest[i].id,
+        ),
+      );
+      _data.fields.add(
+        MapEntry(
+          'ScheduleCoperativeRequest[$i].canBoId',
+          scheduleCoperativeRequest[i].canBoId,
+        ),
+      );
+      _data.fields.add(
+        MapEntry(
+          'ScheduleCoperativeRequest[$i].taskContent',
+          scheduleCoperativeRequest[i].noidung,
+        ),
+      );
+    }
+
+    _data.fields
+        .add(MapEntry('repeatCalendar.typeRepeat', typeRepeat.toString()));
+    _data.fields.add(MapEntry(
+        'scheduleReminderRequest.typeRemider', typeRemider.toString()));
+    final dateRepeats = [dateRepeat, dateRepeat1];
+    for (int i = 0; i < dateRepeats.length; i++) {
+      _data.fields.add(
+          MapEntry('repeatCalendar.dateRepeat[$i]', dateRepeats[i].toString()));
+    }
+    _data.fields.add(MapEntry('repeatCalendar.only', only.toString()));
+
     return runCatchingAsync<TaoLichLamViecResponse, MessageModel>(
-      () => lichLamViecService.taoLichLamviec(
-        title,
-        typeScheduleId,
-        linhVucId,
-        TenTinh,
-        TenHuyen,
-        TenXa,
-        dateFrom,
-        timeFrom,
-        dateTo,
-        timeTo,
-        content,
-        location,
-        vehicle,
-        expectedResults,
-        results,
-        status,
-        rejectReason,
-        publishSchedule,
-        tags,
-        isLichDonVi,
-        canBoChuTriId,
-        donViId,
-        note,
-        isAllDay,
-        isSendMail,
-        typeRemider,
-        typeRepeat,
-        dateRepeat,
-        dateRepeat1,
-        only,
-      ),
+      () => lichLamViecService.taoLichLamviec(_data),
       (res) => res.toDomain(),
     );
   }

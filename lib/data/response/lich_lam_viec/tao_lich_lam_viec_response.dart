@@ -7,7 +7,7 @@ part 'tao_lich_lam_viec_response.g.dart';
 @JsonSerializable()
 class TaoLichLamViecResponse extends Equatable {
   @JsonKey(name: 'data')
-  String? data;
+  bool? data;
   @JsonKey(name: 'statusCode')
   int? statusCode;
   @JsonKey(name: 'succeeded')

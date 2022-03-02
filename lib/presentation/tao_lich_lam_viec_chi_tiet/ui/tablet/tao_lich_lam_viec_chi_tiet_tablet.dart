@@ -151,7 +151,7 @@ class _TaoLichLamViecChiTietTabletState
                               padding: const EdgeInsets.only(left: 14),
                               child: Column(
                                 children: const [
-                                  ThanhPhanThamGiaTLWidget(),
+                               //   ThanhPhanThamGiaTLWidget(),
                                   TaiLieuWidget(),
                                 ],
                               ),

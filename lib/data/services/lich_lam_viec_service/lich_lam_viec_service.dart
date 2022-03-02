@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
@@ -28,6 +29,7 @@ import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_vi
 import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -114,36 +116,7 @@ abstract class LichLamViecService {
 
   @POST(ApiConstants.TAO_LICH_LAM_VIEC)
   Future<TaoLichLamViecResponse> taoLichLamviec(
-    @Part() String title,
-    @Part() String typeScheduleId,
-    @Part() String linhVucId,
-    @Part() String TenTinh,
-    @Part() String TenHuyen,
-    @Part() String TenXa,
-    @Part() String dateFrom,
-    @Part() String timeFrom,
-    @Part() String dateTo,
-    @Part() String timeTo,
-    @Part() String content,
-    @Part() String location,
-    @Part() String vehicle,
-    @Part() String expectedResults,
-    @Part() String results,
-    @Part() int    status,
-    @Part() String rejectReason,
-    @Part() bool   publishSchedule,
-    @Part() String tags,
-    @Part() bool   isLichDonVi,
-    @Part() String canBoChuTriId,
-    @Part() String donViId,
-    @Part() String note,
-    @Part() bool   isAllDay,
-    @Part() bool   isSendMail,
-    @Part(name: 'scheduleReminderRequest.typeRemider') int typeRemider,
-    @Part(name: 'repeatCalendar.typeRepeat') int typeRepeat,
-    @Part(name: 'repeatCalendar.dateRepeat[0]') String dateRepeat,
-    @Part(name: 'repeatCalendar.dateRepeat[1]') String dateRepeat1,
-    @Part(name: 'repeatCalendar.only') bool only,
+    @Body() FormData data,
   );
   @POST(ApiConstants.TAO_BAO_KET_QUA)
   Future<TaoBaoCaoKetQuaResponse> taoBaoCaoKetQua(

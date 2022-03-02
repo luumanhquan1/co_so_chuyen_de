@@ -274,6 +274,7 @@ class ImageAssets {
   static const String icFaceId = '$baseImg/ic_face_id.svg';
   static const String icFingerprint = '$baseImg/ic_fingerprint.svg';
   static const String icDonViNhiemVu = '$baseImg/ic_don_vi_nhiem_vu.svg';
+  static const String icTaoLichLamViecThanhCong = '$baseImg/tao_lich_lam_viec_thanh_cong.svg';
 
   static SvgPicture svgAssets(
     String name, {
