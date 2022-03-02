@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
@@ -135,7 +137,6 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   Future<void> _dataLoaiLich(
   ) async {
-    showLoading();
     final result = await _lichLamViec.getLichLvRight(
       '2022-03-04',
       '2022-03-04',
@@ -189,12 +190,11 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
         error: (err) {});
   }
 
-  Future<void> taoLichLamViec({
+  Future<MessageModel> taoLichLamViec({
     required String title,
     required String content,
     required String location,
   }) async {
-    showLoading();
     final result = await _lichLamViec.taoLichLamViec(
       title,
       selectLoaiLich?.typeId??'',
@@ -233,6 +233,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     }, error: (error) {
       showContent();
     });
+    return MessageModel();
+
   }
 
   Future<void> taoBaoCaoKetQua({
@@ -240,7 +242,6 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     required String scheduleId,
     required List<File> files,
   }) async {
-    showLoading();
     await _lichLamViec
         .taoBaoCaoKetQua(
       reportStatusId,

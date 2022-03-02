@@ -530,7 +530,9 @@
   "truc_tuyen" : "Trực tuyến",
   "binh_thuong": "Bình thường",
 
-  "sua_that_bai": "Sửa thất bại"
+  "sua_that_bai": "Sửa thất bại",
+  "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
+  "quay_lai" : "Quay lại"
 
 
 }

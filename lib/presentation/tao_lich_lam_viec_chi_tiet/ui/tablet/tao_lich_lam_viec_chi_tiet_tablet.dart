@@ -11,10 +11,9 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/ng
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nhac_lai_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/search_name_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/tai_lieu_widget.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/tao_lich_lam_viec_provider.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/text_form_widget.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/thanh_phan_tham_gia_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -45,34 +44,37 @@ class _TaoLichLamViecChiTietTabletState
 
   @override
   Widget build(BuildContext context) {
-    return TaoLichLamViecProvider(
+    return WidgetTaoLichLVInherited(
       taoLichLamViecCubit: taoLichLamViecCubit,
-      child: StateStreamLayout(
-        textEmpty: S.current.khong_co_du_lieu,
-        retry: () {},
-        error: AppException('1', ''),
-        stream: taoLichLamViecCubit.stateStream,
-        child: WidgetTaoLichLVInherited(
-          taoLichLamViecCubit: taoLichLamViecCubit,
-          child: Scaffold(
-            backgroundColor: bgWidgets,
-            appBar: BaseAppBar(
-              title: S.current.tao_lich_cong_tac_trong_nuoc,
-              leadingIcon: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: unselectLabelColor,
-                  size: 24,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+      child: Scaffold(
+        backgroundColor: bgWidgets,
+        appBar: BaseAppBar(
+          title: S.current.tao_lich_cong_tac_trong_nuoc,
+          leadingIcon: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_rounded,
+              color: unselectLabelColor,
+              size: 24,
             ),
-            body: RefreshIndicator(
-              onRefresh: () async {
-                await taoLichLamViecCubit.loadData();
-              },
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await taoLichLamViecCubit.loadData();
+          },
+          child: ProviderWidget<TaoLichLamViecCubit>(
+            cubit: taoLichLamViecCubit,
+            child: StateStreamLayout(
+              textEmpty: S.current.khong_co_du_lieu,
+              retry: () {},
+              error: AppException(
+                S.current.error,
+                S.current.error,
+              ),
+              stream: taoLichLamViecCubit.stateStream,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
