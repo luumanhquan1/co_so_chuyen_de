@@ -21,6 +21,7 @@ import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class DetailMeetCalenderTablet extends StatefulWidget {
   final String id;
+
   const DetailMeetCalenderTablet({Key? key, required this.id})
       : super(key: key);
 
@@ -31,7 +32,7 @@ class DetailMeetCalenderTablet extends StatefulWidget {
 
 class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
   late DetailMeetCalenderCubit cubit;
-  final _controller = TabController(vsync: AnimatedListState(), length: 7);
+  final _controller = TabController(vsync: AnimatedListState(), length: 6);
 
   @override
   void initState() {
@@ -97,12 +98,12 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
             color: backgroundColorApp,
           ),
           child: DefaultTabController(
-            length: 7,
+            length: 6,
             child: NestedScrollView(
               headerSliverBuilder: (
-                  BuildContext context,
-                  bool innerBoxIsScrolled,
-                  ) {
+                BuildContext context,
+                bool innerBoxIsScrolled,
+              ) {
                 return <Widget>[
                   SliverToBoxAdapter(
                     child: DetailMeetCalendarInherited(
@@ -114,23 +115,27 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                             padding: const EdgeInsets.only(bottom: 25),
                             child: SingleChildScrollView(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 28, left: 28, right: 28),
+                                margin: const EdgeInsets.only(
+                                    top: 28, left: 28, right: 28),
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   color: backgroundColorApp,
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(12),
                                   ),
-                                  border: Border.all(color: borderColor.withOpacity(0.5)),
+                                  border: Border.all(
+                                      color: borderColor.withOpacity(0.5)),
                                   boxShadow: [
                                     BoxShadow(
                                         offset: const Offset(0, 4),
                                         blurRadius: 10,
-                                        color: shadowContainerColor.withOpacity(0.05))
+                                        color: shadowContainerColor
+                                            .withOpacity(0.05))
                                   ],
                                 ),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Row(
                                       children: [
@@ -171,9 +176,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                       ),
                     ),
                     Tab(
-                      child: Text(
-                        S.current.chuong_trinh_hop
-                      ),
+                      child: Text(S.current.chuong_trinh_hop),
                     ),
                     Tab(
                       child: Text(
@@ -195,16 +198,6 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                         S.current.bieu_quyet,
                       ),
                     ),
-                    Tab(
-                      child: Text(
-                        S.current.ket_luan_hop,
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        S.current.y_kien_cuop_hop,
-                      ),
-                    ),
                   ],
                 ),
                 content: TabBarView(
@@ -216,8 +209,6 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     TaiLieuWidget(),
                     PhatBieuWidgetTablet(),
                     BieuQuyetWidgetTablet(),
-                    // KetLuanHopWidgetTablet(),
-                    // YKienCuocHopWidgetTablet(),
                   ],
                 ),
               ),
@@ -227,5 +218,4 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
       ),
     );
   }
-
 }
