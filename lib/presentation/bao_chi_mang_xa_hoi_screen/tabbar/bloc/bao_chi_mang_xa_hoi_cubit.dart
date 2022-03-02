@@ -13,6 +13,8 @@ class BaoChiMangXaHoiBloc {
       BehaviorSubject<List<ChuDeModel>>();
 
   Stream<List<ChuDeModel>> get listYKienNguoiDan => _listYKienNguoiDan.stream;
+  String startDate=DateTime.now().formatApiStartDay;
+  String endDate=DateTime.now().formatApiEndDay;
 
   DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
       DashBoardTatCaChuDeRequest(
