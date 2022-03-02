@@ -3,18 +3,14 @@ class DonViModel {
   String name = '';
   String tenCanBo = '';
   String chucVu = '';
+  String canBoId = '';
   String noidung = '';
-
-  DonViModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['tenDonVi'];
-  }
-
   DonViModel(
       {required this.id,
       required this.name,
       this.tenCanBo = '',
-      this.chucVu = ''});
+      this.chucVu = '',
+      this.canBoId = ''});
 }
 
 class Node<T> {
