@@ -118,6 +118,10 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
       '/vpdt/api/Files/add-file-with-meeting';
   static const SEND_EMAIL_KL_HOP =
       '/vpdt/api/ScheduleReport/send-email-bao-cao';
+  static const DASH_BOARD_TAT_CA_CHU_DE =
+      '/api/NewsNetViews/dashboard';
+  static const GET_LIST_TAT_CA_CHU_DE =
+      '/api/NewsNetViews/search_news';
   static const CHI_TIET_VAN_BAN_DEN = '/qlvb/api/VanBan/ChiTietVanBanDen';
 
 }
