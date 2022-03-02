@@ -36,8 +36,8 @@ class ChuDeData {
   String? url;
   @JsonKey(name: 'addressId')
   String? addressId;
-  @JsonKey(name: 'syncDate? ')
-  String? syncDate;
+  @JsonKey(name: 'publishedTime')
+  String? publishedTime;
 
   ChuDeData({
     this.id,
@@ -46,7 +46,7 @@ class ChuDeData {
     this.avartar,
     this.url,
     this.addressId,
-    this.syncDate,
+    this.publishedTime,
   });
 
   factory ChuDeData.fromJson(Map<String, dynamic> json) =>
@@ -61,6 +61,6 @@ class ChuDeData {
         avartar: avartar,
         url: url,
         addressId: addressId,
-        syncDate: syncDate,
+        publishedTime: publishedTime ?? '',
       );
 }

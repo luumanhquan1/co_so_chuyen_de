@@ -15,3 +15,5 @@ class DashBoardItemTatCaChuDeModel {
     this.total,
   });
 }
+class ChuDeDashBoardModel{
+}

@@ -9,9 +9,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 class BaoChiMangXaHoiBloc {
-
   final BehaviorSubject<List<ChuDeModel>> _listYKienNguoiDan =
-  BehaviorSubject<List<ChuDeModel>>();
+      BehaviorSubject<List<ChuDeModel>>();
 
   Stream<List<ChuDeModel>> get listYKienNguoiDan => _listYKienNguoiDan.stream;
 
@@ -25,24 +24,31 @@ class BaoChiMangXaHoiBloc {
     toDate: DateTime.now().formatApiSS,
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
+
   Future<void> getDasBoardTatCaCuDe() async {
-    final result =
-        await _BCMXHRepo.getDashBoardTatCaChuDe(1,30,0,true,'2022/02/22 20:17:01','2022/02/22 20:17:01');
+    final result = await _BCMXHRepo.getDashBoardTatCaChuDe(
+        1, 30, 0, true, '2022/02/22 20:17:01', '2022/02/22 20:17:01');
     result.when(
-      success: (res) {
-      },
+      success: (res) {},
       error: (err) {
         return;
       },
     );
   }
 
-  Future<void> getListTatCaCuDe() async {
-    final result =
-    await _BCMXHRepo.getDashListChuDe(1,30,233,true,'2022/02/14 00:00:00','2022/02/14 23:59:59');
+//DateTime.now().formatApiEndDay
+  Future<void> getListTatCaCuDe(String startDate, String enDate) async {
+    final result = await _BCMXHRepo.getDashListChuDe(
+      1,
+      30,
+      233,
+      true,
+      startDate,
+      enDate,
+    );
     result.when(
       success: (res) {
-        final result= res.getlistChuDe??[];
+        final result = res.getlistChuDe ?? [];
         _listYKienNguoiDan.sink.add(result);
       },
       error: (err) {

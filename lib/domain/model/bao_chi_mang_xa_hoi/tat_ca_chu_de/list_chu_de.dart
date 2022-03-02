@@ -5,7 +5,7 @@ class ChuDeModel {
   String? avartar;
   String? url;
   String? addressId;
-  String? syncDate;
+  String? publishedTime;
 
   ChuDeModel({
     this.id,
@@ -14,7 +14,7 @@ class ChuDeModel {
     this.avartar,
     this.url,
     this.addressId,
-    this.syncDate,
+    this.publishedTime,
   });
 }
 
