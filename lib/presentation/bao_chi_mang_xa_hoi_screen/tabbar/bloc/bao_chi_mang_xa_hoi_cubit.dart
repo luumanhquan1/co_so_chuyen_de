@@ -24,19 +24,6 @@ class BaoChiMangXaHoiBloc {
     toDate: DateTime.now().formatApiSS,
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
-
-  Future<void> getDasBoardTatCaCuDe() async {
-    final result = await _BCMXHRepo.getDashBoardTatCaChuDe(
-        1, 30, 0, true, '2022/02/22 20:17:01', '2022/02/22 20:17:01');
-    result.when(
-      success: (res) {},
-      error: (err) {
-        return;
-      },
-    );
-  }
-
-//DateTime.now().formatApiEndDay
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     final result = await _BCMXHRepo.getDashListChuDe(
       1,
