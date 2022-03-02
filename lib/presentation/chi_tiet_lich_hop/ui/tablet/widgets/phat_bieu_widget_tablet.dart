@@ -31,7 +31,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
         child: Column(
           children: [
             IconWithTiltleWidget(
-              icon: ImageAssets.ic_chitet,
+              icon: ImageAssets.icMic,
               title: S.current.dang_ky_phat_bieu,
               onPress: () {
                 showDiaLogTablet(
@@ -48,14 +48,13 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
             Padding(
               padding: const EdgeInsets.only(top: 16),
               child: StreamBuilder<List<PhatBieuModel>>(
-                initialData: cubit.listPhatBieu,
                 stream: cubit.streamPhatBieu,
                 builder: (context, snapshot) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ButtonStatus(
-                        lengthList: cubit.listPhatBieu.length,
+                        lengthList: cubit.dataSoLuongPhatBieu.danhSachPhatBieu,
                         onTap: () {
                           cubit.getValueStatus(S.current.danh_sach_phat_bieu);
                         },
@@ -72,7 +71,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                       ),
                       const SizedBox(width: 16),
                       ButtonStatus(
-                        lengthList: cubit.listPhatBieu.length,
+                        lengthList: cubit.dataSoLuongPhatBieu.choDuyet,
                         onTap: () {
                           cubit.getValueStatus(S.current.cho_duyet);
                         },
@@ -87,7 +86,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                       ),
                       const SizedBox(width: 16),
                       ButtonStatus(
-                        lengthList: cubit.listPhatBieu.length,
+                        lengthList: cubit.dataSoLuongPhatBieu.daDuyet,
                         onTap: () {
                           cubit.getValueStatus(S.current.da_duyet);
                         },
@@ -102,7 +101,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                       ),
                       const SizedBox(width: 16),
                       ButtonStatus(
-                        lengthList: cubit.listPhatBieu.length,
+                        lengthList: cubit.dataSoLuongPhatBieu.huyDuyet,
                         onTap: () {
                           cubit.getValueStatus(S.current.huy_duyet);
                         },
@@ -121,7 +120,6 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
               ),
             ),
             StreamBuilder<List<PhatBieuModel>>(
-              initialData: cubit.listPhatBieu,
               stream: cubit.streamPhatBieu,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];
@@ -155,7 +153,6 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
             ),
             SizedBox(
               child: StreamBuilder<List<PhatBieuModel>>(
-                initialData: cubit.listPhatBieu,
                 stream: cubit.streamPhatBieu,
                 builder: (context, snapshot) {
                   if (cubit.typeStatus.value == S.current.cho_duyet) {
@@ -199,31 +196,31 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
       ),
     );
   }
+}
 
-  Widget ButtonStatus({
-    required String text,
-    required Function() onTap,
-    required int lengthList,
-    required Color colorText,
-    required Color colorBorder,
-    required Color backgroup,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: backgroup,
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-          border: Border.all(color: colorBorder),
-        ),
-        child: Text(
-          '${text} (${lengthList})',
-          style: textNormalCustom(
-            color: colorText,
-          ),
+Widget ButtonStatus({
+  required String text,
+  required Function() onTap,
+  required int? lengthList,
+  required Color colorText,
+  required Color colorBorder,
+  required Color backgroup,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: backgroup,
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        border: Border.all(color: colorBorder),
+      ),
+      child: Text(
+        '${text} (${lengthList})',
+        style: textNormalCustom(
+          color: colorText,
         ),
       ),
-    );
-  }
+    ),
+  );
 }

@@ -8,7 +8,8 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
+
+import 'cell_phat_bieu_widget.dart';
 
 class BieuQuyetWidgetTablet extends StatefulWidget {
   const BieuQuyetWidgetTablet({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _BieuQuyetWidgetTabletState extends State<BieuQuyetWidgetTablet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconWithTiltleWidget(
-              icon: ImageAssets.ic_chitet,
+              icon: ImageAssets.icBieuQuyet,
               title: S.current.them_bieu_quyet,
               onPress: () {
                 showDiaLogTablet(
@@ -42,35 +43,25 @@ class _BieuQuyetWidgetTabletState extends State<BieuQuyetWidgetTablet> {
                 );
               },
             ),
-            StreamBuilder<PhatBieuModel>(
-              initialData: cubit.phatBieu,
-              // stream: cubit.detailDocumentGuiNhan,
+            StreamBuilder<List<PhatBieuModel>>(
+              initialData: cubit.listBieuQuyet,
+              stream: cubit.streamBieuQuyet,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                final _list = snapshot.data ?? [];
+                if (_list.isNotEmpty) {
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 1,
+                    itemCount: _list.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(top: 16),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: borderItemCalender),
-                          color: borderItemCalender.withOpacity(0.1),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6),
+                      return Column(
+                        children: [
+                          CellPhatBieu(
+                            infoModel: _list[index],
+                            cubit: cubit,
+                            index: index,
                           ),
-                        ),
-                        child: Column(
-                          children: snapshot.data!.toListRowPhatBieu().map(
-                                (row) {
-                              return DetailDocumentRow(
-                                row: row,
-                              );
-                            },
-                          ).toList(),
-                        ),
+                        ],
                       );
                     },
                   );

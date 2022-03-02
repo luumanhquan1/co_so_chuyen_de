@@ -89,7 +89,6 @@ class _MoiNguoiThamGiaWidgetTabletState
               mainAxisSize: MainAxisSize.min,
               children: [
                 StreamBuilder<bool>(
-                  // initialData: false,
                   stream: cubit.checkBoxCheckBool,
                   builder: (context, snapshot) {
                     return CustomCheckBox(
@@ -98,8 +97,6 @@ class _MoiNguoiThamGiaWidgetTabletState
                       onChange: (value) {
                         cubit.check = !cubit.check;
                         cubit.checkAll();
-                        // cubit.subjectStreamCheck.sink.add(VALUE);
-                        // setState(() {});
                         print({value});
                       },
                     );
@@ -120,7 +117,7 @@ class _MoiNguoiThamGiaWidgetTabletState
           ),
           spaceH16,
           StreamBuilder<List<ThanhPhanThamGiaModel>>(
-            initialData: cubit.listFakeThanhPhanThamGiaModel,
+            initialData: cubit.dataThanhPhanThamGia,
             stream: cubit.thanhPhanThamGia,
             builder: (context, snapshot) {
               final _list = snapshot.data ?? [];

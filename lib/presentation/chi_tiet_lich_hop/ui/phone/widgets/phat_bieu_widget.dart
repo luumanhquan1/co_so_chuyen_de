@@ -1,13 +1,15 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cell_phat_bieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/dang_ky_phat_bieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/icon_with_title_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/state_phat_bieu_widget.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
+import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../chi_tiet_lich_hop_screen.dart';
@@ -33,57 +35,85 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
               padding: const EdgeInsets.only(top: 50),
               child: Column(
                 children: [
-                  IconWithTiltleWidget(
-                    icon: ImageAssets.ic_chitet,
-                    title: S.current.dang_ky_phat_bieu,
-                    onPress: () {
-                      showBottomSheetCustom(
-                        context,
-                        title: S.current.dang_ky_phat_bieu,
-                        child: const DangKyPhatBieuWidget(),
-                      );
-                    },
+                  SizedBox(
+                    child: StreamBuilder<List<PhatBieuModel>>(
+                      stream: cubit.streamPhatBieu,
+                      builder: (context, snapshot) {
+                        if (cubit.typeStatus.value == S.current.cho_duyet) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 150),
+                            child: DoubleButtonBottom(
+                              title1: S.current.huy_duyet,
+                              title2: S.current.duyet,
+                              onPressed1: () {
+                                Navigator.pop(context);
+                              },
+                              onPressed2: () {},
+                            ),
+                          );
+                        } else if (cubit.typeStatus.value ==
+                            S.current.da_duyet) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 250),
+                            child: ButtonCustomBottom(
+                              title: S.current.huy_duyet,
+                              onPressed: () {},
+                              isColorBlue: false,
+                            ),
+                          );
+                        } else if (cubit.typeStatus.value ==
+                            S.current.huy_duyet) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 250),
+                            child: ButtonCustomBottom(
+                              title: S.current.duyet,
+                              onPressed: () {},
+                              isColorBlue: true,
+                            ),
+                          );
+                        } else {
+                          return IconWithTiltleWidget(
+                            icon: ImageAssets.icMic,
+                            title: S.current.dang_ky_phat_bieu,
+                            onPress: () {
+                              showBottomSheetCustom(
+                                context,
+                                title: S.current.dang_ky_phat_bieu,
+                                child: const DangKyPhatBieuWidget(),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
                   ),
-                  StreamBuilder<PhatBieuModel>(
-                    initialData: cubit.phatBieu,
+                  StreamBuilder<List<PhatBieuModel>>(
+                    stream: cubit.streamPhatBieu,
                     builder: (context, snapshot) {
-                      if (snapshot.hasData) {
+                      final _list = snapshot.data ?? [];
+                      if (_list.isNotEmpty) {
                         return ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 1,
+                          itemCount: _list.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(top: 16),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: borderItemCalender),
-                                color: borderItemCalender.withOpacity(0.1),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(6),
+                            return Column(
+                              children: [
+                                CellPhatBieu(
+                                  infoModel: _list[index],
+                                  cubit: cubit,
+                                  index: index,
                                 ),
-                              ),
-                              child: Column(
-                                children:
-                                snapshot.data!.toListRowPhatBieu().map(
-                                      (row) {
-                                    return DetailDocumentRow(
-                                      row: row,
-                                    );
-                                  },
-                                ).toList(),
-                              ),
+                              ],
                             );
                           },
                         );
                       } else {
-                        return SingleChildScrollView(
-                          physics: const AlwaysScrollableScrollPhysics(),
+                        return const SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
                           child: SizedBox(
                             height: 200,
-                            child: Center(
-                              child: Text(S.current.khong_co_du_lieu),
-                            ),
+                            child: NodataWidget(),
                           ),
                         );
                       }
@@ -92,7 +122,12 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                 ],
               ),
             ),
-            StatePhatBieuWidget(cubit: cubit),
+            StreamBuilder<List<PhatBieuModel>>(
+              stream: cubit.streamPhatBieu,
+              builder: (context, snapshot) {
+                return StatePhatBieuWidget(cubit: cubit);
+              },
+            ),
           ],
         ),
       ),

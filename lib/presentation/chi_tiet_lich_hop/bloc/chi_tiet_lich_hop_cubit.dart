@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
@@ -80,6 +81,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   String id = '';
   List<LoaiSelectModel> listLoaiHop = [];
+
   void addValueToList(String value) {
     cacLuaChonBieuQuyet.add(value);
   }
@@ -174,11 +176,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       },
       error: (error) {},
     );
-  }
-
-  Future<void> soLuongPhatBieuData() async {
-    final result = await hopRp.getSoLuongPhatBieu(id);
-    result.when(success: (res) {}, error: (err) {});
   }
 
   LoaiSelectModel? _findLoaiHop(String id) {
@@ -327,14 +324,13 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           .contains(searchTxt);
     }
 
-    final value = listFakeThanhPhanThamGiaModel
-        .where((element) => isListCanBo(element))
-        .toList();
+    final value =
+        dataThanhPhanThamGia.where((element) => isListCanBo(element)).toList();
     thanhPhanThamGia.sink.add(value);
   }
 
   BehaviorSubject<List<ThanhPhanThamGiaModel>> thanhPhanThamGia =
-  BehaviorSubject<List<ThanhPhanThamGiaModel>>();
+      BehaviorSubject<List<ThanhPhanThamGiaModel>>();
 
   Stream<List<ThanhPhanThamGiaModel>> get streamthanhPhanThamGia =>
       thanhPhanThamGia.stream;
@@ -346,7 +342,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   void checkBoxButton() {
     checkBoxCheck.sink.add(check);
   }
+
   List<String> selectedIds = [];
+
   bool checkIsSelected(String id) {
     bool vl = false;
     if (selectedIds.contains(id)) {
@@ -373,100 +371,47 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   void checkAll() {
     selectedIds.clear();
     if (check) {
-      selectedIds =
-          listFakeThanhPhanThamGiaModel.map((e) => e.id ?? '').toList();
+      selectedIds = dataThanhPhanThamGia.map((e) => e.id ?? '').toList();
       log('LEN : ${selectedIds.length}');
     }
     List<ThanhPhanThamGiaModel> _tempList = [];
     if (thanhPhanThamGia.hasValue) {
       _tempList = thanhPhanThamGia.value;
     } else {
-      _tempList = listFakeThanhPhanThamGiaModel;
+      _tempList = dataThanhPhanThamGia;
     }
     thanhPhanThamGia.sink.add(_tempList);
   }
 
   void validateCheckAll() {
-    check = selectedIds.length == listFakeThanhPhanThamGiaModel.length;
+    check = selectedIds.length == dataThanhPhanThamGia.length;
     log(check.toString());
     checkBoxCheck.sink.add(check);
   }
 
-  List<ThanhPhanThamGiaModel> listFakeThanhPhanThamGiaModel = [
-    ThanhPhanThamGiaModel(
-      id: '0',
-      tebCanBo: 'Lê Sĩ Lâm',
-      trangThai: 'Chờ xác nhận',
-      diemDanh: 'Có mặt',
-      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-      ndCongViec: 'Họp nội bộ',
-      vaiTro: 'Cán bộ chủ trì',
-      statusDiemDanh: false,
-    ),
-    ThanhPhanThamGiaModel(
-      id: '1',
-      tebCanBo: 'Lê Sĩ Lâm2',
-      trangThai: 'Chờ xác nhận',
-      diemDanh: 'Có mặt',
-      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-      ndCongViec: 'Họp nội bộ',
-      vaiTro: 'Cán bộ chủ trì',
-      statusDiemDanh: false,
-    ),
-    ThanhPhanThamGiaModel(
-      id: '2',
-      tebCanBo: 'vu thi tuyet',
-      trangThai: 'xác nhận',
-      diemDanh: 'Có mặt',
-      tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-      ndCongViec: 'Họp nội bộ',
-      vaiTro: 'Cán bộ chủ trì',
-      statusDiemDanh: false,
-    ),
-  ];
+  List<ThanhPhanThamGiaModel> dataThanhPhanThamGia = [];
 
   HistoryProcessPage? process;
 
   List<HistoryDetailDocument> get listHistory =>
       process == null ? [] : process!.listDetailDocumentHistory;
 
-  PhatBieuModel phatBieu = PhatBieuModel(
-    tthoiGian: '5/11/2021  9:10:03 PM',
-    nguoiPhatBieu: 'Lê Sĩ Lâm',
-    ndPhatBieu: 'Cán bộ chủ trì',
-    phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-  );
-
-  List<String> fakeList = ['1','2','3'];
-
-  List<PhatBieuModel> listPhatBieu = [
-    PhatBieuModel(
-      tthoiGian: '11:00, 14/01/2021',
-      nguoiPhatBieu: 'Lê Sĩ Lâm',
-      ndPhatBieu: 'Cán bộ chủ trì',
-      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-    ),
-    PhatBieuModel(
-      tthoiGian: '11:00, 14/01/2021',
-      nguoiPhatBieu: 'Lê Sĩ Lâm',
-      ndPhatBieu: 'Cán bộ chủ trì',
-      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-    ),
-    PhatBieuModel(
-      tthoiGian: '11:00, 14/01/2021',
-      nguoiPhatBieu: 'Lê Sĩ Lâm',
-      ndPhatBieu: 'Cán bộ chủ trì',
-      phienHop: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-    ),
-  ];
+  List<String> dataDropdown = ['1', '2', '3'];
 
   BehaviorSubject<List<PhatBieuModel>> phatbieu =
-  BehaviorSubject<List<PhatBieuModel>>();
+      BehaviorSubject<List<PhatBieuModel>>();
 
   Stream<List<PhatBieuModel>> get streamPhatBieu => phatbieu.stream;
 
+  BehaviorSubject<List<PhatBieuModel>> bieuQuyet =
+      BehaviorSubject<List<PhatBieuModel>>();
+
+  Stream<List<PhatBieuModel>> get streamBieuQuyet => bieuQuyet.stream;
+
+  List<PhatBieuModel> listBieuQuyet = [];
+
   final BehaviorSubject<String> typeStatus =
-  BehaviorSubject.seeded(S.current.danh_sach_phat_bieu);
+      BehaviorSubject.seeded(S.current.danh_sach_phat_bieu);
 
   Stream<String> get getTypeStatus => typeStatus.stream;
 
@@ -475,7 +420,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       phatbieu.sink.add(listPhatBieu);
     } else if (value == S.current.cho_duyet) {
       phatbieu.sink.add(listPhatBieu);
-    } else if (value == S.current.da_duyet){
+    } else if (value == S.current.da_duyet) {
       phatbieu.sink.add(listPhatBieu);
     } else {
       phatbieu.sink.add(listPhatBieu);
@@ -485,6 +430,22 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     print(value);
   }
 
+  SoLuongPhatBieuModel dataSoLuongPhatBieu = SoLuongPhatBieuModel();
+
+  Future<void> soLuongPhatBieuData() async {
+    final result = await hopRp.getSoLuongPhatBieu(id);
+    result.when(
+        success: (res) {
+          dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
+          dataSoLuongPhatBieu.choDuyet = res.choDuyet;
+          dataSoLuongPhatBieu.daDuyet = res.daDuyet;
+          dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
+        },
+        error: (err) {});
+  }
+
+  List<PhatBieuModel> listPhatBieu = [];
+
   final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
 
   Stream<int> get checkRadioStream => _checkRadioSubject.stream;
@@ -493,15 +454,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     _checkRadioSubject.sink.add(_index);
   }
 
-
-
   void dispose() {}
 }
 
 ///Chương Trình họp
 extension ChuongTrinhHop on DetailMeetCalenderCubit {
   Future<void> getListPhienHop() async {
-    final result  = await hopRp.getDanhSachPhienHop(id);
-
+    final result = await hopRp.getDanhSachPhienHop(id);
   }
 }

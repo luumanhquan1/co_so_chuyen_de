@@ -41,7 +41,7 @@ class _TextFormFieldWidgetState extends State<DangKyPhatBieuWidget> {
           ),
         ),
         CustomDropDown(
-          items: cubit.fakeList,
+          items: cubit.dataDropdown,
           onSelectItem: (value) {},
         ),
         Column(

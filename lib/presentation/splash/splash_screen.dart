@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/main.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/chi_tiet_lich_hop_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
 
@@ -52,8 +54,10 @@ class _SplashScreenState extends State<SplashScreen> {
       return const MainTabBarView();
     } else {
       return screenDevice(
-        mobileScreen: const LoginScreen(),
-        tabletScreen: const LoginTabletScreen(),
+        mobileScreen: const DetailMeetCalenderScreen(id: '',),
+        // const LoginScreen(),
+        tabletScreen: const DetailMeetCalenderTablet(id: '',)
+        // const LoginTabletScreen(),
       );
     }
   }

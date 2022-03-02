@@ -5,13 +5,11 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_ho
 import 'package:flutter/material.dart';
 
 class StatePhatBieuWidget extends StatefulWidget {
-  // final Function(int)? onSelectItem;
   final DetailMeetCalenderCubit cubit;
 
   const StatePhatBieuWidget({
     Key? key,
     required this.cubit,
-    // this.onSelectItem,
   }) : super(key: key);
 
   @override
@@ -22,9 +20,9 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
     with SingleTickerProviderStateMixin {
   bool expand = false;
   static final Animatable<double> _easeInTween =
-  CurveTween(curve: Curves.easeIn);
+      CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween =
-  Tween<double>(begin: 0.0, end: 0.5);
+      Tween<double>(begin: 0.0, end: 0.5);
   late AnimationController expandController;
   late Animation<double> animation;
   late Animation<double> _iconTurns;
@@ -76,20 +74,90 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
               expand = !expand;
               _runExpandCheck();
             },
-            child: Container(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
-                border: Border.all(color: choXuLyColor),
-              ),
-              child: Text(
-                '${S.current.danh_sach_phat_bieu} (${widget.cubit.listHistory.length})',
-                style: textNormalCustom(
-                  color: choXuLyColor,
-                ),
-              ),
-            ),
+            child: (widget.cubit.typeStatus.value ==
+                    S.current.danh_sach_phat_bieu)
+                ? Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: backgroundColorApp,
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      border: Border.all(color: choXuLyColor),
+                    ),
+                    child: Text(
+                      '${S.current.danh_sach_phat_bieu} (${widget.cubit.dataSoLuongPhatBieu.danhSachPhatBieu})',
+                      style: textNormalCustom(
+                        color: choXuLyColor,
+                      ),
+                    ),
+                  )
+                : (widget.cubit.typeStatus.value == S.current.cho_duyet
+                    ? Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: backgroundColorApp,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          border: Border.all(color: itemWidgetNotUse),
+                        ),
+                        child: Text(
+                          '${S.current.cho_duyet} (${widget.cubit.dataSoLuongPhatBieu.choDuyet})',
+                          style: textNormalCustom(
+                            color: itemWidgetNotUse,
+                          ),
+                        ),
+                      )
+                    : (widget.cubit.typeStatus.value == S.current.da_duyet
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: backgroundColorApp,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(30)),
+                              border: Border.all(color: itemWidgetUsing),
+                            ),
+                            child: Text(
+                              '${S.current.da_duyet} (${widget.cubit.dataSoLuongPhatBieu.daDuyet})',
+                              style: textNormalCustom(
+                                color: itemWidgetUsing,
+                              ),
+                            ),
+                          )
+                        : (widget.cubit.typeStatus.value == S.current.huy_duyet
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: backgroundColorApp,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(30)),
+                                  border: Border.all(color: statusCalenderRed),
+                                ),
+                                child: Text(
+                                  '${S.current.huy_duyet} (${widget.cubit.dataSoLuongPhatBieu.huyDuyet})',
+                                  style: textNormalCustom(
+                                    color: statusCalenderRed,
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: backgroundColorApp,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(30)),
+                                  border: Border.all(color: choXuLyColor),
+                                ),
+                                child: Text(
+                                  '${S.current.danh_sach_phat_bieu} (${widget.cubit.dataSoLuongPhatBieu.danhSachPhatBieu})',
+                                  style: textNormalCustom(
+                                    color: choXuLyColor,
+                                  ),
+                                ),
+                              )))),
           ),
           SizeTransition(
             axisAlignment: 1.0,
@@ -107,18 +175,21 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        widget.cubit
+                            .getValueStatus(S.current.danh_sach_phat_bieu);
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                           color: backgroundColorApp,
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30)),
+                              const BorderRadius.all(Radius.circular(30)),
                           border: Border.all(color: choXuLyColor),
                         ),
                         child: Text(
-                          '${S.current.danh_sach_phat_bieu} (${widget.cubit.listHistory.length})',
+                          '${S.current.danh_sach_phat_bieu} (${widget.cubit.dataSoLuongPhatBieu.danhSachPhatBieu})',
                           style: textNormalCustom(
                             color: choXuLyColor,
                           ),
@@ -127,18 +198,20 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        widget.cubit.getValueStatus(S.current.cho_duyet);
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                           color: backgroundColorApp,
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30)),
+                              const BorderRadius.all(Radius.circular(30)),
                           border: Border.all(color: itemWidgetNotUse),
                         ),
                         child: Text(
-                          '${S.current.cho_duyet} (${widget.cubit.listHistory.length})',
+                          '${S.current.cho_duyet} (${widget.cubit.dataSoLuongPhatBieu.choDuyet})',
                           style: textNormalCustom(
                             color: itemWidgetNotUse,
                           ),
@@ -147,18 +220,20 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        widget.cubit.getValueStatus(S.current.da_duyet);
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                           color: backgroundColorApp,
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30)),
+                              const BorderRadius.all(Radius.circular(30)),
                           border: Border.all(color: itemWidgetUsing),
                         ),
                         child: Text(
-                          '${S.current.da_duyet} (${widget.cubit.listHistory.length})',
+                          '${S.current.da_duyet} (${widget.cubit.dataSoLuongPhatBieu.daDuyet})',
                           style: textNormalCustom(
                             color: itemWidgetUsing,
                           ),
@@ -167,18 +242,20 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        widget.cubit.getValueStatus(S.current.huy_duyet);
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                           color: backgroundColorApp,
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30)),
+                              const BorderRadius.all(Radius.circular(30)),
                           border: Border.all(color: statusCalenderRed),
                         ),
                         child: Text(
-                          '${S.current.huy_duyet} (${widget.cubit.listHistory.length})',
+                          '${S.current.huy_duyet} (${widget.cubit.dataSoLuongPhatBieu.huyDuyet})',
                           style: textNormalCustom(
                             color: statusCalenderRed,
                           ),
