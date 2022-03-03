@@ -64,10 +64,8 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                   TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
-                  setState(() {
-                    cubit.isCheck = !cubit.isCheck;
-                  });
-                  cubit.callApi();
+                  setState(() {});
+                  cubit.isCheck = !cubit.isCheck;
                 },
                 icon: BlocBuilder<CalenderCubit, CalenderState>(
                   bloc: cubit,
@@ -135,21 +133,18 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                           return SelectOptionHeader(
                             onTapDay: () {
                               setState(() {});
-                              cubit.callApi();
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.DAY,
                               );
                             },
                             onTapWeek: () {
                               setState(() {});
-                              cubit.callApi();
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.WEEK,
                               );
                             },
                             onTapmonth: () {
                               setState(() {});
-                              cubit.callApi();
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.MONTH,
                               );

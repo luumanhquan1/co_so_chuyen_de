@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
@@ -137,11 +139,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }
 
   Future<void> _dataLoaiLich() async {
-    final result = await _lichLamViec.getLichLvRight(
-      '2022-03-04',
-      '2022-03-04',
-      0,
-    );
+    final result = await _lichLamViec.getLichLvRight(LichLamViecRightRequest(
+        dateStart: '2022-03-04', dateTo: '2022-03-04', type: 0));
     result.when(
       success: (res) {
         if (res.isNotEmpty) {

@@ -1,11 +1,13 @@
 import 'package:ccvc_mobile/data/di/flutter_transformer.dart';
 import 'package:ccvc_mobile/data/repository_impl/account_impl/account_impl.dart';
+import 'package:ccvc_mobile/data/repository_impl/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/home_impl/home_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_impl/lich_lam_viec_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
+import 'package:ccvc_mobile/data/services/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_service.dart';
 import 'package:ccvc_mobile/data/services/home_service/home_service.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
@@ -13,6 +15,7 @@ import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
 import 'package:ccvc_mobile/data/services/thanh_phan_tham_gia/thanh_phan_tham_gia_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_repository.dart';
 import 'package:ccvc_mobile/domain/repository/home_repository/home_repository.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
@@ -42,7 +45,6 @@ void configureDependencies() {
     AccountImpl(Get.find(),Get.find()),
   );
 
-
   Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
   Get.put(HomeServiceCCVC(provideDio()));
   Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
@@ -68,6 +70,13 @@ void configureDependencies() {
     ),
   );
   Get.put<HopRepository>(HopRepositoryImpl(Get.find()));
+
+  Get.put(
+    BaoChiMangXaHoiService(
+      provideDio(),
+    ),
+  );
+  Get.put<BaoChiMangXaHoiRepository>(BaoChiMangXaHoiImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;

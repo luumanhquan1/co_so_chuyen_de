@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderWeekMobile extends StatefulWidget {
-  final CalenderCubit cubit;
-
-  const CalenderWeekMobile({Key? key, required this.cubit}) : super(key: key);
+  const CalenderWeekMobile({Key? key}) : super(key: key);
 
   @override
   State<CalenderWeekMobile> createState() => _CalenderWeekMobileState();
@@ -16,13 +14,21 @@ class CalenderWeekMobile extends StatefulWidget {
 
 class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
   final CalendarController _controller = CalendarController();
+  final CalenderCubit cubit = CalenderCubit();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit.callApi();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: StreamBuilder<DataLichLvModel>(
-          stream: null,
+          stream: cubit.streamListLich,
           builder: (context, snapshot) {
             return SfCalendar(
               allowAppointmentResize: true,
@@ -33,7 +39,7 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
               view: CalendarView.week,
               todayHighlightColor: statusCalenderRed,
               appointmentTimeTextFormat: 'hh:mm:ss a',
-              dataSource: widget.cubit.getCalenderDataSource(
+              dataSource: cubit.getCalenderDataSource(
                 snapshot.data ?? DataLichLvModel(),
               ),
               timeSlotViewSettings: const TimeSlotViewSettings(
@@ -47,8 +53,6 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
               ) {
                 final Appointment appointment =
                     calendarAppointmentDetails.appointments.first;
-                // final distanceTime =
-                //     appointment.startTime.difference(appointment.endTime);
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6.0),
@@ -56,7 +60,9 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 5.0, vertical: 2.0),
+                      horizontal: 5.0,
+                      vertical: 2.0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -72,7 +78,7 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
                 );
               },
             );
-          }),
+          },),
     );
   }
 }
