@@ -629,6 +629,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
   bool isDanhSachChoXuLy = false;
   bool isDanhSachDaBanHanh = true;
   bool isChoYKien = false;
+  bool isVanBanDen = true;
   SelectKey? selectKey;
   Future<void> callApiVB() async {
     showLoading();
@@ -684,6 +685,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
       case SelectKey.CHO_VAO_SO:
         isChoYKien = false;
         maTrangThai = ['CHO_VAO_SO'];
+        isVanBanDen = true;
         callApiVB();
         break;
       case SelectKey.CHO_XU_LY_VB_DI:
@@ -692,11 +694,13 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
         isDanhSachChoXuLy = true;
         isDanhSachDaBanHanh = false;
         trangThaiFilter = 2;
+        isVanBanDen = false;
         callSearchVB();
         break;
       case SelectKey.CHO_XU_LY_VB_DEN:
         maTrangThai = ['CHO_XU_LY', 'CHO_PHAN_XU_LY'];
         isChoYKien = false;
+        isVanBanDen = true;
         callApiVB();
         break;
       case SelectKey.CHO_TRINH_KY:
@@ -705,11 +709,13 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
         isDanhSachChoXuLy = false;
         isDanhSachDaBanHanh = false;
         trangThaiFilter = 1;
+        isVanBanDen = false;
         callSearchVB();
         break;
       case SelectKey.CHO_CHO_Y_KIEN_VB_DEN:
         isChoYKien = true;
         maTrangThai = [];
+        isVanBanDen = true;
         callApiVB();
         break;
       case SelectKey.CHO_CAP_SO:
@@ -718,6 +724,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
         isDanhSachChoXuLy = false;
         isDanhSachDaBanHanh = false;
         trangThaiFilter = 5;
+        isVanBanDen = false;
         callSearchVB();
         break;
       case SelectKey.CHO_BAN_HANH:
@@ -726,6 +733,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
         isDanhSachChoXuLy = false;
         isDanhSachDaBanHanh = true;
         trangThaiFilter = 6;
+        isVanBanDen = false;
         callSearchVB();
         break;
       default:
@@ -860,6 +868,7 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
 
   Stream<List<CalendarMeetingModel>> get getListLichLamViec =>
       _getListLichLamViec.stream;
+  final userId = HiveLocal.getDataUser()?.userId ?? '';
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getListLichLamViec(

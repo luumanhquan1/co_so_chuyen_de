@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_den_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
@@ -19,7 +20,7 @@ mixin QLVBRepository {
   Future<Result<DanhSachVanBanModel>> getVanBanModel();
 
   Future<Result<DanhSachVanBanModel>> getDanhSachVbDen(
-      String startDate, String endDate, int index, int size);
+      DanhSachVBRequest danhSachVBRequest);
 
   Future<Result<DanhSachVanBanModel>> getDanhSachVbDi(
       String startDate, String endDate, int index, int size);

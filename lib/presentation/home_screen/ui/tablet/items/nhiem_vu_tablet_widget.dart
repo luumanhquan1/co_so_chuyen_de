@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -108,24 +109,36 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
                   final result = data[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: ContainerInfoWidget(
-                      title: result.title,
-                      status: result.codeStatus.getText(),
-                      colorStatus: result.codeStatus.getColor(),
-                      listData: [
-                        InfoData(
-                          urlIcon: ImageAssets.icWork,
-                          key: _nhiemVuCubit.isCongViec
-                              ? S.current.nguoi_giao_viec
-                              : S.current.loai_nhiem_vu,
-                          value: result.loaiNhiemVu,
-                        ),
-                        InfoData(
-                          urlIcon: ImageAssets.icCalendar,
-                          key: S.current.han_xu_ly,
-                          value: result.hanXuLy,
-                        ),
-                      ],
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChiTietNhiemVuTabletScreen(
+                              id: result.id,
+                            ),
+                          ),
+                        );
+                      },
+                      child: ContainerInfoWidget(
+                        title: result.title,
+                        status: result.codeStatus.getText(),
+                        colorStatus: result.codeStatus.getColor(),
+                        listData: [
+                          InfoData(
+                            urlIcon: ImageAssets.icWork,
+                            key: _nhiemVuCubit.isCongViec
+                                ? S.current.nguoi_giao_viec
+                                : S.current.loai_nhiem_vu,
+                            value: result.loaiNhiemVu,
+                          ),
+                          InfoData(
+                            urlIcon: ImageAssets.icCalendar,
+                            key: S.current.han_xu_ly,
+                            value: result.hanXuLy,
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }),

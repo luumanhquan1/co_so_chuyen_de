@@ -190,7 +190,7 @@ class _EditPersonalInformationTabletScreen
                                       key: UniqueKey(),
                                       paddings: 10,
                                       leadingIcon: SvgPicture.asset(
-                                        ImageAssets.icEditInfor,
+                                        ImageAssets.icCalenders,
                                       ),
                                       value: cubit
                                               .managerPersonalInformationModel

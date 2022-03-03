@@ -53,7 +53,6 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
             onPress: () {},
           ),
           StreamBuilder<List<ThanhPhanThamGiaModel>>(
-            initialData: cubit.dataThanhPhanThamGia,
             stream: cubit.thanhPhanThamGia,
             builder: (context, snapshot) {
               final _list = snapshot.data ?? [];

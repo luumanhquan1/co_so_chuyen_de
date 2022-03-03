@@ -117,7 +117,6 @@ class _MoiNguoiThamGiaWidgetTabletState
           ),
           spaceH16,
           StreamBuilder<List<ThanhPhanThamGiaModel>>(
-            initialData: cubit.dataThanhPhanThamGia,
             stream: cubit.thanhPhanThamGia,
             builder: (context, snapshot) {
               final _list = snapshot.data ?? [];
@@ -146,3 +145,5 @@ class _MoiNguoiThamGiaWidgetTabletState
     );
   }
 }
+
+

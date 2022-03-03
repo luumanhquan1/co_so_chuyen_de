@@ -35,6 +35,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+    cubit.callApi();
   }
 
   @override
@@ -80,7 +81,12 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         builder: (context) =>
                             const TaoLichLamViecChiTietTablet(),
                       ),
-                    );
+                    ).then((value) {
+                      if (value == null) {}
+                      if (value == true) {
+                        cubit.callApi();
+                      }
+                    });
                   },
                   onTapDay: () {
                     setState(() {});

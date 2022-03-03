@@ -1,7 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -42,7 +41,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
     cubit.callApi();
-    cubit.postDanhSachLichlamViec(body: dataBodyRequetDanhSachLLV);
   }
 
   @override
@@ -158,7 +156,10 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                     BlocBuilder<CalenderCubit, CalenderState>(
                       bloc: cubit,
                       builder: (context, state) {
-                        return state.tableCalendar(cubit);
+                        return state.tableCalendar(
+                          cubit: cubit,
+                          type: state.type,
+                        );
                       },
                     ),
                   ],
@@ -173,7 +174,11 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                   MaterialPageRoute(
                     builder: (context) => const TaoLichLamViecChiTietScreen(),
                   ),
-                );
+                ).then((value) {
+                  if (value) {
+                    cubit.callApi();
+                  }
+                });
               },
               backgroundColor: labelColor,
               child: SvgPicture.asset(ImageAssets.icVectorCalender),

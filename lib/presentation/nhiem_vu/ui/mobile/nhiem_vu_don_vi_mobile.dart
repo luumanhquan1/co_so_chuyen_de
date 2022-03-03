@@ -191,6 +191,8 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
         ),
         TableCalendarWidget(
           onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChangeRange:
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
         ),
       ],
     );

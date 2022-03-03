@@ -18,6 +18,7 @@ class SelectOnlyExpand extends StatefulWidget {
   final String urlIcon;
   final bool isShowValue;
   final Widget? customValue;
+  final Function(int)? onChange;
   const SelectOnlyExpand({
     Key? key,
     this.initExpand = false,
@@ -27,6 +28,7 @@ class SelectOnlyExpand extends StatefulWidget {
     this.title = '',
     required this.urlIcon,
     this.customValue,
+    this.onChange,
   }) : super(key: key);
 
   @override
@@ -50,6 +52,9 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
           widget.listSelect.indexWhere((element) => element == widget.value);
       if (index != -1) {
         valueSelect = widget.listSelect[index];
+        if(widget.onChange!=null){
+          widget.onChange!(index);
+        }
         selectBloc.sink.add(index);
       }
     }
@@ -95,6 +100,9 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
             child: GestureDetector(
               onTap: () {
                 valueSelect = widget.listSelect[index];
+                if(widget.onChange!=null){
+                  widget.onChange!(index);
+                }
                 selectBloc.sink.add(index);
               },
               child: Container(

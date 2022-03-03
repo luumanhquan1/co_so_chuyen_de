@@ -22,7 +22,8 @@ import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietNhiemVuTabletScreen extends StatefulWidget {
-  const ChiTietNhiemVuTabletScreen({Key? key}) : super(key: key);
+  final String id;
+  const ChiTietNhiemVuTabletScreen({Key? key,this.id = ''}) : super(key: key);
 
   @override
   _ChiTietNhiemVuTabletScreenState createState() =>
