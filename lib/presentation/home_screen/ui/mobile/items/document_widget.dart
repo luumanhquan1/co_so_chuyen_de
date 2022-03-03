@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_den_mobile.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -77,14 +78,15 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                   initValue: _vanBanCubit.selectKeyTime,
                   onSelect: (value, startDate, endDate) {
                     _vanBanCubit.selectDate(
-                        selectKey: value, startDate: startDate, endDate: endDate);
+                        selectKey: value,
+                        startDate: startDate,
+                        endDate: endDate);
                   },
                   title: S.current.time,
                 )
               ],
             );
-          }
-      ),
+          }),
       child: LoadingOnly(
         stream: _vanBanCubit.stateStream,
         child: StreamBuilder<List<DocumentModel>>(
@@ -102,22 +104,35 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                 final result = data[index];
                 return Padding(
                   padding: const EdgeInsets.only(top: 16),
-                  child: ContainerInfoWidget(
-                    title: result.title,
-                    status: result.status,
-                    colorStatus: result.documentStatus.getColor(),
-                    listData: [
-                      InfoData(
-                        urlIcon: ImageAssets.icSoKyHieu,
-                        key: S.current.so_ky_hieu,
-                        value: result.kyHieu,
-                      ),
-                      InfoData(
-                        urlIcon: ImageAssets.icAddress,
-                        key: S.current.noi_gui,
-                        value: result.noiGui,
-                      ),
-                    ],
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChiTietVanBanDenMobile(
+                            taskId: result.taskId,
+                            processId: result.id,
+                          ),
+                        ),
+                      );
+                    },
+                    child: ContainerInfoWidget(
+                      title: result.title,
+                      status: result.status,
+                      colorStatus: result.documentStatus.getColor(),
+                      listData: [
+                        InfoData(
+                          urlIcon: ImageAssets.icSoKyHieu,
+                          key: S.current.so_ky_hieu,
+                          value: result.kyHieu,
+                        ),
+                        InfoData(
+                          urlIcon: ImageAssets.icAddress,
+                          key: S.current.noi_gui,
+                          value: result.noiGui,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }),
