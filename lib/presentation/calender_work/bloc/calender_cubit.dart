@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
-import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
@@ -57,11 +57,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void callApi() {
     getListLichHop(
-      dateFrom: startDate.formatApi,
-      dateTo: endDate.formatApi,
+      DateFrom: startDate.formatApi,
+      DateTo: endDate.formatApi,
+      UserId: HiveLocal.getDataUser()?.userId ?? '',
+      DonViId:
+          HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
+      PageIndex: page,
+      PageSize: 10,
       isLichCuaToi: true,
-      pageIndex: page,
-      pageSize: 10,
     );
     dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
     dataLichLamViecRight(
@@ -72,18 +75,22 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   Future<void> getListLichHop({
-    required String dateFrom,
-    required String dateTo,
+    required String DateFrom,
+    required String DateTo,
+    required String UserId,
+    required String DonViId,
+    required int PageIndex,
+    required int PageSize,
     required bool isLichCuaToi,
-    required int pageIndex,
-    required int pageSize,
   }) async {
-    final ListLichLvRequest data = ListLichLvRequest(
-      dateFrom: dateFrom,
-      dateTo: dateTo,
+    final DanhSachLichLamViecRequest data = DanhSachLichLamViecRequest(
+      DateFrom: DateFrom,
+      DateTo: DateTo,
+      UserId: UserId,
+      DonViId: DonViId,
+      PageIndex: PageIndex,
+      PageSize: PageSize,
       isLichCuaToi: isLichCuaToi,
-      pageIndex: pageIndex,
-      pageSize: pageSize,
     );
     showLoading();
     final result = await _lichLamViec.getListLichLamViec(data);

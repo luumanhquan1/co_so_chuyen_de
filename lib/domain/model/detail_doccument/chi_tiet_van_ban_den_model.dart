@@ -137,7 +137,7 @@ class ChiTietVanBanDenModel {
     final List<DocumentDetailRow> list = [
       DocumentDetailRow(
         S.current.so_van_ban,
-        soVanBan,
+        soVanBan??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
@@ -148,47 +148,47 @@ class ChiTietVanBanDenModel {
       DocumentDetailRow(S.current.so_phu, soPhu== null ? '' : soPhu.toString(), TypeDocumentDetailRow.text),
       DocumentDetailRow(
         S.current.noi_gui,
-        donViBanHanh,
+        donViBanHanh??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.loai_van_ban,
-        loaiVanBan,
+        loaiVanBan??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.so_ky_hieu,
-        soKyHieu,
+        soKyHieu??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.ngay_ban_hanh,
-        ngayBanHanh,
+        ngayBanHanh??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.ngay_den,
-        ngayDen,
+        ngayDen??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.do_khan,
-        doKhan,
+        doKhan??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.ngay_han_xu_ly,
-        ngayHanXuLy,
+        ngayHanXuLy??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.han_xu_ly,
-        hanXuLy,
+        hanXuLy??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.nguoi_ky,
-        nguoiKy,
+        nguoiKy??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(S.current.so_ban, soBan== null ? '' : soBan.toString(), TypeDocumentDetailRow.text),
@@ -199,12 +199,12 @@ class ChiTietVanBanDenModel {
       ),
       DocumentDetailRow(
         S.current.phuong_thuc_nhan,
-        phuongThucNhan,
+        phuongThucNhan??'',
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
         S.current.trich_yeu,
-        trichYeu,
+        trichYeu??'',
         TypeDocumentDetailRow.text,
       ),
     ];

@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expan
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/widget_head_chi_tiet_van_ban_den_mobile.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,12 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                     LichSuTraLaiExpandWidget(cubit: cubit),
                     LichSuThuHoiExpandWidget(cubit: cubit),
                     LichSuVanBanLienThongExpandWidget(cubit: cubit),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0,bottom: 24.0),
+                      child: ButtonCustomBottom(isColorBlue: false, title: S.current.xem_luong, onPressed: (){
+
+                      }),
+                    ),
                   ],
                 ),
               ),

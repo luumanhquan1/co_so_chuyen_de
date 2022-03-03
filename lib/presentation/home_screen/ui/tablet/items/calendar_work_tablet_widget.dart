@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -78,23 +79,35 @@ class _CalendarWorkWidgetState extends State<CalendarWorkTabletWidget> {
                     final result = data[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: ContainerInfoWidget(
-                        status: result.codeStatus.getText(),
-                        colorStatus: result.codeStatus.getColor(),
-                        backGroundStatus: true,
-                        title: result.title,
-                        listData: [
-                          InfoData(
-                            urlIcon: ImageAssets.icTime,
-                            key: S.current.time,
-                            value: result.convertTime(),
-                          ),
-                          InfoData(
-                            urlIcon: ImageAssets.icPeople,
-                            key: S.current.nguoi_chu_tri,
-                            value: result.nguoiChuTri,
-                          ),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChiTietLamViecTablet(
+                                id: result.id,
+                              ),
+                            ),
+                          );
+                        },
+                        child: ContainerInfoWidget(
+                          status: result.codeStatus.getText(),
+                          colorStatus: result.codeStatus.getColor(),
+                          backGroundStatus: true,
+                          title: result.title,
+                          listData: [
+                            InfoData(
+                              urlIcon: ImageAssets.icTime,
+                              key: S.current.time,
+                              value: result.convertTime(),
+                            ),
+                            InfoData(
+                              urlIcon: ImageAssets.icPeople,
+                              key: S.current.nguoi_chu_tri,
+                              value: result.nguoiChuTri,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),

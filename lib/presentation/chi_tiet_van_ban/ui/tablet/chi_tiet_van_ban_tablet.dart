@@ -14,7 +14,8 @@ import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietVanBanTablet extends StatefulWidget {
-  const ChiTietVanBanTablet({Key? key}) : super(key: key);
+  final String id;
+  const ChiTietVanBanTablet({Key? key,this.id = ''}) : super(key: key);
 
   @override
   _ChiTietVanBanTabletState createState() => _ChiTietVanBanTabletState();

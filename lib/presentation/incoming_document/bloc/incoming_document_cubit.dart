@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
+import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
 import 'package:ccvc_mobile/domain/model/document/incoming_document.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
@@ -20,6 +21,7 @@ class IncomingDocumentCubit extends BaseCubit<BaseState> {
   IncomingDocumentCubit() : super(IncomingDocumentStateIntial());
   int nextPage = 1;
   int totalPage = 1;
+  List<String> maTrangThai = [];
 
   final BehaviorSubject<List<VanBanModel>> _getListVBDen =
       BehaviorSubject<List<VanBanModel>>();
@@ -54,7 +56,17 @@ class IncomingDocumentCubit extends BaseCubit<BaseState> {
   }) async {
     loadMorePage = page;
     final result =
-        await _QLVBRepo.getDanhSachVbDen(startDate, endDate, page, size);
+        await _QLVBRepo.getDanhSachVbDen(
+          DanhSachVBRequest(
+            maTrangThai: maTrangThai,
+            index: page,
+            isChoYKien: false,
+            isSortByDoKhan: true,
+            thoiGianStartFilter: startDate,
+            thoiGianEndFilter: endDate,
+            size: 10,
+          ),
+        );
     result.when(
       success: (res) {
         if (page == ApiConstants.PAGE_BEGIN) {
