@@ -118,7 +118,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                       child: BlocBuilder<CalenderCubit, CalenderState>(
                         bloc: cubit,
                         builder: (context, state) {
-                          print('${state.type} ===================');
                           return state.lichLamViecMobile(cubit);
                         },
                       ),

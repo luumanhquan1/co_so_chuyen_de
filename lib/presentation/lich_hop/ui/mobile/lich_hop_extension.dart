@@ -58,20 +58,6 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
   }) {
     switch (this) {
-      case Type_Choose_Option_Day.DAY:
-        return TableCalendarWidget(
-          type: type,
-          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
-          onChangeRange:
-              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-        );
-      case Type_Choose_Option_Day.WEEK:
-        return TableCalendarWidget(
-          type: type,
-          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
-          onChangeRange:
-              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-        );
       case Type_Choose_Option_Day.MONTH:
         return TableCalendarWidget(
           isCalendar: false,
