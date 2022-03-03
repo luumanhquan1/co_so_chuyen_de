@@ -82,7 +82,6 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                             const TaoLichLamViecChiTietTablet(),
                       ),
                     ).then((value) {
-                      print('88888888888888888888$value');
                       if (value == null) {}
                       if (value == true) {
                         cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
