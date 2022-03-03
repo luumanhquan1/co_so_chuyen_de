@@ -15,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChiTietLichLamViecScreen extends StatefulWidget {
-  const ChiTietLichLamViecScreen({Key? key}) : super(key: key);
+  final String id;
+  const ChiTietLichLamViecScreen({Key? key,this.id = ''}) : super(key: key);
 
   @override
   State<ChiTietLichLamViecScreen> createState() =>
@@ -31,7 +32,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
     super.initState();
     // chiTietLichLamViecCubit.initData();
 
-    chiTietLichLamViecCubit.loadApi('e359be29-1d41-44a9-a410-f3d105f63ffb');
+    chiTietLichLamViecCubit.loadApi(widget.id);
   }
 
   @override
@@ -52,7 +53,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
                       chiTietLichLamViecCubit
-                          .cancel('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                          .cancel(widget.id);
         
                     },
                     title: S.current.huy_lich,
@@ -79,7 +80,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       btnLeftTxt: S.current.khong,
                       funcBtnRight: () {
                         chiTietLichLamViecCubit
-                            .dataDelete('dcfb06d3-09df-44f6-adbc-ea31ba69697f');
+                            .dataDelete(widget.id);
 
                  
                       },

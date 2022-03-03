@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/chi_tiet_lich_hop_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -92,27 +93,39 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleTabletWidget> {
                     final result = data[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: ContainerInfoWidget(
-                        status: result.isHopTrucTuyen
-                            ? S.current.truc_tuyen
-                            : S.current.truc_tiep,
-                        colorStatus: result.isHopTrucTuyen
-                            ? sideBtnSelected.withOpacity(0.5)
-                            : choXuLyColor,
-                        backGroundStatus: true,
-                        title: result.title,
-                        listData: [
-                          InfoData(
-                            urlIcon: ImageAssets.icTime,
-                            key: S.current.time,
-                            value: result.convertTime(),
+                      child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailMeetCalenderTablet(
+                              id: result.id,
+                            ),
                           ),
-                          InfoData(
-                            urlIcon: ImageAssets.icPeople,
-                            key: S.current.nguoi_chu_tri,
-                            value: result.nguoiChuTri,
-                          ),
-                        ],
+                        );
+                      },
+                        child: ContainerInfoWidget(
+                          status: result.isHopTrucTuyen
+                              ? S.current.truc_tuyen
+                              : S.current.truc_tiep,
+                          colorStatus: result.isHopTrucTuyen
+                              ? sideBtnSelected.withOpacity(0.5)
+                              : choXuLyColor,
+                          backGroundStatus: true,
+                          title: result.title,
+                          listData: [
+                            InfoData(
+                              urlIcon: ImageAssets.icTime,
+                              key: S.current.time,
+                              value: result.convertTime(),
+                            ),
+                            InfoData(
+                              urlIcon: ImageAssets.icPeople,
+                              key: S.current.nguoi_chu_tri,
+                              value: result.nguoiChuTri,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),
