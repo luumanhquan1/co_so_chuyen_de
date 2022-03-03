@@ -232,7 +232,7 @@ class ChiTietVanBanDenResponse extends Equatable {
         donViBanHanh: donViBanHanh ?? '',
         donViVaoSoLanDauId: donViVaoSoLanDauId ?? '',
         soDen: soDen ,
-        soPhu: soPhu ,
+        soPhu: soPhu,
         loaiVanBanId: loaiVanBanId ?? '',
         loaiVanBan: loaiVanBan ?? '',
         soKyHieu: soKyHieu ?? '',

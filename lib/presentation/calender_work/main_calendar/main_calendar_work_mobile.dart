@@ -158,7 +158,10 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                     BlocBuilder<CalenderCubit, CalenderState>(
                       bloc: cubit,
                       builder: (context, state) {
-                        return state.tableCalendar(cubit);
+                        return state.tableCalendar(
+                          cubit: cubit,
+                          type: state.type,
+                        );
                       },
                     ),
                   ],
@@ -171,9 +174,16 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const TaoLichLamViecChiTietScreen(),
+                    builder: (context) =>  const TaoLichLamViecChiTietScreen(),
                   ),
-                );
+                ).then((value) {
+                    if(value) {
+                      cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+                      cubit.callApi();
+                      cubit.postDanhSachLichlamViec(
+                          body: dataBodyRequetDanhSachLLV);
+                    }
+                });
               },
               backgroundColor: labelColor,
               child: SvgPicture.asset(ImageAssets.icVectorCalender),

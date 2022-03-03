@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:rxdart/rxdart.dart';
 
-class TableCalendarTabletCubit {
+class TableCalendarCubit {
   DateTime focusedDay = DateTime.now();
   DateTime selectedDay = DateTime.now();
   DateTime? rangeStart;

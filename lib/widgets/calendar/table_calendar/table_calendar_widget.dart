@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_null_aware_method_calls, unnecessary_statements
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,16 +14,18 @@ import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
-  final Function(DateTime? start, DateTime? end, DateTime? focusedDay)?
+  final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
   final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
   final Function(String value)? onSearch;
+  final Type_Choose_Option_Day type;
 
   const TableCalendarWidget({
     Key? key,
     this.isCalendar = true,
     this.onSearch,
-    this.onChangeRange,
+    required this.onChangeRange,
+    this.type = Type_Choose_Option_Day.DAY,
     required this.onDaySelected,
   }) : super(key: key);
 
@@ -34,6 +36,7 @@ class TableCalendarWidget extends StatefulWidget {
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   DateTime? _startTime;
   DateTime? _endTime;
+  TableCalendarCubit cubit = TableCalendarCubit();
 
   List<Event> _getEventsfromDay(DateTime date) {
     return selectedEvents[date] ?? [];
@@ -115,7 +118,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             ),
                           ),
                           onSubmitted: (value) {
-                            print('click submit');
                             widget.onSearch != null
                                 ? widget.onSearch!(value)
                                 : null;
@@ -130,13 +132,9 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         },
                         child: Row(
                           children: [
-                            Text(
-                              DateTime.now().toStringWithListFormat,
-                              style: textNormalCustom(
-                                fontSize: 14.0.textScale(),
-                                fontWeight: FontWeight.w500,
-                                color: titleColor,
-                              ),
+                            widget.type.getTextWidget(
+                              cubit: cubit,
+                              textColor: titleColor,
                             ),
                             const Icon(
                               Icons.arrow_drop_down_sharp,
@@ -170,14 +168,19 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             _focusedDay.value = _selectedDay;
                           });
                         }
-
-                        widget.onDaySelected(date, events);
+                        cubit.selectedDay = date;
+                        cubit.moveTimeSubject.add(cubit.selectedDay);
+                        widget.onDaySelected(
+                          cubit.moveTimeSubject.value,
+                          events,
+                        );
                       },
                       rangeSelectionMode: RangeSelectionMode.toggledOff,
                       rangeStartDay: _startTime,
                       rangeEndDay: _endTime,
                       onRangeSelected: (startTime, endTime, focusedDay) {
                         print('$startTime ....... $endTime');
+                        widget.onChangeRange(startTime, endTime, focusedDay);
                       },
                       daysOfWeekVisible: true,
                       onFormatChanged: (CalendarFormat _format) {

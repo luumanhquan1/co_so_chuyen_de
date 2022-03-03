@@ -154,13 +154,15 @@ class Items {
         : null;
   }
   CalendarMeetingModel toDomain() => CalendarMeetingModel(
-      title: title ?? '',
-      nguoiChuTri: canBoChuTriInfo?.hoTen ?? '',
-      dataTimeFrom: dateTimeFrom ?? DateTime.now().toString(),
-      dateTimeTo: dateTimeTo ?? DateTime.now().toString(),
-      timeFrom: timeStart ?? '',
-      timeTo: timeTo ?? '',
-      isHopTrucTuyen: bitHopTrucTuyen ?? false);
+        title: title ?? '',
+        nguoiChuTri: canBoChuTriInfo?.hoTen ?? '',
+        dataTimeFrom: dateTimeFrom ?? DateTime.now().toString(),
+        dateTimeTo: dateTimeTo ?? DateTime.now().toString(),
+        timeFrom: timeStart ?? '',
+        timeTo: timeTo ?? '',
+        isHopTrucTuyen: bitHopTrucTuyen ?? false,
+        id: id ?? '',
+      );
 }
 
 class CanBoChuTriInfo {

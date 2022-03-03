@@ -142,7 +142,7 @@ class ChiTietVanBanDenModel {
       ),
       DocumentDetailRow(
         S.current.so_den,
-        soDen == null ? '' : soDen.toString(),
+        soDen== null ? '' : soDen.toString(),
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(S.current.so_phu, soPhu== null ? '' : soPhu.toString(), TypeDocumentDetailRow.text),
@@ -191,10 +191,10 @@ class ChiTietVanBanDenModel {
         nguoiKy??'',
         TypeDocumentDetailRow.text,
       ),
-      DocumentDetailRow(S.current.so_ban, soBan ==null ?'':soBan.toString(), TypeDocumentDetailRow.text),
+      DocumentDetailRow(S.current.so_ban, soBan== null ? '' : soBan.toString(), TypeDocumentDetailRow.text),
       DocumentDetailRow(
         S.current.so_trang,
-        soTrang == null?'':soTrang.toString(),
+        soTrang== null ? '' : soTrang.toString(),
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
