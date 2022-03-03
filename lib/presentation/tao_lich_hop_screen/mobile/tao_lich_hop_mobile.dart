@@ -40,9 +40,10 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarDefaultBack(S.current.tao_lich_hop),
-      body: ExpandGroup(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ExpandGroup(
               child: Column(
@@ -153,13 +154,15 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
               onChange: (value) {},
             ),
             spaceH15,
-            const ThanhPhanThamGiaExpandWidget(),
-            ChuongTrinhHopWidget(
-              cubit: _cubit,
-            ),
-            const SizedBox(
-              height: 100,
-            )
+            ExpandGroup(
+                child: Column(
+              children: [
+                const ThanhPhanThamGiaExpandWidget(),
+                ChuongTrinhHopWidget(
+                  cubit: _cubit,
+                ),
+              ],
+            ))
           ],
         ),
       ),
