@@ -1,17 +1,20 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/DanhSachNhiemVuLichHopModel.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_nhiem_vu_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/extension_status.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'item_menu_ket_thuc.dart';
 
 class KetLuanHopWidget extends StatefulWidget {
   const KetLuanHopWidget({Key? key}) : super(key: key);
@@ -41,6 +44,7 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StreamBuilder<KetLuanHopModel>(
+                  initialData: cubit.ketLuanHopModel,
                   stream: cubit.ketLuanHopStream,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
@@ -57,7 +61,10 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                         },
                       );
                     } else {
-                      return Container();
+                      return const SizedBox(
+                        height: 200,
+                        child: NodataWidget(),
+                      );
                     }
                   },
                 ),
@@ -75,7 +82,10 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                         trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
                       );
                     } else {
-                      return Container();
+                      return const SizedBox(
+                        height: 200,
+                        child: NodataWidget(),
+                      );
                     }
                   },
                 )
@@ -225,7 +235,7 @@ class ItemKetLuanHopWidget extends StatelessWidget {
                 onTap: () {
                   onTap();
                 },
-                child: SvgPicture.asset(ImageAssets.icThreeDotMenu),
+                child: SvgPicture.asset(ImageAssets.ic_baocao),
               )
             ],
           ),
@@ -341,7 +351,7 @@ class ItemDanhSachNhiemVu extends StatelessWidget {
                   )),
                   GestureDetector(
                     onTap: () {},
-                    child: SvgPicture.asset(ImageAssets.icLuong),
+                    child: SvgPicture.asset(ImageAssets.ic_chitet),
                   )
                 ],
               ),

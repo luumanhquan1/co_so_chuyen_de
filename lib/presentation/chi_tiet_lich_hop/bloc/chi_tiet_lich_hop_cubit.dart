@@ -13,7 +13,9 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_documen
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_nhiem_vu_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
@@ -430,6 +432,24 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   void checkRadioButton(int _index) {
     _checkRadioSubject.sink.add(_index);
   }
+
+  BehaviorSubject<KetLuanHopModel> ketLuanHopSubject = BehaviorSubject();
+
+  Stream<KetLuanHopModel> get ketLuanHopStream => ketLuanHopSubject.stream;
+
+  KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
+    id: '111111111111',
+    thoiGian: '22/22/2222',
+    trangThai: TrangThai.ChoDuyet,
+    tinhTrang: TinhTrang.ChuaDat,
+    file: File('alo.doc'),
+  );
+
+  BehaviorSubject<DanhSachNhiemVuLichHopModel> danhSachNhiemVuLichHopSubject =
+      BehaviorSubject();
+
+  Stream<DanhSachNhiemVuLichHopModel> get streamDanhSachNhiemVuLichHop =>
+      danhSachNhiemVuLichHopSubject.stream;
 
   void dispose() {}
 }

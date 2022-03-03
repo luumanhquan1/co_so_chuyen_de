@@ -557,8 +557,13 @@
   "bo_phieu_cong_khai" : "Bỏ phiếu công khai",
   "ngay_bieu_quyet" : "Ngày biểu quyết",
   "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết",
-  "nguoi_phat_bieu" : "Nguười phát biểu"
-
+  "nguoi_phat_bieu" : "Nguười phát biểu",
+  "chua_gui_duyet" : "Chưa gửi duyệt",
+  "chua_dat" : "Chưa đạt",
+  "tinh_trang" : "Tình trạng",
+  "noi_dung_theo_doi" : "Nội dung theo dõi",
+  "tinh_hinh_thuc_hien_noi_bo" : "Tình hình thực hiện nội bộ",
+  "loai_nv" : "Loại nhiệm vụ"
 }
 
 

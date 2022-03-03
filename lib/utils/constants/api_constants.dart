@@ -56,7 +56,7 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
       '/vpdt/api/Schedules/dashboard-schedule';
   static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
   static const SEARCH_CAN_BO = '/vpdt/api/CanBo/search';
-  static const CATEGORY_LIST = '/vpdt/api/Category/list';
+  static const CATEGORY_LIST = '/fvpdt/api/Category/list';
   static const SCHEDULE_FIELD = '/vpdt/api/ScheduleField/list';
   static const DANH_SACH_CAN_BO_LICH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';

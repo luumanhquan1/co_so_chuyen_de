@@ -30,8 +30,8 @@ List<KetThucView> listKetThucView = [
     S.current.gui_mail_ket_luan,
     KetThuc.ketluanch,
   ),
-  KetThucView(ImageAssets.icMessYealow, S.current.gui_email, KetThuc.guimail),
-  KetThucView(ImageAssets.icSync, S.current.thu_hoi, KetThuc.thuhoi),
+  KetThucView(ImageAssets.icDeleteRed, S.current.gui_email, KetThuc.guimail),
+  KetThucView(ImageAssets.icDeleteRed, S.current.thu_hoi, KetThuc.thuhoi),
   KetThucView(ImageAssets.icDeleteRed, S.current.xoa, KetThuc.xoa),
 ];
 
@@ -57,7 +57,7 @@ extension GetScreen on KetThuc {
   Widget getScreen() {
     switch (this) {
       case KetThuc.taomoinv:
-        return const TaoMoiNhiemVuWidget();
+        return Container();
 
       case KetThuc.ketluanch:
         return Container();
@@ -76,7 +76,7 @@ extension GetScreen on KetThuc {
   Widget getScreenTablet() {
     switch (this) {
       case KetThuc.taomoinv:
-        return const TaoMoiNhiemVuWidget();
+        return Container();
       case KetThuc.ketluanch:
         return Container();
 
@@ -107,13 +107,13 @@ extension GetScreenChiTietLichHop on ChiTietLichHop {
         return Container();
 
       case ChiTietLichHop.thuhoi:
-        return const ThuHoiLichWidget();
+        return Container();
 
       case ChiTietLichHop.phanCongThuKy:
-        return const PhanCongThuKyWidget();
+        return Container();
 
       case ChiTietLichHop.taoBocBang:
-        return const TaoBocBangWidget();
+        return Container();
     }
   }
 }
