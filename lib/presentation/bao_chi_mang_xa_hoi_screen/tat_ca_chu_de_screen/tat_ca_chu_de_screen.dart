@@ -26,6 +26,7 @@ class TatCaChuDeScreen extends StatefulWidget {
 class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
   ScrollController _scrollController = ScrollController();
   BaoChiMangXaHoiBloc baoChiMangXaHoiBloc = BaoChiMangXaHoiBloc();
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -34,7 +35,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
           _scrollController.position.maxScrollExtent) {}
     });
     baoChiMangXaHoiBloc.getListTatCaCuDe(
-        baoChiMangXaHoiBloc.startDate, baoChiMangXaHoiBloc.endDate,);
+      baoChiMangXaHoiBloc.startDate,
+      baoChiMangXaHoiBloc.endDate,
+    );
   }
 
   @override
@@ -178,13 +181,17 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
             ),
             TableCalendarWidget(
               onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-                baoChiMangXaHoiBloc.startDate=selectedDay.formatApiStartDay;
-                baoChiMangXaHoiBloc.endDate=selectedDay.formatApiEndDay;
+                baoChiMangXaHoiBloc.startDate = selectedDay.formatApiStartDay;
+                baoChiMangXaHoiBloc.endDate = selectedDay.formatApiEndDay;
               },
-              onSearch: (value){
+              onSearch: (value) {
                 baoChiMangXaHoiBloc.getListTatCaCuDe(
-                  baoChiMangXaHoiBloc.startDate, baoChiMangXaHoiBloc.endDate,);
+                  baoChiMangXaHoiBloc.startDate,
+                  baoChiMangXaHoiBloc.endDate,
+                );
               },
+              onChangeRange:
+                  (DateTime? start, DateTime? end, DateTime? focusedDay) {},
             ),
           ],
         ),

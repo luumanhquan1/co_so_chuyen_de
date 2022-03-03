@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/danh_sach_lich_hop_tablet/danh_sach_lich_hop_ngay_tablet.dart';
@@ -9,7 +11,9 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_t
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_tuan_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
-import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet_cubit.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'danh_sach_lich_hop/danh_sach_lich_hop.dart';
@@ -49,7 +53,48 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     }
   }
 
-  Widget getTextWidget(TableCalendarTabletCubit cubit) {
+  Widget getTableCalendar({
+    required CalenderCubit cubit,
+    Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
+  }) {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
+        return TableCalendarWidget(
+          type: type,
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChangeRange:
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+        );
+      case Type_Choose_Option_Day.WEEK:
+        return TableCalendarWidget(
+          type: type,
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChangeRange:
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+        );
+      case Type_Choose_Option_Day.MONTH:
+        return TableCalendarWidget(
+          isCalendar: false,
+          type: type,
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChangeRange:
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+        );
+
+      default:
+        return TableCalendarWidget(
+          type: type,
+          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChangeRange:
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+        );
+    }
+  }
+
+  Widget getTextWidget({
+    required TableCalendarCubit cubit,
+    Color textColor = textDefault,
+  }) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
         return StreamBuilder<DateTime>(
@@ -59,8 +104,8 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
               return Text(
                 data.formatDayCalendar,
                 style: textNormalCustom(
-                  color: textDefault,
-                  fontSize: 16,
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
                   fontWeight: FontWeight.w500,
                 ),
               );
@@ -74,8 +119,8 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
               return Text(
                 data.startEndWeek,
                 style: textNormalCustom(
-                  color: textDefault,
-                  fontSize: 16,
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
                   fontWeight: FontWeight.w500,
                 ),
               );
@@ -90,8 +135,8 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
               return Text(
                 'Tháng ${data.month}',
                 style: textNormalCustom(
-                  color: textDefault,
-                  fontSize: 16,
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
                   fontWeight: FontWeight.w500,
                 ),
               );
