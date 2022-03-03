@@ -2,17 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/data/request/home/lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
-import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
-import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
-import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
@@ -58,8 +53,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Stream<DateTime> get endDateStream => endDateSubject.stream;
 
   Stream<List<String>> get listItemPersonStream => listItemPersonSubject.stream;
-  final BehaviorSubject<List<LichLamViecDashBroadItem>> _loaiLich1 =
-      BehaviorSubject();
+  final BehaviorSubject<List<LoaiSelectModel>> _loaiLich1 = BehaviorSubject();
 
   final BehaviorSubject<List<NguoiChutriModel>> _nguoiChuTri =
       BehaviorSubject();
@@ -69,8 +63,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   Stream<List<NguoiChutriModel>> get nguoiChuTri => _nguoiChuTri.stream;
 
-  Stream<List<LichLamViecDashBroadItem>> get loaiLich => _loaiLich1.stream;
-  LichLamViecDashBroadItem? selectLoaiLich;
+  Stream<List<LoaiSelectModel>> get loaiLich => _loaiLich1.stream;
+  LoaiSelectModel? selectLoaiLich;
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
   List<DonViModel>? donviModel;
@@ -139,8 +133,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }
 
   Future<void> _dataLoaiLich() async {
-    final result = await _lichLamViec.getLichLvRight(LichLamViecRightRequest(
-        dateStart: '2022-03-04', dateTo: '2022-03-04', type: 0));
+    final result = await _lichLamViec
+        .getLoaiLich(CatogoryListRequest(pageIndex: 1, pageSize: 100, type: 0));
     result.when(
       success: (res) {
         if (res.isNotEmpty) {
@@ -196,7 +190,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }) async {
     final result = await _lichLamViec.taoLichLamViec(
       title,
-      selectLoaiLich?.typeId ?? '',
+      selectLoaiLich?.id ?? '',
       selectLinhVuc?.id ?? '',
       '',
       '',
