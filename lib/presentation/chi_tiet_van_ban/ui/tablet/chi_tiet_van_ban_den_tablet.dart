@@ -91,14 +91,14 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                   ),
                                   child: Column(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child:
-                                            ThongTinGuiNhanWidgetExpandTablet(
-                                          cubit: cubit,
-                                          expanded: cubit.expanded,
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.only(top: 10),
+                                      //   child:
+                                      //       ThongTinGuiNhanWidgetExpandTablet(
+                                      //     cubit: cubit,
+                                      //     expanded: cubit.expanded,
+                                      //   ),
+                                      // ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 10.0),

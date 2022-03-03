@@ -42,9 +42,9 @@ class _ThongTinGuiNhanWidgetExpandTabletState
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        child: StreamBuilder<DetailDocumentProfileSend>(
+        child: StreamBuilder<List<ThongTinGuiNhanModel>>(
           initialData: widget.cubit.thongTinGuiNhan,
-          stream: widget.cubit.detailDocumentGuiNhan,
+          stream: widget.cubit.thongTinGuiNhanSubject,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -65,13 +65,7 @@ class _ThongTinGuiNhanWidgetExpandTabletState
                       ),
                     ),
                     child: Column(
-                      children: snapshot.data!.toListRow().map(
-                        (row) {
-                          return DetailDocumentRow(
-                            row: row,
-                          );
-                        },
-                      ).toList(),
+                      children: []
                     ),
                   );
                 },

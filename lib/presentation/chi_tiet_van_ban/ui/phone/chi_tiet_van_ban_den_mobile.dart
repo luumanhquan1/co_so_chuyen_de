@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand.dart';
@@ -67,7 +68,15 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WidgetHeadChiTietVanBanDenMobile(cubit: cubit),
-                    ThongTinGuiNhanExpandWidget(cubit: cubit),
+                    StreamBuilder<List<ThongTinGuiNhanModel>>(
+                        stream: cubit.thongTinGuiNhanStream,
+                        builder: (context, snapshot) {
+                          final data = snapshot.data ?? [];
+                          return ThongTinGuiNhanExpandWidget(
+                            cubit: cubit,
+                            thongTinGuiNhanModel: data,
+                          );
+                        }),
                     YKienXuLyExpandWidget(
                       cubit: cubit,
                     ),
@@ -76,10 +85,11 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                     LichSuThuHoiExpandWidget(cubit: cubit),
                     LichSuVanBanLienThongExpandWidget(cubit: cubit),
                     Padding(
-                      padding: const EdgeInsets.only(top: 16.0,bottom: 24.0),
-                      child: ButtonCustomBottom(isColorBlue: false, title: S.current.xem_luong, onPressed: (){
-
-                      }),
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
+                      child: ButtonCustomBottom(
+                          isColorBlue: false,
+                          title: S.current.xem_luong,
+                          onPressed: () {}),
                     ),
                   ],
                 ),

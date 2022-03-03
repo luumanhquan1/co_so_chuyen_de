@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_den_mobile.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_di_mobile.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -101,7 +101,7 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
                     taskId: data.taskId ?? '',
                   );
                 } else {
-                  return const ChiTietVanBanMobile();
+                  return const ChiTietVanBanDiMobile();
                 }
               },
             ),

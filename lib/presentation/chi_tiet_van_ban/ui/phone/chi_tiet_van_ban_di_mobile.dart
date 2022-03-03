@@ -11,15 +11,15 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 
-class ChiTietVanBanMobile extends StatefulWidget {
+class ChiTietVanBanDiMobile extends StatefulWidget {
   final String id;
-  const ChiTietVanBanMobile({Key? key,this.id = ''}) : super(key: key);
+  const ChiTietVanBanDiMobile({Key? key,this.id = ''}) : super(key: key);
 
   @override
-  _ChiTietVanBanMobileState createState() => _ChiTietVanBanMobileState();
+  _ChiTietVanBanDiMobileState createState() => _ChiTietVanBanDiMobileState();
 }
 
-class _ChiTietVanBanMobileState extends State<ChiTietVanBanMobile> {
+class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
   DetailDocumentCubit cubit=DetailDocumentCubit();
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _ChiTietVanBanMobileState extends State<ChiTietVanBanMobile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WidgetHeadChiTietVanBan(cubit: cubit),
-              ThongTinGuiNhanExpandWidget(cubit: cubit),
+              ThongTinGuiNhanExpandWidget(cubit: cubit, thongTinGuiNhanModel: [],),
               YKienXuLyExpandWidget(cubit: cubit,),
               LichSuCapNhatTinhHinhXuLyExpandWidget(cubit: cubit),
               LichSuTraLaiExpandWidget(cubit: cubit),

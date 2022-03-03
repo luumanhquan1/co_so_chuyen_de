@@ -31,17 +31,13 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   Stream<DetailDocumentModel> get streamDetaiMission =>
       detailDocumentSubject.stream;
 
-  BehaviorSubject<DetailDocumentProfileSend> detailDocumentGuiNhan =
-      BehaviorSubject<DetailDocumentProfileSend>();
+  //thong tin gui nhan
+  ThongTinGuiNhanModel thongTinGuiNhanModel = ThongTinGuiNhanModel();
+  BehaviorSubject<List<ThongTinGuiNhanModel>> thongTinGuiNhanSubject =
+      BehaviorSubject();
 
-  Stream<DetailDocumentProfileSend> get streamDetaiGuiNhan =>
-      detailDocumentGuiNhan.stream;
-
-  // BehaviorSubject<HistoryDetailDocument> detailDocumentHistorySubject =
-  // BehaviorSubject<HistoryDetailDocument>();
-  //
-  // Stream<HistoryDetailDocument> get streamDetailHistorySubject =>
-  //     detailDocumentHistorySubject.stream;
+  Stream<List<ThongTinGuiNhanModel>> get thongTinGuiNhanStream =>
+      thongTinGuiNhanSubject.stream;
 
   final BehaviorSubject<HistoryProcessPage> _subjectJobPriliesProcess =
       BehaviorSubject<HistoryProcessPage>();
@@ -58,18 +54,24 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   BehaviorSubject<ChiTietVanBanDiModel> chiTietVanBanDiSubject =
       BehaviorSubject();
   ChiTietVanBanDiModel chiTietVanBanDiModel = ChiTietVanBanDiModel();
+
   //chi tiet van ban den
   BehaviorSubject<ChiTietVanBanDenModel> chiTietVanBanDenSubject =
-  BehaviorSubject();
+      BehaviorSubject();
   ChiTietVanBanDenModel chiTietVanBanDenModel = ChiTietVanBanDenModel();
 
   final BehaviorSubject<WidgetType?> _showDialogSetting =
-  BehaviorSubject<WidgetType?>();
+      BehaviorSubject<WidgetType?>();
 
   Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
-  Future<void> loadDataVanBanDen({required String processId, required String taskId,}) async {
-    final queue = Queue(parallel: 1);
-    unawaited(queue.add(() => getChiTietVanBanDen(processId,taskId)));
+
+  Future<void> loadDataVanBanDen({
+    required String processId,
+    required String taskId,
+  }) async {
+    final queue = Queue(parallel: 2);
+    unawaited(queue.add(() => getChiTietVanBanDen(processId, taskId)));
+    unawaited(queue.add(() => getThongTinGuiNhan(processId)));
 
     await queue.onComplete;
     showContent();
@@ -86,12 +88,27 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       error: (error) {},
     );
   }
-  Future<void> getChiTietVanBanDen(String processId, String taskId,) async {
-    final result = await _QLVBRepo.getDataChiTietVanBanDen(processId,taskId,false);
+
+  Future<void> getChiTietVanBanDen(
+    String processId,
+    String taskId,
+  ) async {
+    final result =
+        await _QLVBRepo.getDataChiTietVanBanDen(processId, taskId, false);
     result.when(
       success: (res) {
         chiTietVanBanDenModel = res;
         chiTietVanBanDenSubject.sink.add(chiTietVanBanDenModel);
+      },
+      error: (error) {},
+    );
+  }
+
+  Future<void> getThongTinGuiNhan(String id) async {
+    final result = await _QLVBRepo.getDataThongTinGuiNhan(id);
+    result.when(
+      success: (res) {
+        thongTinGuiNhanSubject.add(res.data ?? []);
       },
       error: (error) {},
     );
@@ -118,16 +135,16 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       soTrang: 56,
       vanBanQlPL: true);
 
-  DetailDocumentProfileSend thongTinGuiNhan = DetailDocumentProfileSend(
-      nguoiGui: 'Văn thu bọ',
-      donViGui: 'UBND Đồng Nai',
-      donViNhan: 'UBND Đồng Nai',
-      trangThai: 'Chờ vào sổ',
-      nguoiNhan: 'Hà Kiều Anh',
-      thoiGian: '10/09/2021 | 17:06:53',
-      vaiTro: 'Chủ trì');
-
-  // List<DetailDocumentModel> thongTinGuiNhan = [];
+  List<ThongTinGuiNhanModel> thongTinGuiNhan = [
+    ThongTinGuiNhanModel(
+        nguoiGui: 'Văn thu bộ',
+        donViGui: 'UBND Đồng Nai',
+        donViNhan: 'UBND Đồng Nai',
+        trangThai: 'CHO_VAO_SO',
+        nguoiNhan: 'Hà Kiều Anh',
+        thoiGian: '10/09/2021 | 17:06:53',
+        vaiTroXuLy: 'Chủ trì'),
+  ];
 
   List<String> listIdFile = [];
   List<String> listIdFileReComment = [];
