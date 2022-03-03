@@ -556,5 +556,6 @@
   "bo_khieu_kin" : "Bỏ phiếu ",
   "bo_phieu_cong_khai" : "Bỏ phiếu công khai",
   "ngay_bieu_quyet" : "Ngày biểu quyết",
-  "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết"
+  "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết",
+  "nguoi_phat_bieu" : "Nguười phát biểu"
 }

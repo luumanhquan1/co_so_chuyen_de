@@ -27,55 +27,58 @@ class _CongTacChuanBiWidgetTabletState
   }
 
   Widget body() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        titleType(
-          title: S.current.thong_tin_phong,
-          child: StreamBuilder<ThongTinPhongHopModel?>(
-            stream: cubit.getThongTinPhongHop,
-            builder: (context, snapshot) {
-              final data = snapshot.data;
-              if (data == null) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 50),
-                  child: NodataWidget(),
+    return Padding(
+      padding: const EdgeInsets.only(top: 60),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          titleType(
+            title: S.current.thong_tin_phong,
+            child: StreamBuilder<ThongTinPhongHopModel?>(
+              stream: cubit.getThongTinPhongHop,
+              builder: (context, snapshot) {
+                final data = snapshot.data;
+                if (data == null) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50),
+                    child: NodataWidget(),
+                  );
+                }
+                return ThongTinPhongWidget(
+                  thongTinPhongHopModel: data,
                 );
-              }
-              return ThongTinPhongWidget(
-                thongTinPhongHopModel: data,
-              );
-            },
+              },
+            ),
           ),
-        ),
-        spaceH20,
-        titleType(
-          title: S.current.yeu_cau_de_chuan_bi_phong,
-          child: StreamBuilder<List<ThietBiPhongHopModel>>(
-            stream: cubit.getListThietBi,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? <ThietBiPhongHopModel>[];
-              if (data.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 50),
-                  child: NodataWidget(),
-                );
-              }
-              return Column(
-                children: List.generate(
-                  data.length,
-                      (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: ThongTinYeuCauThietBiWidget(
-                      model: data[index],
+          spaceH20,
+          titleType(
+            title: S.current.yeu_cau_de_chuan_bi_phong,
+            child: StreamBuilder<List<ThietBiPhongHopModel>>(
+              stream: cubit.getListThietBi,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? <ThietBiPhongHopModel>[];
+                if (data.isEmpty) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50),
+                    child: NodataWidget(),
+                  );
+                }
+                return Column(
+                  children: List.generate(
+                    data.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ThongTinYeuCauThietBiWidget(
+                        model: data[index],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

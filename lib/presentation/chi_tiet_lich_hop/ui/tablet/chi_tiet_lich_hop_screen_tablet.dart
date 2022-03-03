@@ -173,29 +173,55 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     Tab(
                       child: Text(
                         S.current.cong_tac_chuan_bi,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                     Tab(
-                      child: Text(S.current.chuong_trinh_hop),
+                      child: Text(
+                        S.current.chuong_trinh_hop,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                     Tab(
                       child: Text(
                         S.current.thanh_phan_tham_gia,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                     Tab(
                       child: Text(
                         S.current.tai_lieu,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                     Tab(
                       child: Text(
                         S.current.phat_bieu,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                     Tab(
                       child: Text(
                         S.current.bieu_quyet,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],

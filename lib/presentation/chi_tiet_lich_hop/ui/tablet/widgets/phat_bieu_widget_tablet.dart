@@ -47,6 +47,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
             ),
             buttonStatePhatBieu(cubit: cubit),
             StreamBuilder<List<PhatBieuModel>>(
+              initialData: cubit.listPhatBieu,
               stream: cubit.streamPhatBieu,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];
@@ -87,7 +88,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
       child: StreamBuilder<List<PhatBieuModel>>(
         stream: cubit.streamPhatBieu,
         builder: (context, snapshot) {
-          if (cubit.typeStatus.value == S.current.cho_duyet) {
+          if (cubit.typeStatus.value == cubit.choDuyet) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 250),
               child: DoubleButtonBottom(
@@ -99,7 +100,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 onPressed2: () {},
               ),
             );
-          } else if (cubit.typeStatus.value == S.current.da_duyet) {
+          } else if (cubit.typeStatus.value == cubit.daDuyet) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 300),
               child: ButtonCustomBottom(
@@ -108,7 +109,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 isColorBlue: false,
               ),
             );
-          } else if (cubit.typeStatus.value == S.current.huy_duyet) {
+          } else if (cubit.typeStatus.value == cubit.huyDuyet) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 300),
               child: ButtonCustomBottom(
@@ -140,10 +141,10 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                   cubit.getValueStatus(1);
                 },
                 text: S.current.danh_sach_phat_bieu,
-                backgroup: cubit.typeStatus.value == 1
+                backgroup: cubit.typeStatus.value == cubit.danhSachphatBieu
                     ? choXuLyColor
                     : backgroundColorApp,
-                colorText: cubit.typeStatus.value == 1
+                colorText: cubit.typeStatus.value == cubit.danhSachphatBieu
                     ? backgroundColorApp
                     : choXuLyColor,
                 colorBorder: choXuLyColor,
@@ -155,10 +156,10 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                   cubit.getValueStatus(2);
                 },
                 text: S.current.cho_duyet,
-                backgroup: cubit.typeStatus.value == 2
+                backgroup: cubit.typeStatus.value == cubit.choDuyet
                     ? itemWidgetNotUse
                     : backgroundColorApp,
-                colorText: cubit.typeStatus.value == 2
+                colorText: cubit.typeStatus.value == cubit.choDuyet
                     ? backgroundColorApp
                     : itemWidgetNotUse,
                 colorBorder: itemWidgetNotUse,
@@ -170,10 +171,10 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                   cubit.getValueStatus(3);
                 },
                 text: S.current.da_duyet,
-                backgroup: cubit.typeStatus.value == 3
+                backgroup: cubit.typeStatus.value == cubit.daDuyet
                     ? itemWidgetUsing
                     : backgroundColorApp,
-                colorText: cubit.typeStatus.value == 3
+                colorText: cubit.typeStatus.value == cubit.daDuyet
                     ? backgroundColorApp
                     : itemWidgetUsing,
                 colorBorder: itemWidgetUsing,
@@ -185,10 +186,10 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                   cubit.getValueStatus(4);
                 },
                 text: S.current.huy_duyet,
-                backgroup: cubit.typeStatus.value == 4
+                backgroup: cubit.typeStatus.value == cubit.huyDuyet
                     ? statusCalenderRed
                     : backgroundColorApp,
-                colorText: cubit.typeStatus.value == 4
+                colorText: cubit.typeStatus.value == cubit.huyDuyet
                     ? backgroundColorApp
                     : statusCalenderRed,
                 colorBorder: statusCalenderRed,

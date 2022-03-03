@@ -33,6 +33,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   HopRepository get hopRp => Get.find();
   bool check = false;
+  int danhSachphatBieu = 1;
+  int choDuyet = 2;
+  int daDuyet = 3;
+  int huyDuyet = 4;
 
   //
 
@@ -257,8 +261,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-
-
   Future<void> themBieuQuyetHop() async {
     final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
         dateStart: '01/01/1900',
@@ -391,11 +393,11 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   Stream<int> get getTypeStatus => typeStatus.stream;
 
   void getValueStatus(int value) {
-    if (value == 1) {
+    if (value == choDuyet) {
       phatbieu.sink.add(listPhatBieu);
-    } else if (value == 2) {
+    } else if (value == daDuyet) {
       phatbieu.sink.add(listPhatBieu);
-    } else if (value == 3) {
+    } else if (value == huyDuyet) {
       phatbieu.sink.add(listPhatBieu);
     } else {
       phatbieu.sink.add(listPhatBieu);

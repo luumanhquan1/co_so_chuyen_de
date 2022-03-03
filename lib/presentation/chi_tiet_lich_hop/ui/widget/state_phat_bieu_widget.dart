@@ -74,7 +74,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
               expand = !expand;
               _runExpandCheck();
             },
-            child: (widget.cubit.typeStatus.value == 1)
+            child: (widget.cubit.typeStatus.value == widget.cubit.danhSachphatBieu)
                 ? Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -90,7 +90,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                       ),
                     ),
                   )
-                : (widget.cubit.typeStatus.value == 2
+                : (widget.cubit.typeStatus.value == widget.cubit.choDuyet
                     ? Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
@@ -107,7 +107,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                           ),
                         ),
                       )
-                    : (widget.cubit.typeStatus.value == 3
+                    : (widget.cubit.typeStatus.value == widget.cubit.daDuyet
                         ? Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
@@ -124,7 +124,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                               ),
                             ),
                           )
-                        : (widget.cubit.typeStatus.value == 4
+                        : (widget.cubit.typeStatus.value == widget.cubit.huyDuyet
                             ? Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),

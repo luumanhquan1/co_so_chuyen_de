@@ -44,7 +44,6 @@ class _BieuQuyetWidgetTabletState extends State<BieuQuyetWidgetTablet> {
               },
             ),
             StreamBuilder<List<PhatBieuModel>>(
-              initialData: cubit.listBieuQuyet,
               stream: cubit.streamBieuQuyet,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];

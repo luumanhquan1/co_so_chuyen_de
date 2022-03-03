@@ -39,7 +39,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                     child: StreamBuilder<int>(
                       stream: cubit.typeStatus,
                       builder: (context, snapshot) {
-                        if (cubit.typeStatus.value == 2) {
+                        if (cubit.typeStatus.value == cubit.choDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 150),
                             child: DoubleButtonBottom(
@@ -51,7 +51,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               onPressed2: () {},
                             ),
                           );
-                        } else if (cubit.typeStatus.value == 3) {
+                        } else if (cubit.typeStatus.value == cubit.daDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
@@ -60,7 +60,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               isColorBlue: false,
                             ),
                           );
-                        } else if (cubit.typeStatus.value == 4) {
+                        } else if (cubit.typeStatus.value == cubit.huyDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
@@ -86,6 +86,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                     ),
                   ),
                   StreamBuilder<List<PhatBieuModel>>(
+                    initialData: cubit.listPhatBieu,
                     stream: cubit.streamPhatBieu,
                     builder: (context, snapshot) {
                       final _list = snapshot.data ?? [];

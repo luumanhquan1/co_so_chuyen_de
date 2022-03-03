@@ -14,15 +14,4 @@ class PhatBieuModel {
   });
 
   PhatBieuModel.fromDetail();
-
-  List<DocumentDetailRow> toListRowPhatBieu() {
-    final List<DocumentDetailRow> list = [
-      DocumentDetailRow('Phiên họp', phienHop, TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Người phát biểu', nguoiPhatBieu, TypeDocumentDetailRow.text),
-      DocumentDetailRow('ND phát biểu', ndPhatBieu, TypeDocumentDetailRow.text),
-      DocumentDetailRow('Thời gian', tthoiGian, TypeDocumentDetailRow.text),
-    ];
-    return list;
-  }
 }
