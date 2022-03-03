@@ -42,7 +42,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
     cubit.callApi();
-    cubit.postDanhSachLichlamViec(body: dataBodyRequetDanhSachLLV);
   }
 
   @override
@@ -174,15 +173,15 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  const TaoLichLamViecChiTietScreen(),
+                    builder: (context) => const TaoLichLamViecChiTietScreen(),
                   ),
                 ).then((value) {
-                    if(value) {
-                      cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
-                      cubit.callApi();
-                      cubit.postDanhSachLichlamViec(
-                          body: dataBodyRequetDanhSachLLV);
-                    }
+                  if (value) {
+                    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+                    cubit.callApi();
+                    cubit.postDanhSachLichlamViec(
+                        body: dataBodyRequetDanhSachLLV);
+                  }
                 });
               },
               backgroundColor: labelColor,

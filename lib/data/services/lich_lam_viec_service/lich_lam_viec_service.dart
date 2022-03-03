@@ -1,12 +1,10 @@
 import 'dart:io';
 
-
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/tao_moi_ban_ghi_request.dart';
-import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/delete_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/huy_lich_lam_viec_response.dart';
@@ -27,7 +25,6 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dar
 import 'package:ccvc_mobile/data/response/list_lich_lv/list_lich_lv_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
-
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -82,7 +79,7 @@ abstract class LichLamViecService {
 
   @POST(ApiConstants.LIST_LICH_LV)
   Future<ListLichLvResponse> getListLichLv(
-    @Body() ListLichLvRequest lichLvRequest,
+    @Body() DanhSachLichLamViecRequest danhSachLichLamViecRequest,
   );
 
   @DELETE(ApiConstants.XOA_LICH_LAM_VIEC)
@@ -116,6 +113,7 @@ abstract class LichLamViecService {
   Future<TaoLichLamViecResponse> taoLichLamviec(
     @Body() FormData data,
   );
+
   @POST(ApiConstants.TAO_BAO_KET_QUA)
   Future<TaoBaoCaoKetQuaResponse> taoBaoCaoKetQua(
     @Part() String ReportStatusId,

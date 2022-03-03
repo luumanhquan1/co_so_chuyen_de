@@ -172,7 +172,7 @@ class _EditPersonalInformationScreen
                             key: UniqueKey(),
                             paddings: 10,
                             leadingIcon:
-                                SvgPicture.asset(ImageAssets.icEditInfor),
+                                SvgPicture.asset(ImageAssets.icCalenders),
                             value: cubit
                                     .managerPersonalInformationModel.ngaySinh ??
                                 '',
