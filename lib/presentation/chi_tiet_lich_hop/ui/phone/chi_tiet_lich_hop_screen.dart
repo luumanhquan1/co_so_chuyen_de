@@ -1,14 +1,14 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-
-import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/bieu_quyet_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/cong_tac_chuan_bi_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/phat_bieu_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_lieu_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/moi_nguoi_tham_gia_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thong_tin_lien_he_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
@@ -21,6 +21,7 @@ import 'package:flutter_svg/svg.dart';
 
 class DetailMeetCalenderScreen extends StatefulWidget {
   final String id;
+
   const DetailMeetCalenderScreen({Key? key, required this.id})
       : super(key: key);
 
@@ -42,7 +43,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).backgroundColor,
       appBar: BaseAppBar(
         leadingIcon: IconButton(
           onPressed: () {
@@ -154,17 +154,19 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 CongTacChuanBiWidget(
                   cubit: cubit,
                 ),
-                const ChuongTrinhHopWidget()
-                // CongTacChuanBiWidget(),
-                // MoiNguoiThamGiaWidget(),
-                // TaiLieuWidget(),
-                // PhatBieuWidget(),
-                // BieuQuyetWidget(),
+                const ChuongTrinhHopWidget(),
+                const SizedBox(
+                  height: 16,
+                ),
+                const MoiNguoiThamGiaWidget(),
+                const TaiLieuWidget(),
+                const PhatBieuWidget(),
+                const BieuQuyetWidget(),
                 // KetLuanHopWidget(),
                 // YKienCuocHopWidget(),
               ],
