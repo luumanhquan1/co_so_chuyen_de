@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/domain/model/home/document_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_den_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
@@ -46,7 +47,7 @@ class _DocumentWidgetState extends State<DocumentWidget> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackgroundWidget(
-      minHeight: 340,
+      minHeight: 0,
       title: S.current.document,
       spacingTitle: 0,
       onTapIcon: () {
@@ -106,15 +107,7 @@ class _DocumentWidgetState extends State<DocumentWidget> {
                   padding: const EdgeInsets.only(top: 16),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChiTietVanBanDenMobile(
-                            taskId: result.taskId,
-                            processId: result.id,
-                          ),
-                        ),
-                      );
+                      pushScreen(id: result.id, taskId: result.taskId);
                     },
                     child: ContainerInfoWidget(
                       title: result.title,
@@ -141,5 +134,28 @@ class _DocumentWidgetState extends State<DocumentWidget> {
         ),
       ),
     );
+  }
+
+  void pushScreen({String id = '', String taskId = ''}) {
+    if (_vanBanCubit.isVanBanDen) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanDenMobile(
+            taskId: taskId,
+            processId: id,
+          ),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanMobile(
+            id: id,
+          ),
+        ),
+      );
+    }
   }
 }
