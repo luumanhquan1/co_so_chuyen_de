@@ -261,6 +261,14 @@ class ImageAssets {
   static const String icPhanCongThuKy = '$baseImg/Swap5.svg';
   static const String icTaoBocBang = '$baseImg/Video6.svg';
 
+  static const String icMic = '$baseImg/Voice2.svg';
+  static const String icBieuQuyet = '$baseImg/IcBieuQuyet.svg';
+
+
+
+
+
+
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
 

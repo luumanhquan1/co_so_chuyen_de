@@ -12,7 +12,8 @@ import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietVanBanMobile extends StatefulWidget {
-  const ChiTietVanBanMobile({Key? key}) : super(key: key);
+  final String id;
+  const ChiTietVanBanMobile({Key? key,this.id = ''}) : super(key: key);
 
   @override
   _ChiTietVanBanMobileState createState() => _ChiTietVanBanMobileState();

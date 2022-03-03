@@ -52,13 +52,15 @@ class PageData {
   String? noiGui;
   String? doKhan;
   String? codeDoKhan;
+  String? taskId;
   PageData({
     this.id,
     this.soKyHieu,
     this.trichYeu,
     this.noiGui,
     this.doKhan,
-    this.codeDoKhan
+    this.codeDoKhan,
+    this.taskId,
   });
 
   PageData.fromJson(Map<String, dynamic> json) {
@@ -69,6 +71,7 @@ class PageData {
     noiGui = json['NoiGui'];
     doKhan = json['DoKhan'];
     codeDoKhan = json['CodeDoKhan'];
+    taskId = json['TaskId'];
   }
 
   DocumentModel toDomain() => DocumentModel(
@@ -78,6 +81,7 @@ class PageData {
         noiGui: noiGui ?? '',
         code: codeDoKhan ?? '',
         status: doKhan ?? '',
+        taskId: taskId ?? '',
       );
 }
 

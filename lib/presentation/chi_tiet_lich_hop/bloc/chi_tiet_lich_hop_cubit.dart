@@ -8,15 +8,22 @@ import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
+import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/so_luong_phat_bieu_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chi_tiet_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
@@ -25,6 +32,11 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   DetailMeetCalenderCubit() : super(DetailMeetCalenderInitial());
 
   HopRepository get hopRp => Get.find();
+  bool check = false;
+  int danhSachphatBieu = 1;
+  int choDuyet = 2;
+  int daDuyet = 3;
+  int huyDuyet = 4;
 
   //
 
@@ -73,6 +85,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   String id = '';
   List<LoaiSelectModel> listLoaiHop = [];
+
   void addValueToList(String value) {
     cacLuaChonBieuQuyet.add(value);
   }
@@ -167,11 +180,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       },
       error: (error) {},
     );
-  }
-
-  Future<void> soLuongPhatBieuData() async {
-    final result = await hopRp.getSoLuongPhatBieu(id);
-    result.when(success: (res) {}, error: (err) {});
   }
 
   LoaiSelectModel? _findLoaiHop(String id) {
@@ -285,13 +293,150 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
+  void search(String text) {
+    final searchTxt = text.trim().toLowerCase().vietNameseParse();
+    bool isListCanBo(ThanhPhanThamGiaModel canBo) {
+      return canBo.tebCanBo!
+          .toLowerCase()
+          .vietNameseParse()
+          .contains(searchTxt);
+    }
+
+    final value =
+        dataThanhPhanThamGia.where((element) => isListCanBo(element)).toList();
+    thanhPhanThamGia.sink.add(value);
+  }
+
+  BehaviorSubject<List<ThanhPhanThamGiaModel>> thanhPhanThamGia =
+      BehaviorSubject<List<ThanhPhanThamGiaModel>>();
+
+  Stream<List<ThanhPhanThamGiaModel>> get streamthanhPhanThamGia =>
+      thanhPhanThamGia.stream;
+
+  final BehaviorSubject<bool> checkBoxCheck = BehaviorSubject();
+
+  Stream<bool> get checkBoxCheckBool => checkBoxCheck.stream;
+
+  void checkBoxButton() {
+    checkBoxCheck.sink.add(check);
+  }
+
+  List<String> selectedIds = [];
+
+  bool checkIsSelected(String id) {
+    bool vl = false;
+    if (selectedIds.contains(id)) {
+      vl = true;
+    }
+    validateCheckAll();
+    return vl;
+  }
+
+  void addOrRemoveId({
+    required bool isSelected,
+    required String id,
+  }) {
+    if (isSelected) {
+      selectedIds.remove(id);
+    } else {
+      selectedIds.add(id);
+      final temp = selectedIds.toSet();
+      selectedIds = temp.toList();
+    }
+    validateCheckAll();
+  }
+
+  void checkAll() {
+    selectedIds.clear();
+    if (check) {
+      selectedIds = dataThanhPhanThamGia.map((e) => e.id ?? '').toList();
+      log('LEN : ${selectedIds.length}');
+    }
+    List<ThanhPhanThamGiaModel> _tempList = [];
+    if (thanhPhanThamGia.hasValue) {
+      _tempList = thanhPhanThamGia.value;
+    } else {
+      _tempList = dataThanhPhanThamGia;
+    }
+    thanhPhanThamGia.sink.add(_tempList);
+  }
+
+  void validateCheckAll() {
+    check = selectedIds.length == dataThanhPhanThamGia.length;
+    log(check.toString());
+    checkBoxCheck.sink.add(check);
+  }
+
+  List<ThanhPhanThamGiaModel> dataThanhPhanThamGia = [];
+
+  HistoryProcessPage? process;
+
+  List<HistoryDetailDocument> get listHistory =>
+      process == null ? [] : process!.listDetailDocumentHistory;
+
+  List<String> dataDropdown = ['1', '2', '3'];
+
+  BehaviorSubject<List<PhatBieuModel>> phatbieu =
+      BehaviorSubject<List<PhatBieuModel>>();
+
+  Stream<List<PhatBieuModel>> get streamPhatBieu => phatbieu.stream;
+
+  BehaviorSubject<List<PhatBieuModel>> bieuQuyet =
+      BehaviorSubject<List<PhatBieuModel>>();
+
+  Stream<List<PhatBieuModel>> get streamBieuQuyet => bieuQuyet.stream;
+
+  List<PhatBieuModel> listBieuQuyet = [];
+
+  final BehaviorSubject<int> typeStatus = BehaviorSubject.seeded(1);
+
+  Stream<int> get getTypeStatus => typeStatus.stream;
+
+  void getValueStatus(int value) {
+    if (value == choDuyet) {
+      phatbieu.sink.add(listPhatBieu);
+    } else if (value == daDuyet) {
+      phatbieu.sink.add(listPhatBieu);
+    } else if (value == huyDuyet) {
+      phatbieu.sink.add(listPhatBieu);
+    } else {
+      phatbieu.sink.add(listPhatBieu);
+    }
+    phatbieu.sink.add(listPhatBieu);
+    typeStatus.sink.add(value);
+    print(value);
+  }
+
+  SoLuongPhatBieuModel dataSoLuongPhatBieu = SoLuongPhatBieuModel();
+
+  Future<void> soLuongPhatBieuData() async {
+    final result = await hopRp.getSoLuongPhatBieu(id);
+    result.when(
+        success: (res) {
+          dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
+          dataSoLuongPhatBieu.choDuyet = res.choDuyet;
+          dataSoLuongPhatBieu.daDuyet = res.daDuyet;
+          dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
+        },
+        error: (err) {});
+  }
+
+  List<PhatBieuModel> listPhatBieu = [];
+
+  final BehaviorSubject<int> _checkRadioSubject = BehaviorSubject();
+
+  Stream<int> get checkRadioStream => _checkRadioSubject.stream;
+
+  void checkRadioButton(int _index) {
+    _checkRadioSubject.sink.add(_index);
+  }
+
   void dispose() {}
 }
 
 ///Chương Trình họp
 extension ChuongTrinhHop on DetailMeetCalenderCubit {
   Future<void> getListPhienHop() async {
-    final result  = await hopRp.getDanhSachPhienHop(id);
-
+    final result = await hopRp.getDanhSachPhienHop(id);
   }
 }
