@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
+import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -52,7 +53,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Stream<DateTime> get endDateStream => endDateSubject.stream;
 
   Stream<List<String>> get listItemPersonStream => listItemPersonSubject.stream;
-  final BehaviorSubject<List<LoaiSelectModel>> _loaiLich = BehaviorSubject();
+  final BehaviorSubject<List<LoaiSelectModel>> _loaiLich1 = BehaviorSubject();
 
   final BehaviorSubject<List<NguoiChutriModel>> _nguoiChuTri =
       BehaviorSubject();
@@ -62,17 +63,17 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   Stream<List<NguoiChutriModel>> get nguoiChuTri => _nguoiChuTri.stream;
 
-  Stream<List<LoaiSelectModel>> get loaiLich => _loaiLich.stream;
+  Stream<List<LoaiSelectModel>> get loaiLich => _loaiLich1.stream;
   LoaiSelectModel? selectLoaiLich;
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
+  List<DonViModel>? donviModel;
 
-  String dateFrom = DateTime.now().formatApi;
-  String timeFrom =
-      '${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
-  String dateEnd = DateTime.now().formatApi;
-  String timeEnd =
-      '${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}';
+  String? dateFrom;
+  String? timeFrom;
+  String? dateEnd;
+  String? timeEnd;
+  bool allDay = true;
 
   void listeningStartDataTime(DateTime dateAndTime) {
     dateFrom = dateAndTime.formatApi;
@@ -124,24 +125,28 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Future<void> loadData() async {
     final queue = Queue(parallel: 3);
     unawaited(queue.add(() => _getLinhVuc()));
-    unawaited(queue.add(() => _getLoaiLich()));
+    unawaited(queue.add(() => _dataLoaiLich()));
     unawaited(queue.add(() => _getNguoiChuTri()));
     await queue.onComplete;
     showContent();
     queue.dispose();
   }
 
-  Future<void> _getLoaiLich() async {
+  Future<void> _dataLoaiLich() async {
     final result = await _lichLamViec
-        .getLoaiLich(CatogoryListRequest(pageIndex: 1, pageSize: 100, type: 1));
+        .getLoaiLich(CatogoryListRequest(pageIndex: 1, pageSize: 100, type: 0));
     result.when(
-        success: (res) {
-          if (res.isNotEmpty) {
-            selectLoaiLich = res.first;
-          }
-          _loaiLich.sink.add(res);
-        },
-        error: (err) {});
+      success: (res) {
+        if (res.isNotEmpty) {
+          selectLoaiLich = res.first;
+        }
+        _loaiLich1.sink.add(res);
+      },
+      error: (err) {
+        return;
+      },
+    );
+    showContent();
   }
 
   Future<void> _getLinhVuc() async {
@@ -180,22 +185,20 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   Future<void> taoLichLamViec({
     required String title,
-    required String typeScheduleId,
     required String content,
     required String location,
   }) async {
-    showLoading();
     final result = await _lichLamViec.taoLichLamViec(
       title,
-      typeScheduleId,
+      selectLoaiLich?.id ?? '',
       selectLinhVuc?.id ?? '',
       '',
       '',
       '',
-      dateFrom,
-      timeFrom,
-      dateEnd,
-      timeEnd,
+      dateFrom ?? '',
+      timeFrom ?? '',
+      dateEnd ?? '',
+      timeEnd ?? '',
       content,
       location,
       '',
@@ -206,18 +209,20 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       false,
       '',
       false,
-      selectNguoiChuTri?.id ?? '',
+      selectNguoiChuTri?.userId ?? '',
       selectNguoiChuTri?.donViId ?? '',
       '',
-      false,
+      allDay,
       true,
+      donviModel ?? [],
       1,
       1,
-      dateFrom,
-      dateEnd,
+      dateFrom ?? '',
+      dateEnd ?? '',
       true,
     );
     result.when(success: (res) {
+      emit(CreateSuccess());
       showContent();
     }, error: (error) {
       showContent();
@@ -229,7 +234,6 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     required String scheduleId,
     required List<File> files,
   }) async {
-    showLoading();
     await _lichLamViec
         .taoBaoCaoKetQua(
       reportStatusId,
@@ -245,7 +249,6 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   }
 
   void dispose() {
-    _loaiLich.close();
     _nguoiChuTri.close();
   }
 

@@ -74,13 +74,9 @@ extension LichLVOpition on Type_Choose_Option_Day {
   Widget getCalendarLvStateDangLichMobile() {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return InCalenderForm(
-          cubit: CalenderCubit(),
-        );
+        return const InCalenderForm();
       case Type_Choose_Option_Day.WEEK:
-        return CalenderWeekMobile(
-          cubit: CalenderCubit(),
-        );
+        return const CalenderWeekMobile();
       case Type_Choose_Option_Day.MONTH:
         return const CalenderFormMonth();
       default:
@@ -120,17 +116,12 @@ extension LichLv on CalenderState {
     }
   }
 
-  Widget tableCalendar(CalenderCubit cubit) {
+  Widget tableCalendar({
+    required CalenderCubit cubit,
+    Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
+  }) {
     if (this is LichLVStateDangLich || this is LichLVStateDangList) {
-      if (type == Type_Choose_Option_Day.MONTH) {
-        return TableCalendarWidget(
-          isCalendar: false,
-          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
-        );
-      }
-      return TableCalendarWidget(
-        onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
-      );
+      return type.getTableCalendar(cubit: cubit, type: type);
     }
     return Container();
   }

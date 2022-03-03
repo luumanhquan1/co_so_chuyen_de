@@ -1,12 +1,12 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
-import 'package:ccvc_mobile/data/request/list_lich_lv/list_lich_lv_request.dart';
-import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
-import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
+import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
@@ -57,33 +57,40 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void callApi() {
     getListLichHop(
-      dateFrom: startDate.formatApi,
-      dateTo: endDate.formatApi,
+      DateFrom: startDate.formatApi,
+      DateTo: endDate.formatApi,
+      UserId: HiveLocal.getDataUser()?.userId ?? '',
+      DonViId:
+          HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
+      PageIndex: page,
+      PageSize: 10,
       isLichCuaToi: true,
-      pageIndex: page,
-      pageSize: 10,
     );
     dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
     dataLichLamViecRight(
       startDate: startDate.formatApi,
       endDate: endDate.formatApi,
-      type: 3,
+      type: 0,
     );
   }
 
   Future<void> getListLichHop({
-    required String dateFrom,
-    required String dateTo,
+    required String DateFrom,
+    required String DateTo,
+    required String UserId,
+    required String DonViId,
+    required int PageIndex,
+    required int PageSize,
     required bool isLichCuaToi,
-    required int pageIndex,
-    required int pageSize,
   }) async {
-    final ListLichLvRequest data = ListLichLvRequest(
-      dateFrom: dateFrom,
-      dateTo: dateTo,
+    final DanhSachLichLamViecRequest data = DanhSachLichLamViecRequest(
+      DateFrom: DateFrom,
+      DateTo: DateTo,
+      UserId: UserId,
+      DonViId: DonViId,
+      PageIndex: PageIndex,
+      PageSize: PageSize,
       isLichCuaToi: isLichCuaToi,
-      pageIndex: pageIndex,
-      pageSize: pageSize,
     );
     showLoading();
     final result = await _lichLamViec.getListLichLamViec(data);
@@ -120,63 +127,17 @@ class CalenderCubit extends BaseCubit<CalenderState> {
         ),
       );
     }
-    print("sssssssssssssssssssssssss${appointments}");
     return DataSource(appointments);
   }
 
   List<String> img = [
-    //ImageAssets.icTongSoLichLamviec,
     ImageAssets.icLichCongTacTrongNuoc,
     ImageAssets.icLichLamViec,
     ImageAssets.icLichCongTacNuocNgoai,
     ImageAssets.icLichTiepDan,
     ImageAssets.icAdminTao,
   ];
-  List<DashboardSchedule> list = [
-    DashboardSchedule(1, '22ssads2', 'Lịch công tác trong nước'),
-    DashboardSchedule(2, '2dasdsd22', 'Lịch làm việc'),
-    DashboardSchedule(3, '2dasda22', 'Lịch công tác nước ngoài'),
-    DashboardSchedule(4, '2asdas22', 'Lịch tiếp dân'),
-    DashboardSchedule(5, 'sdasdasd', 'admin tạo'),
-    DashboardSchedule(6, 'sdasdasd', 'admin tạo'),
-  ];
-  List<MeetingSchedule> listMeeting = [
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2022-01-25T07:45:00',
-      '2022-01-25T08:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2022-01-25T01:45:00',
-      '2022-01-25T02:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội',
-      '2022-01-27T09:45:00',
-      '2022-01-27T10:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2022-01-25T05:45:00',
-      '2022-01-25T06:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2021-12-29T13:45:00',
-      '2021-12-29T15:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2021-12-29T16:45:00',
-      '2021-12-29T17:45:00',
-    ),
-    MeetingSchedule(
-      'Họp nội bộ đơn vị',
-      '2021-12-29T18:45:00',
-      '2021-12-29T19:45:00',
-    ),
-  ];
+
   dynamic currentTime = DateFormat.MEd().format(DateTime.now());
 
   String textDay = '';
@@ -188,10 +149,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   void getDay() {
     final DateTime textTime = DateTime.now();
     textDay = getDateToString(textTime);
-  }
-
-  String getDateToString(DateTime time) {
-    return 'Thứ ${time.weekday},${time.day} tháng ${time.month}';
   }
 
   void chooseTypeListLv(Type_Choose_Option_List type) {
@@ -260,11 +217,12 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     required int type,
   }) async {
     showLoading();
-    final result = await _lichLamViec.getLichLvRight(
-      startDate,
-      endDate,
-      type,
+    final LichLamViecRightRequest request = LichLamViecRightRequest(
+      dateStart: startDate,
+      dateTo: endDate,
+      type: type,
     );
+    final result = await _lichLamViec.getLichLvRight(request);
     result.when(
       success: (res) {
         lichLamViecDashBroadRight = res;
