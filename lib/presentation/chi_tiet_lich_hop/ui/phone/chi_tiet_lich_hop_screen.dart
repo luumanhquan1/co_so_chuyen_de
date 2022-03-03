@@ -10,13 +10,17 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/phat
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_lieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/ket_luan_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/moi_nguoi_tham_gia_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/phan_cong_thu_ky.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_boc_bang_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thong_tin_lien_he_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thu_hoi_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -68,22 +72,42 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
               QData(
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
-                onTap: () {},
+                onTap: () {
+
+                },
               ),
               QData(
                 urlImage: ImageAssets.icThuHoi,
-                text: S.current.xoa_lich,
-                onTap: () {},
+                text: S.current.thu_hoi,
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.phan_cong_thu_ky,
+                    child: const ThuHoiLichWidget(),
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icPhanCongThuKy,
                 text: S.current.phan_cong_thu_ky,
-                onTap: () {},
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.phan_cong_thu_ky,
+                    child: const PhanCongThuKyWidget(),
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icTaoBocBang,
                 text: S.current.tao_boc_bang_cuoc_hop,
-                onTap: () {},
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.phan_cong_thu_ky,
+                    child: const TaoBocBangWidget(),
+                  );
+                },
               ),
             ],
           ),
@@ -169,7 +193,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 const PhatBieuWidget(),
                 const BieuQuyetWidget(),
                 const KetLuanHopWidget(),
-                // YKienCuocHopWidget(),
               ],
             ),
           ),

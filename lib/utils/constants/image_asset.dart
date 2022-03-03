@@ -261,6 +261,15 @@ class ImageAssets {
 
   static const String icMic = '$baseImg/Voice2.svg';
   static const String icBieuQuyet = '$baseImg/IcBieuQuyet.svg';
+  static const String icPlus2 = '$baseImg/icPlus.svg';
+  static const String icDocument2 = '$baseImg/Document.svg';
+  static const String icMessage = '$baseImg/icMessage.svg';
+  static const String Group2 = '$baseImg/Group2.svg';
+
+
+
+
+
 
 
 

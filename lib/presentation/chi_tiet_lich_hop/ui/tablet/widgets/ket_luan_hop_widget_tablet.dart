@@ -15,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class KetLuanHopWidgetTablet extends StatefulWidget {
-  const KetLuanHopWidgetTablet({Key? key}) : super(key: key);
+  final String id;
+  const KetLuanHopWidgetTablet({Key? key, required this.id}) : super(key: key);
 
   @override
   _KetLuanHopWidgetTabletState createState() => _KetLuanHopWidgetTabletState();
@@ -24,6 +25,13 @@ class KetLuanHopWidgetTablet extends StatefulWidget {
 class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
   bool isShow = false;
   DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
+  @override
+  void initState() {
+    cubit = DetailMeetCalenderCubit();
+    cubit.getXemKetLuanHop(widget.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +54,6 @@ class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
                     height: 60,
                   ),
                   StreamBuilder<KetLuanHopModel>(
-                    initialData: cubit.ketLuanHopModel,
                     stream: cubit.ketLuanHopStream,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
@@ -93,7 +100,7 @@ class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
                           soNhiemVu: data?.soNhiemVu ?? '',
                           tinhHinhThucHien: data?.tinhHinhThucHienNoiBo ?? '',
                           trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
-                          index: 00,
+                          index: 0,
                         );
                       } else {
                         return const SizedBox(

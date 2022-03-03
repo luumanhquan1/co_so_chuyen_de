@@ -1,6 +1,3 @@
-import 'dart:io';
-
-
 enum TrangThai { DaDuyet, ChoDuyet, ChuaGuiDuyet, HuyDuyet }
 enum TinhTrang { TrungBinh, Dat, ChuaDat }
 
@@ -9,7 +6,7 @@ class KetLuanHopModel {
   String thoiGian = '';
   TrangThai trangThai = TrangThai.ChoDuyet;
   TinhTrang tinhTrang = TinhTrang.ChuaDat;
-  File file = File('');
+  String file = '';
 
   KetLuanHopModel.empty();
 

@@ -39,6 +39,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   int choDuyet = 2;
   int daDuyet = 3;
   int huyDuyet = 4;
+  List<String> dataThuhoi = ['thu hoi', 'thu hồi'];
+  List<String> dataBocBang = ['boc bang', 'boc bang2'];
 
   //
 
@@ -409,6 +411,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     print(value);
   }
 
+  void changeType(int value) {
+    if (value == 1) {}
+  }
+
   SoLuongPhatBieuModel dataSoLuongPhatBieu = SoLuongPhatBieuModel();
 
   Future<void> soLuongPhatBieuData() async {
@@ -433,17 +439,54 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     _checkRadioSubject.sink.add(_index);
   }
 
+  TrangThai typeTrangthai(int value) {
+    switch (value) {
+      case 1:
+        return TrangThai.DaDuyet;
+      case 2:
+        return TrangThai.ChoDuyet;
+      case 3:
+        return TrangThai.ChuaGuiDuyet;
+      case 4:
+        return TrangThai.HuyDuyet;
+      default:
+        return TrangThai.DaDuyet;
+    }
+  }
+
+  TinhTrang typeTinhTrang(String value) {
+    switch (value) {
+      case 'trung-binh':
+        return TinhTrang.TrungBinh;
+      case 'dat':
+        return TinhTrang.Dat;
+      case 'chua-dat':
+        return TinhTrang.ChuaDat;
+      default:
+        return TinhTrang.TrungBinh;
+    }
+  }
+
+  //xem ket luan hop
+  Future<void> getXemKetLuanHop(String id) async {
+    final result = await hopRp.getXemKetLuanHop(id);
+    result.when(
+        success: (res) {
+          KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
+            id: res.id ?? '',
+            thoiGian: res.endDate ?? '',
+            trangThai: typeTrangthai(res.status ?? 0),
+            tinhTrang: typeTinhTrang(res.reportStatusCode ?? ''),
+            file: res.files ?? '',
+          );
+          ketLuanHopSubject.sink.add(ketLuanHopModel);
+        },
+        error: (err) {});
+  }
+
   BehaviorSubject<KetLuanHopModel> ketLuanHopSubject = BehaviorSubject();
 
   Stream<KetLuanHopModel> get ketLuanHopStream => ketLuanHopSubject.stream;
-
-  KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
-    id: '111111111111',
-    thoiGian: '22/22/2222',
-    trangThai: TrangThai.ChoDuyet,
-    tinhTrang: TinhTrang.ChuaDat,
-    file: File('alo.doc'),
-  );
 
   BehaviorSubject<DanhSachNhiemVuLichHopModel> danhSachNhiemVuLichHopSubject =
       BehaviorSubject();

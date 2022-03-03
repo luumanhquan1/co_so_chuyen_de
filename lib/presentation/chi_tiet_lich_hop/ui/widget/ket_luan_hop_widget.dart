@@ -44,7 +44,6 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StreamBuilder<KetLuanHopModel>(
-                  initialData: cubit.ketLuanHopModel,
                   stream: cubit.ketLuanHopStream,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
