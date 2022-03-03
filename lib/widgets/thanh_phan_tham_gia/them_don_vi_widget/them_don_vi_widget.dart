@@ -137,6 +137,9 @@ class TreeDonVi extends StatelessWidget {
                       final data = snapshot.data ?? <Node<DonViModel>>[];
                       if (data.isNotEmpty) {
                         return ListView.builder(
+                          keyboardDismissBehavior: isMobile()
+                              ? ScrollViewKeyboardDismissBehavior.onDrag
+                              : ScrollViewKeyboardDismissBehavior.manual,
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return TreeViewWidget(
