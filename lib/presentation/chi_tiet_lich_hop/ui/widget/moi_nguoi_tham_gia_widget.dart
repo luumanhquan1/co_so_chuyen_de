@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cell_thanh_phan_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thanh_phan_tham_gia_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
@@ -51,46 +52,27 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
             title: S.current.diem_danh,
             onPress: () {},
           ),
-          StreamBuilder<ThanhPhanThamGiaModel>(
-            initialData: cubit.thanhPhanThamGiaModel,
-            // stream: cubit.detailDocumentGuiNhan,
+          StreamBuilder<List<ThanhPhanThamGiaModel>>(
+            initialData: cubit.dataThanhPhanThamGia,
+            stream: cubit.thanhPhanThamGia,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              final _list = snapshot.data ?? [];
+              if (_list.isNotEmpty) {
                 return ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 1,
+                  itemCount: _list.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: borderItemCalender),
-                        color: borderItemCalender.withOpacity(0.1),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(6),
-                        ),
-                      ),
-                      child: Column(
-                        children:
-                        snapshot.data!.toListRowThanhPhanThamGia().map(
-                              (row) {
-                            return DetailDocumentRow(
-                              row: row,
-                            );
-                          },
-                        ).toList(),
-                      ),
+                    return CellThanhPhanThamGia(
+                      cubit: cubit,
+                      infoModel: _list[index],
                     );
                   },
                 );
               } else {
-                return const SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: SizedBox(
-                    height: 200,
-                    child: NodataWidget(),
-                  ),
+                return const SizedBox(
+                  height: 200,
+                  child: NodataWidget(),
                 );
               }
             },

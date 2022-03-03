@@ -134,12 +134,9 @@ class _MoiNguoiThamGiaWidgetTabletState
                   },
                 );
               } else {
-                return const SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: SizedBox(
-                    height: 200,
-                    child: NodataWidget(),
-                  ),
+                return const SizedBox(
+                  height: 200,
+                  child: NodataWidget(),
                 );
               }
             },

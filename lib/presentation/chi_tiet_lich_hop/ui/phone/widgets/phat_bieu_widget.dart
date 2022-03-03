@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cell_phat_bieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/dang_ky_phat_bieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/icon_with_title_widget.dart';
@@ -22,9 +23,10 @@ class PhatBieuWidget extends StatefulWidget {
 }
 
 class _PhatBieuWidgetState extends State<PhatBieuWidget> {
+  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   Widget build(BuildContext context) {
-    final cubit = DetailMeetCalendarInherited.of(context).cubit;
     return SelectOnlyWidget(
       title: S.current.phat_bieu,
       child: Padding(
@@ -109,12 +111,9 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                           },
                         );
                       } else {
-                        return const SingleChildScrollView(
-                          physics: AlwaysScrollableScrollPhysics(),
-                          child: SizedBox(
-                            height: 200,
-                            child: NodataWidget(),
-                          ),
+                        return const SizedBox(
+                          height: 200,
+                          child: NodataWidget(),
                         );
                       }
                     },

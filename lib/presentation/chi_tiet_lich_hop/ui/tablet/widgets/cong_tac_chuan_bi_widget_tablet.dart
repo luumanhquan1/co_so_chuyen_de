@@ -1,10 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/cong_tac_chuan_bi_widget.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 class CongTacChuanBiWidgetTablet extends StatefulWidget {
@@ -17,128 +17,79 @@ class CongTacChuanBiWidgetTablet extends StatefulWidget {
 
 class _CongTacChuanBiWidgetTabletState
     extends State<CongTacChuanBiWidgetTablet> {
+  final DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   Widget build(BuildContext context) {
-    final DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 60,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: Text(
-              S.current.thong_tin_phong,
-              style: titleAppbar(
-                fontSize: 14.0.textScale(),
-                color: dateColor,
-              ),
-            ),
-          ),
-          StreamBuilder<CongTacChuanBiModel>(
-            initialData: cubit.thongTinPhong,
-            // stream: cubit.detailDocumentGuiNhan,
+      child: body(),
+    );
+  }
+
+  Widget body() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        titleType(
+          title: S.current.thong_tin_phong,
+          child: StreamBuilder<ThongTinPhongHopModel?>(
+            stream: cubit.getThongTinPhongHop,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: borderItemCalender),
-                        color: borderItemCalender.withOpacity(0.1),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(6),
-                        ),
-                      ),
-                      child: Column(
-                        children: snapshot.data!.toListRowThongTinPhong().map(
-                              (row) {
-                            return DetailDocumentRow(
-                              row: row,
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: SizedBox(
-                    height: 200,
-                    child: Center(
-                      child: Text(S.current.khong_co_du_lieu),
-                    ),
-                  ),
+              final data = snapshot.data;
+              if (data == null) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50),
+                  child: NodataWidget(),
                 );
               }
+              return ThongTinPhongWidget(
+                thongTinPhongHopModel: data,
+              );
             },
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            S.current.thong_tin_yeu_cau_thiet_bi,
-            style: titleAppbar(
-              fontSize: 14.0,
-              color: dateColor,
-            ),
-          ),
-          StreamBuilder<CongTacChuanBiModel>(
-            initialData: cubit.thongTinYeuCauThietBi,
-            // stream: cubit.detailDocumentGuiNhan,
+        ),
+        spaceH20,
+        titleType(
+          title: S.current.yeu_cau_de_chuan_bi_phong,
+          child: StreamBuilder<List<ThietBiPhongHopModel>>(
+            stream: cubit.getListThietBi,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: borderItemCalender),
-                        color: borderItemCalender.withOpacity(0.1),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(6),
-                        ),
-                      ),
-                      child: Column(
-                        children: snapshot.data!.toListRowYeuCauThietBi().map(
-                              (row) {
-                            return DetailDocumentRow(
-                              row: row,
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: SizedBox(
-                    height: 200,
-                    child: Center(
-                      child: Text(S.current.khong_co_du_lieu),
-                    ),
-                  ),
+              final data = snapshot.data ?? <ThietBiPhongHopModel>[];
+              if (data.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50),
+                  child: NodataWidget(),
                 );
               }
+              return Column(
+                children: List.generate(
+                  data.length,
+                      (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: ThongTinYeuCauThietBiWidget(
+                      model: data[index],
+                    ),
+                  ),
+                ),
+              );
             },
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget titleType({required String title, required Widget child}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: textNormalCustom(color: infoColor, fontSize: 14),
+        ),
+        spaceH16,
+        child
+      ],
     );
   }
 }
