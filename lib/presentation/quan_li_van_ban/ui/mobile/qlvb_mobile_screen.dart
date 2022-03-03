@@ -264,6 +264,8 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
           ),
           TableCalendarWidget(
             onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+            onChangeRange:
+                (DateTime? start, DateTime? end, DateTime? focusedDay) {},
           ),
         ],
       ),
