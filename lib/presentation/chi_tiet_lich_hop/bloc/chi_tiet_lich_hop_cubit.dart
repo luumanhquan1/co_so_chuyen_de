@@ -410,17 +410,16 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   List<PhatBieuModel> listBieuQuyet = [];
 
-  final BehaviorSubject<String> typeStatus =
-      BehaviorSubject.seeded(S.current.danh_sach_phat_bieu);
+  final BehaviorSubject<int> typeStatus = BehaviorSubject.seeded(1);
 
-  Stream<String> get getTypeStatus => typeStatus.stream;
+  Stream<int> get getTypeStatus => typeStatus.stream;
 
-  void getValueStatus(String value) {
-    if (value == S.current.danh_sach_phat_bieu) {
+  void getValueStatus(int value) {
+    if (value == 1) {
       phatbieu.sink.add(listPhatBieu);
-    } else if (value == S.current.cho_duyet) {
+    } else if (value == 2) {
       phatbieu.sink.add(listPhatBieu);
-    } else if (value == S.current.da_duyet) {
+    } else if (value == 3) {
       phatbieu.sink.add(listPhatBieu);
     } else {
       phatbieu.sink.add(listPhatBieu);

@@ -74,8 +74,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
               expand = !expand;
               _runExpandCheck();
             },
-            child: (widget.cubit.typeStatus.value ==
-                    S.current.danh_sach_phat_bieu)
+            child: (widget.cubit.typeStatus.value == 1)
                 ? Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -91,7 +90,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                       ),
                     ),
                   )
-                : (widget.cubit.typeStatus.value == S.current.cho_duyet
+                : (widget.cubit.typeStatus.value == 2
                     ? Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
@@ -108,7 +107,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                           ),
                         ),
                       )
-                    : (widget.cubit.typeStatus.value == S.current.da_duyet
+                    : (widget.cubit.typeStatus.value == 3
                         ? Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
@@ -125,7 +124,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                               ),
                             ),
                           )
-                        : (widget.cubit.typeStatus.value == S.current.huy_duyet
+                        : (widget.cubit.typeStatus.value == 4
                             ? Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
@@ -176,8 +175,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                   children: [
                     GestureDetector(
                       onTap: () {
-                        widget.cubit
-                            .getValueStatus(S.current.danh_sach_phat_bieu);
+                        widget.cubit.getValueStatus(1);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -199,7 +197,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(S.current.cho_duyet);
+                        widget.cubit.getValueStatus(2);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -221,7 +219,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(S.current.da_duyet);
+                        widget.cubit.getValueStatus(3);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -243,7 +241,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(S.current.huy_duyet);
+                        widget.cubit.getValueStatus(4);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

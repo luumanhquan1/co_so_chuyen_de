@@ -13,8 +13,6 @@ import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../chi_tiet_lich_hop_screen.dart';
-
 class PhatBieuWidget extends StatefulWidget {
   const PhatBieuWidget({Key? key}) : super(key: key);
 
@@ -38,10 +36,10 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
               child: Column(
                 children: [
                   SizedBox(
-                    child: StreamBuilder<List<PhatBieuModel>>(
-                      stream: cubit.streamPhatBieu,
+                    child: StreamBuilder<int>(
+                      stream: cubit.typeStatus,
                       builder: (context, snapshot) {
-                        if (cubit.typeStatus.value == S.current.cho_duyet) {
+                        if (cubit.typeStatus.value == 2) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 150),
                             child: DoubleButtonBottom(
@@ -53,8 +51,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               onPressed2: () {},
                             ),
                           );
-                        } else if (cubit.typeStatus.value ==
-                            S.current.da_duyet) {
+                        } else if (cubit.typeStatus.value == 3) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
@@ -63,8 +60,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               isColorBlue: false,
                             ),
                           );
-                        } else if (cubit.typeStatus.value ==
-                            S.current.huy_duyet) {
+                        } else if (cubit.typeStatus.value == 4) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
@@ -121,8 +117,8 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                 ],
               ),
             ),
-            StreamBuilder<List<PhatBieuModel>>(
-              stream: cubit.streamPhatBieu,
+            StreamBuilder<int>(
+              stream: cubit.typeStatus,
               builder: (context, snapshot) {
                 return StatePhatBieuWidget(cubit: cubit);
               },
