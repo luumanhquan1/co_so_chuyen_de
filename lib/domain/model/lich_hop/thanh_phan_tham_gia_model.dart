@@ -1,5 +1,3 @@
-import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
-
 class ThanhPhanThamGiaModel {
   String? id = '';
   String? tenDonVi = '';
@@ -22,18 +20,4 @@ class ThanhPhanThamGiaModel {
   });
 
   ThanhPhanThamGiaModel.fromDetail();
-  List<DocumentDetailRow> toListRowThanhPhanThamGia() {
-    final List<DocumentDetailRow> list = [
-      DocumentDetailRow('Tên đơn vị', tenDonVi, TypeDocumentDetailRow.text),
-      DocumentDetailRow('Tên cán bộ', tebCanBo, TypeDocumentDetailRow.text),
-      DocumentDetailRow('Vai trò', vaiTro, TypeDocumentDetailRow.text),
-      DocumentDetailRow('ND công việc', ndCongViec, TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          'Trạng thái', trangThai, TypeDocumentDetailRow.status),
-      DocumentDetailRow(
-          'Điểm danh', diemDanh, TypeDocumentDetailRow.status),
-    ];
-    return list;
-  }
-
 }
