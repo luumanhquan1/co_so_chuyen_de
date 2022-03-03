@@ -56,7 +56,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Stream<DateTime> get endDateStream => endDateSubject.stream;
 
   Stream<List<String>> get listItemPersonStream => listItemPersonSubject.stream;
-  final BehaviorSubject<List<LichLamViecDashBroadItem>> _loaiLich1 = BehaviorSubject();
+  final BehaviorSubject<List<LichLamViecDashBroadItem>> _loaiLich1 =
+      BehaviorSubject();
 
   final BehaviorSubject<List<NguoiChutriModel>> _nguoiChuTri =
       BehaviorSubject();
@@ -67,16 +68,16 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   Stream<List<NguoiChutriModel>> get nguoiChuTri => _nguoiChuTri.stream;
 
   Stream<List<LichLamViecDashBroadItem>> get loaiLich => _loaiLich1.stream;
-  LichLamViecDashBroadItem?selectLoaiLich;
+  LichLamViecDashBroadItem? selectLoaiLich;
   LoaiSelectModel? selectLinhVuc;
   NguoiChutriModel? selectNguoiChuTri;
-  List<DonViModel>?donviModel;
+  List<DonViModel>? donviModel;
 
   String? dateFrom;
   String? timeFrom;
   String? dateEnd;
   String? timeEnd;
-  bool allDay =true;
+  bool allDay = true;
 
   void listeningStartDataTime(DateTime dateAndTime) {
     dateFrom = dateAndTime.formatApi;
@@ -135,8 +136,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     queue.dispose();
   }
 
-  Future<void> _dataLoaiLich(
-  ) async {
+  Future<void> _dataLoaiLich() async {
     final result = await _lichLamViec.getLichLvRight(
       '2022-03-04',
       '2022-03-04',
@@ -190,22 +190,22 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
         error: (err) {});
   }
 
-  Future<MessageModel> taoLichLamViec({
+  Future<void> taoLichLamViec({
     required String title,
     required String content,
     required String location,
   }) async {
     final result = await _lichLamViec.taoLichLamViec(
       title,
-      selectLoaiLich?.typeId??'',
+      selectLoaiLich?.typeId ?? '',
       selectLinhVuc?.id ?? '',
       '',
       '',
       '',
-      dateFrom??'',
-      timeFrom??'',
-      dateEnd??'',
-      timeEnd??'',
+      dateFrom ?? '',
+      timeFrom ?? '',
+      dateEnd ?? '',
+      timeEnd ?? '',
       content,
       location,
       '',
@@ -221,20 +221,19 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       '',
       allDay,
       true,
-      donviModel??[],
+      donviModel ?? [],
       1,
       1,
-      dateFrom??'',
-      dateEnd??'',
+      dateFrom ?? '',
+      dateEnd ?? '',
       true,
     );
     result.when(success: (res) {
+      emit(CreateSuccess());
       showContent();
     }, error: (error) {
       showContent();
     });
-    return MessageModel();
-
   }
 
   Future<void> taoBaoCaoKetQua({

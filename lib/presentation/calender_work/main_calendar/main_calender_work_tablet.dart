@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -69,7 +70,16 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     MaterialPageRoute(
                       builder: (context) => const TaoLichLamViecChiTietTablet(),
                     ),
-                  );
+                  ).then((value) {
+                    if (value == null) {}
+                    if (value == true) {
+                      cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+                      cubit.callApi();
+                      cubit.postDanhSachLichlamViec(
+                        body: dataBodyRequetDanhSachLLV,
+                      );
+                    }
+                  });
                 },
                 onTapDay: () {
                   setState(() {});
