@@ -228,7 +228,7 @@
   "lich_cong_tac_nuoc_ngoai": "Lịch công tác nước ngoài",
   "lich_tiep_dan": "Lịch tiếp dân",
   "admin_tao": "Admin tạo",
-  "loai_lich": "Loai lich",
+  "loai_lich": "Loai lịch",
   "nhac_lai": "Nhắc lại",
   "mau_mac_dinh": "Màu mặc định",
   "linh_vuc": "Lĩnh vực",
@@ -557,5 +557,8 @@
   "bo_phieu_cong_khai" : "Bỏ phiếu công khai",
   "ngay_bieu_quyet" : "Ngày biểu quyết",
   "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết",
-  "nguoi_phat_bieu" : "Nguười phát biểu"
+  "nguoi_phat_bieu" : "Nguười phát biểu",
+  "sua_that_bai": "Sửa thất bại",
+  "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
+  "quay_lai" : "Quay lại"
 }
