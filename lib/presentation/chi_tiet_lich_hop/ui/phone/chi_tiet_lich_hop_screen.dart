@@ -43,7 +43,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).backgroundColor,
       appBar: BaseAppBar(
         leadingIcon: IconButton(
           onPressed: () {

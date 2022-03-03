@@ -257,21 +257,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  CongTacChuanBiModel thongTinPhong = CongTacChuanBiModel(
-    tenPhong: 'Phòng họp',
-    sucChua: '3',
-    diaDiem: 'UBND Đồng Nai',
-    trangThai: 'Đã duyệt',
-    loaiThietBi: 'Máy chiếu',
-  );
 
-  CongTacChuanBiModel thongTinYeuCauThietBi = CongTacChuanBiModel(
-    tenPhong: '',
-    sucChua: '20',
-    diaDiem: '',
-    trangThai: 'Chờ duyệt',
-    loaiThietBi: 'Máy chiếu',
-  );
 
   Future<void> themBieuQuyetHop() async {
     final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
@@ -304,16 +290,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       },
     );
   }
-
-  ThanhPhanThamGiaModel thanhPhanThamGiaModel = ThanhPhanThamGiaModel(
-    tebCanBo: 'Lê Sĩ Lâm',
-    trangThai: 'Chờ xác nhận',
-    diemDanh: 'Có mặt',
-    tenDonVi: 'Lãnh đạo UBND Tỉnh Đồng Nai',
-    ndCongViec: 'Họp nội bộ',
-    vaiTro: 'Cán bộ chủ trì',
-    statusDiemDanh: false,
-  );
 
   void search(String text) {
     final searchTxt = text.trim().toLowerCase().vietNameseParse();

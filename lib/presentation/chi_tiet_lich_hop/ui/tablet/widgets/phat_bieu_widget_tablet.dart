@@ -45,80 +45,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 );
               },
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: StreamBuilder<int>(
-                stream: cubit.typeStatus,
-                builder: (context, snapshot) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ButtonStatus(
-                        lengthList: cubit.dataSoLuongPhatBieu.danhSachPhatBieu,
-                        onTap: () {
-                          cubit.getValueStatus(1);
-                        },
-                        text: S.current.danh_sach_phat_bieu,
-                        backgroup: cubit.typeStatus.value ==
-                                1
-                            ? choXuLyColor
-                            : backgroundColorApp,
-                        colorText: cubit.typeStatus.value ==
-                                1
-                            ? backgroundColorApp
-                            : choXuLyColor,
-                        colorBorder: choXuLyColor,
-                      ),
-                      const SizedBox(width: 16),
-                      ButtonStatus(
-                        lengthList: cubit.dataSoLuongPhatBieu.choDuyet,
-                        onTap: () {
-                          cubit.getValueStatus(2);
-                        },
-                        text: S.current.cho_duyet,
-                        backgroup: cubit.typeStatus.value == 2
-                            ? itemWidgetNotUse
-                            : backgroundColorApp,
-                        colorText: cubit.typeStatus.value == 2
-                            ? backgroundColorApp
-                            : itemWidgetNotUse,
-                        colorBorder: itemWidgetNotUse,
-                      ),
-                      const SizedBox(width: 16),
-                      ButtonStatus(
-                        lengthList: cubit.dataSoLuongPhatBieu.daDuyet,
-                        onTap: () {
-                          cubit.getValueStatus(3);
-                        },
-                        text: S.current.da_duyet,
-                        backgroup: cubit.typeStatus.value == 3
-                            ? itemWidgetUsing
-                            : backgroundColorApp,
-                        colorText: cubit.typeStatus.value == 3
-                            ? backgroundColorApp
-                            : itemWidgetUsing,
-                        colorBorder: itemWidgetUsing,
-                      ),
-                      const SizedBox(width: 16),
-                      ButtonStatus(
-                        lengthList: cubit.dataSoLuongPhatBieu.huyDuyet,
-                        onTap: () {
-                          cubit.getValueStatus(4);
-                        },
-                        text: S.current.huy_duyet,
-                        backgroup: cubit.typeStatus.value == 4
-                            ? statusCalenderRed
-                            : backgroundColorApp,
-                        colorText: cubit.typeStatus.value == 4
-                            ? backgroundColorApp
-                            : statusCalenderRed,
-                        colorBorder: statusCalenderRed,
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
+            buttonStatePhatBieu(cubit: cubit),
             StreamBuilder<List<PhatBieuModel>>(
               stream: cubit.streamPhatBieu,
               builder: (context, snapshot) {
@@ -148,48 +75,127 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 }
               },
             ),
-            SizedBox(
-              child: StreamBuilder<List<PhatBieuModel>>(
-                stream: cubit.streamPhatBieu,
-                builder: (context, snapshot) {
-                  if (cubit.typeStatus.value == S.current.cho_duyet) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 250),
-                      child: DoubleButtonBottom(
-                        title1: S.current.huy_duyet,
-                        title2: S.current.duyet,
-                        onPressed1: () {
-                          Navigator.pop(context);
-                        },
-                        onPressed2: () {},
-                      ),
-                    );
-                  } else if (cubit.typeStatus.value == S.current.da_duyet) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 300),
-                      child: ButtonCustomBottom(
-                        title: S.current.huy_duyet,
-                        onPressed: () {},
-                        isColorBlue: false,
-                      ),
-                    );
-                  } else if (cubit.typeStatus.value == S.current.huy_duyet) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 300),
-                      child: ButtonCustomBottom(
-                        title: S.current.duyet,
-                        onPressed: () {},
-                        isColorBlue: true,
-                      ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
-            ),
+            buttonPhatBieu(cubit: cubit)
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buttonPhatBieu({required DetailMeetCalenderCubit cubit}) {
+    return SizedBox(
+      child: StreamBuilder<List<PhatBieuModel>>(
+        stream: cubit.streamPhatBieu,
+        builder: (context, snapshot) {
+          if (cubit.typeStatus.value == S.current.cho_duyet) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 250),
+              child: DoubleButtonBottom(
+                title1: S.current.huy_duyet,
+                title2: S.current.duyet,
+                onPressed1: () {
+                  Navigator.pop(context);
+                },
+                onPressed2: () {},
+              ),
+            );
+          } else if (cubit.typeStatus.value == S.current.da_duyet) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 300),
+              child: ButtonCustomBottom(
+                title: S.current.huy_duyet,
+                onPressed: () {},
+                isColorBlue: false,
+              ),
+            );
+          } else if (cubit.typeStatus.value == S.current.huy_duyet) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 300),
+              child: ButtonCustomBottom(
+                title: S.current.duyet,
+                onPressed: () {},
+                isColorBlue: true,
+              ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget buttonStatePhatBieu({required DetailMeetCalenderCubit cubit}) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: StreamBuilder<int>(
+        stream: cubit.typeStatus,
+        builder: (context, snapshot) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ButtonStatus(
+                lengthList: cubit.dataSoLuongPhatBieu.danhSachPhatBieu,
+                onTap: () {
+                  cubit.getValueStatus(1);
+                },
+                text: S.current.danh_sach_phat_bieu,
+                backgroup: cubit.typeStatus.value == 1
+                    ? choXuLyColor
+                    : backgroundColorApp,
+                colorText: cubit.typeStatus.value == 1
+                    ? backgroundColorApp
+                    : choXuLyColor,
+                colorBorder: choXuLyColor,
+              ),
+              const SizedBox(width: 16),
+              ButtonStatus(
+                lengthList: cubit.dataSoLuongPhatBieu.choDuyet,
+                onTap: () {
+                  cubit.getValueStatus(2);
+                },
+                text: S.current.cho_duyet,
+                backgroup: cubit.typeStatus.value == 2
+                    ? itemWidgetNotUse
+                    : backgroundColorApp,
+                colorText: cubit.typeStatus.value == 2
+                    ? backgroundColorApp
+                    : itemWidgetNotUse,
+                colorBorder: itemWidgetNotUse,
+              ),
+              const SizedBox(width: 16),
+              ButtonStatus(
+                lengthList: cubit.dataSoLuongPhatBieu.daDuyet,
+                onTap: () {
+                  cubit.getValueStatus(3);
+                },
+                text: S.current.da_duyet,
+                backgroup: cubit.typeStatus.value == 3
+                    ? itemWidgetUsing
+                    : backgroundColorApp,
+                colorText: cubit.typeStatus.value == 3
+                    ? backgroundColorApp
+                    : itemWidgetUsing,
+                colorBorder: itemWidgetUsing,
+              ),
+              const SizedBox(width: 16),
+              ButtonStatus(
+                lengthList: cubit.dataSoLuongPhatBieu.huyDuyet,
+                onTap: () {
+                  cubit.getValueStatus(4);
+                },
+                text: S.current.huy_duyet,
+                backgroup: cubit.typeStatus.value == 4
+                    ? statusCalenderRed
+                    : backgroundColorApp,
+                colorText: cubit.typeStatus.value == 4
+                    ? backgroundColorApp
+                    : statusCalenderRed,
+                colorBorder: statusCalenderRed,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
