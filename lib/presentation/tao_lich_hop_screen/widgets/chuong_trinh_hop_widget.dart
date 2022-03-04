@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
@@ -38,7 +39,10 @@ class ChuongTrinhHopWidget extends StatelessWidget {
               color: Colors.transparent,
               child: Text(
                 S.current.chuong_trinh_hop,
-                style: textNormalCustom(color: titleColumn, fontSize: 16),
+                style: textNormalCustom(
+                  color: titleColumn,
+                  fontSize: 16.0.textScale(),
+                ),
               ),
             ),
           ),
@@ -46,6 +50,9 @@ class ChuongTrinhHopWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
+          SizedBox(
+            height: 0.0.textScale(space: 10),
+          ),
           SolidButton(
             onTap: () {
               showDialog(context);
@@ -68,13 +75,15 @@ class ChuongTrinhHopWidget extends StatelessWidget {
         title: S.current.them_phien_hop,
       );
     } else {
-      showDiaLogTablet(context,
-          title: S.current.them_phien_hop,
-          isBottomShow: false,
-          child: ThemPhienHopScreen(
-            cubit: cubit,
-          ),
-          funcBtnOk: () {});
+      showDiaLogTablet(
+        context,
+        title: S.current.them_phien_hop,
+        isBottomShow: false,
+        child: ThemPhienHopScreen(
+          cubit: cubit,
+        ),
+        funcBtnOk: () {},
+      );
     }
   }
 }
@@ -106,8 +115,9 @@ class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
       ),
       child: FollowKeyBoardWidget(
         bottomWidget: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+          padding: EdgeInsets.symmetric(vertical: isMobile() ? 24 : 0),
           child: DoubleButtonBottom(
+            isTablet: isMobile() == false,
             onPressed2: () {
               _keyBaseTime.currentState?.validator();
               if (_key.currentState?.validator() ?? false) {
@@ -146,9 +156,11 @@ class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
                     value: DateTime.now().toString(),
                     onSelectDate: (value) {},
                     paddings: 12,
-                    leadingIcon: SvgPicture.asset(isMobile()
-                        ? ImageAssets.icCalenders
-                        : ImageAssets.icCanlendarTablet),
+                    leadingIcon: SvgPicture.asset(
+                      isMobile()
+                          ? ImageAssets.icCalenders
+                          : ImageAssets.icCanlendarTablet,
+                    ),
                   ),
                 ),
                 spaceH20,
@@ -189,6 +201,7 @@ class _ThemPhienHopScreenState extends State<ThemPhienHopScreen> {
                 ),
                 spaceH20,
                 ButtonSelectFile(
+                  spacingFile: 16,
                   title: S.current.tai_lieu_dinh_kem,
                   onChange: (value) {},
                 )

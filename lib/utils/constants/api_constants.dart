@@ -123,6 +123,8 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
   static const GET_LIST_TAT_CA_CHU_DE =
       '/api/NewsNetViews/search_news';
   static const CHI_TIET_VAN_BAN_DEN = '/qlvb/api/VanBan/ChiTietVanBanDen';
+  static const CREATE_METTING = '/vpdt/api/MeetingSchedule/create-meeting';
+  static const THEM_PHIEN_HOP = '/api/LogAction/add-log';
 
 }
 

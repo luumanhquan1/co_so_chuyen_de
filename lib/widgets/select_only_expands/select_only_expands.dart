@@ -114,9 +114,12 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            widget.listSelect[index],
-                            style: textNormal(titleColor, 16),
+                          Flexible(
+                            child: Text(
+                              widget.listSelect[index],
+                              style: textNormal(titleColor, 16),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           if (widget.isShowValue)
                             StreamBuilder<int>(
