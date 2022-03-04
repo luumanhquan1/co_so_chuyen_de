@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/data/response/quan_ly_van_ban/danh_sach_van_ban/ds_v
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/danh_sach_van_ban/ds_vbdi_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/dash_board/db_vb_den_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/dash_board/db_vb_di_response.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_van_ban/lich_su_van_ban_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -65,4 +66,10 @@ abstract class QuanLyVanBanClient {
   @GET(ApiConstants.THONG_TIN_GUI_NHAN)
   Future<ThongTinGuiNhanDataResponse> getDataThongTinGuiNhan(
       @Path('id') String id);
+
+  @GET(ApiConstants.CHI_TIET_VAN_BAN_DEN)
+  Future<DataLichSuVanBanResponse> getDataLichSuVanBanDen(
+      @Query('processId') String processId,
+      @Query('type') String type,
+      );
 }
