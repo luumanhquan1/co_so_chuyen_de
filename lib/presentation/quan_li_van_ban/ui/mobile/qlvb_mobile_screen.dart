@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_den_mobile.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_di_mobile.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/mobile/incoming_document_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/widget/incoming_document_cell.dart';
@@ -232,7 +232,7 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const ChiTietVanBanMobile(),
+                                              const ChiTietVanBanDiMobile(),
                                         ),
                                       );
                                     },
@@ -263,9 +263,24 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
             ),
           ),
           TableCalendarWidget(
-            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+            onChange: (DateTime startDate, DateTime endDate) {},
             onChangeRange:
-                (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+                (DateTime? start, DateTime? end, DateTime? focusedDay) {
+              qlvbCubit.startDate =
+                  start?.formatApi ?? DateTime.now().formatApi;
+              qlvbCubit.endDate = end?.formatApi ?? qlvbCubit.startDate;
+            },
+            onSearch: (value) {
+              qlvbCubit.dataVBDen(
+                startDate: qlvbCubit.startDate,
+                endDate: qlvbCubit.endDate,
+              );
+              qlvbCubit.dataVBDi(
+                startDate: qlvbCubit.startDate,
+                endDate: qlvbCubit.endDate,
+              );
+            },
+
           ),
         ],
       ),

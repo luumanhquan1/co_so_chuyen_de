@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand.dart';
@@ -20,9 +21,11 @@ class ChiTietVanBanDenTablet extends StatefulWidget {
   final String processId;
   final String taskId;
 
-  const ChiTietVanBanDenTablet(
-      {Key? key, required this.processId, required this.taskId})
-      : super(key: key);
+  const ChiTietVanBanDenTablet({
+    Key? key,
+    required this.processId,
+    required this.taskId,
+  }) : super(key: key);
 
   @override
   _ChiTietVanBanDenTabletState createState() => _ChiTietVanBanDenTabletState();
@@ -46,7 +49,9 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
       body: RefreshIndicator(
         onRefresh: () async {
           await cubit.loadDataVanBanDen(
-              taskId: widget.taskId, processId: widget.processId);
+            taskId: widget.taskId,
+            processId: widget.processId,
+          );
         },
         child: ProviderWidget<DetailDocumentCubit>(
           cubit: cubit,
@@ -93,11 +98,17 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10),
-                                        child:
-                                            ThongTinGuiNhanWidgetExpandTablet(
-                                          cubit: cubit,
-                                          expanded: cubit.expanded,
-                                        ),
+                                        child: StreamBuilder<
+                                                List<ThongTinGuiNhanModel>>(
+                                            stream: cubit.thongTinGuiNhanStream,
+                                            builder: (context, snapshot) {
+                                              final data = snapshot.data ?? [];
+                                              return ThongTinGuiNhanWidgetExpandTablet(
+                                                thongTinGuiNhanModel: data,
+                                                cubit: cubit,
+                                                expanded: cubit.expanded,
+                                              );
+                                            }),
                                       ),
                                       Padding(
                                         padding:

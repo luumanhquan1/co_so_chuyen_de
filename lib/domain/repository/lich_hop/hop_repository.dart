@@ -30,6 +30,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 
 mixin HopRepository {
@@ -134,5 +135,8 @@ mixin HopRepository {
   Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
       String lichHopId);
 
+
   Future<Result<ChiTietLichHopModel>> taoLichHop(TaoLichHopRequest taoLichHopRequest);
+
+  Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id);
 }
