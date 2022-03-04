@@ -64,19 +64,18 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         return TableCalendarWidget(
           isCalendar: false,
           type: type,
-          onChange: (DateTime start,DateTime end) {
-             log("$start      $end");
+          onChange: (DateTime start, DateTime end) {
+            log("$start      $end");
           },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-
         );
 
       default:
         return TableCalendarWidget(
           type: type,
-          onChange: (DateTime start,DateTime end) {
-
+          onChange: (DateTime start, DateTime end) {
+           cubit.callApiNgay(start, end);
           },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},

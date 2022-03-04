@@ -91,14 +91,17 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   onTapDay: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
+                    cubit.callApi();
                   },
                   onTapMonth: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
+                    cubit.callApiMonth();
                   },
                   onTapWeek: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
+                    cubit.callApiTuan();
                   },
                   cubit: cubit,
                 ),
@@ -107,9 +110,14 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   builder: (context, state) {
                     return TableCandarTablet(
                       type: state.type,
-                      onChangeRange: (DateTime? start, DateTime? end,
-                          DateTime? focusedDay) {},
-                      onChange: (DateTime startDate, DateTime endDate) {},
+                      onChangeRange: (
+                        DateTime? start,
+                        DateTime? end,
+                        DateTime? focusedDay,
+                      ) {},
+                      onChange: (DateTime startDate, DateTime endDate) {
+                        cubit.callApiNgay(startDate, endDate);
+                      },
                     );
                   },
                 ),

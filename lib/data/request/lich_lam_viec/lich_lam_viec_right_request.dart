@@ -4,12 +4,12 @@ part 'lich_lam_viec_right_request.g.dart';
 
 @JsonSerializable()
 class LichLamViecRightRequest {
-  String dateStart;
+  String dateFrom;
   String dateTo;
   int type;
 
   LichLamViecRightRequest({
-    required this.dateStart,
+    required this.dateFrom,
     required this.dateTo,
     required this.type,
   });

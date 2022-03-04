@@ -134,18 +134,21 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.DAY,
                               );
+                              cubit.callApi();
                             },
                             onTapWeek: () {
                               setState(() {});
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.WEEK,
                               );
+                              cubit.callApiTuan();
                             },
                             onTapmonth: () {
                               setState(() {});
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.MONTH,
                               );
+                              cubit.callApiMonth();
                             },
                             cubit: cubit,
                           );

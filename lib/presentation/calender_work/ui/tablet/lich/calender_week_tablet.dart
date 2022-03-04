@@ -20,7 +20,7 @@ class _CalenderWeekTabletState extends State<CalenderWeekTablet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApi();
+    cubit.callApiTuan();
   }
 
   @override

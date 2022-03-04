@@ -22,7 +22,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApi();
+    cubit.callApiMonth();
   }
 
   @override
