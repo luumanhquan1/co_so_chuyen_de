@@ -37,8 +37,8 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
 
   void callAPi() {
     initTimeRange();
-    dataVBDen(startDate: '2021-11-01', endDate: '2021-11-30');
-    dataVBDi(startDate: '2021-11-01', endDate: '2021-11-30');
+    dataVBDen(startDate: startDate, endDate: endDate);
+    dataVBDi(startDate:startDate, endDate:endDate);
   }
 
   final QLVBRepository _qLVBRepo = Get.find();
