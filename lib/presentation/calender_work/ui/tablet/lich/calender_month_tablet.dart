@@ -22,7 +22,7 @@ class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApi();
+    cubit.callApiMonth();
   }
 
   @override

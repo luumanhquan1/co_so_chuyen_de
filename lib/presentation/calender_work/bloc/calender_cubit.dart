@@ -56,6 +56,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DateTime endDate = DateTime.now();
 
   void callApi() {
+    callApiNgay(startDate, endDate);
+  }
+
+  void callApiNgay(DateTime startDate, DateTime endDate) {
     getListLichHop(
       DateFrom: startDate.formatApi,
       DateTo: endDate.formatApi,
@@ -72,6 +76,42 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       endDate: endDate.formatApi,
       type: 0,
     );
+  }
+
+  void callApiTuan() {
+    final day = DateTime.now();
+
+    final startDate = day.subtract(Duration(days: day.weekday - 1));
+    final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+    callApiNgay(startDate, endDate);
+  }
+
+  void callApiMonth() {
+    DateTime times = DateTime.now();
+    final firstDayThisMonth = DateTime(times.year, times.month, times.day);
+    final firstDayNextMonth = DateTime(
+      firstDayThisMonth.year,
+      firstDayThisMonth.month,
+      firstDayThisMonth.day,
+    );
+    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
+    int b = times.millisecondsSinceEpoch;
+    b = b + (c * 24 * 60 * 60 * 1000);
+    times = DateTime.fromMillisecondsSinceEpoch(b);
+
+    final startMonth = DateTime.fromMillisecondsSinceEpoch(
+      DateTime.utc(
+        times.year,
+        times.month,
+      ).millisecondsSinceEpoch,
+    );
+    final endMonth = DateTime.fromMillisecondsSinceEpoch(
+      DateTime.utc(
+        times.year,
+        times.month + 1,
+      ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
+    );
+    callApiNgay(startMonth, endMonth);
   }
 
   Future<void> getListLichHop({
@@ -218,7 +258,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }) async {
     showLoading();
     final LichLamViecRightRequest request = LichLamViecRightRequest(
-      dateStart: startDate,
+      dateFrom: startDate,
       dateTo: endDate,
       type: type,
     );

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/danh_sach_lich_hop_tablet/danh_sach_lich_hop_ngay_tablet.dart';
@@ -18,6 +17,7 @@ import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'danh_sach_lich_hop/danh_sach_lich_hop.dart';
 import 'lich_hop_danh_sach_ngay_tuan_thang/lich_hop_theo_danh_sach_ngay.dart';
 import 'lich_hop_theo_ngay_tuan_thang/lich_hop_theo_ngay.dart';
@@ -64,19 +64,18 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         return TableCalendarWidget(
           isCalendar: false,
           type: type,
-          onChange: (DateTime start,DateTime end) {
-             log("$start      $end");
+          onChange: (DateTime start, DateTime end) {
+            log("$start      $end");
           },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-
         );
 
       default:
         return TableCalendarWidget(
           type: type,
-          onChange: (DateTime start,DateTime end) {
-
+          onChange: (DateTime start, DateTime end) {
+           cubit.callApiNgay(start, end);
           },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
