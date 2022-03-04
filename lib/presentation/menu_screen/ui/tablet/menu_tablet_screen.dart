@@ -62,9 +62,8 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ManagerPersonalInformationTablet(
-                          id: menuCubit.id,
-                        ),
+                        builder: (context) =>
+                             ManagerPersonalInformationTablet(id: menuCubit.id,),
                       ),
                     );
                   },
@@ -74,17 +73,9 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                     menuCubit: menuCubit,
                   ),
                 ),
-                SizedBox(
-                  height: 100,
-                  width: 200,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Navigator(
-                        onGenerateRoute: (setting) {
-                          return MaterialPageRoute(
-                              builder: (_) => const TextQuanLyWidget(),);
-                        },
-                      ),),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: TextQuanLyWidget(),
                 ),
                 GridView.count(
                   shrinkWrap: true,
@@ -140,8 +131,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                         ),
                       ),
                       Column(
-                        children:
-                            List.generate(listFeatureAccount.length, (index) {
+                        children: List.generate(listFeatureAccount.length, (index) {
                           final type = listFeatureAccount[index];
                           return GestureDetector(
                             onTap: () {
@@ -169,7 +159,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                     child: SizedBox(
                         width: 100,
                         child: ButtonBottom(
-                          text: S.current.dang_xuat,
+                          text:S.current.dang_xuat,
                           onPressed: () {
                             AppStateCt.of(context).appState.setToken('');
                             HiveLocal.clearData();
