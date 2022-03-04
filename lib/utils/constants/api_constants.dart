@@ -56,7 +56,7 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
       '/vpdt/api/Schedules/dashboard-schedule';
   static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
   static const SEARCH_CAN_BO = '/vpdt/api/CanBo/search';
-  static const CATEGORY_LIST = '/vpdt/api/Category/list';
+  static const CATEGORY_LIST = '/fvpdt/api/Category/list';
   static const SCHEDULE_FIELD = '/vpdt/api/ScheduleField/list';
   static const DANH_SACH_CAN_BO_LICH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
@@ -123,6 +123,10 @@ static const String DANH_SACH_CONG_VIEC = '/qlvb/api/qlnv/cong-viec/danhsachcong
   static const GET_LIST_TAT_CA_CHU_DE =
       '/api/NewsNetViews/search_news';
   static const CHI_TIET_VAN_BAN_DEN = '/qlvb/api/VanBan/ChiTietVanBanDen';
+  static const CREATE_METTING = '/vpdt/api/MeetingSchedule/create-meeting';
+  static const THEM_PHIEN_HOP = '/api/LogAction/add-log';
+  static const THONG_TIN_GUI_NHAN = '/qlvb/api/VanBan/lich-su-gui-nhan/{id}?';
+  static const XEM_KET_LUAN_HOP = '/vpdt/api/ScheduleReport/xem-ket-luan?';
 
 }
 

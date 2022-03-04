@@ -8,12 +8,17 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/chuo
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_lieu_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/bieu_quyet_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cong_tac_chuan_bi_widget_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/ket_luan_hop_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/moi_nguoi_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/phat_bieu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/phan_cong_thu_ky.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_boc_bang_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thu_hoi_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,7 +37,7 @@ class DetailMeetCalenderTablet extends StatefulWidget {
 
 class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
   late DetailMeetCalenderCubit cubit;
-  final _controller = TabController(vsync: AnimatedListState(), length: 6);
+  final _controller = TabController(vsync: AnimatedListState(), length: 7);
 
   @override
   void initState() {
@@ -64,26 +69,63 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                 onTap: () {},
               ),
               QData(
-                  urlImage: ImageAssets.ic_delete_do,
-                  text: S.current.xoa_lich,
-                  onTap: () {}),
-              QData(
-                  urlImage: ImageAssets.icEditBlue,
-                  text: S.current.sua_lich,
-                  onTap: () {}),
-              QData(
-                urlImage: ImageAssets.icThuHoi,
+                urlImage: ImageAssets.ic_delete_do,
                 text: S.current.xoa_lich,
                 onTap: () {},
               ),
               QData(
-                  urlImage: ImageAssets.icPhanCongThuKy,
-                  text: S.current.phan_cong_thu_ky,
-                  onTap: () {}),
+                urlImage: ImageAssets.icEditBlue,
+                text: S.current.sua_lich,
+                onTap: () {},
+              ),
               QData(
-                  urlImage: ImageAssets.icTaoBocBang,
-                  text: S.current.phan_cong_thu_ky,
-                  onTap: () {}),
+                urlImage: ImageAssets.icThuHoi,
+                text: S.current.thu_hoi,
+                onTap: () {
+                  showDiaLogTablet(
+                    context,
+                    maxHeight: 280,
+                    title: S.current.phan_cong_thu_ky,
+                    child: const ThuHoiLichWidget(),
+                    isBottomShow: false,
+                    funcBtnOk: () {
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+              QData(
+                urlImage: ImageAssets.icPhanCongThuKy,
+                text: S.current.phan_cong_thu_ky,
+                onTap: () {
+                  showDiaLogTablet(
+                    context,
+                    maxHeight: 280,
+                    title: S.current.phan_cong_thu_ky,
+                    child: const PhanCongThuKyWidget(),
+                    isBottomShow: false,
+                    funcBtnOk: () {
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+              QData(
+                urlImage: ImageAssets.icTaoBocBang,
+                text: S.current.tao_boc_bang_cuoc_hop,
+                onTap: () {
+                  showDiaLogTablet(
+                    context,
+                    maxHeight: 280,
+                    title: S.current.tao_boc_bang_cuoc_hop,
+                    child: const TaoBocBangWidget(),
+                    isBottomShow: false,
+                    funcBtnOk: () {
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ],
@@ -98,7 +140,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
             color: backgroundColorApp,
           ),
           child: DefaultTabController(
-            length: 6,
+            length: 7,
             child: NestedScrollView(
               headerSliverBuilder: (
                 BuildContext context,
@@ -224,17 +266,30 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                         ),
                       ),
                     ),
+                    Tab(
+                      child: Text(
+                        S.current.ket_luan_hop,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 content: TabBarView(
                   controller: _controller,
-                  children: const [
-                    CongTacChuanBiWidgetTablet(),
-                    ChuongTrinhHopWidget(),
-                    MoiNguoiThamGiaWidgetTablet(),
-                    TaiLieuWidget(),
-                    PhatBieuWidgetTablet(),
-                    BieuQuyetWidgetTablet(),
+                  children: [
+                    const CongTacChuanBiWidgetTablet(),
+                    const ChuongTrinhHopWidget(),
+                    const MoiNguoiThamGiaWidgetTablet(),
+                    const TaiLieuWidget(),
+                    const PhatBieuWidgetTablet(),
+                    const BieuQuyetWidgetTablet(),
+                    KetLuanHopWidgetTablet(
+                      id: widget.id,
+                      cubit: cubit,
+                    ),
                   ],
                 ),
               ),

@@ -1,21 +1,21 @@
-import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'dart:io';
+
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
-import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_lich_hop_resquest.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_bieu_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/chi_tiet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thiet_bi_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_phong_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_bieu_quyet_lich_hop_response.dart';
@@ -28,10 +28,10 @@ import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
-import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
@@ -53,12 +53,12 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
-import 'dart:io';
 
 class HopRepositoryImpl implements HopRepository {
   final HopServices _hopServices;
@@ -320,5 +320,23 @@ class HopRepositoryImpl implements HopRepository {
       () => _hopServices.getListThietBiPhongHop(lichHopId),
       (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
+  }
+
+  @override
+
+  Future<Result<ChiTietLichHopModel>> taoLichHop(
+      TaoLichHopRequest taoLichHopRequest) {
+    return runCatchingAsync<ChiTietLichHopResponse, ChiTietLichHopModel>(
+            () => _hopServices.createMetting(taoLichHopRequest),
+            (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
+  }
+
+  @override
+  Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id) {
+    return runCatchingAsync<XemKetLuanHopDataResponse, XemKetLuanHopModel>(
+          () => _hopServices.getXemKetLuanHop(id),
+          (res) => res.data!.toModel(),
+    );
+
   }
 }
