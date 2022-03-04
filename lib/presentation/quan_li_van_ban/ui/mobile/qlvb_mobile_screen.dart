@@ -257,12 +257,13 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                     ],
                   ),
                 ),
+
                 // const OutgoingDocumentScreen(),
               ],
             ),
           ),
           TableCalendarWidget(
-            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+            onChange: (DateTime startDate, DateTime endDate) {},
             onChangeRange:
                 (DateTime? start, DateTime? end, DateTime? focusedDay) {
               qlvbCubit.startDate =
@@ -279,6 +280,7 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                 endDate: qlvbCubit.endDate,
               );
             },
+
           ),
         ],
       ),

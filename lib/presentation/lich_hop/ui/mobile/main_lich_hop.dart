@@ -246,23 +246,26 @@ class _MainLichHopState extends State<MainLichHop> {
                         if (state.type == Type_Choose_Option_Day.MONTH) {
                           return TableCalendarWidget(
                             isCalendar: false,
-                            onDaySelected:
-                                (DateTime selectedDay, DateTime focusedDay) {
-                              cubit.startDate = selectedDay;
-                              cubit.endDate = selectedDay;
+                            onChange:
+                                (DateTime startDate, DateTime endDate) {
+                              cubit.startDate = startDate;
+                              cubit.endDate = endDate;
                               cubit.getDashboard();
 
                               cubit.postDanhSachLichHop();
                             },
-                            onChangeRange: (DateTime? start, DateTime? end,
-                                DateTime? focusedDay) {},
+                            onChangeRange: (
+                              DateTime? start,
+                              DateTime? end,
+                              DateTime? focusedDay,
+                            ) {},
                           );
                         }
                         return TableCalendarWidget(
-                          onDaySelected:
-                              (DateTime selectedDay, DateTime focusedDay) {
-                            cubit.startDate = selectedDay;
-                            cubit.endDate = selectedDay;
+                          onChange:
+                              (DateTime startDate, DateTime endDate) {
+                            cubit.startDate = startDate;
+                            cubit.endDate = endDate;
 
                             cubit.postDanhSachLichHop();
                             cubit.getDashboard();

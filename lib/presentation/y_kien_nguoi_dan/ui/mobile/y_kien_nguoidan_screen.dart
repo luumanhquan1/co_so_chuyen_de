@@ -264,7 +264,9 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
             ),
           ),
           TableCalendarWidget(
-            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {}, onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {  },
+            onChangeRange:
+                (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+            onChange: (DateTime startDate, DateTime end) {},
           ),
         ],
       ),
