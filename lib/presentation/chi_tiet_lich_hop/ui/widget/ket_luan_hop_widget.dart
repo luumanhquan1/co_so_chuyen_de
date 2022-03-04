@@ -17,15 +17,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'item_menu_ket_thuc.dart';
 
 class KetLuanHopWidget extends StatefulWidget {
-  const KetLuanHopWidget({Key? key}) : super(key: key);
+  final DetailMeetCalenderCubit cubit;
+  final String id;
+
+
+  KetLuanHopWidget({Key? key, required this.cubit,required this.id}) : super(key: key);
 
   @override
   _KetLuanHopWidgetState createState() => _KetLuanHopWidgetState();
 }
 
 class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
-  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
   bool isShow = false;
+
+  @override
+  void initState() {
+    widget.cubit.getXemKetLuanHop(widget.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,7 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StreamBuilder<KetLuanHopModel>(
-                  stream: cubit.ketLuanHopStream,
+                  stream: widget.cubit.ketLuanHopStream,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final data = snapshot.data;
@@ -68,7 +77,7 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                   },
                 ),
                 StreamBuilder<DanhSachNhiemVuLichHopModel>(
-                  stream: cubit.streamDanhSachNhiemVuLichHop,
+                  stream: widget.cubit.streamDanhSachNhiemVuLichHop,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final data = snapshot.data;

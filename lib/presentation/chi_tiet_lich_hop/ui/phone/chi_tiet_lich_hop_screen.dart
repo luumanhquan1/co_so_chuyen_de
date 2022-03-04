@@ -72,9 +72,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
               QData(
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               QData(
                 urlImage: ImageAssets.icThuHoi,
@@ -192,7 +190,10 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 const TaiLieuWidget(),
                 const PhatBieuWidget(),
                 const BieuQuyetWidget(),
-                const KetLuanHopWidget(),
+                KetLuanHopWidget(
+                  cubit: cubit,
+                  id: widget.id,
+                ),
               ],
             ),
           ),
@@ -232,7 +233,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                       fontWeight: FontWeight.w400,
                       fontSize: 14.0.textScale(),
                     ),
-
                   ),
                   SizedBox(
                     height: 14.0.textScale(),

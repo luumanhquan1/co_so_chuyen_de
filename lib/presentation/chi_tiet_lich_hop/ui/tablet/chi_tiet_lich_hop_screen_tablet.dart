@@ -286,7 +286,10 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     const TaiLieuWidget(),
                     const PhatBieuWidgetTablet(),
                     const BieuQuyetWidgetTablet(),
-                    KetLuanHopWidgetTablet(id: widget.id),
+                    KetLuanHopWidgetTablet(
+                      id: widget.id,
+                      cubit: cubit,
+                    ),
                   ],
                 ),
               ),

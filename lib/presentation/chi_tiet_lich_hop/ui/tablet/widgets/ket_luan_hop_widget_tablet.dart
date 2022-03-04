@@ -15,8 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class KetLuanHopWidgetTablet extends StatefulWidget {
+  final DetailMeetCalenderCubit cubit;
   final String id;
-  const KetLuanHopWidgetTablet({Key? key, required this.id}) : super(key: key);
+
+  const KetLuanHopWidgetTablet(
+      {Key? key, required this.id, required this.cubit})
+      : super(key: key);
 
   @override
   _KetLuanHopWidgetTabletState createState() => _KetLuanHopWidgetTabletState();
@@ -24,12 +28,10 @@ class KetLuanHopWidgetTablet extends StatefulWidget {
 
 class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
   bool isShow = false;
-  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
 
   @override
   void initState() {
-    cubit = DetailMeetCalenderCubit();
-    cubit.getXemKetLuanHop(widget.id);
+    widget.cubit.getXemKetLuanHop(widget.id);
     super.initState();
   }
 
