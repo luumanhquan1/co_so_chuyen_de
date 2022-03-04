@@ -58,14 +58,14 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
        case TabBarType.home:
-        return screenDevice(
-          mobileScreen: HomeScreenMobile(
-            key: keyHomeMobile,
-          ),
-          tabletScreen: HomeScreenTablet(
-            key: keyHomeTablet,
-          ),
-        );
+        // return screenDevice(
+        //   mobileScreen: HomeScreenMobile(
+        //     key: keyHomeMobile,
+        //   ),
+        //   tabletScreen: HomeScreenTablet(
+        //     key: keyHomeTablet,
+        //   ),
+        //);
       case TabBarType.report:
         return screenDevice(
           mobileScreen: const DanhSachBaoCaoDangGirdviewMobile(),
@@ -87,7 +87,11 @@ extension TabbarEnum on TabBarType {
       case TabBarType.menu:
         return screenDevice(
           mobileScreen: const MenuScreen(),
-          tabletScreen: const MenuTabletScreen(),
+          tabletScreen: Navigator(
+            onGenerateRoute: (setting){
+              return MaterialPageRoute(builder: (_) => const MenuTabletScreen(),);
+            },
+          )
         );
     }
   }
