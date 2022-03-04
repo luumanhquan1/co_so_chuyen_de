@@ -25,7 +25,7 @@ class NhiemVuCaNhanTablet extends StatefulWidget {
 }
 
 class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
-  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
+  ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
 
   @override
   Widget build(BuildContext context) {

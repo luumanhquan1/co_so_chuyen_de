@@ -29,7 +29,7 @@ class YKNDScreenTablet extends StatefulWidget {
 class _YKNDScreenTabletState extends State<YKNDScreenTablet>
     with SingleTickerProviderStateMixin {
   YKienNguoiDanCubitt cubit = YKienNguoiDanCubitt();
-  ChooseTimeCubit chooseTimeScreen=ChooseTimeCubit();
+  ChooseTimeCubit chooseTimeScreen = ChooseTimeCubit();
 
   @override
   void initState() {

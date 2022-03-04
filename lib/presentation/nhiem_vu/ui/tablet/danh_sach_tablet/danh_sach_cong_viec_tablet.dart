@@ -20,8 +20,7 @@ class DanhSachCongViecTablet extends StatefulWidget {
 
 class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
   NhiemVuCubit cubit = NhiemVuCubit();
-  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
-
+  ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +37,10 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
               today: DateTime.now(),
             ),
           ),
-
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.only(top:28.0),
+                margin: const EdgeInsets.only(top: 28.0),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0, left: 30.0),
                   child: ListView.builder(
@@ -56,7 +54,7 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                              const ChiTietNhiemVuTabletScreen(),
+                                  const ChiTietNhiemVuTabletScreen(),
                             ),
                           );
                         },

@@ -16,12 +16,10 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/title_child
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
-
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/row_column_tablet.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
-
 import 'package:flutter/material.dart';
 
 class TaoLichHopMobileTabletScreen extends StatefulWidget {
@@ -33,6 +31,7 @@ class TaoLichHopMobileTabletScreen extends StatefulWidget {
 
 class _TaoLichHopScreenState extends State<TaoLichHopMobileTabletScreen> {
   late TaoLichHopCubit _cubit;
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -192,7 +191,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileTabletScreen> {
             ),
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(right: 28,bottom: 30),
+                padding: const EdgeInsets.only(right: 28, bottom: 30),
                 child: ButtonSaveWidget(
                   leftTxt: S.current.huy,
                   rightTxt: S.current.tao_lich_hop,
