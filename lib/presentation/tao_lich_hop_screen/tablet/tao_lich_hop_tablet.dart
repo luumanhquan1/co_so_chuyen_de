@@ -144,7 +144,8 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileTabletScreen> {
               ),
               spaceH32,
               TitleChildWidget(
-                title: S.current.thong_tin_lien_he,
+                title: S.current.dau_moi_lien_he,
+                sizeTitle: 18,
                 child: Column(
                   children: [
                     TextFieldStyle(
@@ -163,7 +164,15 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileTabletScreen> {
           ),
           widgetRight: Column(
             children: [
-
+              ExpandGroup(
+                  child: Column(
+                children: [
+                  const ThanhPhanThamGiaExpandWidget(),
+                  ChuongTrinhHopWidget(
+                    cubit: _cubit,
+                  ),
+                ],
+              ))
             ],
           ),
           titleLeft: S.current.thong_tin_lich,
