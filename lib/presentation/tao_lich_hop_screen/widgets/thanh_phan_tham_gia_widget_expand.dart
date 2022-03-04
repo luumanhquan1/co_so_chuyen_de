@@ -24,7 +24,7 @@ class ThanhPhanThamGiaExpandWidget extends StatelessWidget {
               color: Colors.transparent,
               child: Text(
                 S.current.thanh_phan_tham_gia,
-                style: textNormalCustom(color: titleColumn, fontSize: 16),
+                style: textNormalCustom(color: titleColumn, fontSize: 16.0.textScale()),
               ),
             ),
           ),
@@ -33,6 +33,9 @@ class ThanhPhanThamGiaExpandWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 0.0.textScale(space: 10),
+          ),
           ThanhPhanThamGiaWidget(
             isPhuongThucNhan: true,
             onChange: (value) {},

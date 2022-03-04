@@ -7,12 +7,14 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_c
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/fake_data_tao_lich.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/container_toggle_widget.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/tai_lieu_cuoc_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/text_field_style.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/thanh_phan_tham_gia_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/title_child_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
@@ -64,28 +66,30 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
                   ),
                   spaceH5,
                   StreamBuilder<List<LoaiSelectModel>>(
-                      stream: _cubit.loaiLich,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? <LoaiSelectModel>[];
-                        return SelectOnlyExpand(
-                          urlIcon: ImageAssets.icCalendar,
-                          title: S.current.loai_hop,
-                          value: _cubit.selectLoaiHop?.name ?? '',
-                          listSelect: data.map((e) => e.name).toList(),
-                        );
-                      }),
+                    stream: _cubit.loaiLich,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <LoaiSelectModel>[];
+                      return SelectOnlyExpand(
+                        urlIcon: ImageAssets.icCalendar,
+                        title: S.current.loai_hop,
+                        value: _cubit.selectLoaiHop?.name ?? '',
+                        listSelect: data.map((e) => e.name).toList(),
+                      );
+                    },
+                  ),
                   spaceH5,
                   StreamBuilder<List<LoaiSelectModel>>(
-                      stream: _cubit.linhVuc,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? <LoaiSelectModel>[];
-                        return SelectOnlyExpand(
-                          urlIcon: ImageAssets.icWork,
-                          title: S.current.linh_vuc,
-                          value: _cubit.selectLinhVuc?.name ?? '',
-                          listSelect: data.map((e) => e.name).toList(),
-                        );
-                      }),
+                    stream: _cubit.linhVuc,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <LoaiSelectModel>[];
+                      return SelectOnlyExpand(
+                        urlIcon: ImageAssets.icWork,
+                        title: S.current.linh_vuc,
+                        value: _cubit.selectLinhVuc?.name ?? '',
+                        listSelect: data.map((e) => e.name).toList(),
+                      );
+                    },
+                  ),
                   StartEndDateWidget(
                     icMargin: false,
                     onEndDateTimeChanged: (DateTime value) {},
@@ -114,16 +118,17 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
                   ),
                   spaceH5,
                   StreamBuilder<List<NguoiChutriModel>>(
-                      stream: _cubit.nguoiChuTri,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? <NguoiChutriModel>[];
-                        return SelectOnlyExpand(
-                          urlIcon: ImageAssets.icPeople,
-                          title: S.current.nguoi_chu_tri,
-                          value: _cubit.selectNguoiChuTri?.title() ?? '',
-                          listSelect: data.map((e) => e.title()).toList(),
-                        );
-                      }),
+                    stream: _cubit.nguoiChuTri,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <NguoiChutriModel>[];
+                      return SelectOnlyExpand(
+                        urlIcon: ImageAssets.icPeople,
+                        title: S.current.nguoi_chu_tri,
+                        value: _cubit.selectNguoiChuTri?.title() ?? '',
+                        listSelect: data.map((e) => e.title()).toList(),
+                      );
+                    },
+                  ),
                   spaceH24,
                   TextFieldStyle(
                     urlIcon: ImageAssets.icDocument,
@@ -155,14 +160,29 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
             ),
             spaceH15,
             ExpandGroup(
-                child: Column(
-              children: [
-                const ThanhPhanThamGiaExpandWidget(),
-                ChuongTrinhHopWidget(
-                  cubit: _cubit,
-                ),
-              ],
-            ))
+              child: Column(
+                children: [
+                  const ThanhPhanThamGiaExpandWidget(),
+                  ChuongTrinhHopWidget(
+                    cubit: _cubit,
+                  ),
+                  TaiLieuCuocHopWidget(
+                    cubit: _cubit,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: DoubleButtonBottom(
+                title1: S.current.dong,
+                title2: S.current.luu,
+                onPressed1: () {
+                  Navigator.pop(context);
+                },
+                onPressed2: () {},
+              ),
+            )
           ],
         ),
       ),
