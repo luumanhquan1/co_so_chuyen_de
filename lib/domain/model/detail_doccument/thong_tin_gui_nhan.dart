@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 
 class DataThongTinGuiNhanModel {
   String? messages;
@@ -72,7 +73,7 @@ class ThongTinGuiNhanModel {
       ),
       DocumentDetailRow(
         S.current.trang_thai,
-        trangThai ?? '',
+        trangThai?.split(' ').join('_').toUpperCase().vietNameseParse() ?? '',
         TypeDocumentDetailRow.status,
       ),
     ];

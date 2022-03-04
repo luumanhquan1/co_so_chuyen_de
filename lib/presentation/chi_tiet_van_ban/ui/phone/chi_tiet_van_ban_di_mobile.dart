@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expan
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_thu_hoi_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_tra_lai_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_van_ban_lien_thong_widget_expand.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/thong_tin_gui_nhan_widget_expand.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/thong_tin_gui_nhan_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/widget_head_chi_tiet_van_ban.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/y_kien_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -38,7 +38,7 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WidgetHeadChiTietVanBan(cubit: cubit),
-              ThongTinGuiNhanExpandWidget(cubit: cubit, thongTinGuiNhanModel: [],),
+              ThongTinGuiNhanExpandWidgetMobile(cubit: cubit, thongTinGuiNhanModel: [],),
               YKienXuLyExpandWidget(cubit: cubit,),
               LichSuCapNhatTinhHinhXuLyExpandWidget(cubit: cubit),
               LichSuTraLaiExpandWidget(cubit: cubit),
