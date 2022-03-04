@@ -60,6 +60,8 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                   child: GestureDetector(
                     onTap: () {
                       baseChooseTimeCubit.ontoDay();
+                      print('----------------------startDate------------------- ${baseChooseTimeCubit.startDate}');
+                      print('----------------------endDate------------------- ${baseChooseTimeCubit.endDate}');
                     },
                     child: Text(
                       S.current.today,
@@ -88,6 +90,8 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                               baseChooseTimeCubit.checkToOptionBackDay(
                                 baseChooseTimeCubit.changeOption,
                               );
+                              print('----------------------startDate------------------- ${baseChooseTimeCubit.startDate}');
+                              print('----------------------endDate------------------- ${baseChooseTimeCubit.endDate}');
                             },
                             child: SvgPicture.asset(ImageAssets.ic_prev_box),
                           ),
@@ -114,6 +118,8 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                               baseChooseTimeCubit.checkToOption(
                                 baseChooseTimeCubit.changeOption,
                               );
+                              print('----------------------startDate------------------- ${baseChooseTimeCubit.startDate}');
+                              print('----------------------endDate------------------- ${baseChooseTimeCubit.endDate}');
                             },
                             child: SvgPicture.asset(ImageAssets.ic_next_box),
                           ),

@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/quan_ly_van_ban/van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/bloc/incoming_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/incoming_document/ui/tablet/incoming_document_tablet.dart';
@@ -25,6 +26,7 @@ class QLVBScreenTablet extends StatefulWidget {
 class _QLVBScreenTabletState extends State<QLVBScreenTablet>
     with SingleTickerProviderStateMixin {
   QLVBCCubit qlvbCubit = QLVBCCubit();
+  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
   OutgoingDocumentCubit outgoingDocumentCubit = OutgoingDocumentCubit();
   IncomingDocumentCubit cubitIncoming = IncomingDocumentCubit();
   late TabController controller;
@@ -60,6 +62,16 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                   color: Colors.white,
                   child: ChooseTimeScreen(
                     today: DateTime.now(),
+                    onSubmit: (value){
+                      qlvbCubit.dataVBDen(
+                        startDate: chooseTimeCubit.startDate,
+                        endDate: chooseTimeCubit.endDate,
+                      );
+                      qlvbCubit.dataVBDi(
+                        startDate: chooseTimeCubit.startDate,
+                        endDate: chooseTimeCubit.endDate,
+                      );
+                    },
                   ),
                 ),
               ),

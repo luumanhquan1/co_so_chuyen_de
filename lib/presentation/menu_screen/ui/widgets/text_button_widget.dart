@@ -16,7 +16,7 @@ class TextQuanLyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context,rootNavigator: true).push(
+        Navigator.of(context).push(
           PageRouteBuilder(
             pageBuilder: (_, __, ___) => screenDevice(
               mobileScreen: const WidgetManageScreen(),
@@ -24,16 +24,6 @@ class TextQuanLyWidget extends StatelessWidget {
             ),
           ),
         );
-
-        // Navigator.push(
-        //   context,
-        //   PageRouteBuilder(
-        //     pageBuilder: (_, __, ___) => screenDevice(
-        //       mobileScreen: const WidgetManageScreen(),
-        //       tabletScreen: const WidgetManageScreenTablet(),
-        //     ),
-        //   ),
-        // );
       },
       child: Text(
         S.current.quan_ly_widget,
