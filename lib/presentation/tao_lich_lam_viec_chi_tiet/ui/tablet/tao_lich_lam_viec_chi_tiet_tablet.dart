@@ -53,31 +53,29 @@ class _TaoLichLamViecChiTietTabletState
   Widget build(BuildContext context) {
     return BlocListener<TaoLichLamViecCubit, TaoLichLamViecState>(
       bloc: taoLichLamViecCubit,
-        listener: (context, state) {
-          if (state is CreateSuccess) {
-            showDiaLogOneButton(
-              context,
-              showTablet: true,
-              funcBtnRight: ()async {
-
-              },
-              icon: SvgPicture.asset(
-                ImageAssets.icTaoLichLamViecThanhCong,
-              ),
-              textContent: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
-              btnRightTxt: S.current.dong,
-            ).then((value) {
-              if (value == null) {
-                Navigator.pop(context, true);
-              }
-              if (value) {
-                Navigator.pop(context, true);
-              } else {
-                Navigator.pop(context, false);
-              }
-            });
-          } else {}
-        },
+      listener: (context, state) {
+        if (state is CreateSuccess) {
+          showDiaLogOneButton(
+            context,
+            showTablet: true,
+            funcBtnRight: () async {},
+            icon: SvgPicture.asset(
+              ImageAssets.icTaoLichLamViecThanhCong,
+            ),
+            textContent: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
+            btnRightTxt: S.current.dong,
+          ).then((value) {
+            if (value == null) {
+              Navigator.pop(context, true);
+            }
+            if (value) {
+              Navigator.pop(context, true);
+            } else {
+              Navigator.pop(context, false);
+            }
+          });
+        } else {}
+      },
       child: WidgetTaoLichLVInherited(
         taoLichLamViecCubit: taoLichLamViecCubit,
         child: Scaffold(
@@ -120,7 +118,8 @@ class _TaoLichLamViecChiTietTabletState
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          border: Border.all(color: borderColor.withOpacity(0.5)),
+                          border:
+                              Border.all(color: borderColor.withOpacity(0.5)),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: const [
                             BoxShadow(
@@ -164,10 +163,12 @@ class _TaoLichLamViecChiTietTabletState
                                     const SearchNameWidget(),
                                     StartEndDateWidget(
                                       onEndDateTimeChanged: (DateTime value) {
-                                        taoLichLamViecCubit.listeningEndDataTime(value);
+                                        taoLichLamViecCubit
+                                            .listeningEndDataTime(value);
                                       },
                                       onStartDateTimeChanged: (DateTime value) {
-                                        taoLichLamViecCubit.listeningStartDataTime(value);
+                                        taoLichLamViecCubit
+                                            .listeningStartDataTime(value);
                                       },
                                     ),
                                     const NhacLaiWidget(),
@@ -195,7 +196,7 @@ class _TaoLichLamViecChiTietTabletState
                               child: Container(
                                 padding: const EdgeInsets.only(left: 14),
                                 child: Column(
-                                  children:  [
+                                  children: [
                                     ThanhPhanThamGiaTLWidget(
                                       taoLichLamViecCubit: taoLichLamViecCubit,
                                     ),
@@ -227,7 +228,7 @@ class _TaoLichLamViecChiTietTabletState
                               title: S.current.tao_lich_lam_viec,
                               background: textDefault,
                               textColor: Colors.white,
-                              onTap: () async{
+                              onTap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   await taoLichLamViecCubit.taoLichLamViec(
                                     title: tieuDeController.value.text,

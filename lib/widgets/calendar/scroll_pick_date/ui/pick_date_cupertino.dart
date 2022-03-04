@@ -107,8 +107,10 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      widget.startOfEnd
-                          .getText(context: context, title: widget.title2),
+                      Expanded(
+                        child: widget.startOfEnd
+                            .getText(context: context, title: widget.title2),
+                      ),
                       if (expandController!.value == 0)
                         const Icon(
                           Icons.keyboard_arrow_down_outlined,
