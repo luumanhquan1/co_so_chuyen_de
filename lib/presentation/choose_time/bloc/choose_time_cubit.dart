@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_state.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:intl/intl.dart';
@@ -72,7 +73,7 @@ class ChooseTimeCubit extends BaseCubit<ChooseTimeState> {
     times = DateTime.fromMillisecondsSinceEpoch(b);
     final String a = DateFormat(DateFormat.WEEKDAY).format(times); // Tues
     final weekDay = times.weekday == 7 ? 0 : times.weekday;
-    if (a == 'Sunday') {
+    if (a == S.current.sun_day) {
       textDisplayTime = getDateToString(
         DateTime.fromMillisecondsSinceEpoch(
           getDate(
@@ -115,7 +116,7 @@ class ChooseTimeCubit extends BaseCubit<ChooseTimeState> {
     times = DateTime.fromMillisecondsSinceEpoch(b);
     final String a = DateFormat(DateFormat.WEEKDAY).format(times); // Tues
     final weekDay = times.weekday == 7 ? 0 : times.weekday;
-    if (a == 'Sunday') {
+    if (a == S.current.sun_day) {
       textDisplayTime = getDateToString(
         DateTime.fromMillisecondsSinceEpoch(
           getDate(
