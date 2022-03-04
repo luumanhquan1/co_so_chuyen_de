@@ -263,9 +263,24 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
             ),
           ),
           TableCalendarWidget(
-            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+            onChange: (DateTime startDate, DateTime endDate) {},
             onChangeRange:
-                (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+                (DateTime? start, DateTime? end, DateTime? focusedDay) {
+              qlvbCubit.startDate =
+                  start?.formatApi ?? DateTime.now().formatApi;
+              qlvbCubit.endDate = end?.formatApi ?? qlvbCubit.startDate;
+            },
+            onSearch: (value) {
+              qlvbCubit.dataVBDen(
+                startDate: qlvbCubit.startDate,
+                endDate: qlvbCubit.endDate,
+              );
+              qlvbCubit.dataVBDi(
+                startDate: qlvbCubit.startDate,
+                endDate: qlvbCubit.endDate,
+              );
+            },
+
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
@@ -62,15 +64,20 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         return TableCalendarWidget(
           isCalendar: false,
           type: type,
-          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChange: (DateTime start,DateTime end) {
+             log("$start      $end");
+          },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+
         );
 
       default:
         return TableCalendarWidget(
           type: type,
-          onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
+          onChange: (DateTime start,DateTime end) {
+
+          },
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
         );
