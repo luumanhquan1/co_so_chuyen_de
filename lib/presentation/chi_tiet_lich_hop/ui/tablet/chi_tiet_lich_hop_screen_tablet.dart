@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_ho
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_lieu_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/y_kien_cuoc_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/bieu_quyet_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cong_tac_chuan_bi_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/ket_luan_hop_widget_tablet.dart';
@@ -37,7 +38,7 @@ class DetailMeetCalenderTablet extends StatefulWidget {
 
 class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
   late DetailMeetCalenderCubit cubit;
-  final _controller = TabController(vsync: AnimatedListState(), length: 7);
+  final _controller = TabController(vsync: AnimatedListState(), length: 8);
 
   @override
   void initState() {
@@ -140,7 +141,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
             color: backgroundColorApp,
           ),
           child: DefaultTabController(
-            length: 7,
+            length: 8,
             child: NestedScrollView(
               headerSliverBuilder: (
                 BuildContext context,
@@ -275,6 +276,15 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                         ),
                       ),
                     ),
+                    Tab(
+                      child: Text(
+                        S.current.y_kien_cuop_hop,
+                        style: titleText(
+                          color: bgButtonDropDown,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 content: TabBarView(
@@ -288,6 +298,9 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     const BieuQuyetWidgetTablet(),
                     KetLuanHopWidgetTablet(
                       id: widget.id,
+                      cubit: cubit,
+                    ),
+                    YKienCuocHopWidget(
                       cubit: cubit,
                     ),
                   ],
