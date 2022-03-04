@@ -49,6 +49,9 @@ class RowColunmTabletWidget extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(
+            width: 28,
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -76,7 +76,7 @@ class ImageAssets {
   static const String icHuyLich = '$baseImg/ic_huy_lich.svg';
   static const String icCalling = '$baseImg/ic_calling.svg';
   static const String icError = '$baseImg/ic_error.svg';
-
+  static const String icDocumentBlue = '$baseImg/ic_docunment_blue.svg';
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';
@@ -263,6 +263,15 @@ class ImageAssets {
 
   static const String icMic = '$baseImg/Voice2.svg';
   static const String icBieuQuyet = '$baseImg/IcBieuQuyet.svg';
+  static const String icPlus2 = '$baseImg/icPlus.svg';
+  static const String icDocument2 = '$baseImg/Document.svg';
+  static const String icMessage = '$baseImg/icMessage.svg';
+  static const String Group2 = '$baseImg/Group2.svg';
+
+
+
+
+
 
 
 

@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dar
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/moi_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/nguoi_chu_tri_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/tao_lich_hop_resquest.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/them_y_kien_hop_request.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
@@ -29,6 +30,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 
 mixin HopRepository {
@@ -132,4 +134,9 @@ mixin HopRepository {
 
   Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
       String lichHopId);
+
+
+  Future<Result<ChiTietLichHopModel>> taoLichHop(TaoLichHopRequest taoLichHopRequest);
+
+  Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id);
 }
