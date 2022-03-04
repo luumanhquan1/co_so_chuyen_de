@@ -4,22 +4,22 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expan
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_thu_hoi_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_tra_lai_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_van_ban_lien_thong_widget_expand.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/thong_tin_gui_nhan_widget_expand.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/thong_tin_gui_nhan_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/widget_head_chi_tiet_van_ban.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/y_kien_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 
-class ChiTietVanBanMobile extends StatefulWidget {
+class ChiTietVanBanDiMobile extends StatefulWidget {
   final String id;
-  const ChiTietVanBanMobile({Key? key,this.id = ''}) : super(key: key);
+  const ChiTietVanBanDiMobile({Key? key,this.id = ''}) : super(key: key);
 
   @override
-  _ChiTietVanBanMobileState createState() => _ChiTietVanBanMobileState();
+  _ChiTietVanBanDiMobileState createState() => _ChiTietVanBanDiMobileState();
 }
 
-class _ChiTietVanBanMobileState extends State<ChiTietVanBanMobile> {
+class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
   DetailDocumentCubit cubit=DetailDocumentCubit();
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _ChiTietVanBanMobileState extends State<ChiTietVanBanMobile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WidgetHeadChiTietVanBan(cubit: cubit),
-              ThongTinGuiNhanExpandWidget(cubit: cubit),
+              ThongTinGuiNhanExpandWidgetMobile(cubit: cubit, thongTinGuiNhanModel: [],),
               YKienXuLyExpandWidget(cubit: cubit,),
               LichSuCapNhatTinhHinhXuLyExpandWidget(cubit: cubit),
               LichSuTraLaiExpandWidget(cubit: cubit),
