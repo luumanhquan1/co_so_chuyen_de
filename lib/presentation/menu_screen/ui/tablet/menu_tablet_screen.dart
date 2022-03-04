@@ -62,8 +62,9 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                             ManagerPersonalInformationTablet(id: menuCubit.id,),
+                        builder: (context) => ManagerPersonalInformationTablet(
+                          id: menuCubit.id,
+                        ),
                       ),
                     );
                   },
@@ -87,8 +88,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                   children: List.generate(listFeature.length, (index) {
                     final type = listFeature[index];
                     return containerType(type, () {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context, rootNavigator: true).push(
                         PageRouteBuilder(
                           pageBuilder: (_, __, ___) => type.getScreen(),
                         ),
@@ -131,12 +131,12 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                         ),
                       ),
                       Column(
-                        children: List.generate(listFeatureAccount.length, (index) {
+                        children:
+                            List.generate(listFeatureAccount.length, (index) {
                           final type = listFeatureAccount[index];
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
+                              Navigator.of(context, rootNavigator: true).push(
                                 PageRouteBuilder(
                                   pageBuilder: (_, __, ___) => type.getScreen(),
                                 ),
@@ -159,7 +159,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                     child: SizedBox(
                         width: 100,
                         child: ButtonBottom(
-                          text:S.current.dang_xuat,
+                          text: S.current.dang_xuat,
                           onPressed: () {
                             AppStateCt.of(context).appState.setToken('');
                             HiveLocal.clearData();
