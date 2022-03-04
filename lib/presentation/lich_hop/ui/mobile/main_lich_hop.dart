@@ -254,8 +254,15 @@ class _MainLichHopState extends State<MainLichHop> {
 
                               cubit.postDanhSachLichHop();
                             },
-                            onChangeRange: (DateTime? start, DateTime? end,
-                                DateTime? focusedDay) {},
+                            onChangeRange: (
+                              DateTime? start,
+                              DateTime? end,
+                              DateTime? focusedDay,
+                            ) {},
+                            onMonthSelected:
+                                (DateTime startDate, DateTime endDate) {},
+                            onWeekSelected:
+                                (DateTime startDate, DateTime endDate) {},
                           );
                         }
                         return TableCalendarWidget(
@@ -269,6 +276,10 @@ class _MainLichHopState extends State<MainLichHop> {
                           },
                           onChangeRange: (DateTime? start, DateTime? end,
                               DateTime? focusedDay) {},
+                          onMonthSelected:
+                              (DateTime startDate, DateTime endDate) {},
+                          onWeekSelected:
+                              (DateTime startDate, DateTime endDate) {},
                         );
                       }
                       return Container();

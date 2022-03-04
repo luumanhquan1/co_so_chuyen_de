@@ -107,6 +107,13 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   builder: (context, state) {
                     return TableCandarTablet(
                       type: state.type,
+                      onMonthSelected:
+                          (DateTime startDate, DateTime endDate) {},
+                      onDaySelected:
+                          (DateTime selectedDay, DateTime focusedDay) {},
+                      onChangeRange: (DateTime? start, DateTime? end,
+                          DateTime? focusedDay) {},
+                      onWeekSelected: (DateTime startDate, DateTime endDate) {},
                     );
                   },
                 ),

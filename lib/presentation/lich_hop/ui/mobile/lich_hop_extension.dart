@@ -65,6 +65,8 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
           onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+          onMonthSelected: (DateTime startDate, DateTime endDate) {},
+          onWeekSelected: (DateTime startDate, DateTime endDate) {},
         );
 
       default:
@@ -73,6 +75,10 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
           onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+          onMonthSelected: (DateTime startDate, DateTime endDate) {
+            print('${startDate} ........  ${endDate}');
+          },
+          onWeekSelected: (DateTime startDate, DateTime endDate) {},
         );
     }
   }

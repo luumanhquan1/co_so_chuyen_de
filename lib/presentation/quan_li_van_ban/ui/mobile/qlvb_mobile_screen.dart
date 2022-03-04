@@ -266,6 +266,8 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
             onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
             onChangeRange:
                 (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+            onWeekSelected: (DateTime startDate, DateTime endDate) {},
+            onMonthSelected: (DateTime startDate, DateTime endDate) {},
           ),
         ],
       ),

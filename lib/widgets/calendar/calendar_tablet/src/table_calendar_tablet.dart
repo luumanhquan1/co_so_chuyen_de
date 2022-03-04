@@ -7,8 +7,20 @@ import 'package:flutter/material.dart';
 
 class TableCandarTablet extends StatefulWidget {
   final Type_Choose_Option_Day type;
+  final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
+      onChangeRange;
+  final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
+  final Function(DateTime startDate, DateTime endDate) onWeekSelected;
+  final Function(DateTime startDate, DateTime endDate) onMonthSelected;
 
-  const TableCandarTablet({Key? key, required this.type}) : super(key: key);
+  const TableCandarTablet({
+    Key? key,
+    required this.type,
+    required this.onChangeRange,
+    required this.onDaySelected,
+    required this.onWeekSelected,
+    required this.onMonthSelected,
+  }) : super(key: key);
 
   @override
   State<TableCandarTablet> createState() => _TableCandarTabletState();
@@ -50,6 +62,30 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
       cubitCalendar.moveTimeSubject.add(cubitCalendar.selectedDay);
+      widget.onDaySelected(
+        cubitCalendar.moveTimeSubject.value,
+        focusedDay,
+      );
+      widget.onWeekSelected(
+        selectedDay.subtract(Duration(days: selectedDay.weekday - 1)),
+        selectedDay.add(
+          Duration(
+            days: DateTime.daysPerWeek - selectedDay.weekday,
+          ),
+        ),
+      );
+      widget.onMonthSelected(
+        DateTime(
+          cubitCalendar.moveTimeSubject.value.year,
+          cubitCalendar.moveTimeSubject.value.month,
+          1,
+        ),
+        DateTime(
+          cubitCalendar.moveTimeSubject.value.year,
+          cubitCalendar.moveTimeSubject.value.month + 1,
+          0,
+        ),
+      );
       _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
@@ -59,6 +95,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
       cubitCalendar.focusedDay = focusedDay;
       cubitCalendar.rangeStart = start;
       cubitCalendar.rangeEnd = end;
+      widget.onChangeRange(start, end, focusedDay);
       _rangeSelectionMode = RangeSelectionMode.toggledOn;
     });
 

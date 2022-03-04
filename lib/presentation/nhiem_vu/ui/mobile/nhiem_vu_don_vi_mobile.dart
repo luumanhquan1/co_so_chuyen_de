@@ -193,6 +193,8 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
           onDaySelected: (DateTime selectedDay, DateTime focusedDay) {},
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+          onMonthSelected: (DateTime startDate, DateTime endDate) {},
+          onWeekSelected: (DateTime startDate, DateTime endDate) {},
         ),
       ],
     );

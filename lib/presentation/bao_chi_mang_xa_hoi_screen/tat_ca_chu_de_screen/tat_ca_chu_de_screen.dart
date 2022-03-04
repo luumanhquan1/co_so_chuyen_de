@@ -192,6 +192,8 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
               },
               onChangeRange:
                   (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+              onMonthSelected: (DateTime startDate, DateTime endDate) {},
+              onWeekSelected: (DateTime startDate, DateTime endDate) {},
             ),
           ],
         ),
