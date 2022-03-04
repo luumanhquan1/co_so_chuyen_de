@@ -16,7 +16,11 @@ class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
-  final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
+  final Function(DateTime startDate, DateTime end) onChange;
+
+  // final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
+  // final Function(DateTime startDate, DateTime endDate) onWeekSelected;
+  // final Function(DateTime startDate, DateTime endDate) onMonthSelected;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
 
@@ -25,8 +29,11 @@ class TableCalendarWidget extends StatefulWidget {
     this.isCalendar = true,
     this.onSearch,
     required this.onChangeRange,
+    required this.onChange,
     this.type = Type_Choose_Option_Day.DAY,
-    required this.onDaySelected,
+    // required this.onDaySelected,
+    // required this.onWeekSelected,
+    // required this.onMonthSelected,
   }) : super(key: key);
 
   @override
@@ -34,8 +41,6 @@ class TableCalendarWidget extends StatefulWidget {
 }
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
-  DateTime? _startTime;
-  DateTime? _endTime;
   TableCalendarCubit cubit = TableCalendarCubit();
 
   List<Event> _getEventsfromDay(DateTime date) {
@@ -56,11 +61,63 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   CalendarFormat _calendarFormatWeek = CalendarFormat.week;
   CalendarFormat _calendarFormatMonth = CalendarFormat.month;
   final TextEditingController _eventController = TextEditingController();
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
+      .toggledOff; // Can be toggled on/off by longpressing a date
 
   @override
   void dispose() {
     _eventController.dispose();
     super.dispose();
+  }
+
+  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+    setState(() {
+      cubit.focusedDay = focusedDay;
+      cubit.rangeStart = start;
+      cubit.rangeEnd = end;
+      widget.onChangeRange(start, end, focusedDay);
+      _rangeSelectionMode = RangeSelectionMode.toggledOn;
+    });
+  }
+
+  void _onDaySelect(DateTime date, DateTime events) {
+    if (!isSameDay(_selectedDay, date)) {
+      setState(() {
+        _selectedDay = date;
+        _focusedDay.value = _selectedDay;
+        cubit.rangeStart = null; // Important to clean those
+        cubit.rangeEnd = null;
+        _rangeSelectionMode = RangeSelectionMode.toggledOff;
+      });
+    }
+    cubit.selectedDay = date;
+    cubit.moveTimeSubject.add(cubit.selectedDay);
+
+    if (widget.type == Type_Choose_Option_Day.DAY) {
+      widget.onChange(date, date);
+    } else if (widget.type == Type_Choose_Option_Day.WEEK) {
+      widget.onChange(
+        date.subtract(Duration(days: date.weekday - 1)),
+        date.add(
+          Duration(
+            days: DateTime.daysPerWeek - date.weekday,
+          ),
+        ),
+      );
+    } else {
+      widget.onChange(
+        DateTime(
+          cubit.moveTimeSubject.value.year,
+          cubit.moveTimeSubject.value.month,
+          1,
+        ),
+        DateTime(
+          cubit.moveTimeSubject.value.year,
+          cubit.moveTimeSubject.value.month + 1,
+          0,
+        ),
+      );
+    }
   }
 
   @override
@@ -161,27 +218,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                     TableCalendar(
                       eventLoader: _getEventsfromDay,
                       startingDayOfWeek: StartingDayOfWeek.monday,
-                      onDaySelected: (date, events) {
-                        if (!isSameDay(_selectedDay, date)) {
-                          setState(() {
-                            _selectedDay = date;
-                            _focusedDay.value = _selectedDay;
-                          });
-                        }
-                        cubit.selectedDay = date;
-                        cubit.moveTimeSubject.add(cubit.selectedDay);
-                        widget.onDaySelected(
-                          cubit.moveTimeSubject.value,
-                          events,
-                        );
-                      },
-                      rangeSelectionMode: RangeSelectionMode.toggledOff,
-                      rangeStartDay: _startTime,
-                      rangeEndDay: _endTime,
-                      onRangeSelected: (startTime, endTime, focusedDay) {
-                        print('$startTime ....... $endTime');
-                        widget.onChangeRange(startTime, endTime, focusedDay);
-                      },
+                      onDaySelected: _onDaySelect,
+                      rangeSelectionMode: _rangeSelectionMode,
+                      rangeStartDay: cubit.rangeStart,
+                      rangeEndDay: cubit.rangeEnd,
+                      onRangeSelected: _onRangeSelected,
                       daysOfWeekVisible: true,
                       onFormatChanged: (CalendarFormat _format) {
                         setState(() {

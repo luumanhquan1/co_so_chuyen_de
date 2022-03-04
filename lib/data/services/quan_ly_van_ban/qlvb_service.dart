@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
 import 'package:ccvc_mobile/data/request/quan_ly_van_ban/danh_sach_vb_di_request.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_van_ban/chi_tiet_van_ban_den_response.dart';
+import 'package:ccvc_mobile/data/response/chi_tiet_van_ban/thong_tin_gui_nhan_response.dart';
 import 'package:ccvc_mobile/data/response/chi_tiet_van_ban/chi_tiet_van_ban_di_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/danh_sach_van_ban/ds_vbden_response.dart';
 import 'package:ccvc_mobile/data/response/quan_ly_van_ban/danh_sach_van_ban/ds_vbdi_response.dart';
@@ -57,8 +58,11 @@ abstract class QuanLyVanBanClient {
 
   @GET(ApiConstants.CHI_TIET_VAN_BAN_DEN)
   Future<ChiTietVanBanDenDataResponse> getDataChiTietVanBanDen(
-    @Query('processId') String processId,
-    @Query('taskId') String taskId,
-    @Query('IsYKien') bool isYKien,
-  );
+      @Query('processId') String processId,
+      @Query('taskId') String taskId,
+      @Query('IsYKien') bool isYKien,
+      );
+  @GET(ApiConstants.THONG_TIN_GUI_NHAN)
+  Future<ThongTinGuiNhanDataResponse> getDataThongTinGuiNhan(
+      @Path('id') String id);
 }
