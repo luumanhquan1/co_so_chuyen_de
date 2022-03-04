@@ -114,6 +114,42 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     );
   }
 
+  Future<void> getLichSuVanBanLichSuCapNhat(
+      String processId, String type) async {
+    final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
+    result.when(
+      success: (res) {},
+      error: (error) {},
+    );
+  }
+
+  Future<void> getLichSuVanBanLichSuTraLai(
+      String processId, String type) async {
+    final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
+    result.when(
+      success: (res) {},
+      error: (error) {},
+    );
+  }
+
+  Future<void> getLichSuVanBanLichSuThuHoi(
+      String processId, String type) async {
+    final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
+    result.when(
+      success: (res) {},
+      error: (error) {},
+    );
+  }
+
+  Future<void> getLichSuVanBanLichSuLienThong(
+      String processId, String type) async {
+    final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
+    result.when(
+      success: (res) {},
+      error: (error) {},
+    );
+  }
+
   DetailDocumentModel detailDocumentModel = DetailDocumentModel(
       soVanBan: 'M123',
       soDen: 'M123',
