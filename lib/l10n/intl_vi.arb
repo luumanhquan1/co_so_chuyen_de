@@ -558,6 +558,20 @@
   "ngay_bieu_quyet" : "Ngày biểu quyết",
   "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết",
   "nguoi_phat_bieu" : "Nguười phát biểu",
+  "chua_gui_duyet" : "Chưa gửi duyệt",
+  "chua_dat" : "Chưa đạt",
+  "tinh_trang" : "Tình trạng",
+  "noi_dung_theo_doi" : "Nội dung theo dõi",
+  "tinh_hinh_thuc_hien_noi_bo" : "Tình hình thực hiện nội bộ",
+  "loai_nv" : "Loại nhiệm vụ",
+  "ngay_van_ban": "Ngày văn bản",
+  "nhiem_vu_ubnd": "Nhiệm vụ uỷ ban nhân dân",
+  "nhiem_vu_cpvpcp": "Nhiệm vụ chính phủ văn phòng chính phủ",
+  "nhiem_vu_dv": "Nhiệm vụ nv",
+  "don_vi_theo_doi": "Đơn vị theo dõi",
+  "nguoi_theo_doi": "Người theo dõi",
+  "nguoi_giao_nhiem_vu" : "Người giao nhiệm vụ",
+  "can_bo_boc_bang" : "Chọn cán bộ sử dụng bắc băng",
   "thong_tin_phong" : "Thông tin phòng",
   "cho_duyet" : "Chờ duyệt",
   "da_duyet" : "Đã duyệt",
@@ -571,8 +585,6 @@
   "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
   "quay_lai" : "Quay lại",
   "nhan_de_biet" : "Nhận để biết"
-
-
 }
 
 

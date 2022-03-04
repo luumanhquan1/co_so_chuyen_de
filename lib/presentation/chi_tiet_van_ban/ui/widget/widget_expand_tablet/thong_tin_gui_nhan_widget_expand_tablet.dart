@@ -57,7 +57,10 @@ class _ThongTinGuiNhanWidgetExpandTabletState
             ),
           )
               .toList()
-              : [const NodataWidget()],
+              : [ const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: NodataWidget(),
+              )],
         )
       ),
     );
