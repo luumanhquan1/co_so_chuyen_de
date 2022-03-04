@@ -15,6 +15,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/cong_tac_chuan_bi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_nhiem_vu_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_phat_bieu_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/handing_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
@@ -41,6 +42,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   int huyDuyet = 4;
   List<String> dataThuhoi = ['thu hoi', 'thu hồi'];
   List<String> dataBocBang = ['boc bang', 'boc bang2'];
+  List<String> dataThemYkien = ['cuộc họp 1', 'cuộc họp 2'];
 
   //
 
@@ -167,7 +169,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> getDanhSachPhatBieuLichHop(String lichHopId) async {
     final result = await hopRp.getDanhSachPhatBieuLichHop(lichHopId);
-    result.when(success: (res) {}, error: (err) {});
+    result.when(
+        success: (res) {
+          List<PhatBieuModel> phatBieu = res.toList();
+          phatbieu.sink.add(phatBieu);
+        },
+        error: (err) {});
   }
 
   Future<void> getDanhSachBieuQuyetLichHop(String id) async {
@@ -211,16 +218,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           _getListThietBiPhongHop.sink.add(res);
         },
         error: (err) {});
-  }
-
-  ListPerSon fakeDataListPerson() {
-    ListPerSon fakeDataListPersona = ListPerSon(
-      tongSoNguoi: 8,
-      soNguoiDongY: 3,
-      soNguoiChoXacNhan: 5,
-      listPerson: listFake,
-    );
-    return fakeDataListPersona;
   }
 
   Future<void> getTongPhienHop() async {
@@ -373,11 +370,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   List<ThanhPhanThamGiaModel> dataThanhPhanThamGia = [];
 
-  HistoryProcessPage? process;
-
-  List<HistoryDetailDocument> get listHistory =>
-      process == null ? [] : process!.listDetailDocumentHistory;
-
   List<String> dataDropdown = ['1', '2', '3'];
 
   BehaviorSubject<List<PhatBieuModel>> phatbieu =
@@ -398,15 +390,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   void getValueStatus(int value) {
     if (value == choDuyet) {
-      phatbieu.sink.add(listPhatBieu);
     } else if (value == daDuyet) {
-      phatbieu.sink.add(listPhatBieu);
     } else if (value == huyDuyet) {
-      phatbieu.sink.add(listPhatBieu);
-    } else {
-      phatbieu.sink.add(listPhatBieu);
-    }
-    phatbieu.sink.add(listPhatBieu);
+    } else {}
     typeStatus.sink.add(value);
     print(value);
   }
@@ -493,6 +479,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<DanhSachNhiemVuLichHopModel> get streamDanhSachNhiemVuLichHop =>
       danhSachNhiemVuLichHopSubject.stream;
+
+  HandingCommentLichHop handingCommentLichHop = HandingCommentLichHop.emty();
 
   void dispose() {}
 }
