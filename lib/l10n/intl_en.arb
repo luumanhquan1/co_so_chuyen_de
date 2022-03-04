@@ -541,7 +541,6 @@
   "tim_kiem_can_bo" : "Tìm kiếm cán bộ",
   "chon_tat_ca" : "Chọn tất cả",
   "them_tai_lieu_cuoc_hop" : "Thêm tài liệu cuộc họp",
-  "chuong_trinh_hop" : "Chương trình họp",
   "dang_ky_phat_bieu" : "Đăng ký phát biểu",
   "danh_sach_phat_bieu" : "Danh sách phát biểu",
   "huy_duyet" : "Huỷ duyệt",
@@ -558,6 +557,7 @@
   "ngay_bieu_quyet" : "Ngày biểu quyết",
   "cac_lua_chon_bieu_quyet" : "Các lựa chọn biểu quyết",
   "nguoi_phat_bieu" : "Nguười phát biểu",
+  "dau_moi_lien_he" : "Đầu mối liên hệ",
   "tao_moi_nhiem_vu" : "Tạo mới nhiệm vụ",
   "gui_mail_ket_luan" : "Gửi mail kết luận",
   "chua_gui_duyet" : "Chưa gửi duyệt",
@@ -574,7 +574,6 @@
   "nguoi_theo_doi": "Người theo dõi",
   "nguoi_giao_nhiem_vu" : "Người giao nhiệm vụ",
   "can_bo_boc_bang" : "Chọn cán bộ sử dụng bắc băng",
-  "sua_that_bai": "Sửa thất bại",
   "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
   "quay_lai" : "Quay lại",
   "nhan_de_biet" : "Nhận để biết"
