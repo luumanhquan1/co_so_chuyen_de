@@ -56,7 +56,7 @@ class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
                     height: 60,
                   ),
                   StreamBuilder<KetLuanHopModel>(
-                    stream: cubit.ketLuanHopStream,
+                    stream: widget.cubit.ketLuanHopStream,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         final data = snapshot.data;
@@ -91,7 +91,7 @@ class _KetLuanHopWidgetTabletState extends State<KetLuanHopWidgetTablet> {
                     ),
                   ),
                   StreamBuilder<DanhSachNhiemVuLichHopModel>(
-                    stream: cubit.streamDanhSachNhiemVuLichHop,
+                    stream: widget.cubit.streamDanhSachNhiemVuLichHop,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         final data = snapshot.data;
