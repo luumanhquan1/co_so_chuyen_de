@@ -246,10 +246,10 @@ class _MainLichHopState extends State<MainLichHop> {
                         if (state.type == Type_Choose_Option_Day.MONTH) {
                           return TableCalendarWidget(
                             isCalendar: false,
-                            onDaySelected:
-                                (DateTime selectedDay, DateTime focusedDay) {
-                              cubit.startDate = selectedDay;
-                              cubit.endDate = selectedDay;
+                            onChange:
+                                (DateTime startDate, DateTime endDate) {
+                              cubit.startDate = startDate;
+                              cubit.endDate = endDate;
                               cubit.getDashboard();
 
                               cubit.postDanhSachLichHop();
@@ -259,27 +259,19 @@ class _MainLichHopState extends State<MainLichHop> {
                               DateTime? end,
                               DateTime? focusedDay,
                             ) {},
-                            onMonthSelected:
-                                (DateTime startDate, DateTime endDate) {},
-                            onWeekSelected:
-                                (DateTime startDate, DateTime endDate) {},
                           );
                         }
                         return TableCalendarWidget(
-                          onDaySelected:
-                              (DateTime selectedDay, DateTime focusedDay) {
-                            cubit.startDate = selectedDay;
-                            cubit.endDate = selectedDay;
+                          onChange:
+                              (DateTime startDate, DateTime endDate) {
+                            cubit.startDate = startDate;
+                            cubit.endDate = endDate;
 
                             cubit.postDanhSachLichHop();
                             cubit.getDashboard();
                           },
                           onChangeRange: (DateTime? start, DateTime? end,
                               DateTime? focusedDay) {},
-                          onMonthSelected:
-                              (DateTime startDate, DateTime endDate) {},
-                          onWeekSelected:
-                              (DateTime startDate, DateTime endDate) {},
                         );
                       }
                       return Container();

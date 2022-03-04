@@ -9,17 +9,13 @@ class TableCandarTablet extends StatefulWidget {
   final Type_Choose_Option_Day type;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
-  final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
-  final Function(DateTime startDate, DateTime endDate) onWeekSelected;
-  final Function(DateTime startDate, DateTime endDate) onMonthSelected;
+  final Function(DateTime startDate, DateTime endDate) onChange;
 
   const TableCandarTablet({
     Key? key,
     required this.type,
     required this.onChangeRange,
-    required this.onDaySelected,
-    required this.onWeekSelected,
-    required this.onMonthSelected,
+    required this.onChange,
   }) : super(key: key);
 
   @override
@@ -62,30 +58,32 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
       cubitCalendar.moveTimeSubject.add(cubitCalendar.selectedDay);
-      widget.onDaySelected(
-        cubitCalendar.moveTimeSubject.value,
-        focusedDay,
-      );
-      widget.onWeekSelected(
-        selectedDay.subtract(Duration(days: selectedDay.weekday - 1)),
-        selectedDay.add(
-          Duration(
-            days: DateTime.daysPerWeek - selectedDay.weekday,
+
+      if (widget.type == Type_Choose_Option_Day.DAY) {
+        widget.onChange(selectedDay, selectedDay);
+      } else if (widget.type == Type_Choose_Option_Day.WEEK) {
+        widget.onChange(
+          selectedDay.subtract(Duration(days: selectedDay.weekday - 1)),
+          selectedDay.add(
+            Duration(
+              days: DateTime.daysPerWeek - selectedDay.weekday,
+            ),
           ),
-        ),
-      );
-      widget.onMonthSelected(
-        DateTime(
-          cubitCalendar.moveTimeSubject.value.year,
-          cubitCalendar.moveTimeSubject.value.month,
-          1,
-        ),
-        DateTime(
-          cubitCalendar.moveTimeSubject.value.year,
-          cubitCalendar.moveTimeSubject.value.month + 1,
-          0,
-        ),
-      );
+        );
+      } else {
+        widget.onChange(
+          DateTime(
+            cubitCalendar.moveTimeSubject.value.year,
+            cubitCalendar.moveTimeSubject.value.month,
+            1,
+          ),
+          DateTime(
+            cubitCalendar.moveTimeSubject.value.year,
+            cubitCalendar.moveTimeSubject.value.month + 1,
+            0,
+          ),
+        );
+      }
       _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }

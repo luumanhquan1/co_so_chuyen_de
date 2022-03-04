@@ -16,9 +16,11 @@ class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
-  final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
-  final Function(DateTime startDate, DateTime endDate) onWeekSelected;
-  final Function(DateTime startDate, DateTime endDate) onMonthSelected;
+  final Function(DateTime startDate, DateTime end) onChange;
+
+  // final Function(DateTime selectedDay, DateTime focusedDay) onDaySelected;
+  // final Function(DateTime startDate, DateTime endDate) onWeekSelected;
+  // final Function(DateTime startDate, DateTime endDate) onMonthSelected;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
 
@@ -27,10 +29,11 @@ class TableCalendarWidget extends StatefulWidget {
     this.isCalendar = true,
     this.onSearch,
     required this.onChangeRange,
+    required this.onChange,
     this.type = Type_Choose_Option_Day.DAY,
-    required this.onDaySelected,
-    required this.onWeekSelected,
-    required this.onMonthSelected,
+    // required this.onDaySelected,
+    // required this.onWeekSelected,
+    // required this.onMonthSelected,
   }) : super(key: key);
 
   @override
@@ -174,30 +177,32 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         }
                         cubit.selectedDay = date;
                         cubit.moveTimeSubject.add(cubit.selectedDay);
-                        widget.onDaySelected(
-                          cubit.moveTimeSubject.value,
-                          events,
-                        );
-                        widget.onWeekSelected(
-                          date.subtract(Duration(days: date.weekday - 1)),
-                          date.add(
-                            Duration(
-                              days: DateTime.daysPerWeek - date.weekday,
+
+                        if (widget.type == Type_Choose_Option_Day.DAY) {
+                          widget.onChange(date, date);
+                        } else if (widget.type == Type_Choose_Option_Day.WEEK) {
+                          widget.onChange(
+                            date.subtract(Duration(days: date.weekday - 1)),
+                            date.add(
+                              Duration(
+                                days: DateTime.daysPerWeek - date.weekday,
+                              ),
                             ),
-                          ),
-                        );
-                        widget.onMonthSelected(
-                          DateTime(
-                            cubit.moveTimeSubject.value.year,
-                            cubit.moveTimeSubject.value.month,
-                            1,
-                          ),
-                          DateTime(
-                            cubit.moveTimeSubject.value.year,
-                            cubit.moveTimeSubject.value.month + 1,
-                            0,
-                          ),
-                        );
+                          );
+                        } else {
+                          widget.onChange(
+                            DateTime(
+                              cubit.moveTimeSubject.value.year,
+                              cubit.moveTimeSubject.value.month,
+                              1,
+                            ),
+                            DateTime(
+                              cubit.moveTimeSubject.value.year,
+                              cubit.moveTimeSubject.value.month + 1,
+                              0,
+                            ),
+                          );
+                        }
                       },
                       rangeSelectionMode: RangeSelectionMode.toggledOff,
                       rangeStartDay: _startTime,
