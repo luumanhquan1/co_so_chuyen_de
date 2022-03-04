@@ -232,6 +232,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                       fontWeight: FontWeight.w400,
                       fontSize: 14.0.textScale(),
                     ),
+
                   ),
                   SizedBox(
                     height: 14.0.textScale(),
