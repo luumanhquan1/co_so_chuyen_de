@@ -53,8 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
       return const MainTabBarView();
     } else {
       return screenDevice(
-        mobileScreen: const DetailMeetCalenderScreen(id: '',),
-        tabletScreen: const DetailMeetCalenderTablet(id: '',),
+        mobileScreen: const LoginScreen(),
+        tabletScreen: const LoginTabletScreen(),
       );
     }
   }
