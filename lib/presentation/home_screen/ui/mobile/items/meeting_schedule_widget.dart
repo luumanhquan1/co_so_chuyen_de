@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
-
 import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
@@ -115,6 +111,14 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
                             ? sideBtnSelected.withOpacity(0.5)
                             : choXuLyColor,
                         backGroundStatus: true,
+                        status2: result
+                                .trangThaiTheoUserEnum(_lichHopCubit.userId)
+                                ?.getText() ??
+                            '',
+                        colorStatus2: result
+                            .trangThaiTheoUserEnum(_lichHopCubit.userId)
+                            ?.getColor(),
+                        backGroundStatus2: true,
                         title: result.title,
                         listData: [
                           InfoData(

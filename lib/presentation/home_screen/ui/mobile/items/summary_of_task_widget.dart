@@ -110,11 +110,15 @@ class _SummaryOfTaskWidgetState extends State<SummaryOfTaskWidget> {
                   data.length,
                   (index) {
                     final result = data[index];
-                    return NhiemVuWidget(
-                      title: result.tongHopNhiemVuModel.getText(),
-                      urlIcon: result.tongHopNhiemVuModel.urlImg(),
-                      value: result.value.toString(),
-                      type: result.tongHopNhiemVuModel,
+                    return GestureDetector(
+                      onTap: (){
+                      },
+                      child: NhiemVuWidget(
+                        title: result.tongHopNhiemVuModel.getText(),
+                        urlIcon: result.tongHopNhiemVuModel.urlImg(),
+                        value: result.value.toString(),
+                        type: result.tongHopNhiemVuModel,
+                      ),
                     );
                   },
                 ),
