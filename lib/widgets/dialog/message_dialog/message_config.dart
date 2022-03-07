@@ -39,9 +39,9 @@ class MessageConfig {
   static String _urlIcon(MessState messState, String urlIcon) {
     switch (messState) {
       case MessState.error:
-        return ImageAssets.icSucces;
-      case MessState.success:
         return ImageAssets.icError;
+      case MessState.success:
+        return ImageAssets.icSucces;
       case MessState.customIcon:
         return urlIcon;
     }
