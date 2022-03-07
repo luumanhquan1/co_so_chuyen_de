@@ -130,9 +130,6 @@ class _ChiTietNhiemVuTabletScreenState
                                 );
                               },
                             ),
-                            YKienNhiemVuWidget(
-                              cubit:cubit ,
-                            ),
 
                             StreamBuilder<List<LichSuCapNhatTHTHModel>>(
                               stream: cubit.lichSuCapNhatTHTHModelStream,
@@ -189,8 +186,21 @@ class _ChiTietNhiemVuTabletScreenState
               ),
             ),
             Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 14),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                      border: Border.all(color: toDayColor),
+                    ),
+                    margin: const EdgeInsets.only(left: 14),
+                    child:     YKienNhiemVuWidget(
+                      cubit:cubit ,
+                    ),
+                  ),
+                ],
               ),
             )
           ],
