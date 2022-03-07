@@ -162,6 +162,8 @@ class Items {
         timeTo: timeTo ?? '',
         isHopTrucTuyen: bitHopTrucTuyen ?? false,
         id: id ?? '',
+        trangThaiTheoUser: trangThaiTheoUser ?? 0,
+        nguoiChuTriId: canBoChuTriInfo?.canBoId ?? '',
       );
 }
 
