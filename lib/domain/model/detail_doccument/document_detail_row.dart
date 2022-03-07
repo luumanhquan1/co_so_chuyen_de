@@ -8,6 +8,8 @@ import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
+import 'lich_su_van_ban_model.dart';
+
 const QUA_HAN = 'QUA_HAN';
 const CHUA_THUC_HIEN = 'CHUA_THUC_HIEN';
 const DANG_THUC_HIEN = 'DANG_THUC_HIEN';
@@ -50,14 +52,16 @@ extension TypeDataDocument on TypeDocumentDetailRow {
         );
       case TypeDocumentDetailRow.fileActacks:
         {
-          final data = row.value as File;
-          return Text(
-            data.path,
+          final data = row.value as List<FileDinhKems>;
+          return Column(
+            children: data.map((e) => Text(
+            e.ten??'',
             style: textNormalCustom(
-              color: choXuLyColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 14.0.textScale(),
+            color: choXuLyColor,
+            fontWeight: FontWeight.w400,
+            fontSize: 14.0.textScale(),
             ),
+          ),).toList(),
           );
         }
       case TypeDocumentDetailRow.status:

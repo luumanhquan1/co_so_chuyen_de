@@ -73,7 +73,7 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   child:
                                       LichSuCapNhatTinhHinhWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded2,
+                                    expanded: cubit.expanded2, lichSuVanBanCapNhatModel: [],
                                   ),
                                 ),
                                 Padding(
