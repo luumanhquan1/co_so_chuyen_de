@@ -18,7 +18,7 @@ import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
-import 'package:ccvc_mobile/widgets/dialog/show_dialog_one_button.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,15 +55,17 @@ class _TaoLichLamViecChiTietTabletState
       bloc: taoLichLamViecCubit,
       listener: (context, state) {
         if (state is CreateSuccess) {
-          showDiaLogOneButton(
+          showDiaLog(
             context,
             showTablet: true,
-            funcBtnRight: () async {},
-            icon: SvgPicture.asset(
-              ImageAssets.icTaoLichLamViecThanhCong,
-            ),
+            isOneButton:false,
             textContent: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
+            btnLeftTxt: S.current.dong,
+            funcBtnRight: () {
+            },
+            title: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
             btnRightTxt: S.current.dong,
+            icon: SvgPicture.asset(ImageAssets.icTaoLichLamViecThanhCong),
           ).then((value) {
             if (value == null) {
               Navigator.pop(context, true);
