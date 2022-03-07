@@ -1,10 +1,19 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lich_lam_viec_cubit.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/item_select_model.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/title_widget.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MauMacDinhWidget extends StatefulWidget {
-  const MauMacDinhWidget({Key? key}) : super(key: key);
+  final TaoLichLamViecCubit taoLichLamViecCubit;
+
+  const MauMacDinhWidget({Key? key, required this.taoLichLamViecCubit})
+      : super(key: key);
 
   @override
   _MauMacDinhWidgetState createState() => _MauMacDinhWidgetState();
@@ -13,23 +22,68 @@ class MauMacDinhWidget extends StatefulWidget {
 class _MauMacDinhWidgetState extends State<MauMacDinhWidget> {
   @override
   Widget build(BuildContext context) {
-    return TitleWidget(
-      isColor: true,
-      color: Colors.red,
-      title: 'Màu mặc định',
-      child: Column(
-        children: listColorDefault
-            .map((e) => Row(
-                  children: [
-                    Container(
-                      height: 12,
-                      width: 12,
-                      color: e.color,
-                    )
-                  ],
-                ),)
-            .toList(),
-      ),
-    );
+    return StreamBuilder<List<ItemSelectModel>>(
+        stream: widget.taoLichLamViecCubit.listColorDefaultStream,
+        builder: (context, snapshot) {
+          final index =
+              snapshot.data?.indexWhere((element) => element.isSelect == true) ?? 0;
+
+          return TitleWidget(
+            isColor: true,
+            isLine: true,
+            color: listColorDefault[index].color,
+            title: listColorDefault[index].text,
+            child: Column(
+              children: listColorDefault
+                  .map(
+                    (e) => GestureDetector(
+                      onTap: () {
+                        widget.taoLichLamViecCubit.selectColor(e);
+                      },
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 12.0.textScale(),
+                                      width: 12.0.textScale(),
+                                      decoration: BoxDecoration(
+                                        color: e.color,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20.5.textScale(),
+                                    ),
+                                    Text(
+                                      e.text,
+                                      style: textNormal(titleColor, 16),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                                if (e.isSelect)
+                                  SvgPicture.asset(ImageAssets.icCheck)
+                                else
+                                  Container(),
+                              ],
+                            ),
+
+
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          );
+        });
   }
 }

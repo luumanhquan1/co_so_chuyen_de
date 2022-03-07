@@ -135,8 +135,12 @@ class _TaoLichLamViecChiTietScreenState
                             },
                           ),
                           const NhacLaiWidget(),
-                          MauMacDinhWidget(),
-
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          MauMacDinhWidget(
+                            taoLichLamViecCubit: taoLichLamViecCubit,
+                          ),
                           NguoiChuTriWidget(
                             taoLichLamViecCubit: taoLichLamViecCubit,
                           ),
