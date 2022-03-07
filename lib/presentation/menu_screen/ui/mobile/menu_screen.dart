@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
@@ -64,8 +63,9 @@ class _MenuScreenState extends State<MenuScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                   ManagerPersonalInformation(id: menuCubit.id,),
+                              builder: (context) => ManagerPersonalInformation(
+                                id: menuCubit.id,
+                              ),
                             ),
                           );
                         },
@@ -108,7 +108,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: Column(
                     children: [
                       Column(
-                        children: List.generate(listFeatureAccount.length, (index) {
+                        children:
+                            List.generate(listFeatureAccount.length, (index) {
                           final type = listFeatureAccount[index];
                           return GestureDetector(
                             onTap: () {
