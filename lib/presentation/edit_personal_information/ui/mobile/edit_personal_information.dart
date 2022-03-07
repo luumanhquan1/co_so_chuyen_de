@@ -96,6 +96,8 @@ class _EditPersonalInformationScreen
             child: TextButton(
               onPressed: () {
                 cubit.getInfo(id: widget.id);
+                cubit.huyenSubject.sink.add([]);
+                cubit.xaSubject.sink.add([]);
                 if (keyGroup.currentState!.validator()) {
                 } else {}
               },
