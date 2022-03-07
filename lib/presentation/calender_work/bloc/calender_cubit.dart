@@ -59,15 +59,18 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     callApiNgay(startDate, endDate);
   }
 
-  void callApiNgay(DateTime startDate, DateTime endDate) {
-    getListLichHop(
-      DateFrom: startDate.formatApi,
-      DateTo: endDate.formatApi,
-      UserId: HiveLocal.getDataUser()?.userId ?? '',
-      DonViId:
+  void callApiNgay(
+    DateTime startDate,
+    DateTime endDate,
+  ) {
+    getListLichLV(
+      dateFrom: startDate.formatApi,
+      dateTo: endDate.formatApi,
+      userId: HiveLocal.getDataUser()?.userId ?? '',
+      donViId:
           HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
-      PageIndex: page,
-      PageSize: 10,
+      pageIndex: page,
+      pageSize: 10,
       isLichCuaToi: true,
     );
     dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
@@ -114,22 +117,24 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     callApiNgay(startMonth, endMonth);
   }
 
-  Future<void> getListLichHop({
-    required String DateFrom,
-    required String DateTo,
-    required String UserId,
-    required String DonViId,
-    required int PageIndex,
-    required int PageSize,
+  List<ListLichLVModel> listDSLV = [];
+
+  Future<void> getListLichLV({
+    required String dateFrom,
+    required String dateTo,
+    required String userId,
+    required String donViId,
+    required int pageIndex,
+    required int pageSize,
     required bool isLichCuaToi,
   }) async {
     final DanhSachLichLamViecRequest data = DanhSachLichLamViecRequest(
-      DateFrom: DateFrom,
-      DateTo: DateTo,
-      UserId: UserId,
-      DonViId: DonViId,
-      PageIndex: PageIndex,
-      PageSize: PageSize,
+      DateFrom: dateFrom,
+      DateTo: dateTo,
+      UserId: userId,
+      DonViId: donViId,
+      PageIndex: pageIndex,
+      PageSize: pageSize,
       isLichCuaToi: isLichCuaToi,
     );
     showLoading();
@@ -138,6 +143,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       success: (res) {
         totalPage = res.totalPage ?? 1;
         dataLichLvModel = res;
+        listDSLV.addAll(dataLichLvModel.listLichLVModel ?? []);
+        dataLichLvModel.listLichLVModel = listDSLV;
         listLichSubject.sink.add(dataLichLvModel);
         showContent();
       },
@@ -275,8 +282,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     showContent();
   }
 
-  Future<void> postDanhSachLichlamViec(
-      {required DanhSachLichLamViecRequest body}) async {
+  Future<void> postDanhSachLichlamViec({
+    required DanhSachLichLamViecRequest body,
+  }) async {
     final result = await _lichLamViec.postDanhSachLichLamViec(body);
     result.when(
       success: (value) {

@@ -227,6 +227,7 @@ class _MainLichHopState extends State<MainLichHop> {
                           onTapWeek: () {
                             setState(() {});
                             cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
+                            cubit.postDanhSachLichHop();
                           },
                           onTapmonth: () {
                             setState(() {});
