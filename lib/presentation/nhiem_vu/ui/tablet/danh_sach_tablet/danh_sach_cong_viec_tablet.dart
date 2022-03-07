@@ -50,13 +50,6 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
                     itemBuilder: (context, index) {
                       return NhiemVuCellTablet(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChiTietNhiemVuTabletScreen(),
-                            ),
-                          );
                         },
                         title: listDanhSachCongViec[index].title ?? '',
                         noiDung: listDanhSachCongViec[index].noiDung ?? '',

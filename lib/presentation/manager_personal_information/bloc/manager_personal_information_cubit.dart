@@ -51,6 +51,7 @@ class ManagerPersonalInformationCubit
     result.when(
       success: (res) {
         managerPersonalInformationModel = res;
+        //  numbers.sort((a, b) => a.length.compareTo(b.length));
         if (res.tinhId != null) {
           getDataHuyenXa(
             parentId: res.tinhId ?? '',
@@ -102,9 +103,11 @@ class ManagerPersonalInformationCubit
         if (isXa) {
           xaModel = res;
           xaSubject.sink.add(xaModel);
+          print('${res.length} =============1');
         } else {
           huyenModel = res;
           huyenSubject.sink.add(huyenModel);
+          print('${res.length} ==================2');
         }
       },
       error: (error) {},

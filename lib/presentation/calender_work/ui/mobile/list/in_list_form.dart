@@ -79,8 +79,10 @@ class _InListFormState extends State<InListForm> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChiTietLichLamViecScreen(),
+                              builder: (context) => ChiTietLichLamViecScreen(
+                                  id: _cubit.dataLichLvModel
+                                          .listLichLVModel?[index].id ??
+                                      '',),
                             ),
                           );
                         },

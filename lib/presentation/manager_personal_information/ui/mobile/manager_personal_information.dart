@@ -5,12 +5,12 @@ import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_pe
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/edit_personal_information.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_cubit.dart';
-import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/manager_provider.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_don_vi_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_image_mobile.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_thong_tin.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/mobile/widget/widget_ung_dung_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,10 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ManagerPersonalInformation extends StatefulWidget {
-  final String id ;
-  const ManagerPersonalInformation({Key? key,required this.id}) : super(key: key);
+  final String id;
+
+  const ManagerPersonalInformation({Key? key, required this.id})
+      : super(key: key);
 
   @override
   _ManagerPersonalInformationState createState() =>
@@ -30,7 +32,6 @@ class _ManagerPersonalInformationState
     extends State<ManagerPersonalInformation> {
   final ManagerPersonalInformationCubit _cubit =
       ManagerPersonalInformationCubit();
-
 
   @override
   void initState() {
@@ -75,8 +76,8 @@ class _ManagerPersonalInformationState
           spaceW10
         ],
       ),
-      body: ManagerProvider(
-        managerCubit: _cubit,
+      body: ProviderWidget(
+        cubit: _cubit,
         child: StateStreamLayout(
           textEmpty: S.current.khong_co_du_lieu,
           retry: () {},
