@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+
 class DataLichSuVanBanModel {
   String? messages;
   List<LichSuVanBanModel>? data;
@@ -32,6 +35,38 @@ class LichSuVanBanModel {
     this.fileDinhKems,
     this.hoatDong,
   });
+
+  List<DocumentDetailRow> toListRowLichSuCapNhat() {
+    final List<DocumentDetailRow> list = [
+      DocumentDetailRow(
+        S.current.nguoi_cap_nhat,
+        nguoiTaoXuLy ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+       S.current.dv_cap_nhat,
+        donViTaoXuLy ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.thoi_gian,
+        thoiGianTao ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.noidung,
+        noiDung ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.file_dinh_kem,
+        fileDinhKems ?? [],
+        TypeDocumentDetailRow.fileActacks,
+      ),
+    ];
+
+    return list;
+  }
 }
 
 class FileDinhKems {
