@@ -44,7 +44,6 @@ class LoginCubit extends BaseCubit<LoginState> {
           accessToken: res.accessToken,
         );
         emit(LoginSuccess(token: token.accessToken ?? ''));
-        PrefsService.saveToken(token.accessToken ?? '');
         PrefsService.saveRefreshToken(token.refreshToken ?? '');
         final DataUser dataUser = DataUser(
           userId: res.userId,
@@ -60,15 +59,18 @@ class LoginCubit extends BaseCubit<LoginState> {
       },
     );
     await getPermission();
-    showContent();
   }
   Future<void> getPermission() async {
     final permissionResult = await _loginRepo.getListPermissionApp();
-    permissionResult.when(
-      success: (res) {
-        HiveLocal.savePermission(res);
+   await permissionResult.when(
+      success: (res)  async {
+        await  HiveLocal.savePermission(res);
+        showContent();
       },
-      error: (err) {},
+      error: (err) {
+        showContent();
+      },
     );
+
   }
 }
