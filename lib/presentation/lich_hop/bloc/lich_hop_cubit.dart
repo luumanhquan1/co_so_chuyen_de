@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'dart:developer';
+import 'dart:io';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/add_file_tao_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
@@ -37,6 +37,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+  List<ItemDanhSachLichHop> listDSLH = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   String userId = '';
@@ -119,7 +120,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         DateTo: endDate.formatApi,
         DonViId: donViId,
         PageIndex: page,
-        PageSize: 1000,
+        PageSize: 10,
         UserId: userId,
       ),
     );
@@ -127,6 +128,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       success: (value) {
         totalPage = value.totalPage ?? 1;
         log("${value.items?.map((e) => e.id).toList()}");
+
+        listDSLH.addAll(value.items ?? []);
+
+        value.items = listDSLH;
         danhSachLichHopSubject.add(value);
       },
       error: (error) {},
