@@ -927,6 +927,7 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
   bool isLichDuocMoi = false;
   bool isDuyetLich = false;
   bool isChoXacNhan = false;
+  final userId = HiveLocal.getDataUser()?.userId ?? '';
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getLichHop(
