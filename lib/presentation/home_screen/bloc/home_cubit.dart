@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_cong_viec_resquest.dart';
 import 'package:ccvc_mobile/data/request/home/danh_sach_van_ban_den_request.dart';
@@ -786,16 +787,22 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
   String userId = '';
   String trangThai = '1';
   String? loaiMenu;
-  SelectKey selectKeyTrangThai = SelectKey.CHO_TIEP_NHAN;
+  SelectKey? selectKeyTrangThai;
+  List<SelectKey> selectKeyPermission = [];
   YKienNguoiDanCubit() {
     dataUser = HiveLocal.getDataUser();
     if (dataUser != null) {
       donViId = dataUser?.userInformation?.donViTrucThuoc?.id ?? '';
       userId = dataUser?.userId ?? '';
     }
+    selectKeyPermission = _permissionKeyCheck();
   }
   Stream<List<DocumentModel>> get getYKien => _getYKien.stream;
   Future<void> callApi() async {
+    if(selectKeyTrangThai == null){
+      showContent();
+      return;
+    }
     showLoading();
     final result = await homeRep.getYKienNguoidan(
       100000,
@@ -858,6 +865,30 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
       selectKeyDialog.sink.add(true);
       callApi();
     }
+  }
+
+  List<SelectKey> _permissionKeyCheck() {
+
+    final listSelect = <SelectKey>[];
+    if (HiveLocal.checkPermissionApp(
+        permissionTxt: 'TiepNhanPAKNChoTiepNhanXem')) {
+      listSelect.add(SelectKey.CHO_TIEP_NHAN);
+    }
+    if (HiveLocal.checkPermissionApp(permissionTxt: 'PhanXuLyXem')) {
+      listSelect.add(SelectKey.CHO_PHAN_XU_LY);
+    }
+    if (HiveLocal.checkPermissionApp(
+        permissionTxt: 'TiepNhanPAKNChoDuyetxem')) {
+      listSelect.add(SelectKey.CHO_DUYET_XU_LY);
+    }
+    if (HiveLocal.checkPermissionApp(
+        permissionTxt: 'XuLyPAKNChoTiepNhanXuLyXem')) {
+      listSelect.add(SelectKey.CHO_DUYET_TIEP_NHAN);
+    }
+    if (listSelect.isNotEmpty) {
+      selectKeyTrangThai = listSelect.first;
+    }
+    return listSelect;
   }
 }
 
