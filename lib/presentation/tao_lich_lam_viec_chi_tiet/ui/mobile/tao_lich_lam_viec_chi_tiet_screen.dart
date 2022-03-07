@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lic
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/item_lich_lap.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/linh_vuc_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/loai_lich_widget.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/mau_mac_dinh_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nguoi_chu_tri_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nhac_lai_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/tai_lieu_widget.dart';
@@ -134,6 +135,8 @@ class _TaoLichLamViecChiTietScreenState
                             },
                           ),
                           const NhacLaiWidget(),
+                          MauMacDinhWidget(),
+
                           NguoiChuTriWidget(
                             taoLichLamViecCubit: taoLichLamViecCubit,
                           ),
@@ -160,17 +163,37 @@ class _TaoLichLamViecChiTietScreenState
                             taoLichLamViecCubit: taoLichLamViecCubit,
                           ),
                           const TaiLieuWidget(),
-                          buttonTaoLich(
-                            onTap: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await taoLichLamViecCubit.taoLichLamViec(
-                                  title: tieuDeController.value.text,
-                                  content: noiDungController.value.text,
-                                  location: diaDiemController.value.text,
-                                );
-                              }
-                            },
-                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: buttomWidget(
+                                  background: buttonColor.withOpacity(0.1),
+                                  title: S.current.dong,
+                                  onTap: () {},
+                                  textColor: buttonColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              Expanded(
+                                child: buttomWidget(
+                                  background: buttonColor,
+                                  title: S.current.luu,
+                                  onTap: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      await taoLichLamViecCubit.taoLichLamViec(
+                                        title: tieuDeController.value.text,
+                                        content: noiDungController.value.text,
+                                        location: diaDiemController.value.text,
+                                      );
+                                    }
+                                  },
+                                  textColor: Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -224,6 +247,38 @@ Widget buttonTaoLich({required Function onTap}) {
           fontWeight: FontWeight.w500,
           fontSize: 14,
           color: Colors.white,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget buttomWidget({
+  required String title,
+  required Color background,
+  required Color textColor,
+  required Function onTap,
+}) {
+  return GestureDetector(
+    onTap: () {
+      onTap();
+    },
+    child: Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 13,
+        horizontal: 24,
+      ),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        title,
+        style: textNormalCustom(
+          color: textColor,
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
         ),
       ),
     ),
