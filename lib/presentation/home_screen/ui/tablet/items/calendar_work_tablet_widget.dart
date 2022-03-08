@@ -91,8 +91,13 @@ class _CalendarWorkWidgetState extends State<CalendarWorkTabletWidget> {
                           );
                         },
                         child: ContainerInfoWidget(
-                          status: result.codeStatus.getText(),
-                          colorStatus: result.codeStatus.getColor(),
+                          status: result
+                              .trangThaiTheoUserEnum(_lamViecCubit.userId)
+                              ?.getText() ??
+                              '',
+                          colorStatus: result
+                              .trangThaiTheoUserEnum(_lamViecCubit.userId)
+                              ?.getColor(),
                           backGroundStatus: true,
                           title: result.title,
                           listData: [
