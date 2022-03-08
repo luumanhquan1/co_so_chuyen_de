@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/account/permission_app_model.dart';
@@ -47,9 +48,9 @@ class HiveLocal {
     _listPermission.clear();
   }
 
-  static void savePermission(PermissionApp permissionApp) {
-    _listPermission.clear();
-    _listPermission.add(permissionApp);
+  static Future<void> savePermission(PermissionApp permissionApp) async {
+    await _listPermission.clear();
+    await _listPermission.add(permissionApp);
   }
 
   static bool checkPermissionApp(

@@ -112,6 +112,14 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleTabletWidget> {
                               ? sideBtnSelected.withOpacity(0.5)
                               : choXuLyColor,
                           backGroundStatus: true,
+                          status2: result
+                              .trangThaiTheoUserEnum(_lichHopCubit.userId)
+                              ?.getText() ??
+                              '',
+                          colorStatus2: result
+                              .trangThaiTheoUserEnum(_lichHopCubit.userId)
+                              ?.getColor(),
+                          backGroundStatus2: true,
                           title: result.title,
                           listData: [
                             InfoData(

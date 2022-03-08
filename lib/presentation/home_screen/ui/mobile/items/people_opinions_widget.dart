@@ -47,12 +47,7 @@ class _PeopleOpinionsState extends State<PeopleOpinions> {
       },
       selectKeyDialog: _danCubit,
       spacingTitle: 0,
-      listSelect: const [
-        SelectKey.CHO_TIEP_NHAN,
-        SelectKey.CHO_PHAN_XU_LY,
-        SelectKey.CHO_DUYET_XU_LY,
-        SelectKey.CHO_DUYET_TIEP_NHAN,
-      ],
+      listSelect: _danCubit.selectKeyPermission,
       onChangeKey: (value){
         if(_danCubit.selectKeyTrangThai !=value){
           _danCubit.selectTrangThaiApi(value);

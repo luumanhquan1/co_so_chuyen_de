@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
@@ -113,11 +114,18 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 10.0),
-                                        child:
-                                            LichSuCapNhatTinhHinhWidgetExpandTablet(
-                                          cubit: cubit,
-                                          expanded: cubit.expanded2,
-                                        ),
+                                        child: StreamBuilder<
+                                                List<LichSuVanBanModel>>(
+                                            stream:
+                                                cubit.lichSuCapNhatXuLyStream,
+                                            builder: (context, snapshot) {
+                                              final data = snapshot.data ?? [];
+                                              return LichSuCapNhatTinhHinhWidgetExpandTablet(
+                                                lichSuVanBanCapNhatModel: data,
+                                                cubit: cubit,
+                                                expanded: cubit.expanded2,
+                                              );
+                                            }),
                                       ),
                                       Padding(
                                         padding:
