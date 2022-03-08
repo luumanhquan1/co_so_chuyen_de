@@ -44,12 +44,6 @@ extension DateFormatString on DateTime {
     return DateFormat('dd-MM-yyyy').format(this);
   }
 
-  String get startEndMonth {
-    final day = DateTime(year, month+1, 0);
-
-    return '01 - ${day.formatDayCalendar}';
-  }
-
   String get startEndWeek {
     final day = DateTime(year, month, this.day);
 

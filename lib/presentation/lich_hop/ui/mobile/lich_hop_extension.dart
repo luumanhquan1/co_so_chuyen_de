@@ -95,9 +95,13 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
             stream: cubit.moveTimeSubject.stream,
             builder: (context, snapshot) {
               final data = snapshot.data ?? cubit.selectedDay;
+              final dateTimeFormRange =
+              data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
 
+              final dataString = '${dateTimeFormRange[0]
+                  .day} - ${dateTimeFormRange[1].formatDayCalendar}';
               return Text(
-                data.startEndMonth,
+                dataString,
                 style: textNormalCustom(
                   color: textColor,
                   fontSize: 14.0.textScale(),
