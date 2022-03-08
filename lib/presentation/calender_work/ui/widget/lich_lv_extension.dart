@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/main_calendar/main_calendar_work_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/lich/calender_form_month.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/lich/calender_week_mobile.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/lich/in_calender_form.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/lich/calender_w
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/list/in_list_form_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -128,15 +130,33 @@ extension LichLv on CalenderState {
     required CalenderCubit cubit,
     Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
   }) {
-    if (this is LichLVStateDangLich || this is LichLVStateDangList) {
-      return type.getTableCalendar(cubit: cubit, type: type);
+    if (this is LichLVStateDangLich && type == Type_Choose_Option_Day.MONTH) {
+      return TableCalendarWidget(
+        type: type,
+        isCalendar: false,
+        onChange: (DateTime start, DateTime end) {
+          cubit.callApiNgay(start, end);
+        },
+        onChangeRange:
+            (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+      );
     }
-    return Container();
+    return TableCalendarWidget(
+      type: type,
+      onChange: (DateTime start, DateTime end) {
+        cubit.callApiNgay(start, end);
+      },
+      onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+    );
   }
 
   Widget itemCalendarWork(CalenderCubit cubit) {
     if (this is LichLVStateDangLich || this is LichLVStateDangList) {
-      if (type == Type_Choose_Option_Day.MONTH) {
+      if (type == Type_Choose_Option_Day.MONTH &&
+          this is LichLVStateDangList &&
+          cubit.changeItemMenuSubject.value == TypeCalendarMenu.LichCuaToi) {
+        return itemCalendarWorkDefault(cubit);
+      } else if (type == Type_Choose_Option_Day.MONTH) {
         return itemCalendarWorkIscheck(cubit);
       }
       return itemCalendarWorkDefault(cubit);

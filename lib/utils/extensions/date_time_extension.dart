@@ -43,6 +43,7 @@ extension DateFormatString on DateTime {
   String get formatApiDDMMYYYY{
     return DateFormat('dd-MM-yyyy').format(this);
   }
+
   String get startEndWeek {
     final day = DateTime(year, month, this.day);
 
