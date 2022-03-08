@@ -1,4 +1,6 @@
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_bieu_quyet_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -33,8 +35,7 @@ class DanhSachBieuQuyetLichHopDataResponse extends Equatable {
   Map<String, dynamic> toJson() =>
       _$DanhSachBieuQuyetLichHopDataResponseToJson(this);
 
-  List<DanhSachBieuQuyetLichHopModel> toModel() =>
-      data?.map((e) => e.toModel()).toList() ?? [];
+  List<PhatBieuModel> toModel() => data?.map((e) => e.toModel()).toList() ?? [];
 
   //todo convert to Model to use
   @override
@@ -118,28 +119,11 @@ class DanhSachBieuQuyetLichHopResponse extends Equatable {
   Map<String, dynamic> toJson() =>
       _$DanhSachBieuQuyetLichHopResponseToJson(this);
 
-  DanhSachBieuQuyetLichHopModel toModel() => DanhSachBieuQuyetLichHopModel(
-        tenChucVu: tenChucVu,
-        diemDanh: diemDanh,
-        disable: disable,
-        trangThai: trangThai,
-        isVangMat: isVangMat,
-        id: id,
-        lichHopId: lichHopId,
-        donViId: donViId,
-        canBoId: canBoId,
-        vaiTro: vaiTro,
-        ghiChu: ghiChu,
-        parentId: parentId,
-        vaiTroThamGia: vaiTroThamGia,
-        email: email,
-        soDienThoai: soDienThoai,
-        dauMoiLienHe: dauMoiLienHe,
-        tenCanBo: tenCanBo,
-        tenCoQuan: tenCoQuan,
-        isThuKy: isThuKy,
-        isThamGiaBocBang: isThamGiaBocBang,
-        createAt: createAt,
+  PhatBieuModel toModel() => PhatBieuModel(
+        tthoiGian: DateTime.parse(createAt ?? '').formatApiSS,
+        nguoiPhatBieu: tenCanBo ?? '',
+        phienHop: tenCoQuan ?? '',
+        ndPhatBieu: ghiChu ?? '',
       );
 
   //todo convert to Model to use

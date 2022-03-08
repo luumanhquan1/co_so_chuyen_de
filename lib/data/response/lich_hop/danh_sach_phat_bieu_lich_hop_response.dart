@@ -99,10 +99,10 @@ class DanhSachPhatBieuLichHopResponse extends Equatable {
       _$DanhSachPhatBieuLichHopResponseToJson(this);
 
   PhatBieuModel toModel() => PhatBieuModel(
-        nguoiPhatBieu: personName,
-        phienHop: tenPhienHop,
-        tthoiGian: time,
-        ndPhatBieu: content,
+        nguoiPhatBieu: personName ?? '',
+        phienHop: tenPhienHop ?? '',
+        tthoiGian: time ?? '',
+        ndPhatBieu: content ?? '',
       );
 
   //todo convert to Model to use
