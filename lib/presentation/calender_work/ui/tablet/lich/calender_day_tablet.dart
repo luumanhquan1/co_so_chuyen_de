@@ -22,7 +22,7 @@ class _CalenderDayTabletState extends State<CalenderDayTablet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _cubit.callApi();
+    _cubit.callApi(_cubit.startDates, _cubit.endDates);
   }
 
   @override

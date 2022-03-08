@@ -52,11 +52,13 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DataLichLvModel dataLichLvModel = DataLichLvModel();
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  DateTime startDates = DateTime.now();
+  DateTime endDates = DateTime.now();
 
-  void callApi() {
-    callApiNgay(startDate, endDate);
+  void callApi(DateTime? startDate, DateTime? endDate) {
+    //listDSLV.clear();
+    //page = 1;
+    callApiNgay(startDate ?? startDates, endDate ?? endDates);
   }
 
   void callApiNgay(
@@ -83,7 +85,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void callApiTuan() {
     final day = DateTime.now();
-
     final startDate = day.subtract(Duration(days: day.weekday - 1));
     final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     callApiNgay(startDate, endDate);
@@ -141,6 +142,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     final result = await _lichLamViec.getListLichLamViec(data);
     result.when(
       success: (res) {
+        // listDSLV.clear();
         totalPage = res.totalPage ?? 1;
         dataLichLvModel = res;
         listDSLV.addAll(dataLichLvModel.listLichLVModel ?? []);
@@ -251,7 +253,27 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       numberOfCalendars: 0,
       typeId: '',
       typeName: '',
-    )
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
   ]);
 
   Stream<List<LichLamViecDashBroadItem>> get streamLichLamViecRight =>

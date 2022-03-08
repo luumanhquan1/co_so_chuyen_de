@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
-    cubit.callApi();
+    cubit.callApi(cubit.startDates, cubit.endDates);
   }
 
   @override
@@ -134,13 +135,17 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.DAY,
                               );
-                              cubit.callApi();
+                              cubit.listDSLV.clear();
+                              cubit.page = 1;
+                              cubit.callApi(cubit.startDates, cubit.endDates);
                             },
                             onTapWeek: () {
                               setState(() {});
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.WEEK,
                               );
+                              cubit.listDSLV.clear();
+                              cubit.page = 1;
                               cubit.callApiTuan();
                             },
                             onTapmonth: () {
@@ -148,6 +153,8 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.MONTH,
                               );
+                              cubit.listDSLV.clear();
+                              cubit.page = 1;
                               cubit.callApiMonth();
                             },
                             cubit: cubit,
@@ -159,9 +166,20 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                     BlocBuilder<CalenderCubit, CalenderState>(
                       bloc: cubit,
                       builder: (context, state) {
-                        return state.tableCalendar(
-                          cubit: cubit,
+                        return TableCalendarWidget(
                           type: state.type,
+                          onChange: (DateTime start, DateTime end) {
+                            cubit.startDates = start;
+                            cubit.endDates = end;
+                            cubit.listDSLV.clear();
+                            cubit.page = 1;
+                            cubit.callApi(start, end);
+                          },
+                          onChangeRange: (
+                            DateTime? start,
+                            DateTime? end,
+                            DateTime? focusedDay,
+                          ) {},
                         );
                       },
                     ),
@@ -179,7 +197,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                   ),
                 ).then((value) {
                   if (value) {
-                    cubit.callApi();
+                    cubit.callApi(cubit.startDates, cubit.endDates);
                   }
                 });
               },
@@ -195,15 +213,15 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
 
 Widget itemCalendarWorkIscheck(CalenderCubit cubit) {
   return Padding(
-    padding: EdgeInsets.only(
-      top: cubit.isCheck ? 44 : 34,
+    padding: const EdgeInsets.only(
+      top: 16,
     ),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
         margin: EdgeInsets.only(
           left: 16.0,
-          top: cubit.isCheck ? 54 : 32,
+          top: cubit.isCheck ? 150 : 120,
         ),
         height: 88,
         child: Row(

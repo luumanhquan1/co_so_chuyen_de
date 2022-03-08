@@ -21,16 +21,25 @@ extension LichLVOpition on Type_Choose_Option_Day {
         return InListFormTablet(
           isHindText: true,
           cubit: cubit,
+          onTap: () {
+            cubit.callApi(cubit.startDates, cubit.endDates);
+          },
         );
       case Type_Choose_Option_Day.WEEK:
         return InListFormTablet(
           isHindText: true,
           cubit: cubit,
+          onTap: () {
+            cubit.callApiTuan();
+          },
         );
       case Type_Choose_Option_Day.MONTH:
         return InListFormTablet(
           isHindText: true,
           cubit: cubit,
+          onTap: () {
+            cubit.callApiMonth();
+          },
         );
       default:
         return Container();
@@ -57,7 +66,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
         return InListForm(
           cubit: cubit,
           onTap: () {
-            cubit.callApi();
+            cubit.callApi(cubit.startDates, cubit.endDates);
           },
         );
       case Type_Choose_Option_Day.WEEK:

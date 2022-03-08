@@ -11,9 +11,14 @@ import 'package:flutter/material.dart';
 class InListFormTablet extends StatefulWidget {
   bool isHindText = false;
   final CalenderCubit cubit;
+  final Function onTap;
 
-  InListFormTablet({Key? key, required this.isHindText, required this.cubit})
-      : super(key: key);
+  InListFormTablet({
+    Key? key,
+    required this.isHindText,
+    required this.cubit,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   _InListFormTabletState createState() => _InListFormTabletState();
@@ -32,11 +37,11 @@ class _InListFormTabletState extends State<InListFormTablet> {
           _scrollController.position.maxScrollExtent) {
         if (widget.cubit.page < widget.cubit.totalPage) {
           widget.cubit.page = widget.cubit.page + 1;
-          _cubit.callApi();
+          widget.onTap();
         }
       }
     });
-    _cubit.callApi();
+    widget.onTap();
   }
 
   @override

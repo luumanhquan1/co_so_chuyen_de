@@ -35,7 +35,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
-    cubit.callApi();
+    cubit.callApi(cubit.startDates, cubit.endDates);
   }
 
   @override
@@ -84,23 +84,29 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     ).then((value) {
                       if (value == null) {}
                       if (value == true) {
-                        cubit.callApi();
+                        cubit.callApi(cubit.startDates, cubit.endDates);
                       }
                     });
                   },
                   onTapDay: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
-                    cubit.callApi();
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
+                    cubit.callApi(cubit.startDates, cubit.endDates);
                   },
                   onTapMonth: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
                     cubit.callApiMonth();
                   },
                   onTapWeek: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
                     cubit.callApiTuan();
                   },
                   cubit: cubit,
@@ -116,7 +122,11 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         DateTime? focusedDay,
                       ) {},
                       onChange: (DateTime startDate, DateTime endDate) {
-                        cubit.callApiNgay(startDate, endDate);
+                        cubit.startDates = startDate;
+                        cubit.endDates = endDate;
+                        cubit.listDSLV.clear();
+                        cubit.page = 1;
+                        cubit.callApi(startDate, endDate);
                       },
                     );
                   },
