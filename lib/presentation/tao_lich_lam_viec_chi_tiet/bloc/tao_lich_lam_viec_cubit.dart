@@ -46,6 +46,12 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
   BehaviorSubject<List<String>> listItemPersonSubject =
       BehaviorSubject.seeded(listPerson);
 
+  BehaviorSubject<List<ItemSelectModel>> listColorDefaultSubject =
+      BehaviorSubject();
+
+  Stream<List<ItemSelectModel>> get listColorDefaultStream =>
+      listColorDefaultSubject.stream;
+
   Stream<MessageModel> get taoMoiBanGhiStream => taoMoiBanGhiSubject.stream;
 
   Stream<DateTime> get startDateStream => startDateSubject.stream;
@@ -130,6 +136,18 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     await queue.onComplete;
     showContent();
     queue.dispose();
+  }
+
+  void selectColor(ItemSelectModel item) {
+    listColorDefault.forEach((element) {
+      if(element == item) {
+        element.isSelect = true;
+      } else {
+        element.isSelect = false;
+      }
+    });
+
+    listColorDefaultSubject.add(listColorDefault);
   }
 
   Future<void> _dataLoaiLich() async {

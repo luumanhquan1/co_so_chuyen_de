@@ -19,9 +19,9 @@ class _NhacLaiWidgetState extends State<NhacLaiWidget> {
   @override
   Widget build(BuildContext context) {
     return SelectOnlyExpand(
-      urlIcon: ImageAssets.icNhacLai,
+      urlIcon: ImageAssets.icNotify,
       listSelect: listTime.map<String>((e) => e.text).toList(),
-      title: S.current.nhac_lai,
+      title: S.current.nhac_lich,
     );
   }
 }
