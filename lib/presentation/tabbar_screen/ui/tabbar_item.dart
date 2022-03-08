@@ -31,7 +31,6 @@ List<TabBarType> getTabListItem() {
 class TabBarItem {
   Widget icon;
   String text;
-
   TabBarItem({required this.icon, required this.text});
 }
 

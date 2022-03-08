@@ -36,8 +36,8 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
   final List<ChartData> chartDataVbDen = [];
   final List<ChartData> chartDataVbDi = [];
   List<String> maTrangThai = [];
-  int index=1;
-  int size=10;
+  int index = 1;
+  int size = 10;
 
   Stream<DocumentDashboardModel> get getVbDen => _getVbDen.stream;
 
@@ -187,6 +187,53 @@ class QLVBCCubit extends BaseCubit<QLVBState> {
         thoiGianStartFilter: startDate,
         thoiGianEndFilter: endDate,
         size: 10,
+      ),
+    );
+    result.when(
+      success: (res) {
+        listVbDen = res.pageData ?? [];
+        _getDanhSachVBDen.sink.add(listVbDen);
+      },
+      error: (error) {
+        showError();
+      },
+    );
+  }
+
+  Future<void> searchDataDanhSachVBDi({
+    required String startDate,
+    required String endDate,
+    String? keySearch,
+  }) async {
+    List<VanBanModel> listVbDi = [];
+    final result = await _qLVBRepo.getDanhSachVbDi(
+        startDate, endDate, index, size, keySearch ?? '',);
+    result.when(
+      success: (res) {
+        listVbDi = res.pageData ?? [];
+        _getDanhSachVBDi.sink.add(listVbDi);
+      },
+      error: (err) {
+        return err;
+      },
+    );
+  }
+  Future<void> searchDataDanhSachVBDen({
+    required String startDate,
+    required String endDate,
+    String? keySearch,
+  }) async {
+    List<VanBanModel> listVbDen = [];
+    final result = await _qLVBRepo.getDanhSachVbDen(
+      DanhSachVBRequest(
+        maTrangThai: maTrangThai,
+        index: 1,
+        isChoYKien: false,
+        isSortByDoKhan: true,
+        thoiGianStartFilter: startDate,
+        thoiGianEndFilter: endDate,
+        size: 10,
+        keySearch: keySearch??'',
       ),
     );
     result.when(
