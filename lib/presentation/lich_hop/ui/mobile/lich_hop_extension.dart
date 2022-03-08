@@ -55,34 +55,6 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     }
   }
 
-  Widget getTableCalendar({
-    required CalenderCubit cubit,
-    Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
-  }) {
-    switch (this) {
-      case Type_Choose_Option_Day.MONTH:
-        return TableCalendarWidget(
-          isCalendar: false,
-          type: type,
-          onChange: (DateTime start, DateTime end) {
-            log("$start      $end");
-          },
-          onChangeRange:
-              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-        );
-
-      default:
-        return TableCalendarWidget(
-          type: type,
-          onChange: (DateTime start, DateTime end) {
-           cubit.callApiNgay(start, end);
-          },
-          onChangeRange:
-              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-        );
-    }
-  }
-
   Widget getTextWidget({
     required TableCalendarCubit cubit,
     Color textColor = textDefault,
@@ -125,7 +97,7 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
               final data = snapshot.data ?? cubit.selectedDay;
 
               return Text(
-                'Tháng ${data.month}',
+                data.startEndMonth,
                 style: textNormalCustom(
                   color: textColor,
                   fontSize: 14.0.textScale(),
