@@ -25,14 +25,20 @@ mixin QLVBRepository {
       DanhSachVBRequest danhSachVBRequest);
 
   Future<Result<DanhSachVanBanModel>> getDanhSachVbDi(
-      String startDate, String endDate, int index, int size);
+    String startDate,
+    String endDate,
+    int index,
+    int size, [
+    String keySearch = '',
+  ]);
 
   Future<Result<ChiTietVanBanDiModel>> getDataChiTietVanBanDi(String id);
 
   Future<Result<ChiTietVanBanDenModel>> getDataChiTietVanBanDen(
       String processId, String taskId, bool isYKien);
+
   Future<Result<DataThongTinGuiNhanModel>> getDataThongTinGuiNhan(String id);
 
-  Future<Result<DataLichSuVanBanModel>>getDataLichSuVanBanDen (String processId, String type);
-
+  Future<Result<DataLichSuVanBanModel>> getDataLichSuVanBanDen(
+      String processId, String type);
 }

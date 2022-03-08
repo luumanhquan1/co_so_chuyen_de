@@ -62,6 +62,7 @@ class ImageAssets {
   static const String icCalenderWeekBig = '$baseImg/ic_calender_week_big.svg';
   static const String icCalenderMonthBig = '$baseImg/ic_calender_month_big.svg';
   static const String icPhone = '$baseImg/ic_phone.svg';
+  static const String icNotify = '$baseImg/ic_notify.svg';
   static const String icGroupPeople = '$baseImg/ic_group_people.svg';
   static const String icClock = '$baseImg/ic_clock.svg';
   static const String icTheoDangLich = '$baseImg/ic_theo_dang_lich.svg';
