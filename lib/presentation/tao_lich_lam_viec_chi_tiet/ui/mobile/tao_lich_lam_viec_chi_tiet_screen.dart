@@ -141,6 +141,9 @@ class _TaoLichLamViecChiTietScreenState
                           MauMacDinhWidget(
                             taoLichLamViecCubit: taoLichLamViecCubit,
                           ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           NguoiChuTriWidget(
                             taoLichLamViecCubit: taoLichLamViecCubit,
                           ),

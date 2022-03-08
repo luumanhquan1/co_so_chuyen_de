@@ -41,6 +41,7 @@ class _MauMacDinhWidgetState extends State<MauMacDinhWidget> {
                         widget.taoLichLamViecCubit.selectColor(e);
                       },
                       child: Container(
+                        margin: const EdgeInsets.only(top: 20),
                         color: Colors.transparent,
                         child: Column(
                           children: [
@@ -73,9 +74,7 @@ class _MauMacDinhWidgetState extends State<MauMacDinhWidget> {
                                   Container(),
                               ],
                             ),
-
-
-
+                            const SizedBox(height: 21,),
                           ],
                         ),
                       ),
