@@ -38,17 +38,23 @@ class _LichSuCapNhatTinhHinhWidgetExpandTabletState
         ),
         child: Text(S.current.lich_su_cap_nhat_tinh_hinh_xu_ly),
       ),
-      child: Column(
-        children: widget.lichSuVanBanCapNhatModel.isNotEmpty
-            ? widget.lichSuVanBanCapNhatModel
-            .map(
-              (e) => WidgetInExpandVanBan(
-            row: e.toListRowLichSuCapNhat(),
-            cubit: widget.cubit,
-          ),
-        )
-            .toList()
-            : [const NodataWidget()],
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6, left: 16, right: 16),
+        child: Column(
+          children: widget.lichSuVanBanCapNhatModel.isNotEmpty
+              ? widget.lichSuVanBanCapNhatModel
+              .map(
+                (e) => WidgetInExpandVanBan(
+              row: e.toListRowLichSuCapNhat(),
+              cubit: widget.cubit,
+            ),
+          )
+              .toList()
+              : [const Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: NodataWidget(),
+          )],
+        ),
       ),
       onChangeExpand: () {
         setState(() {

@@ -23,20 +23,11 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
     return Scaffold(
       appBar: BaseAppBar(
         title: S.current.menu,
-        leadingIcon: GestureDetector(
-          onTap: () {
+        leadingIcon:IconButton(
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: SizedBox(
-            height: 10,
-            width: 10,
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              child: SvgPicture.asset(
-                ImageAssets.icExit,
-              ),
-            ),
-          ),
+          icon: SvgPicture.asset(ImageAssets.icExit),
         ),
       ),
       body: StreamBuilder<List<bool>>(

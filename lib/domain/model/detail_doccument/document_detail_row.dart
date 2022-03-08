@@ -54,6 +54,7 @@ extension TypeDataDocument on TypeDocumentDetailRow {
         {
           final data = row.value as List<FileDinhKems>;
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: data.map((e) => Text(
             e.ten??'',
             style: textNormalCustom(

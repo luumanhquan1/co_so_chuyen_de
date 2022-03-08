@@ -44,7 +44,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-       S.current.dv_cap_nhat,
+        S.current.dv_cap_nhat,
         donViTaoXuLy ?? '',
         TypeDocumentDetailRow.text,
       ),
@@ -65,6 +65,122 @@ class LichSuVanBanModel {
       ),
     ];
 
+    return list;
+  }
+
+  List<DocumentDetailRow> toListRowLichSuTraLai() {
+    final List<DocumentDetailRow> list = [
+      DocumentDetailRow(
+        S.current.nguoi_tra_lai,
+        nguoiXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv_tra_lai,
+        donViXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.thoi_gian,
+        thoiGianTao ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.noi_dung_tra_lai,
+        noiDung,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nguoi_bi_tra_lai,
+        nguoiTaoXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.d_v_bi_tra_lai,
+        donViTaoXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.file_dinh_kem,
+        fileDinhKems ?? [],
+        TypeDocumentDetailRow.fileActacks,
+      ),
+    ];
+    return list;
+  }
+
+  List<DocumentDetailRow> toListRowLichSuThuHoi() {
+    final List<DocumentDetailRow> list = [
+      DocumentDetailRow(
+        S.current.nguoi_thu_hoi,
+        nguoiTaoXuLy,
+
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nd_thu_hoi,
+        donViTaoXuLy,
+
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv_thu_hoi,
+        noiDung,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.thoi_gian,
+        thoiGianTao ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nguoi_bi_thu_hoi,
+        nguoiXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv_bi_thu_hoi,
+        donViXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+    ];
+    return list;
+  }
+  List<DocumentDetailRow> toListRowLichSuVanBanLienThong() {
+    final List<DocumentDetailRow> list = [
+      DocumentDetailRow(
+        S.current.nguoi_thu_hoi,
+        nguoiTaoXuLy,
+
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nd_thu_hoi,
+        donViTaoXuLy,
+
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv_thu_hoi,
+        noiDung,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.thoi_gian,
+        thoiGianTao ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nguoi_bi_thu_hoi,
+        nguoiXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv_bi_thu_hoi,
+        donViXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+    ];
     return list;
   }
 }

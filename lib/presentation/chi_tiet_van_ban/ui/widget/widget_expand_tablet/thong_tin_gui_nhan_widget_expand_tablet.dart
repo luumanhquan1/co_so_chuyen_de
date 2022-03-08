@@ -1,8 +1,6 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_in_expand_van_ban.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
@@ -46,22 +44,24 @@ class _ThongTinGuiNhanWidgetExpandTabletState
         });
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        child:Column(
+        padding: const EdgeInsets.only(bottom: 6, left: 16, right: 16),
+        child: Column(
           children: widget.thongTinGuiNhanModel.isNotEmpty
               ? widget.thongTinGuiNhanModel
-              .map(
-                (e) => WidgetInExpandVanBan(
-              row: e.toListRow(),
-              cubit: widget.cubit,
-            ),
-          )
-              .toList()
-              : [ const Padding(
-                padding: EdgeInsets.only(top: 16.0),
-                child: NodataWidget(),
-              )],
-        )
+                  .map(
+                    (e) => WidgetInExpandVanBan(
+                      row: e.toListRow(),
+                      cubit: widget.cubit,
+                    ),
+                  )
+                  .toList()
+              : [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: NodataWidget(),
+                  )
+                ],
+        ),
       ),
     );
   }

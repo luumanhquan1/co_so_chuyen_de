@@ -1,18 +1,22 @@
-import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/history_widget/history_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_in_expand_van_ban.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
 class LichSuThuHoiWidgetExpandTablet extends StatefulWidget {
+  final List<LichSuVanBanModel> lichSuVanBanThuHoiModel;
   final DetailDocumentCubit cubit;
   bool expanded;
 
-  LichSuThuHoiWidgetExpandTablet(
-      {Key? key, required this.cubit, required this.expanded})
-      : super(key: key);
+  LichSuThuHoiWidgetExpandTablet({
+    Key? key,
+    required this.cubit,
+    required this.expanded,
+    required this.lichSuVanBanThuHoiModel,
+  }) : super(key: key);
 
   @override
   State<LichSuThuHoiWidgetExpandTablet> createState() =>
@@ -34,15 +38,25 @@ class _LichSuThuHoiWidgetExpandTabletState
         ),
         child: Text(S.current.lich_su_thu_hoi),
       ),
-      child: StreamBuilder<HistoryProcessPage>(
-        stream: widget.cubit.screenJobProfilesStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData && widget.cubit.listHistory.isNotEmpty) {
-            return HistoryWidget(widget.cubit);
-          } else {
-            return const NodataWidget();
-          }
-        },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6, left: 16, right: 16),
+        child: Column(
+          children: widget.lichSuVanBanThuHoiModel.isNotEmpty
+              ? widget.lichSuVanBanThuHoiModel
+                  .map(
+                    (e) => WidgetInExpandVanBan(
+                      cubit: widget.cubit,
+                      row: e.toListRowLichSuThuHoi(),
+                    ),
+                  )
+                  .toList()
+              : [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: NodataWidget(),
+                  )
+                ],
+        ),
       ),
       onChangeExpand: () {
         setState(() {

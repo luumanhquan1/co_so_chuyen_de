@@ -576,7 +576,13 @@
   "cuoc_hop": "Cuộc họp",
   "nhan_de_biet": "Nhận để biết",
   "sun_day": "Sunday",
-  "dv_cap_nhat": "ĐV cập nhật"
+  "dv_cap_nhat": "ĐV cập nhật",
+  "nguoi_tra_lai": "Người trả lại",
+  "dv_tra_lai": "ĐV trả lại",
+  "d_v_bi_tra_lai": "ĐV trả lại",
+  "nd_thu_hoi": "ND thu hồi",
+  "dv_thu_hoi": "ĐV thu hồi",
+  "dv_bi_thu_hoi": "ĐV bị thu hồi"
 }
 
 
