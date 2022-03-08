@@ -33,16 +33,22 @@ class _LichSuVanBanLienThongWidgetExpandTabletState extends State<LichSuVanBanLi
         ),
         child: Text(S.current.lich_su_van_ban_lien_thong),
       ),
-      child: StreamBuilder<HistoryProcessPage>(
-        stream: widget.cubit.screenJobProfilesStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData &&
-              widget.cubit.listHistory.isNotEmpty) {
-            return HistoryWidget(widget.cubit);
-          } else {
-            return const NodataWidget();
-          }
-        },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+        child: StreamBuilder<HistoryProcessPage>(
+          stream: widget.cubit.screenJobProfilesStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData &&
+                widget.cubit.listHistory.isNotEmpty) {
+              return HistoryWidget(widget.cubit);
+            } else {
+              return const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: NodataWidget(),
+              );
+            }
+          },
+        ),
       ),
       onChangeExpand: () {
         setState(() {

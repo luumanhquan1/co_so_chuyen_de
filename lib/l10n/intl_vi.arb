@@ -568,6 +568,12 @@
   "nhiem_vu_dv": "Nhiệm vụ nv",
   "don_vi_theo_doi": "Đơn vị theo dõi",
   "nguoi_theo_doi": "Người theo dõi",
+  "nguoi_tra_lai": "Người trả lại",
+  "dv_tra_lai": "ĐV trả lại",
+  "d_v_bi_tra_lai": "ĐV trả lại",
+  "nd_thu_hoi": "ND thu hồi",
+  "dv_thu_hoi": "ĐV thu hồi",
+  "dv_bi_thu_hoi": "ĐV bị thu hồi",
   "nguoi_giao_nhiem_vu" : "Người giao nhiệm vụ",
   "can_bo_boc_bang" : "Chọn cán bộ sử dụng bắc băng",
   "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
@@ -578,7 +584,6 @@
   "sun_day" : "Sunday",
   "nhac_lich" : "Nhắc lịch",
   "dv_cap_nhat": "ĐV cập nhật"
-
 }
 
 

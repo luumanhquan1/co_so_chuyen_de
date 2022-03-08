@@ -61,13 +61,13 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                             ),
                             child: Column(
                               children: [
-                                // Padding(
-                                //   padding: const EdgeInsets.only(top: 10),
-                                //   child: ThongTinGuiNhanWidgetExpandTablet(
-                                //     cubit: cubit,
-                                //     expanded: cubit.expanded,
-                                //   ),
-                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: ThongTinGuiNhanWidgetExpandTablet(
+                                    cubit: cubit,
+                                    expanded: cubit.expanded, thongTinGuiNhanModel: [],
+                                  ),
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child:
@@ -80,14 +80,14 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuTraLaiWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded3,
+                                    expanded: cubit.expanded3, lichSuVanBanTraLaiModel: [],
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuThuHoiWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded4,
+                                    expanded: cubit.expanded4, lichSuVanBanThuHoiModel: [],
                                   ),
                                 ),
                                 Padding(
