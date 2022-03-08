@@ -65,6 +65,18 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                       baseChooseTimeCubit: chooseTimeCubit,
                       today: DateTime.now(),
                       onSubmit: (value){
+                        qlvbCubit.searchDataDanhSachVBDen(
+                          startDate: chooseTimeCubit.startDate,
+                          endDate: chooseTimeCubit.endDate,
+                          keySearch: value,
+                        );
+                        qlvbCubit.searchDataDanhSachVBDi(
+                          startDate: chooseTimeCubit.startDate,
+                          endDate: chooseTimeCubit.endDate,
+                          keySearch: value,
+                        );
+                      },
+                      onChangTime: (){
                         qlvbCubit.dataVBDen(
                           startDate: chooseTimeCubit.startDate,
                           endDate: chooseTimeCubit.endDate,
