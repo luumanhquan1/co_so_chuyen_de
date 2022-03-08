@@ -34,8 +34,8 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   @override
   void initState() {
     super.initState();
-    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
-    cubit.callApi(cubit.startDates, cubit.endDates);
+    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
+    cubit.callApi();
   }
 
   @override

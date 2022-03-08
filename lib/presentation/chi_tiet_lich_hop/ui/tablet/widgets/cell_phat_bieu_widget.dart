@@ -28,141 +28,136 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
   @override
   Widget build(BuildContext context) {
     return screenDevice(
-      mobileScreen: Padding(
-        padding: const EdgeInsets.only(bottom: 25),
-        child: Container(
-          margin: const EdgeInsets.only(top: 16),
-          padding: const EdgeInsets.only(top: 16, bottom: 16, left: 16),
-          decoration: BoxDecoration(
-            border: Border.all(color: borderItemCalender),
-            color: borderItemCalender.withOpacity(0.1),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(12),
-            ),
+      mobileScreen: Container(
+        margin: const EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.only(top: 16, bottom: 16, left: 16),
+        decoration: BoxDecoration(
+          border: Border.all(color: borderItemCalender),
+          color: borderItemCalender.withOpacity(0.1),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(12),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    '${S.current.phien_hop}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
                     child: Text(
-                      '${S.current.phien_hop}:',
+                      '${S.current.ten_can_bo}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: unselectedLabelColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
+                    child: Text(
+                      '${S.current.noi_dung}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: unselectedLabelColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
+                    child: Text(
+                      '${S.current.thoi_gian}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: unselectedLabelColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    '${widget.infoModel.phienHop}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
+                    child: Text(
+                      '${widget.infoModel.nguoiPhatBieu}',
                       style: textNormalCustom(
                         fontSize: 14,
                         color: infoColor,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.ten_can_bo}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.noi_dung}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.thoi_gian}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(
-                        '${widget.infoModel.phienHop}',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.nguoiPhatBieu}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.ndPhatBieu}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.tthoiGian}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
-              ),
-              if (widget.cubit.typeStatus.value !=
-                  widget.cubit.danhSachphatBieu)
-                CustomCheckBox(
-                  title: '',
-                  isCheck: widget.cubit.check,
-                  onChange: (isCheck) {
-                    widget.cubit.check = !widget.cubit.check;
-                    // widget.cubit.checkAllSelect();
-                    setState(() {});
-                  },
-                )
-              else
-                const Text('')
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
+                    child: Text(
+                      '${widget.infoModel.ndPhatBieu}',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Expanded(
+                    child: Text(
+                      '${widget.infoModel.tthoiGian}',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            if (widget.cubit.typeStatus.value !=
+                widget.cubit.danhSachphatBieu)
+              CustomCheckBox(
+                title: '',
+                isCheck: widget.cubit.check,
+                onChange: (isCheck) {
+                  widget.cubit.check = !widget.cubit.check;
+                  // widget.cubit.checkAllSelect();
+                  setState(() {});
+                },
+              )
+            else
+              const Text('')
+          ],
         ),
       ),
       tabletScreen: Padding(
@@ -197,7 +192,7 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                         '${widget.index}.',
                         style: textNormalCustom(
                           fontSize: 16,
-                          color: infoColor,
+                          color: unselectedLabelColor,
                         ),
                       ),
               ),
@@ -227,7 +222,7 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                                 '${S.current.nguoi_phat_bieu}:',
                                 style: textNormalCustom(
                                   fontSize: 14,
-                                  color: infoColor,
+                                  color: unselectedLabelColor,
                                 ),
                               ),
                             ),
@@ -235,7 +230,7 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                               '${S.current.noi_dung_phat_bieu}:',
                               style: textNormalCustom(
                                 fontSize: 14,
-                                color: infoColor,
+                                color: unselectedLabelColor,
                               ),
                             ),
                           ],
@@ -274,15 +269,13 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                 flex: 2,
                 child: SizedBox(),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 16, left: 17),
-                  child: Text(
-                    '${widget.infoModel.tthoiGian}',
-                    style: textNormalCustom(
-                      fontSize: 14,
-                      color: textBodyTime,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16, left: 17),
+                child: Text(
+                  '${widget.infoModel.tthoiGian}',
+                  style: textNormalCustom(
+                    fontSize: 14,
+                    color: unselectedLabelColor,
                   ),
                 ),
               ),

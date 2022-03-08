@@ -40,8 +40,8 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   @override
   void initState() {
     super.initState();
-    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
-    cubit.callApi(cubit.startDates, cubit.endDates);
+    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
+    cubit.callApi();
   }
 
   @override
@@ -102,13 +102,15 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                       BlocBuilder<CalenderCubit, CalenderState>(
                         bloc: cubit,
                         builder: (context, state) {
-                          if (state.type != Type_Choose_Option_Day.MONTH) {
+                          if (state.type == Type_Choose_Option_Day.MONTH &&
+                              cubit.selectTypeCalendarSubject.value[0]) {
                             return const SizedBox(
-                              height: 130,
+                              height: 70,
+
                             );
                           } else {
                             return const SizedBox(
-                              height: 70,
+                              height: 140,
                             );
                           }
                         },

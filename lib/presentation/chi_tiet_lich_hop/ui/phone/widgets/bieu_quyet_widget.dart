@@ -42,7 +42,6 @@ class _BieuQuyetWidgetState extends State<BieuQuyetWidget> {
             ),
           ),
           StreamBuilder<List<PhatBieuModel>>(
-            initialData: cubit.listBieuQuyet,
             stream: cubit.streamBieuQuyet,
             builder: (context, snapshot) {
               final _list = snapshot.data ?? [];
@@ -52,14 +51,10 @@ class _BieuQuyetWidgetState extends State<BieuQuyetWidget> {
                   shrinkWrap: true,
                   itemCount: _list.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        CellPhatBieu(
-                          infoModel: _list[index],
-                          cubit: cubit,
-                          index: index,
-                        ),
-                      ],
+                    return CellPhatBieu(
+                      infoModel: _list[index],
+                      cubit: cubit,
+                      index: index,
                     );
                   },
                 );

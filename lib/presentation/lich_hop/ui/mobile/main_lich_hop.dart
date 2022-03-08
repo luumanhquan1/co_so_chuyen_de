@@ -244,9 +244,8 @@ class _MainLichHopState extends State<MainLichHop> {
                       if (state is LichHopStateDangLich ||
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
-                        if (state.type == Type_Choose_Option_Day.MONTH) {
                           return TableCalendarWidget(
-                            isCalendar: false,
+
                             onChange:
                                 (DateTime startDate, DateTime endDate) {
                               cubit.startDate = startDate;
@@ -261,19 +260,6 @@ class _MainLichHopState extends State<MainLichHop> {
                               DateTime? focusedDay,
                             ) {},
                           );
-                        }
-                        return TableCalendarWidget(
-                          onChange:
-                              (DateTime startDate, DateTime endDate) {
-                            cubit.startDate = startDate;
-                            cubit.endDate = endDate;
-
-                            cubit.postDanhSachLichHop();
-                            cubit.getDashboard();
-                          },
-                          onChangeRange: (DateTime? start, DateTime? end,
-                              DateTime? focusedDay) {},
-                        );
                       }
                       return Container();
                     },

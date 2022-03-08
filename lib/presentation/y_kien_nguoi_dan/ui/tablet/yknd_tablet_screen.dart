@@ -61,7 +61,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                 ),
               );
             },
-            icon: SvgPicture.asset(ImageAssets.icMenuUnFocus),
+            icon: SvgPicture.asset(ImageAssets.icMenuLichHopTablet),
           )
         ],
       ),

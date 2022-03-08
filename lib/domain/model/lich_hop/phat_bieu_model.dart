@@ -1,5 +1,3 @@
-import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
-
 class PhatBieuModel {
   String? phienHop = '';
   String? nguoiPhatBieu = '';

@@ -67,7 +67,7 @@ abstract class QuanLyVanBanClient {
   Future<ThongTinGuiNhanDataResponse> getDataThongTinGuiNhan(
       @Path('id') String id);
 
-  @GET(ApiConstants.CHI_TIET_VAN_BAN_DEN)
+  @GET(ApiConstants.LICH_SU_VAN_BAN_DEN)
   Future<DataLichSuVanBanResponse> getDataLichSuVanBanDen(
       @Query('processId') String processId,
       @Query('type') String type,

@@ -14,6 +14,7 @@ class ChooseTimeScreen extends StatefulWidget {
   final ChooseTimeCubit baseChooseTimeCubit;
   final Function(String text)? onChange;
   final Function(String text)? onSubmit;
+  final Function()? onChangTime;
 
   const ChooseTimeScreen({
     Key? key,
@@ -21,6 +22,7 @@ class ChooseTimeScreen extends StatefulWidget {
     required this.baseChooseTimeCubit,
     this.onChange,
     this.onSubmit,
+    this.onChangTime,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,6 @@ class ChooseTimeScreen extends StatefulWidget {
 }
 
 class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
-
   @override
   void initState() {
     widget.baseChooseTimeCubit.getState(widget.today);
@@ -61,6 +62,7 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                   child: GestureDetector(
                     onTap: () {
                       widget.baseChooseTimeCubit.ontoDay();
+                      widget.onChangTime != null ? widget.onChangTime!() : null;
                     },
                     child: Text(
                       S.current.today,
@@ -89,13 +91,17 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                               widget.baseChooseTimeCubit.checkToOptionBackDay(
                                 widget.baseChooseTimeCubit.changeOption,
                               );
+                              widget.onChangTime != null
+                                  ? widget.onChangTime!()
+                                  : null;
                             },
                             child: SvgPicture.asset(ImageAssets.ic_prev_box),
                           ),
                           spaceW12,
                           Expanded(
                             child: StreamBuilder<Object>(
-                              stream: widget.baseChooseTimeCubit.textDateTimeStream,
+                              stream:
+                                  widget.baseChooseTimeCubit.textDateTimeStream,
                               builder: (context, snapshot) {
                                 return FittedBox(
                                   child: Text(
@@ -115,6 +121,9 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                               widget.baseChooseTimeCubit.checkToOption(
                                 widget.baseChooseTimeCubit.changeOption,
                               );
+                              widget.onChangTime != null
+                                  ? widget.onChangTime!()
+                                  : null;
                             },
                             child: SvgPicture.asset(ImageAssets.ic_next_box),
                           ),

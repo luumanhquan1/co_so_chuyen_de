@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
@@ -63,130 +64,150 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
               S.current.error,
             ),
             stream: cubit.stateStream,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(top: 30.0, left: 28.0, right: 28.0),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 15.0),
-                            child: Column(
-                              children: [
-                                WidgetHeadChiTietVanBanDenTablet(
-                                  cubit: cubit,
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 30.0, left: 28.0, right: 28.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 15.0),
+                        child: Column(
+                          children: [
+                            WidgetHeadChiTietVanBanDenTablet(
+                              cubit: cubit,
+                            ),
+                            const SizedBox(
+                              height: 28.0,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 30.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: borderButtomColor,
                                 ),
-                                const SizedBox(
-                                  height: 28.0,
+                                color: backgroundColorApp,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(8),
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: borderButtomColor,
-                                    ),
-                                    color: backgroundColorApp,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(8),
-                                    ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: StreamBuilder<
+                                            List<ThongTinGuiNhanModel>>(
+                                        stream: cubit.thongTinGuiNhanStream,
+                                        builder: (context, snapshot) {
+                                          final data = snapshot.data ?? [];
+                                          return ThongTinGuiNhanWidgetExpandTablet(
+                                            thongTinGuiNhanModel: data,
+                                            cubit: cubit,
+                                            expanded: cubit.expanded,
+                                          );
+                                        }),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: StreamBuilder<
-                                                List<ThongTinGuiNhanModel>>(
-                                            stream: cubit.thongTinGuiNhanStream,
-                                            builder: (context, snapshot) {
-                                              final data = snapshot.data ?? [];
-                                              return ThongTinGuiNhanWidgetExpandTablet(
-                                                thongTinGuiNhanModel: data,
-                                                cubit: cubit,
-                                                expanded: cubit.expanded,
-                                              );
-                                            }),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child:
-                                            LichSuCapNhatTinhHinhWidgetExpandTablet(
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 10.0),
+                                    child: StreamBuilder<
+                                        List<LichSuVanBanModel>>(
+                                      stream: cubit.lichSuCapNhatXuLyStream,
+                                      builder: (context, snapshot) {
+                                        final data = snapshot.data ?? [];
+                                        return LichSuCapNhatTinhHinhWidgetExpandTablet(
+                                          lichSuVanBanCapNhatModel: data,
                                           cubit: cubit,
                                           expanded: cubit.expanded2,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: LichSuTraLaiWidgetExpandTablet(
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 10.0),
+                                    child: StreamBuilder<
+                                        List<LichSuVanBanModel>>(
+                                      stream: cubit.lichSuTraLaiStream,
+                                      builder: (context, snapshot) {
+                                        final data = snapshot.data ?? [];
+                                        return LichSuTraLaiWidgetExpandTablet(
                                           cubit: cubit,
                                           expanded: cubit.expanded3,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: LichSuThuHoiWidgetExpandTablet(
+                                          lichSuVanBanTraLaiModel: data,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 10.0),
+                                    child: StreamBuilder<
+                                        List<LichSuVanBanModel>>(
+                                      stream: cubit.lichSuThuHoiStream,
+                                      builder: (context, snapshot) {
+                                        final data = snapshot.data ?? [];
+                                        return LichSuThuHoiWidgetExpandTablet(
                                           cubit: cubit,
                                           expanded: cubit.expanded4,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child:
-                                            LichSuVanBanLienThongWidgetExpandTablet(
-                                          cubit: cubit,
-                                          expanded: cubit.expanded5,
-                                        ),
-                                      ),
-                                    ],
+                                          lichSuVanBanThuHoiModel: data,
+                                        );
+                                      },
+                                    ),
                                   ),
-                                )
-                              ],
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 10.0),
+                                    child:
+                                        LichSuVanBanLienThongWidgetExpandTablet(
+                                      cubit: cubit,
+                                      expanded: cubit.expanded5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // const SizedBox(width: 30.0,),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          YKienSuLyWidgetExpandTablet(
+                            cubit: cubit,
+                            expanded: cubit.expanded6,
+                          ),
+                          const SizedBox(
+                            height: 28.0,
+                          ),
+                          SizedBox(
+                            width: 160,
+                            child: ButtonCustomBottom(
+                              title: S.current.xem_luong,
+                              onPressed: () {
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      StreamProcessScreen(),
+                                );
+                              },
+                              isColorBlue: true,
                             ),
                           ),
-                        ),
-                        // const SizedBox(width: 30.0,),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 15.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                YKienSuLyWidgetExpandTablet(
-                                  cubit: cubit,
-                                  expanded: cubit.expanded6,
-                                ),
-                                const SizedBox(
-                                  height: 28.0,
-                                ),
-                                SizedBox(
-                                  width: 160,
-                                  child: ButtonCustomBottom(
-                                    title: S.current.xem_luong,
-                                    onPressed: () {
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            StreamProcessScreen(),
-                                      );
-                                    },
-                                    isColorBlue: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

@@ -200,12 +200,11 @@ class HopRepositoryImpl implements HopRepository {
     );
   }
 
-  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
-      getDanhSachBieuQuyetLichHop(
+  Future<Result<List<PhatBieuModel>>> getDanhSachBieuQuyetLichHop(
     String id,
   ) {
     return runCatchingAsync<DanhSachBieuQuyetLichHopDataResponse,
-        List<DanhSachBieuQuyetLichHopModel>>(
+        List<PhatBieuModel>>(
       () => _hopServices.getDanhSachBieuQuyetLichHop(id),
       (res) => res.toModel(),
     );
@@ -325,20 +324,18 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-
   Future<Result<ChiTietLichHopModel>> taoLichHop(
       TaoLichHopRequest taoLichHopRequest) {
     return runCatchingAsync<ChiTietLichHopResponse, ChiTietLichHopModel>(
-            () => _hopServices.createMetting(taoLichHopRequest),
-            (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
+        () => _hopServices.createMetting(taoLichHopRequest),
+        (res) => res.data?.toDomain() ?? ChiTietLichHopModel());
   }
 
   @override
   Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id) {
     return runCatchingAsync<XemKetLuanHopDataResponse, XemKetLuanHopModel>(
-          () => _hopServices.getXemKetLuanHop(id),
-          (res) => res.data!.toModel(),
+      () => _hopServices.getXemKetLuanHop(id),
+      (res) => res.data!.toModel(),
     );
-
   }
 }

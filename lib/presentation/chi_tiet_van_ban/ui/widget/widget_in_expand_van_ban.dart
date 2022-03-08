@@ -33,37 +33,39 @@ class WidgetInExpandVanBan extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(6.0.textScale(space: 6)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: row
-            .map(
-              (e) => Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        e.title,
-                        style: textNormalCustom(
-                          color: dateColor,
-                          fontSize: 14.0.textScale(),
-                          fontWeight: FontWeight.w400,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: row
+              .map(
+                (e) => Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          e.title,
+                          style: textNormalCustom(
+                            color: dateColor,
+                            fontSize: 14.0.textScale(),
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 14.0.textScale(),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: e.type.getWidgetVanBan(row: e, cubit: cubit),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 14.0.textScale(),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: e.type.getWidgetVanBan(row: e, cubit: cubit),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            )
-            .toList(),
+              )
+              .toList(),
+        ),
       ),
     );
   }
