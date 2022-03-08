@@ -116,9 +116,7 @@ class _TitleWidgetState extends State<TitleWidget> {
             )
           else
             Container(),
-          SizedBox(
-            height: 20.0.textScale(),
-          ),
+
           ExpandedSection(expand: isExpand, child: widget.child),
         ],
       ),

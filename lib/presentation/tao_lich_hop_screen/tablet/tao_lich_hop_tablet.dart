@@ -63,7 +63,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileTabletScreen> {
                         ),
                         spaceH5,
                         ContainerToggleWidget(
-                          title: S.current.hop_truc_tiep,
+                          title: S.current.hop_truc_tuyen,
                           onChange: (value) {},
                         ),
                         spaceH5,

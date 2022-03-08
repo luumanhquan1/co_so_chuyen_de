@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/bloc/tao_lic
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/linh_vuc_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/loai_lich_widget.dart';
+import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/mau_mac_dinh_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nguoi_chu_tri_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nhac_lai_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/search_name_widget.dart';
@@ -58,11 +59,10 @@ class _TaoLichLamViecChiTietTabletState
           showDiaLog(
             context,
             showTablet: true,
-            isOneButton:false,
+            isOneButton: false,
             textContent: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
             btnLeftTxt: S.current.dong,
-            funcBtnRight: () {
-            },
+            funcBtnRight: () {},
             title: S.current.ban_da_tao_lich_lam_viec_thanh_cong,
             btnRightTxt: S.current.dong,
             icon: SvgPicture.asset(ImageAssets.icTaoLichLamViecThanhCong),
@@ -174,6 +174,13 @@ class _TaoLichLamViecChiTietTabletState
                                       },
                                     ),
                                     const NhacLaiWidget(),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    MauMacDinhWidget(
+                                        taoLichLamViecCubit:
+                                            taoLichLamViecCubit),
+
                                     NguoiChuTriWidget(
                                       taoLichLamViecCubit: taoLichLamViecCubit,
                                     ),
