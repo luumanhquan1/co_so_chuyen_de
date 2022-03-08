@@ -16,7 +16,7 @@ List<KetThucView> listKetThucView = [
     S.current.gui_mail_ket_luan,
     KetThuc.ketluanch,
   ),
-  KetThucView(ImageAssets.icMessage, S.current.gui_email, KetThuc.guimail),
+  KetThucView(ImageAssets.icDocument2, S.current.gui_email, KetThuc.guimail),
   KetThucView(ImageAssets.Group2, S.current.thu_hoi, KetThuc.thuhoi),
   KetThucView(ImageAssets.icDeleteRed, S.current.xoa, KetThuc.xoa),
 ];

@@ -108,7 +108,7 @@ mixin HopRepository {
     String lichHopId,
   );
 
-  Future<Result<List<DanhSachBieuQuyetLichHopModel>>>
+  Future<Result<List<PhatBieuModel>>>
       getDanhSachBieuQuyetLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);

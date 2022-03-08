@@ -161,12 +161,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       error: (error) {},
     );
   }
-
-  void getDanhSachPhatBieu() {
-    getDanhSachPhatBieuLichHop(id);
-    getDanhSachBieuQuyetLichHop(id);
-  }
-
+  // danh sach phat bieu
   Future<void> getDanhSachPhatBieuLichHop(String lichHopId) async {
     final result = await hopRp.getDanhSachPhatBieuLichHop(lichHopId);
     result.when(
@@ -176,10 +171,13 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         },
         error: (err) {});
   }
-
+ // danh sach bieu quyet
   Future<void> getDanhSachBieuQuyetLichHop(String id) async {
     final result = await hopRp.getDanhSachBieuQuyetLichHop(id);
-    result.when(success: (res) {}, error: (err) {});
+    result.when(success: (res) {
+      List<PhatBieuModel> resBieuQuyet = res.toList();
+      bieuQuyet.sink.add(resBieuQuyet);
+    }, error: (err) {});
   }
 
   Future<void> danhSachCanBoTPTG({required String id}) async {
@@ -382,7 +380,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<List<PhatBieuModel>> get streamBieuQuyet => bieuQuyet.stream;
 
-  List<PhatBieuModel> listBieuQuyet = [];
 
   final BehaviorSubject<int> typeStatus = BehaviorSubject.seeded(1);
 
@@ -403,7 +400,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   SoLuongPhatBieuModel dataSoLuongPhatBieu = SoLuongPhatBieuModel();
 
-  Future<void> soLuongPhatBieuData() async {
+  Future<void> soLuongPhatBieuData({required String id}) async {
     final result = await hopRp.getSoLuongPhatBieu(id);
     result.when(
         success: (res) {
@@ -412,7 +409,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           dataSoLuongPhatBieu.daDuyet = res.daDuyet;
           dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
         },
-        error: (err) {});
+        error: (err) {
+          print('lỗi số lượng phát biểu');
+        });
   }
 
   List<PhatBieuModel> listPhatBieu = [];
@@ -467,7 +466,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           );
           ketLuanHopSubject.sink.add(ketLuanHopModel);
         },
-        error: (err) {});
+        error: (err) {
+          print('aaaaaaaaaaaaaaaaaaaaaaaa looi ket luan hop');
+        });
   }
 
   BehaviorSubject<KetLuanHopModel> ketLuanHopSubject = BehaviorSubject();

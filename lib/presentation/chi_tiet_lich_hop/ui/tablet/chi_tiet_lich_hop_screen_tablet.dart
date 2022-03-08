@@ -45,6 +45,9 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     cubit = DetailMeetCalenderCubit();
     cubit.initData(widget.id);
     super.initState();
+    cubit.soLuongPhatBieuData(id: widget.id);
+    cubit.getDanhSachPhatBieuLichHop(widget.id);
+    cubit.getDanhSachBieuQuyetLichHop(widget.id);
   }
 
   @override
