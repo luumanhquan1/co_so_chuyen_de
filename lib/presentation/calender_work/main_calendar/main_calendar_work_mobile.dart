@@ -39,7 +39,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   @override
   void initState() {
     super.initState();
-    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LIST);
+    cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
     cubit.callApi();
   }
 
