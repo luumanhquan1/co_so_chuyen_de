@@ -41,7 +41,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
-    cubit.callApi();
+    cubit.callApi(cubit.startDates, cubit.endDates);
   }
 
   @override
@@ -106,7 +106,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.selectTypeCalendarSubject.value[0]) {
                             return const SizedBox(
                               height: 70,
-
                             );
                           } else {
                             return const SizedBox(
