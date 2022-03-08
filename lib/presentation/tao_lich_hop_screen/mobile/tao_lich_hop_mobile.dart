@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/title_child
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/button/button_bottom.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
@@ -56,7 +57,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
                   ),
                   spaceH5,
                   ContainerToggleWidget(
-                    title: S.current.hop_truc_tiep,
+                    title: S.current.hop_truc_tuyen,
                     onChange: (value) {},
                   ),
                   spaceH5,
@@ -174,13 +175,9 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
-              child: DoubleButtonBottom(
-                title1: S.current.dong,
-                title2: S.current.luu,
-                onPressed1: () {
-                  Navigator.pop(context);
-                },
-                onPressed2: () {},
+              child: ButtonBottom(
+               text: S.current.tao_lich_hop,
+                onPressed: (){},
               ),
             )
           ],
