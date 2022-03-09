@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_den_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_tablet.dart';
+
 import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
@@ -135,24 +138,24 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
 
   void pushScreen({String id = '', String taskId = ''}) {
     if (_vanBanCubit.isVanBanDen) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ChiTietVanBanDenTablet(
-      //       taskId: taskId,
-      //       processId: id,
-      //     ),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanDenTablet(
+            taskId: taskId,
+            processId: id,
+          ),
+        ),
+      );
     } else {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ChiTietVanBanTablet(
-      //       id: id,
-      //     ),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanTablet(
+            id: id,
+          ),
+        ),
+      );
     }
   }
 }

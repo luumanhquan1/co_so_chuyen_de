@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
+
 import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/domain/model/home/WidgetType.dart';
 import '/generated/l10n.dart';
@@ -112,14 +114,14 @@ class _NhiemVuWidgetState extends State<NhiemVuWidget> {
                     padding: const EdgeInsets.only(top: 16),
                     child: GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ChiTietNhiemVuPhoneScreen(
-                        //       id: result.id,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChiTietNhiemVuPhoneScreen(
+                              id: result.id,
+                            ),
+                          ),
+                        );
                       },
                       child: ContainerInfoWidget(
                         title: result.title,

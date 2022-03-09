@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
+
 import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/domain/model/home/WidgetType.dart';
 import '/generated/l10n.dart';
@@ -110,14 +112,14 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: GestureDetector(
                       onTap: (){
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ChiTietNhiemVuTabletScreen(
-                        //       id: result.id,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChiTietNhiemVuTabletScreen(
+                              id: result.id,
+                            ),
+                          ),
+                        );
                       },
                       child: ContainerInfoWidget(
                         title: result.title,

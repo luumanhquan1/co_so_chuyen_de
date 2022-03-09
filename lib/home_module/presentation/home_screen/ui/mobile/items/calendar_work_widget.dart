@@ -1,5 +1,7 @@
 
 
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
+
 import '/home_module/widgets/text/views/loading_only.dart';
 
 import '/generated/l10n.dart';
@@ -90,14 +92,14 @@ class _CalendarWorkWidgetState extends State<CalendarWorkWidget> {
                     padding: const EdgeInsets.only(top: 16),
                     child: GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ChiTietLichLamViecScreen(
-                        //       id: result.id,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChiTietLichLamViecScreen(
+                              id: result.id,
+                            ),
+                          ),
+                        );
                       },
                       child: ContainerInfoWidget(
                         status: result

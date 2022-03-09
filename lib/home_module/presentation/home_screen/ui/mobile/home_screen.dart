@@ -1,5 +1,12 @@
 
 
+
+import 'package:ccvc_mobile/home_module/config/app_config.dart';
+import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.dart';
+import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
+
+import '/home_module/utils/constants/app_constants.dart';
+
 import '/data/exception/app_exception.dart';
 import '/generated/l10n.dart';
 import '/home_module/config/resources/styles.dart';
@@ -34,6 +41,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
+    checkDeviceType();
 
   }
 
@@ -61,12 +69,12 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
             leading: Center(
               child: GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   PageRouteBuilder(
-                  //     pageBuilder: (_, __, ___) => const SearchScreen(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => const SearchScreen(),
+                    ),
+                  );
                 },
                 child: SvgPicture.asset(
                   ImageAssets.icSearchWhite,
@@ -95,12 +103,12 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   PageRouteBuilder(
-                    //     pageBuilder: (_, __, ___) => const ThongBaoScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const ThongBaoScreen(),
+                      ),
+                    );
                   },
                   child: const SizedBox(
                     width: 24,
@@ -155,5 +163,12 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         ),
       ),
     );
+  }
+  void checkDeviceType() {
+    final shortestSide =
+        MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+            .size
+            .shortestSide;
+    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
   }
 }

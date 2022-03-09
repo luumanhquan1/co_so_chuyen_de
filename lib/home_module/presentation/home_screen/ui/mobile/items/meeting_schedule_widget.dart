@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/domain/model/home/WidgetType.dart';
@@ -94,14 +96,14 @@ class _MeetingScheduleWidgetState extends State<MeetingScheduleWidget> {
                     padding: const EdgeInsets.only(top: 16),
                     child: GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailMeetCalenderScreen(
-                        //       id: result.id,
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailMeetCalenderScreen(
+                              id: result.id,
+                            ),
+                          ),
+                        );
                       },
                       child: ContainerInfoWidget(
                         status: result.isHopTrucTuyen

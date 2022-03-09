@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/home_module/config/app_config.dart';
+import 'package:ccvc_mobile/home_module/utils/constants/app_constants.dart';
+
 import '/data/exception/app_exception.dart';
 import '/widgets/views/state_stream_layout.dart';
 
@@ -46,6 +49,7 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
     );
     super.initState();
     homeCubit.loadApi();
+    checkDeviceType();
   }
 
   @override
@@ -185,5 +189,12 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
         ),
       ),
     );
+  }
+  void checkDeviceType() {
+    final shortestSide =
+        MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+            .size
+            .shortestSide;
+    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
   }
 }

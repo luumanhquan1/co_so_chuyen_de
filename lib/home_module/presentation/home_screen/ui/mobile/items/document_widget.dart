@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_den_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/chi_tiet_van_ban_di_mobile.dart';
+
 import '/home_module/widgets/text/text/no_data_widget.dart';
 
 import '/home_module/domain/model/home/WidgetType.dart';
@@ -141,24 +144,24 @@ class _DocumentWidgetState extends State<DocumentWidget> {
 
   void pushScreen({String id = '', String taskId = ''}) {
     if (_vanBanCubit.isVanBanDen) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ChiTietVanBanDenMobile(
-      //       taskId: taskId,
-      //       processId: id,
-      //     ),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanDenMobile(
+            taskId: taskId,
+            processId: id,
+          ),
+        ),
+      );
     } else {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ChiTietVanBanDiMobile(
-      //       id: id,
-      //     ),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChiTietVanBanDiMobile(
+            id: id,
+          ),
+        ),
+      );
     }
   }
 }
