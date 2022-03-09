@@ -84,7 +84,7 @@ class _TextFormFieldWidgetState extends State<DangKyPhatBieuWidget> {
         ),
         DoubleButtonBottom(
           title1: S.current.dong,
-          title2: S.current.luu,
+          title2: S.current.xac_nhan,
           onPressed1: () {
             Navigator.pop(context);
           },

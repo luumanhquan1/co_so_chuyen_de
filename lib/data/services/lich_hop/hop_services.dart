@@ -114,10 +114,17 @@ abstract class HopServices {
   @GET(ApiConstants.MEETING_ROOM_DANH_SACH_THIET_BI)
   Future<ThietBiPhongHopResponse> getListThietBiPhongHop(
       @Query('lichHopId') String lichHopId);
+
   @GET(ApiConstants.DANH_SACH_PHAT_BIEU_LICH_HOP)
   Future<DanhSachPhatBieuLichHopDataResponse> getDanhSachPhatBieuLichHop(
-    @Query('lichHopId') String lichHopId,
+      @Query('status') int stutus,
+      @Query('lichHopId') String lichHopId,
   );
+
+  @GET(ApiConstants.DANH_SACH_PHAT_BIEU_LICH_HOP)
+  Future<DanhSachPhatBieuLichHopDataResponse> getDanhSachPhatBieuLichHopNoStatus(
+      @Query('lichHopId') String lichHopId,
+      );
 
   @GET(ApiConstants.DANH_SACH_BIEU_QUYET_LICH_HOP)
   Future<DanhSachBieuQuyetLichHopDataResponse> getDanhSachBieuQuyetLichHop(

@@ -105,11 +105,15 @@ mixin HopRepository {
   );
 
   Future<Result<List<PhatBieuModel>>> getDanhSachPhatBieuLichHop(
+    int status,
     String lichHopId,
   );
 
-  Future<Result<List<PhatBieuModel>>>
-      getDanhSachBieuQuyetLichHop(String id);
+  Future<Result<List<PhatBieuModel>>> getDanhSachPhatBieuLichHopNoStatus(
+    String lichHopId,
+  );
+
+  Future<Result<List<PhatBieuModel>>> getDanhSachBieuQuyetLichHop(String id);
 
   Future<Result<ChuongTrinhHopModel>> getDanhSachCanBoTPTG(String id);
 
@@ -136,8 +140,8 @@ mixin HopRepository {
   Future<Result<List<ThietBiPhongHopModel>>> getListThietBiPhongHop(
       String lichHopId);
 
-
-  Future<Result<ChiTietLichHopModel>> taoLichHop(TaoLichHopRequest taoLichHopRequest);
+  Future<Result<ChiTietLichHopModel>> taoLichHop(
+      TaoLichHopRequest taoLichHopRequest);
 
   Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id);
 }

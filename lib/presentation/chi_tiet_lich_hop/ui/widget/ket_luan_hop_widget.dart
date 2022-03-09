@@ -6,9 +6,14 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/extension_status.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_moi_nhiem_vu_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +25,8 @@ class KetLuanHopWidget extends StatefulWidget {
   final DetailMeetCalenderCubit cubit;
   final String id;
 
-
-  KetLuanHopWidget({Key? key, required this.cubit,required this.id}) : super(key: key);
+  KetLuanHopWidget({Key? key, required this.cubit, required this.id})
+      : super(key: key);
 
   @override
   _KetLuanHopWidgetState createState() => _KetLuanHopWidgetState();
@@ -38,15 +43,9 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SelectOnlyWidget(
-      title: S.current.ket_luan_hop,
-      child: GestureDetector(
-        onTap: () {
-          if (isShow) {
-            isShow = false;
-            setState(() {});
-          }
-        },
+    return screenDevice(
+      mobileScreen: SelectOnlyWidget(
+        title: S.current.ket_luan_hop,
         child: Stack(
           children: [
             Column(
@@ -77,6 +76,7 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                   },
                 ),
                 StreamBuilder<DanhSachNhiemVuLichHopModel>(
+                  initialData: widget.cubit.danhSachNhiemVu,
                   stream: widget.cubit.streamDanhSachNhiemVuLichHop,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
@@ -99,105 +99,282 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                 )
               ],
             ),
-            if (isShow)
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 32,
+            Column(
+              children: [
+                const SizedBox(
+                  height: 32,
+                ),
+                Align(
+                  alignment: const Alignment(0.9, 0.5),
+                  child: MenuSelectWidget(
+                    listSelect: [
+                      QData(
+                        urlImage: ImageAssets.icPlus2,
+                        text: S.current.tao_moi_nhiem_vu,
+                        onTap: () {
+                          showBottomSheetCustom(
+                            context,
+                            title: S.current.tao_moi_nhiem_vu,
+                            child: const TaoMoiNhiemVuWidget(),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icDocument2,
+                        text: S.current.ket_luan_cuoc_hop,
+                        onTap: () {
+                          widget.cubit.sendMailKetLuatHop(widget.id);
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icMessage,
+                        text: S.current.gui_mail_ket_luan,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_gui_mai_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.gui_email,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.IcEmail),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.Group2,
+                        text: S.current.thu_hoi,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_thu_hoi_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.thu_hoi_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.icThuHoiKL),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icDeleteRed,
+                        text: S.current.xoa,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_xoa_klh_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.xoa_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.XoaKLHop),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  Align(
-                    alignment: const Alignment(0.5, 0.5),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 18.0.textScale(),
-                        horizontal: 17.0.textScale(),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+      tabletScreen: Padding(
+        padding: const EdgeInsets.only(top: 60),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StreamBuilder<KetLuanHopModel>(
+                  stream: widget.cubit.ketLuanHopStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final data = snapshot.data;
+
+                      return ItemKetLuanHopWidget(
+                        title: S.current.ket_luan_hop,
+                        time: data?.thoiGian ?? '',
+                        trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
+                        tinhTrang: data?.tinhTrang ?? TinhTrang.TrungBinh,
+                        onTap: () {
+                          isShow = !isShow;
+                          setState(() {});
+                        },
+                      );
+                    } else {
+                      return const SizedBox(
+                        height: 200,
+                        child: NodataWidget(),
+                      );
+                    }
+                  },
+                ),
+                StreamBuilder<DanhSachNhiemVuLichHopModel>(
+                  initialData: widget.cubit.danhSachNhiemVu,
+                  stream: widget.cubit.streamDanhSachNhiemVuLichHop,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final data = snapshot.data;
+                      return ItemDanhSachNhiemVu(
+                        hanXuLy: DateTime.parse(data?.hanXuLy ?? ''),
+                        loaiNV: data?.loaiNhiemVu ?? '',
+                        ndTheoDoi: data?.noiDungTheoDoi ?? '',
+                        soNhiemVu: data?.soNhiemVu ?? '',
+                        tinhHinhThucHien: data?.tinhHinhThucHienNoiBo ?? '',
+                        trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
+                      );
+                    } else {
+                      return const SizedBox(
+                        height: 200,
+                        child: NodataWidget(),
+                      );
+                    }
+                  },
+                )
+              ],
+            ),
+            Column(
+              children: [
+                const SizedBox(
+                  height: 32,
+                ),
+                Align(
+                  alignment: const Alignment(0.9, 0.5),
+                  child: MenuSelectWidget(
+                    listSelect: [
+                      QData(
+                        urlImage: ImageAssets.icPlus2,
+                        text: S.current.tao_moi_nhiem_vu,
+                        onTap: () {
+                          showBottomSheetCustom(
+                            context,
+                            title: S.current.tao_moi_nhiem_vu,
+                            child: const TaoMoiNhiemVuWidget(),
+                          );
+                        },
                       ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: shadowContainerColor.withOpacity(0.05),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(12),
+                      QData(
+                        urlImage: ImageAssets.icMessage,
+                        text: S.current.ket_luan_cuoc_hop,
+                        onTap: () {},
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: listKetThucView
-                            .map(
-                              (e) => GestureDetector(
-                                onTap: () {
-                                  showBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return e.ketThuc.getScreen();
-                                    },
-                                  );
-                                },
-                                child: itemListKetThuc(
-                                  name: e.name,
-                                  icon: e.icon,
-                                ),
-                              ),
-                            )
-                            .toList(),
+                      QData(
+                        urlImage: ImageAssets.icDocument2,
+                        text: S.current.gui_mail_ket_luan,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_gui_mai_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.gui_email,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.IcEmail),
+                          );
+                        },
                       ),
-                    ),
+                      QData(
+                        urlImage: ImageAssets.Group2,
+                        text: S.current.thu_hoi,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_thu_hoi_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.thu_hoi_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.icThuHoiKL),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icDeleteRed,
+                        text: S.current.xoa,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_xoa_klh_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.xoa_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.XoaKLHop),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              )
-            else
-              Container()
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
   }
+}
 
-  Widget itemListKetThuc({required String icon, required String name}) {
-    return Container(
-      width: 170,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(child: SvgPicture.asset(icon)),
-          SizedBox(
-            width: 10.0.textScale(),
+Widget itemListKetThuc({required String icon, required String name}) {
+  return Container(
+    width: 170,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(child: SvgPicture.asset(icon)),
+        SizedBox(
+          width: 10.0.textScale(),
+        ),
+        Expanded(
+          flex: 7,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                textAlign: TextAlign.center,
+                style: textNormalCustom(
+                  color: textTitle,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.0.textScale(),
+                ),
+              ),
+              SizedBox(
+                height: 14.0.textScale(),
+              ),
+              Container(
+                height: 1,
+                color: borderColor.withOpacity(0.5),
+              ),
+              SizedBox(
+                height: 14.0.textScale(),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: textNormalCustom(
-                    color: textTitle,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14.0.textScale(),
-                  ),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-                Container(
-                  height: 1,
-                  color: borderColor.withOpacity(0.5),
-                ),
-                SizedBox(
-                  height: 14.0.textScale(),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
 
 class ItemKetLuanHopWidget extends StatelessWidget {
@@ -239,12 +416,6 @@ class ItemKetLuanHopWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  onTap();
-                },
-                child: SvgPicture.asset(ImageAssets.ic_baocao),
-              )
             ],
           ),
           widgetRow(

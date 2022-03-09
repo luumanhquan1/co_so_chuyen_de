@@ -20,6 +20,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_s
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,6 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
     super.initState();
     cubit = DetailMeetCalenderCubit();
     cubit.initData(widget.id);
-    cubit.soLuongPhatBieuData(id: widget.id);
-    cubit.getDanhSachPhatBieuLichHop(widget.id);
-    cubit.getDanhSachBieuQuyetLichHop(widget.id);
   }
 
   @override
@@ -66,17 +64,53 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
               QData(
                 urlImage: ImageAssets.icHuy,
                 text: S.current.huy_lich_hop,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.huy_lich,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.ic_delete_do,
                 text: S.current.xoa_lich,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.khong,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_sua_lich_nay_khong,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.sua_lich,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icThuHoi,
@@ -178,19 +212,22 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                     );
                   },
                 ),
-                const SizedBox(
-                  height: 16,
+                Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 10),
+                  child: CongTacChuanBiWidget(
+                    cubit: cubit,
+                  ),
                 ),
-                CongTacChuanBiWidget(
-                  cubit: cubit,
-                ),
-                const ChuongTrinhHopWidget(),
-                const SizedBox(
-                  height: 16,
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: ChuongTrinhHopWidget(),
                 ),
                 const MoiNguoiThamGiaWidget(),
                 const TaiLieuWidget(),
-                const PhatBieuWidget(),
+                PhatBieuWidget(
+                  cubit: cubit,
+                  id: widget.id,
+                ),
                 const BieuQuyetWidget(),
                 KetLuanHopWidget(
                   cubit: cubit,

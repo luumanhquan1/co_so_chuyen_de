@@ -577,8 +577,14 @@
   "nhan_de_biet" : "Nhận để biết",
   "sun_day" : "Sunday",
   "nhac_lich" : "Nhắc lịch",
-  "dv_cap_nhat": "ĐV cập nhật"
-
+  "dv_cap_nhat": "ĐV cập nhật",
+  "ban_chan_chan_sua_lich_nay_khong" : "Bạn có chắc chắn muốn sửa lịch này không",
+  "ket_luan_cuoc_hop" : "Kết luận cuộc họp",
+  "ban_co_chac_chan_muon_gui_mai_nay" : "Bạn có muốn gửi mail kết luận họp này?",
+  "ban_co_chac_chan_muon_xoa_klh_nay" : "Bạn có chắc muốn xóa kết luận họp này?",
+  "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
+  "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
+  "xoa_ket_luan_hop" : "Xóa kết luận họp"
 }
 
 

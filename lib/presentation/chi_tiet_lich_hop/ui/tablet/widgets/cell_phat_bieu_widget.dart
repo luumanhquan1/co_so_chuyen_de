@@ -12,12 +12,14 @@ class CellPhatBieu extends StatefulWidget {
   final PhatBieuModel infoModel;
   final DetailMeetCalenderCubit cubit;
   final int index;
+  final bool isthePhatBieu;
 
   const CellPhatBieu({
     Key? key,
     required this.infoModel,
     required this.cubit,
     required this.index,
+    this.isthePhatBieu = true,
   }) : super(key: key);
 
   @override
@@ -133,7 +135,8 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
               ],
             ),
             if (widget.cubit.typeStatus.value !=
-                widget.cubit.danhSachphatBieu)
+                    widget.cubit.danhSachphatBieu &&
+                widget.isthePhatBieu == true)
               CustomCheckBox(
                 title: '',
                 isCheck: widget.cubit.check,

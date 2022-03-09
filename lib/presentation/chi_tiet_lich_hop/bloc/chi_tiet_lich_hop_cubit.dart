@@ -36,10 +36,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   HopRepository get hopRp => Get.find();
   bool check = false;
-  int danhSachphatBieu = 1;
-  int choDuyet = 2;
-  int daDuyet = 3;
-  int huyDuyet = 4;
+  int danhSachphatBieu = 0;
+  int choDuyet = 1;
+  int daDuyet = 2;
+  int huyDuyet = 3;
   List<String> dataThuhoi = ['thu hoi', 'thu hồi'];
   List<String> dataBocBang = ['boc bang', 'boc bang2'];
   List<String> dataThemYkien = ['cuộc họp 1', 'cuộc họp 2'];
@@ -120,6 +120,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     unawaited(queue.add(() => getThongTinPhongHopApi()));
     unawaited(queue.add(() => getDanhSachThietBi()));
     await queue.onComplete.catchError((er) {});
+    await getDanhSachPhatBieuLichHop(typeStatus.value, id);
+    await getDanhSachBieuQuyetLichHop(id);
+    await soLuongPhatBieuData(id: id);
   }
 
   Future<void> postMoiHop({
@@ -161,9 +164,19 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       error: (error) {},
     );
   }
-  // danh sach phat bieu
-  Future<void> getDanhSachPhatBieuLichHop(String lichHopId) async {
-    final result = await hopRp.getDanhSachPhatBieuLichHop(lichHopId);
+
+  void getValueStatus(int value) {
+    if (value == danhSachphatBieu) {
+      typeStatus.sink.add(value);
+      getDanhSachPhatBieuLichHopNoStatus(id);
+    } else {
+      typeStatus.sink.add(value);
+      getDanhSachPhatBieuLichHop(value, id);
+    }
+  }
+
+  Future<void> getDanhSachPhatBieuLichHop(int status, String lichHopId) async {
+    final result = await hopRp.getDanhSachPhatBieuLichHop(status, lichHopId);
     result.when(
         success: (res) {
           List<PhatBieuModel> phatBieu = res.toList();
@@ -171,13 +184,27 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         },
         error: (err) {});
   }
- // danh sach bieu quyet
+
+  // danh cho duyet, da duyet, huy duyet
+  Future<void> getDanhSachPhatBieuLichHopNoStatus(String lichHopId) async {
+    final result = await hopRp.getDanhSachPhatBieuLichHopNoStatus(lichHopId);
+    result.when(
+        success: (res) {
+          List<PhatBieuModel> phatBieu = res.toList();
+          phatbieu.sink.add(phatBieu);
+        },
+        error: (err) {});
+  }
+
+  // danh sach bieu quyet
   Future<void> getDanhSachBieuQuyetLichHop(String id) async {
     final result = await hopRp.getDanhSachBieuQuyetLichHop(id);
-    result.when(success: (res) {
-      List<PhatBieuModel> resBieuQuyet = res.toList();
-      bieuQuyet.sink.add(resBieuQuyet);
-    }, error: (err) {});
+    result.when(
+        success: (res) {
+          List<PhatBieuModel> resBieuQuyet = res.toList();
+          bieuQuyet.sink.add(resBieuQuyet);
+        },
+        error: (err) {});
   }
 
   Future<void> danhSachCanBoTPTG({required String id}) async {
@@ -250,8 +277,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  Future<void> sendMailKetLuatHop() async {
-    final result = await hopRp.sendMailKetLuanHop(id);
+  Future<void> sendMailKetLuatHop(String idSendmail) async {
+    final result = await hopRp.sendMailKetLuanHop(idSendmail);
     result.when(
       success: (res) {},
       error: (err) {
@@ -380,19 +407,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<List<PhatBieuModel>> get streamBieuQuyet => bieuQuyet.stream;
 
-
-  final BehaviorSubject<int> typeStatus = BehaviorSubject.seeded(1);
+  final BehaviorSubject<int> typeStatus = BehaviorSubject.seeded(0);
 
   Stream<int> get getTypeStatus => typeStatus.stream;
-
-  void getValueStatus(int value) {
-    if (value == choDuyet) {
-    } else if (value == daDuyet) {
-    } else if (value == huyDuyet) {
-    } else {}
-    typeStatus.sink.add(value);
-    print(value);
-  }
 
   void changeType(int value) {
     if (value == 1) {}
@@ -402,16 +419,14 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> soLuongPhatBieuData({required String id}) async {
     final result = await hopRp.getSoLuongPhatBieu(id);
-    result.when(
-        success: (res) {
-          dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
-          dataSoLuongPhatBieu.choDuyet = res.choDuyet;
-          dataSoLuongPhatBieu.daDuyet = res.daDuyet;
-          dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
-        },
-        error: (err) {
-          print('lỗi số lượng phát biểu');
-        });
+    result.when(success: (res) {
+      dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
+      dataSoLuongPhatBieu.choDuyet = res.choDuyet;
+      dataSoLuongPhatBieu.daDuyet = res.daDuyet;
+      dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
+    }, error: (err) {
+      print('lỗi số lượng phát biểu');
+    });
   }
 
   List<PhatBieuModel> listPhatBieu = [];
@@ -466,9 +481,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           );
           ketLuanHopSubject.sink.add(ketLuanHopModel);
         },
-        error: (err) {
-          print('aaaaaaaaaaaaaaaaaaaaaaaa looi ket luan hop');
-        });
+        error: (err) {});
   }
 
   BehaviorSubject<KetLuanHopModel> ketLuanHopSubject = BehaviorSubject();
@@ -481,7 +494,45 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   Stream<DanhSachNhiemVuLichHopModel> get streamDanhSachNhiemVuLichHop =>
       danhSachNhiemVuLichHopSubject.stream;
 
-  HandingCommentLichHop handingCommentLichHop = HandingCommentLichHop.emty();
+  HandingCommentLichHop handingCommentLichHop = HandingCommentLichHop(
+    'Id',
+    'NoiDung',
+    'ChucVu',
+    'Avatar',
+    'TenNhanVien',
+    'NgayTao',
+    [],
+  );
+
+  DanhSachNhiemVuLichHopModel danhSachNhiemVu = DanhSachNhiemVuLichHopModel(
+    soNhiemVu: 'fake',
+    noiDungTheoDoi: 'fake ',
+    tinhHinhThucHienNoiBo: ' fake',
+    hanXuLy: 'fake ',
+    loaiNhiemVu: 'fake',
+    trangThai: TrangThai.DaDuyet,
+  );
+
+  List<ThanhPhanThamGiaModel> thanhPhanThamGiaModelData = [
+    ThanhPhanThamGiaModel(
+        vaiTro: 'fake',
+        trangThai: 'fake',
+        tenDonVi: 'fake',
+        tebCanBo: 'fake',
+        ndCongViec: 'fake',
+        id: 'abc',
+        diemDanh: 'fake',
+        statusDiemDanh: false),
+    ThanhPhanThamGiaModel(
+        vaiTro: 'fake',
+        trangThai: 'fake',
+        tenDonVi: 'fake',
+        tebCanBo: 'fake',
+        ndCongViec: 'fake',
+        id: 'abcd',
+        diemDanh: 'fake',
+        statusDiemDanh: false)
+  ];
 
   void dispose() {}
 }
