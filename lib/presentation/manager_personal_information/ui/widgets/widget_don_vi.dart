@@ -11,8 +11,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetDonVi extends StatefulWidget {
   final ManagerPersonalInformationCubit cubit;
+  final bool isCheckTitle;
 
-  const WidgetDonVi({Key? key, required this.cubit}) : super(key: key);
+  const WidgetDonVi({Key? key, required this.cubit, required this.isCheckTitle})
+      : super(key: key);
 
   @override
   _WidgetDonViState createState() => _WidgetDonViState();
@@ -24,10 +26,13 @@ class _WidgetDonViState extends State<WidgetDonVi> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          S.current.don_vi,
-          style: titleAppbar(fontSize: 16.0.textScale()),
-        ),
+        if (widget.isCheckTitle)
+          Text(
+            S.current.don_vi,
+            style: titleAppbar(fontSize: 16.0.textScale()),
+          )
+        else
+          Container(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

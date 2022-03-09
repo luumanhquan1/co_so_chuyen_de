@@ -33,12 +33,8 @@ class _DoubleButtonEditScreenState extends State<DoubleButtonEditScreen> {
             widget.onPressed1();
           },
           child: Container(
-            padding: const EdgeInsets.only(
-              left: 27,
-              right: 27,
-              top: 13,
-              bottom: 13,
-            ),
+            padding:
+                const EdgeInsets.only(left: 61, right: 61, top: 13, bottom: 13),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0.textScale(space: 4.0)),
               color: buttonColor2,
