@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/type_calendar.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/phone/chi_tiet_lich_lam_viec_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,16 +80,22 @@ class _InListFormState extends State<InListForm> {
                         urlImage:
                             'https://th.bing.com/th/id/R.91e66c15f578d577c2b40dcf097f6a98?rik=41oluNFG8wUvYA&pid=ImgRaw&r=0',
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChiTietLichLamViecScreen(
-                                id: _cubit.dataLichLvModel
-                                        .listLichLVModel?[index].id ??
-                                    '',
-                              ),
-                            ),
-                          );
+                          final String typeCalendar = _cubit.dataLichLvModel
+                                  .listLichLVModel?[index].typeSchedule ??
+                              'MeetingSchedule';
+
+                          typeCalendar.getTypeCalendar
+                              .navigatorDetail(context, _cubit);
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => ChiTietLichLamViecScreen(
+                          //       id: _cubit.dataLichLvModel
+                          //               .listLichLVModel?[index].id ??
+                          //           '',
+                          //     ),
+                          //   ),
+                          // );
                         },
                         isTrung: _cubit.dataLichLvModel.listLichLVModel?[index]
                                 .isLichLap ??

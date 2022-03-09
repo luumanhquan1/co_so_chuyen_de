@@ -28,7 +28,6 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
   void initState() {
     super.initState();
     cubit = widget.cubit;
-    cubit.selectTypeCalendarSubject.add([true, false]);
   }
 
   @override
