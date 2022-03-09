@@ -1,8 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+
+
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/bao_chi_widget.dart';
+import 'package:ccvc_mobile/home_module/domain/model/home/press_network_model.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/widgets/bao_chi_widget.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/title_item.dart';
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';

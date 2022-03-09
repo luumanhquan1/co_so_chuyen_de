@@ -212,6 +212,7 @@ class _ThemThietBiScreenState extends State<ThemThietBiScreen> {
                 ),
                 InputInfoUserWidget(
                   title: S.current.so_luong,
+                  isObligatory: true,
                   child: TextFieldValidator(
                     textInputType: TextInputType.number,
                     controller: soLuong,

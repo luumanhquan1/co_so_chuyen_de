@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 
 class FakeData {
   static final List<WidgetModel> listUse = [

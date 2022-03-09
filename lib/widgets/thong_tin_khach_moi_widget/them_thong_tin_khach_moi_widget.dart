@@ -105,7 +105,7 @@ class _ThemDonViPhoiHopKhacScreenState
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       InputInfoUserWidget(
-                        title: S.current.ten_don_vi,
+                        title: S.current.ho_va_ten,
                         child: TextFieldValidator(
                           hintText: S.current.ten_don_vi,
                           validator: (value) {
@@ -114,7 +114,7 @@ class _ThemDonViPhoiHopKhacScreenState
                         ),
                       ),
                       InputInfoUserWidget(
-                        title: S.current.dau_moi_lam_viec,
+                        title: S.current.ten_don_vi,
                         child: TextFieldValidator(
                           hintText: S.current.dau_moi_lam_viec,
                         ),
