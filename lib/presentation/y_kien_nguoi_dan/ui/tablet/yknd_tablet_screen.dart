@@ -116,8 +116,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 4,
+                        Flexible(
+                          flex: 5,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -136,8 +136,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                         const SizedBox(
                           width: 100,
                         ),
-                        Expanded(
-                          flex: 6,
+                        Flexible(
+                          flex:6,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
