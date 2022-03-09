@@ -5,7 +5,7 @@ const baseImg = 'lib/home_module/assets/images';
 
 class ImageAssets {
   ///Svg path
-
+  static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String icTongSoNhiemVu = '$baseImg/ic_tong_so_nhiem_vu.svg';
   static const String icHoanThanhNhiemVu =
       '$baseImg/ic_hoan_thanh-nhiem_vu.svg';
@@ -35,8 +35,6 @@ class ImageAssets {
   static const String icCalendar = '$baseImg/ic_calendar.svg';
   static const String icWork = '$baseImg/ic_work.svg';
 
-  static const String appBarBackground = '$baseImg/app_bar_background.png';
-  static const String headerBackground = '$baseImg/header_background.png';
 
   static const String icThoiTiet = '$baseImg/ic_thoi_tiet.png';
 
@@ -50,8 +48,9 @@ class ImageAssets {
   static const String icEditBlue = '$baseImg/ic_edit_blue.svg';
 
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
-  static const String bgAppBarTablet = '$baseImg/bg_app_bar.png';
   static const String imgHeaderTablet = '$baseImg/ic_header_tablet.png';
+  static const String headerBackground = '$baseImg/header_background.png';
+  static const String appBarBackground = '$baseImg/app_bar_background.png';
 
   static SvgPicture svgAssets(
     String name, {

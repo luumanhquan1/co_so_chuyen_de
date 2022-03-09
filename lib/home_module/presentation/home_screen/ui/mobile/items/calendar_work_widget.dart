@@ -118,6 +118,11 @@ class _CalendarWorkWidgetState extends State<CalendarWorkWidget> {
                             value: result.convertTime(),
                           ),
                           InfoData(
+                            urlIcon: ImageAssets.icAddress,
+                            key: S.current.dia_diem,
+                            value: result.address,
+                          ),
+                          InfoData(
                             urlIcon: ImageAssets.icPeople,
                             key: S.current.nguoi_chu_tri,
                             value: result.nguoiChuTri,

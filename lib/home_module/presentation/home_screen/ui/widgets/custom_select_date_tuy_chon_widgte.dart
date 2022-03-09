@@ -86,85 +86,99 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
   Widget _tablet() {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Center(
-        child: Container(
-          width: 394,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            border: Border.all(color: borderColor.withOpacity(0.5)),
-            boxShadow: [
-              BoxShadow(
-                color: shadowContainerColor.withOpacity(0.05),
-                offset: const Offset(0, 4),
-                blurRadius: 10,
-              )
-            ],
+      body: Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SizedBox.expand(
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            const SizedBox(
-            height: 20,
-          ),
-              Text(
-                S.current.chon_khoang_thoi_gian,
-                style: textNormalCustom(fontSize: 16, color: textTitle),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: dateSelectCell(
-                      value: startDate,
-                      title: S.current.tu_ngay,
-                      onSelect: selectStartDate,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                  Expanded(
-                    child: dateSelectCell(
-                      value: endDate,
-                      title: S.current.den_ngay,
-                      onSelect: selectEndDate,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  buttonWidget(
-                    S.current.bo_qua,
-                    () {},
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  buttonWidget(
-                    S.current.hien_thi,
-                    () {
-                      widget.onXacNhan(startDate, endDate);
-                    },
-                    isClose: false,
+          Center(
+            child: Container(
+              width: 394,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: Border.all(color: borderColor.withOpacity(0.5)),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadowContainerColor.withOpacity(0.05),
+                    offset: const Offset(0, 4),
+                    blurRadius: 10,
                   )
                 ],
               ),
-              const SizedBox(
-                height: 32,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    S.current.chon_khoang_thoi_gian,
+                    style: textNormalCustom(fontSize: 16, color: textTitle),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: dateSelectCell(
+                          value: startDate,
+                          title: S.current.tu_ngay,
+                          onSelect: selectStartDate,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 28,
+                      ),
+                      Expanded(
+                        child: dateSelectCell(
+                          value: endDate,
+                          title: S.current.den_ngay,
+                          onSelect: selectEndDate,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      buttonWidget(
+                        S.current.bo_qua,
+                        () {},
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      buttonWidget(
+                        S.current.hien_thi,
+                        () {
+                          widget.onXacNhan(startDate, endDate);
+                        },
+                        isClose: false,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -181,7 +195,7 @@ class _CustomSelectDateWidgetState extends State<CustomSelectDateWidget> {
           title,
           style: textNormal(titleItemEdit, 14.0.textScale()),
         ),
-       const SizedBox(
+        const SizedBox(
           height: 8,
         ),
         CustomSelectDate(

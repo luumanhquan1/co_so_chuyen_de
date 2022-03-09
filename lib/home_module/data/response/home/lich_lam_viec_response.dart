@@ -126,6 +126,7 @@ class Items {
       nguoiChuTriId: canBoChuTri?.id ?? '',
       trangThaiTheoUser: trangThaiTheoUser ?? 0,
       id: id ?? '',
+      address: location ?? ''
     );
   }
 }

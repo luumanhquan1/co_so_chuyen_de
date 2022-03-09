@@ -161,7 +161,7 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget> {
       final offsetDialog = _key.currentContext?.size?.height ?? 0;
       final double insertBottomDialog = insertBottom - offsetDialog - 120;
       if (insertBottomDialog < 0) {
-        
+
         widget.controller.jumpTo(
           widget.controller.offset + (-insertBottomDialog),
         );
