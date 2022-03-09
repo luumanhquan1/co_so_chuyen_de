@@ -1,10 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_item.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/home_provider.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/widgets/mequee_widget.dart';
+import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/home_item.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/home_provider.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/widgets/mequee_widget.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';

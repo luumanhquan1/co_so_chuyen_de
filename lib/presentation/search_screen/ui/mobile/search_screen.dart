@@ -1,8 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/fake_data.dart';
 import 'package:ccvc_mobile/presentation/search_screen/bloc/search_cubit.dart';
 import 'package:ccvc_mobile/presentation/search_screen/fake_data.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/bao_chi_mang_xa_hoi_widget.dart';
