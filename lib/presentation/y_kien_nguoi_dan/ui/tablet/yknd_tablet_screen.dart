@@ -116,8 +116,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 4,
+                        Flexible(
+                          flex: 5,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -136,7 +136,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                         const SizedBox(
                           width: 100,
                         ),
-                        Expanded(
+                        Flexible(
                           flex: 6,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +148,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 onTap: (int value) {},
                               ),
                               RowIndicatorTablet(
-                                chartData: cubit.chartYKienNduoiDan,
+                                paddingleft: 0,
+                                chartData: cubit.chartYKienNduoiDanTablet,
                               ),
                               Container(height: 20),
                             ],
@@ -158,8 +159,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                     ),
                     Row(
                       children: [
-                        Expanded(
-                          flex: 4,
+                        Flexible(
+                          flex: 5,
                           child: Row(
                             children: [
                               Expanded(
@@ -179,7 +180,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                   value:
                                       cubit.dashboardModel.soLuongDenHan ?? 0,
                                   onTap: () {},
-                                  color: statusCalenderRed,
+                                  color: labelColor,
                                   statusName: S.current.den_han,
                                 ),
                               ),
@@ -191,7 +192,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                   value:
                                       cubit.dashboardModel.soLuongQuaHan ?? 0,
                                   onTap: () {},
-                                  color: textColorForum,
+                                  color: statusCalenderRed,
                                   statusName: S.current.qua_han,
                                 ),
                               ),
@@ -201,7 +202,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                         const SizedBox(
                           width: 100,
                         ),
-                        Expanded(
+                        Flexible(
                           flex: 6,
                           child: Row(
                             children: [
@@ -209,7 +210,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 child: SizedBox(),
                               ),
                               Expanded(
-                                flex: 4,
+                                flex: 10,
                                 child: Row(
                                   children: [
                                     Expanded(
@@ -228,11 +229,11 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                     Expanded(
                                       child: BoxStatusVanBan(
                                         value: cubit
-                                                .dashboardModel.soLuongQuaHan ??
+                                                .dashboardModel.soLuongDenHan ??
                                             0,
                                         onTap: () {},
-                                        color: statusCalenderRed,
-                                        statusName: S.current.qua_han,
+                                        color: labelColor,
+                                        statusName: S.current.den_han,
                                       ),
                                     ),
                                     const SizedBox(
@@ -240,12 +241,12 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                     ),
                                     Expanded(
                                       child: BoxStatusVanBan(
-                                        value: cubit.dashboardModel
-                                                .soLuongThuongKhan ??
+                                        value: cubit
+                                                .dashboardModel.soLuongQuaHan ??
                                             0,
                                         onTap: () {},
-                                        color: textColorForum,
-                                        statusName: S.current.thuong_khan,
+                                        color: statusCalenderRed,
+                                        statusName: S.current.qua_han,
                                       ),
                                     ),
                                   ],
