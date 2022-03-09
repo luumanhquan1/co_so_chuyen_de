@@ -31,15 +31,22 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     ImageAssets.icDongHoYKND,
   ];
   List<ChartData> chartYKienNduoiDan = [
-    ChartData(S.current.dang_xu_ly, 10, numberOfCalenders),
+    ChartData(S.current.cong_dvc_quoc_gia, 10, numberOfCalenders),
     ChartData(S.current.thu_dien_tu, 10, labelColor),
     ChartData(S.current.thu_dien_tu_hai, 10, unselectLabelColor),
     ChartData(S.current.ung_dung_chi_dao_dieu_hanh, 5, itemWidgetUsing),
     ChartData(S.current.he_thong_quan_ly_van_ban, 5, itemWidgetNotUse),
   ];
+  List<ChartData> chartYKienNduoiDanTablet = [
+    ChartData(S.current.thu_dien_tu, 10, labelColor),
+    ChartData(S.current.cong_dvc_quoc_gia, 10, numberOfCalenders),
+    ChartData(S.current.ung_dung_chi_dao_dieu_hanh, 5, itemWidgetUsing),
+    ChartData(S.current.thu_dien_tu_hai, 10, unselectLabelColor),
+    ChartData(S.current.he_thong_quan_ly_van_ban, 5, itemWidgetNotUse),
+  ];
 
   List<ChartData> chartPhanLoaiYKND = [
-    ChartData(S.current.cong_dvc_quoc_gia, 30, choXuLyColor),
+    ChartData(S.current.dang_xu_ly, 30, choXuLyColor),
     ChartData(S.current.da_hoan_thanh, 12, daXuLyColor),
     ChartData(S.current.chua_thuc_hien, 14, choVaoSoColor),
   ];
