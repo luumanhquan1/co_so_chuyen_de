@@ -65,7 +65,7 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   padding: const EdgeInsets.only(top: 10),
                                   child: ThongTinGuiNhanWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded, thongTinGuiNhanModel: [],
+                                    thongTinGuiNhanModel: [],
                                   ),
                                 ),
                                 Padding(
@@ -73,21 +73,21 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   child:
                                       LichSuCapNhatTinhHinhWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded2, lichSuVanBanCapNhatModel: [],
+                                    lichSuVanBanCapNhatModel: [],
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuTraLaiWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded3, lichSuVanBanTraLaiModel: [],
+                                   lichSuVanBanTraLaiModel: [],
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuThuHoiWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded4, lichSuVanBanThuHoiModel: [],
+                                   lichSuVanBanThuHoiModel: [],
                                   ),
                                 ),
                                 Padding(
@@ -95,7 +95,6 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   child:
                                       LichSuVanBanLienThongWidgetExpandTablet(
                                     cubit: cubit,
-                                    expanded: cubit.expanded5,
                                   ),
                                 ),
                               ],
@@ -115,7 +114,6 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                         children: [
                           YKienSuLyWidgetExpandTablet(
                             cubit: cubit,
-                            expanded: cubit.expanded6,
                           ),
                           const SizedBox(
                             height: 28.0,

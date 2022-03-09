@@ -55,8 +55,8 @@ class _ExpandOnlyNhiemVuState extends State<ExpandOnlyNhiemVu> {
                   ),
                   Icon(
                     isExpand
-                        ? Icons.keyboard_arrow_down_outlined
-                        : Icons.keyboard_arrow_up_rounded,
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_outlined,
                     color: AqiColor,
                   ),
                 ],

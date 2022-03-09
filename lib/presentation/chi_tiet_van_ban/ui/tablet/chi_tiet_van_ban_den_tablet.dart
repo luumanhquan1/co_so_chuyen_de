@@ -106,7 +106,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                           return ThongTinGuiNhanWidgetExpandTablet(
                                             thongTinGuiNhanModel: data,
                                             cubit: cubit,
-                                            expanded: cubit.expanded,
                                           );
                                         }),
                                   ),
@@ -121,7 +120,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                         return LichSuCapNhatTinhHinhWidgetExpandTablet(
                                           lichSuVanBanCapNhatModel: data,
                                           cubit: cubit,
-                                          expanded: cubit.expanded2,
                                         );
                                       },
                                     ),
@@ -136,7 +134,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                         final data = snapshot.data ?? [];
                                         return LichSuTraLaiWidgetExpandTablet(
                                           cubit: cubit,
-                                          expanded: cubit.expanded3,
                                           lichSuVanBanTraLaiModel: data,
                                         );
                                       },
@@ -152,7 +149,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                         final data = snapshot.data ?? [];
                                         return LichSuThuHoiWidgetExpandTablet(
                                           cubit: cubit,
-                                          expanded: cubit.expanded4,
                                           lichSuVanBanThuHoiModel: data,
                                         );
                                       },
@@ -164,7 +160,6 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                                     child:
                                         LichSuVanBanLienThongWidgetExpandTablet(
                                       cubit: cubit,
-                                      expanded: cubit.expanded5,
                                     ),
                                   ),
                                 ],
@@ -179,31 +174,35 @@ class _ChiTietVanBanDenTabletState extends State<ChiTietVanBanDenTablet> {
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.only(left: 15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          YKienSuLyWidgetExpandTablet(
-                            cubit: cubit,
-                            expanded: cubit.expanded6,
-                          ),
-                          const SizedBox(
-                            height: 28.0,
-                          ),
-                          SizedBox(
-                            width: 160,
-                            child: ButtonCustomBottom(
-                              title: S.current.xem_luong,
-                              onPressed: () {
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      StreamProcessScreen(),
-                                );
-                              },
-                              isColorBlue: true,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            YKienSuLyWidgetExpandTablet(
+                              cubit: cubit,
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 28.0,
+                            ),
+                            SizedBox(
+                              width: 160,
+                              child: ButtonCustomBottom(
+                                title: S.current.xem_luong,
+                                onPressed: () {
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        StreamProcessScreen(),
+                                  );
+                                },
+                                isColorBlue: true,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 28.0,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
