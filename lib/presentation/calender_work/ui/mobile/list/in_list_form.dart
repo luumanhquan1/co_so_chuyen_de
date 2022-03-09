@@ -86,16 +86,6 @@ class _InListFormState extends State<InListForm> {
 
                           typeCalendar.getTypeCalendar
                               .navigatorDetail(context, _cubit);
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => ChiTietLichLamViecScreen(
-                          //       id: _cubit.dataLichLvModel
-                          //               .listLichLVModel?[index].id ??
-                          //           '',
-                          //     ),
-                          //   ),
-                          // );
                         },
                         isTrung: _cubit.dataLichLvModel.listLichLVModel?[index]
                                 .isLichLap ??
