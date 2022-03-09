@@ -101,14 +101,26 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                 onTapDay: () {
                   setState(() {});
                   cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
+                  cubit.listDSLH.clear();
+                  cubit.page = 1;
+                  cubit.postDSLHDay();
+                  cubit.getDashboard();
                 },
                 onTapWeek: () {
                   setState(() {});
                   cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
+                  cubit.listDSLH.clear();
+                  cubit.page = 1;
+                  cubit.postDSLHWeek();
+                  cubit.getDashboard();
                 },
                 onTapMonth: () {
                   setState(() {});
                   cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
+                  cubit.listDSLH.clear();
+                  cubit.page = 1;
+                  cubit.postDSLHMonth();
+                  cubit.getDashboard();
                 },
               ),
               BlocBuilder<LichHopCubit, LichHopState>(
@@ -116,9 +128,30 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                 builder: (context, state) {
                   return TableCandarTablet(
                     type: state.type,
-                    onChangeRange: (DateTime? start, DateTime? end,
-                        DateTime? focusedDay) {},
-                    onChange: (DateTime startDate, DateTime endDate) {},
+                    onChangeRange: (
+                      DateTime? start,
+                      DateTime? end,
+                      DateTime? focusedDay,
+                    ) {},
+                    onChange: (
+                      DateTime startDate,
+                      DateTime endDate,
+                      DateTime selectDay,
+                    ) {
+                      cubit.startDate = startDate;
+                      cubit.endDate = endDate;
+                      cubit.selectDay = selectDay;
+                      cubit.listDSLH.clear();
+                      cubit.page = 1;
+
+                      if (state.type == Type_Choose_Option_Day.DAY) {
+                        cubit.postDSLHDay();
+                        cubit.getDashboard();
+                      } else {
+                        cubit.getDashboard();
+                        cubit.postDanhSachLichHop();
+                      }
+                    },
                   );
                 },
               ),
