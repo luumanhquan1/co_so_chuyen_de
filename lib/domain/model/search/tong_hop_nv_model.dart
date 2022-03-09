@@ -1,4 +1,6 @@
-import 'package:ccvc_mobile/domain/model/home/calendar_metting_model.dart';
+
+
+import 'package:ccvc_mobile/home_module/domain/model/home/calendar_metting_model.dart';
 
 class TongHopNVModel {
   String time;

@@ -45,9 +45,6 @@ void configureDependencies() {
     AccountImpl(Get.find(),Get.find()),
   );
 
-  Get.put(HomeServiceGateWay(provideDio(baseOption: BaseURLOption.GATE_WAY)));
-  Get.put(HomeServiceCCVC(provideDio()));
-  Get.put<HomeRepository>(HomeImpl(Get.find(), Get.find()));
   // lich lam viec
   Get.put(
     LichLamViecService(

@@ -1,7 +1,8 @@
 import 'package:ccvc_mobile/config/app_config.dart';
-import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/mobile/home_screen.dart';
-import 'package:ccvc_mobile/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/mobile/home_screen.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+
 import 'package:ccvc_mobile/presentation/widget_manage/fake_data.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:rxdart/subjects.dart';

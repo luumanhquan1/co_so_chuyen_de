@@ -7,6 +7,8 @@ import 'package:ccvc_mobile/data/di/module.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/data/di/module.dart';
+import 'package:ccvc_mobile/home_module/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ Future<void> mainApp() async {
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   await HiveLocal.init();
+  await HiveLocalHome.init();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -35,6 +38,7 @@ Future<void> mainApp() async {
     ),
   );
   configureDependencies();
+  configureDependenciesHome();
   runApp(const MyApp());
 }
 
