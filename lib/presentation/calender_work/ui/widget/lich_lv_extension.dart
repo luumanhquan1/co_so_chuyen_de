@@ -155,7 +155,7 @@ extension LichLv on CalenderState {
       return TableCalendarWidget(
         type: type,
         isCalendar: false,
-        onChange: (DateTime start, DateTime end) {
+        onChange: (DateTime start, DateTime end, selectDay) {
           cubit.callApi(start, end);
         },
         onChangeRange:
@@ -164,7 +164,7 @@ extension LichLv on CalenderState {
     }
     return TableCalendarWidget(
       type: type,
-      onChange: (DateTime start, DateTime end) {
+      onChange: (DateTime start, DateTime end, selectDay) {
         cubit.startDates = start;
         cubit.endDates = end;
         cubit.listDSLV.clear();

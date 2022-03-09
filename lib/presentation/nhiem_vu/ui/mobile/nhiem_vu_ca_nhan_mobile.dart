@@ -196,7 +196,7 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
           ),
         ),
         TableCalendarWidget(
-          onChange: (DateTime selectedDay, DateTime focusedDay) {},
+          onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {},
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
         ),

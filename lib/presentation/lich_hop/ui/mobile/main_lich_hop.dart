@@ -140,7 +140,7 @@ class _MainLichHopState extends State<MainLichHop> {
                                 child: Container(
                                   margin: EdgeInsets.only(
                                     left: 16.0,
-                                    top: cubit.isCheckNgay ? 82 : 50,
+                                    top: cubit.isCheckNgay ? 150 : 120,
                                   ),
                                   height: 88,
                                   child: ListView.builder(
@@ -223,15 +223,26 @@ class _MainLichHopState extends State<MainLichHop> {
                           onTapDay: () {
                             setState(() {});
                             cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
+                            cubit.listDSLH.clear();
+                            cubit.page = 1;
+                            cubit.postDSLHDay();
+                            cubit.getDashboard();
                           },
                           onTapWeek: () {
                             setState(() {});
                             cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
-                            cubit.postDanhSachLichHop();
+                            cubit.listDSLH.clear();
+                            cubit.page = 1;
+                            cubit.postDSLHWeek();
+                            cubit.getDashboard();
                           },
                           onTapmonth: () {
                             setState(() {});
                             cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
+                            cubit.listDSLH.clear();
+                            cubit.page = 1;
+                            cubit.postDSLHMonth();
+                            cubit.getDashboard();
                           },
                         );
                       },
@@ -244,22 +255,29 @@ class _MainLichHopState extends State<MainLichHop> {
                       if (state is LichHopStateDangLich ||
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
-                          return TableCalendarWidget(
-
-                            onChange:
-                                (DateTime startDate, DateTime endDate) {
-                              cubit.startDate = startDate;
-                              cubit.endDate = endDate;
+                        return TableCalendarWidget(
+                          type: state.type,
+                          onChange: (DateTime startDate, DateTime endDate,
+                              DateTime selectDay,) {
+                            cubit.startDate = startDate;
+                            cubit.endDate = endDate;
+                            cubit.selectDay = selectDay;
+                            cubit.listDSLH.clear();
+                            cubit.page = 1;
+                            if (state.type == Type_Choose_Option_Day.DAY) {
+                              cubit.postDSLHDay();
                               cubit.getDashboard();
-
+                            } else {
+                              cubit.getDashboard();
                               cubit.postDanhSachLichHop();
-                            },
-                            onChangeRange: (
-                              DateTime? start,
-                              DateTime? end,
-                              DateTime? focusedDay,
-                            ) {},
-                          );
+                            }
+                          },
+                          onChangeRange: (
+                            DateTime? start,
+                            DateTime? end,
+                            DateTime? focusedDay,
+                          ) {},
+                        );
                       }
                       return Container();
                     },

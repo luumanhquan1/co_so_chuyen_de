@@ -275,7 +275,7 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
               ),
             ),
             TableCalendarWidget(
-              onChange: (DateTime startDate, DateTime endDate) {
+              onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {
                 qlvbCubit.startDate = startDate.formatApi;
                 qlvbCubit.endDate = endDate.formatApi;
                 qlvbCubit.dataVBDen(
