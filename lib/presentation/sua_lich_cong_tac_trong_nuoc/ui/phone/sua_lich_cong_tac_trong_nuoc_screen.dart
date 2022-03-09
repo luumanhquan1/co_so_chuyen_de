@@ -41,22 +41,8 @@ class _SuaLichCongTacTrongNuocPhoneState
       taoLichLamViecCubit: taoLichLamViecCubit,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.85,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
-          ),
         ),
         child: ExpandGroup(
           child: Column(
@@ -66,29 +52,6 @@ class _SuaLichCongTacTrongNuocPhoneState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          height: 6,
-                          width: 57,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: Colors.grey.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        S.current.sua_lich_cong_tac_trong_nuoc,
-                        style: textNormalCustom(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: textTitle,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Form(
                         key: _formKey,
                         child: TextFormWidget(

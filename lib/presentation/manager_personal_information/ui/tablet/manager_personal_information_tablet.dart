@@ -20,8 +20,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ManagerPersonalInformationTablet extends StatefulWidget {
   final String id;
-  const ManagerPersonalInformationTablet({Key? key,
-  required this.id}) : super(key: key);
+
+  const ManagerPersonalInformationTablet({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   _ManagerPersonalInformationTabletState createState() =>
@@ -32,7 +35,6 @@ class _ManagerPersonalInformationTabletState
     extends State<ManagerPersonalInformationTablet> {
   final ManagerPersonalInformationCubit _cubit =
       ManagerPersonalInformationCubit();
-
 
   @override
   void initState() {
@@ -141,12 +143,14 @@ class _ManagerPersonalInformationTabletState
                           Expanded(
                             child: WidgetDonVi(
                               cubit: _cubit,
+                              isCheckTitle: true,
                             ),
                           ),
                           spaceW30,
                           Expanded(
                             child: WidgetUngDung(
                               cubit: _cubit,
+                              isCheckTitle: true,
                             ),
                           )
                         ],
