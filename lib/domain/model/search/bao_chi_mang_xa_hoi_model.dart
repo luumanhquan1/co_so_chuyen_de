@@ -1,4 +1,6 @@
-import 'package:ccvc_mobile/domain/model/home/press_network_model.dart';
+
+
+import 'package:ccvc_mobile/home_module/domain/model/home/press_network_model.dart';
 
 class BaoChiMangXaHoiModel {
   String time;

@@ -1,4 +1,6 @@
-import 'package:ccvc_mobile/domain/model/home/document_model.dart';
+
+
+import 'package:ccvc_mobile/home_module/domain/model/home/document_model.dart';
 
 class VanBanDiModel {
   String time;
