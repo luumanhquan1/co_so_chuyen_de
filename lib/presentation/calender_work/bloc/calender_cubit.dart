@@ -24,6 +24,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(const CalenderStateIntial());
   int page = 1;
   int totalPage = 1;
+  int pageSize = 100;
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -56,8 +57,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DateTime endDates = DateTime.now();
 
   void callApi(DateTime? startDate, DateTime? endDate) {
-    //listDSLV.clear();
-    //page = 1;
     callApiNgay(startDate ?? startDates, endDate ?? endDates);
   }
 
@@ -72,7 +71,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       donViId:
           HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
       pageIndex: page,
-      pageSize: 10,
+      pageSize: pageSize,
       isLichCuaToi: true,
     );
     dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
@@ -156,6 +155,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   DataSource getCalenderDataSource(DataLichLvModel dataLichLvModels) {
     final List<Appointment> appointments = [];
+
     final RecurrenceProperties recurrence =
         RecurrenceProperties(startDate: DateTime.now());
     recurrence.recurrenceType = RecurrenceType.daily;
@@ -202,8 +202,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void chooseTypeListLv(Type_Choose_Option_List type) {
     if (type == Type_Choose_Option_List.DANG_LICH) {
+      pageSize = 100;
       emit(const LichLVStateDangLich(Type_Choose_Option_Day.DAY));
     } else if (type == Type_Choose_Option_List.DANG_LIST) {
+      pageSize = 10;
       emit(const LichLVStateDangList(Type_Choose_Option_Day.DAY));
     } else if (type == Type_Choose_Option_List.DANH_SACH) {
       emit(const LichLVStateDangDanhSach(Type_Choose_Option_Day.DAY));

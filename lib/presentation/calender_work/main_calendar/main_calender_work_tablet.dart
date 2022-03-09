@@ -29,7 +29,7 @@ class CalenderWorkDayTablet extends StatefulWidget {
 }
 
 class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
-  final CalenderCubit cubit = CalenderCubit();
+  CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
@@ -95,19 +95,19 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     cubit.page = 1;
                     cubit.callApi(cubit.startDates, cubit.endDates);
                   },
-                  onTapMonth: () {
-                    setState(() {});
-                    cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
-                    cubit.listDSLV.clear();
-                    cubit.page = 1;
-                    cubit.callApiMonth();
-                  },
                   onTapWeek: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
                     cubit.listDSLV.clear();
                     cubit.page = 1;
                     cubit.callApiTuan();
+                  },
+                  onTapMonth: () {
+                    setState(() {});
+                    cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
+                    cubit.callApiMonth();
                   },
                   cubit: cubit,
                 ),

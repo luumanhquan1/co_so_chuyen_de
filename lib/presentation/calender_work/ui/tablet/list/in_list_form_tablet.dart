@@ -32,6 +32,7 @@ class _InListFormTabletState extends State<InListFormTablet> {
   void initState() {
     super.initState();
     widget.cubit.getDay();
+    widget.cubit.listDSLV = [];
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {

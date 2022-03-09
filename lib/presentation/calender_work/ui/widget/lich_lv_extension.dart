@@ -48,14 +48,20 @@ extension LichLVOpition on Type_Choose_Option_Day {
     }
   }
 
-  Widget getCalendarLvStateDangLich() {
+  Widget getCalendarLvStateDangLich(CalenderCubit cubit) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const CalenderDayTablet();
+        return CalenderDayTablet(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const CalenderWeekTablet();
+        return CalenderWeekTablet(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.MONTH:
-        return const CalenderMonthTablet();
+        return CalenderMonthTablet(
+          cubit: cubit,
+        );
       default:
         return Container();
     }
@@ -90,14 +96,20 @@ extension LichLVOpition on Type_Choose_Option_Day {
     }
   }
 
-  Widget getCalendarLvStateDangLichMobile() {
+  Widget getCalendarLvStateDangLichMobile(CalenderCubit cubit) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const InCalenderForm();
+        return InCalenderForm(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const CalenderWeekMobile();
+        return CalenderWeekMobile(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.MONTH:
-        return const CalenderFormMonth();
+        return CalenderFormMonth(
+          cubit: cubit,
+        );
       default:
         return Container();
     }
@@ -129,7 +141,7 @@ extension LichLv on CalenderState {
     if (this is LichLVStateDangList) {
       return type.getLichLVDangList(cubit);
     } else if (this is LichLVStateDangLich) {
-      return type.getCalendarLvStateDangLich();
+      return type.getCalendarLvStateDangLich(cubit);
     } else {
       return const SizedBox();
     }
@@ -144,7 +156,7 @@ extension LichLv on CalenderState {
         type: type,
         isCalendar: false,
         onChange: (DateTime start, DateTime end) {
-          cubit.callApiNgay(start, end);
+          cubit.callApi(start, end);
         },
         onChangeRange:
             (DateTime? start, DateTime? end, DateTime? focusedDay) {},
@@ -153,7 +165,11 @@ extension LichLv on CalenderState {
     return TableCalendarWidget(
       type: type,
       onChange: (DateTime start, DateTime end) {
-        cubit.callApiNgay(start, end);
+        cubit.startDates = start;
+        cubit.endDates = end;
+        cubit.listDSLV.clear();
+        cubit.page = 1;
+        cubit.callApi(start, end);
       },
       onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
     );
@@ -177,7 +193,7 @@ extension LichLv on CalenderState {
     if (this is LichLVStateDangList) {
       return type.getLichLVDangListMobile(cubit);
     } else if (this is LichLVStateDangLich) {
-      return type.getCalendarLvStateDangLichMobile();
+      return type.getCalendarLvStateDangLichMobile(cubit);
     } else {
       return const SizedBox();
     }

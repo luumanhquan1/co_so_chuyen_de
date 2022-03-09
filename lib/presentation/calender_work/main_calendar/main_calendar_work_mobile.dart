@@ -16,7 +16,6 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +31,7 @@ class CalenderWorkDayMobile extends StatefulWidget {
 
 class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
   CalenderCubit cubit = CalenderCubit();
-  GlobalKey globalKey = GlobalKey();
   double hegihtCalendar = 120;
-  double x = 0.0;
-  double y = 0.0;
 
   @override
   void initState() {
@@ -167,20 +163,9 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                     BlocBuilder<CalenderCubit, CalenderState>(
                       bloc: cubit,
                       builder: (context, state) {
-                        return TableCalendarWidget(
+                        return state.tableCalendar(
+                          cubit: cubit,
                           type: state.type,
-                          onChange: (DateTime start, DateTime end) {
-                            cubit.startDates = start;
-                            cubit.endDates = end;
-                            cubit.listDSLV.clear();
-                            cubit.page = 1;
-                            cubit.callApi(start, end);
-                          },
-                          onChangeRange: (
-                            DateTime? start,
-                            DateTime? end,
-                            DateTime? focusedDay,
-                          ) {},
                         );
                       },
                     ),
@@ -214,15 +199,15 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
 
 Widget itemCalendarWorkIscheck(CalenderCubit cubit) {
   return Padding(
-    padding: const EdgeInsets.only(
-      top: 16,
+    padding: EdgeInsets.only(
+      top: cubit.isCheck ? 44 : 34,
     ),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
         margin: EdgeInsets.only(
           left: 16.0,
-          top: cubit.isCheck ? 150 : 120,
+          top: cubit.isCheck ? 54 : 32,
         ),
         height: 88,
         child: Row(

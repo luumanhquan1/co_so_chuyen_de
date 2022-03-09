@@ -8,7 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class InCalenderForm extends StatefulWidget {
-  const InCalenderForm({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const InCalenderForm({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _InCalenderFormState createState() => _InCalenderFormState();
@@ -16,13 +18,11 @@ class InCalenderForm extends StatefulWidget {
 
 class _InCalenderFormState extends State<InCalenderForm> {
   final CalendarController _controller = CalendarController();
-  final CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApi(cubit.startDates, cubit.endDates);
   }
 
   @override
@@ -36,7 +36,7 @@ class _InCalenderFormState extends State<InCalenderForm> {
             child: Padding(
               padding: const EdgeInsets.only(right: 16),
               child: StreamBuilder<DataLichLvModel>(
-                stream: cubit.streamListLich,
+                stream: widget.cubit.listLichSubject,
                 builder: (context, snapshot) {
                   return SfCalendar(
                     viewHeaderHeight: 0.0,
@@ -52,7 +52,7 @@ class _InCalenderFormState extends State<InCalenderForm> {
                     selectionDecoration:
                         const BoxDecoration(color: Colors.transparent),
                     appointmentTimeTextFormat: 'hh:mm:ss a',
-                    dataSource: cubit.getCalenderDataSource(
+                    dataSource: widget.cubit.getCalenderDataSource(
                       snapshot.data ?? DataLichLvModel(),
                     ),
                     appointmentBuilder: (
