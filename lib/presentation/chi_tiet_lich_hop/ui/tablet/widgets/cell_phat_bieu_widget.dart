@@ -56,37 +56,31 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.ten_can_bo}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.ten_can_bo}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.noi_dung}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.noi_dung}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.thoi_gian}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.thoi_gian}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
@@ -108,37 +102,31 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.nguoiPhatBieu}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.nguoiPhatBieu}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.ndPhatBieu}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.ndPhatBieu}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.tthoiGian}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.tthoiGian}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
