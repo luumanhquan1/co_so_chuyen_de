@@ -103,11 +103,9 @@ class ManagerPersonalInformationCubit
         if (isXa) {
           xaModel = res;
           xaSubject.sink.add(xaModel);
-          print('${res.length} =============1');
         } else {
           huyenModel = res;
           huyenSubject.sink.add(huyenModel);
-          print('${res.length} ==================2');
         }
       },
       error: (error) {},

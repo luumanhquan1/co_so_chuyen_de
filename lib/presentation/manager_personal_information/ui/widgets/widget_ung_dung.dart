@@ -8,8 +8,13 @@ import 'package:flutter/material.dart';
 
 class WidgetUngDung extends StatefulWidget {
   final ManagerPersonalInformationCubit cubit;
+  final bool isCheckTitle;
 
-  const WidgetUngDung({Key? key, required this.cubit}) : super(key: key);
+  const WidgetUngDung({
+    Key? key,
+    required this.cubit,
+    required this.isCheckTitle,
+  }) : super(key: key);
 
   @override
   _WidgetUngDungState createState() => _WidgetUngDungState();
@@ -21,15 +26,18 @@ class _WidgetUngDungState extends State<WidgetUngDung> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          S.current.ung_dung,
-          style: titleAppbar(),
-        ),
+        if (widget.isCheckTitle)
+          Text(
+            S.current.ung_dung,
+            style: titleAppbar(),
+          )
+        else
+          Container(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(bottom: 16, right: 16),
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

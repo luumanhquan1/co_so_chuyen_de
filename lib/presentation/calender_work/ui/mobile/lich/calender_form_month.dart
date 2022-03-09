@@ -8,7 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderFormMonth extends StatefulWidget {
-  const CalenderFormMonth({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const CalenderFormMonth({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _CalenderFormMonthState createState() => _CalenderFormMonthState();
@@ -16,13 +18,11 @@ class CalenderFormMonth extends StatefulWidget {
 
 class _CalenderFormMonthState extends State<CalenderFormMonth> {
   final CalendarController _controller = CalendarController();
-  final CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApiMonth();
   }
 
   @override
@@ -32,7 +32,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
         spaceH20,
         Expanded(
           child: StreamBuilder<DataLichLvModel>(
-            stream: cubit.streamListLich,
+            stream: widget.cubit.streamListLich,
             builder: (context, snapshot) {
               return SfCalendar(
                 firstDayOfWeek: 1,
@@ -44,7 +44,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
                 view: CalendarView.month,
                 todayHighlightColor: labelColor,
                 appointmentTimeTextFormat: 'hh:mm:ss a',
-                dataSource: cubit.getCalenderDataSource(
+                dataSource: widget.cubit.getCalenderDataSource(
                   snapshot.data ?? DataLichLvModel(),
                 ),
                 viewHeaderStyle: ViewHeaderStyle(

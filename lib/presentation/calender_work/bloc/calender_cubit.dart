@@ -24,6 +24,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   CalenderCubit() : super(const CalenderStateIntial());
   int page = 1;
   int totalPage = 1;
+  int pageSize = 100;
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -52,11 +53,11 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DataLichLvModel dataLichLvModel = DataLichLvModel();
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  DateTime startDates = DateTime.now();
+  DateTime endDates = DateTime.now();
 
-  void callApi() {
-    callApiNgay(startDate, endDate);
+  void callApi(DateTime? startDate, DateTime? endDate) {
+    callApiNgay(startDate ?? startDates, endDate ?? endDates);
   }
 
   void callApiNgay(
@@ -70,7 +71,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       donViId:
           HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
       pageIndex: page,
-      pageSize: 10,
+      pageSize: pageSize,
       isLichCuaToi: true,
     );
     dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
@@ -83,7 +84,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void callApiTuan() {
     final day = DateTime.now();
-
     final startDate = day.subtract(Duration(days: day.weekday - 1));
     final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     callApiNgay(startDate, endDate);
@@ -141,6 +141,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     final result = await _lichLamViec.getListLichLamViec(data);
     result.when(
       success: (res) {
+        // listDSLV.clear();
         totalPage = res.totalPage ?? 1;
         dataLichLvModel = res;
         listDSLV.addAll(dataLichLvModel.listLichLVModel ?? []);
@@ -154,6 +155,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   DataSource getCalenderDataSource(DataLichLvModel dataLichLvModels) {
     final List<Appointment> appointments = [];
+
     final RecurrenceProperties recurrence =
         RecurrenceProperties(startDate: DateTime.now());
     recurrence.recurrenceType = RecurrenceType.daily;
@@ -200,8 +202,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   void chooseTypeListLv(Type_Choose_Option_List type) {
     if (type == Type_Choose_Option_List.DANG_LICH) {
+      pageSize = 100;
       emit(const LichLVStateDangLich(Type_Choose_Option_Day.DAY));
     } else if (type == Type_Choose_Option_List.DANG_LIST) {
+      pageSize = 10;
       emit(const LichLVStateDangList(Type_Choose_Option_Day.DAY));
     } else if (type == Type_Choose_Option_List.DANH_SACH) {
       emit(const LichLVStateDangDanhSach(Type_Choose_Option_Day.DAY));
@@ -251,7 +255,27 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       numberOfCalendars: 0,
       typeId: '',
       typeName: '',
-    )
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
+    LichLamViecDashBroadItem(
+      numberOfCalendars: 0,
+      typeId: '',
+      typeName: '',
+    ),
   ]);
 
   Stream<List<LichLamViecDashBroadItem>> get streamLichLamViecRight =>

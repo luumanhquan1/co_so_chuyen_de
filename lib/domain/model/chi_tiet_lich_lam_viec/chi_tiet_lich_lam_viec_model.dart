@@ -29,23 +29,31 @@ class ChiTietLichLamViecModel {
   });
 
   List<TypeData> dataRow() {
-    List<TypeData> list = [
+    final List<TypeData> list = [
       TypeData(icon: ImageAssets.icNhacLai, value: time, type: typeData.text),
       TypeData(
-          icon: ImageAssets.icCalendarUnFocus,
-          value: date,
-          type: typeData.text),
+        icon: ImageAssets.icCalendarUnFocus,
+        value: date,
+        type: typeData.text,
+      ),
       TypeData(
-          icon: ImageAssets.icCalendarUnFocus,
-          value: loaiLich,
-          type: typeData.text),
+        icon: ImageAssets.icCalendarUnFocus,
+        value: loaiLich,
+        type: typeData.text,
+      ),
       TypeData(
-          icon: ImageAssets.icNhacLai, value: nhacLai, type: typeData.text),
+        icon: ImageAssets.icNotify,
+        value: nhacLai,
+        type: typeData.text,
+      ),
       TypeData(icon: ImageAssets.icPerson, value: chuTri, type: typeData.text),
       TypeData(icon: ImageAssets.icWork, value: linhVuc, type: typeData.text),
       TypeData(icon: ImageAssets.icViTri, value: diaDiem, type: typeData.text),
       TypeData(
-          icon: ImageAssets.icDocument, value: noiDung, type: typeData.text),
+        icon: ImageAssets.icDocument,
+        value: noiDung,
+        type: typeData.text,
+      ),
     ];
 
     return list;

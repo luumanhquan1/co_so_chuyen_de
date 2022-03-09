@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderWeekTablet extends StatefulWidget {
-  const CalenderWeekTablet({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const CalenderWeekTablet({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<CalenderWeekTablet> createState() => _CalenderWeekTabletState();
@@ -14,13 +16,11 @@ class CalenderWeekTablet extends StatefulWidget {
 
 class _CalenderWeekTabletState extends State<CalenderWeekTablet> {
   final CalendarController _controller = CalendarController();
-  final CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApiTuan();
   }
 
   @override
@@ -28,7 +28,7 @@ class _CalenderWeekTabletState extends State<CalenderWeekTablet> {
     return Container(
       margin: const EdgeInsets.only(right: 30, left: 30),
       child: StreamBuilder<DataLichLvModel>(
-        stream: cubit.streamListLich,
+        stream: widget.cubit.streamListLich,
         builder: (context, snapshot) {
           return SfCalendar(
             showCurrentTimeIndicator: false,
@@ -53,7 +53,7 @@ class _CalenderWeekTabletState extends State<CalenderWeekTablet> {
             appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
             todayHighlightColor: labelColor,
             appointmentTimeTextFormat: 'hh:mm:ss a',
-            dataSource: cubit.getCalenderDataSource(
+            dataSource: widget.cubit.getCalenderDataSource(
               snapshot.data ?? DataLichLvModel(),
             ),
             appointmentBuilder: (
