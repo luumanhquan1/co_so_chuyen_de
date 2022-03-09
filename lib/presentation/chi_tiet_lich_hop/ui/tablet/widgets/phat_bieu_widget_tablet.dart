@@ -15,7 +15,11 @@ import 'cell_phat_bieu_widget.dart';
 import 'dang_ky_phat_bieu_widget.dart';
 
 class PhatBieuWidgetTablet extends StatefulWidget {
-  const PhatBieuWidgetTablet({Key? key}) : super(key: key);
+  final DetailMeetCalenderCubit cubit;
+  final String id;
+
+  const PhatBieuWidgetTablet({Key? key, required this.cubit, required this.id})
+      : super(key: key);
 
   @override
   _PhatBieuWidgetTabletState createState() => _PhatBieuWidgetTabletState();
@@ -24,7 +28,6 @@ class PhatBieuWidgetTablet extends StatefulWidget {
 class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
   @override
   Widget build(BuildContext context) {
-    final DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
     return Padding(
       padding: const EdgeInsets.only(top: 60),
       child: SingleChildScrollView(
@@ -45,10 +48,10 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 );
               },
             ),
-            buttonStatePhatBieu(cubit: cubit),
+            buttonStatePhatBieu(cubit: widget.cubit),
             StreamBuilder<List<PhatBieuModel>>(
-              initialData: cubit.listPhatBieu,
-              stream: cubit.streamPhatBieu,
+              initialData: widget.cubit.listPhatBieu,
+              stream: widget.cubit.streamPhatBieu,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];
                 if (_list.isNotEmpty) {
@@ -61,7 +64,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                         children: [
                           CellPhatBieu(
                             infoModel: _list[index],
-                            cubit: cubit,
+                            cubit: widget.cubit,
                             index: index,
                           ),
                         ],
@@ -76,7 +79,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
                 }
               },
             ),
-            buttonPhatBieu(cubit: cubit)
+            buttonPhatBieu(cubit: widget.cubit)
           ],
         ),
       ),
@@ -138,7 +141,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
               ButtonStatus(
                 lengthList: cubit.dataSoLuongPhatBieu.danhSachPhatBieu,
                 onTap: () {
-                  cubit.getValueStatus(1);
+                  cubit.getValueStatus(0);
                 },
                 text: S.current.danh_sach_phat_bieu,
                 backgroup: cubit.typeStatus.value == cubit.danhSachphatBieu
@@ -153,7 +156,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
               ButtonStatus(
                 lengthList: cubit.dataSoLuongPhatBieu.choDuyet,
                 onTap: () {
-                  cubit.getValueStatus(2);
+                  cubit.getValueStatus(1);
                 },
                 text: S.current.cho_duyet,
                 backgroup: cubit.typeStatus.value == cubit.choDuyet
@@ -168,7 +171,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
               ButtonStatus(
                 lengthList: cubit.dataSoLuongPhatBieu.daDuyet,
                 onTap: () {
-                  cubit.getValueStatus(3);
+                  cubit.getValueStatus(2);
                 },
                 text: S.current.da_duyet,
                 backgroup: cubit.typeStatus.value == cubit.daDuyet
@@ -183,7 +186,7 @@ class _PhatBieuWidgetTabletState extends State<PhatBieuWidgetTablet> {
               ButtonStatus(
                 lengthList: cubit.dataSoLuongPhatBieu.huyDuyet,
                 onTap: () {
-                  cubit.getValueStatus(4);
+                  cubit.getValueStatus(3);
                 },
                 text: S.current.huy_duyet,
                 backgroup: cubit.typeStatus.value == cubit.huyDuyet

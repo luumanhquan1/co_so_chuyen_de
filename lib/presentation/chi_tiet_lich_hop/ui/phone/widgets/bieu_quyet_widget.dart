@@ -55,6 +55,7 @@ class _BieuQuyetWidgetState extends State<BieuQuyetWidget> {
                       infoModel: _list[index],
                       cubit: cubit,
                       index: index,
+                      isthePhatBieu: false,
                     );
                   },
                 );

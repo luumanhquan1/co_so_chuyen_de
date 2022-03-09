@@ -177,7 +177,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                   children: [
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(1);
+                        widget.cubit.getValueStatus(0);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -199,7 +199,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(2);
+                        widget.cubit.getValueStatus(1);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -221,7 +221,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(3);
+                        widget.cubit.getValueStatus(2);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -243,7 +243,7 @@ class _StatePhatBieuWidgetState extends State<StatePhatBieuWidget>
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: () {
-                        widget.cubit.getValueStatus(4);
+                        widget.cubit.getValueStatus(3);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

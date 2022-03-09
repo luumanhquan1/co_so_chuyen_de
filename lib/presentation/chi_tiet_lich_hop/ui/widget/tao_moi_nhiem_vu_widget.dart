@@ -33,23 +33,8 @@ class _TaoMoiNhiemVuWidgetState extends State<TaoMoiNhiemVuWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      height: MediaQuery.of(context).size.height * 0.96,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-        ),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.8,
       ),
       child: FormGroup(
         key: keyGroup,
@@ -61,26 +46,6 @@ class _TaoMoiNhiemVuWidgetState extends State<TaoMoiNhiemVuWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 16),
-                        height: 6,
-                        width: 57,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: Colors.grey.withOpacity(0.5),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      S.current.tao_moi_nhiem_vu,
-                      style: textNormalCustom(
-                        color: titleColor,
-                        fontSize: 18.0.textScale(),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
                     sb20(),
                     DropDownWidget(
                       isNote: true,
@@ -141,14 +106,12 @@ class _TaoMoiNhiemVuWidgetState extends State<TaoMoiNhiemVuWidget> {
                         showBottomSheetCustom(
                           context,
                           title: S.current.van_ban_giao_nhiem_vu,
-                          child: Container(
-                            child: VBGiaoNhiemVu(
-                              soKyHieuController: soKyHieuController,
-                              onChangeSoKyHieu: (String value) {},
-                              onChangeDateTime: (DateTime value) {},
-                              trichYeuController: trichYeuController,
-                              onChangeTrichYeu: (String value) {},
-                            ),
+                          child: VBGiaoNhiemVu(
+                            soKyHieuController: soKyHieuController,
+                            onChangeSoKyHieu: (String value) {},
+                            onChangeDateTime: (DateTime value) {},
+                            trichYeuController: trichYeuController,
+                            onChangeTrichYeu: (String value) {},
                           ),
                         );
                       },
@@ -160,14 +123,12 @@ class _TaoMoiNhiemVuWidgetState extends State<TaoMoiNhiemVuWidget> {
                         showBottomSheetCustom(
                           context,
                           title: S.current.van_ban_khac,
-                          child: Container(
-                            child: VBGiaoNhiemVu(
-                              soKyHieuController: soKyHieuController,
-                              onChangeSoKyHieu: (String value) {},
-                              onChangeDateTime: (DateTime value) {},
-                              trichYeuController: trichYeuController,
-                              onChangeTrichYeu: (String value) {},
-                            ),
+                          child: VBGiaoNhiemVu(
+                            soKyHieuController: soKyHieuController,
+                            onChangeSoKyHieu: (String value) {},
+                            onChangeDateTime: (DateTime value) {},
+                            trichYeuController: trichYeuController,
+                            onChangeTrichYeu: (String value) {},
                           ),
                         );
                       },
@@ -202,6 +163,7 @@ class _TaoMoiNhiemVuWidgetState extends State<TaoMoiNhiemVuWidget> {
                 )
               ],
             ),
+            sb20(),
           ],
         ),
       ),
