@@ -335,7 +335,7 @@
   "chon": "Chọn",
   "dong": "Đóng",
   "thong_tin_khach_moi": "Thông tin khách mời",
-  "tong_so_luong_khach": "Tông số lượng khách",
+  "tong_so_luong_khach": "Tổng số lượng khách",
   "nhap_so_luong": "Nhập số lượng",
   "chuong_trinh_hop": "Chương trình họp",
   "them_phien_hop": "Thêm phiên họp",
@@ -568,6 +568,12 @@
   "nhiem_vu_dv": "Nhiệm vụ nv",
   "don_vi_theo_doi": "Đơn vị theo dõi",
   "nguoi_theo_doi": "Người theo dõi",
+  "nguoi_tra_lai": "Người trả lại",
+  "dv_tra_lai": "ĐV trả lại",
+  "d_v_bi_tra_lai": "ĐV trả lại",
+  "nd_thu_hoi": "ND thu hồi",
+  "dv_thu_hoi": "ĐV thu hồi",
+  "dv_bi_thu_hoi": "ĐV bị thu hồi",
   "nguoi_giao_nhiem_vu" : "Người giao nhiệm vụ",
   "can_bo_boc_bang" : "Chọn cán bộ sử dụng bắc băng",
   "ban_da_tao_lich_lam_viec_thanh_cong" : "Bạn đã tạo lịch làm việc thành công",
@@ -584,7 +590,8 @@
   "ban_co_chac_chan_muon_xoa_klh_nay" : "Bạn có chắc muốn xóa kết luận họp này?",
   "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
   "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
-  "xoa_ket_luan_hop" : "Xóa kết luận họp"
+  "xoa_ket_luan_hop" : "Xóa kết luận họp",
+  "dv_cap_nhat": "ĐV cập nhật"
 }
 
 

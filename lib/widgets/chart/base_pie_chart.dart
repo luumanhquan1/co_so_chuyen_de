@@ -35,11 +35,13 @@ class PieChart extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.only(top: paddingTop),
-              child: Text(
-                title,
-                style: textNormalCustom(
-                  color: infoColor,
-                  fontSize: 16,
+              child: FittedBox(
+                child: Text(
+                  title,
+                  style: textNormalCustom(
+                    color: infoColor,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),

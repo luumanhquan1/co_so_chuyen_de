@@ -3,13 +3,13 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_thu_hoi_widget_expand.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_tra_lai_widget_expand.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/lich_su_van_ban_lien_thong_widget_expand.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand/y_kien_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_thu_hoi_widget_expand_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_tra_lai_widget_expand_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_van_ban_lien_thong_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/thong_tin_gui_nhan_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/widget_head_chi_tiet_van_ban_den_mobile.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/y_kien_su_ly_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
@@ -79,7 +79,7 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                         );
                       },
                     ),
-                    YKienXuLyExpandWidget(
+                    YKienXuLyExpandWidgetMobile(
                       cubit: cubit,
                     ),
                     StreamBuilder<List<LichSuVanBanModel>>(
@@ -89,13 +89,39 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                         return LichSuCapNhatTinhHinhXuLyExpandWidgetMobile(
                           cubit: cubit,
                           lichSuVanBanCapNhatModel: data,
-
                         );
-                      }
-                    ,),
-                    LichSuTraLaiExpandWidget(cubit: cubit),
-                    LichSuThuHoiExpandWidget(cubit: cubit),
-                    LichSuVanBanLienThongExpandWidget(cubit: cubit),
+                      },
+                    ),
+                    StreamBuilder<List<LichSuVanBanModel>>(
+                      stream: cubit.lichSuTraLaiStream,
+                      builder: (context, snapshot) {
+                        final data = snapshot.data ?? [];
+                        return LichSuTraLaiExpandWidgetMobile(
+                          cubit: cubit,
+                          lichSuVanBanTraLaiModel: data,
+                        );
+                      },
+                    ),
+                    StreamBuilder<List<LichSuVanBanModel>>(
+                      stream: cubit.lichSuThuHoiStream,
+                      builder: (context, snapshot) {
+                        final data = snapshot.data ?? [];
+                        return LichSuThuHoiExpandWidgetMobile(
+                          cubit: cubit,
+                          lichSuVanBanThuHoiModel: data,
+                        );
+                      },
+                    ),
+                    StreamBuilder<List<LichSuVanBanModel>>(
+                      stream: cubit.lichSuVanBanLienThongStream,
+                      builder: (context, snapshot) {
+                        final data = snapshot.data ?? [];
+                        return LichSuVanBanLienThongExpandWidgetMobile(
+                          cubit: cubit,
+                          listLichSuVanBanLienThongModel: data,
+                        );
+                      },
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
                       child: ButtonCustomBottom(

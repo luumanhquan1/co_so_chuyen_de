@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/list/widget/custom_item_calender_list.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/type_calendar.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/tablet/chi_tiet_lam_viec_tablet.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +12,14 @@ import 'package:flutter/material.dart';
 class InListFormTablet extends StatefulWidget {
   bool isHindText = false;
   final CalenderCubit cubit;
+  final Function onTap;
 
-  InListFormTablet({Key? key, required this.isHindText, required this.cubit})
-      : super(key: key);
+  InListFormTablet({
+    Key? key,
+    required this.isHindText,
+    required this.cubit,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   _InListFormTabletState createState() => _InListFormTabletState();
@@ -27,16 +33,17 @@ class _InListFormTabletState extends State<InListFormTablet> {
   void initState() {
     super.initState();
     widget.cubit.getDay();
+    widget.cubit.listDSLV = [];
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         if (widget.cubit.page < widget.cubit.totalPage) {
           widget.cubit.page = widget.cubit.page + 1;
-          _cubit.callApi();
+          widget.onTap();
         }
       }
     });
-    _cubit.callApi();
+    widget.onTap();
   }
 
   @override
@@ -80,6 +87,12 @@ class _InListFormTabletState extends State<InListFormTablet> {
                         urlImage:
                             'https://lh3.googleusercontent.com/ogw/ADea4I7KuOHLBX4h7PqlUfbDpmYAuuvb9iBc5eaCvicoFg=s192-c-mo',
                         onTap: () {
+                          final String typeCalendar = _cubit.dataLichLvModel
+                              .listLichLVModel?[index].typeSchedule ??
+                              'MeetingSchedule';
+
+                          typeCalendar.getTypeCalendar
+                              .navigatorDetailTablet(context, _cubit);
                           Navigator.push(
                             context,
                             PageRouteBuilder(

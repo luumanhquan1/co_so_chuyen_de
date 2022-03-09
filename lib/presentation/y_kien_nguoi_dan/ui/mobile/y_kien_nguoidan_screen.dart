@@ -136,10 +136,10 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           ),
                           Expanded(
                             child: BoxStatusVanBan(
-                              value: cubit.dashboardModel.soLuongQuaHan ?? 0,
+                              value: cubit.dashboardModel.soLuongDenHan ?? 0,
                               onTap: () {},
-                              color: statusCalenderRed,
-                              statusName: S.current.qua_han,
+                              color: labelColor,
+                              statusName: S.current.den_han,
                             ),
                           ),
                           const SizedBox(
@@ -148,10 +148,10 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           Expanded(
                             child: BoxStatusVanBan(
                               value:
-                                  cubit.dashboardModel.soLuongThuongKhan ?? 0,
+                                  cubit.dashboardModel.soLuongQuaHan ?? 0,
                               onTap: () {},
-                              color: textColorForum,
-                              statusName: S.current.thuong_khan,
+                              color: statusCalenderRed,
+                              statusName: S.current.qua_han,
                             ),
                           ),
                         ],

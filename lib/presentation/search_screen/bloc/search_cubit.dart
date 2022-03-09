@@ -1,7 +1,11 @@
 import 'dart:developer';
-import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
-import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/home_screen/fake_data.dart';
+
+import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
+import 'package:ccvc_mobile/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:ccvc_mobile/presentation/menu_screen/ui/fake_date_menu.dart';
+
+
+
 import 'package:rxdart/rxdart.dart';
 
 class SearchCubit extends HomeCubit {
@@ -21,6 +25,6 @@ class SearchCubit extends HomeCubit {
 /// Get Config Widget
 extension GetConfigWidget on SearchCubit {
   Future<void> configWidget() async {
-    listWigdetSubject.sink.add(FakeData.listSearchWidget);
+    // listWigdetSubject.sink.add();
   }
 }

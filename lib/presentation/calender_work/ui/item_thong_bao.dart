@@ -331,7 +331,7 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichDuocMoi:
         return Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16),
+          padding: const EdgeInsets.only(right: 16, left: 16, top: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -358,7 +358,7 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichTaoHo:
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+          padding: const EdgeInsets.only(right: 16.0, top: 32.0, bottom: 16.0),
           child: Text(
             cubit.textDay,
             style: textNormalCustom(color: textBodyTime),
@@ -367,7 +367,7 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       default:
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+          padding: const EdgeInsets.only(right: 16.0, top: 32.0, bottom: 16.0),
           child: Text(
             cubit.textDay,
             style: textNormalCustom(color: textBodyTime),

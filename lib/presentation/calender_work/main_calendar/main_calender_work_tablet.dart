@@ -29,13 +29,13 @@ class CalenderWorkDayTablet extends StatefulWidget {
 }
 
 class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
-  final CalenderCubit cubit = CalenderCubit();
+  CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
-    cubit.callApi();
+    cubit.callApi(cubit.startDates, cubit.endDates);
   }
 
   @override
@@ -84,24 +84,30 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     ).then((value) {
                       if (value == null) {}
                       if (value == true) {
-                        cubit.callApi();
+                        cubit.callApi(cubit.startDates, cubit.endDates);
                       }
                     });
                   },
                   onTapDay: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
-                    cubit.callApi();
-                  },
-                  onTapMonth: () {
-                    setState(() {});
-                    cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
-                    cubit.callApiMonth();
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
+                    cubit.callApi(cubit.startDates, cubit.endDates);
                   },
                   onTapWeek: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
                     cubit.callApiTuan();
+                  },
+                  onTapMonth: () {
+                    setState(() {});
+                    cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
+                    cubit.listDSLV.clear();
+                    cubit.page = 1;
+                    cubit.callApiMonth();
                   },
                   cubit: cubit,
                 ),
@@ -116,7 +122,11 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         DateTime? focusedDay,
                       ) {},
                       onChange: (DateTime startDate, DateTime endDate) {
-                        cubit.callApiNgay(startDate, endDate);
+                        cubit.startDates = startDate;
+                        cubit.endDates = endDate;
+                        cubit.listDSLV.clear();
+                        cubit.page = 1;
+                        cubit.callApi(startDate, endDate);
                       },
                     );
                   },

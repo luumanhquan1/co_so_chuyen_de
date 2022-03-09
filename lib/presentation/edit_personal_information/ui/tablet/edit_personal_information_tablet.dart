@@ -12,6 +12,7 @@ import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manag
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_don_vi.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/ui/widgets/widget_ung_dung.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
@@ -99,8 +100,7 @@ class _EditPersonalInformationTabletScreen
               decoration: BoxDecoration(
                 color: backgroundColorApp,
                 borderRadius: BorderRadius.circular(12),
-                border:
-                    Border.all(color: borderItemCalender.withOpacity(0.5)),
+                border: Border.all(color: borderItemCalender.withOpacity(0.5)),
               ),
               margin: const EdgeInsets.only(
                 top: 28,
@@ -132,8 +132,10 @@ class _EditPersonalInformationTabletScreen
                             TextButton(
                               onPressed: () {
                                 cubit.getInfo(id: widget.id);
-                                // if (keyGroup.currentState!.validator()) {
-                                // } else {}
+                                cubit.huyenSubject.sink.add([]);
+                                cubit.xaSubject.sink.add([]);
+                                if (keyGroup.currentState!.validator()) {
+                                } else {}
                               },
                               child: Text(
                                 S.current.reset,
@@ -159,8 +161,7 @@ class _EditPersonalInformationTabletScreen
                                       controller: nameController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return S
-                                              .current.khong_duoc_de_trong;
+                                          return S.current.khong_duoc_de_trong;
                                         }
                                         return null;
                                       },
@@ -295,10 +296,9 @@ class _EditPersonalInformationTabletScreen
 
                                             cubit.getDataHuyenXa(
                                               isXa: false,
-                                              parentId: cubit
-                                                      .tinhModel[indexes]
-                                                      .id ??
-                                                  '',
+                                              parentId:
+                                                  cubit.tinhModel[indexes].id ??
+                                                      '',
                                             );
                                             if (indexes >= 0) {
                                               cubit.isCheckTinhSubject.sink
@@ -314,8 +314,8 @@ class _EditPersonalInformationTabletScreen
                                                 .add(true);
                                           },
                                           cubit: cubit,
-                                          isEnable: cubit
-                                              .huyenSubject.value.isEmpty,
+                                          isEnable:
+                                              cubit.huyenSubject.value.isEmpty,
                                         ),
                                       );
                                     },
@@ -344,8 +344,7 @@ class _EditPersonalInformationTabletScreen
                                             cubit.getDataHuyenXa(
                                               isXa: true,
                                               parentId: cubit
-                                                      .huyenModel[indexes]
-                                                      .id ??
+                                                      .huyenModel[indexes].id ??
                                                   '',
                                             );
                                             if (indexes >= 0) {
@@ -362,8 +361,8 @@ class _EditPersonalInformationTabletScreen
                                                 .add(true);
                                           },
                                           cubit: cubit,
-                                          isEnable: cubit
-                                              .huyenSubject.value.isEmpty,
+                                          isEnable:
+                                              cubit.huyenSubject.value.isEmpty,
                                         ),
                                       );
                                     },
@@ -423,41 +422,66 @@ class _EditPersonalInformationTabletScreen
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                  left: 20,
-                                  bottom: 20,
-                                  right: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: borderItemCalender.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(6),
-                                  border:
-                                      Border.all(color: borderItemCalender),
-                                ),
-                                child: WidgetDonVi(
-                                  cubit: cubit,
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    S.current.don_vi,
+                                    style:
+                                        titleAppbar(fontSize: 16.0.textScale()),
+                                  ),
+                                  spaceH24,
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                      //  top: 20,
+                                      left: 20,
+                                      bottom: 20,
+                                      right: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          borderItemCalender.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(6),
+                                      border:
+                                          Border.all(color: borderItemCalender),
+                                    ),
+                                    child: WidgetDonVi(
+                                      cubit: cubit,
+                                      isCheckTitle: false,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             spaceW28,
                             Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                  left: 20,
-                                  bottom: 20,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: borderItemCalender.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(6),
-                                  border:
-                                      Border.all(color: borderItemCalender),
-                                ),
-                                child: WidgetUngDung(
-                                  cubit: cubit,
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    S.current.ung_dung,
+                                    style:
+                                        titleAppbar(fontSize: 16.0.textScale()),
+                                  ),
+                                  spaceH24,
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      bottom: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          borderItemCalender.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(6),
+                                      border:
+                                          Border.all(color: borderItemCalender),
+                                    ),
+                                    child: WidgetUngDung(
+                                      cubit: cubit,
+                                      isCheckTitle: false,
+                                    ),
+                                  ),
+                                ],
                               ),
                             )
                           ],
@@ -488,8 +512,7 @@ class _EditPersonalInformationTabletScreen
                                 gioitinh: gioiTinh,
                                 ngaySinh: dateTimes,
                                 cmnt: cmndController.value.text,
-                                diaChiLienHe:
-                                    diaChiLienHeController.value.text,
+                                diaChiLienHe: diaChiLienHeController.value.text,
                                 donViDetail: cubit
                                     .editPersonInformationRequest.donViDetail,
                                 tinh: tinh,
@@ -498,8 +521,8 @@ class _EditPersonalInformationTabletScreen
                               );
                             } else {}
                           },
-                          title1: S.current.huy,
-                          title2: S.current.thay_doi,
+                          title1: S.current.dong,
+                          title2: S.current.luu_lai,
                         ),
                         spaceH32,
                       ],

@@ -3,20 +3,25 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_lich_lam_viec/chi_tiet_lich_lam_viec_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/bloc/chi_tiet_lich_lam_viec_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/bottom_sheet_bao_cao.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lich_lv_bao_cao_ket_qua/ui/mobile/widgets/btn_show_chinh_sua_bao_cao.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lichlv_danh_sach_y_kien/ui/mobile/show_bottom_sheet_ds_y_Kien.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/lichlv_danh_sach_y_kien/ui/mobile/widgets/bottom_sheet_y_kien.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/row_value_widget.dart';
+import 'package:ccvc_mobile/presentation/sua_lich_cong_tac_trong_nuoc/ui/phone/sua_lich_cong_tac_trong_nuoc_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChiTietLichLamViecScreen extends StatefulWidget {
   final String id;
-  const ChiTietLichLamViecScreen({Key? key,this.id = ''}) : super(key: key);
+
+  const ChiTietLichLamViecScreen({Key? key, this.id = ''}) : super(key: key);
 
   @override
   State<ChiTietLichLamViecScreen> createState() =>
@@ -52,9 +57,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                     textContent: S.current.ban_chan_chan_huy_lich_nay,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
-                      chiTietLichLamViecCubit
-                          .cancel(widget.id);
-        
+                      chiTietLichLamViecCubit.cancel(widget.id);
                     },
                     title: S.current.huy_lich,
                     btnRightTxt: S.current.dong_y,
@@ -63,13 +66,27 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                 },
               ),
               QData(
-                  urlImage: ImageAssets.icChartFocus,
-                  text: S.current.bao_cao_ket_qua,
-                  onTap: () {}),
+                urlImage: ImageAssets.icChartFocus,
+                text: S.current.bao_cao_ket_qua,
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.bao_cao_ket_qua,
+                    child: const BaoCaoBottomSheet(),
+                  );
+                },
+              ),
               QData(
-                  urlImage: ImageAssets.icChoYKien,
-                  text: S.current.cho_y_kien,
-                  onTap: () {}),
+                urlImage: ImageAssets.icChoYKien,
+                text: S.current.cho_y_kien,
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.cho_y_kien,
+                    child: const YKienBottomSheet(),
+                  );
+                },
+              ),
               QData(
                   urlImage: ImageAssets.icDelete,
                   text: S.current.xoa_lich,
@@ -79,10 +96,7 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                       textContent: S.current.ban_co_muon_xoa_lich_lam_viec,
                       btnLeftTxt: S.current.khong,
                       funcBtnRight: () {
-                        chiTietLichLamViecCubit
-                            .dataDelete(widget.id);
-
-                 
+                        chiTietLichLamViecCubit.dataDelete(widget.id);
                       },
                       title: S.current.xoa_lich_lam_viec,
                       btnRightTxt: S.current.dong_y,
@@ -90,9 +104,16 @@ class _ChiTietLichLamViecScreenState extends State<ChiTietLichLamViecScreen> {
                     );
                   }),
               QData(
-                  urlImage: ImageAssets.icEditBlue,
-                  text: S.current.sua_lich,
-                  onTap: () {}),
+                urlImage: ImageAssets.icEditBlue,
+                text: S.current.sua_lich,
+                onTap: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.sua_lich_cong_tac_trong_nuoc,
+                    child: const SuaLichCongTacTrongNuocPhone(),
+                  );
+                },
+              ),
             ],
           ),
           const SizedBox(

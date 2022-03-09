@@ -141,7 +141,7 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
               ),
             ),
             TitleChildWidget(
-              title: S.current.thong_tin_lien_he,
+              title: S.current.dau_moi_lien_he,
               child: Column(
                 children: [
                   TextFieldStyle(

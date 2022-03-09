@@ -1,17 +1,20 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/phone/widget_phone/y_kien_xu_y.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/dropdown_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/y_kien_su_ly_widget.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
 class YKienSuLyWidgetExpandTablet extends StatefulWidget {
   final DetailDocumentCubit cubit;
-  bool expanded;
 
-  YKienSuLyWidgetExpandTablet(
-      {Key? key, required this.cubit, required this.expanded})
-      : super(key: key);
+  const YKienSuLyWidgetExpandTablet({
+    Key? key,
+    required this.cubit,
+  }) : super(key: key);
 
   @override
   State<YKienSuLyWidgetExpandTablet> createState() =>
@@ -30,26 +33,35 @@ class _YKienSuLyWidgetExpandTabletState
         color: backgroundColorApp,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      child: ExpansionTitleCustom(
-        expand: widget.expanded,
-        paddingRightIcon: const EdgeInsets.only(right: 21),
-        title: Container(
-          padding: const EdgeInsets.only(
-            left: 16,
-            top: 10.5,
-            bottom: 10.5,
+      child: ExpandOnlyNhiemVu(
+        name: S.current.y_kien_xu_ly,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0.textScale(space: 4),
           ),
-          child: Text(S.current.y_kien_xu_ly),
+          child: StreamBuilder<List<DanhSachYKienXuLy>>(
+              stream: widget.cubit.danhSachYKienXuLyStream,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? [];
+                if (data.isNotEmpty) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return YKienSuLyWidget(
+                        object: data[index],
+                      );
+                    },
+                  );
+                } else {
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: NodataWidget(),
+                  );
+                }
+              }),
         ),
-        child: YKienXuLyExpand(
-          onSendComment: (text, listFileId) {},
-          miss: widget.cubit.info,
-        ),
-        onChangeExpand: () {
-          setState(() {
-            widget.expanded = !widget.expanded;
-          });
-        },
       ),
     );
   }

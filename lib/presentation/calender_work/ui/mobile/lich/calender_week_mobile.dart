@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalenderWeekMobile extends StatefulWidget {
-  const CalenderWeekMobile({Key? key}) : super(key: key);
+  final CalenderCubit cubit;
+
+  const CalenderWeekMobile({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<CalenderWeekMobile> createState() => _CalenderWeekMobileState();
@@ -14,13 +16,11 @@ class CalenderWeekMobile extends StatefulWidget {
 
 class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
   final CalendarController _controller = CalendarController();
-  final CalenderCubit cubit = CalenderCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.callApiTuan();
   }
 
   @override
@@ -28,7 +28,7 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: StreamBuilder<DataLichLvModel>(
-        stream: cubit.streamListLich,
+        stream: widget.cubit.streamListLich,
         builder: (context, snapshot) {
           return SfCalendar(
             allowAppointmentResize: true,
@@ -39,7 +39,7 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
             view: CalendarView.week,
             todayHighlightColor: statusCalenderRed,
             appointmentTimeTextFormat: 'hh:mm:ss a',
-            dataSource: cubit.getCalenderDataSource(
+            dataSource: widget.cubit.getCalenderDataSource(
               snapshot.data ?? DataLichLvModel(),
             ),
             timeSlotViewSettings: const TimeSlotViewSettings(
