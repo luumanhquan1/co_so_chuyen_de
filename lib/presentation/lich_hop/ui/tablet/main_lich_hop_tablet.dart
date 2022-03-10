@@ -9,7 +9,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/widget/wisget_choose_day_week_month.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/calendar_work_menu_tablet.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/my_calendar_mene_drawer.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -64,8 +64,10 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                 onPressed: () {
                   DrawerSlide.navigatorSlide(
                     context: context,
-                    screen: MyCalendarMenuTablet(
-                      cubit: calenderCubit,
+                    screen: MyCalendarMenu(
+                      cubit: cubit,
+                      theoDangLich: () {},
+                      TheoDangDanhSach: () {},
                     ),
                   );
                 },

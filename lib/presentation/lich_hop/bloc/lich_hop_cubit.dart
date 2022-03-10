@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -37,6 +38,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+  BehaviorSubject<List<bool>> selectTypeCalendarSubject =
+      BehaviorSubject.seeded([true, false]);
+
   List<ItemDanhSachLichHop> listDSLH = [];
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
@@ -48,6 +52,18 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
+
+  BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
+      BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
+
+  Stream<TypeCalendarMenu> get changeItemMenuStream =>
+      changeItemMenuSubject.stream;
+
+  void changeScreenMenu(TypeCalendarMenu typeMenu) {
+    if (typeMenu == TypeCalendarMenu.DanhSachLichHop) {
+      chooseTypeList(Type_Choose_Option_List.DANH_SACH);
+    }
+  }
 
   HopRepository get hopRepo => Get.find();
 
