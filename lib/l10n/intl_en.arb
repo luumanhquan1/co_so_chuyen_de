@@ -595,6 +595,15 @@
   "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
   "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
   "xoa_ket_luan_hop" : "Xóa kết luận họp",
-  "dv_cap_nhat": "ĐV cập nhật"
+  "dv_cap_nhat": "ĐV cập nhật",
+  "baochi_mangxahoi": "Báo chí - Mạng xã hội",
+  "lanh_dao_tinh": "Lãnh đạo tỉnh",
+  "tinh_uy": "Tỉnh ủy",
+  "hoi_dong_nhan_dan_tinh": "Hội đồng nhân dân tỉnh",
+  "uy_ban_nhan_dan_tinh": "Ủy ban nhân dân tỉnh",
+  "cac_dia_phuong": "Các địa phương",
+  "mttq_cac_the": "MTTQ và các đoàn thể",
+  "nhap_linK_bao_cao": "Nhập link bài báo hoặc bài post Facebook để theo dõi",
+  "nhap_link": "Nhập link ..."
 
 }
