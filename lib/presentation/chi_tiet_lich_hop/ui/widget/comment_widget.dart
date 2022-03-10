@@ -3,21 +3,26 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/handing_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/send_comment_widget_lich_hop.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class CommentWidget extends StatefulWidget {
+  final String id;
   final HandingCommentLichHop object;
 
-  const CommentWidget({Key? key, required this.object}) : super(key: key);
+  const CommentWidget({Key? key, required this.object, required this.id})
+      : super(key: key);
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
+  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -22,6 +22,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -40,9 +41,20 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   int choDuyet = 1;
   int daDuyet = 2;
   int huyDuyet = 3;
+  List<String> dataTinhTrangKetLuanHop = [
+    S.current.trung_binh,
+    S.current.dat,
+    S.current.khong_dat,
+  ];
+  List<String> dataMauBienBan = [
+    S.current.mau_bien_ban_1,
+    S.current.mau_bien_ban_2,
+    S.current.mau_bien_ban_3,
+  ];
   List<String> dataThuhoi = ['thu hoi', 'thu hồi'];
   List<String> dataBocBang = ['boc bang', 'boc bang2'];
   List<String> dataThemYkien = ['cuộc họp 1', 'cuộc họp 2'];
+  List<String> dataDropdown = ['1', '2', '3'];
 
   //
 
@@ -265,9 +277,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  Future<void> themYKien() async {
+  Future<void> themYKien({required String yKien, required String id}) async {
     ThemYKienRequest themYKienRequest =
-        ThemYKienRequest(content: 'them y kien', scheduleId: id);
+        ThemYKienRequest(content: yKien, scheduleId: id);
     final result = await hopRp.themYKienHop(themYKienRequest);
     result.when(
       success: (res) {},
@@ -395,8 +407,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   List<ThanhPhanThamGiaModel> dataThanhPhanThamGia = [];
 
-  List<String> dataDropdown = ['1', '2', '3'];
-
   BehaviorSubject<List<PhatBieuModel>> phatbieu =
       BehaviorSubject<List<PhatBieuModel>>();
 
@@ -467,21 +477,33 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     }
   }
 
+  XemKetLuanHopModel xemKetLuanHopModel = XemKetLuanHopModel.emty();
+
   //xem ket luan hop
   Future<void> getXemKetLuanHop(String id) async {
     final result = await hopRp.getXemKetLuanHop(id);
-    result.when(
-        success: (res) {
-          KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
-            id: res.id ?? '',
-            thoiGian: res.endDate ?? '',
-            trangThai: typeTrangthai(res.status ?? 0),
-            tinhTrang: typeTinhTrang(res.reportStatusCode ?? ''),
-            file: res.files ?? '',
-          );
-          ketLuanHopSubject.sink.add(ketLuanHopModel);
-        },
-        error: (err) {});
+    result.when(success: (res) {
+      KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
+        id: res.id ?? '',
+        thoiGian: res.endDate ?? '',
+        trangThai: typeTrangthai(res.status ?? 0),
+        tinhTrang: typeTinhTrang(res.reportStatusCode ?? ''),
+        file: res.files ?? '',
+      );
+      ketLuanHopSubject.sink.add(ketLuanHopModel);
+      xemKetLuanHopModel.endDate = res.endDate;
+      xemKetLuanHopModel.content = res.content;
+      xemKetLuanHopModel.reportStatus = res.reportStatus;
+    }, error: (err) {
+      KetLuanHopModel ketLuanHopModel = KetLuanHopModel(
+        id: '',
+        thoiGian: '',
+        trangThai: typeTrangthai(0),
+        tinhTrang: typeTinhTrang(''),
+        file: '',
+      );
+      ketLuanHopSubject.sink.add(ketLuanHopModel);
+    });
   }
 
   BehaviorSubject<KetLuanHopModel> ketLuanHopSubject = BehaviorSubject();
@@ -498,9 +520,9 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     'Id',
     'NoiDung',
     'ChucVu',
-    'Avatar',
+    'http://hinhanhdephd.com/wp-content/uploads/2016/01/tai-hinh-girl-xinh-lam-avatar-de-thuong-nhat-22.jpg',
     'TenNhanVien',
-    'NgayTao',
+    '2021-10-29T11:42:42.4179289',
     [],
   );
 
@@ -508,7 +530,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     soNhiemVu: 'fake',
     noiDungTheoDoi: 'fake ',
     tinhHinhThucHienNoiBo: ' fake',
-    hanXuLy: 'fake ',
+    hanXuLy: '2021-10-29T11:42:42.4179289',
     loaiNhiemVu: 'fake',
     trangThai: TrangThai.DaDuyet,
   );

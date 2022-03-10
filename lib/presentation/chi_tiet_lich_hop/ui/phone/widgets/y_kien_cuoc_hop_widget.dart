@@ -11,9 +11,10 @@ import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
 class YKienCuocHopWidget extends StatefulWidget {
+  final String id;
   final DetailMeetCalenderCubit cubit;
 
-  const YKienCuocHopWidget({Key? key, required this.cubit}) : super(key: key);
+  const YKienCuocHopWidget({Key? key, required this.cubit, required this.id}) : super(key: key);
 
   @override
   _YKienCuocHopWidgetState createState() => _YKienCuocHopWidgetState();
@@ -47,7 +48,7 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
               ),
               if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
                 CommentWidget(
-                  object: widget.cubit.handingCommentLichHop,
+                  object: widget.cubit.handingCommentLichHop, id: widget.id,
                 )
               else
                 const SizedBox(
@@ -80,7 +81,7 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
             ),
             if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
               CommentWidget(
-                object: widget.cubit.handingCommentLichHop,
+                object: widget.cubit.handingCommentLichHop, id: widget.id,
               )
             else
               const SizedBox(

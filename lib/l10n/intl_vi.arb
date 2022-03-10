@@ -591,7 +591,11 @@
   "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
   "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
   "xoa_ket_luan_hop" : "Xóa kết luận họp",
-  "dv_cap_nhat": "ĐV cập nhật"
+  "dv_cap_nhat": "ĐV cập nhật",
+  "chon_mau_bien_ban" : "Chọn mẫu biên bản",
+  "mau_bien_ban_1" : "Mẫu biên bản 1",
+  "mau_bien_ban_2" : "Mẫu biên bản 2",
+  "mau_bien_ban_3" : "Mẫu biên bản 3"
 }
 
 

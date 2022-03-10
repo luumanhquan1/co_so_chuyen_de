@@ -273,18 +273,7 @@ class ImageAssets {
   static const String IcEmail = '$baseImg/IcEmail.svg';
   static const String XoaKLHop = '$baseImg/XoaKLHop.svg';
   static const String icThuHoiKL = '$baseImg/icThuHoiKL.svg';
-
-
-
-
-
-
-
-
-
-
-
-
+  static const String ic_luong = '$baseImg/ic_luong.svg';
 
 
 

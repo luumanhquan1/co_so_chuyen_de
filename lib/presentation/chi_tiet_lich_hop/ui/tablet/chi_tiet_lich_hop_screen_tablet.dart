@@ -346,7 +346,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                       cubit: cubit,
                     ),
                     YKienCuocHopWidget(
-                      cubit: cubit,
+                      cubit: cubit, id: widget.id,
                     ),
                   ],
                 ),

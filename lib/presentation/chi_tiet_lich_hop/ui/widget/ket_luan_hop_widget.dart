@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_ho
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/extension_status.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_moi_nhiem_vu_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/xem_ket_luan_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_select_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -62,6 +63,8 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                         time: data?.thoiGian ?? '',
                         trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
                         tinhTrang: data?.tinhTrang ?? TinhTrang.TrungBinh,
+                        id: widget.id,
+                        cubit: widget.cubit,
                         onTap: () {
                           isShow = !isShow;
                           setState(() {});
@@ -99,92 +102,6 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                 )
               ],
             ),
-            Column(
-              children: [
-                const SizedBox(
-                  height: 32,
-                ),
-                Align(
-                  alignment: const Alignment(0.9, 0.5),
-                  child: MenuSelectWidget(
-                    listSelect: [
-                      QData(
-                        urlImage: ImageAssets.icPlus2,
-                        text: S.current.tao_moi_nhiem_vu,
-                        onTap: () {
-                          showBottomSheetCustom(
-                            context,
-                            title: S.current.tao_moi_nhiem_vu,
-                            child: const TaoMoiNhiemVuWidget(),
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icDocument2,
-                        text: S.current.ket_luan_cuoc_hop,
-                        onTap: () {
-                          widget.cubit.sendMailKetLuatHop(widget.id);
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icMessage,
-                        text: S.current.gui_mail_ket_luan,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_gui_mai_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              Navigator.pop(context);
-                            },
-                            title: S.current.gui_email,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.IcEmail),
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.Group2,
-                        text: S.current.thu_hoi,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_thu_hoi_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              Navigator.pop(context);
-                            },
-                            title: S.current.thu_hoi_ket_luan_hop,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.icThuHoiKL),
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icDeleteRed,
-                        text: S.current.xoa,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_xoa_klh_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              Navigator.pop(context);
-                            },
-                            title: S.current.xoa_ket_luan_hop,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.XoaKLHop),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),
@@ -200,12 +117,13 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final data = snapshot.data;
-
                       return ItemKetLuanHopWidget(
                         title: S.current.ket_luan_hop,
                         time: data?.thoiGian ?? '',
                         trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
                         tinhTrang: data?.tinhTrang ?? TinhTrang.TrungBinh,
+                        id: widget.id,
+                        cubit: widget.cubit,
                         onTap: () {
                           isShow = !isShow;
                           setState(() {});
@@ -278,7 +196,7 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                                 S.current.ban_co_chac_chan_muon_gui_mai_nay,
                             btnLeftTxt: S.current.khong,
                             funcBtnRight: () {
-                              Navigator.pop(context);
+                              widget.cubit.sendMailKetLuatHop(widget.id);
                             },
                             title: S.current.gui_email,
                             btnRightTxt: S.current.dong_y,
@@ -383,6 +301,8 @@ class ItemKetLuanHopWidget extends StatelessWidget {
   final TrangThai trangThai;
   final TinhTrang tinhTrang;
   final Function onTap;
+  final DetailMeetCalenderCubit cubit;
+  final String id;
 
   const ItemKetLuanHopWidget({
     Key? key,
@@ -391,6 +311,8 @@ class ItemKetLuanHopWidget extends StatelessWidget {
     required this.trangThai,
     required this.tinhTrang,
     required this.onTap,
+    required this.cubit,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -416,6 +338,90 @@ class ItemKetLuanHopWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              Column(
+                children: [
+                  MenuSelectWidget(
+                    listSelect: [
+                      QData(
+                        urlImage: ImageAssets.icPlus2,
+                        text: S.current.tao_moi_nhiem_vu,
+                        onTap: () {
+                          showBottomSheetCustom(
+                            context,
+                            title: S.current.tao_moi_nhiem_vu,
+                            child: const TaoMoiNhiemVuWidget(),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icDocument2,
+                        text: S.current.ket_luan_cuoc_hop,
+                        onTap: () {
+                          showBottomSheetCustom(
+                            context,
+                            title: S.current.ket_luan_cuoc_hop,
+                            child: const XemKetLuanHopWidget(),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icMessage,
+                        text: S.current.gui_mail_ket_luan,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_gui_mai_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              cubit.sendMailKetLuatHop(id);
+                            },
+                            title: S.current.gui_email,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.IcEmail),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.Group2,
+                        text: S.current.thu_hoi,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_thu_hoi_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.thu_hoi_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.icThuHoiKL),
+                          );
+                        },
+                      ),
+                      QData(
+                        urlImage: ImageAssets.icDeleteRed,
+                        text: S.current.xoa,
+                        onTap: () {
+                          showDiaLog(
+                            context,
+                            textContent:
+                                S.current.ban_co_chac_chan_muon_xoa_klh_nay,
+                            btnLeftTxt: S.current.khong,
+                            funcBtnRight: () {
+                              Navigator.pop(context);
+                            },
+                            title: S.current.xoa_ket_luan_hop,
+                            btnRightTxt: S.current.dong_y,
+                            icon: SvgPicture.asset(ImageAssets.XoaKLHop),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
           widgetRow(
@@ -530,7 +536,7 @@ class ItemDanhSachNhiemVu extends StatelessWidget {
                   )),
                   GestureDetector(
                     onTap: () {},
-                    child: SvgPicture.asset(ImageAssets.ic_chitet),
+                    child: SvgPicture.asset(ImageAssets.ic_luong),
                   )
                 ],
               ),
