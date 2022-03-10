@@ -10,17 +10,21 @@ class TitleCaiDatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: textNormalCustom(fontSize: 16, color: titleColor),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        child
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 17),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textNormalCustom(fontSize: 16, color: titleColor),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          child
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/document_dashboard_model.dart';
@@ -12,7 +14,7 @@ import '/home_module/presentation/home_screen/ui/tablet/widgets/container_backgr
 import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import '/home_module/utils/constants/app_constants.dart';
 import '/home_module/utils/enum_ext.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
 import '/home_module/widgets/chart/base_pie_chart.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';

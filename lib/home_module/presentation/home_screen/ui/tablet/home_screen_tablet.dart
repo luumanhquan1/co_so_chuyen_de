@@ -1,5 +1,8 @@
-import 'package:ccvc_mobile/home_module/config/app_config.dart';
+
 import 'package:ccvc_mobile/home_module/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/thong_bao/ui/tablet/thong_bao_screen_tablet.dart';
+import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 
 import '/data/exception/app_exception.dart';
 import '/widgets/views/state_stream_layout.dart';
@@ -49,7 +52,6 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
     );
     super.initState();
     homeCubit.loadApi();
-    checkDeviceType();
   }
 
   @override
@@ -77,12 +79,12 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
             acction: [
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SearchScreenTablet(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreenTablet(),
+                    ),
+                  );
                 },
                 child: SvgPicture.asset(ImageAssets.icSearchWhite),
               ),
@@ -91,11 +93,11 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
               ),
               GestureDetector(
                 onTap: () {
-                  // DrawerSlide.navigatorSlide(
-                  //   context: context,
-                  //   screen: const ThongBaoScreenTablet(),
-                  //   isLeft: false,
-                  // );
+                  DrawerSlide.navigatorSlide(
+                    context: context,
+                    screen: const ThongBaoScreenTablet(),
+                    isLeft: false,
+                  );
                 },
                 child: const ThongBaoWidget(
                   sum: 19,
@@ -189,12 +191,5 @@ class _HomeScreenTabletState extends State<HomeScreenTablet>
         ),
       ),
     );
-  }
-  void checkDeviceType() {
-    final shortestSide =
-        MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-            .size
-            .shortestSide;
-    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
   }
 }

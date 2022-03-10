@@ -84,7 +84,9 @@ class BottomTabBarWidget extends StatelessWidget {
               child: Text(
                 item.getTabBarItem().text,
                 style: textNormal(
-                  isSelect ? textDefault : unselectLabelColor,
+                  isSelect
+                      ? AppTheme.getInstance().colorField()
+                      : AppTheme.getInstance().buttonUnfocus(),
                   10,
                 ),
               ),
@@ -103,7 +105,9 @@ class BottomTabBarWidget extends StatelessWidget {
               child: Text(
                 item.getTabBarItem().text,
                 style: textNormal(
-                  isSelect ? textDefault : unselectLabelColor,
+                  isSelect
+                      ? AppTheme.getInstance().colorField()
+                      : AppTheme.getInstance().buttonUnfocus(),
                   18,
                 ),
               ),
