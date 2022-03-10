@@ -28,7 +28,6 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
     return StreamBuilder<TypeKetNoiMenu>(
       stream: cubit.streamTypeKetNoiMenu,
       builder: (context, snapshot) {
-        print("sss${snapshot.data}");
         return Scaffold(
           appBar: BaseAppBar(
             title:
