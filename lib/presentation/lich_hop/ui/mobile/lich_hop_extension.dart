@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -33,6 +34,21 @@ enum Type_Choose_Option_List {
   DANH_SACH,
   DANG_LICH,
   DANG_LIST,
+}
+
+extension type_Choose_Option_List on Type_Choose_Option_List {
+  String getTitle() {
+    switch (this) {
+      case Type_Choose_Option_List.DANH_SACH:
+        return S.current.danh_sach_lich_hop;
+
+      case Type_Choose_Option_List.DANG_LIST:
+        return S.current.lich_hop_cua_toi;
+
+      case Type_Choose_Option_List.DANG_LICH:
+        return S.current.lich_hop_cua_toi;
+    }
+  }
 }
 
 extension lichHopOptionDayCubit on Type_Choose_Option_Day {
@@ -96,10 +112,10 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
             builder: (context, snapshot) {
               final data = snapshot.data ?? cubit.selectedDay;
               final dateTimeFormRange =
-              data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+                  data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
 
-              final dataString = '${dateTimeFormRange[0]
-                  .day} - ${dateTimeFormRange[1].formatDayCalendar}';
+              final dataString =
+                  '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
               return Text(
                 dataString,
                 style: textNormalCustom(
