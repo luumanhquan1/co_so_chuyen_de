@@ -3,21 +3,21 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cell_thanh_phan_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thanh_phan_tham_gia_widget.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/detail_document_row/detail_document_row_widget.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
+import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'icon_with_title_widget.dart';
 
@@ -30,6 +30,7 @@ class MoiNguoiThamGiaWidget extends StatefulWidget {
 
 class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
   DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   Widget build(BuildContext context) {
     return screenDevice(
@@ -57,7 +58,17 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
             IconWithTiltleWidget(
               icon: ImageAssets.ic_file,
               title: S.current.diem_danh,
-              onPress: () {},
+              onPress: () {
+                showDiaLog(
+                  context,
+                  title: S.current.diem_danh,
+                  icon: SvgPicture.asset(ImageAssets.icDiemDanh),
+                  btnLeftTxt: S.current.khong,
+                  btnRightTxt: S.current.dong_y,
+                  funcBtnRight: () {},
+                  textContent: S.current.conten_diem_danh,
+                );
+              },
             ),
             StreamBuilder<List<ThanhPhanThamGiaModel>>(
               initialData: cubit.thanhPhanThamGiaModelData,
@@ -118,7 +129,18 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
                   child: IconWithTiltleWidget(
                     icon: ImageAssets.ic_file,
                     title: S.current.diem_danh,
-                    onPress: () {},
+                    onPress: () {
+                      showDiaLog(
+                        context,
+                        title: S.current.diem_danh,
+                        icon: SvgPicture.asset(ImageAssets.icDiemDanh),
+                        btnLeftTxt: S.current.khong,
+                        btnRightTxt: S.current.dong_y,
+                        funcBtnRight: () {},
+                        showTablet: true,
+                        textContent: S.current.conten_diem_danh,
+                      );
+                    },
                   ),
                 ),
                 const Expanded(child: SizedBox()),
@@ -127,7 +149,18 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
                     type2: true,
                     icon: ImageAssets.ic_file,
                     title: S.current.huy_diem_danh,
-                    onPress: () {},
+                    onPress: () {
+                      showDiaLog(
+                        context,
+                        title: S.current.huy_diem_danh,
+                        icon: SvgPicture.asset(ImageAssets.icHuyDiemDanh),
+                        btnLeftTxt: S.current.khong,
+                        btnRightTxt: S.current.dong_y,
+                        funcBtnRight: () {},
+                        showTablet: true,
+                        textContent: S.current.conten_huy_diem_danh,
+                      );
+                    },
                   ),
                 ),
               ],

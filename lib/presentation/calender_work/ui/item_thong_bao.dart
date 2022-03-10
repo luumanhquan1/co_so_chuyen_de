@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +18,24 @@ class ItemThongBaoModel {
   Function(BuildContext context, CalenderCubit cubit) onTap;
 
   ItemThongBaoModel({
+    required this.icon,
+    required this.typeMenu,
+    required this.type,
+    required this.onTap,
+    this.index,
+    this.listWidget,
+  });
+}
+
+class ItemThongBaoModelMyCalender {
+  String icon;
+  TypeCalendarMenu typeMenu;
+  TypeContainer type;
+  int? index;
+  List<ItemThongBaoModelMyCalender>? listWidget;
+  Function(BuildContext context, LichHopCubit cubit) onTap;
+
+  ItemThongBaoModelMyCalender({
     required this.icon,
     required this.typeMenu,
     required this.type,
@@ -52,28 +71,28 @@ List<ItemThongBaoModel> listThongBao = [
     onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
 ];
-List<ItemThongBaoModel> listThongBaoMyCalendar = [
-  ItemThongBaoModel(
+
+List<ItemThongBaoModelMyCalender> listThongBaoMyCalendar = [
+  ItemThongBaoModelMyCalender(
     icon: ImageAssets.icPerson,
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.expand,
-    onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
-    },
+    listWidget: listLichHopCuaToi,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
-  ItemThongBaoModel(
+  ItemThongBaoModelMyCalender(
     icon: ImageAssets.icLichTheoTrangThai,
     typeMenu: TypeCalendarMenu.LichHopLanhDao,
     type: TypeContainer.expand,
-    listWidget: listTheoTrangThai,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
+    listWidget: listLichHopCuaToi,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
-  ItemThongBaoModel(
+  ItemThongBaoModelMyCalender(
     icon: ImageAssets.icLichLanhDao,
     typeMenu: TypeCalendarMenu.BaoCaoThongKe,
     type: TypeContainer.expand,
-    listWidget: listBaoCaoThongKe,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
+    listWidget: listBaoCaoThongKeMyCalender,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
 ];
 
@@ -155,6 +174,51 @@ List<ItemThongBaoModel> listTheoTrangThai = [
   ),
 ];
 
+List<ItemThongBaoModelMyCalender> listLichHopCuaToi = [
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichDuocMoi,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichTaoHo,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichHuy,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichThuHoi,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichDaCoBaoCao,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.LichChuaCoBaoCao,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+];
+
 List<ItemThongBaoModel> listLanhDao = [
   ItemThongBaoModel(
     icon: '',
@@ -228,6 +292,26 @@ List<ItemThongBaoModel> listBaoCaoThongKe = [
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, CalenderCubit cubit) {},
+  ),
+];
+
+List<ItemThongBaoModelMyCalender> listBaoCaoThongKeMyCalender = [
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.ThongKeLichHop,
+    type: TypeContainer.number,
+    index: 0,
+    onTap: (BuildContext context, LichHopCubit cubit) {},
+  ),
+  ItemThongBaoModelMyCalender(
+    icon: '',
+    typeMenu: TypeCalendarMenu.DanhSachLichHop,
+    type: TypeContainer.number,
+    index: 0,
+    onTap: (BuildContext context, LichHopCubit cubit) {
+      cubit.changeScreenMenu(TypeCalendarMenu.DanhSachLichHop);
+      Navigator.pop(context);
+    },
   ),
 ];
 
@@ -312,6 +396,12 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.BaoCaoThongKe:
         return S.current.bao_cao_thong_ke;
+
+      case TypeCalendarMenu.ThongKeLichHop:
+        return 'Thống kê lịch họp';
+
+      case TypeCalendarMenu.DanhSachLichHop:
+        return 'Danh sách lịch họp';
 
       default:
         return S.current.lich_cua_toi;
