@@ -1,13 +1,17 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi_mang_xa_hoi_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/tat_ca_chu_de_screen.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/mobile/thoi_doi_bai_viet_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
-import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TabbarNewspaper extends StatefulWidget {
   const TabbarNewspaper({Key? key}) : super(key: key);
@@ -18,6 +22,8 @@ class TabbarNewspaper extends StatefulWidget {
 
 class _TabbarNewspaperState extends State<TabbarNewspaper> {
   var _controller = TabController(vsync: AnimatedListState(), length: 4);
+  BaoChiMangXaHoiBloc cubit = BaoChiMangXaHoiBloc();
+
   @override
   void initState() {
     _controller = TabController(vsync: AnimatedListState(), length: 4);
@@ -44,11 +50,15 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.menu_open_rounded,
-              color: unselectLabelColor,
-            ),
-            onPressed: () {},
+            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
+            onPressed: () {
+              DrawerSlide.navigatorSlide(
+                context: context,
+                screen: BaoChiMangXaHoiMenu(
+                  cubit: cubit,
+                ),
+              );
+            },
           ),
         ],
         bottom: TabBar(
@@ -75,17 +85,20 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           ],
         ),
       ),
-      body: TabBarView(controller: _controller, children: [
-        Text(
-          S.current.bao_cao_thong_ke,
-        ),
-        const TatCaChuDeScreen(),
-        Text(S.current.theo_doi_bai_viet),
-        TinTucThoiSuScreen(
-          tinTucThoiSuBloc: TinTucThoiSuBloc(),
-          pContext: context,
-        ),
-      ],),
+      body: TabBarView(
+        controller: _controller,
+        children: [
+          Text(
+            S.current.bao_cao_thong_ke,
+          ),
+          const TatCaChuDeScreen(),
+          const TheoDoiBaiVietScreen(),
+          TinTucThoiSuScreen(
+            tinTucThoiSuBloc: TinTucThoiSuBloc(),
+            pContext: context,
+          ),
+        ],
+      ),
     );
   }
 }

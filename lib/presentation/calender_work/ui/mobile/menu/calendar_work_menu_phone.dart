@@ -88,45 +88,45 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                       children: listThongBao
                           .map(
                             (e) => ContainerMenuWidget(
-                              name: e.typeMenu.getTitle(),
-                              icon: e.icon,
-                              type: e.type,
-                              index: e.index ?? 0,
-                              childExpand: Column(
-                                children: e.typeMenu ==
-                                        TypeCalendarMenu.LichTheoTrangThai
-                                    ? listTheoTrangThai
-                                        .map(
-                                          (e) => ContainerMenuWidget(
-                                            icon: e.icon,
-                                            name: e.typeMenu.getTitle(),
-                                            index: e.index ?? 0,
-                                            isIcon: false,
-                                            onTap: () {
-                                              e.onTap(context, widget.cubit);
-                                            },
-                                          ),
-                                        )
-                                        .toList()
-                                    : listLanhDao
-                                        .map(
-                                          (e) => ContainerMenuWidget(
-                                            icon: e.icon,
-                                            name: e.typeMenu.getTitle(),
-                                            index: e.index ?? 0,
-                                            isIcon: false,
-                                            onTap: () {
-                                              e.onTap(context, widget.cubit);
-                                            },
-                                          ),
-                                        )
-                                        .toList(),
+                          name: e.typeMenu.getTitle(),
+                          icon: e.icon,
+                          type: e.type,
+                          index: e.index ?? 0,
+                          childExpand: Column(
+                            children: e.typeMenu ==
+                                TypeCalendarMenu.LichTheoTrangThai
+                                ? listTheoTrangThai
+                                .map(
+                                  (e) => ContainerMenuWidget(
+                                icon: e.icon,
+                                name: e.typeMenu.getTitle(),
+                                index: e.index ?? 0,
+                                isIcon: false,
+                                onTap: () {
+                                  e.onTap(context, widget.cubit);
+                                },
                               ),
-                              onTap: () {
-                                e.onTap(context, widget.cubit);
-                              },
-                            ),
-                          )
+                            )
+                                .toList()
+                                : listLanhDao
+                                .map(
+                                  (e) => ContainerMenuWidget(
+                                icon: e.icon,
+                                name: e.typeMenu.getTitle(),
+                                index: e.index ?? 0,
+                                isIcon: false,
+                                onTap: () {
+                                  e.onTap(context, widget.cubit);
+                                },
+                              ),
+                            )
+                                .toList(),
+                          ),
+                          onTap: () {
+                            e.onTap(context, widget.cubit);
+                          },
+                        ),
+                      )
                           .toList(),
                     ),
                   ),

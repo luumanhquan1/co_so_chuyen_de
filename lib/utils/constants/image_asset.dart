@@ -278,6 +278,8 @@ class ImageAssets {
   static const String IcEmail = '$baseImg/IcEmail.svg';
   static const String XoaKLHop = '$baseImg/XoaKLHop.svg';
   static const String icThuHoiKL = '$baseImg/icThuHoiKL.svg';
+  static const String icHeaderMenuBCMXH = '$baseImg/ic_header_menu_bcmxh.svg';
+  static const String icMenuItemBCMXH = '$baseImg/ic_menu_item_bcmxh.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';
