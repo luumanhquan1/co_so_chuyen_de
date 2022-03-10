@@ -583,7 +583,9 @@
   "nhan_de_biet" : "Nhận để biết",
   "sun_day" : "Sunday",
   "nhac_lich" : "Nhắc lịch",
-  "dv_cap_nhat": "ĐV cập nhật"
+  "dv_cap_nhat": "ĐV cập nhật",
+  "tai_file_thanh_cong": "Tải file thành công",
+  "tai_file_that_bai": "Tải file thất bại"
 }
 
 
