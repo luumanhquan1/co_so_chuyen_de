@@ -574,6 +574,8 @@
   "nd_thu_hoi": "ND thu hồi",
   "dv_thu_hoi": "ĐV thu hồi",
   "dv_bi_thu_hoi": "ĐV bị thu hồi",
+  "tai_file_thanh_cong": "Tải file thành công",
+  "tai_file_that_bai": "Tải file thất bại",
   "nguoi_giao_nhiem_vu": "Người giao nhiệm vụ",
   "can_bo_boc_bang": "Chọn cán bộ sử dụng bắc băng",
   "ban_da_tao_lich_lam_viec_thanh_cong": "Bạn đã tạo lịch làm việc thành công",
