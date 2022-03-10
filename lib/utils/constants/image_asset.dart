@@ -78,6 +78,7 @@ class ImageAssets {
   static const String icCalling = '$baseImg/ic_calling.svg';
   static const String icError = '$baseImg/ic_error.svg';
   static const String icDocumentBlue = '$baseImg/ic_docunment_blue.svg';
+
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';
   static const String headerBackground = '$baseImg/header_background.png';
@@ -227,6 +228,10 @@ class ImageAssets {
   static const String soLichHopTrucTiep = '$baseImg/so_lich_hop_truc_tiep.svg';
   static const String soLichHopTrucTuyen =
       '$baseImg/so_lich_hop_truc_tuyen.svg';
+
+  static const String icDiemDanh = '$baseImg/ic_diem_danh.svg';
+  static const String icHuyDiemDanh = '$baseImg/ic_huy_diem_danh.svg';
+
   static const String ic_delete_do = '$baseImg/delete_do.svg';
   static const String ic_edit = '$baseImg/Edit.svg';
   static const String icDayCalenderWeek = '$baseImg/ic_calender_work_week.svg';
@@ -274,12 +279,8 @@ class ImageAssets {
   static const String XoaKLHop = '$baseImg/XoaKLHop.svg';
   static const String icThuHoiKL = '$baseImg/icThuHoiKL.svg';
   static const String ic_luong = '$baseImg/ic_luong.svg';
-
-
-
-
-
-
+  static const String icHeaderMenuBCMXH = '$baseImg/ic_header_menu_bcmxh.svg';
+  static const String icMenuItemBCMXH = '$baseImg/ic_menu_item_bcmxh.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

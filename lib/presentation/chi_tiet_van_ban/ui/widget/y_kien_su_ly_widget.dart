@@ -4,9 +4,13 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/handing_comment.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/dowload_file.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class YKienSuLyWidget extends StatefulWidget {
   final DanhSachYKienXuLy object;
@@ -40,8 +44,9 @@ class _YKienSuLyWidgetState extends State<YKienSuLyWidget> {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundImage: CachedNetworkImageProvider(
-                          widget.object.avatar ?? 'http://ccvc.dongnai.edsolabs.vn/img/1.9cba4a79.png'),
+                      backgroundImage: CachedNetworkImageProvider(widget
+                              .object.avatar ??
+                          'http://ccvc.dongnai.edsolabs.vn/img/1.9cba4a79.png'),
                     ),
                     SizedBox(
                       width: 14.0.textScale(),
@@ -62,7 +67,8 @@ class _YKienSuLyWidgetState extends State<YKienSuLyWidget> {
                       width: 6,
                     ),
                     Text(
-                      DateTime.parse(widget.object.ngayTao??'').formatDdMMYYYY,
+                      DateTime.parse(widget.object.ngayTao ?? '')
+                          .formatDdMMYYYY,
                       style: textNormalCustom(
                         color: infoColor,
                         fontSize: 12.0.textScale(space: 4.0),
@@ -109,8 +115,56 @@ class _YKienSuLyWidgetState extends State<YKienSuLyWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  //xem file
+                                onTap: () async {
+                                  final status =
+                                      await Permission.storage.status;
+                                  if (!status.isGranted) {
+                                    await Permission.storage.request();
+                                    await Permission.manageExternalStorage
+                                        .request();
+                                  }
+                                  if (widget.object.yKienXuLyFileDinhKem?[index]
+                                          .fileDinhKem?.pathIOC ==
+                                      null) {
+                                    await saveFile(
+                                      widget.object.yKienXuLyFileDinhKem?[index]
+                                              .fileDinhKem?.ten ??
+                                          '',
+                                      '$DO_MAIN_DOWLOAD_FILE${widget.object.yKienXuLyFileDinhKem?[index].fileDinhKem?.duongDan ?? ''}',
+                                    )
+                                        .then(
+                                          (value) => MessageConfig.show(
+                                              title: S
+                                                  .current.tai_file_thanh_cong),
+                                        )
+                                        .onError(
+                                          (error, stackTrace) =>
+                                              MessageConfig.show(
+                                            title: S.current.tai_file_that_bai,
+                                            messState: MessState.error,
+                                          ),
+                                        );
+                                  } else {
+                                    await saveFile(
+                                      widget.object.yKienXuLyFileDinhKem?[index]
+                                              .fileDinhKem?.ten ??
+                                          '',
+                                      widget.object.yKienXuLyFileDinhKem?[index]
+                                          .fileDinhKem?.pathIOC,
+                                    )
+                                        .then(
+                                          (value) => MessageConfig.show(
+                                              title: S
+                                                  .current.tai_file_thanh_cong),
+                                        )
+                                        .onError(
+                                          (error, stackTrace) =>
+                                              MessageConfig.show(
+                                            title: S.current.tai_file_that_bai,
+                                            messState: MessState.error,
+                                          ),
+                                        );
+                                  }
                                 },
                                 child: Text(
                                   widget.object.yKienXuLyFileDinhKem?[index]
