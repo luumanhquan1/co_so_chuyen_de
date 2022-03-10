@@ -265,12 +265,24 @@ class _MainLichHopState extends State<MainLichHop> {
                               state is LichHopStateDangList ||
                               state is LichHopStateDangDanhSach) {
                             return TableCalendarWidget(
-                              onChange: (DateTime startDate, DateTime endDate) {
+                              type: state.type,
+                              onChange: (
+                                DateTime startDate,
+                                DateTime endDate,
+                                DateTime selectDay,
+                              ) {
                                 cubit.startDate = startDate;
                                 cubit.endDate = endDate;
-                                cubit.getDashboard();
-
-                                cubit.postDanhSachLichHop();
+                                cubit.selectDay = selectDay;
+                                cubit.listDSLH.clear();
+                                cubit.page = 1;
+                                if (state.type == Type_Choose_Option_Day.DAY) {
+                                  cubit.postDSLHDay();
+                                  cubit.getDashboard();
+                                } else {
+                                  cubit.getDashboard();
+                                  cubit.postDanhSachLichHop();
+                                }
                               },
                               onChangeRange: (
                                 DateTime? start,

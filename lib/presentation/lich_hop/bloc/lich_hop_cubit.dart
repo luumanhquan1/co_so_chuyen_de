@@ -42,6 +42,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       BehaviorSubject.seeded([true, false]);
 
   List<ItemDanhSachLichHop> listDSLH = [];
+  DateTime selectDay = DateTime.now();
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   String userId = '';
@@ -128,6 +129,28 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showContent();
   }
 
+  void postDSLHWeek() {
+    final day = selectDay;
+    startDate = day.subtract(Duration(days: day.weekday - 1));
+    endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+    postDanhSachLichHop();
+  }
+
+  void postDSLHMonth() {
+    final day = selectDay;
+    startDate = DateTime(day.year, day.month, 1);
+    endDate = DateTime(day.year, day.month + 1, 0);
+
+    postDanhSachLichHop();
+  }
+
+  void postDSLHDay() {
+    startDate = selectDay;
+    endDate = selectDay;
+
+    postDanhSachLichHop();
+  }
+
   Future<void> postDanhSachLichHop() async {
     showLoading();
     final result = await hopRepo.postDanhSachLichHop(
@@ -143,7 +166,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     result.when(
       success: (value) {
         totalPage = value.totalPage ?? 1;
-        log("${value.items?.map((e) => e.id).toList()}");
 
         listDSLH.addAll(value.items ?? []);
 

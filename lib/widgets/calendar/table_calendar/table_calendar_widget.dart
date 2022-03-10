@@ -16,7 +16,7 @@ class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
-  final Function(DateTime startDate, DateTime end) onChange;
+  final Function(DateTime startDate, DateTime end, DateTime selectDay) onChange;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
 
@@ -87,7 +87,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
     cubit.moveTimeSubject.add(cubit.selectedDay);
 
     if (widget.type == Type_Choose_Option_Day.DAY) {
-      widget.onChange(date, date);
+      widget.onChange(date, date, date);
     } else if (widget.type == Type_Choose_Option_Day.WEEK) {
       widget.onChange(
         date.subtract(Duration(days: date.weekday - 1)),
@@ -96,6 +96,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
             days: DateTime.daysPerWeek - date.weekday,
           ),
         ),
+        date,
       );
     } else {
       widget.onChange(
@@ -109,6 +110,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           cubit.moveTimeSubject.value.month + 1,
           0,
         ),
+        date,
       );
     }
   }

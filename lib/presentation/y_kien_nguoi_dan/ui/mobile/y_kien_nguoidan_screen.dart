@@ -147,8 +147,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           ),
                           Expanded(
                             child: BoxStatusVanBan(
-                              value:
-                                  cubit.dashboardModel.soLuongQuaHan ?? 0,
+                              value: cubit.dashboardModel.soLuongQuaHan ?? 0,
                               onTap: () {},
                               color: statusCalenderRed,
                               statusName: S.current.qua_han,
@@ -266,7 +265,8 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
           TableCalendarWidget(
             onChangeRange:
                 (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-            onChange: (DateTime startDate, DateTime end) {},
+            onChange:
+                (DateTime startDate, DateTime endDate, DateTime selectDay) {},
           ),
         ],
       ),

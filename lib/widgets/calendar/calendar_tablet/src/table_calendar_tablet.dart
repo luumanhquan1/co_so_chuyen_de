@@ -9,7 +9,8 @@ class TableCandarTablet extends StatefulWidget {
   final Type_Choose_Option_Day type;
   final Function(DateTime? start, DateTime? end, DateTime? focusedDay)
       onChangeRange;
-  final Function(DateTime startDate, DateTime endDate) onChange;
+  final Function(DateTime startDate, DateTime endDate, DateTime selectDay)
+      onChange;
 
   const TableCandarTablet({
     Key? key,
@@ -60,7 +61,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
       cubitCalendar.moveTimeSubject.add(cubitCalendar.selectedDay);
 
       if (widget.type == Type_Choose_Option_Day.DAY) {
-        widget.onChange(selectedDay, selectedDay);
+        widget.onChange(selectedDay, selectedDay, selectedDay);
       } else if (widget.type == Type_Choose_Option_Day.WEEK) {
         widget.onChange(
           selectedDay.subtract(Duration(days: selectedDay.weekday - 1)),
@@ -69,6 +70,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
               days: DateTime.daysPerWeek - selectedDay.weekday,
             ),
           ),
+          selectedDay,
         );
       } else {
         widget.onChange(
@@ -82,6 +84,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
             cubitCalendar.moveTimeSubject.value.month + 1,
             0,
           ),
+          selectedDay,
         );
       }
       _selectedEvents.value = _getEventsForDay(selectedDay);
