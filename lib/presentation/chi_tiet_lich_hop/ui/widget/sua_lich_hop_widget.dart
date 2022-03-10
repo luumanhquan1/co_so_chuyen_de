@@ -2,48 +2,43 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/loai_select_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/presentation/chon_phong_hop/chon_phong_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/fake_data_tao_lich.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/chuong_trinh_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/container_toggle_widget.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/tai_lieu_cuoc_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/text_field_style.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/thanh_phan_tham_gia_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/widgets/title_child_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/provider_widget.dart';
-import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
-import 'package:ccvc_mobile/widgets/button/button_bottom.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
+import 'package:ccvc_mobile/widgets/textformfield/follow_key_board_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TaoLichHopMobileScreen extends StatefulWidget {
-  const TaoLichHopMobileScreen({Key? key}) : super(key: key);
+class SuaLichHopWidget extends StatefulWidget {
+  const SuaLichHopWidget({Key? key}) : super(key: key);
 
   @override
-  _TaoLichHopScreenState createState() => _TaoLichHopScreenState();
+  _SuaLichHopWidgetState createState() => _SuaLichHopWidgetState();
 }
 
-class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
-  late TaoLichHopCubit _cubit;
+class _SuaLichHopWidgetState extends State<SuaLichHopWidget> {
+  final TaoLichHopCubit _cubit = TaoLichHopCubit();
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    _cubit = ProviderWidget.of<TaoLichHopCubit>(context).cubit;
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
+  //   _cubit = ProviderWidget.of<TaoLichHopCubit>(context).cubit;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBarDefaultBack(S.current.tao_lich_hop),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+    return FollowKeyBoardWidget(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -158,27 +153,15 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
             ChonPhongHopScreen(
               onChange: (value) {},
             ),
-            spaceH15,
-            ExpandGroup(
-              child: Column(
-                children: [
-                  const ThanhPhanThamGiaExpandWidget(),
-                  ChuongTrinhHopWidget(
-                    cubit: _cubit,
-                  ),
-                  TaiLieuCuocHopWidget(
-                    cubit: _cubit,
-                  )
-                ],
-              ),
+            spaceH24,
+            DoubleButtonBottom(
+              title1: S.current.dong,
+              onPressed1: () {
+                Navigator.pop(context);
+              },
+              title2: S.current.luu,
+              onPressed2: () {},
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: ButtonBottom(
-                text: S.current.tao_lich_hop,
-                onPressed: () {},
-              ),
-            )
           ],
         ),
       ),

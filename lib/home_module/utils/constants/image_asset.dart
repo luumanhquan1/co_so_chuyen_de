@@ -52,6 +52,7 @@ class ImageAssets {
   static const String headerBackground = '$baseImg/header_background.png';
   static const String appBarBackground = '$baseImg/app_bar_background.png';
 
+
   static SvgPicture svgAssets(
     String name, {
     Color? color,

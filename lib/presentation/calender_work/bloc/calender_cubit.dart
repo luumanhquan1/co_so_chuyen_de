@@ -53,20 +53,20 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DataLichLvModel dataLichLvModel = DataLichLvModel();
 
   Stream<DataLichLvModel> get streamListLich => listLichSubject.stream;
+  DateTime selectDay = DateTime.now();
   DateTime startDates = DateTime.now();
   DateTime endDates = DateTime.now();
 
-  void callApi(DateTime? startDate, DateTime? endDate) {
-    callApiNgay(startDate ?? startDates, endDate ?? endDates);
+  void callApi() {
+    startDates = selectDay;
+    endDates = selectDay;
+    callApiNgay();
   }
 
-  void callApiNgay(
-    DateTime startDate,
-    DateTime endDate,
-  ) {
+  void callApiNgay() {
     getListLichLV(
-      dateFrom: startDate.formatApi,
-      dateTo: endDate.formatApi,
+      dateFrom: startDates.formatApi,
+      dateTo: endDates.formatApi,
       userId: HiveLocal.getDataUser()?.userId ?? '',
       donViId:
           HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
@@ -74,47 +74,27 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       pageSize: pageSize,
       isLichCuaToi: true,
     );
-    dataLichLamViec(startDate: startDate.formatApi, endDate: endDate.formatApi);
+    dataLichLamViec(
+        startDate: startDates.formatApi, endDate: endDates.formatApi);
     dataLichLamViecRight(
-      startDate: startDate.formatApi,
-      endDate: endDate.formatApi,
+      startDate: startDates.formatApi,
+      endDate: endDates.formatApi,
       type: 0,
     );
   }
 
   void callApiTuan() {
-    final day = DateTime.now();
-    final startDate = day.subtract(Duration(days: day.weekday - 1));
-    final endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
-    callApiNgay(startDate, endDate);
+    final day = selectDay;
+    startDates = day.subtract(Duration(days: day.weekday - 1));
+    endDates = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+    callApiNgay();
   }
 
   void callApiMonth() {
-    DateTime times = DateTime.now();
-    final firstDayThisMonth = DateTime(times.year, times.month, times.day);
-    final firstDayNextMonth = DateTime(
-      firstDayThisMonth.year,
-      firstDayThisMonth.month,
-      firstDayThisMonth.day,
-    );
-    final int c = firstDayNextMonth.difference(firstDayThisMonth).inDays;
-    int b = times.millisecondsSinceEpoch;
-    b = b + (c * 24 * 60 * 60 * 1000);
-    times = DateTime.fromMillisecondsSinceEpoch(b);
-
-    final startMonth = DateTime.fromMillisecondsSinceEpoch(
-      DateTime.utc(
-        times.year,
-        times.month,
-      ).millisecondsSinceEpoch,
-    );
-    final endMonth = DateTime.fromMillisecondsSinceEpoch(
-      DateTime.utc(
-        times.year,
-        times.month + 1,
-      ).subtract(const Duration(days: 1)).millisecondsSinceEpoch,
-    );
-    callApiNgay(startMonth, endMonth);
+    final day = selectDay;
+    startDates = DateTime(day.year, day.month, 1);
+    endDates = DateTime(day.year, day.month + 1, 0);
+    callApiNgay();
   }
 
   List<ListLichLVModel> listDSLV = [];
