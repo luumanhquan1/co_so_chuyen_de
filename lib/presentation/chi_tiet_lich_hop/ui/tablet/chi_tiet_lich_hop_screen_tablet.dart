@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
@@ -9,9 +8,8 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/tai_
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/widgets/y_kien_cuoc_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/bieu_quyet_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/cong_tac_chuan_bi_widget_tablet.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/ket_luan_hop_widget_tablet.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/moi_nguoi_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/phat_bieu_widget_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/sua_lich_hop_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/ket_luan_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/moi_nguoi_tham_gia_widget.dart';
@@ -107,17 +105,11 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
                 onTap: () {
-                  showDiaLog(
+                  Navigator.push(
                     context,
-                    textContent: S.current.ban_chan_chan_sua_lich_nay_khong,
-                    btnLeftTxt: S.current.khong,
-                    funcBtnRight: () {
-                      Navigator.pop(context);
-                    },
-                    title: S.current.sua_lich,
-                    btnRightTxt: S.current.dong_y,
-                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
-                    showTablet: true,
+                    MaterialPageRoute(
+                      builder: (_) => const SuaLichHopTabletScreen(),
+                    ),
                   );
                 },
               ),
