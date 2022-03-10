@@ -12,12 +12,14 @@ class CellPhatBieu extends StatefulWidget {
   final PhatBieuModel infoModel;
   final DetailMeetCalenderCubit cubit;
   final int index;
+  final bool isthePhatBieu;
 
   const CellPhatBieu({
     Key? key,
     required this.infoModel,
     required this.cubit,
     required this.index,
+    this.isthePhatBieu = true,
   }) : super(key: key);
 
   @override
@@ -56,37 +58,31 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.ten_can_bo}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.ten_can_bo}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.noi_dung}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.noi_dung}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${S.current.thoi_gian}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: unselectedLabelColor,
-                      ),
+                  child: Text(
+                    '${S.current.thoi_gian}:',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: unselectedLabelColor,
                     ),
                   ),
                 ),
@@ -108,44 +104,39 @@ class _CellPhatBieuState extends State<CellPhatBieu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.nguoiPhatBieu}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.nguoiPhatBieu}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.ndPhatBieu}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.ndPhatBieu}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: Expanded(
-                    child: Text(
-                      '${widget.infoModel.tthoiGian}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
-                      ),
+                  child: Text(
+                    '${widget.infoModel.tthoiGian}',
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: infoColor,
                     ),
                   ),
                 ),
               ],
             ),
             if (widget.cubit.typeStatus.value !=
-                widget.cubit.danhSachphatBieu)
+                    widget.cubit.danhSachphatBieu &&
+                widget.isthePhatBieu == true)
               CustomCheckBox(
                 title: '',
                 isCheck: widget.cubit.check,

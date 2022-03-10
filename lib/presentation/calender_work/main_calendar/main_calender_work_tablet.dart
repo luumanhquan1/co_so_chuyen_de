@@ -121,7 +121,8 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         DateTime? end,
                         DateTime? focusedDay,
                       ) {},
-                      onChange: (DateTime startDate, DateTime endDate) {
+                      onChange: (DateTime startDate, DateTime endDate,
+                          DateTime selectDay, ) {
                         cubit.startDates = startDate;
                         cubit.endDates = endDate;
                         cubit.listDSLV.clear();

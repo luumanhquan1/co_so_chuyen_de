@@ -270,6 +270,16 @@ class ImageAssets {
   static const String Group2 = '$baseImg/Group2.svg';
   static const String Comment_ic = '$baseImg/Comment_ic.svg';
 
+  static const String IcEmail = '$baseImg/IcEmail.svg';
+  static const String XoaKLHop = '$baseImg/XoaKLHop.svg';
+  static const String icThuHoiKL = '$baseImg/icThuHoiKL.svg';
+
+
+
+
+
+
+
 
 
 

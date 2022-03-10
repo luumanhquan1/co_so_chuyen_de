@@ -13,6 +13,8 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/ket
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/moi_nguoi_tham_gia_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/phat_bieu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/thong_tin_cuoc_hop_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/ket_luan_hop_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/moi_nguoi_tham_gia_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/phan_cong_thu_ky.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_boc_bang_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thu_hoi_widget.dart';
@@ -20,6 +22,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_lam_viec/ui/widget/menu_s
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,9 +48,6 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
     cubit = DetailMeetCalenderCubit();
     cubit.initData(widget.id);
     super.initState();
-    cubit.soLuongPhatBieuData(id: widget.id);
-    cubit.getDanhSachPhatBieuLichHop(widget.id);
-    cubit.getDanhSachBieuQuyetLichHop(widget.id);
   }
 
   @override
@@ -70,17 +70,56 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
               QData(
                 urlImage: ImageAssets.icHuy,
                 text: S.current.huy_lich_hop,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.huy_lich,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                    showTablet: true,
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.ic_delete_do,
                 text: S.current.xoa_lich,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.khong,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                    showTablet: true,
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
-                onTap: () {},
+                onTap: () {
+                  showDiaLog(
+                    context,
+                    textContent: S.current.ban_chan_chan_sua_lich_nay_khong,
+                    btnLeftTxt: S.current.khong,
+                    funcBtnRight: () {
+                      Navigator.pop(context);
+                    },
+                    title: S.current.sua_lich,
+                    btnRightTxt: S.current.dong_y,
+                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                    showTablet: true,
+                  );
+                },
               ),
               QData(
                 urlImage: ImageAssets.icThuHoi,
@@ -295,11 +334,14 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                   children: [
                     const CongTacChuanBiWidgetTablet(),
                     const ChuongTrinhHopWidget(),
-                    const MoiNguoiThamGiaWidgetTablet(),
+                    const MoiNguoiThamGiaWidget(),
                     const TaiLieuWidget(),
-                    const PhatBieuWidgetTablet(),
+                    PhatBieuWidgetTablet(
+                      id: widget.id,
+                      cubit: cubit,
+                    ),
                     const BieuQuyetWidgetTablet(),
-                    KetLuanHopWidgetTablet(
+                    KetLuanHopWidget(
                       id: widget.id,
                       cubit: cubit,
                     ),

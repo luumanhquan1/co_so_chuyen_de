@@ -14,14 +14,22 @@ import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 class PhatBieuWidget extends StatefulWidget {
-  const PhatBieuWidget({Key? key}) : super(key: key);
+  final DetailMeetCalenderCubit cubit;
+  final String id;
+
+  const PhatBieuWidget({Key? key, required this.id, required this.cubit})
+      : super(key: key);
 
   @override
   _PhatBieuWidgetState createState() => _PhatBieuWidgetState();
 }
 
 class _PhatBieuWidgetState extends State<PhatBieuWidget> {
-  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +45,10 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                 children: [
                   SizedBox(
                     child: StreamBuilder<int>(
-                      stream: cubit.typeStatus,
+                      stream: widget.cubit.typeStatus,
                       builder: (context, snapshot) {
-                        if (cubit.typeStatus.value == cubit.choDuyet) {
+                        if (widget.cubit.typeStatus.value ==
+                            widget.cubit.choDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 150),
                             child: DoubleButtonBottom(
@@ -51,16 +60,24 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               onPressed2: () {},
                             ),
                           );
-                        } else if (cubit.typeStatus.value == cubit.daDuyet) {
+                        } else if (widget.cubit.typeStatus.value ==
+                            widget.cubit.daDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
                               title: S.current.huy_duyet,
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.cubit.getDanhSachPhatBieuLichHop(
+                                  widget.cubit.daDuyet,
+                                  widget.id,
+                                );
+                                setState(() {});
+                              },
                               isColorBlue: false,
                             ),
                           );
-                        } else if (cubit.typeStatus.value == cubit.huyDuyet) {
+                        } else if (widget.cubit.typeStatus.value ==
+                            widget.cubit.huyDuyet) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 250),
                             child: ButtonCustomBottom(
@@ -86,8 +103,8 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                     ),
                   ),
                   StreamBuilder<List<PhatBieuModel>>(
-                    initialData: cubit.listPhatBieu,
-                    stream: cubit.streamPhatBieu,
+                    initialData: widget.cubit.listPhatBieu,
+                    stream: widget.cubit.streamPhatBieu,
                     builder: (context, snapshot) {
                       final _list = snapshot.data ?? [];
                       if (_list.isNotEmpty) {
@@ -100,7 +117,7 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
                               children: [
                                 CellPhatBieu(
                                   infoModel: _list[index],
-                                  cubit: cubit,
+                                  cubit: widget.cubit,
                                   index: index,
                                 ),
                               ],
@@ -119,9 +136,9 @@ class _PhatBieuWidgetState extends State<PhatBieuWidget> {
               ),
             ),
             StreamBuilder<int>(
-              stream: cubit.typeStatus,
+              stream: widget.cubit.typeStatus,
               builder: (context, snapshot) {
-                return StatePhatBieuWidget(cubit: cubit);
+                return StatePhatBieuWidget(cubit: widget.cubit);
               },
             ),
           ],

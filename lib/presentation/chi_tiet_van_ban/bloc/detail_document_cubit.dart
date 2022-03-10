@@ -107,12 +107,12 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   }) async {
     final queue = Queue(parallel: 1);
     unawaited(queue.add(() => getChiTietVanBanDen(processId, taskId)));
-    // unawaited(queue.add(() => getThongTinGuiNhan(processId)));
-    // unawaited(queue.add(() => getLichSuVanBanLichSuCapNhat(processId,CAP_NHAT_TINH_HINH_THUC_HIEN)));
-    // unawaited(queue.add(() => getLichSuVanBanLichSuTraLai(processId,TRA_LAI)));
-    // unawaited(queue.add(() => getLichSuVanBanLichSuThuHoi(processId,THU_HOI)));
-    // unawaited(queue.add(() => getLichSuVanBanLichSuLienThong(processId,LIEN_THONG)));
-    unawaited(queue.add(() => getDanhSachYKienXuLy('69819d93-1bb4-44a9-9608-529c52d63b8e')));
+    unawaited(queue.add(() => getThongTinGuiNhan(processId)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuCapNhat(processId,CAP_NHAT_TINH_HINH_THUC_HIEN)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuTraLai(processId,TRA_LAI)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuThuHoi(processId,THU_HOI)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuLienThong(processId,LIEN_THONG)));
+    unawaited(queue.add(() => getDanhSachYKienXuLy(processId)));
 
     await queue.onComplete;
     showContent();

@@ -180,7 +180,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
               ),
             ),
             TableCalendarWidget(
-              onChange: (DateTime startDate, DateTime endDate) {
+              onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {
                 baoChiMangXaHoiBloc.startDate = startDate.formatApiStartDay;
                 baoChiMangXaHoiBloc.endDate = endDate.formatApiEndDay;
               },

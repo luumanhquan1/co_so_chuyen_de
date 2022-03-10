@@ -191,11 +191,23 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<List<PhatBieuModel>>> getDanhSachPhatBieuLichHop(
+    int status,
     String lichHopId,
   ) {
     return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
         List<PhatBieuModel>>(
-      () => _hopServices.getDanhSachPhatBieuLichHop(lichHopId),
+      () => _hopServices.getDanhSachPhatBieuLichHop(status, lichHopId),
+      (res) => res.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<PhatBieuModel>>> getDanhSachPhatBieuLichHopNoStatus(
+    String lichHopId,
+  ) {
+    return runCatchingAsync<DanhSachPhatBieuLichHopDataResponse,
+        List<PhatBieuModel>>(
+      () => _hopServices.getDanhSachPhatBieuLichHopNoStatus(lichHopId),
       (res) => res.toModel(),
     );
   }
