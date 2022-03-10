@@ -595,6 +595,11 @@
   "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
   "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
   "xoa_ket_luan_hop" : "Xóa kết luận họp",
-  "dv_cap_nhat": "ĐV cập nhật"
-
+  "chung": "Chung",
+  "trong_nuoc": "Trong nước",
+  "nuoc_ngoai": "Nước ngoài",
+  "phat_dong": "Phát động",
+  "tham_du": "Tham dự",
+  "duoc_moi": "Được mời",
+  "quoc_te": "Quốc tế"
 }

@@ -93,5 +93,6 @@ flutter:
     - assets/images/
     - assets/menu/
     - assets/style/
+    - lib/ket_noi_module/assets/images/
 flutter_intl:
   enabled: true
