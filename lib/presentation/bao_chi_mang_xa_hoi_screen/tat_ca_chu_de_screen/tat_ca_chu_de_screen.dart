@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/bloc/chu_de_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/hot_new.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/item_infomation.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/item_list_new.dart';
@@ -25,7 +28,7 @@ class TatCaChuDeScreen extends StatefulWidget {
 
 class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
   ScrollController _scrollController = ScrollController();
-  BaoChiMangXaHoiBloc baoChiMangXaHoiBloc = BaoChiMangXaHoiBloc();
+  ChuDeCubit chuDeCubit = ChuDeCubit();
 
   @override
   void initState() {
@@ -34,9 +37,13 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {}
     });
-    baoChiMangXaHoiBloc.getListTatCaCuDe(
-      baoChiMangXaHoiBloc.startDate,
-      baoChiMangXaHoiBloc.endDate,
+    chuDeCubit.getListTatCaCuDe(
+      chuDeCubit.startDate,
+      chuDeCubit.endDate,
+    );
+    chuDeCubit.getListBaoCaoThongKe(
+      chuDeCubit.startDateBaoCaoThongKe,
+      chuDeCubit.endDateBaoCaoThongKe,
     );
   }
 
@@ -101,19 +108,30 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                         ),
                       ],
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: const [
-                          ItemTableTopic('Tin tổng hợp', '11295'),
-                          ItemTableTopic('Các địa phoning', '11295'),
-                          ItemTableTopic(
-                            'Uỷ ban nhân dân tỉnh',
-                            '11295',
-                          ),
-                        ],
-                      ),
-                    ),
+                    // StreamBuilder<TuongTacThongKeResponseModel>(
+                    //   stream: chuDeCubit.dataBaoCaoThongKe,
+                    //   builder: (context, snapshot) {
+                    //     final data =
+                    //         snapshot.data ?? TuongTacThongKeResponseModel();
+                    //     return ListView.builder(
+                    //       shrinkWrap: true,
+                    //       scrollDirection: Axis.horizontal,
+                    //       itemCount: data.danhSachTuongtacThongKe?.length ?? 0,
+                    //       itemBuilder: (context, index) {
+                    //         return const SizedBox();
+                    //         // return ItemTableTopic(
+                    //         //   chuDeCubit.listTitle[index],
+                    //         //   '',
+                    //         //   data
+                    //         //       .danhSachTuongtacThongKe[index]
+                    //         //       .dataTuongTacThongKeModel
+                    //         //       .interactionStatistic InteractionStatisticModel(),
+                    //         // );
+                    //       },
+                    //     );
+                    //
+                    //   },
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -144,7 +162,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       ),
                     ),
                     StreamBuilder<List<ChuDeModel>>(
-                      stream: baoChiMangXaHoiBloc.listYKienNguoiDan,
+                      stream: chuDeCubit.listYKienNguoiDan,
                       builder: (context, snapshot) {
                         final data = snapshot.data ?? [];
                         return ListView.builder(
@@ -180,14 +198,15 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
               ),
             ),
             TableCalendarWidget(
-              onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {
-                baoChiMangXaHoiBloc.startDate = startDate.formatApiStartDay;
-                baoChiMangXaHoiBloc.endDate = endDate.formatApiEndDay;
+              onChange:
+                  (DateTime startDate, DateTime endDate, DateTime selectDay) {
+                chuDeCubit.startDate = startDate.formatApiStartDay;
+                chuDeCubit.endDate = endDate.formatApiEndDay;
               },
               onSearch: (value) {
-                baoChiMangXaHoiBloc.getListTatCaCuDe(
-                  baoChiMangXaHoiBloc.startDate,
-                  baoChiMangXaHoiBloc.endDate,
+                chuDeCubit.getListTatCaCuDe(
+                  chuDeCubit.startDate,
+                  chuDeCubit.endDate,
                 );
               },
               onChangeRange:
@@ -199,3 +218,4 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
     );
   }
 }
+
