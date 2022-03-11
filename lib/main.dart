@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
@@ -84,7 +86,8 @@ class _MyAppState extends State<MyApp> {
               textSelectionTheme: TextSelectionThemeData(
                 cursorColor: AppTheme.getInstance().primaryColor(),
                 selectionColor: AppTheme.getInstance().primaryColor(),
-                selectionHandleColor: AppTheme.getInstance().primaryColor(),
+                selectionHandleColor:
+                AppTheme.getInstance().primaryColor(),
               ),
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 secondary: AppTheme.getInstance().accentColor(),

@@ -150,6 +150,7 @@ const gradientEnd = Color(0xFF4DFDF2);
 const unFocusColor = Color(0xffF2F0FF);
 const colorImageLichHop = Color(0xffF1F7FF);
 const dangThucHienPurble = Color(0xffBB6BD9);
+const textUnfocus = Color(0xffF9F9FA);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
@@ -182,6 +183,10 @@ abstract class AppColor {
   Color backGroundColor();
 
   Color subTitleColor();
+
+  Color buttonUnfocus();
+
+  Color colorField();
 }
 
 class LightApp extends AppColor {
@@ -259,52 +264,62 @@ class LightApp extends AppColor {
   Color subTitleColor() {
     return const Color(0xff5A8DEE);
   }
+
+  @override
+  Color buttonUnfocus() {
+    return textDefault;
+  }
+
+  @override
+  Color colorField() {
+    return backgroundColorApp;
+  }
 }
 
 class DarkApp extends AppColor {
   @override
   Color primaryColor() {
-    return Colors.black;
+    return colorPrimary;
   }
 
   @override
   Color accentColor() {
-    return Colors.black;
+    return colorAccent;
   }
 
   @override
   Color statusColor() {
-    return Colors.black;
+    return const Color(0xFFFCFCFC);
   }
 
   @override
   Color mainColor() {
-    return Colors.black.withOpacity(0.8);
+    return const Color(0xFF30536F);
   }
 
   @override
   Color bgColor() {
-    return Colors.black.withOpacity(0.8);
+    return const Color(0xFFFCFCFC);
   }
 
   @override
   Color dfBtnColor() {
-    return Colors.white.withOpacity(0.8);
+    return const Color(0xFF324452);
   }
 
   @override
   Color dfBtnTxtColor() {
-    return Colors.black.withOpacity(0.6);
+    return const Color(0xFFFFFFFF);
   }
 
   @override
   Color dfTxtColor() {
-    return Colors.white.withOpacity(0.6);
+    return const Color(0xFF303742);
   }
 
   @override
   Color secondTxtColor() {
-    return Colors.black.withOpacity(0.4);
+    return const Color(0xFF9097A3);
   }
 
   @override
@@ -314,28 +329,385 @@ class DarkApp extends AppColor {
 
   @override
   Color sideBtnColor() {
-    return const Color(0xFFA9B8BD);
+    return const Color(0xFFDCFFFE);
   }
 
   @override
   Color disableColor() {
-    return Colors.grey;
+    return const Color(0xFFA9B8BD);
   }
 
   @override
   Color titleColor() {
-    return const Color(0xffFFFFFF);
+    return const Color(0xff3D5586);
   }
 
   @override
   Color backGroundColor() {
-    return Colors.black.withOpacity(0.8);
+    return const Color(0xffFFFFFF);
   }
 
   @override
   Color subTitleColor() {
-    // TODO: implement subTitleColor
-    throw UnimplementedError();
+    return const Color(0xff5A8DEE);
+  }
+
+  @override
+  Color buttonUnfocus() {
+    return textDefault;
+  }
+
+  @override
+  Color colorField() {
+    return backgroundColorApp;
+  }
+}
+
+class DefaultApp extends AppColor {
+  @override
+  Color colorField() {
+    return textDefault;
+  }
+
+  @override
+  Color primaryColor() {
+    return colorPrimary;
+  }
+
+  @override
+  Color accentColor() {
+    return colorAccent;
+  }
+
+  @override
+  Color statusColor() {
+    return textDefault;
+  }
+
+  @override
+  Color mainColor() {
+    return const Color(0xFF30536F);
+  }
+
+  @override
+  Color bgColor() {
+    return const Color(0xFFFCFCFC);
+  }
+
+  @override
+  Color dfBtnColor() {
+    return const Color(0xFF324452);
+  }
+
+  @override
+  Color dfBtnTxtColor() {
+    return const Color(0xFFFFFFFF);
+  }
+
+  @override
+  Color dfTxtColor() {
+    return const Color(0xFF303742);
+  }
+
+  @override
+  Color secondTxtColor() {
+    return const Color(0xFF9097A3);
+  }
+
+  @override
+  Color txtLightColor() {
+    return Colors.white.withOpacity(0.85);
+  }
+
+  @override
+  Color sideBtnColor() {
+    return const Color(0xFFDCFFFE);
+  }
+
+  @override
+  Color disableColor() {
+    return const Color(0xFFA9B8BD);
+  }
+
+  @override
+  Color titleColor() {
+    return const Color(0xff3D5586);
+  }
+
+  @override
+  Color backGroundColor() {
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+    return const Color(0xff5A8DEE);
+  }
+
+  @override
+  Color buttonUnfocus() {
+    return AqiColor;
+  }
+}
+
+class BlueApp extends AppColor {
+  @override
+  Color primaryColor() {
+    return colorPrimary;
+  }
+
+  @override
+  Color accentColor() {
+    return colorAccent;
+  }
+
+  @override
+  Color statusColor() {
+    return textDefault;
+  }
+
+  @override
+  Color mainColor() {
+    return const Color(0xFF30536F);
+  }
+
+  @override
+  Color bgColor() {
+    return const Color(0xFFFCFCFC);
+  }
+
+  @override
+  Color dfBtnColor() {
+    return const Color(0xFF324452);
+  }
+
+  @override
+  Color dfBtnTxtColor() {
+    return const Color(0xFFFFFFFF);
+  }
+
+  @override
+  Color dfTxtColor() {
+    return const Color(0xFF303742);
+  }
+
+  @override
+  Color secondTxtColor() {
+    return const Color(0xFF9097A3);
+  }
+
+  @override
+  Color txtLightColor() {
+    return Colors.white.withOpacity(0.85);
+  }
+
+  @override
+  Color sideBtnColor() {
+    return const Color(0xFFDCFFFE);
+  }
+
+  @override
+  Color disableColor() {
+    return const Color(0xFFA9B8BD);
+  }
+
+  @override
+  Color titleColor() {
+    return const Color(0xff3D5586);
+  }
+
+  @override
+  Color backGroundColor() {
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+    return const Color(0xff5A8DEE);
+  }
+
+  @override
+  Color buttonUnfocus() {
+    return AqiColor;
+  }
+
+  @override
+  Color colorField() {
+    return numberOfCalenders;
+  }
+}
+
+class PinkApp extends AppColor {
+  @override
+  Color primaryColor() {
+    return colorPrimary;
+  }
+
+  @override
+  Color accentColor() {
+    return colorAccent;
+  }
+
+  @override
+  Color statusColor() {
+    return textDefault;
+  }
+
+  @override
+  Color mainColor() {
+    return const Color(0xFF30536F);
+  }
+
+  @override
+  Color bgColor() {
+    return const Color(0xFFFCFCFC);
+  }
+
+  @override
+  Color dfBtnColor() {
+    return const Color(0xFF324452);
+  }
+
+  @override
+  Color dfBtnTxtColor() {
+    return const Color(0xFFFFFFFF);
+  }
+
+  @override
+  Color dfTxtColor() {
+    return const Color(0xFF303742);
+  }
+
+  @override
+  Color secondTxtColor() {
+    return const Color(0xFF9097A3);
+  }
+
+  @override
+  Color txtLightColor() {
+    return Colors.white.withOpacity(0.85);
+  }
+
+  @override
+  Color sideBtnColor() {
+    return const Color(0xFFDCFFFE);
+  }
+
+  @override
+  Color disableColor() {
+    return const Color(0xFFA9B8BD);
+  }
+
+  @override
+  Color titleColor() {
+    return const Color(0xff3D5586);
+  }
+
+  @override
+  Color backGroundColor() {
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+    return const Color(0xff5A8DEE);
+  }
+
+  @override
+  Color buttonUnfocus() {
+    return AqiColor;
+  }
+
+  @override
+  Color colorField() {
+    return pinkColor;
+  }
+}
+
+class YellowApp extends AppColor {
+  @override
+  Color primaryColor() {
+    return colorPrimary;
+  }
+
+  @override
+  Color accentColor() {
+    return colorAccent;
+  }
+
+  @override
+  Color statusColor() {
+    return textDefault;
+  }
+
+  @override
+  Color mainColor() {
+    return const Color(0xFF30536F);
+  }
+
+  @override
+  Color bgColor() {
+    return const Color(0xFFFCFCFC);
+  }
+
+  @override
+  Color dfBtnColor() {
+    return const Color(0xFF324452);
+  }
+
+  @override
+  Color dfBtnTxtColor() {
+    return const Color(0xFFFFFFFF);
+  }
+
+  @override
+  Color dfTxtColor() {
+    return const Color(0xFF303742);
+  }
+
+  @override
+  Color secondTxtColor() {
+    return const Color(0xFF9097A3);
+  }
+
+  @override
+  Color txtLightColor() {
+    return Colors.white.withOpacity(0.85);
+  }
+
+  @override
+  Color sideBtnColor() {
+    return const Color(0xFFDCFFFE);
+  }
+
+  @override
+  Color disableColor() {
+    return const Color(0xFFA9B8BD);
+  }
+
+  @override
+  Color titleColor() {
+    return const Color(0xff3D5586);
+  }
+
+  @override
+  Color backGroundColor() {
+    return const Color(0xffFFFFFF);
+  }
+
+  @override
+  Color subTitleColor() {
+    return const Color(0xff5A8DEE);
+  }
+
+  @override
+  Color buttonUnfocus() {
+    return AqiColor;
+  }
+
+  @override
+  Color colorField() {
+    return yellowColor;
   }
 }
 

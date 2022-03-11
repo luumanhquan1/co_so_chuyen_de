@@ -1,6 +1,9 @@
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/phone/danh_sach_chung_screen.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/tab/danh_sach_chung_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
+import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/cai_dat_giao_dien_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
@@ -179,8 +182,9 @@ extension GetScreen on MenuType {
       case MenuType.baoChiMangXaHoi:
         return const Scaffold(body: TabbarNewspaper());
       case MenuType.ketNoi:
-        return const Scaffold(
-          backgroundColor: Colors.red,
+        return screenDevice(
+          mobileScreen: const DanhSachChungScreen(),
+          tabletScreen: const DanhSachChungScreenTablet(),
         );
       case MenuType.tienIch:
         return screenDevice(
@@ -192,9 +196,7 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.caiDatGiaoDien:
-        return const Scaffold(
-          backgroundColor: Colors.red,
-        );
+        return const CaiDatGiaoDienScreen();
       case MenuType.hoiDap:
         return screenDevice(
           mobileScreen: const HoiDapScreen(),

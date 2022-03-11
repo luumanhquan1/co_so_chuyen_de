@@ -1,8 +1,10 @@
 
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
 
 import '/home_module/utils/constants/app_constants.dart';
 
