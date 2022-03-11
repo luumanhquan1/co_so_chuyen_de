@@ -19,6 +19,7 @@ class TableCalendarWidget extends StatefulWidget {
   final Function(DateTime startDate, DateTime end, DateTime selectDay) onChange;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
+  final List<DateTime>? eventsLoader;
 
   const TableCalendarWidget({
     Key? key,
@@ -27,6 +28,7 @@ class TableCalendarWidget extends StatefulWidget {
     required this.onChangeRange,
     required this.onChange,
     this.type = Type_Choose_Option_Day.DAY,
+    this.eventsLoader,
   }) : super(key: key);
 
   @override
@@ -35,10 +37,6 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   TableCalendarCubit cubit = TableCalendarCubit();
-
-  List<Event> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
-  }
 
   @override
   void initState() {
@@ -211,7 +209,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TableCalendar(
-                      eventLoader: _getEventsfromDay,
+                      eventLoader: (day) =>
+                          widget.eventsLoader
+                              ?.where((element) => isSameDay(element, day))
+                              .toList() ??
+                          [],
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       onDaySelected: _onDaySelect,
                       rangeSelectionMode: _rangeSelectionMode,
@@ -266,13 +268,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       firstDay: DateTime.utc(2021, 8, 20),
                       lastDay: DateTime.utc(2030, 8, 20),
                       focusedDay: _selectedDay,
-                    ),
-                    ..._getEventsfromDay(_selectedDay).map(
-                      (Event event) => ListTile(
-                        title: Text(
-                          event.title,
-                        ),
-                      ),
                     ),
                   ],
                 )
