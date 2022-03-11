@@ -91,6 +91,7 @@ flutter:
   uses-material-design: true
   assets:
     - lib/home_module/assets/images/
+    - lib/tien_ich_module/assets/images/
     - assets/images/
     - assets/menu/
     - assets/style/
