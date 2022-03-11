@@ -63,8 +63,10 @@ class ApiConstants {
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const DANH_SACH_PHIEN_HOP =
       '/vpdt/api/meetingsection/get-list-phien-hop';
-  static const EVENT_CALENDAR =
+  static const EVENT_CALENDAR_LICH_HOP =
       '/vpdt/api/MeetingSchedule/calendar-day-of-month';
+  static const EVENT_CALENDAR_LICH_LV =
+      '/vpdt/api/Schedules/Ngay-co-lich';
   static const CHUONG_TRINH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';

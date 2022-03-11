@@ -39,7 +39,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   void initState() {
     super.initState();
     cubit.page = 1;
-    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
     cubit.getDashboard();
     cubit.postEventsCalendar();
     title = S.current.lich_hop_cua_toi;

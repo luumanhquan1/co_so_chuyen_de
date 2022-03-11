@@ -95,7 +95,7 @@ abstract class HopServices {
     @Part() List<File> file,
   );
 
-  @POST(ApiConstants.EVENT_CALENDAR)
+  @POST(ApiConstants.EVENT_CALENDAR_LICH_HOP)
   Future<EventCalendarResponse> postEventCalendar(
       @Body() EventCalendarRequest eventCalendarRequest,);
 

@@ -145,6 +145,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+
   void initData() {
     page = 1;
     getDashboard();
@@ -339,15 +340,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
-  List<MeetingSchedule> listMeeting = [
-    MeetingSchedule(
-        'hung hung hung', '2022-02-07T07:45:00', '2022-02-07T08:45:00'),
-    MeetingSchedule('hung', '2022-02-07T09:45:00', '2022-02-07T10:45:00'),
-    MeetingSchedule('hung', '2022-02-07T11:45:00', '2022-02-07T12:45:00'),
-    MeetingSchedule('hung', '2022-02-07T13:45:00', '2022-02-07T15:45:00'),
-  ];
 
-  DataSource getCalenderDataSource() {
+  DataSource getCalenderDataSource(DanhSachLichHopModel model) {
     List<Appointment> appointments = [];
     RecurrenceProperties recurrence =
         RecurrenceProperties(startDate: DateTime.now());
@@ -355,14 +349,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     recurrence.interval = 2;
     recurrence.recurrenceRange = RecurrenceRange.noEndDate;
     recurrence.recurrenceCount = 10;
-    for (int i = 0; i < listMeeting.length; i++) {
+    for (int i = 0; i < (model.items?.length ?? 0); i++) {
       appointments.add(
         Appointment(
-            startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
-            endTime: DateTime.parse(listMeeting[i].dateTimeTo),
-            subject: listMeeting[i].title,
-            color: textColorMangXaHoi,
-            isAllDay: false),
+            startTime: DateTime.parse(model.items?[i].dateTimeFrom ?? ''),
+            endTime: DateTime.parse(model.items?[i].dateTimeTo ?? ''),
+            subject: model.items?[i].title ?? '',
+            color: textColorMangXaHoi,),
       );
     }
     return DataSource(appointments);

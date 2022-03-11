@@ -36,7 +36,7 @@ class _MainLichHopState extends State<MainLichHop> {
   @override
   void initState() {
     super.initState();
-    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
     cubit.initData();
     title = S.current.lich_hop_cua_toi;
   }
