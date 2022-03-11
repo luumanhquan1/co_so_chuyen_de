@@ -1,7 +1,10 @@
 
+
+import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
-import '/home_module/utils/constants/app_constants.dart';
-import '/home_module/config/app_config.dart';
+
+
 Widget screenDevice({
   required Widget mobileScreen,
   required Widget tabletScreen,

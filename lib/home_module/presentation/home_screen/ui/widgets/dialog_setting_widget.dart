@@ -1,4 +1,7 @@
-import '/home_module/config/app_config.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 
@@ -12,8 +15,8 @@ import '/home_module/utils/constants/image_asset.dart';
 
 import '/home_module/utils/enum_ext.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import '/home_module/utils/extensions/screen_device_extension.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
+
 import '/home_module/widgets/radio/radio_button.dart';
 import '/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 
@@ -289,7 +292,7 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget> {
   void selectCell(BuildContext context, SelectKey value, DialogData data) {
     if (value == SelectKey.TUY_CHON) {
       widget.onDismis();
-      if (APP_DEVICE == DeviceType.MOBILE) {
+      if (isMobile()) {
         showBottomSheetCustom(
           context,
           child: CustomSelectDateWidget(

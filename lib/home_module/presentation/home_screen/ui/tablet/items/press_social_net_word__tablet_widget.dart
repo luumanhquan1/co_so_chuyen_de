@@ -1,4 +1,6 @@
 
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/presentation/webview/web_view_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '/home_module/config/resources/color.dart';
@@ -16,7 +18,6 @@ import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.d
 import '/home_module/utils/constants/api_constants.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import '/home_module/utils/extensions/size_extension.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
 import 'package:flutter/material.dart';

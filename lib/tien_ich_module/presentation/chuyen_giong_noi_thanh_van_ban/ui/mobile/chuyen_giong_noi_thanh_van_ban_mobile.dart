@@ -2,14 +2,14 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 
-class ChuyenGiongNoiThanhVanBan extends StatefulWidget {
-  const ChuyenGiongNoiThanhVanBan({Key? key}) : super(key: key);
+class ChuyenGiongNoiThanhVanBanMobile extends StatefulWidget {
+  const ChuyenGiongNoiThanhVanBanMobile({Key? key}) : super(key: key);
 
   @override
-  _ChuyenGiongNoiThanhVanBanState createState() => _ChuyenGiongNoiThanhVanBanState();
+  _ChuyenGiongNoiThanhVanBanMobileState createState() => _ChuyenGiongNoiThanhVanBanMobileState();
 }
 
-class _ChuyenGiongNoiThanhVanBanState extends State<ChuyenGiongNoiThanhVanBan> {
+class _ChuyenGiongNoiThanhVanBanMobileState extends State<ChuyenGiongNoiThanhVanBanMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

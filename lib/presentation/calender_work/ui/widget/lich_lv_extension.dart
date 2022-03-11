@@ -152,27 +152,39 @@ extension LichLv on CalenderState {
     Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
   }) {
     if (this is LichLVStateDangLich && type == Type_Choose_Option_Day.MONTH) {
-      return TableCalendarWidget(
-        type: type,
-        isCalendar: false,
-        onChange: (DateTime start, DateTime end, selectDay) {
-          cubit.callApi();
-        },
-        onChangeRange:
-            (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+      return StreamBuilder<List<DateTime>>(
+        stream: cubit.eventsStream,
+        builder: (context, snapshot) {
+          return TableCalendarWidget(
+            eventsLoader: snapshot.data,
+            type: type,
+            isCalendar: false,
+            onChange: (DateTime start, DateTime end, selectDay) {
+              cubit.callApi();
+            },
+            onChangeRange:
+                (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+          );
+        }
       );
     }
-    return TableCalendarWidget(
-      type: type,
-      onChange: (DateTime start, DateTime end, selectDay) {
-        cubit.startDates = start;
-        cubit.endDates = end;
-        cubit.selectDay = selectDay;
-        cubit.listDSLV.clear();
-        cubit.page = 1;
-        cubit.callApi();
-      },
-      onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+    return StreamBuilder<List<DateTime>>(
+      stream: cubit.eventsStream,
+      builder: (context, snapshot) {
+        return TableCalendarWidget(
+          eventsLoader: snapshot.data,
+          type: type,
+          onChange: (DateTime start, DateTime end, selectDay) {
+            cubit.startDates = start;
+            cubit.endDates = end;
+            cubit.selectDay = selectDay;
+            cubit.listDSLV.clear();
+            cubit.page = 1;
+            cubit.callApi();
+          },
+          onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+        );
+      }
     );
   }
 

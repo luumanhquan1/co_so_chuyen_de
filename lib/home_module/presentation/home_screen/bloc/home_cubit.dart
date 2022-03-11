@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 
 
 
@@ -34,7 +35,7 @@ import '/home_module/domain/repository/home_repository/home_repository.dart';
 import '/home_module/presentation/home_screen/bloc/home_state.dart';
 import '/home_module/utils/constants/app_constants.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import '/home_module/utils/extensions/screen_device_extension.dart';
+
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';

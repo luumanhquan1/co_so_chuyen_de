@@ -1,14 +1,23 @@
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/ui/mobile/chuyen_giong_noi_thanh_van_ban_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/ui/tablet/chuyen_giong_noi_thanh_van_ban_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_van_ban_thanh_giong_noi/ui/mobile/chuyen_van_ban_thanh_giong_noi_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_van_ban_thanh_giong_noi/ui/tablet/chuyen_van_ban_thanh_giong_noi_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/danh_ba_dien_tu_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/tablet/danh_ba_dien_tu_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/mobile/danh_sach_cong_viec_tien_ich_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/tablet/danh_sach_cong_viec_tien_ich_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/mobile/huong_dan_su_dung_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/tablet/huong_dan_su_dung_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/lich_am_duong/ui/mobile/lich_am_duong_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/lich_am_duong/ui/tablet/lich_am_duong_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/mang_xa_hoi_noi_bo/ui/mobile/mang_xa_hoi_noi_bo_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/mang_xa_hoi_noi_bo/ui/tablet/mang_xa_hoi_noi_bo_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/phien_dich_tu_dong/ui/mobile/phien_dich_tu_dong_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/phien_dich_tu_dong/ui/tablet/phien_dich_tu_dong_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/tra_cuu_van_ban_phap_luat/ui/mobile/tra_cuu_van_ban_phap_luat_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/tra_cuu_van_ban_phap_luat/ui/tablet/tra_cuu_van_ban_phap_luat_mobile.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/screen_device_extension.dart';
@@ -129,48 +138,48 @@ extension GetScreen on MenuTypeTienIch {
     switch (this) {
       case MenuTypeTienIch.chuyenGiongNoiThanhVanBan:
         return screenDevice(
-          mobileScreen: const ChuyenGiongNoiThanhVanBan(),
-          tabletScreen: const ChuyenGiongNoiThanhVanBan(),
+          mobileScreen: const ChuyenGiongNoiThanhVanBanMobile(),
+          tabletScreen: const ChuyenGiongNoiThanhVanBanTablet(),
         );
       case MenuTypeTienIch.chuyenVanBanThanhGiongNoi:
         return screenDevice(
           mobileScreen: const ChuyenVanBanThanhGiongNoi(),
-          tabletScreen: const ChuyenVanBanThanhGiongNoi(),
+          tabletScreen: const ChuyenVanBanThanhGiongNoiTablet(),
         );
       case MenuTypeTienIch.phienDichTuDong:
         return screenDevice(
           mobileScreen: const PhienDichTuDongMobile(),
-          tabletScreen: const PhienDichTuDongMobile(),
+          tabletScreen: const PhienDichTuDongTablet(),
         );
       case MenuTypeTienIch.lichAmDuong:
         return screenDevice(
           mobileScreen: const LichAmDuongMobile(),
-          tabletScreen: const LichAmDuongMobile(),
+          tabletScreen: const LichAmDuongTablet(),
         );
       case MenuTypeTienIch.traCuuVanBanPhapLuat:
         return screenDevice(
           mobileScreen: const TraCuuVanBanPhapLuatMobile(),
-          tabletScreen: const TraCuuVanBanPhapLuatMobile(),
+          tabletScreen: const TraCuuVanBanPhapLuatTablet(),
         );
       case MenuTypeTienIch.danhBaDienTu:
         return screenDevice(
           mobileScreen: const DanhBaDienTuMobile(),
-          tabletScreen: const DanhBaDienTuMobile(),
+          tabletScreen: const DanhBaDienTuTablet(),
         );
       case MenuTypeTienIch.huongDanSuDung:
         return screenDevice(
           mobileScreen: const HuongDanSuDungMobile(),
-          tabletScreen: const HuongDanSuDungMobile(),
+          tabletScreen: const HuongDanSuDungTablet(),
         );
       case MenuTypeTienIch.mangXaHoiNoiBo:
         return screenDevice(
           mobileScreen: const MangXaHoiNoiBoMobile(),
-          tabletScreen: const MangXaHoiNoiBoMobile(),
+          tabletScreen: const MangXaHoiNoiBoTablet(),
         );
       case MenuTypeTienIch.danhSachCongViec:
         return screenDevice(
           mobileScreen: const DanhSachCongViecTienIchMobile(),
-          tabletScreen: const DanhSachCongViecTienIchMobile(),
+          tabletScreen: const DanhSachCongViecTienIchTablet(),
         );
     }
   }

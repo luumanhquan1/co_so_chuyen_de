@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
@@ -104,7 +105,10 @@ extension TabbarEnum on TabBarType {
       case TabBarType.home:
         return TabBarItem(
           icon: SvgPicture.asset(
-            isSelect ? ImageAssets.icHomeFocus : ImageAssets.icHomeUnFocus,
+            ImageAssets.icHomeFocus,
+            color: isSelect
+                ? AppTheme.getInstance().colorField()
+                : AppTheme.getInstance().buttonUnfocus(),
             height: 16.0.textScale(),
           ),
           text: S.current.home,
@@ -112,7 +116,10 @@ extension TabbarEnum on TabBarType {
       case TabBarType.report:
         return TabBarItem(
           icon: SvgPicture.asset(
-            isSelect ? ImageAssets.icChartFocus : ImageAssets.icChartUnFocus,
+            ImageAssets.icChartFocus,
+            color: isSelect
+                ? AppTheme.getInstance().colorField()
+                : AppTheme.getInstance().buttonUnfocus(),
             height: 16.0.textScale(),
           ),
           text: S.current.report,
@@ -120,28 +127,33 @@ extension TabbarEnum on TabBarType {
       case TabBarType.calendarWork:
         return TabBarItem(
           icon: SvgPicture.asset(
-            isSelect
-                ? ImageAssets.icCalendarFocus
-                : ImageAssets.icCalendarUnFocus,
+            ImageAssets.icCalendarFocus,
             height: 16.0.textScale(),
+            color: isSelect
+                ? AppTheme.getInstance().colorField()
+                : AppTheme.getInstance().buttonUnfocus(),
           ),
           text: S.current.calendar_work,
         );
       case TabBarType.internalInteraction:
         return TabBarItem(
           icon: SvgPicture.asset(
-            isSelect
-                ? ImageAssets.icMessageFocus
-                : ImageAssets.icMessageUnFocus,
+            ImageAssets.icMessageFocus,
             height: 16.0.textScale(),
+            color: isSelect
+                ? AppTheme.getInstance().colorField()
+                : AppTheme.getInstance().buttonUnfocus(),
           ),
           text: S.current.internal_interaction,
         );
       case TabBarType.menu:
         return TabBarItem(
           icon: SvgPicture.asset(
-            isSelect ? ImageAssets.icMenuFocus : ImageAssets.icMenuUnFocus,
+            ImageAssets.icMenuFocus,
             height: 16.0.textScale(),
+            color: isSelect
+                ? AppTheme.getInstance().colorField()
+                : AppTheme.getInstance().buttonUnfocus(),
           ),
           text: S.current.menu,
         );
