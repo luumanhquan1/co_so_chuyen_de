@@ -19,6 +19,7 @@ class TableCalendarWidget extends StatefulWidget {
   final Function(DateTime startDate, DateTime end, DateTime selectDay) onChange;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
+  final List<DateTime>? eventsLoader;
 
   const TableCalendarWidget({
     Key? key,
@@ -27,6 +28,7 @@ class TableCalendarWidget extends StatefulWidget {
     required this.onChangeRange,
     required this.onChange,
     this.type = Type_Choose_Option_Day.DAY,
+    this.eventsLoader,
   }) : super(key: key);
 
   @override
@@ -40,9 +42,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
     return selectedEvents[date] ?? [];
   }
 
-  List<DateTime> _getEvents(DateTime date) {
-    return [DateTime.now(), DateTime(2022, 3, 12), DateTime(2022, 3, 13) ,];
-  }
+  final List<DateTime> _getEvent = [
+    DateTime.now(),
+    DateTime(2022, 3, 12),
+    DateTime(2022, 3, 13)
+  ];
 
   @override
   void initState() {
@@ -215,7 +219,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TableCalendar(
-                      eventLoader: _getEvents,
+                      eventLoader: (day) =>
+                          widget.eventsLoader
+                              ?.where((element) => isSameDay(element, day))
+                              .toList() ??
+                          [],
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       onDaySelected: _onDaySelect,
                       rangeSelectionMode: _rangeSelectionMode,

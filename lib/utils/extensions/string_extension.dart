@@ -61,6 +61,10 @@ extension FormatAddressConfirm on String {
     )}';
     return result;
   }
+
+  DateTime convertStringToDate() {
+    return DateFormat('yyyy-MM-dd').parse(this);
+  }
 }
 
 extension StringParse on String {

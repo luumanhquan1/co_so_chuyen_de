@@ -39,6 +39,7 @@ class _MainLichHopState extends State<MainLichHop> {
     cubit.page = 1;
     cubit.getDashboard();
     cubit.postDanhSachLichHop();
+    cubit.postEventsCalendar();
   }
 
   @override
@@ -227,6 +228,7 @@ class _MainLichHopState extends State<MainLichHop> {
                             cubit.page = 1;
                             cubit.postDSLHDay();
                             cubit.getDashboard();
+                            cubit.postEventsCalendar();
                           },
                           onTapWeek: () {
                             setState(() {});
@@ -235,6 +237,7 @@ class _MainLichHopState extends State<MainLichHop> {
                             cubit.page = 1;
                             cubit.postDSLHWeek();
                             cubit.getDashboard();
+                            cubit.postEventsCalendar();
                           },
                           onTapmonth: () {
                             setState(() {});
@@ -243,6 +246,7 @@ class _MainLichHopState extends State<MainLichHop> {
                             cubit.page = 1;
                             cubit.postDSLHMonth();
                             cubit.getDashboard();
+                            cubit.postEventsCalendar();
                           },
                         );
                       },
@@ -255,29 +259,40 @@ class _MainLichHopState extends State<MainLichHop> {
                       if (state is LichHopStateDangLich ||
                           state is LichHopStateDangList ||
                           state is LichHopStateDangDanhSach) {
-                        return TableCalendarWidget(
-                          type: state.type,
-                          onChange: (DateTime startDate, DateTime endDate,
-                              DateTime selectDay,) {
-                            cubit.startDate = startDate;
-                            cubit.endDate = endDate;
-                            cubit.selectDay = selectDay;
-                            cubit.listDSLH.clear();
-                            cubit.page = 1;
-                            if (state.type == Type_Choose_Option_Day.DAY) {
-                              cubit.postDSLHDay();
-                              cubit.getDashboard();
-                            } else {
-                              cubit.getDashboard();
-                              cubit.postDanhSachLichHop();
-                            }
-                          },
-                          onChangeRange: (
-                            DateTime? start,
-                            DateTime? end,
-                            DateTime? focusedDay,
-                          ) {},
-                        );
+                        return StreamBuilder<List<DateTime>>(
+                            stream: cubit.eventsStream,
+                            builder: (context, snapshot) {
+                              return TableCalendarWidget(
+                                type: state.type,
+                                eventsLoader: snapshot.data,
+                                onChange: (
+                                  DateTime startDate,
+                                  DateTime endDate,
+                                  DateTime selectDay,
+                                ) {
+                                  cubit.startDate = startDate;
+                                  cubit.endDate = endDate;
+                                  cubit.selectDay = selectDay;
+                                  cubit.listDSLH.clear();
+                                  cubit.page = 1;
+                                  if (state.type ==
+                                      Type_Choose_Option_Day.DAY) {
+                                    cubit.postDSLHDay();
+                                    cubit.getDashboard();
+                                    cubit.postEventsCalendar();
+                                  } else {
+                                    cubit.getDashboard();
+                                    cubit.postDanhSachLichHop();
+                                    cubit.postEventsCalendar();
+                                  }
+                                },
+                                onChangeRange: (
+                                  DateTime? start,
+                                  DateTime? end,
+                                  DateTime? focusedDay,
+                                ) {},
+                              );
+                            });
                       }
                       return Container();
                     },

@@ -97,7 +97,7 @@ abstract class HopServices {
 
   @POST(ApiConstants.EVENT_CALENDAR)
   Future<EventCalendarResponse> postEventCalendar(
-      @Body() EventCalendarRequest eventCalendarRequest);
+      @Body() EventCalendarRequest eventCalendarRequest,);
 
   @GET(ApiConstants.DANH_SACH_PHIEN_HOP)
   Future<ListPhienHopRespone> getDanhSachPhienHop(@Query('id') String id);

@@ -59,7 +59,7 @@ mixin HopRepository {
 
   Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
       String id);
-  Future<Result<List<dynamic>>> postEventCalendar(EventCalendarRequest request);
+  Future<Result<List<String?>>> postEventCalendar(EventCalendarRequest request);
 
   Future<Result<AddFileModel>> postFileTaoLichHop(
     int entityType,

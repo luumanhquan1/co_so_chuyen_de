@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
@@ -20,6 +22,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -61,6 +64,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
       BehaviorSubject();
 
+  final BehaviorSubject<List<DateTime>> eventsSubject = BehaviorSubject();
+
+  Stream<List<DateTime>> get eventsStream => eventsSubject.stream;
+
   BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
 
   Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
@@ -73,6 +80,36 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
+
+  Future<void> postEventsCalendar() async {
+    final result = await hopRepo.postEventCalendar(
+      EventCalendarRequest(
+        DateFrom: startDate.formatApi,
+        DateTo: endDate.formatApi,
+        DonViId: donViId,
+        isLichCuaToi: true,
+        month: selectDay.month,
+        PageIndex: 1,
+        PageSize: 1000,
+        UserId: userId,
+        year: selectDay.year,
+      ),
+    );
+    result.when(
+      success: (value) {
+        final List<DateTime> data = [];
+
+        value.forEach((element) {
+          if (element != null) {
+            data.add(element.convertStringToDate());
+          }
+        });
+
+        eventsSubject.add(data);
+      },
+      error: (error) {},
+    );
+  }
 
   Future<void> getDashboard() async {
     showLoading();
