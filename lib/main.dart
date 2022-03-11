@@ -57,8 +57,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    appStateCubit.getTokenPrefs();
     appStateCubit.getThemeApp();
+    appStateCubit.getTokenPrefs();
     checkDeviceType();
   }
 

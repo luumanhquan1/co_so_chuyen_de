@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
@@ -21,7 +22,7 @@ class HiveLocal {
   static late Box<SelectkeyModel> _selectKey;
   static late Box<String> _tagKey;
   static late Box<PermissionApp> _listPermission;
-  static late Box<Map<String, dynamic>> _appTheme;
+  static late Box<String> _appTheme;
   static const TAG_KEY = 'TAG_KEY';
   static Future<void> init() async {
     Hive.registerAdapter(DataUserAdapter());
@@ -124,14 +125,15 @@ class HiveLocal {
   }
 
   static Future<void> saveTheme(AppThemModel appThemModel) async {
-
-    await _appTheme.add(appThemModel.toJson());
+    // log
+    await _appTheme.add(jsonEncode(appThemModel.toJson()));
   }
 
   static AppThemModel getThemeApp() {
     // final vl = _appTheme.get(_APP_THEME) ?? {};
     // final a= _appTheme.values;
     // log('$a');
-    return AppThemModel.fromJson( {});
+    // log('>>>>>>>>>>>}');
+    return AppThemModel.fromJson({});
   }
 }
