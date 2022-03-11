@@ -128,14 +128,18 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     }
   }
 
-  Widget getLichHopStateDangLich() {
+  Widget getLichHopStateDangLich({
+    required LichHopCubit cubit,
+  }) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const LichHopTheoNgay();
+        return LichHopTheoNgay(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const LichHopTheoTuan();
+        return LichHopTheoTuan(cubit: cubit);
       case Type_Choose_Option_Day.MONTH:
-        return const LichHopTheoThang();
+        return LichHopTheoThang(cubit: cubit);
       default:
         return const SizedBox();
     }
@@ -184,7 +188,7 @@ extension lichHopCubit on LichHopState {
     if (this is LichHopStateDangList) {
       return type.getLichHopStateDangList(cubit: cubit);
     } else if (this is LichHopStateDangLich) {
-      return type.getLichHopStateDangLich();
+      return type.getLichHopStateDangLich(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSach(cubit);
     } else {
@@ -219,14 +223,20 @@ extension lichHopOptionDayCubitTablet on Type_Choose_Option_Day {
     }
   }
 
-  Widget getLichHopStateDangLichTablet() {
+  Widget getLichHopStateDangLichTablet({required LichHopCubit cubit}) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return const LichHopTheoNgayTablet();
+        return LichHopTheoNgayTablet(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return const LichHopTheoTuanTablet();
+        return LichHopTheoTuanTablet(
+          cubit: cubit,
+        );
       case Type_Choose_Option_Day.MONTH:
-        return const LichHopTheoThangTablet();
+        return LichHopTheoThangTablet(
+          cubit: cubit,
+        );
       default:
         return const SizedBox();
     }
@@ -251,7 +261,7 @@ extension lichHopCubitTablet on LichHopState {
     if (this is LichHopStateDangList) {
       return type.getLichHopStateDangListTablet(cubit);
     } else if (this is LichHopStateDangLich) {
-      return type.getLichHopStateDangLichTablet();
+      return type.getLichHopStateDangLichTablet(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSachTablet(cubit);
     } else {

@@ -114,21 +114,27 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                 BlocBuilder<CalenderCubit, CalenderState>(
                   bloc: cubit,
                   builder: (context, state) {
-                    return TableCandarTablet(
-                      type: state.type,
-                      onChangeRange: (
-                        DateTime? start,
-                        DateTime? end,
-                        DateTime? focusedDay,
-                      ) {},
-                      onChange: (DateTime startDate, DateTime endDate,
-                          DateTime selectDay, ) {
-                        cubit.startDates = startDate;
-                        cubit.endDates = endDate;
-                        cubit.listDSLV.clear();
-                        cubit.page = 1;
-                        cubit.callApi();
-                      },
+                    return StreamBuilder<List<DateTime>>(
+                      stream: cubit.eventsStream,
+                      builder: (context, snapshot) {
+                        return TableCandarTablet(
+                          eventsLoader: snapshot.data,
+                          type: state.type,
+                          onChangeRange: (
+                            DateTime? start,
+                            DateTime? end,
+                            DateTime? focusedDay,
+                          ) {},
+                          onChange: (DateTime startDate, DateTime endDate,
+                              DateTime selectDay, ) {
+                            cubit.startDates = startDate;
+                            cubit.endDates = endDate;
+                            cubit.listDSLV.clear();
+                            cubit.page = 1;
+                            cubit.callApi();
+                          },
+                        );
+                      }
                     );
                   },
                 ),
