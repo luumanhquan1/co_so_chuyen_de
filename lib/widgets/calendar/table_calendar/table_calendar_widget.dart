@@ -40,6 +40,10 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
     return selectedEvents[date] ?? [];
   }
 
+  List<DateTime> _getEvents(DateTime date) {
+    return [DateTime.now(), DateTime(2022, 3, 12), DateTime(2022, 3, 13) ,];
+  }
+
   @override
   void initState() {
     selectedEvents = {};
@@ -211,7 +215,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TableCalendar(
-                      eventLoader: _getEventsfromDay,
+                      eventLoader: _getEvents,
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       onDaySelected: _onDaySelect,
                       rangeSelectionMode: _rangeSelectionMode,
@@ -266,13 +270,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       firstDay: DateTime.utc(2021, 8, 20),
                       lastDay: DateTime.utc(2030, 8, 20),
                       focusedDay: _selectedDay,
-                    ),
-                    ..._getEventsfromDay(_selectedDay).map(
-                      (Event event) => ListTile(
-                        title: Text(
-                          event.title,
-                        ),
-                      ),
                     ),
                   ],
                 )
