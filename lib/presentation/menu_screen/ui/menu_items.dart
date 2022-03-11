@@ -1,8 +1,6 @@
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
-import 'package:ccvc_mobile/presentation/detail_hdsd/ui/mobile/detail_hdsd.dart';
-import 'package:ccvc_mobile/presentation/detail_hdsd/ui/tablet/detail_hdsd_tablet.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/hoi_dap/ui/mobile/hoi_dap_screen.dart';
@@ -16,6 +14,7 @@ import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/qlvb_tablet_s
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/y_kien_nguoidan_screen.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/yknd_tablet_screen.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/menu_tien_ich_screen/ui/mobile/menu_tien_ich_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/menu_tien_ich_screen/ui/tablet/menu_tien_ich_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
@@ -186,7 +185,7 @@ extension GetScreen on MenuType {
       case MenuType.tienIch:
         return screenDevice(
           mobileScreen: const MenuTienIchMobile(),
-          tabletScreen: const MenuTienIchMobile(),
+          tabletScreen: const MenuTienIchTablet(),
         );
       case MenuType.chuyenPhamVi:
         return const Scaffold(
