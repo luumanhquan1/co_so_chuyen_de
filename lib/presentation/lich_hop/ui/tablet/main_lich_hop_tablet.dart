@@ -132,37 +132,29 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                     bloc: cubit,
                     builder: (context, state) {
                       return StreamBuilder<List<DateTime>>(
-                        stream: cubit.eventsStream,
-                        builder: (context, snapshot) {
-                          return TableCandarTablet(
-                            type: state.type,
-                            eventsLoader: snapshot.data,
-                            onChangeRange: (
-                              DateTime? start,
-                              DateTime? end,
-                              DateTime? focusedDay,
-                            ) {},
-                            onChange: (
-                              DateTime startDate,
-                              DateTime endDate,
-                              DateTime selectDay,
-                            ) {
-                              cubit.startDate = startDate;
-                              cubit.endDate = endDate;
-                              cubit.selectDay = selectDay;
-                              cubit.listDSLH.clear();
-                              cubit.page = 1;
-
-                              if (state.type == Type_Choose_Option_Day.DAY) {
-                                cubit.postDSLHDay();
-                              } else {
-                                cubit.getDashboard();
-                                cubit.postDanhSachLichHop();
-                              }
-                            },
-                          );
-                        }
-                      );
+                          stream: cubit.eventsStream,
+                          builder: (context, snapshot) {
+                            return TableCandarTablet(
+                              type: state.type,
+                              eventsLoader: snapshot.data,
+                              onChangeRange: (
+                                DateTime? start,
+                                DateTime? end,
+                                DateTime? focusedDay,
+                              ) {},
+                              onChange: (
+                                DateTime startDate,
+                                DateTime endDate,
+                                DateTime selectDay,
+                              ) {
+                                cubit.getDataCalendar(
+                                  startDate,
+                                  endDate,
+                                  selectDay,
+                                );
+                              },
+                            );
+                          });
                     },
                   ),
                   BlocBuilder<LichHopCubit, LichHopState>(

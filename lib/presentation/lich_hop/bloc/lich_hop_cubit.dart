@@ -126,6 +126,32 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     );
   }
 
+  void getDataCalendar(
+    DateTime startTime,
+    DateTime endTime,
+    DateTime selectTime,
+  ) {
+    startDate = startTime;
+    endDate = endTime;
+    selectDay = selectTime;
+    listDSLH.clear();
+    page = 1;
+
+    if (state.type == Type_Choose_Option_Day.DAY) {
+      postDSLHDay();
+    } else {
+      getDashboard();
+      postDanhSachLichHop();
+    }
+  }
+
+  void initData() {
+    page = 1;
+    getDashboard();
+    postDanhSachLichHop();
+    postEventsCalendar();
+  }
+
   Future<void> getDashboard() async {
     showLoading();
 

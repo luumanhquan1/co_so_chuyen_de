@@ -37,10 +37,7 @@ class _MainLichHopState extends State<MainLichHop> {
   void initState() {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
-    cubit.page = 1;
-    cubit.getDashboard();
-    cubit.postDanhSachLichHop();
-    cubit.postEventsCalendar();
+    cubit.initData();
     title = S.current.lich_hop_cua_toi;
   }
 
@@ -257,7 +254,6 @@ class _MainLichHopState extends State<MainLichHop> {
                                 cubit.chooseTypeDay(
                                   Type_Choose_Option_Day.MONTH,
                                 );
-
                                 cubit.postDSLHMonth();
                               },
                             );
@@ -282,19 +278,11 @@ class _MainLichHopState extends State<MainLichHop> {
                                       DateTime endDate,
                                       DateTime selectDay,
                                     ) {
-                                      cubit.startDate = startDate;
-                                      cubit.endDate = endDate;
-                                      cubit.selectDay = selectDay;
-                                      cubit.listDSLH.clear();
-                                      cubit.page = 1;
-                                      if (state.type ==
-                                          Type_Choose_Option_Day.DAY) {
-                                        cubit.postDSLHDay();
-                                      } else {
-                                        cubit.getDashboard();
-                                        cubit.postDanhSachLichHop();
-                                        cubit.postEventsCalendar();
-                                      }
+                                      cubit.getDataCalendar(
+                                        startDate,
+                                        endDate,
+                                        selectDay,
+                                      );
                                     },
                                     onChangeRange: (
                                       DateTime? start,
