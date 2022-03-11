@@ -22,6 +22,9 @@ import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:ccvc_mobile/domain/repository/thanh_phan_tham_gia_reponsitory.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/tien_ich_repository_impl.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/service/tien_ich_service.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
@@ -74,6 +77,13 @@ void configureDependencies() {
     ),
   );
   Get.put<BaoChiMangXaHoiRepository>(BaoChiMangXaHoiImpl(Get.find()));
+
+  Get.put(
+    TienIchService(
+      provideDio(),
+    ),
+  );
+  Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
