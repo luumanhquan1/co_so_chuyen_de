@@ -4,8 +4,10 @@ import 'dart:developer';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/account/permission_app_model.dart';
 import 'package:ccvc_mobile/domain/model/account/user_infomation.dart';
+import 'package:ccvc_mobile/domain/model/app_theme_model.dart';
 import 'package:ccvc_mobile/domain/model/select_key/select_key_model.dart';
 import 'package:hive/hive.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:queue/queue.dart';
 
 enum PermissionType { QLVB, PAKN, VPDT, QLNV }
@@ -14,10 +16,12 @@ class HiveLocal {
   static const USER_INFO = 'USER_INFO';
   static const SELECT_KEY = 'SELECT_KEY';
   static const LIST_PERMISSION = 'LIST_PERMISSION';
+  static const _APP_THEME = 'APP_THEME';
   static late Box<DataUser> _userBox;
   static late Box<SelectkeyModel> _selectKey;
   static late Box<String> _tagKey;
   static late Box<PermissionApp> _listPermission;
+  static late Box<Map<String, dynamic>> _appTheme;
   static const TAG_KEY = 'TAG_KEY';
   static Future<void> init() async {
     Hive.registerAdapter(DataUserAdapter());
@@ -27,10 +31,11 @@ class HiveLocal {
     Hive.registerAdapter(SelectkeyModelAdapter());
     Hive.registerAdapter(PermissionModelAdapter());
     Hive.registerAdapter(PermissionAppAdapter());
-    final que = Queue(parallel: 4);
+    final que = Queue(parallel: 5);
     unawaited(que.add(() async => _userBox = await Hive.openBox(USER_INFO)));
     unawaited(que.add(() async => _selectKey = await Hive.openBox(SELECT_KEY)));
     unawaited(que.add(() async => _tagKey = await Hive.openBox(TAG_KEY)));
+    unawaited(que.add(() async => _appTheme = await Hive.openBox(_APP_THEME)));
     unawaited(que.add(
         () async => _listPermission = await Hive.openBox(LIST_PERMISSION)));
     await que.onComplete;
@@ -116,5 +121,17 @@ class HiveLocal {
 
   static Future<void> addTagList(List<String> tagList) async {
     await _tagKey.addAll(tagList);
+  }
+
+  static Future<void> saveTheme(AppThemModel appThemModel) async {
+
+    await _appTheme.add(appThemModel.toJson());
+  }
+
+  static AppThemModel getThemeApp() {
+    // final vl = _appTheme.get(_APP_THEME) ?? {};
+    // final a= _appTheme.values;
+    // log('$a');
+    return AppThemModel.fromJson( {});
   }
 }

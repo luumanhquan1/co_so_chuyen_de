@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 class TitleCaiDatWidget extends StatelessWidget {
   final String title;
   final Widget child;
-  const TitleCaiDatWidget({Key? key, required this.title, required this.child})
+  final double bottomPadding;
+  const TitleCaiDatWidget(
+      {Key? key,
+      required this.title,
+      required this.child,
+      this.bottomPadding = 48})
       : super(key: key);
 
   @override
@@ -31,6 +36,7 @@ class TitleCaiDatWidget extends StatelessWidget {
         tabletScreen: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
@@ -40,12 +46,8 @@ class TitleCaiDatWidget extends StatelessWidget {
                 height: 24,
               ),
               Container(
-                padding: const EdgeInsets.only(
-                  top: 48,
-                  right: 48,
-                  left: 48,
-                  bottom: 50,
-                ),
+                padding:  EdgeInsets.only(
+                    top: 48, left: 48, right: 48, bottom: bottomPadding),
                 decoration: BoxDecoration(
                   color: backgroundRowColor,
                   border: Border.all(color: borderColor.withOpacity(0.5)),

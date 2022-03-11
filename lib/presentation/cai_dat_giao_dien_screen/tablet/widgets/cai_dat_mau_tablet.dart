@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
@@ -6,6 +7,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 
 import 'package:ccvc_mobile/main.dart';
+import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/check_box_widget.dart';
 
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/title_cai_dat_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -21,28 +23,30 @@ class CaiDatMauTabletWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColorApp,
-      padding: const EdgeInsets.only(top: 16, bottom: 24),
+      padding: const EdgeInsets.only(top: 28, bottom: 28),
       child: TitleCaiDatWidget(
         title: S.current.cai_dat_mau,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            selectColorCell(context,
-                color: labelColor,
-                name: S.current.mac_dinh,
-                appMode: AppMode.MAC_DINH),
-
-            selectColorCell(context,
-                color: numberOfCalenders,
-                name: S.current.xanh,
-                appMode: AppMode.XANH),
-            selectColorCell(context,
-                color: pinkColor, name: S.current.hong, appMode: AppMode.HONG),
-            selectColorCell(context,
-                color: yellowColor,
-                name: S.current.vang,
-                appMode: AppMode.VANG),
-          ],
+        child: Container(
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              selectColorCell(context,
+                  color: labelColor,
+                  name: S.current.mac_dinh,
+                  appMode: AppMode.MAC_DINH),
+              selectColorCell(context,
+                  color: numberOfCalenders,
+                  name: S.current.xanh,
+                  appMode: AppMode.XANH),
+              selectColorCell(context,
+                  color: pinkColor, name: S.current.hong, appMode: AppMode.HONG),
+              selectColorCell(context,
+                  color: yellowColor,
+                  name: S.current.vang,
+                  appMode: AppMode.VANG),
+            ],
+          ),
         ),
       ),
     );
@@ -54,28 +58,36 @@ class CaiDatMauTabletWidget extends StatelessWidget {
       onTap: () {
         AppStateCt.of(context).appState.setAppMode(appMode);
       },
-      child: Column(
-        children: [
-          Container(
-            height: 213,
-         width: 70.w,
-            decoration: BoxDecoration(
+      child: Container(
+        color: Colors.transparent,
+        child: Column(
+          children: [
+            Container(
+              height: 213,
+              width: 60.w,
+              decoration: BoxDecoration(
                 color: color,
-                borderRadius: const BorderRadius.all(Radius.circular(8))),
-            child: Center(
-              child: APP_THEME == appMode
-                  ? SvgPicture.asset(ImageAssets.icCheckBoxSelect)
-                  : const SizedBox(),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            name,
-            style: textNormal(infoColor, 14),
-          )
-        ],
+            const SizedBox(
+              height: 12,
+            ),
+            Text(
+              name,
+              style: textNormalCustom(fontSize: 16, color: infoColor),
+            ),
+            const SizedBox(
+              height: 23,
+            ),
+            CheckBoxWidget(
+              value: APP_THEME == appMode,
+              onChange: (value) {
+                AppStateCt.of(context).appState.setAppMode(appMode);
+              },
+            )
+          ],
+        ),
       ),
     );
   }

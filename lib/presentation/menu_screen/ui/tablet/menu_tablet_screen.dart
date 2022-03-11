@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'icon_tablet_menu.dart';
+
 class MenuTabletScreen extends StatefulWidget {
   const MenuTabletScreen({Key? key}) : super(key: key);
 
@@ -70,7 +72,7 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                   },
                   child: HeaderMenuWidget(
                     paddingVertical: 20,
-                    urlBackGround: ImageAssets.imgHeaderMenuTablet,
+                    urlBackGround:headerMenu(),
                     menuCubit: menuCubit,
                   ),
                 ),

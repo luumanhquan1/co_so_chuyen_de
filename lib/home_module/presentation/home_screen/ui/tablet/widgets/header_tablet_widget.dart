@@ -1,3 +1,5 @@
+import '/home_module/presentation/home_screen/ui/tablet/home_icon_tablet.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/date_model.dart';
@@ -21,11 +23,11 @@ class HeaderTabletWidget extends StatelessWidget {
       child: Stack(
         children: [
           Transform.translate(
-            offset: const Offset(0, -104),
+            offset: const Offset(0, -105),
             child: Container(
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(ImageAssets.imgHeaderTablet),
+                  image: AssetImage(headerUrlIcon()),
                   fit: BoxFit.fill,
                 ),
               ),

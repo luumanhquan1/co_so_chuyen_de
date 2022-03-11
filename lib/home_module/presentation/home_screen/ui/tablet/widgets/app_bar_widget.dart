@@ -1,3 +1,5 @@
+import '/home_module/presentation/home_screen/ui/tablet/home_icon_tablet.dart';
+
 import '/home_module/config/resources/styles.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +20,9 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
     return Container(
       height: 100,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(ImageAssets.bgAppBarTablet),
+          image: AssetImage(appBarUrlIcon()),
           fit: BoxFit.fill,
         ),
       ),

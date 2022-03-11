@@ -1,3 +1,4 @@
+
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,7 +8,6 @@ class PrefsService {
   static const _PREF_REFRESH_TOKEN = 'pref_token';
 
   static const _PREF_DATA_USER = 'pref_data_user';
-
   static SharedPreferences? _prefsInstance;
 
   static Future<SharedPreferences> get _instance async =>
@@ -42,6 +42,7 @@ class PrefsService {
     final prefs = await _instance;
     return prefs.setString(_PREF_LANGUAGE, code);
   }
+
 
   static String getLanguage() {
     return _prefsInstance?.getString(_PREF_LANGUAGE) ?? VI_CODE;
