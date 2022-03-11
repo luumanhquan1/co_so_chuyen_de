@@ -15,11 +15,9 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/button/button_bottom.dart';
-import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/select_only_expands.dart';
-
 import 'package:flutter/material.dart';
 
 class TaoLichHopMobileScreen extends StatefulWidget {
@@ -31,6 +29,7 @@ class TaoLichHopMobileScreen extends StatefulWidget {
 
 class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
   late TaoLichHopCubit _cubit;
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -176,8 +175,8 @@ class _TaoLichHopScreenState extends State<TaoLichHopMobileScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: ButtonBottom(
-               text: S.current.tao_lich_hop,
-                onPressed: (){},
+                text: S.current.tao_lich_hop,
+                onPressed: () {},
               ),
             )
           ],

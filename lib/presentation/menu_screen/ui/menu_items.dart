@@ -17,6 +17,7 @@ import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/mobile/qlvb_mobile_s
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/tablet/qlvb_tablet_screen.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/y_kien_nguoidan_screen.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/tablet/yknd_tablet_screen.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/menu_tien_ich_screen/ui/mobile/menu_tien_ich_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
@@ -187,8 +188,8 @@ extension GetScreen on MenuType {
         );
       case MenuType.tienIch:
         return screenDevice(
-          mobileScreen: const DetailHDSDScreen(),
-          tabletScreen: const DetailHDSDScreenTablet(),
+          mobileScreen: const MenuTienIchMobile(),
+          tabletScreen: const MenuTienIchMobile(),
         );
       case MenuType.chuyenPhamVi:
         return const Scaffold(
