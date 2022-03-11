@@ -7,10 +7,12 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/customization/calendar_style_phone.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/shared/utils_phone.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/table_calendar_phone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
@@ -208,7 +210,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TableCalendar(
+                    TableCalendarPhone(
                       eventLoader: (day) =>
                           widget.eventsLoader
                               ?.where((element) => isSameDay(element, day))
@@ -232,7 +234,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         return isSameDay(_selectedDay, day);
                       },
                       calendarStyle: CalendarStyle(
-                        cellMargin: const EdgeInsets.all(11),
                         weekendTextStyle: textNormalCustom(
                           color: titleCalenderWork,
                           fontSize: 14.0.textScale(),
@@ -256,10 +257,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                           fontSize: 14.0.textScale(),
                           fontWeight: FontWeight.w500,
                           color: buttonColor,
-                        ),
-                        selectedDecoration: const BoxDecoration(
-                          color: radioFocusColor,
-                          shape: BoxShape.circle,
                         ),
                       ),
                       headerVisible: false,
