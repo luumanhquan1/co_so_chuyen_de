@@ -20,6 +20,7 @@ class MenuResponse {
       MenuModel(listData: listMenuItem?.map((e) => e.toDomain()).toList());
 }
 
+@JsonSerializable()
 class LitsMenuItem {
   @JsonKey(name: 'id')
   String? id;

@@ -36,7 +36,7 @@ abstract class BaoChiMangXaHoiService {
   );
 
   @GET(ApiConstants.BAO_CAO_THONG_KE)
-  Future<TuongTacThongKeResponse> getBaoCaoThongKe(
+  Future<String> getBaoCaoThongKe(
     @Query('pageIndex') int pageInDex,
     @Query('pageSize') int pageSize,
     @Query('total') int total,

@@ -87,8 +87,8 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     result.when(
       success: (res) {
         print('-------------------------------------------------- thanh cong----------------------');
+        print(res.runtimeType);
         final result = res;
-        _dataBaoCaoThongKe.sink.add(result);
       },
       error: (err) {
         print('-------------------------------------------------- that bai----------------------');

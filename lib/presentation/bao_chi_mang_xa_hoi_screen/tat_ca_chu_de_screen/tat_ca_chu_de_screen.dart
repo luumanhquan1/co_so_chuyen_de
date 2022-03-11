@@ -37,10 +37,10 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {}
     });
-    chuDeCubit.getListTatCaCuDe(
-      chuDeCubit.startDate,
-      chuDeCubit.endDate,
-    );
+    // chuDeCubit.getListTatCaCuDe(
+    //   chuDeCubit.startDate,
+    //   chuDeCubit.endDate,
+    // );
     chuDeCubit.getListBaoCaoThongKe(
       chuDeCubit.startDateBaoCaoThongKe,
       chuDeCubit.endDateBaoCaoThongKe,
