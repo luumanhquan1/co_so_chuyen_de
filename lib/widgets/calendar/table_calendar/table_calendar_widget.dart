@@ -38,16 +38,6 @@ class TableCalendarWidget extends StatefulWidget {
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   TableCalendarCubit cubit = TableCalendarCubit();
 
-  List<Event> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
-  }
-
-  final List<DateTime> _getEvent = [
-    DateTime.now(),
-    DateTime(2022, 3, 12),
-    DateTime(2022, 3, 13)
-  ];
-
   @override
   void initState() {
     selectedEvents = {};

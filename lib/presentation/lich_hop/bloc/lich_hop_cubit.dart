@@ -96,16 +96,18 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
 
-  Future<void> postEventsCalendar() async {
+  Future<void> postEventsCalendar({
+    TypeCalendarMenu typeCalendar = TypeCalendarMenu.LichCuaToi,
+  }) async {
     final result = await hopRepo.postEventCalendar(
       EventCalendarRequest(
         DateFrom: startDate.formatApi,
         DateTo: endDate.formatApi,
         DonViId: donViId,
-        isLichCuaToi: true,
+        isLichCuaToi: typeCalendar == TypeCalendarMenu.LichCuaToi,
         month: selectDay.month,
-        PageIndex: 1,
-        PageSize: 1000,
+        PageIndex: page,
+        PageSize: 10,
         UserId: userId,
         year: selectDay.year,
       ),
@@ -169,7 +171,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     final day = selectDay;
     startDate = day.subtract(Duration(days: day.weekday - 1));
     endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
+    getDashboard();
+    postEventsCalendar();
   }
 
   void postDSLHMonth() {
@@ -177,14 +183,20 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     startDate = DateTime(day.year, day.month, 1);
     endDate = DateTime(day.year, day.month + 1, 0);
 
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
-  }
+    getDashboard();
+    postEventsCalendar();  }
 
   void postDSLHDay() {
     startDate = selectDay;
     endDate = selectDay;
-
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
+    getDashboard();
+    postEventsCalendar();
   }
 
   Future<void> postDanhSachLichHop() async {

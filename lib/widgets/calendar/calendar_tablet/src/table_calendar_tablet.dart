@@ -11,12 +11,14 @@ class TableCandarTablet extends StatefulWidget {
       onChangeRange;
   final Function(DateTime startDate, DateTime endDate, DateTime selectDay)
       onChange;
+  final List<DateTime>? eventsLoader;
 
   const TableCandarTablet({
     Key? key,
     required this.type,
     required this.onChangeRange,
     required this.onChange,
+    this.eventsLoader,
   }) : super(key: key);
 
   @override
@@ -123,7 +125,7 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
     return StreamBuilder<DateTime>(
       stream: cubitCalendar.moveTimeSubject.stream,
       builder: (context, snapshot) {
-        return TableCalendar<Event>(
+        return TableCalendar(
           firstDay: kFirstDay,
           lastDay: kLastDay,
           focusedDay: cubitCalendar.focusedDay,
@@ -134,7 +136,11 @@ class _TableCandarTabletState extends State<TableCandarTablet> {
           rangeEndDay: cubitCalendar.rangeEnd,
           calendarFormat: CalendarFormat.week,
           rangeSelectionMode: _rangeSelectionMode,
-          eventLoader: _getEventsForDay,
+          eventLoader: (day) =>
+              widget.eventsLoader
+                  ?.where((element) => isSameDay(element, day))
+                  .toList() ??
+              [],
           onDaySelected: _onDaySelected,
           onRangeSelected: _onRangeSelected,
           onPageChanged: (focusedDay) {
