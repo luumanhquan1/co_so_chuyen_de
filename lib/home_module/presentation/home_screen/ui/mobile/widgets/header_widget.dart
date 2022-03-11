@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/mobile/home_icon.dart';
 
 import '/home_module/config/resources/color.dart';
 
@@ -22,9 +23,9 @@ class HeaderWidget extends StatelessWidget {
           Transform.translate(
             offset: const Offset(0, -120),
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(ImageAssets.headerBackground),
+                  image: AssetImage(headerUrlIcon()),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -52,12 +53,12 @@ class HeaderWidget extends StatelessWidget {
                   decoration: const BoxDecoration(
                     border: Border(bottom: BorderSide(color: borderColor)),
                   ),
-                  child:const InfoUserWidget(),
+                  child: const InfoUserWidget(),
                 ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(top: 14),
-                    child:const DayTimeWidget(),
+                    child: const DayTimeWidget(),
                   ),
                 )
               ],

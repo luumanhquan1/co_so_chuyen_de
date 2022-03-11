@@ -1,9 +1,7 @@
-import 'package:ccvc_mobile/home_module/config/app_config.dart';
+
 import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
-import 'package:flutter/services.dart';
 
-import '/home_module/utils/constants/app_constants.dart';
 
 import '/data/exception/app_exception.dart';
 import '/generated/l10n.dart';
@@ -19,8 +17,11 @@ import '/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '/home_module/presentation/home_screen/ui/home_item.dart';
+import 'home_icon.dart';
 
 final keyHomeMobile = GlobalKey<_HomeScreenMobileState>();
+
+
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({
@@ -40,7 +41,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     // TODO: implement initState
     super.initState();
     homeCubit.loadApi();
-    checkDeviceType();
   }
 
   @override
@@ -110,9 +110,9 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   ),
                   centerTitle: true,
                   flexibleSpace: Container(
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(ImageAssets.appBarBackground),
+                        image: AssetImage(appBarUrlIcon()),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -174,11 +174,4 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     );
   }
 
-  void checkDeviceType() {
-    final shortestSide =
-        MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-            .size
-            .shortestSide;
-    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
-  }
 }

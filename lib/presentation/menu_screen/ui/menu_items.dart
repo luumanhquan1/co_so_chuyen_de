@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/phone/danh_sach_chung_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/tab/danh_sach_chung_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
+import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/cai_dat_giao_dien_screen.dart';
 import 'package:ccvc_mobile/presentation/detail_hdsd/ui/mobile/detail_hdsd.dart';
 import 'package:ccvc_mobile/presentation/detail_hdsd/ui/tablet/detail_hdsd_tablet.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
@@ -196,9 +197,7 @@ extension GetScreen on MenuType {
           backgroundColor: Colors.red,
         );
       case MenuType.caiDatGiaoDien:
-        return const Scaffold(
-          backgroundColor: Colors.red,
-        );
+        return const CaiDatGiaoDienScreen();
       case MenuType.hoiDap:
         return screenDevice(
           mobileScreen: const HoiDapScreen(),
