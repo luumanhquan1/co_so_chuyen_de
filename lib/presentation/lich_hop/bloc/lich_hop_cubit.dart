@@ -117,9 +117,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         final List<DateTime> data = [];
 
         value.forEach((element) {
-          if (element != null) {
-            data.add(element.convertStringToDate());
-          }
+          data.add(element.convertStringToDate());
         });
 
         eventsSubject.add(data);
@@ -187,7 +185,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     page = 1;
     postDanhSachLichHop();
     getDashboard();
-    postEventsCalendar();  }
+    postEventsCalendar();
+  }
 
   void postDSLHDay() {
     startDate = selectDay;

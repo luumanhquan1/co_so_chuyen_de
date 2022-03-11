@@ -7,7 +7,7 @@ part 'event_calendar_response.g.dart';
 @JsonSerializable()
 class EventCalendarResponse {
   @JsonKey(name: 'data')
-  List<String?>? data;
+  List<String?> data;
   @JsonKey(name: 'statusCode')
   int? statusCode;
   @JsonKey(name: 'succeeded')
@@ -30,9 +30,14 @@ class EventCalendarResponse {
 
   Map<String, dynamic> toJson() => _$EventCalendarResponseToJson(this);
 
-  List<String?>? toModel() {
-    final List<String?> dataEvent =
-        data?.map((e) => e).toList() ?? [];
+  List<String> toModel() {
+    final List<String> dataEvent = [];
+
+    data.forEach((element) {
+      if (element != null) {
+        dataEvent.add(element);
+      }
+    });
 
     return dataEvent;
   }

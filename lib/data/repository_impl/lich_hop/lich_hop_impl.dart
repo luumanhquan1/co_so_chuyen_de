@@ -354,10 +354,10 @@ class HopRepositoryImpl implements HopRepository {
   }
 
   @override
-  Future<Result<List<String?>>> postEventCalendar(EventCalendarRequest request) {
-    return runCatchingAsync<EventCalendarResponse, List<String?>>(
+  Future<Result<List<String>>> postEventCalendar(EventCalendarRequest request) {
+    return runCatchingAsync<EventCalendarResponse, List<String>>(
           () => _hopServices.postEventCalendar(request),
-          (res) => res.toModel() ?? [],
+          (res) => res.toModel(),
     );
   }
 }
