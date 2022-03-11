@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_resquest.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 import 'package:ccvc_mobile/domain/repository/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_repository.dart';
@@ -19,6 +20,9 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   final BehaviorSubject<TuongTacThongKeResponseModel> _dataBaoCaoThongKe =
       BehaviorSubject<TuongTacThongKeResponseModel>();
 
+  final BehaviorSubject<MenuModel> _dataMenu =
+  BehaviorSubject<MenuModel>();
+
   List<String> listTitle = [
     S.current.tin_tong_hop,
     S.current.cac_dia_phuong,
@@ -27,6 +31,9 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   ];
 
   Stream<List<ChuDeModel>> get listYKienNguoiDan => _listYKienNguoiDan.stream;
+
+  Stream<MenuModel> get dataMenu => _dataMenu.stream;
+
 
   Stream<TuongTacThongKeResponseModel> get dataBaoCaoThongKe =>
       _dataBaoCaoThongKe.stream;
@@ -82,6 +89,21 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
         print('-------------------------------------------------- thanh cong----------------------');
         final result = res;
         _dataBaoCaoThongKe.sink.add(result);
+      },
+      error: (err) {
+        print('-------------------------------------------------- that bai----------------------');
+        return;
+      },
+    );
+  }
+
+  Future<void> getMenu( ) async {
+    final result = await _BCMXHRepo.getMenuBCMXH();
+    result.when(
+      success: (res) {
+        print('-------------------------------------------------- thanh cong----------------------');
+        final result = res;
+        _dataMenu.sink.add(result);
       },
       error: (err) {
         print('-------------------------------------------------- that bai----------------------');

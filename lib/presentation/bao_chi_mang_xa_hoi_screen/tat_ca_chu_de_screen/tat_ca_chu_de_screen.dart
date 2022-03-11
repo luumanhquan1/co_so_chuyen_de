@@ -45,6 +45,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
       chuDeCubit.startDateBaoCaoThongKe,
       chuDeCubit.endDateBaoCaoThongKe,
     );
+    // chuDeCubit.getMenu();
   }
 
   @override

@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke_resopnse.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
+import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/menu_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_service.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
@@ -77,6 +79,15 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
         toDate,
       ),
       (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<MenuModel>> getMenuBCMXH() {
+    return runCatchingAsync<MenuResponse,
+        MenuModel>(
+          () => _baoChiMangXaHoiService.getMenuBCMXH(),
+          (res) => res.toDomain(),
     );
   }
 }
