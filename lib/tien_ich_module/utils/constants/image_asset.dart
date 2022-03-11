@@ -16,6 +16,7 @@ class ImageAssets {
   static const String icTraCuuVanBanPhapLuat = '$baseImg/ic_tra_cuu_van_ban_phap_luat.svg';
   static const String image_tien_ich = '$baseImg/image_tien_ich.svg';
   static const String image_tien_ichPng = '$baseImg/image_tien_ich.png';
+  static const String imageTienIchTablet = '$baseImg/image_tien_ich_tablet.png';
 
 
   static SvgPicture svgAssets(
