@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/ket_luan_ho
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/moi_nguoi_tham_gia_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/phan_cong_thu_ky.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/row_value_widget.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/sua_lich_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/tao_boc_bang_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thong_tin_lien_he_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/thu_hoi_widget.dart';
@@ -99,16 +100,13 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 urlImage: ImageAssets.icEditBlue,
                 text: S.current.sua_lich,
                 onTap: () {
-                  showDiaLog(
+                  showBottomSheetCustom(
                     context,
-                    textContent: S.current.ban_chan_chan_sua_lich_nay_khong,
-                    btnLeftTxt: S.current.khong,
-                    funcBtnRight: () {
-                      Navigator.pop(context);
-                    },
-                    title: S.current.sua_lich,
-                    btnRightTxt: S.current.dong_y,
-                    icon: SvgPicture.asset(ImageAssets.icHuyLich),
+                    title: S.current.sua_lich_hop,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: const SuaLichHopWidget(),
+                    ),
                   );
                 },
               ),

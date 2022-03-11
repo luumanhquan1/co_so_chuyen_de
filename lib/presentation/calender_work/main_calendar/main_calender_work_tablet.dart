@@ -35,7 +35,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   void initState() {
     super.initState();
     cubit.chooseTypeListLv(Type_Choose_Option_List.DANG_LICH);
-    cubit.callApi(cubit.startDates, cubit.endDates);
+    cubit.callApi();
   }
 
   @override
@@ -84,7 +84,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     ).then((value) {
                       if (value == null) {}
                       if (value == true) {
-                        cubit.callApi(cubit.startDates, cubit.endDates);
+                        cubit.callApi();
                       }
                     });
                   },
@@ -93,7 +93,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
                     cubit.listDSLV.clear();
                     cubit.page = 1;
-                    cubit.callApi(cubit.startDates, cubit.endDates);
+                    cubit.callApi();
                   },
                   onTapWeek: () {
                     setState(() {});
@@ -127,7 +127,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         cubit.endDates = endDate;
                         cubit.listDSLV.clear();
                         cubit.page = 1;
-                        cubit.callApi(startDate, endDate);
+                        cubit.callApi();
                       },
                     );
                   },

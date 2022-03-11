@@ -52,7 +52,7 @@ class _ContainerMenuWidgetState extends State<ContainerMenuWidget> {
               horizontal: 17.0.textScale(),
               vertical: 12.0.textScale(),
             ),
-            color: Colors.transparent,
+           color: Colors.transparent,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -126,7 +126,7 @@ class ItemMenu extends StatelessWidget {
       {Key? key,
       required this.widgetItem,
       required this.textItem,
-      required this.isTitile})
+      required this.isTitile,})
       : super(key: key);
 
   @override
