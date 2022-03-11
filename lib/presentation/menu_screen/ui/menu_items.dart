@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/phone/danh_sach_chung_screen.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/tab/danh_sach_chung_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
 import 'package:ccvc_mobile/presentation/detail_hdsd/ui/mobile/detail_hdsd.dart';
 import 'package:ccvc_mobile/presentation/detail_hdsd/ui/tablet/detail_hdsd_tablet.dart';
@@ -180,8 +182,9 @@ extension GetScreen on MenuType {
       case MenuType.baoChiMangXaHoi:
         return const Scaffold(body: TabbarNewspaper());
       case MenuType.ketNoi:
-        return const Scaffold(
-          backgroundColor: Colors.red,
+        return screenDevice(
+          mobileScreen: const DanhSachChungScreen(),
+          tabletScreen: const DanhSachChungScreenTablet(),
         );
       case MenuType.tienIch:
         return screenDevice(

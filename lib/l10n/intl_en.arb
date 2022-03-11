@@ -597,6 +597,13 @@
   "ban_co_chac_chan_muon_thu_hoi_nay" : "Bạn có chắc muốn thu hồi kết luận họp này?",
   "thu_hoi_ket_luan_hop" : "Thu hồi kết luận họp",
   "xoa_ket_luan_hop" : "Xóa kết luận họp",
+  "chung": "Chung",
+  "trong_nuoc": "Trong nước",
+  "nuoc_ngoai": "Nước ngoài",
+  "phat_dong": "Phát động",
+  "tham_du": "Tham dự",
+  "duoc_moi": "Được mời",
+  "quoc_te": "Quốc tế",
   "chuyen_giong_noi_thanh_van_ban": "Chuyển giọng nói thành văn bản",
   "chuyen_van_ban_thanh_giong_noi": "Chuyển văn bản thành giọng nói",
   "phien_dich_tu_dong": "Phiên dịch tự động",
@@ -617,5 +624,4 @@
   "sua_lich_hop": "Sửa lịch họp",
   "conten_diem_danh": "Bạn có chắc chắn muốn điểm danh cho những người được chọn?",
   "conten_huy_diem_danh": "Bạn có chắc chắn muốn hủy điểm danh cho những người được chọn?"
-
 }
