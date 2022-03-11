@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/home_module/config/resources/color.dart';
 
 import '/home_module/config/resources/styles.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
 import 'package:flutter/material.dart';
 class ClockWidget extends StatefulWidget {
   const ClockWidget({Key? key}) : super(key: key);

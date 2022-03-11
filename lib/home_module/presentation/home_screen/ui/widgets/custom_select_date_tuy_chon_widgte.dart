@@ -1,11 +1,13 @@
+import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/home_module/widgets/selectdate/custom_selectdate.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/generated/l10n.dart';
 import '/home_module/utils/constants/image_asset.dart';
-import '/home_module/utils/extensions/screen_device_extension.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
 import '/home_module/widgets/button/double_button_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

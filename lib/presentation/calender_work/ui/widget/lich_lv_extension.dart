@@ -24,7 +24,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
           isHindText: true,
           cubit: cubit,
           onTap: () {
-            cubit.callApi(cubit.startDates, cubit.endDates);
+            cubit.callApi();
           },
         );
       case Type_Choose_Option_Day.WEEK:
@@ -74,7 +74,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
         return InListForm(
           cubit: cubit,
           onTap: () {
-            cubit.callApi(cubit.startDates, cubit.endDates);
+            cubit.callApi();
           },
         );
       case Type_Choose_Option_Day.WEEK:
@@ -156,7 +156,7 @@ extension LichLv on CalenderState {
         type: type,
         isCalendar: false,
         onChange: (DateTime start, DateTime end, selectDay) {
-          cubit.callApi(start, end);
+          cubit.callApi();
         },
         onChangeRange:
             (DateTime? start, DateTime? end, DateTime? focusedDay) {},
@@ -167,9 +167,10 @@ extension LichLv on CalenderState {
       onChange: (DateTime start, DateTime end, selectDay) {
         cubit.startDates = start;
         cubit.endDates = end;
+        cubit.selectDay = selectDay;
         cubit.listDSLV.clear();
         cubit.page = 1;
-        cubit.callApi(start, end);
+        cubit.callApi();
       },
       onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
     );

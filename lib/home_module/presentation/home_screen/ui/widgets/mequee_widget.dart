@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/presentation/webview/web_view_screen.dart';
 
 import '/home_module/config/resources/color.dart';
@@ -9,7 +11,6 @@ import '/home_module/presentation/home_screen/ui/home_provider.dart';
 
 
 import '/home_module/utils/constants/image_asset.dart';
-import '/home_module/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class MarqueeWidget extends StatelessWidget {

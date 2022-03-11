@@ -1,6 +1,6 @@
 import 'package:flutter_html/shims/dart_ui_fake.dart';
 
-enum AppMode { LIGHT, DARK }
+enum AppMode { MAC_DINH, XANH, HONG, VANG }
 enum DeviceType { MOBILE, TABLET }
 enum ServerType { DEV, QA, STAGING, PRODUCT }
 
@@ -13,6 +13,25 @@ enum MenuType { FEED, NOTIFICATIONS, POLICY, LOGOUT }
 enum AuthMode { LOGIN, REGISTER }
 
 enum AuthType { ACCOUNT, PHONE }
+
+enum AppBackGround {
+  XUAN,
+  HA,
+  THU,
+  DONG,
+  TET_NGUYEN_DAN,
+  LE_TINH_NHAN,
+  NGAY_QUOC_TE_PHU_NU,
+  GIO_TO_HUNG_VUONG,
+  NGAY_QUOC_TE_LAO_DONG,
+  NGAY_QUOC_TE_THIEU_NHI,
+  NGAY_QUOC_KHANH,
+  TET_TRUNG_THU,
+  NGAY_PHU_NU_VIET_NAM,
+  NGAY_LE_GIANG_SINH,
+  NGAY_HALLOWEEN,
+  NGAY_NHA_GIAO_VIET_NAM
+}
 
 enum SelectKey {
   CA_NHAN,
@@ -104,6 +123,8 @@ const _dtFormat3 = 'dd/MM hh:mm a';
 const _dtFormat4 = 'yyyy-MM-dd';
 const _dtFormat5 = 'MMM dd, yyyy';
 const _dtFormat6 = 'MM/dd/yyyy HH:mm:ss';
+
+const String DO_MAIN_DOWLOAD_FILE='http://api-qlvb-nv.dongnai.edsolabs.vn';
 
 class DateTimeFormat {
   static const DEFAULT_FORMAT = _dtFormat1;

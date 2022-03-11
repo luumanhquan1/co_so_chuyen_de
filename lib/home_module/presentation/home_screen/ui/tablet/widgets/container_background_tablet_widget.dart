@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
@@ -8,7 +10,7 @@ import '/home_module/utils/constants/app_constants.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import '/home_module/utils/enum_ext.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import '/home_module/utils/extensions/size_extension.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

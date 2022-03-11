@@ -75,5 +75,37 @@ const unFocusColor = Color(0xffF2F0FF);
 
 
 ///=========== Using to make change app theme ================================
+abstract class AppColor {
+  Color primaryColor();
+
+  Color accentColor();
+
+  Color statusColor();
+
+  Color mainColor();
+
+  Color bgColor();
+
+  Color dfTxtColor();
+
+  Color secondTxtColor();
+
+  Color dfBtnColor();
+
+  Color dfBtnTxtColor();
+
+  Color txtLightColor();
+
+  Color sideBtnColor();
+
+  Color disableColor();
+
+  Color titleColor();
+
+  Color backGroundColor();
+
+  Color subTitleColor();
+}
+
 
 ///============ End setup app theme ======================================
