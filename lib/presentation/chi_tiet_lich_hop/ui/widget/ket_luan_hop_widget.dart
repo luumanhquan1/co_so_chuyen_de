@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_nhiem_vu_lich_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/extension_status.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
@@ -174,17 +175,31 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                         urlImage: ImageAssets.icPlus2,
                         text: S.current.tao_moi_nhiem_vu,
                         onTap: () {
-                          showBottomSheetCustom(
+                          showDiaLogTablet(
                             context,
                             title: S.current.tao_moi_nhiem_vu,
                             child: const TaoMoiNhiemVuWidget(),
+                            isBottomShow: false,
+                            funcBtnOk: () {
+                              Navigator.pop(context);
+                            },
                           );
                         },
                       ),
                       QData(
                         urlImage: ImageAssets.icMessage,
                         text: S.current.ket_luan_cuoc_hop,
-                        onTap: () {},
+                        onTap: () {
+                          showDiaLogTablet(
+                            context,
+                            title: S.current.ket_luan_cuoc_hop,
+                            child: const XemKetLuanHopWidget(),
+                            isBottomShow: false,
+                            funcBtnOk: () {
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
                       ),
                       QData(
                         urlImage: ImageAssets.icDocument2,

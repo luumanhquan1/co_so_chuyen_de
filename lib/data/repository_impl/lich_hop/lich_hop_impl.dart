@@ -32,6 +32,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
@@ -59,6 +60,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 
 class HopRepositoryImpl implements HopRepository {
@@ -348,6 +350,14 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<XemKetLuanHopDataResponse, XemKetLuanHopModel>(
       () => _hopServices.getXemKetLuanHop(id),
       (res) => res.data!.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<YKienModel>>> getDanhSachYKien(String id) {
+    return runCatchingAsync<DanhSachYKienResponse, List<YKienModel>>(
+          () => _hopServices.getDanhSachYKien(id),
+          (res) => res.data?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
 }

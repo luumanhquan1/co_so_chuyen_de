@@ -328,18 +328,10 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     const ChuongTrinhHopWidget(),
                     const MoiNguoiThamGiaWidget(),
                     const TaiLieuWidget(),
-                    PhatBieuWidgetTablet(
-                      id: widget.id,
-                      cubit: cubit,
-                    ),
-                    const BieuQuyetWidgetTablet(),
-                    KetLuanHopWidget(
-                      id: widget.id,
-                      cubit: cubit,
-                    ),
-                    YKienCuocHopWidget(
-                      cubit: cubit, id: widget.id,
-                    ),
+                    PhatBieuWidgetTablet(id: widget.id, cubit: cubit),
+                    BieuQuyetWidgetTablet(id: widget.id),
+                    KetLuanHopWidget(id: widget.id, cubit: cubit),
+                    YKienCuocHopWidget(cubit: cubit, id: widget.id),
                   ],
                 ),
               ),

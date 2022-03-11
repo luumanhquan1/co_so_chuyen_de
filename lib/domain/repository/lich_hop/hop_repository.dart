@@ -33,6 +33,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 
 mixin HopRepository {
   Future<Result<DashBoardLichHopModel>> getDashBoardLichHop(
@@ -144,4 +145,6 @@ mixin HopRepository {
       TaoLichHopRequest taoLichHopRequest);
 
   Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id);
+
+  Future<Result<List<YKienModel>>> getDanhSachYKien(String id);
 }

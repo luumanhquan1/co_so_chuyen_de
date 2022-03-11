@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/widgets/list_y_kien_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/comment_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/icon_with_title_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_only_expand.dart';
@@ -14,7 +15,8 @@ class YKienCuocHopWidget extends StatefulWidget {
   final String id;
   final DetailMeetCalenderCubit cubit;
 
-  const YKienCuocHopWidget({Key? key, required this.cubit, required this.id}) : super(key: key);
+  const YKienCuocHopWidget({Key? key, required this.cubit, required this.id})
+      : super(key: key);
 
   @override
   _YKienCuocHopWidgetState createState() => _YKienCuocHopWidgetState();
@@ -48,13 +50,17 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
               ),
               if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
                 CommentWidget(
-                  object: widget.cubit.handingCommentLichHop, id: widget.id,
+                  object: widget.cubit.handingCommentLichHop,
+                  id: widget.id,
                 )
               else
                 const SizedBox(
                   height: 200,
                   child: NodataWidget(),
-                )
+                ),
+              DanhSachYKienLichHopWidget(
+                cubit: widget.cubit,
+              )
             ],
           ),
         ),
@@ -81,13 +87,17 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
             ),
             if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
               CommentWidget(
-                object: widget.cubit.handingCommentLichHop, id: widget.id,
+                object: widget.cubit.handingCommentLichHop,
+                id: widget.id,
               )
             else
               const SizedBox(
                 height: 200,
                 child: NodataWidget(),
-              )
+              ),
+            DanhSachYKienLichHopWidget(
+              cubit: widget.cubit,
+            )
           ],
         ),
       ),

@@ -240,30 +240,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     });
   }
 
-  BehaviorSubject<ChonBienBanCuocHopModel> chonBienBanHopSubject =
-      BehaviorSubject();
-  ChonBienBanCuocHopModel chonBienBanCuocHopModel = ChonBienBanCuocHopModel();
-
-  Future<void> postChonMauHop({
-    required int pageIndex,
-    required int pageSize,
-  }) async {
-    showLoading();
-    final ChonBienBanHopRequest chonBienBanHopRequest =
-        ChonBienBanHopRequest(pageIndex, pageSize);
-    final result = await hopRepo.postChonMauBienBanHop(chonBienBanHopRequest);
-
-    result.when(
-      success: (value) {
-        chonBienBanCuocHopModel = value;
-        chonBienBanHopSubject.sink.add(chonBienBanCuocHopModel);
-      },
-      error: (error) {},
-    );
-
-    showContent();
-  }
-
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
   List<MeetingSchedule> listMeeting = [
     MeetingSchedule(
