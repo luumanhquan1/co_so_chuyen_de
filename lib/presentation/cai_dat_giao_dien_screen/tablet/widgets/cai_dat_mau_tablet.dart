@@ -12,10 +12,10 @@ import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-class CaiDatMauWidget extends StatelessWidget {
-  const CaiDatMauWidget({Key? key}) : super(key: key);
+class CaiDatMauTabletWidget extends StatelessWidget {
+  const CaiDatMauTabletWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class CaiDatMauWidget extends StatelessWidget {
                 color: labelColor,
                 name: S.current.mac_dinh,
                 appMode: AppMode.MAC_DINH),
+
             selectColorCell(context,
                 color: numberOfCalenders,
                 name: S.current.xanh,
@@ -56,8 +57,8 @@ class CaiDatMauWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 70,
-            width: 70,
+            height: 213,
+         width: 70.w,
             decoration: BoxDecoration(
                 color: color,
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
