@@ -1,28 +1,37 @@
 class InteractionStatisticModel {
-  int? articleCount;
-  int? likeCount;
-  int? shareCount;
-  int? commentCount;
+  int articleCount;
+  int likeCount;
+  int shareCount;
+  int commentCount;
 
   InteractionStatisticModel({
-    this.articleCount,
-    this.likeCount,
-    this.shareCount,
-    this.commentCount,
+    required this.articleCount,
+    required this.likeCount,
+    required this.shareCount,
+    required this.commentCount,
   });
 }
 
 class DataModel {
-  int? iD;
-  String? name;
-  InteractionStatisticModel? interactionStatistic;
-  DataModel({this.iD, this.name, this.interactionStatistic});
+  int iD;
+  String name;
+  InteractionStatisticModel interactionStatistic;
+
+  DataModel({
+    required this.iD,
+    required this.name,
+    required this.interactionStatistic,
+  });
 }
-class TopInteractionModel{
-  DataModel? dataTuongTacThongKeModel;
-  TopInteractionModel({this.dataTuongTacThongKeModel});
+
+class TopInteractionModel {
+  DataModel dataTuongTacThongKeModel;
+
+  TopInteractionModel({required this.dataTuongTacThongKeModel});
 }
-class TuongTacThongKeResponseModel{
-  List<TopInteractionModel>? danhSachTuongtacThongKe;
-  TuongTacThongKeResponseModel({this.danhSachTuongtacThongKe});
+
+class TuongTacThongKeResponseModel {
+  List<TopInteractionModel> danhSachTuongtacThongKe;
+
+  TuongTacThongKeResponseModel({required this.danhSachTuongtacThongKe});
 }

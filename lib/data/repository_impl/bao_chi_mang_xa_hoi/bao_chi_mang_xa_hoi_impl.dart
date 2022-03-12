@@ -84,10 +84,10 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   }
 
   @override
-  Future<Result<MenuModel>> getMenuBCMXH() {
-    return runCatchingAsync<MenuResponse, MenuModel>(
+  Future<Result<List<ListMenuItemModel>>> getMenuBCMXH() {
+    return runCatchingAsync<List<MenuBCMXHResponse>, List<ListMenuItemModel>>(
       () => _baoChiMangXaHoiService.getMenuBCMXH(),
-      (res) => res.toDomain(),
+      (res) => res.map((e) => e.toDomain()).toList(),
     );
   }
 }

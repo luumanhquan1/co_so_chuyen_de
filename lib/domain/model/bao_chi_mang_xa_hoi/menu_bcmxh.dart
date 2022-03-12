@@ -1,16 +1,16 @@
-class MenuModel{
-  List<ListMenuItemModel>?listData;
-  MenuModel({this.listData});
-}
+// class MenuModel{
+//   List<ListMenuItemModel>listData;
+//   MenuModel({required this.listData});
+// }
 class ListMenuItemModel{
-  String? id;
-  String? title;
-  List<MenuItemModel>?subMenu;
-  ListMenuItemModel({this.id,this.title,this.subMenu});
+  String id;
+  String title;
+  List<MenuItemModel>subMenu;
+  ListMenuItemModel({required this.id,required this.title,required this.subMenu});
 }
 class MenuItemModel{
-  String? id;
-  String? nodeId;
-  String? title;
-  MenuItemModel({this.id,this.nodeId,this.title});
+  String id;
+  int nodeId;
+  String title;
+  MenuItemModel({required this.id,required this.nodeId,required this.title});
 }

@@ -52,14 +52,14 @@ class ItemTableTopic extends StatelessWidget {
             children:  [
               Expanded(
                 child: ItemInTable(
-                   '${dataItem.articleCount ??0}',
+                   '${dataItem.articleCount}',
                   S.current.bai_viet,
                   ImageAssets.icBaiViet,
                 ),
               ),
               Expanded(
                 child: ItemInTable(
-                    '${dataItem.likeCount ??0}',
+                    '${dataItem.likeCount}',
                   S.current.like,
                   ImageAssets.icLike,
                 ),
@@ -70,14 +70,14 @@ class ItemTableTopic extends StatelessWidget {
             children:  [
               Expanded(
                 child: ItemInTable(
-                  '${dataItem.shareCount ??0}',
+                  '${dataItem.shareCount}',
                   S.current.share,
                   ImageAssets.icShare,
                 ),
               ),
               Expanded(
                 child: ItemInTable(
-                  '${dataItem.commentCount ??0}',
+                  '${dataItem.commentCount}',
                   S.current.comment,
                   ImageAssets.icComment,
                 ),

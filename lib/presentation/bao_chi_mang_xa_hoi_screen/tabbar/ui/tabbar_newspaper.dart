@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi_mang_xa_hoi_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
+import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +28,9 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
 
   @override
   void initState() {
+    super.initState();
     _controller = TabController(vsync: AnimatedListState(), length: 4);
+    cubit.getMenu();
   }
 
   @override
@@ -54,7 +58,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
-                screen: BaoChiMangXaHoiMenu(
+                screen:  BaoChiMangXaHoiMenu(
                   cubit: cubit,
                 ),
               );
@@ -85,19 +89,28 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _controller,
-        children: [
-          Text(
-            S.current.bao_cao_thong_ke,
-          ),
-          const TatCaChuDeScreen(),
-          const TheoDoiBaiVietScreen(),
-          TinTucThoiSuScreen(
-            tinTucThoiSuBloc: TinTucThoiSuBloc(),
-            pContext: context,
-          ),
-        ],
+      body: StateStreamLayout(
+        stream: cubit.stateStream,
+        retry: () {},
+        textEmpty: S.current.khong_co_du_lieu,
+        error: AppException(
+          S.current.error,
+          S.current.error,
+        ),
+        child: TabBarView(
+          controller: _controller,
+          children: [
+            Text(
+              S.current.bao_cao_thong_ke,
+            ),
+            const TatCaChuDeScreen(),
+            const TheoDoiBaiVietScreen(),
+            TinTucThoiSuScreen(
+              tinTucThoiSuBloc: TinTucThoiSuBloc(),
+              pContext: context,
+            ),
+          ],
+        ),
       ),
     );
   }

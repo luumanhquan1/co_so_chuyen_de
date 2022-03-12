@@ -4,24 +4,8 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'menu_response.g.dart';
-
 @JsonSerializable()
-class MenuResponse {
-  List<LitsMenuItem>? listMenuItem;
-
-  MenuResponse(this.listMenuItem);
-
-  factory MenuResponse.fromJson(Map<String, dynamic> json) =>
-      _$MenuResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MenuResponseToJson(this);
-
-  MenuModel toDomain() =>
-      MenuModel(listData: listMenuItem?.map((e) => e.toDomain()).toList());
-}
-
-@JsonSerializable()
-class LitsMenuItem {
+class MenuBCMXHResponse {
   @JsonKey(name: 'id')
   String? id;
   @JsonKey(name: 'title')
@@ -29,17 +13,17 @@ class LitsMenuItem {
   @JsonKey(name: 'submenu')
   List<MenuData>? subMenu;
 
-  LitsMenuItem(this.id, this.title, this.subMenu);
+  MenuBCMXHResponse(this.id, this.title, this.subMenu);
 
-  factory LitsMenuItem.fromJson(Map<String, dynamic> json) =>
-      _$LitsMenuItemFromJson(json);
+  factory MenuBCMXHResponse.fromJson(Map<String, dynamic> json) =>
+      _$MenuBCMXHResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$LitsMenuItemToJson(this);
+  Map<String, dynamic> toJson() => _$MenuBCMXHResponseToJson(this);
 
   ListMenuItemModel toDomain() => ListMenuItemModel(
-        id: id,
-        title: title,
-        subMenu: subMenu?.map((e) => e.toDomain()).toList(),
+        id: id ?? '',
+        title: title ?? '',
+        subMenu: subMenu?.map((e) => e.toDomain()).toList() ?? [],
       );
 }
 
@@ -48,7 +32,7 @@ class MenuData {
   @JsonKey(name: 'id')
   String? id;
   @JsonKey(name: 'nodeid')
-  String? nodeId;
+  int? nodeId;
   @JsonKey(name: 'title')
   String? title;
 
@@ -64,8 +48,8 @@ class MenuData {
   Map<String, dynamic> toJson() => _$MenuDataToJson(this);
 
   MenuItemModel toDomain() => MenuItemModel(
-        id: id,
-        nodeId: nodeId,
-        title: title,
+        id: id ?? '',
+        nodeId: nodeId ?? 0,
+        title: title ?? '',
       );
 }

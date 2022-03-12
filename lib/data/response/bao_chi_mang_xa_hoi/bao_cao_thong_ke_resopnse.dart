@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -16,7 +14,11 @@ class TuongTacThongKeResponse {
       _$TuongTacThongKeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TuongTacThongKeResponseToJson(this);
-  TuongTacThongKeResponseModel toDomain()=>TuongTacThongKeResponseModel();
+
+  TuongTacThongKeResponseModel toDomain() => TuongTacThongKeResponseModel(
+        danhSachTuongtacThongKe:
+            danhSachTuongtacThongKe.map((e) => e.toDomain()).toList(),
+      );
 }
 
 @JsonSerializable()
@@ -31,8 +33,10 @@ class DaTaTuongTacThongKeResponse {
 
   Map<String, dynamic> toJson() => _$DaTaTuongTacThongKeResponseToJson(this);
 
+  TopInteractionModel toDomain() => TopInteractionModel(
+        dataTuongTacThongKeModel: dataTuongTacThongKe.toDomain(),
+      );
 }
-
 
 @JsonSerializable()
 class DataTuongTacThongKe {
@@ -50,6 +54,12 @@ class DataTuongTacThongKe {
 
   Map<String, dynamic> toJson() => _$DataTuongTacThongKeToJson(this);
 
+  DataModel toDomain() => DataModel(
+        iD: iD ?? 0,
+        name: name ?? '',
+        interactionStatistic: interactionStatistic?.toDomain() ??
+            DataInteractionStatistic().toDomain(),
+      );
 }
 
 @JsonSerializable()
@@ -63,8 +73,8 @@ class DataInteractionStatistic {
   @JsonKey(name: 'commentCount')
   int? commentCount;
 
-
-  DataInteractionStatistic({this.articleCount,
+  DataInteractionStatistic({
+    this.articleCount,
     this.likeCount,
     this.shareCount,
     this.commentCount,
@@ -75,11 +85,10 @@ class DataInteractionStatistic {
 
   Map<String, dynamic> toJson() => _$DataInteractionStatisticToJson(this);
 
-  InteractionStatisticModel toDomain() =>
-      InteractionStatisticModel(
-        articleCount: articleCount,
-        likeCount: likeCount,
-        shareCount: shareCount,
-        commentCount: commentCount,);
+  InteractionStatisticModel toDomain() => InteractionStatisticModel(
+        articleCount: articleCount ?? 0,
+        likeCount: likeCount ?? 0,
+        shareCount: shareCount ?? 0,
+        commentCount: commentCount ?? 0,
+      );
 }
-

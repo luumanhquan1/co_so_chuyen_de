@@ -20,8 +20,8 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   final BehaviorSubject<TuongTacThongKeResponseModel> _dataBaoCaoThongKe =
       BehaviorSubject<TuongTacThongKeResponseModel>();
 
-  final BehaviorSubject<MenuModel> _dataMenu =
-  BehaviorSubject<MenuModel>();
+  final BehaviorSubject<List<ListMenuItemModel>> _dataMenu =
+  BehaviorSubject<List<ListMenuItemModel>>();
 
   List<String> listTitle = [
     S.current.tin_tong_hop,
@@ -32,7 +32,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
 
   Stream<List<ChuDeModel>> get listYKienNguoiDan => _listYKienNguoiDan.stream;
 
-  Stream<MenuModel> get dataMenu => _dataMenu.stream;
+  Stream<List<ListMenuItemModel>> get dataMenu => _dataMenu.stream;
 
 
   Stream<TuongTacThongKeResponseModel> get dataBaoCaoThongKe =>
@@ -56,6 +56,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
 
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
+    showLoading();
     final result = await _BCMXHRepo.getDashListChuDe(
       1,
       30,
@@ -68,6 +69,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       success: (res) {
         final result = res.getlistChuDe ?? [];
         _listYKienNguoiDan.sink.add(result);
+        showContent();
       },
       error: (err) {
         return;
@@ -86,29 +88,13 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     );
     result.when(
       success: (res) {
-        print('-------------------------------------------------- thanh cong----------------------');
-        print(res.runtimeType);
         final result = res;
+        _dataBaoCaoThongKe.sink.add(result);
       },
       error: (err) {
-        print('-------------------------------------------------- that bai----------------------');
         return;
       },
     );
   }
 
-  Future<void> getMenu( ) async {
-    final result = await _BCMXHRepo.getMenuBCMXH();
-    result.when(
-      success: (res) {
-        print('-------------------------------------------------- thanh cong----------------------');
-        final result = res;
-        _dataMenu.sink.add(result);
-      },
-      error: (err) {
-        print('-------------------------------------------------- that bai----------------------');
-        return;
-      },
-    );
-  }
 }

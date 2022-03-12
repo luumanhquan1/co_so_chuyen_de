@@ -32,5 +32,5 @@ mixin BaoChiMangXaHoiRepository {
     String toDate,
   );
 
-  Future<Result<MenuModel>> getMenuBCMXH();
+  Future<Result<List<ListMenuItemModel>>> getMenuBCMXH();
 }

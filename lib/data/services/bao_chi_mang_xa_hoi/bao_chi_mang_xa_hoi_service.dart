@@ -46,5 +46,5 @@ abstract class BaoChiMangXaHoiService {
   );
 
   @GET(ApiConstants.MENU_BCMXH)
-  Future<MenuResponse> getMenuBCMXH();
+  Future<List<MenuBCMXHResponse>> getMenuBCMXH();
 }
