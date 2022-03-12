@@ -3,7 +3,6 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
@@ -40,8 +39,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   void initState() {
     super.initState();
     cubit.page = 1;
-    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LIST);
+    cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
     cubit.getDashboard();
+    cubit.postEventsCalendar();
     title = S.current.lich_hop_cua_toi;
   }
 
@@ -115,58 +115,46 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                     onTapDay: () {
                       setState(() {});
                       cubit.chooseTypeDay(Type_Choose_Option_Day.DAY);
-                      cubit.listDSLH.clear();
-                      cubit.page = 1;
                       cubit.postDSLHDay();
-                      cubit.getDashboard();
                     },
                     onTapWeek: () {
                       setState(() {});
                       cubit.chooseTypeDay(Type_Choose_Option_Day.WEEK);
-                      cubit.listDSLH.clear();
-                      cubit.page = 1;
                       cubit.postDSLHWeek();
-                      cubit.getDashboard();
                     },
                     onTapMonth: () {
                       setState(() {});
                       cubit.chooseTypeDay(Type_Choose_Option_Day.MONTH);
-                      cubit.listDSLH.clear();
-                      cubit.page = 1;
                       cubit.postDSLHMonth();
-                      cubit.getDashboard();
                     },
                   ),
                   BlocBuilder<LichHopCubit, LichHopState>(
                     bloc: cubit,
                     builder: (context, state) {
-                      return TableCandarTablet(
-                        type: state.type,
-                        onChangeRange: (
-                            DateTime? start,
-                            DateTime? end,
-                            DateTime? focusedDay,
-                            ) {},
-                        onChange: (
-                            DateTime startDate,
-                            DateTime endDate,
-                            DateTime selectDay,
-                            ) {
-                          cubit.startDate = startDate;
-                          cubit.endDate = endDate;
-                          cubit.selectDay = selectDay;
-                          cubit.listDSLH.clear();
-                          cubit.page = 1;
-
-                          if (state.type == Type_Choose_Option_Day.DAY) {
-                            cubit.postDSLHDay();
-                            cubit.getDashboard();
-                          } else {
-                            cubit.getDashboard();
-                            cubit.postDanhSachLichHop();
-                          }
-                        },
-                      );
+                      return StreamBuilder<List<DateTime>>(
+                          stream: cubit.eventsStream,
+                          builder: (context, snapshot) {
+                            return TableCandarTablet(
+                              type: state.type,
+                              eventsLoader: snapshot.data,
+                              onChangeRange: (
+                                DateTime? start,
+                                DateTime? end,
+                                DateTime? focusedDay,
+                              ) {},
+                              onChange: (
+                                DateTime startDate,
+                                DateTime endDate,
+                                DateTime selectDay,
+                              ) {
+                                cubit.getDataCalendar(
+                                  startDate,
+                                  endDate,
+                                  selectDay,
+                                );
+                              },
+                            );
+                          });
                     },
                   ),
                   BlocBuilder<LichHopCubit, LichHopState>(
@@ -189,10 +177,13 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                     itemCount: listItemSchedule.length,
                                     itemBuilder: (context, index) {
                                       return CustomItemCalenderWorkTablet(
-                                        image: cubit.listImageLichHopCuaToi[index],
-                                        typeName: listItemSchedule[index].typeName,
-                                        numberOfCalendars: listItemSchedule[index]
-                                            .numberOfSchedule,
+                                        image:
+                                            cubit.listImageLichHopCuaToi[index],
+                                        typeName:
+                                            listItemSchedule[index].typeName,
+                                        numberOfCalendars:
+                                            listItemSchedule[index]
+                                                .numberOfSchedule,
                                       );
                                     },
                                   ),
@@ -236,6 +227,5 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
         );
       },
     );
-
   }
 }

@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
@@ -20,6 +22,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -76,6 +79,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
       BehaviorSubject();
 
+  final BehaviorSubject<List<DateTime>> eventsSubject = BehaviorSubject();
+
+  Stream<List<DateTime>> get eventsStream => eventsSubject.stream;
+
   BehaviorSubject<DashBoardLichHopModel> dashBoardSubject = BehaviorSubject();
 
   Stream<DashBoardLichHopModel> get dashBoardStream => dashBoardSubject.stream;
@@ -88,6 +95,63 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
+
+  Future<void> postEventsCalendar({
+    TypeCalendarMenu typeCalendar = TypeCalendarMenu.LichCuaToi,
+  }) async {
+    final result = await hopRepo.postEventCalendar(
+      EventCalendarRequest(
+        DateFrom: startDate.formatApi,
+        DateTo: endDate.formatApi,
+        DonViId: donViId,
+        isLichCuaToi: typeCalendar == TypeCalendarMenu.LichCuaToi,
+        month: selectDay.month,
+        PageIndex: page,
+        PageSize: 10,
+        UserId: userId,
+        year: selectDay.year,
+      ),
+    );
+    result.when(
+      success: (value) {
+        final List<DateTime> data = [];
+
+        value.forEach((element) {
+          data.add(element.convertStringToDate());
+        });
+
+        eventsSubject.add(data);
+      },
+      error: (error) {},
+    );
+  }
+
+  void getDataCalendar(
+    DateTime startTime,
+    DateTime endTime,
+    DateTime selectTime,
+  ) {
+    startDate = startTime;
+    endDate = endTime;
+    selectDay = selectTime;
+    listDSLH.clear();
+    page = 1;
+
+    if (state.type == Type_Choose_Option_Day.DAY) {
+      postDSLHDay();
+    } else {
+      getDashboard();
+      postDanhSachLichHop();
+    }
+  }
+
+
+  void initData() {
+    page = 1;
+    getDashboard();
+    postDanhSachLichHop();
+    postEventsCalendar();
+  }
 
   Future<void> getDashboard() async {
     showLoading();
@@ -132,7 +196,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     final day = selectDay;
     startDate = day.subtract(Duration(days: day.weekday - 1));
     endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
+    getDashboard();
+    postEventsCalendar();
   }
 
   void postDSLHMonth() {
@@ -140,14 +208,21 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     startDate = DateTime(day.year, day.month, 1);
     endDate = DateTime(day.year, day.month + 1, 0);
 
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
+    getDashboard();
+    postEventsCalendar();
   }
 
   void postDSLHDay() {
     startDate = selectDay;
     endDate = selectDay;
-
+    listDSLH.clear();
+    page = 1;
     postDanhSachLichHop();
+    getDashboard();
+    postEventsCalendar();
   }
 
   Future<void> postDanhSachLichHop() async {
@@ -265,15 +340,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   }
 
   dynamic currentTime = DateFormat.MMMMEEEEd().format(DateTime.now());
-  List<MeetingSchedule> listMeeting = [
-    MeetingSchedule(
-        'hung hung hung', '2022-02-07T07:45:00', '2022-02-07T08:45:00'),
-    MeetingSchedule('hung', '2022-02-07T09:45:00', '2022-02-07T10:45:00'),
-    MeetingSchedule('hung', '2022-02-07T11:45:00', '2022-02-07T12:45:00'),
-    MeetingSchedule('hung', '2022-02-07T13:45:00', '2022-02-07T15:45:00'),
-  ];
 
-  DataSource getCalenderDataSource() {
+  DataSource getCalenderDataSource(DanhSachLichHopModel model) {
     List<Appointment> appointments = [];
     RecurrenceProperties recurrence =
         RecurrenceProperties(startDate: DateTime.now());
@@ -281,14 +349,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     recurrence.interval = 2;
     recurrence.recurrenceRange = RecurrenceRange.noEndDate;
     recurrence.recurrenceCount = 10;
-    for (int i = 0; i < listMeeting.length; i++) {
+    for (int i = 0; i < (model.items?.length ?? 0); i++) {
       appointments.add(
         Appointment(
-            startTime: DateTime.parse(listMeeting[i].dateTimeFrom),
-            endTime: DateTime.parse(listMeeting[i].dateTimeTo),
-            subject: listMeeting[i].title,
-            color: textColorMangXaHoi,
-            isAllDay: false),
+            startTime: DateTime.parse(model.items?[i].dateTimeFrom ?? ''),
+            endTime: DateTime.parse(model.items?[i].dateTimeTo ?? ''),
+            subject: model.items?[i].title ?? '',
+            color: textColorMangXaHoi),
       );
     }
     return DataSource(appointments);
