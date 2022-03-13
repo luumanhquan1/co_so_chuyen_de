@@ -9,52 +9,52 @@ String headerMenu() {
   }
   switch (APP_THEME) {
     case AppMode.MAC_DINH:
-      return ImageAssets.headerMenu;
+      return ImageAssets.imgHeaderMenuTablet;
     case AppMode.XANH:
-      return ImageAssets.icHeaderMenuBlue;
+      return ImageAssets.icHeaderMenuBlueTablet;
     case AppMode.HONG:
-      return ImageAssets.icHeaderMenuPink;
+      return ImageAssets.icHeaderMenuPinkTablet;
     case AppMode.VANG:
-      return ImageAssets.icHeaderMenuYellow;
+      return ImageAssets.icHeaderMenuYellowTablet;
   }
 }
 String _iconHeaderBackGround(){
   switch (APP_BACKGROUND) {
     case AppBackGround.XUAN:
-      return ImageAssets.headerMenuXuan;
+      return ImageAssets.headerMenuXuanTablet;
     case AppBackGround.HA:
-      return ImageAssets.headerMenuHa;
+      return ImageAssets.headerMenuHaTablet;
 
     case AppBackGround.THU:
-      return ImageAssets.headerMenuThu;
+      return ImageAssets.headerMenuThuTablet;
 
 
     case AppBackGround.DONG:
-      return ImageAssets.headerMenuDong;
+      return ImageAssets.headerMenuDongTablet;
     case AppBackGround.TET_NGUYEN_DAN:
-      return ImageAssets.icHeaderMenuTetNguyenDan;
+      return ImageAssets.icHeaderMenuTetNguyenDanTablet;
     case AppBackGround.LE_TINH_NHAN:
-      return ImageAssets.icHeaderMenuLeTinhNhan;
+      return ImageAssets.icHeaderMenuLeTinhNhanTablet;
     case AppBackGround.NGAY_QUOC_TE_PHU_NU:
-      return ImageAssets.icHeaderMenuLeQuocTePhuNu;
+      return ImageAssets.icHeaderMenuLeQuocTePhuNuTablet;
     case AppBackGround.GIO_TO_HUNG_VUONG:
-      return ImageAssets.icHeaderMenuGioToHungVuong;
+      return ImageAssets.icHeaderMenuGioToHungVuongTablet;
     case AppBackGround.NGAY_QUOC_TE_LAO_DONG:
-      return ImageAssets.icHeaderMenuQuocTeLaoDong;
+      return ImageAssets.icHeaderMenuQuocTeLaoDongTablet;
     case AppBackGround.NGAY_QUOC_TE_THIEU_NHI:
-      return ImageAssets.icHeaderMenuQuocTeThieuNhi;
+      return ImageAssets.icHeaderMenuQuocTeThieuNhiTablet;
     case AppBackGround.NGAY_QUOC_KHANH:
-      return ImageAssets.icHeaderMenuQuocKhanh;
+      return ImageAssets.icHeaderMenuQuocKhanhTablet;
     case AppBackGround.TET_TRUNG_THU:
-      return ImageAssets.icHeaderMenuTrungThu;
+      return ImageAssets.icHeaderMenuTrungThuTablet;
     case AppBackGround.NGAY_PHU_NU_VIET_NAM:
-      return ImageAssets.icHeaderMenuPhuNuVietNam;
+      return ImageAssets.icHeaderMenuPhuNuVietNamTablet;
     case AppBackGround.NGAY_LE_GIANG_SINH:
-      return ImageAssets.icHeaderMenuLeGiangSinh;
+      return ImageAssets.icHeaderMenuLeGiangSinhTablet;
     case AppBackGround.NGAY_HALLOWEEN:
-      return ImageAssets.icHeaderMenuHalloween;
+      return ImageAssets.icHeaderMenuHalloweenTablet;
     case AppBackGround.NGAY_NHA_GIAO_VIET_NAM:
-      return ImageAssets.icHeaderMenuNhaGiaoVietNam;
+      return ImageAssets.icHeaderMenuNhaGiaoVietNamTablet;
     default:
       {
         return '';

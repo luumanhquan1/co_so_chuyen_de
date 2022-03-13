@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 
@@ -24,7 +26,7 @@ class AppState {
 
   void setAppMode(AppMode appMode) {
     APP_THEME = appMode;
-    HiveLocal.saveTheme(
+    PrefsService.setAppTheme(
       AppThemModel(appMode: APP_THEME, appBackGround: APP_BACKGROUND),
     );
     Get.forceAppUpdate();
@@ -36,14 +38,14 @@ class AppState {
     } else {
       APP_BACKGROUND = appBackGround;
     }
-    HiveLocal.saveTheme(
+    PrefsService.setAppTheme(
       AppThemModel(appMode: APP_THEME, appBackGround: APP_BACKGROUND),
     );
     Get.forceAppUpdate();
   }
 
   void getThemeApp() {
-    final appTheme = HiveLocal.getThemeApp();
+   final appTheme =  PrefsService.getAppTheme();
     APP_THEME = appTheme.appMode ?? AppMode.MAC_DINH;
     APP_BACKGROUND = appTheme.appBackGround;
   }

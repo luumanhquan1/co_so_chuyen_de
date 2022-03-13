@@ -58,9 +58,10 @@ class LoginCubit extends BaseCubit<LoginState> {
         passIsError = true;
       },
     );
-    await getPermission();
+
   }
   Future<void> getPermission() async {
+    showLoading();
     final permissionResult = await _loginRepo.getListPermissionApp();
    await permissionResult.when(
       success: (res)  async {

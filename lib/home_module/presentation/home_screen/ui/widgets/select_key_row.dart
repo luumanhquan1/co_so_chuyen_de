@@ -1,3 +1,4 @@
+import '/home_module/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
 import '/home_module/config/resources/color.dart';
@@ -42,14 +43,18 @@ class _SelectKeyRowState extends State<SelectKeyRow> {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                color: index == selectKey ? labelColor : unFocusColor,
+                color: index == selectKey
+                    ? AppTheme.getInstance().colorSelect()
+                    : AppTheme.getInstance().colorSelect().withOpacity(0.1),
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
               ),
               child: Text(
                 data.getText(),
                 style: textNormalCustom(
                   fontSize: 14.0.textScale(),
-                  color: index == selectKey ? backgroundColorApp : labelColor,
+                  color: index == selectKey
+                      ? backgroundColorApp
+                      : AppTheme.getInstance().colorSelect(),
                 ),
               ),
             ),

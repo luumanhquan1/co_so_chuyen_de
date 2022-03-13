@@ -40,7 +40,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // homeCubit.loadApi();
+    homeCubit.loadApi();
   }
 
   @override

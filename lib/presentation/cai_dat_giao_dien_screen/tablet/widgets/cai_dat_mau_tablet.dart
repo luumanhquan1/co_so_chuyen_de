@@ -32,17 +32,19 @@ class CaiDatMauTabletWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               selectColorCell(context,
-                  color: labelColor,
+                  icon: ImageAssets.previewDefault,
                   name: S.current.mac_dinh,
                   appMode: AppMode.MAC_DINH),
               selectColorCell(context,
-                  color: numberOfCalenders,
+                  icon: ImageAssets.previewBlue,
                   name: S.current.xanh,
                   appMode: AppMode.XANH),
               selectColorCell(context,
-                  color: pinkColor, name: S.current.hong, appMode: AppMode.HONG),
+                  icon: ImageAssets.previewPink,
+                  name: S.current.hong,
+                  appMode: AppMode.HONG),
               selectColorCell(context,
-                  color: yellowColor,
+                  icon: ImageAssets.previewYellow,
                   name: S.current.vang,
                   appMode: AppMode.VANG),
             ],
@@ -53,7 +55,7 @@ class CaiDatMauTabletWidget extends StatelessWidget {
   }
 
   Widget selectColorCell(BuildContext context,
-      {required Color color, required String name, required AppMode appMode}) {
+      {required String icon, required String name, required AppMode appMode}) {
     return GestureDetector(
       onTap: () {
         AppStateCt.of(context).appState.setAppMode(appMode);
@@ -66,8 +68,11 @@ class CaiDatMauTabletWidget extends StatelessWidget {
               height: 213,
               width: 60.w,
               decoration: BoxDecoration(
-                color: color,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                border: Border.all(color: borderColor.withOpacity(0.5)),
+                image: DecorationImage(
+                  image: AssetImage(icon),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             const SizedBox(

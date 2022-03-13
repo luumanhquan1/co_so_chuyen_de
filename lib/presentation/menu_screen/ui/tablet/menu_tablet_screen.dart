@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
@@ -70,10 +71,16 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                       ),
                     );
                   },
-                  child: HeaderMenuWidget(
-                    paddingVertical: 20,
-                    urlBackGround:headerMenu(),
-                    menuCubit: menuCubit,
+                  child: SizedBox(
+                    height: 170,
+                    child: HeaderMenuWidget(
+                      paddingVertical: 20,
+                      urlBackGround: headerMenu(),
+                      menuCubit: menuCubit,
+                      overlayColor: APP_BACKGROUND == null
+                          ? Colors.transparent
+                          : Colors.black.withOpacity(0.2),
+                    ),
                   ),
                 ),
                 const Padding(

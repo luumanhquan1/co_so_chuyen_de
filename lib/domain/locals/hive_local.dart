@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/account/permission_app_model.dart';
 import 'package:ccvc_mobile/domain/model/account/user_infomation.dart';
@@ -22,7 +20,6 @@ class HiveLocal {
   static late Box<SelectkeyModel> _selectKey;
   static late Box<String> _tagKey;
   static late Box<PermissionApp> _listPermission;
-  static late Box<String> _appTheme;
   static const TAG_KEY = 'TAG_KEY';
   static Future<void> init() async {
     Hive.registerAdapter(DataUserAdapter());
@@ -36,7 +33,6 @@ class HiveLocal {
     unawaited(que.add(() async => _userBox = await Hive.openBox(USER_INFO)));
     unawaited(que.add(() async => _selectKey = await Hive.openBox(SELECT_KEY)));
     unawaited(que.add(() async => _tagKey = await Hive.openBox(TAG_KEY)));
-    unawaited(que.add(() async => _appTheme = await Hive.openBox(_APP_THEME)));
     unawaited(que.add(
         () async => _listPermission = await Hive.openBox(LIST_PERMISSION)));
     await que.onComplete;
@@ -124,16 +120,4 @@ class HiveLocal {
     await _tagKey.addAll(tagList);
   }
 
-  static Future<void> saveTheme(AppThemModel appThemModel) async {
-    // log
-    await _appTheme.add(jsonEncode(appThemModel.toJson()));
-  }
-
-  static AppThemModel getThemeApp() {
-    // final vl = _appTheme.get(_APP_THEME) ?? {};
-    // final a= _appTheme.values;
-    // log('$a');
-    // log('>>>>>>>>>>>}');
-    return AppThemModel.fromJson({});
-  }
 }
