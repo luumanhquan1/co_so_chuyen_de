@@ -7,7 +7,7 @@ class ImageAssets {
   ///Svg path
   static const String icChuyenGiongNoiThanhVanBan = '$baseImg/ic_chuyen_giong_noi_thanh_van_ban.svg';
   static const String icChuyenVanBanThanhGiongNoi = '$baseImg/ic_chuyen_van_ban_thanh_giong_noi.svg';
-  static const String icDanhBaDienTu = '$baseImg/ic_danh_ba_dien_tu.svg';
+  static const String icDanhBaDienTu = '$baseImg/ic_danh_ba_dien_tu_tien_ich.svg';
   static const String icDanhSachCongViec = '$baseImg/ic_danh_sach_cong_viec.svg';
   static const String icHuongDanSuDung = '$baseImg/ic_huong_dan_su_dung.svg';
   static const String icLichAmDuong = '$baseImg/ic_lich_am_duong.svg';
@@ -17,6 +17,34 @@ class ImageAssets {
   static const String image_tien_ich = '$baseImg/image_tien_ich.svg';
   static const String image_tien_ichPng = '$baseImg/image_tien_ich.png';
   static const String imageTienIchTablet = '$baseImg/image_tien_ich_tablet.png';
+  //icon 12 con giap
+  static const String icChuot = '$baseImg/ic_chuot.svg';
+  static const String icSuu =   '$baseImg/ic_suu.svg';
+  static const String icDan = '$baseImg/ic_dan.svg';
+  static const String icMao = '$baseImg/ic_mao.svg';
+  static const String icThin = '$baseImg/ic_thin.svg';
+  static const String icTy = '$baseImg/ic_ty.svg';
+  static const String icNgo = '$baseImg/ic_ngo.svg';
+  static const String icMui = '$baseImg/ic_mui.svg';
+  static const String icThan = '$baseImg/ic_than.svg';
+  static const String icDau = '$baseImg/ic_dau.svg';
+  static const String icTuat = '$baseImg/ic_tuat.svg';
+  static const String icHoi = '$baseImg/ic_hoi.svg';
+  //icon huong dan su dung
+  static const String icBaoCao = '$baseImg/ic_bao_cao.svg';
+  static const String icLichLamViec = '$baseImg/ic_lich_lam_viec.svg';
+  static const String icHop = '$baseImg/ic_hop.svg';
+  static const String icQuanLyNhiemVu = '$baseImg/ic_quan_ly_nhiem_vu.svg';
+  static const String icHanhChinhCong = '$baseImg/ic_hanh_chinh_cong.svg';
+  static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
+  static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
+  static const String icBaoChiMangXaHoi = '$baseImg/ic_bao_chi_mang_xa_hoi.svg';
+  static const String icCctvCamBien = '$baseImg/ic_cctv_cam_bien.svg';
+  static const String icKetNoi = '$baseImg/ic_ket_noi.svg';
+  static const String icTuongTacNoiBo = '$baseImg/ic_tuong_tac_noi_bo.svg';
+  static const String icTienIch = '$baseImg/ic_tien_ich.svg';
+  static const String icDanhBaDienTuHdsd = '$baseImg/ic_danh_ba_dien_tu_hdsd.svg';
+
 
 
   static SvgPicture svgAssets(
