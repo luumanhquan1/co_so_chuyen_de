@@ -4,6 +4,45 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ImageAssets {
   ///Svg path
+  static const String icHeaderMenuBlue = '$baseImg/background_menu_blue.png';
+  static const String icHeaderMenuPink = '$baseImg/header_menu_pink.png';
+  static const String icHeaderMenuYellow = '$baseImg/header_menu_yellow.png';
+  static const String icBackGroundXuan = '$baseImg/back_ground_xuan.png';
+  static const String icBackGroundHa = '$baseImg/back_ground_ha.png';
+  static const String icBackGroundThu = '$baseImg/back_ground_thu.png';
+  static const String icBackGroundDong = '$baseImg/back_ground_dong.png';
+  static const String bgTetNguyenDan = '$baseImg/bg_ten_nguyen_dan.png';
+  static const String bgLeTinhNhan = '$baseImg/bg_le_tinh_nhan.png';
+  static const String bgQuocTePhuNu = '$baseImg/bg_quoc_te_phu_nu.png';
+  static const String bgGioToHungVuong = '$baseImg/bg_gio_to_hung_vuong.png';
+  static const String bgQuocTeLaoDong = '$baseImg/bg_quoc_te_lao_dong.png';
+  static const String bgQuocTeThieuNhi = '$baseImg/bg_quoc_te_thieu_nhi.png';
+  static const String bgQuocKhanh = '$baseImg/bg_quoc_khanh.png';
+  static const String bgTetTrungThu = '$baseImg/bg_tet_trung_thu.png';
+  static const String bgPhuNuVietNam = '$baseImg/bg_phu_nu_viet_nam.png';
+  static const String bgHalloween = '$baseImg/bg_halloween.png';
+  static const String bgNhaGiaoVietNam = '$baseImg/bg_nha_giao_viet_nam.png';
+  static const String bgLeGiangSinh = '$baseImg/bg_le_giang_sinh.png';
+  static const headerMenuXuan = '$baseImg/background_menu_xuan.png';
+  static const headerMenuHa = '$baseImg/background_menu_ha.png';
+  static const headerMenuThu = '$baseImg/background_menu_thu.png';
+  static const headerMenuDong = '$baseImg/background_menu_dong.png';
+
+  static const String icHeaderMenuTetNguyenDan = '$baseImg/background_tet_nguyen_dan.png';
+  static const String icHeaderMenuLeTinhNhan = '$baseImg/background_le_tinh_nhan.png';
+  static const String icHeaderMenuLeQuocTePhuNu = '$baseImg/background_quoc_te_phu_nu.png';
+  static const String icHeaderMenuGioToHungVuong = '$baseImg/background_gio_to_hung_vuong.png';
+  static const String icHeaderMenuQuocTeLaoDong = '$baseImg/background_quoc_te_lao_dong.png';
+  static const String icHeaderMenuQuocTeThieuNhi = '$baseImg/background_quoc_te_thieu_nha.png';
+  static const String icHeaderMenuQuocKhanh = '$baseImg/background_quoc_khanh.png';
+  static const String icHeaderMenuTrungThu = '$baseImg/background_trung_thu.png';
+  static const String icHeaderMenuPhuNuVietNam = '$baseImg/background_phu_nu_viet_nam.png';
+  static const String icHeaderMenuHalloween = '$baseImg/background_hallowwen.png';
+  static const String icHeaderMenuNhaGiaoVietNam = '$baseImg/background_nha_giao_viet_nam.png';
+  static const String icHeaderMenuLeGiangSinh = '$baseImg/background_le_giang_sinh.png';
+
+
+
   static const String icBack = '$baseImg/ic_back.svg';
   static const String icTongSoNhiemVu = '$baseImg/ic_tong_so_nhiem_vu.svg';
   static const String icHoanThanhNhiemVu =
@@ -127,7 +166,7 @@ class ImageAssets {
   static const String icListGroundMobile = '$baseImg/ic_list_group_mobile.png';
   static const String icMenuListBaoCaoTab = '$baseImg/ic_menu_list_bao_cao.png';
   static const String icNameFile = '$baseImg/ic_name_file.svg';
-
+  static const String icCheckBoxSelect = '$baseImg/ic_ckeck_box_select.svg';
   static const String icCalenders = '$baseImg/ic_calendars.svg';
 
   static const String icDongNai = '$baseImg/ic_default_chu_de.png';
@@ -283,6 +322,7 @@ class ImageAssets {
   static const String icMenuItemBCMXH = '$baseImg/ic_menu_item_bcmxh.svg';
   static const String ic_Select = '$baseImg/ic_Select.svg';
   static const String ic_unchecked = '$baseImg/ic_unchecked.svg';
+
 
 
   ///gif

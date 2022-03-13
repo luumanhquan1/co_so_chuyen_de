@@ -7,10 +7,12 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/customization/calendar_style_phone.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/shared/utils_phone.dart';
+import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/table_calendar_phone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
   final bool isCalendar;
@@ -19,6 +21,7 @@ class TableCalendarWidget extends StatefulWidget {
   final Function(DateTime startDate, DateTime end, DateTime selectDay) onChange;
   final Function(String value)? onSearch;
   final Type_Choose_Option_Day type;
+  final List<DateTime>? eventsLoader;
 
   const TableCalendarWidget({
     Key? key,
@@ -27,6 +30,7 @@ class TableCalendarWidget extends StatefulWidget {
     required this.onChangeRange,
     required this.onChange,
     this.type = Type_Choose_Option_Day.DAY,
+    this.eventsLoader,
   }) : super(key: key);
 
   @override
@@ -35,10 +39,6 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   TableCalendarCubit cubit = TableCalendarCubit();
-
-  List<Event> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
-  }
 
   @override
   void initState() {
@@ -210,8 +210,12 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TableCalendar(
-                      eventLoader: _getEventsfromDay,
+                    TableCalendarPhone(
+                      eventLoader: (day) =>
+                          widget.eventsLoader
+                              ?.where((element) => isSameDay(element, day))
+                              .toList() ??
+                          [],
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       onDaySelected: _onDaySelect,
                       rangeSelectionMode: _rangeSelectionMode,
@@ -230,7 +234,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         return isSameDay(_selectedDay, day);
                       },
                       calendarStyle: CalendarStyle(
-                        cellMargin: const EdgeInsets.all(11),
                         weekendTextStyle: textNormalCustom(
                           color: titleCalenderWork,
                           fontSize: 14.0.textScale(),
@@ -255,10 +258,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                           fontWeight: FontWeight.w500,
                           color: buttonColor,
                         ),
-                        selectedDecoration: const BoxDecoration(
-                          color: radioFocusColor,
-                          shape: BoxShape.circle,
-                        ),
                       ),
                       headerVisible: false,
                       calendarFormat:
@@ -266,13 +265,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                       firstDay: DateTime.utc(2021, 8, 20),
                       lastDay: DateTime.utc(2030, 8, 20),
                       focusedDay: _selectedDay,
-                    ),
-                    ..._getEventsfromDay(_selectedDay).map(
-                      (Event event) => ListTile(
-                        title: Text(
-                          event.title,
-                        ),
-                      ),
                     ),
                   ],
                 )

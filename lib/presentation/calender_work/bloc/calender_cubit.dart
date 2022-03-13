@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
@@ -13,6 +14,7 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -32,6 +34,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       BehaviorSubject.seeded([true, false]);
   BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
       BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
+  final BehaviorSubject<List<DateTime>> eventsSubject = BehaviorSubject();
+
+  Stream<List<DateTime>> get eventsStream => eventsSubject.stream;
 
   Stream<int> get checkIndexStream => checkIndex.stream;
 
@@ -61,6 +66,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     startDates = selectDay;
     endDates = selectDay;
     callApiNgay();
+    postEventsCalendar();
   }
 
   void callApiNgay() {
@@ -83,11 +89,43 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     );
   }
 
+  Future<void> postEventsCalendar({
+    TypeCalendarMenu typeCalendar = TypeCalendarMenu.LichCuaToi,
+  }) async {
+    final result = await _lichLamViec.postEventCalendar(
+      EventCalendarRequest(
+        DateFrom: startDates.formatApi,
+        DateTo: endDates.formatApi,
+        DonViId:
+            HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
+        isLichCuaToi: typeCalendar == TypeCalendarMenu.LichCuaToi,
+        month: selectDay.month,
+        PageIndex: page,
+        PageSize: 10,
+        UserId: HiveLocal.getDataUser()?.userId ?? '',
+        year: selectDay.year,
+      ),
+    );
+    result.when(
+      success: (value) {
+        final List<DateTime> data = [];
+
+        value.forEach((element) {
+          data.add(element.convertStringToDate());
+        });
+
+        eventsSubject.add(data);
+      },
+      error: (error) {},
+    );
+  }
+
   void callApiTuan() {
     final day = selectDay;
     startDates = day.subtract(Duration(days: day.weekday - 1));
     endDates = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     callApiNgay();
+    postEventsCalendar();
   }
 
   void callApiMonth() {
@@ -95,6 +133,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     startDates = DateTime(day.year, day.month, 1);
     endDates = DateTime(day.year, day.month + 1, 0);
     callApiNgay();
+    postEventsCalendar();
   }
 
   List<ListLichLVModel> listDSLV = [];
