@@ -73,39 +73,53 @@ const bgTabletColor = Color(0xffF9FAFF);
 
 const unFocusColor = Color(0xffF2F0FF);
 
+const pinkColor  = Color(0xffFB7897);
 
 ///=========== Using to make change app theme ================================
 abstract class AppColor {
-  Color primaryColor();
-
-  Color accentColor();
-
-  Color statusColor();
-
-  Color mainColor();
-
-  Color bgColor();
-
-  Color dfTxtColor();
-
-  Color secondTxtColor();
-
-  Color dfBtnColor();
-
-  Color dfBtnTxtColor();
-
-  Color txtLightColor();
-
-  Color sideBtnColor();
-
-  Color disableColor();
-
-  Color titleColor();
-
-  Color backGroundColor();
-
-  Color subTitleColor();
+  Color colorSelect();
 }
 
+class LightApp extends AppColor {
+  @override
+  Color colorSelect() {
+    return Colors.white;
+  }
+}
+
+class DarkApp extends AppColor {
+  @override
+  Color colorSelect() {
+    return Colors.white;
+  }
+}
+
+class DefaultApp extends AppColor {
+  @override
+  Color colorSelect() {
+    return textDefault;
+  }
+}
+
+class BlueApp extends AppColor {
+  @override
+  Color colorSelect() {
+     return numberOfCalenders;
+  }
+}
+
+class PinkApp extends AppColor {
+  @override
+  Color colorSelect() {
+    return pinkColor;
+  }
+}
+
+class YellowApp extends AppColor {
+  @override
+  Color colorSelect() {
+    return yellowColor;
+  }
+}
 
 ///============ End setup app theme ======================================

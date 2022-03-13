@@ -1,6 +1,25 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+
+import 'constants/app_constants.dart';
+
+const _MUA_XUAN = 'MUA_XUAN';
+const _MUA_HA = 'MUA_HA';
+const _MUA_THU = 'MUA_THU';
+const _MUA_DONG = 'MUA_DONG';
+const _TET_NGUYEN_DAN = 'TET_NGUYEN_DAN';
+const _LE_TINH_NHAN = 'LE_TINH_NHAN';
+const _NGAY_QUOC_TE_PHU_NU = 'NGAY_QUOC_TE_PHU_NU';
+const _GIO_TO_HUNG_VUONG = 'GIO_TO_HUNG_VUONG';
+const _NGAY_QUOC_TE_LAO_DONG = 'NGAY_QUOC_TE_LAO_DONG';
+const _NGAY_QUOC_TE_THIEU_NHI = 'NGAY_QUOC_TE_THIEU_NHI';
+const _NGAY_QUOC_KHANH = 'NGAY_QUOC_KHANH';
+const _TET_TRUNG_THU = 'TET_TRUNG_THU';
+const _NGAY_PHU_NU_VIET_NAM = 'NGAY_PHU_NU_VIET_NAM';
+const _NGAY_LE_GIANG_SINH = 'NGAY_LE_GIANG_SINH';
+const _NGAY_HALLOWEEN = 'NGAY_HALLOWEEN';
+const _NGAY_NHA_GIAO_VIET_NAM = 'NGAY_NHA_GIAO_VIET_NAM';
 
 extension AppBackGroundEx on AppBackGround {
   String getText() {
@@ -84,4 +103,5 @@ extension AppBackGroundEx on AppBackGround {
         return ImageAssets.bgNhaGiaoVietNam;
     }
   }
+
 }
