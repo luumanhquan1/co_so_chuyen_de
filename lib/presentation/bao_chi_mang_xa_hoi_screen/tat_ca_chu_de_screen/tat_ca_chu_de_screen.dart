@@ -112,62 +112,76 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Tin nổi bật',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                          color: titleColor,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const HotNews(
-                        'https://recmiennam.com/wp-content/uploads/2018/01/phong-canh-thien-nhien-dep-1.jpg',
-                        'Bản tin tiêu dùng ngày 27/12: Loại gà ăn thực đơn “hạng sang” được săn lùng trong dịp Tết',
-                        '5/11/2021  9:10:03 PM',
-                        'Ngưng hoạt động gần 3 tháng do dịch, lãnh đạo '
-                            'nhà máy Chang '
-                            'Shin Việt Nam (huyện Vĩnh Cửu ...',
-                      ),
-                      const SizedBox(
-                        height: 16,
-                        child: Divider(
-                          color: lineColor,
-                          height: 1,
-                        ),
-                      ),
                       StreamBuilder<List<ChuDeModel>>(
                         stream: chuDeCubit.listYKienNguoiDan,
                         builder: (context, snapshot) {
-                          final data = snapshot.data ?? [];
-                          return ListView.builder(
-                            // controller: _scrollController,
-                            itemCount: data.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  ItemListNews(
-                                    data[index].avartar ?? '',
-                                    data[index].title ?? '',
-                                    DateTime.parse(
-                                      data[index].publishedTime ?? '',
-                                    ).formatApiSS,
+                          if (snapshot.hasData) {
+                            final listChuDe = snapshot.data ?? [];
+                            final ChuDeModel hotNew =
+                                listChuDe.removeAt(0);
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.current.tin_noi_bat,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    color: titleColor,
                                   ),
-                                  const SizedBox(
-                                    height: 16,
-                                    child: Divider(
-                                      color: lineColor,
-                                      height: 1,
-                                    ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                HotNews(
+                                  hotNew.avartar ?? '',
+                                  hotNew.title ?? '',
+                                  DateTime.parse(
+                                    hotNew.publishedTime ?? '',
+                                  ).formatApiSS,
+                                  hotNew.contents ?? '',
+                                  hotNew.url??'',
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                  child: Divider(
+                                    color: lineColor,
+                                    height: 1,
                                   ),
-                                ],
-                              );
-                            },
-                          );
+                                ),
+                                ListView.builder(
+                                  // controller: _scrollController,
+                                  itemCount: listChuDe.length,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        ItemListNews(
+                                          listChuDe[index].avartar ?? '',
+                                          listChuDe[index].title ?? '',
+                                          DateTime.parse(
+                                            listChuDe[index].publishedTime ??
+                                                '',
+                                          ).formatApiSS,
+                                          listChuDe[index].url??'',
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                          child: Divider(
+                                            color: lineColor,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
                         },
                       ),
                     ],
