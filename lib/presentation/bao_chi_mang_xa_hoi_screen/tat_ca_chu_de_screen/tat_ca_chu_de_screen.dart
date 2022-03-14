@@ -10,7 +10,6 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_d
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/item_infomation.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/item_list_new.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/item_table_topic.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -39,15 +38,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {}
     });
-    chuDeCubit.getListTatCaCuDe(
-      chuDeCubit.startDate,
-      chuDeCubit.endDate,
-    );
-    chuDeCubit.getListBaoCaoThongKe(
-      chuDeCubit.startDateBaoCaoThongKe,
-      chuDeCubit.endDateBaoCaoThongKe,
-    );
-
+    chuDeCubit.callApi();
   }
 
   @override
@@ -72,49 +63,24 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       const SizedBox(
                         height: 130,
                       ),
-                      GridView.count(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        childAspectRatio: 2.3,
-                        children: const [
-                          ItemInfomation(
-                            image: ImageAssets.icTongTin,
-                            color: textColorTongTin,
-                            title: 'Tổng tin',
-                            index: '2032',
-                          ),
-                          ItemInfomation(
-                            image: ImageAssets.icBaoChi,
-                            color: textColorBaoChi,
-                            title: 'Báo chí',
-                            index: '2032',
-                          ),
-                          ItemInfomation(
-                            image: ImageAssets.icMangXaHoi,
-                            color: textColorMangXaHoi,
-                            title: 'Mạng xã hội',
-                            index: '2032',
-                          ),
-                          ItemInfomation(
-                            image: ImageAssets.icForum,
-                            color: textColorForum,
-                            title: 'Forum',
-                            index: '2032',
-                          ),
-                          ItemInfomation(
-                            image: ImageAssets.icBlog,
-                            color: textColorBlog,
-                            title: 'Blog',
-                            index: '2032',
-                          ),
-                          ItemInfomation(
-                            image: ImageAssets.icNguonKhac,
-                            color: textColorNguonKhac,
-                            title: 'Nguồn khác',
-                            index: '2032',
-                          ),
-                        ],
+                      StreamBuilder<List<ItemInfomationModel>>(
+                        stream: chuDeCubit.streamDashBoard,
+                        builder: (context, snapshot) {
+                          final data = snapshot.data ?? [];
+                          return GridView.count(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            crossAxisCount: 2,
+                            childAspectRatio: 2.3,
+                            children: data
+                                .map(
+                                  (e) => ItemInfomation(
+                                    infomationModel: e,
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        },
                       ),
                       StreamBuilder<TuongTacThongKeResponseModel>(
                         stream: chuDeCubit.dataBaoCaoThongKe,
@@ -214,6 +180,12 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                   (DateTime startDate, DateTime endDate, DateTime selectDay) {
                 chuDeCubit.startDate = startDate.formatApiStartDay;
                 chuDeCubit.endDate = endDate.formatApiEndDay;
+                chuDeCubit.startDateDashBoard = startDate.formatApiStartDay;
+                chuDeCubit.endDateDashBoard = endDate.formatApiEndDay;
+                chuDeCubit.getDashboard(
+                  chuDeCubit.startDateDashBoard,
+                  chuDeCubit.endDateDashBoard,
+                );
               },
               onSearch: (value) {
                 chuDeCubit.getListTatCaCuDe(
@@ -222,7 +194,14 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                 );
               },
               onChangeRange:
-                  (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+                  (DateTime? start, DateTime? end, DateTime? focusedDay) {
+                chuDeCubit.startDateDashBoard = start?.formatApiSS ?? '';
+                chuDeCubit.endDateDashBoard = end?.formatApiSS ?? '';
+                chuDeCubit.getDashboard(
+                  chuDeCubit.startDateDashBoard,
+                  chuDeCubit.endDateDashBoard,
+                );
+              },
             ),
           ],
         ),
