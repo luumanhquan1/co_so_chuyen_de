@@ -33,8 +33,8 @@ class _ThemYKienWidgetState extends State<ThemYKienWidget> {
           ),
         ),
         CustomDropDown(
-          value: widget.cubit.dataThemYkien.first,
-          items: widget.cubit.dataThemYkien,
+          value: S.current.cuoc_hop,
+          items: widget.cubit.phienHop.map((e) => e.value ?? '').toList(),
           onSelectItem: (value) {},
         ),
         const SizedBox(

@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
@@ -18,6 +19,8 @@ import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'icon_tablet_menu.dart';
 
 class MenuTabletScreen extends StatefulWidget {
   const MenuTabletScreen({Key? key}) : super(key: key);
@@ -68,10 +71,16 @@ class _MenuTabletScreenState extends State<MenuTabletScreen> {
                       ),
                     );
                   },
-                  child: HeaderMenuWidget(
-                    paddingVertical: 20,
-                    urlBackGround: ImageAssets.imgHeaderMenuTablet,
-                    menuCubit: menuCubit,
+                  child: SizedBox(
+                    height: 170,
+                    child: HeaderMenuWidget(
+                      paddingVertical: 20,
+                      urlBackGround: headerMenu(),
+                      menuCubit: menuCubit,
+                      overlayColor: APP_BACKGROUND == null
+                          ? Colors.transparent
+                          : Colors.black.withOpacity(0.2),
+                    ),
                   ),
                 ),
                 const Padding(

@@ -19,6 +19,8 @@ class XemKetLuanHopModel {
   String? noiDungHuy;
   String? title;
 
+  XemKetLuanHopModel.emty();
+
   XemKetLuanHopModel({
     required this.id,
     required this.scheduleId,
