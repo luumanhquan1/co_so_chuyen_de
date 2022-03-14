@@ -1,3 +1,22 @@
+class DataDanhSachTitleHDSD {
+  int? pageIndex;
+  int? totalPages;
+  int? totalItems;
+  List<DanhSachTitleHDSD>? pageData;
+  bool? hasPreviousPage;
+  bool? hasNextPage;
+
+  DataDanhSachTitleHDSD({
+    this.pageIndex,
+    this.totalPages,
+    this.totalItems,
+    this.pageData,
+    this.hasPreviousPage,
+    this.hasNextPage,
+  });
+  DataDanhSachTitleHDSD.empty();
+}
+
 class DanhSachTitleHDSD {
   String? id;
   String? title;
@@ -26,4 +45,5 @@ class DanhSachTitleHDSD {
     this.updatedBy,
     this.order,
   });
+  DanhSachTitleHDSD.empty();
 }

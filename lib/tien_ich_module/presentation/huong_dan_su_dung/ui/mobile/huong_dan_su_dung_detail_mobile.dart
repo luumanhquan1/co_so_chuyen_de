@@ -37,7 +37,9 @@ class HuongDanSuDungDetailMobile extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: BaseSearchBar(
                 hintText: S.current.tim_kiem_cau_hoi,
-                onChange: (value) {},
+                onChange: (value) {
+                  cubit.search(value);
+                },
               ),
             ),
             Expanded(

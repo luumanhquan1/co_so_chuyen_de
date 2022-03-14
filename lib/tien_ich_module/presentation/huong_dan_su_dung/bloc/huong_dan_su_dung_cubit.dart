@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.da
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/bloc/huong_dan_su_dung_state.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:queue/queue.dart';
@@ -18,6 +19,7 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
   BehaviorSubject<List<TopicHDSD>> topicHDSDSubject = BehaviorSubject();
 
   Stream<List<TopicHDSD>> get getTopicHDSDStream => topicHDSDSubject.stream;
+  List<DanhSachTitleHDSD> dataDanhSachTitleHDSD = [];
 
   BehaviorSubject<List<DanhSachTitleHDSD>> danhSachTitleHDSDSubject =
       BehaviorSubject.seeded([
@@ -43,8 +45,9 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
       danhSachTitleHDSDSubject.stream;
 
   Future<void> loadData() async {
-    final queue = Queue(parallel: 1);
+    final queue = Queue(parallel: 2);
     unawaited(queue.add(() => getTopicHDSD()));
+    unawaited(queue.add(() => getDanhSachHDSD()));
 
     await queue.onComplete;
     showContent();
@@ -59,5 +62,29 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
       },
       error: (error) {},
     );
+  }
+
+  Future<void> getDanhSachHDSD() async {
+    final result = await tienIchRep.getDanhSachHDSD(1, 1000, '', '');
+    result.when(
+      success: (res) {
+        danhSachTitleHDSDSubject.add(res.pageData?.toList() ?? []);
+      },
+      error: (error) {},
+    );
+  }
+
+  void search(String values) {
+    final searchTxt = values.trim().toLowerCase().vietNameseParse();
+    bool isListDanhSach(DanhSachTitleHDSD titleHDSD) {
+      print(titleHDSD.title);
+      return titleHDSD.title!
+          .toLowerCase()
+          .vietNameseParse()
+          .contains(searchTxt);
+    }
+    final value =
+        dataDanhSachTitleHDSD.where((event) => isListDanhSach(event)).toList();
+    danhSachTitleHDSDSubject.add(value);
   }
 }
