@@ -156,6 +156,8 @@ mixin HopRepository {
 
   Future<Result<MessageModel>> deleteKetLuanHop(String id);
 
+  Future<Result<MessageModel>> deleteChiTietLichHop(String id);
+
   Future<Result<MessageModel>> huyChiTietLichHop(
     String scheduleId,
     int statusId,

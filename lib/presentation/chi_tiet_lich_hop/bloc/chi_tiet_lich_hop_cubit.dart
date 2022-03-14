@@ -644,7 +644,12 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   Future<void> deleteChiTietLichHop(String id) async {
-    final result = await hopRp.deleteKetLuanHop(id, 8, false);
+    final result = await hopRp.deleteChiTietLichHop(id);
+    result.when(success: (res) {}, error: (err) {});
+  }
+
+  Future<void> huyChiTietLichHop(String scheduleId) async {
+    final result = await hopRp.huyChiTietLichHop(scheduleId, 8, false);
     result.when(success: (res) {}, error: (err) {});
   }
 

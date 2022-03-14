@@ -71,6 +71,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                     textContent: S.current.ban_chan_chan_huy_lich_nay,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
+                      cubit.huyChiTietLichHop(widget.id);
                       Navigator.pop(context);
                     },
                     title: S.current.huy_lich,
