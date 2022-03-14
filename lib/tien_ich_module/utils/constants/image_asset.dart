@@ -39,12 +39,20 @@ class ImageAssets {
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
   static const String icBaoChiMangXaHoi = '$baseImg/ic_bao_chi_mang_xa_hoi.svg';
+  static const String icBaoChiMangXaHoiTablet = '$baseImg/ic_bao_chi_mang_xa_hoi_tablet.svg';
   static const String icCctvCamBien = '$baseImg/ic_cctv_cam_bien.svg';
+  static const String icCctvCamBienTablet = '$baseImg/ic_cctv_cam_bien_tablet.svg';
   static const String icKetNoi = '$baseImg/ic_ket_noi.svg';
+  static const String icKetNoiTablet = '$baseImg/ic_ket_noi_tablet.svg';
   static const String icTuongTacNoiBo = '$baseImg/ic_tuong_tac_noi_bo.svg';
+  static const String icTuongTacNoiBoTablet = '$baseImg/ic_tuong_tac_noi_bo_tablet.svg';
   static const String icTienIch = '$baseImg/ic_tien_ich.svg';
   static const String icDanhBaDienTuHdsd = '$baseImg/ic_danh_ba_dien_tu_hdsd.svg';
-
+  static const String icDanhBaDienTuHdsdTablet = '$baseImg/ic_danh_ba_dien_tu_hdsd_tablet.svg';
+  static const String imageHuongDanSuDungTablet = '$baseImg/image_huong_dan_su_dung_tablet.png';
+  //icon huong dan su dung bao cao
+  static const String icCallHDSD = '$baseImg/ic_call_hdsd.svg';
+  static const String icMailHDSD = '$baseImg/ic_mail_hdsd.svg';
 
 
   static SvgPicture svgAssets(

@@ -1,19 +1,21 @@
 import 'dart:core';
 
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
-const String MENU_BAOCAO         ='menu_baocao';
-const String MENU_LICHLAMVIEC     ='menu_lichlamviec';
-const String MENU_HOP             ='menu_hop';
-const String MENU_QUANLYNHIEMVU     ='menu_quanlynhiemvu';
-const String MENU_HANHCHINHCONG     ='menu_hanhchinhcong';
-const String MENU_YKIENNGUOIDAN    ='menu_ykiennguoidan';
-const String MENU_QUANLYVANBAN      ='menu_quanlyvanban';
-const String MENU_BAOCHIMANGXAHOI    ='menu_baochi_mangxahoi';
-const String MENU_CCTVCAMBIEN       ='menu_cctv_cambien';
-const String MENU_KETNOI            ='menu_ketnoi';
-const String MENU_TUONGTACNOIBO     ='menu_tuongtacnoibo';
-const String MENU_TIENICH            ='menu_tienich';
-const String MENU_DANHBA           ='menu_danhba';
+
+const String MENU_BAOCAO = 'menu_baocao';
+const String MENU_LICHLAMVIEC = 'menu_lichlamviec';
+const String MENU_HOP = 'menu_hop';
+const String MENU_QUANLYNHIEMVU = 'menu_quanlynhiemvu';
+const String MENU_HANHCHINHCONG = 'menu_hanhchinhcong';
+const String MENU_YKIENNGUOIDAN = 'menu_ykiennguoidan';
+const String MENU_QUANLYVANBAN = 'menu_quanlyvanban';
+const String MENU_BAOCHIMANGXAHOI = 'menu_baochi_mangxahoi';
+const String MENU_CCTVCAMBIEN = 'menu_cctv_cambien';
+const String MENU_KETNOI = 'menu_ketnoi';
+const String MENU_TUONGTACNOIBO = 'menu_tuongtacnoibo';
+const String MENU_TIENICH = 'menu_tienich';
+const String MENU_DANHBA = 'menu_danhba';
+
 enum TypeIconHDSD {
   menu_baocao,
   menu_lichlamviec,
@@ -75,7 +77,6 @@ class TopicHDSD {
   String? createdBy;
   String? updatedOn;
   String? updatedBy;
-  TypeIconHDSD typeIconHDSD=TypeIconHDSD.menu_danhba;
 
   TopicHDSD({
     this.maTopic,
@@ -89,39 +90,68 @@ class TopicHDSD {
     this.createdBy,
     this.updatedOn,
     this.updatedBy,
-  }){
-    typeIconHDSD=toIcon();
-  }
-  TypeIconHDSD toIcon(){
-    switch(maTopic){
+  });
+  String  toIcon(){
+    switch(icon){
       case MENU_BAOCAO:
-        return TypeIconHDSD.menu_baocao;
+        return ImageAssets.icBaoCao;
       case MENU_LICHLAMVIEC:
-        return TypeIconHDSD.menu_lichlamviec;
+        return ImageAssets.icLichLamViec;
       case MENU_HOP:
-        return TypeIconHDSD.menu_hop;
+        return ImageAssets.icHop;
       case MENU_QUANLYNHIEMVU:
-        return TypeIconHDSD.menu_quanlynhiemvu;
+        return ImageAssets.icQuanLyNhiemVu;
       case MENU_HANHCHINHCONG:
-        return TypeIconHDSD.menu_hanhchinhcong;
+        return ImageAssets.icHanhChinhCong;
       case MENU_YKIENNGUOIDAN:
-        return TypeIconHDSD.menu_ykiennguoidan;
+        return ImageAssets.icYKienNguoiDan;
       case MENU_QUANLYVANBAN:
-        return TypeIconHDSD.menu_quanlyvanban;
+        return ImageAssets.icQuanLyVanBan;
       case MENU_BAOCHIMANGXAHOI:
-        return TypeIconHDSD.menu_baochi_mangxahoi;
+        return ImageAssets.icBaoChiMangXaHoi;
       case MENU_CCTVCAMBIEN:
-        return TypeIconHDSD.menu_cctv_cambien;
+        return ImageAssets.icCctvCamBien;
       case MENU_KETNOI:
-        return TypeIconHDSD.menu_ketnoi;
+        return ImageAssets.icKetNoi;
       case MENU_TUONGTACNOIBO:
-        return TypeIconHDSD.menu_tuongtacnoibo;
+        return ImageAssets.icTuongTacNoiBo;
       case MENU_TIENICH:
-        return TypeIconHDSD.menu_tienich;
+        return ImageAssets.icTienIch;
       case MENU_DANHBA:
-        return TypeIconHDSD.menu_danhba;
+        return ImageAssets.icDanhBaDienTuHdsd;
   }
-  return TypeIconHDSD.menu_danhba;
+  return '';
+  }
+  String  toIconTablet(){
+    switch(icon){
+      case MENU_BAOCAO:
+        return ImageAssets.icBaoCao;
+      case MENU_LICHLAMVIEC:
+        return ImageAssets.icLichLamViec;
+      case MENU_HOP:
+        return ImageAssets.icHop;
+      case MENU_QUANLYNHIEMVU:
+        return ImageAssets.icQuanLyNhiemVu;
+      case MENU_HANHCHINHCONG:
+        return ImageAssets.icHanhChinhCong;
+      case MENU_YKIENNGUOIDAN:
+        return ImageAssets.icYKienNguoiDan;
+      case MENU_QUANLYVANBAN:
+        return ImageAssets.icQuanLyVanBan;
+      case MENU_BAOCHIMANGXAHOI:
+        return ImageAssets.icBaoChiMangXaHoiTablet;
+      case MENU_CCTVCAMBIEN:
+        return ImageAssets.icCctvCamBienTablet;
+      case MENU_KETNOI:
+        return ImageAssets.icKetNoiTablet;
+      case MENU_TUONGTACNOIBO:
+        return ImageAssets.icTuongTacNoiBoTablet;
+      case MENU_TIENICH:
+        return ImageAssets.icTienIch;
+      case MENU_DANHBA:
+        return ImageAssets.icDanhBaDienTuHdsdTablet;
+    }
+    return '';
   }
 
   TopicHDSD.empty();
