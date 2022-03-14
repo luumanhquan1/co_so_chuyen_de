@@ -36,6 +36,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -191,4 +192,8 @@ abstract class HopServices {
 
   @GET(ApiConstants.XEM_KET_LUAN_HOP)
   Future<XemKetLuanHopDataResponse> getXemKetLuanHop(@Query('id') String id);
+
+  @GET(ApiConstants.SCHEDULE_OPINION_LIST)
+  Future<DanhSachYKienResponse> getDanhSachYKien(
+      @Query('scheduleId') String scheduleId);
 }

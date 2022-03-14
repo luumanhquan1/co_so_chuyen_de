@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 
 class BaseChooseTimerWidget extends StatefulWidget {
   final String? Function()? validator;
+  final Function(TimerData, TimerData)? onChange;
 
-  const BaseChooseTimerWidget({Key? key, this.validator}) : super(key: key);
+  const BaseChooseTimerWidget({Key? key, this.validator, this.onChange})
+      : super(key: key);
 
   @override
   State<BaseChooseTimerWidget> createState() => BaseChooseTimerWidgetState();
@@ -27,6 +29,8 @@ class BaseChooseTimerWidgetState extends State<BaseChooseTimerWidget> {
   }
 
   String? validatorString;
+  TimerData startDate = TimerData(hour: 0, minutes: 0);
+  TimerData endDate = TimerData(hour: 0, minutes: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,12 @@ class BaseChooseTimerWidgetState extends State<BaseChooseTimerWidget> {
           children: [
             Expanded(
               child: TimeDateInputWidget(
-                onChange: (value) {},
+                onChange: (value) {
+                  startDate = value;
+                  if (widget.onChange != null) {
+                    widget.onChange!(startDate, endDate);
+                  }
+                },
               ),
             ),
             Padding(
@@ -49,7 +58,12 @@ class BaseChooseTimerWidgetState extends State<BaseChooseTimerWidget> {
             ),
             Expanded(
               child: TimeDateInputWidget(
-                onChange: (value) {},
+                onChange: (value) {
+                  endDate = value;
+                  if (widget.onChange != null) {
+                    widget.onChange!(startDate, endDate);
+                  }
+                },
               ),
             )
           ],

@@ -322,9 +322,12 @@ class ImageAssets {
   static const String IcEmail = '$baseImg/IcEmail.svg';
   static const String XoaKLHop = '$baseImg/XoaKLHop.svg';
   static const String icThuHoiKL = '$baseImg/icThuHoiKL.svg';
-
+  static const String ic_luong = '$baseImg/ic_luong.svg';
   static const String icHeaderMenuBCMXH = '$baseImg/ic_header_menu_bcmxh.svg';
   static const String icMenuItemBCMXH = '$baseImg/ic_menu_item_bcmxh.svg';
+  static const String ic_Select = '$baseImg/ic_Select.svg';
+  static const String ic_unchecked = '$baseImg/ic_unchecked.svg';
+
 
 
   ///gif

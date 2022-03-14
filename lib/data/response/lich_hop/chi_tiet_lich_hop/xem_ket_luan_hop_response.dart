@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -89,24 +90,24 @@ class XemKetLuanHopDataResponseData extends Equatable {
   List<Object?> get props => throw [];
 
   XemKetLuanHopModel toModel() => XemKetLuanHopModel(
-    id: id,
-    scheduleId: scheduleId,
-    reportStatusId: reportStatusId,
-    startDate: startDate,
-    endDate: endDate,
-    content: content,
-    status: status,
-    statusName: statusName,
-    scheduleTitle: scheduleTitle,
-    reportStatus: reportStatus,
-    reportStatusCode: reportStatusCode,
-    createBy: createBy,
-    canBoChuTriId: canBoChuTriId,
-    nguoiTao: nguoiTao,
-    nguoiChuTri: nguoiChuTri,
-    files: files,
-    reportTemplateId: reportTemplateId,
-    noiDungHuy: noiDungHuy,
-    title: title,
+    id: id ?? '',
+    scheduleId: scheduleId ?? '',
+    reportStatusId: reportStatusId ?? '',
+    startDate: startDate ?? '',
+    endDate: endDate ?? '',
+    content: content!.parseHtml(),
+    status: status ?? 0,
+    statusName: statusName ?? '',
+    scheduleTitle: scheduleTitle ?? '',
+    reportStatus: reportStatus ?? '',
+    reportStatusCode: reportStatusCode ?? '',
+    createBy: createBy ?? '',
+    canBoChuTriId: canBoChuTriId ?? '',
+    nguoiTao: nguoiTao ?? '',
+    nguoiChuTri: nguoiChuTri ?? '',
+    files: files ?? '',
+    reportTemplateId: reportTemplateId ?? '',
+    noiDungHuy: noiDungHuy ?? '',
+    title: title ?? '',
   );
 }
