@@ -26,11 +26,13 @@ class _ItemListTrongNuocState extends State<ItemListTrongNuoc> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0.textScale(space: 8)),
-      margin: EdgeInsets.only(
-        bottom: 16.0.textScale(space: 10),
-        left: 16.0.textScale(space: 14),
-        right: 16.0.textScale(space: 14),
-      ),
+      margin: isMobile()
+          ? EdgeInsets.only(
+              bottom: 16.0.textScale(space: 10),
+              left: 16.0.textScale(space: 14),
+              right: 16.0.textScale(space: 14),
+            )
+          : const EdgeInsets.all(1),
       decoration: BoxDecoration(
         color: isMobile() ? bgDropDown.withOpacity(0.1) : Colors.white,
         border: Border.all(color: bgDropDown),

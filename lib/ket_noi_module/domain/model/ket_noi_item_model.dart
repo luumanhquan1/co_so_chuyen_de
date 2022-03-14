@@ -217,8 +217,6 @@ extension GetScreenMenu on TypeKetNoiMenu {
           }
         case TypeKetNoiMenu.ChinhPhu:
           {
-
-
             break;
           }
       }
@@ -260,6 +258,73 @@ extension GetScreenMenu on TypeKetNoiMenu {
         return ListViewLoadMore(
           cubit: cubit,
           isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+          ),
+        );
+    }
+  }
+
+  Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
+    void callApi(int page) {
+      switch (this) {
+        case TypeKetNoiMenu.Chung:
+          {
+            cubit.getListChungKetNoi(
+              pageSize: cubit.pageSize,
+              pageIndex: page,
+              type: cubit.type,
+            );
+
+            break;
+          }
+        case TypeKetNoiMenu.ChinhPhu:
+          {
+            break;
+          }
+      }
+    }
+
+    switch (this) {
+      case TypeKetNoiMenu.Chung:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: false,
+          checkRatio: 1.15,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+          ),
+        );
+
+      case TypeKetNoiMenu.ChinhPhu:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: false,
+          checkRatio: 1.25,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListTrongNuoc(
+            model: ItemTrongNuocModel(
+              category: 'CHINH_PHU',
+              categoryTitle: "Chính phủ",
+              diaChi: '16 Lê Hồng Phong - Ba Đình - Hà Nội',
+              email: 'thongtinchinhphu@chinhphu.vn',
+              fax: '08 048 924',
+              id: '597c41ac-c39e-4d67-9e52-08d96d304ff9',
+              imageUrlPath:
+                  'https://api-ccvc-uat.chinhquyendientu.vn/attachments/upload/091220211616214465.png',
+              sdt: '08 043 162',
+              tenCoQuanLienHe: 'Chen phủ Việt Nam',
+            ),
+          ),
+        );
+
+      default:
+        return ListViewLoadMore(
+          cubit: cubit,
+          checkRatio: 1.25,
+          isListView: false,
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,
