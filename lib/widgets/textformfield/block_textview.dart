@@ -40,12 +40,26 @@ class _BlockTextViewState extends State<BlockTextView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.title,
-          style: tokenDetailAmount(
-            fontSize: 14.0.textScale(),
-            color: borderCaneder,
-          ),
+        Row(
+          children: [
+            Text(
+              widget.title,
+              style: tokenDetailAmount(
+                fontSize: 14.0.textScale(),
+                color: borderCaneder,
+              ),
+            ),
+            if (widget.isRequired)
+              Text(
+                ' *',
+                style: tokenDetailAmount(
+                  fontSize: 14.0.textScale(),
+                  color: Colors.red,
+                ),
+              )
+            else
+              const SizedBox()
+          ],
         ),
         SizedBox(
           height: 10.h,

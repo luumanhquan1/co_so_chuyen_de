@@ -1,3 +1,5 @@
+import '/home_module/config/themes/app_theme.dart';
+
 import '/presentation/webview/web_view_screen.dart';
 
 import '/home_module/config/resources/color.dart';
@@ -202,8 +204,8 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                         ),
                         decoration: BoxDecoration(
                           color: result == _xaHoiCubit.tagKey
-                              ? linkColor
-                              : radioFocusColor.withOpacity(0.1),
+                              ? AppTheme.getInstance().colorSelect()
+                              : AppTheme.getInstance().colorSelect().withOpacity(0.1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6)),
                         ),
@@ -214,7 +216,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                               style: textNormal(
                                 result == _xaHoiCubit.tagKey
                                     ? dfBtnTxtColor
-                                    : linkColor,
+                                    : AppTheme.getInstance().colorSelect(),
                                 12,
                               ),
                             ),
@@ -236,9 +238,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                                             child: SvgPicture.asset(
                                               ImageAssets.icClose,
                                               color:
-                                                  result == _xaHoiCubit.tagKey
-                                                      ? dfBtnTxtColor
-                                                      : linkColor,
+                                              result == _xaHoiCubit.tagKey
+                                                  ? dfBtnTxtColor
+                                                  : AppTheme.getInstance().colorSelect(),
                                             ),
                                           ),
                                         ),

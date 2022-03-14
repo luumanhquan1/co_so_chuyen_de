@@ -10,6 +10,7 @@ class PhienhopModel {
 
   PhienhopModel({this.key, this.value});
 }
+
 class DanhSachPhienHopModel{
   List<PhienhopModel>?danhSachPhienHop;
   DanhSachPhienHopModel({this.danhSachPhienHop});

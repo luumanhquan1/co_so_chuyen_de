@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +11,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ItemTableTopic extends StatelessWidget {
   final String title;
   final String index;
+  final InteractionStatisticModel dataItem;
 
-  const ItemTableTopic(this.title, this.index, {Key? key}) : super(key: key);
+  const ItemTableTopic(this.title, this.index, this.dataItem, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +49,36 @@ class ItemTableTopic extends StatelessWidget {
             ),
           ),
           Row(
-            children: const [
+            children:  [
               Expanded(
                 child: ItemInTable(
-                  '11,085',
-                  'Bài viết',
+                   '${dataItem.articleCount}',
+                  S.current.bai_viet,
                   ImageAssets.icBaiViet,
                 ),
               ),
               Expanded(
                 child: ItemInTable(
-                  '11,085',
-                  'Like',
+                    '${dataItem.likeCount}',
+                  S.current.like,
                   ImageAssets.icLike,
                 ),
               ),
             ],
           ),
           Row(
-            children: const [
+            children:  [
               Expanded(
                 child: ItemInTable(
-                  '11,085',
-                  'Share',
+                  '${dataItem.shareCount}',
+                  S.current.share,
                   ImageAssets.icShare,
                 ),
               ),
               Expanded(
                 child: ItemInTable(
-                  '11,085',
-                  'Comment',
+                  '${dataItem.commentCount}',
+                  S.current.comment,
                   ImageAssets.icComment,
                 ),
               ),

@@ -12,7 +12,9 @@ import 'package:flutter/material.dart';
 import 'cell_phat_bieu_widget.dart';
 
 class BieuQuyetWidgetTablet extends StatefulWidget {
-  const BieuQuyetWidgetTablet({Key? key}) : super(key: key);
+  final String id;
+
+  const BieuQuyetWidgetTablet({Key? key, required this.id}) : super(key: key);
 
   @override
   _BieuQuyetWidgetTabletState createState() => _BieuQuyetWidgetTabletState();
@@ -35,7 +37,9 @@ class _BieuQuyetWidgetTabletState extends State<BieuQuyetWidgetTablet> {
                 showDiaLogTablet(
                   context,
                   title: S.current.tao_bieu_quyet,
-                  child: const TaoBieuQuyetWidget(),
+                  child: TaoBieuQuyetWidget(
+                    id: widget.id,
+                  ),
                   isBottomShow: false,
                   funcBtnOk: () {
                     Navigator.pop(context);

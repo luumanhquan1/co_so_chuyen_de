@@ -56,11 +56,11 @@ class _RadioButtonCheckState extends State<RadioButtonCheck> {
               SvgPicture.asset(
                 widget.isTheRadio
                     ? widget.isCheck
-                    ? ImageAssets.ic_baocao
-                    : ImageAssets.ic_chitet
+                    ? ImageAssets.ic_Select
+                    : ImageAssets.ic_unchecked
                     : widget.isCheck
-                    ? ImageAssets.ic_baocao
-                    : ImageAssets.ic_chitet,
+                    ? ImageAssets.ic_Select
+                    : ImageAssets.ic_unchecked,
               ),
               if (widget.isTheTitle)
                 Padding(

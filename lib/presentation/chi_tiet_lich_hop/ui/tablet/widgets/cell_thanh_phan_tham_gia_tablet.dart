@@ -55,61 +55,51 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.ten_can_bo}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
+                    child: Text(
+                      '${S.current.ten_can_bo}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.vai_tro}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
+                    child: Text(
+                      '${S.current.vai_tro}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.noi_dung_cong_viec}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
+                    child: Text(
+                      '${S.current.noi_dung_cong_viec}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.trang_thai}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
+                    child: Text(
+                      '${S.current.trang_thai}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Expanded(
-                      child: Text(
-                        '${S.current.diem_danh}:',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
-                        ),
+                    child: Text(
+                      '${S.current.diem_danh}:',
+                      style: textNormalCustom(
+                        fontSize: 14,
+                        color: infoColor,
                       ),
                     ),
                   ),
@@ -132,61 +122,51 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.tebCanBo}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
+                      child: Text(
+                        '${widget.infoModel.tebCanBo}',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.vaiTro}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
+                      child: Text(
+                        '${widget.infoModel.vaiTro}',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.ndCongViec}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
+                      child: Text(
+                        '${widget.infoModel.ndCongViec}',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.trangThai}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
+                      child: Text(
+                        '${widget.infoModel.trangThai}',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Expanded(
-                        child: Text(
-                          '${widget.infoModel.diemDanh}',
-                          style: textNormalCustom(
-                            fontSize: 14,
-                            color: infoColor,
-                          ),
+                      child: Text(
+                        '${widget.infoModel.diemDanh}',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
                         ),
                       ),
                     ),

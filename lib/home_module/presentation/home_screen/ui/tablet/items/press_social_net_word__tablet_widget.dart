@@ -1,4 +1,5 @@
 
+import '/home_module/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
 import '/presentation/webview/web_view_screen.dart';
@@ -193,7 +194,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
             height: 106,
             clipBehavior: Clip.hardEdge,
             decoration: const BoxDecoration(
-              borderRadius: const BorderRadius.all(
+              borderRadius:  BorderRadius.all(
                 Radius.circular(10),
               ),
             ),
@@ -308,8 +309,8 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
                         ),
                         decoration: BoxDecoration(
                           color: result == _xaHoiCubit.tagKey
-                              ? linkColor
-                              : radioFocusColor.withOpacity(0.1),
+                              ? AppTheme.getInstance().colorSelect()
+                              : AppTheme.getInstance().colorSelect().withOpacity(0.1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6)),
                         ),
@@ -320,7 +321,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
                               style: textNormal(
                                 result == _xaHoiCubit.tagKey
                                     ? dfBtnTxtColor
-                                    : linkColor,
+                                    : AppTheme.getInstance().colorSelect(),
                                 12.0.textScale(),
                               ),
                             ),
@@ -342,9 +343,9 @@ class _PressSocialNetWorkState extends State<PressSocialNetWorkTabletWidget> {
                                             child: SvgPicture.asset(
                                               ImageAssets.icClose,
                                               color:
-                                                  result == _xaHoiCubit.tagKey
-                                                      ? dfBtnTxtColor
-                                                      : linkColor,
+                                              result == _xaHoiCubit.tagKey
+                                                  ? dfBtnTxtColor
+                                                  : AppTheme.getInstance().colorSelect(),
                                             ),
                                           ),
                                         ),

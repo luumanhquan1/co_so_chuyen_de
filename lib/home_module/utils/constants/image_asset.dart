@@ -170,6 +170,46 @@ class ImageAssets {
   static const String appBarBackGroundGiangSinhTablet =
       '$baseImg/app_bar_background_giang_sinh_tablet.png';
 
+
+  static const String headerBackgroudXanhTablet =
+      '$baseImg/header_background_xanh_tablet.png';
+  static const String headerBackgroundHongTablet =
+      '$baseImg/header_backgroung_hong_tablet.png';
+  static const String headerBackgroungVangTablet =
+      '$baseImg/header_backgroung_vang_tablet.png';
+  static const String headerBackgroungXuanTablet =
+      '$baseImg/header_background_xuan_tablet.png';
+  static const String headerBackgroungHaTablet = '$baseImg/header_background_ha_tablet.png';
+  static const String headerBackgroungThuTablet =
+      '$baseImg/header_background_thu_tablet.png';
+  static const String headerBackgroungDongTablet =
+      '$baseImg/header_background_dong_tablet.png';
+
+  static const String headerBackgroudTetNguyenDanTablet =
+      '$baseImg/header_background_tet_nguyen_dan_tablet.png';
+  static const String headerBackgroudTetLeTinhNhanTablet =
+      '$baseImg/header_background_le_tinh_nhan_tablet.png';
+  static const String headerBackgroudQuocTePhuNuTablet =
+      '$baseImg/header_background_quoc_te_phu_nu_tablet.png';
+  static const String headerBackgroudGioToHungVuongTablet =
+      '$baseImg/header_background_gio_to_hung_vuong_tablet.png';
+  static const String headerBackgroudQuocTeLaoDongTablet =
+      '$baseImg/header_background_quoc_te_lao_dong_tablet.png';
+  static const String headerBackgroudQuocTeThieuNhiTablet =
+      '$baseImg/header_background_quoc_te_thieu_nhi_tablet.png';
+  static const String headerBackgroudQuocKhanhTablet =
+      '$baseImg/header_background_quoc_khanh_tablet.png';
+  static const String headerBackgroudTetTrungThuTablet =
+      '$baseImg/header_background_tet_trung_thu_tablet.png';
+  static const String headerBackgroudTetPhuNuVietNamTablet =
+      '$baseImg/header_background_phu_nu_viet_nam_tablet.png';
+  static const String headerBackgroudHalloweenTablet =
+      '$baseImg/header_background_halloween_tablet.png';
+  static const String headerBackgroudNhaGiaoVietNamTablet =
+      '$baseImg/header_background_nha_giao_viet_nam_tablet.png';
+  static const String headerBackgroudLeGiangSinhTablet =
+      '$baseImg/header_background_le_giang_sinh_tablet.png';
+
   static SvgPicture svgAssets(
     String name, {
     Color? color,

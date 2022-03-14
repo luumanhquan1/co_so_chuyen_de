@@ -9,12 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CacLuaChonDonViWidget extends StatefulWidget {
-  // final ThemDonViCubit themDonViCubit;
   final DetailMeetCalenderCubit detailMeetCalenderCubit;
 
   const CacLuaChonDonViWidget({
     Key? key,
-    // required this.themDonViCubit,
     required this.detailMeetCalenderCubit,
   }) : super(key: key);
 

@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,8 @@ class SendCommentWidgetLichHop extends StatefulWidget {
 }
 
 class _SendCommentWidgetLichHopState extends State<SendCommentWidgetLichHop> {
+  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +44,8 @@ class _SendCommentWidgetLichHopState extends State<SendCommentWidgetLichHop> {
               Expanded(
                 child: TextFormField(
                   onChanged: (text) {
-                    widget._isDisableButtonNotifier.value = text.trim().isEmpty;
+                    widget._isDisableButtonNotifier.value =
+                        text.trim().isEmpty;
                   },
                   controller: widget.contentController,
                   maxLines: 3,
@@ -94,7 +98,10 @@ class _SendCommentWidgetLichHopState extends State<SendCommentWidgetLichHop> {
                               ? ImageAssets.ic_gui_y_kien
                               : ImageAssets.ic_gui_y_kien,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          cubit.themYKien(
+                              yKien: widget.contentController.text, id: 'id');
+                        },
                       );
                     },
                   ),

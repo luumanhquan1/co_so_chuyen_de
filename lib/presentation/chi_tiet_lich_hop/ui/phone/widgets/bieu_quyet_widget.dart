@@ -12,7 +12,9 @@ import 'package:flutter/material.dart';
 import '../chi_tiet_lich_hop_screen.dart';
 
 class BieuQuyetWidget extends StatefulWidget {
-  const BieuQuyetWidget({Key? key}) : super(key: key);
+  final String id;
+
+  const BieuQuyetWidget({Key? key, required this.id}) : super(key: key);
 
   @override
   _BieuQuyetWidgetState createState() => _BieuQuyetWidgetState();
@@ -36,7 +38,9 @@ class _BieuQuyetWidgetState extends State<BieuQuyetWidget> {
                 showBottomSheetCustom(
                   context,
                   title: S.current.tao_bieu_quyet,
-                  child: const TaoBieuQuyetWidget(),
+                  child: TaoBieuQuyetWidget(
+                    id: widget.id,
+                  ),
                 );
               },
             ),
