@@ -130,8 +130,9 @@ class ApiConstants {
   static const XEM_KET_LUAN_HOP = '/vpdt/api/ScheduleReport/xem-ket-luan?';
   static const LICH_SU_VAN_BAN_DEN = '/qlvb/api/vanban/lich-su-by-type';
   static const LIST_PERMISSION = '/api/auth/list-permission';
-  static const GET_DANH_SACH_Y_KIEN =
-      '/qlvb/api/qlvb/van-ban-den/y-kien-xu-ly/danh-sach-y-kien';
+  static const GET_DANH_SACH_Y_KIEN = '/qlvb/api/qlvb/van-ban-den/y-kien-xu-ly/danh-sach-y-kien';
+  static const BAO_CAO_THONG_KE = '/api/NewsNetViews/dashboard_statistical';
+  static const MENU_BCMXH = '/api/NewsNetViews/menu-items?';
 }
 
 class ImageConstants {
