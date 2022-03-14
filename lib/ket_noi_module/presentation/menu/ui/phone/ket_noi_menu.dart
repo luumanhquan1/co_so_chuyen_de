@@ -66,6 +66,26 @@ class _KetNoiMenuState extends State<KetNoiMenu> {
                                             icon: e.icon,
                                             name: e.typeMenu.getTitle(),
                                             index: e.index ?? 0,
+                                            type: TypeContainer.expand,
+                                            childExpand: Column(
+                                              children: e.listWidget
+                                                      ?.map(
+                                                        (e) =>
+                                                            ContainerKetNoiMenuWidget(
+                                                          icon: e.icon,
+                                                          name: e.typeMenu
+                                                              .getTitle(),
+                                                          index: e.index ?? 0,
+                                                          isIcon: false,
+                                                          onTap: () {
+                                                            e.onTap(context,
+                                                                widget.cubit,);
+                                                          },
+                                                        ),
+                                                      )
+                                                      .toList() ??
+                                                  [Container()],
+                                            ),
                                             isIcon: false,
                                             onTap: () {
                                               e.onTap(context, widget.cubit);
