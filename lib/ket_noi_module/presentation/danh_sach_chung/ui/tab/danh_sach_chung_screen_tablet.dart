@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/i
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/tab/ket_noi_menu_tablet.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
+import 'package:ccvc_mobile/presentation/search_screen/ui/widget/search_widget.dart';
 import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -77,7 +78,7 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                if (snapshot.data == TypeKetNoiMenu.Chung) Container(
                   padding: const EdgeInsets.only(top: 24, left: 30),
                   child: Text(
                     S.current.tin_noi_bat,
@@ -85,7 +86,7 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
                       fontSize: 20,
                     ),
                   ),
-                ),
+                ) else SearchWidget(),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(left: 20, right: 20),
