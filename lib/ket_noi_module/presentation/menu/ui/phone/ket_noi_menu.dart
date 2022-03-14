@@ -78,7 +78,6 @@ class _KetNoiMenuState extends State<KetNoiMenu> {
                                                           index: e.index ?? 0,
                                                           isIcon: false,
                                                           onTap: () {
-                                                            print('change Screnn');
                                                             e.onTap(context,
                                                                 widget.cubit,);
                                                           },

@@ -32,9 +32,7 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   Stream<DataDanhSachChungModel> get streamData => dataDanhSachSubject.stream;
 
   void changeScreenMenu(TypeKetNoiMenu typeMenu) {
-    print(typeMenu.toString());
     changeItemMenuSubject.add(typeMenu);
-    print('end -=============');
   }
 
   Future<void> getDataTrongNuoc(TypeKetNoiMenu type) async {
@@ -81,8 +79,6 @@ class KetNoiCubit extends BaseCubit<BaseState> {
     required int pageSize,
     required String type,
   }) async {
-    showLoading();
-
     loadMorePage = pageIndex;
     final result = await repo.ketNoiListChung(pageIndex, pageSize, type);
     result.when(
