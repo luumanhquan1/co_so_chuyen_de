@@ -85,9 +85,10 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 onTap: () {
                   showDiaLog(
                     context,
-                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    textContent: S.current.xoa_chi_tiet_lich_hop,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
+                      cubit.deleteChiTietLichHop(widget.id);
                       Navigator.pop(context);
                     },
                     title: S.current.khong,

@@ -31,9 +31,12 @@ import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_state.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/edit_ket_luan_hop_screen.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/xem_ket_luan_hop_widget.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/timer/time_date_widget.dart';
 import 'package:get/get.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -51,22 +54,30 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   String? tenBieuQuyet;
   bool? loaiBieuQuyet;
   String? dateBieuQuyet;
-  List<String> dataTinhTrangKetLuanHop = [
-    S.current.trung_binh,
-    S.current.dat,
-    S.current.khong_dat,
-  ];
-  List<String> dataMauBienBan = [
-    S.current.mau_bien_ban_1,
-    S.current.mau_bien_ban_2,
-    S.current.mau_bien_ban_3,
-  ];
+  BehaviorSubject<List<String>> dataTinhTrangKetLuanHop =
+      BehaviorSubject.seeded([]);
+  BehaviorSubject<List<String>> dataMauBienBan = BehaviorSubject.seeded([]);
   List<String> dataThuhoi = ['thu hoi', 'thu hồi'];
   List<String> dataBocBang = ['boc bang', 'boc bang2'];
   List<PhienhopModel> phienHop = [];
   List<String> dataDropdown = ['1', '2', '3'];
+  BehaviorSubject<String> noiDung = BehaviorSubject();
+
+  List<String?> data = [];
+  HtmlEditorController? controller = keyEditKetLuanHop.currentState?.controller;
 
   //
+
+  void getValueMauBienBan(int value) {
+    noiDung.sink.add(data[value] ?? '');
+  }
+
+  String valueEdit = '';
+
+  String getTextAfterEdit(String value) {
+    noiDung.sink.add(value);
+    return value;
+  }
 
   final BehaviorSubject<List<YKienModel>> _listYKien =
       BehaviorSubject<List<YKienModel>>();
@@ -152,6 +163,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     await soLuongPhatBieuData(id: id);
     await getDanhSachPhienHop(id);
     await getDanhSachYKien(id);
+    await postChonMauHop();
+    await ListStatusKetLuanHop();
   }
 
   Future<void> postMoiHop({
@@ -256,6 +269,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   Future<void> getThongTinPhongHopApi() async {
+    showLoading();
     final result = await hopRp.getListThongTinPhongHop(id);
     result.when(
       success: (res) {
@@ -266,6 +280,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   Future<void> getDanhSachThietBi() async {
+    showLoading();
     final result = await hopRp.getListThietBiPhongHop(id);
     result.when(
         success: (res) {
@@ -276,6 +291,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   // danh sách phiên họp ý kiến cuộc họp
   Future<void> getDanhSachPhienHop(String id) async {
+    showLoading();
     final result = await hopRp.getTongPhienHop(id);
     result.when(
       success: (res) {
@@ -289,6 +305,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
 // gui y kien phien hop
   Future<void> themYKien({required String yKien, required String id}) async {
+    showLoading();
     final ThemYKienRequest themYKienRequest =
         ThemYKienRequest(content: yKien, scheduleId: id);
     final result = await hopRp.themYKienHop(themYKienRequest);
@@ -303,6 +320,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   // gui mail ket luan hop
   Future<void> sendMailKetLuatHop(String idSendmail) async {
+    showLoading();
     final result = await hopRp.sendMailKetLuanHop(idSendmail);
     result.when(
       success: (res) {},
@@ -327,6 +345,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> themBieuQuyetHop(
       {required String id, required String tenBieuQuyet}) async {
+    showLoading();
     final BieuQuyetRequest bieuQuyetRequest = BieuQuyetRequest(
       dateStart: dateBieuQuyet,
       lichHopId: id,
@@ -350,28 +369,33 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     );
   }
 
-  BehaviorSubject<ChonBienBanCuocHopModel> chonBienBanHopSubject =
-      BehaviorSubject();
-  ChonBienBanCuocHopModel chonBienBanCuocHopModel = ChonBienBanCuocHopModel();
-
-  Future<void> postChonMauHop({
-    required int pageIndex,
-    required int pageSize,
-  }) async {
+  Future<void> postChonMauHop() async {
     showLoading();
     final ChonBienBanHopRequest chonBienBanHopRequest =
-        ChonBienBanHopRequest(pageIndex, pageSize);
+        ChonBienBanHopRequest(1, 100);
     final result = await hopRp.postChonMauBienBanHop(chonBienBanHopRequest);
 
     result.when(
       success: (value) {
-        chonBienBanCuocHopModel = value;
-        chonBienBanHopSubject.sink.add(chonBienBanCuocHopModel);
+        dataMauBienBan.sink.add(value.items.map((e) => e.name).toList());
+        data = value.items.map((e) => e.content).toList();
       },
       error: (error) {},
     );
 
     showContent();
+  }
+
+  Future<void> ListStatusKetLuanHop() async {
+    showLoading();
+    final result = await hopRp.getListStatusKetLuanHop();
+
+    result.when(
+        success: (success) {
+          dataTinhTrangKetLuanHop.sink
+              .add(success.map((e) => e.displayName).toList());
+        },
+        error: (error) {});
   }
 
   void search(String text) {
@@ -612,6 +636,16 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
           _listYKien.sink.add(res);
         },
         error: (err) {});
+  }
+
+  Future<void> deleteKetLuanHop(String id) async {
+    final result = await hopRp.deleteKetLuanHop(id);
+    result.when(success: (res) {}, error: (err) {});
+  }
+
+  Future<void> deleteChiTietLichHop(String id) async {
+    final result = await hopRp.deleteKetLuanHop(id, 8, false);
+    result.when(success: (res) {}, error: (err) {});
   }
 
   void dispose() {}

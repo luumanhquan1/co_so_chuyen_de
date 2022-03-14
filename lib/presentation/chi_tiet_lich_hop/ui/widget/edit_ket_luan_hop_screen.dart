@@ -1,0 +1,90 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/button/double_button_bottom.dart';
+import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
+
+final keyEditKetLuanHop = GlobalKey<_EditKetLuanHopScreenState>();
+
+class EditKetLuanHopScreen extends StatefulWidget {
+  final DetailMeetCalenderCubit cubit;
+
+  const EditKetLuanHopScreen({Key? key, required this.cubit}) : super(key: key);
+
+  @override
+  _EditKetLuanHopScreenState createState() => _EditKetLuanHopScreenState();
+}
+
+class _EditKetLuanHopScreenState extends State<EditKetLuanHopScreen> {
+  final HtmlEditorController controller = HtmlEditorController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.cubit.controller = controller;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Scaffold(
+        appBar: BaseAppBar(
+          leadingIcon: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: AqiColor,
+              size: 20,
+            ),
+          ),
+          title: 'Sửa mẫu biên bản',
+          actions: [
+            IconButton(
+              onPressed: () async {
+                final getHtml = await controller.getText();
+                widget.cubit.getTextAfterEdit(getHtml);
+                Navigator.pop(context);
+              },
+              icon: SvgPicture.asset(
+                ImageAssets.icTickCircle,
+              ),
+            ),
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.9,
+            ),
+            child: SingleChildScrollView(
+              child: StreamBuilder<String>(
+                initialData: widget.cubit.xemKetLuanHopModel.content,
+                stream: widget.cubit.noiDung,
+                builder: (context, snapshot) {
+                  return HtmlEditor(
+                    controller: controller,
+                    htmlEditorOptions: HtmlEditorOptions(
+                      initialText: snapshot.data,
+                    ),
+                    otherOptions: OtherOptions(
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

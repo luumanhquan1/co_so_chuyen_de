@@ -58,7 +58,6 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final data = snapshot.data;
-
                       return ItemKetLuanHopWidget(
                         title: S.current.ket_luan_hop,
                         time: data?.thoiGian ?? '',
@@ -193,7 +192,9 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                           showDiaLogTablet(
                             context,
                             title: S.current.ket_luan_cuoc_hop,
-                            child: const XemKetLuanHopWidget(),
+                            child: XemKetLuanHopWidget(
+                              cubit: widget.cubit,
+                            ),
                             isBottomShow: false,
                             funcBtnOk: () {
                               Navigator.pop(context);
@@ -247,7 +248,8 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
                                 S.current.ban_co_chac_chan_muon_xoa_klh_nay,
                             btnLeftTxt: S.current.khong,
                             funcBtnRight: () {
-                              Navigator.pop(context);
+                              widget.cubit.deleteKetLuanHop(
+                                  widget.cubit.xemKetLuanHopModel.id ?? '');
                             },
                             title: S.current.xoa_ket_luan_hop,
                             btnRightTxt: S.current.dong_y,
@@ -265,49 +267,6 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
       ),
     );
   }
-}
-
-Widget itemListKetThuc({required String icon, required String name}) {
-  return Container(
-    width: 170,
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(child: SvgPicture.asset(icon)),
-        SizedBox(
-          width: 10.0.textScale(),
-        ),
-        Expanded(
-          flex: 7,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                textAlign: TextAlign.center,
-                style: textNormalCustom(
-                  color: textTitle,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14.0.textScale(),
-                ),
-              ),
-              SizedBox(
-                height: 14.0.textScale(),
-              ),
-              Container(
-                height: 1,
-                color: borderColor.withOpacity(0.5),
-              ),
-              SizedBox(
-                height: 14.0.textScale(),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
 }
 
 class ItemKetLuanHopWidget extends StatelessWidget {
@@ -375,7 +334,9 @@ class ItemKetLuanHopWidget extends StatelessWidget {
                           showBottomSheetCustom(
                             context,
                             title: S.current.ket_luan_cuoc_hop,
-                            child: const XemKetLuanHopWidget(),
+                            child: XemKetLuanHopWidget(
+                              cubit: cubit,
+                            ),
                           );
                         },
                       ),
@@ -425,7 +386,8 @@ class ItemKetLuanHopWidget extends StatelessWidget {
                                 S.current.ban_co_chac_chan_muon_xoa_klh_nay,
                             btnLeftTxt: S.current.khong,
                             funcBtnRight: () {
-                              Navigator.pop(context);
+                              cubit.deleteKetLuanHop(
+                                  cubit.xemKetLuanHopModel.id ?? '');
                             },
                             title: S.current.xoa_ket_luan_hop,
                             btnRightTxt: S.current.dong_y,

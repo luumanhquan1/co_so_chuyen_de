@@ -76,13 +76,14 @@ dependencies:
   injectable: ^1.4.1
   freezed: ^0.14.2
   tuple: ^2.0.0
+  html_editor_enhanced: ^2.4.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   retrofit_generator: any
   hive_generator:
-  build_runner:  #flutter pub run build_runner build --delete-conflicting-outputs
+  build_runner:  #flutter pub run build_runner build --delete-conflicting-outputsflutter pub run build_runner build --delete-conflicting-outputs
   json_serializable: ^4.1.0
   injectable_generator: ^1.4.1
   flutter_lints: ^1.0.0
