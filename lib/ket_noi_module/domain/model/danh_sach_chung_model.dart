@@ -15,9 +15,13 @@ class DataDanhSachChungModel {
     this.hasNextPage,
   });
 }
-List<String> subStringImage(String image){
-    return image.split(',',);
+
+List<String> subStringImage(String image) {
+  return image.split(
+    ',',
+  );
 }
+
 class DanhSachChungModel {
   String? id;
   String? tenSuKien;
