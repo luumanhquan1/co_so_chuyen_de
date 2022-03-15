@@ -1,6 +1,6 @@
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/config/resources/color.dart';
-import 'package:ccvc_mobile/tien_ich_module/config/resources/styles.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/menu_tien_ich_screen/ui/menu_item_tien_ich.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';

@@ -18,7 +18,7 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   BaoChiMangXaHoiImpl(this._baoChiMangXaHoiService);
 
   @override
-  Future<Result<ListDashBoardItemModel>> getDashBoardTatCaChuDe(
+  Future<Result<List<DashBoardItemTatCaChuDeModel>>> getDashBoardTatCaChuDe(
     int pageIndex,
     int pageSize,
     int total,
@@ -26,8 +26,8 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
     String fromDate,
     String toDate,
   ) {
-    return runCatchingAsync<DoashBoashTatCaChuDeResponse,
-        ListDashBoardItemModel>(
+    return runCatchingAsync<List<DashBoardTatCaChuDeResponse>,
+        List<DashBoardItemTatCaChuDeModel>>(
       () => _baoChiMangXaHoiService.getDashBoardTatCaChuDe(
         pageIndex,
         pageSize,
@@ -36,7 +36,7 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
         fromDate,
         toDate,
       ),
-      (res) => res.toDomain(),
+      (res) => res.map((e) => e.toDomain()).toList(),
     );
   }
 

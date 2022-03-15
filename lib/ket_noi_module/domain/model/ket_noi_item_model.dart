@@ -124,12 +124,14 @@ List<ItemKetNoiModel> listKetNoi2 = [
     typeMenu: TypeKetNoiMenu.QuocTes,
     type: TypeContainer.expand,
     listWidget: listQuocTe,
+    index: 3,
     onTap: (BuildContext context, KetNoiCubit cubit) {},
   ),
   ItemKetNoiModel(
     icon: '',
     typeMenu: TypeKetNoiMenu.TrongNuocs,
     type: TypeContainer.expand,
+    index: 3,
     listWidget: listTrongNuoc,
     onTap: (BuildContext context, KetNoiCubit cubit) {},
   ),
@@ -230,19 +232,18 @@ extension GetScreenMenu on TypeKetNoiMenu {
           break;
         }
     }
-  }
 
-  Widget getScreenMenu({required KetNoiCubit cubit}) {
-    return ListViewLoadMore(
-      cubit: cubit,
-      isListView: true,
-      callApi: (page) => {callApi(page, cubit)},
-      viewItem: (value, index) {
-        switch (this) {
-          case TypeKetNoiMenu.Chung:
-            return ItemListChung(
-              danhSachChungModel: value as DanhSachChungModel,
-            );
+    switch (this) {
+      case TypeKetNoiMenu.Chung:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
 
           case TypeKetNoiMenu.ChinhPhu:
             return ItemListTrongNuoc(
@@ -259,76 +260,51 @@ extension GetScreenMenu on TypeKetNoiMenu {
               model: value as ItemTrongNuocModel,
             );
 
-          default:
-            return ItemListChung(
-              danhSachChungModel: value as DanhSachChungModel,
-            );
-        }
-      },
-    );
-
-    // switch (this) {
-    //   case TypeKetNoiMenu.Chung:
-    //     return ListViewLoadMore(
-    //       cubit: cubit,
-    //       isListView: true,
-    //       callApi: (page) => {callApi(page, cubit)},
-    //       viewItem: (value, index) => ItemListChung(
-    //         danhSachChungModel: value as DanhSachChungModel,
-    //       ),
-    //     );
-    //
-    //   case TypeKetNoiMenu.ChinhPhu:
-    //     return ListViewLoadMore(
-    //       cubit: cubit,
-    //       isListView: true,
-    //       callApi: (page) => {callApi(page, cubit)},
-    //       viewItem: (value, index) => ItemListTrongNuoc(
-    //         model: value as ItemTrongNuocModel,
-    //       ),
-    //     );
-    //      case TypeKetNoiMenu.CacToChuc:
-    //     return ListViewLoadMore(
-    //       cubit: cubit,
-    //       isListView: true,
-    //       callApi: (page) => {callApi(page, cubit)},
-    //       viewItem: (value, index) => ItemListTrongNuoc(
-    //         model: value as ItemTrongNuocModel,
-    //       ),
-    //     );
-    //   case TypeKetNoiMenu.CacDonViHanhChinh:
-    //     return ListViewLoadMore(
-    //       cubit: cubit,
-    //       isListView: true,
-    //       callApi: (page) => {callApi(page, cubit)},
-    //       viewItem: (value, index) => ItemListTrongNuoc(
-    //         model: value as ItemTrongNuocModel,
-    //       ),
-    //     );
-    //
-    //   default :  return ListViewLoadMore(
-    //     cubit: cubit,
-    //     isListView: true,
-    //     callApi: (page) => {callApi(page, cubit)},
-    //     viewItem: (value, index) => ItemListChung(
-    //       danhSachChungModel: value as DanhSachChungModel,
-    //     ),
-    //   );
-    // }
+      default:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+    }
   }
 
   Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
-    return ListViewLoadMore(
-      cubit: cubit,
-      isListView: false,
-      checkRatio: 1.15,
-      callApi: (page) => {callApi(page, cubit)},
-      viewItem: (value, index) {
-        switch (this) {
-          case TypeKetNoiMenu.Chung:
-            return ItemListChung(
-              danhSachChungModel: value as DanhSachChungModel,
+    void callApi(int page) {
+      switch (this) {
+        case TypeKetNoiMenu.Chung:
+          {
+            cubit.getListChungKetNoi(
+              pageSize: cubit.pageSize,
+              pageIndex: page,
+              type: cubit.type,
             );
+
+            break;
+          }
+        case TypeKetNoiMenu.ChinhPhu:
+          {
+            break;
+          }
+      }
+    }
+
+    switch (this) {
+      case TypeKetNoiMenu.Chung:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: false,
+          checkRatio: 1.15,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
 
           case TypeKetNoiMenu.ChinhPhu:
             return ItemListTrongNuoc(
@@ -345,13 +321,18 @@ extension GetScreenMenu on TypeKetNoiMenu {
               model: value as ItemTrongNuocModel,
             );
 
-          default:
-            return ItemListChung(
-              danhSachChungModel: value as DanhSachChungModel,
-            );
-        }
-      },
-    );
+      default:
+        return ListViewLoadMore(
+          cubit: cubit,
+          checkRatio: 1.25,
+          isListView: false,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+    }
   }
 
   String getCategory() {
