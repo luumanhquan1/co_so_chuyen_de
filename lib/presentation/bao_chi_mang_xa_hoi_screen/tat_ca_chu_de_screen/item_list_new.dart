@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +9,9 @@ class ItemListNews extends StatelessWidget {
   final String image;
   final String title;
   final String date;
+  final String url;
 
-  const ItemListNews(this.image, this.title, this.date, {Key? key})
+  const ItemListNews(this.image, this.title, this.date, this.url, {Key? key})
       : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class ItemListNews extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child:Container(
+            child: Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10)),
               clipBehavior: Clip.antiAlias,
@@ -39,15 +41,26 @@ class ItemListNews extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: textNormalCustom(
-                    color: titleColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                GestureDetector(
+                  child: Text(
+                    title,
+                    style: textNormalCustom(
+                      color: titleColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            WebViewScreen(url: url, title: ''),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 10,

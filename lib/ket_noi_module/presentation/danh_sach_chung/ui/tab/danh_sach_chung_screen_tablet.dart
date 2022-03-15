@@ -1,6 +1,8 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/styles.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/tab/ket_noi_menu_tablet.dart';
@@ -30,63 +32,71 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: S.current.chung,
-        leadingIcon: IconButton(
-          onPressed: () => {Navigator.pop(context)},
-          icon: SvgPicture.asset(
-            ImageAssets.icBacks,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Container(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: SvgPicture.asset(
-                ImageAssets.ic_plus,
+    return StreamBuilder<TypeKetNoiMenu>(
+        stream: cubit.streamTypeKetNoiMenu,
+        builder: (context, snapshot) {
+          return Scaffold(
+            backgroundColor: bgWidgets,
+            appBar: BaseAppBar(
+              title:
+                  snapshot.data?.getTitle() ?? TypeKetNoiMenu.SuKien.getTitle(),
+              leadingIcon: IconButton(
+                onPressed: () => {Navigator.pop(context)},
+                icon: SvgPicture.asset(
+                  ImageAssets.icBacks,
+                ),
               ),
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => KetNoiMenuTablet(
-                    cubit: cubit,
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Container(
+                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                    child: SvgPicture.asset(
+                      ImageAssets.ic_plus,
+                    ),
                   ),
                 ),
-              );
-            },
-            icon: SvgPicture.asset(
-              ImageAssets.ic_mennu_ykien,
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => KetNoiMenuTablet(
+                          cubit: cubit,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: SvgPicture.asset(
+                    ImageAssets.ic_mennu_ykien,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 24, left: 30),
-            child: Text(
-              S.current.tin_noi_bat,
-              style: titleAppbar(
-                fontSize: 20,
-              ),
+            body: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 24, left: 30),
+                  child: Text(
+                    S.current.tin_noi_bat,
+                    style: titleAppbar(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: snapshot.data?.getScreenMenuTablet(cubit: cubit) ??
+                        _content(),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(left: 14, right: 14),
-              child: _content(),
-            ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 
   void callApi(int page) {
@@ -100,12 +110,13 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
   Widget _content() {
     return ListViewLoadMore(
       crossAxisSpacing: 28,
-      checkRatio: 1,
+      checkRatio: 1.25,
       cubit: cubit,
       isListView: false,
       callApi: (page) => {callApi(page)},
       viewItem: (value, index) => ItemListChung(
         danhSachChungModel: value as DanhSachChungModel,
+        index: index ?? 0,
       ),
     );
   }

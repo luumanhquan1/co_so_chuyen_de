@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/dialog/loading_loadmore.dart';
@@ -18,7 +19,7 @@ class ListViewLoadMore extends StatelessWidget {
   final double? checkRatio;
   final double? crossAxisSpacing;
 
-  ListViewLoadMore({
+  const ListViewLoadMore({
     Key? key,
     required this.cubit,
     required this.isListView,

@@ -55,6 +55,8 @@ class ImageAssets {
   static const String icDangThucHienQuaHan =
       '$baseImg/ic_dang_thuc_hien_qua_han.svg';
   static const String icHomeFocus = '$baseImg/ic_home.svg';
+  static const String icChinhPhu = '$baseImg/ic_chinh_phu.svg';
+  static const String icFax = '$baseImg/ic_fax.svg';
   static const String icHomeUnFocus = '$baseImg/ic_home_unfocus.svg';
   static const String icChartUnFocus = '$baseImg/ic_chart.svg';
   static const String icChartFocus = '$baseImg/ic_bao_cao.svg';
