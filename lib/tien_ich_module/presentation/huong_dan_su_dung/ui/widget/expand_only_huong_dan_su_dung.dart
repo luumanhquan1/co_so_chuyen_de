@@ -7,17 +7,15 @@ import 'package:flutter/material.dart';
 class ExpandOnlyHuongDanSuDung extends StatefulWidget {
   final String name;
   final Widget child;
-   bool? isTablet;
+  bool? isTablet;
 
-   ExpandOnlyHuongDanSuDung({
-    Key? key,
-    required this.name,
-    required this.child,
-    this.isTablet
-  }) : super(key: key);
+  ExpandOnlyHuongDanSuDung(
+      {Key? key, required this.name, required this.child, this.isTablet})
+      : super(key: key);
 
   @override
-  _ExpandOnlyHuongDanSuDungState createState() => _ExpandOnlyHuongDanSuDungState();
+  _ExpandOnlyHuongDanSuDungState createState() =>
+      _ExpandOnlyHuongDanSuDungState();
 }
 
 class _ExpandOnlyHuongDanSuDungState extends State<ExpandOnlyHuongDanSuDung> {
@@ -41,7 +39,9 @@ class _ExpandOnlyHuongDanSuDungState extends State<ExpandOnlyHuongDanSuDung> {
                 vertical: 10.5.textScale(space: 4),
               ),
               decoration: BoxDecoration(
-                color:widget.isTablet??false?backgroundColorApp: borderColor.withOpacity(0.1),
+                color: widget.isTablet ?? false
+                    ? backgroundColorApp
+                    : borderColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(color: borderColor.withOpacity(0.5)),
               ),
@@ -81,7 +81,6 @@ class _ExpandOnlyHuongDanSuDungState extends State<ExpandOnlyHuongDanSuDung> {
               ),
             ),
           ),
-
         ],
       ),
     );

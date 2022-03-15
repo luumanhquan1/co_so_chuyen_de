@@ -1,8 +1,13 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/bloc/huong_dan_su_dung_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/mobile/huong_dan_su_dung_detail_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/widget/expand_only_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/widget/item_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/provider_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/appbar/app_bar_default_back.dart';
@@ -44,71 +49,139 @@ class _HuongDanSuDungMobileState extends State<HuongDanSuDungMobile> {
             S.current.error,
           ),
           stream: cubit.stateStream,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: BaseSearchBar(
-                  hintText: S.current.tim_kiem_cau_hoi,
-                  onChange: (value) {},
-                ),
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    await cubit.loadData();
-                  },
-                  child: Center(
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: StreamBuilder<List<TopicHDSD>>(
-                        stream: cubit.getTopicHDSDStream,
-                        builder: (context, snapshot) {
-                          final data = snapshot.data ?? [];
-                          if (data.isNotEmpty) {
-                            return Padding(
-                              padding: const EdgeInsets.all(24.0),
-                              child: GridView.count(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
-                                childAspectRatio: 1.25,
-                                children: List.generate(data.length, (index) {
-                                  return ItemHuongDanSuDung(
-                                    url: data[index].toIcon(),
-                                    title: '${data[index].title}',
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HuongDanSuDungDetailMobile(
-                                            title: data[index].title ?? '',
-                                            id: data[index].id ?? '',
-                                            cubit: cubit,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }),
-                              ),
-                            );
+          child: StreamBuilder<bool>(
+              stream: cubit.selectSearchStream,
+              builder: (context, snapshot) {
+                final selectData = snapshot.data ?? false;
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: BaseSearchBar(
+                        hintText: S.current.tim_kiem_cau_hoi,
+                        onChange: (value) {
+                          cubit.searchAllDanhSach(value);
+                          if (value.isNotEmpty || value == null) {
+                            cubit.setSelectSearch(true);
                           } else {
-                            return Center(
-                              child: Text(S.current.no_data),
-                            );
+                            cubit.setSelectSearch(false);
                           }
                         },
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+                    if (!selectData)
+                      Expanded(
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            await cubit.loadData();
+                          },
+                          child: Center(
+                            child: SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: StreamBuilder<List<TopicHDSD>>(
+                                stream: cubit.getTopicHDSDStream,
+                                builder: (context, snapshot) {
+                                  final data = snapshot.data ?? [];
+                                  if (data.isNotEmpty) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(24.0),
+                                      child: GridView.count(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 20,
+                                        mainAxisSpacing: 20,
+                                        childAspectRatio: 1.25,
+                                        children:
+                                            List.generate(data.length, (index) {
+                                          return ItemHuongDanSuDung(
+                                            url: data[index].toIcon(),
+                                            title: '${data[index].title}',
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HuongDanSuDungDetailMobile(
+                                                    title:
+                                                        data[index].title ?? '',
+                                                    id: data[index].id ?? '',
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }),
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: NodataWidget(),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    else
+                      Expanded(
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            await cubit.loadData();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 16.0,
+                              left: 16.0,
+                              right: 16.0,
+                            ),
+                            child: SingleChildScrollView(
+                              child: StreamBuilder<List<DanhSachTitleHDSD>>(
+                                stream: cubit.getDanhSachTitleHDSDStream,
+                                builder: (context, snapshot) {
+                                  final data = snapshot.data ?? [];
+                                  return data.isEmpty
+                                      ? const Center(
+                                          child: NodataWidget(),
+                                        )
+                                      : ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: data.length,
+                                          itemBuilder: (context, index) {
+                                            return ExpandOnlyHuongDanSuDung(
+                                              name: data[index].title ?? '',
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${data[index].topic}',
+                                                    style: textNormalCustom(
+                                                      fontSize: 14.0,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: dateColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              }),
         ),
       ),
     );
