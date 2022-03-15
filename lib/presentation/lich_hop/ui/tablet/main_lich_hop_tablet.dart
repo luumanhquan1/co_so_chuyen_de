@@ -78,8 +78,22 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                         context: context,
                         screen: MyCalendarMenu(
                           cubit: cubit,
-                          theoDangLich: () {},
-                          TheoDangDanhSach: () {},
+                          theoDangLich: () {
+                            setState(() {
+                              cubit.chooseTypeList(
+                                Type_Choose_Option_List.DANG_LICH,
+                              );
+                              cubit.index.sink.add(0);
+                            });
+                          },
+                          TheoDangDanhSach: () {
+                            setState(() {
+                              cubit.chooseTypeList(
+                                Type_Choose_Option_List.DANG_LIST,
+                              );
+                              cubit.index.sink.add(0);
+                            });
+                          },
                         ),
                       );
                     },

@@ -4,4 +4,5 @@ class ApiConstants {
   static const int NOT_SAVED_ID = -1;
   static const int TIME_OUT = 30;
   static const KETNOI = '/api/CmsNews/ketnoi/danhsach-sukien';
+  static const DETAIL_KETNOI = '/api/CmsNews/ketnoi/get-su-kien-by-id';
 }

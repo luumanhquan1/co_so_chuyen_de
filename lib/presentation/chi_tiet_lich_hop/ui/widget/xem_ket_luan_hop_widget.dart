@@ -17,7 +17,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'chon_ngay_widget.dart';
 import 'edit_ket_luan_hop_screen.dart';
 
-
 class XemKetLuanHopWidget extends StatefulWidget {
   final DetailMeetCalenderCubit cubit;
 
@@ -120,16 +119,17 @@ class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
                     ),
                     child: SingleChildScrollView(
                       child: StreamBuilder<String>(
-                          stream: widget.cubit.noiDung,
-                          builder: (context, snapshot) {
-                            return widget.cubit.valueEdit != snapshot.data
-                                ? Html(
-                                    data: snapshot.data ?? '',
-                                  )
-                                : Html(
-                                    data: widget.cubit.valueEdit ?? '',
-                                  );
-                          }),
+                        stream: widget.cubit.noiDung,
+                        builder: (context, snapshot) {
+                          return widget.cubit.valueEdit != snapshot.data
+                              ? Html(
+                                  data: snapshot.data ?? '',
+                                )
+                              : Html(
+                                  data: widget.cubit.valueEdit,
+                                );
+                        },
+                      ),
                     ),
                   ),
                 ),

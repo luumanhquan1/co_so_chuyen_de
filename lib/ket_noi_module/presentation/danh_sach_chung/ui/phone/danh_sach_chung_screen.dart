@@ -89,6 +89,7 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
       callApi: (page) => {callApi(page)},
       viewItem: (value, index) => ItemListChung(
         danhSachChungModel: value as DanhSachChungModel,
+        index: index ?? 0,
       ),
     );
   }

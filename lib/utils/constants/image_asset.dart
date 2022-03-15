@@ -248,6 +248,8 @@ class ImageAssets {
   static const String icBaoChiTablet = '$baseImg/ic_bao_chi_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
   static const String ic_gui_y_kien = '$baseImg/icon_send.svg';
+  static const String Group3 = '$baseImg/Group3.svg';
+
 
   //
   static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';

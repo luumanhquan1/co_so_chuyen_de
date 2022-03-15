@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/ket_noi_module/data/response/detail_chung_ket_noi_response.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/response/list_chung_ket_noi_response.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -17,5 +18,11 @@ abstract class KetNoiService {
     @Query('pageIndex') int pageIndex,
     @Query('pageSize') int pageSize,
     @Query('type') String type,
+  );
+
+  @GET(ApiConstants.DETAIL_KETNOI)
+  @FormUrlEncoded()
+  Future<DetailKetNoiResponse> getDetailChungKetNoi(
+    @Query('id') String id,
   );
 }

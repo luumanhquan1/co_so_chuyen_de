@@ -230,6 +230,7 @@ extension GetScreenMenu on TypeKetNoiMenu {
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
           ),
         );
 
@@ -261,6 +262,7 @@ extension GetScreenMenu on TypeKetNoiMenu {
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
           ),
         );
     }
@@ -295,6 +297,7 @@ extension GetScreenMenu on TypeKetNoiMenu {
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
           ),
         );
 
@@ -328,6 +331,7 @@ extension GetScreenMenu on TypeKetNoiMenu {
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
           ),
         );
     }
