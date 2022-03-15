@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_menu.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_tablet_menu.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -71,6 +72,26 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                                         icon: e.icon,
                                         name: e.typeMenu.getTitle(),
                                         index: e.index ?? 0,
+                                        type: TypeContainer.expand,
+                                        childExpand: Column(
+                                          children: e.listWidget
+                                                  ?.map(
+                                                    (e) =>
+                                                        ContainerKetNoiTablet(
+                                                      icon: e.icon,
+                                                      name:
+                                                          e.typeMenu.getTitle(),
+                                                      index: e.index ?? 0,
+                                                      isIcon: false,
+                                                      onTap: () {
+                                                        e.onTap(context,
+                                                            widget.cubit);
+                                                      },
+                                                    ),
+                                                  )
+                                                  .toList() ??
+                                              [Container()],
+                                        ),
                                         isIcon: false,
                                         onTap: () {
                                           e.onTap(context, widget.cubit);
