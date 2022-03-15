@@ -34,7 +34,7 @@ class HeaderMenuWidget extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.asset(urlBackGround),
+              Image.asset(urlBackGround,fit: BoxFit.fill,),
                Container(
                  height: 170,
                  width: double.infinity,
