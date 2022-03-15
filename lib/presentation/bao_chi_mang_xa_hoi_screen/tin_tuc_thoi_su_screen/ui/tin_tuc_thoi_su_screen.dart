@@ -27,11 +27,13 @@ class TinTucThoiSuScreen extends StatefulWidget {
 }
 
 class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
+
   dropDown? valueChoose = dropDown.tinRadio;
 
   @override
   void initState() {
     widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
+    widget.tinTucThoiSuBloc.getListTinTucThoiSu('2022/02/12 00:00:00', '2022/03/14 23:59:59');
   }
 
   @override
@@ -165,11 +167,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                           );
 
                         default:
-                          return ItemTinRadio(
-                            'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
-                            'Bản tin trưa ngày 29 tháng 1 năm 2021',
-                            '5/11/2021  9:10:03 PM',
-                          );
+                          return const SizedBox();
                       }
                     },
                   );
