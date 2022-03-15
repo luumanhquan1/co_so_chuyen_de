@@ -4,22 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'dash_board_tat_ca_chu_de_response.g.dart';
 
 @JsonSerializable()
-class DoashBoashTatCaChuDeResponse {
-  List<DataResponseDoashBoashTatCaChuDe>? listDashBoardTatCaChuDe;
-  DoashBoashTatCaChuDeResponse(this.listDashBoardTatCaChuDe);
-  factory DoashBoashTatCaChuDeResponse.fromJson(Map<String, dynamic> json) =>
-      _$DoashBoashTatCaChuDeResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DoashBoashTatCaChuDeResponseToJson(this);
-
-  ListDashBoardItemModel toDomain() => ListDashBoardItemModel(
-        listDashBoardItem:
-            listDashBoardTatCaChuDe?.map((e) => e.toDomain()).toList()??[],
-      );
-}
-
-@JsonSerializable()
-class DataResponseDoashBoashTatCaChuDe {
+class DashBoardTatCaChuDeResponse {
   @JsonKey(name: 'sourceId')
   int? sourceId;
   @JsonKey(name: 'sourceTitle')
@@ -27,18 +12,18 @@ class DataResponseDoashBoashTatCaChuDe {
   @JsonKey(name: 'total')
   int? total;
 
-  DataResponseDoashBoashTatCaChuDe(this.sourceId, this.sourceTitle, this.total);
+  DashBoardTatCaChuDeResponse(this.sourceId, this.sourceTitle, this.total);
 
-  factory DataResponseDoashBoashTatCaChuDe.fromJson(
+  factory DashBoardTatCaChuDeResponse.fromJson(
           Map<String, dynamic> json) =>
-      _$DataResponseDoashBoashTatCaChuDeFromJson(json);
+      _$DashBoardTatCaChuDeResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
-      _$DataResponseDoashBoashTatCaChuDeToJson(this);
+      _$DashBoardTatCaChuDeResponseToJson(this);
 
   DashBoardItemTatCaChuDeModel toDomain() => DashBoardItemTatCaChuDeModel(
-        sourceId: sourceId,
-        sourceTitle: sourceTitle,
-        total: total,
+        sourceId: sourceId??0,
+        sourceTitle: sourceTitle??'',
+        total: total??0,
       );
 }

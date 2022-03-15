@@ -6,6 +6,8 @@ class ChuDeModel {
   String? url;
   String? addressId;
   String? publishedTime;
+  String? contents;
+
 
   ChuDeModel({
     this.id,
@@ -15,6 +17,7 @@ class ChuDeModel {
     this.url,
     this.addressId,
     this.publishedTime,
+    this.contents,
   });
 }
 
