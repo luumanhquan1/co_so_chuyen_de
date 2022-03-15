@@ -93,6 +93,9 @@ class _HuongDanSuDungDetailMobileState
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
                                   return ExpandOnlyHuongDanSuDung(
+                                    onTap: (){
+
+                                    },
                                     name: data[index].title ?? '',
                                     child: Column(
                                       crossAxisAlignment:

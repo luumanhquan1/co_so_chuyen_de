@@ -159,6 +159,9 @@ class _HuongDanSuDungTabletState extends State<HuongDanSuDungTablet> {
                                         itemBuilder: (context, index) {
                                           return
                                             ExpandOnlyHuongDanSuDung(
+                                              onTap: ()async{
+                                                await cubit.getDetailDanhSachHuongDanSuDung(data[index].id??'');
+                                              },
                                             isTablet: true,
                                             name: data[index].title ?? '',
                                             child: Column(

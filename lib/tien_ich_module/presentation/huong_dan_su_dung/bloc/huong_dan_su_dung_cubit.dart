@@ -88,6 +88,17 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
       error: (error) {},
     );
   }
+  Future<void> getDetailDanhSachHuongDanSuDung(String id) async{
+    showLoading();
+    final result = await tienIchRep.getDetailHuongDanSuDung(id);
+    result.when(
+      success: (res) {
+
+        showContent();
+      },
+      error: (error) {},
+    );
+  }
 
   void searchAllDanhSach(String values) {
     final searchTxt = values.trim().toLowerCase().vietNameseParse();

@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_sach_hssd_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/detail_huong_dan_su_dung_response.dart';
 
 part 'tien_ich_service.g.dart';
 
@@ -24,7 +25,8 @@ abstract class TienIchService {
       @Query('searchKeyword') String searchKeyword,
       );
 
-
-
-
+  @GET(ApiConstants.GET_DETAIL_HUONG_DAN_SU_DUNG)
+  Future<DetailHuongDanSuDungResponse> getDetailHuongDanSuDung(
+    @Query('id') String id,
+  );
 }

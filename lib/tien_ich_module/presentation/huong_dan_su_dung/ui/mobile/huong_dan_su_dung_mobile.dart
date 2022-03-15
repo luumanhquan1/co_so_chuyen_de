@@ -153,22 +153,30 @@ class _HuongDanSuDungMobileState extends State<HuongDanSuDungMobile> {
                                           shrinkWrap: true,
                                           itemCount: data.length,
                                           itemBuilder: (context, index) {
-                                            return ExpandOnlyHuongDanSuDung(
-                                              name: data[index].title ?? '',
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    '${data[index].topic}',
-                                                    style: textNormalCustom(
-                                                      fontSize: 14.0,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: dateColor,
+                                            return GestureDetector(
+                                              onTap: ()async{
+                                                await cubit.getDetailDanhSachHuongDanSuDung(data[index].topic??'');
+                                              },
+                                              child: ExpandOnlyHuongDanSuDung(
+                                                onTap: (){
+
+                                                },
+                                                name: data[index].title ?? '',
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '${data[index].topic}',
+                                                      style: textNormalCustom(
+                                                        fontSize: 14.0,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: dateColor,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             );
                                           },

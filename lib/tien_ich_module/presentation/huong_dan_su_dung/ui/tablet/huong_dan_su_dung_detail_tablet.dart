@@ -123,6 +123,9 @@ class _HuongDanSuDungDetailTabletState extends State<HuongDanSuDungDetailTablet>
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return ExpandOnlyHuongDanSuDung(
+                              onTap: (){
+
+                              },
                               isTablet: true,
                               name: data[index].title ?? '',
                               child: Column(
