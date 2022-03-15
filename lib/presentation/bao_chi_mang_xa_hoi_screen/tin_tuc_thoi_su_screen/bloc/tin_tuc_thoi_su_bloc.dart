@@ -1,18 +1,22 @@
+
+import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/domain/repository/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_repository.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_state.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
-class TinTucThoiSuBloc {
+class TinTucThoiSuBloc extends BaseCubit<TinTucThoiSuState> {
+
+  TinTucThoiSuBloc() : super(TinTucThoiSuStateInitial());
   BehaviorSubject<int> dropDownSubject = BehaviorSubject.seeded(1);
+  final BehaviorSubject<TinTucRadioResponseModel> _listTinTucRadio =
+  BehaviorSubject<TinTucRadioResponseModel>();
+  Stream<TinTucRadioResponseModel> get listTinTucRadio =>
+      _listTinTucRadio.stream;
 
-  final BehaviorSubject<List<TinTucThoiSuModel>> _listTinTucThoiSu =
-  BehaviorSubject<List<TinTucThoiSuModel>>();
-
-  Stream<List<TinTucThoiSuModel>> get listTinTucThoiSu =>
-      _listTinTucThoiSu.stream;
 
 
   Stream<int> get dropDownStream => dropDownSubject.stream;
@@ -41,24 +45,23 @@ class TinTucThoiSuBloc {
 
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
 
-  Future<void> getListTinTucThoiSu(String startDate, String enDate) async {
+  Future<void> getListTinTucRadio(String startDate, String enDate) async {
+   showLoading();
     final result = await _BCMXHRepo.getTinTucThoiSu(
       1,
       30,
       startDate,
       enDate,
-      918,
+      -1,
     );
     result.when(
       success: (res) {
-        final result = res;
-        // _listTinTucThoiSu.sink.add(result);
-        print('--------------------------------- thanh cong----------------------');
+        _listTinTucRadio.sink.add(res);
       },
       error: (err) {
-        print('---------------------------------that bai-------------------------');
         return;
       },
     );
+    showContent();
   }
 }

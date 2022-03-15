@@ -1,17 +1,17 @@
 
-class TinTucThoiSuResponseModel{
-  final List<TinTucThoiSuModel>listTinTucThoiSu;
-  TinTucThoiSuResponseModel({required this.listTinTucThoiSu});
+class TinTucRadioResponseModel{
+  final List<TinTucRadioModel>listTinTucThoiSu;
+  TinTucRadioResponseModel({required this.listTinTucThoiSu});
 }
 
-class TinTucThoiSuModel {
+class TinTucRadioModel {
   final String title;
   final String content;
   final String publishedTime;
   final String audioUrl;
   final double audioDuration;
 
-  TinTucThoiSuModel(
+  TinTucRadioModel(
       {required this.title,
       required this.content,
       required this.publishedTime,

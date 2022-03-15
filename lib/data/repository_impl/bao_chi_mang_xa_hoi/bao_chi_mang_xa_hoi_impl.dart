@@ -94,9 +94,9 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   }
 
   @override
-  Future<Result<TinTucThoiSuResponseModel>> getTinTucThoiSu(
+  Future<Result<TinTucRadioResponseModel>> getTinTucThoiSu(
       int pageIndex, int pageSize, String fromDate, String toDate, int topic) {
-    return runCatchingAsync<String, TinTucThoiSuResponseModel>(
+    return runCatchingAsync<String, TinTucRadioResponseModel>(
           () => _baoChiMangXaHoiService.getTinTucThoiSu(
         pageIndex,
         pageSize,
@@ -105,6 +105,7 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
         topic,
       ),
           (res) => TinTucThoiSuResponse.fromJson(json.decode(res)).toDomain(),
+
     );
   }
 }

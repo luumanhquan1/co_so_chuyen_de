@@ -19,11 +19,12 @@ class TinTucThoiSuResponse {
      for (final element in json) {
        data.add(TinTucThoiSuData.fromJson(element));
      }
+     listTinTucThoiSu=data;
    }
 
   Map<String, dynamic> toJson() => _$TinTucThoiSuResponseToJson(this);
 
-  TinTucThoiSuResponseModel toDomain() => TinTucThoiSuResponseModel(
+  TinTucRadioResponseModel toDomain() => TinTucRadioResponseModel(
       listTinTucThoiSu: listTinTucThoiSu?.map((e) => e.toDomain()).toList()??[],
       );
 }
@@ -54,7 +55,7 @@ class TinTucThoiSuData {
 
   Map<String, dynamic> toJson() => _$TinTucThoiSuDataToJson(this);
 
-  TinTucThoiSuModel toDomain() => TinTucThoiSuModel(
+  TinTucRadioModel toDomain() => TinTucRadioModel(
         title: title ?? '',
         content: content ?? '',
         publishedTime: publishedTime ?? '',

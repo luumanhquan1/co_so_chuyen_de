@@ -35,7 +35,7 @@ mixin BaoChiMangXaHoiRepository {
 
   Future<Result<List<ListMenuItemModel>>> getMenuBCMXH();
 
-  Future<Result<TinTucThoiSuResponseModel>> getTinTucThoiSu(
+  Future<Result<TinTucRadioResponseModel>> getTinTucThoiSu(
       int pageIndex,
       int pageSize,
       String fromDate,
