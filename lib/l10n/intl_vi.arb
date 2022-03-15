@@ -660,7 +660,13 @@
   "cac_co_quan_khac": "Các cơ quan khác",
   "cac_to_chuc": "Các tổ chức",
   "chinh_phu": "Chính phủ",
-  "cac_don_vi_hanh_chinh": "Các đơn vị hành chính"
+  "cac_don_vi_hanh_chinh": "Các đơn vị hành chính",
+  "tao_su_kien": "Tạo sự kiện",
+  "nhap_ten_chuong_trinh": "Nhập tên chương trình",
+  "loai_bai_viet": "Loại bài viết",
+  "id_viber": "ID Viber",
+  "id_meeting": "ID Meeting",
+  "zoom": "Zoom"
 }
 
 
