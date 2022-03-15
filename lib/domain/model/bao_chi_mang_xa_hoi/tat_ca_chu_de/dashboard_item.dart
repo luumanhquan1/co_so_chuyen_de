@@ -1,19 +1,13 @@
-class ListDashBoardItemModel{
-  List<DashBoardItemTatCaChuDeModel>? listDashBoardItem;
-
-  ListDashBoardItemModel({this.listDashBoardItem});
-}
 
 class DashBoardItemTatCaChuDeModel {
-  int? sourceId;
-  String? sourceTitle;
-  int? total;
+  int sourceId;
+  String sourceTitle;
+  int total;
 
   DashBoardItemTatCaChuDeModel({
-    this.sourceId,
-    this.sourceTitle,
-    this.total,
+    required this.sourceId,
+    required this.sourceTitle,
+    required this.total,
   });
 }
-class ChuDeDashBoardModel{
-}
+

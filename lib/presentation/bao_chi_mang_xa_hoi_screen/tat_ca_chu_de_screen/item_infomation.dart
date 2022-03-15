@@ -5,25 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ItemInfomation extends StatelessWidget {
-  final String image;
-  final Color color;
-  final String title;
-  final String index;
+  final ItemInfomationModel infomationModel;
 
-  const ItemInfomation(
-      {Key? key,
-      required this.image,
-      required this.color,
-      required this.title,
-      required this.index})
-      : super(key: key);
+  const ItemInfomation({
+    Key? key,
+    required this.infomationModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SvgPicture.asset(
-          image,
+          infomationModel.image,
           fit: BoxFit.cover,
         ),
         const SizedBox(
@@ -33,20 +27,42 @@ class ItemInfomation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,
-                style: textNormalCustom(
-                    color: unselectLabelColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,),),
-            const SizedBox(height: 5,),
             Text(
-              index,
+              infomationModel.title,
               style: textNormalCustom(
-                  color: color, fontSize: 26, fontWeight: FontWeight.w700,),
+                color: unselectLabelColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              infomationModel.index,
+              style: textNormalCustom(
+                color: infomationModel.color,
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
             )
           ],
         )
       ],
     );
   }
+}
+
+class ItemInfomationModel {
+  final String image;
+  final Color color;
+  final String title;
+  final String index;
+
+  const ItemInfomationModel({
+    required this.image,
+    required this.color,
+    required this.title,
+    required this.index,
+  });
 }

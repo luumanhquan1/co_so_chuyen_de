@@ -1,7 +1,4 @@
-// class MenuModel{
-//   List<ListMenuItemModel>listData;
-//   MenuModel({required this.listData});
-// }
+
 class ListMenuItemModel{
   String id;
   String title;
