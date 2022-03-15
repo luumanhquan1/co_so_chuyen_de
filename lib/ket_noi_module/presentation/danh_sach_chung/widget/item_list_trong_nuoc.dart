@@ -50,42 +50,44 @@ class _ItemListTrongNuocState extends State<ItemListTrongNuoc> {
             width: 18.0.textScale(space: 10),
           ),
           Expanded(
-            child: Column(
-              children: [
-                rowData(
-                  image: ImageAssets.icChinhPhu,
-                  value: widget.model.tenCoQuanLienHe ??
-                      S.current.khong_co_du_lieu,
-                ),
-                SizedBox(
-                  height: 8.0.textScale(space: 20),
-                ),
-                rowData(
-                  image: ImageAssets.icViTri,
-                  value: widget.model.diaChi ?? S.current.khong_co_du_lieu,
-                ),
-                SizedBox(
-                  height: 8.0.textScale(space: 20),
-                ),
-                rowData(
-                  image: ImageAssets.icCalling,
-                  value: widget.model.sdt ?? S.current.khong_co_du_lieu,
-                ),
-                SizedBox(
-                  height: 8.0.textScale(space: 20),
-                ),
-                rowData(
-                  image: ImageAssets.ic_email,
-                  value: widget.model.email ?? S.current.khong_co_du_lieu,
-                ),
-                SizedBox(
-                  height: 8.0.textScale(space: 20),
-                ),
-                rowData(
-                  image: ImageAssets.icFax,
-                  value: widget.model.fax ?? S.current.khong_co_du_lieu,
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  rowData(
+                    image: ImageAssets.icChinhPhu,
+                    value: widget.model.tenCoQuanLienHe ??
+                        S.current.khong_co_du_lieu,
+                  ),
+                  SizedBox(
+                    height: 8.0.textScale(space: 20),
+                  ),
+                  rowData(
+                    image: ImageAssets.icViTri,
+                    value: widget.model.diaChi ?? S.current.khong_co_du_lieu,
+                  ),
+                  SizedBox(
+                    height: 8.0.textScale(space: 20),
+                  ),
+                  rowData(
+                    image: ImageAssets.icCalling,
+                    value: widget.model.sdt ?? S.current.khong_co_du_lieu,
+                  ),
+                  SizedBox(
+                    height: 8.0.textScale(space: 20),
+                  ),
+                  rowData(
+                    image: ImageAssets.ic_email,
+                    value: widget.model.email ?? S.current.khong_co_du_lieu,
+                  ),
+                  SizedBox(
+                    height: 8.0.textScale(space: 20),
+                  ),
+                  rowData(
+                    image: ImageAssets.icFax,
+                    value: widget.model.fax ?? S.current.khong_co_du_lieu,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

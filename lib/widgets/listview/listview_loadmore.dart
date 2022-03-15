@@ -48,9 +48,17 @@ class ListViewLoadMore extends StatelessWidget {
     }
   }
 
+  Future<void> initData() async {
+    cubit.loadMorePage = ApiConstants.PAGE_BEGIN;
+    cubit.loadMoreRefresh = true;
+    cubit.loadMoreLoading = true;
+    await callApi(cubit.loadMorePage);
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    refreshPosts();
+    initData();
     return BlocConsumer(
       bloc: cubit,
       listener: (ctx, state) {
@@ -107,30 +115,30 @@ class ListViewLoadMore extends StatelessWidget {
                         AsyncSnapshot<List<dynamic>> snapshot) {
                       return isListView == true
                           ? ListView.builder(
-                              itemCount: snapshot.data?.length ?? 0,
-                              itemBuilder: (ctx, index) {
+                        itemCount: snapshot.data?.length ?? 0,
+                        itemBuilder: (ctx, index) {
                                 return viewItem(snapshot.data![index], index);
-                              },
-                            )
+                        },
+                      )
                           : GridView.builder(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 16,
-                                bottom: 32,
-                              ),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 16,
-                                crossAxisSpacing: crossAxisSpacing ?? 16,
-                                childAspectRatio: checkRatio ?? 2 / 3,
-                              ),
-                              itemCount: snapshot.data?.length ?? 0,
-                              itemBuilder: (_, index) {
-                                return viewItem(snapshot.data![index], index);
-                              },
-                            );
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 16,
+                          bottom: 32,
+                        ),
+                        gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: crossAxisSpacing ?? 16,
+                          childAspectRatio: checkRatio ?? 2 / 3,
+                        ),
+                        itemCount: snapshot.data?.length ?? 0,
+                        itemBuilder: (_, index) {
+                          return viewItem(snapshot.data![index], index);
+                        },
+                      );
                     },
                   ),
                   Positioned(

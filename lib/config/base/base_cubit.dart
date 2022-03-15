@@ -10,8 +10,8 @@ abstract class BaseCubit<BaseState> extends BlocBase<BaseState> {
 
   final List<dynamic> loadMoreList = [];
 
-  final StreamController<List<dynamic>> loadMoreListController =
-      StreamController.broadcast();
+  final BehaviorSubject<List<dynamic>> loadMoreListController =
+      BehaviorSubject();
 
   Stream<List<dynamic>> get loadMoreListStream => loadMoreListController.stream;
 
