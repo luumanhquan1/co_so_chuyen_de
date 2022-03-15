@@ -21,10 +21,10 @@ class TienIchRepositoryImpl implements TienIchRepository {
 
   @override
   Future<Result<DataDanhSachTitleHDSD>> getDanhSachHDSD(
-      int pageIndex, int pageSize, String type, String searchKeyword) {
+      int pageIndex, int pageSize,String topicId, String type, String searchKeyword) {
     return runCatchingAsync<DataDanhSachHDSDResponse, DataDanhSachTitleHDSD>(
         () => _tienIchService.getDanhSachHDSD(
-            pageIndex, pageSize, type, searchKeyword),
+            pageIndex, pageSize, topicId, type, searchKeyword),
         (response) =>
             response.data?.toModel() ?? DataDanhSachTitleHDSD.empty());
   }

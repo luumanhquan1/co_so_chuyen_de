@@ -19,30 +19,31 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
   BehaviorSubject<List<TopicHDSD>> topicHDSDSubject = BehaviorSubject();
 
   Stream<List<TopicHDSD>> get getTopicHDSDStream => topicHDSDSubject.stream;
+
+  //danh sach all
   List<DanhSachTitleHDSD> dataDanhSachTitleHDSD = [];
 
   BehaviorSubject<List<DanhSachTitleHDSD>> danhSachTitleHDSDSubject =
-      BehaviorSubject.seeded([
-    DanhSachTitleHDSD(
-        title: 'Làm cách nào để tôi có thể xem được các báo cáo khác nhau?',
-        topic:
-            'Các báo cáo được hiển thị theo quyền hạn được thiết lập theo phòng ban, chức vụ của tài khoản đang đăng nhập nhằm kiểm soát vùng dữ liệu được phép sử dụng.'),
-    DanhSachTitleHDSD(
-        title: 'Làm cách nào để tôi có thể xem được các báo cáo khác nhau?',
-        topic:
-            'Các báo cáo được hiển thị theo quyền hạn được thiết lập theo phòng ban, chức vụ của tài khoản đang đăng nhập nhằm kiểm soát vùng dữ liệu được phép sử dụng.'),
-    DanhSachTitleHDSD(
-        title: 'Làm cách nào để tôi có thể xem được các báo cáo khác nhau?',
-        topic:
-            'Các báo cáo được hiển thị theo quyền hạn được thiết lập theo phòng ban, chức vụ của tài khoản đang đăng nhập nhằm kiểm soát vùng dữ liệu được phép sử dụng.'),
-    DanhSachTitleHDSD(
-        title: 'Làm cách nào để tôi có thể xem được các báo cáo khác nhau?',
-        topic:
-            'Các báo cáo được hiển thị theo quyền hạn được thiết lập theo phòng ban, chức vụ của tài khoản đang đăng nhập nhằm kiểm soát vùng dữ liệu được phép sử dụng.'),
-  ]);
+      BehaviorSubject();
 
   Stream<List<DanhSachTitleHDSD>> get getDanhSachTitleHDSDStream =>
       danhSachTitleHDSDSubject.stream;
+
+  //danh sach detail
+  List<DanhSachTitleHDSD> danhSachTitleHDSDDetail = [];
+  BehaviorSubject<List<DanhSachTitleHDSD>> danhSachTitleHDSDDetailSubject =
+      BehaviorSubject();
+
+  Stream<List<DanhSachTitleHDSD>> get getDanhSachTitleDetailHDSDStream =>
+      danhSachTitleHDSDDetailSubject.stream;
+
+  final BehaviorSubject<bool> selectSearch = BehaviorSubject.seeded(false);
+
+  Stream<bool> get selectSearchStream => selectSearch.stream;
+
+  void setSelectSearch(bool data) {
+    selectSearch.sink.add(data);
+  }
 
   Future<void> loadData() async {
     final queue = Queue(parallel: 2);
@@ -65,26 +66,55 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
   }
 
   Future<void> getDanhSachHDSD() async {
-    final result = await tienIchRep.getDanhSachHDSD(1, 1000, '', '');
+    final result = await tienIchRep.getDanhSachHDSD(1, 1000, '', '', '');
     result.when(
       success: (res) {
-        danhSachTitleHDSDSubject.add(res.pageData?.toList() ?? []);
+        dataDanhSachTitleHDSD = res.pageData ?? [];
+        danhSachTitleHDSDSubject.add(dataDanhSachTitleHDSD);
       },
       error: (error) {},
     );
   }
 
-  void search(String values) {
+  Future<void> getDanhSachHDSDDetail(String idTopic) async {
+    showLoading();
+    final result = await tienIchRep.getDanhSachHDSD(1, 1000, idTopic, '', '');
+    result.when(
+      success: (res) {
+        danhSachTitleHDSDDetail = res.pageData ?? [];
+        danhSachTitleHDSDDetailSubject.add(danhSachTitleHDSDDetail);
+        showContent();
+      },
+      error: (error) {},
+    );
+  }
+
+  void searchAllDanhSach(String values) {
     final searchTxt = values.trim().toLowerCase().vietNameseParse();
     bool isListDanhSach(DanhSachTitleHDSD titleHDSD) {
-      print(titleHDSD.title);
       return titleHDSD.title!
           .toLowerCase()
           .vietNameseParse()
           .contains(searchTxt);
     }
+
     final value =
         dataDanhSachTitleHDSD.where((event) => isListDanhSach(event)).toList();
     danhSachTitleHDSDSubject.add(value);
+  }
+
+  void searchDanhSachDetail(String values) {
+    final searchTxt = values.trim().toLowerCase().vietNameseParse();
+    bool isListDanhSach(DanhSachTitleHDSD titleHDSD) {
+      return titleHDSD.title!
+          .toLowerCase()
+          .vietNameseParse()
+          .contains(searchTxt);
+    }
+
+    final value = danhSachTitleHDSDDetail
+        .where((event) => isListDanhSach(event))
+        .toList();
+    danhSachTitleHDSDDetailSubject.add(value);
   }
 }

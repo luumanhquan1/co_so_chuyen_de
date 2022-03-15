@@ -19,6 +19,7 @@ abstract class TienIchService {
   Future<DataDanhSachHDSDResponse> getDanhSachHDSD(
       @Query('pageIndex')     int pageIndex,
       @Query('pageSize')      int pageSize ,
+      @Query('topicId')       String topicId,
       @Query('type')          String type,
       @Query('searchKeyword') String searchKeyword,
       );

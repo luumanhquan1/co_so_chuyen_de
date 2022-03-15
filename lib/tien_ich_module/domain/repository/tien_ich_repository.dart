@@ -9,6 +9,7 @@ mixin TienIchRepository {
   Future<Result<DataDanhSachTitleHDSD>> getDanhSachHDSD(
       int pageIndex,
       int pageSize ,
+      String topicId,
       String type,
       String searchKeyword,
       );
