@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,9 @@ class HotNews extends StatelessWidget {
   final String title;
   final String date;
   final String content;
+  final String url;
 
-  const HotNews(this.image, this.title, this.date, this.content, {Key? key})
+  const HotNews(this.image, this.title, this.date, this.content,this.url, {Key? key})
       : super(key: key);
 
   @override
@@ -30,14 +32,25 @@ class HotNews extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          title,
-          style: textNormalCustom(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: titleCalenderWork,).copyWith(height: 1.3),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+        GestureDetector(
+          child: Text(
+            title,
+            style: textNormalCustom(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: titleCalenderWork,).copyWith(height: 1.3),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          onTap: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    WebViewScreen(url: url, title: ''),
+              ),
+            );
+          },
         ),
         const SizedBox(
           height: 10,

@@ -5,7 +5,7 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashb
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 
 mixin BaoChiMangXaHoiRepository {
-  Future<Result<ListDashBoardItemModel>> getDashBoardTatCaChuDe(
+  Future<Result<List<DashBoardItemTatCaChuDeModel>>> getDashBoardTatCaChuDe(
     int pageIndex,
     int pageSize,
     int total,
