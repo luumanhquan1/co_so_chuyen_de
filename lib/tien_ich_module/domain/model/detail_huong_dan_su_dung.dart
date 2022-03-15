@@ -27,3 +27,6 @@ class DetailHuongDanSuDung {
     this.updatedBy,
   });
 }
+String addDomainImage(String content){
+  return content.replaceAll('src="/', 'src="http://api-ccvc.dongnai.edsolabs.vn/');
+}

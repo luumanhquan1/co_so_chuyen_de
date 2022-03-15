@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/detail_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/bloc/huong_dan_su_dung_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/huong_dan_su_dung/ui/widget/expand_only_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
@@ -12,6 +13,7 @@ import 'package:ccvc_mobile/tien_ich_module/widget/appbar/app_bar_default_back.d
 import 'package:ccvc_mobile/tien_ich_module/widget/search/base_search_bar.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HuongDanSuDungDetailMobile extends StatefulWidget {
@@ -93,24 +95,42 @@ class _HuongDanSuDungDetailMobileState
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
                                   return ExpandOnlyHuongDanSuDung(
-                                    onTap: (){
-
+                                    onTap: () async {
+                                      await cubit
+                                          .getDetailDanhSachHuongDanSuDung(
+                                              data[index].id ?? '');
                                     },
                                     name: data[index].title ?? '',
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${data[index].topic}',
-                                          style: textNormalCustom(
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w400,
-                                            color: dateColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    child: StreamBuilder<DetailHuongDanSuDung>(
+                                        stream:
+                                            cubit.getDetailHuongDanSuDungStream,
+                                        builder: (context, snapshot) {
+                                          // final dataDetail=snapshot.data??[];
+                                          print(
+                                              '${snapshot.data?.content ?? ''}');
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Html(
+                                                data: addDomainImage(
+                                                    snapshot.data?.content ??
+                                                        ''),
+                                                onImageTap: (url, contexts,
+                                                        attributes, element) =>
+                                                    {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            FullScreenImageViewer(
+                                                                url ?? ''),),
+                                                  ),
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        }),
                                   );
                                 },
                               );
@@ -235,4 +255,25 @@ Widget itemPhoneMail(
       ),
     ),
   );
+}
+
+class FullScreenImageViewer extends StatelessWidget {
+  const FullScreenImageViewer(this.url, {Key? key}) : super(key: key);
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Image.network(url),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
 }

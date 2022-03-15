@@ -26,7 +26,7 @@ abstract class TienIchService {
       );
 
   @GET(ApiConstants.GET_DETAIL_HUONG_DAN_SU_DUNG)
-  Future<DetailHuongDanSuDungResponse> getDetailHuongDanSuDung(
+  Future<DataDetailHuongDanSuDungResponse> getDetailHuongDanSuDung(
     @Query('id') String id,
   );
 }

@@ -33,8 +33,8 @@ class TienIchRepositoryImpl implements TienIchRepository {
 
   @override
   Future<Result<DetailHuongDanSuDung>> getDetailHuongDanSuDung(String id) {
-    return runCatchingAsync<DetailHuongDanSuDungResponse, DetailHuongDanSuDung>(
+    return runCatchingAsync<DataDetailHuongDanSuDungResponse, DetailHuongDanSuDung>(
         () => _tienIchService.getDetailHuongDanSuDung(id),
-        (response) => response.toModel());
+        (response) => response.data?.toModel()??DetailHuongDanSuDung());
   }
 }
