@@ -1,10 +1,16 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/styles.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_menu.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/material.dart';
+
+import 'danh_sach_chung_model.dart';
 
 class ItemKetNoiModel {
   String icon;
@@ -116,28 +122,75 @@ List<ItemKetNoiModel> listKetNoi2 = [
   ItemKetNoiModel(
     icon: '',
     typeMenu: TypeKetNoiMenu.QuocTes,
+    type: TypeContainer.expand,
+    listWidget: listQuocTe,
+    index: 3,
+    onTap: (BuildContext context, KetNoiCubit cubit) {},
+  ),
+  ItemKetNoiModel(
+    icon: '',
+    typeMenu: TypeKetNoiMenu.TrongNuocs,
+    type: TypeContainer.expand,
+    index: 3,
+    listWidget: listTrongNuoc,
+    onTap: (BuildContext context, KetNoiCubit cubit) {},
+  ),
+];
+
+List<ItemKetNoiModel> listQuocTe = [
+  ItemKetNoiModel(
+    icon: '',
+    typeMenu: TypeKetNoiMenu.CacCoQuanKhac,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, KetNoiCubit cubit) {
-      // cubit.changeScreenMenu();
+      cubit.changeScreenMenu(TypeKetNoiMenu.CacCoQuanKhac);
+      Navigator.pop(context);
+    },
+  ),
+];
+
+List<ItemKetNoiModel> listTrongNuoc = [
+  ItemKetNoiModel(
+    icon: '',
+    typeMenu: TypeKetNoiMenu.CacToChuc,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, KetNoiCubit cubit) {
+      cubit.changeScreenMenu(TypeKetNoiMenu.CacToChuc);
       Navigator.pop(context);
     },
   ),
   ItemKetNoiModel(
     icon: '',
-    typeMenu: TypeKetNoiMenu.TrongNuocs,
+    typeMenu: TypeKetNoiMenu.ChinhPhu,
     type: TypeContainer.number,
     index: 3,
     onTap: (BuildContext context, KetNoiCubit cubit) {
-      //  cubit.changeScreenMenu(TypeCalendarMenu.LichDuocMoi);
+      cubit.changeScreenMenu(TypeKetNoiMenu.ChinhPhu);
+      Navigator.pop(context);
+    },
+  ),
+  ItemKetNoiModel(
+    icon: '',
+    typeMenu: TypeKetNoiMenu.CacDonViHanhChinh,
+    type: TypeContainer.number,
+    index: 3,
+    onTap: (BuildContext context, KetNoiCubit cubit) {
+      cubit.changeScreenMenu(TypeKetNoiMenu.CacDonViHanhChinh);
       Navigator.pop(context);
     },
   ),
 ];
+
 enum TypeKetNoiMenu {
   SuKien,
   Chung,
   SuKiens,
+  CacCoQuanKhac,
+  CacToChuc,
+  ChinhPhu,
+  CacDonViHanhChinh,
   TrongNuoc,
   NuocNgoai,
   PhatDong,
@@ -149,6 +202,141 @@ enum TypeKetNoiMenu {
 }
 
 extension GetScreenMenu on TypeKetNoiMenu {
+  Widget getScreenMenu({required KetNoiCubit cubit}) {
+    void callApi(int page) {
+      switch (this) {
+        case TypeKetNoiMenu.Chung:
+          {
+            cubit.getListChungKetNoi(
+              pageSize: cubit.pageSize,
+              pageIndex: page,
+              type: cubit.type,
+            );
+
+            break;
+          }
+        case TypeKetNoiMenu.ChinhPhu:
+          {
+            break;
+          }
+      }
+    }
+
+    switch (this) {
+      case TypeKetNoiMenu.Chung:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+
+      case TypeKetNoiMenu.ChinhPhu:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListTrongNuoc(
+            model: ItemTrongNuocModel(
+              category: 'CHINH_PHU',
+              categoryTitle: "Chính phủ",
+              diaChi: '16 Lê Hồng Phong - Ba Đình - Hà Nội',
+              email: 'thongtinchinhphu@chinhphu.vn',
+              fax: '08 048 924',
+              id: '597c41ac-c39e-4d67-9e52-08d96d304ff9',
+              imageUrlPath:
+                  'https://api-ccvc-uat.chinhquyendientu.vn/attachments/upload/091220211616214465.png',
+              sdt: '08 043 162',
+              tenCoQuanLienHe: 'Chen phủ Việt Nam',
+            ),
+          ),
+        );
+
+      default:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: true,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+    }
+  }
+
+  Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
+    void callApi(int page) {
+      switch (this) {
+        case TypeKetNoiMenu.Chung:
+          {
+            cubit.getListChungKetNoi(
+              pageSize: cubit.pageSize,
+              pageIndex: page,
+              type: cubit.type,
+            );
+
+            break;
+          }
+        case TypeKetNoiMenu.ChinhPhu:
+          {
+            break;
+          }
+      }
+    }
+
+    switch (this) {
+      case TypeKetNoiMenu.Chung:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: false,
+          checkRatio: 1.15,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+
+      case TypeKetNoiMenu.ChinhPhu:
+        return ListViewLoadMore(
+          cubit: cubit,
+          isListView: false,
+          checkRatio: 1.25,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListTrongNuoc(
+            model: ItemTrongNuocModel(
+              category: 'CHINH_PHU',
+              categoryTitle: "Chính phủ",
+              diaChi: '16 Lê Hồng Phong - Ba Đình - Hà Nội',
+              email: 'thongtinchinhphu@chinhphu.vn',
+              fax: '08 048 924',
+              id: '597c41ac-c39e-4d67-9e52-08d96d304ff9',
+              imageUrlPath:
+                  'https://api-ccvc-uat.chinhquyendientu.vn/attachments/upload/091220211616214465.png',
+              sdt: '08 043 162',
+              tenCoQuanLienHe: 'Chen phủ Việt Nam',
+            ),
+          ),
+        );
+
+      default:
+        return ListViewLoadMore(
+          cubit: cubit,
+          checkRatio: 1.25,
+          isListView: false,
+          callApi: (page) => {callApi(page)},
+          viewItem: (value, index) => ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          ),
+        );
+    }
+  }
+
   String getTitle() {
     switch (this) {
       case TypeKetNoiMenu.SuKien:
@@ -156,6 +344,18 @@ extension GetScreenMenu on TypeKetNoiMenu {
 
       case TypeKetNoiMenu.Chung:
         return S.current.chung;
+
+      case TypeKetNoiMenu.CacCoQuanKhac:
+        return S.current.cac_co_quan_khac;
+
+      case TypeKetNoiMenu.CacToChuc:
+        return S.current.cac_to_chuc;
+
+      case TypeKetNoiMenu.ChinhPhu:
+        return S.current.chinh_phu;
+
+      case TypeKetNoiMenu.CacDonViHanhChinh:
+        return S.current.cac_don_vi_hanh_chinh;
 
       case TypeKetNoiMenu.SuKiens:
         return S.current.su_kien;
