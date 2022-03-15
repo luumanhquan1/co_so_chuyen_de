@@ -43,14 +43,13 @@ class HotNews extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           onTap: (){
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) =>
-            //         WebViewScreen(url: url, title: ''),
-            //   ),
-            // );
-            print(content);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    WebViewScreen(url: url, title: ''),
+              ),
+            );
           },
         ),
         const SizedBox(
