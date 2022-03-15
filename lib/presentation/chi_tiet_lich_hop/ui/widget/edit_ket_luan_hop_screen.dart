@@ -45,7 +45,7 @@ class _EditKetLuanHopScreenState extends State<EditKetLuanHopScreen> {
               size: 20,
             ),
           ),
-          title: 'Sửa mẫu biên bản',
+          title: S.current.sua_bien_ban_ket_luan_hop,
           actions: [
             IconButton(
               onPressed: () async {
