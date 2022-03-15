@@ -664,5 +664,6 @@
   "cac_co_quan_khac": "Các cơ quan khác",
   "cac_to_chuc": "Các tổ chức",
   "chinh_phu": "Chính phủ",
-  "cac_don_vi_hanh_chinh": "Các đơn vị hành chính"
+  "cac_don_vi_hanh_chinh": "Các đơn vị hành chính",
+  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
 }
