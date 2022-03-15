@@ -38,6 +38,8 @@ class ChuDeData {
   String? addressId;
   @JsonKey(name: 'publishedTime')
   String? publishedTime;
+  @JsonKey(name: 'contents')
+  String? contents;
 
   ChuDeData({
     this.id,
@@ -47,6 +49,7 @@ class ChuDeData {
     this.url,
     this.addressId,
     this.publishedTime,
+    this.contents,
   });
 
   factory ChuDeData.fromJson(Map<String, dynamic> json) =>
@@ -55,12 +58,13 @@ class ChuDeData {
   Map<String, dynamic> toJson() => _$ChuDeDataToJson(this);
 
   ChuDeModel toDomain() => ChuDeModel(
-        id: id,
-        title: title,
-        link: link,
-        avartar: avartar,
-        url: url,
-        addressId: addressId,
+        id: id??'',
+        title: title??'',
+        link: link??'',
+        avartar: avartar??'',
+        url: url??'',
+        addressId: addressId??'',
         publishedTime: publishedTime ?? '',
+        contents: contents??'',
       );
 }

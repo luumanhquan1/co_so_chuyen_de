@@ -16,7 +16,7 @@ abstract class BaoChiMangXaHoiService {
       _BaoChiMangXaHoiService;
 
   @GET(ApiConstants.DASH_BOARD_TAT_CA_CHU_DE)
-  Future<DoashBoashTatCaChuDeResponse> getDashBoardTatCaChuDe(
+  Future<List<DashBoardTatCaChuDeResponse>> getDashBoardTatCaChuDe(
     @Query('pageIndex') int pageInDex,
     @Query('pageSize') int pageSize,
     @Query('total') int total,
