@@ -1,22 +1,35 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_list_bang_tin.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/nghe_ban_tin/ui/phat_radio.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/phat_ban_tin/bloc/phat_ban_tin_bloc.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/phat_ban_tin/ui/mobile/phat_radio.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:just_audio/just_audio.dart';
 
 class BanTinBtnSheet extends StatefulWidget {
-  const BanTinBtnSheet({Key? key}) : super(key: key);
+  final List<TinTucRadioModel> listTinTuc;
+
+  const BanTinBtnSheet({Key? key, required this.listTinTuc}) : super(key: key);
 
   @override
   _BanTinBtnSheetState createState() => _BanTinBtnSheetState();
 }
 
 class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
+  PhatBanTinBloc phatBanTinBloc = PhatBanTinBloc();
+  AudioPlayer player = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,14 +74,10 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               color: titleColor,
             ),
           ),
-          // const PlayRadio(),
-          // Slider(
-          //   value: 5,
-          //   max: 20,
-          //   activeColor: labelColor,
-          //   inactiveColor: borderButtomColor,
-          //   onChanged: (value) {},
-          // ),
+          PlayRadio(
+            player: player,
+            listLinkRadio: widget.listTinTuc.map((e) => e.audioUrl).toList(),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -76,16 +85,37 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                 children: [
                   IconButton(
                     color: unselectLabelColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      phatBanTinBloc.setIndexRadio(
+                        phatBanTinBloc.getIndexRadio() - 1,
+                        widget.listTinTuc.length - 1,
+                      );
+                      player.seekToPrevious();
+                    },
                     icon: const Icon(Icons.skip_previous),
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: SvgPicture.asset(ImageAssets.icPlay),
+                  StreamBuilder<bool>(
+                    stream: phatBanTinBloc.streamPlay,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? true;
+                      data ? player.play() : player.pause();
+                      return GestureDetector(
+                        onTap: () {
+                          phatBanTinBloc.changePlay();
+                        },
+                        child: SvgPicture.asset(ImageAssets.icPlay),
+                      );
+                    },
                   ),
                   IconButton(
                     color: unselectLabelColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      phatBanTinBloc.setIndexRadio(
+                        phatBanTinBloc.getIndexRadio() + 1,
+                        widget.listTinTuc.length - 1,
+                      );
+                      player.seekToNext();
+                    },
                     icon: const Icon(Icons.skip_next),
                   ),
                   const SizedBox(
@@ -108,36 +138,44 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               ),
             ],
           ),
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              ItemListBangTin(
-                tin:
-                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                isCheck: false,
-              ),
-              ItemListBangTin(
-                tin:
-                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                isCheck: false,
-              ),
-              ItemListBangTin(
-                tin:
-                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                isCheck: true,
-              ),
-              ItemListBangTin(
-                tin:
-                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                isCheck: false,
-              ),
-              ItemListBangTin(
-                tin:
-                    'Hướng dẫn xác định ca mắc COVID và khỏi bệnh bằng test nhanh',
-                isCheck: false,
-              ),
-            ],
+          Expanded(
+            child: StreamBuilder<int>(
+              stream: phatBanTinBloc.indexRadio,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? 0;
+                return ListView.builder(
+                  itemCount: widget.listTinTuc.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return (index == data)
+                        ? ItemListBangTin(
+                            onclick: () {
+                              phatBanTinBloc.setIndexRadio(
+                                index,
+                                widget.listTinTuc.length,
+                              );
+                            },
+                            tin: widget.listTinTuc[index].title,
+                            isCheck: true,
+                          )
+                        : ItemListBangTin(
+                            onclick: () {
+                              phatBanTinBloc.setIndexRadio(
+                                index,
+                                widget.listTinTuc.length,
+                              );
+                              player.seek(
+                                Duration.zero,
+                                index: index,
+                              );
+                            },
+                            tin: widget.listTinTuc[index].title,
+                            isCheck: false,
+                          );
+                  },
+                );
+              },
+            ),
           )
         ],
       ),

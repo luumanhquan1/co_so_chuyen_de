@@ -7,8 +7,6 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/ban_tin_btn_sheet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_radio.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_trong_nuoc.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/nghe_ban_tin/bloc/play_radio_cubit.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/nghe_ban_tin/ui/phat_radio.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/drop_down_extension.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -16,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 enum dropDown { tinRadio, tinTrongNuoc }
 
 class TinTucThoiSuScreen extends StatefulWidget {
@@ -34,6 +33,7 @@ class TinTucThoiSuScreen extends StatefulWidget {
 
 class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
   dropDown? valueChoose = dropDown.tinRadio;
+  late List<TinTucRadioModel> listTinTuc;
 
   @override
   void initState() {
@@ -110,21 +110,14 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // showBottomSheet(
-                        //   context: widget.pContext,
-                        //   builder: (context) {
-                        //     return const BanTinBtnSheet();
-                        //   },
-                        // );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  PlayRadio(
-                              cubit: PlayRadioCubit(),
-                            ),
-                          ),
+                        showBottomSheet(
+                          context: widget.pContext,
+                          builder: (context) {
+                            return BanTinBtnSheet(
+                              listTinTuc: listTinTuc,
+                            );
+                          },
                         );
-
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -170,6 +163,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                           builder: (context, snapshot) {
                             final listRadio =
                                 snapshot.data?.listTinTucThoiSu ?? [];
+                            listTinTuc = listRadio;
                             return ListView.builder(
                               shrinkWrap: true,
                               itemCount: listRadio.length,
