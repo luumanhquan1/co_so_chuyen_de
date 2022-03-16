@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/bloc/chuyen_giong_noi_thanh_van_ban_cubit.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/ui/widget/voice_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-
 
 class ChuyenGiongNoiThanhVanBanTablet extends StatefulWidget {
   const ChuyenGiongNoiThanhVanBanTablet({Key? key}) : super(key: key);
@@ -42,6 +42,8 @@ class _ChuyenGiongNoiThanhVanBanTabletState
 
   /// Each time to start a speech recognition session
   void _startListening() async {
+    cubit.isVoiceSubject.add(!cubit.isVoiceSubject.value);
+
     await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
@@ -51,6 +53,8 @@ class _ChuyenGiongNoiThanhVanBanTabletState
   /// and the SpeechToText plugin supports setting timeouts on the
   /// listen method.
   void _stopListening() async {
+    cubit.isVoiceSubject.add(!cubit.isVoiceSubject.value);
+
     await _speechToText.stop();
     setState(() {});
   }
@@ -79,11 +83,43 @@ class _ChuyenGiongNoiThanhVanBanTabletState
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                StreamBuilder<bool>(
+                  stream: cubit.isVoiceStream,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? false;
+                    return Expanded(
+                      child: data
+                          ? VoiceWidget(
+                              cubit: cubit,
+                            )
+                          : Container(),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
                 GestureDetector(
                   onTap: _speechToText.isNotListening
                       ? _startListening
                       : _stopListening,
                   child: SvgPicture.asset(ImageAssets.icVoice),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                StreamBuilder<bool>(
+                  stream: cubit.isVoiceStream,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? false;
+                    return Expanded(
+                      child: data
+                          ? VoiceWidget(
+                              cubit: cubit,
+                            )
+                          : Container(),
+                    );
+                  },
                 ),
               ],
             ),
