@@ -43,6 +43,7 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
   Stream<bool> get selectSearchStream => selectSearch.stream;
 
   BehaviorSubject<DetailHuongDanSuDung> detailHuongDanSuDungSubject=BehaviorSubject();
+  DetailHuongDanSuDung detailHuongDanSuDung=DetailHuongDanSuDung();
 
   Stream<DetailHuongDanSuDung> get getDetailHuongDanSuDungStream=>detailHuongDanSuDungSubject.stream;
 
@@ -98,7 +99,8 @@ class HuongDanSuDungCubit extends BaseCubit<HuongDanSuDungState> {
     final result = await tienIchRep.getDetailHuongDanSuDung(id);
     result.when(
       success: (res) {
-        detailHuongDanSuDungSubject.add(res);
+        detailHuongDanSuDung=res;
+        detailHuongDanSuDungSubject.add(detailHuongDanSuDung);
         showContent();
       },
       error: (error) {},

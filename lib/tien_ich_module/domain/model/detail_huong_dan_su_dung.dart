@@ -1,3 +1,7 @@
+import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+
 class DetailHuongDanSuDung {
   String? content;
   String? topic;
@@ -28,5 +32,6 @@ class DetailHuongDanSuDung {
   });
 }
 String addDomainImage(String content){
-  return content.replaceAll('src="/', 'src="http://api-ccvc.dongnai.edsolabs.vn/');
+  final appConstants = Get.find<AppConstants>();
+  return content.replaceAll('src="/', 'src="${appConstants.baseUrlCCVC}/');
 }
