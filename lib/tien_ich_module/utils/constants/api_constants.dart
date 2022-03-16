@@ -2,6 +2,7 @@ class ApiConstants {
 
   static const TOPIC_HDSD = '/api/FAQs/get-all-topic?';
   static const GET_DANH_SACH_HDSD = '/api/FAQs/get-danh-sach';
+  static const GET_DETAIL_HUONG_DAN_SU_DUNG = '/api/FAQs/get-by-id';
 }
 
 class ImageConstants {
