@@ -1,5 +1,7 @@
 
 import 'package:ccvc_mobile/main.dart';
+import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
+import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/ui/mobile/chuyen_giong_noi_thanh_van_ban_mobile.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_giong_noi_thanh_van_ban/ui/tablet/chuyen_giong_noi_thanh_van_ban_tablet.dart';
@@ -51,14 +53,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token.isNotEmpty) {
       return const MainTabBarView();
     } else {
-      // return screenDevice(
-      //   mobileScreen: const LoginScreen(),
-      //   tabletScreen: const LoginTabletScreen(),
-      // );
-
-    return screenDevice(
-        mobileScreen: const ChuyenGiongNoiThanhVanBanMobile(),
-        tabletScreen: const ChuyenGiongNoiThanhVanBanTablet(),
+      return screenDevice(
+        mobileScreen: const LoginScreen(),
+        tabletScreen: const LoginTabletScreen(),
       );
     }
   }

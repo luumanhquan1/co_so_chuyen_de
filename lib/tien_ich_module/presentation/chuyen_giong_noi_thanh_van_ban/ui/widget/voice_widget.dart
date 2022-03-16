@@ -70,10 +70,11 @@ class _MusicvisualizerState extends State<Musicvisualizer>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this,
-        duration: Duration(
-          milliseconds: widget.duration,
-        ));
+      vsync: this,
+      duration: Duration(
+        milliseconds: widget.duration,
+      ),
+    );
     curvedAnimation = CurvedAnimation(
       parent: animationController,
       curve: Curves.easeInOutCubic,

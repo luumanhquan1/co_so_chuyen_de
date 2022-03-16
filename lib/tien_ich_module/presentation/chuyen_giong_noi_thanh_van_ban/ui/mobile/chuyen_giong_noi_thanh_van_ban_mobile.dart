@@ -24,7 +24,7 @@ class _ChuyenGiongNoiThanhVanBanMobileState
     extends State<ChuyenGiongNoiThanhVanBanMobile> {
   ChuyenGiongNoiThanhVanBanCubit cubit = ChuyenGiongNoiThanhVanBanCubit();
 
-  SpeechToText _speechToText = SpeechToText();
+  final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
 
@@ -42,6 +42,7 @@ class _ChuyenGiongNoiThanhVanBanMobileState
 
   /// Each time to start a speech recognition session
   void _startListening() async {
+    cubit.isVoiceSubject.add(!cubit.isVoiceSubject.value);
     await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
@@ -51,6 +52,7 @@ class _ChuyenGiongNoiThanhVanBanMobileState
   /// and the SpeechToText plugin supports setting timeouts on the
   /// listen method.
   void _stopListening() async {
+    cubit.isVoiceSubject.add(!cubit.isVoiceSubject.value);
     await _speechToText.stop();
     setState(() {});
   }
@@ -58,7 +60,6 @@ class _ChuyenGiongNoiThanhVanBanMobileState
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
-    print(result.recognizedWords);
     setState(() {
       _lastWords = result.recognizedWords;
     });
@@ -77,48 +78,52 @@ class _ChuyenGiongNoiThanhVanBanMobileState
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 17),
-            child: StreamBuilder<bool>(
-                stream: cubit.isVoiceStream,
-                builder: (context, snapshot) {
-                  final data = snapshot.data ?? false;
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: data
-                            ? VoiceWidget(
-                                cubit: cubit,
-                              )
-                            : SvgPicture.asset(
-                                ImageAssets.icAnimationVoice,
-                              ),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          cubit.isVoiceSubject.add(!cubit.isVoiceSubject.value);
-                          _speechToText.isNotListening
-                              ? _startListening
-                              : _stopListening;
-                        },
-                        child: SvgPicture.asset(ImageAssets.icVoice),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Expanded(
-                        child: data
-                            ? VoiceWidget(
-                                cubit: cubit,
-                              )
-                            : SvgPicture.asset(
-                                ImageAssets.icAnimationVoice,
-                              ),
-                      ),
-                    ],
-                  );
-                }),
+            child: Row(
+              children: [
+                StreamBuilder<bool>(
+                  stream: cubit.isVoiceStream,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? false;
+                    return Expanded(
+                      child: data
+                          ? VoiceWidget(
+                              cubit: cubit,
+                            )
+                          : SvgPicture.asset(
+                              ImageAssets.icAnimationVoice,
+                            ),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                GestureDetector(
+                  onTap: _speechToText.isNotListening
+                      ? _startListening
+                      : _stopListening,
+                  child: SvgPicture.asset(ImageAssets.icVoice),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                StreamBuilder<bool>(
+                  stream: cubit.isVoiceStream,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? false;
+                    return Expanded(
+                      child: data
+                          ? VoiceWidget(
+                              cubit: cubit,
+                            )
+                          : SvgPicture.asset(
+                              ImageAssets.icAnimationVoice,
+                            ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
           Container(
             padding: EdgeInsets.all(24.0.textScale(space: 4)),
@@ -139,7 +144,7 @@ class _ChuyenGiongNoiThanhVanBanMobileState
                 border: Border.all(color: borderColor.withOpacity(0.5)),
                 boxShadow: [
                   BoxShadow(
-                    color: shadowContainerColor.withOpacity(0.50),
+                    color: shadowContainerColor.withOpacity(0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 4), // changes position of shadow
                   ),
@@ -147,15 +152,13 @@ class _ChuyenGiongNoiThanhVanBanMobileState
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                  // If listening is active show
-                  // the recognized words
-                  _lastWords
-
-                  ,),
+                // If listening is active show
+                // the recognized words
+                _lastWords,
+              ),
             )
           else
             Container(),
-
         ],
       ),
     );
