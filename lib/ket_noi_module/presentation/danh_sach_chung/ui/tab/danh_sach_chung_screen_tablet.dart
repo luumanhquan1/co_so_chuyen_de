@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart'
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/tab/ket_noi_menu_tablet.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
@@ -48,7 +49,14 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const TaoSuKienKetNoi(),
+                      ),
+                    );
+                  },
                   icon: Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: SvgPicture.asset(

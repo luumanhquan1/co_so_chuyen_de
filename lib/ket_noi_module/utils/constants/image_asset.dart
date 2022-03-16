@@ -18,4 +18,6 @@ class ImageAssets {
   static const String icZoom = '$baseImgs/ic_zooms.png';
   static const String icGroup = '$baseImgs/ic_group.png';
   static const String icClose = '$baseImgs/ic_close.svg';
+  static const String icCheck = '$baseImgs/ic_checked.svg';
+  static const String icUnCheck = '$baseImgs/ic_unchecked.svg';
 }

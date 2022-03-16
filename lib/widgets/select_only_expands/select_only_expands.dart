@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
-
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_only_widget.dart';
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +17,7 @@ class SelectOnlyExpand extends StatefulWidget {
   final bool isShowValue;
   final Widget? customValue;
   final Function(int)? onChange;
+
   const SelectOnlyExpand({
     Key? key,
     this.initExpand = false,
@@ -41,6 +39,7 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
   final BehaviorSubject<int> selectBloc = BehaviorSubject<int>();
   String valueSelect = '';
   late AnimationController? expandController;
+
   @override
   void initState() {
     super.initState();
@@ -131,7 +130,8 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
                                         padding:
                                             const EdgeInsets.only(right: 4),
                                         child: SvgPicture.asset(
-                                            ImageAssets.icCheck),
+                                          ImageAssets.icCheck,
+                                        ),
                                       )
                                     : const SizedBox();
                               },

@@ -126,7 +126,10 @@ class _ItemListChungState extends State<ItemListChung> {
               child: Text(
                 widget.danhSachChungModel.tenSuKien ?? '',
                 style: textListChung(
-                    color: titleColor, textHeight: 1.7, fontSize: 16,),
+                  color: titleColor,
+                  textHeight: 1.7,
+                  fontSize: 16,
+                ),
               ),
             ),
             spaceH8,
