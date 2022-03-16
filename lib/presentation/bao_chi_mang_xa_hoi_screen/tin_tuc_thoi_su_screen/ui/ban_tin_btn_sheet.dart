@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_list_bang_tin.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/nghe_ban_tin/ui/phat_radio.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +61,14 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               color: titleColor,
             ),
           ),
-          Slider(
-            value: 5,
-            max: 20,
-            activeColor: labelColor,
-            inactiveColor: borderButtomColor,
-            onChanged: (value) {},
-          ),
+          // const PlayRadio(),
+          // Slider(
+          //   value: 5,
+          //   max: 20,
+          //   activeColor: labelColor,
+          //   inactiveColor: borderButtomColor,
+          //   onChanged: (value) {},
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
