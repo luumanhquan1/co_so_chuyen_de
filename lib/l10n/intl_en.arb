@@ -665,5 +665,10 @@
   "cac_to_chuc": "Các tổ chức",
   "chinh_phu": "Chính phủ",
   "cac_don_vi_hanh_chinh": "Các đơn vị hành chính",
-  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
+  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói",
+  "tieng_viet" : "Tiếng Việt",
+  "english" : "English",
+  "tim_tep_tren_dien_thoai_cua_ban" : "Tìm tệp trên điện thoại của bạn",
+  "chon_tai_lieu" : "Chọn tài liệu",
+  "chi_ho_tro_txt" : "Chỉ hỗ trợ tệp txt"
 }
