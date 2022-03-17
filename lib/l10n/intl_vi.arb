@@ -661,7 +661,10 @@
   "cac_to_chuc": "Các tổ chức",
   "chinh_phu": "Chính phủ",
   "cac_don_vi_hanh_chinh": "Các đơn vị hành chính",
-  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
+  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói",
+  "doc_ngay" : "Đọc ngay",
+  "tai_van_ban_len": "Tải văn bản lên"
+
 }
 
 

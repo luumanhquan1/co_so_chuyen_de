@@ -44,6 +44,8 @@ class ImageAssets {
 
 
   static const String icBack = '$baseImg/ic_back.svg';
+  static const String icUpFile = '$baseImg/ic_up_file.svg';
+
   static const String icTongSoNhiemVu = '$baseImg/ic_tong_so_nhiem_vu.svg';
   static const String icHoanThanhNhiemVu =
       '$baseImg/ic_hoan_thanh-nhiem_vu.svg';
