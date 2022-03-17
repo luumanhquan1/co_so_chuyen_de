@@ -33,6 +33,7 @@ class TinTucThoiSuScreen extends StatefulWidget {
 
 class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
   dropDown? valueChoose = dropDown.tinRadio;
+  late List<TinTucRadioModel> listTinTuc;
 
   @override
   void initState() {
@@ -112,7 +113,9 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                         showBottomSheet(
                           context: widget.pContext,
                           builder: (context) {
-                            return const BanTinBtnSheet();
+                            return BanTinBtnSheet(
+                              listTinTuc: listTinTuc,
+                            );
                           },
                         );
                       },
@@ -160,6 +163,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                           builder: (context, snapshot) {
                             final listRadio =
                                 snapshot.data?.listTinTucThoiSu ?? [];
+                            listTinTuc = listRadio;
                             return ListView.builder(
                               shrinkWrap: true,
                               itemCount: listRadio.length,
