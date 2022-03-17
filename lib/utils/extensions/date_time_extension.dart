@@ -34,6 +34,10 @@ extension DateFormatString on DateTime {
     return DateFormat('yyyy/MM/dd HH:mm:ss').format(this);
   }
 
+  String get formatApiHH {
+    return DateFormat('HH:mm:ss').format(this);
+  }
+
   String get formatApiStartDay {
     return DateFormat('yyyy/MM/dd 00:00:00').format(this);
   }

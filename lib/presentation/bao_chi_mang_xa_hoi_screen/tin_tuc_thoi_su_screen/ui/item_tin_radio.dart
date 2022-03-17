@@ -19,33 +19,36 @@ class ItemTinRadio extends StatelessWidget {
       height: 80,
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: shadowContainerColor.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-              color: borderColor.withOpacity(0.5),),),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: shadowContainerColor.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: borderColor.withOpacity(0.5),
+        ),
+      ),
       child: Row(
         children: [
           Expanded(
-              flex: 2,
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                height: 48,
-                width: 48,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                ),
-              ),),
+            flex: 2,
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              height: 48,
+              width: 48,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset(
+                ImageAssets.icDongNai,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Expanded(
             flex: 8,
             child: Container(
@@ -59,9 +62,10 @@ class ItemTinRadio extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: textNormalCustom(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: titleColor,),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: titleColor,
+                    ),
                   ),
                   const SizedBox(
                     height: 4,

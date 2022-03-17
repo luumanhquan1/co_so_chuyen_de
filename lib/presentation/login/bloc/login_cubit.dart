@@ -54,7 +54,9 @@ class LoginCubit extends BaseCubit<LoginState> {
         HiveLocal.saveDataUser(dataUser);
       },
       error: (err) {
+
         emit(LoginError(err.message));
+        showContent();
         passIsError = true;
       },
     );
