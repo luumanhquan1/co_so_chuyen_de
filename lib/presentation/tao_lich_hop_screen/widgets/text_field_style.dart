@@ -8,6 +8,7 @@ class TextFieldStyle extends StatelessWidget {
   final String? hintText;
   final String urlIcon;
   final int maxLines;
+
   const TextFieldStyle({
     Key? key,
     this.hintText,
