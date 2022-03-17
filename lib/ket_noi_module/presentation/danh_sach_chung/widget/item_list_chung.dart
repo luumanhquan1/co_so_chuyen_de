@@ -38,7 +38,7 @@ class _ItemListChungState extends State<ItemListChung> {
           );
         },
         child: Container(
-          padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 20, left: 24, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,6 +59,8 @@ class _ItemListChungState extends State<ItemListChung> {
               spaceH12,
               Text(
                 widget.danhSachChungModel.tenSuKien ?? '',
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: textListChung(
                   color: titleColor,
                   textHeight: 1.7,
@@ -122,11 +124,14 @@ class _ItemListChungState extends State<ItemListChung> {
               ),
             ),
             spaceH12,
-            Flexible(
-              child: Text(
-                widget.danhSachChungModel.tenSuKien ?? '',
-                style: textListChung(
-                    color: titleColor, textHeight: 1.7, fontSize: 16,),
+            Text(
+              widget.danhSachChungModel.tenSuKien ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: textListChung(
+                color: titleColor,
+                textHeight: 1.7,
+                fontSize: 16,
               ),
             ),
             spaceH8,
@@ -150,6 +155,8 @@ class _ItemListChungState extends State<ItemListChung> {
                 Flexible(
                   child: Text(
                     widget.danhSachChungModel.diaChi ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: textNormal(color: dateColor, fontSize: 16),
                   ),
                 )

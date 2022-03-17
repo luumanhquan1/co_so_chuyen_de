@@ -2,10 +2,9 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TextFieldValidator extends StatefulWidget {
+class TextFieldStylePNG extends StatefulWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final bool isEnabled;
@@ -19,8 +18,9 @@ class TextFieldValidator extends StatefulWidget {
   final Widget? prefixIcon;
   final bool? obscureText;
   final Color? fillColor;
+  final String urlIcon;
 
-  const TextFieldValidator({
+  const TextFieldStylePNG({
     Key? key,
     this.controller,
     this.isEnabled = true,
@@ -35,13 +35,14 @@ class TextFieldValidator extends StatefulWidget {
     this.onTap,
     this.obscureText,
     this.fillColor,
+    required this.urlIcon,
   }) : super(key: key);
 
   @override
-  State<TextFieldValidator> createState() => _TextFormFieldWidgetState();
+  State<TextFieldStylePNG> createState() => _TextFieldStylePNGState();
 }
 
-class _TextFormFieldWidgetState extends State<TextFieldValidator> {
+class _TextFieldStylePNGState extends State<TextFieldStylePNG> {
   final key = GlobalKey<FormState>();
   FormProvider? formProvider;
 
@@ -68,6 +69,51 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
 
   @override
   Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: widget.maxLine == 1
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 16.0.textScale(space: 4),
+          height: 16.0.textScale(space: 4),
+          color: Colors.transparent,
+          child: Image.asset(widget.urlIcon),
+        ),
+        const SizedBox(
+          width: 14,
+        ),
+        Expanded(
+          child: Container(
+            padding:
+                EdgeInsets.symmetric(vertical: widget.maxLine == 1 ? 2 : 0),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: lineColor),
+              ),
+            ),
+            child: textFromField(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Widget textField() {
+  //   return TextField(
+  //     maxLines: widget.maxLine,
+  //     style: textNormal(titleColor, 16),
+  //     decoration: InputDecoration(
+  //       hintText: widget.hintText,
+  //       hintStyle: textNormal(textBodyTime, 16),
+  //       border: InputBorder.none,
+  //       isDense: true,
+  //       contentPadding: EdgeInsets.zero,
+  //     ),
+  //   );
+  // }
+
+  Widget textFromField() {
     return Form(
       key: key,
       child: TextFormField(
@@ -89,42 +135,37 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
             widget.onTap!();
           }
         },
-        style: tokenDetailAmount(
-          fontSize: 14.0.textScale(),
-          color: titleColor,
-        ),
+        style: textNormal(titleColor, 16),
         enabled: widget.isEnabled,
         decoration: InputDecoration(
           hintText: widget.hintText,
-          hintStyle: textNormal(titleItemEdit.withOpacity(0.5), 14),
-          contentPadding: widget.maxLine == 1
-              ? const EdgeInsets.symmetric(vertical: 14, horizontal: 10)
-              : null,
+          hintStyle: textNormal(textBodyTime, 16),
+          contentPadding: EdgeInsets.zero,
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           fillColor: widget.isEnabled
               ? widget.fillColor ?? Colors.transparent
               : borderColor.withOpacity(0.3),
-          filled: true,
+          filled: false,
           border: const OutlineInputBorder(
-            borderSide: BorderSide(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: backgroundColorApp),
+            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: backgroundColorApp),
+            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           errorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: backgroundColorApp),
+            // borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           focusedErrorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: backgroundColorApp),
+            // borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: borderColor),
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: backgroundColorApp),
+            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
         ),
         validator: (value) {

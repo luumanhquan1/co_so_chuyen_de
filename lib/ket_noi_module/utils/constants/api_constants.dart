@@ -7,4 +7,6 @@ class ApiConstants {
   static const DETAIL_KETNOI = '/api/CmsNews/ketnoi/get-su-kien-by-id';
 
   static const TRONG_NUOC = '/api/CmsContact/lay-danhsach-thongtin-lienhe';
+  static const LOAI_BAI_VIET = '/api/CmsNews/ketnoi/get-all-category';
+  static const TAO_SU_KIEN = '/api/CmsNews/ketnoi/taomoi-sukien';
 }

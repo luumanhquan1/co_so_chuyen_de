@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart'
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/phone/ket_noi_menu.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/drawer_slide/drawer_slide.dart';
@@ -61,11 +62,18 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
           ),
           body: Container(
             padding: const EdgeInsets.only(bottom: 16),
-            child: snapshot.data?.getScreenMenu(cubit: cubit) ?? Container(),
+            child: snapshot.data?.getScreenMenu(cubit: cubit) ?? _content(),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: labelColor,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const TaoSuKienKetNoi(),
+                ),
+              );
+            },
             child: SvgPicture.asset(ImageAssets.ic_vector),
           ),
         );
