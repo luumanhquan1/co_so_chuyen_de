@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:translator/translator.dart';
 
 class PhienDichTuDongTablet extends StatefulWidget {
   const PhienDichTuDongTablet({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class PhienDichTuDongTablet extends StatefulWidget {
 class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
   PhienDichTuDongCubit cubit = PhienDichTuDongCubit();
   TextEditingController textEditingController = TextEditingController();
+  final translator = GoogleTranslator();
 
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
@@ -42,6 +44,7 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
   /// Each time to start a speech recognition session
   void _startListening() async {
     await _speechToText.listen(onResult: _onSpeechResult);
+    viToEn();
     setState(() {});
   }
 
@@ -73,6 +76,18 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
 
   void concatenationString() {
     textEditingController.text = '${textEditingController.text} $_lastWords';
+  }
+
+  void viToEn() {
+    translator.translate(textEditingController.text, to: 'en').then((result) {
+      cubit.translateLanguage(result.text);
+    });
+  }
+
+  void enToVi() {
+    translator.translate(textEditingController.text, to: 'vi').then((result) {
+      cubit.translateLanguage(result.text);
+    });
   }
 
   @override
@@ -159,6 +174,13 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                             onChanged: (String value) {
                               cubit.lengthTextSubject
                                   .add(textEditingController.text.length);
+                              cubit.swapLanguage();
+                              cubit.translateLanguage(
+                                textEditingController.text,
+                              );
+                              cubit.languageSubject.value == LANGUAGE.vn
+                                  ? viToEn()
+                                  : enToVi();
                             },
                             maxLength: 1000,
                             decoration: const InputDecoration(
@@ -249,13 +271,19 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Text(
-                            cubit.textTranslate,
-                            style: textNormalCustom(
-                              color: textTitle,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
+                          child: StreamBuilder<String>(
+                            stream: cubit.textTranslateStream,
+                            builder: (context, snapshot) {
+                              final data = snapshot.data ?? '';
+                              return Text(
+                                textEditingController.text.isEmpty ? '' : data,
+                                style: textNormalCustom(
+                                  color: textTitle,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              );
+                            },
                           ),
                         ),
                         GestureDetector(
