@@ -293,7 +293,6 @@ extension GetScreenMenu on TypeKetNoiMenu {
         return ListViewLoadMore(
           cubit: cubit,
           isListView: false,
-          checkRatio: 1.15,
           callApi: (page) => {callApi(page)},
           viewItem: (value, index) => ItemListChung(
             danhSachChungModel: value as DanhSachChungModel,

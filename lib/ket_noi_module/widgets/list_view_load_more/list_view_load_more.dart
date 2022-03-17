@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ListViewLoadMore extends StatelessWidget {
+class ListViewLoadMoreTablet extends StatelessWidget {
   final BaseCubit<dynamic> cubit;
   final Function(int page) callApi;
   final Widget Function(dynamic, int?) viewItem;
@@ -18,7 +18,7 @@ class ListViewLoadMore extends StatelessWidget {
   final double? checkRatio;
   final double? crossAxisSpacing;
 
-  const ListViewLoadMore({
+  const ListViewLoadMoreTablet({
     Key? key,
     required this.cubit,
     required this.isListView,
@@ -121,11 +121,11 @@ class ListViewLoadMore extends StatelessWidget {
                                 bottom: 32,
                               ),
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 16,
-                                crossAxisSpacing: crossAxisSpacing ?? 16,
-                                childAspectRatio: checkRatio ?? 2 / 3,
+                                crossAxisSpacing: 28,
+                                childAspectRatio: 0.5,
                               ),
                               itemCount: snapshot.data?.length ?? 0,
                               itemBuilder: (_, index) {

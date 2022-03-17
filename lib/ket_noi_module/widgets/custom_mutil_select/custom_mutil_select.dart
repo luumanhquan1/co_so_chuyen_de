@@ -116,16 +116,14 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
                         onTap: () {
                           setState(() {});
                           if (valueSelect.contains(widget.listSelect[index])) {
-                            print(
-                                'test value ${valueSelect.remove(widget.listSelect[index])}');
+                            valueSelect.remove(widget.listSelect[index]);
                           } else {
                             valueSelect.add(widget.listSelect[index]);
                           }
                           widget.onChange(valueSelect);
 
                           if (addIndex.contains(index)) {
-                            //  addIndex.remove(index);
-                            print('test index ${addIndex.remove(index)}');
+                            addIndex.remove(index);
                             selectBloc.sink.add(addIndex);
                           } else {
                             addIndex.add(index);
@@ -278,21 +276,9 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
           GestureDetector(
             onTap: () {
               setState(() {});
-              // if (valueSelect.contains(widget.listSelect[index])) {
-              // } else {
-              //   print(
-              //       'test value2 ${valueSelect.remove(widget.listSelect[index])}');
-              // }
               widget.onChange(valueSelect);
-              print("zzzz${valueSelect.removeAt(index)}");
-              print("aaa${addIndex.removeAt(index)}");
-              //  widget.onRemoveItem!(widget.items.indexOf(content));
-              valueSelect.removeRange(index, index);
-              // if (addIndex.contains(index)) {
-              //   //  addIndex.remove(index);
-              //   print('test index2 ${addIndex.remove(index)}');
-              //   selectBloc.sink.add(addIndex);
-              // }
+              valueSelect.removeAt(index);
+              addIndex.removeAt(index);
             },
             child: Container(
               padding: const EdgeInsets.only(top: 8, right: 8, left: 8),

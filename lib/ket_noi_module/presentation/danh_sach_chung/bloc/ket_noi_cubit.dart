@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.da
 import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_state.dart';
-import 'package:ccvc_mobile/ket_noi_module/utils/constants/api_constants.dart';
+import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
