@@ -665,5 +665,10 @@
   "cac_to_chuc": "Các tổ chức",
   "chinh_phu": "Chính phủ",
   "cac_don_vi_hanh_chinh": "Các đơn vị hành chính",
-  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
+  "thay_doi_giong_noi": "Click vào icon để thu âm giọng nói",
+  "dong_bo": "Đồng bộ",
+  "danh_ba_to_chuc": "Danh bạ tổ chức",
+  "danh_ba_ca_nhan": "Danh bạ cá nhân",
+  "tim_kiem_danh_ba": "Tìm kiếm danh bạ",
+  "danh_ba_tu_may": "Danh bạ từ máy"
 }

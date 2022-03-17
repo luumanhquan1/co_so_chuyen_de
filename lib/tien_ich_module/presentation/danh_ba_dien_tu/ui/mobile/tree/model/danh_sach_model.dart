@@ -1,4 +1,4 @@
-class DonViModel {
+class DanhSachModel {
   String id = '';
   String name = '';
   String tenCanBo = '';
@@ -6,7 +6,7 @@ class DonViModel {
   String canBoId = '';
   String noidung = '';
 
-  DonViModel({
+  DanhSachModel({
     required this.id,
     required this.name,
     this.tenCanBo = '',
@@ -34,10 +34,10 @@ class Node<T> {
     isCheck = node.isCheck;
   }
 
-  Node<DonViModel>? search(Node<DonViModel> node) {
-    final nodeTree = value as DonViModel;
+  Node<DanhSachModel>? search(Node<DanhSachModel> node) {
+    final nodeTree = value as DanhSachModel;
     if (node.value.id == nodeTree.id) {
-      return this as Node<DonViModel>;
+      return this as Node<DanhSachModel>;
     } else {
       if (children.isNotEmpty) {
         for (final vl in children) {
