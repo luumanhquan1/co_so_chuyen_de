@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/dialog/loading_loadmore.dart';
@@ -54,7 +53,6 @@ class ListViewLoadMore extends StatelessWidget {
     cubit.loadMoreLoading = true;
     await callApi(cubit.loadMorePage);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,34 +109,36 @@ class ListViewLoadMore extends StatelessWidget {
                 children: [
                   StreamBuilder(
                     stream: cubit.loadMoreListStream,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<dynamic>> snapshot) {
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<List<dynamic>> snapshot,
+                    ) {
                       return isListView == true
                           ? ListView.builder(
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (ctx, index) {
+                              itemCount: snapshot.data?.length ?? 0,
+                              itemBuilder: (ctx, index) {
                                 return viewItem(snapshot.data![index], index);
-                        },
-                      )
+                              },
+                            )
                           : GridView.builder(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          top: 16,
-                          bottom: 32,
-                        ),
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: crossAxisSpacing ?? 16,
-                          childAspectRatio: checkRatio ?? 2 / 3,
-                        ),
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (_, index) {
-                          return viewItem(snapshot.data![index], index);
-                        },
-                      );
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 16,
+                                bottom: 32,
+                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16,
+                                crossAxisSpacing: crossAxisSpacing ?? 28,
+                                childAspectRatio: checkRatio ?? 2 / 3,
+                              ),
+                              itemCount: snapshot.data?.length ?? 0,
+                              itemBuilder: (_, index) {
+                                return viewItem(snapshot.data![index], index);
+                              },
+                            );
                     },
                   ),
                   Positioned(
