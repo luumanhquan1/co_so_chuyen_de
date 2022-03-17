@@ -35,80 +35,81 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<TypeKetNoiMenu>(
-        stream: cubit.streamTypeKetNoiMenu,
-        builder: (context, snapshot) {
-          return Scaffold(
-            backgroundColor: bgWidgets,
-            appBar: BaseAppBar(
-              title:
-                  snapshot.data?.getTitle() ?? TypeKetNoiMenu.SuKien.getTitle(),
-              leadingIcon: IconButton(
-                onPressed: () => {Navigator.pop(context)},
-                icon: SvgPicture.asset(
-                  ImageAssets.icBacks,
+      stream: cubit.streamTypeKetNoiMenu,
+      builder: (context, snapshot) {
+        return Scaffold(
+          backgroundColor: bgWidgets,
+          appBar: BaseAppBar(
+            title:
+                snapshot.data?.getTitle() ?? TypeKetNoiMenu.SuKien.getTitle(),
+            leadingIcon: IconButton(
+              onPressed: () => {Navigator.pop(context)},
+              icon: SvgPicture.asset(
+                ImageAssets.icBacks,
+              ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const TaoSuKienKetNoi(),
+                    ),
+                  );
+                },
+                icon: Container(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: SvgPicture.asset(
+                    ImageAssets.ic_plus,
+                  ),
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const TaoSuKienKetNoi(),
-                      ),
-                    );
-                  },
-                  icon: Container(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    child: SvgPicture.asset(
-                      ImageAssets.ic_plus,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => KetNoiMenuTablet(
-                          cubit: cubit,
-                        ),
-                      ),
-                    );
-                  },
-                  icon: SvgPicture.asset(
-                    ImageAssets.ic_mennu_ykien,
-                  ),
-                ),
-              ],
-            ),
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (snapshot.data == TypeKetNoiMenu.Chung)
-                  Container(
-                    padding: const EdgeInsets.only(top: 24, left: 30),
-                    child: Text(
-                      S.current.tin_noi_bat,
-                      style: titleAppbar(
-                        fontSize: 20,
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => KetNoiMenuTablet(
+                        cubit: cubit,
                       ),
                     ),
-                  )
-                else
-                  SearchWidget(),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: snapshot.data?.getScreenMenuTablet(cubit: cubit) ??
-                        _content(),
-                  ),
+                  );
+                },
+                icon: SvgPicture.asset(
+                  ImageAssets.ic_mennu_ykien,
                 ),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (snapshot.data == TypeKetNoiMenu.Chung)
+                Container(
+                  padding: const EdgeInsets.only(top: 24, left: 30),
+                  child: Text(
+                    S.current.tin_noi_bat,
+                    style: titleAppbar(
+                      fontSize: 20,
+                    ),
+                  ),
+                )
+              else
+                const SearchWidget(),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: snapshot.data?.getScreenMenuTablet(cubit: cubit) ??
+                      _content(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void callApi(int page) {
@@ -121,10 +122,6 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: cubit,
-      checkRatio: 1,
-      crossAxisSpacing: 28,
-      checkRatio: 1.25,
       cubit: cubit,
       isListView: false,
       callApi: (page) => {callApi(page)},

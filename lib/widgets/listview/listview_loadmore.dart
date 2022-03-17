@@ -54,7 +54,6 @@ class ListViewLoadMore extends StatelessWidget {
     await callApi(cubit.loadMorePage);
   }
 
-
   @override
   Widget build(BuildContext context) {
     initData();
@@ -116,30 +115,30 @@ class ListViewLoadMore extends StatelessWidget {
                     ) {
                       return isListView == true
                           ? ListView.builder(
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (ctx, index) {
+                              itemCount: snapshot.data?.length ?? 0,
+                              itemBuilder: (ctx, index) {
                                 return viewItem(snapshot.data![index], index);
-                        },
-                      )
+                              },
+                            )
                           : GridView.builder(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          top: 16,
-                          bottom: 32,
-                        ),
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: crossAxisSpacing ?? 16,
-                          childAspectRatio: checkRatio ?? 2 / 3,
-                        ),
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (_, index) {
-                          return viewItem(snapshot.data![index], index);
-                        },
-                      );
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 16,
+                                bottom: 32,
+                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16,
+                                crossAxisSpacing: crossAxisSpacing ?? 28,
+                                childAspectRatio: checkRatio ?? 2 / 3,
+                              ),
+                              itemCount: snapshot.data?.length ?? 0,
+                              itemBuilder: (_, index) {
+                                return viewItem(snapshot.data![index], index);
+                              },
+                            );
                     },
                   ),
                   Positioned(

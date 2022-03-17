@@ -62,7 +62,7 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
           ),
           body: Container(
             padding: const EdgeInsets.only(bottom: 16),
-            child: snapshot.data?.getScreenMenu(cubit: cubit) ?? Container(),
+            child: snapshot.data?.getScreenMenu(cubit: cubit) ?? _content(),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: labelColor,
