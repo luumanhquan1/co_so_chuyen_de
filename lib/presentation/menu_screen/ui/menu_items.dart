@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/phone/danh_sach_chung_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/ui/tab/danh_sach_chung_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tabbar_newspaper.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/ui/tablet/tabbar_newspaper_tablet.dart';
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/cai_dat_giao_dien_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/mobile/forgot_password_screen.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/ui/tablet/forgot_password_screen_tablet.dart';
@@ -180,7 +181,10 @@ extension GetScreen on MenuType {
           tabletScreen: const QLVBScreenTablet(),
         );
       case MenuType.baoChiMangXaHoi:
-        return const Scaffold(body: TabbarNewspaper());
+        return screenDevice(
+          mobileScreen: const TabbarNewspaper(),
+          tabletScreen: const TabbarNewspaperTablet(),
+        );
       case MenuType.ketNoi:
         return screenDevice(
           mobileScreen: const DanhSachChungScreen(),

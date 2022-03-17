@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -43,8 +44,8 @@ class ItemTableTopic extends StatelessWidget {
               title,
               style: textNormalCustom(
                 fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: titleColumn,
+                fontSize: 16.0.textScale(space: 4),
+                color: titleColor,
               ),
             ),
           ),

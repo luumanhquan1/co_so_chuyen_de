@@ -331,6 +331,11 @@ class ImageAssets {
   static const String icMenuItemBCMXH = '$baseImg/ic_menu_item_bcmxh.svg';
   static const String ic_Select = '$baseImg/ic_Select.svg';
   static const String ic_unchecked = '$baseImg/ic_unchecked.svg';
+  static const String ic_circle_fb = '$baseImg/cirlce_fb.svg';
+  static const String ic_circle_like = '$baseImg/circle_like.svg';
+  static const String ic_circle_share = '$baseImg/circle_share.svg';
+  static const String ic_circle_coment = '$baseImg/circle_comment.svg';
+  static const String ic_bg_radio= '$baseImg/bg_dongnai.png';
 
 
 
