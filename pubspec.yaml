@@ -55,8 +55,8 @@ dependencies:
   logger: any
   rxdart: ^0.27.1
   hive: ^2.0.5
+  just_audio: ^0.9.20
   speech_to_text: 5.4.3
-
   #  permission_handler: ^8.1.4+2
   file_picker: ^4.0.2
   cool_alert: ^1.1.0
