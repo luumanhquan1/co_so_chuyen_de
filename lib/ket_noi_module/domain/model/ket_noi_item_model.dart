@@ -202,138 +202,125 @@ enum TypeKetNoiMenu {
 }
 
 extension GetScreenMenu on TypeKetNoiMenu {
-  Widget getScreenMenu({required KetNoiCubit cubit}) {
-    void callApi(int page) {
-      switch (this) {
-        case TypeKetNoiMenu.Chung:
-          {
-            cubit.getListChungKetNoi(
-              pageSize: cubit.pageSize,
-              pageIndex: page,
-              type: cubit.type,
-            );
-
-            break;
-          }
-        case TypeKetNoiMenu.ChinhPhu:
-          {
-            break;
-          }
-      }
-    }
-
+  void callApi(int page, KetNoiCubit cubit, TypeKetNoiMenu type) {
     switch (this) {
       case TypeKetNoiMenu.Chung:
-        return ListViewLoadMore(
-          cubit: cubit,
-          isListView: true,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListChung(
-            danhSachChungModel: value as DanhSachChungModel,
-            index: index ?? 0,
-          ),
-        );
+        {
+          cubit.getListChungKetNoi(
+            pageSize: cubit.pageSize,
+            pageIndex: page,
+            type: cubit.type,
+          );
 
+          break;
+        }
       case TypeKetNoiMenu.ChinhPhu:
-        return ListViewLoadMore(
-          cubit: cubit,
-          isListView: true,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListTrongNuoc(
-            model: ItemTrongNuocModel(
-              category: 'CHINH_PHU',
-              categoryTitle: "Chính phủ",
-              diaChi: '16 Lê Hồng Phong - Ba Đình - Hà Nội',
-              email: 'thongtinchinhphu@chinhphu.vn',
-              fax: '08 048 924',
-              id: '597c41ac-c39e-4d67-9e52-08d96d304ff9',
-              imageUrlPath:
-                  'https://api-ccvc-uat.chinhquyendientu.vn/attachments/upload/091220211616214465.png',
-              sdt: '08 043 162',
-              tenCoQuanLienHe: 'Chen phủ Việt Nam',
-            ),
-          ),
-        );
+        {
+          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          break;
+        }
 
-      default:
-        return ListViewLoadMore(
-          cubit: cubit,
-          isListView: true,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListChung(
-            danhSachChungModel: value as DanhSachChungModel,
-            index: index ?? 0,
-          ),
-        );
+      case TypeKetNoiMenu.CacToChuc:
+        {
+          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          break;
+        }
+
+      case TypeKetNoiMenu.CacDonViHanhChinh:
+        {
+          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          break;
+        }
     }
   }
 
-  Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
-    void callApi(int page) {
-      switch (this) {
-        case TypeKetNoiMenu.Chung:
-          {
-            cubit.getListChungKetNoi(
-              pageSize: cubit.pageSize,
-              pageIndex: page,
-              type: cubit.type,
+  Widget getScreenMenu({required KetNoiCubit cubit}) {
+    return ListViewLoadMore(
+      cubit: cubit,
+      isListView: true,
+      callApi: (page) => {callApi(page, cubit, this)},
+      viewItem: (value, index) {
+        switch (this) {
+          case TypeKetNoiMenu.Chung:
+            return ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
             );
 
-            break;
-          }
-        case TypeKetNoiMenu.ChinhPhu:
-          {
-            break;
-          }
-      }
-    }
+          case TypeKetNoiMenu.ChinhPhu:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
 
+          case TypeKetNoiMenu.CacToChuc:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+
+          case TypeKetNoiMenu.CacDonViHanhChinh:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+
+          default:
+            return ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
+            );
+        }
+      },
+    );
+  }
+
+  Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
+    return ListViewLoadMore(
+      cubit: cubit,
+      isListView: false,
+      checkRatio: 1.15,
+      callApi: (page) => {callApi(page, cubit, this)},
+      viewItem: (value, index) {
+        switch (this) {
+          case TypeKetNoiMenu.Chung:
+            return ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
+            );
+
+          case TypeKetNoiMenu.ChinhPhu:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+
+          case TypeKetNoiMenu.CacToChuc:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+
+          case TypeKetNoiMenu.CacDonViHanhChinh:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+
+          default:
+            return ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
+            );
+        }
+      },
+    );
+  }
+
+  String getCategory() {
     switch (this) {
-      case TypeKetNoiMenu.Chung:
-        return ListViewLoadMore(
-          cubit: cubit,
-          isListView: false,
-          checkRatio: 1.15,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListChung(
-            danhSachChungModel: value as DanhSachChungModel,
-            index: index ?? 0,
-          ),
-        );
-
       case TypeKetNoiMenu.ChinhPhu:
-        return ListViewLoadMore(
-          cubit: cubit,
-          isListView: false,
-          checkRatio: 1.25,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListTrongNuoc(
-            model: ItemTrongNuocModel(
-              category: 'CHINH_PHU',
-              categoryTitle: "Chính phủ",
-              diaChi: '16 Lê Hồng Phong - Ba Đình - Hà Nội',
-              email: 'thongtinchinhphu@chinhphu.vn',
-              fax: '08 048 924',
-              id: '597c41ac-c39e-4d67-9e52-08d96d304ff9',
-              imageUrlPath:
-                  'https://api-ccvc-uat.chinhquyendientu.vn/attachments/upload/091220211616214465.png',
-              sdt: '08 043 162',
-              tenCoQuanLienHe: 'Chen phủ Việt Nam',
-            ),
-          ),
-        );
-
+        return 'CHINH_PHU';
+      case TypeKetNoiMenu.CacToChuc:
+        return 'CAC_TO_CHUC';
+      case TypeKetNoiMenu.CacDonViHanhChinh:
+        return 'CAC_DON_VI_HANH_CHINH';
       default:
-        return ListViewLoadMore(
-          cubit: cubit,
-          checkRatio: 1.25,
-          isListView: false,
-          callApi: (page) => {callApi(page)},
-          viewItem: (value, index) => ItemListChung(
-            danhSachChungModel: value as DanhSachChungModel,
-            index: index ?? 0,
-          ),
-        );
+        return 'CHINH_PHU';
     }
   }
 

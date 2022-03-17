@@ -83,6 +83,7 @@ class ImageAssets {
   static const String icCamera = '$baseImg/ic_camera.svg';
   static const String icX = '$baseImg/ic_x.svg';
   static const String icV = '$baseImg/ic_v.svg';
+  static const String icVoice = '$baseImg/ic_voice.svg';
   static const String icProfile = '$baseImg/profile_edit_persion.png';
   static const String icVector = '$baseImg/ic_vector.svg';
   static const String icManager = '$baseImg/ic_edit_manager_person.svg';
@@ -234,6 +235,7 @@ class ImageAssets {
   static const String icTheoDangLichCir = '$baseImg/ic_theo_dang_lich_cir.svg';
   static const String icLichLanhDaoCir = '$baseImg/ic_lich_lanh_dao_cir.svg';
   static const String icDeaultChuDe = '$baseImg/ic_default_chude.svg';
+  static const String icAnimationVoice = '$baseImg/ic_animation_voice.svg';
 
   static const String image_lock_reset_tablet =
       '$baseImg/image_lock_reset_tablet.svg';

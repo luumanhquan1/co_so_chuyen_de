@@ -672,5 +672,6 @@
   "ngay_hoan_thanh": "Ngày hoàn thành",
   "chon_nguoi_thuc_hien" : "Chọn người thực hiện",
   "tim_theo_nguoi" : "Tìm theo người",
-  "nguoi_thuc_hien" : "Người thực hiện"
+  "nguoi_thuc_hien" : "Người thực hiện",
+  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
 }

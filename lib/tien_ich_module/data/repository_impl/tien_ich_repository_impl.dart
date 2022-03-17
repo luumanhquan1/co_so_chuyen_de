@@ -5,9 +5,13 @@ import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/tien_ich_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/detail_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/danh_sach_hssd_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/detail_huong_dan_su_dung_response.dart';
 
 class TienIchRepositoryImpl implements TienIchRepository {
   final TienIchService _tienIchService;
@@ -54,8 +58,26 @@ class TienIchRepositoryImpl implements TienIchRepository {
   ) {
     return runCatchingAsync<DataListNguoiThucHienResponse,
         ItemChonBienBanCuocHopModel>(
-      () => _tienIchService.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
-      (res) => res.toDomain(),
+          () =>
+          _tienIchService.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
+          (res) => res.toDomain(),
     );
+  }
+  @override
+  Future<Result<DataDanhSachTitleHDSD>> getDanhSachHDSD(int pageIndex,
+      int pageSize, String topicId, String type, String searchKeyword) {
+    return runCatchingAsync<DataDanhSachHDSDResponse, DataDanhSachTitleHDSD>(
+        () => _tienIchService.getDanhSachHDSD(
+            pageIndex, pageSize, topicId, type, searchKeyword),
+        (response) =>
+            response.data?.toModel() ?? DataDanhSachTitleHDSD.empty());
+  }
+
+  @override
+  Future<Result<DetailHuongDanSuDung>> getDetailHuongDanSuDung(String id) {
+    return runCatchingAsync<DataDetailHuongDanSuDungResponse, DetailHuongDanSuDung>(
+        () => _tienIchService.getDetailHuongDanSuDung(id),
+        (response) => response.data?.toModel()??DetailHuongDanSuDung());
+
   }
 }
