@@ -276,7 +276,8 @@ extension GetScreenMenu on TypeKetNoiMenu {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: false,
-      checkRatio: 1.15,
+      crossAxisSpacing: 28,
+      checkRatio: 1,
       callApi: (page) => {callApi(page, cubit, this)},
       viewItem: (value, index) {
         switch (this) {
