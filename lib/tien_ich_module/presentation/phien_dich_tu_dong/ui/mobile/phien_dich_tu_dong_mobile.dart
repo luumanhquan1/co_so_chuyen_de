@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/config/resources/color.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,24 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarDefaultBack(
-          S.current.phien_dich_tu_dong
+        S.current.phien_dich_tu_dong,
       ),
-      body: Container(),
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color:borderColor.withOpacity(0.5),),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+
+                ]
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
