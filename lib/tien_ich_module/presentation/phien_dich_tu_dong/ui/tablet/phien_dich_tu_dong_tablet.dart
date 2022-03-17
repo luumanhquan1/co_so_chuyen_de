@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -62,6 +63,13 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
       _lastWords = result.recognizedWords;
     });
   }
+
+  final snackBar = SnackBar(
+    content: Text(
+      S.current.coppy,
+      textAlign: TextAlign.center,
+    ),
+  );
 
   void concatenationString() {
     textEditingController.text = '${textEditingController.text} $_lastWords';
@@ -219,6 +227,10 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                       vertical: 20,
                       horizontal: 16,
                     ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 22,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
@@ -234,15 +246,29 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                       ],
                     ),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          cubit.textTranslate,
-                          style: textNormalCustom(
-                            color: textTitle,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
+                        Expanded(
+                          child: Text(
+                            cubit.textTranslate,
+                            style: textNormalCustom(
+                              color: textTitle,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Clipboard.setData(
+                              ClipboardData(text: cubit.textTranslate),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                          child: SvgPicture.asset(ImageAssets.icCoppy),
+                        )
                       ],
                     ),
                   ),

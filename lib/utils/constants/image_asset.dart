@@ -135,6 +135,7 @@ class ImageAssets {
   static const String headerBackground = '$baseImg/header_background.png';
   static const String headerMenu = '$baseImg/header_menu.png';
   static const String icPlay = '$baseImg/ic_play.svg';
+  static const String icCoppy = '$baseImg/ic_coppy.svg';
   static const String icMenuCalender = '$baseImg/menu_calender.svg';
   static const String icAddButtonCalender = '$baseImg/add_button_calender.svg';
   static const String icAddButtonCalenderTablet =

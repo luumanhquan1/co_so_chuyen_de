@@ -11,7 +11,7 @@ class PhienDichTuDongCubit {
 
   Stream<int> get lengthTextStream => lengthTextSubject.stream;
 
-  String textTranslate = '';
+  String textTranslate = 'It’s raining today';
 
   void swapLanguage() {
     if(languageSubject.value == LANGUAGE.vn) {
