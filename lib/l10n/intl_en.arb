@@ -667,5 +667,10 @@
   "cach_tot_nhat_de_nhan_cau_tra_loi_nhanh": "Cách tốt nhất để nhận được câu trả lời nhanh!",
   "cac_cau_hoi_pho_bien": "Các câu hỏi phổ biến",
   "chi_tiet_bai_viet": "Chi tiết bài viết",
-  "tim_kiem_nhanh": "Tìm kiếm nhanh"
+  "tim_kiem_nhanh": "Tìm kiếm nhanh",
+  "chinh_sua": "Chỉnh sửa",
+  "ngay_hoan_thanh": "Ngày hoàn thành",
+  "chon_nguoi_thuc_hien" : "Chọn người thực hiện",
+  "tim_theo_nguoi" : "Tìm theo người",
+  "nguoi_thuc_hien" : "Người thực hiện"
 }

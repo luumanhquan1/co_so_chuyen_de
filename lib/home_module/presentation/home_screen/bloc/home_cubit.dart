@@ -274,24 +274,6 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
 
 ///Danh sách công việc
 class DanhSachCongViecCubit extends HomeCubit {
-  TodoListModel todoListModel = TodoListModel(
-    listTodoImportant: [
-      TodoModel(
-        label: "123456789",
-      ),
-      TodoModel(
-        label: "123456789",
-      ),
-      TodoModel(
-        label: "123456789",
-      ),
-    ],
-    listTodoDone: [
-      TodoModel(
-        label: "123456789",
-      ),
-    ],
-  );
   final BehaviorSubject<TodoListModel> _getTodoList =
       BehaviorSubject<TodoListModel>();
   String id = '';
