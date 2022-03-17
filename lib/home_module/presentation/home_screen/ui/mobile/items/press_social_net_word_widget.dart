@@ -145,7 +145,7 @@ class _PressSocialNetWorkState extends State<PressSocialNetWork> {
                                 PageRouteBuilder(
                                   pageBuilder: (_, __, ___) => WebViewScreen(
                                     title: '',
-                                    url: result.url,
+                                    url: 'http://qlvb-test.chinhquyendientu.vn/van-ban-den/xem-luong-van-ban-den/465746b2-7d73-421a-a936-8f35d08e58e7?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxOTI2NjE0My1mZWVlLTQ0ZDAtODI4YS1lMjlkZjIxNWY0ODEiLCJuYW1laWQiOiIxOTI2NjE0My1mZWVlLTQ0ZDAtODI4YS1lMjlkZjIxNWY0ODEiLCJ1bmlxdWVfbmFtZSI6ImxhbWxzIiwiQ2FuQm9JbmZvIjoie1wiQ2FuQm9JZFwiOlwiYjVhNmI1ODQtYjRhMS00MzM3LTkwMGQtYWQyZTQ5OWFkNmMwXCIsXCJUZW5DYW5Cb1wiOlwiTMOqIFPEqSBMw6JtXCIsXCJDYW5Cb1Bvc2l0aW9uTWFwcGluZ01vZGVsc1wiOntcIkRvblZpSWRcIjpcIjBiZjNiMmMzLTc2ZDctNGUwNS1hNTg3LTkxNjVjMzYyNGQ3NlwiLFwiVGVuRG9uVmlcIjpcIlVCTkQgVOG7iE5IIMSQ4buSTkcgTkFJXCIsXCJDaHVjVnVJZFwiOlwiNzkzMTYzYzktNGExOC00ZWY2LWEzOGQtMDQzZmM3ZjY3MzZkXCIsXCJUZW5DaHVjVnVcIjpcIlbEg24gdGjGsFwiLFwiUGhhbVZpSWRcIjpcIjBiZjNiMmMzLTc2ZDctNGUwNS1hNTg3LTkxNjVjMzYyNGQ3NlwiLFwiVGVuUGhhbVZpXCI6XCJVQk5EIFThu4hOSCDEkOG7kk5HIE5BSVwifX0iLCJJc0xhbmhEYW8iOiJGYWxzZSIsIm5iZiI6MTY0NzMxMDA1OCwiZXhwIjoxNjQ4MTc0MDU4LCJpYXQiOjE2NDczMTAwNTh9.qGyBdk1V5jtJ_8gMAi7568iUn-LiPc4HZUnLMx1FvqU',
                                   ),
                                 ),
                               );
