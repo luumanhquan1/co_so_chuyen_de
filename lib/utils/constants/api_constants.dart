@@ -133,6 +133,8 @@ class ApiConstants {
   static const GET_DANH_SACH_Y_KIEN = '/qlvb/api/qlvb/van-ban-den/y-kien-xu-ly/danh-sach-y-kien';
   static const BAO_CAO_THONG_KE = '/api/NewsNetViews/dashboard_statistical';
   static const MENU_BCMXH = '/api/NewsNetViews/menu-items?';
+  static const Tin_TUC_THOI_SU = '/api/NewsNetViews/tin_tuc_thoi_su?';
+
 }
 
 class ImageConstants {

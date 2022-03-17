@@ -1,7 +1,7 @@
-import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke_resopnse.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/menu_response.dart';
+import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/tin_tuc_thoi_su_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -47,4 +47,13 @@ abstract class BaoChiMangXaHoiService {
 
   @GET(ApiConstants.MENU_BCMXH)
   Future<List<MenuBCMXHResponse>> getMenuBCMXH();
+
+  @GET(ApiConstants.Tin_TUC_THOI_SU)
+  Future<String> getTinTucThoiSu(
+    @Query('pageIndex') int pageInDex,
+    @Query('pageSize') int pageSize,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+    @Query('total') int total,
+  );
 }

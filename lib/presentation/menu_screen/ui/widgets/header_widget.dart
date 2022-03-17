@@ -13,13 +13,13 @@ class HeaderMenuWidget extends StatelessWidget {
   final String urlBackGround;
   final MenuCubit menuCubit;
   final Color overlayColor;
-  const HeaderMenuWidget({
-    Key? key,
-    this.paddingVertical = 29,
-    this.urlBackGround = ImageAssets.headerMenu,
-    required this.menuCubit,
-    this.overlayColor = Colors.transparent
-  }) : super(key: key);
+  const HeaderMenuWidget(
+      {Key? key,
+      this.paddingVertical = 29,
+      this.urlBackGround = ImageAssets.headerMenu,
+      required this.menuCubit,
+      this.overlayColor = Colors.transparent})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +28,24 @@ class HeaderMenuWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
         color: Colors.transparent,
-        borderRadius:  BorderRadius.all(Radius.circular(8)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: Stack(
         children: [
           Stack(
             children: [
-              Image.asset(urlBackGround),
-               Container(
-                 height: 170,
-                 width: double.infinity,
-                 color: overlayColor,
-               )
+              Container(
+                height: 170,
+                  width: double.infinity,
+                  child: Image.asset(
+                    urlBackGround,
+                    fit: BoxFit.fill,
+                  )),
+              Container(
+                height: 170,
+                width: double.infinity,
+                color: overlayColor,
+              )
             ],
           ),
           Center(
@@ -74,11 +80,13 @@ class HeaderMenuWidget extends StatelessWidget {
                             child: data?.anhDaiDienFilePath == null
                                 ? const SizedBox()
                                 : CachedNetworkImage(
-                              imageUrl: data?.anhDaiDienFilePath ?? '',
-                              errorWidget: (context, url, error) => Container(
-                                  color: Colors.black,
-                                  child: Image.asset(ImageAssets.anhDaiDienMacDinh)),
-                            ),
+                                    imageUrl: data?.anhDaiDienFilePath ?? '',
+                                    errorWidget: (context, url, error) =>
+                                        Container(
+                                            color: Colors.black,
+                                            child: Image.asset(
+                                                ImageAssets.anhDaiDienMacDinh)),
+                                  ),
                           ),
                         ),
                       ),
@@ -99,7 +107,9 @@ class HeaderMenuWidget extends StatelessWidget {
                       Text(
                         data?.chucVu ?? '',
                         style: textNormal(
-                          AppTheme.getInstance().dfBtnTxtColor().withOpacity(0.8),
+                          AppTheme.getInstance()
+                              .dfBtnTxtColor()
+                              .withOpacity(0.8),
                           14.0.textScale(),
                         ),
                       )

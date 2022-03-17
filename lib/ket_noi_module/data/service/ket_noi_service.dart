@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/ket_noi_module/data/response/detail_chung_ket_noi_re
 import 'package:ccvc_mobile/ket_noi_module/data/response/list_chung_ket_noi_response.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/response/loai_bai_viet_response.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/response/tao_su_kien_response.dart';
+import 'package:ccvc_mobile/ket_noi_module/data/response/trong_nuoc_response.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -41,5 +42,14 @@ abstract class KetNoiService {
   @FormUrlEncoded()
   Future<TaoSuKienResponse> postTaoSuKien(
     @Part() TaoSuKienRequest taoSuKienRequest,
+  );
+
+  @GET(ApiConstants.TRONG_NUOC)
+  @FormUrlEncoded()
+  Future<TrongNuocResponse> getListTrongNuoc(
+    @Query('pageIndex') int pageIndex,
+    @Query('pageSize') int pageSize,
+    @Query('category') String category,
+    @Query('fullSize') bool fullSize,
   );
 }

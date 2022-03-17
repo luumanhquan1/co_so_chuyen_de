@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/select_only_expands/expand_group.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class ExpandOnlyWidget extends StatefulWidget {
@@ -8,13 +9,18 @@ class ExpandOnlyWidget extends StatefulWidget {
   final Widget child;
   final bool isShowIcon;
   final AnimationController? initController;
-  const ExpandOnlyWidget({
+  final Function onTap;
+  bool? isTablet;
+
+  ExpandOnlyWidget({
     Key? key,
     this.initExpand = false,
     required this.child,
     required this.header,
     this.isShowIcon = true,
     this.initController,
+    required this.onTap,
+    this.isTablet,
   }) : super(key: key);
 
   @override
@@ -28,6 +34,7 @@ class _ExpandedSectionState extends State<ExpandOnlyWidget>
   bool isExpanded = false;
   GroupProvider? groupProvider;
   final key = UniqueKey();
+
   @override
   void initState() {
     super.initState();
@@ -89,47 +96,70 @@ class _ExpandedSectionState extends State<ExpandOnlyWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          onTap: () {
-            if (groupProvider != null) {
-              groupProvider!.expand(key);
-            } else {
-              isExpanded = !isExpanded;
-              _runExpandCheck();
-            }
-          },
-          child: Row(
-            children: [
-              Flexible(child: widget.header),
-              if (widget.isShowIcon)
-                AnimatedBuilder(
-                  animation: expandController,
-                  builder: (context, _) {
-                    return expandController.value == 0
-                        ? const Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            color: AqiColor,
-                          )
-                        : const Icon(
-                            Icons.keyboard_arrow_up_rounded,
-                            color: AqiColor,
-                          );
-                  },
-                )
-              else
-                const SizedBox()
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (expandController.value == 0) {
+                widget.onTap();
+              }
+              if (groupProvider != null) {
+                groupProvider!.expand(key);
+              } else {
+                isExpanded = !isExpanded;
+                _runExpandCheck();
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.0.textScale(space: 4),
+                vertical: 7.5.textScale(space: 4),
+              ),
+              decoration: BoxDecoration(
+                color: widget.isTablet ?? false
+                    ? backgroundColorApp
+                    : borderColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: borderColor.withOpacity(0.5)),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Flexible(child: widget.header),
+                      if (widget.isShowIcon)
+                        AnimatedBuilder(
+                          animation: expandController,
+                          builder: (context, _) {
+                            return expandController.value == 0
+                                ? const Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    color: AqiColor,
+                                  )
+                                : const Icon(
+                                    Icons.keyboard_arrow_up_rounded,
+                                    color: AqiColor,
+                                  );
+                          },
+                        )
+                      else
+                        const SizedBox()
+                    ],
+                  ),
+                  SizeTransition(
+                    axisAlignment: 1.0,
+                    sizeFactor: animation,
+                    child: widget.child,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        SizeTransition(
-          axisAlignment: 1.0,
-          sizeFactor: animation,
-          child: widget.child,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

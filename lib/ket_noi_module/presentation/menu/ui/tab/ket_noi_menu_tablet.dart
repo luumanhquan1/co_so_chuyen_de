@@ -85,7 +85,7 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                                                       isIcon: false,
                                                       onTap: () {
                                                         e.onTap(context,
-                                                            widget.cubit);
+                                                            widget.cubit,);
                                                       },
                                                     ),
                                                   )

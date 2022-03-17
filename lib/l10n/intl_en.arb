@@ -673,5 +673,6 @@
   "zoom": "Zoom",
   "tao_thanh_cong": "Tạo sự kiện thành công",
   "tao_that_bai": "Tạo sự kiện thất bại",
-  "thong_tin_su_kien": "Thông tin sự kiện"
+  "thong_tin_su_kien": "Thông tin sự kiện",
+  "thay_doi_giong_noi" : "Click vào icon để thu âm giọng nói"
 }
