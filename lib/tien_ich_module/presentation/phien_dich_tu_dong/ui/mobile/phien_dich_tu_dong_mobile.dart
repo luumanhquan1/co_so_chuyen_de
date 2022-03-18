@@ -13,6 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:translator/translator.dart';
 
 class PhienDichTuDongMobile extends StatefulWidget {
   const PhienDichTuDongMobile({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class PhienDichTuDongMobile extends StatefulWidget {
 class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
   PhienDichTuDongCubit cubit = PhienDichTuDongCubit();
   TextEditingController textEditingController = TextEditingController();
+  final translator = GoogleTranslator();
 
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
@@ -35,6 +37,18 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
     _initSpeech();
   }
 
+  void viToEn() {
+    translator.translate(textEditingController.text, to: 'en').then((result) {
+      cubit.translateLanguage(result.text);
+    });
+  }
+
+  void enToVi() {
+    translator.translate(textEditingController.text, to: 'vi').then((result) {
+      cubit.translateLanguage(result.text);
+    });
+  }
+
   /// This has to happen only once per app
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
@@ -44,6 +58,7 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
   /// Each time to start a speech recognition session
   void _startListening() async {
     await _speechToText.listen(onResult: _onSpeechResult);
+    viToEn();
     setState(() {});
   }
 
@@ -96,19 +111,23 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
               child: StreamBuilder<LANGUAGE>(
                 stream: cubit.languageStream,
                 builder: (context, snapshot) {
-                  final data = snapshot.data ?? LANGUAGE.vn;
+                  final dataLanguage = snapshot.data ?? LANGUAGE.vn;
                   return Row(
                     children: [
                       Expanded(
                         child: Row(
                           children: [
-                            data.languageLeftWidget(),
+                            dataLanguage.languageLeftWidget(),
                           ],
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           cubit.swapLanguage();
+                          cubit.translateLanguage(textEditingController.text);
+                          cubit.languageSubject.value == LANGUAGE.vn
+                              ? viToEn()
+                              : enToVi();
                         },
                         child: SvgPicture.asset(ImageAssets.icReplace),
                       ),
@@ -116,7 +135,7 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            data.languageRightWidget(),
+                            dataLanguage.languageRightWidget(),
                           ],
                         ),
                       ),
@@ -148,7 +167,11 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
                   Expanded(
                     child: TextField(
                       controller: textEditingController,
-                      onChanged: (String value) {},
+                      onChanged: (String value) {
+                        cubit.languageSubject.value == LANGUAGE.vn
+                            ? viToEn()
+                            : enToVi();
+                      },
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -184,6 +207,7 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
             ),
             Container(
               height: 180,
+              padding: const EdgeInsets.all(16),
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -200,14 +224,21 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
                 ],
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    cubit.textTranslate,
-                    style: textNormalCustom(
-                      color: textTitle,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
+                  StreamBuilder<String>(
+                    stream: cubit.textTranslateStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? '';
+                      return Text(
+                        textEditingController.text.isEmpty ? '' : data,
+                        style: textNormalCustom(
+                          color: textTitle,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -5,21 +5,27 @@ const baseImg = 'lib/tien_ich_module/assets/images';
 
 class ImageAssets {
   ///Svg path
-  static const String icChuyenGiongNoiThanhVanBan = '$baseImg/ic_chuyen_giong_noi_thanh_van_ban.svg';
-  static const String icChuyenVanBanThanhGiongNoi = '$baseImg/ic_chuyen_van_ban_thanh_giong_noi.svg';
-  static const String icDanhBaDienTu = '$baseImg/ic_danh_ba_dien_tu_tien_ich.svg';
-  static const String icDanhSachCongViec = '$baseImg/ic_danh_sach_cong_viec.svg';
+  static const String icChuyenGiongNoiThanhVanBan =
+      '$baseImg/ic_chuyen_giong_noi_thanh_van_ban.svg';
+  static const String icChuyenVanBanThanhGiongNoi =
+      '$baseImg/ic_chuyen_van_ban_thanh_giong_noi.svg';
+  static const String icDanhBaDienTu =
+      '$baseImg/ic_danh_ba_dien_tu_tien_ich.svg';
+  static const String icDanhSachCongViec =
+      '$baseImg/ic_danh_sach_cong_viec.svg';
   static const String icHuongDanSuDung = '$baseImg/ic_huong_dan_su_dung.svg';
   static const String icLichAmDuong = '$baseImg/ic_lich_am_duong.svg';
   static const String icMangXaHoi = '$baseImg/ic_mang_xa_hoi_noi_bo.svg';
   static const String icPhienDichTuDong = '$baseImg/ic_phien_dich_tu_dong.svg';
-  static const String icTraCuuVanBanPhapLuat = '$baseImg/ic_tra_cuu_van_ban_phap_luat.svg';
+  static const String icTraCuuVanBanPhapLuat =
+      '$baseImg/ic_tra_cuu_van_ban_phap_luat.svg';
   static const String image_tien_ich = '$baseImg/image_tien_ich.svg';
   static const String image_tien_ichPng = '$baseImg/image_tien_ich.png';
   static const String imageTienIchTablet = '$baseImg/image_tien_ich_tablet.png';
+
   //icon 12 con giap
   static const String icChuot = '$baseImg/ic_chuot.svg';
-  static const String icSuu =   '$baseImg/ic_suu.svg';
+  static const String icSuu = '$baseImg/ic_suu.svg';
   static const String icDan = '$baseImg/ic_dan.svg';
   static const String icMao = '$baseImg/ic_mao.svg';
   static const String icThin = '$baseImg/ic_thin.svg';
@@ -30,6 +36,7 @@ class ImageAssets {
   static const String icDau = '$baseImg/ic_dau.svg';
   static const String icTuat = '$baseImg/ic_tuat.svg';
   static const String icHoi = '$baseImg/ic_hoi.svg';
+
   //icon huong dan su dung
   static const String icBaoCao = '$baseImg/ic_bao_cao.svg';
   static const String icLichLamViec = '$baseImg/ic_lich_lam_viec.svg';
@@ -39,21 +46,41 @@ class ImageAssets {
   static const String icYKienNguoiDan = '$baseImg/ic_y_kien_nguoi_dan.svg';
   static const String icQuanLyVanBan = '$baseImg/ic_quan_ly_van_ban.svg';
   static const String icBaoChiMangXaHoi = '$baseImg/ic_bao_chi_mang_xa_hoi.svg';
-  static const String icBaoChiMangXaHoiTablet = '$baseImg/ic_bao_chi_mang_xa_hoi_tablet.svg';
+  static const String icBaoChiMangXaHoiTablet =
+      '$baseImg/ic_bao_chi_mang_xa_hoi_tablet.svg';
   static const String icCctvCamBien = '$baseImg/ic_cctv_cam_bien.svg';
-  static const String icCctvCamBienTablet = '$baseImg/ic_cctv_cam_bien_tablet.svg';
+  static const String icCctvCamBienTablet =
+      '$baseImg/ic_cctv_cam_bien_tablet.svg';
   static const String icKetNoi = '$baseImg/ic_ket_noi.svg';
   static const String icKetNoiTablet = '$baseImg/ic_ket_noi_tablet.svg';
   static const String icTuongTacNoiBo = '$baseImg/ic_tuong_tac_noi_bo.svg';
-  static const String icTuongTacNoiBoTablet = '$baseImg/ic_tuong_tac_noi_bo_tablet.svg';
+  static const String icTuongTacNoiBoTablet =
+      '$baseImg/ic_tuong_tac_noi_bo_tablet.svg';
   static const String icTienIch = '$baseImg/ic_tien_ich.svg';
-  static const String icDanhBaDienTuHdsd = '$baseImg/ic_danh_ba_dien_tu_hdsd.svg';
-  static const String icDanhBaDienTuHdsdTablet = '$baseImg/ic_danh_ba_dien_tu_hdsd_tablet.svg';
-  static const String imageHuongDanSuDungTablet = '$baseImg/image_huong_dan_su_dung_tablet.png';
+  static const String icDanhBaDienTuHdsd =
+      '$baseImg/ic_danh_ba_dien_tu_hdsd.svg';
+  static const String icDanhBaDienTuHdsdTablet =
+      '$baseImg/ic_danh_ba_dien_tu_hdsd_tablet.svg';
+  static const String imageHuongDanSuDungTablet =
+      '$baseImg/image_huong_dan_su_dung_tablet.png';
+
   //icon huong dan su dung bao cao
   static const String icCallHDSD = '$baseImg/ic_call_hdsd.svg';
   static const String icMailHDSD = '$baseImg/ic_mail_hdsd.svg';
 
+  //icon lich am duong
+  static const String icIconMenuLichAmDuong =
+      '$baseImg/ic_icon_menu_lich_am_huong.svg';
+  static const String icBack = '$baseImg/ic_back.svg';
+
+// icon danh sach dien tu
+  static const String icDanhBa = '$baseImg/ic_danh_bas.png';
+  static const String icThemMoi = '$baseImg/ic_them_moiz.png';
+  static const String icEdit = '$baseImg/ic_edits.svg';
+  static const String icDelete = '$baseImg/ic_delete.svg';
+  static const String icPhone = '$baseImg/ic_phone.svg';
+  static const String icMail = '$baseImg/ic_mail.svg';
+  static const String icTron = '$baseImg/ic_tron.svg';
 
   static SvgPicture svgAssets(
     String name, {
