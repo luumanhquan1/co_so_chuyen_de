@@ -29,6 +29,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
@@ -60,6 +61,7 @@ mixin HopRepository {
 
   Future<Result<List<NguoiChutriModel>>> getDanhSachNguoiChuTriPhienHop(
       String id);
+
   Future<Result<List<String>>> postEventCalendar(EventCalendarRequest request);
 
   Future<Result<AddFileModel>> postFileTaoLichHop(
@@ -149,4 +151,16 @@ mixin HopRepository {
   Future<Result<XemKetLuanHopModel>> getXemKetLuanHop(String id);
 
   Future<Result<List<YKienModel>>> getDanhSachYKien(String id);
+
+  Future<Result<List<StatusKetLuanHopModel>>> getListStatusKetLuanHop();
+
+  Future<Result<MessageModel>> deleteKetLuanHop(String id);
+
+  Future<Result<MessageModel>> deleteChiTietLichHop(String id);
+
+  Future<Result<MessageModel>> huyChiTietLichHop(
+    String scheduleId,
+    int statusId,
+    bool isMulti,
+  );
 }

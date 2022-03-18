@@ -74,6 +74,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                     textContent: S.current.ban_chan_chan_huy_lich_nay,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
+                      cubit.huyChiTietLichHop(widget.id);
                       Navigator.pop(context);
                     },
                     title: S.current.huy_lich,
@@ -89,9 +90,10 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                 onTap: () {
                   showDiaLog(
                     context,
-                    textContent: S.current.ban_chan_chan_huy_lich_nay,
+                    textContent: S.current.xoa_chi_tiet_lich_hop,
                     btnLeftTxt: S.current.khong,
                     funcBtnRight: () {
+                      cubit.deleteChiTietLichHop(widget.id);
                       Navigator.pop(context);
                     },
                     title: S.current.khong,

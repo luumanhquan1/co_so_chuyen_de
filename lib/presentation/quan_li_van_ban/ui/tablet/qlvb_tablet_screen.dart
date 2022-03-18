@@ -62,7 +62,6 @@ class _QLVBScreenTabletState extends State<QLVBScreenTablet>
                   child: Container(
                     color: Colors.white,
                     child: ChooseTimeScreen(
-                      baseChooseTimeCubit: chooseTimeCubit,
                       today: DateTime.now(),
                       onSubmit: (value){
                         qlvbCubit.searchDataDanhSachVBDen(
