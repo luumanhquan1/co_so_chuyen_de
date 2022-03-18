@@ -60,7 +60,7 @@ class _DanhSachCongViecTienIchMobileState
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
-            icon: SvgPicture.asset(ImageAssets.Group3),
+            icon: SvgPicture.asset(ImageAssets.ic_Group),
             itemBuilder: (context) => [
               PopupMenuItem(
                 child: AddToDoWidget(

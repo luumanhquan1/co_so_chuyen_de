@@ -54,7 +54,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
               child: Column(
                 children: [
                   StreamBuilder<List<bool>>(
-                    // stream: widget.cubit.selectTypeCalendarSubject.stream,
+                    stream: widget.cubit.selectTypeCalendarSubject.stream,
                     builder: (context, snapshot) {
                       return Column(
                         children: [

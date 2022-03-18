@@ -111,10 +111,10 @@ class _EditWidgetState extends State<EditWidget> {
                                     left: 10, top: 14, bottom: 14),
                                 child: Text(
                                   snapshot.data == true
-                                      ? (widget.cubit.person == ''
+                                      ? (widget.cubit.person.isEmpty
                                           ? widget.todo.createdBy ?? ''
                                           : widget.cubit.person)
-                                      : (widget.cubit.person == '')
+                                      : (widget.cubit.person.isEmpty)
                                           ? S.current.tim_theo_nguoi
                                           : widget.cubit.person,
                                   style: textNormalCustom(
