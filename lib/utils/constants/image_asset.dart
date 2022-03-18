@@ -265,8 +265,18 @@ class ImageAssets {
       '$baseImg/ic_quan_ly_van_ban_tablet.svg';
   static const String icBaoChiTablet = '$baseImg/ic_bao_chi_tablet.svg';
   static const String ic_hoicham = '$baseImg/ic_hoicham.svg';
-  static const String ic_gui_y_kien = '$baseImg/icon_send.svg';
+  static const String ic_gui_y_kien = '  $baseImg/icon_send.svg';
   static const String ic_Group = '$baseImg/Group3.svg';
+  static const String ic_documentDSCV = '$baseImg/ic_documentDSCV.svg';
+
+  static const String ic_CVcuaBan = '$baseImg/ic_CVcuaBan.svg';
+  static const String ic_cvQT = '$baseImg/ic_cvQT.svg';
+  static const String ic_cvFInish = '$baseImg/ic_cvFInish.svg';
+  static const String ic_ganCHo_toi = '$baseImg/ic_ganCHo_toi.svg';
+  static const String ic_CV_xoa = '$baseImg/ic_CV_xoa.svg';
+  static const String ic_nhomCVMoi = '$baseImg/ic_nhomCVMoi.svg';
+
+
 
   //
   static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';

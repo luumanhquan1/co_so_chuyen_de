@@ -45,7 +45,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
             const SizedBox(
               height: 58,
             ),
-            headerWidget(menu: S.current.hop),
+            headerWidget(menu: S.current.danh_sach_cong_viec),
             const SizedBox(
               height: 24,
             ),
@@ -54,15 +54,15 @@ class _MenuDSCVState extends State<MenuDSCV> {
               child: Column(
                 children: [
                   StreamBuilder<List<bool>>(
-                    stream: widget.cubit.selectTypeCalendarSubject.stream,
+                    stream: widget.cubit       .selectTypeCalendarSubject.stream,
                     builder: (context, snapshot) {
                       return Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TheoDangLichWidget(
-                              icon: ImageAssets.icTheoDangLich,
-                              name: S.current.theo_dang_lich,
+                              icon: ImageAssets.ic_CVcuaBan,
+                              name: S.current.cong_viec_cua_ban,
                               onTap: () {
                                 widget.cubit.selectTypeCalendarSubject
                                     .add([true, false, false, false, false]);
@@ -75,8 +75,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TheoDangLichWidget(
-                              icon: ImageAssets.icTheoDangDanhSachGrey,
-                              name: S.current.theo_dang_danh_sach,
+                              icon: ImageAssets.ic_cvQT,
+                              name: S.current.cong_viec_quan_trong,
                               onTap: () {
                                 widget.cubit.selectTypeCalendarSubject
                                     .add([false, true, false, false, false]);
@@ -89,8 +89,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TheoDangLichWidget(
-                              icon: ImageAssets.icTheoDangLich,
-                              name: S.current.theo_dang_lich,
+                              icon: ImageAssets.ic_cvFInish,
+                              name: S.current.da_hoan_thanh,
                               onTap: () {
                                 widget.cubit.selectTypeCalendarSubject
                                     .add([false, false, true, false, false]);
@@ -103,8 +103,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TheoDangLichWidget(
-                              icon: ImageAssets.icTheoDangDanhSachGrey,
-                              name: S.current.theo_dang_danh_sach,
+                              icon: ImageAssets.ic_ganCHo_toi,
+                              name: S.current.gan_cho_toi,
                               onTap: () {
                                 widget.cubit.selectTypeCalendarSubject
                                     .add([false, false, false, true, false]);
@@ -117,8 +117,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TheoDangLichWidget(
-                              icon: ImageAssets.icTheoDangLich,
-                              name: S.current.theo_dang_lich,
+                              icon: ImageAssets.ic_CV_xoa,
+                              name: S.current.da_bi_xoa,
                               onTap: () {
                                 widget.cubit.selectTypeCalendarSubject
                                     .add([false, false, false, false, true]);
@@ -177,7 +177,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
       ),
       tabletScreen: Scaffold(
         appBar: BaseAppBar(
-          title: S.current.hop,
+          title: S.current.danh_sach_cong_viec,
           leadingIcon: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -206,7 +206,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: TheoDangLichWidget(
-                      icon: ImageAssets.icTheoDangLich,
+                      icon: ImageAssets.ic_CVcuaBan,
                       name: S.current.cong_viec_cua_ban,
                       onTap: () {
                         widget.cubit.selectTypeCalendarSubject
@@ -220,7 +220,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: TheoDangLichWidget(
-                      icon: ImageAssets.icTheoDangDanhSachGrey,
+                      icon: ImageAssets.ic_cvQT,
                       name: S.current.cong_viec_quan_trong,
                       onTap: () {
                         widget.cubit.selectTypeCalendarSubject
@@ -234,7 +234,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: TheoDangLichWidget(
-                      icon: ImageAssets.icTheoDangLich,
+                      icon: ImageAssets.ic_cvFInish,
                       name: S.current.da_hoan_thanh,
                       onTap: () {
                         widget.cubit.selectTypeCalendarSubject
@@ -248,7 +248,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: TheoDangLichWidget(
-                      icon: ImageAssets.icTheoDangDanhSachGrey,
+                      icon: ImageAssets.ic_ganCHo_toi,
                       name: S.current.gan_cho_toi,
                       onTap: () {
                         widget.cubit.selectTypeCalendarSubject
@@ -262,7 +262,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: TheoDangLichWidget(
-                      icon: ImageAssets.icTheoDangLich,
+                      icon: ImageAssets.ic_CV_xoa,
                       name: S.current.da_bi_xoa,
                       onTap: () {
                         widget.cubit.selectTypeCalendarSubject
@@ -328,7 +328,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
         const SizedBox(
           width: 12,
         ),
-        SvgPicture.asset(ImageAssets.icHeaderLVVV),
+        SvgPicture.asset(ImageAssets.ic_documentDSCV),
         const SizedBox(
           width: 12,
         ),

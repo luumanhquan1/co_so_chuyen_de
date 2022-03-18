@@ -25,7 +25,7 @@ class ItemMenuDSCV {
 
 List<ItemMenuDSCV> listMenuDSCV = [
   ItemMenuDSCV(
-    icon: ImageAssets.icLichLanhDao,
+    icon: ImageAssets.ic_nhomCVMoi,
     typeMenu: TypeMenuDSCV.NhomCVMoi,
     type: TypeContainer.expand,
     listWidget: listNhomCVMoi,
@@ -65,7 +65,7 @@ extension GetScreenMenu on TypeMenuDSCV {
   String getTitle() {
     switch (this) {
       default:
-        return S.current.nhom_cong_viec_moi;
+        return S.current.lich_cua_toi;
     }
   }
 }
