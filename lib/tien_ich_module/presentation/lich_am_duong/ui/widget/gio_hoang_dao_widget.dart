@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -90,14 +91,14 @@ Widget titleWidget(String title, String value) {
       Text(
         '$title: ',
         style: textNormalCustom(
-          fontSize: 12.0,
+          fontSize: 12.0.textScale(),
           color: AqiColor,
         ),
       ),
       Text(
         value,
         style: textNormalCustom(
-          fontSize: 12.0,
+          fontSize: 12.0.textScale(),
           color: titleColor,
         ),
       ),
@@ -106,41 +107,42 @@ Widget titleWidget(String title, String value) {
 }
 
 Widget icon12ConGiap(String url, String ten, String gio) {
-  return Row(
-    children: [
-      SvgPicture.asset(
-        url,
-        width: 32,
-        height: 32,
-      ),
-      const SizedBox(
-        width: 12.0,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
+  return Padding(
+    padding: const EdgeInsets.only(right: 24.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SvgPicture.asset(
+          url,
+          width: 32.0.textScale(),
+          height: 32.0.textScale(),
+        ),
+        const SizedBox(
+          width: 12.0,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
               ten,
               style: textNormalCustom(
-                fontSize: 12.0,
+                fontSize: 12.0.textScale(),
                 color: titleColor,
               ),
             ),
-          ),
-          const SizedBox(
-            height: 4.0,
-          ),
-          Text(
-            gio,
-            style: textNormalCustom(
-              fontSize: 12.0,
-              color: iconColorDown,
+            const SizedBox(
+              height: 4.0,
             ),
-          ),
-        ],
-      )
-    ],
+            Text(
+              gio,
+              style: textNormalCustom(
+                fontSize: 12.0.textScale(),
+                color: iconColorDown,
+              ),
+            ),
+          ],
+        )
+      ],
+    ),
   );
 }

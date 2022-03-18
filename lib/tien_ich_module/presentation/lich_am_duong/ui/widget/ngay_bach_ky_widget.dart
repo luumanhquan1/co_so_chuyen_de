@@ -38,23 +38,23 @@ class NgayBachKyWidget extends StatelessWidget {
             );
           },
         ),
-
       ],
     );
   }
 }
 
-Widget titleNgayBachKy(String title, String value, {Color? color,bool? isLine}) {
+Widget titleNgayBachKy(String title, String value,
+    {Color? color, FontWeight? fontWeight, bool? isLine}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 12),
     child: RichText(
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text:isLine==true ?'$title: ': '$title ',
+            text: isLine == true ? '$title: ' : '$title ',
             style: textNormalCustom(
               color: color ?? buttonColor,
-              fontWeight: FontWeight.w700,
+              fontWeight: fontWeight ?? FontWeight.w700,
               fontSize: 14.0.textScale(),
             ),
           ),

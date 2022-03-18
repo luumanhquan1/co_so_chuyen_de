@@ -37,7 +37,7 @@ class ThapNhiBatTuWidget extends StatelessWidget {
         titleNgayBachKy('${S.current.nen_lam}: ', thapNhiBatTu.nenLam ?? '',
             color: colorNenLam,),
         titleNgayBachKy(
-          '${S.current.khong_nen_lam}: ',
+          '${S.current.kieng_cu}: ',
           thapNhiBatTu.kieng ?? '',
           color: specialPriceColor,
         ),
