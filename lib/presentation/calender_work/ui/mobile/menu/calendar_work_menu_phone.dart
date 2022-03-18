@@ -50,7 +50,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([true, false]);
                             widget.cubit.chooseTypeListLv(
-                                Type_Choose_Option_List.DANG_LICH);
+                                Type_Choose_Option_List.DANG_LICH,);
                             widget.cubit.index.sink.add(0);
                             Navigator.pop(context);
                           },
@@ -63,7 +63,7 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([false, true]);
                             widget.cubit.chooseTypeListLv(
-                                Type_Choose_Option_List.DANG_LIST);
+                                Type_Choose_Option_List.DANG_LIST,);
                             widget.cubit.index.sink.add(0);
 
                             Navigator.pop(context);

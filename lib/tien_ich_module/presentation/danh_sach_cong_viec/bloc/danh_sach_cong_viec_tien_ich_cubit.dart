@@ -15,7 +15,7 @@ import 'danh_sach_cong_viec_tien_ich_state.dart';
 class DanhSachCongViecTienIchCubit
     extends BaseCubit<DanhSachCongViecTienIchState> {
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
-      BehaviorSubject.seeded([true, false]);
+      BehaviorSubject.seeded([true, false, false, false, false]);
 
   DanhSachCongViecTienIchCubit() : super(MainStateInitial());
   BehaviorSubject<bool> enabled = BehaviorSubject.seeded(true);
