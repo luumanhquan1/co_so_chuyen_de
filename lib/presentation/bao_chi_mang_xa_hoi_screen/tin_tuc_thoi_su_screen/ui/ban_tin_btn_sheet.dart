@@ -14,8 +14,10 @@ import 'package:just_audio/just_audio.dart';
 
 class BanTinBtnSheet extends StatefulWidget {
   final List<TinTucRadioModel> listTinTuc;
+  final int index;
 
-  const BanTinBtnSheet({Key? key, required this.listTinTuc}) : super(key: key);
+  const BanTinBtnSheet({Key? key, required this.listTinTuc, this.index = 0})
+      : super(key: key);
 
   @override
   _BanTinBtnSheetState createState() => _BanTinBtnSheetState();
@@ -28,6 +30,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
   @override
   void initState() {
     super.initState();
+    phatBanTinBloc.setIndexRadio(widget.index, widget.listTinTuc.length-1);
   }
 
   @override
@@ -77,6 +80,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
           PlayRadio(
             player: player,
             listLinkRadio: widget.listTinTuc.map((e) => e.audioUrl).toList(),
+            initPlay: widget.index,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,7 +137,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                   StreamBuilder<Duration?>(
                       stream: player.positionStream,
                       builder: (context, snapshot) {
-                        final timeData=snapshot.data?.inSeconds??0;
+                        final timeData = snapshot.data?.inSeconds ?? 0;
                         return Text(
                           '${phatBanTinBloc.intToDate(timeData)}/',
                           style: textNormalCustom(
@@ -142,22 +146,20 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                             fontWeight: FontWeight.w400,
                           ),
                         );
-                      }
-                  ),
+                      }),
                   StreamBuilder<Duration?>(
-                    stream: player.durationStream,
-                    builder: (context, snapshot) {
-                      final timeData=snapshot.data?.inSeconds??0;
-                      return Text(
-                        phatBanTinBloc.intToDate(timeData),
-                        style: textNormalCustom(
-                          color: AqiColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      );
-                    }
-                  ),
+                      stream: player.durationStream,
+                      builder: (context, snapshot) {
+                        final timeData = snapshot.data?.inSeconds ?? 0;
+                        return Text(
+                          phatBanTinBloc.intToDate(timeData),
+                          style: textNormalCustom(
+                            color: AqiColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        );
+                      }),
                 ],
               ),
             ],
@@ -206,5 +208,3 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
     );
   }
 }
-
-

@@ -8,8 +8,13 @@ import 'package:rxdart/rxdart.dart';
 class PlayRadio extends StatefulWidget {
   final AudioPlayer player;
   final List<String> listLinkRadio;
+  final  int initPlay;
 
-  const PlayRadio({Key? key, required this.player, required this.listLinkRadio})
+  const PlayRadio(
+      {Key? key,
+      required this.player,
+      required this.listLinkRadio,
+      this.initPlay = 0,})
       : super(key: key);
 
   @override
@@ -42,7 +47,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
               .map((e) => AudioSource.uri(Uri.parse(e)))
               .toList(),
         ),
-        initialIndex: 0, // default
+        initialIndex: widget.initPlay, // default
         initialPosition: Duration.zero, // default
       );
     } catch (e) {
@@ -86,10 +91,13 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
           builder: (context, snapshot) {
             final positionData = snapshot.data;
             return SeekBar(
-              duration: positionData?.duration ?? Duration.zero,
-              position: positionData?.position ?? Duration.zero,
-              bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
-            );
+                duration: positionData?.duration ?? Duration.zero,
+                position: positionData?.position ?? Duration.zero,
+                bufferedPosition:
+                    positionData?.bufferedPosition ?? Duration.zero,
+                onChangeEnd: () {
+                  widget.player.seekToNext();
+                });
           },
         ),
       ],
@@ -102,16 +110,22 @@ class PositionData {
   final Duration? bufferedPosition;
   final Duration? duration;
 
-  PositionData({this.position, this.bufferedPosition, this.duration});
+  PositionData({
+    this.position,
+    this.bufferedPosition,
+    this.duration,
+  });
 }
 
 class SeekBar extends StatefulWidget {
   final Duration position;
   final Duration bufferedPosition;
   final Duration duration;
+  final Function() onChangeEnd;
 
   const SeekBar({
     Key? key,
+    required this.onChangeEnd,
     required this.position,
     required this.bufferedPosition,
     required this.duration,
@@ -130,6 +144,9 @@ class _SeekBarState extends State<SeekBar> {
       onChanged: (value) {},
       activeColor: labelColor,
       inactiveColor: borderButtomColor,
+      onChangeEnd: (time) {
+        widget.onChangeEnd();
+      },
     );
   }
 }

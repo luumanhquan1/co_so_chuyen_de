@@ -9,7 +9,6 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_trong_nuoc.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/drop_down_extension.dart';
-import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -169,10 +168,20 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                               itemCount: listRadio.length,
                               itemBuilder: (context, index) {
                                 return ItemTinRadio(
-                                  'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
-                                  listRadio[index].title,
-                                  listRadio[index].publishedTime,
-                                );
+                                    'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
+                                    listRadio[index].title,
+                                    listRadio[index].publishedTime,
+                                    () {
+                                      showBottomSheet(
+                                        context: widget.pContext,
+                                        builder: (context) {
+                                          return BanTinBtnSheet(
+                                            listTinTuc: listTinTuc,
+                                            index: index,
+                                          );
+                                        },
+                                      );
+                                    },);
                               },
                             );
                           },
@@ -202,6 +211,4 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
       ),
     );
   }
-
 }
-

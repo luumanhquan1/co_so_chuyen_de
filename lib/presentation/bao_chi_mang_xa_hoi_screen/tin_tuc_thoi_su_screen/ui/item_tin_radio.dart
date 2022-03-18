@@ -10,8 +10,10 @@ class ItemTinRadio extends StatelessWidget {
   String image;
   String title;
   String date;
+  Function() clickItem;
 
-  ItemTinRadio(this.image, this.title, this.date, {Key? key}) : super(key: key);
+  ItemTinRadio(this.image, this.title, this.date, this.clickItem, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,12 @@ class ItemTinRadio extends StatelessWidget {
                       const SizedBox(
                         width: 45,
                       ),
-                      SvgPicture.asset(ImageAssets.icPlay)
+                      GestureDetector(
+                        child: SvgPicture.asset(ImageAssets.icPlay),
+                        onTap: () {
+                          clickItem();
+                        },
+                      )
                     ],
                   )
                 ],
