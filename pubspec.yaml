@@ -79,6 +79,7 @@ dependencies:
   injectable: ^1.4.1
   freezed: ^0.14.2
   tuple: ^2.0.0
+  translator: ^0.1.7
 
 dev_dependencies:
   flutter_test:

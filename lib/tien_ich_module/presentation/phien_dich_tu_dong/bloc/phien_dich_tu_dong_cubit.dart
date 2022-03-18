@@ -8,10 +8,16 @@ class PhienDichTuDongCubit {
   Stream<LANGUAGE> get languageStream => languageSubject.stream;
 
   BehaviorSubject<int> lengthTextSubject = BehaviorSubject.seeded(0);
-
   Stream<int> get lengthTextStream => lengthTextSubject.stream;
 
+  BehaviorSubject<String> textTranslateSubject = BehaviorSubject();
+  Stream<String> get textTranslateStream => textTranslateSubject.stream;
+
   String textTranslate = 'It’s raining today';
+
+  void translateLanguage(String text) {
+    textTranslateSubject.add(text);
+  }
 
   void swapLanguage() {
     if(languageSubject.value == LANGUAGE.vn) {
