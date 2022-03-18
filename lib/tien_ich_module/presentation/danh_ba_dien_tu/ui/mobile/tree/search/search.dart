@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobi
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/search/base_seach_bar_no_border.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +41,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             },
           );
         } else {
-          return BaseSearchBar(
+          return BaseSearchBarNoBorder(
             controller: controller,
             onChange: (value) {
               widget.danhBaCubit.onSearch(value);

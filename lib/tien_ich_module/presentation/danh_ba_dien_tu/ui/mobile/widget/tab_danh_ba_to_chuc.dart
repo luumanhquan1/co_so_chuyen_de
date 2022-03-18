@@ -14,19 +14,25 @@ class _DanhBaToChucState extends State<DanhBaToChuc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            child: BaseSearchBar(
-              hintText: S.current.tim_kiem_danh_ba,
-              onChange: (value) {},
-            ),
+      body: SingleChildScrollView(
+        child: Container(
+          constraints:
+              BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                child: BaseSearchBar(
+                  hintText: S.current.tim_kiem_danh_ba,
+                  onChange: (value) {},
+                ),
+              ),
+              ViewTongWidget(
+                onChange: (_) {},
+              )
+            ],
           ),
-          ViewTongWidget(
-            onChange: (_) {},
-          )
-        ],
+        ),
       ),
     );
   }

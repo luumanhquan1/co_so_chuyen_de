@@ -40,17 +40,18 @@ class _TreeWidgetState extends State<TreeDanhSach> {
                   children: [
                     if (widget.selectOnly)
                       StreamBuilder<Node<DanhSachModel>>(
-                          stream: widget.danhBaCubit.selectOnlyDonVi,
-                          builder: (context, snapshot) {
-                            return CustomCheckBox(
-                              title: '',
-                              onChange: (isCheck) {
-                                widget.danhBaCubit.selectNodeOnly(widget.node);
-                              },
-                              isCheck: snapshot.data?.value.id ==
-                                  widget.node.value.id,
-                            );
-                          })
+                        stream: widget.danhBaCubit.selectOnlyDonVi,
+                        builder: (context, snapshot) {
+                          return CustomCheckBox(
+                            title: '',
+                            onChange: (isCheck) {
+                              widget.danhBaCubit.selectNodeOnly(widget.node);
+                            },
+                            isCheck:
+                                snapshot.data?.value.id == widget.node.value.id,
+                          );
+                        },
+                      )
                     else
                       CustomCheckBox(
                         title: '',
