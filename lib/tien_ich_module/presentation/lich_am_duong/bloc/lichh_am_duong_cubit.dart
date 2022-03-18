@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/lich_am_duong_repository.dart';
-import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/lich_am_duong/bloc/lich_am_duong_state.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
@@ -14,8 +14,9 @@ class LichAmDuongCubit extends BaseCubit<LichAmDuongState>{
   BehaviorSubject<LichAmDuong> lichAmDuongSubject =BehaviorSubject();
 
   Stream<LichAmDuong>get lichAmDuongStream => lichAmDuongSubject.stream;
+  String startDate = DateTime.now().formatApiDDMMYYYY;
   void callApi(){
-    getLichAmDuong('17-03-2022');
+    getLichAmDuong(startDate);
   }
   Future<void> getLichAmDuong(String date) async{
     showLoading();

@@ -42,14 +42,6 @@ class ThapNhiKienTruWidget extends StatelessWidget {
           thapNhiKienTru.khongNenLam ?? '',
           color: specialPriceColor,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
-          child: Divider(
-            thickness: 1,
-          ),
-        ),
       ],
     );
   }

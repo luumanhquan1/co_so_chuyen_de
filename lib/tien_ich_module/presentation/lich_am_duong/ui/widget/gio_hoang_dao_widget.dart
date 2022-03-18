@@ -69,7 +69,7 @@ class GioHoangDaoWidget extends StatelessWidget {
           width: 16.0,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -77,14 +77,6 @@ class GioHoangDaoWidget extends StatelessWidget {
               titleWidget(S.current.truc, truc),
               titleWidget(S.current.sao, sao),
             ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
-          child: Divider(
-            thickness: 1,
           ),
         ),
       ],
@@ -99,7 +91,7 @@ Widget titleWidget(String title, String value) {
         '$title: ',
         style: textNormalCustom(
           fontSize: 12.0,
-          color: dateColor,
+          color: AqiColor,
         ),
       ),
       Text(
