@@ -75,7 +75,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   ];
 
   void callApi() {
-    getDashboard(
+     getDashboard(
       startDateDashBoard,
       endDateDashBoard,
     );
@@ -99,7 +99,6 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     toDate: DateTime.now().formatApiSS,
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
-
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     showLoading();
     final result = await _BCMXHRepo.getDashListChuDe(
@@ -123,6 +122,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   }
 
   Future<void> getListBaoCaoThongKe(String startDate, String enDate) async {
+    showLoading();
     final result = await _BCMXHRepo.getTuongTacThongKe(
       1,
       30,
@@ -131,7 +131,6 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       startDate,
       enDate,
     );
-    showLoading();
     result.when(
       success: (res) {
         final result = res;
@@ -163,7 +162,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
             index: res[i].total.toString(),
             image: listIconDashBoard[i],
             color: listColorsItemDashBoard[i],
-          ));
+          ),);
         }
         _dataDashBoard.sink.add(listDataDashboard);
       },

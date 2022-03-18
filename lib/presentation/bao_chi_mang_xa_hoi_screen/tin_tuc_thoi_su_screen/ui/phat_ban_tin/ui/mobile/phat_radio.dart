@@ -22,9 +22,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.black,
-      ),
+      const SystemUiOverlayStyle(),
     );
     _init();
   }
@@ -65,6 +63,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
       widget.player.stop();
     }
   }
+
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         widget.player.positionStream,
@@ -126,7 +125,7 @@ class _SeekBarState extends State<SeekBar> {
   @override
   Widget build(BuildContext context) {
     return Slider(
-      max: widget.bufferedPosition.inSeconds.toDouble(),
+      max: widget.duration.inSeconds.toDouble(),
       value: widget.position.inSeconds.toDouble(),
       onChanged: (value) {},
       activeColor: labelColor,
@@ -134,4 +133,3 @@ class _SeekBarState extends State<SeekBar> {
     );
   }
 }
-

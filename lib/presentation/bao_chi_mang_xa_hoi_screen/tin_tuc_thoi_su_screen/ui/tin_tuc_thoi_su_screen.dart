@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_trong_nuoc.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/drop_down_extension.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,6 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                     if (!snapshot.hasData) {
                       return Container();
                     }
-
                     switch (snapshot.data) {
                       case 1:
                         return StreamBuilder<TinTucRadioResponseModel>(
@@ -202,4 +202,6 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
       ),
     );
   }
+
 }
+

@@ -128,13 +128,37 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                   )
                 ],
               ),
-              Text(
-                S.current.time_play,
-                style: textNormalCustom(
-                  color: AqiColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
+              Row(
+                children: [
+                  StreamBuilder<Duration?>(
+                      stream: player.positionStream,
+                      builder: (context, snapshot) {
+                        final timeData=snapshot.data?.inSeconds??0;
+                        return Text(
+                          '${phatBanTinBloc.intToDate(timeData)}/',
+                          style: textNormalCustom(
+                            color: AqiColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        );
+                      }
+                  ),
+                  StreamBuilder<Duration?>(
+                    stream: player.durationStream,
+                    builder: (context, snapshot) {
+                      final timeData=snapshot.data?.inSeconds??0;
+                      return Text(
+                        phatBanTinBloc.intToDate(timeData),
+                        style: textNormalCustom(
+                          color: AqiColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    }
+                  ),
+                ],
               ),
             ],
           ),
@@ -182,3 +206,5 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
     );
   }
 }
+
+
