@@ -168,12 +168,6 @@ class _MoiNguoiThamGiaWidgetState extends State<MoiNguoiThamGiaWidget> {
             const SizedBox(
               height: 16,
             ),
-            BaseSearchBar(
-              hintText: S.current.tim_kiem_can_bo,
-              onChange: (value) {
-                cubit.search(value);
-              },
-            ),
             Padding(
               padding: const EdgeInsets.only(left: 13.5, top: 18),
               child: Row(

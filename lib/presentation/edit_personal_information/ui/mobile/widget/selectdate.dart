@@ -54,7 +54,7 @@ class _CustomDropDownState extends State<SelectDate> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: 300,
                 child: FlutterRoundedCupertinoDatePickerWidget(
                   onDateTimeChanged: (value) {
                     dateSelect = value.toString();
