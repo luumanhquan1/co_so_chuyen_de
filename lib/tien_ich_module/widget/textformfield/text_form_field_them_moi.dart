@@ -1,6 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/ket_noi_module/widgets/from_group/form_group.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/form_group/form_group.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -136,23 +136,18 @@ class _TextFieldStyleState extends State<TextFieldStyle> {
           filled: false,
           border: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
-            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
-            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
-            // borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
-            // borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
-            //  borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
         ),
         validator: (value) {

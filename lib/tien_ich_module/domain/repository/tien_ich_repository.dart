@@ -5,20 +5,21 @@ import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 
 mixin TienIchRepository {
-
   Future<Result<List<TopicHDSD>>> getTopicHDSD();
 
   Future<Result<DataDanhSachTitleHDSD>> getDanhSachHDSD(
-      int pageIndex,
-      int pageSize ,
-      String topicId,
-      String type,
-      String searchKeyword,
-      );
+    int pageIndex,
+    int pageSize,
+    String topicId,
+    String type,
+    String searchKeyword,
+  );
+
   Future<Result<DetailHuongDanSuDung>> getDetailHuongDanSuDung(
-      String id,
-      );
+    String id,
+  );
+
   Future<Result<LichAmDuong>> getLichAmDuong(
-      String date,
-      );
+    String date,
+  );
 }

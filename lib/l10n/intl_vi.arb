@@ -704,7 +704,13 @@
   "tim_tep_tren_dien_thoai_cua_ban": "Tìm tệp trên điện thoại của bạn",
   "chon_tai_lieu": "Chọn tài liệu",
   "chi_ho_tro_txt": "Chỉ hỗ trợ tệp txt",
-  "coppy": "Coppy"
+  "coppy": "Coppy",
+  "nhan_vien": "Nhân viên",
+  "them_danh_ba_ca_nhan": "Thêm danh bạ cá nhân",
+  "ho_ten_cb": "Họ tên cán bộ",
+  "so_cmt": "Số CMTND",
+  "sdt_nha_rieng": "Số điện thoại nhà riêng",
+  "luu_danh_ba": "Lưu danh bạ"
 }
 
 

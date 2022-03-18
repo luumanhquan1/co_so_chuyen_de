@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/bloc/danh_ba_state.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/bloc_tree/danh_ba_state.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/danh_sach_model.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:rxdart/rxdart.dart';
