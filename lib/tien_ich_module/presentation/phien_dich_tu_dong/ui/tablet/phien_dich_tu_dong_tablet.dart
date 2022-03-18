@@ -127,7 +127,10 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                       GestureDetector(
                         onTap: () {
                           cubit.swapLanguage();
-                        },
+                          cubit.translateLanguage(textEditingController.text);
+                          cubit.languageSubject.value == LANGUAGE.vn
+                              ? viToEn()
+                              : enToVi();                        },
                         child: SvgPicture.asset(ImageAssets.icReplace),
                       ),
                       Expanded(
@@ -214,7 +217,6 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                                   margin: const EdgeInsets.only(
                                     bottom: 20,
                                     right: 20,
-                                    top: 10,
                                   ),
                                   child: SvgPicture.asset(
                                     ImageAssets.icVoiceMini,
@@ -275,12 +277,18 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                             stream: cubit.textTranslateStream,
                             builder: (context, snapshot) {
                               final data = snapshot.data ?? '';
-                              return Text(
-                                textEditingController.text.isEmpty ? '' : data,
-                                style: textNormalCustom(
-                                  color: textTitle,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
+                              return Expanded(
+                                child: SingleChildScrollView(
+                                  child: Text(
+                                    textEditingController.text.isEmpty
+                                        ? ''
+                                        : data,
+                                    style: textNormalCustom(
+                                      color: textTitle,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
                                 ),
                               );
                             },
@@ -328,7 +336,13 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
             const SizedBox(
               height: 20,
             ),
-            btn(onTap: () {}),
+            btn(onTap: () {
+              cubit.readFile(
+                textEditingController,
+                viToEn,
+                enToVi,
+              );
+            },),
           ],
         ),
       ),

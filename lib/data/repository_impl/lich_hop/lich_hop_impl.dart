@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_b
 import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/status_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thiet_bi_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
@@ -36,6 +37,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/domain/model/add_file_model.dart';
@@ -54,6 +56,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/moi_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/nguoi_chu_tri_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
@@ -365,6 +368,43 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<EventCalendarResponse, List<String>>(
       () => _hopServices.postEventCalendar(request),
       (res) => res.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<StatusKetLuanHopModel>>> getListStatusKetLuanHop() {
+    return runCatchingAsync<StatusKetLuanHopResponse,
+        List<StatusKetLuanHopModel>>(
+      () => _hopServices.getListStatusKetLuanHop(),
+      (res) => res.data!.map((e) => e.toModel()).toList(),
+    );
+  }
+
+  @override
+  Future<Result<MessageModel>> deleteKetLuanHop(String id) {
+    return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
+      () => _hopServices.deleteKetLuanHop(id),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<MessageModel>> deleteChiTietLichHop(String id) {
+    return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
+      () => _hopServices.deleteChiTietLichHop(id),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<MessageModel>> huyChiTietLichHop(
+    String scheduleId,
+    int statusId,
+    bool isMulti,
+  ) {
+    return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
+      () => _hopServices.huyChiTietLichHop(scheduleId, statusId, isMulti),
+      (res) => res.toDomain(),
     );
   }
 }
