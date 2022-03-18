@@ -1,6 +1,11 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/widget/tab_danh_ba_ca_nhan.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/widget/tab_danh_ba_to_chuc.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class DanhBaDienTuMobile extends StatefulWidget {
   const DanhBaDienTuMobile({Key? key}) : super(key: key);
@@ -10,13 +15,66 @@ class DanhBaDienTuMobile extends StatefulWidget {
 }
 
 class _DanhBaDienTuMobileState extends State<DanhBaDienTuMobile> {
+  var _controller = TabController(vsync: AnimatedListState(), length: 2);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(vsync: AnimatedListState(), length: 2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarDefaultBack(
-          S.current.danh_ba_dien_tu
+      appBar: AppBar(
+        elevation: 1,
+        title: Text(
+          S.current.danh_ba_dien_tu,
+          style: titleAppbar(),
+        ),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              S.current.dong_bo,
+              style: textNormalCustom(
+                fontSize: 14,
+                color: numberColorTablet,
+              ),
+            ),
+          ),
+          spaceW16
+        ],
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            ImageAssets.icBack,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        bottom: TabBar(
+          controller: _controller,
+          indicatorColor: indicatorColor,
+          unselectedLabelColor: unselectLabelColor,
+          labelColor: numberColorTablet,
+          tabs: [
+            Tab(
+              child: Text(
+                S.current.danh_ba_to_chuc,
+              ),
+            ),
+            Tab(
+              child: Text(S.current.danh_ba_ca_nhan),
+            ),
+          ],
+        ),
       ),
-      body: Container(),
+      body: TabBarView(
+        controller: _controller,
+        children: const [DanhBaToChuc(), DanhBaCaNhan()],
+      ),
     );
   }
 }

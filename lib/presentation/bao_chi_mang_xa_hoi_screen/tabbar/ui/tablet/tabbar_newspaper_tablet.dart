@@ -4,13 +4,10 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi_mang_xa_hoi_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/mobile/tat_ca_chu_de_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/tat_ca_chu_de_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/mobile/thoi_doi_bai_viet_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_tuc_thoi_su_tablet.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -61,7 +58,7 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
-                screen:  BaoChiMangXaHoiMenu(
+                screen: BaoChiMangXaHoiMenu(
                   cubit: cubit,
                 ),
               );
@@ -103,10 +100,10 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
         child: TabBarView(
           controller: _controller,
           children: [
-            TinRadioScreen(title: 'Tin Radio', tinTucThoiSuBloc: TinTucThoiSuBloc(),),
-            // Text(
-            //   S.current.bao_cao_thong_ke,
-            // ),
+            //  TinRadioScreen(title: 'Tin Radio', tinTucThoiSuBloc: TinTucThoiSuBloc(),),
+            Text(
+              S.current.bao_cao_thong_ke,
+            ),
             const TatCaChuDeScreenTablet(),
             const TheoDoiBaiVietScreen(),
             TinTucThoiSuScreenTablet(

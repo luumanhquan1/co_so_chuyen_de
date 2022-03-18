@@ -5,12 +5,14 @@ class DonViModel {
   String chucVu = '';
   String canBoId = '';
   String noidung = '';
-  DonViModel(
-      {required this.id,
-      required this.name,
-      this.tenCanBo = '',
-      this.chucVu = '',
-      this.canBoId = ''});
+
+  DonViModel({
+    required this.id,
+    required this.name,
+    this.tenCanBo = '',
+    this.chucVu = '',
+    this.canBoId = '',
+  });
 }
 
 class Node<T> {
@@ -31,6 +33,7 @@ class Node<T> {
     expand = node.expand;
     isCheck = node.isCheck;
   }
+
   Node<DonViModel>? search(Node<DonViModel> node) {
     final nodeTree = value as DonViModel;
     if (node.value.id == nodeTree.id) {
@@ -70,6 +73,7 @@ class Node<T> {
     isCheck = node.isCheck;
     level = node.level;
   }
+
   Node<T> coppyWith() {
     final Node<T> node = Node.copyWith(this);
     for (final vl in children) {
@@ -82,5 +86,6 @@ class Node<T> {
 class CheckBox {
   //dùng tham chiếu để đỡ phải duyệt tree
   bool isCheck = false;
+
   CheckBox({this.isCheck = false});
 }

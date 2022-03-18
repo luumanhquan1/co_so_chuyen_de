@@ -15,11 +15,13 @@ import 'package:readmore/readmore.dart';
 enum dropDown { tinRadio, tinTrongNuoc }
 
 class TinRadioScreen extends StatefulWidget {
-  final TinTucThoiSuBloc tinTucThoiSuBloc;
   final String title;
+  final List<TinTucRadioModel> listBanTin;
 
   const TinRadioScreen(
-      {Key? key, required this.title, required this.tinTucThoiSuBloc})
+      {Key? key,
+      required this.title,
+      required this.listBanTin,})
       : super(key: key);
 
   @override
@@ -34,8 +36,8 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
   void initState() {
     super.initState();
     // widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
-    widget.tinTucThoiSuBloc
-        .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
+    // widget.tinTucThoiSuBloc
+    //     .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
   }
 
   @override
@@ -181,25 +183,17 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
                           color: lineColor,
                         ),
                         Expanded(
-                          child: StreamBuilder<TinTucRadioResponseModel>(
-                            stream: widget.tinTucThoiSuBloc.listTinTucRadio,
-                            builder: (context, snapshot) {
-                              final listRadio =
-                                  snapshot.data?.listTinTucThoiSu ?? [];
-                              listTinTuc = listRadio;
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: listRadio.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    child: ItemTinRadioTablet(
-                                      'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
-                                      listRadio[index].title,
-                                      listRadio[index].publishedTime,
-                                    ),
-                                  );
-                                },
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: widget.listBanTin.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: ItemTinRadioTablet(
+                                  'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
+                                  widget.listBanTin[index].title,
+                                  widget.listBanTin[index].publishedTime,
+                                ),
                               );
                             },
                           ),

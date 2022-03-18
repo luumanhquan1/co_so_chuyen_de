@@ -182,7 +182,7 @@ extension GetScreen on MenuType {
         );
       case MenuType.baoChiMangXaHoi:
         return screenDevice(
-          mobileScreen: const TabbarNewspaper(),
+          mobileScreen: const Scaffold(body:TabbarNewspaper(),),
           tabletScreen: const TabbarNewspaperTablet(),
         );
       case MenuType.ketNoi:

@@ -1,9 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_tablet.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,35 +47,73 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
         retry: () {},
         error: AppException('1', ''),
         stream: widget.tinTucThoiSuBloc.stateStream,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 28,
-              ),
-              Text(
-                S.current.tin_radio,
-                style: textNormalCustom(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: titleColor,
+        child: SingleChildScrollView(
+          child: Container(
+            color: bgCalenderColor,
+            padding: const EdgeInsets.fromLTRB(30, 28, 30, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StreamBuilder<TinTucRadioResponseModel>(
+                  stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                  builder: (context, snapshot) {
+                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
+                    listTinTuc = listRadio;
+                    return BanTinItem(
+                      listTinTuc: listTinTuc,
+                      clickXemThem: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TinRadioScreen(
+                              title: S.current.tin_radio,
+                              listBanTin: listRadio,
+                            ),
+                          ),
+                        );
+                      },
+                      title: S.current.tin_radio,
+                      description: S.current.tin_radio_mieu_ta,
+                      clickPLay: () {},
+                    );
+                  },
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                S.current.kenh_raido,
-                style: textNormalCustom(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: dateColor,
+                const SizedBox(
+                  height: 28,
                 ),
-              ),
-
-            ],
+                const Divider(
+                  height: 1,
+                  color: bgDropDown,
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                StreamBuilder<TinTucRadioResponseModel>(
+                  stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                  builder: (context, snapshot) {
+                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
+                    listTinTuc = listRadio;
+                    return BanTinItem(
+                      listTinTuc: listTinTuc,
+                      clickXemThem: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TinRadioScreen(
+                              title: S.current.tin_trong_nuoc,
+                              listBanTin: listRadio,
+                            ),
+                          ),
+                        );
+                      },
+                      title: S.current.tin_trong_nuoc,
+                      description: S.current.tin_trong_nuoc_mieu_ta,
+                      clickPLay: () {},
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
