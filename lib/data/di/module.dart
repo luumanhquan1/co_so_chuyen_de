@@ -22,15 +22,19 @@ import 'package:ccvc_mobile/domain/repository/thanh_phan_tham_gia_reponsitory.da
 import 'package:ccvc_mobile/ket_noi_module/data/repository_impl/ket_noi_repo.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/service/ket_noi_service.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/lich_am_duong_repository_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/tien_ich_repository_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/tien_ich_service.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/repository/lich_am_duong_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/service/lich_am_duong_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-enum BaseURLOption { GATE_WAY, COMMON, CCVC }
+enum BaseURLOption { GATE_WAY, COMMON, CCVC,API_AND_UAT }
 
 void configureDependencies() {
   Get.put(
@@ -90,6 +94,13 @@ void configureDependencies() {
     ),
   );
   Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find()));
+
+  Get.put(
+    LichAmDuongService(
+      provideDio(baseOption: BaseURLOption.API_AND_UAT),
+    ),
+  );
+  Get.put<LichAmDuongRepository>(LichAmDuongRepositoryImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
@@ -106,6 +117,9 @@ Dio provideDio({BaseURLOption baseOption = BaseURLOption.CCVC}) {
       break;
     case BaseURLOption.CCVC:
       baseUrl = appConstants.baseUrlCCVC;
+      break;
+    case BaseURLOption.API_AND_UAT:
+      baseUrl= DO_MAIN_LICH_AM_DUONG;
       break;
   }
   final options = BaseOptions(

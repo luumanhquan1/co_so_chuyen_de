@@ -68,8 +68,12 @@ class ImageAssets {
   static const String icCallHDSD = '$baseImg/ic_call_hdsd.svg';
   static const String icMailHDSD = '$baseImg/ic_mail_hdsd.svg';
 
-// icon danh sach dien tu
+  //icon lich am duong
+  static const String icIconMenuLichAmDuong =
+      '$baseImg/ic_icon_menu_lich_am_huong.svg';
   static const String icBack = '$baseImg/ic_back.svg';
+
+// icon danh sach dien tu
   static const String icDanhBa = '$baseImg/ic_danh_bas.png';
   static const String icThemMoi = '$baseImg/ic_them_moiz.png';
   static const String icEdit = '$baseImg/ic_edits.svg';
