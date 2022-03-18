@@ -52,7 +52,8 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                           return Container(
                             padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
                             child: Text(
-                                widget.cubit.listSubMenu[index][indexItem].title,),
+                              widget.cubit.listSubMenu[index][indexItem].title,
+                            ),
                           );
                         },
                       ),
