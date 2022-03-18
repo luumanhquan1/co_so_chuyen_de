@@ -15,6 +15,7 @@ import 'package:ccvc_mobile/data/response/chi_tiet_lich_lam_viec/so_luong_phat_b
 import 'package:ccvc_mobile/data/response/lich_hop/add_file_tao_lich_hop.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/catogory_list_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/chi_tiet_lich_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/status_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thiet_bi_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_phong_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
@@ -38,6 +39,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -91,7 +93,8 @@ abstract class HopServices {
 
   @POST(ApiConstants.EVENT_CALENDAR_LICH_HOP)
   Future<EventCalendarResponse> postEventCalendar(
-      @Body() EventCalendarRequest eventCalendarRequest,);
+    @Body() EventCalendarRequest eventCalendarRequest,
+  );
 
   @GET(ApiConstants.DANH_SACH_PHIEN_HOP)
   Future<ListPhienHopRespone> getDanhSachPhienHop(@Query('id') String id);
@@ -196,4 +199,22 @@ abstract class HopServices {
   @GET(ApiConstants.SCHEDULE_OPINION_LIST)
   Future<DanhSachYKienResponse> getDanhSachYKien(
       @Query('scheduleId') String scheduleId);
+
+  @GET(ApiConstants.STATUS_LIST_KET_LUAN_HOP)
+  Future<StatusKetLuanHopResponse> getListStatusKetLuanHop();
+
+  @DELETE(ApiConstants.DELETE_SCHEDULE_REPORT)
+  Future<XoaBaoCaoKetQuaResponse> deleteKetLuanHop(@Query('id') String id);
+
+  @DELETE(ApiConstants.DELETE_DETAIL_CELENDER_MEET)
+  Future<XoaBaoCaoKetQuaResponse> deleteChiTietLichHop(
+    @Query('lstLichHopId') String id,
+  );
+
+  @GET(ApiConstants.CANCEL_DETAIL_CELENDER_MEET)
+  Future<XoaBaoCaoKetQuaResponse> huyChiTietLichHop(
+    @Query('scheduleId') String scheduleId,
+    @Query('statusId') int statusId,
+    @Query('isMulti') bool isMulti,
+  );
 }

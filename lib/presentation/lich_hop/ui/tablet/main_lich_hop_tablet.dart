@@ -13,7 +13,6 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
-import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,12 +73,28 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   padding: const EdgeInsets.only(right: 16.0),
                   child: IconButton(
                     onPressed: () {
-                      DrawerSlide.navigatorSlide(
-                        context: context,
-                        screen: MyCalendarMenu(
-                          cubit: cubit,
-                          theoDangLich: () {},
-                          TheoDangDanhSach: () {},
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyCalendarMenu(
+                            cubit: cubit,
+                            theoDangLich: () {
+                              setState(() {
+                                cubit.chooseTypeList(
+                                  Type_Choose_Option_List.DANG_LICH,
+                                );
+                                cubit.index.sink.add(0);
+                              });
+                            },
+                            TheoDangDanhSach: () {
+                              setState(() {
+                                cubit.chooseTypeList(
+                                  Type_Choose_Option_List.DANG_LIST,
+                                );
+                                cubit.index.sink.add(0);
+                              });
+                            },
+                          ),
                         ),
                       );
                     },
