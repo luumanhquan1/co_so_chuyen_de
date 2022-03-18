@@ -154,13 +154,14 @@ class _EditWidgetState extends State<EditWidget> {
                   height: 20,
                 ),
                 ItemTextFieldWidgetDSNV(
-                  title: widget.todo.note ?? '',
-                  controller: tieuDeController,
+                  initialValue: widget.todo.note ?? '',
+                  title: S.current.ghi_tru,
                   validator: (String? value) {},
                   onChange: (String value) {
                     widget.cubit.getnote(value);
                   },
                   maxLine: 8,
+                  controller: tieuDeController,
                 ),
                 const SizedBox(
                   height: 20,
