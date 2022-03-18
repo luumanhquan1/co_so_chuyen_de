@@ -32,7 +32,6 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
           Container(
             color: Colors.white,
             child: ChooseTimeScreen(
-              baseChooseTimeCubit: chooseTimeCubit,
               today: DateTime.now(),
             ),
           ),

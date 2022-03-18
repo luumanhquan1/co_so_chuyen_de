@@ -41,7 +41,6 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
               child: Container(
                 color: backgroundColorApp,
                 child: ChooseTimeScreen(
-                  baseChooseTimeCubit: chooseTimeCubit,
                   today: DateTime.now(),
                 ),
               ),
