@@ -8,6 +8,8 @@ part 'menu_response.g.dart';
 class MenuBCMXHResponse {
   @JsonKey(name: 'id')
   String? id;
+  @JsonKey(name: 'nodeid')
+  int? nodeid;
   @JsonKey(name: 'title')
   String? title;
   @JsonKey(name: 'submenu')
@@ -22,6 +24,7 @@ class MenuBCMXHResponse {
 
   ListMenuItemModel toDomain() => ListMenuItemModel(
         id: id ?? '',
+        nodeid: nodeid??0,
         title: title ?? '',
         subMenu: subMenu?.map((e) => e.toDomain()).toList() ?? [],
       );

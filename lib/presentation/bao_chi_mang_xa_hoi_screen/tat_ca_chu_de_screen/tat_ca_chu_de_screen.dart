@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/bloc/chu_de_cubit.dart';
@@ -63,10 +64,10 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       const SizedBox(
                         height: 130,
                       ),
-                      StreamBuilder<List<ItemInfomationModel>>(
+                      StreamBuilder<DashBoardModel>(
                         stream: chuDeCubit.streamDashBoard,
                         builder: (context, snapshot) {
-                          final data = snapshot.data ?? [];
+                          final data = snapshot.data?.listItemDashBoard ?? [];
                           return GridView.count(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -117,8 +118,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             final listChuDe = snapshot.data ?? [];
-                            final ChuDeModel hotNew =
-                                listChuDe.removeAt(0);
+                            final ChuDeModel hotNew = listChuDe.removeAt(0);
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -140,7 +140,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                                     hotNew.publishedTime ?? '',
                                   ).formatApiSS,
                                   hotNew.contents ?? '',
-                                  hotNew.url??'',
+                                  hotNew.url ?? '',
                                 ),
                                 const SizedBox(
                                   height: 16,
@@ -164,7 +164,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                                             listChuDe[index].publishedTime ??
                                                 '',
                                           ).formatApiSS,
-                                          listChuDe[index].url??'',
+                                          listChuDe[index].url ?? '',
                                         ),
                                         const SizedBox(
                                           height: 16,
@@ -200,6 +200,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                   chuDeCubit.startDateDashBoard,
                   chuDeCubit.endDateDashBoard,
                 );
+                chuDeCubit.getListTatCaCuDe(
+                    chuDeCubit.startDate,
+                    chuDeCubit.endDate,);
               },
               onSearch: (value) {
                 chuDeCubit.getListTatCaCuDe(

@@ -8,14 +8,14 @@ import 'package:rxdart/rxdart.dart';
 class PlayRadio extends StatefulWidget {
   final AudioPlayer player;
   final List<String> listLinkRadio;
-  final  int initPlay;
+  final int initPlay;
 
-  const PlayRadio(
-      {Key? key,
-      required this.player,
-      required this.listLinkRadio,
-      this.initPlay = 0,})
-      : super(key: key);
+  const PlayRadio({
+    Key? key,
+    required this.player,
+    required this.listLinkRadio,
+    this.initPlay = 0,
+  }) : super(key: key);
 
   @override
   _PlayRadioState createState() => _PlayRadioState();
@@ -83,24 +83,18 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        StreamBuilder<PositionData>(
-          stream: _positionDataStream,
-          builder: (context, snapshot) {
-            final positionData = snapshot.data;
-            return SeekBar(
-                duration: positionData?.duration ?? Duration.zero,
-                position: positionData?.position ?? Duration.zero,
-                bufferedPosition:
-                    positionData?.bufferedPosition ?? Duration.zero,
-                onChangeEnd: () {
-                  widget.player.seekToNext();
-                });
-          },
-        ),
-      ],
+    return StreamBuilder<PositionData>(
+      stream: _positionDataStream,
+      builder: (context, snapshot) {
+        final positionData = snapshot.data;
+        return SeekBar(
+            duration: positionData?.duration ?? Duration.zero,
+            position: positionData?.position ?? Duration.zero,
+            bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
+            onChangeEnd: () {
+              widget.player.seekToNext();
+            });
+      },
     );
   }
 }
@@ -138,15 +132,49 @@ class SeekBar extends StatefulWidget {
 class _SeekBarState extends State<SeekBar> {
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      max: widget.duration.inSeconds.toDouble(),
-      value: widget.position.inSeconds.toDouble(),
-      onChanged: (value) {},
-      activeColor: labelColor,
-      inactiveColor: borderButtomColor,
-      onChangeEnd: (time) {
-        widget.onChangeEnd();
-      },
+    return Container(
+      color: borderButtomColor,
+      child: SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          trackShape: CustomTrackShape(),
+          trackHeight: 6,
+          thumbColor: labelColor,
+          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+        ),
+        child: SizedBox(
+          width:double.maxFinite,
+          height: 6,
+          child: Slider(
+            value: widget.position.inSeconds.toDouble(),
+            max: widget.duration.inSeconds.toDouble(),
+            activeColor: labelColor,
+            inactiveColor: borderButtomColor,
+            onChangeEnd: (value) {
+              widget.onChangeEnd();
+            },
+            onChanged: (double value) {},
+          ),
+        ),
+      ),
+
     );
+  }
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 0;
+    final double trackLeft = offset.dx;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

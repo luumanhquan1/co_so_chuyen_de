@@ -157,35 +157,35 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                     }
                     switch (snapshot.data) {
                       case 1:
-                        return StreamBuilder<TinTucRadioResponseModel>(
-                          stream: widget.tinTucThoiSuBloc.listTinTucRadio,
-                          builder: (context, snapshot) {
-                            final listRadio =
-                                snapshot.data?.listTinTucThoiSu ?? [];
-                            listTinTuc = listRadio;
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: listRadio.length,
-                              itemBuilder: (context, index) {
-                                return ItemTinRadio(
-                                    'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
-                                    listRadio[index].title,
-                                    listRadio[index].publishedTime,
-                                    () {
-                                      showBottomSheet(
-                                        context: widget.pContext,
-                                        builder: (context) {
-                                          return BanTinBtnSheet(
-                                            listTinTuc: listTinTuc,
-                                            index: index,
-                                          );
-                                        },
-                                      );
-                                    },);
-                              },
-                            );
-                          },
-                        );
+                      return StreamBuilder<TinTucRadioResponseModel>(
+                        stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                        builder: (context, snapshot) {
+                          final listRadio =
+                              snapshot.data?.listTinTucThoiSu ?? [];
+                          listTinTuc = listRadio;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: listRadio.length,
+                            itemBuilder: (context, index) {
+                              return ItemTinRadio(
+                                  'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
+                                  listRadio[index].title,
+                                  listRadio[index].publishedTime,
+                                  () {
+                                    showBottomSheet(
+                                      context: widget.pContext,
+                                      builder: (context) {
+                                        return BanTinBtnSheet(
+                                          listTinTuc: listTinTuc,
+                                          index: index,
+                                        );
+                                      },
+                                    );
+                                  },);
+                            },
+                          );
+                        },
+                      );
 
                       case 2:
                         return ItemTinTrongNuoc(
