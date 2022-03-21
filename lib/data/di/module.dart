@@ -23,13 +23,10 @@ import 'package:ccvc_mobile/ket_noi_module/data/repository_impl/ket_noi_repo.dar
 import 'package:ccvc_mobile/ket_noi_module/data/service/ket_noi_service.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/danh_ba_dien_tu_impl.dart';
-import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/lich_am_duong_repository_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/tien_ich_repository_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/danh_ba_dien_tu_service.dart';
-import 'package:ccvc_mobile/tien_ich_module/data/service/lich_am_duong_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/tien_ich_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/danh_ba_dien_tu_repository.dart';
-import 'package:ccvc_mobile/tien_ich_module/domain/repository/lich_am_duong_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:dio/dio.dart';
@@ -96,14 +93,12 @@ void configureDependencies() {
       provideDio(),
     ),
   );
-  Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find()));
-
   Get.put(
-    LichAmDuongService(
+    TienIchServiceUAT(
       provideDio(baseOption: BaseURLOption.API_AND_UAT),
     ),
   );
-  Get.put<LichAmDuongRepository>(LichAmDuongRepositoryImpl(Get.find()));
+  Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find(),Get.find()));
   Get.put(
     DanhBaDienTuService(
       provideDio(baseOption: BaseURLOption.COMMON),

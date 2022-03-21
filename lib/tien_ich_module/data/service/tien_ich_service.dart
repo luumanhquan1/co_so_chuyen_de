@@ -58,6 +58,12 @@ abstract class TienIchService {
   Future<DataDetailHuongDanSuDungResponse> getDetailHuongDanSuDung(
     @Query('id') String id,
   );
+}
+
+@RestApi()
+abstract class TienIchServiceUAT {
+  @factoryMethod
+  factory TienIchServiceUAT(Dio dio, {String baseUrl}) = _TienIchServiceUAT;
 
   @GET(ApiConstants.GET_LICH_AM_DUONG)
   Future<DataLichAmDuongResponse> getLichAmDuong(

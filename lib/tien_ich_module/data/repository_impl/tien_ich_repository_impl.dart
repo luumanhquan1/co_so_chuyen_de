@@ -17,8 +17,9 @@ import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repositor
 
 class TienIchRepositoryImpl implements TienIchRepository {
   final TienIchService _tienIchService;
+  final TienIchServiceUAT _tienIchServiceUAT;
 
-  TienIchRepositoryImpl(this._tienIchService);
+  TienIchRepositoryImpl(this._tienIchService,this._tienIchServiceUAT);
 
   @override
   Future<Result<List<TopicHDSD>>> getTopicHDSD() {
@@ -91,7 +92,7 @@ class TienIchRepositoryImpl implements TienIchRepository {
   @override
   Future<Result<LichAmDuong>> getLichAmDuong(String date) {
     return runCatchingAsync<DataLichAmDuongResponse, LichAmDuong>(
-      () => _tienIchService.getLichAmDuong(date),
+      () => _tienIchServiceUAT.getLichAmDuong(date),
       (response) => response.data?.toModel() ?? LichAmDuong(),
     );
   }

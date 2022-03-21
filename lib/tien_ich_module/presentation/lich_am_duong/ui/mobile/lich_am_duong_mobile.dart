@@ -17,7 +17,9 @@ import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/provider_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/calendar/table_calendar/table_calendar_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/show_buttom_sheet/show_bottom_date_picker.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -44,7 +46,20 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
       appBar: BaseAppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              CupertinoRoundedDatePickerWidget.show(
+                context,
+                minimumYear: 1990,
+                maximumYear: 2060,
+                initialDate: DateTime.now(),
+                onTap: (dateTime) async {
+                  await cubit.getLichAmDuong(dateTime.formatApiDDMMYYYY);
+                  cubit.selectTime = dateTime;
+                  cubit.changeDateTimeSubject.add(dateTime);
+                  Navigator.pop(context);
+                },
+              );
+            },
             icon: Container(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: SvgPicture.asset(
@@ -63,7 +78,7 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
       ),
       body: ProviderWidget<LichAmDuongCubit>(
         cubit: cubit,
-        child:  StateStreamLayout(
+        child: StateStreamLayout(
           textEmpty: S.current.khong_co_du_lieu,
           retry: () {},
           error: AppException(
@@ -86,9 +101,10 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                             height: 100,
                           ),
                           LichAmWidget(
-                            ngayAmLich: snapshot.data?.ngayAmLich??NgayAmLich(),
-                            thu: snapshot.data?.thu??'',
-                            ngayAmLichStr: snapshot.data?.ngayAmLicgStr??'',
+                            ngayAmLich:
+                                snapshot.data?.ngayAmLich ?? NgayAmLich(),
+                            thu: snapshot.data?.thu ?? '',
+                            ngayAmLichStr: snapshot.data?.ngayAmLicgStr ?? '',
                           ),
                           GioHoangDaoWidget(
                             listGioHoangDao: snapshot.data?.gioHoangDao ?? [],
@@ -96,7 +112,6 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                             truc: snapshot.data?.nguHanh?.truc ?? '',
                             hanh: snapshot.data?.nguHanh?.hanh ?? '',
                           ),
-
                           const Padding(
                             padding: EdgeInsets.only(bottom: 12.0),
                             child: Divider(
@@ -133,8 +148,8 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                             ),
                           ),
                           ThapNhiKienTruWidget(
-                            thapNhiKienTru:
-                                snapshot.data?.thapNhiKienTru ?? ThapNhiKienTru(),
+                            thapNhiKienTru: snapshot.data?.thapNhiKienTru ??
+                                ThapNhiKienTru(),
                           ),
                           const Padding(
                             padding: EdgeInsets.only(bottom: 12.0),
@@ -153,8 +168,8 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                             ),
                           ),
                           SaoTotSaoXauWidget(
-                            listSaoTot: snapshot.data?.saoTot??[],
-                            listSaoXau:  snapshot.data?.saoXau??[],
+                            listSaoTot: snapshot.data?.saoTot ?? [],
+                            listSaoXau: snapshot.data?.saoXau ?? [],
                           ),
                           const Padding(
                             padding: EdgeInsets.only(bottom: 12.0),
@@ -163,7 +178,8 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                             ),
                           ),
                           GioLyThuanPhongWidget(
-                            listGioLyThuanPhong: snapshot.data?.gioLyThuanPhong??[],
+                            listGioLyThuanPhong:
+                                snapshot.data?.gioLyThuanPhong ?? [],
                           ),
                           const Padding(
                             padding: EdgeInsets.only(bottom: 12.0),
@@ -178,13 +194,21 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
                   ),
                 ),
               ),
-              TableCalendarWidget(
-                onChange: (DateTime start, DateTime end, selectDay) {
-                cubit.startDate=start.formatApiDDMMYYYY;
-                cubit.getLichAmDuong(cubit.startDate);
+              StreamBuilder<DateTime>(
+                stream: cubit.changeDateTimeSubject.stream,
+                builder: (context, snapshot) {
+                  return TableCalendarWidget(
+                    onChange: (DateTime start, DateTime end, selectDay) {
+                      cubit.startDate = start.formatApiDDMMYYYY;
+                      cubit.getLichAmDuong(cubit.startDate);
+                      cubit.selectTime = selectDay;
+                    },
+                    onChangeRange: (DateTime? start, DateTime? end,
+                        DateTime? focusedDay) {},
+                    selectDay: (day) => cubit.selectDay(day),
+                    cubit: cubit,
+                  );
                 },
-                onChangeRange:
-                    (DateTime? start, DateTime? end, DateTime? focusedDay) {},
               ),
             ],
           ),
