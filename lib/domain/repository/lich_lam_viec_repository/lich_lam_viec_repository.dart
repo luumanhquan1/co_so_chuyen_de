@@ -19,6 +19,7 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.d
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/tinh_trang_bao_cao_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/tree_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
@@ -28,6 +29,8 @@ mixin LichLamViecRepository {
     String startTime,
     String endTime,
   );
+
+  Future<Result<List<MenuModel>>> getDataMenu(String startTime, String endTime);
 
   Future<Result<List<LichLamViecDashBroadItem>>> getLichLvRight(
       LichLamViecRightRequest lamViecRightRequest);

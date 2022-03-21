@@ -1,8 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 class ItemThongBaoModel {
   String icon;
   TypeCalendarMenu typeMenu;
+  String? name;
   TypeContainer type;
   int? index;
   List<ItemThongBaoModel>? listWidget;
@@ -25,6 +26,7 @@ class ItemThongBaoModel {
     required this.type,
     required this.onTap,
     this.index,
+    this.name,
     this.listWidget,
   });
 }
@@ -341,6 +343,27 @@ enum TypeCalendarMenu {
 }
 
 extension GetScreenMenu on TypeCalendarMenu {
+  int getIndex(LichLamViecDashBroad data) {
+    switch (this) {
+      case TypeCalendarMenu.LichCuaToi:
+        return data.countScheduleCaNhan ?? 0;
+      case TypeCalendarMenu.LichTaoHo:
+        return data.soLichTaoHo ?? 0;
+      case TypeCalendarMenu.LichHuy:
+        return data.soLichHuyBo ?? 0;
+      case TypeCalendarMenu.LichThuHoi:
+        return data.soLichThuHoi ?? 0;
+      case TypeCalendarMenu.LichDaCoBaoCao:
+        return data.soLichCoBaoCaoDaDuyet ?? 0;
+      case TypeCalendarMenu.LichChuaCoBaoCao:
+        return data.soLichChuaCoBaoCao ?? 0;
+      case TypeCalendarMenu.LichDuocMoi:
+        return data.tongLichDuocMoi ?? 0;
+      default:
+        return 0;
+    }
+  }
+
   String getTitle() {
     switch (this) {
       case TypeCalendarMenu.LichCuaToi:
@@ -444,10 +467,12 @@ extension GetScreenMenu on TypeCalendarMenu {
                         textColor: textBodyTime,
                       ),
                     ),
-
-                    const SizedBox(width: 10,),
-
-                    StateSelectWidget(cubit: cubit,),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    StateSelectWidget(
+                      cubit: cubit,
+                    ),
                   ],
                 ),
               ),
@@ -460,7 +485,7 @@ extension GetScreenMenu on TypeCalendarMenu {
           padding: const EdgeInsets.only(
             top: 32.0,
           ),
-          child:  type.getTextLLVWidget(
+          child: type.getTextLLVWidget(
             cubit: cubit,
             textColor: textBodyTime,
           ),

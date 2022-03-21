@@ -7,11 +7,13 @@ import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.d
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -28,6 +30,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   int page = 1;
   int totalPage = 1;
   int pageSize = 100;
+  String titleAppbar = '';
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -36,6 +39,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
       BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
   final BehaviorSubject<List<DateTime>> eventsSubject = BehaviorSubject();
+
+  BehaviorSubject<List<MenuModel>> menuModelSubject = BehaviorSubject();
 
   Stream<List<DateTime>> get eventsStream => eventsSubject.stream;
 
@@ -77,6 +82,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
     );
+    menuCalendar();
   }
 
   void callApiNgay() {
@@ -98,6 +104,38 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
       type: 0,
+    );
+    menuCalendar();
+  }
+
+  Future<void> menuCalendar() async {
+    final result = await _lichLamViec.getDataMenu(
+      startDates.formatApi,
+      endDates.formatApi,
+    );
+
+    result.when(
+      success: (value) {
+        listLanhDao.clear();
+        value.forEach((element) {
+          listLanhDao.add(
+            ItemThongBaoModel(
+              icon: '',
+              typeMenu: TypeCalendarMenu.LichTheoLanhDao,
+              type: TypeContainer.number,
+              name: element.tenDonVi ?? '',
+              index: element.count,
+              onTap: (BuildContext context, CalenderCubit cubit) {
+                changeItemMenuSubject.add(TypeCalendarMenu.LichTheoLanhDao);
+                titleAppbar = element.tenDonVi ?? '';
+                Navigator.pop(context);
+              },
+            ),
+          );
+        });
+        menuModelSubject.add(value);
+      },
+      error: (error) {},
     );
   }
 
@@ -142,6 +180,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
     );
+    menuCalendar();
   }
 
   void callApiMonth() {
@@ -154,6 +193,7 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
     );
+    menuCalendar();
   }
 
   List<ListLichLVModel> listDSLV = [];
