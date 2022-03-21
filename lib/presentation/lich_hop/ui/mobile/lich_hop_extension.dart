@@ -128,6 +128,63 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     }
   }
 
+  Widget getTextLLVWidget({
+    required CalenderCubit cubit,
+    Color textColor = textDefault,
+  }) {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
+        return StreamBuilder<DateTime>(
+            stream: cubit.moveTimeSubject.stream,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? cubit.selectDay;
+              return Text(
+                data.formatDayCalendar,
+                style: textNormalCustom(
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            });
+
+      case Type_Choose_Option_Day.WEEK:
+        return StreamBuilder<DateTime>(
+            stream: cubit.moveTimeSubject.stream,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? cubit.selectDay;
+              return Text(
+                data.startEndWeek,
+                style: textNormalCustom(
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            },);
+
+      case Type_Choose_Option_Day.MONTH:
+        return StreamBuilder<DateTime>(
+            stream: cubit.moveTimeSubject.stream,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? cubit.selectDay;
+              final dateTimeFormRange =
+                  data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+
+              final dataString =
+                  '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+              return Text(
+                dataString,
+                style: textNormalCustom(
+                  color: textColor,
+                  fontSize: 14.0.textScale(),
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            });
+    }
+  }
+
   Widget getLichHopStateDangLich({
     required LichHopCubit cubit,
   }) {

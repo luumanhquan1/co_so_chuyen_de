@@ -1,13 +1,20 @@
-
-class ListMenuItemModel{
+class ListMenuItemModel {
   String id;
+  int nodeid;
   String title;
-  List<MenuItemModel>subMenu;
-  ListMenuItemModel({required this.id,required this.title,required this.subMenu});
+  List<MenuItemModel> subMenu;
+
+  ListMenuItemModel(
+      {required this.id,
+      required this.title,
+      required this.nodeid,
+      required this.subMenu,});
 }
-class MenuItemModel{
+
+class MenuItemModel {
   String id;
   int nodeId;
   String title;
-  MenuItemModel({required this.id,required this.nodeId,required this.title});
+
+  MenuItemModel({required this.id, required this.nodeId, required this.title});
 }

@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -53,16 +54,4 @@ class ItemInfomation extends StatelessWidget {
   }
 }
 
-class ItemInfomationModel {
-  final String image;
-  final Color color;
-  final String title;
-  final String index;
 
-  const ItemInfomationModel({
-    required this.image,
-    required this.color,
-    required this.title,
-    required this.index,
-  });
-}

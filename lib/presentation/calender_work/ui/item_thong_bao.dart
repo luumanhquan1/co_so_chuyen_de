@@ -4,7 +4,9 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -338,9 +340,6 @@ enum TypeCalendarMenu {
   DanhSachLichHop
 }
 
-
-
-
 extension GetScreenMenu on TypeCalendarMenu {
   String getTitle() {
     switch (this) {
@@ -410,37 +409,45 @@ extension GetScreenMenu on TypeCalendarMenu {
 
   Widget getHeader({
     required CalenderCubit cubit,
+    required Type_Choose_Option_Day type,
   }) {
     switch (this) {
       case TypeCalendarMenu.LichCuaToi:
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
-          child: Text(
-            cubit.textDay,
-            style: textNormalCustom(color: textBodyTime),
+          padding: const EdgeInsets.only(
+            top: 16.0,
+          ),
+          child: type.getTextLLVWidget(
+            cubit: cubit,
+            textColor: textBodyTime,
           ),
         );
 
       case TypeCalendarMenu.LichDuocMoi:
         return Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16, top: 16),
+          padding: const EdgeInsets.only(
+            top: 16.0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                  right: 16.0,
                   top: 16.0,
-                  bottom: 16.0,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      cubit.textDay,
-                      style: textNormalCustom(color: textBodyTime),
+                    Expanded(
+                      child: type.getTextLLVWidget(
+                        cubit: cubit,
+                        textColor: textBodyTime,
+                      ),
                     ),
-                    stateLDM.ChoXacNhan.getState(3),
+
+                    const SizedBox(width: 10,),
+
+                    StateSelectWidget(cubit: cubit,),
                   ],
                 ),
               ),
@@ -450,16 +457,20 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichTaoHo:
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 32.0, bottom: 16.0),
-          child: Text(
-            cubit.textDay,
-            style: textNormalCustom(color: textBodyTime),
+          padding: const EdgeInsets.only(
+            top: 32.0,
+          ),
+          child:  type.getTextLLVWidget(
+            cubit: cubit,
+            textColor: textBodyTime,
           ),
         );
 
       default:
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0, top: 32.0, bottom: 16.0),
+          padding: const EdgeInsets.only(
+            top: 32.0,
+          ),
           child: Text(
             cubit.textDay,
             style: textNormalCustom(color: textBodyTime),
@@ -490,7 +501,7 @@ extension GetScreenMenu on TypeCalendarMenu {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(),
-                  stateLDM.ChoXacNhan.getState(3),
+                  StateSelectWidget(cubit: cubit),
                 ],
               )
             : Container(
@@ -502,7 +513,7 @@ extension GetScreenMenu on TypeCalendarMenu {
                       cubit.textDay,
                       style: textNormalCustom(color: textBodyTime),
                     ),
-                    stateLDM.ChoXacNhan.getState(3),
+                    StateSelectWidget(cubit: cubit),
                   ],
                 ),
               );

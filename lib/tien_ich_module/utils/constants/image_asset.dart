@@ -84,6 +84,16 @@ class ImageAssets {
   static const String icMail = '$baseImg/ic_mail.svg';
   static const String icTron = '$baseImg/ic_tron.svg';
 
+// ic them moi
+  static const String icCalenderDb = '$baseImg/ic_calender_db.svg';
+  static const String icCallDb = '$baseImg/ic_call_db.svg';
+  static const String icCalling = '$baseImg/ic_calling_db.svg';
+  static const String icCmt = '$baseImg/ic_cmtn_db.svg';
+  static const String icEditDb = '$baseImg/ic_edit_db.svg';
+  static const String icLocation = '$baseImg/ic_location_db.svg';
+  static const String icMessage = '$baseImg/ic_message_db.svg';
+  static const String icPhoneCp = '$baseImg/ic_phone_cq_db.svg';
+
   static SvgPicture svgAssets(
     String name, {
     Color? color,

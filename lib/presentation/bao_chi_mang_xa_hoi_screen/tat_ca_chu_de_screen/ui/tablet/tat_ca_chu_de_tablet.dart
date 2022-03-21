@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/bloc/chu_de_cubit.dart';
@@ -69,10 +70,10 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                       const SizedBox(
                         height: 28,
                       ),
-                      StreamBuilder<List<ItemInfomationModel>>(
+                      StreamBuilder<DashBoardModel>(
                         stream: chuDeCubit.streamDashBoard,
                         builder: (context, snapshot) {
-                          final data = snapshot.data ?? [];
+                          final data = snapshot.data?.listItemDashBoard ?? [];
                           return GridView.count(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,

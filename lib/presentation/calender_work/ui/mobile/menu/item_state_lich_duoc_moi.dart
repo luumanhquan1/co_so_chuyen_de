@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,19 @@ import 'package:flutter/cupertino.dart';
 enum stateLDM { ChoXacNhan, ThamGia, TuChoi }
 
 extension StateLDM on stateLDM {
+  int getIndex(LichLamViecDashBroad model) {
+    switch (this) {
+      case stateLDM.ChoXacNhan:
+        return model.soLichChoXacNhan ?? 0;
+
+      case stateLDM.ThamGia:
+        return model.soLichThamGia ?? 0;
+
+      case stateLDM.TuChoi:
+        return model.soLichChuTriTuChoi ?? 0;
+    }
+  }
+
   Widget getState(int index) {
     switch (this) {
       case stateLDM.ChoXacNhan:
@@ -16,20 +30,19 @@ extension StateLDM on stateLDM {
           index: index,
         );
 
-      case stateLDM.ThamGia :
+      case stateLDM.ThamGia:
         return ContainerState(
           name: S.current.tham_gia,
           color: itemWidgetUsing,
           index: index,
         );
 
-      case stateLDM.TuChoi :
+      case stateLDM.TuChoi:
         return ContainerState(
           name: S.current.tu_choi,
           color: statusCalenderRed,
           index: index,
         );
-
     }
   }
 }
@@ -53,6 +66,9 @@ class ContainerState extends StatelessWidget {
         horizontal: 16.0.textScale(),
         vertical: 8.0.textScale(),
       ),
+      margin: const EdgeInsets.only(
+        bottom: 16,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
@@ -60,6 +76,7 @@ class ContainerState extends StatelessWidget {
         ),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             '$name($index)',

@@ -44,7 +44,6 @@ class TinTucThoiSuBloc extends BaseCubit<TinTucThoiSuState> {
 
 
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
-
   Future<void> getListTinTucRadio(String startDate, String enDate) async {
    showLoading();
     final result = await _BCMXHRepo.getTinTucThoiSu(
