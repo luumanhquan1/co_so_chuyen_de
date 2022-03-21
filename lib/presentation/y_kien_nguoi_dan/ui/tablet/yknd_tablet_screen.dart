@@ -69,7 +69,6 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
         child: Column(
           children: [
             ChooseTimeScreen(
-              baseChooseTimeCubit: chooseTimeScreen,
               today: DateTime.now(),
             ),
             Padding(

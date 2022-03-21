@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'chon_bien_ban_cuoc_hop_response.g.dart';
@@ -74,7 +75,7 @@ class ItemsResponse {
 
   ItemsModel toModel() => ItemsModel(
         id: id,
-        name: name,
+        name: name ?? '',
         content: content,
         totalItems: totalItems,
         isXoa: isXoa,

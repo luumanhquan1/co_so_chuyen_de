@@ -1,12 +1,12 @@
 class ChonBienBanCuocHopModel {
-  List<ItemsModel>? items;
+  List<ItemsModel> items;
   int? pageIndex;
   int? pageSize;
   int? totalCount;
   int? totalPage;
 
   ChonBienBanCuocHopModel({
-    this.items,
+    required this.items,
     this.pageIndex,
     this.pageSize,
     this.totalCount,
@@ -16,7 +16,7 @@ class ChonBienBanCuocHopModel {
 
 class ItemsModel {
   String? id;
-  String? name;
+  String name;
   String? content;
   int? totalItems;
   bool? isXoa;

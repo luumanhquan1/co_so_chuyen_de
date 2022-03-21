@@ -68,6 +68,10 @@ class ImageAssets {
   static const String icPeople = '$baseImg/ic_people.svg';
   static const String icCalendar = '$baseImg/ic_calendar.svg';
   static const String icWork = '$baseImg/ic_work.svg';
+  static const String edit_dscv = '$baseImg/edit_dscv.svg';
+
+
+
 
   static const String appBarBackgroundXanh =
       '$baseImg/app_bar_backgroud_xanh.png';
@@ -89,6 +93,10 @@ class ImageAssets {
       '$baseImg/header_background_thu.png';
   static const String headerBackgroungDong =
       '$baseImg/header_background_dong.png';
+
+
+
+
 
   static const String headerBackgroudTetNguyenDan =
       '$baseImg/header_background_tet_nguyen_dan.png';
@@ -170,7 +178,6 @@ class ImageAssets {
   static const String appBarBackGroundGiangSinhTablet =
       '$baseImg/app_bar_background_giang_sinh_tablet.png';
 
-
   static const String headerBackgroudXanhTablet =
       '$baseImg/header_background_xanh_tablet.png';
   static const String headerBackgroundHongTablet =
@@ -179,7 +186,8 @@ class ImageAssets {
       '$baseImg/header_backgroung_vang_tablet.png';
   static const String headerBackgroungXuanTablet =
       '$baseImg/header_background_xuan_tablet.png';
-  static const String headerBackgroungHaTablet = '$baseImg/header_background_ha_tablet.png';
+  static const String headerBackgroungHaTablet =
+      '$baseImg/header_background_ha_tablet.png';
   static const String headerBackgroungThuTablet =
       '$baseImg/header_background_thu_tablet.png';
   static const String headerBackgroungDongTablet =

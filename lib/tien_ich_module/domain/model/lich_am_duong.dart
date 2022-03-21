@@ -101,6 +101,35 @@ class GioHacDao {
     this.ten,
     this.gio,
   });
+  String  toIcon(){
+    switch(ten?.trim()){
+      case IC_CHUOT:
+        return ImageAssets.icChuot;
+      case IC_SUU:
+        return ImageAssets.icSuu;
+      case IC_DAN:
+        return ImageAssets.icDan;
+      case IC_MAO:
+        return ImageAssets.icMao;
+      case IC_THIN:
+        return ImageAssets.icThin;
+      case IC_TY:
+        return ImageAssets.icTy;
+      case IC_NGO:
+        return ImageAssets.icNgo;
+      case IC_MUI:
+        return ImageAssets.icMui;
+      case IC_THAN:
+        return ImageAssets.icThan;
+      case IC_DAU:
+        return ImageAssets.icDau;
+      case IC_TUAT:
+        return ImageAssets.icTuat;
+      case IC_HOI:
+        return ImageAssets.icHoi;
+    }
+    return ImageAssets.icChuot;
+  }
 }
 
 class NgayAmLich {

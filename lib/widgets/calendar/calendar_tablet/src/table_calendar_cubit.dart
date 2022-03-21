@@ -90,10 +90,17 @@ class TableCalendarCubit {
       selectedDay =
           DateTime(selectedDay.year, selectedDay.month, selectedDay.day + 1);
     } else if (type == Type_Choose_Option_Day.WEEK) {
-      selectedDay = DateTime(selectedDay.year, selectedDay.month,
-          selectedDay.day + (7 - selectedDay.weekday + 1));
+      selectedDay = DateTime(
+        selectedDay.year,
+        selectedDay.month,
+        selectedDay.day + (7 - selectedDay.weekday + 1),
+      );
     } else {
-      selectedDay = DateTime(selectedDay.year, selectedDay.month + 1, 1);
+      selectedDay = DateTime(
+        selectedDay.year,
+        selectedDay.month + 1,
+        1,
+      );
     }
     moveTimeSubject.add(selectedDay);
   }

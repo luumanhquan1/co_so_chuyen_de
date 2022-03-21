@@ -195,7 +195,6 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
                       margin: const EdgeInsets.only(
                         bottom: 20,
                         right: 20,
-                        top: 10,
                       ),
                       child: SvgPicture.asset(
                         ImageAssets.icVoiceMini,
@@ -230,12 +229,16 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
                     stream: cubit.textTranslateStream,
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? '';
-                      return Text(
-                        textEditingController.text.isEmpty ? '' : data,
-                        style: textNormalCustom(
-                          color: textTitle,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
+                      return Expanded(
+                        child: SingleChildScrollView(
+                          child: Text(
+                            textEditingController.text.isEmpty ? '' : data,
+                            style: textNormalCustom(
+                              color: textTitle,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -268,7 +271,15 @@ class _PhienDichTuDongMobileState extends State<PhienDichTuDongMobile> {
             const SizedBox(
               height: 20,
             ),
-            btn(onTap: () {}),
+            btn(
+              onTap: () {
+                cubit.readFile(
+                  textEditingController,
+                  viToEn,
+                  enToVi,
+                );
+              },
+            ),
           ],
         ),
       ),

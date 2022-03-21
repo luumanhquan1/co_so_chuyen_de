@@ -13,19 +13,20 @@ import 'package:ccvc_mobile/widgets/textformfield/follow_key_board_widget.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_html/flutter_html.dart';
 import 'chon_ngay_widget.dart';
+import 'edit_ket_luan_hop_screen.dart';
 
 class XemKetLuanHopWidget extends StatefulWidget {
-  const XemKetLuanHopWidget({Key? key}) : super(key: key);
+  final DetailMeetCalenderCubit cubit;
+
+  const XemKetLuanHopWidget({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _XemKetLuanHopWidgetState createState() => _XemKetLuanHopWidgetState();
 }
 
 class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
-  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,14 +56,18 @@ class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
                     ],
                   ),
                 ),
-                CustomDropDown(
-                  hint: Text(
-                    '${cubit.xemKetLuanHopModel.reportStatus}',
-                    style: textNormal(titleItemEdit, 14),
-                  ),
-                  items: cubit.dataTinhTrangKetLuanHop,
-                  onSelectItem: (value) {},
-                ),
+                StreamBuilder<List<String>>(
+                    stream: widget.cubit.dataTinhTrangKetLuanHop,
+                    builder: (context, snapshot) {
+                      return CustomDropDown(
+                        hint: Text(
+                          '${widget.cubit.xemKetLuanHopModel.reportStatus}',
+                          style: textNormal(titleItemEdit, 14),
+                        ),
+                        items: snapshot.data ?? [],
+                        onSelectItem: (value) {},
+                      );
+                    }),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8, top: 20),
                   child: Text(
@@ -70,14 +75,20 @@ class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
                     style: textNormal(titleItemEdit, 14),
                   ),
                 ),
-                CustomDropDown(
-                  hint: Text(
-                    S.current.mau_bien_ban_1,
-                    style: textNormal(titleItemEdit, 14),
-                  ),
-                  items: cubit.dataMauBienBan,
-                  onSelectItem: (value) {},
-                ),
+                StreamBuilder<List<String>>(
+                    stream: widget.cubit.dataMauBienBan,
+                    builder: (context, snapshot) {
+                      return CustomDropDown(
+                        hint: Text(
+                          widget.cubit.dataMauBienBan.value.last,
+                          style: textNormal(titleItemEdit, 14),
+                        ),
+                        items: snapshot.data ?? [],
+                        onSelectItem: (value) {
+                          widget.cubit.getValueMauBienBan(value);
+                        },
+                      );
+                    }),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8, top: 20),
                   child: Text(
@@ -85,15 +96,41 @@ class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
                     style: textNormal(titleItemEdit, 14),
                   ),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(bottom: 8, top: 20),
-                  decoration: BoxDecoration(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditKetLuanHopScreen(
+                          key: keyEditKetLuanHop,
+                          cubit: widget.cubit,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 200,
+                    padding: const EdgeInsets.only(
+                        bottom: 8, top: 10, left: 8, right: 8),
+                    decoration: BoxDecoration(
                       border: Border.all(color: borderColor),
-                      borderRadius: BorderRadius.circular(6)),
-                  child: Text(
-                    '${cubit.xemKetLuanHopModel.content}',
-                    style: textNormal(titleItemEdit, 14),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: SingleChildScrollView(
+                      child: StreamBuilder<String>(
+                        stream: widget.cubit.noiDung,
+                        builder: (context, snapshot) {
+                          return widget.cubit.valueEdit != snapshot.data
+                              ? Html(
+                                  data: snapshot.data ?? '',
+                                )
+                              : Html(
+                                  data: widget.cubit.valueEdit,
+                                );
+                        },
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
