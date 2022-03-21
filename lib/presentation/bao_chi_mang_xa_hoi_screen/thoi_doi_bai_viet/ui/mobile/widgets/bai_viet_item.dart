@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/theo_doi_bai_viet/theo_doi_bai_viet_model.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -102,15 +103,26 @@ class _BaiVietItemState extends State<BaiVietItem> {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            widget.baiVietModel.title,
-            style: textNormalCustom(
-              color: titleColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+          GestureDetector(
+            child: Text(
+              widget.baiVietModel.title,
+              style: textNormalCustom(
+                color: titleColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      WebViewScreen(url: widget.baiVietModel.url, title: ''),
+                ),
+              );
+            },
           )
         ],
       ),
