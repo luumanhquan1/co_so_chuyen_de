@@ -18,3 +18,8 @@ class MenuItemModel {
 
   MenuItemModel({required this.id, required this.nodeId, required this.title});
 }
+class MenuData{
+  int nodeId;
+  String title;
+  MenuData({required this.nodeId, required this.title,});
+}

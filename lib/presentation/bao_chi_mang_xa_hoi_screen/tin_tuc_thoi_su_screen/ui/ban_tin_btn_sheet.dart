@@ -89,7 +89,6 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
             height: 24,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -124,88 +123,97 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                         phatBanTinBloc.getIndexRadio() + 1,
                         widget.listTinTuc.length - 1,
                       );
-                      player.seekToNext();
+                       player.seekToNext();
                     },
                     icon: const Icon(Icons.skip_next),
                   ),
                   const SizedBox(
-                    width: 20,
+                    width: 10,
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.volume_up),
-                        color: unselectLabelColor,
-                      ),
-                      SizedBox(
-                        width: 70,
-                        child: StreamBuilder<double>(
-                          stream: player.volumeStream,
-                          builder: (context, snapshot) {
-                            final data = snapshot.data ?? 0.5;
-                            return Container(
-                              color: borderButtomColor,
-                              child: SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  trackShape: CustomTrackShape(),
-                                  trackHeight: 4,
-                                  thumbColor: labelColor,
-                                  thumbShape: const RoundSliderThumbShape(
-                                      enabledThumbRadius: 6,),
-                                ),
-                                child: SizedBox(
-                                  width: 70,
-                                  height: 4,
-                                  child: Slider(
-                                    value: data,
-                                    activeColor: labelColor,
-                                    inactiveColor: borderButtomColor,
-                                    onChanged: (double value) {
-                                      player.setVolume(value);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  )
+
                 ],
               ),
-              Row(
-                children: [
-                  StreamBuilder<Duration?>(
-                    stream: player.positionStream,
-                    builder: (context, snapshot) {
-                      final timeData = snapshot.data?.inSeconds ?? 0;
-                      return Text(
-                        '${phatBanTinBloc.intToDate(timeData)}/',
-                        style: textNormalCustom(
-                          color: AqiColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      );
-                    },
-                  ),
-                  StreamBuilder<Duration?>(
-                    stream: player.durationStream,
-                    builder: (context, snapshot) {
-                      final timeData = snapshot.data?.inSeconds ?? 0;
-                      return Text(
-                        phatBanTinBloc.intToDate(timeData),
-                        style: textNormalCustom(
-                          color: AqiColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.volume_up),
+                            color: unselectLabelColor,
+                          ),
+                          SizedBox(
+                            width: 60,
+                            child: StreamBuilder<double>(
+                              stream: player.volumeStream,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ?? 0.5;
+                                return Container(
+                                  color: borderButtomColor,
+                                  child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      trackShape: CustomTrackShape(),
+                                      trackHeight: 4,
+                                      thumbColor: labelColor,
+                                      thumbShape: const RoundSliderThumbShape(
+                                        enabledThumbRadius: 6,),
+                                    ),
+                                    child: SizedBox(
+                                      width: 60,
+                                      height: 4,
+                                      child: Slider(
+                                        value: data,
+                                        activeColor: labelColor,
+                                        inactiveColor: borderButtomColor,
+                                        onChanged: (double value) {
+                                          player.setVolume(value);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    StreamBuilder<Duration?>(
+                      stream: player.positionStream,
+                      builder: (context, snapshot) {
+                        final timeData = snapshot.data?.inSeconds ?? 0;
+                        return Text(
+                          '${phatBanTinBloc.intToDate(timeData)}/',
+                          style: textNormalCustom(
+                            color: AqiColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        );
+                      },
+                    ),
+                    StreamBuilder<Duration?>(
+                      stream: player.durationStream,
+                      builder: (context, snapshot) {
+                        final timeData = snapshot.data?.inSeconds ?? 0;
+                        return Text(
+                          phatBanTinBloc.intToDate(timeData),
+                          style: textNormalCustom(
+                            color: AqiColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

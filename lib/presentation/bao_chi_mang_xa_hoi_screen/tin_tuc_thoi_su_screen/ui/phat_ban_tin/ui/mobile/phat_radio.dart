@@ -92,8 +92,8 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
             position: positionData?.position ?? Duration.zero,
             bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
             onChangeEnd: () {
-              widget.player.seekToNext();
-            });
+               widget.player.seekToNext();
+            },);
       },
     );
   }
