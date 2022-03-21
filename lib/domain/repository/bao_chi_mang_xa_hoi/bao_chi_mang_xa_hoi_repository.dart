@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/theo_doi_bai_viet/theo_doi_bai_viet_model.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 
 mixin BaoChiMangXaHoiRepository {
@@ -36,11 +37,18 @@ mixin BaoChiMangXaHoiRepository {
   Future<Result<List<ListMenuItemModel>>> getMenuBCMXH();
 
   Future<Result<TinTucRadioResponseModel>> getTinTucThoiSu(
-      int pageIndex,
-      int pageSize,
-      String fromDate,
-      String toDate,
-      int topic,
-      );
+    int pageIndex,
+    int pageSize,
+    String fromDate,
+    String toDate,
+    int topic,
+  );
 
+  Future<Result<TheoDoiBaiVietModel>> getBaiVietTheoDoi(
+    int pageIndex,
+    int pageSize,
+    String fromDate,
+    String toDate,
+    int topic,
+  );
 }

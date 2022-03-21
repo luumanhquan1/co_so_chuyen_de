@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke_r
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/menu_response.dart';
+import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/theo_doi_bai_viet_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/tin_tuc_thoi_su_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_service.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/theo_doi_bai_viet/theo_doi_bai_viet_model.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/domain/repository/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_repository.dart';
 
@@ -28,30 +30,29 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
     String fromDate,
     String toDate,
   ) {
-    return runCatchingAsync<List<DashBoardTatCaChuDeResponse>,
-        DashBoardModel>(
-      () => _baoChiMangXaHoiService.getDashBoardTatCaChuDe(
-        pageIndex,
-        pageSize,
-        total,
-        hasNextPage,
-        fromDate,
-        toDate,
-      ),
-      (res) {
-        final data=res.map((e) => e.toDomain()).toList();
-        final List<ItemInfomationModel> lisDataItem=[];
-        for(int i=0;i<data.length;i++){
-          lisDataItem.add(ItemInfomationModel(
+    return runCatchingAsync<List<DashBoardTatCaChuDeResponse>, DashBoardModel>(
+        () => _baoChiMangXaHoiService.getDashBoardTatCaChuDe(
+              pageIndex,
+              pageSize,
+              total,
+              hasNextPage,
+              fromDate,
+              toDate,
+            ), (res) {
+      final data = res.map((e) => e.toDomain()).toList();
+      final List<ItemInfomationModel> lisDataItem = [];
+      for (int i = 0; i < data.length; i++) {
+        lisDataItem.add(
+          ItemInfomationModel(
             title: data[i].sourceTitle,
             index: data[i].total.toString(),
             image: listIconDashBoard[i],
             color: listColorsItemDashBoard[i],
-          ),);
-        }
-        return DashBoardModel(listItemDashBoard:lisDataItem);
+          ),
+        );
       }
-    );
+      return DashBoardModel(listItemDashBoard: lisDataItem);
+    });
   }
 
   @override
@@ -109,15 +110,31 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   Future<Result<TinTucRadioResponseModel>> getTinTucThoiSu(
       int pageIndex, int pageSize, String fromDate, String toDate, int topic) {
     return runCatchingAsync<String, TinTucRadioResponseModel>(
-          () => _baoChiMangXaHoiService.getTinTucThoiSu(
+      () => _baoChiMangXaHoiService.getTinTucThoiSu(
         pageIndex,
         pageSize,
         fromDate,
         toDate,
         topic,
       ),
-          (res) => TinTucThoiSuResponse.fromJson(json.decode(res)).toDomain(),
+      (res) => TinTucThoiSuResponse.fromJson(json.decode(res)).toDomain(),
+    );
+  }
 
+  @override
+  Future<Result<TheoDoiBaiVietModel>> getBaiVietTheoDoi(
+      int pageIndex, int pageSize, String fromDate, String toDate, int topic) {
+    return runCatchingAsync<String, TheoDoiBaiVietModel>(
+          () => _baoChiMangXaHoiService.getTheoDoiBaiViet(
+        pageIndex,
+        pageSize,
+        fromDate,
+        toDate,
+        topic,
+      ),
+          (res) {
+            return TheoDoiBaiVietResponse.fromJson(json.decode(res)).toDomain();
+          }
     );
   }
 }

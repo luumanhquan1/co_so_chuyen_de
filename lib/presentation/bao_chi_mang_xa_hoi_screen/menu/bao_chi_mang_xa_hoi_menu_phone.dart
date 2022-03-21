@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/bloc/theo_doi_bai_viet_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -10,14 +11,19 @@ import 'package:flutter_svg/svg.dart';
 
 class BaoChiMangXaHoiMenu extends StatefulWidget {
   final BaoChiMangXaHoiBloc cubit;
+  final Function() onChange;
 
-  const BaoChiMangXaHoiMenu({Key? key, required this.cubit}) : super(key: key);
+  const BaoChiMangXaHoiMenu(
+      {Key? key, required this.cubit, required this.onChange})
+      : super(key: key);
 
   @override
   _BaoChiMangXaHoiMenuState createState() => _BaoChiMangXaHoiMenuState();
 }
 
 class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
+  TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                   itemCount: widget.cubit.listTitleItemMenu.length,
                   itemBuilder: (context, index) {
                     return ContainerMenuWidget(
-                      name: widget.cubit.listTitleItemMenu[index],
+                      name: widget.cubit.listTitleItemMenu[index].title,
                       icon: ImageAssets.icMenuItemBCMXH,
                       type: TypeContainer.expand,
                       childExpand: ListView.builder(
@@ -50,20 +56,48 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: widget.cubit.listSubMenu[index].length,
                         itemBuilder: (context, indexItem) {
-                          return Container(
-                            padding: const EdgeInsets.fromLTRB(32, 0, 0, 16),
-                            child: Text(
-                              widget.cubit.listSubMenu[index][indexItem].title,
-                              style: textNormalCustom(
-                              color: textTitle,
-                              fontSize: 16.0.textScale(),
-                              fontWeight: FontWeight.w400,
+                          return GestureDetector(
+                            child: StreamBuilder(
+                              stream: widget.cubit.indexSelectItem,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data;
+                                return Container(
+                                  color: data == indexItem
+                                      ? linkColor
+                                      : backgroundColorApp,
+                                  padding: const EdgeInsets.fromLTRB(
+                                    32,
+                                    0,
+                                    0,
+                                    16,
+                                  ),
+                                  child: Text(
+                                    widget.cubit.listSubMenu[index][indexItem]
+                                        .title,
+                                    style: textNormalCustom(
+                                      color: textTitle,
+                                      fontSize: 16.0.textScale(),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            ),
+                            onTap: () {
+                              widget.cubit.topic = widget
+                                  .cubit.listSubMenu[index][indexItem].nodeId;
+                              widget.onChange();
+                              widget.cubit.slectColorItem(indexItem);
+                              Navigator.pop(context);
+                            },
                           );
                         },
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        widget.cubit.topic =
+                            widget.cubit.listTitleItemMenu[index].nodeId;
+                        widget.onChange();
+                      },
                     );
                   },
                 ),
