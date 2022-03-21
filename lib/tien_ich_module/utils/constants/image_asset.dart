@@ -72,6 +72,8 @@ class ImageAssets {
   static const String icIconMenuLichAmDuong =
       '$baseImg/ic_icon_menu_lich_am_huong.svg';
   static const String icBack = '$baseImg/ic_back.svg';
+  static const String icLeftCalendar = '$baseImg/ic_left_calendar.svg';
+  static const String icRightCalendar = '$baseImg/ic_right.svg';
 
 // icon danh sach dien tu
   static const String icDanhBa = '$baseImg/ic_danh_bas.png';

@@ -4,7 +4,8 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/src/customization/calendar_style_phone.dart';
@@ -146,8 +147,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.tablet==false
-                    ? TableCalendarPhone(
+                if (widget.tablet==false) TableCalendarPhone(
                         eventLoader: (day) =>
                             widget.eventsLoader
                                 ?.where((element) => isSameDay(element, day))
@@ -209,8 +209,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         firstDay: DateTime.utc(2021, 8, 20),
                         lastDay: DateTime.utc(2030, 8, 20),
                         focusedDay: _selectedDay,
-                      )
-                    : TableCalendarTablet(
+                      ) else TableCalendarTablet(
                         eventLoader: (day) =>
                             widget.eventsLoader
                                 ?.where((element) => isSameDay(element, day))
@@ -234,24 +233,26 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                           return isSameDay(_selectedDay, day);
                         },
                         calendarStyle: CalendarStyle(
+                          cellMargin: EdgeInsets.zero,
+                          cellPadding: EdgeInsets.zero,
                           weekendTextStyle: textNormalCustom(
                             color: titleCalenderWork,
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
                           ),
                           defaultTextStyle: textNormalCustom(
                             color: titleColor,
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
                           ),
                           outsideTextStyle: textNormalCustom(
                             color: titleColor,
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
                           ),
                           selectedTextStyle: textNormalCustom(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10.0,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.0,
                             color: Colors.white,
                           ),
                           todayDecoration: const BoxDecoration(
@@ -259,8 +260,8 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             color: toDayColor,
                           ),
                           todayTextStyle: textNormalCustom(
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
                             color: buttonColor,
                           ),
                         ),
@@ -268,6 +269,19 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                         headerStyle: HeaderStyle(
                           formatButtonVisible: false,
                           titleCentered: true,
+                          leftChevronMargin: EdgeInsets.zero ,
+                          rightChevronMargin:  EdgeInsets.zero ,
+                          leftChevronPadding: const EdgeInsets.symmetric(vertical: 12.0) ,
+                          rightChevronPadding: const EdgeInsets.symmetric(vertical: 12.0) ,
+                          leftChevronIcon: SvgPicture.asset(
+                            ImageAssets.icLeftCalendar,
+                          ),     rightChevronIcon: SvgPicture.asset(
+                            ImageAssets.icRightCalendar,
+                          ),
+                          titleTextStyle:  textNormalCustom(
+                          fontSize: 16.0,
+                          color: titleColor,),
+                          titleTextFormatter: (date, locale)=>date.toStringMonth_Year,
                           formatButtonShowsNext: true,
                         ),
                         calendarFormat: widget.isFomatMonth == true

@@ -95,7 +95,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: shadowContainerColor.withOpacity(0.05),
+                                    color: shadowContainerColor.withOpacity(0.05,),
                                     offset: const Offset(0, 4),
                                     blurRadius: 5,
                                   )
@@ -127,6 +127,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
+                                        top: 20.0,
                                           bottom: 20.0, left: 20.0, right: 20.0),
                                       child: Row(
                                         children: [
@@ -150,7 +151,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                   S.current.ngay_hoang_dao,
                                                   style: textNormalCustom(
                                                     fontSize: 16.0,
-                                                    color: titleColor,
+                                                    color: titleColumn,
                                                   ),
                                                 ),
                                               ],
@@ -176,7 +177,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                   S.current.ngay_hach_dao,
                                                   style: textNormalCustom(
                                                     fontSize: 16.0,
-                                                    color: titleColor,
+                                                    color: titleColumn,
                                                   ),
                                                 ),
                                               ],
@@ -348,7 +349,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                           color:
                                                               unselectedLabelColor,
                                                           title:
-                                                              '${S.current.ngay}: ${snapshot.data?.ngayAmLich?.dayName}',
+                                                              '${S.current.ngay}: ${snapshot.data?.ngayAmLich?.dayName??''}',
                                                         ),
                                                         TextLichAmHomNay(
                                                           color: titleColor,
@@ -360,7 +361,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                           color:
                                                               unselectedLabelColor,
                                                           title:
-                                                              '${S.current.thang} ${snapshot.data?.ngayAmLich?.month} ${S.current.nam} ${snapshot.data?.ngayAmLich?.year}',
+                                                              '${S.current.thang} ${snapshot.data?.ngayAmLich?.month??''} ${S.current.nam} ${snapshot.data?.ngayAmLich?.year??''}',
                                                           fontWeight:
                                                               FontWeight.w400,
                                                         ),
@@ -404,15 +405,15 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                             children: [
                                               TextLichAmHomNay(
                                                 title:
-                                                    '${snapshot.data?.ngayAmLich?.dayName}',
+                                                    snapshot.data?.ngayAmLich?.dayName??'',
                                               ),
                                               TextLichAmHomNay(
                                                 title:
-                                                    '${snapshot.data?.ngayAmLich?.monthLongName}',
+                                                    snapshot.data?.ngayAmLich?.monthLongName??'',
                                               ),
                                               TextLichAmHomNay(
                                                 title:
-                                                    '${snapshot.data?.ngayAmLich?.yearName}',
+                                                    snapshot.data?.ngayAmLich?.yearName??'',
                                               ),
                                             ],
                                           ),
