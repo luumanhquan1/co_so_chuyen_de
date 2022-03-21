@@ -727,6 +727,8 @@
   "so_cmt": "Số CMTND",
   "sdt_nha_rieng": "Số điện thoại nhà riêng",
   "luu_danh_ba": "Lưu danh bạ",
+  "gio_hac_dao_gio_xau": "Giờ Hắc Đạo (Giờ Xấu)",
+  "tiet_khi": "Tiết khí",
   "tin_radio_mieu_ta": "Kênh radio chính thức của UBND tỉnh Đồng Nai cập nhật tin thời sự trong ngày, bản tin thời sự, chính trị trong nước mới nhất",
   "tin_trong_nuoc_mieu_ta": "Tin mới được cập nhật liên tục từng phút khắp mọi tỉnh thành. Đọc tin theo sở thích. Mỗi ngày đọc 5 tin để biết mọi chuyện trong thiên hạ tại tintuc.vn. Không dành cho trẻ em. Tin phải quan tâm. Tin tức trong ngày. Đọc báo hôm nay. Loại: Thế giới, Thể thao, Quân sự.",
   "tin_trong_nuoc": "Tin trong nước",

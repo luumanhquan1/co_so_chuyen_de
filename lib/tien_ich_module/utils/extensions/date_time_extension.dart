@@ -23,7 +23,7 @@ extension DateFormatString on DateTime {
 
   String get formatDayCalendar {
     final dateString =
-        (DateFormat(' dd-MM, yyyy').format(this)).replaceAll('-', ' tháng ');
+        (DateFormat('dd-MM, yyyy').format(this)).replaceAll('-', ' tháng ');
 
     return dateString;
   }
