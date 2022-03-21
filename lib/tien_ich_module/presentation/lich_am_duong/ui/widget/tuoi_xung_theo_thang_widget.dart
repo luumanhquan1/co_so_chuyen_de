@@ -19,7 +19,7 @@ class TuoiXungTheoThangWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const EdgeInsets.only(bottom: 6.0),
           child: Text(
             S.current.tuoi_xung_theo_thang,
             style: textNormalCustom(
@@ -43,14 +43,7 @@ class TuoiXungTheoThangWidget extends StatelessWidget {
             );
           }),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
-          child: Divider(
-            thickness: 1,
-          ),
-        ),
+
       ],
     );
   }

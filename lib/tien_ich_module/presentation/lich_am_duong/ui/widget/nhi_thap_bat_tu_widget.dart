@@ -32,25 +32,18 @@ class ThapNhiBatTuWidget extends StatelessWidget {
         titleNgayBachKy(
           '${S.current.tinh_moc_han_dieu_ky}: ',
           thapNhiBatTu.totXau ?? '',
+          color: colorNenLam,
         ),
         titleNgayBachKy('${S.current.nen_lam}: ', thapNhiBatTu.nenLam ?? '',
             color: colorNenLam,),
         titleNgayBachKy(
-          '${S.current.khong_nen_lam}: ',
+          '${S.current.kieng_cu}: ',
           thapNhiBatTu.kieng ?? '',
           color: specialPriceColor,
         ),
         titleNgayBachKy(
           '${S.current.ngoai_le}: ',
           thapNhiBatTu.ngoaiLe ?? '',
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
-          child: Divider(
-            thickness: 1,
-          ),
         ),
       ],
     );
