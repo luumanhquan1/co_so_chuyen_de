@@ -18,6 +18,7 @@ import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension
 import 'package:ccvc_mobile/tien_ich_module/utils/provider_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/calendar/table_calendar/table_calendar_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/dialog/show_dialog_date_picker.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,11 +47,22 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
       appBar: BaseAppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              CupertinoRoundedDatePickerWidgetDialog.show(
+                context,
+                initialDate: DateTime.now(),
+                onTap: (dateTime) async {
+                  await cubit.getLichAmDuong(dateTime.formatApiDDMMYYYY);
+                  cubit.selectTime=dateTime;
+                  cubit.changeDateTimeSubject.add(dateTime);
+                  Navigator.pop(context);
+                },
+              );
+            },
             icon: Container(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: SvgPicture.asset(
-                ImageAssets.icIconMenuLichAmDuong,
+                ImageAssets.icIconMenuLichAmDuongTablet,
               ),
             ),
           ),
@@ -95,7 +107,9 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: shadowContainerColor.withOpacity(0.05,),
+                                    color: shadowContainerColor.withOpacity(
+                                      0.05,
+                                    ),
                                     offset: const Offset(0, 4),
                                     blurRadius: 5,
                                   )
@@ -115,20 +129,26 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                           DateTime end,
                                           selectDay,
                                         ) {
-                                          cubit.startDate = start.formatApiDDMMYYYY;
+                                          cubit.startDate =
+                                              start.formatApiDDMMYYYY;
                                           cubit.getLichAmDuong(cubit.startDate);
                                         },
                                         tablet: true,
                                         isCalendar: false,
                                         isFomatMonth: false,
                                         onChangeRange: (DateTime? start,
-                                            DateTime? end, DateTime? focusedDay) {},
+                                            DateTime? end,
+                                            DateTime? focusedDay) {},
+                                        selectDay: (DateTime day) => cubit.selectDay(day),
+                                        cubit: cubit,
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                        top: 20.0,
-                                          bottom: 20.0, left: 20.0, right: 20.0),
+                                          top: 20.0,
+                                          bottom: 20.0,
+                                          left: 20.0,
+                                          right: 20.0),
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -139,7 +159,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                 Container(
                                                   height: 12.0,
                                                   width: 12.0,
-                                                  decoration: const BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     color: choVaoSoColor,
                                                     shape: BoxShape.circle,
                                                   ),
@@ -165,7 +186,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                 Container(
                                                   height: 12.0,
                                                   width: 12.0,
-                                                  decoration: const BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     color: titleColor,
                                                     shape: BoxShape.circle,
                                                   ),
@@ -206,7 +228,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: shadowContainerColor.withOpacity(0.05),
+                                    color:
+                                        shadowContainerColor.withOpacity(0.05),
                                     offset: const Offset(0, 4),
                                     blurRadius: 10,
                                   )
@@ -258,7 +281,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                         )),
                                                     child: TextLichAmHomNay(
                                                       color: titleColor,
-                                                      title: S.current.duong_lich,
+                                                      title:
+                                                          S.current.duong_lich,
                                                     ),
                                                   ),
                                                 ),
@@ -295,14 +319,15 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                     ),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment.end,
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         TextLichAmHomNay(
                                                           color:
                                                               unselectedLabelColor,
-                                                          title:
-                                                              snapshot.data?.thu ??
-                                                                  '',
+                                                          title: snapshot
+                                                                  .data?.thu ??
+                                                              '',
                                                         ),
                                                         TextLichAmHomNay(
                                                           color: titleColor,
@@ -349,7 +374,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                           color:
                                                               unselectedLabelColor,
                                                           title:
-                                                              '${S.current.ngay}: ${snapshot.data?.ngayAmLich?.dayName??''}',
+                                                              '${S.current.ngay}: ${snapshot.data?.ngayAmLich?.dayName ?? ''}',
                                                         ),
                                                         TextLichAmHomNay(
                                                           color: titleColor,
@@ -361,7 +386,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                                           color:
                                                               unselectedLabelColor,
                                                           title:
-                                                              '${S.current.thang} ${snapshot.data?.ngayAmLich?.month??''} ${S.current.nam} ${snapshot.data?.ngayAmLich?.year??''}',
+                                                              '${S.current.thang} ${snapshot.data?.ngayAmLich?.month ?? ''} ${S.current.nam} ${snapshot.data?.ngayAmLich?.year ?? ''}',
                                                           fontWeight:
                                                               FontWeight.w400,
                                                         ),
@@ -404,16 +429,19 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                           TableRow(
                                             children: [
                                               TextLichAmHomNay(
-                                                title:
-                                                    snapshot.data?.ngayAmLich?.dayName??'',
+                                                title: snapshot.data?.ngayAmLich
+                                                        ?.dayName ??
+                                                    '',
                                               ),
                                               TextLichAmHomNay(
-                                                title:
-                                                    snapshot.data?.ngayAmLich?.monthLongName??'',
+                                                title: snapshot.data?.ngayAmLich
+                                                        ?.monthLongName ??
+                                                    '',
                                               ),
                                               TextLichAmHomNay(
-                                                title:
-                                                    snapshot.data?.ngayAmLich?.yearName??'',
+                                                title: snapshot.data?.ngayAmLich
+                                                        ?.yearName ??
+                                                    '',
                                               ),
                                             ],
                                           ),
@@ -433,8 +461,10 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                       Container(
                         decoration: BoxDecoration(
                           color: backgroundColorApp,
-                          borderRadius: const BorderRadius.all(Radius.circular(12)),
-                          border: Border.all(color: borderColor.withOpacity(0.5)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                          border:
+                              Border.all(color: borderColor.withOpacity(0.5)),
                           boxShadow: [
                             BoxShadow(
                               color: shadowContainerColor.withOpacity(0.05),
@@ -469,19 +499,21 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: TuoiXungTheoNgayWidget(
                                           listTuoiXungTheoNgay:
-                                              snapshot.data?.tuoiXungTheoNgay ?? [],
+                                              snapshot.data?.tuoiXungTheoNgay ??
+                                                  [],
                                         ),
                                       ),
                                       Expanded(
                                         child: TuoiXungTheoThangWidget(
-                                          listTuoiXungTheoThang:
-                                              snapshot.data?.tuoiXungTheoThang ??
-                                                  [],
+                                          listTuoiXungTheoThang: snapshot
+                                                  .data?.tuoiXungTheoThang ??
+                                              [],
                                         ),
                                       ),
                                     ],
@@ -494,7 +526,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: ThapNhiKienTruWidget(
@@ -522,7 +555,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                     ),
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: ThapNhiBatTuWidget(
@@ -536,8 +570,10 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                       ),
                                       Expanded(
                                         child: SaoTotSaoXauWidget(
-                                          listSaoTot: snapshot.data?.saoTot ?? [],
-                                          listSaoXau: snapshot.data?.saoXau ?? [],
+                                          listSaoTot:
+                                              snapshot.data?.saoTot ?? [],
+                                          listSaoXau:
+                                              snapshot.data?.saoXau ?? [],
                                         ),
                                       ),
                                     ],
