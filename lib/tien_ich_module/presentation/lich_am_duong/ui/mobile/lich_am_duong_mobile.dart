@@ -49,6 +49,8 @@ class _LichAmDuongMobileState extends State<LichAmDuongMobile> {
             onPressed: () {
               CupertinoRoundedDatePickerWidget.show(
                 context,
+                minimumYear: 1990,
+                maximumYear: 2060,
                 initialDate: DateTime.now(),
                 onTap: (dateTime) async {
                   await cubit.getLichAmDuong(dateTime.formatApiDDMMYYYY);

@@ -50,6 +50,8 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
             onPressed: () {
               CupertinoRoundedDatePickerWidgetDialog.show(
                 context,
+                minimumYear: 1990,
+                maximumYear: 2060,
                 initialDate: DateTime.now(),
                 onTap: (dateTime) async {
                   await cubit.getLichAmDuong(dateTime.formatApiDDMMYYYY);

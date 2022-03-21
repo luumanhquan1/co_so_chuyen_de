@@ -56,10 +56,6 @@ class CupertinoRoundedDatePickerWidgetDialog {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // lineContainer(),
                 const SizedBox(
                   height: 22,
                 ),
