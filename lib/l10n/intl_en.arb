@@ -742,5 +742,10 @@
   "da_bi_xoa": "Đã bị xóa",
   "nhom_cong_viec_moi": "Nhóm công việc mới",
   "ghi_tru": "Ghi trú",
-  "bai_theo_doi": "Bài theo dõi"
+  "bai_theo_doi": "Bài theo dõi",
+  "nam": "Năm",
+  "tong_quan_ngay_am_lich": "Tổng quan ngày âm lịch",
+  "am_lich": "Âm lịch",
+  "duong_lich": "Dương lịch",
+  "am_lich_hom_nay_ngay": "ÂM LỊCH HÔM NAY NGÀY"
 }

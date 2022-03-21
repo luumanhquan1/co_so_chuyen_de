@@ -19,6 +19,7 @@ import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_lich_lam_viec_
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/lich_lam_viec_dashbroad_right_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/menu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_bao_cao_ket_qua_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_lich_lam_viec_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/tao_moi_ban_ghi_response.dart';
@@ -65,8 +66,8 @@ abstract class LichLamViecService {
 
   @POST(ApiConstants.EVENT_CALENDAR_LICH_LV)
   Future<EventCalendarResponse> postEventCalendar(
-      @Body() EventCalendarRequest eventCalendarRequest,);
-
+    @Body() EventCalendarRequest eventCalendarRequest,
+  );
 
   @POST(ApiConstants.SCHEDULE_FIELD)
   Future<CatogoryListResponse> getLinhVuc(
@@ -131,5 +132,11 @@ abstract class LichLamViecService {
   @POST(ApiConstants.TAO_MOI_BAN_GHI)
   Future<TaoMoiBanGhiResponse> taoMoiBanGhi(
     @Body() TaoMoiBanGhiRequest body,
+  );
+
+  @GET(ApiConstants.MENU_LICH_LV)
+  Future<MenuResponse> getMenuLichLV(
+    @Query('DateStart') String DateStart,
+    @Query('DateTo') String DateTo,
   );
 }

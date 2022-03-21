@@ -93,6 +93,7 @@ class ApiConstants {
   static const CANCEL_DETAIL_CELENDER_MEET = '/vpdt/api/MeetingSchedule/cancel?';
 
   static const STATUS_LIST_KET_LUAN_HOP = '/vpdt/api/ReportStatus/list?';
+  static const MENU_LICH_LV = '/vpdt/api/Schedules/count-lich-don-vi';
 
   static const String POST_FILE_TAO_LICH_HOP =
       '/vpdt/api/Files/add-file-with-meeting';

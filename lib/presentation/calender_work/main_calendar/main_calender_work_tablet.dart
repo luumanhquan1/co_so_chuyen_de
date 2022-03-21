@@ -53,8 +53,10 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
           ),
           child: Scaffold(
             appBar: BaseAppBar(
-              title: snapshot.data?.getTitle() ??
-                  TypeCalendarMenu.LichCuaToi.getTitle(),
+              title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
+                  ? cubit.titleAppbar
+                  : snapshot.data?.getTitle() ??
+                      TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
                   Navigator.push(

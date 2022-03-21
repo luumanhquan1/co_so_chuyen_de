@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
@@ -50,7 +52,8 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([true, false]);
                             widget.cubit.chooseTypeListLv(
-                                Type_Choose_Option_List.DANG_LICH,);
+                              Type_Choose_Option_List.DANG_LICH,
+                            );
                             widget.cubit.index.sink.add(0);
                             Navigator.pop(context);
                           },
@@ -63,7 +66,8 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                             widget.cubit.selectTypeCalendarSubject
                                 .add([false, true]);
                             widget.cubit.chooseTypeListLv(
-                                Type_Choose_Option_List.DANG_LIST,);
+                              Type_Choose_Option_List.DANG_LIST,
+                            );
                             widget.cubit.index.sink.add(0);
 
                             Navigator.pop(context);
@@ -87,46 +91,68 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                     child: Column(
                       children: listThongBao
                           .map(
-                            (e) => ContainerMenuWidget(
-                          name: e.typeMenu.getTitle(),
-                          icon: e.icon,
-                          type: e.type,
-                          index: e.index ?? 0,
-                          childExpand: Column(
-                            children: e.typeMenu ==
-                                TypeCalendarMenu.LichTheoTrangThai
-                                ? listTheoTrangThai
-                                .map(
-                                  (e) => ContainerMenuWidget(
-                                icon: e.icon,
-                                name: e.typeMenu.getTitle(),
-                                index: e.index ?? 0,
-                                isIcon: false,
-                                onTap: () {
-                                  e.onTap(context, widget.cubit);
-                                },
-                              ),
-                            )
-                                .toList()
-                                : listLanhDao
-                                .map(
-                                  (e) => ContainerMenuWidget(
-                                icon: e.icon,
-                                name: e.typeMenu.getTitle(),
-                                index: e.index ?? 0,
-                                isIcon: false,
-                                onTap: () {
-                                  e.onTap(context, widget.cubit);
-                                },
-                              ),
-                            )
-                                .toList(),
-                          ),
-                          onTap: () {
-                            e.onTap(context, widget.cubit);
-                          },
-                        ),
-                      )
+                            (e) => StreamBuilder<LichLamViecDashBroad>(
+                              stream: widget
+                                  .cubit.lichLamViecDashBroadSubject.stream,
+                              builder: (context, snapshot) {
+                                final dataDashBroad = snapshot.data ??
+                                    LichLamViecDashBroad.empty();
+                                return StreamBuilder<List<MenuModel>>(
+                                  stream: widget.cubit.menuModelSubject.stream,
+                                  builder: (context, snapshot) {
+                                    return ContainerMenuWidget(
+                                      name: e.typeMenu.getTitle(),
+                                      icon: e.icon,
+                                      type: e.type,
+                                      index: e.typeMenu.getIndex(dataDashBroad),
+                                      childExpand: Column(
+                                        children: e.typeMenu ==
+                                                TypeCalendarMenu
+                                                    .LichTheoTrangThai
+                                            ? listTheoTrangThai
+                                                .map(
+                                                  (e) => ContainerMenuWidget(
+                                                    icon: e.icon,
+                                                    name: e.typeMenu.getTitle(),
+                                                    index: e.typeMenu.getIndex(
+                                                      dataDashBroad,
+                                                    ),
+                                                    isIcon: false,
+                                                    onTap: () {
+                                                      e.onTap(
+                                                        context,
+                                                        widget.cubit,
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+                                                .toList()
+                                            : listLanhDao
+                                                .map(
+                                                  (e) => ContainerMenuWidget(
+                                                    icon: e.icon,
+                                                    name: e.name ?? '',
+                                                    index: e.index ?? 0,
+                                                    isIcon: false,
+                                                    onTap: () {
+                                                      e.onTap(
+                                                        context,
+                                                        widget.cubit,
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+                                                .toList(),
+                                      ),
+                                      onTap: () {
+                                        e.onTap(context, widget.cubit);
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          )
                           .toList(),
                     ),
                   ),
