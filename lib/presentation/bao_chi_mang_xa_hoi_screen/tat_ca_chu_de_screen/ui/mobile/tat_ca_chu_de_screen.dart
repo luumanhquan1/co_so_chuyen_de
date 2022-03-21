@@ -37,7 +37,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {}
+          _scrollController.position.maxScrollExtent) {
+
+      }
     });
     chuDeCubit.callApi();
   }
@@ -150,7 +152,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                                   ),
                                 ),
                                 ListView.builder(
-                                  // controller: _scrollController,
+                                  controller: _scrollController,
                                   itemCount: listChuDe.length,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
