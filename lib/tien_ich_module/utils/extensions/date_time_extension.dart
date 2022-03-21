@@ -20,10 +20,23 @@ extension DateFormatString on DateTime {
     final dateString = DateFormat('dd/MM/yyyy').format(this);
     return dateString;
   }
+  String get toStringDay{
+    final dateString = DateFormat('dd').format(this);
+    return dateString;
+  }
+
+  String get toStringMonthYear{
+    final dateString = 'Tháng ${DateFormat('M').format(this)} Năm ${DateFormat('yyyy').format(this)}';
+    return dateString;
+  }
+  String get toStringMonth_Year{
+    final dateString = 'Tháng ${DateFormat('M').format(this)} - ${DateFormat('yyyy').format(this)}';
+    return dateString;
+  }
 
   String get formatDayCalendar {
     final dateString =
-        (DateFormat(' dd-MM, yyyy').format(this)).replaceAll('-', ' tháng ');
+        (DateFormat('dd-MM, yyyy').format(this)).replaceAll('-', ' tháng ');
 
     return dateString;
   }

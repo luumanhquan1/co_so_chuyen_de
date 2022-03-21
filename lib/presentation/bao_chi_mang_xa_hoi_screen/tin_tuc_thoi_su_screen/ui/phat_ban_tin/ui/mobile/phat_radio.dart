@@ -8,9 +8,14 @@ import 'package:rxdart/rxdart.dart';
 class PlayRadio extends StatefulWidget {
   final AudioPlayer player;
   final List<String> listLinkRadio;
+  final int initPlay;
 
-  const PlayRadio({Key? key, required this.player, required this.listLinkRadio})
-      : super(key: key);
+  const PlayRadio({
+    Key? key,
+    required this.player,
+    required this.listLinkRadio,
+    this.initPlay = 0,
+  }) : super(key: key);
 
   @override
   _PlayRadioState createState() => _PlayRadioState();
@@ -22,9 +27,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.black,
-      ),
+      const SystemUiOverlayStyle(),
     );
     _init();
   }
@@ -44,7 +47,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
               .map((e) => AudioSource.uri(Uri.parse(e)))
               .toList(),
         ),
-        initialIndex: 0, // default
+        initialIndex: widget.initPlay, // default
         initialPosition: Duration.zero, // default
       );
     } catch (e) {
@@ -65,6 +68,7 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
       widget.player.stop();
     }
   }
+
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         widget.player.positionStream,
@@ -79,21 +83,18 @@ class _PlayRadioState extends State<PlayRadio> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        StreamBuilder<PositionData>(
-          stream: _positionDataStream,
-          builder: (context, snapshot) {
-            final positionData = snapshot.data;
-            return SeekBar(
-              duration: positionData?.duration ?? Duration.zero,
-              position: positionData?.position ?? Duration.zero,
-              bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
-            );
-          },
-        ),
-      ],
+    return StreamBuilder<PositionData>(
+      stream: _positionDataStream,
+      builder: (context, snapshot) {
+        final positionData = snapshot.data;
+        return SeekBar(
+            duration: positionData?.duration ?? Duration.zero,
+            position: positionData?.position ?? Duration.zero,
+            bufferedPosition: positionData?.bufferedPosition ?? Duration.zero,
+            onChangeEnd: () {
+               widget.player.seekToNext();
+            },);
+      },
     );
   }
 }
@@ -103,16 +104,22 @@ class PositionData {
   final Duration? bufferedPosition;
   final Duration? duration;
 
-  PositionData({this.position, this.bufferedPosition, this.duration});
+  PositionData({
+    this.position,
+    this.bufferedPosition,
+    this.duration,
+  });
 }
 
 class SeekBar extends StatefulWidget {
   final Duration position;
   final Duration bufferedPosition;
   final Duration duration;
+  final Function() onChangeEnd;
 
   const SeekBar({
     Key? key,
+    required this.onChangeEnd,
     required this.position,
     required this.bufferedPosition,
     required this.duration,
@@ -125,13 +132,49 @@ class SeekBar extends StatefulWidget {
 class _SeekBarState extends State<SeekBar> {
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      max: widget.bufferedPosition.inSeconds.toDouble(),
-      value: widget.position.inSeconds.toDouble(),
-      onChanged: (value) {},
-      activeColor: labelColor,
-      inactiveColor: borderButtomColor,
+    return Container(
+      color: borderButtomColor,
+      child: SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          trackShape: CustomTrackShape(),
+          trackHeight: 6,
+          thumbColor: labelColor,
+          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+        ),
+        child: SizedBox(
+          width:double.maxFinite,
+          height: 6,
+          child: Slider(
+            value: widget.position.inSeconds.toDouble(),
+            max: widget.duration.inSeconds.toDouble(),
+            activeColor: labelColor,
+            inactiveColor: borderButtomColor,
+            onChangeEnd: (value) {
+              widget.onChangeEnd();
+            },
+            onChanged: (double value) {},
+          ),
+        ),
+      ),
+
     );
   }
 }
 
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight ?? 0;
+    final double trackLeft = offset.dx;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
+  }
+}

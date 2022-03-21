@@ -26,4 +26,10 @@ class NguoiThucHienModel {
     required this.donVi,
     required this.chucVu,
   });
+
+  String data() {
+    String value =
+        '${hoten.isNotEmpty ? hoten : ''}${donVi.isNotEmpty ? ' - ${donVi.join(', ')}' : ''}${chucVu.isNotEmpty ? ' - ${chucVu.join(', ')}' : ''}';
+    return value;
+  }
 }

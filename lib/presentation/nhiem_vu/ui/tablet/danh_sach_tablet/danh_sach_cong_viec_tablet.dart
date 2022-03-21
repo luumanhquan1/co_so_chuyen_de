@@ -33,7 +33,6 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
           Container(
             color: Colors.white,
             child: ChooseTimeScreen(
-              baseChooseTimeCubit: chooseTimeCubit,
               today: DateTime.now(),
             ),
           ),

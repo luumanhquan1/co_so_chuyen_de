@@ -4,7 +4,7 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi_mang_xa_hoi_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/tat_ca_chu_de_screen.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/mobile/tat_ca_chu_de_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/mobile/thoi_doi_bai_viet_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tin_tuc_thoi_su_screen.dart';
@@ -58,7 +58,10 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
-                screen:  BaoChiMangXaHoiMenu(
+                screen: BaoChiMangXaHoiMenu(
+                  onChange: () {
+                    cubit.changeScreenMenu();
+                  },
                   cubit: cubit,
                 ),
               );
@@ -104,7 +107,15 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
               S.current.bao_cao_thong_ke,
             ),
             const TatCaChuDeScreen(),
-            const TheoDoiBaiVietScreen(),
+            StreamBuilder(
+              stream: cubit.changeItemMenu,
+              builder: (context, snapshot) {
+                return TheoDoiBaiVietScreen(
+                  key: UniqueKey(),
+                  topic: cubit.topic,
+                );
+              },
+            ),
             TinTucThoiSuScreen(
               tinTucThoiSuBloc: TinTucThoiSuBloc(),
               pContext: context,

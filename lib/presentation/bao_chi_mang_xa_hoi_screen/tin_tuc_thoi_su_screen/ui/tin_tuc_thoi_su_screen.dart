@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_radio.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_trong_nuoc.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/drop_down_extension.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
@@ -155,28 +156,37 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                     if (!snapshot.hasData) {
                       return Container();
                     }
-
                     switch (snapshot.data) {
                       case 1:
-                        return StreamBuilder<TinTucRadioResponseModel>(
-                          stream: widget.tinTucThoiSuBloc.listTinTucRadio,
-                          builder: (context, snapshot) {
-                            final listRadio =
-                                snapshot.data?.listTinTucThoiSu ?? [];
-                            listTinTuc = listRadio;
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: listRadio.length,
-                              itemBuilder: (context, index) {
-                                return ItemTinRadio(
+                      return StreamBuilder<TinTucRadioResponseModel>(
+                        stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                        builder: (context, snapshot) {
+                          final listRadio =
+                              snapshot.data?.listTinTucThoiSu ?? [];
+                          listTinTuc = listRadio;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: listRadio.length,
+                            itemBuilder: (context, index) {
+                              return ItemTinRadio(
                                   'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
                                   listRadio[index].title,
                                   listRadio[index].publishedTime,
-                                );
-                              },
-                            );
-                          },
-                        );
+                                  () {
+                                    showBottomSheet(
+                                      context: widget.pContext,
+                                      builder: (context) {
+                                        return BanTinBtnSheet(
+                                          listTinTuc: listTinTuc,
+                                          index: index,
+                                        );
+                                      },
+                                    );
+                                  },);
+                            },
+                          );
+                        },
+                      );
 
                       case 2:
                         return ItemTinTrongNuoc(

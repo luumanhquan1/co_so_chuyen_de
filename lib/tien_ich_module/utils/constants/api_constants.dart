@@ -7,6 +7,7 @@ class ApiConstants {
   static const GET_DANH_SACH_HDSD = '/api/FAQs/get-danh-sach';
   static const GET_DETAIL_HUONG_DAN_SU_DUNG = '/api/FAQs/get-by-id';
   static const GET_LICH_AM_DUONG = '/api/Lich/lich-am-duong';
+  static const GET_LIST_DANH_BA_CA_NHAN = '/api/danhbadientu/all';
 }
 
 class ImageConstants {

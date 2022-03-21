@@ -68,7 +68,10 @@ extension LichLVOpition on Type_Choose_Option_Day {
   }
 
 //mobile
-  Widget getLichLVDangListMobile(CalenderCubit cubit) {
+  Widget getLichLVDangListMobile(
+    CalenderCubit cubit,
+    Type_Choose_Option_Day type,
+  ) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
         return InListForm(
@@ -76,6 +79,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
           onTap: () {
             cubit.callApi();
           },
+          type: this,
         );
       case Type_Choose_Option_Day.WEEK:
         return InListForm(
@@ -83,6 +87,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
           onTap: () {
             cubit.callApiTuan();
           },
+          type: this,
         );
       case Type_Choose_Option_Day.MONTH:
         return InListForm(
@@ -90,6 +95,7 @@ extension LichLVOpition on Type_Choose_Option_Day {
           onTap: () {
             cubit.callApiMonth();
           },
+          type: this,
         );
       default:
         return Container();
@@ -153,39 +159,39 @@ extension LichLv on CalenderState {
   }) {
     if (this is LichLVStateDangLich && type == Type_Choose_Option_Day.MONTH) {
       return StreamBuilder<List<DateTime>>(
+          stream: cubit.eventsStream,
+          builder: (context, snapshot) {
+            return TableCalendarWidget(
+              eventsLoader: snapshot.data,
+              type: type,
+              isCalendar: false,
+              onChange: (DateTime start, DateTime end, selectDay) {
+                cubit.callApi();
+              },
+              onChangeRange:
+                  (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+            );
+          });
+    }
+    return StreamBuilder<List<DateTime>>(
         stream: cubit.eventsStream,
         builder: (context, snapshot) {
           return TableCalendarWidget(
             eventsLoader: snapshot.data,
             type: type,
-            isCalendar: false,
             onChange: (DateTime start, DateTime end, selectDay) {
+              cubit.startDates = start;
+              cubit.endDates = end;
+              cubit.selectDay = selectDay;
+              cubit.listDSLV.clear();
+              cubit.page = 1;
+              cubit.moveTimeSubject.add(selectDay);
               cubit.callApi();
             },
             onChangeRange:
                 (DateTime? start, DateTime? end, DateTime? focusedDay) {},
           );
-        }
-      );
-    }
-    return StreamBuilder<List<DateTime>>(
-      stream: cubit.eventsStream,
-      builder: (context, snapshot) {
-        return TableCalendarWidget(
-          eventsLoader: snapshot.data,
-          type: type,
-          onChange: (DateTime start, DateTime end, selectDay) {
-            cubit.startDates = start;
-            cubit.endDates = end;
-            cubit.selectDay = selectDay;
-            cubit.listDSLV.clear();
-            cubit.page = 1;
-            cubit.callApi();
-          },
-          onChangeRange: (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-        );
-      }
-    );
+        });
   }
 
   Widget itemCalendarWork(CalenderCubit cubit) {
@@ -202,9 +208,9 @@ extension LichLv on CalenderState {
     return Container();
   }
 
-  Widget lichLamViecMobile(CalenderCubit cubit) {
+  Widget lichLamViecMobile(CalenderCubit cubit, Type_Choose_Option_Day type) {
     if (this is LichLVStateDangList) {
-      return type.getLichLVDangListMobile(cubit);
+      return type.getLichLVDangListMobile(cubit, type);
     } else if (this is LichLVStateDangLich) {
       return type.getCalendarLvStateDangLichMobile(cubit);
     } else {

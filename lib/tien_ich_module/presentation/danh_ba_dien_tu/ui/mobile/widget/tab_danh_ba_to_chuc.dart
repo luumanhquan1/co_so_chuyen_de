@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/view_tong.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/tree_view/view_tong.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 

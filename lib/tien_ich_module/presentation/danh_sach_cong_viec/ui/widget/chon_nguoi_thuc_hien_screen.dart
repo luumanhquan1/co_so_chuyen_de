@@ -56,8 +56,7 @@ class _DanhSachCongViecTienIchMobileState
                         return GestureDetector(
                           onTap: () {
                             widget.cubit.getPersontodo(
-                              person:
-                                  '${todo.hoten.isNotEmpty ? '${todo.hoten} - ' : ''}${todo.donVi.isNotEmpty ? '${todo.donVi.join(', ')}' : ''}${todo.chucVu.isNotEmpty ? ' - ${todo.chucVu.join(', ')}' : ''}',
+                              person: todo.data(),
                               idPerson: todo.id,
                             );
                             widget.cubit.enabled.sink.add(true);
@@ -65,37 +64,14 @@ class _DanhSachCongViecTienIchMobileState
                           },
                           child: Container(
                             padding: const EdgeInsets.only(top: 20),
-                            child: Wrap(
-                              children: [
-                                Text(
-                                  todo.hoten.isNotEmpty ? todo.hoten : '',
-                                  style: textNormalCustom(
-                                    color: titleItemEdit,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14.0.textScale(),
-                                  ),
-                                ),
-                                Text(
-                                  todo.donVi.isNotEmpty
-                                      ? ' - ${todo.donVi.join(', ')}'
-                                      : '',
-                                  style: textNormalCustom(
-                                    color: titleItemEdit,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14.0.textScale(),
-                                  ),
-                                ),
-                                Text(
-                                  todo.chucVu.isNotEmpty
-                                      ? ' - ${todo.chucVu.join(', ')}'
-                                      : '',
-                                  style: textNormalCustom(
-                                    color: titleItemEdit,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14.0.textScale(),
-                                  ),
-                                )
-                              ],
+                            child: Text(
+                              todo.data(),
+                              style: textNormalCustom(
+                                color: titleItemEdit,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14.0.textScale(),
+                              ),
+                              maxLines: 2,
                             ),
                           ),
                         );

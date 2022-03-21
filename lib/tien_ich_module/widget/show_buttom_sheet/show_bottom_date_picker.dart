@@ -49,7 +49,7 @@ class CupertinoRoundedDatePickerWidget {
       clipBehavior: Clip.hardEdge,
       builder: (context) {
         return Container(
-          height: 375,
+          height: 400,
           width: double.infinity,
           color: background,
           padding: const EdgeInsets.symmetric(horizontal: 16),

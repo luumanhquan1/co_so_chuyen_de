@@ -93,6 +93,7 @@ class ApiConstants {
   static const CANCEL_DETAIL_CELENDER_MEET = '/vpdt/api/MeetingSchedule/cancel?';
 
   static const STATUS_LIST_KET_LUAN_HOP = '/vpdt/api/ReportStatus/list?';
+  static const MENU_LICH_LV = '/vpdt/api/Schedules/count-lich-don-vi';
 
   static const String POST_FILE_TAO_LICH_HOP =
       '/vpdt/api/Files/add-file-with-meeting';
@@ -139,6 +140,7 @@ class ApiConstants {
   static const BAO_CAO_THONG_KE = '/api/NewsNetViews/dashboard_statistical';
   static const MENU_BCMXH = '/api/NewsNetViews/menu-items?';
   static const Tin_TUC_THOI_SU = '/api/NewsNetViews/tin_tuc_thoi_su?';
+  static const BAI_VIET_THEO_DOI = '/api/NewsNetViews/get_bai_viet_theo_doi?';
 
 }
 

@@ -55,8 +55,10 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
           ),
           child: Scaffold(
             appBar: BaseAppBar(
-              title: snapshot.data?.getTitle() ??
-                  TypeCalendarMenu.LichCuaToi.getTitle(),
+              title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
+                  ? cubit.titleAppbar
+                  : snapshot.data?.getTitle() ??
+                      TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
                   setState(() {});
@@ -105,7 +107,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                             );
                           } else {
                             return const SizedBox(
-                              height: 140,
+                              height: 120,
                             );
                           }
                         },
@@ -114,7 +116,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                       child: BlocBuilder<CalenderCubit, CalenderState>(
                         bloc: cubit,
                         builder: (context, state) {
-                          return state.lichLamViecMobile(cubit);
+                          return state.lichLamViecMobile(cubit, state.type);
                         },
                       ),
                     ),
@@ -213,7 +215,7 @@ Widget itemCalendarWorkIscheck(CalenderCubit cubit) {
         child: Row(
           children: [
             StreamBuilder<LichLamViecDashBroad>(
-              initialData: LichLamViecDashBroad(countScheduleCaNhan: 0),
+              initialData: LichLamViecDashBroad.empty(),
               stream: cubit.streamLichLamViec,
               builder: (context, snapshot) {
                 return CustomItemCalenderWork(
@@ -270,7 +272,7 @@ Widget itemCalendarWorkDefault(CalenderCubit cubit) {
           child: Row(
             children: [
               StreamBuilder<LichLamViecDashBroad>(
-                initialData: LichLamViecDashBroad(countScheduleCaNhan: 0),
+                initialData: LichLamViecDashBroad.empty(),
                 stream: cubit.streamLichLamViec,
                 builder: (context, snapshot) {
                   return CustomItemCalenderWork(

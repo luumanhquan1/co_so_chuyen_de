@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/phat_ban_tin/bloc/phat_ban_tin_state.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PhatBanTinBloc extends BaseCubit<PhatBanTinState> {
@@ -30,4 +31,10 @@ class PhatBanTinBloc extends BaseCubit<PhatBanTinState> {
   int getIndexRadio() {
     return _indexRadio.value;
   }
+  String intToDate(int time ){
+    final date = DateTime.fromMillisecondsSinceEpoch(time*1000);
+    final result = DateFormat( 'mm:ss').format(date);
+    return result;
+  }
 }
+

@@ -34,7 +34,6 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
         child: Column(
           children: [
             ChooseTimeScreen(
-              baseChooseTimeCubit: chooseTimeCubit,
               today: DateTime.now(),
             ),
             Container(

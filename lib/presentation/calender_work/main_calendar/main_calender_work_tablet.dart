@@ -53,8 +53,10 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
           ),
           child: Scaffold(
             appBar: BaseAppBar(
-              title: snapshot.data?.getTitle() ??
-                  TypeCalendarMenu.LichCuaToi.getTitle(),
+              title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
+                  ? cubit.titleAppbar
+                  : snapshot.data?.getTitle() ??
+                      TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -125,16 +127,27 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                             DateTime? end,
                             DateTime? focusedDay,
                           ) {},
-                          onChange: (DateTime startDate, DateTime endDate,
-                              DateTime selectDay, ) {
+                          onChange: (
+                            DateTime startDate,
+                            DateTime endDate,
+                            DateTime selectDay,
+                          ) {
                             cubit.startDates = startDate;
                             cubit.endDates = endDate;
                             cubit.listDSLV.clear();
                             cubit.page = 1;
-                            cubit.callApi();
+
+                            if (state.type == Type_Choose_Option_Day.DAY) {
+                              cubit.callApi();
+                            } else if (state.type ==
+                                Type_Choose_Option_Day.WEEK) {
+                              cubit.callApiTuan();
+                            } else {
+                              cubit.callApiMonth();
+                            }
                           },
                         );
-                      }
+                      },
                     );
                   },
                 ),
@@ -153,9 +166,7 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                           child: Row(
                             children: [
                               StreamBuilder<LichLamViecDashBroad>(
-                                initialData: LichLamViecDashBroad(
-                                  countScheduleCaNhan: 0,
-                                ),
+                                initialData: LichLamViecDashBroad.empty(),
                                 stream: cubit.streamLichLamViec,
                                 builder: (context, snapshot) {
                                   return CustomItemCalenderWorkTablet(

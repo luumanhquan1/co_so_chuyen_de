@@ -13,20 +13,27 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 class BaoChiMangXaHoiBloc extends BaseCubit<BaoCHiMangXaHoiState> {
-
   BaoChiMangXaHoiBloc() : super(BaoCHiMangXaHoiStateInitial());
 
   final BehaviorSubject<List<ChuDeModel>> _listYKienNguoiDan =
       BehaviorSubject<List<ChuDeModel>>();
   final BehaviorSubject<List<ListMenuItemModel>> _dataMenu =
-  BehaviorSubject<List<ListMenuItemModel>>();
+      BehaviorSubject<List<ListMenuItemModel>>();
+  final BehaviorSubject<bool>_changeItemMenu=BehaviorSubject.seeded(false);
+  Stream<bool> get changeItemMenu => _changeItemMenu.stream;
+
+  final BehaviorSubject<int>_selectColorItem=BehaviorSubject<int>();
+  Stream<int> get  indexSelectItem => _selectColorItem.stream;
+
+  int topic = 848;
 
   Stream<List<ChuDeModel>> get listYKienNguoiDan => _listYKienNguoiDan.stream;
+
   Stream<List<ListMenuItemModel>> get dataMenu => _dataMenu.stream;
-  String startDate=DateTime.now().formatApiStartDay;
-  String endDate=DateTime.now().formatApiEndDay;
-  List<String>listTitleItemMenu=[];
-  List<List<MenuItemModel>>listSubMenu=[];
+  String startDate = DateTime.now().formatApiStartDay;
+  String endDate = DateTime.now().formatApiEndDay;
+  List<MenuData> listTitleItemMenu = [];
+  List<List<MenuItemModel>> listSubMenu = [];
   DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
       DashBoardTatCaChuDeRequest(
     pageIndex: 1,
@@ -37,6 +44,7 @@ class BaoChiMangXaHoiBloc extends BaseCubit<BaoCHiMangXaHoiState> {
     toDate: DateTime.now().formatApiSS,
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
+
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     final result = await _BCMXHRepo.getDashListChuDe(
       1,
@@ -56,17 +64,25 @@ class BaoChiMangXaHoiBloc extends BaseCubit<BaoCHiMangXaHoiState> {
       },
     );
   }
-  void changeScreenMenu(TypeBaoChiMangXaHoiMenu typeMenu) {
+
+  void changeScreenMenu( ) {
+    _changeItemMenu.sink.add(true);
   }
-  Future<void> getMenu( ) async {
+  void slectColorItem(int index ) {
+    _selectColorItem.sink.add(index);
+  }
+
+  Future<void> getMenu() async {
     showLoading();
     final result = await _BCMXHRepo.getMenuBCMXH();
     result.when(
       success: (res) {
-        listTitleItemMenu=res.map((e) => e.title).toList();
+        listTitleItemMenu =
+            res.map((e) => MenuData(nodeId: e.nodeid, title: e.title)).toList();
         for (final element in res) {
           listSubMenu.add(element.subMenu);
-        }},
+        }
+      },
       error: (err) {
         return;
       },

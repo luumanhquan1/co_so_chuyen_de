@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/from_group/form_group.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -100,20 +99,6 @@ class _TextFieldStyleState extends State<TextFieldStyle> {
       ],
     );
   }
-
-  // Widget textField() {
-  //   return TextField(
-  //     maxLines: widget.maxLine,
-  //     style: textNormal(titleColor, 16),
-  //     decoration: InputDecoration(
-  //       hintText: widget.hintText,
-  //       hintStyle: textNormal(textBodyTime, 16),
-  //       border: InputBorder.none,
-  //       isDense: true,
-  //       contentPadding: EdgeInsets.zero,
-  //     ),
-  //   );
-  // }
 
   Widget textFromField() {
     return Form(
