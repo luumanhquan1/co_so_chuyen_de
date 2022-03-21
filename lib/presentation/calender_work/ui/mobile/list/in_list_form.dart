@@ -3,16 +3,22 @@ import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart'
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/list/widget/custom_item_calender_work_mobile.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/type_calendar.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InListForm extends StatefulWidget {
   final CalenderCubit cubit;
+  final Type_Choose_Option_Day type;
   final Function onTap;
 
-  const InListForm({Key? key, required this.cubit, required this.onTap})
-      : super(key: key);
+  const InListForm({
+    Key? key,
+    required this.cubit,
+    required this.onTap,
+    required this.type,
+  }) : super(key: key);
 
   @override
   _InListFormState createState() => _InListFormState();
@@ -49,6 +55,10 @@ class _InListFormState extends State<InListForm> {
         children: [
           _cubit.changeItemMenuSubject.value.getHeader(
             cubit: _cubit,
+            type: widget.type,
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Expanded(
             child: StreamBuilder<DataLichLvModel>(

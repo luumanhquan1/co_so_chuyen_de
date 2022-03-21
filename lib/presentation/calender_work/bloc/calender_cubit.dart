@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_pe
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -47,8 +48,13 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   final BehaviorSubject<DanhSachLichlamViecModel> danhSachLichLamViecSubject =
       BehaviorSubject();
 
+  BehaviorSubject<DateTime> moveTimeSubject = BehaviorSubject();
+
   Stream<DanhSachLichlamViecModel> get danhSachLichLamViecStream =>
       danhSachLichLamViecSubject.stream;
+
+  BehaviorSubject<stateLDM> getStateLDM =
+      BehaviorSubject.seeded(stateLDM.ChoXacNhan);
 
   /// ListLichLvRequest lichLvRequest = fakeData;
 
@@ -67,6 +73,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     endDates = selectDay;
     callApiNgay();
     postEventsCalendar();
+    dataLichLamViec(
+      startDate: startDates.formatApi,
+      endDate: endDates.formatApi,
+    );
   }
 
   void callApiNgay() {
@@ -81,7 +91,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       isLichCuaToi: true,
     );
     dataLichLamViec(
-        startDate: startDates.formatApi, endDate: endDates.formatApi);
+      startDate: startDates.formatApi,
+      endDate: endDates.formatApi,
+    );
     dataLichLamViecRight(
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
@@ -126,6 +138,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     endDates = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     callApiNgay();
     postEventsCalendar();
+    dataLichLamViec(
+      startDate: startDates.formatApi,
+      endDate: endDates.formatApi,
+    );
   }
 
   void callApiMonth() {
@@ -134,6 +150,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     endDates = DateTime(day.year, day.month + 1, 0);
     callApiNgay();
     postEventsCalendar();
+    dataLichLamViec(
+      startDate: startDates.formatApi,
+      endDate: endDates.formatApi,
+    );
   }
 
   List<ListLichLVModel> listDSLV = [];
@@ -242,11 +262,13 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   //tong dashbroad
 
   BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
-      BehaviorSubject.seeded(LichLamViecDashBroad(countScheduleCaNhan: 0));
+      BehaviorSubject.seeded(
+    LichLamViecDashBroad.empty(),
+  );
 
   Stream<LichLamViecDashBroad> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
-  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad();
+  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad.empty();
 
   LichLamViecRepository get _lichLamViec => Get.find();
 
