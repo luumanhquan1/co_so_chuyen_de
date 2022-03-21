@@ -17,6 +17,7 @@ class ListViewLoadMore extends StatelessWidget {
   final bool isListView;
   final double? checkRatio;
   final double? crossAxisSpacing;
+  final bool? sinkWap;
 
   const ListViewLoadMore({
     Key? key,
@@ -26,6 +27,7 @@ class ListViewLoadMore extends StatelessWidget {
     required this.viewItem,
     this.checkRatio,
     this.crossAxisSpacing,
+    this.sinkWap,
   }) : super(key: key);
 
   Future<void> refreshPosts() async {
@@ -115,6 +117,7 @@ class ListViewLoadMore extends StatelessWidget {
                     ) {
                       return isListView == true
                           ? ListView.builder(
+                              shrinkWrap: sinkWap ?? false,
                               itemCount: snapshot.data?.length ?? 0,
                               itemBuilder: (ctx, index) {
                                 return viewItem(snapshot.data![index], index);

@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/item_tin_radio_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -18,11 +17,11 @@ class TinRadioScreen extends StatefulWidget {
   final String title;
   final List<TinTucRadioModel> listBanTin;
 
-  const TinRadioScreen(
-      {Key? key,
-      required this.title,
-      required this.listBanTin,})
-      : super(key: key);
+  const TinRadioScreen({
+    Key? key,
+    required this.title,
+    required this.listBanTin,
+  }) : super(key: key);
 
   @override
   _TinRadioScreenState createState() => _TinRadioScreenState();
