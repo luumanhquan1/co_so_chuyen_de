@@ -721,5 +721,7 @@
   "gan_cho_toi": "Gán cho tôi",
   "da_bi_xoa": "Đã bị xóa",
   "nhom_cong_viec_moi": "Nhóm công việc mới",
-  "tai_van_ban_len": "Tải văn bản lên"
+  "tai_van_ban_len": "Tải văn bản lên",
+  "nhap_don_vi" : "Nhập đơn vị"
+
 }

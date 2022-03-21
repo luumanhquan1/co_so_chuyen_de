@@ -271,11 +271,13 @@ class DanhSachCongViecTienIchCubit
         createdOn: todo.createdOn,
         createdBy: todo.createdBy,
         isTicked: todo.isTicked,
-        label: titleChange,
+        label: titleChange.isEmpty ? todo.label : titleChange,
         updatedBy: HiveLocal.getDataUser()?.userInformation?.id ?? '',
         updatedOn: DateTime.now().formatApi,
-        note: noteChange,
-        finishDay: dateChange,
+        note: noteChange.isNotEmpty ? todo.note : noteChange,
+        finishDay: dateChange.isEmpty
+            ? DateTime.now().formatApi
+            : DateTime.parse(dateChange).formatDayCalendar,
       ),
     );
     await getToDoList();
@@ -320,7 +322,7 @@ class DanhSachCongViecTienIchCubit
 
   Future<void> listNguoiThucHien() async {
     showLoading();
-    final result = await tienIchRep.getListNguoiThucHien(true, 9999, 1);
+    final result = await tienIchRep.getListNguoiThucHien(true, 10, 1);
     result.when(
       success: (res) {
         nguoiThucHien.sink.add(res.items);

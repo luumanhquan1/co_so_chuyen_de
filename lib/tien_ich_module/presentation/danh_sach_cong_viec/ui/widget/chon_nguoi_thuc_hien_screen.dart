@@ -26,7 +26,6 @@ class _DanhSachCongViecTienIchMobileState
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.cubit.listNguoiThucHien();
   }
 
   @override
@@ -58,7 +57,7 @@ class _DanhSachCongViecTienIchMobileState
                           onTap: () {
                             widget.cubit.getPersontodo(
                               person:
-                                  '${todo.hoten.isNotEmpty ? todo.hoten : ''}${todo.donVi.isNotEmpty ? ' - ${todo.donVi.join(', ')}' : ''}${todo.chucVu.isNotEmpty ? ' - ${todo.chucVu.join(', ')}' : ''}',
+                                  '${todo.hoten.isNotEmpty ? '${todo.hoten} - ' : ''}${todo.donVi.isNotEmpty ? '${todo.donVi.join(', ')}' : ''}${todo.chucVu.isNotEmpty ? ' - ${todo.chucVu.join(', ')}' : ''}',
                               idPerson: todo.id,
                             );
                             widget.cubit.enabled.sink.add(true);

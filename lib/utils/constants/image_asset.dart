@@ -140,6 +140,8 @@ class ImageAssets {
   static const String previewBlue = '$baseImg/perview_blue.png';
   static const String previewPink = '$baseImg/perview_pink.png';
   static const String previewYellow = '$baseImg/perview_yellow.png';
+  static const String ic_tick = '$baseImg/ic_tick.svg';
+
 
   ///SvgImage
   static const String appBarBackground = '$baseImg/app_bar_background.png';

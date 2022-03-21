@@ -92,8 +92,12 @@ void configureDependencies() {
     TienIchService(
       provideDio(),
     ),
+  );Get.put(
+    TienIchServiceCommon(
+      provideDio(baseOption: BaseURLOption.COMMON),
+    ),
   );
-  Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find()));
+  Get.put<TienIchRepository>(TienIchRepositoryImpl(Get.find(),Get.find()));
 
   Get.put(
     LichAmDuongService(

@@ -17,8 +17,8 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response
 
 class TienIchRepositoryImpl implements TienIchRepository {
   final TienIchService _tienIchService;
-
-  TienIchRepositoryImpl(this._tienIchService);
+  final TienIchServiceCommon _tienIchServiceCommon;
+  TienIchRepositoryImpl(this._tienIchService,this._tienIchServiceCommon);
 
   @override
   Future<Result<List<TopicHDSD>>> getTopicHDSD() {
@@ -58,11 +58,11 @@ class TienIchRepositoryImpl implements TienIchRepository {
     int pageSize,
     int pageIndex,
   ) {
-    return runCatchingAsync<DataListNguoiThucHienResponse,
+    return runCatchingAsync<ListNguoiThucHienResponse,
         ItemChonBienBanCuocHopModel>(
           () =>
-          _tienIchService.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
-          (res) => res.toDomain(),
+          _tienIchServiceCommon.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
+          (res) => res.data.toDomain(),
     );
   }
   @override

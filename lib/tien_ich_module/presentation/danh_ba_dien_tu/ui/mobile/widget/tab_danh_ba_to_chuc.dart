@@ -28,7 +28,7 @@ class _DanhBaToChucState extends State<DanhBaToChuc> {
                 ),
               ),
               ViewTongWidget(
-                onChange: (_) {},
+                onChange: () {},
               )
             ],
           ),
