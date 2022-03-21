@@ -3,7 +3,6 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/widgets.dart';
 class ItemThongBaoModel {
   String icon;
   TypeCalendarMenu typeMenu;
+  String? name;
   TypeContainer type;
   int? index;
   List<ItemThongBaoModel>? listWidget;
@@ -26,6 +26,7 @@ class ItemThongBaoModel {
     required this.type,
     required this.onTap,
     this.index,
+    this.name,
     this.listWidget,
   });
 }

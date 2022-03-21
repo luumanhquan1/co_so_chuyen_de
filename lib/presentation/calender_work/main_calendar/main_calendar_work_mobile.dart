@@ -55,8 +55,10 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
           ),
           child: Scaffold(
             appBar: BaseAppBar(
-              title: snapshot.data?.getTitle() ??
-                  TypeCalendarMenu.LichCuaToi.getTitle(),
+              title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
+                  ? cubit.titleAppbar
+                  : snapshot.data?.getTitle() ??
+                      TypeCalendarMenu.LichCuaToi.getTitle(),
               leadingIcon: IconButton(
                 onPressed: () {
                   setState(() {});
