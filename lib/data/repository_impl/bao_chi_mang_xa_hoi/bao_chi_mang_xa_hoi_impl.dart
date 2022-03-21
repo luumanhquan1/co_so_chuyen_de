@@ -20,7 +20,7 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   BaoChiMangXaHoiImpl(this._baoChiMangXaHoiService);
 
   @override
-  Future<Result<List<DashBoardItemTatCaChuDeModel>>> getDashBoardTatCaChuDe(
+  Future<Result<DashBoardModel>> getDashBoardTatCaChuDe(
     int pageIndex,
     int pageSize,
     int total,
@@ -29,7 +29,7 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
     String toDate,
   ) {
     return runCatchingAsync<List<DashBoardTatCaChuDeResponse>,
-        List<DashBoardItemTatCaChuDeModel>>(
+        DashBoardModel>(
       () => _baoChiMangXaHoiService.getDashBoardTatCaChuDe(
         pageIndex,
         pageSize,
@@ -38,7 +38,19 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
         fromDate,
         toDate,
       ),
-      (res) => res.map((e) => e.toDomain()).toList(),
+      (res) {
+        final data=res.map((e) => e.toDomain()).toList();
+        final List<ItemInfomationModel> lisDataItem=[];
+        for(int i=0;i<data.length;i++){
+          lisDataItem.add(ItemInfomationModel(
+            title: data[i].sourceTitle,
+            index: data[i].total.toString(),
+            image: listIconDashBoard[i],
+            color: listColorsItemDashBoard[i],
+          ),);
+        }
+        return DashBoardModel(listItemDashBoard:lisDataItem);
+      }
     );
   }
 

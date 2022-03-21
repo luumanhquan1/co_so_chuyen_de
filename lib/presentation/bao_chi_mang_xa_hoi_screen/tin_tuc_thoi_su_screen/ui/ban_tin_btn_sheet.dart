@@ -14,8 +14,10 @@ import 'package:just_audio/just_audio.dart';
 
 class BanTinBtnSheet extends StatefulWidget {
   final List<TinTucRadioModel> listTinTuc;
+  final int index;
 
-  const BanTinBtnSheet({Key? key, required this.listTinTuc}) : super(key: key);
+  const BanTinBtnSheet({Key? key, required this.listTinTuc, this.index = 0})
+      : super(key: key);
 
   @override
   _BanTinBtnSheetState createState() => _BanTinBtnSheetState();
@@ -28,6 +30,7 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
   @override
   void initState() {
     super.initState();
+    phatBanTinBloc.setIndexRadio(widget.index, widget.listTinTuc.length - 1);
   }
 
   @override
@@ -74,9 +77,16 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
               color: titleColor,
             ),
           ),
+          const SizedBox(
+            height: 30,
+          ),
           PlayRadio(
             player: player,
             listLinkRadio: widget.listTinTuc.map((e) => e.audioUrl).toList(),
+            initPlay: widget.index,
+          ),
+          const SizedBox(
+            height: 24,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,20 +131,81 @@ class _BanTinBtnSheetState extends State<BanTinBtnSheet> {
                   const SizedBox(
                     width: 20,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.volume_up),
-                    color: unselectLabelColor,
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.volume_up),
+                        color: unselectLabelColor,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: StreamBuilder<double>(
+                          stream: player.volumeStream,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? 0.5;
+                            return Container(
+                              color: borderButtomColor,
+                              child: SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  trackShape: CustomTrackShape(),
+                                  trackHeight: 4,
+                                  thumbColor: labelColor,
+                                  thumbShape: const RoundSliderThumbShape(
+                                      enabledThumbRadius: 6,),
+                                ),
+                                child: SizedBox(
+                                  width: 70,
+                                  height: 4,
+                                  child: Slider(
+                                    value: data,
+                                    activeColor: labelColor,
+                                    inactiveColor: borderButtomColor,
+                                    onChanged: (double value) {
+                                      player.setVolume(value);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
-              Text(
-                S.current.time_play,
-                style: textNormalCustom(
-                  color: AqiColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
+              Row(
+                children: [
+                  StreamBuilder<Duration?>(
+                    stream: player.positionStream,
+                    builder: (context, snapshot) {
+                      final timeData = snapshot.data?.inSeconds ?? 0;
+                      return Text(
+                        '${phatBanTinBloc.intToDate(timeData)}/',
+                        style: textNormalCustom(
+                          color: AqiColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                  ),
+                  StreamBuilder<Duration?>(
+                    stream: player.durationStream,
+                    builder: (context, snapshot) {
+                      final timeData = snapshot.data?.inSeconds ?? 0;
+                      return Text(
+                        phatBanTinBloc.intToDate(timeData),
+                        style: textNormalCustom(
+                          color: AqiColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -1,16 +1,13 @@
-import 'dart:ui';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_resquest.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 import 'package:ccvc_mobile/domain/repository/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/bloc/chu_de_state.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/mobile/item_infomation.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -28,8 +25,8 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   final BehaviorSubject<List<ListMenuItemModel>> _dataMenu =
       BehaviorSubject<List<ListMenuItemModel>>();
 
-  final BehaviorSubject<List<ItemInfomationModel>> _dataDashBoard =
-      BehaviorSubject<List<ItemInfomationModel>>();
+  final BehaviorSubject<DashBoardModel> _dataDashBoard =
+      BehaviorSubject<DashBoardModel>();
 
   List<String> listTitle = [
     S.current.tin_tong_hop,
@@ -42,7 +39,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
 
   Stream<List<ListMenuItemModel>> get dataMenu => _dataMenu.stream;
 
-  Stream<List<ItemInfomationModel>> get streamDashBoard =>
+  Stream<DashBoardModel> get streamDashBoard =>
       _dataDashBoard.stream;
 
   Stream<TuongTacThongKeResponseModel> get dataBaoCaoThongKe =>
@@ -56,26 +53,9 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
 
   String startDateDashBoard = DateTime.now().formatApiStartDay;
   String endDateDashBoard = DateTime.now().formatApiEndDay;
-  List<Color> listColorsItemDashBoard = [
-    textColorTongTin,
-    textColorBaoChi,
-    textColorMangXaHoi,
-    textColorForum,
-    textColorBlog,
-    textColorNguonKhac,
-  ];
-
-  List<String> listIconDashBoard = [
-    ImageAssets.icTongTin,
-    ImageAssets.icBaoChi,
-    ImageAssets.icMangXaHoi,
-    ImageAssets.icForum,
-    ImageAssets.icBlog,
-    ImageAssets.icNguonKhac,
-  ];
 
   void callApi() {
-    getDashboard(
+     getDashboard(
       startDateDashBoard,
       endDateDashBoard,
     );
@@ -99,7 +79,6 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     toDate: DateTime.now().formatApiSS,
   );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
-
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     showLoading();
     final result = await _BCMXHRepo.getDashListChuDe(
@@ -110,6 +89,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       startDate,
       enDate,
     );
+    showContent();
     result.when(
       success: (res) {
         final result = res.getlistChuDe ?? [];
@@ -119,10 +99,10 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
         return;
       },
     );
-    showContent();
   }
 
   Future<void> getListBaoCaoThongKe(String startDate, String enDate) async {
+    showLoading();
     final result = await _BCMXHRepo.getTuongTacThongKe(
       1,
       30,
@@ -131,7 +111,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       startDate,
       enDate,
     );
-    showLoading();
+    showContent();
     result.when(
       success: (res) {
         final result = res;
@@ -141,7 +121,6 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
         return;
       },
     );
-    showContent();
   }
 
   Future<void> getDashboard(String startDate, String enDate) async {
@@ -154,23 +133,14 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       startDate,
       enDate,
     );
+    showContent();
     result.when(
       success: (res) {
-        final List<ItemInfomationModel> listDataDashboard = [];
-        for (int i = 0; i < res.length; i++) {
-          listDataDashboard.add(ItemInfomationModel(
-            title: res[i].sourceTitle,
-            index: res[i].total.toString(),
-            image: listIconDashBoard[i],
-            color: listColorsItemDashBoard[i],
-          ));
-        }
-        _dataDashBoard.sink.add(listDataDashboard);
+        _dataDashBoard.sink.add(res);
       },
       error: (err) {
         return;
       },
     );
-    showContent();
   }
 }

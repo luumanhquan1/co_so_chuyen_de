@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -50,9 +51,14 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                         itemCount: widget.cubit.listSubMenu[index].length,
                         itemBuilder: (context, indexItem) {
                           return Container(
-                            padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(32, 0, 0, 16),
                             child: Text(
                               widget.cubit.listSubMenu[index][indexItem].title,
+                              style: textNormalCustom(
+                              color: textTitle,
+                              fontSize: 16.0.textScale(),
+                              fontWeight: FontWeight.w400,
+                            ),
                             ),
                           );
                         },
