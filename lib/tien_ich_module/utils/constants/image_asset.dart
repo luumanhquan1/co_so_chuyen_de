@@ -95,6 +95,9 @@ class ImageAssets {
   static const String icLocation = '$baseImg/ic_location_db.svg';
   static const String icMessage = '$baseImg/ic_message_db.svg';
   static const String icPhoneCp = '$baseImg/ic_phone_cq_db.svg';
+  static const String icXoaDanhBa = '$baseImg/ic_delete_danh_ba.svg';
+  static const String icDongBo = '$baseImg/ic_dong_bo.svg';
+  static const String icNhanVien = '$baseImg/ic_nhan_vien.svg';
 
   static SvgPicture svgAssets(
     String name, {
