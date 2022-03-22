@@ -101,7 +101,9 @@ class _IncomingDocumentScreenState extends State<IncomingDocumentScreen> {
                     taskId: data.taskId ?? '',
                   );
                 } else {
-                  return const ChiTietVanBanDiMobile();
+                  return  ChiTietVanBanDiMobile(
+                    id: data.iD??'',
+                  );
                 }
               },
             ),
