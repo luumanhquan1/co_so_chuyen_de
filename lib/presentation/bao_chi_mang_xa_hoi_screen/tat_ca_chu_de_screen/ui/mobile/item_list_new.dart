@@ -28,7 +28,8 @@ class ItemListNews extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: image.isNotEmpty
                   ? Image(
-                      image: NetworkImage(image),
+                      image: NetworkImage(image,
+                      ),
                     )
                   : Image.asset(ImageAssets.icDongNai),
             ),
