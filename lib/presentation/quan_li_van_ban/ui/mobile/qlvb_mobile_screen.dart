@@ -242,8 +242,9 @@ class _QLVBMobileScreenState extends State<QLVBMobileScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                            const ChiTietVanBanDiMobile(),
+                                            builder: (context) => ChiTietVanBanDiMobile(
+                                              id: listData[index].iD??'',
+                                            ),
                                           ),
                                         );
                                       },
