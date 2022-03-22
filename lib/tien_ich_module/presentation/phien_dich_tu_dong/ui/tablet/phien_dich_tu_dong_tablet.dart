@@ -177,10 +177,6 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
                             onChanged: (String value) {
                               cubit.lengthTextSubject
                                   .add(textEditingController.text.length);
-                              cubit.swapLanguage();
-                              cubit.translateLanguage(
-                                textEditingController.text,
-                              );
                               cubit.languageSubject.value == LANGUAGE.vn
                                   ? viToEn()
                                   : enToVi();
@@ -315,7 +311,7 @@ class _PhienDichTuDongTabletState extends State<PhienDichTuDongTablet> {
               height: 16,
             ),
             Text(
-              S.current.chon_tat_ca,
+              S.current.chon_tai_lieu,
               style: textNormalCustom(
                 fontWeight: FontWeight.w400,
                 fontSize: 18,

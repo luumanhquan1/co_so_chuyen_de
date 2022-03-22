@@ -10,6 +10,8 @@ class ApiConstants {
   static const GET_LIST_DANH_BA_CA_NHAN = '/api/danhbadientu/all';
   static const POST_DANH_BA_CA_NHAN = '/api/danhbadientu';
   static const TREE_DANH_BA = '/api/DonVi/all-by-don-vi-cha?';
+  static const DELETE_DANH_BA_CA_NHAN = '/api/danhbadientu/{id}?';
+  static const SEARCH_LIST_DANH_BA_CA_NHAN = '/api/danhbadientu/all';
 }
 
 class ImageConstants {
