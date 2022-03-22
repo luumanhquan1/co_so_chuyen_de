@@ -32,19 +32,17 @@ class TatCaChuDeScreen extends StatefulWidget {
 }
 
 class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   ChuDeCubit chuDeCubit = ChuDeCubit();
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {}
     });
     chuDeCubit.callApi();
-    // chuDeCubit.search('2022/02/20 00:00:00','2022/03/22 23:59:59');
   }
 
   @override
@@ -64,7 +62,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
                       Expanded(
@@ -122,7 +122,9 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   StreamBuilder<DashBoardModel>(
                     stream: chuDeCubit.streamDashBoard,
                     builder: (context, snapshot) {

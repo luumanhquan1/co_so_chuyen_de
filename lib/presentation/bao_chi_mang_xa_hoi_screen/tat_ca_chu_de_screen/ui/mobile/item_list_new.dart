@@ -23,12 +23,17 @@ class ItemListNews extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              width: 100,
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: containerColorTab,
+              ),
               clipBehavior: Clip.antiAlias,
               child: image.isNotEmpty
                   ? Image.network(
                       image,
+                      fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) {
                         return Image.asset(ImageAssets.icDongNai);
                       },
