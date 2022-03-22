@@ -749,5 +749,8 @@
   "am_lich": "Âm lịch",
   "duong_lich": "Dương lịch",
   "am_lich_hom_nay_ngay": "ÂM LỊCH HÔM NAY NGÀY",
-  "hom_nay": "Hôm nay"
+  "hom_nay": "Hôm nay",
+  "hom_qua": "Hôm qua",
+  "bay_ngay_truoc": "7 ngày trước",
+  "bamuoi_ngay_truoc": "30 ngày trước"
 }

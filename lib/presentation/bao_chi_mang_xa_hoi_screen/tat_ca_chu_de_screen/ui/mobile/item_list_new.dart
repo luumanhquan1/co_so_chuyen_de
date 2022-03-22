@@ -27,9 +27,11 @@ class ItemListNews extends StatelessWidget {
                   BoxDecoration(borderRadius: BorderRadius.circular(10)),
               clipBehavior: Clip.antiAlias,
               child: image.isNotEmpty
-                  ? Image(
-                      image: NetworkImage(image,
-                      ),
+                  ? Image.network(
+                      image,
+                      errorBuilder: (_, __, ___) {
+                        return Image.asset(ImageAssets.icDongNai);
+                      },
                     )
                   : Image.asset(ImageAssets.icDongNai),
             ),
