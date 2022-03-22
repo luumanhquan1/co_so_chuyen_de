@@ -1,4 +1,7 @@
+import 'package:ccvc_mobile/tien_ich_module/data/request/sua_danh_sach_request.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/request/them_danh_ba_ca_nhan_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_dien_tu_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/them_danh_ba_ca_nhan_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -15,5 +18,15 @@ abstract class DanhBaDienTuService {
   Future<DanhBaResponse> getListDanhBaCaNhan(
     @Query('pageIndex') int pageIndex,
     @Query('pageSize') int pageSize,
+  );
+
+  @POST(ApiConstants.POST_DANH_BA_CA_NHAN)
+  Future<ThemDanhBaCaNhanResponse> postThemDanhBaCaNhan(
+    @Body() ThemDanhBaCaNhanRequest themDanhBaCaNhanRequest,
+  );
+
+  @PUT(ApiConstants.POST_DANH_BA_CA_NHAN)
+  Future<ThemDanhBaCaNhanResponse> putDanhBaCaNhan(
+    @Body() SuaDanhBaCaNhanRequest suaDanhBaCaNhanRequest,
   );
 }

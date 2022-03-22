@@ -129,13 +129,19 @@ class _CustomDropDownState extends State<SelectDate> {
                                 : Text(
                                     S.current.ngay_sinh,
                                     style: tokenDetailAmount(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: AqiColor,
                                     ),
                                   );
                           },
                         )
-                      : const SizedBox(),
+                      : Text(
+                          DateTime.parse(dateSelect).toStringWithListFormat,
+                          style: tokenDetailAmount(
+                            fontSize: 14,
+                            color: titleColor,
+                          ),
+                        ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 16),

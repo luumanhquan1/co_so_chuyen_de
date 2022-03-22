@@ -1,7 +1,11 @@
 import 'package:ccvc_mobile/data/result/result.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/request/sua_danh_sach_request.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/request/them_danh_ba_ca_nhan_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_dien_tu_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/them_danh_ba_ca_nhan_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/danh_ba_dien_tu_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_ba_dien_tu.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/them_moi_danh_ba_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/danh_ba_dien_tu_repository.dart';
 
 class DanhBaDienTuImpl implements DanhBaDienTuRepository {
@@ -18,6 +22,28 @@ class DanhBaDienTuImpl implements DanhBaDienTuRepository {
         () => danhBaDienTuService.getListDanhBaCaNhan(pageIndex, pageSize),
         (response) {
       return response.data?.toDomain() ?? DanhBaDienTuModel();
+    });
+  }
+
+  @override
+  Future<Result<ThemMoiDanhBaModel>> postThemMoiDanhBa(
+    ThemDanhBaCaNhanRequest themDanhBaCaNhanRequest,
+  ) {
+    return runCatchingAsync<ThemDanhBaCaNhanResponse, ThemMoiDanhBaModel>(
+        () => danhBaDienTuService.postThemDanhBaCaNhan(themDanhBaCaNhanRequest),
+        (response) {
+      return response.dataResponse?.toModel() ?? ThemMoiDanhBaModel();
+    });
+  }
+
+  @override
+  Future<Result<ThemMoiDanhBaModel>> putSuaDanhBa(
+    SuaDanhBaCaNhanRequest suaDanhBaCaNhanRequest,
+  ) {
+    return runCatchingAsync<ThemDanhBaCaNhanResponse, ThemMoiDanhBaModel>(
+        () => danhBaDienTuService.putDanhBaCaNhan(suaDanhBaCaNhanRequest),
+        (response) {
+      return response.dataResponse?.toModel() ?? ThemMoiDanhBaModel();
     });
   }
 }
