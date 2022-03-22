@@ -63,75 +63,80 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
             ),
             stream: cubit.stateStream,
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ExpandGroup(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WidgetHeadChiTietVanBanDenMobile(cubit: cubit),
-                    StreamBuilder<List<ThongTinGuiNhanModel>>(
-                      stream: cubit.thongTinGuiNhanStream,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? [];
-                        return ThongTinGuiNhanExpandWidgetMobile(
-                          cubit: cubit,
-                          thongTinGuiNhanModel: data,
-                        );
-                      },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16.0,
+                      left: 16.0,
+                      right: 16.0,
                     ),
-                    YKienXuLyExpandWidgetMobile(
-                      cubit: cubit,
+                    child: WidgetHeadChiTietVanBanDenMobile(cubit: cubit),
+                  ),
+                  StreamBuilder<List<ThongTinGuiNhanModel>>(
+                    stream: cubit.thongTinGuiNhanStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      return ThongTinGuiNhanExpandWidgetMobile(
+                        cubit: cubit,
+                        thongTinGuiNhanModel: data,
+                      );
+                    },
+                  ),
+                  YKienXuLyExpandWidgetMobile(
+                    cubit: cubit,
+                  ),
+                  StreamBuilder<List<LichSuVanBanModel>>(
+                    stream: cubit.lichSuCapNhatXuLyStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      return LichSuCapNhatTinhHinhXuLyExpandWidgetMobile(
+                        cubit: cubit,
+                        lichSuVanBanCapNhatModel: data,
+                      );
+                    },
+                  ),
+                  StreamBuilder<List<LichSuVanBanModel>>(
+                    stream: cubit.lichSuTraLaiStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      return LichSuTraLaiExpandWidgetMobile(
+                        cubit: cubit,
+                        lichSuVanBanTraLaiModel: data,
+                      );
+                    },
+                  ),
+                  StreamBuilder<List<LichSuVanBanModel>>(
+                    stream: cubit.lichSuThuHoiStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      return LichSuThuHoiExpandWidgetMobile(
+                        cubit: cubit,
+                        lichSuVanBanThuHoiModel: data,
+                      );
+                    },
+                  ),
+                  StreamBuilder<List<LichSuVanBanModel>>(
+                    stream: cubit.lichSuVanBanLienThongStream,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      return LichSuVanBanLienThongExpandWidgetMobile(
+                        cubit: cubit,
+                        listLichSuVanBanLienThongModel: data,
+                      );
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 16.0, bottom: 24.0, left: 16.0, right: 16.0),
+                    child: ButtonCustomBottom(
+                      isColorBlue: false,
+                      title: S.current.xem_luong,
+                      onPressed: () {},
                     ),
-                    StreamBuilder<List<LichSuVanBanModel>>(
-                      stream: cubit.lichSuCapNhatXuLyStream,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? [];
-                        return LichSuCapNhatTinhHinhXuLyExpandWidgetMobile(
-                          cubit: cubit,
-                          lichSuVanBanCapNhatModel: data,
-                        );
-                      },
-                    ),
-                    StreamBuilder<List<LichSuVanBanModel>>(
-                      stream: cubit.lichSuTraLaiStream,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? [];
-                        return LichSuTraLaiExpandWidgetMobile(
-                          cubit: cubit,
-                          lichSuVanBanTraLaiModel: data,
-                        );
-                      },
-                    ),
-                    StreamBuilder<List<LichSuVanBanModel>>(
-                      stream: cubit.lichSuThuHoiStream,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? [];
-                        return LichSuThuHoiExpandWidgetMobile(
-                          cubit: cubit,
-                          lichSuVanBanThuHoiModel: data,
-                        );
-                      },
-                    ),
-                    StreamBuilder<List<LichSuVanBanModel>>(
-                      stream: cubit.lichSuVanBanLienThongStream,
-                      builder: (context, snapshot) {
-                        final data = snapshot.data ?? [];
-                        return LichSuVanBanLienThongExpandWidgetMobile(
-                          cubit: cubit,
-                          listLichSuVanBanLienThongModel: data,
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
-                      child: ButtonCustomBottom(
-                        isColorBlue: false,
-                        title: S.current.xem_luong,
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

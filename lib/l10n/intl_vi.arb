@@ -410,7 +410,7 @@
   "ngay_phan_anh": "Ngày phản ánh",
   "lien_quan_quy_dinh": "Liên quan đến quy định tại Luật",
   "tai_lieu_dinh_kem_cong_dan": "Tài liệu đính kèm của công dân/ DN",
-  "ngay_vb": "Ngày VB",
+  "ngay_vb": "Ngày văn bản",
   "trich_yeu": "Trích yếu",
   "file_dinh_kem": "File đính kèm",
   "van_ban_lien_quan": "Văn bản liên quan",
@@ -455,7 +455,7 @@
   "don_vi_tra_lai": "Đơn vị trả lại",
   "noi_dung_tra_lai": "Nội dung trả lại",
   "nguoi_bi_tra_lai": "Người bị trả lại",
-  "don_vi_bi_tra_lai": "đon vị bị trả lại",
+  "don_vi_bi_tra_lai": "Đơn vị bị trả lại",
   "lich_su_tra_lai": "Lịch sử trả lại",
   "lich_su_thu_hoi": "Lịch sử thu hồi",
   "nguoi_thu_hoi": "Người thu hồi",
@@ -737,6 +737,7 @@
   "gan_cho_toi": "Gán cho tôi",
   "da_bi_xoa": "Đã bị xóa",
   "nhom_cong_viec_moi": "Nhóm công việc mới",
+  "nhap_don_vi": "Nhập đơn vị",
   "ghi_tru": "Ghi trú",
   "sua_danh_ba_ca_nhan": "Sửa thông tin danh bạ cá nhân",
   "bai_theo_doi": "Bài theo dõi",
@@ -748,7 +749,21 @@
   "hom_nay": "Hôm nay",
   "content_xoa_danh_ba": "Bạn có chắc chắn muốn xóa danh bạ.",
   "xoa_danh_ba": "Xóa danh bạ",
-  "them_anh": "Thêm ảnh"
+  "them_anh": "Thêm ảnh",
+  "loai_van_ban_di": "Loại văn bản đi",
+  "ma_pakn": "Mã PAKN",
+  "dv_soan_thao": "ĐV soạn thảo",
+  "nguoi_soan_thao": "Người soạn thảo",
+  "ky_hieu": "Ký hiệu",
+  "ngay_han_xl": "Ngày hạn XL",
+  "nguoi_theo_doi_van_ban": "Người theo dõi văn bản",
+  "dv_trong_he_thong": "ĐV trong hệ thống",
+  "dv_ngoai_he_thong": "ĐV ngoài hệ thống",
+  "thong_tin_ky_duyet": "Thông tin ký duyệt",
+  "lich_su_huy_duyet": "Lịch sử hủy duyệt",
+  "theo_doi_van_ban_da_ban_hanh": "Theo dõi văn bản đã ban hành",
+  "van_ban_di_ban_hanh": "Văn bản đi ban hành",
+  "van_ban_di_noi_bo": "Văn bản đi nội bộ"
 }
 
 
