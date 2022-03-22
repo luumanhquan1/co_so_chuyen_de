@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_ba_dien_tu.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/sua_danh_ba_ca_nhan/sua_danh_ba_ca_nhan.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -99,7 +101,19 @@ class CellListCaNhan extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showBottomSheetCustom(
+                        context,
+                        title: S.current.sua_danh_ba_ca_nhan,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          child: SuaDanhBaCaNhan(
+                            item: item,
+                            id: item.id ?? '',
+                          ),
+                        ),
+                      );
+                    },
                     child: SvgPicture.asset(ImageAssets.icEdit),
                   ),
                   const SizedBox(

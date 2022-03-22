@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/request/sua_danh_sach_request.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/request/them_danh_ba_ca_nhan_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_ba_dien_tu.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/danh_ba_dien_tu_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/bloc_danh_ba_dien_tu/bloc_danh_ba_dien_tu_state.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -16,8 +19,73 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
 
   DanhBaDienTuRepository get tienIchRep => Get.find();
   int pageSize = 10;
+  String createdAt = DateTime.now().formatApiDanhBa;
+  String updatedAt = DateTime.now().formatApiDanhBa;
+
+  String hoTen = '';
+  String phoneDiDong = '';
+  String phoneCoQuan = '';
+  String phoneNhaRieng = '';
+  String email = '';
+  bool gioiTinh = true;
+  String ngaySinh = '';
+  String cmtnd = '';
+  String anhDaiDienFilePath = '';
+  String anhChuKyFilePath = '';
+  String anhChuKyNhayFilePath = '';
+  String diaChi = '';
+  bool isDeleted = false;
+  int? thuTu = 0;
+  List<String>? groupIds = [];
   BehaviorSubject<File> saveFile = BehaviorSubject();
   final BehaviorSubject<String> anhDanhBaCaNhan = BehaviorSubject();
+
+  void getValue() {}
+
+  void callApi() {
+    postDanhSach(
+      hoTen: hoTen,
+      phoneDiDong: phoneDiDong,
+      phoneCoQuan: phoneCoQuan,
+      phoneNhaRieng: phoneNhaRieng,
+      email: email,
+      gioiTinh: gioiTinh,
+      ngaySinh: ngaySinh,
+      cmtnd: cmtnd,
+      anhDaiDienFilePath: anhDaiDienFilePath,
+      anhChuKyFilePath: anhChuKyFilePath,
+      anhChuKyNhayFilePath: anhChuKyNhayFilePath,
+      diaChi: diaChi,
+      isDeleted: isDeleted,
+      thuTu: thuTu ?? 0,
+      groupIds: groupIds ?? [],
+    );
+  }
+
+  void suaDanhSachApi(String id) {
+    suaDanhSach(
+      groups: '',
+      hoTen: hoTen,
+      phoneDiDong: phoneDiDong,
+      phoneCoQuan: phoneCoQuan,
+      phoneNhaRieng: phoneNhaRieng,
+      email: email,
+      gioiTinh: gioiTinh,
+      ngaySinh: ngaySinh,
+      cmtnd: cmtnd,
+      anhDaiDienFilePath: anhDaiDienFilePath,
+      anhChuKyFilePath: anhChuKyFilePath,
+      anhChuKyNhayFilePath: anhChuKyNhayFilePath,
+      diaChi: diaChi,
+      isDeleted: isDeleted,
+      thuTu: thuTu ?? 0,
+      createdAt: createdAt,
+      createdBy: id,
+      updatedAt: updatedAt,
+      updatedBy: id,
+      id: id,
+    );
+  }
 
   Future<void> getListDanhBaCaNhan({
     required int pageIndex,
@@ -41,6 +109,104 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
       },
       error: (error) {
         emit(const CompletedLoadMore(CompleteType.ERROR));
+        showError();
+      },
+    );
+  }
+
+  Future<void> postDanhSach({
+    required String hoTen,
+    required String phoneDiDong,
+    required String phoneCoQuan,
+    required String phoneNhaRieng,
+    required String email,
+    required bool gioiTinh,
+    required String ngaySinh,
+    required String cmtnd,
+    required String anhDaiDienFilePath,
+    required String anhChuKyFilePath,
+    required String anhChuKyNhayFilePath,
+    required String diaChi,
+    required bool isDeleted,
+    required int thuTu,
+    required List<String> groupIds,
+  }) async {
+    final ThemDanhBaCaNhanRequest themDanhBaCaNhanRequest =
+        ThemDanhBaCaNhanRequest(
+      hoTen: hoTen,
+      phone_DiDong: phoneDiDong,
+      phone_CoQuan: phoneCoQuan,
+      phone_NhaRieng: phoneNhaRieng,
+      email: email,
+      gioiTinh: gioiTinh,
+      ngaySinh: ngaySinh,
+      cmtnd: cmtnd,
+      anhDaiDienFilePath: anhDaiDienFilePath,
+      anhChuKyFilePath: anhChuKyFilePath,
+      anhChuKyNhayFilePath: anhChuKyNhayFilePath,
+      diaChi: diaChi,
+      isDeleted: isDeleted,
+      thuTu: thuTu,
+      groupIds: groupIds,
+    );
+    final result = await tienIchRep.postThemMoiDanhBa(themDanhBaCaNhanRequest);
+    result.when(
+      success: (res) {},
+      error: (error) {
+        showError();
+      },
+    );
+  }
+
+  Future<void> suaDanhSach({
+    required String groups,
+    required String hoTen,
+    required String phoneDiDong,
+    required String phoneCoQuan,
+    required String phoneNhaRieng,
+    required String email,
+    required bool gioiTinh,
+    required String ngaySinh,
+    required String cmtnd,
+    required String anhDaiDienFilePath,
+    required String anhChuKyFilePath,
+    required String anhChuKyNhayFilePath,
+    required String diaChi,
+    required bool isDeleted,
+    required int thuTu,
+    required String createdAt,
+    required String createdBy,
+    required String updatedAt,
+    required String updatedBy,
+    required String id,
+  }) async {
+    final SuaDanhBaCaNhanRequest suaDanhBaCaNhanRequest =
+        SuaDanhBaCaNhanRequest(
+      groups: groups,
+      hoTen: hoTen,
+      phone_DiDong: phoneDiDong,
+      phone_CoQuan: phoneCoQuan,
+      phone_NhaRieng: phoneNhaRieng,
+      email: email,
+      gioiTinh: gioiTinh,
+      ngaySinh: ngaySinh,
+      cmtnd: cmtnd,
+      anhDaiDienFilePath: anhDaiDienFilePath,
+      anhChuKyFilePath: anhChuKyFilePath,
+      anhChuKyNhayFilePath: anhChuKyNhayFilePath,
+      diaChi: diaChi,
+      isDeleted: isDeleted,
+      thuTu: thuTu,
+      createdAt: createdAt,
+      createdBy: createdBy,
+      updatedAt: updatedAt,
+      updatedBy: updatedBy,
+      id: id,
+    );
+    final result = await tienIchRep.putSuaDanhBa(suaDanhBaCaNhanRequest);
+    result.when(
+      success: (res) {},
+      error: (error) {
         showError();
       },
     );

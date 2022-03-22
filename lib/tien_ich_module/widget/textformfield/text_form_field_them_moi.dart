@@ -122,18 +122,18 @@ class _TextFieldStyleState extends State<TextFieldStyle> {
             widget.onTap!();
           }
         },
-        style: textNormal(titleColor, 16),
+        style: textNormal(titleColor, 14),
         enabled: widget.isEnabled,
         decoration: InputDecoration(
           hintText: widget.hintText,
-          hintStyle: textNormal(textBodyTime, 16),
+          hintStyle: textNormal(textBodyTime, 14),
           contentPadding: EdgeInsets.zero,
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           fillColor: widget.isEnabled
               ? widget.fillColor ?? Colors.transparent
               : borderColor.withOpacity(0.3),
-          filled: false,
+          filled: true,
           border: const OutlineInputBorder(
             borderSide: BorderSide(color: backgroundColorApp),
           ),

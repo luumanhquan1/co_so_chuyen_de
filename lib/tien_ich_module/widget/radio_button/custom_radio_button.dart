@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class CustomRadioButton extends StatefulWidget {
   final String title;
   final Function(String) onchange;
+  String? value;
 
-  const CustomRadioButton({
+  CustomRadioButton({
     Key? key,
     required this.title,
     required this.onchange,
+    this.value = 'Nam',
   }) : super(key: key);
 
   @override
@@ -18,7 +20,7 @@ class CustomRadioButton extends StatefulWidget {
 }
 
 class _CustomRadioButtonState extends State<CustomRadioButton> {
-  String groupValue = 'Nam';
+  // String groupValue = 'Nam';
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +49,10 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
               value: S.current.Nam,
               onChanged: (String? value) {
                 setState(() {});
-                groupValue = value ?? S.current.Nam;
-                widget.onchange(groupValue);
+                widget.value = value ?? S.current.Nam;
+                widget.onchange(widget.value ?? S.current.Nam);
               },
-              groupValue: groupValue,
+              groupValue: widget.value,
             ),
           ),
         ),
@@ -69,10 +71,10 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
               value: S.current.Nu,
               onChanged: (String? value) {
                 setState(() {});
-                groupValue = value ?? S.current.Nu;
-                widget.onchange(groupValue);
+                widget.value = value ?? S.current.Nu;
+                widget.onchange(widget.value ?? S.current.Nu);
               },
-              groupValue: groupValue,
+              groupValue: widget.value,
             ),
           ),
         )
