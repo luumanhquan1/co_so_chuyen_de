@@ -150,6 +150,8 @@ class _NodeWidgetState extends State<NodeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double widthSize = size.width;
     return StreamBuilder<Tree>(
       stream: widget.cubit.listTreeDanhBaSubject.stream,
       builder: (BuildContext context, AsyncSnapshot<Tree> snapshot) {
@@ -157,127 +159,115 @@ class _NodeWidgetState extends State<NodeWidget> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ExpandOnlyWidgetAutoShow(
-                header: widget.node!.value.iD_DonVi_Cha != ''
-                    ? GestureDetector(
-                        onTap: () {
-                          widget.node!.isHasChild == false
-                              ? widget.cubit.getValueTree(
-                                  id: isExpand ? widget.node!.value.id : '',
-                                  donVi: isExpand
+              Container(
+                width: widthSize,
+                margin: const EdgeInsets.only(top: 12.5),
+                child: GestureDetector(
+                  onTap: () {
+                    widget.node!.isHasChild == false
+                        ? widget.cubit.getValueTree(
+                      id: isExpand ? widget.node!.value.id : '',
+                      donVi: isExpand
+                          ? widget.node!.value.tenDonVi
+                          : '',
+                    )
+                        : setState(() {});
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 8,
+                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 5.85),
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      width: 1.4, color: Color(0xFFECEEF7)))),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 9,
+                                child: Text(
+                                  widget.node!.value.tenDonVi.isNotEmpty
                                       ? widget.node!.value.tenDonVi
                                       : '',
-                                )
-                              : setState(() {});
-                        },
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                  top: widget.node!.value.iD_DonVi_Cha != ''
-                                      ? 6
-                                      : 0,
-                                  bottom: widget.node!.value.iD_DonVi_Cha != ''
-                                      ? 6
-                                      : 0,
-                                ),
-                                decoration: BoxDecoration(
-                                  border: widget.node!.value.iD_DonVi_Cha != ''
-                                      ? Border(
-                                          top: BorderSide(
-                                            color: widget.node!.isHasChild
-                                                ? borderColor
-                                                : Colors.white,
-                                          ),
-                                        )
-                                      : const Border(),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 9,
-                                      child: widget.node!.value.iD_DonVi_Cha !=
-                                              ''
-                                          ? Text(
-                                              widget.node!.value.tenDonVi
-                                                      .isNotEmpty
-                                                  ? widget.node!.value.tenDonVi
-                                                  : '',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2!
-                                                  .copyWith(
-                                                      color: const Color(
-                                                          0xFF304261)),
-                                            )
-                                          : const SizedBox(),
-                                    ),
-                                    Stack(
-                                      children: [
-                                        StreamBuilder<String>(
-                                          stream: widget.cubit.idDonVi.stream,
-                                          builder: (context, snapshot) {
-                                            return snapshot.data.toString() ==
-                                                    widget.node!.value.id
-                                                ? (widget.node!.isHasChild)
-                                                    ? const SizedBox()
-                                                    : SvgPicture.asset(
-                                                        ImageAssets.ic_tick,
-                                                      )
-                                                : const SizedBox();
-                                          },
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(
+                                      color: const Color(0xFF304261)),
                                 ),
                               ),
-                            )
-                          ],
+                              Stack(
+                                children: [
+                                  StreamBuilder<String>(
+                                    stream: widget.cubit.idDonVi.stream,
+                                    builder: (context, snapshot) {
+                                      return snapshot.data.toString() ==
+                                          widget.node!.value.id
+                                          ? (widget.node!.isHasChild)
+                                          ? const SizedBox()
+                                          : SvgPicture.asset(
+                                        ImageAssets.ic_tick,
+                                      )
+                                          : const SizedBox();
+                                    },
+                                  ),
+                                  if (widget.node!.value.iD_DonVi_Cha != '')
+                                    Expanded(
+                                      flex: 2,
+                                      child: widget.node!.isHasChild
+                                          ? isExpand
+                                          ? const Icon(
+                                        Icons.keyboard_arrow_up,
+                                        color: Color(0xFFA2AEBD),
+                                      )
+                                          : const Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: Color(0xFFA2AEBD))
+                                          : Container(),
+                                    ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       )
-                    : const SizedBox(),
-                isShowIcon: widget.node!.value.iD_DonVi_Cha != ''
-                    ? widget.node!.isHasChild
-                    : false,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: widget.node!.value.iD_DonVi_Cha != ''
-                        ? Border(
-                            bottom: BorderSide(
-                              color: widget.node!.isHasChild
-                                  ? borderColor
-                                  : Colors.white,
-                            ),
-                          )
-                        : const Border(),
+                    ],
                   ),
-                  child: StreamBuilder<List<NodeHSCV>>(
-                    stream: nodeViewModel.listTreeXLPhanXuLySubject.stream,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<NodeHSCV>> snapshot) {
-                      widget.cubit.levelTree++;
-                      final List<NodeHSCV> data = snapshot.data ?? [];
-                      return Column(
+                ),
+              ),
+              if (isExpand)
+                StreamBuilder<List<NodeHSCV>>(
+                  stream: nodeViewModel.listTreeXLPhanXuLySubject.stream,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<NodeHSCV>> snapshot) {
+                    widget.cubit.levelTree++;
+                    final List<NodeHSCV> data = snapshot.data ?? [];
+                    return Padding(
+                      padding: EdgeInsets.only(left: size.width * 0.07),
+                      child: Column(
                         children: [
                           ...data.map(
-                            (e) => NodeWidget(
+                                (e) => NodeWidget(
                               key: UniqueKey(),
                               node: e,
                               cubit: widget.cubit,
                             ),
-                          ),
+                          )
                         ],
-                      );
-                    },
-                  ),
-                ),
-              ),
+                      ),
+                    );
+                  },
+                )
+              else
+                Container(),
             ],
           );
         } else {
-          return const SizedBox();
+          return const SizedBox(
+            height: 0,
+          );
         }
       },
     );
