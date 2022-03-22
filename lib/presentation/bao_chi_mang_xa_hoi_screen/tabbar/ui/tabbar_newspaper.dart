@@ -58,7 +58,10 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
-                screen:  BaoChiMangXaHoiMenu(
+                screen: BaoChiMangXaHoiMenu(
+                  onChange: () {
+                    cubit.changeScreenMenu();
+                  },
                   cubit: cubit,
                 ),
               );
@@ -104,7 +107,15 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
               S.current.bao_cao_thong_ke,
             ),
             const TatCaChuDeScreen(),
-            const TheoDoiBaiVietScreen(),
+            StreamBuilder(
+              stream: cubit.changeItemMenu,
+              builder: (context, snapshot) {
+                return TheoDoiBaiVietScreen(
+                  key: UniqueKey(),
+                  topic: cubit.topic,
+                );
+              },
+            ),
             TinTucThoiSuScreen(
               tinTucThoiSuBloc: TinTucThoiSuBloc(),
               pContext: context,

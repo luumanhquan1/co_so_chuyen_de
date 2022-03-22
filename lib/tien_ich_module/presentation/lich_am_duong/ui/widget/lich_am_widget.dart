@@ -37,9 +37,9 @@ class LichAmWidget extends StatelessWidget {
                   DateTime.parse(
                     ngayAmLich.solarDate ?? DateTime.now().toString(),
                   ).formatDayCalendar,
-                  fontSize: 16.0),
+                  fontSize: 16.0,),
               titleLichAm(
-                  '${ngayAmLich.day}, Tháng ${ngayAmLich.month} (AL), ${ngayAmLich.yearName}',
+                  '${ngayAmLich.day??''}, Tháng ${ngayAmLich.month??''} (AL), ${ngayAmLich.yearName??''}',
                   fontSize: 12.0,
                   fontWeight: FontWeight.w500,
                   color: AqiColor),

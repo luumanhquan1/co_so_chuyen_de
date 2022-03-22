@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_tuc_thoi_su_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
+import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,9 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
               DrawerSlide.navigatorSlide(
                 context: context,
                 screen: BaoChiMangXaHoiMenu(
+                  onChange: () {
+                    cubit.changeScreenMenu();
+                  },
                   cubit: cubit,
                 ),
               );
@@ -105,7 +109,50 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
               S.current.bao_cao_thong_ke,
             ),
             const TatCaChuDeScreenTablet(),
-            const TheoDoiBaiVietScreen(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    S.current.nhap_linK_bao_cao,
+                    style: textNormalCustom(
+                      fontSize: 14,
+                      color: dateColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  BaseSearchBar(
+                    hintText: S.current.nhap_link,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    S.current.bai_theo_doi,
+                    style: textNormalCustom(
+                      color: titleCalenderWork,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                ],
+              ),
+            ),
+            StreamBuilder<bool>(
+              stream: cubit.changeItemMenu,
+              builder: (context,nspshot){
+                return TheoDoiBaiVietScreen(
+                  topic: cubit.topic,
+                  key: UniqueKey(),
+                );
+              },
+            ),
             TinTucThoiSuScreenTablet(
               tinTucThoiSuBloc: TinTucThoiSuBloc(),
               pContext: context,
