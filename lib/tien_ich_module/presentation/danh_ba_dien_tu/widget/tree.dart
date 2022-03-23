@@ -11,9 +11,7 @@ class Tree<T> {
         node.isHasChild = IsDaPhanXuLy(node, listNode);
         tree.add(node);
       }
-    } catch (e) {
-      print('dddddddddddddddddddddddddddddddddddddddddddd$e');
-    }
+    } catch (e) {}
   }
 
   bool IsDaPhanXuLy(NodeHSCV value, List<TreeDonViDanhBA> listChild) {

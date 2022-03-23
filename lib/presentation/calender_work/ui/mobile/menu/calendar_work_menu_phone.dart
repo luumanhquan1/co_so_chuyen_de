@@ -106,9 +106,9 @@ class _CalendarWorkMenuState extends State<CalendarWorkMenu> {
                                       type: e.type,
                                       index: e.typeMenu.getIndex(dataDashBroad),
                                       childExpand: Column(
-                                        children: e.typeMenu ==
+                                        children: (e.typeMenu ==
                                                 TypeCalendarMenu
-                                                    .LichTheoTrangThai
+                                                    .LichTheoTrangThai)
                                             ? listTheoTrangThai
                                                 .map(
                                                   (e) => ContainerMenuWidget(

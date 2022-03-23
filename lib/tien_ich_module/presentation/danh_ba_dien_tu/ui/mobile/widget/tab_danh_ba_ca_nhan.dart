@@ -6,10 +6,13 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/bloc_da
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/widget/cell_list_ca_nhan.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/them_danh_ba_ca_nhan/ui/them_danh_ba_ca_nhan.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/dialog/show_dia_log_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/search/base_search_bar.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DanhBaCaNhan extends StatefulWidget {
   const DanhBaCaNhan({Key? key}) : super(key: key);
@@ -29,72 +32,175 @@ class _DanhBaCaNhanState extends State<DanhBaCaNhan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BaseSearchBar(
-              hintText: S.current.tim_kiem_danh_ba,
-              onChange: (value) {},
-            ),
-            spaceH20,
-            SizedBox(
-              height: 40,
-              child: Row(
-                children: [
-                  Image.asset(ImageAssets.icDanhBa),
-                  spaceW16,
-                  Text(
-                    S.current.danh_ba_tu_may,
-                    style: tokenDetailAmount(fontSize: 16, color: titleColor),
-                  )
-                ],
-              ),
-            ),
-            spaceH16,
-            SizedBox(
-              height: 40,
-              child: GestureDetector(
-                onTap: () {
-                  showBottomSheetCustom(
-                    context,
-                    title: S.current.them_danh_ba_ca_nhan,
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.8,
-                      child: const ThemDanhBaCaNhan(),
-                    ),
-                  );
+    return screenDevice(
+      mobileScreen: Scaffold(
+        body: Container(
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              BaseSearchBar(
+                hintText: S.current.tim_kiem_danh_ba,
+                onChange: (value) {
+                  cubit.searchListDanhSach(value.trim());
                 },
+              ),
+              spaceH20,
+              SizedBox(
+                height: 40,
                 child: Row(
                   children: [
-                    Image.asset(ImageAssets.icThemMoi),
+                    Image.asset(ImageAssets.icDanhBa),
                     spaceW16,
                     Text(
-                      S.current.them_moi,
+                      S.current.danh_ba_tu_may,
                       style: tokenDetailAmount(fontSize: 16, color: titleColor),
                     )
                   ],
                 ),
               ),
-            ),
-            spaceH30,
-            Expanded(
-              flex: 6,
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: _content(),
+              spaceH16,
+              SizedBox(
+                height: 40,
+                child: GestureDetector(
+                  onTap: () {
+                    showBottomSheetCustom(
+                      context,
+                      title: S.current.them_danh_ba_ca_nhan,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.8,
+                        child: ThemDanhBaCaNhan(
+                          cubit: cubit,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(ImageAssets.icThemMoi),
+                      spaceW16,
+                      Text(
+                        S.current.them_moi,
+                        style:
+                            tokenDetailAmount(fontSize: 16, color: titleColor),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            )
-          ],
+              spaceH30,
+              Expanded(
+                flex: 6,
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _content(),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      tabletScreen: Scaffold(
+        backgroundColor: bgManagerColor,
+        body: Container(
+          padding: const EdgeInsets.only(top: 28, left: 30, right: 30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              BaseSearchBar(
+                hintText: S.current.tim_kiem_danh_ba,
+                onChange: (value) {
+                  cubit.searchListDanhSach(value.trim());
+                },
+              ),
+              spaceH20,
+              SizedBox(
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(ImageAssets.icDanhBa),
+                        spaceW16,
+                        Text(
+                          S.current.danh_ba_tu_may,
+                          style: tokenDetailAmount(
+                            fontSize: 16,
+                            color: titleColor,
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: labelColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 10,
+                        left: 30,
+                        right: 30,
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(ImageAssets.icDongBo),
+                          spaceW12,
+                          Text(
+                            S.current.dong_bo,
+                            style: tokenDetailAmount(
+                              fontSize: 14,
+                              color: labelColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              spaceH16,
+              SizedBox(
+                height: 40,
+                child: GestureDetector(
+                  onTap: () {
+                    showDiaLogTablet(
+                      context,
+                      title: S.current.them_danh_ba_ca_nhan,
+                      isBottomShow: false,
+                      child: ThemDanhBaCaNhan(
+                        cubit: cubit,
+                      ),
+                      funcBtnOk: () {},
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(ImageAssets.icThemMoi),
+                      spaceW16,
+                      Text(
+                        S.current.them_moi,
+                        style:
+                            tokenDetailAmount(fontSize: 16, color: titleColor),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              spaceH30,
+              Expanded(
+                flex: 6,
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _content(),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
-  }
-
-  void callApi(int pageIndex) {
-    cubit.getListDanhBaCaNhan(pageIndex: pageIndex, pageSize: cubit.pageSize);
   }
 
   Widget _content() {
@@ -102,10 +208,11 @@ class _DanhBaCaNhanState extends State<DanhBaCaNhan> {
       cubit: cubit,
       sinkWap: true,
       isListView: true,
-      callApi: (page) => {callApi(page)},
+      callApi: (page) => {cubit.pageIndex = page, cubit.callApiDanhSach()},
       viewItem: (value, index) => CellListCaNhan(
         item: value as Items,
         index: index ?? 0,
+        cubit: cubit,
       ),
     );
   }

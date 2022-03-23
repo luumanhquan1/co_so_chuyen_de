@@ -146,6 +146,7 @@ class ApiConstants {
   static const LICH_SU_KY_DUYET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-luong-xu-ly';
   static const LICH_SU_HUY_DUYET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-huy-duyet';
   static const LICH_SU_CAP_NHAT_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-cap-nhat';
+  static const SEARCH_TIN_TUC = '/api/NewsNetViews/search_news?';
 
 }
 

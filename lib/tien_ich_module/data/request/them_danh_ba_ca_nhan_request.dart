@@ -4,11 +4,6 @@ part 'them_danh_ba_ca_nhan_request.g.dart';
 
 @JsonSerializable()
 class ThemDanhBaCaNhanRequest {
-  String? id;
-  String? createdAt;
-  String? createdBy;
-  String? updatedAt;
-  String? updatedBy;
   String? hoTen;
   String? phone_DiDong;
   String? phone_CoQuan;
@@ -26,11 +21,6 @@ class ThemDanhBaCaNhanRequest {
   List<String>? groupIds;
 
   ThemDanhBaCaNhanRequest({
-    this.id,
-    this.createdAt,
-    this.createdBy,
-    this.updatedAt,
-    this.updatedBy,
     required this.hoTen,
     required this.phone_DiDong,
     required this.phone_CoQuan,
