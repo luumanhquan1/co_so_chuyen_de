@@ -91,6 +91,10 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       BehaviorSubject();
   ChiTietVanBanDiModel chiTietVanBanDiModel = ChiTietVanBanDiModel();
 
+  //nguoi ky duyet vb di
+  BehaviorSubject<List<NguoiKyDuyetModel>> nguoiKyDuyetVanBanDiSubject =
+  BehaviorSubject();
+
   //chi tiet van ban den
   BehaviorSubject<ChiTietVanBanDenModel> chiTietVanBanDenSubject =
       BehaviorSubject();
@@ -125,6 +129,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       success: (res) {
         chiTietVanBanDiModel = res;
         chiTietVanBanDiSubject.sink.add(chiTietVanBanDiModel);
+        nguoiKyDuyetVanBanDiSubject.sink.add(res.nguoiKyDuyetResponses??[]);
       },
       error: (error) {},
     );

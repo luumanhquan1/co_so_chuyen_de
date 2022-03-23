@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_thong_tin_ky_duyet_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/widget_head_chi_tiet_van_ban_di.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_group.dart';
@@ -11,19 +12,22 @@ import 'package:flutter/material.dart';
 
 class ChiTietVanBanDiMobile extends StatefulWidget {
   final String id;
-   ChiTietVanBanDiMobile({Key? key,required this.id }) : super(key: key);
+
+  ChiTietVanBanDiMobile({Key? key, required this.id}) : super(key: key);
 
   @override
   _ChiTietVanBanDiMobileState createState() => _ChiTietVanBanDiMobileState();
 }
 
 class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
-  DetailDocumentCubit cubit=DetailDocumentCubit();
+  DetailDocumentCubit cubit = DetailDocumentCubit();
+
   @override
   void initState() {
     cubit.getChiTietVanBanDi(widget.id);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +38,16 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             WidgetHeadChiTietVanBanDi(cubit: cubit),
+            StreamBuilder<List<NguoiKyDuyetModel>>(
+              stream: cubit.nguoiKyDuyetVanBanDiSubject.stream,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? [];
+                return VBDiThongTinKyDuyetExpandWidgetMobile(
+                  cubit: cubit,
+                  nguoiKyDuyetModel: data,
+                );
+              }
+            ),
           ],
         ),
       ),
