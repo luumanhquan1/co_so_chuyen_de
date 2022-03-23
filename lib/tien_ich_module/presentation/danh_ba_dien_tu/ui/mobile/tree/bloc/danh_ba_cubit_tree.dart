@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/widget/tree.dart';
@@ -39,13 +40,13 @@ class DanhBaCubitTree {
   }
 
   TreeDonViDanhBA tree = TreeDonViDanhBA.Emty();
-
   int levelTree = 0;
-  BehaviorSubject<String> tenDonVi = BehaviorSubject.seeded('');
+  BehaviorSubject<String> tenDonVi =
+      BehaviorSubject.seeded(S.current.UBND_tinh_dong_nai);
   BehaviorSubject<String> idDonVi = BehaviorSubject();
 
   void getValueTree({required String donVi, required String id}) {
-    if (tenDonVi.value != donVi) {
+    if (idDonVi.value != id) {
       tenDonVi.sink.add(donVi);
       idDonVi.sink.add(id);
     }
@@ -71,33 +72,39 @@ class DanhBaCubitTree {
       return tree.tenDonVi.toLowerCase().vietNameseParse().contains(searchTxt);
     }
 
-    final vlAfterSearch =
-        listTreeDanhBa.where((element) => isListCanBo(element)).toList();
-    for (final e in listTreeDanhBa) {
-      if (e.iD_DonVi_Cha == '') {
-        vlAfterSearch.add(e);
+    List<TreeDonViDanhBA> result = [];
+    void findDonViCha(List<TreeDonViDanhBA> listAll, TreeDonViDanhBA node) {
+      var parentsNode =
+          listAll.where((x) => x.id == node.iD_DonVi_Cha).toList();
+      if (parentsNode.isNotEmpty) {
+        var parentNode = parentsNode.first;
+        if (!result.contains(parentNode)) {
+          result.add(parentNode);
+          findDonViCha(listAll, parentNode);
+        }
       }
     }
 
+    final vlAfterSearch =
+        listTreeDanhBa.where((element) => isListCanBo(element)).toList();
     try {
-      for (var x = 0; x <= vlAfterSearch.length; x++) {
-        bool isListCanBo(TreeDonViDanhBA tree) {
-          return tree.iD_DonVi_Cha
-              .toLowerCase()
-              .vietNameseParse()
-              .contains(vlAfterSearch[x].id);
+      if (vlAfterSearch.isNotEmpty) {
+        for (var x = 0; x <= vlAfterSearch.length; x++) {
+          if (!(result.map((e) => e.id)).contains(vlAfterSearch[x].id)) {
+            result.add(vlAfterSearch[x]);
+          }
+          findDonViCha(listTreeDanhBa, vlAfterSearch[x]);
         }
-
-        final vlAfterSearch2 =
-            listTreeDanhBa.where((element) => isListCanBo(element)).toList();
-        vlAfterSearch.addAll(vlAfterSearch2);
+      } else {
+        result = listTreeDanhBa;
       }
     } catch (er) {}
 
     Tree ans = Tree();
-    ans.initTree(listNode: vlAfterSearch);
+    ans.initTree(listNode: result);
     listTreeDanhBaSubject.add(ans);
-    // print('${vlAfterSearch.length}');
+
+    print('${result.where((element) => element.iD_DonVi_Cha == '').toList()}');
   }
 
   void dispose() {}

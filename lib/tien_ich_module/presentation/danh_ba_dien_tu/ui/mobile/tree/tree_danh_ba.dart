@@ -55,9 +55,14 @@ class _DanhBaScreenState extends State<DanhBaWidget> {
                 title: StreamBuilder<String>(
                     stream: widget.cubit.tenDonVi.stream,
                     builder: (context, snapshot) {
-                      return Text(
-                        snapshot.data.toString(),
-                        style: textNormal(titleColor, 14),
+                      return Container(
+                        constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.7),
+                        child: Text(
+                          snapshot.data.toString(),
+                          style: textNormal(titleColor, 14),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       );
                     }),
                 child: SingleChildScrollView(
