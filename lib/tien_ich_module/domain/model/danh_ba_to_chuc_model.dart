@@ -1,5 +1,5 @@
 class DataDanhBaToChuc {
-  List<Items>? items;
+  List<ItemsToChuc>? items;
   int? pageIndex;
   int? pageSize;
   int? totalCount;
@@ -14,7 +14,7 @@ class DataDanhBaToChuc {
   });
 }
 
-class Items {
+class ItemsToChuc {
   String? id;
   String? maCanBo;
   String? hoTen;
@@ -63,7 +63,7 @@ class Items {
   String? userAccounts;
   String? lsCanBoKiemNhiemResponse;
 
-  Items({
+  ItemsToChuc({
     this.id,
     this.maCanBo,
     this.hoTen,

@@ -22,7 +22,6 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
   int pageIndex = 1;
   String createdAt = DateTime.now().formatApiDanhBa;
   String updatedAt = DateTime.now().formatApiDanhBa;
-
   String hoTen = '';
   String phoneDiDong = '';
   String phoneCoQuan = '';
@@ -38,6 +37,8 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
   bool isDeleted = false;
   int? thuTu = 0;
   List<String>? groupIds = [];
+  String id = '';
+  String search = '';
   BehaviorSubject<File> saveFile = BehaviorSubject();
   final BehaviorSubject<String> anhDanhBaCaNhan = BehaviorSubject();
 
@@ -50,12 +51,15 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
 
   void callApiDanhSach() {
     getListDanhBaCaNhan(pageIndex: pageIndex, pageSize: pageSize);
-    // getListDanhBaToChuc(
-    //   pageIndex: pageIndex,
-    //   pageSize: pageSize,
-    //   filterBy: '',
-    //   idDonVi: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
-    // );
+  }
+
+  void callApiDanhBaToChuc() {
+    getListDanhBaToChuc(
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      filterBy: search,
+      idDonVi: id,
+    );
   }
 
   void searchListDanhSach(String keyword) {

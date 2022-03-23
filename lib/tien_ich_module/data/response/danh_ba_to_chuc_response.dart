@@ -210,7 +210,7 @@ class ItemsResponse {
 
   Map<String, dynamic> toJson() => _$ItemsResponseToJson(this);
 
-  Items toModel() => Items(
+  ItemsToChuc toModel() => ItemsToChuc(
         id: id,
         maCanBo: maCanBo,
         hoTen: hoTen,
