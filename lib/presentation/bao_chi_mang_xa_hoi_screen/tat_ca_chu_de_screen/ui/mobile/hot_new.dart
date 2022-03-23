@@ -14,7 +14,8 @@ class HotNews extends StatelessWidget {
   final String content;
   final String url;
 
-  const HotNews(this.image, this.title, this.date, this.content,this.url, {Key? key})
+  const HotNews(this.image, this.title, this.date, this.content, this.url,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -23,11 +24,23 @@ class HotNews extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          height: 186,
           width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          child: Image(image: NetworkImage(image), fit: BoxFit.cover,),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: containerColorTab,
+          ),
+          child: Image(
+            image: NetworkImage(image),
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) {
+              return SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: Image.asset(ImageAssets.icDongNai));
+            },
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -36,18 +49,18 @@ class HotNews extends StatelessWidget {
           child: Text(
             title,
             style: textNormalCustom(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: titleCalenderWork,).copyWith(height: 1.3),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: titleCalenderWork,
+            ).copyWith(height: 1.3),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          onTap: (){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    WebViewScreen(url: url, title: ''),
+                builder: (context) => WebViewScreen(url: url, title: ''),
               ),
             );
           },
@@ -64,9 +77,10 @@ class HotNews extends StatelessWidget {
             Text(
               date,
               style: textNormalCustom(
-                  color: unselectedLabelColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,),
+                color: unselectedLabelColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+              ),
             )
           ],
         ),
@@ -76,9 +90,10 @@ class HotNews extends StatelessWidget {
         Text(
           content,
           style: textNormalCustom(
-              color: unselectedLabelColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 14,),
+            color: unselectedLabelColor,
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
