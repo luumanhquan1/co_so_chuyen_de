@@ -98,7 +98,7 @@ void configureDependencies() {
       provideDio(baseOption: BaseURLOption.COMMON),
     ),
   );
-  
+
   Get.put(
     TienIchServiceUAT(
       provideDio(baseOption: BaseURLOption.API_AND_UAT),
