@@ -32,7 +32,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class LichHopCubit extends BaseCubit<LichHopState> {
-  LichHopCubit() : super(LichHopStateIntial()) {
+  LichHopCubit() : super(const LichHopStateIntial()) {
     final user = HiveLocal.getDataUser();
     if (user != null) {
       userId = user.userId ?? '';
@@ -41,7 +41,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   }
 
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
-      BehaviorSubject.seeded([true, false]);
+      BehaviorSubject.seeded([true, false, false]);
 
   List<ItemDanhSachLichHop> listDSLH = [];
   DateTime selectDay = DateTime.now();
@@ -61,12 +61,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   Stream<TypeCalendarMenu> get changeItemMenuStream =>
       changeItemMenuSubject.stream;
-
-  void changeScreenMenu(TypeCalendarMenu typeMenu) {
-    if (typeMenu == TypeCalendarMenu.DanhSachLichHop) {
-      chooseTypeList(Type_Choose_Option_List.DANH_SACH);
-    }
-  }
 
   HopRepository get hopRepo => Get.find();
 

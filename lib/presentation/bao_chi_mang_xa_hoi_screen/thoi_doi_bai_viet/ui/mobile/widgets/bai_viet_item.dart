@@ -42,6 +42,9 @@ class _BaiVietItemState extends State<BaiVietItem> {
                   child: Image.network(
                     widget.baiVietModel.iconUrl,
                     fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) {
+                      return Image.asset(ImageAssets.icDongNai);
+                    },
                   ),
                 ),
               ),
@@ -93,11 +96,26 @@ class _BaiVietItemState extends State<BaiVietItem> {
             height: 16,
           ),
           Container(
+            height: 170,
+            width: double.maxFinite,
             clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: containerColorTab,
+            ),
             child: Image.network(
               widget.baiVietModel.imageSources,
               fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) {
+                return Center(
+                    child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.asset(
+                          ImageAssets.icDongNai,
+                          fit: BoxFit.cover,
+                        ),),);
+              },
             ),
           ),
           const SizedBox(
@@ -114,7 +132,7 @@ class _BaiVietItemState extends State<BaiVietItem> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            onTap: (){
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(

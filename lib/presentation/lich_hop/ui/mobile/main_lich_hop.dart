@@ -104,7 +104,7 @@ class _MainLichHopState extends State<MainLichHop> {
                             cubit.index.sink.add(0);
                           });
                         },
-                        TheoDangDanhSach: () {
+                        theoDangDanhSach: () {
                           setState(() {
                             cubit.chooseTypeList(
                               Type_Choose_Option_List.DANG_LIST,
@@ -134,13 +134,15 @@ class _MainLichHopState extends State<MainLichHop> {
                                 state.type == Type_Choose_Option_Day.WEEK) {
                               return Container(
                                 margin: EdgeInsets.only(
-                                    top: cubit.isCheckNgay ? 150 : 120),
+                                  top: cubit.isCheckNgay ? 150 : 120,
+                                ),
                                 color: Colors.transparent,
                               );
                             } else {
                               return Container(
                                 margin: EdgeInsets.only(
-                                    top: cubit.isCheckNgay ? 80 : 50),
+                                  top: cubit.isCheckNgay ? 80 : 50,
+                                ),
                                 color: Colors.transparent,
                               );
                             }
@@ -268,29 +270,30 @@ class _MainLichHopState extends State<MainLichHop> {
                               state is LichHopStateDangList ||
                               state is LichHopStateDangDanhSach) {
                             return StreamBuilder<List<DateTime>>(
-                                stream: cubit.eventsStream,
-                                builder: (context, snapshot) {
-                                  return TableCalendarWidget(
-                                    type: state.type,
-                                    eventsLoader: snapshot.data,
-                                    onChange: (
-                                      DateTime startDate,
-                                      DateTime endDate,
-                                      DateTime selectDay,
-                                    ) {
-                                      cubit.getDataCalendar(
-                                        startDate,
-                                        endDate,
-                                        selectDay,
-                                      );
-                                    },
-                                    onChangeRange: (
-                                      DateTime? start,
-                                      DateTime? end,
-                                      DateTime? focusedDay,
-                                    ) {},
-                                  );
-                                });
+                              stream: cubit.eventsStream,
+                              builder: (context, snapshot) {
+                                return TableCalendarWidget(
+                                  type: state.type,
+                                  eventsLoader: snapshot.data,
+                                  onChange: (
+                                    DateTime startDate,
+                                    DateTime endDate,
+                                    DateTime selectDay,
+                                  ) {
+                                    cubit.getDataCalendar(
+                                      startDate,
+                                      endDate,
+                                      selectDay,
+                                    );
+                                  },
+                                  onChangeRange: (
+                                    DateTime? start,
+                                    DateTime? end,
+                                    DateTime? focusedDay,
+                                  ) {},
+                                );
+                              },
+                            );
                           }
                           return Container();
                         },
