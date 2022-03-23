@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.da
 import 'package:ccvc_mobile/home_module/data/response/home/todo_current_user_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -38,13 +39,6 @@ abstract class TienIchService {
     @Body() CreateToDoRequest createToDoRequest,
   );
 
-  @GET(ApiConstants.LIST_NGUOI_THUC_HIEN)
-  Future<DataListNguoiThucHienResponse> getListNguoiThucHien(
-    @Query('IsGetAll') bool isGetAll,
-    @Query('PageSize') int pageSize,
-    @Query('PageIndex') int pageIndex,
-  );
-
   @GET(ApiConstants.GET_DANH_SACH_HDSD)
   Future<DataDanhSachHDSDResponse> getDanhSachHDSD(
     @Query('pageIndex') int pageIndex,
@@ -68,5 +62,26 @@ abstract class TienIchServiceUAT {
   @GET(ApiConstants.GET_LICH_AM_DUONG)
   Future<DataLichAmDuongResponse> getLichAmDuong(
     @Query('dateStr') String date,
+  );
+}
+
+@RestApi()
+abstract class TienIchServiceCommon {
+  @factoryMethod
+  factory TienIchServiceCommon(Dio dio, {String baseUrl}) =
+      _TienIchServiceCommon;
+
+  @GET(ApiConstants.LIST_NGUOI_THUC_HIEN)
+  @FormUrlEncoded()
+  Future<ListNguoiThucHienResponse> getListNguoiThucHien(
+    @Query('IsGetAll') bool isGetAll,
+    @Query('PageSize') int pageSize,
+    @Query('PageIndex') int pageIndex,
+  );
+
+  @GET(ApiConstants.TREE_DANH_BA)
+  @FormUrlEncoded()
+  Future<TreeDanhBaResponse> TreeDanhBa(
+    @Query('soCap') int soCap,
   );
 }

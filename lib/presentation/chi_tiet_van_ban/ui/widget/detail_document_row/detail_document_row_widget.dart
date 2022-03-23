@@ -31,9 +31,10 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                 flex: 4,
                 child: AutoSizeText(
                   widget.row.title,
-                  style: const TextStyle(
+                  style: textNormalCustom(
                     fontSize: 14,
-                    color: Color(0xff667793),
+                    fontWeight: FontWeight.w400,
+                    color: titleColumn,
                   ),
                 ),
               ),
@@ -50,6 +51,7 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                     '${widget.row.value}',
                     style: textNormalCustom(
                       fontSize: 14,
+                      fontWeight: FontWeight.w400,
                       color: titleColor,
                     ),
                     maxLines: 3,
@@ -100,9 +102,10 @@ class _DetailDocumentRowState extends State<DetailDocumentRow> {
                 flex: 4,
                 child: AutoSizeText(
                   widget.row.title,
-                  style: const TextStyle(
+                  style:textNormalCustom(
                     fontSize: 14,
-                    color: Color(0xff667793),
+                    fontWeight: FontWeight.w400,
+                    color: titleColumn,
                   ),
                 ),
               ),
@@ -156,8 +159,9 @@ Widget checkBoxCusTom(DocumentDetailRow row) {
       AutoSizeText(row.title,
           style: textNormalCustom(
             fontSize: 14,
-            color: const Color(0xff667793),
-          )),
+            fontWeight: FontWeight.w400,
+            color: titleColumn,
+          ),),
     ],
   );
 }

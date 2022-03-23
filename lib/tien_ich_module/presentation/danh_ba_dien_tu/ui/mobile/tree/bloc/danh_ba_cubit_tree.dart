@@ -1,57 +1,104 @@
-import 'package:ccvc_mobile/domain/repository/thanh_phan_tham_gia_reponsitory.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/danh_sach_model.dart';
-import 'package:get/get.dart' as GET_IT;
+import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/widget/tree.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DanhBaCubitTree {
-  final List<DanhSachModel> listPeople = [];
+  TienIchRepository get tienIchRep => Get.find();
 
-  ThanhPhanThamGiaReponsitory get hopRp => GET_IT.Get.find();
-  final BehaviorSubject<List<DanhSachModel>> _listPeopleThamGia =
-      BehaviorSubject<List<DanhSachModel>>();
+  BehaviorSubject<Tree> listTreeDanhBaSubject = BehaviorSubject<Tree>();
 
-  Stream<List<DanhSachModel>> get listPeopleThamGia =>
-      _listPeopleThamGia.stream;
+  List<TreeDonViDanhBA> listTreeDanhBa = [];
 
-  final BehaviorSubject<List<Node<DanhSachModel>>> _getTreeDanhSach =
-      BehaviorSubject<List<Node<DanhSachModel>>>();
+  final List<String> _listId = [];
+  final List<String> _listParent = [];
 
-  Stream<List<Node<DanhSachModel>>> get getTreeDonVi => _getTreeDanhSach.stream;
+  Future<void> getTree() async {
+    final result = await tienIchRep.TreeDanhBa(3);
+    result.when(
+      success: (res) {
+        Tree ans = Tree();
+        listTreeDanhBa = res;
+        for (final e in listTreeDanhBa) {
+          _listId.add(e.id);
+          _listParent.add(e.iD_DonVi_Cha);
+        }
+        ans.initTree(listNode: listTreeDanhBa);
+        listTreeDanhBaSubject.add(ans);
+      },
+      error: (error) {},
+    );
+  }
 
-  void addPeopleThamGia(
-    List<DanhSachModel> danhSachModel,
-  ) {
-    for (final vl in danhSachModel) {
-      if (listPeople.indexWhere((element) => element.id == vl.id) == -1) {
-        listPeople.add(vl);
+  NodeHSCV? getRoot() {
+    if (listTreeDanhBaSubject.hasValue) {
+      return listTreeDanhBaSubject.value.getRoot();
+    }
+  }
+
+  TreeDonViDanhBA tree = TreeDonViDanhBA.Emty();
+
+  int levelTree = 0;
+  BehaviorSubject<String> tenDonVi = BehaviorSubject.seeded('');
+  BehaviorSubject<String> idDonVi = BehaviorSubject();
+
+  void getValueTree({required String donVi, required String id}) {
+    if (tenDonVi.value != donVi) {
+      tenDonVi.sink.add(donVi);
+      idDonVi.sink.add(id);
+    }
+  }
+
+  bool checkDad(
+      {required NodeHSCV? node,
+      required bool boolCheck,
+      required Function(bool) onChange}) {
+    if (node!.value.iD_DonVi_Cha != '') {
+      boolCheck = false;
+      onChange(boolCheck);
+    } else {
+      boolCheck = true;
+      onChange(boolCheck);
+    }
+    return boolCheck;
+  }
+
+  void search(String text) {
+    final searchTxt = text.toLowerCase().vietNameseParse();
+    bool isListCanBo(TreeDonViDanhBA tree) {
+      return tree.tenDonVi.toLowerCase().vietNameseParse().contains(searchTxt);
+    }
+
+    final vlAfterSearch =
+        listTreeDanhBa.where((element) => isListCanBo(element)).toList();
+    for (final e in listTreeDanhBa) {
+      if (e.iD_DonVi_Cha == '') {
+        vlAfterSearch.add(e);
       }
     }
-    _listPeopleThamGia.sink.add(listPeople);
+
+    try {
+      for (var x = 0; x <= vlAfterSearch.length; x++) {
+        bool isListCanBo(TreeDonViDanhBA tree) {
+          return tree.iD_DonVi_Cha
+              .toLowerCase()
+              .vietNameseParse()
+              .contains(vlAfterSearch[x].id);
+        }
+
+        final vlAfterSearch2 =
+            listTreeDanhBa.where((element) => isListCanBo(element)).toList();
+        vlAfterSearch.addAll(vlAfterSearch2);
+      }
+    } catch (er) {}
+
+    Tree ans = Tree();
+    ans.initTree(listNode: vlAfterSearch);
+    listTreeDanhBaSubject.add(ans);
+    // print('${vlAfterSearch.length}');
   }
 
-  void getTree() {
-    hopRp.getTreeDonVi().then((value) {
-      value.when(
-        success: (res) {
-          // _getTreeDanhSach.sink.add(res);
-        },
-        error: (err) {},
-      );
-    });
-  }
-
-  void nhapNoiDungDonVi(String text, DanhSachModel donViModel) {
-    donViModel.noidung = text.trim();
-  }
-
-  void deletePeopleThamGia(DanhSachModel donViModel) {
-    listPeople.remove(donViModel);
-
-    _listPeopleThamGia.sink.add(listPeople);
-  }
-
-  void dispose() {
-    _listPeopleThamGia.close();
-    _getTreeDanhSach.close();
-  }
+  void dispose() {}
 }

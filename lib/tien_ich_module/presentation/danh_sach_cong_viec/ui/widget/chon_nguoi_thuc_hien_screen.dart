@@ -26,7 +26,6 @@ class _DanhSachCongViecTienIchMobileState
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.cubit.listNguoiThucHien();
   }
 
   @override

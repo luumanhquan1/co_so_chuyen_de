@@ -1,7 +1,4 @@
-import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
-import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'list_nguoi_thuc_hien_response.g.dart';

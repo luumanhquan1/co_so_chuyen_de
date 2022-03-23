@@ -10,6 +10,7 @@ class DoubleButtonBottom extends StatelessWidget {
   final Function onPressed1;
   final Function onPressed2;
   final bool isTablet;
+
   const DoubleButtonBottom({
     Key? key,
     required this.title1,
@@ -100,6 +101,34 @@ class DoubleButtonBottom extends StatelessWidget {
   }
 
   Widget button({
+    required Function onTap,
+    required String title,
+    bool isLeft = true,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        height: 44,
+        width: 142,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: isLeft ? buttonColor2 : textDefault,
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: textNormalCustom(
+              fontSize: 16,
+              color: isLeft ? textDefault : backgroundColorApp,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget buttonTablet({
     required Function onTap,
     required String title,
     bool isLeft = true,

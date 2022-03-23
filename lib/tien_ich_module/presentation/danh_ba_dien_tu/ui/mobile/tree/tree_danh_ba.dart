@@ -1,33 +1,24 @@
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
+import 'package:ccvc_mobile/presentation/list_menu/ui/tablet/widgetTablet/dropdow_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/bloc/danh_ba_cubit_tree.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/widget/tree.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/bloc_tree/danh_sach_cubit.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/danh_sach_model.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/search/search.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/tree_view/tree_danh_sach.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
-import 'package:ccvc_mobile/widgets/button/solid_button.dart';
-import 'package:ccvc_mobile/widgets/dialog/show_dia_log_tablet.dart';
-import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
-import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
+import 'package:ccvc_mobile/widgets/search/base_seach_bar_no_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class DanhBaWidget extends StatefulWidget {
-  final Function(List<Node<DanhSachModel>>) onChange;
-  final List<DanhSachModel> listSelectNode;
-
+  final Function(TreeDonViDanhBA obj) onChange;
   final DanhBaCubitTree cubit;
 
   const DanhBaWidget({
     Key? key,
     required this.onChange,
-    this.listSelectNode = const [],
     required this.cubit,
   }) : super(key: key);
 
@@ -42,9 +33,7 @@ class _DanhBaScreenState extends State<DanhBaWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.cubit.getTreeDonVi.listen((event) {
-      danhBaCubit.getTreeDonVi(event);
-    });
+    widget.cubit.getTree();
   }
 
   @override
@@ -56,131 +45,258 @@ class _DanhBaScreenState extends State<DanhBaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SolidButton(
-      onTap: () {
-        showSelect();
-      },
-      text: S.current.them_don_vi,
-      urlIcon: ImageAssets.icThemDonVi,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              DropdownWidgetTablet(
+                title: StreamBuilder<String>(
+                    stream: widget.cubit.tenDonVi.stream,
+                    builder: (context, snapshot) {
+                      return Text(
+                        snapshot.data.toString(),
+                        style: textNormal(titleColor, 14),
+                      );
+                    }),
+                child: SingleChildScrollView(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 11),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: borderColor),
+                      borderRadius: const BorderRadius.all(Radius.circular(6)),
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height * 0.4,
+                    ),
+                    child: Column(
+                      children: [
+                        BaseSearchBarNoBorder(
+                          hintText: S.current.nhap_don_vi,
+                          onChange: (vl) {
+                            widget.cubit.search(vl);
+                          },
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            border: Border(top: BorderSide(color: borderColor)),
+                          ),
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          child: StreamBuilder(
+                            stream: widget.cubit.listTreeDanhBaSubject.stream,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<dynamic> snapshot) {
+                              if (widget.cubit.listTreeDanhBa.isEmpty) {
+                                return const Padding(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: NodataWidget(),
+                                );
+                              } else {
+                                return Scrollbar(
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                      maxHeight:
+                                          MediaQuery.of(context).size.height *
+                                              0.3,
+                                    ),
+                                    color: Colors.white,
+                                    child: ListView(
+                                      children: [
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          child: NodeWidget(
+                                            onChange: (vl) {
+                                              widget.onChange(vl);
+                                            },
+                                            key: UniqueKey(),
+                                            node: widget.cubit.getRoot(),
+                                            cubit: widget.cubit,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
-  }
-
-  void showSelect() {
-    danhBaCubit.initSelectNode(widget.listSelectNode);
-    if (APP_DEVICE == DeviceType.MOBILE) {
-      showBottomSheetCustom<List<Node<DanhSachModel>>>(
-        context,
-        title: S.current.chon_thanh_phan_tham_gia,
-        child: TreeDanhSach2(
-          cubit: danhBaCubit,
-        ),
-      ).then((value) {
-        if (value != null) {
-          widget.onChange(value);
-        }
-        danhBaCubit.onSearch('');
-      });
-    } else {
-      showDiaLogTablet(
-        context,
-        title: S.current.chon_thanh_phan_tham_gia,
-        child: TreeDanhSach2(
-          cubit: danhBaCubit,
-        ),
-        isBottomShow: true,
-        funcBtnOk: () {
-          Navigator.pop(context, danhBaCubit.selectNode);
-        },
-      ).then((value) {
-        if (value != null) {
-          widget.onChange(value);
-        }
-        danhBaCubit.onSearch('');
-      });
-    }
   }
 }
 
-class TreeDanhSach2 extends StatelessWidget {
-  final DanhBaCubit cubit;
+class NodeWidget extends StatefulWidget {
+  final Function(TreeDonViDanhBA obj) onChange;
+  NodeHSCV? node;
+  final DanhBaCubitTree cubit;
 
-  const TreeDanhSach2({Key? key, required this.cubit}) : super(key: key);
+  NodeWidget({Key? key, this.node, required this.cubit, required this.onChange})
+      : super(key: key);
+
+  @override
+  _NodeWidgetState createState() => _NodeWidgetState();
+}
+
+class _NodeWidgetState extends State<NodeWidget> {
+  late NodeCubit nodeCubit;
+  bool isExpand = true;
+
+  @override
+  void initState() {
+    super.initState();
+    nodeCubit = NodeCubit(
+        tree: widget.cubit.listTreeDanhBaSubject.value
+            .getChild(widget.node!.value.id));
+    nodeCubit.init();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      color: Colors.transparent,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20.0.textScale(space: 4),
-          ),
-          SearchWidget(
-            danhBaCubit: cubit,
-          ),
-          SizedBox(
-            height: 18.0.textScale(),
-          ),
-          Expanded(
+    final Size size = MediaQuery.of(context).size;
+    final double widthSize = size.width;
+    return StreamBuilder<Tree>(
+      stream: widget.cubit.listTreeDanhBaSubject.stream,
+      builder: (BuildContext context, AsyncSnapshot<Tree> snapshot) {
+        if (widget.node != null) {
+          return SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  S.current.danh_sach_don_vi_tham_gia,
-                  style: textNormal(textTitle, 16),
-                ),
                 SizedBox(
-                  height: 22.0.textScale(space: -9),
+                  width: widthSize,
+                  child: GestureDetector(
+                    onTap: () {
+                      widget.node!.isHasChild == false
+                          ? widget.cubit.getValueTree(
+                              id: isExpand ? widget.node!.value.id : '',
+                              donVi:
+                                  isExpand ? widget.node!.value.tenDonVi : '',
+                            )
+                          : setState(() {});
+                      widget.node!.isHasChild == true
+                          ? isExpand = !isExpand
+                          : setState(() {});
+                      widget.onChange(widget.node!.value);
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 8,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              bottom:
+                                  widget.node!.value.iD_DonVi_Cha != '' ? 6 : 0,
+                              top:
+                                  widget.node!.value.iD_DonVi_Cha != '' ? 6 : 0,
+                            ),
+                            decoration: BoxDecoration(
+                              border: widget.node!.value.iD_DonVi_Cha != ''
+                                  ? isExpand
+                                      ? const Border()
+                                      : const Border(
+                                          bottom:
+                                              BorderSide(color: borderColor))
+                                  : const Border(),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 9,
+                                  child: widget.node!.value.iD_DonVi_Cha != ''
+                                      ? Text(
+                                          widget.node!.value.tenDonVi,
+                                          style: textNormal(titleColor, 14),
+                                        )
+                                      : const SizedBox(),
+                                ),
+                                Stack(
+                                  children: [
+                                    StreamBuilder<String>(
+                                      stream: widget.cubit.idDonVi.stream,
+                                      builder: (context, snapshot) {
+                                        return snapshot.data.toString() ==
+                                                widget.node!.value.id
+                                            ? (widget.node!.isHasChild)
+                                                ? const SizedBox()
+                                                : SvgPicture.asset(
+                                                    ImageAssets.ic_tick,
+                                                  )
+                                            : const SizedBox();
+                                      },
+                                    ),
+                                    if (widget.node!.value.iD_DonVi_Cha != '')
+                                      widget.node!.isHasChild
+                                          ? isExpand
+                                              ? const Icon(
+                                                  Icons.keyboard_arrow_up,
+                                                  color: Color(0xFFA2AEBD),
+                                                )
+                                              : const Icon(
+                                                  Icons.keyboard_arrow_down,
+                                                  color: Color(0xFFA2AEBD))
+                                          : const SizedBox(),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                Expanded(
-                  child: StreamBuilder<List<Node<DanhSachModel>>>(
-                    stream: cubit.getTree,
-                    builder: (context, snapshot) {
-                      final data = snapshot.data ?? <Node<DanhSachModel>>[];
-                      if (data.isNotEmpty) {
-                        return ListView.builder(
-                          keyboardDismissBehavior: isMobile()
-                              ? ScrollViewKeyboardDismissBehavior.onDrag
-                              : ScrollViewKeyboardDismissBehavior.manual,
-                          itemCount: data.length,
-                          itemBuilder: (context, index) {
-                            return TreeDanhSach(
-                              node: data[index],
-                              danhBaCubit: cubit,
-                            );
-                          },
-                        );
-                      }
+                if (isExpand)
+                  StreamBuilder<List<NodeHSCV>>(
+                    stream: nodeCubit.listTreeXLPhanXuLySubject.stream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<NodeHSCV>> snapshot) {
+                      widget.cubit.levelTree++;
+                      final List<NodeHSCV> data = snapshot.data ?? [];
                       return Column(
-                        children: const [
-                          NodataWidget(),
+                        children: [
+                          ...data.map(
+                            (e) => Container(
+                              decoration: BoxDecoration(
+                                border: e == data.last
+                                    ? const Border(
+                                        bottom: BorderSide(color: borderColor))
+                                    : const Border(),
+                              ),
+                              child: NodeWidget(
+                                onChange: (vl) {},
+                                key: UniqueKey(),
+                                node: e,
+                                cubit: widget.cubit,
+                              ),
+                            ),
+                          )
                         ],
                       );
                     },
-                  ),
-                )
+                  )
+                else
+                  Container(),
               ],
             ),
-          ),
-          screenDevice(
-            mobileScreen: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: DoubleButtonBottom(
-                title1: S.current.dong,
-                title2: S.current.them,
-                onPressed1: () {
-                  Navigator.pop(context);
-                },
-                onPressed2: () {
-                  Navigator.pop(context, cubit.selectNode);
-                },
-              ),
-            ),
-            tabletScreen: const SizedBox(),
-          )
-        ],
-      ),
+          );
+        } else {
+          return const SizedBox(
+            height: 0,
+          );
+        }
+      },
     );
   }
 }
