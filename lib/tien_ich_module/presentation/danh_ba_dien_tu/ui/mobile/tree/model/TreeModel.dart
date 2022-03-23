@@ -8,7 +8,7 @@ class TreeDonViDanhBA {
   int capDonVi = 0;
   String duongDan_ID_DonVi = '';
   String duongDan_ID_DonVi_Cha = '';
-  String email = 'null';
+  String email = '';
   dynamic fax;
   bool hasDonViCon = false;
   String iD_DonVi_Cha = '';
@@ -23,7 +23,7 @@ class TreeDonViDanhBA {
   String tenDonViGoc = '';
   int thuTu = 0;
 
-  TreeDonViDanhBA.PhanXuLy();
+  TreeDonViDanhBA.Emty();
 
   TreeDonViDanhBA({
     required this.bitDauMoiPAKN,
