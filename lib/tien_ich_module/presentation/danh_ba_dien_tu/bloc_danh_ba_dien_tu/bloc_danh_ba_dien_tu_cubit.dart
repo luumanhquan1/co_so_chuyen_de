@@ -48,10 +48,14 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
     return '';
   }
 
-  void getValue() {}
-
   void callApiDanhSach() {
     getListDanhBaCaNhan(pageIndex: pageIndex, pageSize: pageSize);
+    // getListDanhBaToChuc(
+    //   pageIndex: pageIndex,
+    //   pageSize: pageSize,
+    //   filterBy: '',
+    //   idDonVi: '1141b196-e3e4-481b-8bf5-8dba8c82cd65',
+    // );
   }
 
   void searchListDanhSach(String keyword) {
@@ -139,6 +143,50 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
     );
   }
 
+  Future<void> getListDanhBaToChuc({
+    required int pageIndex,
+    required int pageSize,
+    required String filterBy,
+    required String idDonVi,
+  }) async {
+    loadMorePage = pageIndex;
+    final result = await tienIchRep.getListDanhBaToChuc(
+      pageIndex,
+      pageSize,
+      filterBy,
+      idDonVi,
+    );
+    result.when(
+      success: (res) {
+        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+          if (res.items?.isEmpty ?? true) {
+            showEmpty();
+          } else {
+            showContent();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.items));
+          }
+        } else {
+          emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.items));
+        }
+      },
+      error: (error) {
+        emit(const CompletedLoadMore(CompleteType.ERROR));
+        showError();
+      },
+    );
+  }
+
+  List<Items> listItem = [];
+  Items items = Items();
+  BehaviorSubject<List<Items>> listItemSubject = BehaviorSubject();
+
+  // Future<void> getCurrentUnit(
+  //   Items items,
+  // ) async {
+  //   this.items = gioiTinh = items.gioiTinh ?? true;
+  //   ngaySinh = items.ngaySinh ?? '';
+  // }
+
   Future<void> getListDanhBaCaNhan({
     required int pageIndex,
     required int pageSize,
@@ -147,6 +195,7 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
     final result = await tienIchRep.getListDanhBaCaNhan(pageIndex, pageSize);
     result.when(
       success: (res) {
+        listItem = res.items ?? [];
         if (pageIndex == ApiConstants.PAGE_BEGIN) {
           if (res.items?.isEmpty ?? true) {
             showEmpty();
@@ -281,9 +330,6 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
       },
     );
   }
-
-  List<Items> listItem = [];
-  BehaviorSubject<List<Items>> listItemSubject = BehaviorSubject();
 
   void searchAllDanhSach(String values) {
     final searchTxt = values.trim().toLowerCase().vietNameseParse();
