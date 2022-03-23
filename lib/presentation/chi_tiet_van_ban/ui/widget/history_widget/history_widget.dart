@@ -7,9 +7,6 @@ class HistoryWidget extends StatefulWidget {
 
   HistoryWidget(this.cubit);
 
-  // final ContentHistoryJobViewModel viewModel;
-  // const ContentHistoryJob({Key? key, required this.viewModel})
-  //     : super(key: key);
 
   @override
   _ContentHistoryMissionState createState() => _ContentHistoryMissionState();
@@ -23,12 +20,11 @@ class _ContentHistoryMissionState extends State<HistoryWidget>
   void initState() {
     // TODO: implement initState
     super.initState();
-    // widget.viewModel.loadingHistoryProcess();
+
   }
 
   @override
   void dispose() {
-    // widget.viewModel.dispose();
     // TODO: implement dispose
     super.dispose();
   }
@@ -71,50 +67,6 @@ class _ContentHistoryMissionState extends State<HistoryWidget>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Container(
-                            //   child: Row(
-                            //     children: [
-                            //       Text(
-                            //         '${widget.viewModel.listHistory[index].nguoiGiaoViec.value}',
-                            //         style: Theme.of(context)
-                            //             .textTheme
-                            //             .headline3!
-                            //             .copyWith(
-                            //                 color: const Color(
-                            //                     0xff304261),
-                            //                 fontWeight:
-                            //                     FontWeight.w600),
-                            //       ),
-                            //       if (widget.viewModel.type ==
-                            //           TypeProcessJob
-                            //               .LICH_SU_THAY_DOI_TRANG_THAI)
-                            //         Expanded(
-                            //           child: Text(
-                            //               widget
-                            //                   .viewModel
-                            //                   .listHistory[index]
-                            //                   .trangThai,
-                            //               textAlign: TextAlign.end,
-                            //               style: Theme.of(context)
-                            //                   .textTheme
-                            //                   .headline3!
-                            //                   .copyWith(
-                            //                       fontSize: 12,
-                            //                       color: widget
-                            //                           .viewModel
-                            //                           .listHistory[
-                            //                               index]
-                            //                           .trangThai
-                            //                           .getColorByjObStatusHistory(),
-                            //                       fontWeight:
-                            //                           FontWeight
-                            //                               .w600)),
-                            //         )
-                            //       else
-                            //         Container()
-                            //     ],
-                            //   ),
-                            // ),
                             const SizedBox(height: 8),
                             Column(
                               children: [

@@ -17,9 +17,10 @@ import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repositor
 
 class TienIchRepositoryImpl implements TienIchRepository {
   final TienIchService _tienIchService;
+  final TienIchServiceCommon _tienIchServiceCommon;
   final TienIchServiceUAT _tienIchServiceUAT;
 
-  TienIchRepositoryImpl(this._tienIchService,this._tienIchServiceUAT);
+  TienIchRepositoryImpl(this._tienIchService,this._tienIchServiceUAT, this._tienIchServiceCommon);
 
   @override
   Future<Result<List<TopicHDSD>>> getTopicHDSD() {
@@ -59,10 +60,11 @@ class TienIchRepositoryImpl implements TienIchRepository {
     int pageSize,
     int pageIndex,
   ) {
-    return runCatchingAsync<DataListNguoiThucHienResponse,
+    return runCatchingAsync<ListNguoiThucHienResponse,
         ItemChonBienBanCuocHopModel>(
-      () => _tienIchService.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
-      (res) => res.toDomain(),
+          () =>
+          _tienIchServiceCommon.getListNguoiThucHien(isGetAll, pageSize, pageIndex),
+          (res) => res.data.toDomain(),
     );
   }
 

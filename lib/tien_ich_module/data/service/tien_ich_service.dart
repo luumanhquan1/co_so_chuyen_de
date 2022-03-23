@@ -38,13 +38,6 @@ abstract class TienIchService {
     @Body() CreateToDoRequest createToDoRequest,
   );
 
-  @GET(ApiConstants.LIST_NGUOI_THUC_HIEN)
-  Future<DataListNguoiThucHienResponse> getListNguoiThucHien(
-    @Query('IsGetAll') bool isGetAll,
-    @Query('PageSize') int pageSize,
-    @Query('PageIndex') int pageIndex,
-  );
-
   @GET(ApiConstants.GET_DANH_SACH_HDSD)
   Future<DataDanhSachHDSDResponse> getDanhSachHDSD(
     @Query('pageIndex') int pageIndex,
@@ -69,4 +62,17 @@ abstract class TienIchServiceUAT {
   Future<DataLichAmDuongResponse> getLichAmDuong(
     @Query('dateStr') String date,
   );
+}
+@RestApi()
+abstract class TienIchServiceCommon {
+  @factoryMethod
+  factory TienIchServiceCommon(Dio dio, {String baseUrl}) = _TienIchServiceCommon;
+  @GET(ApiConstants.LIST_NGUOI_THUC_HIEN)
+  @FormUrlEncoded()
+  Future<ListNguoiThucHienResponse> getListNguoiThucHien(
+      @Query('IsGetAll') bool isGetAll,
+      @Query('PageSize') int pageSize,
+      @Query('PageIndex') int pageIndex,
+      );
+
 }

@@ -19,6 +19,7 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
 
   DanhBaDienTuRepository get tienIchRep => Get.find();
   int pageSize = 10;
+  int pageIndex = 1;
   String createdAt = DateTime.now().formatApiDanhBa;
   String updatedAt = DateTime.now().formatApiDanhBa;
 
@@ -40,7 +41,26 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
   BehaviorSubject<File> saveFile = BehaviorSubject();
   final BehaviorSubject<String> anhDanhBaCaNhan = BehaviorSubject();
 
+  String subString(String? name) {
+    if (name != null) {
+      return name.substring(0, 1);
+    }
+    return '';
+  }
+
   void getValue() {}
+
+  void callApiDanhSach() {
+    getListDanhBaCaNhan(pageIndex: pageIndex, pageSize: pageSize);
+  }
+
+  void searchListDanhSach(String keyword) {
+    searchListDanhBaCaNhan(
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      keyword: keyword,
+    );
+  }
 
   void callApi() {
     postDanhSach(
@@ -84,6 +104,38 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
       updatedAt: updatedAt,
       updatedBy: id,
       id: id,
+    );
+  }
+
+  Future<void> searchListDanhBaCaNhan({
+    required int pageIndex,
+    required int pageSize,
+    required String keyword,
+  }) async {
+    loadMorePage = pageIndex;
+    final result = await tienIchRep.searchListDanhBaCaNhan(
+      pageIndex,
+      pageSize,
+      keyword,
+    );
+    result.when(
+      success: (res) {
+        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+          if (res.items?.isEmpty ?? true) {
+            showEmpty();
+          } else {
+            listItemSubject.sink.add(res.items ?? []);
+            showContent();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.items));
+          }
+        } else {
+          emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.items));
+        }
+      },
+      error: (error) {
+        emit(const CompletedLoadMore(CompleteType.ERROR));
+        showError();
+      },
     );
   }
 
@@ -151,7 +203,9 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
     );
     final result = await tienIchRep.postThemMoiDanhBa(themDanhBaCaNhanRequest);
     result.when(
-      success: (res) {},
+      success: (res) {
+        callApiDanhSach();
+      },
       error: (error) {
         showError();
       },
@@ -205,7 +259,23 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
     );
     final result = await tienIchRep.putSuaDanhBa(suaDanhBaCaNhanRequest);
     result.when(
-      success: (res) {},
+      success: (res) {
+        callApiDanhSach();
+      },
+      error: (error) {
+        showError();
+      },
+    );
+  }
+
+  Future<void> xoaDanhBa({
+    required String id,
+  }) async {
+    final result = await tienIchRep.xoaDanhBa(id);
+    result.when(
+      success: (res) {
+        callApiDanhSach();
+      },
       error: (error) {
         showError();
       },

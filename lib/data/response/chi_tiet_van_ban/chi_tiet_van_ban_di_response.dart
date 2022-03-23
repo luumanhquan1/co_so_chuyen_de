@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/string_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'chi_tiet_van_ban_di_response.g.dart';
@@ -48,8 +49,14 @@ class ChiTietVanBanDiResponse {
   String? donViBanHanh;
   @JsonKey(name: 'IdVanBanGoc')
   int? idVanBanGoc;
+  @JsonKey(name: 'KyHieuVanBanGoc')
+  String? kyHieuVanBanGoc;
   @JsonKey(name: 'IsDaKyPhieuTrinh')
   bool? isDaKyPhieuTrinh;
+  @JsonKey(name: 'DonViTrongHeThongs')
+  List<DonViTrongHeThongsResponse>? donViTrongHeThongs;
+  @JsonKey(name: 'DonViNgoaiHeThongs')
+  List<DonViNgoaiHeThongsResponse>? donViNgoaiHeThongs;
   @JsonKey(name: 'IdDoKhan')
   String? idDoKhan;
   @JsonKey(name: 'DoKhan')
@@ -69,7 +76,7 @@ class ChiTietVanBanDiResponse {
   @JsonKey(name: 'VanBanChiDaoResponses')
   String? vanBanChiDaoResponses;
   @JsonKey(name: 'NguoiTheoDoiResponses')
-  List<String>? nguoiTheoDoiResponses;
+  List<NguoiTheoDoiResponse>? nguoiTheoDoiResponses;
   @JsonKey(name: 'NguoiKyDuyetResponses')
   List<NguoiKyDuyetDiResponse>? nguoiKyDuyetResponse;
   @JsonKey(name: 'NguoiKy')
@@ -133,6 +140,8 @@ class ChiTietVanBanDiResponse {
     this.donViBanHanh,
     this.idVanBanGoc,
     this.isDaKyPhieuTrinh,
+    this.donViTrongHeThongs,
+    this.donViNgoaiHeThongs,
     this.idDoKhan,
     this.doKhan,
     this.issuedAmount,
@@ -181,7 +190,7 @@ class ChiTietVanBanDiResponse {
         maPAKN: maPAKN,
         processTypeId: processTypeId,
         fileNotation: fileNotation,
-        subject: subject,
+        subject: subject?.parseHtml(),
         dueDate: dueDate,
         ngayTao: ngayTao,
         ngayBanHanh: ngayBanHanh,
@@ -190,7 +199,10 @@ class ChiTietVanBanDiResponse {
         donViSoanThao: donViSoanThao,
         donViBanHanh: donViBanHanh,
         idVanBanGoc: idVanBanGoc,
+        kyHieuVanBanGoc: kyHieuVanBanGoc,
         isDaKyPhieuTrinh: isDaKyPhieuTrinh,
+        donViTrongHeThongs: donViTrongHeThongs?.map((e) => e.toModel()).toList()??[],
+        donViNgoaiHeThongs: donViNgoaiHeThongs?.map((e) => e.toModel()).toList()??[],
         idDoKhan: idDoKhan,
         doKhan: doKhan,
         issuedAmount: issuedAmount,
@@ -200,7 +212,7 @@ class ChiTietVanBanDiResponse {
         isVanBanChiDao: isVanBanChiDao,
         vanBanDenResponses: vanBanDenResponses,
         vanBanChiDaoResponses: vanBanChiDaoResponses,
-        nguoiTheoDoiResponses: nguoiTheoDoiResponses,
+        nguoiTheoDoiResponses: nguoiTheoDoiResponses?.map((e) => e.toModel()).toList()??[],
         nguoiKyDuyetResponses: nguoiKyDuyetResponse
                 ?.map((e) => e.toModelNguoikyDuyet())
                 .toList() ??
@@ -330,4 +342,174 @@ class FileDinhKemVanBanDiResponse {
         qrCreated: qrCreated,
         loaiFileDinhKem: loaiFileDinhKem,
       );
+}
+@JsonSerializable()
+class NguoiTheoDoiResponse {
+  @JsonKey(name: 'Id')
+  String? id;
+  @JsonKey(name: 'HoTen')
+  String? hoTen;
+  @JsonKey(name: 'DonVi')
+  String? donVi;
+  @JsonKey(name: 'ChucVu')
+  String? chucVu;
+  @JsonKey(name: 'IdChucVu')
+  String? idChucVu;
+  @JsonKey(name: 'IdDonVi')
+  String? idDonVi;
+  @JsonKey(name: 'TenTaiKhoan')
+  String? tenTaiKhoan;
+  @JsonKey(name: 'Sdt')
+  String? sdt;
+  @JsonKey(name: 'NgaySinh')
+  String? ngaySinh;
+  @JsonKey(name: 'GioiTinh')
+  String? gioiTinh;
+  @JsonKey(name: 'Email')
+  String? email;
+  @JsonKey(name: 'PathAnhDaiDien')
+  String? pathAnhDaiDien;
+  @JsonKey(name: 'PathChuKy')
+  String? pathChuKy;
+  @JsonKey(name: 'User')
+  String? user;
+  @JsonKey(name: 'AnhDaiDien')
+  String? anhDaiDien;
+  @JsonKey(name: 'AnhChuKy')
+  String? anhChuKy;
+
+
+  NguoiTheoDoiResponse({
+      this.id,
+      this.hoTen,
+      this.donVi,
+      this.chucVu,
+      this.idChucVu,
+      this.idDonVi,
+      this.tenTaiKhoan,
+      this.sdt,
+      this.ngaySinh,
+      this.gioiTinh,
+      this.email,
+      this.pathAnhDaiDien,
+      this.pathChuKy,
+      this.user,
+      this.anhDaiDien,
+      this.anhChuKy,});
+
+  factory NguoiTheoDoiResponse.fromJson(
+      Map<String, dynamic> json,
+      ) =>
+      _$NguoiTheoDoiResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NguoiTheoDoiResponseToJson(this);
+  NguoiTheoDoi toModel()=>NguoiTheoDoi(
+      id:id,
+      hoTen:hoTen,
+      donVi:donVi,
+      chucVu:chucVu,
+      idChucVu:idChucVu,
+      idDonVi:idDonVi,
+      tenTaiKhoan:tenTaiKhoan,
+      sdt:sdt,
+      ngaySinh:ngaySinh,
+      gioiTinh:gioiTinh,
+      email:email,
+      pathAnhDaiDien:pathAnhDaiDien,
+      pathChuKy:pathChuKy,
+      user:user,
+      anhDaiDien:anhDaiDien,
+      anhChuKy:anhChuKy,
+  );
+
+}
+
+@JsonSerializable()
+class DonViTrongHeThongsResponse {
+  @JsonKey(name: 'TrangThaiBanHanh')
+  int? trangThaiBanHanh;
+  @JsonKey(name: 'IsPhaiGuiBanGiay')
+  bool? isPhaiGuiBanGiay;
+  @JsonKey(name: 'IsTrangThaiLienThong')
+  bool? isTrangThaiLienThong;
+  @JsonKey(name: 'IdDonViCanBo')
+  String? idDonViCanBo;
+  @JsonKey(name: 'IsDonVi')
+  bool? isDonVi;
+  @JsonKey(name: 'ThuTu')
+  int? thuTu;
+  @JsonKey(name: 'Ten')
+  String? ten;
+
+
+  DonViTrongHeThongsResponse({
+      this.trangThaiBanHanh,
+      this.isPhaiGuiBanGiay,
+      this.isTrangThaiLienThong,
+      this.idDonViCanBo,
+      this.isDonVi,
+      this.thuTu,
+      this.ten,});
+
+  factory DonViTrongHeThongsResponse.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$DonViTrongHeThongsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DonViTrongHeThongsResponseToJson(this);
+  DonViTrongHeThongs toModel()=>DonViTrongHeThongs(
+    trangThaiBanHanh:trangThaiBanHanh,
+    isPhaiGuiBanGiay:isPhaiGuiBanGiay,
+    isTrangThaiLienThong:isTrangThaiLienThong,
+    idDonViCanBo:idDonViCanBo,
+    isDonVi:isDonVi,
+    thuTu:thuTu,
+    ten:ten,
+
+  );
+}
+
+@JsonSerializable()
+class DonViNgoaiHeThongsResponse {
+  @JsonKey(name: 'TrangThaiBanHanh')
+  int? trangThaiBanHanh;
+  @JsonKey(name: 'IsPhaiGuiBanGiay')
+  bool? isPhaiGuiBanGiay;
+  @JsonKey(name: 'IsTrangThaiLienThong')
+  bool? isTrangThaiLienThong;
+  @JsonKey(name: 'IdDonViCanBo')
+  String? idDonViCanBo;
+  @JsonKey(name: 'IsDonVi')
+  bool? isDonVi;
+  @JsonKey(name: 'ThuTu')
+  int? thuTu;
+  @JsonKey(name: 'Ten')
+  String? ten;
+
+  DonViNgoaiHeThongsResponse({
+    this.trangThaiBanHanh,
+    this.isPhaiGuiBanGiay,
+    this.isTrangThaiLienThong,
+    this.idDonViCanBo,
+    this.isDonVi,
+    this.thuTu,
+    this.ten,
+  });
+
+  factory DonViNgoaiHeThongsResponse.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$DonViNgoaiHeThongsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DonViNgoaiHeThongsResponseToJson(this);
+  DonViNgoaiHeThongs toModel()=>DonViNgoaiHeThongs(
+    trangThaiBanHanh:trangThaiBanHanh,
+    isPhaiGuiBanGiay:isPhaiGuiBanGiay,
+    isTrangThaiLienThong:isTrangThaiLienThong,
+    idDonViCanBo:idDonViCanBo,
+    isDonVi:isDonVi,
+    thuTu:thuTu,
+    ten:ten,
+
+  );
 }

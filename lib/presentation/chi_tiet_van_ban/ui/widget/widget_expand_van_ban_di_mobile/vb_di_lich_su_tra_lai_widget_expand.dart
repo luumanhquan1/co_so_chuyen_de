@@ -8,10 +8,10 @@ import 'package:ccvc_mobile/widgets/select_only_expands/expand_only_widget.dart'
 import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/material.dart';
 
-class LichSuTraLaiExpandWidget extends StatelessWidget {
+class VBDiLichSuTraLaiExpandWidget extends StatelessWidget {
   final DetailDocumentCubit cubit;
 
-  const LichSuTraLaiExpandWidget({Key? key, required this.cubit})
+  const VBDiLichSuTraLaiExpandWidget({Key? key, required this.cubit})
       : super(key: key);
 
   @override

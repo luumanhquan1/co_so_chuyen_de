@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_van_ban_thanh_giong_noi/bloc/chuyen_van_ban_thanh_giong_noi_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/chuyen_van_ban_thanh_giong_noi/ui/mobile/chuyen_van_ban_thanh_giong_noi_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -21,6 +22,8 @@ class ChuyenVanBanThanhGiongNoiTablet extends StatefulWidget {
 
 class _ChuyenVanBanThanhGiongNoiTabletState
     extends State<ChuyenVanBanThanhGiongNoiTablet> {
+  ChuyenVanBanThanhGiongNoiCubit cubit = ChuyenVanBanThanhGiongNoiCubit();
+  TextEditingController textEditingController = TextEditingController();
   late FlutterTts flutterTts;
   String? language;
   String? engine;
@@ -162,7 +165,10 @@ class _ChuyenVanBanThanhGiongNoiTabletState
                   background: labelColor.withOpacity(0.1),
                   textColor: labelColor,
                   isIcon: true,
-                  onTap: () {},
+                  onTap: () {
+                    cubit.readFile(textEditingController);
+                    _newVoiceText = textEditingController.text;
+                  },
                 )
               ],
             ),
@@ -184,6 +190,7 @@ class _ChuyenVanBanThanhGiongNoiTabletState
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: TextField(
+                  controller: textEditingController,
                   onChanged: (String value) {
                     _onChange(value);
                   },
