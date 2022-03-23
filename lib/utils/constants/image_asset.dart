@@ -277,6 +277,7 @@ class ImageAssets {
   static const String ic_ganCHo_toi = '$baseImg/ic_ganCHo_toi.svg';
   static const String ic_CV_xoa = '$baseImg/ic_CV_xoa.svg';
   static const String ic_nhomCVMoi = '$baseImg/ic_nhomCVMoi.svg';
+  static const String ic_box_serach = '$baseImg/search_box.svg';
 
 
 
