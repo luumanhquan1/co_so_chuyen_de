@@ -86,7 +86,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                 cubit.index.sink.add(0);
                               });
                             },
-                            TheoDangDanhSach: () {
+                            theoDangDanhSach: () {
                               setState(() {
                                 cubit.chooseTypeList(
                                   Type_Choose_Option_List.DANG_LIST,
