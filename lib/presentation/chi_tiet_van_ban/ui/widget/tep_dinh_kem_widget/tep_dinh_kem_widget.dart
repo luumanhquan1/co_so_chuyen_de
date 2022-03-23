@@ -35,7 +35,7 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                 Expanded(
                   flex: 4,
                   child: Text(
-                    'Phiếu trình',
+                    S.current.phieu_trinh,
                     style: textNormal(
                       infoColor,
                       14.0.textScale(),
@@ -66,7 +66,7 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                 Expanded(
                   flex: 4,
                   child: Text(
-                    'Dự thảo',
+                    S.current.du_thao,
                     style: textNormal(
                       infoColor,
                       14.0.textScale(),
@@ -95,7 +95,7 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: Text(
-                'Văn bản ban hành kèm theo dự thảo',
+                S.current.van_ban_ban_hanh_kem_theo_du_an,
                 style: titleText(
                   color: textDefault,
                   fontSize: 14.0.textScale(),
@@ -120,9 +120,15 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     },
                   );
                 } else {
-                  return const SizedBox(
-                    height: 200,
-                    child: NodataWidget(),
+                  return SizedBox(
+                    height: 50,
+                    child: Text(
+                      S.current.khong_co_tep_nao,
+                      style: titleText(
+                        color: textBodyTime,
+                        fontSize: 14.0.textScale(),
+                      ),
+                    ),
                   );
                 }
               },
@@ -130,7 +136,7 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: Text(
-                'Văn bản liên thông (không ban hành cùng)',
+                S.current.van_ban_lien_thong_khong_ban_hanh_cung,
                 style: titleText(
                   color: textDefault,
                   fontSize: 14.0.textScale(),
@@ -155,9 +161,15 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     },
                   );
                 } else {
-                  return const SizedBox(
-                    height: 200,
-                    child: NodataWidget(),
+                  return SizedBox(
+                    height: 50,
+                    child: Text(
+                      S.current.khong_co_tep_nao,
+                      style: titleText(
+                        color: textBodyTime,
+                        fontSize: 14.0.textScale(),
+                      ),
+                    ),
                   );
                 }
               },

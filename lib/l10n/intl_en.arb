@@ -741,7 +741,7 @@
   "gan_cho_toi": "Gán cho tôi",
   "da_bi_xoa": "Đã bị xóa",
   "nhom_cong_viec_moi": "Nhóm công việc mới",
-  "nhap_don_vi" : "Nhập đơn vị",
+  "nhap_don_vi": "Nhập đơn vị",
   "ghi_tru": "Ghi trú",
   "sua_danh_ba_ca_nhan": "Sửa thông tin danh bạ cá nhân",
   "bai_theo_doi": "Bài theo dõi",
@@ -771,7 +771,10 @@
   "ky_duyet": "Ký duyệt",
   "kiem_tra_the_thuc": "Kiểm tra thể thức",
   "cap_so_ban_hanh": "Cấp số ban hành",
-  "tep_dinh_kem": "Tệp đính kèm"
-
-
+  "tep_dinh_kem": "Tệp đính kèm",
+  "phieu_trinh": "Phiếu trình",
+  "du_thao": "Dự thảo",
+  "van_ban_ban_hanh_kem_theo_du_an": "Văn bản ban hành kèm theo dự thảo",
+  "van_ban_lien_thong_khong_ban_hanh_cung": "Văn bản liên thông (không ban hành cùng)",
+  "khong_co_tep_nao" : "Không có tệp nào"
 }
