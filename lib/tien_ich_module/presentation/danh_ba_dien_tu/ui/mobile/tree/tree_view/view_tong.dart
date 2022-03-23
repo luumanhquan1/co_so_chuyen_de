@@ -1,9 +1,10 @@
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/bloc/danh_ba_cubit_tree.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/tree_danh_ba.dart';
 import 'package:flutter/material.dart';
 
 class ViewTongWidget extends StatefulWidget {
-  final Function() onChange;
+  final Function(TreeDonViDanhBA obj) onChange;
 
   const ViewTongWidget({
     Key? key,

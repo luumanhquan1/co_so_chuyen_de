@@ -766,7 +766,7 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
       showContent();
       return;
     }
-    showLoading();
+    // showLoading();
     final result = await homeRep.getYKienNguoidan(
       100000,
       1,
