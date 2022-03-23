@@ -766,7 +766,15 @@
   "ky_van_ban": "Ký văn bản",
   "ky_duyet": "Ký duyệt",
   "kiem_tra_the_thuc": "Kiểm tra thể thức",
-  "cap_so_ban_hanh": "Cấp số ban hành"
+  "cap_so_ban_hanh": "Cấp số ban hành",
+  "nd_ky_duyet": "ND ký duyệt",
+  "trinh_ky": "Trình ký",
+  "lich_su_ky_duyet": "Lịch sử ký duyệt",
+  "can_bo": "Cán bộ",
+  "nd_huy_duyet": "ND hủy duyệt",
+  "lich_su_cap_nhat": "Lịch sử cập nhật",
+  "dv": "ĐV"
+
 }
 
 

@@ -3,6 +3,11 @@ import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_den_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_cap_nhat_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_huy_duyet_van_ban_di.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_ky_duyet_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_tra_lai_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
@@ -45,4 +50,19 @@ mixin QLVBRepository {
 
   Future<Result<DataDanhSachYKienXuLy>> getDataDanhSachYKien(
       String vanBanId);
+
+  Future<Result<DataLichSuThuHoiVanBanDi>> getLichSuThuHoiVanBanDi(
+      String id, String vanBanId);
+
+  Future<Result<DataLichSuTraLaiVanBanDi>> getLichSuTraLaiVanBanDi(
+      String id, String vanBanId);
+
+  Future<Result<DataLichSuKyDuyetVanBanDi>> getLichSuKyDuyetVanBanDi(
+      String id, String vanBanId);
+
+  Future<Result<DataLichSuHuyDuyetVanBanDi>> getLichSuHuyDuyetVanBanDi(
+      String id, String vanBanId);
+
+  Future<Result<DataLichSuCapNhatVanBanDi>> getLichSuCapNhatVanBanDi(
+      String id, String vanBanId);
 }
