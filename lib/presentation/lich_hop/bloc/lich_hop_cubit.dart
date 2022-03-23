@@ -15,10 +15,15 @@ import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
+import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
+import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -40,6 +45,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+  String titleAppbar = '';
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
       BehaviorSubject.seeded([true, false, false]);
 
@@ -61,8 +67,12 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   Stream<TypeCalendarMenu> get changeItemMenuStream =>
       changeItemMenuSubject.stream;
+  BehaviorSubject<DateTime> moveTimeSubject = BehaviorSubject();
+  BehaviorSubject<stateLDM> getStateLDM =
+      BehaviorSubject.seeded(stateLDM.ChoXacNhan);
 
   HopRepository get hopRepo => Get.find();
+  BehaviorSubject<List<MenuModel>> menuModelSubject = BehaviorSubject();
 
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
@@ -90,9 +100,46 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
 
+  void changeScreenMenu(TypeCalendarMenu typeMenu) {
+    changeItemMenuSubject.add(typeMenu);
+  }
+
+  Future<void> menuCalendar() async {
+    final result = await hopRepo.getDataMenu(
+      startDate.formatApi,
+      endDate.formatApi,
+    );
+
+    result.when(
+      success: (value) {
+        listLanhDaoLichHop.clear();
+        value.forEach((element) {
+          listLanhDaoLichHop.add(
+            ItemThongBaoModelMyCalender(
+              icon: '',
+              typeMenu: TypeCalendarMenu.LichTheoLanhDao,
+              type: TypeContainer.number,
+              name: element.tenDonVi ?? '',
+              index: element.count,
+              onTap: (BuildContext context, LichHopCubit cubit) {
+                changeItemMenuSubject.add(TypeCalendarMenu.LichTheoLanhDao);
+                titleAppbar = element.tenDonVi ?? '';
+                Navigator.pop(context);
+              },
+            ),
+          );
+        });
+        menuModelSubject.add(value);
+      },
+      error: (error) {},
+    );
+  }
+
   Future<void> postEventsCalendar({
     TypeCalendarMenu typeCalendar = TypeCalendarMenu.LichCuaToi,
   }) async {
+    showLoading();
+
     final result = await hopRepo.postEventCalendar(
       EventCalendarRequest(
         DateFrom: startDate.formatApi,
@@ -118,6 +165,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       },
       error: (error) {},
     );
+    showContent();
   }
 
   void getDataCalendar(
@@ -139,12 +187,12 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
-
   void initData() {
     page = 1;
     getDashboard();
     postDanhSachLichHop();
     postEventsCalendar();
+    menuCalendar();
   }
 
   Future<void> getDashboard() async {
@@ -194,6 +242,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     page = 1;
     postDanhSachLichHop();
     getDashboard();
+    menuCalendar();
     postEventsCalendar();
   }
 
@@ -206,6 +255,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     page = 1;
     postDanhSachLichHop();
     getDashboard();
+    menuCalendar();
     postEventsCalendar();
   }
 
@@ -216,6 +266,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     page = 1;
     postDanhSachLichHop();
     getDashboard();
+    menuCalendar();
     postEventsCalendar();
   }
 

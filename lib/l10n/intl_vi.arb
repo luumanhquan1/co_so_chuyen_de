@@ -765,7 +765,10 @@
   "van_ban_di_ban_hanh": "Văn bản đi ban hành",
   "van_ban_di_noi_bo": "Văn bản đi nội bộ",
   "lich_hop_can_klch": "Lịch họp cần KLCH",
-  "lich_da_klch": "Lịch đã KLCH"
+  "lich_da_klch": "Lịch đã KLCH",
+  "lich_hop_huy" : "Lịch họp huỷ",
+  "lich_hop_tao_ho" : "Lịch họp tạo hộ",
+  "lich_hop_thu_hoi" : "Lịch họp thu hồi"
 }
 
 

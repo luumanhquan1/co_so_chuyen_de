@@ -39,6 +39,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/menu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
@@ -217,4 +218,9 @@ abstract class HopServices {
     @Query('statusId') int statusId,
     @Query('isMulti') bool isMulti,
   );
+  @GET(ApiConstants.MENU_LICH_HOP)
+  Future<MenuResponse> getMenuLichHop(
+      @Query('DateStart') String DateStart,
+      @Query('DateTo') String DateTo,
+      );
 }
