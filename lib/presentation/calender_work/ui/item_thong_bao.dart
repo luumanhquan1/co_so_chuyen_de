@@ -5,7 +5,6 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -27,24 +26,6 @@ class ItemThongBaoModel {
     required this.onTap,
     this.index,
     this.name,
-    this.listWidget,
-  });
-}
-
-class ItemThongBaoModelMyCalender {
-  String icon;
-  TypeCalendarMenu typeMenu;
-  TypeContainer type;
-  int? index;
-  List<ItemThongBaoModelMyCalender>? listWidget;
-  Function(BuildContext context, LichHopCubit cubit) onTap;
-
-  ItemThongBaoModelMyCalender({
-    required this.icon,
-    required this.typeMenu,
-    required this.type,
-    required this.onTap,
-    this.index,
     this.listWidget,
   });
 }
@@ -73,30 +54,6 @@ List<ItemThongBaoModel> listThongBao = [
     type: TypeContainer.expand,
     listWidget: listLanhDao,
     onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-];
-
-List<ItemThongBaoModelMyCalender> listThongBaoMyCalendar = [
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icPerson,
-    typeMenu: TypeCalendarMenu.LichCuaToi,
-    type: TypeContainer.expand,
-    listWidget: listLichHopCuaToi,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icLichTheoTrangThai,
-    typeMenu: TypeCalendarMenu.LichHopLanhDao,
-    type: TypeContainer.expand,
-    listWidget: listLichHopCuaToi,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icLichLanhDao,
-    typeMenu: TypeCalendarMenu.BaoCaoThongKe,
-    type: TypeContainer.expand,
-    listWidget: listBaoCaoThongKeMyCalender,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
 ];
 
@@ -178,51 +135,6 @@ List<ItemThongBaoModel> listTheoTrangThai = [
   ),
 ];
 
-List<ItemThongBaoModelMyCalender> listLichHopCuaToi = [
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichDuocMoi,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichTaoHo,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichHuy,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichThuHoi,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichDaCoBaoCao,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LichChuaCoBaoCao,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-];
-
 List<ItemThongBaoModel> listLanhDao = [
   ItemThongBaoModel(
     icon: '',
@@ -282,43 +194,6 @@ List<ItemThongBaoModel> listLanhDao = [
   ),
 ];
 
-List<ItemThongBaoModel> listBaoCaoThongKe = [
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.ThongKeLichHop,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.DanhSachLichHop,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-];
-
-List<ItemThongBaoModelMyCalender> listBaoCaoThongKeMyCalender = [
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.ThongKeLichHop,
-    type: TypeContainer.number,
-    index: 0,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.DanhSachLichHop,
-    type: TypeContainer.number,
-    index: 0,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.DanhSachLichHop);
-      Navigator.pop(context);
-    },
-  ),
-];
-
 enum TypeCalendarMenu {
   LichCuaToi,
   LichTheoTrangThai,
@@ -329,6 +204,9 @@ enum TypeCalendarMenu {
   LichThuHoi,
   LichDaCoBaoCao,
   LichChuaCoBaoCao,
+  ChoDuyet,
+  LichHopCanKLCH,
+  LichDaKLCH,
   LanhDaoUBNDTinh,
   VanPhongUBNDTinh,
   SoKeHoachDauVaDauTu,
@@ -338,8 +216,6 @@ enum TypeCalendarMenu {
   SoTaiChinh,
   LichHopLanhDao,
   BaoCaoThongKe,
-  ThongKeLichHop,
-  DanhSachLichHop
 }
 
 extension GetScreenMenu on TypeCalendarMenu {
@@ -359,6 +235,10 @@ extension GetScreenMenu on TypeCalendarMenu {
         return data.soLichChuaCoBaoCao ?? 0;
       case TypeCalendarMenu.LichDuocMoi:
         return data.tongLichDuocMoi ?? 0;
+      case TypeCalendarMenu.LichHopCanKLCH:
+        return data.soLichChuaCoBaoCao ?? 0;
+      case TypeCalendarMenu.LichDaKLCH:
+        return data.tongSoLichCoBaoCao ?? 0;
       default:
         return 0;
     }
@@ -419,11 +299,11 @@ extension GetScreenMenu on TypeCalendarMenu {
       case TypeCalendarMenu.BaoCaoThongKe:
         return S.current.bao_cao_thong_ke;
 
-      case TypeCalendarMenu.ThongKeLichHop:
-        return 'Thống kê lịch họp';
+      case TypeCalendarMenu.LichDaKLCH:
+        return S.current.lich_da_klch;
 
-      case TypeCalendarMenu.DanhSachLichHop:
-        return 'Danh sách lịch họp';
+      case TypeCalendarMenu.LichHopCanKLCH:
+        return S.current.lich_hop_can_klch;
 
       default:
         return S.current.lich_cua_toi;

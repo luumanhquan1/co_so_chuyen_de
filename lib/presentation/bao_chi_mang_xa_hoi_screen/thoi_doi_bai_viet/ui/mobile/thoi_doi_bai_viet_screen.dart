@@ -11,13 +11,15 @@ import 'package:flutter/material.dart';
 
 class TheoDoiBaiVietScreen extends StatefulWidget {
   final int topic;
-  const TheoDoiBaiVietScreen({Key? key,required this.topic}) : super(key: key);
+
+  const TheoDoiBaiVietScreen({Key? key, required this.topic}) : super(key: key);
 
   @override
   _TheoDoiBaiVietScreenState createState() => _TheoDoiBaiVietScreenState();
 }
 
 class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
+  final ScrollController _scrollController = ScrollController();
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
 
@@ -25,8 +27,24 @@ class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        if (theoDoiBaiVietCubit.pageIndex <= theoDoiBaiVietCubit.totalPage) {
+          theoDoiBaiVietCubit.pageIndex +=1;
+          theoDoiBaiVietCubit.getListBaiVietTheoDoi(
+            theoDoiBaiVietCubit.endDate,
+            theoDoiBaiVietCubit.startDate,
+            widget.topic,
+          );
+        }
+      }
+    });
     theoDoiBaiVietCubit.getListBaiVietTheoDoi(
-      theoDoiBaiVietCubit.endDate, theoDoiBaiVietCubit.startDate, widget.topic,);
+      theoDoiBaiVietCubit.endDate,
+      theoDoiBaiVietCubit.startDate,
+      widget.topic,
+    );
   }
 
   @override
@@ -74,8 +92,9 @@ class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
                   stream: theoDoiBaiVietCubit.listBaiVietTheoDoi,
                   builder: (context, snapshot) {
                     final data = snapshot.data?.listBaiViet ?? [];
-                    if(data.isNotEmpty){
+                    if (data.isNotEmpty) {
                       return ListView.builder(
+                        controller: _scrollController,
                         shrinkWrap: true,
                         itemCount: 10,
                         itemBuilder: (context, index) {
@@ -84,10 +103,8 @@ class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
                           );
                         },
                       );
-                    }
-                    else{
-                      return const
-                      SizedBox();
+                    } else {
+                      return const SizedBox();
                     }
                   },
                 ),

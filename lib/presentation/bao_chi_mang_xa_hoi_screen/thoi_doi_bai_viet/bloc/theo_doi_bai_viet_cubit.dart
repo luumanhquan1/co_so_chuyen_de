@@ -16,6 +16,9 @@ class TheoDoiBaiVietCubit extends BaseCubit<TheoDoiState> {
   Stream<TheoDoiBaiVietModel> get listBaiVietTheoDoi =>
       _listBaiVietTheoDoi.stream;
 
+  int pageIndex=1;
+  int totalPage=1;
+
   final String startDate = DateTime.now().formatApiSS;
   final String endDate = DateTime(
           DateTime.now().year,
@@ -35,14 +38,15 @@ class TheoDoiBaiVietCubit extends BaseCubit<TheoDoiState> {
   ) async {
     showLoading();
     final result = await _BCMXHRepo.getBaiVietTheoDoi(
-      1,
-      50,
+      pageIndex,
+      10,
       startDate,
       enDate,
       topic,
     );
     result.when(
       success: (res) {
+        totalPage=res.totalPages;
         _listBaiVietTheoDoi.sink.add(res);
       },
       error: (err) {
