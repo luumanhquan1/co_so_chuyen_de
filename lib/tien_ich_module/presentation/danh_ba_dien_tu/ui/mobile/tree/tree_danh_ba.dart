@@ -105,6 +105,7 @@ class _DanhBaScreenState extends State<DanhBaWidget> {
                                 ),
                                 color: Colors.white,
                                 child: ListView(
+                                  shrinkWrap: true,
                                   children: [
                                     SizedBox(
                                       height:
