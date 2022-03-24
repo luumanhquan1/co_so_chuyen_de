@@ -9,14 +9,14 @@ import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class BanTinItem extends StatefulWidget {
+class BanTinItemTablet extends StatefulWidget {
   final String title;
   final String description;
   final Function() clickPLay;
   final Function() clickXemThem;
   final List<TinTucRadioModel>listTinTuc;
 
-  const BanTinItem({
+  const BanTinItemTablet({
     Key? key,
     required this.listTinTuc,
     required this.clickXemThem,
@@ -26,10 +26,10 @@ class BanTinItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BanTinItemState createState() => _BanTinItemState();
+  _BanTinItemTabletState createState() => _BanTinItemTabletState();
 }
 
-class _BanTinItemState extends State<BanTinItem> {
+class _BanTinItemTabletState extends State<BanTinItemTablet> {
   @override
   Widget build(BuildContext context) {
     return Column(
