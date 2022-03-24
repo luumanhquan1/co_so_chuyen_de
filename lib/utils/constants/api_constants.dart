@@ -147,6 +147,9 @@ class ApiConstants {
   static const LICH_SU_HUY_DUYET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-huy-duyet';
   static const LICH_SU_CAP_NHAT_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-cap-nhat';
   static const SEARCH_TIN_TUC = '/api/NewsNetViews/search_news?';
+  static const DASH_BOARD_TINH_HINH_XU_LY = '/pakn/api/IocApi/thong-ke-tinh-hinh-xu-ly-pakn';
+  static const DASH_BOARD_PHAN_LOAI = '/pakn/api/IocApi/thong-ke-tinh-hinh-theo-nguon';
+  static const THONG_TIN_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/thong-ke-pakn-theo-trang-thai';
 
 }
 
