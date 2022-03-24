@@ -32,6 +32,9 @@ extension DateFormatString on DateTime {
     final dateString = 'Tháng ${DateFormat('M').format(this)} - ${DateFormat('yyyy').format(this)}';
     return dateString;
   }
+  String get formatApiLichSu {
+    return DateFormat('dd/MM/yyyy | HH:mm:ss').format(this);
+  }
 
   String get formatDayCalendar {
     final dateString =
