@@ -124,13 +124,7 @@ class ChiTietVanBanDiModel {
       DocumentDetailRow(
           S.current.ky_hieu, kyHieuVanBanGoc ?? '', TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          S.current.ngay_han_xl, ngayBanHanh ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          S.current.nguoi_theo_doi_van_ban, '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          S.current.do_khan, doKhan ?? '', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          S.current.trich_yeu, subject ?? '', TypeDocumentDetailRow.text),
+          S.current.ngay_han_xl, dueDate??'', TypeDocumentDetailRow.text),
     ];
 
     return list;
@@ -139,9 +133,9 @@ class ChiTietVanBanDiModel {
   List<DocumentDetailRow> toListRowBottom() {
     final List<DocumentDetailRow> list = [
       DocumentDetailRow(
-          S.current.dv_trong_he_thong, '', TypeDocumentDetailRow.text),
+          S.current.do_khan, doKhan ?? '', TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          S.current.dv_ngoai_he_thong, '', TypeDocumentDetailRow.text),
+          S.current.trich_yeu, subject ?? '', TypeDocumentDetailRow.text),
     ];
 
     return list;
@@ -197,21 +191,23 @@ class NguoiKyDuyetModel {
     this.thuTu,
     this.idUser,
   });
+
   List<DocumentDetailRow> toListRowKyDuyet() {
     final List<DocumentDetailRow> list = [
       DocumentDetailRow(
-          S.current.ho_va_ten, tenNguoiKy??'', TypeDocumentDetailRow.text),
+          S.current.ho_va_ten, tenNguoiKy ?? '', TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          S.current.don_vi, donViNguoiKy??'', TypeDocumentDetailRow.text),
+          S.current.don_vi, donViNguoiKy ?? '', TypeDocumentDetailRow.text),
       DocumentDetailRow(
-          S.current.vai_tro, vaiTro??'', TypeDocumentDetailRow.text),
-      DocumentDetailRow(
-          S.current.ban_hanh,vanBanBanhanh(loaiBanHanh??0), TypeDocumentDetailRow.text),
+          S.current.vai_tro, vaiTro ?? '', TypeDocumentDetailRow.text),
+      DocumentDetailRow(S.current.ban_hanh, vanBanBanhanh(loaiBanHanh ?? 0),
+          TypeDocumentDetailRow.text),
     ];
     return list;
   }
+
   String vanBanBanhanh(int number) {
-    switch(number){
+    switch (number) {
       case 0:
         return S.current.soan_thao;
       case 1:
@@ -220,11 +216,10 @@ class NguoiKyDuyetModel {
         return S.current.ky_van_ban;
       case 3:
         return S.current.kiem_tra_the_thuc;
-        case 4:
+      case 4:
         return S.current.cap_so_ban_hanh;
     }
     return '';
-
   }
 }
 
@@ -350,27 +345,28 @@ class DanhSachChoYKien {
   bool? isNguoiDangNhapCoTheTraLoi;
 
   DanhSachChoYKien({
-      this.id,
-      this.chucVu,
-      this.user,
-      this.tenCanBo,
-      this.idCanBo,
-      this.idCanBoXinYKien,
-      this.tenDonVi,
-      this.idDonVi,
-      this.idParrent,
-      this.noiDung,
-      this.ngayTao,
-      this.issuer,
-      this.signerInfos,
-      this.serialNumber,
-      this.anhDaiDien,
-      this.anhDaiDienCommon,
-      this.danhSachFiles,
-      this.isXinYKien,
-      this.isCanXoa,
-      this.isCanSuaXinYKien,
-      this.isNguoiDangNhapCoTheTraLoi,});
+    this.id,
+    this.chucVu,
+    this.user,
+    this.tenCanBo,
+    this.idCanBo,
+    this.idCanBoXinYKien,
+    this.tenDonVi,
+    this.idDonVi,
+    this.idParrent,
+    this.noiDung,
+    this.ngayTao,
+    this.issuer,
+    this.signerInfos,
+    this.serialNumber,
+    this.anhDaiDien,
+    this.anhDaiDienCommon,
+    this.danhSachFiles,
+    this.isXinYKien,
+    this.isCanXoa,
+    this.isCanSuaXinYKien,
+    this.isNguoiDangNhapCoTheTraLoi,
+  });
 }
 
 class DanhSachFiles {

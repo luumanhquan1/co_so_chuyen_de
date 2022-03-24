@@ -139,6 +139,9 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                   child: ShowDropDownButton(
                     onChanged: (value) {
                       baseChooseTimeCubit.changeOption = value;
+                      baseChooseTimeCubit.checkToOption(
+                        baseChooseTimeCubit.changeOption,
+                      );
                     },
                     chooseTimeCubit: ChooseTimeCubit(),
                   ),

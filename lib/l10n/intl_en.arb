@@ -777,6 +777,12 @@
   "ky_duyet": "Ký duyệt",
   "kiem_tra_the_thuc": "Kiểm tra thể thức",
   "cap_so_ban_hanh": "Cấp số ban hành",
+  "tep_dinh_kem": "Tệp đính kèm",
+  "phieu_trinh": "Phiếu trình",
+  "du_thao": "Dự thảo",
+  "van_ban_ban_hanh_kem_theo_du_an": "Văn bản ban hành kèm theo dự thảo",
+  "van_ban_lien_thong_khong_ban_hanh_cung": "Văn bản liên thông (không ban hành cùng)",
+  "khong_co_tep_nao" : "Không có tệp nào",
   "nd_ky_duyet": "ND ký duyệt",
   "trinh_ky": "Trình ký",
   "lich_su_ky_duyet": "Lịch sử ký duyệt",
@@ -789,5 +795,13 @@
   "lich_da_klch" : "Lịch đã KLCH",
   "lich_hop_huy" : "Lịch họp huỷ",
   "lich_hop_tao_ho" : "Lịch họp tạo hộ",
-  "lich_hop_thu_hoi" : "Lịch họp thu hồi"
+  "lich_hop_thu_hoi" : "Lịch họp thu hồi",
+  "tra_lai" : "Trả lại",
+  "cap_so" : "Cấp sổ",
+  "thu_hoi_van_ban_di_da_ban_hanh" : "Thu hồi văn bản đi đã ban hành",
+  "huy_trinh_ky" : "Hủy trình ký",
+  "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
+  "khoi_tao_van_ban" : "Khởi tạo văn bản",
+  "cap_nhat_van_ban" : "Cập nhật văn bản"
+
 }
