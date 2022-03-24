@@ -202,7 +202,7 @@ class CellTepDinhKem extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Text(
-                'Tệp đính kèm',
+                S.current.tep_dinh_kem,
                 style: textNormal(
                   textTitle,
                   14.0.textScale(),
