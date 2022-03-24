@@ -143,6 +143,13 @@ class ApiConstants {
   static const MENU_BCMXH = '/api/NewsNetViews/menu-items?';
   static const Tin_TUC_THOI_SU = '/api/NewsNetViews/tin_tuc_thoi_su?';
   static const BAI_VIET_THEO_DOI = '/api/NewsNetViews/get_bai_viet_theo_doi?';
+  static const LICH_SU_THU_HOI_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-thu-hoi';
+  static const LICH_SU_TRA_LAI_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-tra-lai';
+  static const LICH_SU_KY_DUYET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-luong-xu-ly';
+  static const LICH_SU_HUY_DUYET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-huy-duyet';
+  static const LICH_SU_CAP_NHAT_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}/xem-lich-su-cap-nhat';
+  static const SEARCH_TIN_TUC = '/api/NewsNetViews/search_news?';
+
 }
 
 class ImageConstants {

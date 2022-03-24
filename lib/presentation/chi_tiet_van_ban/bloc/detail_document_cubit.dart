@@ -7,6 +7,11 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_mo
 import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/detail_document.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/history_detail_document.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_cap_nhat_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_huy_duyet_van_ban_di.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_ky_duyet_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_tra_lai_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
@@ -91,6 +96,27 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       BehaviorSubject();
   ChiTietVanBanDiModel chiTietVanBanDiModel = ChiTietVanBanDiModel();
 
+  //nguoi ky duyet vb di
+  BehaviorSubject<List<NguoiKyDuyetModel>> nguoiKyDuyetVanBanDiSubject =
+  BehaviorSubject();
+
+  //lich su thu hoi vb di
+  BehaviorSubject<List<LichSuThuHoiVanBanDi>> lichSuThuHoiVanBanDiSubject =
+      BehaviorSubject();
+  //lich su cap nhat vb di
+  BehaviorSubject<List<LichSuCapNhatVanBanDi>> lichSuCapNhatVanBanDiSubject =
+  BehaviorSubject();
+
+  //lich su tra lai vb di
+  BehaviorSubject<List<LichSuTraLaiVanBanDi>> lichSuTraLaiVanBanDiSubject =
+      BehaviorSubject();
+  //lich su ky duyet vb di
+  BehaviorSubject<List<LichSuKyDuyetVanBanDi>> lichSuKyDuyetVanBanDiSubject =
+  BehaviorSubject();
+  //lich su huy duyet vb di
+  BehaviorSubject<List<LichSuHuyDuyetVanBanDi>> lichSuHuyDuyetVanBanDiSubject =
+  BehaviorSubject();
+
   //chi tiet van ban den
   BehaviorSubject<ChiTietVanBanDenModel> chiTietVanBanDenSubject =
       BehaviorSubject();
@@ -105,7 +131,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     required String processId,
     required String taskId,
   }) async {
-    final queue = Queue(parallel: 1);
+    final queue = Queue(parallel: 7);
     unawaited(queue.add(() => getChiTietVanBanDen(processId, taskId)));
     unawaited(queue.add(() => getThongTinGuiNhan(processId)));
     unawaited(queue.add(() => getLichSuVanBanLichSuCapNhat(processId,CAP_NHAT_TINH_HINH_THUC_HIEN)));
@@ -118,6 +144,21 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     showContent();
     queue.dispose();
   }
+  Future<void> loadDataVanBanDi({
+    required String processId,
+    required String taskId,
+  }) async {
+    final queue = Queue(parallel: 5);
+    unawaited(queue.add(() => getChiTietVanBanDi(processId)));
+    unawaited(queue.add(() => getLichSuThuHoiVanBanDi(processId,taskId)));
+    unawaited(queue.add(() => getLichSuTraLaiVanBanDi(processId,taskId)));
+    unawaited(queue.add(() => getLichSuKyDuyetVanBanDi(processId,taskId)));
+    unawaited(queue.add(() => getLichSuHuyDuyetVanBanDi(processId,taskId)));
+    unawaited(queue.add(() => getLichSuCapNhatVanBanDi(processId,taskId)));
+    await queue.onComplete;
+    showContent();
+    queue.dispose();
+  }
 
   Future<void> getChiTietVanBanDi(String id) async {
     final result = await _QLVBRepo.getDataChiTietVanBanDi(id);
@@ -125,6 +166,73 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       success: (res) {
         chiTietVanBanDiModel = res;
         chiTietVanBanDiSubject.sink.add(chiTietVanBanDiModel);
+        nguoiKyDuyetVanBanDiSubject.sink.add(res.nguoiKyDuyetResponses??[]);
+      },
+      error: (error) {},
+    );
+  }
+  Future<void> getLichSuThuHoiVanBanDi(
+      String id,
+      String taskId,
+      ) async {
+    final result =
+    await _QLVBRepo.getLichSuThuHoiVanBanDi(id, taskId);
+    result.when(
+      success: (res) {
+        lichSuThuHoiVanBanDiSubject.add(res.data??[]);
+      },
+      error: (error) {},
+    );
+  }
+
+  Future<void> getLichSuTraLaiVanBanDi(
+      String id,
+      String taskId,
+      ) async {
+    final result =
+    await _QLVBRepo.getLichSuTraLaiVanBanDi(id, taskId);
+    result.when(
+      success: (res) {
+        lichSuTraLaiVanBanDiSubject.add(res.data??[]);
+      },
+      error: (error) {},
+    );
+  }
+  Future<void> getLichSuKyDuyetVanBanDi(
+      String id,
+      String taskId,
+      ) async {
+    final result =
+    await _QLVBRepo.getLichSuKyDuyetVanBanDi(id, taskId);
+    result.when(
+      success: (res) {
+        lichSuKyDuyetVanBanDiSubject.add(res.data??[]);
+      },
+      error: (error) {},
+    );
+  }
+  Future<void> getLichSuHuyDuyetVanBanDi(
+      String id,
+      String taskId,
+      ) async {
+    final result =
+    await _QLVBRepo.getLichSuHuyDuyetVanBanDi(id, taskId);
+    result.when(
+      success: (res) {
+        lichSuHuyDuyetVanBanDiSubject.add(res.data??[]);
+      },
+      error: (error) {},
+    );
+  }
+  Future<void> getLichSuCapNhatVanBanDi(
+      String id,
+      String taskId,
+      ) async {
+    final result =
+    await _QLVBRepo.getLichSuCapNhatVanBanDi(id, taskId);
+    result.when(
+      success: (res) {
+        lichSuCapNhatVanBanDiSubject.add(res.data??[]);
       },
       error: (error) {},
     );

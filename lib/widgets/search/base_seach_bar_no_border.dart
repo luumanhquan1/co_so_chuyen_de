@@ -44,9 +44,9 @@ class BaseSearchBarNoBorder extends StatelessWidget {
       onChanged: (searchText) {
         onChange != null ? onChange!(searchText) : null;
       },
-      onSubmitted: (searchText) {
-        onSubmit != null ? onSubmit!(searchText) : null;
-      },
+      // onSubmitted: (searchText) {
+      //   onSubmit != null ? onSubmit!(searchText) : null;
+      // },
     );
   }
 }

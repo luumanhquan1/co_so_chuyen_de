@@ -2,10 +2,12 @@ import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/sua_danh_sach_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/them_danh_ba_ca_nhan_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_dien_tu_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_to_chuc_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/them_danh_ba_ca_nhan_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/xoa_danh_ba_reponse.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/danh_ba_dien_tu_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_ba_dien_tu.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_ba_to_chuc_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/them_moi_danh_ba_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/xoa_danh_ba_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/danh_ba_dien_tu_repository.dart';
@@ -72,6 +74,24 @@ class DanhBaDienTuImpl implements DanhBaDienTuRepository {
               keyword,
             ), (response) {
       return response.data?.toDomain() ?? DanhBaDienTuModel();
+    });
+  }
+
+  @override
+  Future<Result<DataDanhBaToChuc>> getListDanhBaToChuc(
+    int pageIndex,
+    int pageSize,
+    String filterBy,
+    String idDonVi,
+  ) {
+    return runCatchingAsync<DanhBaToChucResponse, DataDanhBaToChuc>(
+        () => danhBaDienTuService.getListDanhBaToChuc(
+              pageIndex,
+              pageSize,
+              filterBy,
+              idDonVi,
+            ), (response) {
+      return response.data?.toDomain() ?? DataDanhBaToChuc();
     });
   }
 }
