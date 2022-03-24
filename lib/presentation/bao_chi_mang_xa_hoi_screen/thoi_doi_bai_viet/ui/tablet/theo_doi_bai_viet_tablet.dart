@@ -53,7 +53,7 @@ class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> {
       body: StateStreamLayout(
         textEmpty: S.current.khong_co_du_lieu,
         retry: () {},
-        error: AppException('1', ''),
+        error: AppException('', S.current.something_went_wrong),
         stream: theoDoiBaiVietCubit.stateStream,
         child: Container(
           color:bgManagerColor,
