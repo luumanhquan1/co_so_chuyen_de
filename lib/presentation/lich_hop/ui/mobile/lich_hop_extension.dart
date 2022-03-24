@@ -52,19 +52,25 @@ extension type_Choose_Option_List on Type_Choose_Option_List {
 }
 
 extension lichHopOptionDayCubit on Type_Choose_Option_Day {
-  Widget getLichHopStateDangList({required LichHopCubit cubit}) {
+  Widget getLichHopStateDangList({
+    required LichHopCubit cubit,
+    required Type_Choose_Option_Day type,
+  }) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
         return LichHopTheoDanhSachNgay(
           cubit: cubit,
+          type: type,
         );
       case Type_Choose_Option_Day.WEEK:
         return LichHopTheoDanhSachNgay(
           cubit: cubit,
+          type: type,
         );
       case Type_Choose_Option_Day.MONTH:
         return LichHopTheoDanhSachNgay(
           cubit: cubit,
+          type: type,
         );
       default:
         return SizedBox();
@@ -150,31 +156,55 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
 
       case Type_Choose_Option_Day.WEEK:
         return StreamBuilder<DateTime>(
-            stream: cubit.moveTimeSubject.stream,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? cubit.selectDay;
-              return Text(
-                data.startEndWeek,
-                style: textNormalCustom(
-                  color: textColor,
-                  fontSize: 14.0.textScale(),
-                  fontWeight: FontWeight.w500,
-                ),
-              );
-            },);
+          stream: cubit.moveTimeSubject.stream,
+          builder: (context, snapshot) {
+            final data = snapshot.data ?? cubit.selectDay;
+            return Text(
+              data.startEndWeek,
+              style: textNormalCustom(
+                color: textColor,
+                fontSize: 14.0.textScale(),
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
+        );
 
       case Type_Choose_Option_Day.MONTH:
+        return StreamBuilder<DateTime>(
+          stream: cubit.moveTimeSubject.stream,
+          builder: (context, snapshot) {
+            final data = snapshot.data ?? cubit.selectDay;
+            final dateTimeFormRange =
+                data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+
+            final dataString =
+                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+            return Text(
+              dataString,
+              style: textNormalCustom(
+                color: textColor,
+                fontSize: 14.0.textScale(),
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
+        );
+    }
+  }
+
+  Widget getTextLHWidget({
+    required LichHopCubit cubit,
+    Color textColor = textDefault,
+  }) {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
         return StreamBuilder<DateTime>(
             stream: cubit.moveTimeSubject.stream,
             builder: (context, snapshot) {
               final data = snapshot.data ?? cubit.selectDay;
-              final dateTimeFormRange =
-                  data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
-
-              final dataString =
-                  '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
               return Text(
-                dataString,
+                data.formatDayCalendar,
                 style: textNormalCustom(
                   color: textColor,
                   fontSize: 14.0.textScale(),
@@ -182,6 +212,43 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
                 ),
               );
             });
+
+      case Type_Choose_Option_Day.WEEK:
+        return StreamBuilder<DateTime>(
+          stream: cubit.moveTimeSubject.stream,
+          builder: (context, snapshot) {
+            final data = snapshot.data ?? cubit.selectDay;
+            return Text(
+              data.startEndWeek,
+              style: textNormalCustom(
+                color: textColor,
+                fontSize: 14.0.textScale(),
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
+        );
+
+      case Type_Choose_Option_Day.MONTH:
+        return StreamBuilder<DateTime>(
+          stream: cubit.moveTimeSubject.stream,
+          builder: (context, snapshot) {
+            final data = snapshot.data ?? cubit.selectDay;
+            final dateTimeFormRange =
+                data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+
+            final dataString =
+                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+            return Text(
+              dataString,
+              style: textNormalCustom(
+                color: textColor,
+                fontSize: 14.0.textScale(),
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
+        );
     }
   }
 
@@ -241,9 +308,15 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
 }
 
 extension lichHopCubit on LichHopState {
-  Widget lichHop({required LichHopCubit cubit}) {
+  Widget lichHop({
+    required LichHopCubit cubit,
+    required Type_Choose_Option_Day type,
+  }) {
     if (this is LichHopStateDangList) {
-      return type.getLichHopStateDangList(cubit: cubit);
+      return type.getLichHopStateDangList(
+        cubit: cubit,
+        type: type,
+      );
     } else if (this is LichHopStateDangLich) {
       return type.getLichHopStateDangLich(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
@@ -267,14 +340,29 @@ extension lichHopCubit on LichHopState {
 }
 
 extension lichHopOptionDayCubitTablet on Type_Choose_Option_Day {
-  Widget getLichHopStateDangListTablet(LichHopCubit cubit) {
+  Widget getLichHopStateDangListTablet(
+    LichHopCubit cubit,
+    Type_Choose_Option_Day type,
+  ) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
-        return LichHopTheoDanhSachNgayTablet(cubit: cubit);
+        return LichHopTheoDanhSachNgayTablet(
+          cubit: cubit,
+          isHindText: false,
+          type: type,
+        );
       case Type_Choose_Option_Day.WEEK:
-        return LichHopTheoDanhSachNgayTablet(cubit: cubit);
+        return LichHopTheoDanhSachNgayTablet(
+          cubit: cubit,
+          isHindText: false,
+          type: type,
+        );
       case Type_Choose_Option_Day.MONTH:
-        return LichHopTheoDanhSachNgayTablet(cubit: cubit);
+        return LichHopTheoDanhSachNgayTablet(
+          cubit: cubit,
+          isHindText: false,
+          type: type,
+        );
       default:
         return const SizedBox();
     }
@@ -314,9 +402,12 @@ extension lichHopOptionDayCubitTablet on Type_Choose_Option_Day {
 }
 
 extension lichHopCubitTablet on LichHopState {
-  Widget lichHopTablet(LichHopCubit cubit) {
+  Widget lichHopTablet(
+    LichHopCubit cubit,
+    Type_Choose_Option_Day type,
+  ) {
     if (this is LichHopStateDangList) {
-      return type.getLichHopStateDangListTablet(cubit);
+      return type.getLichHopStateDangListTablet(cubit, type);
     } else if (this is LichHopStateDangLich) {
       return type.getLichHopStateDangLichTablet(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {

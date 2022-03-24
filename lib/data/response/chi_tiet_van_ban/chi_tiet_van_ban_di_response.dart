@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/string_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -191,7 +192,9 @@ class ChiTietVanBanDiResponse {
         processTypeId: processTypeId,
         fileNotation: fileNotation,
         subject: subject?.parseHtml(),
-        dueDate: dueDate,
+        dueDate: dueDate == null
+            ? ''
+            : DateTime.parse(dueDate ?? '').toStringWithListFormat,
         ngayTao: ngayTao,
         ngayBanHanh: ngayBanHanh,
         loaiNguonDuLieu: loaiNguonDuLieu,
@@ -605,7 +608,7 @@ class DanhSachChoYKienResponse {
         tenDonVi: tenDonVi,
         idDonVi: idDonVi,
         idParrent: idParrent,
-        noiDung: noiDung,
+        noiDung: noiDung?.parseHtml(),
         ngayTao: ngayTao,
         issuer: issuer,
         signerInfos: signerInfos,

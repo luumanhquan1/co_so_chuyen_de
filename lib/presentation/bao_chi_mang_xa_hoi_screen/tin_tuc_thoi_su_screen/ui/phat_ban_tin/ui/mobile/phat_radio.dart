@@ -9,7 +9,6 @@ class PlayRadio extends StatefulWidget {
   final AudioPlayer player;
   final List<String> listLinkRadio;
   final int initPlay;
-
   const PlayRadio({
     Key? key,
     required this.player,

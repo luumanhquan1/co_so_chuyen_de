@@ -5,6 +5,7 @@ class DrawerSlide {
   static void navigatorSlide({
     required BuildContext context,
     required Widget screen,
+    required Function(dynamic value) thenValue,
     bool isLeft = true,
   }) {
     Navigator.push(
@@ -23,7 +24,7 @@ class DrawerSlide {
           final tween = Tween(end: end, begin: begin);
           final offsetAnimation = animation.drive(tween);
 
-          if(isLeft) {
+          if (isLeft) {
             return Stack(
               children: [
                 Row(
@@ -83,6 +84,8 @@ class DrawerSlide {
         },
         opaque: false,
       ),
-    );
+    ).then((value) async {
+      thenValue(value);
+    });
   }
 }

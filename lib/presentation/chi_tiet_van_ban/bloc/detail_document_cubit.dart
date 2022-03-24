@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/handing_comment.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_den_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
@@ -14,6 +13,7 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ba
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_tra_lai_van_ban_di_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
+import 'package:ccvc_mobile/domain/model/document/tep_dinh_kem_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
 import 'package:get/get.dart';
@@ -48,7 +48,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
 
   //lich su cap nhat xu ly
   BehaviorSubject<List<LichSuVanBanModel>> lichSuCapNhatXuLySubject =
-  BehaviorSubject();
+      BehaviorSubject();
 
   Stream<List<LichSuVanBanModel>> get lichSuCapNhatXuLyStream =>
       lichSuCapNhatXuLySubject.stream;
@@ -62,22 +62,25 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
 
   //lich su thu hoi
   BehaviorSubject<List<LichSuVanBanModel>> lichSuThuHoiSubject =
-  BehaviorSubject();
+      BehaviorSubject();
 
   Stream<List<LichSuVanBanModel>> get lichSuThuHoiStream =>
       lichSuThuHoiSubject.stream;
+
   //lich su van ban lien thong
   BehaviorSubject<List<LichSuVanBanModel>> lichSuVanBanLienThongSubject =
-  BehaviorSubject();
+      BehaviorSubject();
 
   Stream<List<LichSuVanBanModel>> get lichSuVanBanLienThongStream =>
       lichSuVanBanLienThongSubject.stream;
+
   //danh sach y kien xu ly
   BehaviorSubject<List<DanhSachYKienXuLy>> danhSachYKienXuLySubject =
-  BehaviorSubject();
+      BehaviorSubject();
 
   Stream<List<DanhSachYKienXuLy>> get danhSachYKienXuLyStream =>
       danhSachYKienXuLySubject.stream;
+
   // DanhSachYKienXuLy inforYkienXuLy=DanhSachYKienXuLy.empty();
 
   final BehaviorSubject<HistoryProcessPage> _subjectJobPriliesProcess =
@@ -98,7 +101,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
 
   //nguoi ky duyet vb di
   BehaviorSubject<List<NguoiKyDuyetModel>> nguoiKyDuyetVanBanDiSubject =
-  BehaviorSubject();
+      BehaviorSubject();
 
   //lich su thu hoi vb di
   BehaviorSubject<List<LichSuThuHoiVanBanDi>> lichSuThuHoiVanBanDiSubject =
@@ -134,10 +137,12 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     final queue = Queue(parallel: 7);
     unawaited(queue.add(() => getChiTietVanBanDen(processId, taskId)));
     unawaited(queue.add(() => getThongTinGuiNhan(processId)));
-    unawaited(queue.add(() => getLichSuVanBanLichSuCapNhat(processId,CAP_NHAT_TINH_HINH_THUC_HIEN)));
-    unawaited(queue.add(() => getLichSuVanBanLichSuTraLai(processId,TRA_LAI)));
-    unawaited(queue.add(() => getLichSuVanBanLichSuThuHoi(processId,THU_HOI)));
-    unawaited(queue.add(() => getLichSuVanBanLichSuLienThong(processId,LIEN_THONG)));
+    unawaited(queue.add(() =>
+        getLichSuVanBanLichSuCapNhat(processId, CAP_NHAT_TINH_HINH_THUC_HIEN)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuTraLai(processId, TRA_LAI)));
+    unawaited(queue.add(() => getLichSuVanBanLichSuThuHoi(processId, THU_HOI)));
+    unawaited(
+        queue.add(() => getLichSuVanBanLichSuLienThong(processId, LIEN_THONG)));
     unawaited(queue.add(() => getDanhSachYKienXuLy(processId)));
 
     await queue.onComplete;
@@ -166,7 +171,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       success: (res) {
         chiTietVanBanDiModel = res;
         chiTietVanBanDiSubject.sink.add(chiTietVanBanDiModel);
-        nguoiKyDuyetVanBanDiSubject.sink.add(res.nguoiKyDuyetResponses??[]);
+        nguoiKyDuyetVanBanDiSubject.sink.add(res.nguoiKyDuyetResponses ?? []);
       },
       error: (error) {},
     );
@@ -268,7 +273,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
     result.when(
       success: (res) {
-        lichSuCapNhatXuLySubject.add(res.data??[]);
+        lichSuCapNhatXuLySubject.add(res.data ?? []);
       },
       error: (error) {},
     );
@@ -279,7 +284,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
     result.when(
       success: (res) {
-        lichSuTraLaiSubject.add(res.data??[]);
+        lichSuTraLaiSubject.add(res.data ?? []);
       },
       error: (error) {},
     );
@@ -290,7 +295,7 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
     result.when(
       success: (res) {
-        lichSuThuHoiSubject.add(res.data??[]);
+        lichSuThuHoiSubject.add(res.data ?? []);
       },
       error: (error) {},
     );
@@ -301,19 +306,19 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     final result = await _QLVBRepo.getDataLichSuVanBanDen(processId, type);
     result.when(
       success: (res) {
-        lichSuVanBanLienThongSubject.add(res.data??[]);
+        lichSuVanBanLienThongSubject.add(res.data ?? []);
       },
       error: (error) {},
     );
   }
-  
-  Future<void>getDanhSachYKienXuLy(String vanBanId)async{
-    final result= await _QLVBRepo.getDataDanhSachYKien(vanBanId);
-    result.when(success: (res){
-      danhSachYKienXuLySubject.add(res.data??[]);
-    }, error: (error){
-      
-    });
+
+  Future<void> getDanhSachYKienXuLy(String vanBanId) async {
+    final result = await _QLVBRepo.getDataDanhSachYKien(vanBanId);
+    result.when(
+        success: (res) {
+          danhSachYKienXuLySubject.add(res.data ?? []);
+        },
+        error: (error) {});
   }
 
   DetailDocumentModel detailDocumentModel = DetailDocumentModel(
@@ -336,8 +341,6 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
       soKyHieu: 'M123',
       soTrang: 56,
       vanBanQlPL: true);
-
-
 
   List<String> listIdFile = [];
   List<String> listIdFileReComment = [];
@@ -367,6 +370,16 @@ class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
     //   }
     // });
   }
+
+  /// y kien xu ly
+  String phieuTrinh = '';
+
+  String duThao = '';
+  BehaviorSubject<TepDinhKemModel> dinhKemSubject = BehaviorSubject();
+
+  BehaviorSubject<List<String>> vanBanBanHanh = BehaviorSubject();
+
+  BehaviorSubject<List<String>> vanBanLienThong = BehaviorSubject();
 
   void dispose() {}
 }

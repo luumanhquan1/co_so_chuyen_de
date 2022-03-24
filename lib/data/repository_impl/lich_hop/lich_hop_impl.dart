@@ -37,6 +37,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_lam_viec/menu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
@@ -61,6 +62,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -405,6 +407,15 @@ class HopRepositoryImpl implements HopRepository {
     return runCatchingAsync<XoaBaoCaoKetQuaResponse, MessageModel>(
       () => _hopServices.huyChiTietLichHop(scheduleId, statusId, isMulti),
       (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<List<MenuModel>>> getDataMenu(
+      String startTime, String endTime,) {
+    return runCatchingAsync<MenuResponse, List<MenuModel>>(
+      () => _hopServices.getMenuLichHop(startTime, endTime),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
     );
   }
 }
