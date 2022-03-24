@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/tep_dinh_kem_widget/tep_dinh_kem_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_thu_hoi_widget_expand_tablet.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_tablet/lich_su_tra_lai_widget_expand_tablet.dart';
@@ -15,7 +16,8 @@ import 'package:flutter/material.dart';
 
 class ChiTietVanBanTablet extends StatefulWidget {
   final String id;
-  const ChiTietVanBanTablet({Key? key,this.id = ''}) : super(key: key);
+
+  const ChiTietVanBanTablet({Key? key, this.id = ''}) : super(key: key);
 
   @override
   _ChiTietVanBanTabletState createState() => _ChiTietVanBanTabletState();
@@ -23,6 +25,12 @@ class ChiTietVanBanTablet extends StatefulWidget {
 
 class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
   DetailDocumentCubit cubit = DetailDocumentCubit();
+
+  @override
+  void initState() {
+    cubit.loadDataVanBanDi(processId: widget.id, taskId: widget.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +71,10 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10),
+                                  child: TepDinhKemMobile(cubit: cubit),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
                                   child: ThongTinGuiNhanWidgetExpandTablet(
                                     cubit: cubit,
                                     thongTinGuiNhanModel: [],
@@ -80,14 +92,14 @@ class _ChiTietVanBanTabletState extends State<ChiTietVanBanTablet> {
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuTraLaiWidgetExpandTablet(
                                     cubit: cubit,
-                                   lichSuVanBanTraLaiModel: [],
+                                    lichSuVanBanTraLaiModel: [],
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: LichSuThuHoiWidgetExpandTablet(
                                     cubit: cubit,
-                                   lichSuVanBanThuHoiModel: [],
+                                    lichSuVanBanThuHoiModel: [],
                                   ),
                                 ),
                                 Padding(

@@ -84,7 +84,7 @@ class ImageAssets {
   static const String icSinhNhat = '$baseImg/ic_sinh_nhat.svg';
   static const String icThemDonVi = '$baseImg/ic_them_don_vi.svg';
   static const String icMore = '$baseImg/ic_more.svg';
-  static const String icEdit = '$baseImg/ic_edits.svg';
+  static const String icEdit = '$baseImg/ic_edit.svg';
   static const String icStarUnfocus = '$baseImg/ic_start_unfocus.svg';
   static const String icStarFocus = '$baseImg/ic_start_focus.svg';
   static const String icTag = '$baseImg/ic_tag.svg';

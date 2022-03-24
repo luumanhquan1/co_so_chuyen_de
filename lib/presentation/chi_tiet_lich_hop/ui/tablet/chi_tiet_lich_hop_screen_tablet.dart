@@ -122,7 +122,7 @@ class _DetailMeetCalenderTabletState extends State<DetailMeetCalenderTablet> {
                   showDiaLogTablet(
                     context,
                     maxHeight: 280,
-                    title: S.current.phan_cong_thu_ky,
+                    title: S.current.thu_hoi_lich,
                     child: const ThuHoiLichWidget(),
                     isBottomShow: false,
                     funcBtnOk: () {

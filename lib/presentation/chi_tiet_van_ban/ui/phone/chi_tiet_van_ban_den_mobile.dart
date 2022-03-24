@@ -3,7 +3,6 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/tep_dinh_kem_widget/tep_dinh_kem_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_cap_nhat_tinh_hinh_xu_ly_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_thu_hoi_widget_expand_mobile.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_den_mobile/lich_su_tra_lai_widget_expand_mobile.dart';
@@ -74,7 +73,6 @@ class _ChiTietVanBanDenMobileState extends State<ChiTietVanBanDenMobile> {
                     ),
                     child: WidgetHeadChiTietVanBanDenMobile(cubit: cubit),
                   ),
-                  TepDinhKemMobile(cubit: cubit),
                   StreamBuilder<List<ThongTinGuiNhanModel>>(
                     stream: cubit.thongTinGuiNhanStream,
                     builder: (context, snapshot) {

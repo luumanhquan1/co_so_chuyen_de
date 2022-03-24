@@ -25,7 +25,6 @@ class _TextFormFieldWidgetState extends State<DangKyPhatBieuWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = DetailMeetCalendarInherited.of(context).cubit;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +47,7 @@ class _TextFormFieldWidgetState extends State<DangKyPhatBieuWidget> {
           children: [
             InputInfoUserWidget(
               isObligatory: true,
-              title: S.current.noi_dung_phat_bieu,
+              title: S.current.thoi_gian_phat_bieu,
               child: const SizedBox(),
             ),
             Row(
@@ -76,7 +75,7 @@ class _TextFormFieldWidgetState extends State<DangKyPhatBieuWidget> {
           child: BlockTextView(
             formKey: formKeyNoiDung,
             contentController: noiDungController,
-            title: S.current.ten_bieu_quyet,
+            title: S.current.noi_dung_phat_bieu,
           ),
         ),
         const SizedBox(
