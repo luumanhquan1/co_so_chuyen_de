@@ -124,9 +124,9 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     height: 50,
                     child: Text(
                       S.current.khong_co_tep_nao,
-                      style: titleText(
-                        color: textBodyTime,
-                        fontSize: 14.0.textScale(),
+                      style: textNormal(
+                        textBodyTime,
+                        14.0.textScale(),
                       ),
                     ),
                   );
@@ -165,9 +165,9 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     height: 50,
                     child: Text(
                       S.current.khong_co_tep_nao,
-                      style: titleText(
-                        color: textBodyTime,
-                        fontSize: 14.0.textScale(),
+                      style: textNormal(
+                        textBodyTime,
+                        14.0.textScale(),
                       ),
                     ),
                   );
