@@ -788,7 +788,14 @@
   "dv": "ĐV",
   "UBND_tinh_dong_nai": "UBND tỉnh đồng nai",
   "lich_hop_can_klch": "Lịch họp cần KLCH",
-  "lich_da_klch": "Lịch đã KLCH"
+  "lich_da_klch": "Lịch đã KLCH",
+  "tra_lai" : "Trả lại",
+  "cap_so" : "Cấp sổ",
+  "thu_hoi_van_ban_di_da_ban_hanh" : "Thu hồi văn bản đi đã ban hành",
+  "huy_trinh_ky" : "Hủy trình ký",
+  "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
+  "khoi_tao_van_ban" : "Khởi tạo văn bản",
+  "cap_nhat_van_ban" : "Cập nhật văn bản"
 }
 
 
