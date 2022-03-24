@@ -218,43 +218,6 @@ class WidgetHeadChiTietVanBanDiTablet extends StatelessWidget {
                       .toList(),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //       horizontal: 16.0, vertical: 10.0),
-              //   child: GridView.count(
-              //     physics: const NeverScrollableScrollPhysics(),
-              //     shrinkWrap: true,
-              //     crossAxisCount: 2,
-              //     childAspectRatio: 5,
-              //     children: snapshot.data!
-              //         .toListCheckBox()
-              //         .map(
-              //           (row) => Row(
-              //         // mainAxisSize: MainAxisSize.min,
-              //         children: [
-              //           SizedBox(
-              //             height: 20,
-              //             width: 41,
-              //             child: CustomCheckBox(
-              //               title: '',
-              //               isCheck: row.value,
-              //               onChange: (bool check) {},
-              //             ),
-              //           ),
-              //           AutoSizeText(
-              //             row.title,
-              //             style: textNormalCustom(
-              //               color: titleItemEdit,
-              //               fontSize: 14.0,
-              //               fontWeight: FontWeight.w400,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     )
-              //         .toList(),
-              //   ),
-              // )
             ],
           );
         } else {
