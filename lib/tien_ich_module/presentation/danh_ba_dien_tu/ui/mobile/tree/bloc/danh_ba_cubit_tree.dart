@@ -46,10 +46,8 @@ class DanhBaCubitTree {
   BehaviorSubject<String> idDonVi = BehaviorSubject();
 
   void getValueTree({required String donVi, required String id}) {
-    if (idDonVi.value != id) {
-      tenDonVi.sink.add(donVi);
-      idDonVi.sink.add(id);
-    }
+    tenDonVi.sink.add(donVi);
+    idDonVi.sink.add(id);
   }
 
   bool checkDad(

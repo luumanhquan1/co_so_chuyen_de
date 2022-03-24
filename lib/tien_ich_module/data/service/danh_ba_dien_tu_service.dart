@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/tien_ich_module/data/request/sua_danh_sach_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/them_danh_ba_ca_nhan_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_dien_tu_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/danh_ba_to_chuc_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/them_danh_ba_ca_nhan_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/xoa_danh_ba_reponse.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/api_constants.dart';
@@ -39,5 +40,13 @@ abstract class DanhBaDienTuService {
     @Query('pageIndex') int pageIndex,
     @Query('pageSize') int pageSize,
     @Query('keyword') String keyword,
+  );
+
+  @GET(ApiConstants.GET_LIST_DANH_BA_TO_CHUC)
+  Future<DanhBaToChucResponse> getListDanhBaToChuc(
+    @Query('pageIndex') int pageIndex,
+    @Query('pagesize') int pageSize,
+    @Query('FilterBy') String filterBy,
+    @Query('ID_DonVi') String idDonVi,
   );
 }
