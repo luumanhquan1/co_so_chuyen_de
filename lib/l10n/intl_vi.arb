@@ -795,7 +795,10 @@
   "huy_trinh_ky" : "Hủy trình ký",
   "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
   "khoi_tao_van_ban" : "Khởi tạo văn bản",
-  "cap_nhat_van_ban" : "Cập nhật văn bản"
+  "cap_nhat_van_ban" : "Cập nhật văn bản",
+  "lich_hop_huy" : "Lịch họp huỷ",
+  "lich_hop_tao_ho" : "Lịch họp tạo hộ",
+  "lich_hop_thu_hoi" : "Lịch họp thu hồi"
 }
 
 

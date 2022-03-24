@@ -81,7 +81,7 @@ class _DanhSachCongViecTienIchMobileState
                   cubit: cubit,
                   theoDangLich: () {},
                   TheoDangDanhSach: () {},
-                ),
+                ), thenValue: (value) {  },
               );
             },
             icon: SvgPicture.asset(ImageAssets.icMenuCalender),

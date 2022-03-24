@@ -52,6 +52,7 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
                     screen: KetNoiMenu(
                       cubit: cubit,
                     ),
+                    thenValue: (value) {},
                   );
                 },
                 icon: SvgPicture.asset(

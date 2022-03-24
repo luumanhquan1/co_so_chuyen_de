@@ -65,8 +65,7 @@ class ApiConstants {
       '/vpdt/api/meetingsection/get-list-phien-hop';
   static const EVENT_CALENDAR_LICH_HOP =
       '/vpdt/api/MeetingSchedule/calendar-day-of-month';
-  static const EVENT_CALENDAR_LICH_LV =
-      '/vpdt/api/Schedules/Ngay-co-lich';
+  static const EVENT_CALENDAR_LICH_LV = '/vpdt/api/Schedules/Ngay-co-lich';
   static const CHUONG_TRINH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
   static const CHI_TIET_VAN_BAN_DI = '/qlvb/api/van-ban-di/{id}?';
@@ -90,10 +89,12 @@ class ApiConstants {
   static const REPORT_STATUS_LIST = '/vpdt/api/ReportStatus/list';
   static const DELETE_DETAIL_CELENDER_MEET = '/vpdt/api/MeetingSchedule?';
 
-  static const CANCEL_DETAIL_CELENDER_MEET = '/vpdt/api/MeetingSchedule/cancel?';
+  static const CANCEL_DETAIL_CELENDER_MEET =
+      '/vpdt/api/MeetingSchedule/cancel?';
+  static const MENU_LICH_HOP = '/vpdt/api/MeetingSchedule/count-lich-hop-don-vi';
 
   static const STATUS_LIST_KET_LUAN_HOP = '/vpdt/api/ReportStatus/list?';
-  static const MENU_LICH_LV = '/vpdt/api/Schedules/count-lich-don-vi';
+  static const MENU_LICH_LV = '/vpdt/api/MeetingSchedule/count-lich-hop-don-vi';
 
   static const String POST_FILE_TAO_LICH_HOP =
       '/vpdt/api/Files/add-file-with-meeting';
@@ -136,7 +137,8 @@ class ApiConstants {
   static const XEM_KET_LUAN_HOP = '/vpdt/api/ScheduleReport/xem-ket-luan?';
   static const LICH_SU_VAN_BAN_DEN = '/qlvb/api/vanban/lich-su-by-type';
   static const LIST_PERMISSION = '/api/auth/list-permission';
-  static const GET_DANH_SACH_Y_KIEN = '/qlvb/api/qlvb/van-ban-den/y-kien-xu-ly/danh-sach-y-kien';
+  static const GET_DANH_SACH_Y_KIEN =
+      '/qlvb/api/qlvb/van-ban-den/y-kien-xu-ly/danh-sach-y-kien';
   static const BAO_CAO_THONG_KE = '/api/NewsNetViews/dashboard_statistical';
   static const MENU_BCMXH = '/api/NewsNetViews/menu-items?';
   static const Tin_TUC_THOI_SU = '/api/NewsNetViews/tin_tuc_thoi_su?';

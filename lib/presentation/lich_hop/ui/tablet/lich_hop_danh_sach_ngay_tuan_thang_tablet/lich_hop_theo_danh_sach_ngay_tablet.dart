@@ -1,17 +1,24 @@
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/tablet/chi_tiet_lich_hop_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 
 class LichHopTheoDanhSachNgayTablet extends StatefulWidget {
   final LichHopCubit cubit;
+  bool isHindText = false;
+  final Type_Choose_Option_Day type;
 
-  const LichHopTheoDanhSachNgayTablet({
+  LichHopTheoDanhSachNgayTablet({
     Key? key,
+    required this.isHindText,
     required this.cubit,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -39,11 +46,20 @@ class _LichHopTheoDanhSachNgayTabletState
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          StreamBuilder<DanhSachLichHopModel>(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(right: 30.0, left: 30.0),
+          child:
+              widget.cubit.changeItemMenuSubject.value.getHeaderTabletLichHop(
+            cubit: widget.cubit,
+            isHindText: widget.isHindText,
+            type: widget.type,
+          ),
+        ),
+        Expanded(
+          child: StreamBuilder<DanhSachLichHopModel>(
               stream: widget.cubit.danhSachLichHopStream,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? DanhSachLichHopModel.empty();
@@ -78,8 +94,8 @@ class _LichHopTheoDanhSachNgayTabletState
                   ),
                 );
               }),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

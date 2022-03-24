@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
@@ -9,6 +10,19 @@ enum stateLDM { ChoXacNhan, ThamGia, TuChoi }
 
 extension StateLDM on stateLDM {
   int getIndex(LichLamViecDashBroad model) {
+    switch (this) {
+      case stateLDM.ChoXacNhan:
+        return model.soLichChoXacNhan ?? 0;
+
+      case stateLDM.ThamGia:
+        return model.soLichThamGia ?? 0;
+
+      case stateLDM.TuChoi:
+        return model.soLichChuTriTuChoi ?? 0;
+    }
+  }
+
+  int getIndexLichHop(DashBoardLichHopModel model) {
     switch (this) {
       case stateLDM.ChoXacNhan:
         return model.soLichChoXacNhan ?? 0;
