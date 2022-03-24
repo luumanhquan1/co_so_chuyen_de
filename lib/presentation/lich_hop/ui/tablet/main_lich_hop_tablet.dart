@@ -106,7 +106,19 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                   },
                                 ),
                               ),
-                            );
+                            ).then((value) {
+                              final data = value as TypeCalendarMenu;
+                              cubit.changeScreenMenu(data);
+                              if (data == TypeCalendarMenu.LichTheoLanhDao) {}
+                              if (state.type == Type_Choose_Option_Day.DAY) {
+                                cubit.postDSLHDay();
+                              } else if (state.type ==
+                                  Type_Choose_Option_Day.WEEK) {
+                                cubit.postDSLHWeek();
+                              } else {
+                                cubit.postDSLHMonth();
+                              }
+                            });
                           },
                           icon: SvgPicture.asset(
                             ImageAssets.icMenuLichHopTablet,

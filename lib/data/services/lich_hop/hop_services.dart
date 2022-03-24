@@ -218,9 +218,10 @@ abstract class HopServices {
     @Query('statusId') int statusId,
     @Query('isMulti') bool isMulti,
   );
+
   @GET(ApiConstants.MENU_LICH_HOP)
   Future<MenuResponse> getMenuLichHop(
-      @Query('DateStart') String DateStart,
-      @Query('DateTo') String DateTo,
-      );
+    @Query('DateStart') String DateStart,
+    @Query('DateTo') String DateTo,
+  );
 }

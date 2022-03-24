@@ -135,64 +135,7 @@ List<ItemThongBaoModel> listTheoTrangThai = [
   ),
 ];
 
-List<ItemThongBaoModel> listLanhDao = [
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LanhDaoUBNDTinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.VanPhongUBNDTinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoKeHoachDauVaDauTu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoNoiVu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.PhongTaiChinhNoiChinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.PhongKinhTeNghanh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoTaiChinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-  ItemThongBaoModel(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoNoiVu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
-  ),
-];
+List<ItemThongBaoModel> listLanhDao = [];
 
 enum TypeCalendarMenu {
   LichCuaToi,
@@ -207,14 +150,6 @@ enum TypeCalendarMenu {
   ChoDuyet,
   LichHopCanKLCH,
   LichDaKLCH,
-  LanhDaoUBNDTinh,
-  VanPhongUBNDTinh,
-  SoKeHoachDauVaDauTu,
-  SoNoiVu,
-  PhongTaiChinhNoiChinh,
-  PhongKinhTeNghanh,
-  SoTaiChinh,
-  LichHopLanhDao,
   BaoCaoThongKe,
 }
 
@@ -271,30 +206,6 @@ extension GetScreenMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichDaCoBaoCao:
         return S.current.lich_da_co_bao_cao;
-
-      case TypeCalendarMenu.LanhDaoUBNDTinh:
-        return S.current.lanh_dao_ubnd_tinh;
-
-      case TypeCalendarMenu.VanPhongUBNDTinh:
-        return S.current.van_phong_ubnd_tinh;
-
-      case TypeCalendarMenu.SoKeHoachDauVaDauTu:
-        return S.current.so_ke_hoach_va_dau_tu;
-
-      case TypeCalendarMenu.SoNoiVu:
-        return S.current.so_noi_vu;
-
-      case TypeCalendarMenu.PhongTaiChinhNoiChinh:
-        return S.current.phong_tai_chinh_noi_chinh;
-
-      case TypeCalendarMenu.PhongKinhTeNghanh:
-        return S.current.phong_kinh_te_nghanh;
-
-      case TypeCalendarMenu.SoTaiChinh:
-        return S.current.so_tai_chinh;
-
-      case TypeCalendarMenu.LichHopLanhDao:
-        return S.current.lich_hop_lanh_dao;
 
       case TypeCalendarMenu.BaoCaoThongKe:
         return S.current.bao_cao_thong_ke;

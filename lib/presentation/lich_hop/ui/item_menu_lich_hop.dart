@@ -14,19 +14,17 @@ import 'package:flutter/widgets.dart';
 import 'mobile/lich_hop_extension.dart';
 
 class ItemThongBaoModelMyCalender {
-  String icon;
+  String idLanhDao;
   TypeCalendarMenu typeMenu;
   TypeContainer type;
   int? index;
   List<ItemThongBaoModelMyCalender>? listWidget;
-  Function(BuildContext context, LichHopCubit cubit) onTap;
   String name;
 
   ItemThongBaoModelMyCalender({
-    required this.icon,
     required this.typeMenu,
     required this.type,
-    required this.onTap,
+    this.idLanhDao = '',
     this.index,
     this.listWidget,
     this.name = '',
@@ -35,191 +33,80 @@ class ItemThongBaoModelMyCalender {
 
 List<ItemThongBaoModelMyCalender> listThongBaoMyCalendar = [
   ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icPerson,
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
     index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icLichTheoTrangThai,
     typeMenu: TypeCalendarMenu.LichTheoTrangThai,
     type: TypeContainer.expand,
     listWidget: listTheoTrangThaiLichHop,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
   ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icLichTheoTrangThai,
-    typeMenu: TypeCalendarMenu.LichHopLanhDao,
+    typeMenu: TypeCalendarMenu.LichTheoLanhDao,
     type: TypeContainer.expand,
     listWidget: listTheoTrangThaiLichHop,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-];
-
-List<ItemThongBaoModelMyCalender> listThongBaoMyCalendarTablet = [
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icPersonWork,
-    typeMenu: TypeCalendarMenu.LichCuaToi,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
-      Navigator.pop(context);
-    },
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icTheoDangLichCir,
-    typeMenu: TypeCalendarMenu.LichTheoTrangThai,
-    type: TypeContainer.expand,
-    listWidget: listTheoTrangThaiLichHop,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: ImageAssets.icLichLanhDaoCir,
-    typeMenu: TypeCalendarMenu.LichHopLanhDao,
-    type: TypeContainer.expand,
-    listWidget: listTheoTrangThaiLichHop,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
 ];
 
 List<ItemThongBaoModelMyCalender> listTheoTrangThaiLichHop = [
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichDuocMoi,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichDuocMoi);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichTaoHo,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichTaoHo);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichHuy,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichHuy);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichThuHoi,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichThuHoi);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.ChoDuyet,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.ChoDuyet);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichHopCanKLCH,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichHopCanKLCH);
-      Navigator.pop(context);
-    },
   ),
   ItemThongBaoModelMyCalender(
-    icon: '',
     typeMenu: TypeCalendarMenu.LichDaKLCH,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichDaKLCH);
-      Navigator.pop(context);
-    },
-  ),
-];
-
-List<ItemThongBaoModelMyCalender> listLanhDaoLichHop = [
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.LanhDaoUBNDTinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.VanPhongUBNDTinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoKeHoachDauVaDauTu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoNoiVu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.PhongTaiChinhNoiChinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.PhongKinhTeNghanh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoTaiChinh,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
-  ),
-  ItemThongBaoModelMyCalender(
-    icon: '',
-    typeMenu: TypeCalendarMenu.SoNoiVu,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, LichHopCubit cubit) {},
   ),
 ];
 
 extension GetDataMenu on TypeCalendarMenu {
+  String getIconMobile() {
+    switch (this) {
+      case TypeCalendarMenu.LichCuaToi:
+        return ImageAssets.icPerson;
+      case TypeCalendarMenu.LichTheoTrangThai:
+        return ImageAssets.icLichTheoTrangThai;
+      case TypeCalendarMenu.LichTheoLanhDao:
+        return ImageAssets.icLichLanhDao;
+      default:
+        return '';
+    }
+  }
+
+  String getIconTablet() {
+    switch (this) {
+      case TypeCalendarMenu.LichCuaToi:
+        return ImageAssets.icPersonWork;
+      case TypeCalendarMenu.LichTheoTrangThai:
+        return ImageAssets.icTheoDangLichCir;
+      case TypeCalendarMenu.LichTheoLanhDao:
+        return ImageAssets.icLichLanhDaoCir;
+      default:
+        return '';
+    }
+  }
+
   int getIndexMenuLichHop(DashBoardLichHopModel data) {
     switch (this) {
       case TypeCalendarMenu.LichCuaToi:
@@ -344,30 +231,6 @@ extension GetDataMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichDaCoBaoCao:
         return S.current.lich_da_co_bao_cao;
-
-      case TypeCalendarMenu.LanhDaoUBNDTinh:
-        return S.current.lanh_dao_ubnd_tinh;
-
-      case TypeCalendarMenu.VanPhongUBNDTinh:
-        return S.current.van_phong_ubnd_tinh;
-
-      case TypeCalendarMenu.SoKeHoachDauVaDauTu:
-        return S.current.so_ke_hoach_va_dau_tu;
-
-      case TypeCalendarMenu.SoNoiVu:
-        return S.current.so_noi_vu;
-
-      case TypeCalendarMenu.PhongTaiChinhNoiChinh:
-        return S.current.phong_tai_chinh_noi_chinh;
-
-      case TypeCalendarMenu.PhongKinhTeNghanh:
-        return S.current.phong_kinh_te_nghanh;
-
-      case TypeCalendarMenu.SoTaiChinh:
-        return S.current.so_tai_chinh;
-
-      case TypeCalendarMenu.LichHopLanhDao:
-        return S.current.lich_hop_lanh_dao;
 
       case TypeCalendarMenu.BaoCaoThongKe:
         return S.current.bao_cao_thong_ke;

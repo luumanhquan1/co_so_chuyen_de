@@ -120,7 +120,7 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                     .map(
                                       (e) => ContainerMenuWidget(
                                         name: e.typeMenu.getTitleLichHop(),
-                                        icon: e.icon,
+                                        icon: e.typeMenu.getIconMobile(),
                                         type: e.type,
                                         index: e.typeMenu.getIndexMenuLichHop(
                                           dataDashBoard,
@@ -132,7 +132,8 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                               ? listTheoTrangThaiLichHop
                                                   .map(
                                                     (e) => ContainerMenuWidget(
-                                                      icon: e.icon,
+                                                      icon: e.typeMenu
+                                                          .getIconMobile(),
                                                       name: e.typeMenu
                                                           .getTitleLichHop(),
                                                       index: e.typeMenu
@@ -141,25 +142,32 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                       ),
                                                       isIcon: false,
                                                       onTap: () {
-                                                        e.onTap(
+                                                        Navigator.pop(
                                                           context,
-                                                          widget.cubit,
+                                                          e.typeMenu,
                                                         );
                                                       },
                                                     ),
                                                   )
                                                   .toList()
-                                              : listLanhDaoLichHop
+                                              : widget.cubit.listLanhDaoLichHop
                                                   .map(
                                                     (e) => ContainerMenuWidget(
-                                                      icon: e.icon,
+                                                      icon: e.typeMenu
+                                                          .getIconMobile(),
                                                       name: e.name,
                                                       index: e.index ?? 0,
                                                       isIcon: false,
                                                       onTap: () {
-                                                        e.onTap(
+                                                        widget.cubit
+                                                                .titleAppbar =
+                                                            e.name;
+                                                        widget.cubit
+                                                                .idDonViLanhDao=
+                                                            e.idLanhDao;
+                                                        Navigator.pop(
                                                           context,
-                                                          widget.cubit,
+                                                          e.typeMenu,
                                                         );
                                                       },
                                                     ),
@@ -167,7 +175,13 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                   .toList(),
                                         ),
                                         onTap: () {
-                                          e.onTap(context, widget.cubit);
+                                          if (e.typeMenu ==
+                                              TypeCalendarMenu.LichCuaToi) {
+                                            Navigator.pop(
+                                              context,
+                                              e.typeMenu,
+                                            );
+                                          }
                                         },
                                       ),
                                     )
@@ -268,75 +282,89 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: StreamBuilder<DashBoardLichHopModel>(
-                        stream: widget.cubit.dashBoardStream,
-                        builder: (context, snapshot) {
-                          final dataDashBoard =
-                              snapshot.data ?? DashBoardLichHopModel.empty();
+                      stream: widget.cubit.dashBoardStream,
+                      builder: (context, snapshot) {
+                        final dataDashBoard =
+                            snapshot.data ?? DashBoardLichHopModel.empty();
 
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: listThongBaoMyCalendarTablet
-                                  .map(
-                                    (e) => ContainerMenuWidgetTablet(
-                                      name: e.typeMenu.getTitleLichHop(),
-                                      icon: e.icon,
-                                      type: e.type,
-                                      index: e.typeMenu.getIndexMenuLichHop(
-                                        dataDashBoard,
-                                      ),
-                                      childExpand: Column(
-                                        children: e.typeMenu ==
-                                                TypeCalendarMenu
-                                                    .LichTheoTrangThai
-                                            ? listTheoTrangThaiLichHop
-                                                .map(
-                                                  (e) =>
-                                                      ContainerMenuWidgetTablet(
-                                                    icon: e.icon,
-                                                    name: e.typeMenu
-                                                        .getTitleLichHop(),
-                                                    index: e.typeMenu
-                                                        .getIndexMenuLichHop(
-                                                      dataDashBoard,
-                                                    ),
-                                                    isIcon: false,
-                                                    onTap: () {
-                                                      e.onTap(
-                                                        context,
-                                                        widget.cubit,
-                                                      );
-                                                    },
-                                                  ),
-                                                )
-                                                .toList()
-                                            : listLanhDaoLichHop
-                                                .map(
-                                                  (e) =>
-                                                      ContainerMenuWidgetTablet(
-                                                    icon: e.icon,
-                                                    name: e.name,
-                                                    index: e.index ?? 0,
-                                                    isIcon: false,
-                                                    onTap: () {
-                                                      e.onTap(
-                                                        context,
-                                                        widget.cubit,
-                                                      );
-                                                    },
-                                                  ),
-                                                )
-                                                .toList(),
-                                      ),
-                                      onTap: () {
-                                        e.onTap(context, widget.cubit);
-                                      },
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            children: listThongBaoMyCalendar
+                                .map(
+                                  (e) => ContainerMenuWidgetTablet(
+                                    name: e.typeMenu.getTitleLichHop(),
+                                    icon: e.typeMenu.getIconTablet(),
+                                    type: e.type,
+                                    index: e.typeMenu.getIndexMenuLichHop(
+                                      dataDashBoard,
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                          );
-                        }),
+                                    childExpand: Column(
+                                      children: e.typeMenu ==
+                                              TypeCalendarMenu.LichTheoTrangThai
+                                          ? listTheoTrangThaiLichHop
+                                              .map(
+                                                (e) =>
+                                                    ContainerMenuWidgetTablet(
+                                                  icon: e.typeMenu
+                                                      .getIconTablet(),
+                                                  name: e.typeMenu
+                                                      .getTitleLichHop(),
+                                                  index: e.typeMenu
+                                                      .getIndexMenuLichHop(
+                                                    dataDashBoard,
+                                                  ),
+                                                  isIcon: false,
+                                                  onTap: () {
+                                                    Navigator.pop(
+                                                      context,
+                                                      e.typeMenu,
+                                                    );
+                                                  },
+                                                ),
+                                              )
+                                              .toList()
+                                          : widget.cubit.listLanhDaoLichHop
+                                              .map(
+                                                (e) =>
+                                                    ContainerMenuWidgetTablet(
+                                                  icon: e.typeMenu
+                                                      .getIconTablet(),
+                                                  name: e.name,
+                                                  index: e.index ?? 0,
+                                                  isIcon: false,
+                                                  onTap: () {
+                                                    widget.cubit
+                                                        .titleAppbar =
+                                                        e.name;
+                                                    widget.cubit
+                                                        .idDonViLanhDao=
+                                                        e.idLanhDao;
+                                                    Navigator.pop(
+                                                      context,
+                                                      e.typeMenu,
+                                                    );
+                                                  },
+                                                ),
+                                              )
+                                              .toList(),
+                                    ),
+                                    onTap: () {
+                                      if (e.typeMenu ==
+                                          TypeCalendarMenu.LichCuaToi) {
+                                        Navigator.pop(
+                                          context,
+                                          e.typeMenu,
+                                        );
+                                      }
+                                    },
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
               ],

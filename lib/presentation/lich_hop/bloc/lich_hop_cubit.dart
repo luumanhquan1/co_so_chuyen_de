@@ -45,6 +45,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+  List<ItemThongBaoModelMyCalender> listLanhDaoLichHop = [];
+  String idDonViLanhDao = '';
   String titleAppbar = '';
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
       BehaviorSubject.seeded([true, false, false]);
@@ -116,16 +118,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         value.forEach((element) {
           listLanhDaoLichHop.add(
             ItemThongBaoModelMyCalender(
-              icon: '',
+              idLanhDao: element.id ?? '',
               typeMenu: TypeCalendarMenu.LichTheoLanhDao,
               type: TypeContainer.number,
               name: element.tenDonVi ?? '',
               index: element.count,
-              onTap: (BuildContext context, LichHopCubit cubit) {
-                changeItemMenuSubject.add(TypeCalendarMenu.LichTheoLanhDao);
-                titleAppbar = element.tenDonVi ?? '';
-                Navigator.pop(context);
-              },
             ),
           );
         });
@@ -276,7 +273,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       DanhSachLichHopRequest(
         DateFrom: startDate.formatApi,
         DateTo: endDate.formatApi,
-        DonViId: donViId,
+        DonViId: changeItemMenuSubject.value == TypeCalendarMenu.LichTheoLanhDao
+            ? idDonViLanhDao
+            : donViId,
+        IsLichLanhDao:
+            changeItemMenuSubject.value == TypeCalendarMenu.LichTheoLanhDao
+                ? true
+                : null,
         PageIndex: page,
         PageSize: 10,
         UserId: userId,
