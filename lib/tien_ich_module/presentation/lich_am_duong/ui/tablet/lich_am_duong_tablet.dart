@@ -134,6 +134,7 @@ class _LichAmDuongTabletState extends State<LichAmDuongTablet> {
                                           cubit.startDate =
                                               start.formatApiDDMMYYYY;
                                           cubit.getLichAmDuong(cubit.startDate);
+                                          cubit.selectTime = selectDay;
                                         },
                                         tablet: true,
                                         isCalendar: false,

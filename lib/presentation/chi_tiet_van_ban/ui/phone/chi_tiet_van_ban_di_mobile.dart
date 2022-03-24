@@ -12,9 +12,12 @@ import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expan
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_lich_su_ky_duyet_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_lich_su_thu_hoi_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_lich_su_tra_lai_widget_expand.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_theo_doi_van_ban_ban_hanh_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_thong_tin_ky_duyet_widget_expand.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/vb_di_y_kien_xu_ly_widget_expand.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/widget/widget_expand_van_ban_di_mobile/widget_head_chi_tiet_van_ban_di.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/provider_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +74,9 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
                       );
                     }
                   ),
+                  VBDiYKienXuLyExpandWidget(
+                    cubit: cubit,
+                  ),
                   StreamBuilder<List<LichSuCapNhatVanBanDi>>(
                     stream: cubit.lichSuCapNhatVanBanDiSubject.stream,
                     builder: (context, snapshot) {
@@ -120,6 +126,18 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
                         lichSuKyDuyetModel: data,
                       );
                     }
+                  ),
+                  VBDiTheoDoiVanBanBanHanhExpandWidget(
+                    cubit: cubit,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 16.0, bottom: 24.0, left: 16.0, right: 16.0),
+                    child: ButtonCustomBottom(
+                      isColorBlue: false,
+                      title: S.current.xem_luong,
+                      onPressed: () {},
+                    ),
                   ),
 
                 ],
