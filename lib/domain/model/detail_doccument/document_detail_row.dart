@@ -2,9 +2,11 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
 import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_checkbox.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/dowload_file.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
@@ -23,7 +25,7 @@ const DANG_XU_LY = 'DANG_XU_LY';
 const CHO_TIEP_NHAN = 'CHO_TIEP_NHAN';
 const CHO_PHAN_XU_LY = 'CHO_PHAN_XU_LY';
 
-enum TypeDocumentDetailRow { checkbox, text, fileActacks, status }
+enum TypeDocumentDetailRow { checkbox, text, fileActacks, status,fileVanBanDi }
 
 class DocumentDetailRow {
   String title = '';
@@ -123,6 +125,48 @@ extension TypeDataDocument on TypeDocumentDetailRow {
             ),
           ],
         );
+      case TypeDocumentDetailRow.fileVanBanDi:
+        {
+          final data = row.value as List<Files>;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: data
+                .map(
+                  (e) => GestureDetector(
+                onTap: () async {
+                  final status = await Permission.storage.status;
+                  if (!status.isGranted) {
+                    await Permission.storage.request();
+                    await Permission.manageExternalStorage.request();
+                  }
+                  await saveFile(
+                    e.ten ?? '',
+                    '$DO_MAIN_DOWLOAD_FILE${e.duongDan}',
+                  )
+                      .then(
+                        (value) => MessageConfig.show(
+                        title: S.current.tai_file_thanh_cong),
+                  )
+                      .onError(
+                        (error, stackTrace) => MessageConfig.show(
+                      title: S.current.tai_file_that_bai,
+                      messState: MessState.error,
+                    ),
+                  );
+                },
+                child: Text(
+                  e.ten ?? '',
+                  style: textNormalCustom(
+                    color: choXuLyColor,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14.0.textScale(),
+                  ),
+                ),
+              ),
+            )
+                .toList(),
+          );
+        }
     }
   }
 }

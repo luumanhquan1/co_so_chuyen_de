@@ -33,19 +33,7 @@ class _DanhBaDienTuMobileState extends State<DanhBaDienTuMobile> {
           style: titleAppbar(),
         ),
         centerTitle: true,
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              S.current.dong_bo,
-              style: textNormalCustom(
-                fontSize: 14,
-                color: numberColorTablet,
-              ),
-            ),
-          ),
-          spaceW16
-        ],
+        actions: const [],
         leading: IconButton(
           icon: SvgPicture.asset(
             ImageAssets.icBack,

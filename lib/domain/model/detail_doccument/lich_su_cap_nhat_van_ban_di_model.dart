@@ -1,0 +1,101 @@
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
+
+class DataLichSuCapNhatVanBanDi {
+  String? messages;
+  List<LichSuCapNhatVanBanDi>? data;
+  String? validationResult;
+  bool? isSuccess;
+
+  DataLichSuCapNhatVanBanDi({
+    this.messages,
+    this.data,
+    this.validationResult,
+    this.isSuccess,
+  });
+}
+
+class LichSuCapNhatVanBanDi {
+  String? nguoiCapNhat;
+  String? donViCapNhat;
+  String? thoiGian;
+  String? noiDungCapNhat;
+  int? trangThai;
+  List<Files>? files;
+
+  LichSuCapNhatVanBanDi({
+    this.nguoiCapNhat,
+    this.donViCapNhat,
+    this.thoiGian,
+    this.noiDungCapNhat,
+    this.trangThai,
+    this.files,
+  });
+
+  List<DocumentDetailRow> toListRowCapNhat() {
+    final List<DocumentDetailRow> list = [
+      DocumentDetailRow(
+        S.current.ho_va_ten,
+        nguoiCapNhat ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.dv,
+        donViCapNhat ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.thoi_gian,
+        thoiGian ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.noidung,
+        noiDungCapNhat ?? '',
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.file_dinh_kem,
+        files ?? [],
+        TypeDocumentDetailRow.fileVanBanDi,
+      ),
+      DocumentDetailRow(
+        S.current.trang_thai,
+        trangThaiDuyet(trangThai??0) ,
+        TypeDocumentDetailRow.text,
+      ),
+    ];
+    return list;
+  }
+
+  String trangThaiDuyet(int number) {
+    switch (number) {
+      case 0:
+        return S.current.huy_duyet;
+      case 1:
+        return S.current.duyet;
+      case 2:
+        return S.current.duyet;
+      case 3:
+        return S.current.duyet;
+      case 4:
+        return S.current.duyet;
+      case 5:
+        return S.current.duyet;
+      case 6:
+        return S.current.duyet;
+        case 7:
+        return S.current.trinh_ky;
+      case 8:
+        return S.current.trinh_ky;
+      case 9:
+        return S.current.trinh_ky;
+      case 10:
+        return S.current.trinh_ky;
+      case 11:
+        return S.current.trinh_ky;
+    }
+    return '';
+  }
+}

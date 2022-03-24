@@ -41,6 +41,8 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
   TextEditingController sdtController = TextEditingController();
   TextEditingController sdtRiengController = TextEditingController();
   TextEditingController sdtCoquanController = TextEditingController();
+  bool gioiTinh = false;
+  String ngaySinh = '';
 
   @override
   void initState() {
@@ -94,9 +96,9 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                   ),
                   SelectDate(
                     leadingIcon: SvgPicture.asset(ImageAssets.icCalenderDb),
-                    value: widget.item.ngaySinh,
+                    value: widget.item.ngaySinh ?? '',
                     onSelectDate: (dateTime) {
-                      widget.cubit.ngaySinh = dateTime;
+                      ngaySinh = dateTime;
                     },
                   ),
                   TextFieldStyle(
@@ -153,9 +155,10 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                     title: S.current.gioi_tinh,
                     onchange: (value) {
                       if (value == S.current.Nam) {
-                        widget.cubit.gioiTinh = true;
+                        gioiTinh = true;
+                      } else {
+                        gioiTinh = false;
                       }
-                      return widget.cubit.gioiTinh = false;
                     },
                   ),
                   spaceH16,
@@ -169,8 +172,8 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                           phoneCoQuan: sdtCoquanController.text,
                           phoneNhaRieng: sdtRiengController.text,
                           email: emailController.text,
-                          gioiTinh: true,
-                          ngaySinh: widget.cubit.ngaySinh,
+                          gioiTinh: gioiTinh,
+                          ngaySinh: ngaySinh,
                           cmtnd: cmtndController.text,
                           anhDaiDienFilePath: widget.cubit.anhDaiDienFilePath,
                           anhChuKyFilePath: widget.cubit.anhChuKyFilePath,
@@ -228,7 +231,7 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                     leadingIcon: SvgPicture.asset(ImageAssets.icCalenderDb),
                     value: widget.item.ngaySinh,
                     onSelectDate: (dateTime) {
-                      widget.cubit.ngaySinh = dateTime;
+                      ngaySinh = dateTime;
                     },
                   ),
                   CustomRadioButton(
@@ -238,9 +241,10 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                     title: S.current.gioi_tinh,
                     onchange: (value) {
                       if (value == S.current.Nam) {
-                        widget.cubit.gioiTinh = true;
+                        gioiTinh = true;
+                      } else {
+                        gioiTinh = false;
                       }
-                      return widget.cubit.gioiTinh = false;
                     },
                   ),
                   TextFieldStyle(
@@ -301,7 +305,29 @@ class _SuaDanhBaCaNhanState extends State<SuaDanhBaCaNhan> {
                     isTablet: true,
                     onPressed2: () {
                       if (keyGroup.currentState!.validator()) {
-                        widget.cubit.suaDanhSachApi(widget.id);
+                        widget.cubit.suaDanhSach(
+                          groups: '',
+                          hoTen: hoTenController.text,
+                          phoneDiDong: sdtController.text,
+                          phoneCoQuan: sdtCoquanController.text,
+                          phoneNhaRieng: sdtRiengController.text,
+                          email: emailController.text,
+                          gioiTinh: gioiTinh,
+                          ngaySinh: ngaySinh,
+                          cmtnd: cmtndController.text,
+                          anhDaiDienFilePath: widget.cubit.anhDaiDienFilePath,
+                          anhChuKyFilePath: widget.cubit.anhChuKyFilePath,
+                          anhChuKyNhayFilePath:
+                              widget.cubit.anhChuKyNhayFilePath,
+                          diaChi: diaDiemController.text,
+                          isDeleted: widget.cubit.isDeleted,
+                          thuTu: widget.cubit.thuTu ?? 0,
+                          createdAt: widget.cubit.createdAt,
+                          createdBy: widget.id,
+                          updatedAt: widget.cubit.updatedAt,
+                          updatedBy: widget.id,
+                          id: widget.id,
+                        );
                         Navigator.pop(context);
                       } else {}
                     },
