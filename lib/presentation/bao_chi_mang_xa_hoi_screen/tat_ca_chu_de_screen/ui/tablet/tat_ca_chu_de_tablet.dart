@@ -7,14 +7,12 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashb
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/list_chu_de.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/bloc/chu_de_cubit.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/mobile/item_infomation.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/hot_new_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_infomation_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_list_view_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_tablet_topic_tablet.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
-import 'package:ccvc_mobile/widgets/base_choose_date/base_choose_date.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +56,7 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
             controller: _scrollController,
             child: Column(
               children: [
-                 ChooseTimeScreen(
+                ChooseTimeScreen(
                   today: DateTime.now(),
                 ),
                 Container(
@@ -168,10 +166,12 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                                 Expanded(
                                   child: ListView.builder(
                                     // controller: _scrollController,
-                                    itemCount:
-                                        listChuDe.length > 3 ? 3 : listChuDe.length,
+                                    itemCount: listChuDe.length > 3
+                                        ? 3
+                                        : listChuDe.length,
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
                                         children: [
@@ -179,7 +179,8 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                                             listChuDe[index].avartar ?? '',
                                             listChuDe[index].title ?? '',
                                             DateTime.parse(
-                                              listChuDe[index].publishedTime ?? '',
+                                              listChuDe[index].publishedTime ??
+                                                  '',
                                             ).formatApiSS,
                                             listChuDe[index].url ?? '',
                                           ),

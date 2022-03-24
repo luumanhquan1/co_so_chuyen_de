@@ -352,7 +352,6 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
           .vietNameseParse()
           .contains(searchTxt);
     }
-
     final value = listItem.where((event) => isListDanhSach(event)).toList();
     listItemSubject.add(value);
   }

@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/tat_ca_chu_de_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/mobile/thoi_doi_bai_viet_screen.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/tablet/theo_doi_bai_viet_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_tuc_thoi_su_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -74,7 +75,6 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
           indicatorColor: indicatorColor,
           unselectedLabelColor: unselectLabelColor,
           labelColor: selectColorTabbar,
-          isScrollable: true,
           tabs: [
             Tab(
               child: Text(
@@ -109,45 +109,11 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
               S.current.bao_cao_thong_ke,
             ),
             const TatCaChuDeScreenTablet(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    S.current.nhap_linK_bao_cao,
-                    style: textNormalCustom(
-                      fontSize: 14,
-                      color: dateColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  BaseSearchBar(
-                    hintText: S.current.nhap_link,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    S.current.bai_theo_doi,
-                    style: textNormalCustom(
-                      color: titleCalenderWork,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                ],
-              ),
-            ),
+
             StreamBuilder<bool>(
               stream: cubit.changeItemMenu,
               builder: (context,nspshot){
-                return TheoDoiBaiVietScreen(
+                return TheoDoiBaiVietTablet(
                   topic: cubit.topic,
                   key: UniqueKey(),
                 );
