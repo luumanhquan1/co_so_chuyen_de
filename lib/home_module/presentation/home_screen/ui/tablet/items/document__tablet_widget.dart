@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_den_tablet.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_tablet.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/ui/tablet/chi_tiet_van_ban_di_tablet.dart';
 
 import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
@@ -151,7 +151,7 @@ class _DocumentWidgetState extends State<DocumentTabletWidget> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChiTietVanBanTablet(
+          builder: (context) => ChiTietVanBanDiTablet(
             id: id,
           ),
         ),

@@ -66,13 +66,20 @@ class _YKienSuLyWidgetState extends State<YKienSuLyWidget> {
                     const SizedBox(
                       width: 6,
                     ),
-                    Text(
-                      DateTime.parse(widget.object.ngayTao ?? '')
-                          .formatDdMMYYYY,
-                      style: textNormalCustom(
-                        color: infoColor,
-                        fontSize: 12.0.textScale(space: 4.0),
-                        fontWeight: FontWeight.w400,
+                    Expanded(
+                      flex: 2,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          DateTime.parse(widget.object.ngayTao ?? '')
+                              .formatDdMMYYYY,
+                          softWrap: true,
+                          style: textNormalCustom(
+                            color: infoColor,
+                            fontSize: 12.0.textScale(space: 4.0),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                     )
                   ],

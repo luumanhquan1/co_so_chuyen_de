@@ -278,6 +278,9 @@ class ImageAssets {
   static const String ic_CV_xoa = '$baseImg/ic_CV_xoa.svg';
   static const String ic_nhomCVMoi = '$baseImg/ic_nhomCVMoi.svg';
   static const String ic_box_serach = '$baseImg/search_box.svg';
+  static const String ic_loop_mode = '$baseImg/ic_loop_mode.svg';
+  static const String ic_replay = '$baseImg/ic_replay.svg';
+  static const String ic_pasue = '$baseImg/ic_pause.svg';
 
 
 

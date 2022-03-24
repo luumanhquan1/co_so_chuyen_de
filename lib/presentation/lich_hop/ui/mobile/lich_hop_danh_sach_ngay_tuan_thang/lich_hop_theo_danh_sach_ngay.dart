@@ -7,16 +7,21 @@ import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/widget_item_lich_hop.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 
+import '../lich_hop_extension.dart';
+
 class LichHopTheoDanhSachNgay extends StatefulWidget {
   final LichHopCubit cubit;
+  final Type_Choose_Option_Day type;
 
   const LichHopTheoDanhSachNgay({
     Key? key,
     required this.cubit,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -46,17 +51,13 @@ class _LichHopTheoDanhSachNgayState extends State<LichHopTheoDanhSachNgay> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
-            bottom: 16.0,
-          ),
-          child: Text(
-            widget.cubit.currentTime,
-            style: textNormalCustom(color: textBodyTime),
-          ),
+        widget.cubit.changeItemMenuSubject.value.getHeaderLichHop(
+          cubit: widget.cubit,
+          type: widget.type,
         ),
+
+       const SizedBox(height: 16,),
+
         Expanded(
           child: StreamBuilder<DanhSachLichHopModel>(
             stream: widget.cubit.danhSachLichHopStream,

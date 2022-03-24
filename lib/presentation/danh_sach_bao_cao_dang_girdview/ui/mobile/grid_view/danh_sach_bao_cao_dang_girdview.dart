@@ -49,7 +49,7 @@ class _DanhSachBaoCaoDangGirdviewMobileState
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 2));
+
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),

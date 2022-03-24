@@ -34,6 +34,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 
@@ -42,6 +43,8 @@ mixin HopRepository {
     String dateStart,
     String dateTo,
   );
+
+  Future<Result<List<MenuModel>>> getDataMenu(String startTime, String endTime);
 
   Future<Result<DanhSachLichHopModel>> postDanhSachLichHop(
     DanhSachLichHopRequest body,

@@ -18,6 +18,8 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
   DanhBaDienTuCubit() : super(DanhBaDienTuStateInitial());
 
   DanhBaDienTuRepository get tienIchRep => Get.find();
+  int page = 1;
+  int totalPage = 1;
   int pageSize = 10;
   int pageIndex = 1;
   String createdAt = DateTime.now().formatApiDanhBa;
@@ -44,6 +46,13 @@ class DanhBaDienTuCubit extends BaseCubit<BaseState> {
 
   String subString(String? name) {
     if (name != null) {
+      return name.substring(0, 1);
+    }
+    return '';
+  }
+
+  String subStringFix(String name) {
+    if (name.trim().isNotEmpty) {
       return name.substring(0, 1);
     }
     return '';
