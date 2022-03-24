@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
@@ -34,7 +35,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
   @override
   void initState() {
     super.initState();
-    cubit. initTimeRange();
+    cubit.initTimeRange();
     cubit.callApi();
   }
 
@@ -102,16 +103,22 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           left: 16.0,
                         ),
                         height: 88,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cubit.list.length,
-                          itemBuilder: (context, index) {
-                            return CustomItemCalenderWork(
-                              image: cubit.img[index],
-                              typeName: cubit.list[index].typeName,
-                              numberOfCalendars:
-                                  cubit.list[index].numberOfCalendars,
+                        child: StreamBuilder<List<YKienNguoiDanDashBroadItem>>(
+                          stream: cubit.listItemDashboard,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                return CustomItemCalenderWork(
+                                  image: data[index].img ?? '',
+                                  typeName: data[index].typeName ?? '',
+                                  numberOfCalendars:
+                                      data[index].numberOfCalendars ??0,
+                                );
+                              },
                             );
                           },
                         ),
@@ -191,11 +198,17 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                     padding: const EdgeInsets.only(left: 16),
                     child: Column(
                       children: [
-                        PieChart(
-                          isSubjectInfo: false,
-                          title: S.current.phan_loai_nguon_yknd,
-                          chartData: cubit.chartYKienNduoiDan,
-                          onTap: (int value) {},
+                        StreamBuilder<List<ChartData>>(
+                          stream: cubit.chartPhanLoai,
+                          builder: (context,snapshot){
+                            final data=snapshot.data??[];
+                            return PieChart(
+                              isSubjectInfo: false,
+                              title: S.current.phan_loai_nguon_yknd,
+                              chartData: data,
+                              onTap: (int value) {},
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 20,
