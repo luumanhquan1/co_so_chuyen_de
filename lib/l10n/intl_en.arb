@@ -792,6 +792,7 @@
   "dv": "ĐV",
   "UBND_tinh_dong_nai": "UBND tỉnh đồng nai",
   "lich_hop_can_klch" : "Lịch họp cần KLCH",
+  "cho_bo_xung_thong_tin": "Chờ bổ sung thông tin",
   "lich_da_klch" : "Lịch đã KLCH",
   "thoi_gian_phat_bieu" : "Thời gian phát biểu",
   "lich_hop_huy" : "Lịch họp huỷ",
@@ -804,5 +805,4 @@
   "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
   "khoi_tao_van_ban" : "Khởi tạo văn bản",
   "cap_nhat_van_ban" : "Cập nhật văn bản"
-
 }
