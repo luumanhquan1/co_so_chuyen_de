@@ -118,7 +118,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 onTap: () {
                   showBottomSheetCustom(
                     context,
-                    title: S.current.phan_cong_thu_ky,
+                    title: S.current.thu_hoi_lich,
                     child: const ThuHoiLichWidget(),
                   );
                 },
@@ -140,7 +140,7 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                 onTap: () {
                   showBottomSheetCustom(
                     context,
-                    title: S.current.phan_cong_thu_ky,
+                    title: S.current.tao_boc_bang_cuoc_hop,
                     child: const TaoBocBangWidget(),
                   );
                 },

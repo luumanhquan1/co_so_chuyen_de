@@ -25,6 +25,7 @@ class _ThuHoiLichWidgetState extends State<ThuHoiLichWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDropDown(
+            hint: Text(S.current.chon_can_bo_hoac_don_vi_de_thu_hoi),
             items: cubit.dataThuhoi,
             onSelectItem: (value) {},
           ),

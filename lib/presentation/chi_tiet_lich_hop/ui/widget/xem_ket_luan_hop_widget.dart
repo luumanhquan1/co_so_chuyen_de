@@ -61,7 +61,7 @@ class _XemKetLuanHopWidgetState extends State<XemKetLuanHopWidget> {
                     builder: (context, snapshot) {
                       return CustomDropDown(
                         hint: Text(
-                          '${widget.cubit.xemKetLuanHopModel.reportStatus}',
+                          '${widget.cubit.xemKetLuanHopModel.reportStatus ?? ''}',
                           style: textNormal(titleItemEdit, 14),
                         ),
                         items: snapshot.data ?? [],

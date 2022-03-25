@@ -1,11 +1,15 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/detail_doccument/chi_tiet_van_ban_di_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_van_ban/bloc/detail_document_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/utils/dowload_file.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TepDinhKemMobile extends StatefulWidget {
   final DetailDocumentCubit cubit;
@@ -30,67 +34,89 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: Text(
-                    S.current.phieu_trinh,
-                    style: textNormal(
-                      infoColor,
-                      14.0.textScale(),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                S.current.phieu_trinh,
+                style: titleText(
+                  color: textDefault,
+                  fontSize: 14.0.textScale(),
                 ),
-                Expanded(
-                  flex: 7,
-                  child: Text(
-                    widget.cubit.phieuTrinh,
-                    style: textNormal(
-                      textTitle,
-                      14.0.textScale(),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: Text(
-                    S.current.du_thao,
-                    style: textNormal(
-                      infoColor,
-                      14.0.textScale(),
+            StreamBuilder<List<FileDinhKemVanBanDiModel>>(
+              stream: widget.cubit.listPhieuTrinh.stream,
+              builder: (context, snapshot) {
+                final _list = snapshot.data ?? [];
+                if (_list.isNotEmpty) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _list.length,
+                    itemBuilder: (context, index) {
+                      return CellTepDinhKem(
+                        obj: _list[index],
+                        index: 0,
+                      );
+                    },
+                  );
+                } else {
+                  return SizedBox(
+                    height: 50,
+                    child: Text(
+                      S.current.khong_co_tep_nao,
+                      style: textNormal(
+                        textBodyTime,
+                        14.0.textScale(),
+                      ),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Expanded(
-                  flex: 7,
-                  child: Text(
-                    widget.cubit.duThao,
-                    style: textNormal(
-                      textTitle,
-                      14.0.textScale(),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
+                  );
+                }
+              },
             ),
-            const SizedBox(
-              height: 16,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                S.current.du_thao,
+                style: titleText(
+                  color: textDefault,
+                  fontSize: 14.0.textScale(),
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            StreamBuilder<List<FileDinhKemVanBanDiModel>>(
+              stream: widget.cubit.listDuThao.stream,
+              builder: (context, snapshot) {
+                final _list = snapshot.data ?? [];
+                if (_list.isNotEmpty) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _list.length,
+                    itemBuilder: (context, index) {
+                      return CellTepDinhKem(
+                        obj: _list[index],
+                        index: 0,
+                      );
+                    },
+                  );
+                } else {
+                  return SizedBox(
+                    height: 50,
+                    child: Text(
+                      S.current.khong_co_tep_nao,
+                      style: textNormal(
+                        textBodyTime,
+                        14.0.textScale(),
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -104,8 +130,8 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            StreamBuilder<List<String>>(
-              stream: widget.cubit.vanBanBanHanh.stream,
+            StreamBuilder<List<FileDinhKemVanBanDiModel>>(
+              stream: widget.cubit.listVBBHKemDuTHao.stream,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];
                 if (_list.isNotEmpty) {
@@ -115,7 +141,8 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     itemCount: _list.length,
                     itemBuilder: (context, index) {
                       return CellTepDinhKem(
-                        nameFile: _list[index],
+                        obj: _list[index],
+                        index: 0,
                       );
                     },
                   );
@@ -145,8 +172,8 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            StreamBuilder<List<String>>(
-              stream: widget.cubit.vanBanLienThong.stream,
+            StreamBuilder<List<FileDinhKemVanBanDiModel>>(
+              stream: widget.cubit.listVBLienThong.stream,
               builder: (context, snapshot) {
                 final _list = snapshot.data ?? [];
                 if (_list.isNotEmpty) {
@@ -156,7 +183,8 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
                     itemCount: _list.length,
                     itemBuilder: (context, index) {
                       return CellTepDinhKem(
-                        nameFile: _list[index],
+                        obj: _list[index],
+                        index: 0,
                       );
                     },
                   );
@@ -182,9 +210,11 @@ class _TepDinhKemMobileState extends State<TepDinhKemMobile> {
 }
 
 class CellTepDinhKem extends StatelessWidget {
-  final String nameFile;
+  final FileDinhKemVanBanDiModel obj;
+  final int index;
 
-  const CellTepDinhKem({Key? key, required this.nameFile}) : super(key: key);
+  const CellTepDinhKem({Key? key, required this.obj, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -207,20 +237,43 @@ class CellTepDinhKem extends StatelessWidget {
                   textTitle,
                   14.0.textScale(),
                 ),
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             Expanded(
               flex: 7,
-              child: Text(
-                nameFile,
-                style: textNormal(
-                  choXuLyColor,
-                  14.0.textScale(),
+              child: GestureDetector(
+                onTap: () async {
+                  final status = await Permission.storage.status;
+                  if (!status.isGranted) {
+                    await Permission.storage.request();
+                    await Permission.manageExternalStorage.request();
+                  }
+                  await saveFile(
+                    obj.ten ?? '',
+                    '$DO_MAIN_DOWLOAD_FILE${obj.duongDan}',
+                  )
+                      .then(
+                        (value) => MessageConfig.show(
+                            title: S.current.tai_file_thanh_cong),
+                      )
+                      .onError(
+                        (error, stackTrace) => MessageConfig.show(
+                          title: S.current.tai_file_that_bai,
+                          messState: MessState.error,
+                        ),
+                      );
+                },
+                child: Text(
+                  obj.ten ?? '',
+                  style: textNormal(
+                    choXuLyColor,
+                    14.0.textScale(),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
