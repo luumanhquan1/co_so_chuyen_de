@@ -4,9 +4,9 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_board_phan_loai_mode.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -30,7 +30,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   bool isCheck = false;
   late String startDate;
   late String endDate;
-  final List<ChartData> listChartPhanLoai=[];
+  final List<ChartData> listChartPhanLoai = [];
   final BehaviorSubject<DashboardTinhHinhXuLuModel> _dashBoardTinhHinhXuLy =
       BehaviorSubject<DashboardTinhHinhXuLuModel>();
 
@@ -42,6 +42,12 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
 
   final BehaviorSubject<List<YKienNguoiDanDashBroadItem>> _listItemDashBoard =
       BehaviorSubject<List<YKienNguoiDanDashBroadItem>>();
+
+  final BehaviorSubject<List<YKienNguoiDanModel>> _listYKienNguoiDan =
+  BehaviorSubject<List<YKienNguoiDanModel>>();
+
+  Stream<List<YKienNguoiDanModel>> get danhSachYKienNguoiDan =>
+      _listYKienNguoiDan.stream;
 
   Stream<List<YKienNguoiDanDashBroadItem>> get listItemDashboard =>
       _listItemDashBoard.stream;
@@ -127,20 +133,28 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
 
   void callApi() {
-    getDashBoardTinhHinhXuLy(
+    // getDashBoardTinhHinhXuLy(
+    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+    //   startDate,
+    //   endDate,
+    // );
+    // getDashBoardPhanLoai(
+    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+    //   startDate,
+    //   endDate,
+    // );
+    // getThongTinYKienNguoiDan(
+    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+    //   startDate,
+    //   endDate,
+    // );
+    getDanhSachYKienNguoiDan(
+      '01/03/2022',
+      '25/03/2022',
+      10,
+      1,
+      '39227131-3db7-48f8-a1b2-57697430cc69',
       '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-      startDate,
-      endDate,
-    );
-    getDashBoardPhanLoai(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-      startDate,
-      endDate,
-    );
-    getThongTinYKienNguoiDan(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-      startDate,
-      endDate,
     );
   }
 
@@ -260,32 +274,70 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         listChartPhanLoai.clear();
-        listChartPhanLoai.add(ChartData(
+        listChartPhanLoai.add(
+          ChartData(
             res.listPhanLoai[4].status,
             res.listPhanLoai[4].soLuong.toDouble(),
             choTrinhKyColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[0].status,
-          res.listPhanLoai[0].soLuong.toDouble(),
-          labelColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[3].status,
-          res.listPhanLoai[3].soLuong.toDouble(),
-          unselectLabelColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[5].status,
-          res.listPhanLoai[5].soLuong.toDouble(),
-          itemWidgetUsing,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[6].status,
-          res.listPhanLoai[6].soLuong.toDouble(),
-          itemWidgetNotUse,
-        ),);
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[0].status,
+            res.listPhanLoai[0].soLuong.toDouble(),
+            labelColor,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[3].status,
+            res.listPhanLoai[3].soLuong.toDouble(),
+            unselectLabelColor,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[5].status,
+            res.listPhanLoai[5].soLuong.toDouble(),
+            itemWidgetUsing,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[6].status,
+            res.listPhanLoai[6].soLuong.toDouble(),
+            itemWidgetNotUse,
+          ),
+        );
         _chartPhanLoai.sink.add(listChartPhanLoai);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> getDanhSachYKienNguoiDan(
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+    String userId,
+    String donViId,
+  ) async {
+    showLoading();
+    final result = await _YKNDRepo.danhSachYKienNguoiDan(
+      tuNgay,
+      denNgay,
+      pageSize,
+      pageNumber,
+      userId,
+      donViId,
+    );
+     showContent();
+    result.when(
+      success: (res) {
+        _listYKienNguoiDan.sink.add(res.listYKienNguoiDan??[]);
       },
       error: (err) {
         return;

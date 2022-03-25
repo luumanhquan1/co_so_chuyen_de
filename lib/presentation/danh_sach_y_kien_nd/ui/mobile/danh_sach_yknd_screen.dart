@@ -1,9 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_y_kien_nd/bloc/danh_sach_yknd_cubit.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/y__kien_nguoi_dan_item.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +25,7 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
   @override
   void initState() {
     super.initState();
-    cubit.getListYKien();
+    cubit.callApi();
   }
 
   @override
@@ -70,34 +73,40 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
+          cubit.callApi();
         },
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: StreamBuilder<List<NguoiDanModel>>(
-            stream: cubit.listYKienNguoiDan,
-            builder: (context, snapshot) {
-              final List<NguoiDanModel> listData = snapshot.data ?? [];
-              if (listData.isNotEmpty) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: listData.length,
-                  itemBuilder: (context, index) {
-                    return YKienNguoiDanCell(
-                      onTap: () {},
-                      title: listData[index].ngheNghiep ?? '',
-                      dateTime: listData[index].ngayThang ?? '',
-                      userName: listData[index].ten ?? '',
-                      status: listData[index].statusData.getText().text,
-                      stausColor: listData[index].statusData.getText().color,
-                      userImage:
-                          'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                    );
-                  },
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
+        child: StateStreamLayout(
+          textEmpty: S.current.khong_co_du_lieu,
+          retry: () {},
+          error: AppException('', S.current.something_went_wrong),
+          stream: cubit.stateStream,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: StreamBuilder<List<YKienNguoiDanModel>>(
+              stream: cubit.listYKienNguoiDan,
+              builder: (context, snapshot) {
+                final listData = snapshot.data ?? [];
+                if (listData.isNotEmpty) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: listData.length,
+                    itemBuilder: (context, index) {
+                      return YKienNguoiDanCell(
+                        onTap: () {},
+                        title: listData[index].tieuDe ?? '',
+                        dateTime: listData[index].ngayNhan ?? '',
+                        userName:'Ha Kieu Anh',
+                        status: listData[index].soNgayToiHan,
+                        userImage:
+                            'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
           ),
         ),
       ),

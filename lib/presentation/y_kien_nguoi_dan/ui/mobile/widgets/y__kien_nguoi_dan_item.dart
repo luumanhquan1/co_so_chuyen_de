@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,15 +10,13 @@ class YKienNguoiDanCell extends StatelessWidget {
   final String dateTime;
   final String userImage;
   final String userName;
-  final String status;
-  final Color stausColor;
+  final int status;
   final Function onTap;
 
   const YKienNguoiDanCell({
     Key? key,
     required this.title,
     required this.dateTime,
-    required this.stausColor,
     required this.userImage,
     required this.userName,
     required this.status,
@@ -80,8 +79,7 @@ class YKienNguoiDanCell extends StatelessWidget {
                             maxLines: 1,
                           ),
                           Text(
-                            //DateTime.parse(dateTime).toStringWithListFormat,
-                            dateTime,
+                            DateTime.parse(dateTime).toStringWithListFormat,
                             style: textNormalCustom(
                               color: textBodyTime,
                               fontWeight: FontWeight.w400,
@@ -121,11 +119,15 @@ class YKienNguoiDanCell extends StatelessWidget {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
-                                  color: stausColor,
+                                  color: status < 0
+                                      ? statusCalenderRed
+                                      : textColorForum,
                                 ),
                                 child: Center(
                                   child: Text(
-                                    status,
+                                    status < 0
+                                        ? S.current.qua_han
+                                        : S.current.dang_xu_ly,
                                     style: textNormalCustom(fontSize: 12.0),
                                   ),
                                 ),

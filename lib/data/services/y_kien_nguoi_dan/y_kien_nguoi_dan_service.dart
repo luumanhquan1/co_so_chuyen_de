@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_phan_loai_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/thong_tin_y_kien_nguoi_dan_resopnse.dart';
@@ -34,5 +35,15 @@ abstract class YKienNguoiDanService {
       @Query('donViId') String donViId,
       @Query('TuNgay') String TuNgay,
       @Query('DenNgay') String DenNgay,
+      );
+
+  @GET(ApiConstants.DANH_SACH_Y_KIEN_NGUOI_DAN)
+  Future<DanhSachYKienNguoiDanResponse> getDanhSachYKienNguoiDan(
+      @Query('TuNgay') String tuNgay,
+      @Query('DenNgay') String denNgay,
+      @Query('PageSize') int pageSize,
+      @Query('PageNumber') int pageNumber,
+      @Query('userId') String userId,
+      @Query('donViId') String donViId,
       );
 }
