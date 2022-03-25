@@ -800,7 +800,10 @@
   "cap_nhat_van_ban" : "Cập nhật văn bản",
   "lich_hop_huy" : "Lịch họp huỷ",
   "lich_hop_tao_ho" : "Lịch họp tạo hộ",
-  "lich_hop_thu_hoi" : "Lịch họp thu hồi"
+  "lich_hop_thu_hoi" : "Lịch họp thu hồi",
+  "lich_hop_duyet_phong" : "Lịch họp duyệt phòng",
+  "lich_hop_duyet_ky_thuat" : "Lịch họp duyệt kỹ thuật",
+  "lich_hop_duyet_yeu_cau_chuan_bi" : "Lịch họp duyệt yêu cầu chuẩn bị"
 }
 
 

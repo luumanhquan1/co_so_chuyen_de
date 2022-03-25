@@ -151,9 +151,23 @@ enum TypeCalendarMenu {
   LichHopCanKLCH,
   LichDaKLCH,
   BaoCaoThongKe,
+  LichDuyetPhong,
+  LichDuyetThietBi,
+  LichDuyetKyThuat,
+  LichYeuCauChuanBi,
 }
 
+extension GetPermissionMenu on TypeCalendarMenu {}
+
 extension GetScreenMenu on TypeCalendarMenu {
+  bool? getListLichHop(TypeCalendarMenu type) {
+    if (this == type) {
+      return true;
+    } else {
+      return null;
+    }
+  }
+
   int getIndex(LichLamViecDashBroad data) {
     switch (this) {
       case TypeCalendarMenu.LichCuaToi:

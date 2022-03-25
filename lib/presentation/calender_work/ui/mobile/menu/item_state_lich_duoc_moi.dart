@@ -8,6 +8,16 @@ import 'package:flutter/cupertino.dart';
 
 enum stateLDM { ChoXacNhan, ThamGia, TuChoi }
 
+extension StateLichHop on stateLDM {
+  bool? getListState (stateLDM state) {
+    if (this == state) {
+      return true;
+    } else {
+      return null;
+    }
+  }
+}
+
 extension StateLDM on stateLDM {
   int getIndex(LichLamViecDashBroad model) {
     switch (this) {
