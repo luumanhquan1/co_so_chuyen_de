@@ -52,6 +52,7 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
                 CommentWidget(
                   object: widget.cubit.handingCommentLichHop,
                   id: widget.id,
+                  cubit: widget.cubit,
                 )
               else
                 const SizedBox(
@@ -67,38 +68,41 @@ class _YKienCuocHopWidgetState extends State<YKienCuocHopWidget> {
       ),
       tabletScreen: Padding(
         padding: const EdgeInsets.only(top: 60.0),
-        child: Column(
-          children: [
-            IconWithTiltleWidget(
-              icon: ImageAssets.icChartFocus,
-              title: S.current.them_y_kien,
-              onPress: () {
-                showBottomSheetCustom(
-                  context,
-                  title: S.current.them_y_kien,
-                  child: ThemYKienWidget(
-                    cubit: widget.cubit,
-                  ),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
-              CommentWidget(
-                object: widget.cubit.handingCommentLichHop,
-                id: widget.id,
-              )
-            else
-              const SizedBox(
-                height: 200,
-                child: NodataWidget(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              IconWithTiltleWidget(
+                icon: ImageAssets.Comment_ic,
+                title: S.current.them_y_kien,
+                onPress: () {
+                  showBottomSheetCustom(
+                    context,
+                    title: S.current.them_y_kien,
+                    child: ThemYKienWidget(
+                      cubit: widget.cubit,
+                    ),
+                  );
+                },
               ),
-            DanhSachYKienLichHopWidget(
-              cubit: widget.cubit,
-            )
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              if (widget.cubit.handingCommentLichHop.TenNhanVien != '')
+                CommentWidget(
+                  object: widget.cubit.handingCommentLichHop,
+                  id: widget.id,
+                  cubit: widget.cubit,
+                )
+              else
+                const SizedBox(
+                  height: 200,
+                  child: NodataWidget(),
+                ),
+              DanhSachYKienLichHopWidget(
+                cubit: widget.cubit,
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -10,10 +10,12 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class CommentWidget extends StatefulWidget {
+  final DetailMeetCalenderCubit cubit;
   final String id;
   final HandingCommentLichHop object;
 
-  const CommentWidget({Key? key, required this.object, required this.id})
+  const CommentWidget(
+      {Key? key, required this.object, required this.id, required this.cubit})
       : super(key: key);
 
   @override
@@ -21,8 +23,6 @@ class CommentWidget extends StatefulWidget {
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
-  DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
-
   @override
   Widget build(BuildContext context) {
     return Padding(

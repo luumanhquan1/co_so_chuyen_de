@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/chuong_trinh_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thanh_phan_tham_gia_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CellThanhPhanThamGia extends StatefulWidget {
-  final ThanhPhanThamGiaModel infoModel;
+  final CanBoModel infoModel;
   final DetailMeetCalenderCubit cubit;
 
   CellThanhPhanThamGia({Key? key, required this.infoModel, required this.cubit})
@@ -85,21 +86,27 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${S.current.trang_thai}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text(
+                        '${S.current.trang_thai}:',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${S.current.diem_danh}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text(
+                        '${S.current.diem_danh}:',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
+                        ),
                       ),
                     ),
                   ),
@@ -113,7 +120,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Text(
-                        '${widget.infoModel.tenDonVi}',
+                        '${widget.infoModel.tenCoQuan}',
                         style: textNormalCustom(
                           fontSize: 14,
                           color: infoColor,
@@ -123,7 +130,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Text(
-                        '${widget.infoModel.tebCanBo}',
+                        '${widget.infoModel.tenCanBo}',
                         style: textNormalCustom(
                           fontSize: 14,
                           color: infoColor,
@@ -143,7 +150,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Text(
-                        '${widget.infoModel.ndCongViec}',
+                        '${widget.infoModel.ghiChu}',
                         style: textNormalCustom(
                           fontSize: 14,
                           color: infoColor,
@@ -152,21 +159,50 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(
-                        '${widget.infoModel.trangThai}',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          color: widget.cubit
+                              .trangThaiColor(widget.infoModel.trangThai),
+                        ),
+                        child: Text(
+                          widget.cubit.trangThai(widget.infoModel.trangThai),
+                          style: textNormalCustom(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(
-                        '${widget.infoModel.diemDanh}',
-                        style: textNormalCustom(
-                          fontSize: 14,
-                          color: infoColor,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          color: widget.cubit.diemDanhColors(
+                            widget.infoModel.isVangMat,
+                            widget.infoModel.diemDanh,
+                          ),
+                        ),
+                        child: Text(
+                          widget.cubit.diemDanh(
+                            widget.infoModel.isVangMat,
+                            widget.infoModel.diemDanh,
+                          ),
+                          style: textNormalCustom(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -191,7 +227,6 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
       tabletScreen: Padding(
         padding: const EdgeInsets.only(bottom: 25),
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.all(20),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -272,7 +307,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Text(
-                      '${widget.infoModel.tebCanBo}',
+                      '${widget.infoModel.tenCanBo}',
                       style: textNormalCustom(
                         fontSize: 16,
                         color: infoColor,
@@ -282,7 +317,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Text(
-                      '${widget.infoModel.tenDonVi}',
+                      '${widget.infoModel.tenCoQuan}',
                       style: textNormalCustom(
                         fontSize: 14,
                         color: infoColor,
@@ -302,7 +337,7 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Text(
-                      '${widget.infoModel.ndCongViec}',
+                      '${widget.infoModel.ghiChu}',
                       style: textNormalCustom(
                         fontSize: 14,
                         color: infoColor,
@@ -327,21 +362,27 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${S.current.trang_thai}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text(
+                        '${S.current.trang_thai}:',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${S.current.diem_danh}:',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text(
+                        '${S.current.diem_danh}:',
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: infoColor,
+                        ),
                       ),
                     ),
                   ),
@@ -363,21 +404,50 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${widget.infoModel.trangThai}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30)),
+                        color: widget.cubit
+                            .trangThaiColor(widget.infoModel.trangThai),
+                      ),
+                      child: Text(
+                        widget.cubit.trangThai(widget.infoModel.trangThai),
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: Text(
-                      '${widget.infoModel.diemDanh}',
-                      style: textNormalCustom(
-                        fontSize: 14,
-                        color: infoColor,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30)),
+                        color: widget.cubit.diemDanhColors(
+                          widget.infoModel.isVangMat,
+                          widget.infoModel.diemDanh,
+                        ),
+                      ),
+                      child: Text(
+                        widget.cubit.diemDanh(
+                          widget.infoModel.isVangMat,
+                          widget.infoModel.diemDanh,
+                        ),
+                        style: textNormalCustom(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
