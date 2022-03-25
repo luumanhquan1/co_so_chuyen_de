@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_y_kien_nd/bloc/danh_sach_yknd_cubit.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/y__kien_nguoi_dan_item.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
@@ -92,9 +93,17 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
                     itemCount: listData.length,
                     itemBuilder: (context, index) {
                       return YKienNguoiDanCell(
-                        onTap: () {},
-                        title: listData[index].tieuDe ?? '',
-                        dateTime: listData[index].ngayNhan ?? '',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const ChiTietYKNDScreen(),
+                              ),
+                            );
+                          },
+                        title: listData[index].tieuDe,
+                        dateTime: listData[index].ngayNhan,
                         userName:'Ha Kieu Anh',
                         status: listData[index].soNgayToiHan,
                         userImage:

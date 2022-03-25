@@ -1,6 +1,9 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
+import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'chi_tiet_y_kien_nguoidan_state.dart';
@@ -8,18 +11,27 @@ import 'chi_tiet_y_kien_nguoidan_state.dart';
 class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   ChiTietYKienNguoiDanCubit() : super(CHiTietYKienNguoiDanStateInitial());
 
-  final BehaviorSubject<HeaderChiTietYKNDModel> _headerChiTIet =
-      BehaviorSubject<HeaderChiTietYKNDModel>();
+  final BehaviorSubject<List<DataRowChiTietKienNghi>> _headerChiTiet =
+      BehaviorSubject<List<DataRowChiTietKienNghi>>();
 
-  Stream<HeaderChiTietYKNDModel> get headerChiTIet => _headerChiTIet.stream;
+  final BehaviorSubject<ChiTietYKNDModel> _chiTietYKND =
+      BehaviorSubject<ChiTietYKNDModel>();
+
+  Stream<List<DataRowChiTietKienNghi>> get headerChiTiet =>
+      _headerChiTiet.stream;
+
+  Stream<ChiTietYKNDModel> get chiTietYKND => _chiTietYKND.stream;
 
   Map<String, String> mapData = {};
 
-  void getDataHeader() {
-    _headerChiTIet.sink.add(fakeDataHeadler);
+  void callApi() {
+    chiTietYKienNguoiDan(
+      '957d3842-92ab-44a2-ac1b-fe3efe816bff',
+      '08dcc0b6-c7b4-46d6-ba1e-2660aeee7ddb',
+    );
   }
 
-  late String yKienXuLy;
+  String yKienXuLy = '';
   final fakeDataHeadler = HeaderChiTietYKNDModel(
     tieuDe:
         'Làm nhân viên văn phòng thất nghiệp gần 4 tháng nhưng chưa được nhận hỗ trợ do dịch Covid19',
@@ -33,7 +45,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     taiLieuCongDan: 'file.pdf',
   );
   final fakeDataNguoiPhanAnh = NguoiPhanAnhModel(
-    doiTuong: '',
+    doiTuong: 0,
     tenCaNhan: 'PAKN 2',
     cmnd: '017496898',
     diaChiEmail: 'chuyenviendonvi@gmail.com',
@@ -55,41 +67,41 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     fileDinhKem: 'file.pdf',
   );
 
-  List<DataRow> getMapDataKetQuaXuLy() {
+  List<DataRowChiTietKienNghi> getMapDataKetQuaXuLy() {
     yKienXuLy = fakeKetQuaXuLy.yKienXuLy ?? '';
-    final List<DataRow> listData = [];
+    final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.thoi_gian_thao_tac,
         content: fakeKetQuaXuLy.thoiGianThaoTac ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.don_vi_thao_tac,
         content: fakeKetQuaXuLy.donViThaoTac ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.tai_khoan_thao_tac,
         content: fakeKetQuaXuLy.taiKhoanThaoTac ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.trang_thai_xu_ly,
         content: fakeKetQuaXuLy.trangThaiXuLy ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.noi_dung_xu_ly,
         content: fakeKetQuaXuLy.noiDungXuLy ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.file_dinh_kem,
         content: fakeKetQuaXuLy.fileDinhKem ?? '',
       ),
@@ -97,16 +109,16 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     return listData;
   }
 
-  List<DataRow> getMapDataThongTinXuLy() {
-    final List<DataRow> listData = [];
+  List<DataRowChiTietKienNghi> getMapDataThongTinXuLy() {
+    final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.nhap_ten_don_vi_phong_ban,
         content: fakeThongTinXuLY.tenDonVi ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.vai_tro,
         content: fakeThongTinXuLY.vaiTro ?? '',
       ),
@@ -114,32 +126,32 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     return listData;
   }
 
-  List<DataRow> getMapDataNguoiPhananh() {
-    final List<DataRow> listData = [];
+  List<DataRowChiTietKienNghi> getMapDataNguoiPhananh() {
+    final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
           title: S.current.ten_ca_nhan_tc,
           content: fakeDataNguoiPhanAnh.tenCaNhan ?? ''),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
           title: S.current.cmt_can_cuoc,
           content: fakeDataNguoiPhanAnh.cmnd ?? ''),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.dia_chi_mail,
         content: fakeDataNguoiPhanAnh.diaChiEmail ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.so_dien_thoai,
         content: fakeDataNguoiPhanAnh.soDienthoai ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.dia_chi_chi_tiet,
         content: fakeDataNguoiPhanAnh.diaChiChiTiet ?? '',
       ),
@@ -147,50 +159,75 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     return listData;
   }
 
-  List<DataRow> getMapDataHeader() {
-    final List<DataRow> listData = [];
+  List<DataRowChiTietKienNghi> getMapDataHeader(
+      HeaderChiTietYKNDModel fakeDataHeadler) {
+    final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
-      DataRow(title: S.current.tieu_de, content: fakeDataHeadler.tieuDe ?? ''),
+      DataRowChiTietKienNghi(
+          title: S.current.tieu_de, content: fakeDataHeadler.tieuDe ?? ''),
     );
     listData.add(
-      DataRow(title: S.current.noidung, content: fakeDataHeadler.noiDung ?? ''),
+      DataRowChiTietKienNghi(
+          title: S.current.noidung, content: fakeDataHeadler.noiDung ?? ''),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.nguon_pakn,
         content: fakeDataHeadler.nguonPAKN ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.phan_loai_pakn,
         content: fakeDataHeadler.phanLoaiPAKN ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.ngay_phan_anh,
         content: fakeDataHeadler.ngayPhanAnh ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.han_xu_ly,
         content: fakeDataHeadler.hanXuLy ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.lien_quan_quy_dinh,
         content: fakeDataHeadler.quyDinhLuat ?? '',
       ),
     );
     listData.add(
-      DataRow(
+      DataRowChiTietKienNghi(
         title: S.current.tai_lieu_dinh_kem_cong_dan,
         content: fakeDataHeadler.taiLieuCongDan ?? '',
       ),
     );
     return listData;
+  }
+
+  final YKienNguoiDanRepository _YKNDRepo = Get.find();
+
+  Future<void> chiTietYKienNguoiDan(
+    String kienNghiId,
+    String taskId,
+  ) async {
+    showLoading();
+    final result = await _YKNDRepo.chiTietYKienNguoiDan(
+      kienNghiId,
+      taskId,
+    );
+    showContent();
+    result.when(
+      success: (res) {
+        _headerChiTiet.sink.add(getMapDataHeader(res.headerChiTietYKNDModel));
+      },
+      error: (err) {
+        return;
+      },
+    );
   }
 }

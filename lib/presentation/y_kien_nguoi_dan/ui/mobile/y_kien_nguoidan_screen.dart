@@ -280,11 +280,9 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                                     );
                                   },
                                   title:
-                                  data[index].tieuDe ??
-                                      '',
+                                  data[index].tieuDe,
                                   dateTime:
-                                  data[index].ngayNhan ??
-                                      '',
+                                  data[index].ngayNhan,
                                   userName:
                                   cubit.listYKienNguoiDan[index].ten ?? '',
                                   status: data[index].soNgayToiHan,

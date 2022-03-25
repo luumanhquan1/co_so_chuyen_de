@@ -96,7 +96,7 @@ class DanhSachYKienNguoiDanCubit extends BaseCubit<YKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
-        _listYKienNguoiDan.sink.add(res.listYKienNguoiDan??[]);
+        _listYKienNguoiDan.sink.add(res.listYKienNguoiDan);
       },
       error: (err) {
         return;

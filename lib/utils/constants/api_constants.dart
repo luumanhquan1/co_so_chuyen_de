@@ -153,6 +153,7 @@ class ApiConstants {
   static const DASH_BOARD_PHAN_LOAI = '/pakn/api/IocApi/thong-ke-tinh-hinh-theo-nguon';
   static const THONG_TIN_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/thong-ke-pakn-theo-trang-thai';
   static const DANH_SACH_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/danh-sach-pakn?';
+  static const CHI_TIET_Y_KIEN_NGUOI_DAN = '/pakn/api/Tasks/chi-tiet-kien-nghi';
 
 }
 

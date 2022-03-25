@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/bloc/chi_tiet_y_kien_nguoidan_cubit.dart';
@@ -25,7 +26,7 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
   @override
   void initState() {
     super.initState();
-    cubit.getMapDataKetQuaXuLy();
+     cubit.callApi();
   }
 
   @override
@@ -50,8 +51,14 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ChiTietYKNDHeader(
-                  cubit: cubit,
+                child: StreamBuilder<List<DataRowChiTietKienNghi>>(
+                  stream: cubit.headerChiTiet,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? [];
+                    return ChiTietYKNDHeader(
+                      listRow: data,
+                    );
+                  },
                 ),
               ),
               ExpandOnlyNhiemVu(

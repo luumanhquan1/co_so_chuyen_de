@@ -1,13 +1,13 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_yknd/bloc/chi_tiet_y_kien_nguoidan_cubit.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietYKNDHeader extends StatefulWidget {
-  final ChiTietYKienNguoiDanCubit cubit;
+  final List<DataRowChiTietKienNghi> listRow;
 
-  const ChiTietYKNDHeader({Key? key, required this.cubit}) : super(key: key);
+  const ChiTietYKNDHeader({Key? key, required this.listRow}) : super(key: key);
 
   @override
   _ChiTietYKNDHeaderState createState() => _ChiTietYKNDHeaderState();
@@ -16,15 +16,14 @@ class ChiTietYKNDHeader extends StatefulWidget {
 class _ChiTietYKNDHeaderState extends State<ChiTietYKNDHeader> {
   @override
   Widget build(BuildContext context) {
-    final data = widget.cubit.getMapDataHeader();
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: data.length,
+      itemCount: widget.listRow.length,
       itemBuilder: (context, index) {
         return ItemRow(
-          title: data[index].title,
-          content: data[index].content,
+          title: widget.listRow[index].title,
+          content: widget.listRow[index].content,
         );
       },
     );

@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/bloc/chi_tiet_y_kien_nguoidan_cubit.dart';
@@ -47,8 +48,14 @@ class _ChiTietVanBanTabletScreenState extends State<ChiTietVanBanTabletScreen> {
                       margin: const EdgeInsets.only(right: 15.0),
                       child: Column(
                         children: [
-                          ChiTietYKNDHeader(
-                            cubit: cubit,
+                          StreamBuilder<List<DataRowChiTietKienNghi>>(
+                            stream: cubit.headerChiTiet,
+                            builder: (context, snapshot) {
+                              final data = snapshot.data ?? [];
+                              return ChiTietYKNDHeader(
+                                listRow: data,
+                              );
+                            },
                           ),
                           const SizedBox(
                             height: 28.0,

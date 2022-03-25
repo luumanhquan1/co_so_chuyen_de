@@ -1,9 +1,12 @@
+import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/chi_tiet_kien_nghi_request.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_respnse.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_phan_loai_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/thong_tin_y_kien_nguoi_dan_resopnse.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/y_kien_nguoi_dan/y_kien_nguoi_dan_service.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_board_phan_loai_mode.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/thong_tin_y_kien_model.dart';
@@ -78,6 +81,20 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
         pageNumber,
         userId,
         donViId,
+      ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<ChiTietYKNDModel>> chiTietYKienNguoiDan(
+      String kienNghiId, String taskId) {
+    return runCatchingAsync<ChiTietKienNghiResponse, ChiTietYKNDModel>(
+      () => _yKienNguoIDanService.chiTietYKienNguoiDan(
+        ChiTietKienNghiRequest(
+          kienNghiId: kienNghiId,
+          taskId: taskId,
+        ),
       ),
       (res) => res.toDomain(),
     );
