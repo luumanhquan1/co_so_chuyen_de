@@ -19,7 +19,6 @@ class TheoDoiBaiVietTablet extends StatefulWidget {
 }
 
 class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> {
-  final ScrollController _scrollController = ScrollController();
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
 
@@ -27,23 +26,11 @@ class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        if (theoDoiBaiVietCubit.pageIndex <= theoDoiBaiVietCubit.totalPage) {
-          theoDoiBaiVietCubit.pageIndex += 1;
-          theoDoiBaiVietCubit.getListBaiVietTheoDoi(
-            theoDoiBaiVietCubit.endDate,
-            theoDoiBaiVietCubit.startDate,
-            widget.topic,
-          );
-        }
-      }
-    });
     theoDoiBaiVietCubit.getListBaiVietTheoDoi(
       theoDoiBaiVietCubit.endDate,
       theoDoiBaiVietCubit.startDate,
       widget.topic,
+      1,
     );
   }
 
