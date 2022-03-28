@@ -199,7 +199,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                               hotNew.title ?? '',
                               DateTime.parse(
                                 hotNew.publishedTime ?? '',
-                              ).formatApiSS,
+                              ).formatApiSSAM,
                               hotNew.contents ?? '',
                               hotNew.url ?? '',
                             ),
@@ -223,7 +223,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                                       listChuDe[index].title ?? '',
                                       DateTime.parse(
                                         listChuDe[index].publishedTime ?? '',
-                                      ).formatApiSS,
+                                      ).formatApiSSAM,
                                       listChuDe[index].url ?? '',
                                     ),
                                     const SizedBox(

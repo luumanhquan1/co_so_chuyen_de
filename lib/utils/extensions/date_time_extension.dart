@@ -9,6 +9,10 @@ extension DateFormatString on DateTime {
     final dateString = DateFormat.jm('en').format(this);
     return dateString;
   }
+  String get toStringWithAMPMJMS {
+    final dateString = DateFormat.jms('en').format(this);
+    return dateString;
+  }
 
   String get formatDdMMYYYY {
     final dateString =
@@ -32,6 +36,9 @@ extension DateFormatString on DateTime {
   }
   String get formatApiSS {
     return DateFormat('yyyy/MM/dd HH:mm:ss').format(this);
+  }
+  String get formatApiSSAM {
+    return DateFormat('yyyy/MM/dd ').format(this)+toStringWithAMPMJMS;
   }
 
   String get formatApiHH {
