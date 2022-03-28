@@ -800,7 +800,9 @@
   "cap_nhat_van_ban" : "Cập nhật văn bản",
   "lich_hop_huy" : "Lịch họp huỷ",
   "lich_hop_tao_ho" : "Lịch họp tạo hộ",
-  "lich_hop_thu_hoi" : "Lịch họp thu hồi"
+  "lich_hop_thu_hoi" : "Lịch họp thu hồi",
+  "tim_kiem_theo_trich_yeu" : "Tìm kiếm theo trích yếu",
+  "ngay_bh" : "Ngày BH"
 }
 
 
