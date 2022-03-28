@@ -167,11 +167,10 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(30)),
-                          color: widget.cubit
-                              .trangThaiColor(widget.infoModel.trangThai),
+                          color: widget.infoModel.trangThaiColor(),
                         ),
                         child: Text(
-                          widget.cubit.trangThai(widget.infoModel.trangThai),
+                          widget.infoModel.trangThaiTPTG(),
                           style: textNormalCustom(
                             fontSize: 14,
                             color: Colors.white,
@@ -189,16 +188,10 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(30)),
-                          color: widget.cubit.diemDanhColors(
-                            widget.infoModel.isVangMat,
-                            widget.infoModel.diemDanh,
-                          ),
+                          color: widget.infoModel.diemDanhColors(),
                         ),
                         child: Text(
-                          widget.cubit.diemDanh(
-                            widget.infoModel.isVangMat,
-                            widget.infoModel.diemDanh,
-                          ),
+                          widget.infoModel.diemDanhTPTG(),
                           style: textNormalCustom(
                             fontSize: 14,
                             color: Colors.white,
@@ -412,11 +405,10 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(30)),
-                        color: widget.cubit
-                            .trangThaiColor(widget.infoModel.trangThai),
+                        color: widget.infoModel.trangThaiColor(),
                       ),
                       child: Text(
-                        widget.cubit.trangThai(widget.infoModel.trangThai),
+                        widget.infoModel.trangThaiTPTG(),
                         style: textNormalCustom(
                           fontSize: 14,
                           color: Colors.white,
@@ -434,16 +426,10 @@ class _CellThanhPhanThamGiaState extends State<CellThanhPhanThamGia> {
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(30)),
-                        color: widget.cubit.diemDanhColors(
-                          widget.infoModel.isVangMat,
-                          widget.infoModel.diemDanh,
-                        ),
+                        color: widget.infoModel.diemDanhColors(),
                       ),
                       child: Text(
-                        widget.cubit.diemDanh(
-                          widget.infoModel.isVangMat,
-                          widget.infoModel.diemDanh,
-                        ),
+                        widget.infoModel.diemDanhTPTG(),
                         style: textNormalCustom(
                           fontSize: 14,
                           color: Colors.white,

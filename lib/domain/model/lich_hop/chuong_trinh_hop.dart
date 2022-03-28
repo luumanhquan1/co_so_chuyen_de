@@ -59,11 +59,9 @@ class CanBoModel {
     required this.isThamGiaBocBang,
     required this.createAt,
   });
-}
 
-extension trangthaiAndDiemDanhTPTG on DetailMeetCalenderCubit {
-  String trangThai(int? tt) {
-    switch (tt) {
+  String trangThaiTPTG() {
+    switch (trangThai) {
       case 1:
         return S.current.tham_gia;
       case 2:
@@ -75,8 +73,8 @@ extension trangthaiAndDiemDanhTPTG on DetailMeetCalenderCubit {
     }
   }
 
-  Color trangThaiColor(int? tt) {
-    switch (tt) {
+  Color trangThaiColor() {
+    switch (trangThai) {
       case 1:
         return daXuLyColor;
       case 2:
@@ -88,24 +86,24 @@ extension trangthaiAndDiemDanhTPTG on DetailMeetCalenderCubit {
     }
   }
 
-  String diemDanh(bool? isVM, bool? dD) {
-    if (isVM == true) {
+  String diemDanhTPTG() {
+    if (isVangMat == true) {
       return S.current.vang_mat;
-    } else if (isVM == false || dD == true) {
+    } else if (isVangMat == false || diemDanh == true) {
       return S.current.da_diem_danh;
-    } else if (isVM == false || dD == false) {
+    } else if (isVangMat == false || diemDanh == false) {
       return S.current.chua_diem_danh;
     } else {
       return '';
     }
   }
 
-  Color diemDanhColors(bool? isVM, bool? dD) {
-    if (isVM == true) {
+  Color diemDanhColors() {
+    if (isVangMat == true) {
       return infoColor;
-    } else if (isVM == false || dD == true) {
+    } else if (isVangMat == false || diemDanh == true) {
       return deliveredColor;
-    } else if (isVM == false || dD == false) {
+    } else if (isVangMat == false || diemDanh == false) {
       return statusCalenderRed;
     } else {
       return backgroundColorApp;
