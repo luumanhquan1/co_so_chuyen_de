@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_re
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_phan_loai_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_yknd_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/search_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/thong_tin_y_kien_nguoi_dan_resopnse.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/y_kien_nguoi_dan/y_kien_nguoi_dan_service.dart';
@@ -87,14 +88,37 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
   }
 
   @override
-  Future<Result<ChiTietYKNDModel>> chiTietYKienNguoiDan(
+  Future<Result<ChiTietYKNDDataModel>> chiTietYKienNguoiDan(
       String kienNghiId, String taskId) {
-    return runCatchingAsync<ChiTietKienNghiResponse, ChiTietYKNDModel>(
+    return runCatchingAsync<ChiTietKienNghiResponse, ChiTietYKNDDataModel>(
       () => _yKienNguoIDanService.chiTietYKienNguoiDan(
         ChiTietKienNghiRequest(
           kienNghiId: kienNghiId,
           taskId: taskId,
         ),
+      ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<DanhSachYKienNguoiDan>> searchYKienNguoiDan(
+      String tuNgay,
+      String denNgay,
+      int pageSize,
+      int pageNumber,
+      String tuKhoa,
+      String userId,
+      String donViId) {
+    return runCatchingAsync<SearchYKienNguoiDanResponse, DanhSachYKienNguoiDan>(
+      () => _yKienNguoIDanService.searchDanhSachYKienNguoiDan(
+        tuNgay,
+        denNgay,
+        pageSize,
+        pageNumber,
+        tuKhoa,
+        userId,
+        donViId,
       ),
       (res) => res.toDomain(),
     );

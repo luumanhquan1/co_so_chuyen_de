@@ -1,10 +1,102 @@
 enum DoiTuongType { CANHAN, DOANHNGHIEP, TOCHUC, COQUANNHANUOC }
 
-class ChiTietYKNDModel {
-  HeaderChiTietYKNDModel headerChiTietYKNDModel;
-  NguoiPhanAnhModel nguoiPhanAnhModel;
+class ChiTietYKNDDataModel {
+  ChiTietYKNDModel chiTietYKNDModel;
 
-  ChiTietYKNDModel({required this.headerChiTietYKNDModel, required this.nguoiPhanAnhModel});
+  ChiTietYKNDDataModel({required this.chiTietYKNDModel});
+}
+
+class ChiTietYKNDModel {
+  String fileDinhKem;
+  String taskFileDinhKem;
+  String luongXuLy;
+  String yKienChiDao;
+  String task;
+  String donViDuocPhanXuLy;
+  bool isDuyet;
+  bool isDraft;
+  int linhVucId;
+  String tenLuat;
+  String phanLoaiPAKN;
+  String soPAKN;
+  String tieuDe;
+  String noiDung;
+  int nguonPAKNId;
+  String tenNguonPAKN;
+  int luatId;
+  int noiDungPAKNId;
+  int linhVucPAKNId;
+  String dSTaiLieuDinhKem;
+  int doiTuongId;
+  String tenNguoiPhanAnh;
+  String cMTND;
+  String email;
+  String soDienThoai;
+  String diaChi;
+  int tinhId;
+  int huyenId;
+  int xaId;
+  String donViXuLyId;
+  int trangThai;
+  String nguoiTaoId;
+  String ngayNhan;
+  String ngayPhanAnh;
+  int noiTao;
+  String diaChiChiTiet;
+  String hanXuLy;
+  String nguoiXuLyId;
+  bool laPAKNChuyenLaiChoTiepNhan;
+  bool laPAKNChuyenLaiChoChuyenXuLy;
+  bool laPAKNChuyenLaiChoTiepNhanXuLy;
+  String id;
+  String thoiGianTaoMoi;
+  String thoiGianCapNhat;
+
+  ChiTietYKNDModel(
+      this.fileDinhKem,
+      this.taskFileDinhKem,
+      this.luongXuLy,
+      this.yKienChiDao,
+      this.task,
+      this.donViDuocPhanXuLy,
+      this.isDuyet,
+      this.isDraft,
+      this.linhVucId,
+      this.tenLuat,
+      this.phanLoaiPAKN,
+      this.soPAKN,
+      this.tieuDe,
+      this.noiDung,
+      this.nguonPAKNId,
+      this.luatId,
+      this.noiDungPAKNId,
+      this.linhVucPAKNId,
+      this.dSTaiLieuDinhKem,
+      this.doiTuongId,
+      this.tenNguoiPhanAnh,
+      this.cMTND,
+      this.email,
+      this.soDienThoai,
+      this.diaChi,
+      this.tinhId,
+      this.huyenId,
+      this.xaId,
+      this.donViXuLyId,
+      this.trangThai,
+      this.nguoiTaoId,
+      this.ngayNhan,
+      this.ngayPhanAnh,
+      this.noiTao,
+      this.diaChiChiTiet,
+      this.hanXuLy,
+      this.nguoiXuLyId,
+      this.laPAKNChuyenLaiChoTiepNhan,
+      this.laPAKNChuyenLaiChoChuyenXuLy,
+      this.laPAKNChuyenLaiChoTiepNhanXuLy,
+      this.id,
+      this.tenNguonPAKN,
+      this.thoiGianTaoMoi,
+      this.thoiGianCapNhat,);
 }
 
 class HeaderChiTietYKNDModel {
@@ -79,4 +171,14 @@ class KetQuaXuLy {
     this.noiDungXuLy,
     this.fileDinhKem,
   });
+}
+class ChiTietYKienNguoiDanRow{
+  final List<DataRowChiTietKienNghi>dataHeaderRow;
+  final List<DataRowChiTietKienNghi>thongTinPhanAnhRow;
+  final List<DataRowChiTietKienNghi>thomgTinXuLyRow;
+  final List<DataRowChiTietKienNghi>ketQuaXuLyRow;
+  final List<DataRowChiTietKienNghi>tienTrinhXuLy;
+
+  ChiTietYKienNguoiDanRow(this.dataHeaderRow, this.thongTinPhanAnhRow,
+      this.thomgTinXuLyRow, this.ketQuaXuLyRow, this.tienTrinhXuLy,);
 }

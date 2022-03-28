@@ -61,7 +61,10 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                  const ChiTietYKNDScreen(),
+                                   ChiTietYKNDScreen(
+                                    iD: listData[index].id,
+                                     taskID: listData[index].taskID,
+                                  ),
                                 ),
                               );
                             },

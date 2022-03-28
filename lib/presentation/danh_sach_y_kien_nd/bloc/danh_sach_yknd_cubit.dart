@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_state.dart';
@@ -19,71 +20,31 @@ class DanhSachYKienNguoiDanCubit extends BaseCubit<YKienNguoiDanState> {
       _listYKienNguoiDan.stream;
 
   Stream<bool> get selectSreach => _selectSreach.stream;
+  String donViId = '';
+  String userId = '';
 
   void setSelectSearch() {
     _selectSreach.sink.add(!_selectSreach.value);
   }
 
-  void callApi(){
+  void callApi() {
+    getUserData();
     getDanhSachYKienNguoiDan(
       '01/03/2022',
       '25/03/2022',
       10,
       1,
-      '39227131-3db7-48f8-a1b2-57697430cc69',
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
     );
   }
 
-
-  List<NguoiDanModel> listYKienNguoiDanFake = [
-    NguoiDanModel(
-        ngheNghiep: 'Nhan vien van phong that nghiep',
-        ngayThang: '18/10/2021',
-        ten: 'Ha Kieu Anh',
-        statusData: StatusYKien.DANG_XU_LY),
-    NguoiDanModel(
-        ngheNghiep: 'Nhan vien van phong that nghiep',
-        ngayThang: '18/10/2021',
-        ten: 'Ha Kieu Anh',
-        statusData: StatusYKien.QUA_HAN),
-    NguoiDanModel(
-        ngheNghiep: 'Nhan vien van phong that nghiep',
-        ngayThang: '18/10/2021',
-        ten: 'Ha Kieu Anh',
-        statusData: StatusYKien.DANG_XU_LY),
-    NguoiDanModel(
-        ngheNghiep: 'Nhan vien van phong that nghiep',
-        ngayThang: '18/10/2021',
-        ten: 'Ha Kieu Anh',
-        statusData: StatusYKien.DANG_XU_LY),
-    NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      statusData: StatusYKien.QUA_HAN,
-    ),
-    NguoiDanModel(
-      ngheNghiep: 'Nhan vien van phong that nghiep',
-      ngayThang: '18/10/2021',
-      ten: 'Ha Kieu Anh',
-      statusData: StatusYKien.DANG_XU_LY,
-    ),
-    NguoiDanModel(
-        ngheNghiep: 'Nhan vien van phong that nghiep',
-        ngayThang: '18/10/2021',
-        ten: 'Ha Kieu Anh',
-        statusData: StatusYKien.DANG_XU_LY),
-  ];
   final YKienNguoiDanRepository _YKNDRepo = Get.find();
+
   Future<void> getDanhSachYKienNguoiDan(
-      String tuNgay,
-      String denNgay,
-      int pageSize,
-      int pageNumber,
-      String userId,
-      String donViId,
-      ) async {
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+  ) async {
     showLoading();
     final result = await _YKNDRepo.danhSachYKienNguoiDan(
       tuNgay,
@@ -102,5 +63,66 @@ class DanhSachYKienNguoiDanCubit extends BaseCubit<YKienNguoiDanState> {
         return;
       },
     );
+  }
+
+  Future<void> searchDanhSachYKienNguoiDan({
+    required String tuNgay,
+    required String denNgay,
+    required int pageSize,
+    required int pageNumber,
+    required String tuKhoa,
+  }) async {
+    showLoading();
+    final result = await _YKNDRepo.searchYKienNguoiDan(
+      tuNgay,
+      denNgay,
+      pageSize,
+      pageNumber,
+      tuKhoa,
+      userId,
+      donViId,
+    );
+    showContent();
+    result.when(
+      success: (res) {
+        _listYKienNguoiDan.sink.add(res.listYKienNguoiDan);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  void getUserData() {
+    final DataUser? dataUser = HiveLocal.getDataUser();
+    if (dataUser != null) {
+      donViId = dataUser.userInformation?.donViTrucThuoc?.id ?? '';
+      userId = dataUser.userId ?? '';
+    }
+  }
+
+  void callSearchApi(
+    String tuKhoa,
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+  ) {
+    if (tuKhoa == '') {
+      getDanhSachYKienNguoiDan(
+        tuNgay,
+        denNgay,
+        pageSize,
+        pageNumber,
+      );
+    } else {
+      searchDanhSachYKienNguoiDan(
+        tuNgay: tuNgay,
+        denNgay: denNgay,
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+        tuKhoa: tuKhoa,
+      );
+    }
   }
 }

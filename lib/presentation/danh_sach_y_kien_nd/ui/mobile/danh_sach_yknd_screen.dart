@@ -1,7 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
@@ -14,7 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DanhSachYKND extends StatefulWidget {
-  const DanhSachYKND({Key? key}) : super(key: key);
+  final String startDate;
+  final String endDate;
+
+  const DanhSachYKND({required this.startDate, required this.endDate, Key? key})
+      : super(key: key);
 
   @override
   _DanhSachYKNDState createState() => _DanhSachYKNDState();
@@ -39,6 +42,15 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
             final selectData = snapshot.data ?? false;
             return selectData
                 ? TextFormField(
+                    onChanged: (value) {
+                      cubit.callSearchApi(
+                        value,
+                        widget.startDate,
+                        widget.endDate,
+                        10,
+                        1,
+                      );
+                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: S.current.tim_kiem,
@@ -93,18 +105,20 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
                     itemCount: listData.length,
                     itemBuilder: (context, index) {
                       return YKienNguoiDanCell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                const ChiTietYKNDScreen(),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>  ChiTietYKNDScreen(
+                                iD: listData[index].id,
+                                taskID: listData[index].taskID,
                               ),
-                            );
-                          },
+                            ),
+                          );
+                        },
                         title: listData[index].tieuDe,
                         dateTime: listData[index].ngayNhan,
-                        userName:'Ha Kieu Anh',
+                        userName: 'Ha Kieu Anh',
                         status: listData[index].soNgayToiHan,
                         userImage:
                             'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',

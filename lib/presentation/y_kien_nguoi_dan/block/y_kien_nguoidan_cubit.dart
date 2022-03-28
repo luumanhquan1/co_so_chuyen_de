@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
@@ -30,6 +32,8 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   bool isCheck = false;
   late String startDate;
   late String endDate;
+  String donViId = '';
+  String userId = '';
   final List<ChartData> listChartPhanLoai = [];
   final BehaviorSubject<DashboardTinhHinhXuLuModel> _dashBoardTinhHinhXuLy =
       BehaviorSubject<DashboardTinhHinhXuLuModel>();
@@ -44,7 +48,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       BehaviorSubject<List<YKienNguoiDanDashBroadItem>>();
 
   final BehaviorSubject<List<YKienNguoiDanModel>> _listYKienNguoiDan =
-  BehaviorSubject<List<YKienNguoiDanModel>>();
+      BehaviorSubject<List<YKienNguoiDanModel>>();
 
   Stream<List<YKienNguoiDanModel>> get danhSachYKienNguoiDan =>
       _listYKienNguoiDan.stream;
@@ -133,29 +137,40 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
 
   void callApi() {
-    // getDashBoardTinhHinhXuLy(
-    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-    //   startDate,
-    //   endDate,
-    // );
-    // getDashBoardPhanLoai(
-    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-    //   startDate,
-    //   endDate,
-    // );
-    // getThongTinYKienNguoiDan(
-    //   '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
-    //   startDate,
-    //   endDate,
-    // );
+    getUserData();
+    getDashBoardTinhHinhXuLy(
+      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      startDate,
+      endDate,
+    );
+    getDashBoardPhanLoai(
+      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      startDate,
+      endDate,
+    );
+    getThongTinYKienNguoiDan(
+      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      startDate,
+      endDate,
+    );
     getDanhSachYKienNguoiDan(
       '01/03/2022',
-      '25/03/2022',
+      '28/03/2022',
       10,
       1,
-      '39227131-3db7-48f8-a1b2-57697430cc69',
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      userId,
+      donViId,
     );
+
+    // searchDanhSachYKienNguoiDan(
+    //   '01/03/2022',
+    //   '28/03/2022',
+    //   10,
+    //   1,
+    //   'tho o',
+    //   userId,
+    //   donViId,
+    // );
   }
 
   final YKienNguoiDanRepository _YKNDRepo = Get.find();
@@ -334,12 +349,44 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       userId,
       donViId,
     );
-     showContent();
+    showContent();
     result.when(
       success: (res) {
         _listYKienNguoiDan.sink.add(res.listYKienNguoiDan);
       },
       error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> searchDanhSachYKienNguoiDan(
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+    String tuKhoa,
+    String userId,
+    String donViId,
+  ) async {
+    showLoading();
+    final result = await _YKNDRepo.searchYKienNguoiDan(
+      tuNgay,
+      denNgay,
+      pageSize,
+      pageNumber,
+      tuKhoa,
+      userId,
+      donViId,
+    );
+    showContent();
+    result.when(
+      success: (res) {
+        print('-------------------------- thanh cong-------------------------');
+        print(res.listYKienNguoiDan.length);
+      },
+      error: (err) {
+        print('-------------------------- that bai-------------------------');
         return;
       },
     );
@@ -364,5 +411,13 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   void initTimeRange() {
     startDate = DateTime.now().toStringWithListFormat;
     endDate = DateTime.now().toStringWithListFormat;
+  }
+
+  void getUserData() {
+    final DataUser? dataUser = HiveLocal.getDataUser();
+    if (dataUser != null) {
+      donViId = dataUser.userInformation?.donViTrucThuoc?.id ?? '';
+      userId = dataUser.userId ?? '';
+    }
   }
 }

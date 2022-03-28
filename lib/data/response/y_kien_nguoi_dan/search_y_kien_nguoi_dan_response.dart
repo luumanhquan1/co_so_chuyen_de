@@ -1,23 +1,23 @@
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'danh_sach_y_kien_nguoi_dan_response.g.dart';
+part 'search_y_kien_nguoi_dan_response.g.dart';
 
 @JsonSerializable()
-class DanhSachYKienNguoiDanResponse {
+class SearchYKienNguoiDanResponse {
   @JsonKey(name: 'DanhSachKetQua')
   List<YKienNguoiDanData>? listDanhSachYKien;
 
-  DanhSachYKienNguoiDanResponse(this.listDanhSachYKien);
+  SearchYKienNguoiDanResponse(this.listDanhSachYKien);
 
-  factory DanhSachYKienNguoiDanResponse.fromJson(Map<String, dynamic> json) =>
-      _$DanhSachYKienNguoiDanResponseFromJson(json);
+  factory SearchYKienNguoiDanResponse.fromJson(Map<String, dynamic> json) =>
+      _$SearchYKienNguoiDanResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DanhSachYKienNguoiDanResponseToJson(this);
+  Map<String, dynamic> toJson() => _$SearchYKienNguoiDanResponseToJson(this);
 
   DanhSachYKienNguoiDan toDomain() => DanhSachYKienNguoiDan(
-      listYKienNguoiDan:
-          listDanhSachYKien?.map((e) => e.toDomain()).toList() ?? [],);
+    listYKienNguoiDan:
+    listDanhSachYKien?.map((e) => e.toDomain()).toList() ?? [],);
 }
 
 @JsonSerializable()
@@ -34,12 +34,12 @@ class YKienNguoiDanData {
   String? taskId;
 
   YKienNguoiDanData(
-    this.id,
-    this.tieuDe,
-    this.ngayNhan,
-    this.soNgayToiHan,
-    this.taskId,
-  );
+      this.id,
+      this.tieuDe,
+      this.ngayNhan,
+      this.soNgayToiHan,
+      this.taskId,
+      );
 
   factory YKienNguoiDanData.fromJson(Map<String, dynamic> json) =>
       _$YKienNguoiDanDataFromJson(json);
@@ -47,10 +47,10 @@ class YKienNguoiDanData {
   Map<String, dynamic> toJson() => _$YKienNguoiDanDataToJson(this);
 
   YKienNguoiDanModel toDomain() => YKienNguoiDanModel(
-        id: id ?? '',
-        tieuDe: tieuDe ?? '',
-        ngayNhan: ngayNhan ?? '',
-        soNgayToiHan: soNgayToiHan ?? 0,
-        taskID: taskId??'',
-      );
+    id: id ?? '',
+    tieuDe: tieuDe ?? '',
+    ngayNhan: ngayNhan ?? '',
+    soNgayToiHan: soNgayToiHan ?? 0,
+    taskID: taskId??'',
+  );
 }

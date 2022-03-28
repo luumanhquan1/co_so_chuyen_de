@@ -17,19 +17,21 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   final BehaviorSubject<ChiTietYKNDModel> _chiTietYKND =
       BehaviorSubject<ChiTietYKNDModel>();
 
+  final BehaviorSubject<ChiTietYKienNguoiDanRow> _rowDataChiTietYKienNguoiDan =
+      BehaviorSubject<ChiTietYKienNguoiDanRow>();
+
+  Stream<ChiTietYKienNguoiDanRow> get rowDataChiTietYKienNguoiDan =>
+      _rowDataChiTietYKienNguoiDan.stream;
+
   Stream<List<DataRowChiTietKienNghi>> get headerChiTiet =>
       _headerChiTiet.stream;
 
   Stream<ChiTietYKNDModel> get chiTietYKND => _chiTietYKND.stream;
 
   Map<String, String> mapData = {};
+  final List<DataRowChiTietKienNghi> listData = [];
 
-  void callApi() {
-    chiTietYKienNguoiDan(
-      '957d3842-92ab-44a2-ac1b-fe3efe816bff',
-      '08dcc0b6-c7b4-46d6-ba1e-2660aeee7ddb',
-    );
-  }
+  List<DataRowChiTietKienNghi> dataRowHeader = [];
 
   String yKienXuLy = '';
   final fakeDataHeadler = HeaderChiTietYKNDModel(
@@ -126,84 +128,83 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     return listData;
   }
 
-  List<DataRowChiTietKienNghi> getMapDataNguoiPhananh() {
+  List<DataRowChiTietKienNghi> getMapDataNguoiPhananh(NguoiPhanAnhModel nguoiPhanAnhModel) {
     final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
       DataRowChiTietKienNghi(
           title: S.current.ten_ca_nhan_tc,
-          content: fakeDataNguoiPhanAnh.tenCaNhan ?? ''),
+          content: nguoiPhanAnhModel.tenCaNhan ?? ''),
     );
     listData.add(
       DataRowChiTietKienNghi(
           title: S.current.cmt_can_cuoc,
-          content: fakeDataNguoiPhanAnh.cmnd ?? ''),
+          content: nguoiPhanAnhModel.cmnd ?? ''),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.dia_chi_mail,
-        content: fakeDataNguoiPhanAnh.diaChiEmail ?? '',
+        content: nguoiPhanAnhModel.diaChiEmail ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.so_dien_thoai,
-        content: fakeDataNguoiPhanAnh.soDienthoai ?? '',
+        content: nguoiPhanAnhModel.soDienthoai ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.dia_chi_chi_tiet,
-        content: fakeDataNguoiPhanAnh.diaChiChiTiet ?? '',
+        content: nguoiPhanAnhModel.diaChiChiTiet ?? '',
       ),
     );
     return listData;
   }
 
   List<DataRowChiTietKienNghi> getMapDataHeader(
-      HeaderChiTietYKNDModel fakeDataHeadler) {
-    final List<DataRowChiTietKienNghi> listData = [];
+      HeaderChiTietYKNDModel dataHeader) {
     listData.add(
       DataRowChiTietKienNghi(
-          title: S.current.tieu_de, content: fakeDataHeadler.tieuDe ?? ''),
+          title: S.current.tieu_de, content: dataHeader.tieuDe ?? ''),
     );
     listData.add(
       DataRowChiTietKienNghi(
-          title: S.current.noidung, content: fakeDataHeadler.noiDung ?? ''),
+          title: S.current.noidung, content: dataHeader.noiDung ?? ''),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.nguon_pakn,
-        content: fakeDataHeadler.nguonPAKN ?? '',
+        content: dataHeader.nguonPAKN ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.phan_loai_pakn,
-        content: fakeDataHeadler.phanLoaiPAKN ?? '',
+        content: dataHeader.phanLoaiPAKN ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.ngay_phan_anh,
-        content: fakeDataHeadler.ngayPhanAnh ?? '',
+        content: dataHeader.ngayPhanAnh ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.han_xu_ly,
-        content: fakeDataHeadler.hanXuLy ?? '',
+        content: dataHeader.hanXuLy ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.lien_quan_quy_dinh,
-        content: fakeDataHeadler.quyDinhLuat ?? '',
+        content: dataHeader.quyDinhLuat ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.tai_lieu_dinh_kem_cong_dan,
-        content: fakeDataHeadler.taiLieuCongDan ?? '',
+        content: dataHeader.taiLieuCongDan ?? '',
       ),
     );
     return listData;
@@ -211,7 +212,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
 
   final YKienNguoiDanRepository _YKNDRepo = Get.find();
 
-  Future<void> chiTietYKienNguoiDan(
+  Future<void> getchiTietYKienNguoiDan(
     String kienNghiId,
     String taskId,
   ) async {
@@ -223,7 +224,29 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
-        _headerChiTiet.sink.add(getMapDataHeader(res.headerChiTietYKNDModel));
+        final data = res.chiTietYKNDModel;
+        // final HeaderChiTietYKNDModel headerChiTietYKNDModel =
+        //     HeaderChiTietYKNDModel(
+        //   tieuDe: data.tieuDe,
+        //   noiDung: data.noiDung,
+        //   nguonPAKN: data.tenNguonPAKN,
+        //   phanLoaiPAKN: data.phanLoaiPAKN,
+        //   ngayPhanAnh: data.ngayPhanAnh,
+        //   hanXuLy: data.hanXuLy,
+        //   quyDinhLuat: data.tenLuat,
+        //   taiLieuCongDan: data.fileDinhKem,
+        // );
+        // dataRowHeader = getMapDataHeader(headerChiTietYKNDModel);
+        // final NguoiPhanAnhModel nguoiPhanAnhModel = NguoiPhanAnhModel(
+        //   doiTuong: data.doiTuongId,
+        //   tenCaNhan: data.tenNguoiPhanAnh,
+        //   cmnd: data.cMTND,
+        //   diaChiChiTiet: data.diaChiChiTiet,
+        //   diaChiEmail: data.email,
+        //   soDienthoai: data.soDienThoai,
+        // );
+        // List<DataRowChiTietKienNghi> dataRowThongTinXuLy =
+        //     getMapDataNguoiPhananh(nguoiPhanAnhModel);
       },
       error: (err) {
         return;

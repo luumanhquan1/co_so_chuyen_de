@@ -13,7 +13,11 @@ import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietYKNDScreen extends StatefulWidget {
-  const ChiTietYKNDScreen({Key? key}) : super(key: key);
+  final String iD;
+  final String taskID;
+
+  const ChiTietYKNDScreen({Key? key, required this.iD, required this.taskID})
+      : super(key: key);
 
   @override
   _ChiTietYKNDScreenState createState() => _ChiTietYKNDScreenState();
@@ -24,9 +28,9 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
   ChiTietYKienNguoiDanCubit cubit = ChiTietYKienNguoiDanCubit();
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
-     cubit.callApi();
+    cubit.getchiTietYKienNguoiDan(widget.iD, widget.taskID);
   }
 
   @override
@@ -53,10 +57,10 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: StreamBuilder<List<DataRowChiTietKienNghi>>(
                   stream: cubit.headerChiTiet,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? [];
+                  builder: (context,snapshot){
+                    final dataRow=snapshot.data??[];
                     return ChiTietYKNDHeader(
-                      listRow: data,
+                      listRow: dataRow,
                     );
                   },
                 ),
@@ -65,7 +69,7 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
                 name: S.current.thong_tin_nguoi_phan_anh,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: ThongTinNguoiPhanAnh(
                     cubit: cubit,
                   ),
@@ -75,7 +79,7 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
                 name: S.current.thong_tin_xu_ly_phan_anh,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: ThongTinXuLyPhanAnh(
                     cubit: cubit,
                   ),
@@ -85,7 +89,7 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
                 name: S.current.ket_qua_xu_ly,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Column(
                     children: [
                       ItemRow(
@@ -103,7 +107,7 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
                 name: S.current.tien_trinh_xu_ly,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Column(
                     children: [
                       ItemRow(
