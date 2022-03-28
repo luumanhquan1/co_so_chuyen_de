@@ -109,159 +109,60 @@ class _KetLuanHopWidgetState extends State<KetLuanHopWidget> {
         padding: const EdgeInsets.only(top: 60),
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                StreamBuilder<KetLuanHopModel>(
-                  stream: widget.cubit.ketLuanHopStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final data = snapshot.data;
-                      return ItemKetLuanHopWidget(
-                        title: S.current.ket_luan_hop,
-                        time: data?.thoiGian ?? '',
-                        trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
-                        tinhTrang: data?.tinhTrang ?? TinhTrang.TrungBinh,
-                        id: widget.id,
-                        cubit: widget.cubit,
-                        onTap: () {
-                          isShow = !isShow;
-                          setState(() {});
-                        },
-                      );
-                    } else {
-                      return const SizedBox(
-                        height: 200,
-                        child: NodataWidget(),
-                      );
-                    }
-                  },
-                ),
-                StreamBuilder<DanhSachNhiemVuLichHopModel>(
-                  initialData: widget.cubit.danhSachNhiemVu,
-                  stream: widget.cubit.streamDanhSachNhiemVuLichHop,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final data = snapshot.data;
-                      return ItemDanhSachNhiemVu(
-                        hanXuLy: DateTime.parse(data?.hanXuLy ?? ''),
-                        loaiNV: data?.loaiNhiemVu ?? '',
-                        ndTheoDoi: data?.noiDungTheoDoi ?? '',
-                        soNhiemVu: data?.soNhiemVu ?? '',
-                        tinhHinhThucHien: data?.tinhHinhThucHienNoiBo ?? '',
-                        trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
-                      );
-                    } else {
-                      return const SizedBox(
-                        height: 200,
-                        child: NodataWidget(),
-                      );
-                    }
-                  },
-                )
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(
-                  height: 32,
-                ),
-                Align(
-                  alignment: const Alignment(0.9, 0.5),
-                  child: MenuSelectWidget(
-                    listSelect: [
-                      QData(
-                        urlImage: ImageAssets.icPlus2,
-                        text: S.current.tao_moi_nhiem_vu,
-                        onTap: () {
-                          showDiaLogTablet(
-                            context,
-                            title: S.current.tao_moi_nhiem_vu,
-                            child: const TaoMoiNhiemVuWidget(),
-                            isBottomShow: false,
-                            funcBtnOk: () {
-                              Navigator.pop(context);
-                            },
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icMessage,
-                        text: S.current.ket_luan_cuoc_hop,
-                        onTap: () {
-                          showDiaLogTablet(
-                            context,
-                            title: S.current.ket_luan_cuoc_hop,
-                            child: XemKetLuanHopWidget(
-                              cubit: widget.cubit,
-                            ),
-                            isBottomShow: false,
-                            funcBtnOk: () {
-                              Navigator.pop(context);
-                            },
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icDocument2,
-                        text: S.current.gui_mail_ket_luan,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_gui_mai_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              widget.cubit.sendMailKetLuatHop(widget.id);
-                            },
-                            title: S.current.gui_email,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.IcEmail),
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.Group2,
-                        text: S.current.thu_hoi,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_thu_hoi_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              Navigator.pop(context);
-                            },
-                            title: S.current.thu_hoi_ket_luan_hop,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.icThuHoiKL),
-                          );
-                        },
-                      ),
-                      QData(
-                        urlImage: ImageAssets.icDeleteRed,
-                        text: S.current.xoa,
-                        onTap: () {
-                          showDiaLog(
-                            context,
-                            textContent:
-                                S.current.ban_co_chac_chan_muon_xoa_klh_nay,
-                            btnLeftTxt: S.current.khong,
-                            funcBtnRight: () {
-                              widget.cubit.deleteKetLuanHop(
-                                  widget.cubit.xemKetLuanHopModel.id ?? '');
-                            },
-                            title: S.current.xoa_ket_luan_hop,
-                            btnRightTxt: S.current.dong_y,
-                            icon: SvgPicture.asset(ImageAssets.XoaKLHop),
-                          );
-                        },
-                      ),
-                    ],
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  StreamBuilder<KetLuanHopModel>(
+                    stream: widget.cubit.ketLuanHopStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final data = snapshot.data;
+                        return ItemKetLuanHopWidget(
+                          title: S.current.ket_luan_hop,
+                          time: data?.thoiGian ?? '',
+                          trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
+                          tinhTrang: data?.tinhTrang ?? TinhTrang.TrungBinh,
+                          id: widget.id,
+                          cubit: widget.cubit,
+                          onTap: () {
+                            isShow = !isShow;
+                            setState(() {});
+                          },
+                        );
+                      } else {
+                        return const SizedBox(
+                          height: 200,
+                          child: NodataWidget(),
+                        );
+                      }
+                    },
                   ),
-                ),
-              ],
-            )
+                  StreamBuilder<DanhSachNhiemVuLichHopModel>(
+                    initialData: widget.cubit.danhSachNhiemVu,
+                    stream: widget.cubit.streamDanhSachNhiemVuLichHop,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final data = snapshot.data;
+                        return ItemDanhSachNhiemVu(
+                          hanXuLy: DateTime.parse(data?.hanXuLy ?? ''),
+                          loaiNV: data?.loaiNhiemVu ?? '',
+                          ndTheoDoi: data?.noiDungTheoDoi ?? '',
+                          soNhiemVu: data?.soNhiemVu ?? '',
+                          tinhHinhThucHien: data?.tinhHinhThucHienNoiBo ?? '',
+                          trangThai: data?.trangThai ?? TrangThai.ChoDuyet,
+                        );
+                      } else {
+                        return const SizedBox(
+                          height: 200,
+                          child: NodataWidget(),
+                        );
+                      }
+                    },
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

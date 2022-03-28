@@ -806,5 +806,9 @@
   "khoi_tao_van_ban" : "Khởi tạo văn bản",
   "cap_nhat_van_ban" : "Cập nhật văn bản",
   "tim_kiem_theo_trich_yeu" : "Tìm kiếm theo trích yếu",
-  "ngay_bh" : "Ngày BH"
+  "ngay_bh" : "Ngày BH",
+  "tu_choi_tham_du" : "Từ chối tham dự",
+  "vang_mat" : "Vắng mặt",
+  "da_diem_danh" : "Đã điểm danh",
+  "chua_diem_danh" : "Chưa điểm danh"
 }

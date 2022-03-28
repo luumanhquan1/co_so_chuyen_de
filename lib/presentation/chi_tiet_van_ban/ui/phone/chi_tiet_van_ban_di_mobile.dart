@@ -65,7 +65,6 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   WidgetHeadChiTietVanBanDi(cubit: cubit),
-                  TepDinhKemMobile(cubit: cubit),
                   StreamBuilder<List<NguoiKyDuyetModel>>(
                       stream: cubit.nguoiKyDuyetVanBanDiSubject.stream,
                       builder: (context, snapshot) {
@@ -75,6 +74,7 @@ class _ChiTietVanBanDiMobileState extends State<ChiTietVanBanDiMobile> {
                           nguoiKyDuyetModel: data,
                         );
                       }),
+                  TepDinhKemMobile(cubit: cubit),
                   VBDiYKienXuLyExpandWidget(
                     cubit: cubit,
                   ),

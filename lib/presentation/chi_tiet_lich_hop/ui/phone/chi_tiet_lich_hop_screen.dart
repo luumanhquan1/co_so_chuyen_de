@@ -222,7 +222,9 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                   padding: EdgeInsets.only(bottom: 16),
                   child: ChuongTrinhHopWidget(),
                 ),
-                const MoiNguoiThamGiaWidget(),
+                MoiNguoiThamGiaWidget(
+                  cubit: cubit,
+                ),
                 const TaiLieuWidget(),
                 PhatBieuWidget(
                   cubit: cubit,

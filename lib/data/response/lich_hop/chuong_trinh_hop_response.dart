@@ -104,8 +104,8 @@ class CanBoItemResponse extends Equatable {
   String? tenCanBo;
 
   CanBoModel toModel() => CanBoModel(
-        tenCanBo: tenCanBo,
-        tenChucVu: tenChucVu,
+        tenCanBo: tenCanBo ?? '',
+        tenChucVu: tenChucVu ?? '',
         diemDanh: diemDanh,
         disable: disable,
         trangThai: trangThai,
@@ -114,11 +114,11 @@ class CanBoItemResponse extends Equatable {
         lichHopId: lichHopId,
         donViId: donViId,
         canBoId: canBoId,
-        vaiTro: vaiTro,
-        ghiChu: ghiChu,
+        vaiTro: vaiTro ?? '',
+        ghiChu: ghiChu ?? '',
         parentId: parentId,
         vaiTroThamGia: vaiTroThamGia,
-        email: email,
+        email: email ?? '',
         soDienThoai: soDienThoai,
         dauMoiLienHe: dauMoiLienHe,
         tenCoQuan: tenCoQuan,
