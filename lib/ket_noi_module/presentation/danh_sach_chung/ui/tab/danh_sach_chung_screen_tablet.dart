@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart'
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/tab/ket_noi_menu_tablet.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
@@ -24,10 +25,10 @@ class DanhSachChungScreenTablet extends StatefulWidget {
 
 class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
   late final KetNoiCubit cubit;
+  TaoSuKienCubit taoSuKienCubit = TaoSuKienCubit();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     cubit = KetNoiCubit();
   }
@@ -71,7 +72,17 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => KetNoiMenuTablet(
-                        cubit: cubit,
+                        taoSuKienCubit: taoSuKienCubit,
+                        onChange: (value) {
+                          if (mounted) setState(() {});
+                          cubit.sukien = value.alias ?? '';
+                        },
+                        onSelect: (value) {
+                          cubit.subCategory = value;
+                        },
+                        ontChangeTitle: (value) {
+                          cubit.headerSubject.sink.add(value);
+                        },
                       ),
                     ),
                   );
@@ -101,7 +112,10 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: snapshot.data?.getScreenMenuTablet(cubit: cubit) ??
+                  child: snapshot.data?.getScreenMenuTablet(
+                        cubit: cubit,
+                        idDauMucSuKien: '',
+                      ) ??
                       _content(),
                 ),
               ),

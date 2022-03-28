@@ -13,18 +13,18 @@ import 'package:flutter/material.dart';
 import 'danh_sach_chung_model.dart';
 
 class ItemKetNoiModel {
-  String icon;
-  TypeKetNoiMenu typeMenu;
-  TypeContainer type;
+  String? icon;
+  TypeKetNoiMenu? typeMenu;
+  TypeContainer? type;
   int? index;
   List<ItemKetNoiModel>? listWidget;
-  Function(BuildContext context, KetNoiCubit cubit) onTap;
+  Function(BuildContext context, KetNoiCubit cubit)? onTap;
 
   ItemKetNoiModel({
-    required this.icon,
-    required this.typeMenu,
-    required this.type,
-    required this.onTap,
+    this.icon,
+    this.typeMenu,
+    this.type,
+    this.onTap,
     this.index,
     this.listWidget,
   });
@@ -202,49 +202,72 @@ enum TypeKetNoiMenu {
 }
 
 extension GetScreenMenu on TypeKetNoiMenu {
-  void callApi(int page, KetNoiCubit cubit, TypeKetNoiMenu type) {
+  void callApi(
+    int page,
+    KetNoiCubit cubit,
+    TypeKetNoiMenu type,
+    String idDauMucSuKien,
+  ) {
     switch (this) {
       case TypeKetNoiMenu.Chung:
         {
-          cubit.getListChungKetNoi(
-            pageSize: cubit.pageSize,
+          // cubit.getListChungKetNoi(
+          //   pageSize: cubit.pageSize,
+          //   pageIndex: page,
+          //   type: cubit.type,
+          // );
+          cubit.getListCategory(
             pageIndex: page,
+            pageSize: cubit.pageSize,
+            idDauMucSuKien: idDauMucSuKien,
             type: cubit.type,
           );
 
           break;
         }
+      case TypeKetNoiMenu.CacCoQuanKhac:
+        {
+          cubit.getDataTrongNuoc(page, idDauMucSuKien);
+          break;
+        }
       case TypeKetNoiMenu.ChinhPhu:
         {
-          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          cubit.getDataTrongNuoc(page, idDauMucSuKien);
           break;
         }
 
       case TypeKetNoiMenu.CacToChuc:
         {
-          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          cubit.getDataTrongNuoc(page, idDauMucSuKien);
           break;
         }
 
       case TypeKetNoiMenu.CacDonViHanhChinh:
         {
-          cubit.getDataTrongNuoc(cubit.changeItemMenuSubject.value);
+          cubit.getDataTrongNuoc(page, idDauMucSuKien);
           break;
         }
     }
   }
 
-  Widget getScreenMenu({required KetNoiCubit cubit}) {
+  Widget getScreenMenu({
+    required KetNoiCubit cubit,
+    required String idDauMucSuKien,
+  }) {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: true,
-      callApi: (page) => {callApi(page, cubit, this)},
+      callApi: (page) => {callApi(page, cubit, this, idDauMucSuKien)},
       viewItem: (value, index) {
         switch (this) {
           case TypeKetNoiMenu.Chung:
             return ItemListChung(
               danhSachChungModel: value as DanhSachChungModel,
               index: index ?? 0,
+            );
+          case TypeKetNoiMenu.CacCoQuanKhac:
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
             );
 
           case TypeKetNoiMenu.ChinhPhu:
@@ -272,13 +295,16 @@ extension GetScreenMenu on TypeKetNoiMenu {
     );
   }
 
-  Widget getScreenMenuTablet({required KetNoiCubit cubit}) {
+  Widget getScreenMenuTablet({
+    required KetNoiCubit cubit,
+    required String idDauMucSuKien,
+  }) {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: false,
       crossAxisSpacing: 28,
       checkRatio: 1,
-      callApi: (page) => {callApi(page, cubit, this)},
+      callApi: (page) => {callApi(page, cubit, this, idDauMucSuKien)},
       viewItem: (value, index) {
         switch (this) {
           case TypeKetNoiMenu.Chung:

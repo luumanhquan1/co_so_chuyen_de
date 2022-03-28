@@ -810,5 +810,6 @@
   "tu_choi_tham_du" : "Từ chối tham dự",
   "vang_mat" : "Vắng mặt",
   "da_diem_danh" : "Đã điểm danh",
-  "chua_diem_danh" : "Chưa điểm danh"
+  "chua_diem_danh" : "Chưa điểm danh",
+  "ket_nois" : "ket-noi"
 }

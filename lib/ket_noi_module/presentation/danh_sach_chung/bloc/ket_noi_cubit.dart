@@ -13,14 +13,21 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   KetNoiCubit() : super(KetNoiStateInitial());
 
   KetNoiRepository get repo => Get.find();
+  String sukien = '';
+  String idDauMucSuKien = '';
   String textDay = '';
   int pageSize = 10;
   int pageIndex = 1;
   String type = 'KET-NOI';
-  DanhSachChungModel danhSachChungModel = DanhSachChungModel();
+  String subCategory = '';
+  ItemKetNoiModel itemKetNoiModel = ItemKetNoiModel();
+
   DataDanhSachChungModel dataDanhSachChungModel = DataDanhSachChungModel();
   BehaviorSubject<TypeKetNoiMenu> changeItemMenuSubject =
       BehaviorSubject.seeded(TypeKetNoiMenu.Chung);
+  BehaviorSubject<String> headerSubject = BehaviorSubject();
+
+  Stream<String> get streamHeader => headerSubject.stream;
 
   Stream<TypeKetNoiMenu> get streamTypeKetNoiMenu =>
       changeItemMenuSubject.stream;
@@ -32,45 +39,6 @@ class KetNoiCubit extends BaseCubit<BaseState> {
 
   void changeScreenMenu(TypeKetNoiMenu typeMenu) {
     changeItemMenuSubject.add(typeMenu);
-  }
-
-  Future<void> getDataTrongNuoc(TypeKetNoiMenu type) async {
-    final result = await repo.getDataTrongNuoc(
-      pageIndex,
-      1,
-      type.getCategory(),
-      true,
-    );
-    showLoading();
-
-    result.when(
-      success: (res) {
-        if (pageIndex == ApiConstants.PAGE_BEGIN) {
-          if (res.pageData?.isEmpty ?? true) {
-            showEmpty();
-          } else {
-            showContent();
-            emit(
-              CompletedLoadMore(
-                CompleteType.SUCCESS,
-                posts: res.pageData,
-              ),
-            );
-          }
-        } else {
-          emit(
-            CompletedLoadMore(
-              CompleteType.SUCCESS,
-              posts: res.pageData,
-            ),
-          );
-        }
-      },
-      error: (error) {
-        emit(const CompletedLoadMore(CompleteType.ERROR));
-        showError();
-      },
-    );
   }
 
   Future<void> getListChungKetNoi({
@@ -98,5 +66,84 @@ class KetNoiCubit extends BaseCubit<BaseState> {
         showError();
       },
     );
+  }
+
+  //
+  Future<void> getListCategory({
+    required int pageIndex,
+    required int pageSize,
+    required String idDauMucSuKien,
+    required String type,
+  }) async {
+    loadMorePage = pageIndex;
+    final result = await repo.listCategory(
+      pageIndex,
+      pageSize,
+      idDauMucSuKien,
+      type,
+    );
+    result.when(
+      success: (res) {
+        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+          if (res.pageData?.isEmpty ?? true) {
+            showEmpty();
+          } else {
+            showContent();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+          }
+        } else {
+          emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+        }
+      },
+      error: (error) {
+        emit(const CompletedLoadMore(CompleteType.ERROR));
+        showError();
+      },
+    );
+  }
+
+  //
+
+  Future<void> getDataTrongNuoc(int page, String idDauMucSuKiens) async {
+    loadMorePage = pageIndex;
+    final result = await repo.getDataTrongNuoc(
+      page,
+      1,
+      idDauMucSuKiens,
+      true,
+    );
+    result.when(
+      success: (res) {
+        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+          if (res.pageData?.isEmpty ?? true) {
+            showEmpty();
+          } else {
+            showContent();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+          }
+        } else {
+          emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
+        }
+      },
+      error: (error) {
+        emit(const CompletedLoadMore(CompleteType.ERROR));
+        showError();
+      },
+    );
+  }
+
+  String getSubCategory(String title) {
+    switch (title) {
+      case 'Các cơ quan khác':
+        return 'CAC_CQ_KHAC';
+      case 'Chính phủ':
+        return 'CHINH_PHU';
+      case 'Các tổ chức':
+        return 'CAC_TO_CHUC';
+      case 'Các đơn vị hành chính':
+        return 'CAC_DON_VI_HANH_CHINH';
+      default:
+        return 'CAC_CQ_KHAC';
+    }
   }
 }
