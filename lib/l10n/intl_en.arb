@@ -222,7 +222,7 @@
   "tuan": "Tuần",
   "thang": "Tháng",
   "lich_cua_toi": "Lịch của tôi",
-  "tao_lich_cong_tac_trong_nuoc": "Tạo lịch công tác trong nước",
+  "tao_lich_cong_tac": "Tạo lịch công tác",
   "lich_cong_tac_trong_nuoc": "Lịch công tác trong nước",
   "lich_lam_viec": "Lịch làm việc",
   "lich_cong_tac_nuoc_ngoai": "Lịch công tác nước ngoài",
@@ -804,5 +804,7 @@
   "huy_trinh_ky" : "Hủy trình ký",
   "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
   "khoi_tao_van_ban" : "Khởi tạo văn bản",
-  "cap_nhat_van_ban" : "Cập nhật văn bản"
+  "cap_nhat_van_ban" : "Cập nhật văn bản",
+  "tim_kiem_theo_trich_yeu" : "Tìm kiếm theo trích yếu",
+  "ngay_bh" : "Ngày BH"
 }

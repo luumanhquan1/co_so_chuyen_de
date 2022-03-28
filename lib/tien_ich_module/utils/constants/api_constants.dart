@@ -13,6 +13,7 @@ class ApiConstants {
   static const DELETE_DANH_BA_CA_NHAN = '/api/danhbadientu/{id}?';
   static const SEARCH_LIST_DANH_BA_CA_NHAN = '/api/danhbadientu/all';
   static const GET_LIST_DANH_BA_TO_CHUC = '/api/CanBo/search';
+  static const GET_TRA_CUU_VAN_BAN_PHAP_LUAT = '/api/VbPhapLuat/search';
 }
 
 class ImageConstants {
