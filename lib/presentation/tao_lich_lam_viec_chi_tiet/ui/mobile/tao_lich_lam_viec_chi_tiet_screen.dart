@@ -78,7 +78,7 @@ class _TaoLichLamViecChiTietScreenState
         taoLichLamViecCubit: taoLichLamViecCubit,
         child: Scaffold(
           appBar: BaseAppBar(
-            title: S.current.tao_lich_cong_tac_trong_nuoc,
+            title: S.current.tao_lich_cong_tac,
             leadingIcon: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,

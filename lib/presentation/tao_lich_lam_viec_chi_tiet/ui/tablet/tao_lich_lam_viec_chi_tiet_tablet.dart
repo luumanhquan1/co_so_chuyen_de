@@ -11,7 +11,6 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/lo
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/mau_mac_dinh_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nguoi_chu_tri_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/nhac_lai_widget.dart';
-import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/search_name_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/tai_lieu_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/text_form_widget.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/widget/thanh_phan_tham_gia_widget.dart';
@@ -84,7 +83,7 @@ class _TaoLichLamViecChiTietTabletState
         child: Scaffold(
           backgroundColor: bgWidgets,
           appBar: BaseAppBar(
-            title: S.current.tao_lich_cong_tac_trong_nuoc,
+            title: S.current.tao_lich_cong_tac,
             leadingIcon: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,
@@ -153,7 +152,7 @@ class _TaoLichLamViecChiTietTabletState
                                       key: _formKey,
                                       child: TextFormWidget(
                                         controller: tieuDeController,
-                                        image: ImageAssets.icEdit,
+                                        image:  ImageAssets.icEdit,
                                         hint: S.current.tieu_de,
                                         validator: (value) {
                                           return (value ?? '').checkNull();
@@ -163,7 +162,6 @@ class _TaoLichLamViecChiTietTabletState
                                     LoaiLichWidget(
                                       taoLichLamViecCubit: taoLichLamViecCubit,
                                     ),
-                                    const SearchNameWidget(),
                                     StartEndDateWidget(
                                       onEndDateTimeChanged: (DateTime value) {
                                         taoLichLamViecCubit
@@ -227,7 +225,7 @@ class _TaoLichLamViecChiTietTabletState
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             buttomWidget(
-                              title: S.current.huy,
+                              title: S.current.dong,
                               background: bgTag,
                               textColor: labelColor,
                               onTap: () {
@@ -238,7 +236,7 @@ class _TaoLichLamViecChiTietTabletState
                               width: 20,
                             ),
                             buttomWidget(
-                              title: S.current.tao_lich_lam_viec,
+                              title: S.current.luu,
                               background: textDefault,
                               textColor: Colors.white,
                               onTap: () async {
@@ -253,7 +251,10 @@ class _TaoLichLamViecChiTietTabletState
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
