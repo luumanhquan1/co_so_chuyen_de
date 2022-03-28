@@ -54,7 +54,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
               child: Column(
                 children: [
                   StreamBuilder<List<bool>>(
-                    stream: widget.cubit       .selectTypeCalendarSubject.stream,
+                    stream: widget.cubit.selectTypeCalendarSubject.stream,
                     builder: (context, snapshot) {
                       return Column(
                         children: [
@@ -194,129 +194,125 @@ class _MenuDSCVState extends State<MenuDSCV> {
             ),
           ),
         ),
-        body: Container(
-          child: StreamBuilder<List<bool>>(
-            stream: widget.cubit.selectTypeCalendarSubject.stream,
-            builder: (context, snapshot) {
-              return Column(
-                children: [
-                  const SizedBox(
-                    height: 24,
+        body: StreamBuilder<List<bool>>(
+          stream: widget.cubit.selectTypeCalendarSubject.stream,
+          builder: (context, snapshot) {
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TheoDangLichWidget(
+                    icon: ImageAssets.ic_CVcuaBan,
+                    name: S.current.cong_viec_cua_ban,
+                    onTap: () {
+                      widget.cubit.selectTypeCalendarSubject
+                          .add([true, false, false, false, false]);
+                      widget.theoDangLich();
+                      Navigator.pop(context);
+                    },
+                    isSelect: snapshot.data?[0] ?? true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TheoDangLichWidget(
-                      icon: ImageAssets.ic_CVcuaBan,
-                      name: S.current.cong_viec_cua_ban,
-                      onTap: () {
-                        widget.cubit.selectTypeCalendarSubject
-                            .add([true, false]);
-                        widget.theoDangLich();
-                        Navigator.pop(context);
-                      },
-                      isSelect: snapshot.data?[0] ?? true,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TheoDangLichWidget(
+                    icon: ImageAssets.ic_cvQT,
+                    name: S.current.cong_viec_quan_trong,
+                    onTap: () {
+                      widget.cubit.selectTypeCalendarSubject
+                          .add([false, true, false, false, false]);
+                      widget.TheoDangDanhSach();
+                      Navigator.pop(context);
+                    },
+                    isSelect: snapshot.data?[1] ?? true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TheoDangLichWidget(
-                      icon: ImageAssets.ic_cvQT,
-                      name: S.current.cong_viec_quan_trong,
-                      onTap: () {
-                        widget.cubit.selectTypeCalendarSubject
-                            .add([false, true]);
-                        widget.TheoDangDanhSach();
-                        Navigator.pop(context);
-                      },
-                      isSelect: snapshot.data?[1] ?? true,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TheoDangLichWidget(
+                    icon: ImageAssets.ic_cvFInish,
+                    name: S.current.da_hoan_thanh,
+                    onTap: () {
+                      widget.cubit.selectTypeCalendarSubject
+                          .add([false, false, true, false, false]);
+                      widget.theoDangLich();
+                      Navigator.pop(context);
+                    },
+                    isSelect: snapshot.data?[2] ?? true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TheoDangLichWidget(
-                      icon: ImageAssets.ic_cvFInish,
-                      name: S.current.da_hoan_thanh,
-                      onTap: () {
-                        widget.cubit.selectTypeCalendarSubject
-                            .add([true, false]);
-                        widget.theoDangLich();
-                        Navigator.pop(context);
-                      },
-                      isSelect: snapshot.data?[3] ?? true,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TheoDangLichWidget(
+                    icon: ImageAssets.ic_ganCHo_toi,
+                    name: S.current.gan_cho_toi,
+                    onTap: () {
+                      widget.cubit.selectTypeCalendarSubject
+                          .add([false, false, false, true, false]);
+                      widget.TheoDangDanhSach();
+                      Navigator.pop(context);
+                    },
+                    isSelect: snapshot.data?[3] ?? true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TheoDangLichWidget(
-                      icon: ImageAssets.ic_ganCHo_toi,
-                      name: S.current.gan_cho_toi,
-                      onTap: () {
-                        widget.cubit.selectTypeCalendarSubject
-                            .add([false, true]);
-                        widget.TheoDangDanhSach();
-                        Navigator.pop(context);
-                      },
-                      isSelect: snapshot.data?[4] ?? true,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TheoDangLichWidget(
+                    icon: ImageAssets.ic_CV_xoa,
+                    name: S.current.da_bi_xoa,
+                    onTap: () {
+                      widget.cubit.selectTypeCalendarSubject
+                          .add([false, false, false, false, true]);
+                      widget.theoDangLich();
+                      Navigator.pop(context);
+                    },
+                    isSelect: snapshot.data?[4] ?? true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TheoDangLichWidget(
-                      icon: ImageAssets.ic_CV_xoa,
-                      name: S.current.da_bi_xoa,
-                      onTap: () {
-                        widget.cubit.selectTypeCalendarSubject
-                            .add([true, false]);
-                        widget.theoDangLich();
-                        Navigator.pop(context);
-                      },
-                      isSelect: snapshot.data?[5] ?? true,
-                    ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          children: listMenuDSCV
-                              .map(
-                                (e) => ContainerMenuWidgetTablet(
-                                  name: e.typeMenu.getTitle(),
-                                  icon: e.icon,
-                                  index: e.index ?? 0,
-                                  childExpand: Column(
-                                    children: e.typeMenu ==
-                                            TypeMenuDSCV.NhomCVMoi
-                                        ? listNhomCVMoi
-                                            .map(
-                                              (e) => ContainerMenuWidgetTablet(
-                                                icon: e.icon,
-                                                name: e.typeMenu.getTitle(),
-                                                index: e.index ?? 0,
-                                                isIcon: false,
-                                                onTap: () {
-                                                  e.onTap(
-                                                      context, widget.cubit);
-                                                },
-                                              ),
-                                            )
-                                            .toList()
-                                        : [],
-                                  ),
-                                  onTap: () {
-                                    e.onTap(context, widget.cubit);
-                                  },
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: listMenuDSCV
+                            .map(
+                              (e) => ContainerMenuWidgetTablet(
+                                name: e.typeMenu.getTitle(),
+                                icon: e.icon,
+                                index: e.index ?? 0,
+                                childExpand: Column(
+                                  children: e.typeMenu == TypeMenuDSCV.NhomCVMoi
+                                      ? listNhomCVMoi
+                                          .map(
+                                            (e) => ContainerMenuWidgetTablet(
+                                              icon: e.icon,
+                                              name: e.typeMenu.getTitle(),
+                                              index: e.index ?? 0,
+                                              isIcon: false,
+                                              onTap: () {
+                                                e.onTap(context, widget.cubit);
+                                              },
+                                            ),
+                                          )
+                                          .toList()
+                                      : [],
                                 ),
-                              )
-                              .toList(),
-                        ),
+                                onTap: () {
+                                  e.onTap(context, widget.cubit);
+                                },
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
-                  )
-                ],
-              );
-            },
-          ),
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
