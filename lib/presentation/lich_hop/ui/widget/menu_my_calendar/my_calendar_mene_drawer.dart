@@ -163,8 +163,10 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                                 .titleAppbar =
                                                             e.name;
                                                         widget.cubit
-                                                                .idDonViLanhDao=
-                                                            e.idLanhDao;
+                                                            .idDonViLanhDao = e
+                                                                .menuModel
+                                                                ?.id ??
+                                                            '';
                                                         Navigator.pop(
                                                           context,
                                                           e.typeMenu,
@@ -334,12 +336,11 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                   index: e.index ?? 0,
                                                   isIcon: false,
                                                   onTap: () {
-                                                    widget.cubit
-                                                        .titleAppbar =
+                                                    widget.cubit.titleAppbar =
                                                         e.name;
                                                     widget.cubit
-                                                        .idDonViLanhDao=
-                                                        e.idLanhDao;
+                                                            .idDonViLanhDao =
+                                                        e.menuModel?.id ?? '';
                                                     Navigator.pop(
                                                       context,
                                                       e.typeMenu,

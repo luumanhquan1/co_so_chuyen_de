@@ -1,8 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
-import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
@@ -11,21 +10,20 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/state_select_lich_ho
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'mobile/lich_hop_extension.dart';
 
 class ItemThongBaoModelMyCalender {
-  String idLanhDao;
   TypeCalendarMenu typeMenu;
   TypeContainer type;
   int? index;
   List<ItemThongBaoModelMyCalender>? listWidget;
   String name;
+  MenuModel? menuModel;
 
   ItemThongBaoModelMyCalender({
     required this.typeMenu,
     required this.type,
-    this.idLanhDao = '',
+    this.menuModel,
     this.index,
     this.listWidget,
     this.name = '',

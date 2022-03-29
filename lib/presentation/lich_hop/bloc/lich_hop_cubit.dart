@@ -118,11 +118,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         value.forEach((element) {
           listLanhDaoLichHop.add(
             ItemThongBaoModelMyCalender(
-              idLanhDao: element.id ?? '',
               typeMenu: TypeCalendarMenu.LichTheoLanhDao,
               type: TypeContainer.number,
               name: element.tenDonVi ?? '',
               index: element.count,
+              menuModel: element,
             ),
           );
         });
@@ -266,8 +266,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     menuCalendar();
     postEventsCalendar();
   }
-
-
 
   Future<void> postDanhSachLichHop() async {
     showLoading();

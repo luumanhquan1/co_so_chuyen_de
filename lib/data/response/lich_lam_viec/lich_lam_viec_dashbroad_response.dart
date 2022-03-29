@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'lich_lam_viec_dashbroad_response.g.dart';
@@ -98,7 +98,7 @@ class DataLichLamViecResponse {
 
   List<Object?> get props => throw [];
 
-  LichLamViecDashBroad toDomain() => LichLamViecDashBroad(
+  DashBoardLichHopModel toDomain() => DashBoardLichHopModel(
         countScheduleCaNhan: countScheduleCaNhan,
         soLichCanBaoCao: soLichCanBaoCao,
         soLichCanChuTriDuyetCho: soLichCanChuTriDuyetCho,

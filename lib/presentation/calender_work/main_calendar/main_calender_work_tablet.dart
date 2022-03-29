@@ -1,13 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/lich_lv_extension.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/widget_select_option_header.dart';
@@ -16,6 +15,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/tablet/ta
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_cubit.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class CalenderWorkDayTablet extends StatefulWidget {
 
 class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   CalenderCubit cubit = CalenderCubit();
+  MenuCalendarCubit cubitMenu = MenuCalendarCubit();
 
   @override
   void initState() {
@@ -57,20 +59,58 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   ? cubit.titleAppbar
                   : snapshot.data?.getTitle() ??
                       TypeCalendarMenu.LichCuaToi.getTitle(),
-              leadingIcon: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CalendarWorkMenuTablet(
-                        cubit: cubit,
-                      ),
+              leadingIcon: BlocBuilder<CalenderCubit, CalenderState>(
+                bloc: cubit,
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MenuWidget(
+                            isBaoCaoThongKe: false,
+                            onTap: (value) {
+                              if (value == S.current.theo_dang_lich) {
+                                cubit.chooseTypeListLv(
+                                  Type_Choose_Option_List.DANG_LICH,
+                                );
+                              }
+
+                              if (value == S.current.theo_dang_danh_sach) {
+                                cubit.chooseTypeListLv(
+                                  Type_Choose_Option_List.DANG_LIST,
+                                );
+                              }
+
+                              cubit.index.sink.add(0);
+                            },
+                            listItem: listThongBao,
+                            onTapLanhDao: (value) {
+                              final data = value as TypeCalendarMenu;
+                              cubit.changeScreenMenu(data);
+                              if (data == TypeCalendarMenu.LichTheoLanhDao) {}
+                              if (state.type == Type_Choose_Option_Day.DAY) {
+                                cubit.callApi();
+                              } else if (state.type ==
+                                  Type_Choose_Option_Day.WEEK) {
+                                cubit.callApiTuan();
+                              } else {
+                                cubit.callApiMonth();
+                              }
+                            },
+                            cubit: cubitMenu,
+                            streamDashBoard:
+                                cubit.lichLamViecDashBroadSubject.stream,
+                            title: S.current.lich_lam_viec,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: SvgPicture.asset(
+                      ImageAssets.icMenuCalender,
                     ),
                   );
                 },
-                icon: SvgPicture.asset(
-                  ImageAssets.icMenuCalender,
-                ),
               ),
             ),
             body: Column(
@@ -93,22 +133,19 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                   onTapDay: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.DAY);
-                    cubit.listDSLV.clear();
-                    cubit.page = 1;
+
                     cubit.callApi();
                   },
                   onTapWeek: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.WEEK);
-                    cubit.listDSLV.clear();
-                    cubit.page = 1;
+
                     cubit.callApiTuan();
                   },
                   onTapMonth: () {
                     setState(() {});
                     cubit.chooseTypeCalender(Type_Choose_Option_Day.MONTH);
-                    cubit.listDSLV.clear();
-                    cubit.page = 1;
+
                     cubit.callApiMonth();
                   },
                   cubit: cubit,
@@ -165,8 +202,8 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                           height: 116,
                           child: Row(
                             children: [
-                              StreamBuilder<LichLamViecDashBroad>(
-                                initialData: LichLamViecDashBroad.empty(),
+                              StreamBuilder<DashBoardLichHopModel>(
+                                initialData: DashBoardLichHopModel.empty(),
                                 stream: cubit.streamLichLamViec,
                                 builder: (context, snapshot) {
                                   return CustomItemCalenderWorkTablet(
