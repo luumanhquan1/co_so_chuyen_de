@@ -84,13 +84,11 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                                 width: 15.0.textScale(space: 8),
                               )
                       else
-                        Container(
-                          color: Colors.black,
+                       const SizedBox(
                           height: 15,
                           width: 15,
                         ),
                       Container(
-                        color: Colors.blue,
                         width: 14.0.textScale(),
                       ),
                       Expanded(

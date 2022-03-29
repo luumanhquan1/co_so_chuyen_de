@@ -2,9 +2,10 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/styles.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.dart';
-import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/tab/ket_noi_menu_tablet.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
@@ -31,18 +32,19 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
   void initState() {
     super.initState();
     cubit = KetNoiCubit();
+    taoSuKienCubit.callApi();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<TypeKetNoiMenu>(
-      stream: cubit.streamTypeKetNoiMenu,
+    return StreamBuilder<String>(
+      stream: cubit.streamHeader,
       builder: (context, snapshot) {
+        final data = snapshot.data ?? S.current.chung;
         return Scaffold(
           backgroundColor: bgWidgets,
           appBar: BaseAppBar(
-            title:
-                snapshot.data?.getTitle() ?? TypeKetNoiMenu.SuKien.getTitle(),
+            title: data,
             leadingIcon: IconButton(
               onPressed: () => {Navigator.pop(context)},
               icon: SvgPicture.asset(
@@ -97,7 +99,12 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (snapshot.data == TypeKetNoiMenu.Chung)
+              if (cubit.sukien == S.current.ket_nois)
+                Container(
+                  padding: const EdgeInsets.only(top: 28, left: 30, right: 30),
+                  child: const SearchWidget(),
+                )
+              else
                 Container(
                   padding: const EdgeInsets.only(top: 24, left: 30),
                   child: Text(
@@ -106,17 +113,14 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
                       fontSize: 20,
                     ),
                   ),
-                )
-              else
-                const SearchWidget(),
+                ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: snapshot.data?.getScreenMenuTablet(
-                        cubit: cubit,
-                        idDauMucSuKien: '',
-                      ) ??
-                      _content(),
+                  padding: const EdgeInsets.only(
+                    left: 14,
+                    right: 14,
+                  ),
+                  child: _content(),
                 ),
               ),
             ],
@@ -127,22 +131,30 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
   }
 
   void callApi(int page) {
-    cubit.getListChungKetNoi(
-      pageSize: cubit.pageSize,
-      pageIndex: page,
-      type: cubit.type,
-    );
+    cubit.sukien == S.current.ket_nois
+        ? cubit.getDataTrongNuoc(page, cubit.subCategory)
+        : cubit.getListCategory(
+            pageIndex: page,
+            pageSize: cubit.pageSize,
+            idDauMucSuKien: cubit.subCategory,
+            type: cubit.type,
+          );
   }
 
   Widget _content() {
     return ListViewLoadMore(
       cubit: cubit,
       isListView: false,
+      checkRatio: 1,
       callApi: (page) => {callApi(page)},
-      viewItem: (value, index) => ItemListChung(
-        danhSachChungModel: value as DanhSachChungModel,
-        index: index ?? 0,
-      ),
+      viewItem: (value, index) => cubit.sukien == S.current.ket_nois
+          ? ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            )
+          : ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
+            ),
     );
   }
 }
