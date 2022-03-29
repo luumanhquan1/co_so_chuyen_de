@@ -34,7 +34,7 @@ class ItemTableTopicTablet extends StatelessWidget {
                 offset:  Offset(1, 1), // changes position of shadow
               ),
             ],
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: cellColorborder,
             ),
