@@ -1,12 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_yknd/bloc/chi_tiet_y_kien_nguoidan_cubit.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/widget/chi_tiet_header.dart';
 import 'package:flutter/material.dart';
 
 class ThongTinXuLyPhanAnh extends StatefulWidget {
-  final ChiTietYKienNguoiDanCubit cubit;
+  final List<DataRowChiTietKienNghi> listRow;
 
-  const ThongTinXuLyPhanAnh({Key? key, required this.cubit}) : super(key: key);
+  const ThongTinXuLyPhanAnh({Key? key, required this.listRow}) : super(key: key);
 
   @override
   _ThongTinXuLyPhanAnhState createState() => _ThongTinXuLyPhanAnhState();
@@ -15,7 +15,6 @@ class ThongTinXuLyPhanAnh extends StatefulWidget {
 class _ThongTinXuLyPhanAnhState extends State<ThongTinXuLyPhanAnh> {
   @override
   Widget build(BuildContext context) {
-    final data = widget.cubit.getMapDataThongTinXuLy();
     return Container(
       padding: const EdgeInsets.only(left: 16, top: 16),
       decoration: BoxDecoration(
@@ -26,11 +25,11 @@ class _ThongTinXuLyPhanAnhState extends State<ThongTinXuLyPhanAnh> {
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: data.length,
+        itemCount: widget.listRow.length,
         itemBuilder: (context, index) {
           return ItemRow(
-            title: data[index].title,
-            content: data[index].content,
+            title: widget.listRow[index].title,
+            content: widget.listRow[index].content,
           );
         },
       ),

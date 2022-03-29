@@ -1,4 +1,7 @@
+import 'dart:convert' as JSONs;
+
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'chi_tiet_kien_nghi_respnse.g.dart';
@@ -160,6 +163,7 @@ class ChiTietYKienNguoiDanData {
     this.tenNguonPAKN,
   );
 
+
   factory ChiTietYKienNguoiDanData.fromJson(Map<String, dynamic> json) =>
       _$ChiTietYKienNguoiDanDataFromJson(json);
 
@@ -198,10 +202,10 @@ class ChiTietYKienNguoiDanData {
         trangThai ?? 0,
         nguoiTaoId ?? '',
         ngayNhan ?? '',
-        ngayPhanAnh ?? '',
+        DateTime.parse(ngayPhanAnh ?? '').toStringWithListFormat,
         noiTao ?? 0,
         diaChiChiTiet ?? '',
-        hanXuLy ?? '',
+        DateTime.parse(hanXuLy ?? '').toStringWithListFormat,
         nguoiXuLyId ?? '',
         laPAKNChuyenLaiChoTiepNhan ?? false,
         laPAKNChuyenLaiChoChuyenXuLy ?? false,
@@ -209,6 +213,41 @@ class ChiTietYKienNguoiDanData {
         id ?? '',
         thoiGianTaoMoi ?? '',
         thoiGianCapNhat ?? '',
-        tenNguonPAKN??'',
+        tenNguonPAKN ?? '',
+      );
+}
+
+@JsonSerializable()
+class FileDataResopne {
+  @JsonKey(name: 'DungLuong')
+  int? dungLuong;
+  @JsonKey(name: 'DuoiMoRong')
+  String? duoiMoRong;
+  @JsonKey(name: 'DuongDan')
+  String? duongDan;
+  @JsonKey(name: 'KieuDinhKem')
+  String? kieuDinhKem;
+  @JsonKey(name: 'Ten')
+  String? tenFile;
+
+  FileDataResopne(
+    this.dungLuong,
+    this.duoiMoRong,
+    this.duongDan,
+    this.kieuDinhKem,
+    this.tenFile,
+  );
+
+  factory FileDataResopne.fromJson(Map<String, dynamic> json) =>
+      _$FileDataResopneFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FileDataResopneToJson(this);
+
+  FileData toDomain() => FileData(
+        dungLuong: dungLuong ?? 0,
+        duoiMoRong: duoiMoRong ?? '',
+        duongDan: duongDan ?? '',
+        kieuDinhKem: kieuDinhKem ?? '',
+        tenFile: tenFile ?? '',
       );
 }

@@ -100,9 +100,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     ChartData(S.current.chua_thuc_hien, 14, choVaoSoColor),
   ];
   DocumentDashboardModel dashboardModel = DocumentDashboardModel(
-    soLuongTrongHan: 6,
-    soLuongDenHan: 12,
-    soLuongQuaHan: 20,
+    soLuongTrongHan: 0,
+    soLuongDenHan: 0,
+    soLuongQuaHan: 0,
   );
   List<ItemIndicator> listIndicator = [
     ItemIndicator(color: numberOfCalenders, title: S.current.cong_dvc_quoc_gia),
@@ -139,17 +139,17 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   void callApi() {
     getUserData();
     getDashBoardTinhHinhXuLy(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
     );
     getDashBoardPhanLoai(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
     );
     getThongTinYKienNguoiDan(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
     );
@@ -161,16 +161,6 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       userId,
       donViId,
     );
-
-    // searchDanhSachYKienNguoiDan(
-    //   '01/03/2022',
-    //   '28/03/2022',
-    //   10,
-    //   1,
-    //   'tho o',
-    //   userId,
-    //   donViId,
-    // );
   }
 
   final YKienNguoiDanRepository _YKNDRepo = Get.find();
@@ -197,32 +187,32 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choXuLy,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.tongSoPakn,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choTiepNhan,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choPhanCongXuLy,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choChoYKien,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choBoXungThongTin,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(
@@ -255,7 +245,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         final listDataTinhHinhXuLy = res.tinhHinhXuLyModel.listTinhHinh;
-        listDataTinhHinhXuLy
+        final List<ChartData>listChartTinhHinhxuLy= listDataTinhHinhXuLy
             .map(
               (e) => ChartData(
                 e.status,
@@ -266,7 +256,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
               ),
             )
             .toList();
-        _dashBoardTinhHinhXuLy.sink.add(res);
+        _chartTinhHinhXuLy.sink.add(listChartTinhHinhxuLy);
       },
       error: (err) {
         return;
@@ -382,11 +372,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
-        print('-------------------------- thanh cong-------------------------');
         print(res.listYKienNguoiDan.length);
       },
       error: (err) {
-        print('-------------------------- that bai-------------------------');
         return;
       },
     );
@@ -402,7 +390,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
         colorResult = daXuLyColor;
         break;
       case 'DANG_THUC_HIEN':
-        colorResult = choVaoSoColor;
+        colorResult = numberOfCalenders;
         break;
     }
     return colorResult;

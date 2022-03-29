@@ -25,6 +25,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
 
   Stream<List<DataRowChiTietKienNghi>> get headerChiTiet =>
       _headerChiTiet.stream;
+  int checkIndex = -1;
 
   Stream<ChiTietYKNDModel> get chiTietYKND => _chiTietYKND.stream;
 
@@ -44,7 +45,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     ngayPhanAnh: '22/10/2021',
     hanXuLy: '22/10/2021',
     quyDinhLuat: 'Luật Tổ chức Chính phủ',
-    taiLieuCongDan: 'file.pdf',
+    taiLieuCongDan: '',
   );
   final fakeDataNguoiPhanAnh = NguoiPhanAnhModel(
     doiTuong: 0,
@@ -69,66 +70,68 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     fileDinhKem: 'file.pdf',
   );
 
-  List<DataRowChiTietKienNghi> getMapDataKetQuaXuLy() {
+  List<DataRowChiTietKienNghi> getMapDataKetQuaXuLy(KetQuaXuLy ketQuaXuLy) {
     yKienXuLy = fakeKetQuaXuLy.yKienXuLy ?? '';
     final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.thoi_gian_thao_tac,
-        content: fakeKetQuaXuLy.thoiGianThaoTac ?? '',
+        content: ketQuaXuLy.thoiGianThaoTac ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.don_vi_thao_tac,
-        content: fakeKetQuaXuLy.donViThaoTac ?? '',
+        content: ketQuaXuLy.donViThaoTac ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.tai_khoan_thao_tac,
-        content: fakeKetQuaXuLy.taiKhoanThaoTac ?? '',
+        content: ketQuaXuLy.taiKhoanThaoTac ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.trang_thai_xu_ly,
-        content: fakeKetQuaXuLy.trangThaiXuLy ?? '',
+        content: ketQuaXuLy.trangThaiXuLy ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.noi_dung_xu_ly,
-        content: fakeKetQuaXuLy.noiDungXuLy ?? '',
+        content: ketQuaXuLy.noiDungXuLy ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.file_dinh_kem,
-        content: fakeKetQuaXuLy.fileDinhKem ?? '',
+        content: ketQuaXuLy.fileDinhKem ?? '',
       ),
     );
     return listData;
   }
 
-  List<DataRowChiTietKienNghi> getMapDataThongTinXuLy() {
+  List<DataRowChiTietKienNghi> getMapDataThongTinXuLy(
+      ThongTinXuLy thongTinXuLy) {
     final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.nhap_ten_don_vi_phong_ban,
-        content: fakeThongTinXuLY.tenDonVi ?? '',
+        content: thongTinXuLy.tenDonVi ?? '',
       ),
     );
     listData.add(
       DataRowChiTietKienNghi(
         title: S.current.vai_tro,
-        content: fakeThongTinXuLY.vaiTro ?? '',
+        content: thongTinXuLy.vaiTro ?? '',
       ),
     );
     return listData;
   }
 
-  List<DataRowChiTietKienNghi> getMapDataNguoiPhananh(NguoiPhanAnhModel nguoiPhanAnhModel) {
+  List<DataRowChiTietKienNghi> getMapDataNguoiPhananh(
+      NguoiPhanAnhModel nguoiPhanAnhModel) {
     final List<DataRowChiTietKienNghi> listData = [];
     listData.add(
       DataRowChiTietKienNghi(
@@ -137,8 +140,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     );
     listData.add(
       DataRowChiTietKienNghi(
-          title: S.current.cmt_can_cuoc,
-          content: nguoiPhanAnhModel.cmnd ?? ''),
+          title: S.current.cmt_can_cuoc, content: nguoiPhanAnhModel.cmnd ?? ''),
     );
     listData.add(
       DataRowChiTietKienNghi(
@@ -224,29 +226,77 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
+        checkIndex = res.chiTietYKNDModel.doiTuongId;
         final data = res.chiTietYKNDModel;
-        // final HeaderChiTietYKNDModel headerChiTietYKNDModel =
-        //     HeaderChiTietYKNDModel(
-        //   tieuDe: data.tieuDe,
-        //   noiDung: data.noiDung,
-        //   nguonPAKN: data.tenNguonPAKN,
-        //   phanLoaiPAKN: data.phanLoaiPAKN,
-        //   ngayPhanAnh: data.ngayPhanAnh,
-        //   hanXuLy: data.hanXuLy,
-        //   quyDinhLuat: data.tenLuat,
-        //   taiLieuCongDan: data.fileDinhKem,
-        // );
-        // dataRowHeader = getMapDataHeader(headerChiTietYKNDModel);
-        // final NguoiPhanAnhModel nguoiPhanAnhModel = NguoiPhanAnhModel(
-        //   doiTuong: data.doiTuongId,
-        //   tenCaNhan: data.tenNguoiPhanAnh,
-        //   cmnd: data.cMTND,
-        //   diaChiChiTiet: data.diaChiChiTiet,
-        //   diaChiEmail: data.email,
-        //   soDienthoai: data.soDienThoai,
-        // );
-        // List<DataRowChiTietKienNghi> dataRowThongTinXuLy =
-        //     getMapDataNguoiPhananh(nguoiPhanAnhModel);
+        print("zzzz${data.fileDinhKem}");
+        print("zzz${data.fileDinhKem.splitMapJoin(
+          ',',
+        )}");
+        final HeaderChiTietYKNDModel headerChiTietYKNDModel =
+            HeaderChiTietYKNDModel(
+          tieuDe: data.tieuDe,
+          noiDung: data.noiDung,
+          nguonPAKN: data.tenNguonPAKN,
+          phanLoaiPAKN: data.phanLoaiPAKN,
+          ngayPhanAnh: data.ngayPhanAnh,
+          hanXuLy: data.hanXuLy,
+          quyDinhLuat: data.tenLuat,
+          taiLieuCongDan: data.fileDinhKem.splitMapJoin(
+            ',',
+          ),
+        );
+        dataRowHeader = getMapDataHeader(headerChiTietYKNDModel);
+        final NguoiPhanAnhModel nguoiPhanAnhModel = NguoiPhanAnhModel(
+          doiTuong: data.doiTuongId,
+          tenCaNhan: data.tenNguoiPhanAnh,
+          cmnd: data.cMTND,
+          diaChiChiTiet: data.diaChiChiTiet,
+          diaChiEmail: data.email,
+          soDienthoai: data.soDienThoai,
+        );
+        List<DataRowChiTietKienNghi> dataRowThongTinNguoiXuLy =
+            getMapDataNguoiPhananh(nguoiPhanAnhModel);
+
+        final ThongTinXuLy thongTinXuLy = ThongTinXuLy(
+          tenDonVi: data.donViDuocPhanXuLy,
+          vaiTro: data.donViDuocPhanXuLy,
+        );
+        List<DataRowChiTietKienNghi> dataRowThongTinXuLy =
+            getMapDataThongTinXuLy(thongTinXuLy);
+
+        final KetQuaXuLy ketQuaXuLy = KetQuaXuLy(
+          yKienXuLy: data.yKienChiDao,
+          thoiGianThaoTac: data.donViDuocPhanXuLy,
+          donViThaoTac: data.donViDuocPhanXuLy,
+          taiKhoanThaoTac: data.donViDuocPhanXuLy,
+          trangThaiXuLy: data.donViDuocPhanXuLy,
+          noiDungXuLy: data.donViDuocPhanXuLy,
+          fileDinhKem: data.donViDuocPhanXuLy,
+        );
+        List<DataRowChiTietKienNghi> dataRowKetQuaXuLy =
+            getMapDataKetQuaXuLy(ketQuaXuLy);
+
+        final KetQuaXuLy tienTrinhXuLy = KetQuaXuLy(
+          yKienXuLy: data.yKienChiDao,
+          thoiGianThaoTac: data.donViDuocPhanXuLy,
+          donViThaoTac: data.donViDuocPhanXuLy,
+          taiKhoanThaoTac: data.donViDuocPhanXuLy,
+          trangThaiXuLy: data.donViDuocPhanXuLy,
+          noiDungXuLy: data.donViDuocPhanXuLy,
+          fileDinhKem: data.donViDuocPhanXuLy,
+        );
+        List<DataRowChiTietKienNghi> dataRowTienTrinhXuLy =
+            getMapDataKetQuaXuLy(tienTrinhXuLy);
+
+        _rowDataChiTietYKienNguoiDan.sink.add(
+          ChiTietYKienNguoiDanRow(
+            dataRowHeader,
+            dataRowThongTinNguoiXuLy,
+            dataRowThongTinXuLy,
+            dataRowKetQuaXuLy,
+            dataRowTienTrinhXuLy,
+          ),
+        );
       },
       error: (err) {
         return;
