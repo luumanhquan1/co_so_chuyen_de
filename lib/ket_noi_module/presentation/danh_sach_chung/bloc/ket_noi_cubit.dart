@@ -1,7 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.dart';
-import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_state.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -20,26 +19,17 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   int pageIndex = 1;
   String type = 'KET-NOI';
   String subCategory = '';
-  ItemKetNoiModel itemKetNoiModel = ItemKetNoiModel();
 
   DataDanhSachChungModel dataDanhSachChungModel = DataDanhSachChungModel();
-  BehaviorSubject<TypeKetNoiMenu> changeItemMenuSubject =
-      BehaviorSubject.seeded(TypeKetNoiMenu.Chung);
+
   BehaviorSubject<String> headerSubject = BehaviorSubject();
 
   Stream<String> get streamHeader => headerSubject.stream;
-
-  Stream<TypeKetNoiMenu> get streamTypeKetNoiMenu =>
-      changeItemMenuSubject.stream;
 
   BehaviorSubject<DataDanhSachChungModel> dataDanhSachSubject =
       BehaviorSubject();
 
   Stream<DataDanhSachChungModel> get streamData => dataDanhSachSubject.stream;
-
-  void changeScreenMenu(TypeKetNoiMenu typeMenu) {
-    changeItemMenuSubject.add(typeMenu);
-  }
 
   Future<void> getListChungKetNoi({
     required int pageIndex,
