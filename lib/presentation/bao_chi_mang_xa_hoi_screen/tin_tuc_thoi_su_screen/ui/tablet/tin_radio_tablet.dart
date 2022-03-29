@@ -2,11 +2,16 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/ban_tin_btn_sheet.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_radio.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/item_tin_radio_tablet.dart';
+import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:readmore/readmore.dart';
@@ -16,11 +21,15 @@ enum dropDown { tinRadio, tinTrongNuoc }
 class TinRadioScreen extends StatefulWidget {
   final String title;
   final List<TinTucRadioModel> listBanTin;
+  final TinTucThoiSuBloc tinTucThoiSuBloc;
+  final BuildContext pContext;
 
   const TinRadioScreen({
     Key? key,
     required this.title,
     required this.listBanTin,
+    required this.tinTucThoiSuBloc,
+    required this.pContext,
   }) : super(key: key);
 
   @override
@@ -182,19 +191,16 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
                           color: lineColor,
                         ),
                         Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: widget.listBanTin.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                child: ItemTinRadioTablet(
-                                  'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
-                                  widget.listBanTin[index].title,
-                                  widget.listBanTin[index].publishedTime,
-                                ),
-                              );
+                          child: ListViewLoadMore(
+                            cubit: widget.tinTucThoiSuBloc,
+                            isListView: true,
+                            callApi: (page) => {
+                              callApi(
+                                page,
+                              )
                             },
+                            viewItem: (value, index) => itemTinTucThoiSu(
+                                value as TinTucRadioModel, index ?? 0),
                           ),
                         ),
                       ],
@@ -250,6 +256,22 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void callApi(int page) {
+    widget.tinTucThoiSuBloc
+        .getListTinTucRadio(page, ApiConstants.DEFAULT_PAGE_SIZE);
+  }
+
+  Widget itemTinTucThoiSu(TinTucRadioModel data, int index) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20.0),
+      child: ItemTinRadioTablet(
+        'https://www.elleman.vn/wp-content/uploads/2019/05/20/4-buc-anh-dep-hinh-gau-truc.jpg',
+        data.title,
+        data.publishedTime,
       ),
     );
   }
