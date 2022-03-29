@@ -1,6 +1,7 @@
+import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class TinTucThoiSuState extends Equatable {
+abstract class TinTucThoiSuState extends BaseState {
   const TinTucThoiSuState();
 }
 

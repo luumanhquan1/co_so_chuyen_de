@@ -31,14 +31,15 @@ class TinTucThoiSuScreenTablet extends StatefulWidget {
 
 class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
   dropDown? valueChoose = dropDown.tinRadio;
-  late List<TinTucRadioModel> listTinTuc;
+  // late List<TinTucRadioModel> listTinTuc;
 
   @override
   void initState() {
     super.initState();
+    widget.tinTucThoiSuBloc.listTinTuc.clear();
     // widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
-    widget.tinTucThoiSuBloc
-        .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
+    // widget.tinTucThoiSuBloc
+    //     .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
   }
 
   @override
@@ -56,38 +57,38 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                StreamBuilder<TinTucRadioResponseModel>(
-                  stream: widget.tinTucThoiSuBloc.listTinTucRadio,
-                  builder: (context, snapshot) {
-                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
-                    listTinTuc = listRadio;
-                    return BanTinItemTablet(
-                      listTinTuc: listTinTuc,
-                      clickXemThem: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              title: S.current.tin_radio,
-                              listBanTin: listRadio,
-                            ),
-                          ),
-                        );
-                      },
-                      title: S.current.tin_radio,
-                      description: S.current.tin_radio_mieu_ta,
-                      clickPLay: () {
-                        showBottomSheetCustom(
-                          context,
-                           title: S.current.ban_tin_trua_ngay,
-                          child:  BanTinBtnSheetTablet(
-                            listTinTuc: listTinTuc,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                // StreamBuilder<TinTucRadioResponseModel>(
+                //   stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                //   builder: (context, snapshot) {
+                //     final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
+                //     listTinTuc = listRadio;
+                //     return BanTinItemTablet(
+                //       listTinTuc: listTinTuc,
+                //       clickXemThem: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => TinRadioScreen(
+                //               title: S.current.tin_radio,
+                //               listBanTin: listRadio,
+                //             ),
+                //           ),
+                //         );
+                //       },
+                //       title: S.current.tin_radio,
+                //       description: S.current.tin_radio_mieu_ta,
+                //       clickPLay: () {
+                //         showBottomSheetCustom(
+                //           context,
+                //            title: S.current.ban_tin_trua_ngay,
+                //           child:  BanTinBtnSheetTablet(
+                //             listTinTuc: listTinTuc,
+                //           ),
+                //         );
+                //       },
+                //     );
+                //   },
+                // ),
                 const SizedBox(
                   height: 28,
                 ),
@@ -98,30 +99,30 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
                 const SizedBox(
                   height: 28,
                 ),
-                StreamBuilder<TinTucRadioResponseModel>(
-                  stream: widget.tinTucThoiSuBloc.listTinTucRadio,
-                  builder: (context, snapshot) {
-                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
-                    listTinTuc = listRadio;
-                    return BanTinItemTablet(
-                      listTinTuc: listTinTuc,
-                      clickXemThem: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              title: S.current.tin_trong_nuoc,
-                              listBanTin: listRadio,
-                            ),
-                          ),
-                        );
-                      },
-                      title: S.current.tin_trong_nuoc,
-                      description: S.current.tin_trong_nuoc_mieu_ta,
-                      clickPLay: () {},
-                    );
-                  },
-                ),
+                // StreamBuilder<TinTucRadioResponseModel>(
+                //   stream: widget.tinTucThoiSuBloc.listTinTucRadio,
+                //   builder: (context, snapshot) {
+                //     final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
+                //     listTinTuc = listRadio;
+                //     return BanTinItemTablet(
+                //       listTinTuc: listTinTuc,
+                //       clickXemThem: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => TinRadioScreen(
+                //               title: S.current.tin_trong_nuoc,
+                //               listBanTin: listRadio,
+                //             ),
+                //           ),
+                //         );
+                //       },
+                //       title: S.current.tin_trong_nuoc,
+                //       description: S.current.tin_trong_nuoc_mieu_ta,
+                //       clickPLay: () {},
+                //     );
+                //   },
+                // ),
               ],
             ),
           ),
@@ -129,4 +130,30 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
       ),
     );
   }
+  // void callApi(int page) {
+  //   widget.tinTucThoiSuBloc
+  //       .getListTinTucRadio(page, ApiConstants.DEFAULT_PAGE_SIZE);
+  // }
+  //
+  // Widget itemTinTucThoiSu(TinTucRadioModel data, int index) {
+  //   return Container(
+  //     margin: EdgeInsets.symmetric(horizontal: 16.0),
+  //     child: ItemTinRadio(
+  //       '',
+  //       data.title,
+  //       data.publishedTime,
+  //           () {
+  //         showBottomSheet(
+  //           context: widget.pContext,
+  //           builder: (context) {
+  //             return BanTinBtnSheet(
+  //               listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
+  //               index: index,
+  //             );
+  //           },
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }
