@@ -17,6 +17,8 @@ class ContainerKetNoiMenuWidget extends StatefulWidget {
   final TypeContainer type;
   final Widget? childExpand;
   final Function onTap;
+  final bool? showIcons;
+  final int lenghtItem;
 
   const ContainerKetNoiMenuWidget({
     Key? key,
@@ -28,6 +30,8 @@ class ContainerKetNoiMenuWidget extends StatefulWidget {
     this.isTypeContainer = true,
     this.childExpand,
     required this.onTap,
+    this.showIcons = true,
+    required this.lenghtItem,
   }) : super(key: key);
 
   @override
@@ -46,7 +50,12 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
           onTap: () {
             isExpand = !isExpand;
             setState(() {});
-            widget.onTap();
+            if (widget.lenghtItem <= 0) {
+              widget.onTap();
+              Navigator.pop(context);
+            } else {
+              widget.onTap();
+            }
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -75,11 +84,11 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                                 width: 15.0.textScale(space: 8),
                               )
                       else
-                        const SizedBox(
+                       const SizedBox(
                           height: 15,
                           width: 15,
                         ),
-                      SizedBox(
+                      Container(
                         width: 14.0.textScale(),
                       ),
                       Expanded(
@@ -98,39 +107,38 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                 const SizedBox(
                   width: 12,
                 ),
-                if (widget.isTypeContainer)
-                  if (widget.type == TypeContainer.number)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 5,
+                if (widget.lenghtItem <= 0)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: numberColorTabletbg,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.index.toString(),
+                      style: textNormalCustom(
+                        color: textDefault,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.0.textScale(),
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: numberColorTabletbg,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.index.toString(),
-                        style: textNormalCustom(
-                          color: textDefault,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0.textScale(),
-                        ),
-                      ),
-                    )
-                  else
-                    Icon(
-                      isExpand
-                          ? Icons.keyboard_arrow_down_outlined
-                          : Icons.keyboard_arrow_up_rounded,
-                      color: AqiColor,
-                    )
+                    ),
+                  )
+                else
+                  Icon(
+                    isExpand
+                        ? Icons.keyboard_arrow_down_outlined
+                        : Icons.keyboard_arrow_up_rounded,
+                    color: AqiColor,
+                  )
               ],
             ),
           ),
         ),
-        if (widget.type == TypeContainer.expand)
+        if (widget.lenghtItem > 0)
           ExpandedSection(
             expand: isExpand,
             child: widget.childExpand ?? Container(),

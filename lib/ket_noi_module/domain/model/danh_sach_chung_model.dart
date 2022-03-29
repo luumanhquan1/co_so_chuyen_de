@@ -34,14 +34,14 @@ class DanhSachChungModel {
   bool? isBookMark;
 
   DanhSachChungModel({
-    this.id,
-    this.tenSuKien,
-    this.thoiGianBatDau,
-    this.diaChi,
-    this.thanhPhanThamGia,
-    this.thongTinLienHe,
-    this.danhSachHinhAnh,
-    this.danhSachIdLoaiSuKien,
-    this.isBookMark,
+   required this.id,
+   required this.tenSuKien,
+   required this.thoiGianBatDau,
+   required this.diaChi,
+   required this.thanhPhanThamGia,
+   required this.thongTinLienHe,
+   required this.danhSachHinhAnh,
+   required this.danhSachIdLoaiSuKien,
+   required this.isBookMark,
   });
 }

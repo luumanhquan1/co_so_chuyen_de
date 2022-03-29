@@ -16,6 +16,8 @@ class ContainerKetNoiTablet extends StatefulWidget {
   final TypeContainer type;
   final Widget? childExpand;
   final Function onTap;
+  final bool? showIcons;
+  final int lenghtItem;
 
   const ContainerKetNoiTablet({
     Key? key,
@@ -27,6 +29,8 @@ class ContainerKetNoiTablet extends StatefulWidget {
     this.isTypeContainer = true,
     this.childExpand,
     required this.onTap,
+    this.showIcons = true,
+    required this.lenghtItem,
   }) : super(key: key);
 
   @override
@@ -53,7 +57,12 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
             onTap: () {
               isExpand = !isExpand;
               setState(() {});
-              widget.onTap();
+              if (widget.lenghtItem <= 0) {
+                widget.onTap();
+                Navigator.pop(context);
+              } else {
+                widget.onTap();
+              }
             },
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -64,73 +73,79 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      if (widget.isIcon)
-                        widget.icon != null
-                            ? SizedBox(
-                                height: 15.0.textScale(space: 8),
-                                width: 15.0.textScale(space: 8),
-                                child: SvgPicture.asset(
-                                  widget.icon ?? '',
-                                ),
-                              )
-                            : SizedBox(
-                                height: 15.0.textScale(space: 8),
-                                width: 15.0.textScale(space: 8),
-                              )
-                      else
-                        const SizedBox(
-                          height: 15,
-                          width: 15,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        if (widget.isIcon)
+                          widget.icon != null
+                              ? SizedBox(
+                                  height: 15.0.textScale(space: 8),
+                                  width: 15.0.textScale(space: 8),
+                                  child: SvgPicture.asset(
+                                    widget.icon ?? '',
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 15.0.textScale(space: 8),
+                                  width: 15.0.textScale(space: 8),
+                                )
+                        else
+                          const SizedBox(
+                            height: 15,
+                            width: 15,
+                          ),
+                        Container(
+                          width: 14.0.textScale(),
                         ),
-                      SizedBox(
-                        width: 14.0.textScale(),
-                      ),
-                      Text(
-                        widget.name,
-                        style: textNormalCustom(
-                          color: textTitle,
-                          fontSize: 16.0.textScale(),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (widget.isTypeContainer)
-                    if (widget.type == TypeContainer.number)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: numberColorTabletbg,
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.index.toString(),
-                          style: textNormalCustom(
-                            color: textDefault,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12.0.textScale(),
+                        Expanded(
+                          child: Text(
+                            widget.name,
+                            style: textNormalCustom(
+                              color: textTitle,
+                              fontSize: 14.0.textScale(),
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                      )
-                    else
-                      Icon(
-                        isExpand
-                            ? Icons.keyboard_arrow_down_outlined
-                            : Icons.keyboard_arrow_up_rounded,
-                        color: AqiColor,
-                      )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  if (widget.lenghtItem <= 0)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: numberColorTabletbg,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        widget.index.toString(),
+                        style: textNormalCustom(
+                          color: textDefault,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.0.textScale(),
+                        ),
+                      ),
+                    )
+                  else
+                    Icon(
+                      isExpand
+                          ? Icons.keyboard_arrow_down_outlined
+                          : Icons.keyboard_arrow_up_rounded,
+                      color: AqiColor,
+                    )
                 ],
               ),
             ),
           ),
         ),
-        if (widget.type == TypeContainer.expand)
+        if (widget.lenghtItem > 0)
           ExpandedSection(
             expand: isExpand,
             child: widget.childExpand ?? Container(),
