@@ -151,7 +151,7 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                                     hotNew.title ?? '',
                                     DateTime.parse(
                                       hotNew.publishedTime ?? '',
-                                    ).formatApiSS,
+                                    ).formatApiSSAM,
                                     hotNew.contents ?? '',
                                     hotNew.url ?? '',
                                   ),
@@ -174,6 +174,8 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                                         const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           ItemListNewsTablet(
                                             listChuDe[index].avartar ?? '',
@@ -181,11 +183,11 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                                             DateTime.parse(
                                               listChuDe[index].publishedTime ??
                                                   '',
-                                            ).formatApiSS,
+                                            ).formatApiSSAM,
                                             listChuDe[index].url ?? '',
                                           ),
-                                          const SizedBox(
-                                            height: 16,
+                                          const Padding(
+                                            padding: EdgeInsets.all(16.0),
                                             child: Divider(
                                               color: lineColor,
                                               height: 1,
@@ -202,6 +204,9 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> {
                             return const SizedBox();
                           }
                         },
+                      ),
+                      const SizedBox(
+                        height: 16,
                       ),
                     ],
                   ),

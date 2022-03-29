@@ -6,6 +6,8 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/bloc/theo_doi_bai_viet_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/ui/tablet/widgets/bai_viet_item_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
+import 'package:ccvc_mobile/utils/constants/api_constants.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -23,114 +25,80 @@ class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> {
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        if (theoDoiBaiVietCubit.pageIndex <= theoDoiBaiVietCubit.totalPage) {
-          theoDoiBaiVietCubit.pageIndex += 1;
-          theoDoiBaiVietCubit.getListBaiVietTheoDoi(
-            theoDoiBaiVietCubit.endDate,
-            theoDoiBaiVietCubit.startDate,
-            widget.topic,
-          );
-        }
-      }
-    });
-    theoDoiBaiVietCubit.getListBaiVietTheoDoi(
-      theoDoiBaiVietCubit.endDate,
-      theoDoiBaiVietCubit.startDate,
-      widget.topic,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StateStreamLayout(
-        textEmpty: S.current.khong_co_du_lieu,
-        retry: () {},
-        error: AppException('', S.current.something_went_wrong),
-        stream: theoDoiBaiVietCubit.stateStream,
-        child: Container(
-          color:bgManagerColor,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                S.current.nhap_linK_bao_cao,
-                style: textNormalCustom(
-                  fontSize: 14,
-                  color: dateColor,
-                  fontWeight: FontWeight.w400,
-                ),
+      backgroundColor:bgManagerColor ,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: 20.0,left: 30.0,right: 30.0),
+            child: Text(
+              S.current.nhap_linK_bao_cao,
+              style: textNormalCustom(
+                fontSize: 14,
+                color: titleColor,
+                fontWeight: FontWeight.w400,
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: shadowContainerColor.withOpacity(0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: BaseSearchBar(
-                  hintText: S.current.nhap_link,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                S.current.bai_theo_doi,
-                style: textNormalCustom(
-                  color: titleCalenderWork,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(
-                height: 14,
-              ),
-              Expanded(
-                child: StreamBuilder<TheoDoiBaiVietModel>(
-                  stream: theoDoiBaiVietCubit.listBaiVietTheoDoi,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data?.listBaiViet ?? [];
-                    if (data.isNotEmpty) {
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 28,
-                          crossAxisSpacing: 28,
-                          childAspectRatio: 1.5,
-                          mainAxisExtent: 420,
-                        ),
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return BaiVietItemTablet(
-                            baiVietModel: data[index],
-                          );
-                        },
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          const SizedBox(
+            height: 16,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: shadowContainerColor.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: BaseSearchBar(
+              hintText: S.current.nhap_link_,
+            ),
+          ),
+          const SizedBox(
+            height: 14,
+          ),
+          Expanded(
+            child: ListViewLoadMore(
+              cubit: theoDoiBaiVietCubit,
+              isListView: false,
+              checkRatio: 0.9,
+               crossAxisSpacing: 0.0,
+              sinkWap: true,
+              callApi: (page) => {
+                callApi(
+                  page,
+                )
+              },
+              viewItem: (value, index) =>
+                  itemBaiViet(value as BaiVietModel),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  void callApi(int page) {
+    theoDoiBaiVietCubit.getListBaiVietTheoDoi(
+        theoDoiBaiVietCubit.endDate,
+        theoDoiBaiVietCubit.startDate,
+        widget.topic,
+        page,
+        ApiConstants.DEFAULT_PAGE_SIZE
+    );
+  }
+  Widget itemBaiViet(BaiVietModel data){
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+      child: BaiVietItemTablet(
+        baiVietModel: data,
       ),
     );
   }
