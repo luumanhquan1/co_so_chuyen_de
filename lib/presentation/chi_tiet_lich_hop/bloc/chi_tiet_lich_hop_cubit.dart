@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/category_list_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/kien_nghi_request.dart';
@@ -35,6 +36,7 @@ import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/edit_ket_lu
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/xem_ket_luan_hop_widget.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/timer/time_date_widget.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:queue/queue.dart';
@@ -62,7 +64,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   List<PhienhopModel> phienHop = [];
   List<String> dataDropdown = ['1', '2', '3'];
   BehaviorSubject<String> noiDung = BehaviorSubject();
-
+  List<CanBoModel> dataThanhPhanThamGia = [];
   List<String?> data = [];
   HtmlEditorController? controller = keyEditKetLuanHop.currentState?.controller;
 
@@ -95,9 +97,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   BehaviorSubject<ChiTietLichHopModel> chiTietLichLamViecSubject =
       BehaviorSubject();
 
-  BehaviorSubject<ChuongTrinhHopModel> danhSachCanBoTPTGSubject =
-      BehaviorSubject();
-
   BehaviorSubject<DanhSachPhatBieuLichHopModel>
       danhSachPhatbieuLichHopModelSubject = BehaviorSubject();
 
@@ -110,9 +109,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Stream<ChiTietLichHopModel> get chiTietLichLamViecStream =>
       chiTietLichLamViecSubject.stream;
-
-  Stream<ChuongTrinhHopModel> get danhSachCanBoTPTGStream =>
-      danhSachCanBoTPTGSubject.stream;
 
   final BehaviorSubject<ThongTinPhongHopModel?> _getThongTinPhongHop =
       BehaviorSubject<ThongTinPhongHopModel?>();
@@ -139,6 +135,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
   }
 
   Future<void> initData(String id) async {
+    showLoading();
     this.id = id;
     final loaiHop = await hopRp
         .getLoaiHop(CatogoryListRequest(pageIndex: 1, pageSize: 100, type: 1));
@@ -165,6 +162,7 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     await getDanhSachYKien(id);
     await postChonMauHop();
     await ListStatusKetLuanHop();
+    await danhSachCanBoTPTG(id: id);
   }
 
   Future<void> postMoiHop({
@@ -249,12 +247,16 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
         error: (err) {});
   }
 
+  // thanh phan tham gia
   Future<void> danhSachCanBoTPTG({required String id}) async {
     final result = await hopRp.getDanhSachCanBoTPTG(id);
-
     result.when(
       success: (value) {
-        danhSachCanBoTPTGSubject.add(value);
+        dataThanhPhanThamGia = value.listCanBo ?? [];
+        thanhPhanThamGia.sink.add(value.listCanBo ?? []);
+        print('vllllllllllllllllllllllllllllllllllllll-${value.listCanBo}');
+        print(
+            'dataTPTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG-${dataThanhPhanThamGia[0].tenCanBo}');
       },
       error: (error) {},
     );
@@ -312,7 +314,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     result.when(
       success: (res) {},
       error: (err) {
-        print('loi gui y kien');
         return;
       },
     );
@@ -400,8 +401,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   void search(String text) {
     final searchTxt = text.trim().toLowerCase().vietNameseParse();
-    bool isListCanBo(ThanhPhanThamGiaModel canBo) {
-      return canBo.tebCanBo!
+    bool isListCanBo(CanBoModel canBo) {
+      return canBo.tenCanBo!
           .toLowerCase()
           .vietNameseParse()
           .contains(searchTxt);
@@ -412,10 +413,10 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     thanhPhanThamGia.sink.add(value);
   }
 
-  BehaviorSubject<List<ThanhPhanThamGiaModel>> thanhPhanThamGia =
-      BehaviorSubject<List<ThanhPhanThamGiaModel>>();
+  BehaviorSubject<List<CanBoModel>> thanhPhanThamGia =
+      BehaviorSubject<List<CanBoModel>>();
 
-  Stream<List<ThanhPhanThamGiaModel>> get streamthanhPhanThamGia =>
+  Stream<List<CanBoModel>> get streamthanhPhanThamGia =>
       thanhPhanThamGia.stream;
 
   final BehaviorSubject<bool> checkBoxCheck = BehaviorSubject();
@@ -455,9 +456,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     selectedIds.clear();
     if (check) {
       selectedIds = dataThanhPhanThamGia.map((e) => e.id ?? '').toList();
-      log('LEN : ${selectedIds.length}');
     }
-    List<ThanhPhanThamGiaModel> _tempList = [];
+    List<CanBoModel> _tempList = [];
     if (thanhPhanThamGia.hasValue) {
       _tempList = thanhPhanThamGia.value;
     } else {
@@ -471,8 +471,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     log(check.toString());
     checkBoxCheck.sink.add(check);
   }
-
-  List<ThanhPhanThamGiaModel> dataThanhPhanThamGia = [];
 
   BehaviorSubject<List<PhatBieuModel>> phatbieu =
       BehaviorSubject<List<PhatBieuModel>>();
@@ -496,14 +494,14 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
 
   Future<void> soLuongPhatBieuData({required String id}) async {
     final result = await hopRp.getSoLuongPhatBieu(id);
-    result.when(success: (res) {
-      dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
-      dataSoLuongPhatBieu.choDuyet = res.choDuyet;
-      dataSoLuongPhatBieu.daDuyet = res.daDuyet;
-      dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
-    }, error: (err) {
-      print('lỗi số lượng phát biểu');
-    });
+    result.when(
+        success: (res) {
+          dataSoLuongPhatBieu.danhSachPhatBieu = res.danhSachPhatBieu;
+          dataSoLuongPhatBieu.choDuyet = res.choDuyet;
+          dataSoLuongPhatBieu.daDuyet = res.daDuyet;
+          dataSoLuongPhatBieu.huyDuyet = res.huyDuyet;
+        },
+        error: (err) {});
   }
 
   List<PhatBieuModel> listPhatBieu = [];
@@ -519,7 +517,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     } else {
       loaiBieuQuyet = false;
     }
-    print('loại biểu quyết $loaiBieuQuyet');
   }
 
   TrangThai typeTrangthai(int value) {
@@ -608,27 +605,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     trangThai: TrangThai.DaDuyet,
   );
 
-  List<ThanhPhanThamGiaModel> thanhPhanThamGiaModelData = [
-    ThanhPhanThamGiaModel(
-        vaiTro: 'fake',
-        trangThai: 'fake',
-        tenDonVi: 'fake',
-        tebCanBo: 'fake',
-        ndCongViec: 'fake',
-        id: 'abc',
-        diemDanh: 'fake',
-        statusDiemDanh: false),
-    ThanhPhanThamGiaModel(
-        vaiTro: 'fake',
-        trangThai: 'fake',
-        tenDonVi: 'fake',
-        tebCanBo: 'fake',
-        ndCongViec: 'fake',
-        id: 'abcd',
-        diemDanh: 'fake',
-        statusDiemDanh: false)
-  ];
-
   Future<void> getDanhSachYKien(String id) async {
     final result = await hopRp.getDanhSachYKien(id);
     result.when(
@@ -663,3 +639,5 @@ extension ChuongTrinhHop on DetailMeetCalenderCubit {
     result.when(success: (res) {}, error: (error) {});
   }
 }
+
+

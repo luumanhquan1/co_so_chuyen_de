@@ -1,14 +1,13 @@
 import 'dart:async';
 
-
-
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
-
-
+import 'package:get/get.dart';
+import 'package:queue/queue.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '/home_module/data/request/home/danh_sach_cong_viec_resquest.dart';
 import '/home_module/data/request/home/danh_sach_van_ban_den_request.dart';
@@ -16,9 +15,8 @@ import '/home_module/data/request/home/lich_hop_request.dart';
 import '/home_module/data/request/home/lich_lam_viec_request.dart';
 import '/home_module/data/request/home/nhiem_vu_request.dart';
 import '/home_module/data/request/home/to_do_list_request.dart';
-
 import '/home_module/domain/locals/hive_local.dart';
-
+import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/domain/model/home/date_model.dart';
 import '/home_module/domain/model/home/document_dashboard_model.dart';
@@ -30,18 +28,14 @@ import '/home_module/domain/model/home/tinh_hinh_y_kien_model.dart';
 import '/home_module/domain/model/home/tinh_huong_khan_cap_model.dart';
 import '/home_module/domain/model/home/todo_model.dart';
 import '/home_module/domain/model/home/tong_hop_nhiem_vu_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/domain/repository/home_repository/home_repository.dart';
 import '/home_module/presentation/home_screen/bloc/home_state.dart';
 import '/home_module/utils/constants/app_constants.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
 
-import 'package:get/get.dart';
-import 'package:queue/queue.dart';
-import 'package:rxdart/rxdart.dart';
-
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(MainStateInitial());
+
   HomeRepository get homeRep => Get.find();
   final BehaviorSubject<List<WidgetModel>> _getConfigWidget =
       BehaviorSubject<List<WidgetModel>>();
@@ -56,6 +50,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       BehaviorSubject<DataUser>();
   final BehaviorSubject<DateModel> _getDate = BehaviorSubject<DateModel>();
   final PublishSubject<bool> refreshListen = PublishSubject<bool>();
+
   Future<void> _getTinhHuongKhanCap() async {
     final result = await homeRep.getTinhHuongKhanCap();
     result.when(
@@ -146,12 +141,20 @@ class HomeCubit extends BaseCubit<HomeState> {
   }
 
   Stream<DateModel> get getDateStream => _getDate.stream;
+
   Stream<DataUser> get getUserInformation => _getUserInformation.stream;
+
   Stream<List<WidgetModel>> get getConfigWidget => _getConfigWidget.stream;
+
   Stream<DataUser> get userInformation => _userInformation;
+
   Stream<List<TinhHuongKhanCapModel>> get tinhHuongKhanCap =>
       _tinhHuongKhanCap.stream;
+
   Stream<WidgetType?> get showDialogSetting => _showDialogSetting.stream;
+
+  List<WidgetModel>  get getListWidget => _getConfigWidget.value;
+
 }
 
 /// Get Config Widget
@@ -178,12 +181,14 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
   bool isShowTag = false;
   String tagKey = 'Covid-19';
   String nameUser = '';
+
   BaoChiMangXaHoiCubit() {
     final dataUser = HiveLocal.getDataUser();
     if (dataUser != null) {
       nameUser = dataUser.userInformation?.hoTen ?? '';
     }
   }
+
   void showAddTag() {
     showAddTagStream.sink.add(true);
   }
@@ -264,6 +269,7 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
 
   Stream<List<PressNetWorkModel>> get getPressNetWork =>
       _getPressNetWork.stream;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -277,9 +283,11 @@ class DanhSachCongViecCubit extends HomeCubit {
   final BehaviorSubject<TodoListModel> _getTodoList =
       BehaviorSubject<TodoListModel>();
   String id = '';
+
   DanhSachCongViecCubit() {
     id = HiveLocal.getDataUser()?.userInformation?.id ?? '';
   }
+
   Stream<TodoListModel> get getTodoList => _getTodoList.stream;
 
   void tickerListWord({required TodoModel todo, bool removeDone = true}) {
@@ -464,9 +472,8 @@ class DanhSachCongViecCubit extends HomeCubit {
 class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<TongHopNhiemVuModel>> _getTongHopNhiemVu =
       BehaviorSubject<List<TongHopNhiemVuModel>>();
-  TongHopNhiemVuCubit() {
-  }
 
+  TongHopNhiemVuCubit() {}
 
   Future<void> getDataTongHopNhiemVu() async {
     showLoading();
@@ -515,6 +522,7 @@ class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
 
   Stream<List<TongHopNhiemVuModel>> get getTonghopNhiemVu =>
       _getTongHopNhiemVu.stream;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -528,7 +536,9 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<DocumentDashboardModel>();
   final BehaviorSubject<DocumentDashboardModel> _getDocumentVBDi =
       BehaviorSubject<DocumentDashboardModel>();
+
   TinhHinhXuLyCubit() {}
+
   void getDocument() {
     callApi(startDate.toString(), endDate.toString());
   }
@@ -584,8 +594,10 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
   }
 
   Stream<DocumentDashboardModel> get getDocumentVBDi => _getDocumentVBDi.stream;
+
   Stream<DocumentDashboardModel> get getDocumentVBDen =>
       _getDocumentVBDen.stream;
+
   @override
   void dispose() {
     _getDocumentVBDen.close();
@@ -597,8 +609,9 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
 class VanBanCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<DocumentModel>> _getDanhSachVb =
       BehaviorSubject<List<DocumentModel>>();
-  VanBanCubit() {
-  }
+
+  VanBanCubit() {}
+
   Stream<List<DocumentModel>> get getDanhSachVb => _getDanhSachVb.stream;
   int trangThaiFilter = 0;
   List<String> maTrangThai = ['CHO_VAO_SO'];
@@ -609,6 +622,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
   bool isChoYKien = false;
   bool isVanBanDen = true;
   SelectKey? selectKey;
+
   Future<void> callApiVB() async {
     showLoading();
     final result = await homeRep.getDanhSachVanBan(
@@ -737,8 +751,6 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
       );
     }
   }
-
-
 }
 
 ///Ý kiến người dân
@@ -752,6 +764,7 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
   String? loaiMenu;
   SelectKey? selectKeyTrangThai;
   List<SelectKey> selectKeyPermission = [];
+
   YKienNguoiDanCubit() {
     dataUser = HiveLocal.getDataUser();
     if (dataUser != null) {
@@ -760,9 +773,11 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
     }
     selectKeyPermission = _permissionKeyCheck();
   }
+
   Stream<List<DocumentModel>> get getYKien => _getYKien.stream;
+
   Future<void> callApi() async {
-    if(selectKeyTrangThai == null){
+    if (selectKeyTrangThai == null) {
       showContent();
       return;
     }
@@ -831,7 +846,6 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
   }
 
   List<SelectKey> _permissionKeyCheck() {
-
     final listSelect = <SelectKey>[];
     if (HiveLocal.checkPermissionApp(
         permissionTxt: 'TiepNhanPAKNChoTiepNhanXem')) {
@@ -863,6 +877,7 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
   Stream<List<CalendarMeetingModel>> get getListLichLamViec =>
       _getListLichLamViec.stream;
   final userId = HiveLocal.getDataUser()?.userId ?? '';
+
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getListLichLamViec(
@@ -922,6 +937,7 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
   bool isDuyetLich = false;
   bool isChoXacNhan = false;
   final userId = HiveLocal.getDataUser()?.userId ?? '';
+
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getLichHop(
@@ -1010,6 +1026,7 @@ class SinhNhatCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<List<SinhNhatUserModel>>();
 
   Stream<List<SinhNhatUserModel>> get getSinhNhat => _getSinhNhat.stream;
+
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getSinhNhat(
@@ -1045,6 +1062,7 @@ class SuKienTrongNgayCubit extends HomeCubit with SelectKeyDialog {
       BehaviorSubject<List<SuKienModel>>();
 
   Stream<List<SuKienModel>> get getSuKien => _getSuKien.stream;
+
   Future<void> callApi() async {
     showLoading();
     final result =
@@ -1079,14 +1097,17 @@ class TinhHinhXuLyYKienCubit extends HomeCubit with SelectKeyDialog {
   final BehaviorSubject<List<TinhHinhYKienModel>> _getTinhHinhXuLy =
       BehaviorSubject<List<TinhHinhYKienModel>>();
   String donViId = '';
+
   Stream<List<TinhHinhYKienModel>> get getTinhHinhXuLy =>
       _getTinhHinhXuLy.stream;
+
   TinhHinhXuLyYKienCubit() {
     final dataUser = HiveLocal.getDataUser();
     if (dataUser != null) {
       donViId = dataUser.userInformation?.donViTrucThuoc?.id ?? '';
     }
   }
+
   Future<void> callApi() async {
     showLoading();
     final result = await homeRep.getTinhHinhYKienNguoiDan(
@@ -1121,9 +1142,7 @@ class TinhHinhXuLyYKienCubit extends HomeCubit with SelectKeyDialog {
 
 /// Nhiệm vụ
 class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
-  NhiemVuCubit() {
-
-  }
+  NhiemVuCubit() {}
   final BehaviorSubject<List<CalendarMeetingModel>> _getNhiemVu =
       BehaviorSubject<List<CalendarMeetingModel>>();
 
@@ -1131,6 +1150,7 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
   SelectKey selectTrangThai = SelectKey.CHO_PHAN_XU_LY;
   List<String> mangTrangThai = ['CHUA_THUC_HIEN', 'CHO_PHAN_XU_LY'];
   bool isCongViec = false;
+
   void selectTrangThaiNhiemVu(SelectKey selectKey) {
     selectTrangThai = selectKey;
     switch (selectKey) {
@@ -1194,7 +1214,6 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
     );
   }
 
-
   Future<Result<List<CalendarMeetingModel>>> getDataApi(
       {bool isCaNhan = false}) {
     if (isCongViec) {
@@ -1233,6 +1252,7 @@ mixin SelectKeyDialog {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   final BehaviorSubject<bool> selectKeyDialog = BehaviorSubject();
+
   void selectDate({
     required SelectKey selectKey,
     required DateTime startDate,

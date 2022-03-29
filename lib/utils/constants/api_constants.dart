@@ -57,7 +57,7 @@ class ApiConstants {
       '/vpdt/api/Schedules/dashboard-schedule';
   static const GET_TREE_DON_VI = '/common/DonVi/get-tree?';
   static const SEARCH_CAN_BO = '/vpdt/api/CanBo/search';
-  static const CATEGORY_LIST = '/fvpdt/api/Category/list';
+  static const CATEGORY_LIST = '/vpdt/api/Category/list';
   static const SCHEDULE_FIELD = '/vpdt/api/ScheduleField/list';
   static const DANH_SACH_CAN_BO_LICH_HOP =
       '/vpdt/api/MeetingSchedule/danh-sach-can-bo-lich-hop';
@@ -152,6 +152,7 @@ class ApiConstants {
   static const DASH_BOARD_TINH_HINH_XU_LY = '/pakn/api/IocApi/thong-ke-tinh-hinh-xu-ly-pakn';
   static const DASH_BOARD_PHAN_LOAI = '/pakn/api/IocApi/thong-ke-tinh-hinh-theo-nguon';
   static const THONG_TIN_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/thong-ke-pakn-theo-trang-thai';
+  static const GET_LIST_WIDGET = '/api/Widget/get-list-widget?';
 
 }
 

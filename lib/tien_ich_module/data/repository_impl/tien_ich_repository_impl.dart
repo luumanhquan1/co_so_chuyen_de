@@ -8,12 +8,14 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/tien_ich_service.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/detail_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/tra_cuu_van_ban_phap_luat_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
 
@@ -108,5 +110,15 @@ class TienIchRepositoryImpl implements TienIchRepository {
       () => _tienIchServiceCommon.TreeDanhBa(soCap),
       (response) => response.toModel(),
     );
+  }
+
+  @override
+  Future<Result<PageTraCuuVanBanPhapLuatModel>> getTraCuuVanBanPhapLuat(
+      String title, int pageIndex, int pageSize) {
+    return runCatchingAsync<DataTraCuuVanBanPhapLuatResponse,
+            PageTraCuuVanBanPhapLuatModel>(
+        () =>
+            _tienIchService.getTraCuuVanBanPhapLuat(title, pageIndex, pageSize),
+        (response) => response.data?.toModel()??PageTraCuuVanBanPhapLuatModel());
   }
 }
