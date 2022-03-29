@@ -20,4 +20,6 @@ class ImageAssets {
   static const String icClose = '$baseImgs/ic_close.svg';
   static const String icCheck = '$baseImgs/ic_checked.svg';
   static const String icUnCheck = '$baseImgs/ic_unchecked.svg';
+  static const String icX = '$baseImgs/ic_x.svg';
+  static const String icSide = '$baseImgs/ic_side_menu.svg';
 }

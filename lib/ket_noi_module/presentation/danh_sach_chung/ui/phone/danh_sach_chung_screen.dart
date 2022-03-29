@@ -1,9 +1,12 @@
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.dart';
-import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_chung.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/item_list_trong_nuoc.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/phone/ket_noi_menu.dart';
+import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
@@ -21,23 +24,25 @@ class DanhSachChungScreen extends StatefulWidget {
 
 class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
   late final KetNoiCubit cubit;
+  TaoSuKienCubit taoSuKienCubit = TaoSuKienCubit();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     cubit = KetNoiCubit();
+    taoSuKienCubit.callApi();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<TypeKetNoiMenu>(
-      stream: cubit.streamTypeKetNoiMenu,
-      builder: (context, snapshot) {
+    return StreamBuilder<String>(
+      stream: cubit.streamHeader,
+      builder: (context, snap) {
+        final data = snap.data ?? S.current.chung;
         return Scaffold(
           appBar: BaseAppBar(
-            title:
-                snapshot.data?.getTitle() ?? TypeKetNoiMenu.SuKien.getTitle(),
+            title: data,
             leadingIcon: IconButton(
               onPressed: () => {Navigator.pop(context)},
               icon: SvgPicture.asset(
@@ -50,7 +55,17 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
                   DrawerSlide.navigatorSlide(
                     context: context,
                     screen: KetNoiMenu(
-                      cubit: cubit,
+                      taoSuKienCubit: taoSuKienCubit,
+                      onChange: (value) {
+                        if (mounted) setState(() {});
+                        cubit.sukien = value.alias ?? '';
+                      },
+                      onSelect: (value) {
+                        cubit.subCategory = value;
+                      },
+                      ontChangeTitle: (value) {
+                        cubit.headerSubject.sink.add(value);
+                      },
                     ),
                     thenValue: (value) {},
                   );
@@ -63,7 +78,7 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
           ),
           body: Container(
             padding: const EdgeInsets.only(bottom: 16),
-            child: snapshot.data?.getScreenMenu(cubit: cubit) ?? _content(),
+            child: _content(),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: labelColor,
@@ -82,23 +97,44 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
     );
   }
 
-  void callApi(int page) {
-    cubit.getListChungKetNoi(
-      pageSize: cubit.pageSize,
-      pageIndex: page,
-      type: cubit.type,
-    );
-  }
-
   Widget _content() {
-    return ListViewLoadMore(
-      cubit: cubit,
-      isListView: true,
-      callApi: (page) => {callApi(page)},
-      viewItem: (value, index) => ItemListChung(
-        danhSachChungModel: value as DanhSachChungModel,
-        index: index ?? 0,
-      ),
-    );
+    return cubit.sukien == S.current.ket_nois
+        ? ListViewLoadMore(
+            cubit: cubit,
+            isListView: true,
+            callApi: (page) =>
+                {cubit.getDataTrongNuoc(page, cubit.subCategory)},
+            viewItem: (value, index) {
+              try {
+                return ItemListTrongNuoc(
+                  model: value as ItemTrongNuocModel,
+                );
+              } catch (e) {
+                return const SizedBox();
+              }
+            },
+          )
+        : ListViewLoadMore(
+            cubit: cubit,
+            isListView: true,
+            callApi: (page) => {
+              cubit.getListCategory(
+                pageIndex: page,
+                pageSize: cubit.pageSize,
+                idDauMucSuKien: cubit.subCategory,
+                type: cubit.type,
+              )
+            },
+            viewItem: (value, index) {
+              try {
+                return ItemListChung(
+                  danhSachChungModel: value as DanhSachChungModel,
+                  index: index ?? 0,
+                );
+              } catch (e) {
+                return const SizedBox();
+              }
+            },
+          );
   }
 }

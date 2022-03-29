@@ -26,6 +26,15 @@ abstract class KetNoiService {
     @Query('type') String type,
   );
 
+  @GET(ApiConstants.KETNOI)
+  @FormUrlEncoded()
+  Future<ListChungKetNoiResponse> getListCategory(
+    @Query('pageIndex') int pageIndex,
+    @Query('pageSize') int pageSize,
+    @Query('idDauMucSuKien') String idDauMucSuKien,
+    @Query('type') String type,
+  );
+
   @GET(ApiConstants.DETAIL_KETNOI)
   @FormUrlEncoded()
   Future<DetailKetNoiResponse> getDetailChungKetNoi(

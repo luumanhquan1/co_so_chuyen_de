@@ -15,6 +15,7 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
 
   BehaviorSubject<List<String>> loaiBaiVietSubject = BehaviorSubject.seeded([]);
   List<LoaiBaiVietModel> listData = [];
+  List<Childrens> checkType = [];
   LoaiBaiVietModel loaiBaiVietModel = LoaiBaiVietModel();
   String type = 'KET-NOI';
   String tenSuKien = '';
@@ -52,6 +53,8 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
 
   List<String> listName = [];
   String name = '';
+  List<Childrens> listTitleItemMenu = [];
+  List<Childrens> listTitleItemMenu2 = [];
 
   Future<void> getLoaiBaiViet({
     required String type,
@@ -67,6 +70,8 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
               listName.add(j.title);
               name = listName.first;
             }
+          } else {
+            listTitleItemMenu2.addAll(res.first.childrens ?? []);
           }
         }
         loaiBaiVietSubject.sink.add(listName);

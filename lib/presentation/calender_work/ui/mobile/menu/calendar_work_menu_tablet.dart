@@ -4,7 +4,6 @@ import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget_tablet.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/dang_lich_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
@@ -36,7 +35,7 @@ class _CalendarWorkMenuTabletState extends State<CalendarWorkMenuTablet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: S.current.hop,
+        title: S.current.lich_lam_viec,
         leadingIcon: GestureDetector(
           onTap: () {
             Navigator.pop(context);

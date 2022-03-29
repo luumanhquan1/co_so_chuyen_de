@@ -51,7 +51,6 @@ class ManagerPersonalInformationCubit
     result.when(
       success: (res) {
         managerPersonalInformationModel = res;
-        //  numbers.sort((a, b) => a.length.compareTo(b.length));
         if (res.tinhId != null) {
           getDataHuyenXa(
             parentId: res.tinhId ?? '',
