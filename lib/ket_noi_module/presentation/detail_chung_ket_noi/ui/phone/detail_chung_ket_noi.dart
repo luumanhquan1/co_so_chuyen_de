@@ -139,6 +139,7 @@ class _DetailChungKetNoiState extends State<DetailChungKetNoi> {
         error: AppException('', S.current.something_went_wrong),
         stream: cubit.stateStream,
         child: Scaffold(
+          backgroundColor: bgTabletColor,
           appBar: BaseAppBar(
             title: S.current.chi_tiet_bai_viet,
             leadingIcon: IconButton(

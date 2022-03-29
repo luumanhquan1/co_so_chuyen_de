@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/ket_noi_item_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_menu.dart';
@@ -26,6 +27,7 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgTabletColor,
       appBar: BaseAppBar(
         title: S.current.hop,
         leadingIcon: IconButton(
@@ -46,7 +48,8 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                 child: Column(
                   children: listKetNoi
                       .map(
-                        (e) => ContainerKetNoiTablet(
+                        (e) =>
+                        ContainerKetNoiTablet(
                           name: e.typeMenu.getTitle(),
                           icon: e.icon,
                           type: e.type,
@@ -54,57 +57,59 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                           childExpand: Column(
                             children: e.typeMenu == TypeKetNoiMenu.SuKien
                                 ? listSuKien
-                                    .map(
-                                      (e) => ContainerKetNoiTablet(
-                                        icon: e.icon,
-                                        name: e.typeMenu.getTitle(),
-                                        index: e.index ?? 0,
-                                        isIcon: false,
-                                        onTap: () {
-                                          e.onTap(context, widget.cubit);
-                                        },
-                                      ),
-                                    )
-                                    .toList()
+                                .map(
+                                  (e) =>
+                                  ContainerKetNoiTablet(
+                                    icon: e.icon,
+                                    name: e.typeMenu.getTitle(),
+                                    index: e.index ?? 0,
+                                    isIcon: false,
+                                    onTap: () {
+                                      e.onTap(context, widget.cubit);
+                                    },
+                                  ),
+                            )
+                                .toList()
                                 : listKetNoi2
-                                    .map(
-                                      (e) => ContainerKetNoiTablet(
-                                        icon: e.icon,
-                                        name: e.typeMenu.getTitle(),
-                                        index: e.index ?? 0,
-                                        type: TypeContainer.expand,
-                                        childExpand: Column(
-                                          children: e.listWidget
-                                                  ?.map(
-                                                    (e) =>
-                                                        ContainerKetNoiTablet(
-                                                      icon: e.icon,
-                                                      name:
-                                                          e.typeMenu.getTitle(),
-                                                      index: e.index ?? 0,
-                                                      isIcon: false,
-                                                      onTap: () {
-                                                        e.onTap(context,
-                                                            widget.cubit,);
-                                                      },
-                                                    ),
-                                                  )
-                                                  .toList() ??
-                                              [Container()],
-                                        ),
-                                        isIcon: false,
-                                        onTap: () {
-                                          e.onTap(context, widget.cubit);
-                                        },
-                                      ),
-                                    )
-                                    .toList(),
+                                .map(
+                                  (e) =>
+                                  ContainerKetNoiTablet(
+                                    icon: e.icon,
+                                    name: e.typeMenu.getTitle(),
+                                    index: e.index ?? 0,
+                                    type: TypeContainer.expand,
+                                    childExpand: Column(
+                                      children: e.listWidget
+                                          ?.map(
+                                            (e) =>
+                                            ContainerKetNoiTablet(
+                                              icon: e.icon,
+                                              name:
+                                              e.typeMenu.getTitle(),
+                                              index: e.index ?? 0,
+                                              isIcon: false,
+                                              onTap: () {
+                                                e.onTap(context,
+                                                  widget.cubit,);
+                                              },
+                                            ),
+                                      )
+                                          .toList() ??
+                                          [Container()],
+                                    ),
+                                    isIcon: false,
+                                    onTap: () {
+                                      e.onTap(context, widget.cubit);
+                                    },
+                                  ),
+                            )
+                                .toList(),
                           ),
                           onTap: () {
                             e.onTap(context, widget.cubit);
                           },
                         ),
-                      )
+                  )
                       .toList(),
                 ),
               ),
