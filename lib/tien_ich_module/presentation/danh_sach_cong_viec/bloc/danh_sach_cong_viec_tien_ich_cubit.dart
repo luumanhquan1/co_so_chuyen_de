@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
+
 import 'danh_sach_cong_viec_tien_ich_state.dart';
 
 class DanhSachCongViecTienIchCubit
@@ -64,7 +65,7 @@ class DanhSachCongViecTienIchCubit
         inUsed: true,
       ),
     );
-    await getToDoList();
+    // await getToDoList();
     showContent();
     result.when(
       success: (res) {
@@ -74,6 +75,7 @@ class DanhSachCongViecTienIchCubit
           res,
         );
         _getTodoList.sink.add(data);
+        closeDialog();
       },
       error: (err) {},
     );
