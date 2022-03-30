@@ -32,7 +32,7 @@ class TinTucThoiSuScreen extends StatefulWidget {
   State<TinTucThoiSuScreen> createState() => _TinTucThoiSuScreenState();
 }
 
-class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
+class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen>  with AutomaticKeepAliveClientMixin{
   dropDown? valueChoose = dropDown.tinRadio;
 
   @override
@@ -44,6 +44,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Column(
         children: [
@@ -168,7 +169,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                 switch (snapshot.data) {
                   case 1:
                     {
-                      //widget.tinTucThoiSuBloc.listTinTuc.clear();
+                      widget.tinTucThoiSuBloc.listTinTuc.clear();
                       return Expanded(
                         child: ListViewLoadMore(
                           cubit: widget.tinTucThoiSuBloc,
@@ -187,7 +188,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                     }
                   case 2:
                     {
-                      // widget.tinTucThoiSuBloc.listTinTucTrongNuoc.clear();
+                      widget.tinTucThoiSuBloc.listTinTucTrongNuoc.clear();
                       return Expanded(
                         child: ListViewLoadMore(
                           cubit: widget.tinTucThoiSuBloc,
@@ -206,7 +207,7 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
                     }
                   case 3:
                     {
-                      // widget.tinTucThoiSuBloc.listTinTucQuocTe.clear();
+                      widget.tinTucThoiSuBloc.listTinTucQuocTe.clear();
                       return Expanded(
                         child: ListViewLoadMore(
                           cubit: widget.tinTucThoiSuBloc,
@@ -328,4 +329,8 @@ class _TinTucThoiSuScreenState extends State<TinTucThoiSuScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
