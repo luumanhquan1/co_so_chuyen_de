@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
@@ -116,7 +116,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                                   image: data[index].img ?? '',
                                   typeName: data[index].typeName ?? '',
                                   numberOfCalendars:
-                                      data[index].numberOfCalendars ??0,
+                                      data[index].numberOfCalendars ?? 0,
                                 );
                               },
                             );
@@ -200,8 +200,8 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                       children: [
                         StreamBuilder<List<ChartData>>(
                           stream: cubit.chartPhanLoai,
-                          builder: (context,snapshot){
-                            final data=snapshot.data??[];
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
                             return PieChart(
                               isSubjectInfo: false,
                               title: S.current.phan_loai_nguon_yknd,
@@ -247,8 +247,10 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                                 Navigator.push(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        const DanhSachYKND(),
+                                    pageBuilder: (_, __, ___) => DanhSachYKND(
+                                      startDate: cubit.startDate,
+                                      endDate: cubit.endDate,
+                                    ),
                                   ),
                                 );
                               },
@@ -257,40 +259,36 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           ],
                         ),
                         const SizedBox(height: 16.0),
-                        ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: cubit.listYKienNguoiDan.length < 3
-                              ? cubit.listYKienNguoiDan.length
-                              : 3,
-                          itemBuilder: (context, index) {
-                            return YKienNguoiDanCell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChiTietYKNDScreen(),
-                                  ),
+                        StreamBuilder<List<YKienNguoiDanModel>>(
+                          stream: cubit.danhSachYKienNguoiDan,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? [];
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: data.length < 3 ? data.length : 3,
+                              itemBuilder: (context, index) {
+                                return YKienNguoiDanCell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChiTietYKNDScreen(
+                                          iD: data[index].id,
+                                          taskID: data[index].taskID,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  title: data[index].tieuDe,
+                                  dateTime: data[index].ngayNhan,
+                                  userName:
+                                      cubit.listYKienNguoiDan[index].ten ?? '',
+                                  status: data[index].soNgayToiHan,
+                                  userImage:
+                                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                                 );
                               },
-                              title:
-                                  cubit.listYKienNguoiDan[index].ngheNghiep ??
-                                      '',
-                              dateTime:
-                                  cubit.listYKienNguoiDan[index].ngayThang ??
-                                      '',
-                              userName:
-                                  cubit.listYKienNguoiDan[index].ten ?? '',
-                              stausColor: cubit
-                                  .listYKienNguoiDan[index].statusData
-                                  .getText()
-                                  .color,
-                              status: cubit.listYKienNguoiDan[index].statusData
-                                  .getText()
-                                  .text,
-                              userImage:
-                                  'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                             );
                           },
                         )

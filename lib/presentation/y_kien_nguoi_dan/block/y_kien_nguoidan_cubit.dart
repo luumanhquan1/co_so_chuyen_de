@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
 import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_board_phan_loai_mode.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -30,7 +32,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   bool isCheck = false;
   late String startDate;
   late String endDate;
-  final List<ChartData> listChartPhanLoai=[];
+  String donViId = '';
+  String userId = '';
+  final List<ChartData> listChartPhanLoai = [];
   final BehaviorSubject<DashboardTinhHinhXuLuModel> _dashBoardTinhHinhXuLy =
       BehaviorSubject<DashboardTinhHinhXuLuModel>();
 
@@ -42,6 +46,12 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
 
   final BehaviorSubject<List<YKienNguoiDanDashBroadItem>> _listItemDashBoard =
       BehaviorSubject<List<YKienNguoiDanDashBroadItem>>();
+
+  final BehaviorSubject<List<YKienNguoiDanModel>> _listYKienNguoiDan =
+      BehaviorSubject<List<YKienNguoiDanModel>>();
+
+  Stream<List<YKienNguoiDanModel>> get danhSachYKienNguoiDan =>
+      _listYKienNguoiDan.stream;
 
   Stream<List<YKienNguoiDanDashBroadItem>> get listItemDashboard =>
       _listItemDashBoard.stream;
@@ -90,9 +100,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     ChartData(S.current.chua_thuc_hien, 14, choVaoSoColor),
   ];
   DocumentDashboardModel dashboardModel = DocumentDashboardModel(
-    soLuongTrongHan: 6,
-    soLuongDenHan: 12,
-    soLuongQuaHan: 20,
+    soLuongTrongHan: 0,
+    soLuongDenHan: 0,
+    soLuongQuaHan: 0,
   );
   List<ItemIndicator> listIndicator = [
     ItemIndicator(color: numberOfCalenders, title: S.current.cong_dvc_quoc_gia),
@@ -127,20 +137,29 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
 
   void callApi() {
+    getUserData();
     getDashBoardTinhHinhXuLy(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
     );
     getDashBoardPhanLoai(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
     );
     getThongTinYKienNguoiDan(
-      '0bf3b2c3-76d7-4e05-a587-9165c3624d76',
+      donViId,
       startDate,
       endDate,
+    );
+    getDanhSachYKienNguoiDan(
+      '01/03/2022',
+      '28/03/2022',
+      10,
+      1,
+      userId,
+      donViId,
     );
   }
 
@@ -168,32 +187,32 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choXuLy,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.tongSoPakn,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choTiepNhan,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choPhanCongXuLy,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choChoYKien,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(YKienNguoiDanDashBroadItem(
           img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
+          numberOfCalendars: res.choBoXungThongTin,
           typeName: S.current.cho_duyet,
         ));
         listItem.add(
@@ -226,7 +245,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         final listDataTinhHinhXuLy = res.tinhHinhXuLyModel.listTinhHinh;
-        listDataTinhHinhXuLy
+        final List<ChartData>listChartTinhHinhxuLy= listDataTinhHinhXuLy
             .map(
               (e) => ChartData(
                 e.status,
@@ -237,7 +256,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
               ),
             )
             .toList();
-        _dashBoardTinhHinhXuLy.sink.add(res);
+        _chartTinhHinhXuLy.sink.add(listChartTinhHinhxuLy);
       },
       error: (err) {
         return;
@@ -260,32 +279,100 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         listChartPhanLoai.clear();
-        listChartPhanLoai.add(ChartData(
+        listChartPhanLoai.add(
+          ChartData(
             res.listPhanLoai[4].status,
             res.listPhanLoai[4].soLuong.toDouble(),
             choTrinhKyColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[0].status,
-          res.listPhanLoai[0].soLuong.toDouble(),
-          labelColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[3].status,
-          res.listPhanLoai[3].soLuong.toDouble(),
-          unselectLabelColor,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[5].status,
-          res.listPhanLoai[5].soLuong.toDouble(),
-          itemWidgetUsing,
-        ),);
-        listChartPhanLoai.add(ChartData(
-          res.listPhanLoai[6].status,
-          res.listPhanLoai[6].soLuong.toDouble(),
-          itemWidgetNotUse,
-        ),);
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[0].status,
+            res.listPhanLoai[0].soLuong.toDouble(),
+            labelColor,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[3].status,
+            res.listPhanLoai[3].soLuong.toDouble(),
+            unselectLabelColor,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[5].status,
+            res.listPhanLoai[5].soLuong.toDouble(),
+            itemWidgetUsing,
+          ),
+        );
+        listChartPhanLoai.add(
+          ChartData(
+            res.listPhanLoai[6].status,
+            res.listPhanLoai[6].soLuong.toDouble(),
+            itemWidgetNotUse,
+          ),
+        );
         _chartPhanLoai.sink.add(listChartPhanLoai);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> getDanhSachYKienNguoiDan(
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+    String userId,
+    String donViId,
+  ) async {
+    showLoading();
+    final result = await _YKNDRepo.danhSachYKienNguoiDan(
+      tuNgay,
+      denNgay,
+      pageSize,
+      pageNumber,
+      userId,
+      donViId,
+    );
+    showContent();
+    result.when(
+      success: (res) {
+        _listYKienNguoiDan.sink.add(res.listYKienNguoiDan);
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> searchDanhSachYKienNguoiDan(
+    String tuNgay,
+    String denNgay,
+    int pageSize,
+    int pageNumber,
+    String tuKhoa,
+    String userId,
+    String donViId,
+  ) async {
+    showLoading();
+    final result = await _YKNDRepo.searchYKienNguoiDan(
+      tuNgay,
+      denNgay,
+      pageSize,
+      pageNumber,
+      tuKhoa,
+      userId,
+      donViId,
+    );
+    showContent();
+    result.when(
+      success: (res) {
+        print(res.listYKienNguoiDan.length);
       },
       error: (err) {
         return;
@@ -303,7 +390,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
         colorResult = daXuLyColor;
         break;
       case 'DANG_THUC_HIEN':
-        colorResult = choVaoSoColor;
+        colorResult = numberOfCalenders;
         break;
     }
     return colorResult;
@@ -312,5 +399,13 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   void initTimeRange() {
     startDate = DateTime.now().toStringWithListFormat;
     endDate = DateTime.now().toStringWithListFormat;
+  }
+
+  void getUserData() {
+    final DataUser? dataUser = HiveLocal.getDataUser();
+    if (dataUser != null) {
+      donViId = dataUser.userInformation?.donViTrucThuoc?.id ?? '';
+      userId = dataUser.userId ?? '';
+    }
   }
 }

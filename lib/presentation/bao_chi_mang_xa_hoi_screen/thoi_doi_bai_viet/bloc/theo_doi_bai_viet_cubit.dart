@@ -18,19 +18,17 @@ class TheoDoiBaiVietCubit extends BaseCubit<BaseState> {
 
   Stream<TheoDoiBaiVietModel> get listBaiVietTheoDoi =>
       _listBaiVietTheoDoi.stream;
-
-  int pageIndex=1;
-  int totalPage=1;
+  int totalPage = 1;
 
   final String startDate = DateTime.now().formatApiSS;
   final String endDate = DateTime(
-          DateTime.now().year,
-          DateTime.now().month - 3,
-          DateTime.now().day,
-          DateTime.now().hour,
-          DateTime.now().minute,
-          DateTime.now().second,)
-      .formatApiSS;
+    DateTime.now().year,
+    DateTime.now().month - 3,
+    DateTime.now().day,
+    DateTime.now().hour,
+    DateTime.now().minute,
+    DateTime.now().second,
+  ).formatApiSS;
 
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
 
@@ -55,6 +53,7 @@ class TheoDoiBaiVietCubit extends BaseCubit<BaseState> {
         // totalPage=res.totalPages;
         // _listBaiVietTheoDoi.sink.add(res);
         if (page == ApiConstants.PAGE_BEGIN) {
+
           if (res.listBaiViet.isEmpty) {
             showEmpty();
           } else {
