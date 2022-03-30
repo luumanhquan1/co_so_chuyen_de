@@ -11,21 +11,22 @@ class TinTucThoiSuResponse {
   List<TinTucThoiSuData>? listTinTucThoiSu;
 
   TinTucThoiSuResponse(
-     this.listTinTucThoiSu,
+    this.listTinTucThoiSu,
   );
 
-   TinTucThoiSuResponse.fromJson(List<dynamic> json){
-     final data = <TinTucThoiSuData>[];
-     for (final element in json) {
-       data.add(TinTucThoiSuData.fromJson(element));
-     }
-     listTinTucThoiSu=data;
-   }
+  TinTucThoiSuResponse.fromJson(List<dynamic> json) {
+    final data = <TinTucThoiSuData>[];
+    for (final element in json) {
+      data.add(TinTucThoiSuData.fromJson(element));
+    }
+    listTinTucThoiSu = data;
+  }
 
   Map<String, dynamic> toJson() => _$TinTucThoiSuResponseToJson(this);
 
   TinTucRadioResponseModel toDomain() => TinTucRadioResponseModel(
-      listTinTucThoiSu: listTinTucThoiSu?.map((e) => e.toDomain()).toList()??[],
+        listTinTucThoiSu:
+            listTinTucThoiSu?.map((e) => e.toDomain()).toList() ?? [],
       );
 }
 
@@ -41,21 +42,34 @@ class TinTucThoiSuData {
   String? audioUrl;
   @JsonKey(name: 'tts_audio_duration_seconds')
   double? audioDuration;
+  @JsonKey(name: 'domain')
+  String? domain;
+  @JsonKey(name: 'image_sources')
+  List<String>? urlImage;
+  @JsonKey(name: 'url')
+  String? url;
 
   TinTucThoiSuData(
-    this.title,
-    this.content,
-    this.publishedTime,
-    this.audioUrl,
-    this.audioDuration,
-  );
+      {this.title,
+      this.content,
+      this.publishedTime,
+      this.audioUrl,
+      this.audioDuration,
+      this.domain,
+      this.urlImage,
+      this.url,
+      });
 
   factory TinTucThoiSuData.fromJson(Map<String, dynamic> json) =>
       _$TinTucThoiSuDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$TinTucThoiSuDataToJson(this);
 
-  TinTucRadioModel toDomain() => TinTucRadioModel(
+  TinTucRadioModel toDomain() =>
+      TinTucRadioModel(
+        domain,
+        urlImage,
+        url,
         title: title ?? '',
         content: content ?? '',
         publishedTime: publishedTime ?? '',

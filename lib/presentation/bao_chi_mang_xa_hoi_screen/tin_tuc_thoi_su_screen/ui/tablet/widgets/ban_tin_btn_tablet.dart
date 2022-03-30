@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_list_bang_tin.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/phat_ban_tin/bloc/phat_ban_tin_bloc.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/phat_ban_tin/ui/mobile/phat_radio.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/item_list_bang_tin_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,11 @@ class BanTinBtnSheetTablet extends StatefulWidget {
   final List<TinTucRadioModel> listTinTuc;
   final int index;
 
-  const BanTinBtnSheetTablet(
-      {Key? key, required this.listTinTuc, this.index = 0,})
-      : super(key: key);
+  const BanTinBtnSheetTablet({
+    Key? key,
+    required this.listTinTuc,
+    this.index = 0,
+  }) : super(key: key);
 
   @override
   _BanTinBtnSheetTabletState createState() => _BanTinBtnSheetTabletState();
@@ -79,8 +82,15 @@ class _BanTinBtnSheetTabletState extends State<BanTinBtnSheetTablet> {
                           phatBanTinBloc.changePlay();
                         },
                         child: data
-                            ? SvgPicture.asset(ImageAssets.ic_pasue)
-                            : SvgPicture.asset(ImageAssets.icPlay),
+                            ? SizedBox(
+                                height: 30.0,
+                                width: 30.0,
+                                child: SvgPicture.asset(ImageAssets.ic_pasue),
+                              )
+                            : SizedBox(
+                            height: 30.0,
+                            width: 30.0,
+                                child: SvgPicture.asset(ImageAssets.icPlay)),
                       );
                     },
                   ),
@@ -218,9 +228,6 @@ class _BanTinBtnSheetTabletState extends State<BanTinBtnSheetTablet> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 30,
-                    ),
                   ],
                 ),
               ),
@@ -239,7 +246,7 @@ class _BanTinBtnSheetTabletState extends State<BanTinBtnSheetTablet> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return (index == data)
-                        ? ItemListBangTin(
+                        ? ItemListBangTinTablet(
                             onclick: () {
                               phatBanTinBloc.setIndexRadio(
                                 index,
@@ -249,7 +256,7 @@ class _BanTinBtnSheetTabletState extends State<BanTinBtnSheetTablet> {
                             tin: widget.listTinTuc[index].title,
                             isCheck: true,
                           )
-                        : ItemListBangTin(
+                        : ItemListBangTinTablet(
                             onclick: () {
                               phatBanTinBloc.setIndexRadio(
                                 index,
