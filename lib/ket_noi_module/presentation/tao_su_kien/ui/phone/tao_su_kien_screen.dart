@@ -196,6 +196,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
         ),
       ),
       tabletScreen: Scaffold(
+        backgroundColor: bgTabletColor,
         appBar: BaseAppBar(
           title: S.current.tao_su_kien,
           leadingIcon: IconButton(

@@ -54,6 +54,7 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
                   ),
                 ),
                 monthViewSettings: MonthViewSettings(
+                  showTrailingAndLeadingDates: false,
                   appointmentDisplayCount: 2,
                   monthCellStyle: MonthCellStyle(
                     trailingDatesTextStyle:

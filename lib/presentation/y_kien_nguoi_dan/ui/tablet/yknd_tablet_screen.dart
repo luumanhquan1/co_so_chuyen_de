@@ -294,38 +294,38 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                   const SizedBox(
                     height: 20,
                   ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: cubit.listYKienNguoiDan.length < 3
-                        ? cubit.listYKienNguoiDan.length
-                        : 3,
-                    itemBuilder: (context, index) {
-                      return YKienNguoiDanCell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChiTietVanBanTabletScreen(),
-                            ),
-                          );
-                        },
-                        title: cubit.listYKienNguoiDan[index].ngheNghiep ?? '',
-                        dateTime:
-                            cubit.listYKienNguoiDan[index].ngayThang ?? '',
-                        userName: cubit.listYKienNguoiDan[index].ten ?? '',
-                        stausColor: cubit.listYKienNguoiDan[index].statusData
-                            .getText()
-                            .color,
-                        status: cubit.listYKienNguoiDan[index].statusData
-                            .getText()
-                            .text,
-                        userImage:
-                            'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                      );
-                    },
-                  ),
+                  // ListView.builder(
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   shrinkWrap: true,
+                  //   itemCount: cubit.listYKienNguoiDan.length < 3
+                  //       ? cubit.listYKienNguoiDan.length
+                  //       : 3,
+                  //   itemBuilder: (context, index) {
+                  //     return YKienNguoiDanCell(
+                  //       onTap: () {
+                  //         Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //             builder: (context) =>
+                  //                 const ChiTietVanBanTabletScreen(),
+                  //           ),
+                  //         );
+                  //       },
+                  //       title: cubit.listYKienNguoiDan[index].ngheNghiep ?? '',
+                  //       dateTime:
+                  //           cubit.listYKienNguoiDan[index].ngayThang ?? '',
+                  //       userName: cubit.listYKienNguoiDan[index].ten ?? '',
+                  //       stausColor: cubit.listYKienNguoiDan[index].statusData
+                  //           .getText()
+                  //           .color,
+                  //       status: cubit.listYKienNguoiDan[index].statusData
+                  //           .getText()
+                  //           .text,
+                  //       userImage:
+                  //           'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),

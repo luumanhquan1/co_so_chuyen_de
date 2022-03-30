@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_btn_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item.dart';
+import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,14 +32,17 @@ class TinTucThoiSuScreenTablet extends StatefulWidget {
 
 class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
   dropDown? valueChoose = dropDown.tinRadio;
-  late List<TinTucRadioModel> listTinTuc;
+  // late List<TinTucRadioModel> listTinTuc;
 
   @override
   void initState() {
     super.initState();
-    // widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
+    widget.tinTucThoiSuBloc.listTinTuc.clear();
     widget.tinTucThoiSuBloc
-        .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
+        .getListTinTucRadio(1, ApiConstants.DEFAULT_PAGE_SIZE);
+    // widget.tinTucThoiSuBloc.changeItem(dropDown.tinRadio);
+    // widget.tinTucThoiSuBloc
+    //     .getListTinTucRadio('2022/02/12 00:00:00', '2022/03/14 23:59:59');
   }
 
   @override
@@ -59,20 +63,21 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
                 StreamBuilder<TinTucRadioResponseModel>(
                   stream: widget.tinTucThoiSuBloc.listTinTucRadio,
                   builder: (context, snapshot) {
-                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
-                    listTinTuc = listRadio;
                     return BanTinItemTablet(
-                      listTinTuc: listTinTuc,
+                      listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
                       clickXemThem: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => TinRadioScreen(
+                              pContext: widget.pContext,
+                              tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
                               title: S.current.tin_radio,
-                              listBanTin: listRadio,
+                              listBanTin: widget.tinTucThoiSuBloc.listTinTuc,
                             ),
                           ),
                         );
+                        widget.tinTucThoiSuBloc.listTinTuc.clear();
                       },
                       title: S.current.tin_radio,
                       description: S.current.tin_radio_mieu_ta,
@@ -81,7 +86,7 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
                           context,
                            title: S.current.ban_tin_trua_ngay,
                           child:  BanTinBtnSheetTablet(
-                            listTinTuc: listTinTuc,
+                            listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
                           ),
                         );
                       },
@@ -101,17 +106,17 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
                 StreamBuilder<TinTucRadioResponseModel>(
                   stream: widget.tinTucThoiSuBloc.listTinTucRadio,
                   builder: (context, snapshot) {
-                    final listRadio = snapshot.data?.listTinTucThoiSu ?? [];
-                    listTinTuc = listRadio;
                     return BanTinItemTablet(
-                      listTinTuc: listTinTuc,
+                      listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
                       clickXemThem: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => TinRadioScreen(
                               title: S.current.tin_trong_nuoc,
-                              listBanTin: listRadio,
+                              listBanTin: widget.tinTucThoiSuBloc.listTinTuc,
+                              pContext:widget.pContext ,
+                              tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
                             ),
                           ),
                         );
@@ -129,4 +134,5 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> {
       ),
     );
   }
+
 }

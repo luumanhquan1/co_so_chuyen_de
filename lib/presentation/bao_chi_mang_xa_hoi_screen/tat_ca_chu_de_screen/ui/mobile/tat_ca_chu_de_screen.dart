@@ -38,10 +38,6 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {}
-    });
     chuDeCubit.callApi();
   }
 
@@ -56,7 +52,6 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
           error: AppException('1', ''),
           stream: chuDeCubit.stateStream,
           child: SingleChildScrollView(
-            // controller: _scrollController,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(

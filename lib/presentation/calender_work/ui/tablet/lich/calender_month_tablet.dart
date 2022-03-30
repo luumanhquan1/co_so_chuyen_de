@@ -38,6 +38,7 @@ class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
                 stream: widget.cubit.streamListLich,
                 builder: (context, snapshot) {
                   return SfCalendar(
+                    firstDayOfWeek: 1,
                     allowAppointmentResize: true,
                     controller: _controller,
                     headerHeight: 0.0,
@@ -55,8 +56,7 @@ class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
                     ),
                     monthViewSettings: MonthViewSettings(
                       showTrailingAndLeadingDates: false,
-                      dayFormat: 'EEEE',
-                      appointmentDisplayCount: 3,
+                      appointmentDisplayCount: 2,
                       monthCellStyle: MonthCellStyle(
                         backgroundColor: bgCalenderColor,
                         trailingDatesTextStyle: textNormalCustom(

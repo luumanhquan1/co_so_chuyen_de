@@ -97,30 +97,44 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
     );
   }
 
-  void callApi(int page) {
-    cubit.sukien == S.current.ket_nois
-        ? cubit.getDataTrongNuoc(page, cubit.subCategory)
-        : cubit.getListCategory(
-            pageIndex: page,
-            pageSize: cubit.pageSize,
-            idDauMucSuKien: cubit.subCategory,
-            type: cubit.type,
-          );
-  }
-
   Widget _content() {
-    return ListViewLoadMore(
-      cubit: cubit,
-      isListView: true,
-      callApi: (page) => {callApi(page)},
-      viewItem: (value, index) => cubit.sukien == S.current.ket_nois
-          ? ItemListTrongNuoc(
-              model: value as ItemTrongNuocModel,
-            )
-          : ItemListChung(
-              danhSachChungModel: value as DanhSachChungModel,
-              index: index ?? 0,
-            ),
-    );
+    return cubit.sukien == S.current.ket_nois
+        ? ListViewLoadMore(
+            cubit: cubit,
+            isListView: true,
+            callApi: (page) =>
+                {cubit.getDataTrongNuoc(page, cubit.subCategory)},
+            viewItem: (value, index) {
+              try {
+                return ItemListTrongNuoc(
+                  model: value as ItemTrongNuocModel,
+                );
+              } catch (e) {
+                return const SizedBox();
+              }
+            },
+          )
+        : ListViewLoadMore(
+            cubit: cubit,
+            isListView: true,
+            callApi: (page) => {
+              cubit.getListCategory(
+                pageIndex: page,
+                pageSize: cubit.pageSize,
+                idDauMucSuKien: cubit.subCategory,
+                type: cubit.type,
+              )
+            },
+            viewItem: (value, index) {
+              try {
+                return ItemListChung(
+                  danhSachChungModel: value as DanhSachChungModel,
+                  index: index ?? 0,
+                );
+              } catch (e) {
+                return const SizedBox();
+              }
+            },
+          );
   }
 }

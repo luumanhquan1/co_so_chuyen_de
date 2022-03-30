@@ -19,7 +19,6 @@ class TheoDoiBaiVietTablet extends StatefulWidget {
 }
 
 class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> {
-  final ScrollController _scrollController = ScrollController();
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
 

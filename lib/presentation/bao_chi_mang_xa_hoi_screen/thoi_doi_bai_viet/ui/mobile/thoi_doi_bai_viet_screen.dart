@@ -21,11 +21,8 @@ class TheoDoiBaiVietScreen extends StatefulWidget {
 }
 
 class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
-  final ScrollController _scrollController = ScrollController();
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,3 +101,4 @@ class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
    );
   }
 }
+
