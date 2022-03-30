@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/theo_doi_bai_viet/theo_doi_bai_viet_model.dart';
 import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -77,7 +78,10 @@ class _BaiVietItemState extends State<BaiVietItem> {
                             width: 10,
                           ),
                           Text(
-                            widget.baiVietModel.publishedTime,
+                            DateTime.parse(
+                              widget.baiVietModel.publishedTime
+                                  .replaceAll("/", "-"),
+                            ).formatApiSSAM,
                             style: textNormalCustom(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -95,27 +99,40 @@ class _BaiVietItemState extends State<BaiVietItem> {
           const SizedBox(
             height: 16,
           ),
-          Container(
-            height: 170,
-            width: double.maxFinite,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: containerColorTab,
-            ),
-            child: Image.network(
-              widget.baiVietModel.imageSources,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) {
-                return Center(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      WebViewScreen(url: widget.baiVietModel.url, title: ''),
+                ),
+              );
+            },
+            child: Container(
+              height: 170,
+              width: double.maxFinite,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: containerColorTab,
+              ),
+              child: Image.network(
+                widget.baiVietModel.imageSources,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) {
+                  return Center(
                     child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset(
-                          ImageAssets.icDongNai,
-                          fit: BoxFit.cover,
-                        ),),);
-              },
+                      height: 100,
+                      width: 100,
+                      child: Image.asset(
+                        ImageAssets.icDongNai,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(

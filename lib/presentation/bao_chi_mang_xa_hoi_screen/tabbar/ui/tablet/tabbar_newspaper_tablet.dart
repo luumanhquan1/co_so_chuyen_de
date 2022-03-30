@@ -56,7 +56,7 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
         ),
         actions: [
           IconButton(
-            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
+            icon: SvgPicture.asset(ImageAssets.icMenuLichHopTablet),
             onPressed: () {
               DrawerSlide.navigatorSlide(
                 context: context,
@@ -74,7 +74,7 @@ class _TabbarNewspaperTabletState extends State<TabbarNewspaperTablet> {
           controller: _controller,
           indicatorColor: indicatorColor,
           unselectedLabelColor: unselectLabelColor,
-          labelColor: selectColorTabbar,
+          labelColor: indicatorColor,
           tabs: [
             Tab(
               child: Text(

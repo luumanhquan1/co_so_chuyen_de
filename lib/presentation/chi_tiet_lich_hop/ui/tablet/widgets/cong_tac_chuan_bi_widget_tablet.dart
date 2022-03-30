@@ -8,7 +8,10 @@ import 'package:ccvc_mobile/widgets/text/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 class CongTacChuanBiWidgetTablet extends StatefulWidget {
-  const CongTacChuanBiWidgetTablet({Key? key}) : super(key: key);
+  final DetailMeetCalenderCubit cubit;
+
+  const CongTacChuanBiWidgetTablet({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   _CongTacChuanBiWidgetTabletState createState() =>
@@ -17,8 +20,6 @@ class CongTacChuanBiWidgetTablet extends StatefulWidget {
 
 class _CongTacChuanBiWidgetTabletState
     extends State<CongTacChuanBiWidgetTablet> {
-  final DetailMeetCalenderCubit cubit = DetailMeetCalenderCubit();
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -35,7 +36,7 @@ class _CongTacChuanBiWidgetTabletState
           titleType(
             title: S.current.thong_tin_phong,
             child: StreamBuilder<ThongTinPhongHopModel?>(
-              stream: cubit.getThongTinPhongHop,
+              stream: widget.cubit.getThongTinPhongHop,
               builder: (context, snapshot) {
                 final data = snapshot.data;
                 if (data == null) {
@@ -54,7 +55,7 @@ class _CongTacChuanBiWidgetTabletState
           titleType(
             title: S.current.yeu_cau_de_chuan_bi_phong,
             child: StreamBuilder<List<ThietBiPhongHopModel>>(
-              stream: cubit.getListThietBi,
+              stream: widget.cubit.getListThietBi,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? <ThietBiPhongHopModel>[];
                 if (data.isEmpty) {

@@ -154,6 +154,9 @@ class WidgetTypeConstant {
   static const String SINH_NHAT = 'SinhNhat';
   static const String TINH_HINH_XU_LY_Y_KIEN = 'TinhHinhXuLyYKienNguoiDan';
   static const String NHIEM_VU = 'NhienVuWidGet';
+  static const String HANH_CHINH_CONG = 'HanhChinhCong';
+  static const String LICH_LAM_VIEC_LICH_HOP = 'BoxLichVaHop';
+  static const String TONG_HOP_HCC = 'TongHopHCC';
 }
 
 class DocumentState {

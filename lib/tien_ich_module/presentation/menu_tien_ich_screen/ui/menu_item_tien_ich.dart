@@ -17,7 +17,7 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/mang_xa_hoi_noi_bo/ui/t
 import 'package:ccvc_mobile/tien_ich_module/presentation/phien_dich_tu_dong/ui/mobile/phien_dich_tu_dong_mobile.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/phien_dich_tu_dong/ui/tablet/phien_dich_tu_dong_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/tra_cuu_van_ban_phap_luat/ui/mobile/tra_cuu_van_ban_phap_luat_mobile.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/tra_cuu_van_ban_phap_luat/ui/tablet/tra_cuu_van_ban_phap_luat_mobile.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/tra_cuu_van_ban_phap_luat/ui/tablet/tra_cuu_van_ban_phap_luat_tablet.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/screen_device_extension.dart';

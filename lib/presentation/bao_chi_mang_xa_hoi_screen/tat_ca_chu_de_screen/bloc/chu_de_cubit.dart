@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/request/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_resquest.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
@@ -11,6 +13,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_d
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChuDeCubit extends BaseCubit<ChuDeState> {
@@ -63,20 +66,31 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   String startDate = DateTime.now().formatApiStartDay;
   String endDate = DateTime.now().formatApiEndDay;
 
-
-  void callApi() {
-    getDashboard(
-      startDate,
-      endDate,
+  Future<void> callApi() async {
+    final queue = Queue(parallel: 1);
+    unawaited(
+      queue.add(
+        () => getDashboard(
+          startDate,
+          endDate,
+        ),
+      ),
     );
-    getListBaoCaoThongKe(
-      startDate,
-      endDate,
+    await queue.add(
+      () => getListTatCaCuDe(
+        startDate,
+        endDate,
+      ),
     );
-    getListTatCaCuDe(
-      startDate,
-      endDate,
+    await queue.add(
+      () => getListBaoCaoThongKe(
+        startDate,
+        endDate,
+      ),
     );
+    await queue.onComplete;
+    showContent();
+    queue.dispose();
   }
 
   DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
@@ -98,7 +112,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
       233,
       true,
       startDate,
-      enDate,
+      endDate,
     );
     showContent();
     result.when(
@@ -201,8 +215,9 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     int millisecondOfMounth = 30 * 24 * 60 * 60 * 1000;
     int millisecondNow = DateTime.now().millisecondsSinceEpoch;
     int prevMonth = millisecondNow - millisecondOfMounth;
-    endDate=DateTime.now().formatApiEndDay;
-    startDate=DateTime.fromMillisecondsSinceEpoch(prevMonth).formatApiStartDay;
+    endDate = DateTime.now().formatApiEndDay;
+    startDate =
+        DateTime.fromMillisecondsSinceEpoch(prevMonth).formatApiStartDay;
     String datePrevMounth =
         DateTime.fromMillisecondsSinceEpoch(prevMonth).formatApiStartDay;
     return datePrevMounth;
@@ -212,15 +227,15 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     int millisecondOfWeek = 7 * 24 * 60 * 60 * 1000;
     int millisecondNow = DateTime.now().millisecondsSinceEpoch;
     int prevWeek = millisecondNow - millisecondOfWeek;
-    endDate=DateTime.now().formatApiEndDay;
-    startDate=DateTime.fromMillisecondsSinceEpoch(prevWeek).formatApiStartDay;
+    endDate = DateTime.now().formatApiEndDay;
+    startDate = DateTime.fromMillisecondsSinceEpoch(prevWeek).formatApiStartDay;
   }
 
   void getDateYesterDay() {
     int millisecondOfDay = 24 * 60 * 60 * 1000;
     int millisecondNow = DateTime.now().millisecondsSinceEpoch;
     int prevDay = millisecondNow - millisecondOfDay;
-    startDate=DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiStartDay;
-    endDate=DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiEndDay;
+    startDate = DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiStartDay;
+    endDate = DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiEndDay;
   }
 }

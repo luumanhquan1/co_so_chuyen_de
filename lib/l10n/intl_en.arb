@@ -222,7 +222,7 @@
   "tuan": "Tuần",
   "thang": "Tháng",
   "lich_cua_toi": "Lịch của tôi",
-  "tao_lich_cong_tac_trong_nuoc": "Tạo lịch công tác trong nước",
+  "tao_lich_cong_tac": "Tạo lịch công tác",
   "lich_cong_tac_trong_nuoc": "Lịch công tác trong nước",
   "lich_lam_viec": "Lịch làm việc",
   "lich_cong_tac_nuoc_ngoai": "Lịch công tác nước ngoài",
@@ -647,6 +647,7 @@
   "mttq_cac_the": "MTTQ và các đoàn thể",
   "nhap_linK_bao_cao": "Nhập link bài báo hoặc bài post Facebook để theo dõi",
   "nhap_link": "Nhập link ...",
+  "nhap_link_": "Nhập link",
   "sua_lich_hop": "Sửa lịch họp",
   "conten_diem_danh": "Bạn có chắc chắn muốn điểm danh cho những người được chọn?",
   "conten_huy_diem_danh": "Bạn có chắc chắn muốn hủy điểm danh cho những người được chọn?",
@@ -804,5 +805,12 @@
   "huy_trinh_ky" : "Hủy trình ký",
   "trinh_ky_tiep_theo" : "Trình ký tiếp theo",
   "khoi_tao_van_ban" : "Khởi tạo văn bản",
-  "cap_nhat_van_ban" : "Cập nhật văn bản"
+  "cap_nhat_van_ban" : "Cập nhật văn bản",
+  "tim_kiem_theo_trich_yeu" : "Tìm kiếm theo trích yếu",
+  "ngay_bh" : "Ngày BH",
+  "tu_choi_tham_du" : "Từ chối tham dự",
+  "vang_mat" : "Vắng mặt",
+  "da_diem_danh" : "Đã điểm danh",
+  "chua_diem_danh" : "Chưa điểm danh",
+  "ket_nois" : "ket-noi"
 }

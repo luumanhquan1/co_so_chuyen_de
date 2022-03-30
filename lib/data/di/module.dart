@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/repository_impl/bao_chi_mang_xa_hoi/bao_chi_man
 import 'package:ccvc_mobile/data/repository_impl/lich_hop/lich_hop_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/lich_lam_viec_impl/lich_lam_viec_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/quan_ly_van_ban_impl/qlvb_respository_imlp.dart';
+import 'package:ccvc_mobile/data/repository_impl/quan_ly_widget/quan_ly_widget_imlp.dart';
 import 'package:ccvc_mobile/data/repository_impl/thanh_phan_tham_gia_impl/thanh_phan_tham_gia_impl.dart';
 import 'package:ccvc_mobile/data/repository_impl/y_kien_nguoi_dan_impl/y_kien_nguoi_dan_impl.dart';
 import 'package:ccvc_mobile/data/services/account_service.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/data/services/bao_chi_mang_xa_hoi/bao_chi_mang_xa_ho
 import 'package:ccvc_mobile/data/services/lich_hop/hop_services.dart';
 import 'package:ccvc_mobile/data/services/lich_lam_viec_service/lich_lam_viec_service.dart';
 import 'package:ccvc_mobile/data/services/quan_ly_van_ban/qlvb_service.dart';
+import 'package:ccvc_mobile/data/services/quan_ly_widget/quan_ly_widget_service.dart';
 import 'package:ccvc_mobile/data/services/thanh_phan_tham_gia/thanh_phan_tham_gia_service.dart';
 import 'package:ccvc_mobile/data/services/y_kien_nguoi_dan/y_kien_nguoi_dan_service.dart';
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
@@ -20,6 +22,7 @@ import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
 import 'package:ccvc_mobile/domain/repository/lich_lam_viec_repository/lich_lam_viec_repository.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
+import 'package:ccvc_mobile/domain/repository/quan_ly_widget/quan_li_widget_respository.dart';
 import 'package:ccvc_mobile/domain/repository/thanh_phan_tham_gia_reponsitory.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/repository_impl/ket_noi_repo.dart';
@@ -73,6 +76,15 @@ void configureDependencies() {
   );
   Get.put<YKienNguoiDanRepository>(
     YKienNguoiDanImpl(Get.find()),
+  );
+
+  Get.put(
+    QuanLyWidgetClient(
+      provideDio(),
+    ),
+  );
+  Get.put<QuanLyWidgetRepository>(
+    QuanLyWidgetImlp(Get.find()),
   );
 
 

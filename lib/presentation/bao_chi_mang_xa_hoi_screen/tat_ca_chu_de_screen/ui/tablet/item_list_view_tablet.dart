@@ -11,26 +11,28 @@ class ItemListNewsTablet extends StatelessWidget {
   final String date;
   final String url;
 
-  const ItemListNewsTablet(this.image, this.title, this.date, this.url, {Key? key})
+  const ItemListNewsTablet(this.image, this.title, this.date, this.url,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      // margin: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: [
           Expanded(
             flex: 3,
             child: Container(
-              decoration:
-              BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              clipBehavior: Clip.antiAlias,
-              child: image.isNotEmpty
-                  ? Image(
-                image: NetworkImage(image),
-              )
-                  : Image.asset(ImageAssets.icDongNai),
+              height: 80,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: image.isNotEmpty
+                        ? NetworkImage(image)
+                        : const AssetImage(ImageAssets.icDongNai) as ImageProvider,
+                    fit: BoxFit.fill,
+                  ),),
             ),
           ),
           const SizedBox(
