@@ -23,6 +23,8 @@ class TabbarNewspaper extends StatefulWidget {
 }
 
 class _TabbarNewspaperState extends State<TabbarNewspaper> {
+  TinTucThoiSuBloc blocTinTuc = TinTucThoiSuBloc();
+
   var _controller = TabController(vsync: AnimatedListState(), length: 4);
   BaoChiMangXaHoiBloc cubit = BaoChiMangXaHoiBloc();
 
@@ -74,6 +76,11 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
           unselectedLabelColor: unselectLabelColor,
           labelColor: selectColorTabbar,
           isScrollable: true,
+          onTap: (value) {
+            if (value == 3) {
+              blocTinTuc.listTinTuc.clear();
+            }
+          },
           tabs: [
             Tab(
               child: Text(
@@ -117,7 +124,7 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
               },
             ),
             TinTucThoiSuScreen(
-              tinTucThoiSuBloc: TinTucThoiSuBloc(),
+              tinTucThoiSuBloc: blocTinTuc,
               pContext: context,
             ),
           ],
