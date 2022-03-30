@@ -83,6 +83,7 @@ class DrawerSlide {
         },
         opaque: false,
       ),
-    );
+    ).then((value) {
+    });
   }
 }

@@ -155,13 +155,19 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                     (e) => ContainerMenuWidget(
                                                       icon: e.typeMenu
                                                           .getIconMobile(),
-                                                      name: e.name,
-                                                      index: e.index ?? 0,
+                                                      name: e.menuModel
+                                                              ?.tenDonVi ??
+                                                          '',
+                                                      index:
+                                                          e.menuModel?.count ??
+                                                              0,
                                                       isIcon: false,
                                                       onTap: () {
                                                         widget.cubit
-                                                                .titleAppbar =
-                                                            e.name;
+                                                            .titleAppbar = e
+                                                                .menuModel
+                                                                ?.tenDonVi ??
+                                                            '';
                                                         widget.cubit
                                                             .idDonViLanhDao = e
                                                                 .menuModel
@@ -332,12 +338,15 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                     ContainerMenuWidgetTablet(
                                                   icon: e.typeMenu
                                                       .getIconTablet(),
-                                                  name: e.name,
-                                                  index: e.index ?? 0,
+                                                  name: e.menuModel?.tenDonVi ??
+                                                      '',
+                                                  index:
+                                                      e.menuModel?.count ?? 0,
                                                   isIcon: false,
                                                   onTap: () {
                                                     widget.cubit.titleAppbar =
-                                                        e.name;
+                                                        e.menuModel?.tenDonVi ??
+                                                            '';
                                                     widget.cubit
                                                             .idDonViLanhDao =
                                                         e.menuModel?.id ?? '';

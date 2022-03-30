@@ -104,7 +104,9 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                             title: S.current.lich_lam_viec,
                           ),
                         ),
-                      );
+                      ).then((value) {
+                        cubit.changeScreenMenu(value);
+                      });
                     },
                     icon: SvgPicture.asset(
                       ImageAssets.icMenuCalender,
