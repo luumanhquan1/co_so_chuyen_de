@@ -395,6 +395,7 @@ class _EditPersonalInformationScreen
                                 diaChiLienHe: diaChiLienHeController.value.text,
                                 donViDetail: cubit
                                     .editPersonInformationRequest.donViDetail,
+                                thuTu: int.parse(thuTuController.text),
                                 tinh: tinh,
                                 huyen: huyen,
                                 xa: xa,

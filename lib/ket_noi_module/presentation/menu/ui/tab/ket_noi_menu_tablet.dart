@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/loai_bai_viet_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_tablet_menu.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
@@ -34,6 +35,7 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgTabletColor,
       appBar: BaseAppBar(
         title: S.current.menu,
         leadingIcon: IconButton(
