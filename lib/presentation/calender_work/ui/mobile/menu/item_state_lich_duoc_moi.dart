@@ -1,15 +1,24 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
 
 enum stateLDM { ChoXacNhan, ThamGia, TuChoi }
 
+extension StateLichHop on stateLDM {
+  bool? getListState (stateLDM state) {
+    if (this == state) {
+      return true;
+    } else {
+      return null;
+    }
+  }
+}
+
 extension StateLDM on stateLDM {
-  int getIndex(LichLamViecDashBroad model) {
+  int getIndex(DashBoardLichHopModel model) {
     switch (this) {
       case stateLDM.ChoXacNhan:
         return model.soLichChoXacNhan ?? 0;

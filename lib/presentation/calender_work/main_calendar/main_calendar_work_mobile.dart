@@ -1,13 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/calendar_work_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/select_option_header.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/calender_provider.dart';
@@ -17,6 +16,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/ta
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_cubit.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class CalenderWorkDayMobile extends StatefulWidget {
 }
 
 class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
+  MenuCalendarCubit cubitMenu = MenuCalendarCubit();
   CalenderCubit cubit = CalenderCubit();
   double hegihtCalendar = 120;
 
@@ -72,16 +74,53 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                 ),
               ),
               actions: [
-                IconButton(
-                  onPressed: () {
-                    DrawerSlide.navigatorSlide(
-                      context: context,
-                      screen: CalendarWorkMenu(
-                        cubit: cubit,
-                      ),
+                BlocBuilder<CalenderCubit, CalenderState>(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        DrawerSlide.navigatorSlide(
+                          context: context,
+                          screen: MenuWidget(
+                            isBaoCaoThongKe: false,
+                            onTap: (value) {
+                              if (value == S.current.theo_dang_lich) {
+                                cubit.chooseTypeListLv(
+                                  Type_Choose_Option_List.DANG_LICH,
+                                );
+                              }
+
+                              if (value == S.current.theo_dang_danh_sach) {
+                                cubit.chooseTypeListLv(
+                                  Type_Choose_Option_List.DANG_LIST,
+                                );
+                              }
+
+                              cubit.index.sink.add(0);
+                            },
+                            listItem: listThongBao,
+                            onTapLanhDao: (value) {
+                              final data = value as TypeCalendarMenu;
+                              cubit.changeScreenMenu(data);
+                              if (data == TypeCalendarMenu.LichTheoLanhDao) {}
+                              if (state.type == Type_Choose_Option_Day.DAY) {
+                                cubit.callApi();
+                              } else if (state.type ==
+                                  Type_Choose_Option_Day.WEEK) {
+                                cubit.callApiTuan();
+                              } else {
+                                cubit.callApiMonth();
+                              }
+                            },
+                            cubit: cubitMenu,
+                            streamDashBoard:
+                                cubit.lichLamViecDashBroadSubject.stream, title: '',
+                          ),
+                        );
+                      },
+                      icon: SvgPicture.asset(ImageAssets.icMenuCalender),
                     );
                   },
-                  icon: SvgPicture.asset(ImageAssets.icMenuCalender),
                 )
               ],
             ),
@@ -134,8 +173,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.DAY,
                               );
-                              cubit.listDSLV.clear();
-                              cubit.page = 1;
+
                               cubit.callApi();
                             },
                             onTapWeek: () {
@@ -143,8 +181,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.WEEK,
                               );
-                              cubit.listDSLV.clear();
-                              cubit.page = 1;
                               cubit.callApiTuan();
                             },
                             onTapmonth: () {
@@ -152,8 +188,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                               cubit.chooseTypeCalender(
                                 Type_Choose_Option_Day.MONTH,
                               );
-                              cubit.listDSLV.clear();
-                              cubit.page = 1;
                               cubit.callApiMonth();
                             },
                             cubit: cubit,
@@ -214,8 +248,8 @@ Widget itemCalendarWorkIscheck(CalenderCubit cubit) {
         height: 88,
         child: Row(
           children: [
-            StreamBuilder<LichLamViecDashBroad>(
-              initialData: LichLamViecDashBroad.empty(),
+            StreamBuilder<DashBoardLichHopModel>(
+              initialData: DashBoardLichHopModel.empty(),
               stream: cubit.streamLichLamViec,
               builder: (context, snapshot) {
                 return CustomItemCalenderWork(
@@ -271,8 +305,8 @@ Widget itemCalendarWorkDefault(CalenderCubit cubit) {
           height: 88,
           child: Row(
             children: [
-              StreamBuilder<LichLamViecDashBroad>(
-                initialData: LichLamViecDashBroad.empty(),
+              StreamBuilder<DashBoardLichHopModel>(
+                initialData: DashBoardLichHopModel.empty(),
                 stream: cubit.streamLichLamViec,
                 builder: (context, snapshot) {
                   return CustomItemCalenderWork(

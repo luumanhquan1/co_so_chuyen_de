@@ -18,4 +18,6 @@ class MenuModel {
     required this.tenDonViCha,
     required this.tenDonViGoc,
   });
+
+  MenuModel.empty();
 }
