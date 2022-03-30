@@ -98,7 +98,6 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                             },
                             listItem: listThongBao,
                             onTapLanhDao: (value) {
-                              print('${value.tenDonVi} ==================');
                               cubit.titleAppbar = value.tenDonVi ?? '';
                               cubit.idDonViLanhDao = value.id ?? '';
                             },
