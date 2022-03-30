@@ -3,8 +3,8 @@ import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
@@ -74,6 +74,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DateTime endDates = DateTime.now();
 
   void callApi() {
+    listDSLV.clear();
+    page = 1;
     startDates = selectDay;
     endDates = selectDay;
     callApiNgay();
@@ -171,6 +173,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   void callApiTuan() {
+    listDSLV.clear();
+    page = 1;
     final day = selectDay;
     startDates = day.subtract(Duration(days: day.weekday - 1));
     endDates = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
@@ -184,6 +188,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   void callApiMonth() {
+    listDSLV.clear();
+    page = 1;
     final day = selectDay;
     startDates = DateTime(day.year, day.month, 1);
     endDates = DateTime(day.year, day.month + 1, 0);
@@ -301,14 +307,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   //tong dashbroad
 
-  BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
+  BehaviorSubject<DashBoardLichHopModel> lichLamViecDashBroadSubject =
       BehaviorSubject.seeded(
-    LichLamViecDashBroad.empty(),
+    DashBoardLichHopModel.empty(),
   );
 
-  Stream<LichLamViecDashBroad> get streamLichLamViec =>
+  Stream<DashBoardLichHopModel> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
-  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad.empty();
+  DashBoardLichHopModel lichLamViecDashBroads = DashBoardLichHopModel.empty();
 
   LichLamViecRepository get _lichLamViec => Get.find();
 

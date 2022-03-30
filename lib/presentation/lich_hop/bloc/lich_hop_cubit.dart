@@ -118,11 +118,11 @@ class LichHopCubit extends BaseCubit<LichHopState> {
         value.forEach((element) {
           listLanhDaoLichHop.add(
             ItemThongBaoModelMyCalender(
-              idLanhDao: element.id ?? '',
               typeMenu: TypeCalendarMenu.LichTheoLanhDao,
               type: TypeContainer.number,
               name: element.tenDonVi ?? '',
               index: element.count,
+              menuModel: element,
             ),
           );
         });
@@ -280,6 +280,31 @@ class LichHopCubit extends BaseCubit<LichHopState> {
             changeItemMenuSubject.value == TypeCalendarMenu.LichTheoLanhDao
                 ? true
                 : null,
+        isLichCuaToi: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichCuaToi),
+        isLichDuocMoi: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichDuocMoi),
+        isLichTaoHo: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichTaoHo),
+        isLichHuyBo: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichHuy),
+        isLichThuHoi: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichThuHoi),
+        isDuyetLich: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.ChoDuyet),
+        isChuaCoBaoCao: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichHopCanKLCH),
+        isDaCoBaoCao: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichDaKLCH),
+        isDuyetPhong: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichDuyetPhong),
+        isLichYeuCauChuanBi: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichYeuCauChuanBi),
+        isDuyetThietBi: changeItemMenuSubject.value
+            .getListLichHop(TypeCalendarMenu.LichDuyetThietBi),
+        isChoXacNhan: getStateLDM.value.getListState(stateLDM.ChoXacNhan),
+        isLichThamGia: getStateLDM.value.getListState(stateLDM.ThamGia),
+        isLichTuChoi: getStateLDM.value.getListState(stateLDM.TuChoi),
         PageIndex: page,
         PageSize: 10,
         UserId: userId,

@@ -1,10 +1,11 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
@@ -30,30 +31,21 @@ class ItemThongBaoModel {
   });
 }
 
-List<ItemThongBaoModel> listThongBao = [
-  ItemThongBaoModel(
-    icon: ImageAssets.icPerson,
+List<ItemThongBaoModelMyCalender> listThongBao = [
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
     index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
-      Navigator.pop(context);
-    },
   ),
-  ItemThongBaoModel(
-    icon: ImageAssets.icLichTheoTrangThai,
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTheoTrangThai,
     type: TypeContainer.expand,
-    listWidget: listTheoTrangThai,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
+    listWidget: listTheoTrangThaiLichHop,
   ),
-  ItemThongBaoModel(
-    icon: ImageAssets.icLichLanhDao,
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTheoLanhDao,
     type: TypeContainer.expand,
-    listWidget: listLanhDao,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
+    listWidget: listTheoTrangThaiLichHop,
   ),
 ];
 
@@ -151,10 +143,24 @@ enum TypeCalendarMenu {
   LichHopCanKLCH,
   LichDaKLCH,
   BaoCaoThongKe,
+  LichDuyetPhong,
+  LichDuyetThietBi,
+  LichDuyetKyThuat,
+  LichYeuCauChuanBi,
 }
 
+extension GetPermissionMenu on TypeCalendarMenu {}
+
 extension GetScreenMenu on TypeCalendarMenu {
-  int getIndex(LichLamViecDashBroad data) {
+  bool? getListLichHop(TypeCalendarMenu type) {
+    if (this == type) {
+      return true;
+    } else {
+      return null;
+    }
+  }
+
+  int getIndex(DashBoardLichHopModel data) {
     switch (this) {
       case TypeCalendarMenu.LichCuaToi:
         return data.countScheduleCaNhan ?? 0;

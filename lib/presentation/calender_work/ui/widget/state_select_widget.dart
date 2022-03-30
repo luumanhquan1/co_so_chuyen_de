@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/screen_device_extension.dart';
@@ -34,7 +34,7 @@ class _StateSelectWidgetState extends State<StateSelectWidget>
         stream: widget.cubit.getStateLDM.stream,
         builder: (context, snapshot) {
           final data = snapshot.data ?? stateLDM.ChoXacNhan;
-          return StreamBuilder<LichLamViecDashBroad>(
+          return StreamBuilder<DashBoardLichHopModel>(
             stream: widget.cubit.lichLamViecDashBroadSubject.stream,
             builder: (context, snapshot) {
               return Container(
@@ -42,7 +42,7 @@ class _StateSelectWidgetState extends State<StateSelectWidget>
                 color: Colors.transparent,
                 child: data.getState(
                   data.getIndex(
-                    snapshot.data ?? LichLamViecDashBroad.empty(),
+                    snapshot.data ?? DashBoardLichHopModel.empty(),
                   ),
                 ),
               );
@@ -154,11 +154,11 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
                       left: 20,
                       top: 20,
                     ),
-                    child: StreamBuilder<LichLamViecDashBroad>(
+                    child: StreamBuilder<DashBoardLichHopModel>(
                         stream: widget.cubit.lichLamViecDashBroadSubject.stream,
                         builder: (context, snapshot) {
                           final data =
-                              snapshot.data ?? LichLamViecDashBroad.empty();
+                              snapshot.data ?? DashBoardLichHopModel.empty();
                           return Column(
                             children: [
                               getState(
