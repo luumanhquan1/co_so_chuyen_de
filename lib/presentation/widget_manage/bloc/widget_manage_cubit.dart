@@ -1,7 +1,9 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/repository/quan_ly_widget/quan_li_widget_respository.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage__state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -9,13 +11,15 @@ import 'package:rxdart/subjects.dart';
 
 import '/home_module/domain/model/home/WidgetType.dart';
 
-class WidgetManageCubit {
+class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   final BehaviorSubject<List<WidgetModel>> _listWidgetUsing =
       BehaviorSubject<List<WidgetModel>>();
   final BehaviorSubject<List<WidgetModel>> _listWidgetNotUse =
       BehaviorSubject<List<WidgetModel>>();
   final BehaviorSubject<List<WidgetModel>> _listUpdate =
       BehaviorSubject<List<WidgetModel>>();
+
+  WidgetManageCubit() : super(WidgetManagerStateInitial());
 
   Stream<List<WidgetModel>> get listWidgetUsing => _listWidgetUsing.stream;
 
@@ -103,6 +107,7 @@ class WidgetManageCubit {
   final QuanLyWidgetRepository _qlWidgetRepo = Get.find();
 
   Future<void> _getListWidgetNotUse() async {
+    showLoading();
     final result = await _qlWidgetRepo.getListWidget();
     result.when(
       success: (res) {
@@ -114,6 +119,7 @@ class WidgetManageCubit {
           }
         }
         _listWidgetNotUse.sink.add(listNotUse);
+        showContent();
       },
       error: (err) {
         return;

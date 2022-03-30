@@ -1,4 +1,5 @@
-import 'dart:convert' as JSONs;
+
+import 'dart:convert';
 
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -169,52 +170,61 @@ class ChiTietYKienNguoiDanData {
 
   Map<String, dynamic> toJson() => _$ChiTietYKienNguoiDanDataToJson(this);
 
-  ChiTietYKNDModel toDomain() => ChiTietYKNDModel(
-        fileDinhKem ?? '',
-        taskFileDinhKem ?? '',
-        luongXuLy ?? '',
-        yKienChiDao ?? '',
-        task ?? '',
-        donViDuocPhanXuLy ?? '',
-        isDuyet ?? false,
-        isDraft ?? false,
-        linhVucId ?? 0,
-        tenLuat ?? '',
-        phanLoaiPAKN ?? '',
-        soPAKN ?? '',
-        tieuDe ?? '',
-        noiDung ?? '',
-        nguonPAKNId ?? 0,
-        luatId ?? 0,
-        noiDungPAKNId ?? 0,
-        linhVucPAKNId ?? 0,
-        dSTaiLieuDinhKem ?? '',
-        doiTuongId ?? 0,
-        tenNguoiPhanAnh ?? '',
-        cMTND ?? '',
-        email ?? '',
-        soDienThoai ?? '',
-        diaChi ?? '',
-        tinhId ?? 0,
-        huyenId ?? 0,
-        xaId ?? 0,
-        donViXuLyId ?? '',
-        trangThai ?? 0,
-        nguoiTaoId ?? '',
-        ngayNhan ?? '',
-        DateTime.parse(ngayPhanAnh ?? '').toStringWithListFormat,
-        noiTao ?? 0,
-        diaChiChiTiet ?? '',
-        DateTime.parse(hanXuLy ?? '').toStringWithListFormat,
-        nguoiXuLyId ?? '',
-        laPAKNChuyenLaiChoTiepNhan ?? false,
-        laPAKNChuyenLaiChoChuyenXuLy ?? false,
-        laPAKNChuyenLaiChoTiepNhanXuLy ?? false,
-        id ?? '',
-        thoiGianTaoMoi ?? '',
-        thoiGianCapNhat ?? '',
-        tenNguonPAKN ?? '',
-      );
+  ChiTietYKNDModel toDomain(){
+    final List<FileData>listFile=[];
+    if(fileDinhKem !=null){
+      final listData= jsonDecode(fileDinhKem??'') as List<dynamic>;
+      for (final element in listData) {
+        listFile.add(FileDataResopne.fromJson(element).toDomain());
+      }
+    }
+     return  ChiTietYKNDModel(
+       listFile,
+       taskFileDinhKem ?? '',
+       luongXuLy ?? '',
+       yKienChiDao ?? '',
+       task ?? '',
+       donViDuocPhanXuLy ?? '',
+       isDuyet ?? false,
+       isDraft ?? false,
+       linhVucId ?? 0,
+       tenLuat ?? '',
+       phanLoaiPAKN ?? '',
+       soPAKN ?? '',
+       tieuDe ?? '',
+       noiDung ?? '',
+       nguonPAKNId ?? 0,
+       luatId ?? 0,
+       noiDungPAKNId ?? 0,
+       linhVucPAKNId ?? 0,
+       dSTaiLieuDinhKem ?? '',
+       doiTuongId ?? 0,
+       tenNguoiPhanAnh ?? '',
+       cMTND ?? '',
+       email ?? '',
+       soDienThoai ?? '',
+       diaChi ?? '',
+       tinhId ?? 0,
+       huyenId ?? 0,
+       xaId ?? 0,
+       donViXuLyId ?? '',
+       trangThai ?? 0,
+       nguoiTaoId ?? '',
+       ngayNhan ?? '',
+       DateTime.parse(ngayPhanAnh ?? '').toStringWithListFormat,
+       noiTao ?? 0,
+       diaChiChiTiet ?? '',
+       DateTime.parse(hanXuLy ?? '').toStringWithListFormat,
+       nguoiXuLyId ?? '',
+       laPAKNChuyenLaiChoTiepNhan ?? false,
+       laPAKNChuyenLaiChoChuyenXuLy ?? false,
+       laPAKNChuyenLaiChoTiepNhanXuLy ?? false,
+       id ?? '',
+       thoiGianTaoMoi ?? '',
+       thoiGianCapNhat ?? '',
+       tenNguonPAKN ?? '',
+     );
+  }
 }
 
 @JsonSerializable()

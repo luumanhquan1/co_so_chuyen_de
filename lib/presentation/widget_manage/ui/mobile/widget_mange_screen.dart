@@ -1,10 +1,12 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/mobile/prev_view_widget.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/drag_item_list.dart';
+import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
@@ -73,104 +75,113 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
-                  height: 45,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: backgroundWidget,
-                    borderRadius: BorderRadius.circular(8),
+        body: StateStreamLayout(
+          textEmpty: S.current.khong_co_du_lieu,
+          retry: () {},
+          error: AppException(
+            S.current.error,
+            S.current.error,
+          ),
+          stream: widgetManageCubit.stateStream,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 0, 12),
+                    height: 45,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      color: backgroundWidget,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      S.current.keep_drop,
+                      style: const TextStyle(color: textTitle),
+                    ),
                   ),
-                  child: Text(
-                    S.current.keep_drop,
-                    style: const TextStyle(color: textTitle),
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  S.current.using,
-                  style: textNormalCustom(
-                    color: itemWidgetUsing,
-                    fontSize: 16,
+                  Text(
+                    S.current.using,
+                    style: textNormalCustom(
+                      color: itemWidgetUsing,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                StreamBuilder<List<WidgetModel>>(
-                  stream: widgetManageCubit.listWidgetUsing,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? [];
-                    if (data.isNotEmpty) {
-                      final List<WidgetModel> listWidgetUsing = data;
-                      return DragItemList(
-                        listWidget: listWidgetUsing,
-                        widgetManageCubit: widgetManageCubit,
-                        isUsing: true,
-                      );
-                    } else {
-                      return Center(
-                        child: Text(S.current.no_data),
-                      );
-                    }
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  S.current.not_use,
-                  style: textNormalCustom(
-                    color: itemWidgetNotUse,
-                    fontSize: 16,
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                StreamBuilder<List<WidgetModel>>(
-                  stream: widgetManageCubit.listWidgetNotUse,
-                  builder: (context, snapshot) {
-                    final data = snapshot.data ?? [];
-                    if (data.isNotEmpty) {
-                      final List<WidgetModel> listWidgetNotUse = data;
-                      return DragItemList(
-                        listWidget: listWidgetNotUse,
-                        widgetManageCubit: widgetManageCubit,
-                        isUsing: false,
-                      );
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: Center(
+                  StreamBuilder<List<WidgetModel>>(
+                    stream: widgetManageCubit.listWidgetUsing,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      if (data.isNotEmpty) {
+                        final List<WidgetModel> listWidgetUsing = data;
+                        return DragItemList(
+                          listWidget: listWidgetUsing,
+                          widgetManageCubit: widgetManageCubit,
+                          isUsing: true,
+                        );
+                      } else {
+                        return Center(
                           child: Text(S.current.no_data),
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    S.current.not_use,
+                    style: textNormalCustom(
+                      color: itemWidgetNotUse,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  StreamBuilder<List<WidgetModel>>(
+                    stream: widgetManageCubit.listWidgetNotUse,
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      if (data.isNotEmpty) {
+                        final List<WidgetModel> listWidgetNotUse = data;
+                        return DragItemList(
+                          listWidget: listWidgetNotUse,
+                          widgetManageCubit: widgetManageCubit,
+                          isUsing: false,
+                        );
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: Center(
+                            child: Text(S.current.no_data),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  ButtonCustomBottom(
+                    title: S.current.xem_truoc,
+                    isColorBlue: true,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => const PrevViewWidget(),
                         ),
                       );
-                    }
-                  },
-                ),
-                ButtonCustomBottom(
-                  title: S.current.xem_truoc,
-                  isColorBlue: true,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const PrevViewWidget(),
-                      ),
-                    );
-                  },
-                )
-              ],
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
