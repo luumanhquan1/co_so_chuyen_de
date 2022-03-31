@@ -56,7 +56,7 @@ abstract class BaoChiMangXaHoiService {
     @Query('pageSize') int pageSize,
     @Query('fromDate') String fromDate,
     @Query('toDate') String toDate,
-    @Query('total') int total,
+    @Query('topic') int total,
   );
 
   @GET(ApiConstants.BAI_VIET_THEO_DOI)

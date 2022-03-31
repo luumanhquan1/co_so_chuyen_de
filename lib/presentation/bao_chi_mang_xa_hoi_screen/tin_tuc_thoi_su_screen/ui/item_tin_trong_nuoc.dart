@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +12,19 @@ class ItemTinTrongNuoc extends StatelessWidget {
   String title;
   String content;
   String date;
+  String url;
+  Function() clickItem;
 
-  ItemTinTrongNuoc(
-      {Key? key,
-      required this.imgTitle,
-      required this.imgContent,
-      required this.title,
-      required this.content,
-      required this.date})
-      : super(key: key);
+  ItemTinTrongNuoc({
+    Key? key,
+    required this.imgTitle,
+    required this.imgContent,
+    required this.title,
+    required this.content,
+    required this.date,
+    required this.url,
+    required this.clickItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +52,22 @@ class ItemTinTrongNuoc extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  flex: 2,
-                  child: Container(
+                flex: 2,
+                child: Container(
                     clipBehavior: Clip.antiAlias,
                     height: 48,
                     width: 48,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                    ),
-                    child: Image.network(
-                      imgTitle,
-                      fit: BoxFit.cover,
-                    ),
-                  ),),
+                      image: DecorationImage(
+                        image: imgTitle.isNotEmpty
+                            ? NetworkImage(imgTitle)
+                            : const AssetImage(ImageAssets.icDongNai)
+                                as ImageProvider,
+                        fit: BoxFit.fill,
+                      ),
+                    ),),
+              ),
               Expanded(
                 flex: 8,
                 child: Container(
@@ -74,9 +82,10 @@ class ItemTinTrongNuoc extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: textNormalCustom(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: indicatorColor,),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: indicatorColor,
+                        ),
                       ),
                       const SizedBox(
                         height: 6,
@@ -84,10 +93,7 @@ class ItemTinTrongNuoc extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(
-                            Icons.date_range,
-                            color: iconColor,
-                          ),
+                          SvgPicture.asset(ImageAssets.icCalendar),
                           Text(
                             date,
                             style: textNormalCustom(
@@ -99,8 +105,11 @@ class ItemTinTrongNuoc extends StatelessWidget {
                           const SizedBox(
                             width: 30,
                           ),
-                          SvgPicture.asset(
-                            ImageAssets.icPlay,
+                          GestureDetector(
+                            child: SvgPicture.asset(ImageAssets.icPlay),
+                            onTap: () {
+                              clickItem();
+                            },
                           )
                         ],
                       )
@@ -113,20 +122,52 @@ class ItemTinTrongNuoc extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
-            child: Image.network(imgContent),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WebViewScreen(url: url, title: ''),
+                ),
+              );
+            },
+            child: Container(
+              height: 170,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: containerColorTab,
+                image: DecorationImage(
+                  image: imgContent.isNotEmpty
+                      ? NetworkImage(imgContent)
+                      : const AssetImage(ImageAssets.icDongNai)
+                          as ImageProvider,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(
-            content,
-            style: textNormalCustom(
-                color: titleColor, fontSize: 14, fontWeight: FontWeight.w500,),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WebViewScreen(url: url, title: ''),
+                ),
+              );
+            },
+            child: Text(
+              content,
+              style: textNormalCustom(
+                color: titleColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           )
         ],
       ),

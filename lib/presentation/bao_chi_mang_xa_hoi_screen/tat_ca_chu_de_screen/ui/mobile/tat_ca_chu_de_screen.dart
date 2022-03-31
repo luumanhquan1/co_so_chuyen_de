@@ -31,7 +31,7 @@ class TatCaChuDeScreen extends StatefulWidget {
   State<TatCaChuDeScreen> createState() => _TatCaChuDeScreenState();
 }
 
-class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
+class _TatCaChuDeScreenState extends State<TatCaChuDeScreen>with AutomaticKeepAliveClientMixin {
   final ScrollController _scrollController = ScrollController();
   ChuDeCubit chuDeCubit = ChuDeCubit();
 
@@ -43,6 +43,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -247,4 +248,8 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

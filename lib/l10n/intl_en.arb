@@ -812,9 +812,10 @@
   "da_diem_danh": "Đã điểm danh",
   "chua_diem_danh": "Chưa điểm danh",
   "ket_nois": "ket-noi",
-  "lich_hop_duyet_phong": "Lịch họp duyệt phòng",
-  "lich_hop_duyet_ky_thuat": "Lịch họp duyệt kỹ thuật",
-  "lich_hop_duyet_yeu_cau_chuan_bi": "Lịch họp duyệt yêu cầu chuẩn bị",
+  "lich_hop_duyet_phong" : "Lịch họp duyệt phòng",
+  "lich_hop_duyet_ky_thuat" : "Lịch họp duyệt kỹ thuật",
+  "lich_hop_duyet_yeu_cau_chuan_bi" : "Lịch họp duyệt yêu cầu chuẩn bị",
+  "tin_quoc_te" : "Tin quốc tế",
   "id_zoom": "ID Zoom",
   "ghi_chu": "Ghi chú"
 }

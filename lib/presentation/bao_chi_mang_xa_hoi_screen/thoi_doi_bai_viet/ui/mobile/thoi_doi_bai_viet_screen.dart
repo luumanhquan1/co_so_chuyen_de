@@ -20,11 +20,12 @@ class TheoDoiBaiVietScreen extends StatefulWidget {
   _TheoDoiBaiVietScreenState createState() => _TheoDoiBaiVietScreenState();
 }
 
-class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
+class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> with AutomaticKeepAliveClientMixin{
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
 
       body: Column(
@@ -100,5 +101,9 @@ class _TheoDoiBaiVietScreenState extends State<TheoDoiBaiVietScreen> {
       ),
    );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
