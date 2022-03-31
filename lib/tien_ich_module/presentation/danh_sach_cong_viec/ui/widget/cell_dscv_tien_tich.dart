@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/todo_model.dart';
 import '/home_module/utils/constants/image_asset.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CongViecCellTienIch extends StatefulWidget {
   final String text;
@@ -95,14 +96,18 @@ class _CongViecCellTienIchState extends State<CongViecCellTienIch> {
                       ),
                     ),
                   )
-                : TextFormField(
-                    focusNode: focusNode,
-                    controller: textEditingController,
-                    enabled: widget.enabled,
-                    style: textNormal(infoColor, 14),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(vertical: 20),
+                : Container(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: TextFormField(
+                      focusNode: focusNode,
+                      controller: textEditingController,
+                      enabled: widget.enabled,
+                      style: textNormal(infoColor, 14),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 4),
+                      ),
                     ),
                   ),
           ),

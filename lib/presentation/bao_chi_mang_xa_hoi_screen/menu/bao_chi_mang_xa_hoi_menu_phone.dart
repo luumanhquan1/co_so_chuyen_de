@@ -1,11 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/widget/container_menu_bao_chi.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/thoi_doi_bai_viet/bloc/theo_doi_bai_viet_cubit.dart';
-import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -47,7 +46,7 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                   shrinkWrap: true,
                   itemCount: widget.cubit.listTitleItemMenu.length,
                   itemBuilder: (context, index) {
-                    return ContainerMenuWidget(
+                    return ContainerMenuBaoChiWidget(
                       name: widget.cubit.listTitleItemMenu[index].title,
                       icon: ImageAssets.icMenuItemBCMXH,
                       type: TypeContainer.expand,
@@ -56,33 +55,9 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: widget.cubit.listSubMenu[index].length,
                         itemBuilder: (context, indexItem) {
-                          return GestureDetector(
-                            child: StreamBuilder(
-                              stream: widget.cubit.indexSelectItem,
-                              builder: (context, snapshot) {
-                                final data = snapshot.data;
-                                return Container(
-                                  color: data == indexItem
-                                      ? linkColor
-                                      : backgroundColorApp,
-                                  padding: const EdgeInsets.fromLTRB(
-                                    32,
-                                    0,
-                                    0,
-                                    16,
-                                  ),
-                                  child: Text(
-                                    widget.cubit.listSubMenu[index][indexItem]
-                                        .title,
-                                    style: textNormalCustom(
-                                      color: textTitle,
-                                      fontSize: 16.0.textScale(),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                          return ContainerMenuBaoChiWidget(
+                            name: widget
+                                .cubit.listSubMenu[index][indexItem].title,
                             onTap: () {
                               widget.cubit.topic = widget
                                   .cubit.listSubMenu[index][indexItem].nodeId;
@@ -91,6 +66,40 @@ class _BaoChiMangXaHoiMenuState extends State<BaoChiMangXaHoiMenu> {
                               Navigator.pop(context);
                             },
                           );
+                          // return GestureDetector(
+                          //   child: StreamBuilder(
+                          //     stream: widget.cubit.indexSelectItem,
+                          //     builder: (context, snapshot) {
+                          //       final data = snapshot.data;
+                          //       return Container(
+                          //         // color: data == indexItem
+                          //         //     ? linkColor
+                          //         //     : backgroundColorApp,
+                          //         // padding: const EdgeInsets.fromLTRB(
+                          //         //   32,
+                          //         //   0,
+                          //         //   0,
+                          //         //   16,
+                          //         // ),
+                          //         child: Text(
+                          //           widget.cubit.listSubMenu[index][indexItem]
+                          //               .title,
+                          //           style: tokenDetailAmount(
+                          //             color: textTitle,
+                          //             fontSize: 14.0.textScale(),
+                          //           ),
+                          //         ),
+                          //       );
+                          //     },
+                          //   ),
+                          //   onTap: () {
+                          //     widget.cubit.topic = widget
+                          //         .cubit.listSubMenu[index][indexItem].nodeId;
+                          //     widget.onChange();
+                          //     widget.cubit.slectColorItem(indexItem);
+                          //     Navigator.pop(context);
+                          //   },
+                          // );
                         },
                       ),
                       onTap: () {

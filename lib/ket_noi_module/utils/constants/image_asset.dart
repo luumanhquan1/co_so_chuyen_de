@@ -22,4 +22,6 @@ class ImageAssets {
   static const String icUnCheck = '$baseImgs/ic_unchecked.svg';
   static const String icX = '$baseImgs/ic_x.svg';
   static const String icSide = '$baseImgs/ic_side_menu.svg';
+  static const String icCaling = '$baseImgs/ic_caling.svg';
+  static const String icMeetings = '$baseImgs/ic_meetings.png';
 }
