@@ -136,7 +136,7 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
                     ),
                   alignment: Alignment.topRight,
                   child: Container(
-                    width: isMobile() ? 179 : 210,
+                    width: isMobile() ? 200 : 230,
                     decoration: BoxDecoration(
                       color: backgroundColorApp,
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -193,6 +193,11 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
         _animationController.reverse().whenComplete(() {
           widget.onDismis();
         });
+
+        widget.cubit.page = 1;
+        widget.cubit.listDSLV.clear();
+
+        widget.cubit.getListLichLV();
       },
       child: state.getState(index),
     );

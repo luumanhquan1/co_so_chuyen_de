@@ -43,6 +43,7 @@ class _MainLichHopState extends State<MainLichHop> {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
     cubit.initData();
+    cubit.initDataMenu();
     title = S.current.lich_hop_cua_toi;
   }
 
@@ -106,25 +107,6 @@ class _MainLichHopState extends State<MainLichHop> {
                         onPressed: () {
                           DrawerSlide.navigatorSlide(
                             context: context,
-                            // screen: MyCalendarMenu(
-                            //   cubit: cubit,
-                            //   theoDangLich: () {
-                            //     setState(() {
-                            //       cubit.chooseTypeList(
-                            //         Type_Choose_Option_List.DANG_LICH,
-                            //       );
-                            //       cubit.index.sink.add(0);
-                            //     });
-                            //   },
-                            //   theoDangDanhSach: () {
-                            //     setState(() {
-                            //       cubit.chooseTypeList(
-                            //         Type_Choose_Option_List.DANG_LIST,
-                            //       );
-                            //       cubit.index.sink.add(0);
-                            //     });
-                            //   },
-                            // ),
                             screen: MenuWidget(
                               cubit: cubitMenu,
                               isBaoCaoThongKe: true,
@@ -149,7 +131,7 @@ class _MainLichHopState extends State<MainLichHop> {
 
                                 cubit.index.sink.add(0);
                               },
-                              listItem: listThongBaoMyCalendar,
+                              listItem: cubit.dataMenu,
                               onTapLanhDao: (value) {
                                 cubit.titleAppbar = value.tenDonVi ?? '';
                                 cubit.idDonViLanhDao = value.id ?? '';

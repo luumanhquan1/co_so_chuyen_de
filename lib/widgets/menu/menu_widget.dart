@@ -145,12 +145,23 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                   (e) => ContainerMenuWidget(
                                                     icon: e.typeMenu
                                                         .getIconMobile(),
-                                                    name: e.typeMenu
-                                                        .getTitleLichHop(),
-                                                    index: e.typeMenu
-                                                        .getIndexMenuLichHop(
-                                                      dataDashBoard,
-                                                    ),
+                                                    name: e.typeMenu ==
+                                                            TypeCalendarMenu
+                                                                .LichTheoLanhDao
+                                                        ? e.menuModel
+                                                                ?.tenDonVi ??
+                                                            ''
+                                                        : e.typeMenu
+                                                            .getTitleLichHop(),
+                                                    index: e.typeMenu ==
+                                                            TypeCalendarMenu
+                                                                .LichTheoLanhDao
+                                                        ? e.menuModel?.count ??
+                                                            0
+                                                        : e.typeMenu
+                                                            .getIndexMenuLichHop(
+                                                            dataDashBoard,
+                                                          ),
                                                     isIcon: false,
                                                     onTap: () {
                                                       if (e.typeMenu ==
@@ -226,7 +237,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([true, false, false]);
-                    // widget.theoDangLich();
+                    widget.onTap(S.current.theo_dang_lich);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[0] ?? true,
@@ -240,7 +251,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, true, false]);
-                    // widget.theoDangDanhSach();
+                    widget.onTap(S.current.theo_dang_danh_sach);
+
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[1] ?? true,
@@ -254,6 +266,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, false, true]);
+                    widget.onTap(S.current.theo_dang_danh_sach);
+
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[2] ?? true,
@@ -287,7 +301,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         DashBoardLichHopModel.empty();
                                     return ContainerMenuWidgetTablet(
                                       name: e.typeMenu.getTitleLichHop(),
-                                      icon: e.typeMenu.getIconMobile(),
+                                      icon: e.typeMenu.getIconTablet(),
                                       type: e.type,
                                       index: e.typeMenu.getIndexMenuLichHop(
                                         dataDashBoard,
@@ -299,12 +313,23 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                       ContainerMenuWidgetTablet(
                                                     icon: e.typeMenu
                                                         .getIconMobile(),
-                                                    name: e.typeMenu
-                                                        .getTitleLichHop(),
-                                                    index: e.typeMenu
-                                                        .getIndexMenuLichHop(
-                                                      dataDashBoard,
-                                                    ),
+                                                    name: e.typeMenu ==
+                                                            TypeCalendarMenu
+                                                                .LichTheoLanhDao
+                                                        ? e.menuModel
+                                                                ?.tenDonVi ??
+                                                            ''
+                                                        : e.typeMenu
+                                                            .getTitleLichHop(),
+                                                    index: e.typeMenu ==
+                                                            TypeCalendarMenu
+                                                                .LichTheoLanhDao
+                                                        ? e.menuModel?.count ??
+                                                            0
+                                                        : e.typeMenu
+                                                            .getIndexMenuLichHop(
+                                                            dataDashBoard,
+                                                          ),
                                                     isIcon: false,
                                                     onTap: () {
                                                       if (e.typeMenu ==

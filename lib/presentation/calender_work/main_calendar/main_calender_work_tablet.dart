@@ -81,30 +81,30 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                                   Type_Choose_Option_List.DANG_LIST,
                                 );
                               }
-
-                              cubit.index.sink.add(0);
                             },
                             listItem: listThongBao,
                             onTapLanhDao: (value) {
-                              final data = value as TypeCalendarMenu;
-                              cubit.changeScreenMenu(data);
-                              if (data == TypeCalendarMenu.LichTheoLanhDao) {}
-                              if (state.type == Type_Choose_Option_Day.DAY) {
-                                cubit.callApi();
-                              } else if (state.type ==
-                                  Type_Choose_Option_Day.WEEK) {
-                                cubit.callApiTuan();
-                              } else {
-                                cubit.callApiMonth();
-                              }
+                              cubit.titleAppbar = value.tenDonVi ?? '';
+                              cubit.idDonViLanhDao = value.id ?? '';
                             },
                             cubit: cubitMenu,
                             streamDashBoard:
-                                cubit.lichLamViecDashBroadSubject.stream,
+                            cubit.lichLamViecDashBroadSubject.stream,
                             title: S.current.lich_lam_viec,
                           ),
                         ),
-                      );
+                      ).then((value) {
+                        final data = value as TypeCalendarMenu;
+                        cubit.changeScreenMenu(data);
+                        if (data == TypeCalendarMenu.LichTheoLanhDao) {}
+                        if (state.type == Type_Choose_Option_Day.DAY) {
+                          cubit.callApi();
+                        } else if (state.type ==
+                            Type_Choose_Option_Day.WEEK) {
+                          cubit.callApiTuan();
+                        } else {
+                          cubit.callApiMonth();
+                        }                      });
                     },
                     icon: SvgPicture.asset(
                       ImageAssets.icMenuCalender,
