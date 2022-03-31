@@ -1,18 +1,18 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/widget/chi_tiet_header.dart';
+import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/tablet/widget/item_row.dart';
 import 'package:flutter/material.dart';
 
-class ThongTinXuLyPhanAnh extends StatefulWidget {
+class ThongTinXuLyTablet extends StatefulWidget {
   final List<DataRowChiTietKienNghi> listRow;
 
-  const ThongTinXuLyPhanAnh({Key? key, required this.listRow}) : super(key: key);
+  const ThongTinXuLyTablet({Key? key, required this.listRow}) : super(key: key);
 
   @override
-  _ThongTinXuLyPhanAnhState createState() => _ThongTinXuLyPhanAnhState();
+  _ThongTinXuLyTabletState createState() => _ThongTinXuLyTabletState();
 }
 
-class _ThongTinXuLyPhanAnhState extends State<ThongTinXuLyPhanAnh> {
+class _ThongTinXuLyTabletState extends State<ThongTinXuLyTablet> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,10 +28,13 @@ class _ThongTinXuLyPhanAnhState extends State<ThongTinXuLyPhanAnh> {
         itemCount: widget.listRow.length,
         itemBuilder: (context, index) {
           return Container(
-            padding: EdgeInsets.only(),
-            child: ItemRow(
-              title: widget.listRow[index].title,
-              content: widget.listRow[index].content,
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: ItemRow(
+                title: widget.listRow[index].title,
+                content: widget.listRow[index].content,
+              ),
             ),
           );
         },

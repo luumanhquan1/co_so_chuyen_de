@@ -102,12 +102,15 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                             child: StreamBuilder<Object>(
                               stream: baseChooseTimeCubit.textDateTimeStream,
                               builder: (context, snapshot) {
-                                return FittedBox(
-                                  child: Text(
-                                    '${snapshot.data}',
-                                    style: textNormal(
-                                      textDropDownColor,
-                                      14.0.textScale(space: 4),
+                                return SizedBox(
+                                  height: 22,
+                                  child: FittedBox(
+                                    child: Text(
+                                      '${snapshot.data}',
+                                      style: textNormal(
+                                        textDropDownColor,
+                                        14.0.textScale(space: 4),
+                                      ),
                                     ),
                                   ),
                                 );

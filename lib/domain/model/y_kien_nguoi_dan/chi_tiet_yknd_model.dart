@@ -7,7 +7,7 @@ class ChiTietYKNDDataModel {
 }
 
 class ChiTietYKNDModel {
-  String fileDinhKem;
+  List<FileData> fileDinhKem;
   String taskFileDinhKem;
   String luongXuLy;
   String yKienChiDao;

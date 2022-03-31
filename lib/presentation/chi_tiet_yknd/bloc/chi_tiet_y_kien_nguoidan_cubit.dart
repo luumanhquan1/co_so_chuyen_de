@@ -228,10 +228,14 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
       success: (res) {
         checkIndex = res.chiTietYKNDModel.doiTuongId;
         final data = res.chiTietYKNDModel;
-        print("zzzz${data.fileDinhKem}");
-        print("zzz${data.fileDinhKem.splitMapJoin(
-          ',',
-        )}");
+        String listFile='';
+        if(data.fileDinhKem.isNotEmpty){
+           final List<String>listFileName=[];
+           for (final element in data.fileDinhKem) {
+             listFileName.add(element.tenFile);
+           }
+           listFile = listFileName.join('\n');
+        }
         final HeaderChiTietYKNDModel headerChiTietYKNDModel =
             HeaderChiTietYKNDModel(
           tieuDe: data.tieuDe,
@@ -241,9 +245,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
           ngayPhanAnh: data.ngayPhanAnh,
           hanXuLy: data.hanXuLy,
           quyDinhLuat: data.tenLuat,
-          taiLieuCongDan: data.fileDinhKem.splitMapJoin(
-            ',',
-          ),
+          taiLieuCongDan: listFile,
         );
         dataRowHeader = getMapDataHeader(headerChiTietYKNDModel);
         final NguoiPhanAnhModel nguoiPhanAnhModel = NguoiPhanAnhModel(
