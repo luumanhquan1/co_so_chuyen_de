@@ -129,7 +129,8 @@ class _BanTinItemQuocTeTabletState extends State<BanTinItemQuocTeTablet> {
                             const SizedBox(
                               width: 12,
                             ),
-                            SizedBox(
+                            Container(
+                              color: backgroundColorApp,
                               height: 50,
                               width: 160,
                               child: CustomDropDown(
@@ -178,6 +179,7 @@ class _BanTinItemQuocTeTabletState extends State<BanTinItemQuocTeTablet> {
                                     child: BanTinBtnSheetTablet(
                                       listTinTuc: widget
                                           .tinTucThoiSuBloc.listTinTucQuocTe,
+                                      index:index,
                                     ),
                                   );
                                 },

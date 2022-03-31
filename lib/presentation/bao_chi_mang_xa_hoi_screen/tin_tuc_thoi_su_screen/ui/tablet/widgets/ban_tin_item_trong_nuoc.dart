@@ -130,7 +130,8 @@ class _BanTinItemTrongNuocTabletState extends State<BanTinItemTrongNuocTablet> {
                             const SizedBox(
                               width: 12,
                             ),
-                            SizedBox(
+                            Container(
+                              color: backgroundColorApp,
                               height: 50,
                               width: 160,
                               child: CustomDropDown(
@@ -177,6 +178,7 @@ class _BanTinItemTrongNuocTabletState extends State<BanTinItemTrongNuocTablet> {
                                       child: BanTinBtnSheetTablet(
                                         listTinTuc: widget.tinTucThoiSuBloc
                                             .listTinTucTrongNuoc,
+                                        index:index,
                                       ),
                                     );
                                   },

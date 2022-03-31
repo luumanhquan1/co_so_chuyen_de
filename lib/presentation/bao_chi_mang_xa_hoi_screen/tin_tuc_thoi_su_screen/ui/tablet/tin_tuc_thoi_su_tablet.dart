@@ -3,7 +3,9 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_quoc_te_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_tablet.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_trong_nuoc_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_btn_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item_quoc_te.dart';
@@ -72,8 +74,7 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              type: TypeScreen.TIN_RADIO,
+                            builder: (context) => TinRadioTabletScreen(
                               pContext: widget.pContext,
                               tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
                               title: S.current.tin_radio,
@@ -118,8 +119,7 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  TinRadioScreen(
-                                    type: TypeScreen.TIN_TRONG_NUOC,
+                                  TinRadioTrongNuocTabletScreen(
                                     title: S.current.tin_trong_nuoc,
                                     listBanTin: widget.tinTucThoiSuBloc
                                         .listTinTucTrongNuoc,
@@ -167,8 +167,7 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              type: TypeScreen.TIN_QUOC_TE,
+                            builder: (context) => TinRadioQuocTeTabletScreen(
                               title: S.current.tin_quoc_te,
                               listBanTin: widget.tinTucThoiSuBloc.listTinTucQuocTe,
                               pContext:widget.pContext,
