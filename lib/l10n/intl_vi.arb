@@ -643,7 +643,6 @@
   "mttq_cac_the": "MTTQ và các đoàn thể",
   "nhap_linK_bao_cao": "Nhập link bài báo hoặc bài post Facebook để theo dõi",
   "nhap_link": "Nhập link ...",
-  "nhap_link_": "Nhập link",
   "sua_lich_hop": "Sửa lịch họp",
   "conten_diem_danh": "Bạn có chắc chắn muốn điểm danh cho những người được chọn?",
   "conten_huy_diem_danh": "Bạn có chắc chắn muốn hủy điểm danh cho những người được chọn?",
@@ -808,7 +807,13 @@
   "vang_mat": "Vắng mặt",
   "da_diem_danh": "Đã điểm danh",
   "chua_diem_danh": "Chưa điểm danh",
-  "ket_nois": "ket-noi"
+  "ket_nois": "ket-noi",
+  "tin_quoc_te" : "Tin quốc tế",
+  "lich_hop_duyet_phong": "Lịch họp duyệt phòng",
+  "lich_hop_duyet_ky_thuat": "Lịch họp duyệt kỹ thuật",
+  "lich_hop_duyet_yeu_cau_chuan_bi": "Lịch họp duyệt yêu cầu chuẩn bị",
+  "id_zoom": "ID Zoom",
+  "ghi_chu": "Ghi chú"
 }
 
 

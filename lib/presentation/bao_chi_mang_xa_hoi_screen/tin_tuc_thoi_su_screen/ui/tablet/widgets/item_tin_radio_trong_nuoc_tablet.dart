@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/webview/web_view_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,14 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ItemTinRadioTablet extends StatelessWidget {
+class ItemTinRadioTrongNuocTablet extends StatelessWidget {
   final String image;
   final String title;
   final String date;
+  final String? url;
   final Function() clickItem;
 
-  const ItemTinRadioTablet(this.image, this.title, this.date, {Key? key, required this.clickItem})
-      : super(key: key);
+  ItemTinRadioTrongNuocTablet(
+    this.image,
+    this.title,
+    this.date, {
+    Key? key,
+    required this.url,
+    required this.clickItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +45,28 @@ class ItemTinRadioTablet extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 104,
-            height: 96,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              border: Border.all(color: cellColorborder),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 56,
-                height: 56,
-                child: Image.asset(
-                  ImageAssets.icDongNai,
-                  fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      WebViewScreen(url: url ?? '', title: ''),
+                ),
+              );
+            },
+            child: Container(
+              height: 96,
+              width: 104,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: containerColorTab,
+                image: DecorationImage(
+                  image: image.isNotEmpty
+                      ? NetworkImage(image)
+                      : const AssetImage(ImageAssets.icDongNai)
+                          as ImageProvider,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

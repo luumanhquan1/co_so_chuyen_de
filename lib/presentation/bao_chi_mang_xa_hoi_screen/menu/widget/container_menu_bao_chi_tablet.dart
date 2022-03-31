@@ -1,13 +1,14 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_menu.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_animation_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ContainerKetNoiTablet extends StatefulWidget {
+enum TypeContainer { expand, number }
+
+class ContainerMenuBaoChiTabletWidget extends StatefulWidget {
   final String name;
   final String? icon;
   final bool isIcon;
@@ -16,10 +17,8 @@ class ContainerKetNoiTablet extends StatefulWidget {
   final TypeContainer type;
   final Widget? childExpand;
   final Function onTap;
-  final bool? showIcons;
-  final int lenghtItem;
 
-  const ContainerKetNoiTablet({
+  const ContainerMenuBaoChiTabletWidget({
     Key? key,
     required this.name,
     this.icon,
@@ -29,15 +28,15 @@ class ContainerKetNoiTablet extends StatefulWidget {
     this.isTypeContainer = true,
     this.childExpand,
     required this.onTap,
-    this.showIcons = true,
-    required this.lenghtItem,
   }) : super(key: key);
 
   @override
-  State<ContainerKetNoiTablet> createState() => _ContainerKetNoiTabletState();
+  State<ContainerMenuBaoChiTabletWidget> createState() =>
+      _ContainerMenuBaoChiTabletWidgetState();
 }
 
-class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
+class _ContainerMenuBaoChiTabletWidgetState
+    extends State<ContainerMenuBaoChiTabletWidget> {
   bool isExpand = false;
 
   @override
@@ -57,12 +56,7 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
             onTap: () {
               isExpand = !isExpand;
               setState(() {});
-              if (widget.lenghtItem <= 0) {
-                widget.onTap();
-                Navigator.pop(context);
-              } else {
-                widget.onTap();
-              }
+              widget.onTap();
             },
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -83,6 +77,7 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
                                   width: 15.0.textScale(space: 8),
                                   child: SvgPicture.asset(
                                     widget.icon ?? '',
+                                    color: Colors.grey,
                                   ),
                                 )
                               : SizedBox(
@@ -94,16 +89,15 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
                             height: 15,
                             width: 15,
                           ),
-                        Container(
+                        SizedBox(
                           width: 14.0.textScale(),
                         ),
                         Expanded(
                           child: Text(
                             widget.name,
-                            style: textNormalCustom(
+                            style: tokenDetailAmount(
                               color: textTitle,
                               fontSize: 14.0.textScale(),
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
@@ -113,39 +107,22 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
                   const SizedBox(
                     width: 12,
                   ),
-                  if (widget.lenghtItem <= 0)
-                    Container(
-                        // padding: const EdgeInsets.symmetric(
-                        //   vertical: 4,
-                        //   horizontal: 5,
-                        // ),
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(4),
-                        //   color: numberColorTabletbg,
-                        // ),
-                        // alignment: Alignment.center,
-                        // child: Text(
-                        //   widget.index.toString(),
-                        //   style: textNormalCustom(
-                        //     color: textDefault,
-                        //     fontWeight: FontWeight.w500,
-                        //     fontSize: 12.0.textScale(),
-                        //   ),
-                        // ),
-                        )
-                  else
-                    Icon(
-                      isExpand
-                          ? Icons.keyboard_arrow_down_outlined
-                          : Icons.keyboard_arrow_up_rounded,
-                      color: AqiColor,
-                    )
+                  if (widget.isTypeContainer)
+                    if (widget.type == TypeContainer.number)
+                      Container()
+                    else
+                      Icon(
+                        isExpand
+                            ? Icons.keyboard_arrow_down_outlined
+                            : Icons.keyboard_arrow_up_rounded,
+                        color: AqiColor,
+                      )
                 ],
               ),
             ),
           ),
         ),
-        if (widget.lenghtItem > 0)
+        if (widget.type == TypeContainer.expand)
           ExpandedSection(
             expand: isExpand,
             child: widget.childExpand ?? Container(),

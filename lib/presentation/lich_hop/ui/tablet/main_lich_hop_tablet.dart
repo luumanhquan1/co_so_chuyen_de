@@ -15,6 +15,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tao_lich_hop_screen
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_cubit.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +32,7 @@ class MainLichHopTabLet extends StatefulWidget {
 class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   LichHopCubit cubit = LichHopCubit();
   late String title;
+  final MenuCalendarCubit cubitMenu = MenuCalendarCubit();
 
   @override
   void dispose() {
@@ -44,6 +47,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     cubit.getDashboard();
     cubit.menuCalendar();
     cubit.postEventsCalendar();
+    cubit.initDataMenu();
     title = S.current.lich_hop_cua_toi;
   }
 
@@ -86,24 +90,37 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MyCalendarMenu(
-                                  cubit: cubit,
-                                  theoDangLich: () {
-                                    setState(() {
+                                builder: (context) => MenuWidget(
+                                  cubit: cubitMenu,
+                                  isBaoCaoThongKe: true,
+                                  onTap: (value) {
+                                    if (value == S.current.theo_dang_lich) {
                                       cubit.chooseTypeList(
                                         Type_Choose_Option_List.DANG_LICH,
                                       );
-                                      cubit.index.sink.add(0);
-                                    });
-                                  },
-                                  theoDangDanhSach: () {
-                                    setState(() {
+                                    }
+
+                                    if (value == S.current.theo_dang_danh_sach) {
                                       cubit.chooseTypeList(
                                         Type_Choose_Option_List.DANG_LIST,
                                       );
-                                      cubit.index.sink.add(0);
-                                    });
+                                    }
+
+                                    if (value == S.current.bao_cao_thong_ke) {
+                                      cubit.chooseTypeList(
+                                        Type_Choose_Option_List.DANG_LIST,
+                                      );
+                                    }
+
+                                    cubit.index.sink.add(0);
                                   },
+                                  listItem: cubit.dataMenu,
+                                  onTapLanhDao: (value) {
+                                    cubit.titleAppbar = value.tenDonVi ?? '';
+                                    cubit.idDonViLanhDao = value.id ?? '';
+                                  },
+                                  streamDashBoard: cubit.dashBoardSubject.stream,
+                                  title: S.current.hop,
                                 ),
                               ),
                             ).then((value) {

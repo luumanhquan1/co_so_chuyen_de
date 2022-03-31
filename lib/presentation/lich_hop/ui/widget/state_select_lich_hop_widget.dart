@@ -195,6 +195,11 @@ class _DialogSelectWidgetState extends State<DialogSelectWidget>
         _animationController.reverse().whenComplete(() {
           widget.onDismis();
         });
+
+        widget.cubit.listDSLH.clear();
+        widget.cubit.page = 1;
+
+        widget.cubit.postDanhSachLichHop();
       },
       child: state.getState(index),
     );

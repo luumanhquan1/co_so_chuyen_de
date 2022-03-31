@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
-import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
+import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
@@ -10,24 +10,19 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/state_select_lich_ho
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'mobile/lich_hop_extension.dart';
 
 class ItemThongBaoModelMyCalender {
-  String idLanhDao;
   TypeCalendarMenu typeMenu;
   TypeContainer type;
-  int? index;
   List<ItemThongBaoModelMyCalender>? listWidget;
-  String name;
+  MenuModel? menuModel;
 
   ItemThongBaoModelMyCalender({
     required this.typeMenu,
     required this.type,
-    this.idLanhDao = '',
-    this.index,
+    this.menuModel,
     this.listWidget,
-    this.name = '',
   });
 }
 
@@ -35,7 +30,6 @@ List<ItemThongBaoModelMyCalender> listThongBaoMyCalendar = [
   ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
-    index: 3,
   ),
   ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTheoTrangThai,
@@ -78,6 +72,14 @@ List<ItemThongBaoModelMyCalender> listTheoTrangThaiLichHop = [
     typeMenu: TypeCalendarMenu.LichDaKLCH,
     type: TypeContainer.number,
   ),
+  if (HiveLocal.checkPermissionApp(
+    permissionType: PermissionType.VPDT,
+    permissionTxt: 'quyen-duyet-phong',
+  ))
+    ItemThongBaoModelMyCalender(
+      typeMenu: TypeCalendarMenu.LichDuyetPhong,
+      type: TypeContainer.number,
+    ),
 ];
 
 extension GetDataMenu on TypeCalendarMenu {
@@ -127,6 +129,15 @@ extension GetDataMenu on TypeCalendarMenu {
         return data.soLichChuaCoBaoCao ?? 0;
       case TypeCalendarMenu.LichDaKLCH:
         return data.tongSoLichCoBaoCao ?? 0;
+      case TypeCalendarMenu.LichDuyetPhong:
+        return data.tongSoLichDuyetPhong ?? 0;
+      case TypeCalendarMenu.LichDuyetThietBi:
+        return data.tongSoLichDuyetThietBi ?? 0;
+      case TypeCalendarMenu.LichDuyetKyThuat:
+        return data.tongSoLichCoYeuCau ?? 0;
+      case TypeCalendarMenu.LichYeuCauChuanBi:
+        return data.tongSoLichCoYeuCau ?? 0;
+
       default:
         return 0;
     }
@@ -136,71 +147,53 @@ extension GetDataMenu on TypeCalendarMenu {
     required LichHopCubit cubit,
     required Type_Choose_Option_Day type,
   }) {
-    switch (this) {
-      case TypeCalendarMenu.LichCuaToi:
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-          ),
-          child: type.getTextLHWidget(
-            cubit: cubit,
-            textColor: textBodyTime,
-          ),
-        );
-
-      case TypeCalendarMenu.LichDuocMoi:
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: type.getTextLHWidget(
-                        cubit: cubit,
-                        textColor: textBodyTime,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    StateSelectLichHopWidget(cubit: cubit),
-                  ],
-                ),
+    if (this == TypeCalendarMenu.LichDuocMoi ||
+        this == TypeCalendarMenu.ChoDuyet ||
+        this == TypeCalendarMenu.LichDuyetPhong ||
+        this == TypeCalendarMenu.LichDuyetThietBi ||
+        this == TypeCalendarMenu.LichDaCoBaoCao ||
+        this == TypeCalendarMenu.LichDuyetKyThuat ||
+        this == TypeCalendarMenu.LichYeuCauChuanBi) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
               ),
-            ],
-          ),
-        );
-
-      case TypeCalendarMenu.LichTaoHo:
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-          ),
-          child: type.getTextLHWidget(
-            cubit: cubit,
-            textColor: textBodyTime,
-          ),
-        );
-
-      default:
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-          ),
-          child: Text(
-            getDateToString(DateTime.now()),
-            style: textNormalCustom(color: textBodyTime),
-          ),
-        );
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: type.getTextLHWidget(
+                      cubit: cubit,
+                      textColor: textBodyTime,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  StateSelectLichHopWidget(cubit: cubit),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        child: type.getTextLHWidget(
+          cubit: cubit,
+          textColor: textBodyTime,
+        ),
+      );
     }
   }
 
@@ -243,6 +236,18 @@ extension GetDataMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.ChoDuyet:
         return S.current.cho_duyet;
+
+      case TypeCalendarMenu.LichDuyetPhong:
+        return S.current.lich_hop_duyet_phong;
+
+      case TypeCalendarMenu.LichDuyetThietBi:
+        return S.current.lich_hop_duyet_thiet_bi;
+
+      case TypeCalendarMenu.LichDuyetKyThuat:
+        return S.current.lich_hop_duyet_ky_thuat;
+
+      case TypeCalendarMenu.LichYeuCauChuanBi:
+        return S.current.lich_hop_duyet_yeu_cau_chuan_bi;
 
       default:
         return S.current.lich_cua_toi;

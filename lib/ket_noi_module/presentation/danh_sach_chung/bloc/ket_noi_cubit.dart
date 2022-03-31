@@ -23,7 +23,7 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   DataDanhSachChungModel dataDanhSachChungModel = DataDanhSachChungModel();
 
   BehaviorSubject<String> headerSubject = BehaviorSubject();
-
+  BehaviorSubject<Object> menuSubject = BehaviorSubject();
   Stream<String> get streamHeader => headerSubject.stream;
 
   BehaviorSubject<DataDanhSachChungModel> dataDanhSachSubject =

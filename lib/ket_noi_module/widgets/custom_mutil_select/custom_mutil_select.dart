@@ -73,23 +73,10 @@ class _ExpandedSectionState extends State<SelectOnlyExpand>
         widget.onChange(valueSelect);
         addIndex.add(index);
         selectBloc.sink.add(addIndex);
-        // if (addIndex.contains(index)) {
-        //   addIndex.remove(index);
-        //   selectBloc.sink.add(addIndex);
-        // } else {
-        //   addIndex.add(index);
-        //   selectBloc.sink.add(addIndex);
-        // }
       }
     }
     setState(() {});
   }
-
-  // @override
-  // void dispose() {
-  //   selectBloc.close();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {

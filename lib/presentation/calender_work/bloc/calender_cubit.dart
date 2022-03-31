@@ -3,8 +3,8 @@ import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/danh_sach_lich_lam_viec_request.dart';
 import 'package:ccvc_mobile/data/request/lich_lam_viec/lich_lam_viec_right_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/danh_sach_lich_lam_viec.dart';
-import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/list_lich_lv_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart'
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -30,7 +31,6 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   int page = 1;
   int totalPage = 1;
   int pageSize = 100;
-  String titleAppbar = '';
   BehaviorSubject<bool> isCheckNgay = BehaviorSubject();
   BehaviorSubject<int> checkIndex = BehaviorSubject();
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
@@ -73,7 +73,19 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   DateTime startDates = DateTime.now();
   DateTime endDates = DateTime.now();
 
+  ///Data menu
+  String idDonViLanhDao = '';
+  String titleAppbar = '';
+  List<ItemThongBaoModelMyCalender> listLanhDao = [];
+  List<ItemThongBaoModelMyCalender> listDataMenu = listThongBao;
+
+  void initDataMenu() {
+    listDataMenu[2].listWidget = listLanhDao;
+  }
+
   void callApi() {
+    listDSLV.clear();
+    page = 1;
     startDates = selectDay;
     endDates = selectDay;
     callApiNgay();
@@ -83,19 +95,11 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       endDate: endDates.formatApi,
     );
     menuCalendar();
+    initDataMenu();
   }
 
   void callApiNgay() {
-    getListLichLV(
-      dateFrom: startDates.formatApi,
-      dateTo: endDates.formatApi,
-      userId: HiveLocal.getDataUser()?.userId ?? '',
-      donViId:
-          HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
-      pageIndex: page,
-      pageSize: pageSize,
-      isLichCuaToi: true,
-    );
+    getListLichLV();
     dataLichLamViec(
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
@@ -119,17 +123,10 @@ class CalenderCubit extends BaseCubit<CalenderState> {
         listLanhDao.clear();
         value.forEach((element) {
           listLanhDao.add(
-            ItemThongBaoModel(
-              icon: '',
+            ItemThongBaoModelMyCalender(
               typeMenu: TypeCalendarMenu.LichTheoLanhDao,
               type: TypeContainer.number,
-              name: element.tenDonVi ?? '',
-              index: element.count,
-              onTap: (BuildContext context, CalenderCubit cubit) {
-                changeItemMenuSubject.add(TypeCalendarMenu.LichTheoLanhDao);
-                titleAppbar = element.tenDonVi ?? '';
-                Navigator.pop(context);
-              },
+              menuModel: element,
             ),
           );
         });
@@ -171,11 +168,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   void callApiTuan() {
+    listDSLV.clear();
+    page = 1;
     final day = selectDay;
     startDates = day.subtract(Duration(days: day.weekday - 1));
     endDates = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     callApiNgay();
     postEventsCalendar();
+
     dataLichLamViec(
       startDate: startDates.formatApi,
       endDate: endDates.formatApi,
@@ -184,6 +184,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   }
 
   void callApiMonth() {
+    listDSLV.clear();
+    page = 1;
     final day = selectDay;
     startDates = DateTime(day.year, day.month, 1);
     endDates = DateTime(day.year, day.month + 1, 0);
@@ -198,23 +200,37 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   List<ListLichLVModel> listDSLV = [];
 
-  Future<void> getListLichLV({
-    required String dateFrom,
-    required String dateTo,
-    required String userId,
-    required String donViId,
-    required int pageIndex,
-    required int pageSize,
-    required bool isLichCuaToi,
-  }) async {
+  Future<void> getListLichLV() async {
     final DanhSachLichLamViecRequest data = DanhSachLichLamViecRequest(
-      DateFrom: dateFrom,
-      DateTo: dateTo,
-      UserId: userId,
-      DonViId: donViId,
-      PageIndex: pageIndex,
-      PageSize: pageSize,
-      isLichCuaToi: isLichCuaToi,
+      DateFrom: startDates.formatApi,
+      DateTo: endDates.formatApi,
+      DonViId: changeItemMenuSubject.value == TypeCalendarMenu.LichTheoLanhDao
+          ? idDonViLanhDao
+          : HiveLocal.getDataUser()?.userInformation?.donViTrucThuoc?.id ?? '',
+      IsLichLanhDao:
+          changeItemMenuSubject.value == TypeCalendarMenu.LichTheoLanhDao
+              ? true
+              : null,
+      isLichCuaToi: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichCuaToi),
+      isLichDuocMoi: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichDuocMoi),
+      isLichTaoHo: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichTaoHo),
+      isLichHuyBo:
+          changeItemMenuSubject.value.getListLichHop(TypeCalendarMenu.LichHuy),
+      isLichThuHoi: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichThuHoi),
+      isChuaCoBaoCao: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichHopCanKLCH),
+      isDaCoBaoCao: changeItemMenuSubject.value
+          .getListLichHop(TypeCalendarMenu.LichDaKLCH),
+      isChoXacNhan: getStateLDM.value.getListState(stateLDM.ChoXacNhan),
+      isLichThamGia: getStateLDM.value.getListState(stateLDM.ThamGia),
+      isLichTuChoi: getStateLDM.value.getListState(stateLDM.TuChoi),
+      PageIndex: page,
+      PageSize: 10,
+      UserId: HiveLocal.getDataUser()?.userId ?? '',
     );
     showLoading();
     final result = await _lichLamViec.getListLichLamViec(data);
@@ -301,14 +317,14 @@ class CalenderCubit extends BaseCubit<CalenderState> {
 
   //tong dashbroad
 
-  BehaviorSubject<LichLamViecDashBroad> lichLamViecDashBroadSubject =
+  BehaviorSubject<DashBoardLichHopModel> lichLamViecDashBroadSubject =
       BehaviorSubject.seeded(
-    LichLamViecDashBroad.empty(),
+    DashBoardLichHopModel.empty(),
   );
 
-  Stream<LichLamViecDashBroad> get streamLichLamViec =>
+  Stream<DashBoardLichHopModel> get streamLichLamViec =>
       lichLamViecDashBroadSubject.stream;
-  LichLamViecDashBroad lichLamViecDashBroads = LichLamViecDashBroad.empty();
+  DashBoardLichHopModel lichLamViecDashBroads = DashBoardLichHopModel.empty();
 
   LichLamViecRepository get _lichLamViec => Get.find();
 

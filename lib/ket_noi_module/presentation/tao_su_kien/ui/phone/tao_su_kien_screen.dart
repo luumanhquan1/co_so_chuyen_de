@@ -196,6 +196,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
         ),
       ),
       tabletScreen: Scaffold(
+        backgroundColor: bgTabletColor,
         appBar: BaseAppBar(
           title: S.current.tao_su_kien,
           leadingIcon: IconButton(
@@ -216,7 +217,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                 widgetRight: Column(
                   children: [
                     TextFieldStyle(
-                      urlIcon: ImageAssets.icDocument,
+                      urlIcon: ImageAssets.icCaling,
                       hintText: S.current.so_dien_thoai,
                       validator: (value) {
                         return (value ?? '').checkSdt();
@@ -235,7 +236,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                     ),
                     spaceH16,
                     TextFieldStylePNG(
-                      urlIcon: ImageAssets.icGroup,
+                      urlIcon: ImageAssets.icMeetings,
                       hintText: S.current.id_meeting,
                       onChange: (value) {
                         cubit.emeeting = value;
@@ -244,7 +245,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                     spaceH16,
                     TextFieldStylePNG(
                       urlIcon: ImageAssets.icZoom,
-                      hintText: S.current.zoom,
+                      hintText: S.current.id_zoom,
                       onChange: (value) {
                         cubit.zoom = value;
                       },
@@ -292,7 +293,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 builder: (context, snapshot) {
                                   final data = snapshot.data ?? <String>[];
                                   return SelectOnlyExpand(
-                                    urlIcon: ImageAssets.ic_calender,
+                                    urlIcon: ImageAssets.icDocument,
                                     title: S.current.loai_bai_viet,
                                     value: cubit.name,
                                     listSelect: data,

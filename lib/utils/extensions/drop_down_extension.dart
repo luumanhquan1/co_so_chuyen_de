@@ -7,6 +7,8 @@ extension funDropDown on dropDown {
         return 'Tin radio';
       case dropDown.tinTrongNuoc:
         return 'Tin trong nước';
+      case dropDown.tinQuocTe:
+        return 'Tin quốc tế';
       default:
         return 'khong dung thong tin';
     }

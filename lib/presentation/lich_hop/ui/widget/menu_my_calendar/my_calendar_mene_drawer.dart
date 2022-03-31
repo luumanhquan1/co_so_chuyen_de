@@ -155,16 +155,24 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                     (e) => ContainerMenuWidget(
                                                       icon: e.typeMenu
                                                           .getIconMobile(),
-                                                      name: e.name,
-                                                      index: e.index ?? 0,
+                                                      name: e.menuModel
+                                                              ?.tenDonVi ??
+                                                          '',
+                                                      index:
+                                                          e.menuModel?.count ??
+                                                              0,
                                                       isIcon: false,
                                                       onTap: () {
                                                         widget.cubit
-                                                                .titleAppbar =
-                                                            e.name;
+                                                            .titleAppbar = e
+                                                                .menuModel
+                                                                ?.tenDonVi ??
+                                                            '';
                                                         widget.cubit
-                                                                .idDonViLanhDao=
-                                                            e.idLanhDao;
+                                                            .idDonViLanhDao = e
+                                                                .menuModel
+                                                                ?.id ??
+                                                            '';
                                                         Navigator.pop(
                                                           context,
                                                           e.typeMenu,
@@ -330,16 +338,18 @@ class _MyCalendarMenuState extends State<MyCalendarMenu> {
                                                     ContainerMenuWidgetTablet(
                                                   icon: e.typeMenu
                                                       .getIconTablet(),
-                                                  name: e.name,
-                                                  index: e.index ?? 0,
+                                                  name: e.menuModel?.tenDonVi ??
+                                                      '',
+                                                  index:
+                                                      e.menuModel?.count ?? 0,
                                                   isIcon: false,
                                                   onTap: () {
+                                                    widget.cubit.titleAppbar =
+                                                        e.menuModel?.tenDonVi ??
+                                                            '';
                                                     widget.cubit
-                                                        .titleAppbar =
-                                                        e.name;
-                                                    widget.cubit
-                                                        .idDonViLanhDao=
-                                                        e.idLanhDao;
+                                                            .idDonViLanhDao =
+                                                        e.menuModel?.id ?? '';
                                                     Navigator.pop(
                                                       context,
                                                       e.typeMenu,

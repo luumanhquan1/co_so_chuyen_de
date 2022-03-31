@@ -84,7 +84,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                                 width: 15.0.textScale(space: 8),
                               )
                       else
-                       const SizedBox(
+                        const SizedBox(
                           height: 15,
                           width: 15,
                         ),
@@ -108,25 +108,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                   width: 12,
                 ),
                 if (widget.lenghtItem <= 0)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: numberColorTabletbg,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      widget.index.toString(),
-                      style: textNormalCustom(
-                        color: textDefault,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12.0.textScale(),
-                      ),
-                    ),
-                  )
+                  Container()
                 else
                   Icon(
                     isExpand
