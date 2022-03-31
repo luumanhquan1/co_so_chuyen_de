@@ -19,7 +19,8 @@ mixin YKienNguoiDanRepository {
       String fromDate,
       String toDate,);
 
-  Future<Result<DanhSachYKienNguoiDan>> danhSachYKienNguoiDan(String tuNgay,
+  Future<Result<DanhSachYKienNguoiDan>> danhSachYKienNguoiDan(
+      String tuNgay,
       String denNgay,
       int pageSize,
       int pageNumber,

@@ -34,6 +34,10 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   final BehaviorSubject<List<TinTucData>> _listDataSearch =
       BehaviorSubject<List<TinTucData>>();
 
+  int pageIndex=1;
+  int papeSize=10;
+  int totalPage = 1;
+
   List<String> listTitle = [
     S.current.tin_tong_hop,
     S.current.cac_dia_phuong,
@@ -93,23 +97,23 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     queue.dispose();
   }
 
-  DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
-      DashBoardTatCaChuDeRequest(
-    pageIndex: 1,
-    pageSize: 30,
-    total: 2220,
-    hasNextPage: true,
-    fromDate: DateTime.now().formatApiSS,
-    toDate: DateTime.now().formatApiSS,
-  );
+  // DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
+  //     DashBoardTatCaChuDeRequest(
+  //   pageIndex: 1,
+  //   pageSize: 30,
+  //   total: 2220,
+  //   hasNextPage: true,
+  //   fromDate: DateTime.now().formatApiSS,
+  //   toDate: DateTime.now().formatApiSS,
+  // );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
 
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     showLoading();
     final result = await _BCMXHRepo.getDashListChuDe(
-      1,
-      30,
-      233,
+      pageIndex,
+      papeSize,
+      0,
       true,
       startDate,
       endDate,
@@ -117,6 +121,7 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     showContent();
     result.when(
       success: (res) {
+        totalPage=res.totalPages??1;
         final result = res.getlistChuDe ?? [];
         _listYKienNguoiDan.sink.add(result);
       },

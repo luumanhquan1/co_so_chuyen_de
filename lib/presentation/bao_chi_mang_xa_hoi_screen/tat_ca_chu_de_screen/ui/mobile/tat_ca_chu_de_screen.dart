@@ -39,6 +39,16 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
   void initState() {
     super.initState();
     chuDeCubit.callApi();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('--------------------- cuoi page---------------');
+        if (chuDeCubit.pageIndex <=chuDeCubit.totalPage) {
+          chuDeCubit.pageIndex = chuDeCubit.pageIndex + 1;
+          chuDeCubit.getListTatCaCuDe(chuDeCubit.startDate, chuDeCubit.endDate);
+        }
+      }
+    });
   }
 
   @override
@@ -52,6 +62,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
           error: AppException('1', ''),
           stream: chuDeCubit.stateStream,
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -206,7 +217,7 @@ class _TatCaChuDeScreenState extends State<TatCaChuDeScreen> {
                               ),
                             ),
                             ListView.builder(
-                              controller: _scrollController,
+                              // controller: _scrollController,
                               itemCount: listChuDe.length,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
