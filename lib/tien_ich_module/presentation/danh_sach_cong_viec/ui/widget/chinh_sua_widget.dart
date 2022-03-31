@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/home_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/home_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/chon_nguoi_thuc_hien_screen.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/customTextFieldVersion2.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/textformfield/follow_key_board_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -16,8 +17,6 @@ import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'chon_nguoi_thuc_hien_screen.dart';
 
 class EditWidget extends StatefulWidget {
   final TodoModel todo;
@@ -61,8 +60,8 @@ class _EditWidgetState extends State<EditWidget> {
                   title: S.current.ngay_hoan_thanh,
                   child: SelectDate(
                     hintText: DateTime.parse(
-                            widget.todo.createdOn ?? DateTime.now().toString())
-                        .formatApi,
+                      widget.todo.createdOn ?? DateTime.now().toString(),
+                    ).toStringWithListFormat,
                     onSelectDate: (value) {
                       widget.cubit.getDate(value);
                     },
@@ -83,79 +82,85 @@ class _EditWidgetState extends State<EditWidget> {
                   height: 8,
                 ),
                 StreamBuilder<bool>(
-                    stream: widget.cubit.getEnabled,
-                    builder: (context, snapshot) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChonNguoiThucHienScreen(
-                                cubit: widget.cubit,
+                  stream: widget.cubit.getEnabled,
+                  builder: (context, snapshot) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChonNguoiThucHienScreen(
+                              cubit: widget.cubit,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(6.0),
+                              ),
+                              border: Border.all(
+                                color: borderColor,
                               ),
                             ),
-                          );
-                        },
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(6.0)),
-                                  border: Border.all(
-                                    color: borderColor,
-                                  )),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, top: 14, bottom: 14),
-                                child: Text(
-                                  snapshot.data == true
-                                      ? (widget.cubit.person.isEmpty
-                                          ? widget.todo.createdBy ?? ''
-                                          : widget.cubit.person)
-                                      : (widget.cubit.person.isEmpty)
-                                          ? S.current.tim_theo_nguoi
-                                          : widget.cubit.person,
-                                  style: textNormalCustom(
-                                    color: titleItemEdit,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14.0.textScale(),
-                                  ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                top: 14,
+                                bottom: 14,
+                              ),
+                              child: Text(
+                                snapshot.data == true
+                                    ? (widget.cubit.person.isEmpty
+                                        ? widget.todo.createdBy ?? ''
+                                        : widget.cubit.person)
+                                    : (widget.cubit.person.isEmpty)
+                                        ? S.current.tim_theo_nguoi
+                                        : widget.cubit.person,
+                                style: textNormalCustom(
+                                  color: titleItemEdit,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0.textScale(),
                                 ),
                               ),
                             ),
-                            Positioned(
-                              right: 14,
-                              top: 14,
-                              bottom: 14,
-                              child: GestureDetector(
-                                onTap: () {
-                                  widget.cubit.enabled.sink.add(false);
-                                  widget.cubit
-                                      .getPersontodo(person: '', idPerson: '');
-                                  setState(() {});
-                                },
-                                child: snapshot.data == true
-                                    ? Container(
-                                        color: Colors.transparent,
-                                        child: SvgPicture.asset(
-                                          ImageAssets.icClose,
-                                        ),
-                                      )
-                                    : const SizedBox(),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    }),
+                          ),
+                          Positioned(
+                            right: 14,
+                            top: 14,
+                            bottom: 14,
+                            child: GestureDetector(
+                              onTap: () {
+                                widget.cubit.enabled.sink.add(false);
+                                widget.cubit
+                                    .getPersontodo(person: '', idPerson: '');
+                                setState(() {});
+                              },
+                              child: snapshot.data == true
+                                  ? Container(
+                                      color: Colors.transparent,
+                                      child: SvgPicture.asset(
+                                        ImageAssets.icClose,
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
                 ItemTextFieldWidgetDSNV(
                   initialValue: widget.todo.note ?? '',
-                  title: S.current.ghi_tru,
+                  title: S.current.ghi_chu,
                   validator: (String? value) {},
                   onChange: (String value) {
                     widget.cubit.getnote(value);
@@ -172,7 +177,7 @@ class _EditWidgetState extends State<EditWidget> {
                       : const EdgeInsets.symmetric(horizontal: 100),
                   child: DoubleButtonBottom(
                     title1: S.current.dong,
-                    title2: S.current.xac_nhan,
+                    title2: S.current.luu,
                     onPressed1: () {
                       Navigator.pop(context);
                     },

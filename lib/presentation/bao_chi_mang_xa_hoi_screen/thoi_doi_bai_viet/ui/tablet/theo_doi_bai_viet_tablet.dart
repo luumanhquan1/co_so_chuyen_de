@@ -21,16 +21,17 @@ class TheoDoiBaiVietTablet extends StatefulWidget {
 class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> with AutomaticKeepAliveClientMixin{
   TextEditingController nhapLaiMatKhauController = TextEditingController();
   TheoDoiBaiVietCubit theoDoiBaiVietCubit = TheoDoiBaiVietCubit();
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      backgroundColor:bgManagerColor ,
+      backgroundColor: bgManagerColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 20.0,left: 30.0,right: 30.0),
+            padding: const EdgeInsets.only(top: 20.0, left: 30.0, right: 30.0),
             child: Text(
               S.current.nhap_linK_bao_cao,
               style: textNormalCustom(
@@ -66,31 +67,32 @@ class _TheoDoiBaiVietTabletState extends State<TheoDoiBaiVietTablet> with Automa
               cubit: theoDoiBaiVietCubit,
               isListView: false,
               checkRatio: 0.9,
-               crossAxisSpacing: 0.0,
+              crossAxisSpacing: 0.0,
               sinkWap: true,
               callApi: (page) => {
                 callApi(
                   page,
                 )
               },
-              viewItem: (value, index) =>
-                  itemBaiViet(value as BaiVietModel),
+              viewItem: (value, index) => itemBaiViet(value as BaiVietModel),
             ),
           ),
         ],
       ),
     );
   }
+
   void callApi(int page) {
     theoDoiBaiVietCubit.getListBaiVietTheoDoi(
-        theoDoiBaiVietCubit.endDate,
-        theoDoiBaiVietCubit.startDate,
-        widget.topic,
-        page,
-        ApiConstants.DEFAULT_PAGE_SIZE
+      theoDoiBaiVietCubit.endDate,
+      theoDoiBaiVietCubit.startDate,
+      widget.topic,
+      page,
+      ApiConstants.DEFAULT_PAGE_SIZE,
     );
   }
-  Widget itemBaiViet(BaiVietModel data){
+
+  Widget itemBaiViet(BaiVietModel data) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: BaiVietItemTablet(

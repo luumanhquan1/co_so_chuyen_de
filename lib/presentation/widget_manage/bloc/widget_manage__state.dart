@@ -4,7 +4,7 @@ abstract class WidgetManageState extends Equatable {
   const WidgetManageState();
 }
 
-class MainStateInitial extends WidgetManageState {
+class WidgetManagerStateInitial extends WidgetManageState {
   @override
   List<Object> get props => [];
 }

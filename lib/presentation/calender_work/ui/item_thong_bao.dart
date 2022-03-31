@@ -7,127 +7,52 @@ import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/state_select_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/item_menu_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-class ItemThongBaoModel {
-  String icon;
-  TypeCalendarMenu typeMenu;
-  String? name;
-  TypeContainer type;
-  int? index;
-  List<ItemThongBaoModel>? listWidget;
-  Function(BuildContext context, CalenderCubit cubit) onTap;
-
-  ItemThongBaoModel({
-    required this.icon,
-    required this.typeMenu,
-    required this.type,
-    required this.onTap,
-    this.index,
-    this.name,
-    this.listWidget,
-  });
-}
 
 List<ItemThongBaoModelMyCalender> listThongBao = [
   ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
-    index: 3,
   ),
   ItemThongBaoModelMyCalender(
-    typeMenu: TypeCalendarMenu.LichTheoTrangThai,
-    type: TypeContainer.expand,
-    listWidget: listTheoTrangThaiLichHop,
-  ),
-  ItemThongBaoModelMyCalender(
-    typeMenu: TypeCalendarMenu.LichTheoLanhDao,
-    type: TypeContainer.expand,
-    listWidget: listTheoTrangThaiLichHop,
-  ),
-];
-
-List<ItemThongBaoModel> listThongBaoTablet = [
-  ItemThongBaoModel(
-    icon: ImageAssets.icPersonWork,
-    typeMenu: TypeCalendarMenu.LichCuaToi,
-    type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichCuaToi);
-      Navigator.pop(context);
-    },
-  ),
-  ItemThongBaoModel(
-    icon: ImageAssets.icTheoDangLichCir,
     typeMenu: TypeCalendarMenu.LichTheoTrangThai,
     type: TypeContainer.expand,
     listWidget: listTheoTrangThai,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
-  ItemThongBaoModel(
-    icon: ImageAssets.icLichLanhDaoCir,
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTheoLanhDao,
     type: TypeContainer.expand,
-    listWidget: listLanhDao,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
+    listWidget: listTheoTrangThai,
   ),
 ];
 
-List<ItemThongBaoModel> listTheoTrangThai = [
-  ItemThongBaoModel(
-    icon: '',
+List<ItemThongBaoModelMyCalender> listTheoTrangThai = [
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichDuocMoi,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichDuocMoi);
-      Navigator.pop(context);
-    },
   ),
-  ItemThongBaoModel(
-    icon: '',
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTaoHo,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {
-      cubit.changeScreenMenu(TypeCalendarMenu.LichTaoHo);
-      Navigator.pop(context);
-    },
   ),
-  ItemThongBaoModel(
-    icon: '',
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichHuy,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
-  ItemThongBaoModel(
-    icon: '',
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichThuHoi,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
-  ItemThongBaoModel(
-    icon: '',
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichDaCoBaoCao,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
-  ItemThongBaoModel(
-    icon: '',
+  ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichChuaCoBaoCao,
     type: TypeContainer.number,
-    index: 3,
-    onTap: (BuildContext context, CalenderCubit cubit) {},
   ),
 ];
-
-List<ItemThongBaoModel> listLanhDao = [];
 
 enum TypeCalendarMenu {
   LichCuaToi,

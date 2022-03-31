@@ -1,15 +1,12 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/data/request/lich_hop/chon_bien_ban_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
-import 'package:ccvc_mobile/domain/model/lich_hop/chon_bien_ban_cuoc_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
@@ -18,7 +15,6 @@ import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
-import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/menu/item_state_lich_duoc_moi.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/widget/container_menu_widget.dart';
@@ -45,6 +41,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
   }
 
+  List<ItemThongBaoModelMyCalender> dataMenu = listThongBaoMyCalendar;
   List<ItemThongBaoModelMyCalender> listLanhDaoLichHop = [];
   String idDonViLanhDao = '';
   String titleAppbar = '';
@@ -106,6 +103,48 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     changeItemMenuSubject.add(typeMenu);
   }
 
+  void initDataMenu() {
+    final List<ItemThongBaoModelMyCalender> listTheoTrangThai =
+        dataMenu[1].listWidget ?? [];
+
+    if (HiveLocal.checkPermissionApp(
+      permissionType: PermissionType.VPDT,
+      permissionTxt: 'quyen-duyet-thiet-bi',
+    )) {
+      listTheoTrangThai.add(
+        ItemThongBaoModelMyCalender(
+          typeMenu: TypeCalendarMenu.LichDuyetThietBi,
+          type: TypeContainer.number,
+        ),
+      );
+    }
+    if (HiveLocal.checkPermissionApp(
+      permissionType: PermissionType.VPDT,
+      permissionTxt: 'duyet-ky-thuat',
+    )) {
+      listTheoTrangThai.add(
+        ItemThongBaoModelMyCalender(
+          typeMenu: TypeCalendarMenu.LichDuyetKyThuat,
+          type: TypeContainer.number,
+        ),
+      );
+    }
+    if (HiveLocal.checkPermissionApp(
+      permissionType: PermissionType.VPDT,
+      permissionTxt: 'yeu-cau-chuan-bi',
+    )) {
+      listTheoTrangThai.add(
+        ItemThongBaoModelMyCalender(
+          typeMenu: TypeCalendarMenu.LichYeuCauChuanBi,
+          type: TypeContainer.number,
+        ),
+      );
+    }
+
+    dataMenu[1].listWidget = listTheoTrangThai;
+    dataMenu[2].listWidget = listLanhDaoLichHop;
+  }
+
   Future<void> menuCalendar() async {
     final result = await hopRepo.getDataMenu(
       startDate.formatApi,
@@ -120,8 +159,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
             ItemThongBaoModelMyCalender(
               typeMenu: TypeCalendarMenu.LichTheoLanhDao,
               type: TypeContainer.number,
-              name: element.tenDonVi ?? '',
-              index: element.count,
               menuModel: element,
             ),
           );

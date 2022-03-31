@@ -15,18 +15,14 @@ import 'mobile/lich_hop_extension.dart';
 class ItemThongBaoModelMyCalender {
   TypeCalendarMenu typeMenu;
   TypeContainer type;
-  int? index;
   List<ItemThongBaoModelMyCalender>? listWidget;
-  String name;
   MenuModel? menuModel;
 
   ItemThongBaoModelMyCalender({
     required this.typeMenu,
     required this.type,
     this.menuModel,
-    this.index,
     this.listWidget,
-    this.name = '',
   });
 }
 
@@ -34,7 +30,6 @@ List<ItemThongBaoModelMyCalender> listThongBaoMyCalendar = [
   ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichCuaToi,
     type: TypeContainer.number,
-    index: 3,
   ),
   ItemThongBaoModelMyCalender(
     typeMenu: TypeCalendarMenu.LichTheoTrangThai,
@@ -83,30 +78,6 @@ List<ItemThongBaoModelMyCalender> listTheoTrangThaiLichHop = [
   ))
     ItemThongBaoModelMyCalender(
       typeMenu: TypeCalendarMenu.LichDuyetPhong,
-      type: TypeContainer.number,
-    ),
-  if (HiveLocal.checkPermissionApp(
-    permissionType: PermissionType.VPDT,
-    permissionTxt: 'quyen-duyet-thiet-bi',
-  ))
-    ItemThongBaoModelMyCalender(
-      typeMenu: TypeCalendarMenu.LichDuyetThietBi,
-      type: TypeContainer.number,
-    ),
-  if (HiveLocal.checkPermissionApp(
-    permissionType: PermissionType.VPDT,
-    permissionTxt: 'duyet-ky-thuat',
-  ))
-    ItemThongBaoModelMyCalender(
-      typeMenu: TypeCalendarMenu.LichDuyetKyThuat,
-      type: TypeContainer.number,
-    ),
-  if (HiveLocal.checkPermissionApp(
-    permissionType: PermissionType.VPDT,
-    permissionTxt: 'yeu-cau-chuan-bi',
-  ))
-    ItemThongBaoModelMyCalender(
-      typeMenu: TypeCalendarMenu.LichYeuCauChuanBi,
       type: TypeContainer.number,
     ),
 ];
@@ -163,9 +134,9 @@ extension GetDataMenu on TypeCalendarMenu {
       case TypeCalendarMenu.LichDuyetThietBi:
         return data.tongSoLichDuyetThietBi ?? 0;
       case TypeCalendarMenu.LichDuyetKyThuat:
-        return data.tongSoLichDuyetThietBi ?? 0;
+        return data.tongSoLichCoYeuCau ?? 0;
       case TypeCalendarMenu.LichYeuCauChuanBi:
-        return data.tongSoLichDuyetThietBi ?? 0;
+        return data.tongSoLichCoYeuCau ?? 0;
 
       default:
         return 0;

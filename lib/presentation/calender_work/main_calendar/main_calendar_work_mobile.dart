@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_lam_viec/lich_lam_viec_dashbroad_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/ket_noi_module/widgets/drawer_slide/drawer_slide.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_state.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
@@ -15,7 +16,6 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.d
 import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/mobile/tao_lich_lam_viec_chi_tiet_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
-import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
 import 'package:ccvc_mobile/widgets/menu/menu_cubit.dart';
 import 'package:ccvc_mobile/widgets/menu/menu_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -95,27 +95,30 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                                   Type_Choose_Option_List.DANG_LIST,
                                 );
                               }
-
-                              cubit.index.sink.add(0);
                             },
                             listItem: listThongBao,
                             onTapLanhDao: (value) {
-                              final data = value as TypeCalendarMenu;
-                              cubit.changeScreenMenu(data);
-                              if (data == TypeCalendarMenu.LichTheoLanhDao) {}
-                              if (state.type == Type_Choose_Option_Day.DAY) {
-                                cubit.callApi();
-                              } else if (state.type ==
-                                  Type_Choose_Option_Day.WEEK) {
-                                cubit.callApiTuan();
-                              } else {
-                                cubit.callApiMonth();
-                              }
+                              cubit.titleAppbar = value.tenDonVi ?? '';
+                              cubit.idDonViLanhDao = value.id ?? '';
                             },
                             cubit: cubitMenu,
                             streamDashBoard:
-                                cubit.lichLamViecDashBroadSubject.stream, title: '',
+                                cubit.lichLamViecDashBroadSubject.stream,
+                            title: S.current.lich_lam_viec,
                           ),
+                          thenValue: (value) {
+                            final data = value as TypeCalendarMenu;
+                            cubit.changeScreenMenu(data);
+                            if (data == TypeCalendarMenu.LichTheoLanhDao) {}
+                            if (state.type == Type_Choose_Option_Day.DAY) {
+                              cubit.callApi();
+                            } else if (state.type ==
+                                Type_Choose_Option_Day.WEEK) {
+                              cubit.callApiTuan();
+                            } else {
+                              cubit.callApiMonth();
+                            }
+                          },
                         );
                       },
                       icon: SvgPicture.asset(ImageAssets.icMenuCalender),
@@ -142,7 +145,7 @@ class _CalenderWorkDayMobileState extends State<CalenderWorkDayMobile> {
                           if (state.type == Type_Choose_Option_Day.MONTH &&
                               cubit.selectTypeCalendarSubject.value[0]) {
                             return const SizedBox(
-                              height: 70,
+                              height: 150,
                             );
                           } else {
                             return const SizedBox(

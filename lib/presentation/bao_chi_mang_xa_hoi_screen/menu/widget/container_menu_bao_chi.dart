@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 enum TypeContainer { expand, number }
 
-class ContainerMenuWidget extends StatefulWidget {
+class ContainerMenuBaoChiWidget extends StatefulWidget {
   final String name;
   final String? icon;
   final bool isIcon;
@@ -18,7 +18,7 @@ class ContainerMenuWidget extends StatefulWidget {
   final Widget? childExpand;
   final Function onTap;
 
-  const ContainerMenuWidget({
+  const ContainerMenuBaoChiWidget({
     Key? key,
     required this.name,
     this.icon,
@@ -31,10 +31,11 @@ class ContainerMenuWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ContainerMenuWidget> createState() => _ContainerMenuWidgetState();
+  State<ContainerMenuBaoChiWidget> createState() =>
+      _ContainerMenuBaoChiWidgetState();
 }
 
-class _ContainerMenuWidgetState extends State<ContainerMenuWidget> {
+class _ContainerMenuBaoChiWidgetState extends State<ContainerMenuBaoChiWidget> {
   bool isExpand = false;
 
   @override
@@ -98,25 +99,7 @@ class _ContainerMenuWidgetState extends State<ContainerMenuWidget> {
                 ),
                 if (widget.isTypeContainer)
                   if (widget.type == TypeContainer.number)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: numberColorTabletbg,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.index.toString(),
-                        style: textNormalCustom(
-                          color: textDefault,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0.textScale(),
-                        ),
-                      ),
-                    )
+                    Container()
                   else
                     Icon(
                       isExpand
