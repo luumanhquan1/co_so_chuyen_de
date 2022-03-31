@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+
 enum DoiTuongType { CANHAN, DOANHNGHIEP, TOCHUC, COQUANNHANUOC }
 
 class ChiTietYKNDDataModel {
@@ -98,6 +101,64 @@ class ChiTietYKNDModel {
     this.thoiGianCapNhat,
     this.tenNguonPAKN,
   );
+
+  List<DocumentDetailRow> toListHeader() {
+    final List<DocumentDetailRow> listCheckbox = [
+      DocumentDetailRow(
+        S.current.tieu_de,
+        tieuDe,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.noidung,
+        noiDung,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.nguon_pakn,
+        tenNguoiPhanAnh,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.phan_loai_pakn,
+        phanLoaiPAKN,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.ngay_phan_anh,
+        ngayPhanAnh,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.han_xu_ly,
+        hanXuLy,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.lien_quan_quy_dinh,
+        tenLuat,
+        TypeDocumentDetailRow.text,
+      ),
+      DocumentDetailRow(
+        S.current.tai_lieu_dinh_kem_cong_dan,
+        getFile(),
+        TypeDocumentDetailRow.text,
+      ),
+    ];
+
+    return listCheckbox;
+  }
+
+   getFile() {
+     String listFile='';
+    if (fileDinhKem.isNotEmpty) {
+      final List<String> listFileName = [];
+      for (final element in fileDinhKem) {
+        listFileName.add(element.tenFile);
+      }
+      listFile = listFileName.join('\n');
+    }
+  }
 }
 
 class HeaderChiTietYKNDModel {

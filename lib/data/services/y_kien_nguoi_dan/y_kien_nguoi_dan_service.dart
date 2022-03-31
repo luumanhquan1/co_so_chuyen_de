@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/chi_tiet_kien_nghi_request.dart';
+import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/danh_sach_y_kien_pakn_request.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_respnse.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_ket_qua_y_kien_xu_ly_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_phan_loai_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_yknd_response.dart';
@@ -62,5 +64,9 @@ abstract class YKienNguoiDanService {
       @Query('TuKhoa') String tuKhoa,
       @Query('userId') String userId,
       @Query('donViId') String donViId,
+      );
+  @POST(ApiConstants.GET_DANH_SACH_Y_KIEN_PAKN)
+  Future<DanhSachKetQuaYKXLModelResponse> getDanhSachYKienPAKN(
+      @Body() DanhSachYKienPAKNRequest danhSachYKienPAKNRequest,
       );
 }
