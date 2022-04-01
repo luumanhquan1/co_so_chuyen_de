@@ -3,9 +3,13 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin_tuc_thoi_su_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_quoc_te_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_tablet.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/tin_radio_trong_nuoc_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_btn_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item_quoc_te.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_item_trong_nuoc.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -65,14 +69,12 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                   stream: widget.tinTucThoiSuBloc.listTinTucRadio,
                   builder: (context, snapshot) {
                     return BanTinItemTablet(
-                      type: TypeScreen.TIN_RADIO,
                       listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
                       clickXemThem: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              type: TypeScreen.TIN_RADIO,
+                            builder: (context) => TinRadioTabletScreen(
                               pContext: widget.pContext,
                               tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
                               title: S.current.tin_radio,
@@ -109,23 +111,27 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                 StreamBuilder<TinTucRadioResponseModel>(
                   stream: widget.tinTucThoiSuBloc.listTinTucRadioTrongNuoc,
                   builder: (context, snapshot) {
-                    return BanTinItemTablet(
-                      type: TypeScreen.TIN_TRONG_NUOC,
+                    return BanTinItemTrongNuocTablet(
                       listTinTuc: widget.tinTucThoiSuBloc.listTinTucTrongNuoc,
                       clickXemThem: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              type: TypeScreen.TIN_TRONG_NUOC,
-                              title: S.current.tin_trong_nuoc,
-                              listBanTin: widget.tinTucThoiSuBloc.listTinTucTrongNuoc,
-                              pContext:widget.pContext,
-                              tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
+                        if(widget.tinTucThoiSuBloc.listTinTucTrongNuoc.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  TinRadioTrongNuocTabletScreen(
+                                    title: S.current.tin_trong_nuoc,
+                                    listBanTin: widget.tinTucThoiSuBloc
+                                        .listTinTucTrongNuoc,
+                                    pContext: widget.pContext,
+                                    tinTucThoiSuBloc: widget.tinTucThoiSuBloc,
+                                  ),
                             ),
-                          ),
-                        );
-                        widget.tinTucThoiSuBloc.listTinTucTrongNuoc.clear();
+                          );
+                          widget.tinTucThoiSuBloc.listTinTucTrongNuoc.clear();
+                        }else{
+                          return Container();
+                        }
                       },
                       title: S.current.tin_trong_nuoc,
                       description: S.current.tin_trong_nuoc_mieu_ta,
@@ -154,15 +160,14 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                 StreamBuilder<TinTucRadioResponseModel>(
                   stream: widget.tinTucThoiSuBloc.listTinTucRadioQuocTe,
                   builder: (context, snapshot) {
-                    return BanTinItemTablet(
-                      type: TypeScreen.TIN_QUOC_TE,
+                    return BanTinItemQuocTeTablet(
                       listTinTuc: widget.tinTucThoiSuBloc.listTinTucQuocTe,
                       clickXemThem: () {
+                        if(widget.tinTucThoiSuBloc.listTinTucQuocTe.isNotEmpty){
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TinRadioScreen(
-                              type: TypeScreen.TIN_QUOC_TE,
+                            builder: (context) => TinRadioQuocTeTabletScreen(
                               title: S.current.tin_quoc_te,
                               listBanTin: widget.tinTucThoiSuBloc.listTinTucQuocTe,
                               pContext:widget.pContext,
@@ -170,7 +175,10 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                             ),
                           ),
                         );
-                        widget.tinTucThoiSuBloc.listTinTucQuocTe.clear();
+                        widget.tinTucThoiSuBloc.listTinTucQuocTe.clear();}
+                        else {
+                          return Container();
+                        }
 
                       },
                       title: S.current.tin_quoc_te,
@@ -187,6 +195,7 @@ class _TinTucThoiSuScreenTabletState extends State<TinTucThoiSuScreenTablet> wit
                     );
                   },
                 ),
+                const SizedBox(height: 28.0,),
               ],
             ),
           ),
