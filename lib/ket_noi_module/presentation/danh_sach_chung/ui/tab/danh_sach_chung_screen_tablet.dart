@@ -37,139 +37,133 @@ class _DanhSachChungScreenTabletState extends State<DanhSachChungScreenTablet> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<String>(
-      stream: cubit.streamHeader,
-      builder: (context, snapshot) {
-        final data = snapshot.data ?? S.current.chung;
-        return Scaffold(
-          backgroundColor: bgWidgets,
-          appBar: BaseAppBar(
-            title: data,
-            leadingIcon: IconButton(
-              onPressed: () => {Navigator.pop(context)},
-              icon: SvgPicture.asset(
-                ImageAssets.icBacks,
+    return Scaffold(
+      backgroundColor: bgWidgets,
+      appBar: BaseAppBar(
+        title: cubit.dataCurrent?.title ?? S.current.chung,
+        leadingIcon: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: SvgPicture.asset(
+            ImageAssets.icBacks,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const TaoSuKienKetNoi(),
+                ),
+              );
+            },
+            icon: Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: SvgPicture.asset(
+                ImageAssets.ic_plus,
               ),
             ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const TaoSuKienKetNoi(),
-                    ),
-                  );
-                },
-                icon: Container(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: SvgPicture.asset(
-                    ImageAssets.ic_plus,
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => KetNoiMenuTablet(
-                        taoSuKienCubit: taoSuKienCubit,
-                        onChange: (value) {
-                          if (mounted) setState(() {});
-                          cubit.sukien = value.alias ?? '';
-                        },
-                        onSelect: (value) {
-                          cubit.subCategory = value;
-                        },
-                        ontChangeTitle: (value) {
-                          cubit.headerSubject.sink.add(value);
-                        },
-                      ),
-                    ),
-                  );
-                },
-                icon: SvgPicture.asset(
-                  ImageAssets.ic_mennu_ykien,
-                ),
-              ),
-            ],
           ),
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (cubit.sukien == S.current.ket_nois)
-                Container(
-                  padding: const EdgeInsets.only(top: 28, left: 30, right: 30),
-                  child: const SearchWidget(),
-                )
-              else
-                Container(
-                  padding: const EdgeInsets.only(top: 24, left: 30),
-                  child: Text(
-                    S.current.tin_noi_bat,
-                    style: titleAppbar(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    left: 14,
-                    right: 14,
-                  ),
-                  child: _content(),
-                ),
-              ),
-            ],
+          IconButton(
+            onPressed: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => KetNoiMenuTablet(
+              //       taoSuKienCubit: taoSuKienCubit,
+              //       onChange: (value) {
+              //         if (mounted) setState(() {});
+              //         cubit.alias = value.alias ?? '';
+              //       },
+              //       onSelect: (value) {
+              //         cubit.subCategory = value;
+              //       },
+              //       ontChangeTitle: (value) {
+              //         cubit.headerSubject.sink.add(value);
+              //       },
+              //     ),
+              //   ),
+              // );
+            },
+            icon: SvgPicture.asset(
+              ImageAssets.ic_mennu_ykien,
+            ),
           ),
-        );
-      },
+        ],
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // if (cubit.alias == S.current.ket_nois)
+          //   Container(
+          //     padding: const EdgeInsets.only(top: 28, left: 30, right: 30),
+          //     child: const SearchWidget(),
+          //   )
+          // else
+          //   Container(
+          //     padding: const EdgeInsets.only(top: 24, left: 30),
+          //     child: Text(
+          //       S.current.tin_noi_bat,
+          //       style: titleAppbar(
+          //         fontSize: 20,
+          //       ),
+          //     ),
+          //   ),
+          // Expanded(
+          //   child: Container(
+          //     padding: const EdgeInsets.only(
+          //       left: 14,
+          //       right: 14,
+          //     ),
+          //     child: _content(),
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
-
-  Widget _content() {
-    return cubit.sukien == S.current.ket_nois
-        ? ListViewLoadMore(
-            cubit: cubit,
-            isListView: false,
-            checkRatio: 1,
-            callApi: (page) =>
-                {cubit.getDataTrongNuoc(page, cubit.subCategory)},
-            viewItem: (value, index) {
-              try {
-                return ItemListTrongNuoc(
-                  model: value as ItemTrongNuocModel,
-                );
-              } catch (e) {
-                return const SizedBox();
-              }
-            },
-          )
-        : ListViewLoadMore(
-            cubit: cubit,
-            isListView: false,
-            checkRatio: 1,
-            callApi: (page) => {
-              cubit.getListCategory(
-                pageIndex: page,
-                pageSize: cubit.pageSize,
-                idDauMucSuKien: cubit.subCategory,
-                type: cubit.type,
-              )
-            },
-            viewItem: (value, index) {
-              try {
-                return ItemListChung(
-                  danhSachChungModel: value as DanhSachChungModel,
-                  index: index ?? 0,
-                );
-              } catch (e) {
-                return const SizedBox();
-              }
-            },
-          );
-  }
+  //
+  // Widget _content() {
+  //   return cubit.alias == S.current.ket_nois
+  //       ? ListViewLoadMore(
+  //           cubit: cubit,
+  //           isListView: false,
+  //           checkRatio: 1,
+  //           callApi: (page) =>
+  //               {cubit.getDataTrongNuoc(page, cubit.subCategory)},
+  //           viewItem: (value, index) {
+  //             try {
+  //               return ItemListTrongNuoc(
+  //                 model: value as ItemTrongNuocModel,
+  //               );
+  //             } catch (e) {
+  //               return const SizedBox();
+  //             }
+  //           },
+  //         )
+  //       : ListViewLoadMore(
+  //           cubit: cubit,
+  //           isListView: false,
+  //           checkRatio: 1,
+  //           callApi: (page) => {
+  //             cubit.getListCategory(
+  //               pageIndex: page,
+  //               pageSize: cubit.pageSize,
+  //               category: cubit.subCategory,
+  //               type: cubit.type,
+  //             )
+  //           },
+  //           viewItem: (value, index) {
+  //             try {
+  //               return ItemListChung(
+  //                 danhSachChungModel: value as DanhSachChungModel,
+  //                 index: index ?? 0,
+  //               );
+  //             } catch (e) {
+  //               return const SizedBox();
+  //             }
+  //           },
+  //         );
+  // }
 }

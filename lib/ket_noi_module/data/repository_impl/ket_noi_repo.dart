@@ -56,7 +56,7 @@ class KetNoiRepoImpl implements KetNoiRepository {
   Future<Result<List<LoaiBaiVietModel>>> loaiBaiViet(String type) {
     return runCatchingAsync<LoaiBaiVietResponse, List<LoaiBaiVietModel>>(
       () => _ketNoiService.getLoaiBaiViet(type),
-      (response) => response.toModel(),
+      (response) => response.toDomain(),
     );
   }
 

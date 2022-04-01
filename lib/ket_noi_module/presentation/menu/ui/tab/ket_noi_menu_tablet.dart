@@ -63,98 +63,93 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                     itemCount: widget.taoSuKienCubit.listData.length,
                     itemBuilder: (context, index) {
                       return ContainerKetNoiTablet(
-                        name: widget.taoSuKienCubit.listData[index].title ?? '',
+                        name: widget.taoSuKienCubit.listData[index].title,
                         icon: ImageAssets.icSide,
                         lenghtItem: widget.taoSuKienCubit.listData.length,
                         childExpand: ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: widget.taoSuKienCubit.listData[index]
-                                  .childrens?.length ??
-                              0,
+                                  .childrens.length,
                           itemBuilder: (context, index2) {
                             return ContainerKetNoiTablet(
                               name: widget.taoSuKienCubit.listData[index]
-                                      .childrens?[index2].title ??
-                                  '',
+                                      .childrens[index2].title,
                               lenghtItem: widget.taoSuKienCubit.listData[index]
-                                      .childrens?[index2].childrens?.length ??
-                                  0,
+                                      .childrens[index2].childrens.length,
                               childExpand: ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: widget.taoSuKienCubit.listData[index]
-                                        .childrens?[index2].childrens?.length ??
-                                    0,
+                                        .childrens[index2].childrens.length,
                                 itemBuilder: (context, index3) {
                                   return ContainerKetNoiTablet(
                                     name: widget
                                             .taoSuKienCubit
                                             .listData[index]
-                                            .childrens?[index2]
-                                            .childrens?[index3]
-                                            .title ??
-                                        '',
+                                            .childrens[index2]
+                                            .childrens[index3]
+                                            .title,
                                     lenghtItem: 0,
                                     onTap: () {
-                                      widget.onChange(
-                                        widget.taoSuKienCubit.listData[index],
-                                      );
-                                      widget.taoSuKienCubit.listData[index]
-                                                  .alias ==
-                                              S.current.ket_nois
-                                          ? widget.onSelect(
-                                              widget
-                                                      .taoSuKienCubit
-                                                      .listData[index]
-                                                      .childrens?[index2]
-                                                      .childrens?[index3]
-                                                      .code ??
-                                                  '',
-                                            )
-                                          : widget.onSelect(
-                                              widget
-                                                      .taoSuKienCubit
-                                                      .listData[index]
-                                                      .childrens?[index2]
-                                                      .childrens?[index3]
-                                                      .id ??
-                                                  '',
-                                            );
-                                      widget.ontChangeTitle(
-                                        widget
-                                                .taoSuKienCubit
-                                                .listData[index]
-                                                .childrens?[index2]
-                                                .childrens?[index3]
-                                                .title ??
-                                            '',
-                                      );
+                                      // widget.onChange(
+                                      //   widget.taoSuKienCubit.listData[index],
+                                      // );
+                                      // widget.taoSuKienCubit.listData[index]
+                                      //             .alias ==
+                                      //         S.current.ket_nois
+                                      //     ? widget.onSelect(
+                                      //         widget
+                                      //                 .taoSuKienCubit
+                                      //                 .listData[index]
+                                      //                 .childrens?[index2]
+                                      //                 .childrens?[index3]
+                                      //                 .code ??
+                                      //             '',
+                                      //       )
+                                      //     : widget.onSelect(
+                                      //         widget
+                                      //                 .taoSuKienCubit
+                                      //                 .listData[index]
+                                      //                 .childrens?[index2]
+                                      //                 .childrens?[index3]
+                                      //                 .id ??
+                                      //             '',
+                                      //       );
+                                      // widget.ontChangeTitle(
+                                      //   widget
+                                      //           .taoSuKienCubit
+                                      //           .listData[index]
+                                      //           .childrens?[index2]
+                                      //           .childrens?[index3]
+                                      //           .title ??
+                                      //       '',
+                                      // );
                                     },
                                   );
                                 },
                               ),
                               onTap: () {
-                                widget.onChange(
-                                  widget.taoSuKienCubit.listData[index],
-                                );
-                                widget.taoSuKienCubit.listData[index].alias ==
-                                        S.current.ket_nois
-                                    ? widget.onSelect(
-                                        widget.taoSuKienCubit.listData[index]
-                                                .childrens?[index2].code ??
-                                            '',
-                                      )
-                                    : widget.onSelect(
-                                        widget.taoSuKienCubit.listData[index]
-                                                .childrens?[index2].id ??
-                                            '',
-                                      );
-                                widget.ontChangeTitle(
-                                  widget.taoSuKienCubit.listData[index]
-                                          .childrens?[index2].title ??
-                                      '',
-                                );
+                                // widget.onChange(
+                                //   widget.taoSuKienCubit.listData[index],
+                                // );
+                                // widget.taoSuKienCubit.listData[index].alias ==
+                                //         S.current.ket_nois
+                                //     ? widget.onSelect(
+                                //         widget.taoSuKienCubit.listData[index]
+                                //                 .childrens?[index2].code ??
+                                //             '',
+                                //       )
+                                //     : widget.onSelect(
+                                //         widget.taoSuKienCubit.listData[index]
+                                //                 .childrens?[index2].id ??
+                                //             '',
+                                //       );
+                                // widget.ontChangeTitle(
+                                //   widget.taoSuKienCubit.listData[index]
+                                //           .childrens?[index2].title ??
+                                //       '',
+                                // );
                               },
                             );
                           },
@@ -164,7 +159,7 @@ class _KetNoiMenuTabletState extends State<KetNoiMenuTablet> {
                             widget.taoSuKienCubit.listData[index],
                           );
                           widget.ontChangeTitle(
-                            widget.taoSuKienCubit.listData[index].title ?? '',
+                            widget.taoSuKienCubit.listData[index].title,
                           );
                         },
                       );
