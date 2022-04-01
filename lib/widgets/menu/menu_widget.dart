@@ -104,6 +104,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 widget.onTap(S.current.bao_cao_thong_ke);
                                 Navigator.pop(
                                   context,
+                                  TypeCalendarMenu.BaoCaoThongKe,
                                 );
                               },
                               isSelect: snapshot.data?[2] ?? true,

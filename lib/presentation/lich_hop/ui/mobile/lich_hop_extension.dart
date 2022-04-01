@@ -354,15 +354,7 @@ extension lichHopCubit on LichHopState {
   }
 
   Widget lichLamViecIconsMobile() {
-    if (this is LichHopStateDangList) {
-      return type.getLichHopIconsMobile();
-    } else if (this is LichHopStateDangLich) {
-      return type.getLichHopIconsMobile();
-    } else if (this is LichHopStateDangDanhSach) {
-      return type.getLichHopIconsMobile();
-    } else {
-      return const SizedBox();
-    }
+    return type.getLichHopIconsMobile();
   }
 }
 

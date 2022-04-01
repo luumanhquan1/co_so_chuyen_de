@@ -27,6 +27,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.d
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/dashborad_thong_ke_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/event_calendar_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
@@ -229,6 +230,12 @@ abstract class HopServices {
 
   @POST(ApiConstants.STATISTIC_BY_MONTH)
   Future<StatisticByMonthResponse> postStatisticByMonth(
+    @Query('dateFrom') String dateFrom,
+    @Query('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.DASHBOARD_THONG_KE)
+  Future<DashBoardThongKeResponse> getDashBoardThongKe(
     @Query('dateFrom') String dateFrom,
     @Query('dateTo') String dateTo,
   );

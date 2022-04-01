@@ -25,6 +25,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dar
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/dashborad_thong_ke_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/event_calendar_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
@@ -61,6 +62,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
@@ -425,11 +427,23 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<List<StatisticByMonthModel>>> postStatisticByMonth(
-      String dateFrom, String dateTo) {
+      String dateFrom, String dateTo,) {
     return runCatchingAsync<StatisticByMonthResponse,
         List<StatisticByMonthModel>>(
       () => _hopServices.postStatisticByMonth(dateFrom, dateTo),
       (response) => response.data.map((e) => e.toModel()).toList(),
+    );
+  }
+
+  @override
+  Future<Result<List<DashBoardThongKeModel>>> getDashBoardThongKe(
+    String dateFrom,
+    String dateTo,
+  ) {
+    return runCatchingAsync<DashBoardThongKeResponse,
+        List<DashBoardThongKeModel>>(
+      () => _hopServices.getDashBoardThongKe(dateFrom, dateTo),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
     );
   }
 }

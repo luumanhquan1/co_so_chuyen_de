@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
@@ -79,6 +80,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
 
+  BehaviorSubject<List<DashBoardThongKeModel>> listDashBoardThongKe =
+      BehaviorSubject();
 
   final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
       BehaviorSubject();
@@ -93,7 +96,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   Stream<List<MeetingSchedule>> get listMeetingStream =>
       listMeetTingScheduleSubject.stream;
-
 
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
@@ -142,6 +144,22 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
     dataMenu[1].listWidget = listTheoTrangThai;
     dataMenu[2].listWidget = listLanhDaoLichHop;
+  }
+
+  Future<void> getDashBoardThongKe() async {
+    showLoading();
+    final result = await hopRepo.getDashBoardThongKe(
+      startDate.formatApi,
+      endDate.formatApi,
+    );
+
+    result.when(
+      success: (success) {
+        listDashBoardThongKe.add(success);
+      },
+      error: (error) {},
+    );
+    showContent();
   }
 
   Future<void> menuCalendar() async {
@@ -228,6 +246,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     menuCalendar();
     initDataMenu();
     postStatisticByMonth();
+    getDashBoardThongKe();
   }
 
   Future<void> postStatisticByMonth() async {
@@ -297,9 +316,10 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     menuCalendar();
     postEventsCalendar();
 
-    if (state is LichHopStateDangThongKe) {
-      postDanhSachLichHop();
-    }
+    postDanhSachLichHop();
+
+    postStatisticByMonth();
+    getDashBoardThongKe();
   }
 
   void postDSLHMonth() {
@@ -313,9 +333,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     getDashboard();
     menuCalendar();
     postEventsCalendar();
-    if (state is LichHopStateDangThongKe) {
-      postDanhSachLichHop();
-    }
+    postStatisticByMonth();
+
+    getDashBoardThongKe();
   }
 
   void postDSLHDay() {
@@ -327,7 +347,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     getDashboard();
     menuCalendar();
     postEventsCalendar();
-    postDanhSachLichHop();
+    postStatisticByMonth();
+    getDashBoardThongKe();
   }
 
   Future<void> postDanhSachLichHop() async {

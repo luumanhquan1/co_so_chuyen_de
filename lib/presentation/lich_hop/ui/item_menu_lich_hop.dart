@@ -229,9 +229,6 @@ extension GetDataMenu on TypeCalendarMenu {
       case TypeCalendarMenu.LichDaCoBaoCao:
         return S.current.lich_da_co_bao_cao;
 
-      case TypeCalendarMenu.BaoCaoThongKe:
-        return S.current.bao_cao_thong_ke;
-
       case TypeCalendarMenu.LichDaKLCH:
         return S.current.lich_da_klch;
 

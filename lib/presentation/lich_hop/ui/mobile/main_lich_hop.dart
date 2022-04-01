@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/drawer_slide/drawer_slide.dart';
 import 'package:ccvc_mobile/presentation/calender_work/bloc/calender_cubit.dart';
@@ -122,7 +123,8 @@ class _MainLichHopState extends State<MainLichHop> {
                                 cubit.idDonViLanhDao = value.id ?? '';
                               },
                               streamDashBoard: cubit.dashBoardSubject.stream,
-                              title: S.current.hop, cubit: cubitMenu,
+                              title: S.current.hop,
+                              cubit: cubitMenu,
                             ),
                             thenValue: (value) {
                               final data = value as TypeCalendarMenu;
@@ -158,8 +160,6 @@ class _MainLichHopState extends State<MainLichHop> {
                                           Type_Choose_Option_Day.DAY ||
                                       state.type ==
                                           Type_Choose_Option_Day.WEEK) {
-
-
                                     return Container(
                                       margin: EdgeInsets.only(
                                         top: cubit.isCheckNgay ? 150 : 120,
@@ -181,7 +181,48 @@ class _MainLichHopState extends State<MainLichHop> {
                                       vertical: 16.0,
                                     ),
                                     child: state is LichHopStateDangThongKe
-                                        ? Container()
+                                        ? StreamBuilder<
+                                            List<DashBoardThongKeModel>>(
+                                            stream: cubit
+                                                .listDashBoardThongKe.stream,
+                                            builder: (context, snapshot) {
+                                              final data = snapshot.data ?? [];
+                                              return SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: cubit.isCheckNgay
+                                                        ? 150
+                                                        : 120,
+                                                  ),
+                                                  height: 88,
+                                                  child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount: data.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return CustomItemCalenderWork(
+                                                        image: cubit
+                                                                .listImageLichHopThongKe[
+                                                            index],
+                                                        typeName:
+                                                            data[index].name ??
+                                                                '',
+                                                        numberOfCalendars: data[
+                                                                    index]
+                                                                .quantities ??
+                                                            0,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          )
                                         : StreamBuilder<DashBoardLichHopModel>(
                                             stream: cubit.dashBoardStream,
                                             builder: (context, snapshot) {
@@ -230,12 +271,47 @@ class _MainLichHopState extends State<MainLichHop> {
                                       vertical: 16.0,
                                     ),
                                     child: state is LichHopStateDangThongKe
-                                        ? Container(
-                                            margin: EdgeInsets.only(
-                                              left: 16.0,
-                                              top:
-                                                  cubit.isCheckNgay ? 150 : 120,
-                                            ),
+                                        ? StreamBuilder<
+                                            List<DashBoardThongKeModel>>(
+                                            stream: cubit
+                                                .listDashBoardThongKe.stream,
+                                            builder: (context, snapshot) {
+                                              final data = snapshot.data ?? [];
+                                              return SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 16.0,
+                                                    top: cubit.isCheckNgay
+                                                        ? 150
+                                                        : 120,
+                                                  ),
+                                                  height: 88,
+                                                  child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount: data.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return CustomItemCalenderWork(
+                                                        image: cubit
+                                                                .listImageLichHopThongKe[
+                                                            index],
+                                                        typeName:
+                                                            data[index].name ??
+                                                                '',
+                                                        numberOfCalendars: data[
+                                                                    index]
+                                                                .quantities ??
+                                                            0,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           )
                                         : StreamBuilder<DashBoardLichHopModel>(
                                             stream: cubit.dashBoardStream,
@@ -306,13 +382,15 @@ class _MainLichHopState extends State<MainLichHop> {
                                     onTapDay: () {
                                       setState(() {});
                                       cubit.chooseTypeDay(
-                                          Type_Choose_Option_Day.DAY);
+                                        Type_Choose_Option_Day.DAY,
+                                      );
                                       cubit.postDSLHDay();
                                     },
                                     onTapWeek: () {
                                       setState(() {});
                                       cubit.chooseTypeDay(
-                                          Type_Choose_Option_Day.WEEK);
+                                        Type_Choose_Option_Day.WEEK,
+                                      );
                                       cubit.postDSLHWeek();
                                     },
                                     onTapmonth: () {
