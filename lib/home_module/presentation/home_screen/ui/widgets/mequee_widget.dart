@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
@@ -124,6 +125,19 @@ class _MequeeWidgetState extends State<_MarqueeCell> {
       timer = getAnimationRun();
     });
   }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    //   if(timer.isActive){
+    //     timer.cancel();
+    //   }else{
+    //     timer = getAnimationRun();
+    //   }
+    // });
+    log(">>>>>>>>>>>>>>>>>>>>>");
+  }
 @override
   void dispose() {
     // TODO: implement dispose
@@ -180,7 +194,8 @@ class _MequeeWidgetState extends State<_MarqueeCell> {
   }
 
   Timer getAnimationRun() {
-    return Timer.periodic(const Duration(milliseconds: 40), (timer) {
+    return Timer.periodic(const Duration(microseconds: 40000), (timer) {
+      // log("message$offset");
       offset = offset - 1;
       offset1 = offset1 - 1;
       if (offset1 < 0 && offset1 > -2) {

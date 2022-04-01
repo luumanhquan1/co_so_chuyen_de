@@ -256,7 +256,7 @@ class BaoChiMangXaHoiCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -511,7 +511,7 @@ class TongHopNhiemVuCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -549,7 +549,7 @@ class TinhHinhXuLyCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -739,7 +739,7 @@ class VanBanCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -835,7 +835,7 @@ class YKienNguoiDanCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -915,7 +915,7 @@ class LichLamViecCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -1010,7 +1010,7 @@ class LichHopCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -1046,7 +1046,7 @@ class SinhNhatCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -1082,7 +1082,7 @@ class SuKienTrongNgayCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -1130,7 +1130,7 @@ class TinhHinhXuLyYKienCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
@@ -1179,7 +1179,7 @@ class NhiemVuCubit extends HomeCubit with SelectKeyDialog {
     required DateTime startDate,
     required DateTime endDate,
   }) {
-    if (selectKey != selectKeyTime) {
+    if (selectKey != selectKeyTime || selectKey == SelectKey.TUY_CHON) {
       selectKeyTime = selectKey;
       this.startDate = startDate;
       this.endDate = endDate;
