@@ -30,6 +30,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.da
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/statistic_by_month_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
@@ -60,6 +61,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
@@ -412,10 +414,22 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<List<MenuModel>>> getDataMenu(
-      String startTime, String endTime,) {
+    String startTime,
+    String endTime,
+  ) {
     return runCatchingAsync<MenuResponse, List<MenuModel>>(
       () => _hopServices.getMenuLichHop(startTime, endTime),
       (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<StatisticByMonthModel>>> postStatisticByMonth(
+      String dateFrom, String dateTo) {
+    return runCatchingAsync<StatisticByMonthResponse,
+        List<StatisticByMonthModel>>(
+      () => _hopServices.postStatisticByMonth(dateFrom, dateTo),
+      (response) => response.data.map((e) => e.toModel()).toList(),
     );
   }
 }

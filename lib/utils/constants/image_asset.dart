@@ -28,6 +28,10 @@ class ImageAssets {
   static const headerMenuThu = '$baseImg/background_menu_thu.png';
   static const headerMenuDong = '$baseImg/background_menu_dong.png';
 
+ static const icLichHopTrucTiep = '$baseImg/ic_lich_hop_truc_tiep.png';
+  static const icLichHopTrucTuyen = '$baseImg/ic_lich_hop_truc_tuyen.png';
+  static const icTongSoLichHop = '$baseImg/ic_tong_so_lich_hop.png';
+
   static const String icHeaderMenuTetNguyenDan =
       '$baseImg/background_tet_nguyen_dan.png';
   static const String icHeaderMenuLeTinhNhan =

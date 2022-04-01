@@ -15,7 +15,7 @@ import 'package:ccvc_mobile/presentation/tao_lich_lam_viec_chi_tiet/ui/tablet/ta
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_tablet.dart';
-import 'package:ccvc_mobile/widgets/menu/menu_cubit.dart';
+import 'package:ccvc_mobile/widgets/menu/menu_calendar_cubit.dart';
 import 'package:ccvc_mobile/widgets/menu/menu_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class CalenderWorkDayTablet extends StatefulWidget {
 
 class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
   CalenderCubit cubit = CalenderCubit();
-  MenuCalendarCubit cubitMenu = MenuCalendarCubit();
+  final MenuCalendarCubit cubitMenu = MenuCalendarCubit();
 
   @override
   void initState() {
@@ -87,10 +87,10 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                               cubit.titleAppbar = value.tenDonVi ?? '';
                               cubit.idDonViLanhDao = value.id ?? '';
                             },
-                            cubit: cubitMenu,
                             streamDashBoard:
-                            cubit.lichLamViecDashBroadSubject.stream,
+                                cubit.lichLamViecDashBroadSubject.stream,
                             title: S.current.lich_lam_viec,
+                            cubit: cubitMenu,
                           ),
                         ),
                       ).then((value) {
@@ -99,12 +99,12 @@ class _CalenderWorkDayTabletState extends State<CalenderWorkDayTablet> {
                         if (data == TypeCalendarMenu.LichTheoLanhDao) {}
                         if (state.type == Type_Choose_Option_Day.DAY) {
                           cubit.callApi();
-                        } else if (state.type ==
-                            Type_Choose_Option_Day.WEEK) {
+                        } else if (state.type == Type_Choose_Option_Day.WEEK) {
                           cubit.callApiTuan();
                         } else {
                           cubit.callApiMonth();
-                        }                      });
+                        }
+                      });
                     },
                     icon: SvgPicture.asset(
                       ImageAssets.icMenuCalender,

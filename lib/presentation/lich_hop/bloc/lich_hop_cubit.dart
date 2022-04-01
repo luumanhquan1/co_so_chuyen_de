@@ -12,6 +12,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/list_phien_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -60,6 +61,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   late BuildContext context;
   BehaviorSubject<int> index = BehaviorSubject.seeded(0);
+
+  BehaviorSubject<List<StatisticByMonthModel>> statisticSubject =
+      BehaviorSubject();
 
   BehaviorSubject<TypeCalendarMenu> changeItemMenuSubject =
       BehaviorSubject.seeded(TypeCalendarMenu.LichCuaToi);
@@ -227,6 +231,24 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postDanhSachLichHop();
     postEventsCalendar();
     menuCalendar();
+    initDataMenu();
+    postStatisticByMonth();
+  }
+
+  Future<void> postStatisticByMonth() async {
+    showLoading();
+
+    final result = await hopRepo.postStatisticByMonth(
+      startDate.formatApi,
+      endDate.formatApi,
+    );
+
+    result.when(
+      success: (success) {
+        statisticSubject.add(success);
+      },
+      error: (error) {},
+    );
   }
 
   Future<void> getDashboard() async {
@@ -274,10 +296,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     endDate = day.add(Duration(days: DateTime.daysPerWeek - day.weekday));
     listDSLH.clear();
     page = 1;
-    postDanhSachLichHop();
-    getDashboard();
+
     menuCalendar();
     postEventsCalendar();
+
+    if (state is LichHopStateDangThongKe) {
+      postDanhSachLichHop();
+    }
   }
 
   void postDSLHMonth() {
@@ -291,6 +316,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     getDashboard();
     menuCalendar();
     postEventsCalendar();
+    if (state is LichHopStateDangThongKe) {
+      postDanhSachLichHop();
+    }
   }
 
   void postDSLHDay() {
@@ -302,6 +330,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     getDashboard();
     menuCalendar();
     postEventsCalendar();
+    postDanhSachLichHop();
   }
 
   Future<void> postDanhSachLichHop() async {
@@ -367,6 +396,13 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     ImageAssets.lichSapToi,
     ImageAssets.icLichCongTacNuocNgoai,
   ];
+
+  List<String> listImageLichHopThongKe = [
+    ImageAssets.icTongSoLichHop,
+    ImageAssets.icLichHopTrucTuyen,
+    ImageAssets.icLichHopTrucTuyen,
+  ];
+
   BehaviorSubject<List<TaoPhienHopModel>> themPhienSubject = BehaviorSubject();
   List<TaoPhienHopModel> listThemPhien = [];
 
@@ -454,6 +490,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       emit(const LichHopStateDangList(Type_Choose_Option_Day.DAY));
     } else if (type == Type_Choose_Option_List.DANH_SACH) {
       emit(const LichHopStateDangDanhSach(Type_Choose_Option_Day.DAY));
+    } else if (type == Type_Choose_Option_List.DANG_THONG_KE) {
+      emit(const LichHopStateDangThongKe(Type_Choose_Option_Day.DAY));
     }
   }
 
@@ -466,6 +504,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
     if (state is LichHopStateDangDanhSach) {
       emit(LichHopStateDangDanhSach(type));
+    }
+    if (state is LichHopStateDangThongKe) {
+      emit(LichHopStateDangThongKe(type));
     }
   }
 }
