@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';

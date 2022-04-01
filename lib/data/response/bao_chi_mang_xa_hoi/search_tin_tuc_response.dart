@@ -1,4 +1,5 @@
 import 'dart:core';
+
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/tin_tuc_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 

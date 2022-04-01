@@ -1,10 +1,10 @@
 
 
-import '/widgets/views/state_layout.dart';
 import 'package:flutter/material.dart';
-import '/home_module/widgets/text/dialog/cupertino_loading.dart';
-
 import 'package:rxdart/rxdart.dart';
+
+import '/home_module/widgets/text/dialog/cupertino_loading.dart';
+import '/widgets/views/state_layout.dart';
 
 class LoadingOnly extends StatelessWidget {
   final Stream<StateLayout> stream;

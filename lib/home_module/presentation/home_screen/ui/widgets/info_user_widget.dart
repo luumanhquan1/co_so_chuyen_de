@@ -1,16 +1,14 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:flutter/material.dart';
+
 import '/domain/model/account/data_user.dart';
+import '/generated/l10n.dart';
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
-
-
-
-import '/generated/l10n.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
 import '/home_module/utils/constants/image_asset.dart';
-import 'package:flutter/material.dart';
 
 class InfoUserWidget extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;

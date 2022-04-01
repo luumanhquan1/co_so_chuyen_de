@@ -1,18 +1,14 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-
-import '/presentation/webview/web_view_screen.dart';
+import 'package:flutter/material.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/tinh_huong_khan_cap_model.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
-
-
 import '/home_module/utils/constants/image_asset.dart';
-import 'package:flutter/material.dart';
+import '/presentation/webview/web_view_screen.dart';
 
 class MarqueeWidget extends StatelessWidget {
   const MarqueeWidget({Key? key}) : super(key: key);

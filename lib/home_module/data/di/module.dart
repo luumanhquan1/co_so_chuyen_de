@@ -1,16 +1,14 @@
 
 import 'package:ccvc_mobile/domain/env/model/app_constants.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
-
-
-import '/home_module/data/repository_impl/home_impl/home_impl.dart';
-import '/home_module/data/service/home_service/home_service.dart';
-import '/home_module/domain/repository/home_repository/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '/home_module/data/repository_impl/home_impl/home_impl.dart';
+import '/home_module/data/service/home_service/home_service.dart';
+import '/home_module/domain/repository/home_repository/home_repository.dart';
 import 'flutter_transformer.dart';
 
 enum BaseURLOption { GATE_WAY, COMMON, CCVC }

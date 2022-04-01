@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 

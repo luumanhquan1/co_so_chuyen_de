@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/config/app_config.dart';
-import '/home_module/config/resources/color.dart';
-
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+
+import '/home_module/config/resources/color.dart';
 
 class AppTheme {
   static AppColor getInstance() {

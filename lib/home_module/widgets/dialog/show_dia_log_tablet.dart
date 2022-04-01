@@ -1,13 +1,12 @@
 
 
-import '/home_module/config/resources/styles.dart';
-import '/home_module/utils/constants/image_asset.dart';
-
-import '/generated/l10n.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/generated/l10n.dart';
 import '/home_module/config/resources/color.dart';
+import '/home_module/config/resources/styles.dart';
+import '/home_module/utils/constants/image_asset.dart';
 
 Future<T?> showDiaLogTablet<T>(
   BuildContext context, {

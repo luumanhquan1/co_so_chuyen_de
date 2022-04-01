@@ -3,14 +3,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/check_box_widget.dart';
-
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/title_cai_dat_widget.dart';
 import 'package:ccvc_mobile/utils/app_back_ground_extension.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SelectMuaTabletWidget extends StatelessWidget {
   final List<AppBackGround> list;

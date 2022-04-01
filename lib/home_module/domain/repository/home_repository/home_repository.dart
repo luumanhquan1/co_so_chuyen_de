@@ -8,6 +8,7 @@ import '/home_module/data/request/home/lich_hop_request.dart';
 import '/home_module/data/request/home/lich_lam_viec_request.dart';
 import '/home_module/data/request/home/nhiem_vu_request.dart';
 import '/home_module/data/request/home/to_do_list_request.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/domain/model/home/date_model.dart';
 import '/home_module/domain/model/home/document_dashboard_model.dart';
@@ -20,7 +21,6 @@ import '/home_module/domain/model/home/tinh_hinh_y_kien_model.dart';
 import '/home_module/domain/model/home/tinh_huong_khan_cap_model.dart';
 import '/home_module/domain/model/home/todo_model.dart';
 import '/home_module/domain/model/home/tong_hop_nhiem_vu_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
 abstract class HomeRepository {
   Future<Result<PhamViModel>> getPhamVi();
 

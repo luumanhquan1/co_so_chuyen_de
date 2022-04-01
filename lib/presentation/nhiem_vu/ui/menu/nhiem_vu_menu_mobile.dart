@@ -6,7 +6,6 @@ import 'package:ccvc_mobile/presentation/nhiem_vu/bloc/nhiem_vu_state.dart';
 import 'package:ccvc_mobile/presentation/nhiem_vu/widget/widget_item_menu_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NhiemVuMenuMobile extends StatefulWidget {

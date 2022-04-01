@@ -2,7 +2,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/calendar/event.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_extension.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/lich_am_duong/bloc/lichh_am_duong_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';

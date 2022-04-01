@@ -1,11 +1,5 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CustomSelectHour extends StatefulWidget {
   final String? value;

@@ -1,13 +1,14 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/press_network_model.dart';
 import '/home_module/utils/constants/api_constants.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import '/home_module/utils/extensions/date_time_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BaoChiWidget extends StatelessWidget {
   final PressNetWorkModel data;

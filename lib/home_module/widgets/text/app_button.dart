@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
-import '/home_module/config/resources/color.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '/home_module/config/resources/color.dart';
 
 class AppButton extends StatelessWidget {
   final double width;
