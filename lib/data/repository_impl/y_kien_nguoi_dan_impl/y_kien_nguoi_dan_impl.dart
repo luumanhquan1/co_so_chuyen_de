@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/chi_tiet_kien_nghi_request.dart';
+import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/danh_sach_y_kien_pakn_request.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_respnse.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_ket_qua_y_kien_xu_ly_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_y_kien_nguoi_dan_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_phan_loai_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/dash_board_yknd_response.dart';
@@ -12,6 +14,7 @@ import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_board_phan_loai_m
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/thong_tin_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_xu_ly_yknd_model.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 
 class YKienNguoiDanImpl implements YKienNguoiDanRepository {
@@ -122,5 +125,17 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
       ),
       (res) => res.toDomain(),
     );
+  }
+
+  @override
+  Future<Result<DanhSachKetQuaYKXLModel>> getDanhSachYKienPAKN(
+      String KienNghiId, int type) {
+    return runCatchingAsync<DanhSachKetQuaYKXLModelResponse,DanhSachKetQuaYKXLModel>(
+        () => _yKienNguoIDanService
+            .getDanhSachYKienPAKN(DanhSachYKienPAKNRequest(
+          kienNghiId: KienNghiId,
+          type: type,
+        ),),
+        (res) => res.toModel());
   }
 }
