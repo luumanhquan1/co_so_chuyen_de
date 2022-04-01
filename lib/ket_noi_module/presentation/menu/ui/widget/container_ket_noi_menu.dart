@@ -27,20 +27,20 @@ class ContainerKetNoiMenuWidget extends StatefulWidget {
 }
 
 class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
-  bool isExpand = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           onTap: () {
-            isExpand = !isExpand;
             if (widget.data.childrens.isEmpty) {
               widget.onTap();
               Navigator.pop(context);
+            } else {
+              widget.data.isShowExpanded =
+                  !(widget.data.isShowExpanded ?? false);
+              setState(() {});
             }
-            setState(() {});
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -92,7 +92,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                   Container()
                 else
                   Icon(
-                    isExpand
+                    (widget.data.isShowExpanded ?? false)
                         ? Icons.keyboard_arrow_down_outlined
                         : Icons.keyboard_arrow_up_rounded,
                     color: AqiColor,
@@ -103,7 +103,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
         ),
         if (widget.data.childrens.isNotEmpty)
           ExpandedSection(
-            expand: isExpand,
+            expand: widget.data.isShowExpanded ?? false,
             child: widget.childExpand ?? Container(),
           ),
       ],

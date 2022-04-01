@@ -74,6 +74,7 @@ class _KetNoiMenuState extends State<KetNoiMenu> {
       ),
       onTap: () {
         widget.onChange(data);
+        setState(() {});
       },
     );
   }

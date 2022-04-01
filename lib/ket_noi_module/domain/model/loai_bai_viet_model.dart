@@ -11,7 +11,7 @@ class LoaiBaiVietModel {
   bool isDuocMoi;
   String type;
   int order;
-  bool? isSelect;
+  bool? isShowExpanded;
 
   LoaiBaiVietModel({
     required this.childrens,
