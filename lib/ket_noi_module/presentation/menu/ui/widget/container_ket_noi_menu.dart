@@ -1,37 +1,24 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/loai_bai_viet_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_animation_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum TypeContainer { expand, number }
-
 class ContainerKetNoiMenuWidget extends StatefulWidget {
-  final String name;
-  final String? icon;
-  final bool isIcon;
-  final int index;
-  final bool isTypeContainer;
-  final TypeContainer type;
   final Widget? childExpand;
-  final Function onTap;
-  final bool? showIcons;
-  final int lenghtItem;
+  final Function() onTap;
+  LoaiBaiVietModel data;
 
-  const ContainerKetNoiMenuWidget({
+  ContainerKetNoiMenuWidget({
     Key? key,
-    required this.name,
-    this.icon,
-    this.isIcon = true,
-    this.type = TypeContainer.number,
-    this.index = 0,
-    this.isTypeContainer = true,
+    required this.data,
     this.childExpand,
     required this.onTap,
-    this.showIcons = true,
-    required this.lenghtItem,
   }) : super(key: key);
 
   @override
@@ -49,13 +36,11 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
         GestureDetector(
           onTap: () {
             isExpand = !isExpand;
-            setState(() {});
-            if (widget.lenghtItem <= 0) {
+            if (widget.data.childrens.isEmpty) {
               widget.onTap();
               Navigator.pop(context);
-            } else {
-              widget.onTap();
             }
+            setState(() {});
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -69,31 +54,27 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                 Expanded(
                   child: Row(
                     children: [
-                      if (widget.isIcon)
-                        widget.icon != null
-                            ? SizedBox(
-                                height: 15.0.textScale(space: 8),
-                                width: 15.0.textScale(space: 8),
-                                child: SvgPicture.asset(
-                                  widget.icon ?? '',
-                                  color: Colors.grey,
-                                ),
-                              )
-                            : SizedBox(
-                                height: 15.0.textScale(space: 8),
-                                width: 15.0.textScale(space: 8),
-                              )
+                      if (widget.data.id == ID_KET_NOI ||
+                          widget.data.id == ID_SU_KIEN)
+                        SizedBox(
+                          height: 15.0.textScale(space: 8),
+                          width: 15.0.textScale(space: 8),
+                          child: SvgPicture.asset(
+                            ImageAssets.ic_wifi,
+                            color: Colors.grey,
+                          ),
+                        )
                       else
-                        const SizedBox(
-                          height: 15,
-                          width: 15,
+                        SizedBox(
+                          height: 15.0.textScale(space: 8),
+                          width: 15.0.textScale(space: 8),
                         ),
                       Container(
                         width: 14.0.textScale(),
                       ),
                       Expanded(
                         child: Text(
-                          widget.name,
+                          widget.data.title,
                           style: textNormalCustom(
                             color: textTitle,
                             fontSize: 14.0.textScale(),
@@ -107,7 +88,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
                 const SizedBox(
                   width: 12,
                 ),
-                if (widget.lenghtItem <= 0)
+                if (widget.data.childrens.isEmpty)
                   Container()
                 else
                   Icon(
@@ -120,7 +101,7 @@ class _ContainerKetNoiMenuWidgetState extends State<ContainerKetNoiMenuWidget> {
             ),
           ),
         ),
-        if (widget.lenghtItem > 0)
+        if (widget.data.childrens.isNotEmpty)
           ExpandedSection(
             expand: isExpand,
             child: widget.childExpand ?? Container(),
