@@ -6,7 +6,6 @@ import 'package:ccvc_mobile/data/request/lich_hop/danh_sach_lich_hop_request.dar
 import 'package:ccvc_mobile/data/request/lich_hop/envent_calendar_request.dart';
 import 'package:ccvc_mobile/data/request/lich_hop/tao_phien_hop_request.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
-import 'package:ccvc_mobile/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
@@ -76,8 +75,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
 
-  final BehaviorSubject<DanhSachCongViecModel> danhSachCongViecSubject =
-      BehaviorSubject();
 
   final BehaviorSubject<DanhSachLichHopModel> danhSachLichHopSubject =
       BehaviorSubject();
@@ -93,8 +90,6 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   Stream<List<MeetingSchedule>> get listMeetingStream =>
       listMeetTingScheduleSubject.stream;
 
-  Stream<DanhSachCongViecModel> get danhSachCongViecStream =>
-      danhSachCongViecSubject.stream;
 
   Stream<DanhSachLichHopModel> get danhSachLichHopStream =>
       danhSachLichHopSubject.stream;
