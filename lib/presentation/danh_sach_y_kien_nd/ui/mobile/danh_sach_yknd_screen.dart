@@ -29,7 +29,7 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
   @override
   void initState() {
     super.initState();
-    cubit.callApi();
+    cubit.callApi(widget.startDate,widget.endDate);
   }
 
   @override
@@ -86,7 +86,7 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
-          cubit.callApi();
+          cubit.callApi(widget.startDate, widget.endDate);
         },
         child: StateStreamLayout(
           textEmpty: S.current.khong_co_du_lieu,

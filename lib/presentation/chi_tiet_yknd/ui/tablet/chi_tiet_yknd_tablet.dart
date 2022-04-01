@@ -85,26 +85,24 @@ class _ChiTietVanBanTabletScreenState extends State<ChiTietVanBanTabletScreen> {
                                         blurRadius: 10,
                                       )
                                     ]),
-                                child: ChiTietYKNDHeaderTablet(
-                                  listRow: data?.dataHeaderRow ?? [],
-                                ),
+                                // child: ChiTietYKNDHeaderTablet(
+                                //   listRow: data?.dataHeaderRow ?? [],
+                                // ),
                               ),
                               const SizedBox(
                                 height: 28,
                               ),
-                              Container(
-                                child: ExpandOnlyNhiemVu(
-                                  name: S.current.thong_tin_nguoi_phan_anh,
-                                  child: Container(
-                                    color: backgroundColorApp,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 16,
-                                    ),
-                                    child: NguoiPhanAnhTablet(
-                                      indexCheck: cubit.checkIndex,
-                                      listRow: data?.thongTinPhanAnhRow ?? [],
-                                    ),
+                              ExpandOnlyNhiemVu(
+                                name: S.current.thong_tin_nguoi_phan_anh,
+                                child: Container(
+                                  color: backgroundColorApp,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 16,
+                                  ),
+                                  child: NguoiPhanAnhTablet(
+                                    indexCheck: cubit.checkIndex,
+                                    listRow: data?.thongTinPhanAnhRow ?? [],
                                   ),
                                 ),
                               ),

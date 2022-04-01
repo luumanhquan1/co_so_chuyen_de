@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_xu_ly_yknd_model.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
@@ -28,6 +27,12 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   final BehaviorSubject<List<YKienXuLyYKNDModel>> _yKienXuLyYkndSubject =
       BehaviorSubject<List<YKienXuLyYKNDModel>>();
 
+  final BehaviorSubject<List<DataRowChiTietKienNghi>> _headerRowData =
+  BehaviorSubject<List<DataRowChiTietKienNghi>>();
+
+  Stream<List<DataRowChiTietKienNghi>> get headerRowData =>
+      _headerRowData.stream;
+
   Stream<List<YKienXuLyYKNDModel>> get yKienXuLyYkndStream =>
       _yKienXuLyYkndSubject.stream;
 
@@ -41,20 +46,10 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   final List<DataRowChiTietKienNghi> listData = [];
 
   List<DataRowChiTietKienNghi> dataRowHeader = [];
-
   String yKienXuLy = '';
-  final fakeDataHeadler = HeaderChiTietYKNDModel(
-    tieuDe:
-        'Làm nhân viên văn phòng thất nghiệp gần 4 tháng nhưng chưa được nhận hỗ trợ do dịch Covid19',
-    noiDung:
-        'Làm nhân viên văn phòng thất nghiệp gần 4 tháng nhưng chưa được nhận hỗ trợ do dịch Covid19',
-    nguonPAKN: 'App người dân',
-    phanLoaiPAKN: 'Cơ chế của chính sách',
-    ngayPhanAnh: '22/10/2021',
-    hanXuLy: '22/10/2021',
-    quyDinhLuat: 'Luật Tổ chức Chính phủ',
-    taiLieuCongDan: '',
-  );
+
+
+  List<DataRowChiTietKienNghi> initDataHeadler = [];
   final fakeDataNguoiPhanAnh = NguoiPhanAnhModel(
     doiTuong: 0,
     tenCaNhan: 'PAKN 2',
@@ -299,9 +294,10 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
         List<DataRowChiTietKienNghi> dataRowTienTrinhXuLy =
             getMapDataKetQuaXuLy(tienTrinhXuLy);
 
+
+        _headerRowData.sink.add(dataRowHeader);
         _rowDataChiTietYKienNguoiDan.sink.add(
           ChiTietYKienNguoiDanRow(
-            dataRowHeader,
             dataRowThongTinNguoiXuLy,
             dataRowThongTinXuLy,
             dataRowKetQuaXuLy,

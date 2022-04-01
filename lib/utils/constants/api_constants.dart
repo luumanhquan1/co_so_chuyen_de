@@ -157,6 +157,8 @@ class ApiConstants {
   static const SEARCH_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/danh-sach-pakn?';
   static const GET_LIST_WIDGET = '/api/Widget/get-list-widget?';
   static const GET_DANH_SACH_Y_KIEN_PAKN = '/pakn/api/TaskYKien/danh-sach-ykien';
+  static const BAO_CAO_YKND = '/pakn/api/Dashboard/statistics-by-top';
+  static const DASH_BOARD_BAO_CAO_YKND = '/pakn/api/Dashboard/statistics-by-status';
 }
 
 class ImageConstants {

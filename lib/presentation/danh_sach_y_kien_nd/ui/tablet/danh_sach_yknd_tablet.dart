@@ -23,7 +23,7 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
   @override
   void initState() {
     super.initState();
-    cubit.callApi();
+    // cubit.callApi();
   }
 
   @override
@@ -35,7 +35,7 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
-          cubit.callApi();
+          // cubit.callApi();
         },
         child: SingleChildScrollView(
           child: Column(

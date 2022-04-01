@@ -122,12 +122,12 @@ class ItemMenu extends StatelessWidget {
   final String textItem;
   final bool isTitile;
 
-  const ItemMenu(
-      {Key? key,
-      required this.widgetItem,
-      required this.textItem,
-      required this.isTitile,})
-      : super(key: key);
+  const ItemMenu({
+    Key? key,
+    required this.widgetItem,
+    required this.textItem,
+    required this.isTitile,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

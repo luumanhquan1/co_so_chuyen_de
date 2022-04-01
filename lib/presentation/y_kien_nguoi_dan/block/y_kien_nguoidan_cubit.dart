@@ -5,13 +5,13 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/dashboard_schedule.dart';
-import 'package:ccvc_mobile/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/nguoi_dan_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_state.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/indicator_chart.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -50,6 +50,13 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   final BehaviorSubject<List<YKienNguoiDanModel>> _listYKienNguoiDan =
       BehaviorSubject<List<YKienNguoiDanModel>>();
 
+  final BehaviorSubject<DocumentDashboardModel> _statusTinhHinhXuLyData =
+  BehaviorSubject<DocumentDashboardModel>();
+
+
+  Stream<DocumentDashboardModel> get statusTinhHinhXuLyData =>
+      _statusTinhHinhXuLyData.stream;
+
   Stream<List<YKienNguoiDanModel>> get danhSachYKienNguoiDan =>
       _listYKienNguoiDan.stream;
 
@@ -63,6 +70,9 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   Stream<DashboardTinhHinhXuLuModel> get dashBoardTinhHinhXuLy =>
       _dashBoardTinhHinhXuLy.stream;
 
+  ImageThongTinYKienNguoiDan imageThongTinYKienNguoiDan =
+      ImageThongTinYKienNguoiDan();
+
   List<DashboardSchedule> list = [
     DashboardSchedule(1, '22ssads2', 'Chờ duyệt'),
     DashboardSchedule(2, '2dasdsd22', 'Thời gian'),
@@ -70,8 +80,8 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
   ];
   List<String> img = [
     ImageAssets.icChoDuyetYKND,
-    ImageAssets.icDongHoYKND,
-    ImageAssets.icDongHoYKND,
+    ImageAssets.ic_cho_tiep_nhan_xu_ly,
+    ImageAssets.ic_cho_cho_bo_sung_y_kien,
   ];
 
   List<ChartData> chartYKienNduoiDan = [
@@ -180,48 +190,64 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         final List<YKienNguoiDanDashBroadItem> listItem = [];
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choDuyet,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choXuLy,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.tongSoPakn,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choTiepNhan,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choPhanCongXuLy,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choChoYKien,
-          typeName: S.current.cho_duyet,
-        ));
-        listItem.add(YKienNguoiDanDashBroadItem(
-          img: ImageAssets.icChoDuyetYKND,
-          numberOfCalendars: res.choBoXungThongTin,
-          typeName: S.current.cho_duyet,
-        ));
         listItem.add(
           YKienNguoiDanDashBroadItem(
-            img: ImageAssets.icChoDuyetYKND,
+            img: ImageAssets.ic_cho_cho_bo_sung_y_kien,
+            numberOfCalendars: res.choBoXungThongTin,
+            typeName: S.current.cho_bo_sung_thong_tin,
+          ),
+        );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_cho_cho_y_kien,
+            numberOfCalendars: res.choChoYKien,
+            typeName: S.current.cho_cho_y_kien,
+          ),
+        );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: imageThongTinYKienNguoiDan.imgChoDuyet,
             numberOfCalendars: res.choDuyet,
             typeName: S.current.cho_duyet,
           ),
         );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_cho_phan_cong_xu_ly,
+            numberOfCalendars: res.choPhanCongXuLy,
+            typeName: S.current.cho_phan_cong_xu_ly,
+          ),
+        );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_cho_tiep_nhan,
+            numberOfCalendars: res.choTiepNhan,
+            typeName: S.current.cho_tiep_nhan,
+          ),
+        );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_cho_tiep_nhan_xu_ly,
+            numberOfCalendars: res.choTiepNhanXuLy,
+            typeName: S.current.cho_tiep_nhan_xu_ly,
+          ),
+        );
+
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_cho_xu_ly,
+            numberOfCalendars: res.choXuLy,
+            typeName: S.current.cho_xu_ly,
+          ),
+        );
+        listItem.add(
+          YKienNguoiDanDashBroadItem(
+            img: ImageAssets.ic_tong_so_yknd,
+            numberOfCalendars: res.tongSoPakn,
+            typeName: S.current.tong_hop_yknd_da_nhan,
+          ),
+        );
+
         _listItemDashBoard.sink.add(listItem);
       },
       error: (err) {
@@ -245,6 +271,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         final listDataTinhHinhXuLy = res.tinhHinhXuLyModel.listTinhHinh;
+        final listStatusTinhHinhXuLy = res.tinhHinhXuLyModel.listTrangThai;
         final List<ChartData> listChartTinhHinhxuLy = listDataTinhHinhXuLy
             .map(
               (e) => ChartData(
@@ -256,7 +283,18 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
               ),
             )
             .toList();
+
+        final DocumentDashboardModel statusTrangThaiXuLyData =
+            DocumentDashboardModel();
+        for (final element in listStatusTinhHinhXuLy) {
+          getStatusTinhHinhXuLy(
+            element.status.vietNameseParse().replaceAll(' ', '_').toUpperCase(),
+            statusTrangThaiXuLyData,
+            element,
+          );
+        }
         _chartTinhHinhXuLy.sink.add(listChartTinhHinhxuLy);
+        _statusTinhHinhXuLyData.sink.add(statusTrangThaiXuLyData);
       },
       error: (err) {
         return;
@@ -378,6 +416,25 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
         return;
       },
     );
+  }
+
+  DocumentDashboardModel getStatusTinhHinhXuLy(
+    String codeStatus,
+    DocumentDashboardModel data,
+    TinhHinhModel tinhHinhModel,
+  ) {
+    switch (codeStatus) {
+      case 'DEN_HAN':
+        data.soLuongDenHan = tinhHinhModel.soLuong;
+        break;
+      case 'TRONG_HAN':
+        data.soLuongTrongHan = tinhHinhModel.soLuong;
+        break;
+      case 'QUA_HAN':
+        data.soLuongQuaHan = tinhHinhModel.soLuong;
+        break;
+    }
+    return data;
   }
 
   Color getColorStatus(String status) {
