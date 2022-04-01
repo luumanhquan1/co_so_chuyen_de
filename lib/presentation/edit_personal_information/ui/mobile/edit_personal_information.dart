@@ -191,12 +191,6 @@ class _EditPersonalInformationScreen
                           child: TextFieldValidator(
                             hintText: S.current.cmnd,
                             controller: cmndController,
-                            validator: (value) {
-                              if ((value ?? '').isEmpty) {
-                                return S.current.khong_duoc_de_trong;
-                              }
-                              return null;
-                            },
                           ),
                         ),
                         InputInfoUserWidget(
