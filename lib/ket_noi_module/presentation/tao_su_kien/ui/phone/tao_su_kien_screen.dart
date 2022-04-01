@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/color.dart';
 import 'package:ccvc_mobile/ket_noi_module/config/resources/styles.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/loai_bai_viet_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/extensions/date_time_extension.dart';
@@ -76,15 +77,15 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           },
                         ),
                         spaceH5,
-                        StreamBuilder<List<String>>(
+                        StreamBuilder<List<LoaiBaiVietModel>>(
                           stream: cubit.loaiBaiVietSubject,
                           builder: (context, snapshot) {
-                            final data = snapshot.data ?? <String>[];
+                            final data = snapshot.data ?? <LoaiBaiVietModel>[];
                             return SelectOnlyExpand(
                               urlIcon: ImageAssets.ic_calender,
                               title: S.current.loai_bai_viet,
-                              value: cubit.name,
-                              listSelect: data,
+                              value: data.map((e) => e.title).first,
+                              listSelect: data.map((e) => e.title).toList(),
                               onChange: (value) {
                                 cubit.loaiBaiViet = value;
                               },
@@ -288,15 +289,17 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 },
                               ),
                               spaceH5,
-                              StreamBuilder<List<String>>(
+                              StreamBuilder<List<LoaiBaiVietModel>>(
                                 stream: cubit.loaiBaiVietSubject,
                                 builder: (context, snapshot) {
-                                  final data = snapshot.data ?? <String>[];
+                                  final data =
+                                      snapshot.data ?? <LoaiBaiVietModel>[];
                                   return SelectOnlyExpand(
                                     urlIcon: ImageAssets.icDocument,
                                     title: S.current.loai_bai_viet,
-                                    value: cubit.name,
-                                    listSelect: data,
+                                    value: data.map((e) => e.title).first,
+                                    listSelect:
+                                        data.map((e) => e.title).toList(),
                                     onChange: (value) {
                                       cubit.loaiBaiViet = value;
                                     },
