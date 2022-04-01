@@ -1,4 +1,4 @@
-import 'package:flutter_html/shims/dart_ui_fake.dart';
+
 
 enum AppMode { MAC_DINH, XANH, HONG, VANG }
 enum DeviceType { MOBILE, TABLET }

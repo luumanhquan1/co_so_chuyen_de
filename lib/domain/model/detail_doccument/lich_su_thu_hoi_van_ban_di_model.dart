@@ -1,5 +1,5 @@
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 
 class DataLichSuThuHoiVanBanDi {
   String? messages;

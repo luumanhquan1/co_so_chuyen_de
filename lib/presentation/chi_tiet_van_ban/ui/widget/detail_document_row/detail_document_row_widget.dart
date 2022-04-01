@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 import 'package:ccvc_mobile/widgets/checkbox/custom_checkbox.dart';
 import 'package:flutter/material.dart';
+
 import 'bloc/detail_row_cubit.dart';
 
 class DetailDocumentRow extends StatefulWidget {

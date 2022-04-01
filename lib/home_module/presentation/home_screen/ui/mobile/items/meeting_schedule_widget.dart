@@ -1,10 +1,10 @@
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/phone/chi_tiet_lich_hop_screen.dart';
+import 'package:flutter/material.dart';
 
-import '/home_module/config/resources/color.dart';
-import '/home_module/domain/model/home/calendar_metting_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
 import '/generated/l10n.dart';
-
+import '/home_module/config/resources/color.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/domain/model/home/calendar_metting_model.dart';
 import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
 import '/home_module/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
@@ -15,7 +15,6 @@ import '/home_module/utils/constants/image_asset.dart';
 import '/home_module/utils/enum_ext.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
-import 'package:flutter/material.dart';
 
 class MeetingScheduleWidget extends StatefulWidget {
   final WidgetType homeItemType;

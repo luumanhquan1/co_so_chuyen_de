@@ -1,6 +1,6 @@
+import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
 
 class DataLichSuCapNhatVanBanDi {
   String? messages;

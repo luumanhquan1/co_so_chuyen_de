@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_thu_hoi_van_ban_di_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/date_time_extension.dart';
-import 'package:equatable/equatable.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'lich_su_thu_hoi_van_ban_di_response.g.dart';

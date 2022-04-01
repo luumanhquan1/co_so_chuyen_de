@@ -3,7 +3,7 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/blo
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 
-enum TypeContainer { expand, number }
+import 'container_menu_dscv.dart';
 
 class ItemMenuDSCV {
   String icon;
@@ -51,7 +51,7 @@ List<ItemMenuDSCV> listNhomCVMoi = [
 ];
 
 enum TypeMenuDSCV {
-  ConhViecCuaBan,
+  CongViecCuaBan,
   CongViecQuanTrong,
   DaHoanThanh,
   GanChoToi,
@@ -59,13 +59,20 @@ enum TypeMenuDSCV {
   NhomCVMoi,
   CongViec1,
   CongViec2,
+  NhomCongViecMoi
 }
 
 extension GetScreenMenu on TypeMenuDSCV {
   String getTitle() {
     switch (this) {
+      case TypeMenuDSCV.NhomCongViecMoi:
+        return S.current.nhom_cong_viec_moi;
+      case TypeMenuDSCV.CongViec1:
+        return 'Công việc 1';
+      case TypeMenuDSCV.CongViec2:
+        return 'Công việc 1';
       default:
-        return S.current.lich_cua_toi;
+        return S.current.nhom_cong_viec_moi;
     }
   }
 }

@@ -1,19 +1,18 @@
 
-import '/home_module/domain/model/home/document_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
-import '/generated/l10n.dart';
-import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:flutter/material.dart';
 
+import '/generated/l10n.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/domain/model/home/document_model.dart';
+import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
 import '/home_module/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
-import '/home_module/utils/constants/app_constants.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import '/home_module/utils/enum_ext.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
-import 'package:flutter/material.dart';
 
 class PeopleOpinions extends StatefulWidget {
   final WidgetType homeItemType;

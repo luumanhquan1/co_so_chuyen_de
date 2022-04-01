@@ -1,15 +1,14 @@
-import '/home_module/presentation/home_screen/ui/tablet/home_icon_tablet.dart';
+import 'package:flutter/material.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/date_model.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
+import '/home_module/presentation/home_screen/ui/tablet/home_icon_tablet.dart';
 import '/home_module/presentation/home_screen/ui/widgets/clock_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/info_user_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/mequee_widget.dart';
-
 import '/home_module/utils/constants/image_asset.dart';
-import 'package:flutter/material.dart';
 
 class HeaderTabletWidget extends StatelessWidget {
   const HeaderTabletWidget({Key? key}) : super(key: key);

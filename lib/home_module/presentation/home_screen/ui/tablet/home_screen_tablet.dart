@@ -1,32 +1,23 @@
 
-import 'package:ccvc_mobile/home_module/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/presentation/search_screen/ui/tablet/search_screen_tablet.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/tablet/thong_bao_screen_tablet.dart';
 import 'package:ccvc_mobile/widgets/drawer/drawer_slide.dart';
-
-import '/data/exception/app_exception.dart';
-import '/widgets/views/state_stream_layout.dart';
-
-import '/home_module/config/resources/color.dart';
-
-import '/home_module/domain/model/home/WidgetType.dart';
-
-import '/generated/l10n.dart';
-import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
-import '/home_module/presentation/home_screen/ui/home_item.dart';
-import '/home_module/presentation/home_screen/ui/home_provider.dart';
-
-import '/home_module/presentation/home_screen/ui/tablet/widgets/app_bar_widget.dart';
-import '/home_module/presentation/home_screen/ui/tablet/widgets/header_tablet_widget.dart';
-import '/home_module/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
-
-
-import '/home_module/utils/constants/image_asset.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/data/exception/app_exception.dart';
+import '/generated/l10n.dart';
+import '/home_module/config/resources/color.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import '/home_module/presentation/home_screen/ui/home_item.dart';
+import '/home_module/presentation/home_screen/ui/home_provider.dart';
+import '/home_module/presentation/home_screen/ui/tablet/widgets/app_bar_widget.dart';
+import '/home_module/presentation/home_screen/ui/tablet/widgets/header_tablet_widget.dart';
+import '/home_module/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
+import '/home_module/utils/constants/image_asset.dart';
+import '/widgets/views/state_stream_layout.dart';
 
 final keyHomeTablet = GlobalKey<_HomeScreenTabletState>();
 

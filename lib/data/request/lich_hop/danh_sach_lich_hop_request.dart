@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'danh_sach_lich_hop_request.g.dart';

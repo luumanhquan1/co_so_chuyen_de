@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_board_phan_loai_m
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/dash_boarsh_yknd_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/thong_tin_y_kien_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_xu_ly_yknd_model.dart';
 
 mixin YKienNguoiDanRepository {
   Future<Result<DashboardTinhHinhXuLuModel>> dasdBoardTinhHinhXuLy(
@@ -19,7 +20,8 @@ mixin YKienNguoiDanRepository {
       String fromDate,
       String toDate,);
 
-  Future<Result<DanhSachYKienNguoiDan>> danhSachYKienNguoiDan(String tuNgay,
+  Future<Result<DanhSachYKienNguoiDan>> danhSachYKienNguoiDan(
+      String tuNgay,
       String denNgay,
       int pageSize,
       int pageNumber,
@@ -39,4 +41,6 @@ mixin YKienNguoiDanRepository {
   String userId,
   String donViId,
   );
+  Future<Result<DanhSachKetQuaYKXLModel>> getDanhSachYKienPAKN(String KienNghiId,
+      int type,);
 }

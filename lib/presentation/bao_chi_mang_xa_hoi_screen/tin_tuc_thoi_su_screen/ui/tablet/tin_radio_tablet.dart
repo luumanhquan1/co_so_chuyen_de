@@ -4,11 +4,8 @@ import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tin_tuc_thoi_su/tin
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/bloc/tin_tuc_thoi_su_bloc.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/ban_tin_btn_sheet.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/item_tin_radio.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/ban_tin_btn_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/item_tin_radio_tablet.dart';
-import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tin_tuc_thoi_su_screen/ui/tablet/widgets/item_tin_radio_trong_nuoc_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -20,31 +17,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:readmore/readmore.dart';
 
-enum dropDown { tinRadio, tinTrongNuoc }
 
-class TinRadioScreen extends StatefulWidget {
+class TinRadioTabletScreen extends StatefulWidget {
   final String title;
   final List<TinTucRadioModel> listBanTin;
   final TinTucThoiSuBloc tinTucThoiSuBloc;
   final BuildContext pContext;
-  final TypeScreen type;
 
-  const TinRadioScreen({
+  const TinRadioTabletScreen({
     Key? key,
     required this.title,
     required this.listBanTin,
     required this.tinTucThoiSuBloc,
     required this.pContext,
-    required this.type,
   }) : super(key: key);
 
   @override
-  _TinRadioScreenState createState() => _TinRadioScreenState();
+  _TinRadioTabletScreenState createState() => _TinRadioTabletScreenState();
 }
 
-class _TinRadioScreenState extends State<TinRadioScreen> {
+class _TinRadioTabletScreenState extends State<TinRadioTabletScreen> {
   late List<TinTucRadioModel> listTinTuc;
-  dropDown? valueChoose = dropDown.tinRadio;
 
   @override
   void initState() {
@@ -54,6 +47,7 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgCalenderColor,
       appBar: AppBarDefaultBack(
         widget.title,
       ),
@@ -148,7 +142,8 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
                       const SizedBox(
                         width: 12,
                       ),
-                      SizedBox(
+                      Container(
+                        color: backgroundColorApp,
                         height: 50,
                         width: 160,
                         child: CustomDropDown(
@@ -190,10 +185,12 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
                           height: 20,
                         ),
                         const Divider(
-                          height: 1,
+                          height: 2,
                           color: lineColor,
                         ),
-                        if (widget.type == TypeScreen.TIN_RADIO)
+                        const SizedBox(
+                          height: 16,
+                        ),
                           Expanded(
                             child: ListViewLoadMore(
                               cubit: widget.tinTucThoiSuBloc,
@@ -205,36 +202,6 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
                               },
                               viewItem: (value, index) => itemTinTucThoiSu(
                                   value as TinTucRadioModel, index ?? 0),
-                            ),
-                          )
-                        else if (widget.type == TypeScreen.TIN_TRONG_NUOC)
-                          Expanded(
-                            child: ListViewLoadMore(
-                              cubit: widget.tinTucThoiSuBloc,
-                              isListView: true,
-                              callApi: (page) => {
-                                callApiTrongNuoc(
-                                  page,
-                                )
-                              },
-                              viewItem: (value, index) =>
-                                  itemTinTucThoiSuTrongNuoc(
-                                      value as TinTucRadioModel, index ?? 0),
-                            ),
-                          )
-                        else
-                          Expanded(
-                            child: ListViewLoadMore(
-                              cubit: widget.tinTucThoiSuBloc,
-                              isListView: true,
-                              callApi: (page) => {
-                                callApiQuocTe(
-                                  page,
-                                )
-                              },
-                              viewItem: (value, index) =>
-                                  itemTinTucThoiSuQuocTe(
-                                      value as TinTucRadioModel, index ?? 0),
                             ),
                           )
                       ],
@@ -314,65 +281,10 @@ class _TinRadioScreenState extends State<TinRadioScreen> {
             title: S.current.ban_tin_trua_ngay,
             child:  BanTinBtnSheetTablet(
               listTinTuc: widget.tinTucThoiSuBloc.listTinTuc,
+              index: index,
             ),
           );
         },
-      ),
-    );
-  }
-
-  void callApiTrongNuoc(int page) {
-    widget.tinTucThoiSuBloc
-        .getListTinTucRadioTrongNuoc(page, ApiConstants.DEFAULT_PAGE_SIZE);
-  }
-
-  Widget itemTinTucThoiSuTrongNuoc(TinTucRadioModel data, int index) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20.0),
-      child: ItemTinRadioTrongNuocTablet(
-        data.urlImage?[0]??'',
-        data.title,
-        DateTime.parse(
-                data.publishedTime.replaceAll('/', '-').replaceAll(' ', 'T'))
-            .formatApiSSAM,
-        url: data.url,
-        clickItem: () {
-          showBottomSheetCustom(
-            context,
-            title: S.current.ban_tin_trua_ngay,
-            child:  BanTinBtnSheetTablet(
-              listTinTuc: widget.tinTucThoiSuBloc.listTinTucTrongNuoc,
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  void callApiQuocTe(int page) {
-    widget.tinTucThoiSuBloc
-        .getListTinTucRadioQuocTe(page, ApiConstants.DEFAULT_PAGE_SIZE);
-  }
-
-  Widget itemTinTucThoiSuQuocTe(TinTucRadioModel data, int index) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20.0),
-      child: ItemTinRadioTrongNuocTablet(
-        data.urlImage?[0]??'',
-        data.title,
-        DateTime.parse(
-                data.publishedTime.replaceAll('/', '-').replaceAll(' ', 'T'))
-            .formatApiSSAM,
-        clickItem: () {
-          showBottomSheetCustom(
-            widget.pContext,
-            title: S.current.ban_tin_trua_ngay,
-            child:  BanTinBtnSheetTablet(
-              listTinTuc: widget.tinTucThoiSuBloc.listTinTucQuocTe,
-            ),
-          );
-        },
-        url: data.url,
       ),
     );
   }

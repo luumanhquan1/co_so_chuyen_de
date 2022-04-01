@@ -1,21 +1,17 @@
 
-import '/home_module/domain/model/home/WidgetType.dart';
-
-import '/home_module/domain/model/home/su_kien_model.dart';
+import 'package:flutter/material.dart';
 
 import '/generated/l10n.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/domain/model/home/su_kien_model.dart';
 import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
-
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
-
 import '/home_module/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import '/home_module/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/event_widget.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
-
-import 'package:flutter/material.dart';
 
 class EventOfDayTabletWidget extends StatefulWidget {
   final WidgetType homeItemType;

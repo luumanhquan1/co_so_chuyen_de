@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/chi_tiet_yknd_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_xu_ly_yknd_model.dart';
 import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,7 +15,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   final BehaviorSubject<List<DataRowChiTietKienNghi>> _headerChiTiet =
       BehaviorSubject<List<DataRowChiTietKienNghi>>();
 
-  final BehaviorSubject<ChiTietYKNDModel> _chiTietYKND =
+  final BehaviorSubject<ChiTietYKNDModel> chiTietYKNDSubject =
       BehaviorSubject<ChiTietYKNDModel>();
 
   final BehaviorSubject<ChiTietYKienNguoiDanRow> _rowDataChiTietYKienNguoiDan =
@@ -23,11 +24,17 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
   Stream<ChiTietYKienNguoiDanRow> get rowDataChiTietYKienNguoiDan =>
       _rowDataChiTietYKienNguoiDan.stream;
 
+  final BehaviorSubject<List<YKienXuLyYKNDModel>> _yKienXuLyYkndSubject =
+      BehaviorSubject<List<YKienXuLyYKNDModel>>();
+
+  Stream<List<YKienXuLyYKNDModel>> get yKienXuLyYkndStream =>
+      _yKienXuLyYkndSubject.stream;
+
   Stream<List<DataRowChiTietKienNghi>> get headerChiTiet =>
       _headerChiTiet.stream;
   int checkIndex = -1;
 
-  Stream<ChiTietYKNDModel> get chiTietYKND => _chiTietYKND.stream;
+  Stream<ChiTietYKNDModel> get chiTietYKND => chiTietYKNDSubject.stream;
 
   Map<String, String> mapData = {};
   final List<DataRowChiTietKienNghi> listData = [];
@@ -226,6 +233,7 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
+        chiTietYKNDSubject.sink.add(res.chiTietYKNDModel);
         checkIndex = res.chiTietYKNDModel.doiTuongId;
         final data = res.chiTietYKNDModel;
         String listFile='';
@@ -304,5 +312,17 @@ class ChiTietYKienNguoiDanCubit extends BaseCubit<ChiTietYKienNguoiDanState> {
         return;
       },
     );
+  }
+
+  Future<void> getDanhSachYKienXuLyPAKN(String kienNghiId) async {
+    final result = await _YKNDRepo.getDanhSachYKienPAKN(
+      kienNghiId,
+      2,
+    );
+    result.when(
+        success: (res) {
+          _yKienXuLyYkndSubject.sink.add(res.danhSachKetQua ?? []);
+        },
+        error: (error) {});
   }
 }

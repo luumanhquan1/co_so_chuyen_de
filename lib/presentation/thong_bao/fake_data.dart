@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/domain/model/thong_bao/thong_bao_model.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:flutter/cupertino.dart';
 
 final fakeDataThongBao = <ThongBaoModel>[
   ThongBaoModel(
