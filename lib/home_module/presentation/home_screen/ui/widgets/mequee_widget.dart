@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
@@ -181,6 +182,7 @@ class _MequeeWidgetState extends State<_MarqueeCell> {
 
   Timer getAnimationRun() {
     return Timer.periodic(const Duration(milliseconds: 40), (timer) {
+      // log("message$offset");
       offset = offset - 1;
       offset1 = offset1 - 1;
       if (offset1 < 0 && offset1 > -2) {
