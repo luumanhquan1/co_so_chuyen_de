@@ -98,6 +98,25 @@ class ImageAssets {
   static const String icXoaDanhBa = '$baseImg/ic_delete_danh_ba.svg';
   static const String icDongBo = '$baseImg/ic_dong_bo.svg';
   static const String icNhanVien = '$baseImg/ic_nhan_vien.svg';
+  static const String icDropDown = '$baseImg/ic_drop_down.svg';
+
+  //
+  static const String ic01 = '$baseImg/ic_01_tab.svg';
+  static const String ic02 = '$baseImg/ic_02_tab.svg';
+  static const String ic03 = '$baseImg/ic_03_tab.svg';
+  static const String ic04 = '$baseImg/ic_04_tab.svg';
+  static const String ic05 = '$baseImg/ic_05_tab.svg';
+  static const String ic06 = '$baseImg/ic_06_tab.svg';
+  static const String icClose = '$baseImg/ic_close.svg';
+
+  //
+  static const String icCVCuaBan = '$baseImg/ic_CVcuaBan.svg';
+  static const String icCVQT = '$baseImg/ic_cvQT.svg';
+  static const String icHT = '$baseImg/ic_cvFInish.svg';
+  static const String icGanChoToi = '$baseImg/ic_ganCHo_toi.svg';
+  static const String icXoa = '$baseImg/ic_CV_xoa.svg';
+  static const String icNhomCV = '$baseImg/ic_nhomCVMoi.svg';
+  static const String icDocument = '$baseImg/ic_document.svg';
 
   static SvgPicture svgAssets(
     String name, {
