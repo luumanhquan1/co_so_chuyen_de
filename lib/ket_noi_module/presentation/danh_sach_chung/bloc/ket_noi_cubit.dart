@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/base/base_state.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/model/danh_sach_chung_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/loai_bai_viet_model.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/bloc/ket_noi_state.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
@@ -12,19 +13,12 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   KetNoiCubit() : super(KetNoiStateInitial());
 
   KetNoiRepository get repo => Get.find();
-  String sukien = '';
-  String idDauMucSuKien = '';
-  String textDay = '';
-  int pageSize = 10;
+  LoaiBaiVietModel? dataCurrent;
   int pageIndex = 1;
-  String type = 'KET-NOI';
-  String subCategory = '';
 
   DataDanhSachChungModel dataDanhSachChungModel = DataDanhSachChungModel();
 
-  BehaviorSubject<String> headerSubject = BehaviorSubject();
   BehaviorSubject<Object> menuSubject = BehaviorSubject();
-  Stream<String> get streamHeader => headerSubject.stream;
 
   BehaviorSubject<DataDanhSachChungModel> dataDanhSachSubject =
       BehaviorSubject();
@@ -34,10 +28,9 @@ class KetNoiCubit extends BaseCubit<BaseState> {
   Future<void> getListChungKetNoi({
     required int pageIndex,
     required int pageSize,
-    required String type,
   }) async {
     loadMorePage = pageIndex;
-    final result = await repo.ketNoiListChung(pageIndex, pageSize, type);
+    final result = await repo.ketNoiListChung(pageIndex, pageSize, 'KET-NOI');
     result.when(
       success: (res) {
         if (pageIndex == ApiConstants.PAGE_BEGIN) {
@@ -60,21 +53,22 @@ class KetNoiCubit extends BaseCubit<BaseState> {
 
   //
   Future<void> getListCategory({
-    required int pageIndex,
-    required int pageSize,
-    required String idDauMucSuKien,
-    required String type,
+    required int page,
+    required String category,
   }) async {
-    loadMorePage = pageIndex;
+    if (page == ApiConstants.PAGE_BEGIN) {
+      showLoading();
+    }
+    loadMorePage = page;
     final result = await repo.listCategory(
-      pageIndex,
-      pageSize,
-      idDauMucSuKien,
-      type,
+      page,
+      ApiConstants.DEFAULT_PAGE_SIZE,
+      category,
+      'KET-NOI',
     );
     result.when(
       success: (res) {
-        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+        if (page == ApiConstants.PAGE_BEGIN) {
           if (res.pageData?.isEmpty ?? true) {
             showEmpty();
           } else {
@@ -94,12 +88,15 @@ class KetNoiCubit extends BaseCubit<BaseState> {
 
   //
 
-  Future<void> getDataTrongNuoc(int page, String idDauMucSuKiens) async {
+  Future<void> getDataTrongNuoc(int page, String code) async {
+    if (page == ApiConstants.PAGE_BEGIN) {
+      showLoading();
+    }
     loadMorePage = pageIndex;
     final result = await repo.getDataTrongNuoc(
       page,
-      1,
-      idDauMucSuKiens,
+      ApiConstants.DEFAULT_PAGE_SIZE,
+      code,
       true,
     );
     result.when(
@@ -120,20 +117,5 @@ class KetNoiCubit extends BaseCubit<BaseState> {
         showError();
       },
     );
-  }
-
-  String getSubCategory(String title) {
-    switch (title) {
-      case 'Các cơ quan khác':
-        return 'CAC_CQ_KHAC';
-      case 'Chính phủ':
-        return 'CHINH_PHU';
-      case 'Các tổ chức':
-        return 'CAC_TO_CHUC';
-      case 'Các đơn vị hành chính':
-        return 'CAC_DON_VI_HANH_CHINH';
-      default:
-        return 'CAC_CQ_KHAC';
-    }
   }
 }

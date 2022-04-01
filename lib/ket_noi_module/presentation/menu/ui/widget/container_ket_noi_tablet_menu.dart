@@ -1,6 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/widget/container_ket_noi_menu.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_animation_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +12,6 @@ class ContainerKetNoiTablet extends StatefulWidget {
   final bool isIcon;
   final int index;
   final bool isTypeContainer;
-  final TypeContainer type;
   final Widget? childExpand;
   final Function onTap;
   final bool? showIcons;
@@ -24,7 +22,6 @@ class ContainerKetNoiTablet extends StatefulWidget {
     required this.name,
     this.icon,
     this.isIcon = true,
-    this.type = TypeContainer.number,
     this.index = 0,
     this.isTypeContainer = true,
     this.childExpand,
