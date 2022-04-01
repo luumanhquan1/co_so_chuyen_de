@@ -33,6 +33,13 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
 
   final BehaviorSubject<List<TinTucData>> _listDataSearch =
       BehaviorSubject<List<TinTucData>>();
+  final List<ChuDeModel>listChuDeLoadMore=[];
+  bool isFirstCall=true;
+  ChuDeModel hotNewData=ChuDeModel();
+
+  int pageIndex=1;
+  int papeSize=10;
+  int totalPage = 1;
 
   List<String> listTitle = [
     S.current.tin_tong_hop,
@@ -93,23 +100,13 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     queue.dispose();
   }
 
-  DashBoardTatCaChuDeRequest dashBoardTatCaChuDeRequest =
-      DashBoardTatCaChuDeRequest(
-    pageIndex: 1,
-    pageSize: 30,
-    total: 2220,
-    hasNextPage: true,
-    fromDate: DateTime.now().formatApiSS,
-    toDate: DateTime.now().formatApiSS,
-  );
   final BaoChiMangXaHoiRepository _BCMXHRepo = Get.find();
-
   Future<void> getListTatCaCuDe(String startDate, String enDate) async {
     showLoading();
     final result = await _BCMXHRepo.getDashListChuDe(
-      1,
-      30,
-      233,
+      pageIndex,
+      papeSize,
+      0,
       true,
       startDate,
       endDate,
@@ -117,15 +114,20 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
     showContent();
     result.when(
       success: (res) {
+        totalPage=res.totalPages??1;
         final result = res.getlistChuDe ?? [];
-        _listYKienNguoiDan.sink.add(result);
+        if(isFirstCall){
+          hotNewData=result.removeAt(0);
+          isFirstCall=false;
+        }
+        listChuDeLoadMore.addAll(result);
+        _listYKienNguoiDan.sink.add(listChuDeLoadMore);
       },
       error: (err) {
         return;
       },
     );
   }
-
   Future<void> getListBaoCaoThongKe(String startDate, String enDate) async {
     showLoading();
     final result = await _BCMXHRepo.getTuongTacThongKe(
@@ -212,29 +214,29 @@ class ChuDeCubit extends BaseCubit<ChuDeState> {
   }
 
   String getDateMonth() {
-    int millisecondOfMounth = 30 * 24 * 60 * 60 * 1000;
-    int millisecondNow = DateTime.now().millisecondsSinceEpoch;
-    int prevMonth = millisecondNow - millisecondOfMounth;
+    const int millisecondOfMounth = 30 * 24 * 60 * 60 * 1000;
+    final int millisecondNow = DateTime.now().millisecondsSinceEpoch;
+    final int prevMonth = millisecondNow - millisecondOfMounth;
     endDate = DateTime.now().formatApiEndDay;
     startDate =
         DateTime.fromMillisecondsSinceEpoch(prevMonth).formatApiStartDay;
-    String datePrevMounth =
+    final String datePrevMounth =
         DateTime.fromMillisecondsSinceEpoch(prevMonth).formatApiStartDay;
     return datePrevMounth;
   }
 
   void getDateWeek() {
-    int millisecondOfWeek = 7 * 24 * 60 * 60 * 1000;
-    int millisecondNow = DateTime.now().millisecondsSinceEpoch;
-    int prevWeek = millisecondNow - millisecondOfWeek;
+    const int millisecondOfWeek = 7 * 24 * 60 * 60 * 1000;
+    final int millisecondNow = DateTime.now().millisecondsSinceEpoch;
+    final int prevWeek = millisecondNow - millisecondOfWeek;
     endDate = DateTime.now().formatApiEndDay;
     startDate = DateTime.fromMillisecondsSinceEpoch(prevWeek).formatApiStartDay;
   }
 
   void getDateYesterDay() {
-    int millisecondOfDay = 24 * 60 * 60 * 1000;
-    int millisecondNow = DateTime.now().millisecondsSinceEpoch;
-    int prevDay = millisecondNow - millisecondOfDay;
+    const int millisecondOfDay = 24 * 60 * 60 * 1000;
+    final int millisecondNow = DateTime.now().millisecondsSinceEpoch;
+    final int prevDay = millisecondNow - millisecondOfDay;
     startDate = DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiStartDay;
     endDate = DateTime.fromMillisecondsSinceEpoch(prevDay).formatApiEndDay;
   }

@@ -109,7 +109,7 @@ class _DanhSachYKNDState extends State<DanhSachYKND> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  ChiTietYKNDScreen(
+                              builder: (context) => ChiTietYKNDScreen(
                                 iD: listData[index].id,
                                 taskID: listData[index].taskID,
                               ),

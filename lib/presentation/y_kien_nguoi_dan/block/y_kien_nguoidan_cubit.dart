@@ -154,8 +154,8 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       endDate,
     );
     getDanhSachYKienNguoiDan(
-      '01/03/2022',
-      '28/03/2022',
+      startDate,
+      endDate,
       10,
       1,
       userId,
@@ -245,7 +245,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     result.when(
       success: (res) {
         final listDataTinhHinhXuLy = res.tinhHinhXuLyModel.listTinhHinh;
-        final List<ChartData>listChartTinhHinhxuLy= listDataTinhHinhXuLy
+        final List<ChartData> listChartTinhHinhxuLy = listDataTinhHinhXuLy
             .map(
               (e) => ChartData(
                 e.status,
