@@ -203,6 +203,9 @@ extension GetDataMenu on TypeCalendarMenu {
       case TypeCalendarMenu.LichCuaToi:
         return S.current.lich_hop_cua_toi;
 
+      case TypeCalendarMenu.BaoCaoThongKe:
+        return S.current.bao_cao_thong_ke;
+
       case TypeCalendarMenu.LichTheoTrangThai:
         return S.current.lich_theo_trang_thai;
 

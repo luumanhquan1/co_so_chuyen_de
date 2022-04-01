@@ -346,6 +346,8 @@ extension lichHopCubit on LichHopState {
       return type.getLichHopStateDangLich(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSach(cubit);
+    } else if (this is LichHopStateDangThongKe) {
+      return type.getThongKe(cubit);
     } else {
       return const SizedBox();
     }

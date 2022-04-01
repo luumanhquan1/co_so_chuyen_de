@@ -244,6 +244,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
       },
       error: (error) {},
     );
+
+    showContent();
   }
 
   Future<void> getDashboard() async {
