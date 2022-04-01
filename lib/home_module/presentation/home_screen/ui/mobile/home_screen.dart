@@ -1,22 +1,21 @@
 
 import 'package:ccvc_mobile/presentation/search_screen/ui/mobile/search_screen.dart';
 import 'package:ccvc_mobile/presentation/thong_bao/ui/mobile/thong_bao_screen.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '/data/exception/app_exception.dart';
 import '/generated/l10n.dart';
-import '/home_module/config/resources/styles.dart';
 import '/home_module/config/resources/color.dart';
+import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import '/home_module/presentation/home_screen/ui/home_item.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
 import '/home_module/presentation/home_screen/ui/mobile/widgets/header_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/thong_bao_message_widget.dart';
 import '/home_module/utils/constants/image_asset.dart';
 import '/widgets/views/state_stream_layout.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '/home_module/presentation/home_screen/ui/home_item.dart';
 import 'home_icon.dart';
 
 final keyHomeMobile = GlobalKey<_HomeScreenMobileState>();

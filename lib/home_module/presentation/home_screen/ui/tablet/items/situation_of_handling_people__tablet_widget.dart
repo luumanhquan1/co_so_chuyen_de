@@ -1,16 +1,16 @@
-import '/home_module/domain/model/home/tinh_hinh_y_kien_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
-import '/generated/l10n.dart';
-import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '/generated/l10n.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/domain/model/home/tinh_hinh_y_kien_model.dart';
+import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
 import '/home_module/presentation/home_screen/ui/tablet/widgets/container_background_tablet_widget.dart';
 import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
 import '/home_module/widgets/chart/base_pie_chart.dart';
 import '/home_module/widgets/text/text/no_data_widget.dart';
 import '/home_module/widgets/text/views/loading_only.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SituationOfHandlingPeopleTabletWidget extends StatefulWidget {
   final WidgetType homeItemType;

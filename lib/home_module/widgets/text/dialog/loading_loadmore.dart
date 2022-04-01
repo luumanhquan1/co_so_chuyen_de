@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+
 import '/home_module/config/resources/color.dart';
 
 class LoadingItem extends StatelessWidget {

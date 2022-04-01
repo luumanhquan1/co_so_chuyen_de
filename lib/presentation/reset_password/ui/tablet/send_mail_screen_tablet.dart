@@ -2,8 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/forgot_password/bloc/forgot_password_cubit.dart';
-import 'package:ccvc_mobile/presentation/login/ui/widgets/custom_textfield.dart';
-import 'package:ccvc_mobile/presentation/reset_password/ui/tablet/reset_password_screen_tablet.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';

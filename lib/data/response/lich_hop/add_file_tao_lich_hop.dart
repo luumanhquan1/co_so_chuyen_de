@@ -1,4 +1,5 @@
 import 'dart:core';
+
 import 'package:ccvc_mobile/domain/model/add_file_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';

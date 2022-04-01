@@ -5,11 +5,8 @@ import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_c
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-
 import 'package:ccvc_mobile/widgets/button/button_select_file.dart';
-
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_only_widget.dart';
-
 import 'package:flutter/material.dart';
 
 class TaiLieuCuocHopWidget extends StatelessWidget {

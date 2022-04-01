@@ -23,5 +23,6 @@ class ChuDeModel {
 
 class ListChuDeModel{
   List<ChuDeModel>? getlistChuDe;
-  ListChuDeModel({this.getlistChuDe});
+  int? totalPages;
+  ListChuDeModel({this.getlistChuDe,this.totalPages});
 }

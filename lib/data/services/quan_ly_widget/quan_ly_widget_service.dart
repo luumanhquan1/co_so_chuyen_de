@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
-
 part 'quan_ly_widget_service.g.dart';
 
 @RestApi()

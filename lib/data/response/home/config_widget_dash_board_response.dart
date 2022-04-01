@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 

@@ -2,8 +2,6 @@ import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/menu_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/search_tin_tuc_response.dart';
-import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/theo_doi_bai_viet_response.dart';
-import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/tin_tuc_thoi_su_response.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';

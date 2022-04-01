@@ -1,19 +1,14 @@
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-
 import 'package:ccvc_mobile/generated/l10n.dart';
-
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/check_box_widget.dart';
-
 import 'package:ccvc_mobile/presentation/cai_dat_giao_dien_screen/widgets/title_cai_dat_widget.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CaiDatMauTabletWidget extends StatelessWidget {

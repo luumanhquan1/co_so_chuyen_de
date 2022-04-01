@@ -1,5 +1,6 @@
-import '/generated/l10n.dart';
 import 'package:intl/intl.dart';
+
+import '/generated/l10n.dart';
 
 
 enum TimeRange { HOM_NAY, TUAN_NAY, THANG_NAY, NAM_NAY }

@@ -9,6 +9,8 @@ part 'list_chu_de_response.g.dart';
 class ListChuDeResponse {
   @JsonKey(name: 'pageData')
   List<ChuDeData>? listChuDe;
+  @JsonKey(name: 'totalPages')
+  int? totalPages;
 
   ListChuDeResponse(this.listChuDe);
 
@@ -19,6 +21,7 @@ class ListChuDeResponse {
 
   ListChuDeModel toDomain() => ListChuDeModel(
         getlistChuDe: listChuDe?.map((e) => e.toDomain()).toList() ?? [],
+        totalPages: totalPages,
       );
 }
 

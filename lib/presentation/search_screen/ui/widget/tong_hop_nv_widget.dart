@@ -3,10 +3,8 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/domain/model/home/calendar_metting_model.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/widgets/container_info_widget.dart';
 import 'package:ccvc_mobile/home_module/utils/enum_ext.dart';
-
 import 'package:ccvc_mobile/presentation/search_screen/ui/widget/title_item.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/utils/enum_ext.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 

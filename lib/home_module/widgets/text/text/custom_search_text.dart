@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+
 import '/home_module/config/resources/styles.dart';
 class CustomSearchText extends StatelessWidget {
   final String hintText;

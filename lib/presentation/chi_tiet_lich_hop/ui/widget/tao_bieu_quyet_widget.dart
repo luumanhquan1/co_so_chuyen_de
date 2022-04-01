@@ -4,17 +4,13 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/bloc/chi_tiet_lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/chon_ngay_widget.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/radio_button.dart';
-import 'package:ccvc_mobile/presentation/chi_tiet_lich_hop/ui/widget/select_hour_widget.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/button/double_button_bottom.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
-import 'package:ccvc_mobile/widgets/selectdate/custom_selectdate.dart';
 import 'package:ccvc_mobile/widgets/textformfield/block_textview.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/timer/base_timer_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'cac_lua_chon_don_vi_widget.dart';
 

@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';

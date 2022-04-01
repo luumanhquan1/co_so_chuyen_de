@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/domain/model/lich_hop/danh_sach_bieu_quyet_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:equatable/equatable.dart';

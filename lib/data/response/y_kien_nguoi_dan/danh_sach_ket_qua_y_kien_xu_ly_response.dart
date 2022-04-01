@@ -1,7 +1,7 @@
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_xu_ly_yknd_model.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 
 part 'danh_sach_ket_qua_y_kien_xu_ly_response.g.dart';
 

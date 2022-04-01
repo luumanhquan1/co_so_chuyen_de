@@ -2,10 +2,6 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/menu_screen/ui/fake_date_menu.dart';
-
-
-
 import 'package:rxdart/rxdart.dart';
 
 class SearchCubit extends HomeCubit {
