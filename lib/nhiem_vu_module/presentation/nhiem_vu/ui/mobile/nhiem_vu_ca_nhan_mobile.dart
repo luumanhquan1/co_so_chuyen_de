@@ -2,10 +2,8 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/nhiem_vu_dashboard_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_cong_viec_nhiem_vu/ui/mobile/chi_tiet_cong_viec_nhiem_vu.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_nhiem_vu_mobile.dart';
@@ -98,33 +96,6 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                       ],
                     ),
                     const SizedBox(height: 4.0),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: listDanhSachNhiemVu.length < 3
-                          ? listDanhSachNhiemVu.length
-                          : 3,
-                      itemBuilder: (context, index) {
-                        return NhiemVuItemMobile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ChiTietNhiemVuPhoneScreen(),
-                              ),
-                            );
-                          },
-                          title: listDanhSachNhiemVu[index].noiDung ?? '',
-                          timeStart: listDanhSachNhiemVu[index].timeStart ?? '',
-                          timeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
-                          userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
-                          status: listDanhSachNhiemVu[index].trangThai ?? '',
-                          userImage:
-                              'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                        );
-                      },
-                    )
                   ],
                 ),
               ),
@@ -161,34 +132,34 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                       ],
                     ),
                     const SizedBox(height: 4.0),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: listDanhSachCongViec.length < 3
-                          ? listDanhSachCongViec.length
-                          : 3,
-                      itemBuilder: (context, index) {
-                        return NhiemVuItemMobile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ChitietCongViecNhiemVuMobile(),
-                              ),
-                            );
-                          },
-                          title: listDanhSachCongViec[index].noiDung ?? '',
-                          timeStart:
-                              listDanhSachCongViec[index].timeStart ?? '',
-                          timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
-                          userName: listDanhSachCongViec[index].nguoiTao ?? '',
-                          status: listDanhSachCongViec[index].trangThai ?? '',
-                          userImage:
-                              'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                        );
-                      },
-                    )
+                    // ListView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   itemCount: listDanhSachCongViec.length < 3
+                    //       ? listDanhSachCongViec.length
+                    //       : 3,
+                    //   itemBuilder: (context, index) {
+                    //     return NhiemVuItemMobile(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 const ChitietCongViecNhiemVuMobile(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       title: listDanhSachCongViec[index].noiDung ?? '',
+                    //       timeStart:
+                    //           listDanhSachCongViec[index].timeStart ?? '',
+                    //       timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
+                    //       userName: listDanhSachCongViec[index].nguoiTao ?? '',
+                    //       status: listDanhSachCongViec[index].trangThai ?? '',
+                    //       userImage:
+                    //           'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    //     );
+                    //   },
+                    // )
                   ],
                 ),
               ),
@@ -196,7 +167,8 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
           ),
         ),
         TableCalendarWidget(
-          onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {},
+          onChange:
+              (DateTime startDate, DateTime endDate, DateTime selectDay) {},
           onChangeRange:
               (DateTime? start, DateTime? end, DateTime? focusedDay) {},
         ),

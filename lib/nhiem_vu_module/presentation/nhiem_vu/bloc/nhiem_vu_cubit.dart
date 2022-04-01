@@ -1,13 +1,16 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_state.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NhiemVuCubit extends BaseCubit<NhiemVuState> {
   NhiemVuCubit() : super(const NhiemVuStateIntial());
 
+  NhiemVuRepository get repo => Get.find();
   final BehaviorSubject<ChartData> _dataChartNhiemVu =
       BehaviorSubject<ChartData>();
   BehaviorSubject<List<bool>> selectTypeNhiemVuSubject =

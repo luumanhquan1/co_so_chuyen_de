@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_state.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/menu/nhiem_vu_menu_mobile.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/nhiem_vu_ca_nhan_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/nhiem_vu_don_vi_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/image_asset.dart';
@@ -21,6 +22,7 @@ class MainNhieVuMobile extends StatefulWidget {
 class _MainNhieVuMobileState extends State<MainNhieVuMobile> {
   late final NhiemVuCubit cubit;
   late String title;
+  DanhSachCubit cubits = DanhSachCubit();
 
   @override
   void initState() {

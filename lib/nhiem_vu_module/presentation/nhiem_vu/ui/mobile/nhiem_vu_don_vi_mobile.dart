@@ -100,34 +100,34 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                         )
                       ],
                     ),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: listDanhSachNhiemVu.length < 3
-                          ? listDanhSachNhiemVu.length
-                          : 3,
-                      itemBuilder: (context, index) {
-                        return NhiemVuItemMobile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ChiTietNhiemVuPhoneScreen(),
-                              ),
-                            );
-                          },
-                          title: listDanhSachNhiemVu[index].noiDung ?? '',
-                          timeStart:
-                              listDanhSachCongViec[index].timeStart ?? '',
-                          timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
-                          userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
-                          status: listDanhSachNhiemVu[index].trangThai ?? '',
-                          userImage:
-                              'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                        );
-                      },
-                    )
+                    // ListView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   itemCount: listDanhSachNhiemVu.length < 3
+                    //       ? listDanhSachNhiemVu.length
+                    //       : 3,
+                    //   itemBuilder: (context, index) {
+                    //     return NhiemVuItemMobile(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 const ChiTietNhiemVuPhoneScreen(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       title: listDanhSachNhiemVu[index].noiDung ?? '',
+                    //       timeStart:
+                    //           listDanhSachCongViec[index].timeStart ?? '',
+                    //       timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
+                    //       userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
+                    //       status: listDanhSachNhiemVu[index].trangThai ?? '',
+                    //       userImage:
+                    //           'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    //     );
+                    //   },
+                    // )
                   ],
                 ),
               ),
@@ -166,34 +166,34 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                         )
                       ],
                     ),
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: listDanhSachCongViec.length < 3
-                          ? listDanhSachCongViec.length
-                          : 3,
-                      itemBuilder: (context, index) {
-                        return NhiemVuItemMobile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ChitietCongViecNhiemVuMobile(),
-                              ),
-                            );
-                          },
-                          title: listDanhSachCongViec[index].noiDung ?? '',
-                          timeStart:
-                              listDanhSachCongViec[index].timeStart ?? '',
-                          timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
-                          userName: listDanhSachCongViec[index].nguoiTao ?? '',
-                          status: listDanhSachCongViec[index].trangThai ?? '',
-                          userImage:
-                              'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                        );
-                      },
-                    )
+                    // ListView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   itemCount: listDanhSachCongViec.length < 3
+                    //       ? listDanhSachCongViec.length
+                    //       : 3,
+                    //   itemBuilder: (context, index) {
+                    //     return NhiemVuItemMobile(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 const ChitietCongViecNhiemVuMobile(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       title: listDanhSachCongViec[index].noiDung ?? '',
+                    //       timeStart:
+                    //           listDanhSachCongViec[index].timeStart ?? '',
+                    //       timeEnd: listDanhSachCongViec[index].timeEnd ?? '',
+                    //       userName: listDanhSachCongViec[index].nguoiTao ?? '',
+                    //       status: listDanhSachCongViec[index].trangThai ?? '',
+                    //       userImage:
+                    //           'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    //     );
+                    //   },
+                    // )
                   ],
                 ),
               ),
