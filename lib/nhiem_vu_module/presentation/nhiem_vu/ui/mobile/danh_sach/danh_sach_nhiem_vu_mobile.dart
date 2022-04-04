@@ -28,10 +28,17 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
             const SizedBox(
               height: 16.0,
             ),
-            const BaseSearchBar(),
+            BaseSearchBar(
+              onChange: (value) {
+                setState(() {});
+                cubit.keySearch = value;
+              },
+            ),
             Expanded(
               child: Container(
-                  padding: const EdgeInsets.only(top: 16), child: _content()),
+                padding: const EdgeInsets.only(top: 16),
+                child: _content(),
+              ),
             ),
           ],
         ),
@@ -54,7 +61,6 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
         )
       },
       viewItem: (value, index) => NhiemVuItemMobile(
-        index: index ?? 0,
         data: value as PageData,
       ),
     );

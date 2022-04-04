@@ -37,6 +37,9 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
   void initState() {
     super.initState();
     cubit.initChiTietNV();
+    cubit.getChiTietNhiemVuCaNhan('bac34af9-c184-4238-ad86-b3c1d42fbd86');
+    cubit.getLichSuPhanXuLy('bac34af9-c184-4238-ad86-b3c1d42fbd86');
+    cubit.getYKienXuLyNhiemVu('bac34af9-c184-4238-ad86-b3c1d42fbd86');
   }
 
   @override
@@ -92,7 +95,7 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
                 );
               },
             ),
-            StreamBuilder<List<LichSuPhanXuLyModel>>(
+            StreamBuilder<List<LichSuPhanXuLyNhiemVuModel>>(
               stream: cubit.lichSuPhanXuLySubject,
               builder: (context, snapshot) {
                 final data = snapshot.data ?? [];

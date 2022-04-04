@@ -127,7 +127,7 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
               ),
               ListDanhSachCongViec(
                 titleButton: S.current.xem_danh_sach,
-                list: listDanhSachCongViec,
+                list: [],
                 onTap: () {
                   Navigator.push(
                     context,

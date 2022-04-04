@@ -8,7 +8,7 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class LichSuPhanXuLyWidget extends StatelessWidget {
-  final List<LichSuPhanXuLyModel> dataModel;
+  final List<LichSuPhanXuLyNhiemVuModel> dataModel;
   final ChiTietNVCubit cubit;
 
   const LichSuPhanXuLyWidget(

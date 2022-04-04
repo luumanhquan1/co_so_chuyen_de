@@ -119,7 +119,7 @@ class _ChiTietNhiemVuTabletScreenState
                               },
                             ),
 
-                            StreamBuilder<List<LichSuPhanXuLyModel>>(
+                            StreamBuilder<List<LichSuPhanXuLyNhiemVuModel>>(
                               stream: cubit.lichSuPhanXuLyModelStream,
                               builder: (context, snapshot) {
                                 final data = snapshot.data ?? [];

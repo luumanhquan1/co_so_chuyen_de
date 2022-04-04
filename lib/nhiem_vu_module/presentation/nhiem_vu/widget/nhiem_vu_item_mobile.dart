@@ -7,12 +7,10 @@ import 'package:flutter/cupertino.dart';
 
 class NhiemVuItemMobile extends StatelessWidget {
   final PageData data;
-  final int index;
 
   const NhiemVuItemMobile({
     Key? key,
     required this.data,
-    required this.index,
   }) : super(key: key);
 
   @override

@@ -1,4 +1,5 @@
-
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
@@ -123,6 +124,38 @@ extension CheckValidate on String {
       int.parse(this);
     } catch (e) {
       return S.current.check_so_luong;
+    }
+  }
+
+  Color trangThaiToColor() {
+    switch (this) {
+      case 'thu-hoi':
+        return Colors.red;
+      case 'cho-phan-xu-ly':
+        return choXuLyColor;
+      case 'chua-thuc-hien':
+        return Colors.red;
+      case 'dang-thuc-hien':
+        return yellowColor;
+      case 'da-hoan-thanh':
+        return daXuLyColor;
+      case 'tra-lai':
+        return Colors.red;
+      default:
+        return Colors.red;
+    }
+  }
+
+  Color status() {
+    switch (this) {
+      case 'qua-han':
+        return statusCalenderRed;
+      case 'den-han':
+        return dangXyLyColor;
+      case 'trong-han':
+        return numberOfCalenders;
+      default:
+        return Colors.red;
     }
   }
 }

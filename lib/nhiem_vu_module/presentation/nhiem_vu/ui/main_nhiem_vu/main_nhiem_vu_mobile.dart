@@ -74,10 +74,12 @@ class _MainNhieVuMobileState extends State<MainNhieVuMobile> {
               if (state is NhiemVuCaNhan) {
                 return NhiemVuCaNhanMobile(
                   cubit: cubit,
+                  isCheck: true,
                 );
               } else {
                 return NhiemVuDonViMobile(
                   cubit: cubit,
+                  isCheck: false,
                 );
               }
             },

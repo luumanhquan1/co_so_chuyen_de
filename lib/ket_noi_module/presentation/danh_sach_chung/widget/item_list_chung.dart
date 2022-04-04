@@ -82,9 +82,13 @@ class _ItemListChungState extends State<ItemListChung> {
                 children: [
                   SvgPicture.asset(ImageAssets.ic_location),
                   spaceW12,
-                  Text(
-                    widget.danhSachChungModel.diaChi ?? '',
-                    style: textNormal(color: dateColor),
+                  Flexible(
+                    child: Text(
+                      widget.danhSachChungModel.diaChi ?? '',
+                      style: textNormal(color: dateColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   )
                 ],
               )

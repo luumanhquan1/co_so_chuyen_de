@@ -13,10 +13,10 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
 
   KetNoiRepository get repo => Get.find();
 
-  BehaviorSubject<List<String>> loaiBaiVietSubject = BehaviorSubject.seeded([]);
+  BehaviorSubject<List<LoaiBaiVietModel>> loaiBaiVietSubject =
+      BehaviorSubject.seeded([]);
   List<LoaiBaiVietModel> listData = [];
-  List<Childrens> checkType = [];
-  LoaiBaiVietModel loaiBaiVietModel = LoaiBaiVietModel();
+  LoaiBaiVietModel? loaiBaiVietModel;
   String type = 'KET-NOI';
   String tenSuKien = '';
   List<String> loaiBaiViet = [];
@@ -51,11 +51,6 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
     );
   }
 
-  List<String> listName = [];
-  String name = '';
-  List<Childrens> listTitleItemMenu = [];
-  List<Childrens> listTitleItemMenu2 = [];
-
   Future<void> getLoaiBaiViet({
     required String type,
   }) async {
@@ -63,18 +58,9 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
     final result = await repo.loaiBaiViet(type);
     result.when(
       success: (res) {
-        listData = res;
-        for (final i in listData) {
-          if (i.alias == 'su-kien') {
-            for (final j in i.childrens ?? []) {
-              listName.add(j.title);
-              name = listName.first;
-            }
-          } else {
-            listTitleItemMenu2.addAll(res.first.childrens ?? []);
-          }
-        }
-        loaiBaiVietSubject.sink.add(listName);
+        listData.clear();
+        listData.addAll(res);
+        loaiBaiVietSubject.sink.add(res);
         showContent();
       },
       error: (error) {
