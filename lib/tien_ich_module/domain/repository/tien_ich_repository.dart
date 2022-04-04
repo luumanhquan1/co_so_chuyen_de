@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/tien_ich_module/domain/model/danh_sach_title_hdsd.da
 import 'package:ccvc_mobile/tien_ich_module/domain/model/detail_huong_dan_su_dung.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/tra_cuu_van_ban_phap_luat_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobile/tree/model/TreeModel.dart';
@@ -49,4 +50,6 @@ mixin TienIchRepository {
     int pageIndex,
     int pageSize,
   );
+
+  Future<Result<List<NhomCVMoiModel>>> NhomCVMoi();
 }
