@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/chart_by_month_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/co_cau_lich_hop_widget.dart';
 import 'package:flutter/material.dart';
 
 class ThongKeLichHopScreen extends StatefulWidget {
@@ -51,6 +52,7 @@ class _ThongKeLichHopScreenState extends State<ThongKeLichHopScreen> {
               ),
             ),
           ),
+          CoCauLichHopWidget()
         ],
       ),
     );
