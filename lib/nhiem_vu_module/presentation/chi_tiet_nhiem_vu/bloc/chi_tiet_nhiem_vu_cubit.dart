@@ -9,11 +9,16 @@ import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_thu_hoi.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_tra_lai.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nv_state.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   ChiTietNVCubit() : super(ChiTietNVInitial());
+
+  NhiemVuRepository get nhiemVuRepo => Get.find();
 
   BehaviorSubject<ChiTietNhiemVuHeader> chiTietHeaderSubject =
       BehaviorSubject();
@@ -24,7 +29,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
       BehaviorSubject();
 
-  BehaviorSubject<List<LichSuPhanXuLyModel>> lichSuPhanXuLySubject =
+  BehaviorSubject<List<LichSuPhanXuLyNhiemVuModel>> lichSuPhanXuLySubject =
       BehaviorSubject();
 
   BehaviorSubject<List<LichSuThuHoiModel>> lichSuThuHoiSubject =
@@ -36,7 +41,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   BehaviorSubject<List<LichSuTraLaiModel>> lichSuTraLaiSubject =
       BehaviorSubject();
 
- BehaviorSubject<List<LichSuDonDocModel>> lichSuDonDocSubject =
+  BehaviorSubject<List<LichSuDonDocModel>> lichSuDonDocSubject =
       BehaviorSubject();
 
   Stream<VanBanLienQuanModel> get vanBanLienQuanStream =>
@@ -45,8 +50,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<List<LichSuThuHoiModel>> get lichSuThuHoiStream =>
       lichSuThuHoiSubject.stream;
 
- Stream<List<LichSuDonDocModel>> get lichSuDonDocStream =>
-     lichSuDonDocSubject.stream;
+  Stream<List<LichSuDonDocModel>> get lichSuDonDocStream =>
+      lichSuDonDocSubject.stream;
 
   Stream<List<DanhSachCongViecModel>> get danhSachCongViecStream =>
       danhsachCongViecSubject.stream;
@@ -54,7 +59,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<List<LichSuTraLaiModel>> get lichSuTraLaiStream =>
       lichSuTraLaiSubject.stream;
 
-  Stream<List<LichSuPhanXuLyModel>> get lichSuPhanXuLyModelStream =>
+  Stream<List<LichSuPhanXuLyNhiemVuModel>> get lichSuPhanXuLyModelStream =>
       lichSuPhanXuLySubject.stream;
 
   Stream<List<LichSuCapNhatTHTHModel>> get lichSuCapNhatTHTHModelStream =>
@@ -62,6 +67,20 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
 
   Stream<ChiTietNhiemVuHeader> get chiTietHeaderStream =>
       chiTietHeaderSubject.stream;
+
+  Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getChiTietNhiemVu(nhiemVuId, true);
+    result.when(success: (res) {}, error: (error) {});
+  }
+
+  Future<void> getLichSuPhanXuLy(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getLichSuPhanXuLy(nhiemVuId);
+    result.when(success: (res) {}, error: (error) {});
+  }
+  Future<void> getYKienXuLyNhiemVu(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getYKienXuLyNhiemVu(nhiemVuId);
+    result.when(success: (res) {}, error: (error) {});
+  }
 
   List<LichSuThuHoiModel> fakeLSTH = [
     LichSuThuHoiModel(
@@ -90,18 +109,18 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
       noiDungDonDoc: 'Chưa có',
       thoiGian: '27/07/2021 | 17:02:22',
       donViDonDoc: 'UBND Đồng Nai',
-       donViBiDonDoc: 'UBND Đồng Nai',
-      nguoiBiDonDoc:  'Hà Kiều Anh',
-      nguoiDonDoc:  'Hà Kiều Anh',
+      donViBiDonDoc: 'UBND Đồng Nai',
+      nguoiBiDonDoc: 'Hà Kiều Anh',
+      nguoiDonDoc: 'Hà Kiều Anh',
     ),
-   LichSuDonDocModel(
+    LichSuDonDocModel(
       id: '',
       noiDungDonDoc: 'Chưa có',
       thoiGian: '27/07/2021 | 17:02:22',
       donViDonDoc: 'UBND Đồng Nai',
-       donViBiDonDoc: 'UBND Đồng Nai',
-      nguoiBiDonDoc:  'Hà Kiều Anh',
-      nguoiDonDoc:  'Hà Kiều Anh',
+      donViBiDonDoc: 'UBND Đồng Nai',
+      nguoiBiDonDoc: 'Hà Kiều Anh',
+      nguoiDonDoc: 'Hà Kiều Anh',
     ),
     LichSuDonDocModel(
       id: '',
@@ -182,8 +201,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     vanBanKhac: [],
   );
 
-  List<LichSuPhanXuLyModel> fakeLSPXL = [
-    LichSuPhanXuLyModel(
+  List<LichSuPhanXuLyNhiemVuModel> fakeLSPXL = [
+    LichSuPhanXuLyNhiemVuModel(
       id: '',
       stt: 1,
       donViNhan: 'Đơn vị nhận',
@@ -193,7 +212,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
       vaiTroXuLy: 'Chủ trì',
       trangThai: 'QUA_HAN',
     ),
-    LichSuPhanXuLyModel(
+    LichSuPhanXuLyNhiemVuModel(
       id: '',
       stt: 1,
       donViNhan: 'Đơn vị nhận',
@@ -203,7 +222,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
       vaiTroXuLy: 'Chủ trì',
       trangThai: 'QUA_HAN',
     ),
-    LichSuPhanXuLyModel(
+    LichSuPhanXuLyNhiemVuModel(
       id: '',
       stt: 1,
       donViNhan: 'Đơn vị nhận',
@@ -213,7 +232,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
       vaiTroXuLy: 'Chủ trì',
       trangThai: 'QUA_HAN',
     ),
-    LichSuPhanXuLyModel(
+    LichSuPhanXuLyNhiemVuModel(
       id: '',
       stt: 1,
       donViNhan: 'Đơn vị nhận',

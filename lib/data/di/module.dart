@@ -28,6 +28,9 @@ import 'package:ccvc_mobile/domain/repository/y_kien_nguoi_dan/y_kien_nguoi_dan_
 import 'package:ccvc_mobile/ket_noi_module/data/repository_impl/ket_noi_repo.dart';
 import 'package:ccvc_mobile/ket_noi_module/data/service/ket_noi_service.dart';
 import 'package:ccvc_mobile/ket_noi_module/domain/repository/ket_noi_repository.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/repository_impl/nhiem_vu_repository_impl.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/service/nhiem_vu_service.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/danh_ba_dien_tu_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/repository_impl/tien_ich_repository_impl.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/service/danh_ba_dien_tu_service.dart';
@@ -87,8 +90,6 @@ void configureDependencies() {
     QuanLyWidgetImlp(Get.find()),
   );
 
-
-
   Get.put(
     ThanhPhanThamGiaService(provideDio(baseOption: BaseURLOption.GATE_WAY)),
   );
@@ -138,6 +139,13 @@ void configureDependencies() {
     ),
   );
   Get.put<DanhBaDienTuRepository>(DanhBaDienTuImpl(Get.find()));
+
+  Get.put(
+    NhiemVuService(
+      provideDio(baseOption: BaseURLOption.GATE_WAY),
+    ),
+  );
+  Get.put<NhiemVuRepository>(NhiemVuRepoImpl(Get.find()));
 }
 
 int _connectTimeOut = 60000;
