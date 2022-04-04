@@ -1,29 +1,32 @@
-
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/type_data_row.dart';
 
-class LichSuPhanXuLyModel {
-  String id = '';
-  int stt = 1;
-  String nguoiGui = '';
-  String thoiGian = '';
-  String nguoiNhan = '';
-  String donViNhan = '';
-  String vaiTroXuLy = '';
-  String trangThai = '';
+class LichSuPhanXuLyNhiemVuModel {
+  String? id;
+  int? stt;
+  String? nguoiGui;
+  String? donViGui;
+  String? thoiGian;
+  String? nguoiNhan;
+  String? donViNhan;
+  String? vaiTroXuLy;
+  String? trangThai;
+  String? trangThaiId;
 
-  LichSuPhanXuLyModel.empty();
+  LichSuPhanXuLyNhiemVuModel.empty();
 
-  LichSuPhanXuLyModel({
-    required this.id,
-    required this.stt,
-    required this.nguoiGui,
-    required this.thoiGian,
-    required this.nguoiNhan,
-    required this.donViNhan,
-    required this.vaiTroXuLy,
-    required this.trangThai,
+  LichSuPhanXuLyNhiemVuModel({
+    this.id,
+    this.stt,
+    this.nguoiGui,
+    this.donViGui,
+    this.thoiGian,
+    this.nguoiNhan,
+    this.donViNhan,
+    this.vaiTroXuLy,
+    this.trangThai,
+    this.trangThaiId,
   });
 
   List<RowDataExpandModel> listLSPXL() {
