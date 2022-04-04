@@ -24,12 +24,13 @@ class DashBoardBaoCaoYKNDData {
   String code;
   String name;
   int soLuong;
-  DashBoardBaoCaoYKNDData({required this.code, required this.name, required this.soLuong});
 
-
+  DashBoardBaoCaoYKNDData(
+      {required this.code, required this.name, required this.soLuong,});
 }
 
 class DashBoardBaoCaoYKNDModel {
   List<DashBoardBaoCaoYKNDData> listDataDashBoard;
+
   DashBoardBaoCaoYKNDModel({required this.listDataDashBoard});
 }
