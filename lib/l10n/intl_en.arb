@@ -816,5 +816,10 @@
   "lich_hop_duyet_yeu_cau_chuan_bi" : "Lịch họp duyệt yêu cầu chuẩn bị",
   "tin_quoc_te" : "Tin quốc tế",
   "id_zoom": "ID Zoom",
-  "ghi_chu": "Ghi chú"
+  "ghi_chu": "Ghi chú",
+  "thong_ke_lich_hop" : "Thống kê lịch họp",
+  "so_lich_hop_theo_thoi_gian_trong_nam" : "Số lịch họp theo thời gian trong năm",
+  "so_lich_hop_duoc_to_chuc_boi_cac_don_vi" : "Số lịch họp được tổ chức bởi các đơn vị",
+  "co_cau_lich_hop" : "Cơ cấu lịch họp",
+  "ti_le_tham_du_cua_cac_don_vi" : "Tỉ lệ tham dự họp của các đơn vị"
 }
