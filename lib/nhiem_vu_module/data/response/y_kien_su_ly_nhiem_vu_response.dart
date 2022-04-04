@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/data/response/chi_tiet_van_ban/lich_su_van_ban_response.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/y_kien_su_ly_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -100,7 +101,7 @@ class YKienSuLyNhiemVuModelResponse extends Equatable {
   YKienSuLyNhiemVuModel toModel()=>YKienSuLyNhiemVuModel(
     id:id,
     nhiemVuId:nhiemVuId,
-    noiDung:noiDung,
+    noiDung:noiDung?.parseHtml(),
     nguoiTaoId:nguoiTaoId,
     ngayTao:ngayTao,
     ngaySua:ngaySua,

@@ -1,3 +1,7 @@
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_header.dart';
+
 class ChiTietNhiemVuModel {
   String? id;
   String? processTypeId;
@@ -46,6 +50,43 @@ class ChiTietNhiemVuModel {
     this.coTheCapNhatTinhHinhThucHien,
     this.coThePhanXuLy,
   });
+
+  List<ChiTietHeaderRow> toListRow() {
+    final List<ChiTietHeaderRow> list = [
+      ChiTietHeaderRow(
+        key: S.current.loai_nhiem_vu,
+        value: processTypeName??'',
+        isNote: false,
+      ),
+      ChiTietHeaderRow(
+        key: S.current.so_nhiem_vu,
+        value: processTypeCode??'',
+        isNote: true,
+      ),
+      ChiTietHeaderRow(
+        key: S.current.tinh_hinh_thuc_hien,
+        value: statusName??'',
+        isNote: false,
+      ),
+      ChiTietHeaderRow(
+        key: S.current.han_xu_ly,
+        value: hanXuLy??'',
+        isNote: true,
+      ),
+      ChiTietHeaderRow(
+        key: S.current.nguoi_giao,
+        value: nguoiGiao??'',
+        isNote: false,
+      ),
+      ChiTietHeaderRow(
+        key: S.current.noi_dung,
+        value: processContent?.parseHtml()??'',
+        isNote: true,
+      ),
+    ];
+
+    return list;
+  }
 }
 
 class Metadata {
