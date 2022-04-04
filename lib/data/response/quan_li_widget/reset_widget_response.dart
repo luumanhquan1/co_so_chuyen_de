@@ -1,22 +1,29 @@
+import 'dart:convert';
+
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'quan_li_widget_response.g.dart';
+part 'reset_widget_response.g.dart';
 
 @JsonSerializable()
-class QuanLyWidgetResponse {
+class ResetWidgetResponse {
   @JsonKey(name: 'data')
-  List<WidgetData> listWidget;
+  String stringListWidget;
 
-  QuanLyWidgetResponse(this.listWidget);
+  ResetWidgetResponse(this.stringListWidget);
 
-  factory QuanLyWidgetResponse.fromJson(Map<String, dynamic> json) =>
-      _$QuanLyWidgetResponseFromJson(json);
+  factory ResetWidgetResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResetWidgetResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QuanLyWidgetResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ResetWidgetResponseToJson(this);
 
   List<WidgetModel> toDomain() {
-    return listWidget.map((e) => e.toDomain()).toList();
+    final List<WidgetModel> listResult = [];
+    final listData = json.decode(stringListWidget) as List<dynamic>;
+    for (final element in listData) {
+       listResult.add(WidgetData.fromJson(element).toDomain());
+    }
+     return listResult;
   }
 }
 
@@ -89,34 +96,34 @@ class WidgetData {
   Map<String, dynamic> toJson() => _$WidgetDataToJson(this);
 
   WidgetModel toDomain() => WidgetModel(
-        id: id ?? '',
-        name: name ?? '',
-        component: component,
-        widgetTypeId: widgetTypeId,
-        description: description,
-        code: code,
-        width: width ?? 0,
-        height: height ?? 0,
-        minWidth: minWidth ?? 0,
-        minHeight: minHeight ?? 0,
-        maxHeight: maxHeight ?? 0,
-        maxWidth: maxWidth ?? 0,
-        static: static ?? false,
-        isResizable: isResizable ?? false,
-        thumbnail: thumbnail ?? '',
-        appId: appId ?? '',
-        order: order ?? 0,
-        isShowing: isShowing ?? false,
-        x: x ?? 0,
-        y: y ?? 0,
-        i: i ?? 0,
-        enable: enable ?? false,
-        moved: moved ?? false,
-        w: w ?? 0,
-        h: h ?? 0,
-        maxH: maxH ?? 0,
-        maxW: maxW ?? 0,
-        minH: minH ?? 0,
-        minW: minW ?? 0,
-      );
+    id: id ?? '',
+    name: name ?? '',
+    component: component,
+    widgetTypeId: widgetTypeId,
+    description: description,
+    code: code,
+    width: width ?? 0,
+    height: height ?? 0,
+    minWidth: minWidth ?? 0,
+    minHeight: minHeight ?? 0,
+    maxHeight: maxHeight ?? 0,
+    maxWidth: maxWidth ?? 0,
+    static: static ?? false,
+    isResizable: isResizable ?? false,
+    thumbnail: thumbnail ?? '',
+    appId: appId ?? '',
+    order: order ?? 0,
+    isShowing: isShowing ?? false,
+    x: x ?? 0,
+    y: y ?? 0,
+    i: i ?? 0,
+    enable: enable ?? false,
+    moved: moved ?? false,
+    w: w ?? 0,
+    h: h ?? 0,
+    maxH: maxH ?? 0,
+    maxW: maxW ?? 0,
+    minH: minH ?? 0,
+    minW: minW ?? 0,
+  );
 }

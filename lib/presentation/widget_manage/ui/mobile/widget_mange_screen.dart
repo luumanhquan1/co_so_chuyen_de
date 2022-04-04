@@ -59,7 +59,9 @@ class _WidgetManageScreenState extends State<WidgetManageScreen> {
                         fontSize: 14,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      widgetManageCubit.resetListWidget();
+                    },
                   ),
                 ),
                 const SizedBox(

@@ -1,7 +1,3 @@
-
-
-
-
 import '/home_module/utils/constants/app_constants.dart';
 
 enum WidgetType {
@@ -22,16 +18,71 @@ enum WidgetType {
 class WidgetModel {
   String id = '';
   String name = '';
+  String? widgetTypeId;
+  String? description;
+  String? code;
+  int? width;
+  int? height;
+  int? minWidth;
+  int? minHeight;
+  int? maxHeight;
+  int? maxWidth;
+  Props? props;
   String component = '';
+  bool? static;
+  bool? isResizable;
+  String? thumbnail;
+  String? appId;
+  int? order;
+  bool? isShowing;
+  int? x;
+  int? y;
+  int? i;
+  bool? enable;
+  bool? moved;
+  int? w;
+  int? h;
+  int? maxH;
+  int? maxW;
+  int? minH;
+  int? minW;
   WidgetType? widgetType;
 
   WidgetModel({
     required this.id,
     required this.name,
+    this.widgetTypeId,
+    this.description,
+    this.code,
+    this.width,
+    this.height,
+    this.minWidth,
+    this.minHeight,
+    this.maxHeight,
+    this.maxWidth,
+    this.props,
     required this.component,
+    this.static,
+    this.isResizable,
+    this.thumbnail,
+    this.appId,
+    this.order,
+    this.isShowing,
+    this.x,
+    this.y,
+    this.i,
+    this.enable,
+    this.moved,
+    this.w,
+    this.h,
+    this.maxH,
+    this.maxW,
+    this.minH,
+    this.minW,
+    this.widgetType,
   }) {
     widgetType = fromEnum();
-  }
+  } //
 
   WidgetType? fromEnum() {
     switch (component) {
@@ -60,5 +111,16 @@ class WidgetModel {
       case WidgetTypeConstant.NHIEM_VU:
         return WidgetType.nhiemVu;
     }
+  }
+}
+
+class Props {
+  Props();
+
+  Props.fromJson();
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    return data;
   }
 }
