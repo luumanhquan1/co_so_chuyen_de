@@ -1,11 +1,14 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/widget/container_menu_bao_chi.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cell_menu_custom.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/container_menu_dscv.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/theo_dang_lich_widget_dscv.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -57,7 +60,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                     builder: (context, snapshot) {
                       return Column(
                         children: [
-                          CellMenuCustom(
+                          TheoDangLichWidgetDSCV(
                             icon: ImageAssets.icCVCuaBan,
                             name: S.current.cong_viec_cua_ban,
                             onTap: () {
@@ -67,8 +70,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[0] ?? true,
+                            number: 0,
                           ),
-                          CellMenuCustom(
+                          TheoDangLichWidgetDSCV(
                             icon: ImageAssets.icCVQT,
                             name: S.current.cong_viec_quan_trong,
                             onTap: () {
@@ -78,8 +82,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[1] ?? true,
+                            number: 0,
                           ),
-                          CellMenuCustom(
+                          TheoDangLichWidgetDSCV(
                             icon: ImageAssets.icHT,
                             name: S.current.da_hoan_thanh,
                             onTap: () {
@@ -89,8 +94,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[2] ?? true,
+                            number: 0,
                           ),
-                          CellMenuCustom(
+                          TheoDangLichWidgetDSCV(
                             icon: ImageAssets.icGanChoToi,
                             name: S.current.gan_cho_toi,
                             onTap: () {
@@ -100,8 +106,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[3] ?? true,
+                            number: 0,
                           ),
-                          CellMenuCustom(
+                          TheoDangLichWidgetDSCV(
                             icon: ImageAssets.icXoa,
                             name: S.current.da_bi_xoa,
                             onTap: () {
@@ -111,6 +118,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[4] ?? true,
+                            number: 0,
                           ),
                         ],
                       );
@@ -125,24 +133,43 @@ class _MenuDSCVState extends State<MenuDSCV> {
                                 name: e.typeMenu.getTitle(),
                                 icon: e.icon,
                                 type: TypeContainer.expand,
-                                index: e.index ?? 0,
-                                childExpand: Column(
-                                  children: (e.typeMenu ==
-                                          TypeMenuDSCV.NhomCVMoi)
-                                      ? listNhomCVMoi
-                                          .map(
-                                            (e) => ContainerMenuDSCVWidget(
-                                              icon: e.icon,
-                                              name: e.typeMenu.getTitle(),
-                                              index: e.index ?? 0,
-                                              isIcon: false,
-                                              onTap: () {
-                                                e.onTap(context, widget.cubit);
-                                              },
+                                childExpand: StreamBuilder<List<String>>(
+                                  stream: widget.cubit.nhomCVMoiSubject.stream,
+                                  builder: (context, snapshot) {
+                                    final data = snapshot.data ?? [];
+                                    if (data.isNotEmpty) {
+                                      return ListView.builder(
+                                        itemCount: data.length,
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          final vl = data[index];
+                                          return GestureDetector(
+                                            onTap: () {},
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 20),
+                                              child: Text(
+                                                vl,
+                                                style: textNormalCustom(
+                                                  color: titleItemEdit,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14.0.textScale(),
+                                                ),
+                                                maxLines: 2,
+                                              ),
                                             ),
-                                          )
-                                          .toList()
-                                      : [],
+                                          );
+                                        },
+                                      );
+                                    }
+                                    return const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 30),
+                                      child: SizedBox(),
+                                    );
+                                  },
                                 ),
                                 onTap: () {
                                   e.onTap(context, widget.cubit);
@@ -243,7 +270,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               (e) => ContainerMenuDSCVWidget(
                                 name: e.typeMenu.getTitle(),
                                 icon: ImageAssets.ic06,
-                                index: e.index ?? 0,
                                 type: TypeContainer.expand,
                                 childExpand: Column(
                                   children: e.typeMenu == TypeMenuDSCV.NhomCVMoi
@@ -252,7 +278,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                                             (e) => ContainerMenuDSCVWidget(
                                               icon: e.icon,
                                               name: e.typeMenu.getTitle(),
-                                              index: e.index ?? 0,
                                               isIcon: false,
                                               onTap: () {
                                                 e.onTap(context, widget.cubit);

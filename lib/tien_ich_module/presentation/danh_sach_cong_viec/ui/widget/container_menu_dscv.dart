@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/widget/container_menu_bao_chi.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_animation_widget.dart';
@@ -7,13 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum TypeContainer { expand, number }
-
 class ContainerMenuDSCVWidget extends StatefulWidget {
   final String name;
   final String? icon;
   final bool isIcon;
-  final int index;
   final bool isTypeContainer;
   final TypeContainer type;
   final Widget? childExpand;
@@ -25,7 +23,6 @@ class ContainerMenuDSCVWidget extends StatefulWidget {
     this.icon,
     this.isIcon = true,
     this.type = TypeContainer.number,
-    this.index = 0,
     this.isTypeContainer = true,
     this.childExpand,
     required this.onTap,
@@ -99,25 +96,7 @@ class _ContainerMenuDSCVWidgetState extends State<ContainerMenuDSCVWidget> {
                   ),
                   if (widget.isTypeContainer)
                     if (widget.type == TypeContainer.number)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: numberColorTabletbg,
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.index.toString(),
-                          style: textNormalCustom(
-                            color: textDefault,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12.0.textScale(),
-                          ),
-                        ),
-                      )
+                      const SizedBox()
                     else
                       Icon(
                         isExpand
@@ -202,25 +181,7 @@ class _ContainerMenuDSCVWidgetState extends State<ContainerMenuDSCVWidget> {
                     ),
                     if (widget.isTypeContainer)
                       if (widget.type == TypeContainer.number)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: numberColorTabletbg,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            widget.index.toString(),
-                            style: textNormalCustom(
-                              color: textDefault,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12.0.textScale(),
-                            ),
-                          ),
-                        )
+                        const SizedBox()
                       else
                         Icon(
                           isExpand
