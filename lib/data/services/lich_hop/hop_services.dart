@@ -21,6 +21,7 @@ import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_p
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/co_cau_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_bieu_quyet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
@@ -230,13 +231,19 @@ abstract class HopServices {
 
   @POST(ApiConstants.STATISTIC_BY_MONTH)
   Future<StatisticByMonthResponse> postStatisticByMonth(
-    @Query('dateFrom') String dateFrom,
-    @Query('dateTo') String dateTo,
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
   );
 
   @POST(ApiConstants.DASHBOARD_THONG_KE)
   Future<DashBoardThongKeResponse> getDashBoardThongKe(
-    @Query('dateFrom') String dateFrom,
-    @Query('dateTo') String dateTo,
+    @Field('dateFrom') String dateFrom,
+    @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.CO_CAU_LICH_HOP)
+  Future<CoCauLichHopResponse> postCoCauLichHop(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
   );
 }

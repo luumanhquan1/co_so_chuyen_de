@@ -55,7 +55,7 @@ class DataListNguoiThucHienResponse {
 class ItemsResponseNguoiThucHien {
   @JsonKey(name: 'id')
   String? id;
-  @JsonKey(name: 'hoten')
+  @JsonKey(name: 'hoTen')
   String? hoten;
   @JsonKey(name: 'donVi')
   List<String>? donVi;

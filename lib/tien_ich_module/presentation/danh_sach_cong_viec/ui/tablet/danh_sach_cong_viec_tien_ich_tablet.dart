@@ -37,6 +37,7 @@ class _DanhSachCongViecTienIchTabletState
     super.initState();
     cubit.getToDoList();
     cubit.listNguoiThucHien();
+    cubit.getNHomCVMoi();
   }
 
   @override

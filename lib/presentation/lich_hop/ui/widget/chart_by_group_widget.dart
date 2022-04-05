@@ -1,5 +1,6 @@
-import 'package:ccvc_mobile/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ChartByGroupWidget extends StatelessWidget {
   final LichHopCubit cubit;
