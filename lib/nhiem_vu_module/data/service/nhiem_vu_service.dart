@@ -1,5 +1,9 @@
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_don_doc_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_phan_xu_ly_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_tra_lai_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_cap_nhat_thth_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_thu_hoi_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/y_kien_su_ly_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/api_constants.dart';
@@ -31,8 +35,29 @@ abstract class NhiemVuService {
   );
 
   @GET(ApiConstants.GET_DANH_SACH_CONG_VIEC_CHI_TIET_NHIEM_VU)
-  Future<DataDanhSachCongViecChiTietNhiemVuModelResponse> getDanhSachCongViecChiTietNhiemVu(
+  Future<DataDanhSachCongViecChiTietNhiemVuModelResponse>
+      getDanhSachCongViecChiTietNhiemVu(
     @Query('nhiemVuId') String nhiemVuId,
-      @Query('isCaNhan') bool isCaNhan,
+    @Query('isCaNhan') bool isCaNhan,
+  );
+
+  @GET(ApiConstants.GET_LICH_SU_TRA_LAI_NHIEM_VU)
+  Future<DataLichSuTraLaiNhiemVuResponse> getLichSuTraLaiNhiemVu(
+    @Path('id') String nhiemVuId,
+  );
+
+  @GET(ApiConstants.GET_LICH_SU_TINH_HINH_THUC_HIEN)
+  Future<DataLichSuCapNhatTHTHModelResponse> getLichSuCapNhatThth(
+    @Path('id') String nhiemVuId,
+  );
+
+  @GET(ApiConstants.GET_LICH_SU_THU_HOI_NHIEM_VU)
+  Future<DataLichSuThuHoiNhiemVuModelResponse> getLichSuThuHoiNhiemVu(
+    @Query('nhiemVuId') String nhiemVuId,
+  );
+
+  @GET(ApiConstants.GET_LICH_SU_DON_DOC_NHIEM_VU)
+  Future<DataLichSuDonDocNhiemVuModelResponse> getLichSuDonDocNhiemVu(
+    @Query('nhiemVuId') String nhiemVuId,
   );
 }
