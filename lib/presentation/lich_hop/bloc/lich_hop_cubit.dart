@@ -14,6 +14,7 @@ import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/co_cau_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/to_chuc_boi_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
 import 'package:ccvc_mobile/domain/model/meeting_schedule.dart';
 import 'package:ccvc_mobile/domain/repository/lich_hop/hop_repository.dart';
@@ -78,6 +79,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
   HopRepository get hopRepo => Get.find();
   BehaviorSubject<List<MenuModel>> menuModelSubject = BehaviorSubject();
+
+  BehaviorSubject<List<ToChucBoiDonViModel>> toChucBoiDonViSubject =
+      BehaviorSubject();
 
   BehaviorSubject<List<MeetingSchedule>> listMeetTingScheduleSubject =
       BehaviorSubject();
@@ -175,6 +179,21 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     );
   }
 
+  Future<void> postToChucBoiDonVi() async {
+    showLoading();
+    final result = await hopRepo.postToChucBoiDonVi(
+      startDate.formatApiDDMMYYYYSlash,
+      endDate.formatApiDDMMYYYYSlash,
+    );
+
+    result.when(
+      success: (value) {
+        toChucBoiDonViSubject.add(value);
+      },
+      error: (error) {},
+    );
+  }
+
   Future<void> getDashBoardThongKe() async {
     showLoading();
     final result = await hopRepo.getDashBoardThongKe(
@@ -248,7 +267,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     showContent();
   }
 
-  bool checkDataList(List<CoCauLichHopModel> data) {
+  bool checkDataList(List<dynamic> data) {
     for (var i in data) {
       if (i.quantities != 0) return true;
     }
@@ -286,6 +305,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postStatisticByMonth();
     getDashBoardThongKe();
     postCoCauLichHop();
+    postToChucBoiDonVi();
   }
 
   Future<void> postStatisticByMonth() async {
@@ -360,6 +380,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postStatisticByMonth();
     getDashBoardThongKe();
     postCoCauLichHop();
+    postToChucBoiDonVi();
   }
 
   void postDSLHMonth() {
@@ -377,6 +398,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
 
     getDashBoardThongKe();
     postCoCauLichHop();
+    postToChucBoiDonVi();
   }
 
   void postDSLHDay() {
@@ -391,6 +413,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postStatisticByMonth();
     getDashBoardThongKe();
     postCoCauLichHop();
+    postToChucBoiDonVi();
   }
 
   Future<void> postDanhSachLichHop() async {

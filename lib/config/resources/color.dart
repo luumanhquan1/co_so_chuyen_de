@@ -55,6 +55,7 @@ const bgButtonDropDown = Color(0xff7966FF);
 const bgQLVBTablet = Color(0xffF9FAFF);
 
 const bgrCalendar = Color(0xFFE9E9E9);
+const bgrChart = Color(0xFF00CFE8);
 const homeColor = Color(0xffEEF3FF);
 const borderColor = Color(0xffDBDFEF);
 const AqiColor = Color(0xffA2AEBD);
