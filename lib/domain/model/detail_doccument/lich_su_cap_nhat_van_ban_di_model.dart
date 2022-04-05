@@ -41,7 +41,7 @@ class LichSuCapNhatVanBanDi {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv,
+        S.current.don_vi,
         donViCapNhat ?? '',
         TypeDocumentDetailRow.text,
       ),
