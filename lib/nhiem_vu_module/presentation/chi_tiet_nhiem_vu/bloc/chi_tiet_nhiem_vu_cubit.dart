@@ -77,7 +77,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     required String nhiemVuId,
 
   }) async {
-    final queue = Queue(parallel: 4);mod
+    final queue = Queue(parallel: 4);
     unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId)));
     unawaited(queue.add(() => getLichSuPhanXuLy(nhiemVuId)));
     unawaited(queue.add(() => getYKienXuLyNhiemVu(nhiemVuId)));
