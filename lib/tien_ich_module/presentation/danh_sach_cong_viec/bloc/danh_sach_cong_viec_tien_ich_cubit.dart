@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/home_module/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -15,6 +16,17 @@ import 'danh_sach_cong_viec_tien_ich_state.dart';
 
 class DanhSachCongViecTienIchCubit
     extends BaseCubit<DanhSachCongViecTienIchState> {
+  int sLCvCuaBan = 0;
+  int slCvQuanTrong = 0;
+  int sLCvDaHoanthanh = 0;
+  int sLCvGanChoToi = 0;
+  int sLCvDaBiXoa = 0;
+  int sLNhomCV = 0;
+  BehaviorSubject<List<TodoModel>> listImportanntWork = BehaviorSubject();
+  List<TodoDSCVModel> listGanChoToi = [];
+  List<TodoDSCVModel> listDaXoa = [];
+  List<TodoDSCVModel> listGanChoToiDaXoa = [];
+
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
       BehaviorSubject.seeded([true, false, false, false, false]);
 
@@ -230,8 +242,42 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
+        listImportanntWork.sink.add(res.listTodoImportant
+            .where((element) => element.important == true)
+            .toList());
         _getTodoList.sink.add(res);
         dataListDefault = res;
+        sLCvCuaBan = res.listTodoImportant.length;
+        sLCvDaHoanthanh = res.listTodoDone.length;
+        slCvQuanTrong = listImportanntWork.value.length;
+      },
+      error: (err) {},
+    );
+  }
+
+  Future<void> getToDoListDSCV() async {
+    showLoading();
+    final result = await tienIchRep.getListTodoDSCV();
+    showContent();
+    result.when(
+      success: (res) {
+        listDaXoa = res.where((element) => element.inUsed == false).toList();
+      },
+      error: (err) {},
+    );
+  }
+
+  Future<void> getDSCVGanCHoToi() async {
+    showLoading();
+    final result = await tienIchRep.getListDSCVGanChoToi();
+    showContent();
+    result.when(
+      success: (res) {
+        listGanChoToi = res.where((element) => element.inUsed == true).toList();
+        listGanChoToiDaXoa =
+            res.where((element) => element.inUsed == false).toList();
+        sLCvDaBiXoa = listDaXoa.length + listGanChoToiDaXoa.length;
+        sLCvGanChoToi = listGanChoToi.length;
       },
       error: (err) {},
     );

@@ -10,6 +10,7 @@ class CellMenuCustom extends StatelessWidget {
   final String name;
   final bool isSelect;
   final Function onTap;
+  final int number;
 
   const CellMenuCustom({
     Key? key,
@@ -17,12 +18,21 @@ class CellMenuCustom extends StatelessWidget {
     required this.name,
     required this.isSelect,
     required this.onTap,
+    required this.number,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return screenDevice(
-      mobileScreen: GestureDetector(
+    return Container(
+      margin: const EdgeInsets.only(top: 24, left: 30, right: 30),
+      decoration: BoxDecoration(
+        color: toDayColor.withOpacity(0.1),
+        border: Border.all(
+          color: toDayColor.withOpacity(0.5),
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: GestureDetector(
         onTap: () {
           onTap();
         },
@@ -31,7 +41,6 @@ class CellMenuCustom extends StatelessWidget {
             horizontal: 17.0.textScale(space: 13),
             vertical: 10.0.textScale(space: 4),
           ),
-          color: Colors.white,
           child: Row(
             children: [
               SizedBox(
@@ -39,7 +48,6 @@ class CellMenuCustom extends StatelessWidget {
                 width: 15.0.textScale(space: 8),
                 child: SvgPicture.asset(
                   icon,
-                  color: Colors.grey,
                 ),
               ),
               SizedBox(
@@ -53,50 +61,27 @@ class CellMenuCustom extends StatelessWidget {
                   fontSize: 16.0.textScale(space: 4),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      tabletScreen: Container(
-        margin: const EdgeInsets.only(top: 24, left: 30, right: 30),
-        decoration: BoxDecoration(
-          color: toDayColor.withOpacity(0.1),
-          border: Border.all(
-            color: toDayColor.withOpacity(0.5),
-          ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: GestureDetector(
-          onTap: () {
-            onTap();
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 17.0.textScale(space: 13),
-              vertical: 10.0.textScale(space: 4),
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 15.0.textScale(space: 8),
-                  width: 15.0.textScale(space: 8),
-                  child: SvgPicture.asset(
-                    icon,
-                  ),
+              const Expanded(child: SizedBox()),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4,
+                  horizontal: 5,
                 ),
-                SizedBox(
-                  width: 12.0.textScale(space: 6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: numberColorTabletbg,
                 ),
-                Text(
-                  name,
+                alignment: Alignment.center,
+                child: Text(
+                  number.toString(),
                   style: textNormalCustom(
-                    color: titleColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16.0.textScale(space: 4),
+                    color: textDefault,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0.textScale(),
                   ),
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
