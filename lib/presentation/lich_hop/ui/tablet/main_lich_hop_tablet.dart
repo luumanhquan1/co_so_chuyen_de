@@ -205,6 +205,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                     startDate,
                                     endDate,
                                     selectDay,
+                                    state.type,
                                   );
                                 },
                               );
