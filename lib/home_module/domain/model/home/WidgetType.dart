@@ -18,6 +18,7 @@ enum WidgetType {
 class WidgetModel {
   String id = '';
   String name = '';
+  String component = '';
   String? widgetTypeId;
   String? description;
   String? code;
@@ -27,8 +28,7 @@ class WidgetModel {
   int? minHeight;
   int? maxHeight;
   int? maxWidth;
-  Props? props;
-  String component = '';
+  Map<String,dynamic>? props={};
   bool? static;
   bool? isResizable;
   String? thumbnail;
@@ -37,7 +37,7 @@ class WidgetModel {
   bool? isShowing;
   int? x;
   int? y;
-  int? i;
+  String? i;
   bool? enable;
   bool? moved;
   int? w;
@@ -51,6 +51,7 @@ class WidgetModel {
   WidgetModel({
     required this.id,
     required this.name,
+    required this.component,
     this.widgetTypeId,
     this.description,
     this.code,
@@ -61,7 +62,6 @@ class WidgetModel {
     this.maxHeight,
     this.maxWidth,
     this.props,
-    required this.component,
     this.static,
     this.isResizable,
     this.thumbnail,
@@ -124,3 +124,36 @@ class Props {
     return data;
   }
 }
+  Map<String, dynamic> widgetModelToJson(WidgetModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'widgetTypeId': instance.widgetTypeId,
+      'description': instance.description,
+      'code': instance.code,
+      'width': instance.width,
+      'height': instance.height,
+      'minWidth': instance.minWidth,
+      'minHeight': instance.minHeight,
+      'maxHeight': instance.maxHeight,
+      'maxWidth': instance.maxWidth,
+      'component': instance.component,
+      'static': instance.static,
+      'isResizable': instance.isResizable,
+      'thumbnail': instance.thumbnail,
+      'appId': instance.appId,
+      'order': instance.order,
+      'isShowing': instance.isShowing,
+      'x': instance.x,
+      'y': instance.y,
+      'i': instance.i,
+      'enable': instance.enable,
+      'moved': instance.moved,
+      'w': instance.w,
+      'h': instance.h,
+      'maxH': instance.maxH,
+      'maxW': instance.maxW,
+      'minH': instance.minH,
+      'minW': instance.minW,
+      'props':instance.props
+    };

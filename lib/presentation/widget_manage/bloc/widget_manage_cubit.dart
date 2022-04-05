@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/data/request/quan_li_widget/quan_ly_widget_request.dart';
 import 'package:ccvc_mobile/domain/repository/quan_ly_widget/quan_li_widget_respository.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/mobile/home_screen.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/home_screen_tablet.dart';
@@ -32,6 +31,7 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   List<WidgetModel> listUsing = [];
   List<WidgetModel> listNotUse = [];
   List<String> listTitleWidgetUse = [];
+  final List<String> listResponse = [];
   final List<String> removeWidget = [
     WidgetTypeConstant.HANH_CHINH_CONG,
     WidgetTypeConstant.LICH_LAM_VIEC_LICH_HOP,
@@ -51,7 +51,6 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   void loadApi() {
     _getListWidgetUsing();
     _getListWidgetNotUse();
-    updateListWidget('');
   }
 
   void insertItemUsing(
@@ -111,6 +110,7 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   final QuanLyWidgetRepository _qlWidgetRepo = Get.find();
 
   Future<void> _getListWidgetNotUse() async {
+    listNotUse.clear();
     showLoading();
     final result = await _qlWidgetRepo.getListWidget();
     result.when(
@@ -149,6 +149,7 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
         }
         _listWidgetUsing.sink.add(listUsing);
         _listWidgetNotUse.sink.add(listNotUse);
+        orderWidgetHome(_listWidgetUsing.value);
         showContent();
       },
       error: (err) {
@@ -158,11 +159,6 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   }
 
   Future<void> updateListWidget(String request) async {
-    final QuanLyWidgetRequest request= QuanLyWidgetRequest(widgetConfigData:'[{\"id\":\"cc91c734-d60e-470f-a380-4612b617f084\",\"name\":\"Sự kiện trong ngày\",\"widgetTypeId\":\"8fe7339c-728f-4a44-824e-5a57c9c4c54d\",\"description\":\"Danh sách sự kiện trong ngày\",\"code\":\"CODE\",\"width\":4,\"height\":9,\"minWidth\":3,\"minHeight\":6,\"maxHeight\":99,\"maxWidth\":12,\"props\":{},\"component\":\"SuKienTrongNgay\",\"static\":false,\"isResizable\":true,\"thumbnail\":\"su-kien-trong-ngay.png\",\"appId\":null,\"order\":3,\"isShowing\":true,\"x\":0,\"y\":0,\"i\":3,\"enable\":true,\"moved\":false,\"w\":4,\"h\":9,\"maxH\":99,\"maxW\":12,\"minH\":6,\"minW\":3},{\"id\":\"8874b642-0387-4391-a2c7-4843f4324887\",\"name\":\"Văn bản\",\"widgetTypeId\":\"8fe7339c-728f-4a44-824e-5a57c9c4c54d\",\"description\":null,\"code\":\"CODE\",\"width\":4,\"height\":9,\"minWidth\":3,\"minHeight\":6,\"maxHeight\":9,\"maxWidth\":12,\"props\":{},\"component\":\"VanBanWidGet\",\"static\":false,\"isResizable\":true,\"thumbnail\":\"lich-hop.png\",\"appId\":\"42786a27-556d-4eb0-bbd7-30088ba06077\",\"order\":2,\"isShowing\":true,\"x\":4,\"y\":0,\"i\":1,\"enable\":true,\"moved\":false,\"w\":4,\"h\":9,\"maxH\":9,\"maxW\":12,\"minH\":6,\"minW\":3},{\"id\":\"fc348f83-1a6c-4c9e-90df-5e4d1aa31879\",\"name\":\"Tình hình xử lý văn bản\",\"widgetTypeId\":\"8fe7339c-728f-4a44-824e-5a57c9c4c54d\",\"description\":null,\"code\":\"CODE\",\"width\":4,\"height\":9,\"minWidth\":4,\"minHeight\":6,\"maxHeight\":9,\"maxWidth\":8,\"props\":{},\"component\":\"TinhHinhXuLyVanBan\",\"static\":false,\"isResizable\":true,\"thumbnail\":\"lich-hop.png\",\"appId\":\"42786a27-556d-4eb0-bbd7-30088ba06077\",\"order\":1,\"isShowing\":true,\"x\":8,\"y\":0,\"i\":2,\"enable\":true,\"moved\":false,\"w\":4,\"h\":9,\"maxH\":9,\"maxW\":8,\"minH\":6,\"minW\":4}]',
-    );
-    for (final element in listUsing) {
-      jsonEncode(element);
-    }
     showLoading();
     final result = await _qlWidgetRepo.updateListWidget(request);
     result.when(
@@ -170,9 +166,18 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
         showContent();
       },
       error: (err) {
-
-        return;
+        throw err;
       },
     );
+  }
+
+  void setParaUpdateWidget(List<WidgetModel> listWidget) {
+    final listMap = [];
+    for (final element in listWidget) {
+      listMap.add(widgetModelToJson(element));
+    }
+    for (final element in listMap) {
+      listResponse.add(json.encode(element));
+    }
   }
 }

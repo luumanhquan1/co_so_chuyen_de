@@ -19,6 +19,9 @@ abstract class QuanLyWidgetClient {
   @POST(ApiConstants.RESET_LIST_WIDGET)
   Future<String> resetListWidget();
 
+  // @PUT(ApiConstants.UPDATE_LIST_WIDGET)
+  // Future<String> updateListWidget( @Body() QuanLyWidgetRequest widgetRequest);
+
   @PUT(ApiConstants.UPDATE_LIST_WIDGET)
-  Future<String> updateListWidget( @Body() QuanLyWidgetRequest widgetRequest);
+  Future<String> updateListWidget(@Field('widgetConfigData') String widgetRequest);
 }

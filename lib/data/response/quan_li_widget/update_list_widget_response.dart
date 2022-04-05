@@ -32,6 +32,8 @@ class WidgetData {
   String? id = '';
   @JsonKey(name: 'name')
   String? name = '';
+  @JsonKey(name: 'component')
+  String? component = '';
   @JsonKey(name: 'widgetTypeId')
   String? widgetTypeId;
   @JsonKey(name: 'description')
@@ -50,8 +52,6 @@ class WidgetData {
   int? maxHeight;
   @JsonKey(name: 'maxWidth')
   int? maxWidth;
-  @JsonKey(name: 'component')
-  String component = '';
   @JsonKey(name: 'static')
   bool? static;
   @JsonKey(name: 'isResizable')
@@ -69,7 +69,7 @@ class WidgetData {
   @JsonKey(name: 'y')
   int? y;
   @JsonKey(name: 'i')
-  int? i;
+  String? i;
   @JsonKey(name: 'enable')
   bool? enable;
   @JsonKey(name: 'moved')
@@ -86,7 +86,8 @@ class WidgetData {
   int? minH;
   @JsonKey(name: 'minW')
   int? minW;
-
+  @JsonKey(name: 'props')
+  Map<String,dynamic>? props;
   WidgetData(this.id, this.name, this.component);
 
   factory WidgetData.fromJson(Map<String, dynamic> json) =>
@@ -97,7 +98,7 @@ class WidgetData {
   WidgetModel toDomain() => WidgetModel(
     id: id ?? '',
     name: name ?? '',
-    component: component,
+    component: component??'',
     widgetTypeId: widgetTypeId,
     description: description,
     code: code,
@@ -115,7 +116,7 @@ class WidgetData {
     isShowing: isShowing ?? false,
     x: x ?? 0,
     y: y ?? 0,
-    i: i ?? 0,
+    i: i ?? '',
     enable: enable ?? false,
     moved: moved ?? false,
     w: w ?? 0,
@@ -124,5 +125,6 @@ class WidgetData {
     maxW: maxW ?? 0,
     minH: minH ?? 0,
     minW: minW ?? 0,
+    props: props,
   );
 }
