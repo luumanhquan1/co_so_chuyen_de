@@ -1,18 +1,21 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_header.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec_chi_tiet_nhiem_vu.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_cap_nhat_thth.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_don_doc.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_thu_hoi.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_tra_lai.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/y_kien_su_ly_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nv_state.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
@@ -20,14 +23,13 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
 
   NhiemVuRepository get nhiemVuRepo => Get.find();
 
-  BehaviorSubject<ChiTietNhiemVuHeader> chiTietHeaderSubject =
-      BehaviorSubject();
+  BehaviorSubject<ChiTietNhiemVuModel> chiTietHeaderSubject = BehaviorSubject();
 
   BehaviorSubject<VanBanLienQuanModel> vanBanLienQuanSubject =
       BehaviorSubject();
 
-  BehaviorSubject<List<DanhSachCongViecModel>> danhsachCongViecSubject =
-      BehaviorSubject();
+  BehaviorSubject<List<DanhSachCongViecChiTietNhiemVuModel>>
+      danhsachCongViecSubject = BehaviorSubject();
 
   BehaviorSubject<List<LichSuPhanXuLyNhiemVuModel>> lichSuPhanXuLySubject =
       BehaviorSubject();
@@ -43,6 +45,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
 
   BehaviorSubject<List<LichSuDonDocModel>> lichSuDonDocSubject =
       BehaviorSubject();
+  BehaviorSubject<List<YKienSuLyNhiemVuModel>> yKienXuLyNhiemVuSubject =
+      BehaviorSubject();
 
   Stream<VanBanLienQuanModel> get vanBanLienQuanStream =>
       vanBanLienQuanSubject.stream;
@@ -53,8 +57,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<List<LichSuDonDocModel>> get lichSuDonDocStream =>
       lichSuDonDocSubject.stream;
 
-  Stream<List<DanhSachCongViecModel>> get danhSachCongViecStream =>
-      danhsachCongViecSubject.stream;
+  Stream<List<DanhSachCongViecChiTietNhiemVuModel>>
+      get danhSachCongViecStream => danhsachCongViecSubject.stream;
 
   Stream<List<LichSuTraLaiModel>> get lichSuTraLaiStream =>
       lichSuTraLaiSubject.stream;
@@ -65,21 +69,60 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<List<LichSuCapNhatTHTHModel>> get lichSuCapNhatTHTHModelStream =>
       lichSuCapNhatTHTHSubject.stream;
 
-  Stream<ChiTietNhiemVuHeader> get chiTietHeaderStream =>
+  Stream<List<YKienSuLyNhiemVuModel>> get yKienXuLyNhiemVuStream =>
+      yKienXuLyNhiemVuSubject.stream;
+
+  Stream<ChiTietNhiemVuModel> get chiTietHeaderStream =>
       chiTietHeaderSubject.stream;
+
+  Future<void> loadDataNhiemVuCaNhan({
+    required String nhiemVuId,
+  }) async {
+    final queue = Queue(parallel: 4);
+    unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId)));
+    unawaited(queue.add(() => getLichSuPhanXuLy(nhiemVuId)));
+    unawaited(queue.add(() => getYKienXuLyNhiemVu(nhiemVuId)));
+    unawaited(queue.add(() => getDanhSachCongViecChiTietNhiemVu(nhiemVuId)));
+    await queue.onComplete;
+    showContent();
+    queue.dispose();
+  }
 
   Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId) async {
     final result = await nhiemVuRepo.getChiTietNhiemVu(nhiemVuId, true);
-    result.when(success: (res) {}, error: (error) {});
+    result.when(
+        success: (res) {
+          chiTietHeaderSubject.add(res);
+        },
+        error: (error) {});
   }
 
   Future<void> getLichSuPhanXuLy(String nhiemVuId) async {
     final result = await nhiemVuRepo.getLichSuPhanXuLy(nhiemVuId);
-    result.when(success: (res) {}, error: (error) {});
+    result.when(
+        success: (res) {
+          lichSuPhanXuLySubject.add(res);
+        },
+        error: (error) {});
   }
+
   Future<void> getYKienXuLyNhiemVu(String nhiemVuId) async {
     final result = await nhiemVuRepo.getYKienXuLyNhiemVu(nhiemVuId);
-    result.when(success: (res) {}, error: (error) {});
+    result.when(
+        success: (res) {
+          yKienXuLyNhiemVuSubject.add(res);
+        },
+        error: (error) {});
+  }
+
+  Future<void> getDanhSachCongViecChiTietNhiemVu(String nhiemVuId) async {
+    final result =
+        await nhiemVuRepo.getDanhSachCongViecChiTietNhiemVu(nhiemVuId, true);
+    result.when(
+        success: (res) {
+          danhsachCongViecSubject.add(res);
+        },
+        error: (error) {});
   }
 
   List<LichSuThuHoiModel> fakeLSTH = [
@@ -167,15 +210,6 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     ),
   ];
 
-  ChiTietNhiemVuHeader fakeHeader = ChiTietNhiemVuHeader(
-      id: '',
-      loaiNV: 'Nhiệm vụ cá nhân',
-      soNhiemVu: 'NVBV8',
-      tinhHinhTH: '13/10/2021',
-      hanXuLy: 'NVBV8',
-      nguoiGiao: 'Lương Minh Trang',
-      noiDung: 'Nhiệm vụ hành chính giao');
-
   VanBanLienQuanModel fakeVBLQ = VanBanLienQuanModel(
     id: '',
     vanBanGiaoNV: [
@@ -201,123 +235,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     vanBanKhac: [],
   );
 
-  List<LichSuPhanXuLyNhiemVuModel> fakeLSPXL = [
-    LichSuPhanXuLyNhiemVuModel(
-      id: '',
-      stt: 1,
-      donViNhan: 'Đơn vị nhận',
-      nguoiGui: 'Lương Minh Trang',
-      nguoiNhan: 'Nguyễn Như Sơn',
-      thoiGian: '27/07/2021 | 17:02:22',
-      vaiTroXuLy: 'Chủ trì',
-      trangThai: 'QUA_HAN',
-    ),
-    LichSuPhanXuLyNhiemVuModel(
-      id: '',
-      stt: 1,
-      donViNhan: 'Đơn vị nhận',
-      nguoiGui: 'Lương Minh Trang',
-      nguoiNhan: 'Nguyễn Như Sơn',
-      thoiGian: '27/07/2021 | 17:02:22',
-      vaiTroXuLy: 'Chủ trì',
-      trangThai: 'QUA_HAN',
-    ),
-    LichSuPhanXuLyNhiemVuModel(
-      id: '',
-      stt: 1,
-      donViNhan: 'Đơn vị nhận',
-      nguoiGui: 'Lương Minh Trang',
-      nguoiNhan: 'Nguyễn Như Sơn',
-      thoiGian: '27/07/2021 | 17:02:22',
-      vaiTroXuLy: 'Chủ trì',
-      trangThai: 'QUA_HAN',
-    ),
-    LichSuPhanXuLyNhiemVuModel(
-      id: '',
-      stt: 1,
-      donViNhan: 'Đơn vị nhận',
-      nguoiGui: 'Lương Minh Trang',
-      nguoiNhan: 'Nguyễn Như Sơn',
-      thoiGian: '27/07/2021 | 17:02:22',
-      vaiTroXuLy: 'Chủ trì',
-      trangThai: 'QUA_HAN',
-    ),
-  ];
-
-  List<DanhSachCongViecModel> fakeDSCV = [
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'QUA_HAN',
-    ),
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'QUA_HAN',
-    ),
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'QUA_HAN',
-    ),
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'QUA_HAN',
-    ),
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'CHUA_THUC_HIEN',
-    ),
-    DanhSachCongViecModel(
-      id: '',
-      donViXuLy: 'UBND Tỉnh Đồng Nai',
-      hanXuLy: '25/08/2021',
-      ndCongViec: 'Chưa có',
-      nguoiGiaoViec: 'Nguyễn Kiều Oanh',
-      nguoiXuLy: 'Lương Minh Trang',
-      stt: 1,
-      thoiGianGiaoViec: '25/08/2021',
-      trangThai: 'QUA_HAN',
-    ),
-  ];
-
   void initChiTietNV() {
-    chiTietHeaderSubject.add(fakeHeader);
     vanBanLienQuanSubject.add(fakeVBLQ);
-    danhsachCongViecSubject.add(fakeDSCV);
-    lichSuPhanXuLySubject.add(fakeLSPXL);
     lichSuCapNhatTHTHSubject.add(fakeLSCNTHTH);
     lichSuTraLaiSubject.add(fakeLSTL);
     lichSuThuHoiSubject.add(fakeLSTH);

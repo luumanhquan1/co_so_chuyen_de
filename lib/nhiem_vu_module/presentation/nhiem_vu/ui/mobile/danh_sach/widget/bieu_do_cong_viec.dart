@@ -34,17 +34,10 @@ class _BieuDoCongViecMobileState extends State<BieuDoCongViecMobile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StreamBuilder<List<ChartData>>(
-            stream: widget.cubit.statusCongViecSuject,
-            initialData: widget.cubit.chartDataNhiemVu,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? [];
-              return PieChart(
-                title: widget.title ?? '',
-                chartData: data,
-                onTap: (int value) {},
-              );
-            },
+          PieChart(
+            title: widget.title ?? '',
+            chartData: widget.chartData,
+            onTap: (int value) {},
           ),
           Container(height: 20),
           StreamBuilder<List<LoaiNhiemVuComomModel>>(

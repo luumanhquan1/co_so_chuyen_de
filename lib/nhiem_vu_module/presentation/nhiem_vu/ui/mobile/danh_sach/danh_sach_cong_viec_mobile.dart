@@ -8,15 +8,16 @@ import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachCongViecMobile extends StatefulWidget {
-  const DanhSachCongViecMobile({Key? key}) : super(key: key);
+  final DanhSachCubit cubit;
+
+  const DanhSachCongViecMobile({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   _DanhSachCongViecMobileState createState() => _DanhSachCongViecMobileState();
 }
 
 class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
-  DanhSachCubit cubit = DanhSachCubit();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
             BaseSearchBar(
               onChange: (value) {
                 setState(() {});
-                cubit.keySearch = value;
+                widget.cubit.keySearch = value;
               },
             ),
             Expanded(
@@ -48,17 +49,20 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: cubit,
+      cubit: widget.cubit,
       isListView: true,
       callApi: (page) => {
-        cubit.postDanhSachCongViec(
-          hanXuLy: {'FromDate': '2020/04/01', 'ToDate': '2022/05/15'},
+        widget.cubit.postDanhSachCongViec(
+          hanXuLy: {
+            'FromDate': widget.cubit.ngayDauTien,
+            'ToDate': widget.cubit.ngayKetThuc
+          },
           index: page,
           isCaNhan: false,
           isSortByHanXuLy: true,
-          keySearch: cubit.keySearch,
+          keySearch: widget.cubit.keySearch,
           mangTrangThai: [],
-          size: cubit.pageSize,
+          size: widget.cubit.pageSize,
           trangThaiHanXuLy: '',
         )
       },

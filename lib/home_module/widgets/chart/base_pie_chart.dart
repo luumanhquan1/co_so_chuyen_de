@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -14,6 +13,7 @@ class PieChart extends StatelessWidget {
   final Function(int)? onTap;
   final bool isSubjectInfo;
   final double paddingLeftSubTitle;
+  final bool isThongKeLichHop;
 
   const PieChart({
     Key? key,
@@ -23,6 +23,7 @@ class PieChart extends StatelessWidget {
     this.onTap,
     this.isSubjectInfo = true,
     this.paddingLeftSubTitle = 0,
+    this.isThongKeLichHop = true,
   }) : super(key: key);
 
   @override
@@ -67,14 +68,18 @@ class PieChart extends StatelessWidget {
                           onTap!(value.pointIndex ?? 0);
                         } else {}
                       },
-                      dataLabelSettings: DataLabelSettings(
-                        isVisible: true,
-                        showZeroValue: false,
-                        textStyle: textNormalCustom(
-                          color: backgroundColorApp,
-                          fontSize: 14,
-                        ),
-                      ),
+                      dataLabelSettings: isThongKeLichHop
+                          ? DataLabelSettings(
+                              isVisible: true,
+                              showZeroValue: false,
+                              textStyle: textNormalCustom(
+                                color: backgroundColorApp,
+                                fontSize: 14,
+                              ),
+                            )
+                          : const DataLabelSettings(
+                              isVisible: true,
+                            ),
                     )
                   ],
                 ),

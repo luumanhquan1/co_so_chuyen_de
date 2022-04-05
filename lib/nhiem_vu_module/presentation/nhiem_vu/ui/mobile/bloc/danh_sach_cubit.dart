@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/nhiem_vu_module/domain/model/dash_broash/dash_broash
 import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_state.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/api_constants.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
@@ -22,15 +23,62 @@ class DanhSachCubit extends BaseCubit<BaseState> {
   NhiemVuRepository get repo => Get.find();
   int pageSize = 10;
   int pageIndex = 1;
+  bool isCaNhan = true;
   String keySearch = '';
   BehaviorSubject<List<PageData>> dataSubject = BehaviorSubject();
   BehaviorSubject<List<PageDatas>> dataSubjects = BehaviorSubject();
+  String ngayDauTien = '';
+  String ngayKetThuc = '';
 
-  void callApi() {
+  void callApi(bool isCheckCaNhan) {
+    initTimeRange();
+    getDashBroashNhiemVuCaNhan(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    getDashBroashCongViecCaNhan(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    callDataDanhSach(ngayDauTien, ngayKetThuc, isCheckCaNhan);
+  }
+
+  void callApiDonVi(bool isCheckCaNhan) {
+    initTimeRange();
+    getDashBroashNhiemVu(ngayDauTien: ngayDauTien, ngayCuoiCung: ngayKetThuc);
+    getDashBroashCongViec(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    callDataDanhSach(ngayDauTien, ngayKetThuc, isCheckCaNhan);
+  }
+
+  void callApiDashBroashDonVi(bool isCheckCaNhan) {
+    getDashBroashNhiemVu(ngayDauTien: ngayDauTien, ngayCuoiCung: ngayKetThuc);
+    getDashBroashCongViec(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    callDataDanhSach(ngayDauTien, ngayKetThuc, isCheckCaNhan);
+  }
+
+  void callApiDashBroash(bool isCheckCaNhan) {
+    getDashBroashNhiemVuCaNhan(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    getDashBroashCongViecCaNhan(
+      ngayDauTien: ngayDauTien,
+      ngayCuoiCung: ngayKetThuc,
+    );
+    callDataDanhSach(ngayDauTien, ngayKetThuc, isCheckCaNhan);
+  }
+
+  void callDataDanhSach(String start, String end, bool isCheckCaNhan) {
     postDanhSachCongViec(
-      hanXuLy: {'FromDate': '2020/04/01', 'ToDate': '2022/05/15'},
+      hanXuLy: {'FromDate': start, 'ToDate': end},
       index: pageIndex,
-      isCaNhan: false,
+      isCaNhan: isCheckCaNhan,
       isSortByHanXuLy: true,
       keySearch: keySearch,
       mangTrangThai: [],
@@ -39,21 +87,16 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     );
     postDanhSachNhiemVu(
       index: pageIndex,
-      isNhiemVuCaNhan: true,
+      isNhiemVuCaNhan: isCheckCaNhan,
       isSortByHanXuLy: true,
       mangTrangThai: [],
-      ngayTaoNhiemVu: {'FromDate': '2020/04/01', 'ToDate': '2022/05/15'},
+      ngayTaoNhiemVu: {'FromDate': start, 'ToDate': end},
       size: pageSize,
-    );
-    getDashBroashNhiemVu(ngayDauTien: '2020/04/01', ngayCuoiCung: '2022/05/15');
-    getDashBroashCongViec(
-      ngayDauTien: '2020/04/01',
-      ngayCuoiCung: '2022/05/15',
     );
   }
 
   Future<void> postDanhSachNhiemVu({
-    required int index,
+    required int? index,
     required bool isNhiemVuCaNhan,
     required bool isSortByHanXuLy,
     required List<String> mangTrangThai,
@@ -69,12 +112,12 @@ class DanhSachCubit extends BaseCubit<BaseState> {
       ngayTaoNhiemVu: ngayTaoNhiemVu,
       size: size,
     );
-    loadMorePage = pageIndex;
+    loadMorePage = index ?? 1;
     final result = await repo.danhSachNhiemVu(danhSachNhiemVuRequest);
     result.when(
       success: (res) {
         dataSubject.sink.add(res.pageData ?? []);
-        if (pageIndex == ApiConstants.PAGE_BEGIN) {
+        if (index == ApiConstants.PAGE_BEGIN) {
           if (res.pageData?.isEmpty ?? true) {
             showEmpty();
           } else {
@@ -199,6 +242,74 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     );
   }
 
+  BehaviorSubject<List<LoaiNhiemVuComomModel>> loaiNhiemVuCaNhanSuject =
+      BehaviorSubject();
+  BehaviorSubject<List<ChartData>> statusNhiemVuCaNhanSuject =
+      BehaviorSubject();
+  List<ChartData> chartDataNhiemVuCaNhan = [];
+
+  Future<void> getDashBroashNhiemVuCaNhan({
+    required String ngayDauTien,
+    required String ngayCuoiCung,
+  }) async {
+    final result = await repo.getDashBroashNhiemVuCaNhan(
+      ngayDauTien,
+      ngayCuoiCung,
+    );
+    result.when(
+      success: (res) {
+        loaiNhiemVuCaNhanSuject.sink.add(res.data?.trangThaiXuLy ?? []);
+        chartDataNhiemVuCaNhan = (res.data?.trangThai ?? [])
+            .map(
+              (e) => ChartData(
+                e.text ?? '',
+                (e.value ?? 0).toDouble(),
+                (e.giaTri ?? '').trangThaiToColor(),
+              ),
+            )
+            .toList();
+        statusNhiemVuCaNhanSuject.sink.add(chartDataNhiemVuCaNhan);
+        showContent();
+      },
+      error: (error) {
+        showError();
+      },
+    );
+  }
+
+  BehaviorSubject<List<LoaiNhiemVuComomModel>> loaiCongViecCaNhanSuject =
+      BehaviorSubject();
+  BehaviorSubject<List<ChartData>> statusCongViecCaNhanSuject =
+      BehaviorSubject();
+  List<ChartData> chartDataCongViecCaNhan = [];
+
+  Future<void> getDashBroashCongViecCaNhan({
+    required String ngayDauTien,
+    required String ngayCuoiCung,
+  }) async {
+    final result =
+        await repo.getDashBroashCongViecCaNhan(ngayDauTien, ngayCuoiCung);
+    result.when(
+      success: (res) {
+        loaiCongViecCaNhanSuject.sink.add(res.data?.trangThaiXuLy ?? []);
+        chartDataCongViecCaNhan = (res.data?.trangThai ?? [])
+            .map(
+              (e) => ChartData(
+                e.text ?? '',
+                (e.value ?? 0).toDouble(),
+                (e.giaTri ?? '').trangThaiToColor(),
+              ),
+            )
+            .toList();
+        statusCongViecCaNhanSuject.sink.add(chartDataCongViecCaNhan);
+        showContent();
+      },
+      error: (error) {
+        showError();
+      },
+    );
+  }
+
   final List<ChartData> chartDataNhiemVu = [
     ChartData(
       S.current.cho_phan_xu_ly,
@@ -216,4 +327,11 @@ class DanhSachCubit extends BaseCubit<BaseState> {
       yellowColor,
     ),
   ];
+
+  void initTimeRange() {
+    final dataDateTime =
+        DateTime.now().dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+    ngayDauTien = dataDateTime.first.formatApi;
+    ngayKetThuc = dataDateTime.last.formatApi;
+  }
 }

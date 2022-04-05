@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/type_data_row.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 
 class LichSuPhanXuLyNhiemVuModel {
   String? id;
@@ -38,32 +39,34 @@ class LichSuPhanXuLyNhiemVuModel {
       ),
       RowDataExpandModel(
         key: S.current.nguoi_gui,
-        value: nguoiGui,
+        value: nguoiGui ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.thoi_gian,
-        value: thoiGian,
+        value: thoiGian ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.nguoi_nhan,
-        value: nguoiNhan,
+        value: nguoiNhan ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.don_vi_nhan,
-        value: donViNhan,
+        value: donViNhan ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.vai_tro_xu_ly,
-        value: vaiTroXuLy,
+        value: vaiTroXuLy ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.trang_thai,
-        value: trangThai,
+        value:
+            trangThai?.split(' ').join('_').toUpperCase().vietNameseParse() ??
+                '',
         type: TypeDataNV.status,
       ),
     ];

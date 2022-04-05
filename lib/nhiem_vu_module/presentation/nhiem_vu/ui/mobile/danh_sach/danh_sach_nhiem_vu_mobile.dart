@@ -8,15 +8,16 @@ import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachNhiemVuMobile extends StatefulWidget {
-  const DanhSachNhiemVuMobile({Key? key}) : super(key: key);
+  final DanhSachCubit cubit;
+
+  const DanhSachNhiemVuMobile({Key? key, required this.cubit})
+      : super(key: key);
 
   @override
   _DanhSachNhiemVuMobileState createState() => _DanhSachNhiemVuMobileState();
 }
 
 class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
-  DanhSachCubit cubit = DanhSachCubit();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
             BaseSearchBar(
               onChange: (value) {
                 setState(() {});
-                cubit.keySearch = value;
+                widget.cubit.keySearch = value;
               },
             ),
             Expanded(
@@ -48,16 +49,19 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: cubit,
+      cubit: widget.cubit,
       isListView: true,
       callApi: (page) => {
-        cubit.postDanhSachNhiemVu(
+        widget.cubit.postDanhSachNhiemVu(
           index: page,
           isNhiemVuCaNhan: true,
           isSortByHanXuLy: true,
           mangTrangThai: [],
-          ngayTaoNhiemVu: {'FromDate': '2021/04/01', 'ToDate': "2022/05/01"},
-          size: cubit.pageSize,
+          ngayTaoNhiemVu: {
+            'FromDate': widget.cubit.ngayDauTien,
+            'ToDate': widget.cubit.ngayKetThuc
+          },
+          size: widget.cubit.pageSize,
         )
       },
       viewItem: (value, index) => NhiemVuItemMobile(

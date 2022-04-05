@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_cong_viec_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_nhiem_vu_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/dash_broash_cong_viec_response.dart';
@@ -10,6 +11,7 @@ import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_phan_xu_ly_nhi
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/y_kien_su_ly_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/service/nhiem_vu_service.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/chi_tiet_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec_chi_tiet_nhiem_vu.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/y_kien_su_ly_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
@@ -86,9 +88,45 @@ class NhiemVuRepoImpl implements NhiemVuRepository {
 
   @override
   Future<Result<DashBroashNhiemVu>> getDashBroashCongViec(
-      String ngayDauTien, String ngayCuoiCung,) {
+    String ngayDauTien,
+    String ngayCuoiCung,
+  ) {
     return runCatchingAsync<DashBroashCongViecResponse, DashBroashNhiemVu>(
       () => nhiemVuService.getDashBroashCongViec(ngayDauTien, ngayCuoiCung),
+      (response) => response.toMoDel(),
+    );
+  }
+
+  Future<Result<List<DanhSachCongViecChiTietNhiemVuModel>>>
+      getDanhSachCongViecChiTietNhiemVu(String nhiemVuId, bool isCaNhan) {
+    return runCatchingAsync<DataDanhSachCongViecChiTietNhiemVuModelResponse,
+        List<DanhSachCongViecChiTietNhiemVuModel>>(
+      () =>
+          nhiemVuService.getDanhSachCongViecChiTietNhiemVu(nhiemVuId, isCaNhan),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<DashBroashNhiemVu>> getDashBroashNhiemVuCaNhan(
+    String ngayDauTien,
+    String ngayCuoiCung,
+  ) {
+    return runCatchingAsync<DashBroashResponse, DashBroashNhiemVu>(
+      () =>
+          nhiemVuService.getDashBroashNhiemVuCaNhan(ngayDauTien, ngayCuoiCung),
+      (response) => response.toMoDel(),
+    );
+  }
+
+  @override
+  Future<Result<DashBroashNhiemVu>> getDashBroashCongViecCaNhan(
+    String ngayDauTien,
+    String ngayCuoiCung,
+  ) {
+    return runCatchingAsync<DashBroashCongViecResponse, DashBroashNhiemVu>(
+      () =>
+          nhiemVuService.getDashBroashCongViecCaNhan(ngayDauTien, ngayCuoiCung),
       (response) => response.toMoDel(),
     );
   }

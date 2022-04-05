@@ -7,10 +7,14 @@ import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_nhiem_vu_mobile.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/widget/bieu_do_cong_viec.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/widget/cell_cong_viec.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/bieu_do_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_mobile.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/table_calendar/table_calendar_widget.dart';
+import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -35,7 +39,7 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    danhSachCubit.callApi();
+    danhSachCubit.callApiDonVi(false);
   }
 
   @override
@@ -49,34 +53,48 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
               const SizedBox(
                 height: 120,
               ),
-              // Container(
-              //   padding: const EdgeInsets.only(
-              //     right: 16.0,
-              //     left: 16.0,
-              //     bottom: 20.0,
-              //   ),
-              //   child: BieuDoNhiemVuMobile(
-              //     title: S.current.nhiem_vu,
-              //     nhiemVuDashBoardModel: nhiemVuDashBoardModel,
-              //     chartData: widget.cubit.chartDataNhiemVu,
-              //   ),
-              // ),
+              Container(
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                  left: 16.0,
+                  bottom: 20.0,
+                ),
+                child: StreamBuilder<List<ChartData>>(
+                  stream: danhSachCubit.statusSuject,
+                  initialData: danhSachCubit.chartDataNhiemVu,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? widget.cubit.chartDataNhiemVu;
+                    return BieuDoNhiemVuMobile(
+                      title: S.current.nhiem_vu,
+                      chartData: data,
+                      cubit: danhSachCubit,
+                    );
+                  },
+                ),
+              ),
               Container(
                 height: 6,
                 color: homeColor,
               ),
-              // Container(
-              //   padding: const EdgeInsets.only(
-              //     right: 16.0,
-              //     left: 16.0,
-              //     bottom: 20.0,
-              //   ),
-              //   child: BieuDoNhiemVuMobile(
-              //     title: S.current.cong_viec,
-              //     nhiemVuDashBoardModel: nhiemVuDashBoardModel,
-              //     chartData: widget.cubit.chartDataCongViec,
-              //   ),
-              // ),
+              Container(
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                  left: 16.0,
+                  bottom: 20.0,
+                ),
+                child: StreamBuilder<List<ChartData>>(
+                  stream: danhSachCubit.statusCongViecSuject,
+                  initialData: danhSachCubit.chartDataNhiemVu,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data ?? widget.cubit.chartDataNhiemVu;
+                    return BieuDoCongViecMobile(
+                      title: S.current.cong_viec,
+                      chartData: data,
+                      cubit: danhSachCubit,
+                    );
+                  },
+                ),
+              ),
               Container(
                 height: 6,
                 color: homeColor,
@@ -103,8 +121,9 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const DanhSachNhiemVuMobile(),
+                                builder: (context) => DanhSachNhiemVuMobile(
+                                  cubit: danhSachCubit,
+                                ),
                               ),
                             );
                           },
@@ -166,8 +185,9 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const DanhSachCongViecMobile(),
+                                builder: (context) => DanhSachCongViecMobile(
+                                  cubit: danhSachCubit,
+                                ),
                               ),
                             );
                           },
@@ -207,10 +227,17 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
           ),
         ),
         TableCalendarWidget(
-          onChange:
-              (DateTime startDate, DateTime endDate, DateTime selectDay) {},
+          onChange: (DateTime startDate, DateTime endDate, DateTime selectDay) {
+            danhSachCubit.ngayDauTien = startDate.formatApi;
+            danhSachCubit.ngayKetThuc = endDate.formatApi;
+            danhSachCubit.callApiDashBroashDonVi(false);
+          },
           onChangeRange:
-              (DateTime? start, DateTime? end, DateTime? focusedDay) {},
+              (DateTime? start, DateTime? end, DateTime? focusedDay) {
+            danhSachCubit.ngayDauTien = (start ?? DateTime.now()).formatApi;
+            danhSachCubit.ngayKetThuc = (end ?? DateTime.now()).formatApi;
+            danhSachCubit.callApiDashBroashDonVi(false);
+          },
         ),
       ],
     );

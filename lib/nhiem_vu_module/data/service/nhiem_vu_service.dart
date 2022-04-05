@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_cong_viec_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_nhiem_vu_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/dash_broash_cong_viec_response.dart';
@@ -45,6 +46,20 @@ abstract class NhiemVuService {
     @Query('NgayCuoiCung') String ngayCuoiCung,
   );
 
+  @GET(ApiConstants.GETDASHBROASHNHIEMVUCANHAN)
+  @FormUrlEncoded()
+  Future<DashBroashResponse> getDashBroashNhiemVuCaNhan(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
+
+  @GET(ApiConstants.GETDASHBROASHCONGVIECCANHAN)
+  @FormUrlEncoded()
+  Future<DashBroashCongViecResponse> getDashBroashCongViecCaNhan(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
+
   @GET(ApiConstants.GET_CHI_TIET_NHIEM_VU)
   Future<DataChiTietNhiemVuResponse> getChiTietNhiemVu(
     @Query('nhiemVuId') String nhiemVuId,
@@ -59,5 +74,12 @@ abstract class NhiemVuService {
   @GET(ApiConstants.GET_Y_KIEN_XU_LY)
   Future<DataYKienXuLyFileDinhKemResponse> getYKienXuLyNhiemVu(
     @Path('id') String nhiemVuId,
+  );
+
+  @GET(ApiConstants.GET_DANH_SACH_CONG_VIEC_CHI_TIET_NHIEM_VU)
+  Future<DataDanhSachCongViecChiTietNhiemVuModelResponse>
+      getDanhSachCongViecChiTietNhiemVu(
+    @Query('nhiemVuId') String nhiemVuId,
+    @Query('isCaNhan') bool isCaNhan,
   );
 }

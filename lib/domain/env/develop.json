@@ -1,4 +1,5 @@
 {
+
   "type": "develop",
   "base_url_gate_way": "http://api-gateway.dongnai.edsolabs.vn",
   "base_url_common": "http://api-common.dongnai.edsolabs.vn",

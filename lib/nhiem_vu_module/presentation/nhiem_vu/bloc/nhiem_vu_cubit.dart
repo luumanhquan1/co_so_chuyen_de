@@ -20,24 +20,24 @@ class NhiemVuCubit extends BaseCubit<NhiemVuState> {
   final List<ChartData> chartDataNhiemVu = [
     ChartData(
       S.current.cho_phan_xu_ly,
-      30,
+      0,
       choXuLyColor,
     ),
     ChartData(
       S.current.da_thuc_hien,
-      12,
+      0,
       daXuLyColor,
     ),
     ChartData(
       S.current.dang_thuc_hien,
-      14,
+      0,
       yellowColor,
     ),
   ];
   final List<ChartData> chartDataCongViec = [
     ChartData(
       S.current.chua_thuc_hien,
-      30,
+      0,
       yellowColor,
     ),
     ChartData(S.current.dang_thuc_hien, 14, dangThucHienPurble),
