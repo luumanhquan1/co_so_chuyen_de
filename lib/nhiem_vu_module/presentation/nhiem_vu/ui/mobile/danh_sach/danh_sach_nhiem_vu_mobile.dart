@@ -59,7 +59,7 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
       callApi: (page) => {
         widget.cubit.postDanhSachNhiemVu(
           index: page,
-          isNhiemVuCaNhan: true,
+          isNhiemVuCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
           mangTrangThai: [],
           ngayTaoNhiemVu: {
@@ -69,20 +69,26 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
           size: widget.cubit.pageSize,
         )
       },
-      viewItem: (value, index) => NhiemVuItemMobile(
-        data: value as PageData,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChiTietNhiemVuPhoneScreen(
-                id: value.id ?? '',
-                isCheck: widget.isCheck,
-              ),
-            ),
+      viewItem: (value, index) {
+        try {
+          return NhiemVuItemMobile(
+            data: value as PageData,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChiTietNhiemVuPhoneScreen(
+                    id: value.id ?? '',
+                    isCheck: widget.isCheck,
+                  ),
+                ),
+              );
+            },
           );
-        },
-      ),
+        } catch (e) {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

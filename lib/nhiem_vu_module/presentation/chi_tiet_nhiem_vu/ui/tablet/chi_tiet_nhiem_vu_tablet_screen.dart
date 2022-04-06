@@ -43,7 +43,6 @@ class _ChiTietNhiemVuTabletScreenState
   @override
   void initState() {
     super.initState();
-    cubit.initChiTietNV();
     cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck:widget.isCheck,);
   }
 

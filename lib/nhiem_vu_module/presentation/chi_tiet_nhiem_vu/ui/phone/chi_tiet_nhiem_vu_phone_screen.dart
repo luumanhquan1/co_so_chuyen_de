@@ -44,7 +44,6 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
   @override
   void initState() {
     super.initState();
-    cubit.initChiTietNV();
     cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck: widget.isCheck);
   }
 

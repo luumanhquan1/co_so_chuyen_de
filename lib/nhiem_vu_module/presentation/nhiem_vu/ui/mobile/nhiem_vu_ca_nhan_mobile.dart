@@ -199,6 +199,7 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                               MaterialPageRoute(
                                 builder: (context) => DanhSachCongViecMobile(
                                   cubit: danhSachCubit,
+                                  isCheck: widget.isCheck,
                                 ),
                               ),
                             );
@@ -222,12 +223,13 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                               itemBuilder: (context, index) {
                                 return CellCongViec(
                                   data: data[index],
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ChitietCongViecNhiemVuMobile(
-                                          id: data[index].id??'',
+                                        builder: (context) =>
+                                            ChitietCongViecNhiemVuMobile(
+                                          id: data[index].id ?? '',
                                         ),
                                       ),
                                     );

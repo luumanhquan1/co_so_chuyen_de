@@ -75,14 +75,14 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<ChiTietNhiemVuModel> get chiTietHeaderStream =>
       chiTietHeaderSubject.stream;
 
-  Future<void> loadDataNhiemVuCaNhan({
-    required String nhiemVuId,required bool isCheck
-  }) async {
+  Future<void> loadDataNhiemVuCaNhan(
+      {required String nhiemVuId, required bool isCheck}) async {
     final queue = Queue(parallel: 8);
-    unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId,isCheck)));
+    unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId, isCheck)));
     unawaited(queue.add(() => getLichSuPhanXuLy(nhiemVuId)));
     unawaited(queue.add(() => getYKienXuLyNhiemVu(nhiemVuId)));
-    unawaited(queue.add(() => getDanhSachCongViecChiTietNhiemVu(nhiemVuId)));
+    unawaited(
+        queue.add(() => getDanhSachCongViecChiTietNhiemVu(nhiemVuId, isCheck)));
     unawaited(queue.add(() => getLichSuTraLaiNhiemVu(nhiemVuId)));
     unawaited(queue.add(() => getLichSuCapNhatThth(nhiemVuId)));
     unawaited(queue.add(() => getLichSuThuHoiNhiemVu(nhiemVuId)));
@@ -92,7 +92,7 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     queue.dispose();
   }
 
-  Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId,bool isCheck) async {
+  Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId, bool isCheck) async {
     final result = await nhiemVuRepo.getChiTietNhiemVu(nhiemVuId, isCheck);
     result.when(
         success: (res) {
@@ -119,9 +119,10 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
         error: (error) {});
   }
 
-  Future<void> getDanhSachCongViecChiTietNhiemVu(String nhiemVuId) async {
+  Future<void> getDanhSachCongViecChiTietNhiemVu(
+      String nhiemVuId, bool isCheck) async {
     final result =
-        await nhiemVuRepo.getDanhSachCongViecChiTietNhiemVu(nhiemVuId, true);
+        await nhiemVuRepo.getDanhSachCongViecChiTietNhiemVu(nhiemVuId, isCheck);
     result.when(
         success: (res) {
           danhsachCongViecSubject.add(res);
@@ -194,9 +195,4 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     vanBanKhac: [],
   );
 
-  void initChiTietNV() {
-    vanBanLienQuanSubject.add(fakeVBLQ);
-    // lichSuThuHoiSubject.add(fakeLSTH);
-    // lichSuDonDocSubject.add(fakeLSDD);
-  }
 }

@@ -61,19 +61,24 @@ mixin NhiemVuRepository {
     String nhiemVuId,
     bool isCaNhan,
   );
+
   Future<Result<List<LichSuTraLaiNhiemVuModel>>> getLichSuTraLaiNhiemVu(
-      String nhiemVuId,
-      );
+    String nhiemVuId,
+  );
+
   Future<Result<List<LichSuCapNhatTHTHModel>>> getLichSuCapNhatThth(
-      String nhiemVuId,
-      );
+    String nhiemVuId,
+  );
+
   Future<Result<List<LichSuThuHoiNhiemVuModel>>> getLichSuThuHoiNhiemVu(
-      String nhiemVuId,
-      );
+    String nhiemVuId,
+  );
+
   Future<Result<List<LichSuDonDocNhiemVuModel>>> getLichSuDonDocNhiemVu(
-      String nhiemVuId,
-      );
+    String nhiemVuId,
+  );
+
   Future<Result<ChiTietCongViecNhiemVuModel>> getChiTietCongViec(
-      String congViecId,
-      );
+    String congViecId,
+  );
 }
