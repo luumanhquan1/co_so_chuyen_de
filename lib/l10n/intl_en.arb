@@ -821,5 +821,7 @@
   "so_lich_hop_theo_thoi_gian_trong_nam" : "Số lịch họp theo thời gian trong năm",
   "so_lich_hop_duoc_to_chuc_boi_cac_don_vi" : "Số lịch họp được tổ chức bởi các đơn vị",
   "co_cau_lich_hop" : "Cơ cấu lịch họp",
-  "ti_le_tham_du_cua_cac_don_vi" : "Tỉ lệ tham dự họp của các đơn vị"
+  "ti_le_tham_du_cua_cac_don_vi" : "Tỉ lệ tham dự họp của các đơn vị",
+  "cv_cua_ban": "Công việc của bạn",
+  "cv_quan_trong": "Công việc quan trọng"
 }

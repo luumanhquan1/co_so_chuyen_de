@@ -60,7 +60,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             onTap: () {
                               widget.cubit.selectTypeCalendarSubject.add(
                                   [true, false, false, false, false, false]);
-                              widget.cubit.titleAppBar.add('Công việc của bạn');
+                              widget.cubit.titleAppBar
+                                  .add(S.current.cv_cua_ban);
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[0] ?? true,
@@ -73,7 +74,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                               widget.cubit.selectTypeCalendarSubject.add(
                                   [false, true, false, false, false, false]);
                               widget.cubit.titleAppBar
-                                  .add('Công việc quan trọng');
+                                  .add(S.current.cv_quan_trong);
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[1] ?? true,
@@ -85,7 +86,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             onTap: () {
                               widget.cubit.selectTypeCalendarSubject.add(
                                   [false, false, true, false, false, false]);
-                              widget.cubit.titleAppBar.add('Đã hoàn thành');
+                              widget.cubit.titleAppBar
+                                  .add(S.current.da_hoan_thanh);
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[2] ?? true,
@@ -97,7 +99,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             onTap: () {
                               widget.cubit.selectTypeCalendarSubject.add(
                                   [false, false, false, true, false, false]);
-                              widget.cubit.titleAppBar.add('Gán cho tôi');
+                              widget.cubit.titleAppBar
+                                  .add(S.current.gan_cho_toi);
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[3] ?? true,
@@ -109,7 +112,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             onTap: () {
                               widget.cubit.selectTypeCalendarSubject.add(
                                   [false, false, false, false, true, false]);
-                              widget.cubit.titleAppBar.add('Đã bị xóa');
+                              widget.cubit.titleAppBar.add(S.current.da_bi_xoa);
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[4] ?? true,
@@ -137,29 +140,26 @@ class _MenuDSCVState extends State<MenuDSCV> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   final vl = data[index];
-                                  return GestureDetector(
+                                  return TheoDangLichWidgetDSCV(
+                                    icon: '',
+                                    name: vl.label,
                                     onTap: () {
+                                      widget.cubit.selectTypeCalendarSubject
+                                          .add([
+                                        false,
+                                        false,
+                                        false,
+                                        false,
+                                        false,
+                                        true
+                                      ]);
                                       widget.cubit.getGroupId(vl.id);
+                                      widget.cubit.titleAppBar.add(vl.label);
+                                      widget.cubit.getToDoList();
+                                      Navigator.pop(context);
                                     },
-                                    child: TheoDangLichWidgetDSCV(
-                                      icon: '',
-                                      name: vl.label,
-                                      onTap: () {
-                                        widget.cubit.selectTypeCalendarSubject
-                                            .add([
-                                          false,
-                                          false,
-                                          false,
-                                          false,
-                                          false,
-                                          true
-                                        ]);
-                                        widget.cubit.titleAppBar.add(vl.label);
-                                        Navigator.pop(context);
-                                      },
-                                      isSelect: false,
-                                      number: 0,
-                                    ),
+                                    isSelect: false,
+                                    number: 0,
                                   );
                                 },
                               );

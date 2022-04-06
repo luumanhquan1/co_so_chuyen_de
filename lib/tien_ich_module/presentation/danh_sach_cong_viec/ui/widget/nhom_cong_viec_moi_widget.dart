@@ -105,7 +105,7 @@ class NhomCvMoiWidget extends StatelessWidget {
               style: textNormalCustom(fontSize: 14, color: infoColor),
             ),
             StreamBuilder<TodoListModelTwo>(
-              stream: cubit.getTodoList,
+              stream: cubit.todoListGroup.stream,
               builder: (context, snapshot) {
                 final data = snapshot.data?.listTodoDone ?? <TodoDSCVModel>[];
                 if (data.isNotEmpty) {

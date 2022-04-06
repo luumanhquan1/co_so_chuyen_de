@@ -22,7 +22,7 @@ class DanhSachCongViecTienIchCubit
   int sLCvGanChoToi = 0;
   int sLCvDaBiXoa = 0;
   int sLNhomCV = 0;
-  String groupId = '';
+  String groupIdGet = '';
   final BehaviorSubject<TodoListModelTwo> todoListGroup =
       BehaviorSubject<TodoListModelTwo>();
   BehaviorSubject<List<TodoDSCVModel>> listImportanntWork = BehaviorSubject();
@@ -241,8 +241,8 @@ class DanhSachCongViecTienIchCubit
 
   late TodoListModelTwo dataListDefault;
 
-  Future<void> getGroupId(String id) async {
-    groupId = id;
+  void getGroupId(String id) {
+    groupIdGet = id;
   }
 
   Future<void> getToDoList() async {
@@ -255,18 +255,18 @@ class DanhSachCongViecTienIchCubit
             .where((element) => element.important == true)
             .toList());
 
-        bool isList(TodoDSCVModel toDo) {
-          return toDo.label!.toLowerCase().vietNameseParse().contains(groupId);
-        }
-
-        final TodoListModelTwo listModelTwo = TodoListModelTwo(
-            listTodoDone: res.listTodoImportant
-                .where((element) => isList(element))
-                .toList(),
-            listTodoImportant:
-                res.listTodoDone.where((element) => isList(element)).toList());
-
-        todoListGroup.sink.add(listModelTwo);
+        // bool isList(TodoDSCVModel toDo) {
+        //   return toDo.groupId!.contains(groupIdGet);
+        // }
+        //
+        // todoListGroup.sink.add(TodoListModelTwo(
+        //     listTodoDone:
+        //         res.listTodoDone.where((element) => isList(element)).toList(),
+        //     listTodoImportant: res.listTodoImportant
+        //         .where((element) => isList(element))
+        //         .toList()));
+        // print(
+        //     '---------------${res.listTodoDone.where((element) => isList(element)).toList().length}');
 
         _getTodoList.sink.add(res);
         dataListDefault = res;
@@ -305,8 +305,7 @@ class DanhSachCongViecTienIchCubit
               .add(res.where((element) => element.inUsed == false).toList());
           sLCvDaBiXoa =
               listDaXoa.value.length + listGanChoToiDaXoa.value.length;
-          sLCvGanChoToi =
-              res.where((element) => element.inUsed == true).toList().length;
+          sLCvGanChoToi = listGanChoToi.value.length;
         }
       },
       error: (err) {},

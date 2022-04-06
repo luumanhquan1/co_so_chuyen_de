@@ -35,10 +35,10 @@ class _DanhSachCongViecTienIchMobileState
     // TODO: implement initState
     super.initState();
     cubit.getToDoList();
-    cubit.listNguoiThucHien();
+    // cubit.listNguoiThucHien();
     cubit.getNHomCVMoi();
-    cubit.getToDoListDSCV();
-    cubit.getDSCVGanCHoToi();
+    // cubit.getToDoListDSCV();
+    // cubit.getDSCVGanCHoToi();
   }
 
   @override
@@ -48,7 +48,7 @@ class _DanhSachCongViecTienIchMobileState
         builder: (context, snapshot) {
           return Scaffold(
             appBar: AppBarWithTwoLeading(
-              title: snapshot.data ?? 'Công việc của bạn',
+              title: snapshot.data ?? S.current.cv_cua_ban,
               leadingIcon: Row(
                 children: [
                   IconButton(
