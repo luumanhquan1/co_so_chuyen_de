@@ -31,7 +31,6 @@ class MainLichHopTabLet extends StatefulWidget {
 
 class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   LichHopCubit cubit = LichHopCubit();
-  late String title;
   final MenuCalendarCubit cubitMenu = MenuCalendarCubit();
 
   @override
@@ -44,8 +43,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     super.initState();
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
     cubit.initData();
-
-    title = S.current.lich_hop_cua_toi;
   }
 
   @override
@@ -53,14 +50,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     return BlocBuilder<LichHopCubit, LichHopState>(
       bloc: cubit,
       builder: (context, state) {
-        if (state is LichHopStateDangLich) {
-          title = S.current.lich_hop_cua_toi;
-        } else if (state is LichHopStateDangList) {
-          title = S.current.lich_hop_cua_toi;
-        } else {
-          title = S.current.danh_sach_lich_hop;
-        }
-
         return StateStreamLayout(
           stream: cubit.stateStream,
           retry: () {},
@@ -76,6 +65,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   snapshot.data ?? TypeCalendarMenu.LichCuaToi;
               return Scaffold(
                 appBar: BaseAppBar(
+                  backGroundColor: state is LichHopStateDangThongKe
+                      ? backgroundRowColor
+                      : bgQLVBTablet,
                   title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
                       ? cubit.titleAppbar
                       : dataChangeScreen.getTitleLichHop(),
@@ -150,7 +142,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   ),
                 ),
                 body: Container(
-                  color: backgroundColorApp,
+                  color: state is LichHopStateDangThongKe
+                      ? bgColor
+                      : backgroundColorApp,
                   child: Column(
                     children: [
                       WidgetChooseDayWeekMonth(
@@ -224,7 +218,10 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                   final data = snapshot.data ?? [];
 
                                   return Container(
-                                    margin: const EdgeInsets.only(left: 30.0),
+                                    margin: const EdgeInsets.only(
+                                      left: 30.0,
+                                      top: 15,
+                                    ),
                                     height: 116,
                                     child: ListView.builder(
                                       shrinkWrap: true,
@@ -280,9 +277,12 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             return const SizedBox();
                           } else {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0,
-                                vertical: 28.0,
+                              padding:  EdgeInsets.only(
+                                left: 30.0,
+                                right: 30,
+                                top: 28,
+                                bottom:
+                                    state is LichHopStateDangThongKe ? 0 : 28,
                               ),
                               child: Container(
                                 height: 1,

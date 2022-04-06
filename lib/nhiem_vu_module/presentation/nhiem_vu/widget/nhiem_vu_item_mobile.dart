@@ -7,16 +7,20 @@ import 'package:flutter/cupertino.dart';
 
 class NhiemVuItemMobile extends StatelessWidget {
   final PageData data;
+  final Function onTap;
 
   const NhiemVuItemMobile({
     Key? key,
     required this.data,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20.0),
         height: 107,

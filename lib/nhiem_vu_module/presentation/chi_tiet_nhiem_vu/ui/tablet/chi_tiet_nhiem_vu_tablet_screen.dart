@@ -26,8 +26,10 @@ import 'package:flutter/material.dart';
 
 class ChiTietNhiemVuTabletScreen extends StatefulWidget {
   final String id;
+  final bool isCheck;
 
-  const ChiTietNhiemVuTabletScreen({Key? key, this.id = ''}) : super(key: key);
+  const ChiTietNhiemVuTabletScreen(
+      {Key? key, required this.id, required this.isCheck,}) : super(key: key);
 
   @override
   _ChiTietNhiemVuTabletScreenState createState() =>
@@ -41,8 +43,7 @@ class _ChiTietNhiemVuTabletScreenState
   @override
   void initState() {
     super.initState();
-    cubit.initChiTietNV();
-    cubit.loadDataNhiemVuCaNhan(nhiemVuId: '04632f86-274c-4e93-a203-7cd92b5dd7fe');
+    cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck:widget.isCheck,);
   }
 
   @override

@@ -29,6 +29,8 @@ class ApiConstants {
       '/qlvb/api/qlnv/thu-hoi/lich-su-thu-hoi';
   static const GET_LICH_SU_DON_DOC_NHIEM_VU =
       '/qlvb/api/qlnv/nhiem-vu/lich-su-don-doc';
+  static const GET_CHI_TIET_CONG_VIEC =
+      '/qlvb/api/qlnv/cong-viec/chitiet';
 }
 
 class ImageConstants {

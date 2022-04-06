@@ -73,7 +73,7 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
                       isUnderLine: true,
                       minimumDate: data,
                       maximumDate:
-                          DateTime(data.year + 5, data.month, data.day),
+                          DateTime(data.year, 12, 31, 23, 59, 59),
                       mode: dataBool
                           ? CupertinoDatePickerMode.date
                           : CupertinoDatePickerMode.dateAndTime,
