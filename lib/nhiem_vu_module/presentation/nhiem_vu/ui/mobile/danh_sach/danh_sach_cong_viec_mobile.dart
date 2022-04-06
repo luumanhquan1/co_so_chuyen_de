@@ -9,9 +9,13 @@ import 'package:flutter/material.dart';
 
 class DanhSachCongViecMobile extends StatefulWidget {
   final DanhSachCubit cubit;
+  final bool isCheck;
 
-  const DanhSachCongViecMobile({Key? key, required this.cubit})
-      : super(key: key);
+  const DanhSachCongViecMobile({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _DanhSachCongViecMobileState createState() => _DanhSachCongViecMobileState();
@@ -58,7 +62,7 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
             'ToDate': widget.cubit.ngayKetThuc
           },
           index: page,
-          isCaNhan: false,
+          isCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
           keySearch: widget.cubit.keySearch,
           mangTrangThai: [],
@@ -66,9 +70,15 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
           trangThaiHanXuLy: '',
         )
       },
-      viewItem: (value, index) => CellCongViec(
-        data: value as PageDatas,
-      ),
+      viewItem: (value, index) {
+        try {
+          return CellCongViec(
+            data: value as PageDatas,
+          );
+        } catch (e) {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

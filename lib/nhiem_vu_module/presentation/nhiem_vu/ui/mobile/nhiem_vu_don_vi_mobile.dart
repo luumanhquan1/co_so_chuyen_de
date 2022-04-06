@@ -123,6 +123,7 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                               MaterialPageRoute(
                                 builder: (context) => DanhSachNhiemVuMobile(
                                   cubit: danhSachCubit,
+                                  isCheck: widget.isCheck,
                                 ),
                               ),
                             );
@@ -187,6 +188,7 @@ class _NhiemVuDonViMobileState extends State<NhiemVuDonViMobile> {
                               MaterialPageRoute(
                                 builder: (context) => DanhSachCongViecMobile(
                                   cubit: danhSachCubit,
+                                  isCheck: widget.isCheck,
                                 ),
                               ),
                             );
