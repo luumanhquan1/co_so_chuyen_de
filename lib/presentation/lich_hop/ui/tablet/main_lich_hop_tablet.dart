@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
@@ -41,12 +42,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   @override
   void initState() {
     super.initState();
-    cubit.page = 1;
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
-    cubit.getDashboard();
-    cubit.menuCalendar();
-    cubit.postEventsCalendar();
-    cubit.initDataMenu();
+    cubit.initData();
+
     title = S.current.lich_hop_cua_toi;
   }
 
@@ -107,7 +105,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
 
                                   if (value == S.current.bao_cao_thong_ke) {
                                     cubit.chooseTypeList(
-                                      Type_Choose_Option_List.DANG_LIST,
+                                      Type_Choose_Option_List.DANG_THONG_KE,
                                     );
                                   }
 
@@ -219,12 +217,37 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                           if (state is LichHopStateDangDanhSach) {
                             return const SizedBox();
                           } else {
-                            return StreamBuilder<DashBoardLichHopModel>(
-                              stream: cubit.dashBoardStream,
-                              builder: (context, snapshot) {
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
+                            if (state is LichHopStateDangThongKe) {
+                              return StreamBuilder<List<DashBoardThongKeModel>>(
+                                stream: cubit.listDashBoardThongKe.stream,
+                                builder: (context, snapshot) {
+                                  final data = snapshot.data ?? [];
+
+                                  return Container(
+                                    margin: const EdgeInsets.only(left: 30.0),
+                                    height: 116,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: data.length,
+                                      itemBuilder: (context, index) {
+                                        return CustomItemCalenderWorkTablet(
+                                          image: cubit
+                                              .listImageLichHopThongKe[index],
+                                          typeName: data[index].name ?? '',
+                                          numberOfCalendars:
+                                              data[index].quantities ?? 0,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            } else {
+                              return StreamBuilder<DashBoardLichHopModel>(
+                                stream: cubit.dashBoardStream,
+                                builder: (context, snapshot) {
+                                  return Container(
                                     margin: const EdgeInsets.only(left: 30.0),
                                     height: 116,
                                     child: ListView.builder(
@@ -243,10 +266,10 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                         );
                                       },
                                     ),
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            }
                           }
                         },
                       ),

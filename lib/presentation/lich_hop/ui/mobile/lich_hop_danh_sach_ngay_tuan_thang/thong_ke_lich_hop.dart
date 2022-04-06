@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/chart_by_group_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/chart_by_month_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/co_cau_lich_hop_widget.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/ti_le_tham_du_widget.dart';
 import 'package:flutter/material.dart';
 
 class ThongKeLichHopScreen extends StatefulWidget {
@@ -33,9 +34,9 @@ class _ThongKeLichHopScreenState extends State<ThongKeLichHopScreen> {
             color: homeColor,
           ),
           textviewTitle(S.current.so_lich_hop_duoc_to_chuc_boi_cac_don_vi),
-
-          ChartByGroupWidget(cubit: widget.cubit,),
-
+          ChartByGroupWidget(
+            cubit: widget.cubit,
+          ),
           Container(
             width: double.maxFinite,
             height: 6,
@@ -44,7 +45,15 @@ class _ThongKeLichHopScreenState extends State<ThongKeLichHopScreen> {
           textviewTitle(S.current.co_cau_lich_hop),
           CoCauLichHopWidget(
             cubit: widget.cubit,
-          )
+          ),
+          Container(
+            width: double.maxFinite,
+            height: 6,
+            color: homeColor,
+          ),
+          textviewTitle(S.current.ti_le_tham_du_cua_cac_don_vi),
+
+          TiLeThamDuWidget(cubit: widget.cubit,),
         ],
       ),
     );

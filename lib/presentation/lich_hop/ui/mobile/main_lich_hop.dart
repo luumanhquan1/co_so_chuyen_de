@@ -185,37 +185,34 @@ class _MainLichHopState extends State<MainLichHop> {
                                               cubit.listDashBoardThongKe.stream,
                                           builder: (context, snapshot) {
                                             final data = snapshot.data ?? [];
-                                            return SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Container(
-                                                margin: EdgeInsets.only(
-                                                  left: 16.0,
-                                                  top: cubit.isCheckNgay
-                                                      ? 150
-                                                      : 120,
-                                                ),
-                                                height: 88,
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: data.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return CustomItemCalenderWork(
-                                                      image: cubit
-                                                              .listImageLichHopThongKe[
-                                                          index],
-                                                      typeName:
-                                                          data[index].name ??
-                                                              '',
-                                                      numberOfCalendars:
-                                                          data[index]
-                                                                  .quantities ??
-                                                              0,
-                                                    );
-                                                  },
-                                                ),
+                                            return Container(
+                                              margin: EdgeInsets.only(
+                                                left: 16.0,
+                                                top: cubit.isCheckNgay
+                                                    ? 150
+                                                    : 120,
+                                              ),
+                                              height: 88,
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: data.length,
+                                                itemBuilder:
+                                                    (context, index) {
+                                                  return CustomItemCalenderWork(
+                                                    image: cubit
+                                                            .listImageLichHopThongKe[
+                                                        index],
+                                                    typeName:
+                                                        data[index].name ??
+                                                            '',
+                                                    numberOfCalendars:
+                                                        data[index]
+                                                                .quantities ??
+                                                            0,
+                                                  );
+                                                },
                                               ),
                                             );
                                           },

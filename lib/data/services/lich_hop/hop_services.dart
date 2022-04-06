@@ -39,6 +39,8 @@ import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/ti_le_tham_gia_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/to_chuc_boi_don_vi_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
@@ -243,6 +245,18 @@ abstract class HopServices {
 
   @POST(ApiConstants.CO_CAU_LICH_HOP)
   Future<CoCauLichHopResponse> postCoCauLichHop(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.TO_CHUC_BOI_DON_VI)
+  Future<ToChucBoiDonViResponse> postToChucBoiDonVi(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.TI_LE_THAM_GIA)
+  Future<TiLeThamGiaResponse> postTiLeThamGia(
       @Field('dateFrom') String dateFrom,
       @Field('dateTo') String dateTo,
   );
