@@ -166,7 +166,14 @@ extension LichLv on CalenderState {
               type: type,
               isCalendar: false,
               onChange: (DateTime start, DateTime end, selectDay) {
-                cubit.callApi();
+                cubit.selectDay = selectDay;
+                if (type == Type_Choose_Option_Day.DAY) {
+                  cubit.callApi();
+                } else if (type == Type_Choose_Option_Day.WEEK) {
+                  cubit.callApiTuan();
+                } else {
+                  cubit.callApiMonth();
+                }
               },
               onChangeRange:
                   (DateTime? start, DateTime? end, DateTime? focusedDay) {},
