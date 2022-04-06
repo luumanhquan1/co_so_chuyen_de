@@ -35,44 +35,44 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
               today: DateTime.now(),
             ),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                margin: const EdgeInsets.only(top: 28.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 30.0, left: 30.0),
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: listDanhSachNhiemVu.length,
-                    itemBuilder: (context, index) {
-                      return NhiemVuCellTablet(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChiTietNhiemVuTabletScreen(),
-                            ),
-                          );
-                        },
-                        title: listDanhSachNhiemVu[index].title ?? '',
-                        noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
-                        dateTimeStart:
-                            listDanhSachNhiemVu[index].timeStart ?? '',
-                        dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
-                        userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
-                        status: listDanhSachNhiemVu[index].trangThai ?? '',
-                        userImage:
-                            'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                        index: index + 1,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: SingleChildScrollView(
+          //     child: Container(
+          //       margin: const EdgeInsets.only(top: 28.0),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(right: 30.0, left: 30.0),
+          //         child: ListView.builder(
+          //           physics: const NeverScrollableScrollPhysics(),
+          //           shrinkWrap: true,
+          //           itemCount: listDanhSachNhiemVu.length,
+          //           itemBuilder: (context, index) {
+          //             return NhiemVuCellTablet(
+          //               onTap: () {
+          //                 Navigator.push(
+          //                   context,
+          //                   MaterialPageRoute(
+          //                     builder: (context) =>
+          //                         const ChiTietNhiemVuTabletScreen(),
+          //                   ),
+          //                 );
+          //               },
+          //               title: listDanhSachNhiemVu[index].title ?? '',
+          //               noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
+          //               dateTimeStart:
+          //                   listDanhSachNhiemVu[index].timeStart ?? '',
+          //               dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
+          //               userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
+          //               status: listDanhSachNhiemVu[index].trangThai ?? '',
+          //               userImage:
+          //                   'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+          //               index: index + 1,
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

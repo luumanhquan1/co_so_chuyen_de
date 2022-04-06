@@ -5,12 +5,12 @@ import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 
-class BieuDoNhiemVuMobile extends StatefulWidget {
+class BieuDoCongViecCaNhan extends StatefulWidget {
   final String? title;
   final DanhSachCubit cubit;
   final List<ChartData> chartData;
 
-  const BieuDoNhiemVuMobile({
+  const BieuDoCongViecCaNhan({
     Key? key,
     required this.cubit,
     required this.chartData,
@@ -18,10 +18,10 @@ class BieuDoNhiemVuMobile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BieuDoNhiemVuMobileState createState() => _BieuDoNhiemVuMobileState();
+  _BieuDoCongViecCaNhanState createState() => _BieuDoCongViecCaNhanState();
 }
 
-class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
+class _BieuDoCongViecCaNhanState extends State<BieuDoCongViecCaNhan> {
   @override
   void initState() {
     super.initState();
@@ -41,7 +41,7 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
           ),
           Container(height: 20),
           StreamBuilder<List<LoaiNhiemVuComomModel>>(
-            stream: widget.cubit.loaiNhiemVuSuject,
+            stream: widget.cubit.loaiCongViecCaNhanSuject,
             initialData: listFakeData,
             builder: (context, snapshot) {
               final data = snapshot.data ?? [];

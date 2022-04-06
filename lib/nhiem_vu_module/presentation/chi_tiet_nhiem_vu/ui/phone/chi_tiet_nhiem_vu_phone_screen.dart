@@ -25,8 +25,13 @@ import 'package:flutter/material.dart';
 
 class ChiTietNhiemVuPhoneScreen extends StatefulWidget {
   final String id;
+  final bool isCheck;
 
-  const ChiTietNhiemVuPhoneScreen({Key? key, this.id = ''}) : super(key: key);
+  const ChiTietNhiemVuPhoneScreen({
+    Key? key,
+    required this.id,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _ChiTietNhiemVuPhoneScreenState createState() =>
@@ -39,9 +44,7 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
   @override
   void initState() {
     super.initState();
-    cubit.initChiTietNV();
-    cubit.loadDataNhiemVuCaNhan(
-        nhiemVuId: '04632f86-274c-4e93-a203-7cd92b5dd7fe');
+    cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck: widget.isCheck);
   }
 
   @override
@@ -50,7 +53,9 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
       backgroundColor: Colors.white,
       appBar: AppBarDefaultBack(S.current.chi_tiet_nhiem_vu),
       body: RefreshIndicator(
-        onRefresh: () async {},
+        onRefresh: () async {
+          await cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck: widget.isCheck);
+        },
         child: ProviderWidget<ChiTietNVCubit>(
           cubit: cubit,
           child: StateStreamLayout(

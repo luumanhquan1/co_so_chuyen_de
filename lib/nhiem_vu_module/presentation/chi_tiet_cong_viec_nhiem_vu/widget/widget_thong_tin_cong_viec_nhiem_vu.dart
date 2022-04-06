@@ -1,12 +1,13 @@
-
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_cong_viec_nhiem_vu/chi_tiet_cong_viec_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_cong_viec_nhiem_vu/bloc/chi_tiet_cong_viec_nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_cong_viec_nhiem_vu/widget/widget_item_row_cong_viec.dart';
 import 'package:flutter/material.dart';
 
 class WidgetThongTinCongViecNhiemVu extends StatefulWidget {
-  ChiTietCongViecNhiemVuCubit cubit;
+  final ChiTietCongViecNhiemVuCubit cubit;
+  final ChiTietCongViecNhiemVuModel data;
 
-  WidgetThongTinCongViecNhiemVu(this.cubit, {Key? key}) : super(key: key);
+  const WidgetThongTinCongViecNhiemVu({Key? key, required this.cubit, required this.data}) : super(key: key);
 
   @override
   _WidgetThongTinCongViecNhiemVuState createState() =>
@@ -20,7 +21,7 @@ class _WidgetThongTinCongViecNhiemVuState
     return Column(
       children: [
         Column(
-          children: widget.cubit.chiTietCongViecNhiemVuModel
+          children: widget.data
               .toListMobile()
               .map(
                 (row) => WidgetItemRowCongViec(

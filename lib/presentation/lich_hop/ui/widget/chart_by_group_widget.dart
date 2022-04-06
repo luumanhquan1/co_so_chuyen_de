@@ -63,6 +63,7 @@ class ChartByGroupWidget extends StatelessWidget {
                 series: <ChartSeries<ToChucBoiDonViModel, String>>[
                   BarSeries<ToChucBoiDonViModel, String>(
                     color: bgrChart,
+                    width: 0.5,
                     dataLabelSettings: DataLabelSettings(
                       isVisible: true,
                       textStyle: textNormalCustom(

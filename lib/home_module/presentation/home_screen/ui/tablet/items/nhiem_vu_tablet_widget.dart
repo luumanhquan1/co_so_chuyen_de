@@ -119,6 +119,7 @@ class _NhiemVuTabletWidgetState extends State<NhiemVuTabletWidget> {
                           MaterialPageRoute(
                             builder: (context) => ChiTietNhiemVuTabletScreen(
                               id: result.id,
+                              isCheck: _nhiemVuCubit.selectKeyDonVi == SelectKey.CA_NHAN ? true: false,
                             ),
                           ),
                         );

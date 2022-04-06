@@ -1,15 +1,15 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/ket_noi_module/utils/extensions/string_extension.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
 
-class NhiemVuItemMobile extends StatelessWidget {
-  final PageData data;
+class CellCongViec extends StatelessWidget {
+  final PageDatas data;
   final Function onTap;
 
-  const NhiemVuItemMobile({
+  const CellCongViec({
     Key? key,
     required this.data,
     required this.onTap,
@@ -65,7 +65,7 @@ class NhiemVuItemMobile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            (data.noiDungTheoDoi ?? '').parseHtml(),
+                            (data.noiDungCongViec ?? '').parseHtml(),
                             style: titleAppbar(fontSize: 16.0),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
@@ -97,7 +97,7 @@ class NhiemVuItemMobile extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  data.tinhHinhThucHienNoiBo ?? '',
+                                  data.doiTuongThucHien ?? '',
                                   style: textNormalCustom(
                                     color: unselectedLabelColor,
                                     fontWeight: FontWeight.w400,

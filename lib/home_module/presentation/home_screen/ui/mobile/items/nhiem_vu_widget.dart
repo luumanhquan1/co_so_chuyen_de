@@ -115,6 +115,7 @@ class _NhiemVuWidgetState extends State<NhiemVuWidget> {
                           MaterialPageRoute(
                             builder: (context) => ChiTietNhiemVuPhoneScreen(
                               id: result.id,
+                              isCheck: _nhiemVuCubit.selectKeyDonVi == SelectKey.CA_NHAN ? true: false,
                             ),
                           ),
                         );

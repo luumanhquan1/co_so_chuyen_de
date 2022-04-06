@@ -28,114 +28,116 @@ class PieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (title.isEmpty)
-          const SizedBox()
-        else
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: paddingTop),
-              child: Text(
-                title,
-                style: textNormalCustom(
-                  color: infoColor,
-                  fontSize: 16,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (title.isEmpty)
+            const SizedBox()
+          else
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(top: paddingTop),
+                child: Text(
+                  title,
+                  style: textNormalCustom(
+                    color: infoColor,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
-          ),
-        SizedBox(
-          width: 270,
-          height: 270,
-          child: chartData.indexWhere((element) => element.value != 0) == -1
-              ? const NodataWidget()
-              : SfCircularChart(
-                  margin: EdgeInsets.zero,
-                  series: [
-                    // Renders doughnut chart
-                    DoughnutSeries<ChartData, String>(
-                      innerRadius: '45',
-                      dataSource: chartData,
-                      pointColorMapper: (ChartData data, _) => data.color,
-                      xValueMapper: (ChartData data, _) => data.title,
-                      yValueMapper: (ChartData data, _) => data.value,
-                      dataLabelMapper: (ChartData data, _) =>
-                          percent(data.value),
-                      onPointTap: (value) {
-                        if (onTap != null) {
-                          onTap!(value.pointIndex ?? 0);
-                        } else {}
-                      },
-                      dataLabelSettings: isThongKeLichHop
-                          ? DataLabelSettings(
-                              isVisible: true,
-                              showZeroValue: false,
-                              textStyle: textNormalCustom(
-                                color: backgroundColorApp,
-                                fontSize: 14,
+          SizedBox(
+            width: 270,
+            height: 270,
+            child: chartData.indexWhere((element) => element.value != 0) == -1
+                ? const NodataWidget()
+                : SfCircularChart(
+                    margin: EdgeInsets.zero,
+                    series: [
+                      // Renders doughnut chart
+                      DoughnutSeries<ChartData, String>(
+                        innerRadius: '45',
+                        dataSource: chartData,
+                        pointColorMapper: (ChartData data, _) => data.color,
+                        xValueMapper: (ChartData data, _) => data.title,
+                        yValueMapper: (ChartData data, _) => data.value,
+                        dataLabelMapper: (ChartData data, _) =>
+                            percent(data.value),
+                        onPointTap: (value) {
+                          if (onTap != null) {
+                            onTap!(value.pointIndex ?? 0);
+                          } else {}
+                        },
+                        dataLabelSettings: isThongKeLichHop
+                            ? DataLabelSettings(
+                                isVisible: true,
+                                showZeroValue: false,
+                                textStyle: textNormalCustom(
+                                  color: backgroundColorApp,
+                                  fontSize: 14,
+                                ),
+                              )
+                            : const DataLabelSettings(
+                                isVisible: true,
                               ),
-                            )
-                          : const DataLabelSettings(
-                              isVisible: true,
-                            ),
-                    )
-                  ],
-                ),
-        ),
-        if (isSubjectInfo)
-          Padding(
-            padding: EdgeInsets.only(left: paddingLeftSubTitle),
-            child: GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              childAspectRatio: 9,
-              mainAxisSpacing: 10.0.textScale(space: 4),
-              crossAxisSpacing: 10,
-              children: List.generate(chartData.length, (index) {
-                final result = chartData[index];
-                // ignore: avoid_unnecessary_containers
-                return GestureDetector(
-                  onTap: () {
-                    if (onTap != null) {
-                      onTap!(index);
-                    } else {}
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 14,
-                        width: 14,
-                        decoration: BoxDecoration(
-                          color: result.color,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Flexible(
-                        child: FittedBox(
-                          child: Text(
-                            '${result.title} (${result.value.toInt()})',
-                            style: textNormal(
-                              infoColor,
-                              14.0.textScale(),
-                            ),
-                          ),
-                        ),
                       )
                     ],
                   ),
-                );
-              }),
-            ),
-          )
-        else
-          const SizedBox()
-      ],
+          ),
+          if (isSubjectInfo)
+            Padding(
+              padding: EdgeInsets.only(left: paddingLeftSubTitle),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                childAspectRatio: 9,
+                mainAxisSpacing: 10.0.textScale(space: 4),
+                crossAxisSpacing: 10,
+                children: List.generate(chartData.length, (index) {
+                  final result = chartData[index];
+                  // ignore: avoid_unnecessary_containers
+                  return GestureDetector(
+                    onTap: () {
+                      if (onTap != null) {
+                        onTap!(index);
+                      } else {}
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 14,
+                          width: 14,
+                          decoration: BoxDecoration(
+                            color: result.color,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Flexible(
+                          child: FittedBox(
+                            child: Text(
+                              '${result.title} (${result.value.toInt()})',
+                              style: textNormal(
+                                infoColor,
+                                14.0.textScale(),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            )
+          else
+            const SizedBox()
+        ],
+      ),
     );
   }
 

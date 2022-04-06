@@ -56,6 +56,7 @@ class TiLeThamDuWidget extends StatelessWidget {
               color: AqiColor,
               dashArray: [5, 5],
             ),
+
           ),
           series: <ChartSeries<TiLeThamGiaModel, String>>[
             BarSeries<TiLeThamGiaModel, String>(
@@ -70,6 +71,7 @@ class TiLeThamDuWidget extends StatelessWidget {
                 labelAlignment: ChartDataLabelAlignment.outer,
                 labelPosition: ChartDataLabelPosition.outside,
               ),
+              width: 0.5,
               dataSource: data,
               xValueMapper: (TiLeThamGiaModel data, _) =>
               data.tenDonVi,
