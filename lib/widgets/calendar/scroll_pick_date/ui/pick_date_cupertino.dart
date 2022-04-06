@@ -63,7 +63,7 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino>
               backgroundColor: widget.background,
               mode: widget.mode,
               use24hFormat: true,
-              initialDateTime: widget.maximumDate,
+              initialDateTime: widget.minimumDate,
               onDateTimeChanged: (DateTime value) {
                 widget.onDateTimeChanged(value);
               },

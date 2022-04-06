@@ -2,7 +2,6 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
-import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/chart_by_group_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/chart_by_month_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/menu_my_calendar/co_cau_lich_hop_widget.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/ti_le_tham_du_widget.dart';
@@ -31,7 +30,7 @@ class ThongKeLichHopTablet extends StatelessWidget {
               crossAxisSpacing: 28,
               mainAxisSpacing: 28,
               shrinkWrap: true,
-              childAspectRatio: 4/5,
+              childAspectRatio: 4 / 5,
               children: [
                 containerChart(
                   children: [
@@ -64,7 +63,8 @@ class ThongKeLichHopTablet extends StatelessWidget {
                 containerChart(
                   children: [
                     textviewTitle(
-                        S.current.so_lich_hop_theo_thoi_gian_trong_nam),
+                      S.current.so_lich_hop_theo_thoi_gian_trong_nam,
+                    ),
                     ChartByMonthWidget(
                       cubit: cubit,
                     ),
