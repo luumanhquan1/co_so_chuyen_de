@@ -64,4 +64,19 @@ mixin YKienNguoiDanRepository {
       String startDate,
       String endDate,
       );
+
+  Future<Result<ChartLinhVucKhacModel>> chartLinhVucKhac(
+      String startDate,
+      String endDate,
+      );
+
+  Future<Result<ChartDonViModel>> chartDonVi(
+      String startDate,
+      String endDate,
+      );
+
+  Future<Result<ChartYKNDByMonthModel>> chartSoLuongByMonth(
+      String startDate,
+      String endDate,
+      );
 }

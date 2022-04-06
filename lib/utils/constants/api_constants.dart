@@ -165,6 +165,10 @@ class ApiConstants {
   static const DASH_BOARD_BAO_CAO_YKND = '/pakn/api/Dashboard/statistics-by-status';
   static const RESET_LIST_WIDGET = '/api/Widget/reset-dashboard-widget';
   static const UPDATE_LIST_WIDGET = '/api/Widget/update-dashboard-widget-config';
+  static const BAO_CAO_LINH_VUC_KHAC = '/pakn/api/Dashboard/statistics-by-field';
+  static const DON_VI_XU_LY = '/pakn/api/Dashboard/statistics-by-unit';
+  static const SO_LUONG_BY_MONTH= '/pakn/api/Dashboard/statistics-by-month';
+
 }
 
 class ImageConstants {

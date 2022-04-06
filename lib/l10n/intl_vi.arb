@@ -828,7 +828,15 @@
   "so_lich_hop_duoc_to_chuc_boi_cac_don_vi": "Số lịch họp được tổ chức bởi các đơn vị",
   "co_cau_lich_hop": "Cơ cấu lịch họp",
   "ti_le_tham_du_cua_cac_don_vi": "Tỉ lệ tham dự họp của các đơn vị",
-  "noi_dung_thu_hoi" : "Nội dung thu hồi"
+  "noi_dung_thu_hoi" : "Nội dung thu hồi",
+  "tinh_trang_thuc_hien_yknd": "Tình trạng thực hiện ý kiến người dân",
+  "chuyen_xu_ly": "chuyển xử lý",
+  "yeu_cau_phoi_hop": " yêu cầu phối hợp",
+  "cho_bo_sung_tt": "chờ bổ sung thông tin",
+  "linh_vuc_xu_ly": "Lĩnh vực xử lý",
+  "so_luong_yknd": "Số lượng ý kiến người dân qua thời gian"
+
+
 }
 
 

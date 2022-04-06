@@ -2,6 +2,9 @@ import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/bao_cao_thong_ke_yknd_
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/chi_tiet_kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/danh_sach_y_kien_pakn_request.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/bao_cao_yknd_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_don_vi_xu_ly_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_linh_vuc_khac_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_so_luong_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/dash_board_bao_cao_yknd.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_respnse.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_ket_qua_y_kien_xu_ly_response.dart';
@@ -164,15 +167,58 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
   @override
   Future<Result<DashBoardBaoCaoYKNDModel>> dashBoardBaoCaoYKND(
       String startDate, String endDate) {
-    return runCatchingAsync<DashBoardBaoCaoYKNDResponse, DashBoardBaoCaoYKNDModel>(
-          () => _yKienNguoIDanService.getDashBoardBaoCaoYKND(
+    return runCatchingAsync<DashBoardBaoCaoYKNDResponse,
+        DashBoardBaoCaoYKNDModel>(
+      () => _yKienNguoIDanService.getDashBoardBaoCaoYKND(
         DashBoardBaoCaoYKNDRequest(
           tuNgay: startDate,
           denNgay: endDate,
         ),
       ),
-          (res) => res.toDomain(),
+      (res) => res.toDomain(),
     );
   }
 
+  @override
+  Future<Result<ChartLinhVucKhacModel>> chartLinhVucKhac(
+    String startDate,
+    String endDate,
+  ) {
+    return runCatchingAsync<LinhVucKhacResponse, ChartLinhVucKhacModel>(
+      () => _yKienNguoIDanService.getDashBoardLinhVucKhac(
+        LinhVucKhacRequest(
+          tuNgay: startDate,
+          denNgay: endDate,
+        ),
+      ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<ChartDonViModel>> chartDonVi(String startDate, String endDate) {
+    return runCatchingAsync<DonViXuLyResponse, ChartDonViModel>(
+      () => _yKienNguoIDanService.getDashBoardDonViXuLy(
+        DonViXuLyRequest(
+          tuNgay: startDate,
+          denNgay: endDate,
+        ),
+      ),
+      (res) => res.toDomain(),
+    );
+  }
+
+  @override
+  Future<Result<ChartYKNDByMonthModel>> chartSoLuongByMonth(
+      String startDate, String endDate) {
+    return runCatchingAsync<SoLuongYKNDBtMonthResponse, ChartYKNDByMonthModel>(
+      () => _yKienNguoIDanService.getDashBoardSoLuongYKND(
+        SoLuongByMonthRequest(
+          tuNgay: startDate,
+          denNgay: endDate,
+        ),
+      ),
+      (res) => res.toDomain(),
+    );
+  }
 }

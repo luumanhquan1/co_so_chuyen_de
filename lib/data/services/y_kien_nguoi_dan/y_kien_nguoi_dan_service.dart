@@ -2,6 +2,9 @@ import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/bao_cao_thong_ke_yknd_
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/chi_tiet_kien_nghi_request.dart';
 import 'package:ccvc_mobile/data/request/y_kien_nguoi_dan/danh_sach_y_kien_pakn_request.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/bao_cao_yknd_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_don_vi_xu_ly_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_linh_vuc_khac_response.dart';
+import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/chart_so_luong_yknd_response.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/bao_cao_thong_ke/dash_board_bao_cao_yknd.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/chi_tiet_kien_nghi_respnse.dart';
 import 'package:ccvc_mobile/data/response/y_kien_nguoi_dan/danh_sach_ket_qua_y_kien_xu_ly_response.dart';
@@ -79,8 +82,24 @@ abstract class YKienNguoiDanService {
   Future<BaoCaoYKNDResponse> getBaoCaoYKND(
     @Body() BaoCaoYKNDRequest baoCaoYKNDRequest,
   );
+
   @POST(ApiConstants.DASH_BOARD_BAO_CAO_YKND)
   Future<DashBoardBaoCaoYKNDResponse> getDashBoardBaoCaoYKND(
-      @Body() DashBoardBaoCaoYKNDRequest boardBaoCaoYKNDRequest,
+    @Body() DashBoardBaoCaoYKNDRequest boardBaoCaoYKNDRequest,
+  );
+
+  @POST(ApiConstants.BAO_CAO_LINH_VUC_KHAC)
+  Future<LinhVucKhacResponse> getDashBoardLinhVucKhac(
+    @Body() LinhVucKhacRequest linhVucKhacRequest,
+  );
+
+  @POST(ApiConstants.DON_VI_XU_LY)
+  Future<DonViXuLyResponse> getDashBoardDonViXuLy(
+    @Body() DonViXuLyRequest donViXuLyRequest,
+  );
+
+  @POST(ApiConstants.SO_LUONG_BY_MONTH)
+  Future<SoLuongYKNDBtMonthResponse> getDashBoardSoLuongYKND(
+      @Body() SoLuongByMonthRequest soLuongByMonthRequest,
       );
 }

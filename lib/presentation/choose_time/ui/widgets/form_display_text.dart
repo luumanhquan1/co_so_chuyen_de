@@ -17,10 +17,13 @@ class _FormDisplayTextState extends State<FormDisplayText> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 8),
-      child: FittedBox(
-        child: Text(
-          widget.text,
-          style: textNormal(textDropDownColor, 14.0.textScale()),
+      child: SizedBox(
+        height: 22,
+        child: FittedBox(
+          child: Text(
+            widget.text,
+            style: textNormal(textDropDownColor, 14.0.textScale()),
+          ),
         ),
       ),
     );
