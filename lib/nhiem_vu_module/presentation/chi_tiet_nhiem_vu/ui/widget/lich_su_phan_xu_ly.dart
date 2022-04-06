@@ -1,5 +1,5 @@
-
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/lich_su_phan_xu_ly.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
@@ -17,23 +17,38 @@ class LichSuPhanXuLyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpandOnlyNhiemVu(
-      name: S.current.lich_su_phan_xu_ly,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.0.textScale(space: 4),
+    if (dataModel.isNotEmpty) {
+      return ExpandOnlyNhiemVu(
+        name: S.current.lich_su_phan_xu_ly,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0.textScale(space: 4),
+          ),
+          child: Column(
+            children: dataModel
+                .map(
+                  (e) => WidgetInExpand(
+                    row: e.listLSPXL(),
+                    cubit: cubit,
+                  ),
+                )
+                .toList(),
+          ),
         ),
-        child: Column(
-          children: dataModel
-              .map(
-                (e) => WidgetInExpand(
-                  row: e.listLSPXL(),
-                  cubit: cubit,
-                ),
-              )
-              .toList(),
+      );
+    } else {
+      return ExpandOnlyNhiemVu(
+        name: S.current.lich_su_phan_xu_ly,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0.textScale(space: 4),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: NodataWidget(),
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

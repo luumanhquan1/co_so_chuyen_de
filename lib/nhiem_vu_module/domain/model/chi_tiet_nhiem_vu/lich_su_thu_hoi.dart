@@ -1,59 +1,57 @@
-
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/van_ban_lien_quan.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/type_data_row.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/string_extension.dart';
 
-class LichSuThuHoiModel {
-  String id = '';
-  String nguoiThuHoi = '';
-  String donViThuHoi = '';
-  String thoiGian = '';
-  String noiDungTraLai = '';
-  String nguoiBiThuHoi = '';
-  String donViBiThuHoi = '';
+class LichSuThuHoiNhiemVuModel {
+  String? nguoiTaoXuLy;
+  String? donViTaoXuLy;
+  String? thoiGianTao;
+  String? noiDung;
+  String? nguoiXuLy;
+  String? donViXuLy;
 
-  LichSuThuHoiModel.empty();
+  LichSuThuHoiNhiemVuModel.empty();
 
-  LichSuThuHoiModel({
-    required this.id,
-    required this.nguoiThuHoi,
-    required this.donViThuHoi,
-    required this.thoiGian,
-    required this.noiDungTraLai,
-    required this.nguoiBiThuHoi,
-    required this.donViBiThuHoi,
+  LichSuThuHoiNhiemVuModel({
+    this.nguoiTaoXuLy,
+    this.donViTaoXuLy,
+    this.thoiGianTao,
+    this.noiDung,
+    this.nguoiXuLy,
+    this.donViXuLy,
   });
 
   List<RowDataExpandModel> listLSTH() {
-    List<RowDataExpandModel> listData = [
+    final List<RowDataExpandModel> listData = [
       RowDataExpandModel(
         key: S.current.nguoi_thu_hoi,
-        value: nguoiThuHoi,
+        value: nguoiTaoXuLy ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.don_vi_thu_hoi,
-        value: donViThuHoi,
+        value: donViTaoXuLy ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.thoi_gian,
-        value: thoiGian,
+        value: thoiGianTao ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
-        key: S.current.noi_dung_tra_lai,
-        value: noiDungTraLai,
+        key: S.current.noi_dung_thu_hoi,
+        value: noiDung?.parseHtml() ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.nguoi_bi_thu_hoi,
-        value: nguoiBiThuHoi,
+        value: nguoiXuLy ?? '',
         type: TypeDataNV.text,
       ),
       RowDataExpandModel(
         key: S.current.don_vi_bi_thu_hoi,
-        value: donViBiThuHoi,
+        value: donViXuLy ?? '',
         type: TypeDataNV.text,
       ),
     ];

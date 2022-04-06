@@ -3,11 +3,11 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/y_kien_su_ly_nhiem_vu_model.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/widget/dialog/message_dialog/message_config.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/dowload_file.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -136,7 +136,7 @@ class _YKienSuLyNhiemVuWidgetState extends State<YKienSuLyNhiemVuWidget> {
                                       widget.object.yKienXuLyFileDinhKem?[index]
                                           .fileDinhKem?.ten ??
                                           '',
-                                      '$DO_MAIN_DOWLOAD_FILE_NHIEM_VU${widget.object.yKienXuLyFileDinhKem?[index].fileDinhKem?.duongDan ?? ''}',
+                                      '$DO_MAIN_DOWLOAD_FILE${widget.object.yKienXuLyFileDinhKem?[index].fileDinhKem?.duongDan ?? ''}',
                                     )
                                         .then(
                                           (value) => MessageConfig.show(

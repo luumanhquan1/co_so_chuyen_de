@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -24,6 +23,9 @@ const CHO_XU_LY = 'CHO_XU_LY';
 const DANG_XU_LY = 'DANG_XU_LY';
 const CHO_TIEP_NHAN = 'CHO_TIEP_NHAN';
 const CHO_PHAN_XU_LY = 'CHO_PHAN_XU_LY';
+const THU_HOI = 'THU_HOI';
+const DA_HOAN_THANH = 'DA_HOAN_THANH';
+const TRA_LAI = 'TRA_LAI';
 
 enum TypeDocumentDetailRow { checkbox, text, fileActacks, status,fileVanBanDi }
 
@@ -180,7 +182,10 @@ enum StatusVanBan {
   CHO_XU_LY,
   DANG_XU_LY,
   CHO_TIEP_NHAN,
-  CHO_PHAN_XU_LY
+  CHO_PHAN_XU_LY,
+  THU_HOI,
+  DA_HOAN_THANH,
+  TRA_LAI
 }
 
 extension StatusChiTietVanBan on StatusVanBan {
@@ -231,6 +236,21 @@ extension StatusChiTietVanBan on StatusVanBan {
           name: S.current.cho_phan_xu_ly,
           background: yellowColor,
         );
+      case StatusVanBan.THU_HOI:
+        return statusChiTietVanBan(
+          name: S.current.thu_hoi,
+          background: yellowColor,
+        );
+      case StatusVanBan.DA_HOAN_THANH:
+        return statusChiTietVanBan(
+          name: S.current.da_hoan_thanh,
+          background: daXuLyColor,
+        );
+      case StatusVanBan.TRA_LAI:
+        return statusChiTietVanBan(
+          name: S.current.tra_lai,
+          background: statusCalenderRed,
+        );
     }
   }
 }
@@ -258,6 +278,12 @@ extension GetStatusVanBan on String {
         return StatusVanBan.CHO_TIEP_NHAN;
       case CHO_PHAN_XU_LY:
         return StatusVanBan.CHO_PHAN_XU_LY;
+      case THU_HOI:
+        return StatusVanBan.THU_HOI;
+      case DA_HOAN_THANH:
+        return StatusVanBan.DA_HOAN_THANH;
+      case TRA_LAI:
+        return StatusVanBan.TRA_LAI;
       default:
         return StatusVanBan.QUA_HAN;
     }
