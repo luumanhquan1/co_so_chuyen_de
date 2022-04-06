@@ -42,5 +42,5 @@ class LoaiNhiemVuComomModel {
 List<LoaiNhiemVuComomModel> listFakeData = [
   LoaiNhiemVuComomModel(text: S.current.qua_han, value: 0),
   LoaiNhiemVuComomModel(text: S.current.den_han, value: 0),
-  LoaiNhiemVuComomModel(text: S.current.trong_han, value: 0)
+  LoaiNhiemVuComomModel(text: S.current.trong_han, value: 0),
 ];

@@ -5,13 +5,13 @@ import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 
-class BieuDoNhiemVuTablet extends StatefulWidget {
+class BieuDoDonViTablet extends StatefulWidget {
   final DanhSachCubit cubit;
   final String? title;
   final List<ChartData> chartData;
   final bool isCheck;
 
-  const BieuDoNhiemVuTablet({
+  const BieuDoDonViTablet({
     Key? key,
     required this.cubit,
     this.title,
@@ -20,10 +20,10 @@ class BieuDoNhiemVuTablet extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BieuDoNhiemVuTabletState createState() => _BieuDoNhiemVuTabletState();
+  _BieuDoDonViTabletState createState() => _BieuDoDonViTabletState();
 }
 
-class _BieuDoNhiemVuTabletState extends State<BieuDoNhiemVuTablet> {
+class _BieuDoDonViTabletState extends State<BieuDoDonViTablet> {
   @override
   void initState() {
     super.initState();
@@ -67,7 +67,7 @@ class _BieuDoNhiemVuTabletState extends State<BieuDoNhiemVuTablet> {
               if (widget.isCheck)
                 Expanded(
                   child: StreamBuilder<List<LoaiNhiemVuComomModel>>(
-                    stream: widget.cubit.loaiNhiemVuCaNhanSuject,
+                    stream: widget.cubit.loaiNhiemVuSuject,
                     initialData: listFakeData,
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? [];
@@ -94,7 +94,7 @@ class _BieuDoNhiemVuTabletState extends State<BieuDoNhiemVuTablet> {
               else
                 Expanded(
                   child: StreamBuilder<List<LoaiNhiemVuComomModel>>(
-                    stream: widget.cubit.loaiCongViecCaNhanSuject,
+                    stream: widget.cubit.loaiCongViecSuject,
                     initialData: listFakeData,
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? [];

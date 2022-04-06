@@ -3,14 +3,15 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ListDanhSachCongViec extends StatefulWidget {
   final String titleButton;
-  final List<DanhSachCongViecModel> list;
+  final List<PageDatas> list;
   final Function() onTap;
-
 
   const ListDanhSachCongViec({
     required this.titleButton,
@@ -31,7 +32,7 @@ class _ListDanhSachCongViecState extends State<ListDanhSachCongViec> {
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
           color: bgQLVBTablet,
-          padding: const EdgeInsets.fromLTRB(30, 60, 30,0),
+          padding: const EdgeInsets.fromLTRB(30, 60, 30, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -39,25 +40,26 @@ class _ListDanhSachCongViecState extends State<ListDanhSachCongViec> {
               const SizedBox(
                 height: 20,
               ),
-              // ListView.builder(
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   itemCount: widget.list.length<3?widget.list.length:3,
-              //   itemBuilder: (context, index) {
-              //     return  NhiemVuCellTablet(
-              //       onTap: () {
-              //       },
-              //       title: widget.list[index].title??'',
-              //       noiDung: widget.list[index].noiDung??'',
-              //       dateTimeStart: widget.list[index].timeStart??'',
-              //       dateTimeEnd:widget.list[index].timeEnd??'' ,
-              //       userName: widget.list[index].nguoiTao??'',
-              //       status: widget.list[index].trangThai??'',
-              //       userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-              //       index: index+1,
-              //     );
-              //   },
-              // ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: widget.list.length < 3 ? widget.list.length : 3,
+                itemBuilder: (context, index) {
+                  return NhiemVuCellTablet(
+                    onTap: () {},
+                    title: widget.list[index].maCv ?? '',
+                    noiDung:
+                        (widget.list[index].noiDungCongViec ?? '').parseHtml(),
+                    userName: widget.list[index].doiTuongThucHien ?? '',
+                    status: widget.list[index].trangThai ?? '',
+                    userImage:
+                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    index: index + 1,
+                    hanXuLy: widget.list[index].hanXuLy ??
+                        DateTime.now().formatDdMMYYYY,
+                  );
+                },
+              ),
             ],
           ),
         ),

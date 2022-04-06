@@ -1,12 +1,10 @@
-
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/nhiem_vu_dashboard_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/danh_sach_cong_viec_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/danh_sach_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/widget/list_danh_sach_cong_viec.dart';
@@ -14,6 +12,7 @@ import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/widg
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/bieu_do_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
+import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -28,6 +27,14 @@ class NhiemVuCaNhanTablet extends StatefulWidget {
 
 class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
   ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
+  DanhSachCubit danhSachCubit = DanhSachCubit();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    danhSachCubit.callApi(true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,12 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
                 color: backgroundColorApp,
                 child: ChooseTimeScreen(
                   today: DateTime.now(),
+                  onSubmit: (value) {},
+                  onChangTime: () {
+                    danhSachCubit.ngayDauTien = chooseTimeCubit.startDate;
+                    danhSachCubit.ngayKetThuc = chooseTimeCubit.endDate;
+                    danhSachCubit.callApiDashBroash(true);
+                  },
                 ),
               ),
             ),
@@ -66,19 +79,39 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
                         ),
                       ),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: BieuDoNhiemVuTablet(
-                              title: S.current.nhiem_vu,
-                              nhiemVuDashboardModel: nhiemVuDashBoardModel,
-                              chartData: widget.cubit.chartDataNhiemVu,
+                            child: StreamBuilder<List<ChartData>>(
+                              stream: danhSachCubit.statusNhiemVuCaNhanSuject,
+                              initialData: danhSachCubit.chartDataNhiemVuCaNhan,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ??
+                                    widget.cubit.chartDataNhiemVu;
+                                return BieuDoNhiemVuTablet(
+                                  title: S.current.nhiem_vu,
+                                  chartData: data,
+                                  isCheck: true,
+                                  cubit: danhSachCubit,
+                                );
+                              },
                             ),
                           ),
                           Expanded(
-                            child: BieuDoNhiemVuTablet(
-                              title: S.current.cong_viec,
-                              nhiemVuDashboardModel: nhiemVuDashBoardModel,
-                              chartData: widget.cubit.chartDataCongViec,
+                            child: StreamBuilder<List<ChartData>>(
+                              stream: danhSachCubit.statusCongViecCaNhanSuject,
+                              initialData:
+                                  danhSachCubit.chartDataCongViecCaNhan,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ??
+                                    widget.cubit.chartDataCongViec;
+                                return BieuDoNhiemVuTablet(
+                                  title: S.current.cong_viec,
+                                  isCheck: false,
+                                  cubit: danhSachCubit,
+                                  chartData: data,
+                                );
+                              },
                             ),
                           ),
                         ],
@@ -119,26 +152,60 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
           ),
           content: TabBarView(
             children: [
-              ListDanhSachNhiemVu(
-                titleButton: S.current.xem_danh_sach,
-                list: [],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DanhSachNhiemVuTablet(),
+              StreamBuilder<List<PageData>>(
+                stream: danhSachCubit.dataSubject,
+                builder: (context, snapshot) {
+                  final data = snapshot.data ?? [];
+                  if (data.isNotEmpty) {
+                    return ListDanhSachNhiemVu(
+                      titleButton: S.current.xem_danh_sach,
+                      list: data,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DanhSachNhiemVuTablet(
+                              cubit: danhSachCubit,
+                              isCheck: true,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return SizedBox(
+                    child: Text(
+                      S.current.khong_co_du_lieu,
+                      style: titleAppbar(fontSize: 16.0),
                     ),
                   );
                 },
               ),
-              ListDanhSachCongViec(
-                titleButton: S.current.xem_danh_sach,
-                list: [],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DanhSachCongViecTablet(),
+              StreamBuilder<List<PageDatas>>(
+                stream: danhSachCubit.dataSubjects,
+                builder: (context, snapshot) {
+                  final data = snapshot.data ?? [];
+                  if (data.isNotEmpty) {
+                    return ListDanhSachCongViec(
+                      titleButton: S.current.xem_danh_sach,
+                      list: data,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DanhSachCongViecTablet(
+                              isCheck: true,
+                              cubit: danhSachCubit,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return SizedBox(
+                    child: Text(
+                      S.current.khong_co_du_lieu,
+                      style: titleAppbar(fontSize: 16.0),
                     ),
                   );
                 },

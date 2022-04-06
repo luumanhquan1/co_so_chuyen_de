@@ -153,7 +153,7 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                             width: 100,
                           ),
                           Flexible(
-                            flex: 6,
+                            flex: 5,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -326,7 +326,8 @@ class _YKNDScreenTabletState extends State<YKNDScreenTablet>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChiTietVanBanTabletScreen(
+                                    builder: (context) =>
+                                        ChiTietVanBanTabletScreen(
                                       iD: data[index].id,
                                       taskID: data[index].taskID,
                                     ),
