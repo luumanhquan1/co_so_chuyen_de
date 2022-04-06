@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_cong_viec_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_nhiem_vu_request.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_cong_viec_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_response.dart';
@@ -105,5 +106,9 @@ abstract class NhiemVuService {
   @GET(ApiConstants.GET_LICH_SU_DON_DOC_NHIEM_VU)
   Future<DataLichSuDonDocNhiemVuModelResponse> getLichSuDonDocNhiemVu(
     @Query('nhiemVuId') String nhiemVuId,
+
+  );  @GET(ApiConstants.GET_CHI_TIET_CONG_VIEC)
+  Future<DataChiTietCongViecNhiemVuModelResponse> getChiTietCongViec(
+    @Query('congViecId') String congViecId,
   );
 }

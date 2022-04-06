@@ -54,7 +54,9 @@ class _ChiTietNhiemVuPhoneScreenState extends State<ChiTietNhiemVuPhoneScreen> {
       backgroundColor: Colors.white,
       appBar: AppBarDefaultBack(S.current.chi_tiet_nhiem_vu),
       body: RefreshIndicator(
-        onRefresh: () async {},
+        onRefresh: () async {
+          await cubit.loadDataNhiemVuCaNhan(nhiemVuId: widget.id, isCheck: widget.isCheck);
+        },
         child: ProviderWidget<ChiTietNVCubit>(
           cubit: cubit,
           child: StateStreamLayout(
