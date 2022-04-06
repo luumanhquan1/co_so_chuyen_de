@@ -1,11 +1,17 @@
+import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_cong_viec_request.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/request/danh_sach_nhiem_vu_request.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/chi_tiet_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/dash_broash_cong_viec_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/dash_broash_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_cap_nhat_thth_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_don_doc_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_phan_xu_ly_nhiem_vu_response.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_tra_lai_nhiem_vu_response.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_cap_nhat_thth_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_thu_hoi_nhiem_vu_response.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/data/response/lich_su_tra_lai_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/data/response/y_kien_su_ly_nhiem_vu_response.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/data/response/danh_sach_cong_viec_chi_tiet_nhiem_vu_response.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -17,6 +23,46 @@ part 'nhiem_vu_service.g.dart';
 abstract class NhiemVuService {
   @factoryMethod
   factory NhiemVuService(Dio dio, {String baseUrl}) = _NhiemVuService;
+
+  @POST(ApiConstants.DANHSACHNHIEMVU)
+  @FormUrlEncoded()
+  Future<DanhSachNhiemVuResponse> danhSachNhiemVu(
+    @Body() DanhSachNhiemVuRequest danhSachNhiemVuRequest,
+  );
+
+  @POST(ApiConstants.DANHSACHCONGVIEC)
+  @FormUrlEncoded()
+  Future<DanhSachCongViecResponse> danhSachCongViec(
+    @Body() DanhSachCongViecRequest danhSachCongViecRequest,
+  );
+
+  @GET(ApiConstants.GETDASHBROASHNHIEMVU)
+  @FormUrlEncoded()
+  Future<DashBroashResponse> getDashBroashNhiemVu(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
+
+  @GET(ApiConstants.GETDASHBROASHCONGVIEC)
+  @FormUrlEncoded()
+  Future<DashBroashCongViecResponse> getDashBroashCongViec(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
+
+  @GET(ApiConstants.GETDASHBROASHNHIEMVUCANHAN)
+  @FormUrlEncoded()
+  Future<DashBroashResponse> getDashBroashNhiemVuCaNhan(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
+
+  @GET(ApiConstants.GETDASHBROASHCONGVIECCANHAN)
+  @FormUrlEncoded()
+  Future<DashBroashCongViecResponse> getDashBroashCongViecCaNhan(
+    @Query('NgayDauTien') String ngayDauTien,
+    @Query('NgayCuoiCung') String ngayCuoiCung,
+  );
 
   @GET(ApiConstants.GET_CHI_TIET_NHIEM_VU)
   Future<DataChiTietNhiemVuResponse> getChiTietNhiemVu(

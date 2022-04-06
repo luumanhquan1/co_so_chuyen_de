@@ -5,12 +5,12 @@ import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 
-class BieuDoNhiemVuMobile extends StatefulWidget {
+class BieuDoNhiemVuCaNhan extends StatefulWidget {
   final String? title;
   final DanhSachCubit cubit;
   final List<ChartData> chartData;
 
-  const BieuDoNhiemVuMobile({
+  const BieuDoNhiemVuCaNhan({
     Key? key,
     required this.cubit,
     required this.chartData,
@@ -18,10 +18,10 @@ class BieuDoNhiemVuMobile extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BieuDoNhiemVuMobileState createState() => _BieuDoNhiemVuMobileState();
+  _BieuDoNhiemVuCaNhanState createState() => _BieuDoNhiemVuCaNhanState();
 }
 
-class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
+class _BieuDoNhiemVuCaNhanState extends State<BieuDoNhiemVuCaNhan> {
   @override
   void initState() {
     super.initState();
@@ -34,14 +34,21 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PieChart(
-            title: widget.title ?? '',
-            chartData: widget.chartData,
-            onTap: (int value) {},
+          StreamBuilder<List<ChartData>>(
+            stream: widget.cubit.statusNhiemVuCaNhanSuject,
+            initialData: widget.cubit.chartDataNhiemVu,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? [];
+              return PieChart(
+                title: widget.title ?? '',
+                chartData: data,
+                onTap: (int value) {},
+              );
+            },
           ),
           Container(height: 20),
           StreamBuilder<List<LoaiNhiemVuComomModel>>(
-            stream: widget.cubit.loaiNhiemVuSuject,
+            stream: widget.cubit.loaiNhiemVuCaNhanSuject,
             initialData: listFakeData,
             builder: (context, snapshot) {
               final data = snapshot.data ?? [];

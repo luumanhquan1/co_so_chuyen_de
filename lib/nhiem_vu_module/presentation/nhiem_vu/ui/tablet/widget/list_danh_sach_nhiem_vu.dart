@@ -40,32 +40,32 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
               const SizedBox(
                 height: 20,
               ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: widget.list.length<3?widget.list.length:3,
-                itemBuilder: (context, index) {
-                  return NhiemVuCellTablet(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                          const ChiTietNhiemVuTabletScreen(),
-                        ),
-                      );
-                    },
-                    title: widget.list[index].title??'',
-                    noiDung: widget.list[index].noiDung??'',
-                    dateTimeStart: widget.list[index].timeStart??'',
-                    dateTimeEnd:widget.list[index].timeEnd??'' ,
-                    userName: widget.list[index].nguoiTao??'',
-                    status: widget.list[index].trangThai??'',
-                    userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-                    index: index+1,
-                  );
-                },
-              ),
+              // ListView.builder(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   shrinkWrap: true,
+              //   itemCount: widget.list.length<3?widget.list.length:3,
+              //   itemBuilder: (context, index) {
+              //     return NhiemVuCellTablet(
+              //       onTap: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) =>
+              //             const ChiTietNhiemVuTabletScreen(),
+              //           ),
+              //         );
+              //       },
+              //       title: widget.list[index].title??'',
+              //       noiDung: widget.list[index].noiDung??'',
+              //       dateTimeStart: widget.list[index].timeStart??'',
+              //       dateTimeEnd:widget.list[index].timeEnd??'' ,
+              //       userName: widget.list[index].nguoiTao??'',
+              //       status: widget.list[index].trangThai??'',
+              //       userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+              //       index: index+1,
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),
