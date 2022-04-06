@@ -8,19 +8,19 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 
-class ChitietCongViecNhiemVuMobile extends StatefulWidget {
+class ChitietCongViecNhiemVuTablet extends StatefulWidget {
   final String id;
 
-  const ChitietCongViecNhiemVuMobile({Key? key, required this.id})
+  const ChitietCongViecNhiemVuTablet({Key? key, required this.id})
       : super(key: key);
 
   @override
-  _ChitietCongViecNhiemVuMobileState createState() =>
-      _ChitietCongViecNhiemVuMobileState();
+  _ChitietCongViecNhiemVuTabletState createState() =>
+      _ChitietCongViecNhiemVuTabletState();
 }
 
-class _ChitietCongViecNhiemVuMobileState
-    extends State<ChitietCongViecNhiemVuMobile> {
+class _ChitietCongViecNhiemVuTabletState
+    extends State<ChitietCongViecNhiemVuTablet> {
   ChiTietCongViecNhiemVuCubit cubit = ChiTietCongViecNhiemVuCubit();
 
   @override
@@ -54,14 +54,14 @@ class _ChitietCongViecNhiemVuMobileState
                 child: Column(
                   children: [
                     StreamBuilder<ChiTietCongViecNhiemVuModel>(
-                        stream: cubit.chiTietCongViecSubject,
-                        builder: (context, snapshot) {
-                          final data = snapshot.data;
-                          return WidgetThongTinCongViecNhiemVu(
-                            cubit: cubit,
-                            data: data ?? ChiTietCongViecNhiemVuModel(),
-                          );
-                        },),
+                      stream: cubit.chiTietCongViecSubject,
+                      builder: (context, snapshot) {
+                        final data = snapshot.data;
+                        return WidgetThongTinCongViecNhiemVu(
+                          cubit: cubit,
+                          data: data ?? ChiTietCongViecNhiemVuModel(),
+                        );
+                      },),
                   ],
                 ),
               ),

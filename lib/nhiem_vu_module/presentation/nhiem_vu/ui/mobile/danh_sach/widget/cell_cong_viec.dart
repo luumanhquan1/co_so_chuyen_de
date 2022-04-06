@@ -7,16 +7,20 @@ import 'package:flutter/cupertino.dart';
 
 class CellCongViec extends StatelessWidget {
   final PageDatas data;
+  final Function onTap;
 
   const CellCongViec({
     Key? key,
     required this.data,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20.0),
         height: 107,
