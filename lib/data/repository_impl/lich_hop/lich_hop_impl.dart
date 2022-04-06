@@ -20,20 +20,25 @@ import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_p
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/co_cau_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_bieu_quyet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/dashborad_thong_ke_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/event_calendar_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/statistic_by_month_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/ti_le_tham_gia_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/to_chuc_boi_don_vi_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
@@ -60,6 +65,11 @@ import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/co_cau_lich_hop.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/ti_le_tham_gia.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/to_chuc_boi_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/xem_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/list_lich_lv/menu_model.dart';
@@ -412,9 +422,64 @@ class HopRepositoryImpl implements HopRepository {
 
   @override
   Future<Result<List<MenuModel>>> getDataMenu(
-      String startTime, String endTime,) {
+    String startTime,
+    String endTime,
+  ) {
     return runCatchingAsync<MenuResponse, List<MenuModel>>(
       () => _hopServices.getMenuLichHop(startTime, endTime),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<StatisticByMonthModel>>> postStatisticByMonth(
+    String dateFrom,
+    String dateTo,
+  ) {
+    return runCatchingAsync<StatisticByMonthResponse,
+        List<StatisticByMonthModel>>(
+      () => _hopServices.postStatisticByMonth(dateFrom, dateTo),
+      (response) => response.data.map((e) => e.toModel()).toList(),
+    );
+  }
+
+  @override
+  Future<Result<List<DashBoardThongKeModel>>> getDashBoardThongKe(
+    String dateFrom,
+    String dateTo,
+  ) {
+    return runCatchingAsync<DashBoardThongKeResponse,
+        List<DashBoardThongKeModel>>(
+      () => _hopServices.getDashBoardThongKe(dateFrom, dateTo),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<CoCauLichHopModel>>> postCoCauLichHop(
+    String dateFrom,
+    String dateTo,
+  ) {
+    return runCatchingAsync<CoCauLichHopResponse, List<CoCauLichHopModel>>(
+      () => _hopServices.postCoCauLichHop(dateFrom, dateTo),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<ToChucBoiDonViModel>>> postToChucBoiDonVi(
+      String dateFrom, String dateTo) {
+    return runCatchingAsync<ToChucBoiDonViResponse, List<ToChucBoiDonViModel>>(
+      () => _hopServices.postToChucBoiDonVi(dateFrom, dateTo),
+      (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
+    );
+  }
+
+  @override
+  Future<Result<List<TiLeThamGiaModel>>> postTiLeThamGia(
+      String dateFrom, String dateTo) {
+    return runCatchingAsync<TiLeThamGiaResponse, List<TiLeThamGiaModel>>(
+      () => _hopServices.postTiLeThamGia(dateFrom, dateTo),
       (response) => response.data?.map((e) => e.toModel()).toList() ?? [],
     );
   }

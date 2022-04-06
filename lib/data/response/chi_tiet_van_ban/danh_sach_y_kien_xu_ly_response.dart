@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/danh_sach_y_kien_xu_ly
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'danh_sach_y_kien_xu_ly_response.g.dart';
 
 @JsonSerializable()

@@ -1,6 +1,5 @@
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:ccvc_mobile/domain/model/app_theme_model.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';

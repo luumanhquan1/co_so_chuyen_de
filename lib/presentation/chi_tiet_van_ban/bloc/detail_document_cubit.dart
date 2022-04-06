@@ -15,11 +15,12 @@ import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.
 import 'package:ccvc_mobile/domain/model/detail_doccument/thong_tin_gui_nhan.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/qlvb_repository/qlvb_repository.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:queue/queue.dart';
 import 'package:rxdart/rxdart.dart';
+
 import 'detai_doccument_state.dart';
-import 'package:file_picker/file_picker.dart';
 
 class DetailDocumentCubit extends BaseCubit<DetailDocumentState> {
   DetailDocumentCubit() : super(DetailDocumentInitial());

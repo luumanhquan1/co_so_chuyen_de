@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-
-import '/presentation/webview/web_view_screen.dart';
+import 'package:flutter/material.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/domain/model/home/tinh_huong_khan_cap_model.dart';
 import '/home_module/presentation/home_screen/ui/home_provider.dart';
-
-
 import '/home_module/utils/constants/image_asset.dart';
-import 'package:flutter/material.dart';
+import '/presentation/webview/web_view_screen.dart';
 
 class MarqueeWidget extends StatelessWidget {
   const MarqueeWidget({Key? key}) : super(key: key);
@@ -181,6 +178,7 @@ class _MequeeWidgetState extends State<_MarqueeCell> {
 
   Timer getAnimationRun() {
     return Timer.periodic(const Duration(milliseconds: 40), (timer) {
+      // log("message$offset");
       offset = offset - 1;
       offset1 = offset1 - 1;
       if (offset1 < 0 && offset1 > -2) {

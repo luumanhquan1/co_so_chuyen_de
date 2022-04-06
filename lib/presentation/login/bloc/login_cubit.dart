@@ -1,13 +1,11 @@
 import 'dart:async';
 
-
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/account/login_model.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
-
 import 'package:ccvc_mobile/presentation/login/bloc/login_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_core/src/get_main.dart';

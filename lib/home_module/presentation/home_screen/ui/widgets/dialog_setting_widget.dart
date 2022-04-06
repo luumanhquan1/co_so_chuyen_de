@@ -1,27 +1,20 @@
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-
-
-import '/home_module/config/resources/color.dart';
-import '/home_module/config/resources/styles.dart';
-
-import '/home_module/domain/model/home/WidgetType.dart';
-import '/generated/l10n.dart';
-import '/home_module/presentation/home_screen/ui/home_provider.dart';
-import '/home_module/presentation/home_screen/ui/widgets/custom_select_date_tuy_chon_widgte.dart';
-
-import '/home_module/utils/constants/app_constants.dart';
-import '/home_module/utils/constants/image_asset.dart';
-
-import '/home_module/utils/enum_ext.dart';
-import '/home_module/utils/extensions/date_time_extension.dart';
-
-
-import '/home_module/widgets/radio/radio_button.dart';
-import '/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '/generated/l10n.dart';
+import '/home_module/config/resources/color.dart';
+import '/home_module/config/resources/styles.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/presentation/home_screen/ui/home_provider.dart';
+import '/home_module/presentation/home_screen/ui/widgets/custom_select_date_tuy_chon_widgte.dart';
+import '/home_module/utils/constants/app_constants.dart';
+import '/home_module/utils/constants/image_asset.dart';
+import '/home_module/utils/enum_ext.dart';
+import '/home_module/utils/extensions/date_time_extension.dart';
+import '/home_module/widgets/radio/radio_button.dart';
+import '/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
 
 class DialogSettingWidget extends StatefulWidget {
   final List<DialogData>? listSelectKey;

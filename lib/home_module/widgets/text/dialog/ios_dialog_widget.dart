@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '/generated/l10n.dart';
 import 'package:get/get.dart';
+
+import '/generated/l10n.dart';
 import '/home_module/config/resources/styles.dart';
 
 class IOSDialog extends StatelessWidget {

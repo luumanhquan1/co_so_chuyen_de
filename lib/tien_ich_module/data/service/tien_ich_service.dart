@@ -4,9 +4,10 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/danh_sach_hssd_respons
 import 'package:ccvc_mobile/tien_ich_module/data/response/detail_huong_dan_su_dung_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/nhom_cv_moi_dscv_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
-import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -29,32 +30,35 @@ abstract class TienIchService {
   @PUT(ApiConstants.TODO_LIST_UPDATE)
   @FormUrlEncoded()
   Future<ToDoListUpdateResponse> updateTodoList(
-      @Body() ToDoListRequest toDoListRequest,);
+    @Body() ToDoListRequest toDoListRequest,
+  );
 
   @POST(ApiConstants.TODO_LIST_CREATE)
   @FormUrlEncoded()
   Future<ToDoListUpdateResponse> createTodoList(
-      @Body() CreateToDoRequest createToDoRequest,);
+    @Body() CreateToDoRequest createToDoRequest,
+  );
 
   @GET(ApiConstants.GET_DANH_SACH_HDSD)
   Future<DataDanhSachHDSDResponse> getDanhSachHDSD(
-      @Query('pageIndex') int pageIndex,
-      @Query('pageSize') int pageSize,
-      @Query('topicId') String topicId,
-      @Query('type') String type,
-      @Query('searchKeyword') String searchKeyword,);
+    @Query('pageIndex') int pageIndex,
+    @Query('pageSize') int pageSize,
+    @Query('topicId') String topicId,
+    @Query('type') String type,
+    @Query('searchKeyword') String searchKeyword,
+  );
 
   @GET(ApiConstants.GET_DETAIL_HUONG_DAN_SU_DUNG)
   Future<DataDetailHuongDanSuDungResponse> getDetailHuongDanSuDung(
-      @Query('id') String id,);
+    @Query('id') String id,
+  );
 
   @GET(ApiConstants.GET_TRA_CUU_VAN_BAN_PHAP_LUAT)
   Future<DataTraCuuVanBanPhapLuatResponse> getTraCuuVanBanPhapLuat(
-  @Query('Title') String title,
-      @Query('PageIndex') int pageIndex,
-      @Query('PageSize') int pageSize,
-      );
-
+    @Query('Title') String title,
+    @Query('PageIndex') int pageIndex,
+    @Query('PageSize') int pageSize,
+  );
 }
 
 @RestApi()
@@ -64,23 +68,31 @@ abstract class TienIchServiceUAT {
 
   @GET(ApiConstants.GET_LICH_AM_DUONG)
   Future<DataLichAmDuongResponse> getLichAmDuong(
-      @Query('dateStr') String date,);
+    @Query('dateStr') String date,
+  );
+
+  @GET(ApiConstants.NHOM_CV_MOI)
+  @FormUrlEncoded()
+  Future<NhomCVMoiDSCVResponse> NhomCVMoi();
 }
 
 @RestApi()
 abstract class TienIchServiceCommon {
   @factoryMethod
   factory TienIchServiceCommon(Dio dio, {String baseUrl}) =
-  _TienIchServiceCommon;
+      _TienIchServiceCommon;
 
   @GET(ApiConstants.LIST_NGUOI_THUC_HIEN)
   @FormUrlEncoded()
   Future<ListNguoiThucHienResponse> getListNguoiThucHien(
-      @Query('IsGetAll') bool isGetAll,
-      @Query('PageSize') int pageSize,
-      @Query('PageIndex') int pageIndex,);
+    @Query('IsGetAll') bool isGetAll,
+    @Query('PageSize') int pageSize,
+    @Query('PageIndex') int pageIndex,
+  );
 
   @GET(ApiConstants.TREE_DANH_BA)
   @FormUrlEncoded()
-  Future<TreeDanhBaResponse> TreeDanhBa(@Query('soCap') int soCap,);
+  Future<TreeDanhBaResponse> TreeDanhBa(
+    @Query('soCap') int soCap,
+  );
 }

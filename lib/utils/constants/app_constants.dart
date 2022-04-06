@@ -1,4 +1,4 @@
-import 'package:flutter_html/shims/dart_ui_fake.dart';
+
 
 enum AppMode { MAC_DINH, XANH, HONG, VANG }
 enum DeviceType { MOBILE, TABLET }
@@ -125,6 +125,7 @@ const _dtFormat5 = 'MMM dd, yyyy';
 const _dtFormat6 = 'MM/dd/yyyy HH:mm:ss';
 
 const String DO_MAIN_DOWLOAD_FILE='http://api-qlvb-nv.dongnai.edsolabs.vn';
+const String DO_MAIN_DOWLOAD_FILE_NHIEM_VU='https://api-qlvb-nv-ccvc-uat.chinhquyendientu.vn';
 const String DO_MAIN_LICH_AM_DUONG='https://api-and-uat.chinhquyendientu.vn';
 
 class DateTimeFormat {

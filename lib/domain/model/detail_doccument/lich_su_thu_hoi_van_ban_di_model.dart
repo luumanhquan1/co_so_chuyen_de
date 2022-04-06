@@ -1,5 +1,5 @@
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/domain/model/detail_doccument/document_detail_row.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 
 class DataLichSuThuHoiVanBanDi {
   String? messages;
@@ -42,7 +42,7 @@ class LichSuThuHoiVanBanDi {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_thu_hoi,
+        S.current.don_vi_thu_hoi,
         donViThuHoi??'',
         TypeDocumentDetailRow.text,
       ),
@@ -52,7 +52,7 @@ class LichSuThuHoiVanBanDi {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.nd_thu_hoi,
+        S.current.noi_dung_thu_hoi,
         noiDungThuHoi??'',
         TypeDocumentDetailRow.text,
       ),
@@ -62,7 +62,7 @@ class LichSuThuHoiVanBanDi {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_bi_thu_hoi,
+        S.current.don_vi_bi_thu_hoi,
         donViBiThuHoi??'',
         TypeDocumentDetailRow.text,
       ),

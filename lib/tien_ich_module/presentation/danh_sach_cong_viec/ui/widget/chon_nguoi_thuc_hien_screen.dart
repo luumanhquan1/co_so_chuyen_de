@@ -40,7 +40,9 @@ class _DanhSachCongViecTienIchMobileState
             children: [
               BaseSearchBar(
                 hintText: S.current.tim_kiem_nhanh,
-                onChange: (value) {},
+                onChange: (value) {
+                  widget.cubit.timNguoiTHucHien(value);
+                },
               ),
               StreamBuilder<List<NguoiThucHienModel>>(
                 stream: widget.cubit.nguoiThucHien.stream,

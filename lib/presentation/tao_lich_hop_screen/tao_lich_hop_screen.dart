@@ -1,12 +1,9 @@
 
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/bloc/tao_lich_hop_cubit.dart';
-
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/mobile/tao_lich_hop_mobile.dart';
 import 'package:ccvc_mobile/presentation/tao_lich_hop_screen/tablet/tao_lich_hop_tablet.dart';
-
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/provider_widget.dart';
-
 import 'package:flutter/material.dart';
 
 class TaoLichHopScreen extends StatefulWidget {

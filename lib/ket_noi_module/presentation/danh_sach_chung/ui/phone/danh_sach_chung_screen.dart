@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/ket_noi_module/presentation/danh_sach_chung/widget/i
 import 'package:ccvc_mobile/ket_noi_module/presentation/menu/ui/phone/ket_noi_menu.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/bloc/tao_su_kien_cubit.dart';
 import 'package:ccvc_mobile/ket_noi_module/presentation/tao_su_kien/ui/phone/tao_su_kien_screen.dart';
+import 'package:ccvc_mobile/ket_noi_module/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/app_bar/base_app_bar.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/drawer_slide/drawer_slide.dart';
@@ -28,7 +29,6 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     cubit = KetNoiCubit();
     taoSuKienCubit.callApi();
@@ -36,105 +36,92 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<String>(
-      stream: cubit.streamHeader,
-      builder: (context, snap) {
-        final data = snap.data ?? S.current.chung;
-        return Scaffold(
-          appBar: BaseAppBar(
-            title: data,
-            leadingIcon: IconButton(
-              onPressed: () => {Navigator.pop(context)},
-              icon: SvgPicture.asset(
-                ImageAssets.icBacks,
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  DrawerSlide.navigatorSlide(
-                    context: context,
-                    screen: KetNoiMenu(
-                      taoSuKienCubit: taoSuKienCubit,
-                      onChange: (value) {
-                        if (mounted) setState(() {});
-                        cubit.sukien = value.alias ?? '';
-                      },
-                      onSelect: (value) {
-                        cubit.subCategory = value;
-                      },
-                      ontChangeTitle: (value) {
-                        cubit.headerSubject.sink.add(value);
-                      },
-                    ),
-                    thenValue: (value) {},
-                  );
-                },
-                icon: SvgPicture.asset(
-                  ImageAssets.ic_mennu_ykien,
-                ),
-              ),
-            ],
+    return Scaffold(
+      appBar: BaseAppBar(
+        title: cubit.dataCurrent?.title ?? S.current.chung,
+        leadingIcon: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: SvgPicture.asset(
+            ImageAssets.icBacks,
           ),
-          body: Container(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: _content(),
-          ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: labelColor,
+        ),
+        actions: [
+          IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const TaoSuKienKetNoi(),
-                ),
-              );
+              if (taoSuKienCubit.listData.isNotEmpty) {
+                DrawerSlide.navigatorSlide(
+                  context: context,
+                  screen: KetNoiMenu(
+                    onChange: (value) {
+                      cubit.dataCurrent = value;
+                      setState(() {});
+                    },
+                    listData: taoSuKienCubit.listData,
+                  ),
+                  thenValue: (value) {},
+                );
+              }
             },
-            child: SvgPicture.asset(ImageAssets.ic_vector),
+            icon: SvgPicture.asset(
+              ImageAssets.ic_mennu_ykien,
+            ),
           ),
-        );
-      },
+        ],
+      ),
+      body: Container(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: _content(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: labelColor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const TaoSuKienKetNoi(),
+            ),
+          );
+        },
+        child: SvgPicture.asset(ImageAssets.ic_vector),
+      ),
     );
   }
 
   Widget _content() {
-    return cubit.sukien == S.current.ket_nois
-        ? ListViewLoadMore(
-            cubit: cubit,
-            isListView: true,
-            callApi: (page) =>
-                {cubit.getDataTrongNuoc(page, cubit.subCategory)},
-            viewItem: (value, index) {
-              try {
-                return ItemListTrongNuoc(
-                  model: value as ItemTrongNuocModel,
-                );
-              } catch (e) {
-                return const SizedBox();
-              }
-            },
-          )
-        : ListViewLoadMore(
-            cubit: cubit,
-            isListView: true,
-            callApi: (page) => {
-              cubit.getListCategory(
-                pageIndex: page,
-                pageSize: cubit.pageSize,
-                idDauMucSuKien: cubit.subCategory,
-                type: cubit.type,
-              )
-            },
-            viewItem: (value, index) {
-              try {
-                return ItemListChung(
-                  danhSachChungModel: value as DanhSachChungModel,
-                  index: index ?? 0,
-                );
-              } catch (e) {
-                return const SizedBox();
-              }
-            },
+    return ListViewLoadMore(
+      cubit: cubit,
+      isListView: true,
+      callApi: (page) => {
+        callApi(page),
+      },
+      viewItem: (value, index) {
+        if (cubit.dataCurrent?.id == ID_KET_NOI ||
+            cubit.dataCurrent?.parentId == ID_KET_NOI) {
+          return ItemListTrongNuoc(
+            model: value as ItemTrongNuocModel,
           );
+        } else {
+          return ItemListChung(
+            danhSachChungModel: value as DanhSachChungModel,
+            index: index ?? 0,
+          );
+        }
+      },
+    );
+  }
+
+  void callApi(int page) {
+    if (cubit.dataCurrent?.id == ID_KET_NOI ||
+        cubit.dataCurrent?.parentId == ID_KET_NOI) {
+      cubit.getDataTrongNuoc(
+        page,
+        cubit.dataCurrent?.code ?? '',
+      );
+    } else {
+      cubit.getListCategory(
+        page: page,
+        category: cubit.dataCurrent?.id ?? '',
+      );
+    }
   }
 }

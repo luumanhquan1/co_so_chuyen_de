@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/ui/widget/state_select_lich_ho
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'mobile/lich_hop_extension.dart';
 
 class ItemThongBaoModelMyCalender {
@@ -202,6 +203,9 @@ extension GetDataMenu on TypeCalendarMenu {
       case TypeCalendarMenu.LichCuaToi:
         return S.current.lich_hop_cua_toi;
 
+      case TypeCalendarMenu.BaoCaoThongKe:
+        return S.current.bao_cao_thong_ke;
+
       case TypeCalendarMenu.LichTheoTrangThai:
         return S.current.lich_theo_trang_thai;
 
@@ -224,9 +228,6 @@ extension GetDataMenu on TypeCalendarMenu {
 
       case TypeCalendarMenu.LichDaCoBaoCao:
         return S.current.lich_da_co_bao_cao;
-
-      case TypeCalendarMenu.BaoCaoThongKe:
-        return S.current.bao_cao_thong_ke;
 
       case TypeCalendarMenu.LichDaKLCH:
         return S.current.lich_da_klch;

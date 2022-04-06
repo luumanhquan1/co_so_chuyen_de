@@ -1,5 +1,4 @@
 import 'package:ccvc_mobile/data/response/account/data_login_response.dart';
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_response.g.dart';

@@ -28,6 +28,13 @@ class LichHopStateDangList extends LichHopState {
   List<Object?> get props => [type];
 }
 
+class LichHopStateDangThongKe extends LichHopState {
+  const LichHopStateDangThongKe(Type_Choose_Option_Day type) : super(type);
+
+  @override
+  List<Object?> get props => [type];
+}
+
 class LichHopStateDangDanhSach extends LichHopState {
   const LichHopStateDangDanhSach(Type_Choose_Option_Day type) : super(type);
 

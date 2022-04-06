@@ -44,7 +44,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_cap_nhat,
+        S.current.don_vi_cap_nhat,
         donViTaoXuLy ?? '',
         TypeDocumentDetailRow.text,
       ),
@@ -76,7 +76,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_tra_lai,
+        S.current.don_vi_tra_lai,
         donViXuLy,
         TypeDocumentDetailRow.text,
       ),
@@ -96,7 +96,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.d_v_bi_tra_lai,
+        S.current.don_vi_bi_tra_lai,
         donViTaoXuLy,
         TypeDocumentDetailRow.text,
       ),
@@ -118,13 +118,13 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.nd_thu_hoi,
+        S.current.noi_dung_thu_hoi,
         donViTaoXuLy,
 
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_thu_hoi,
+        S.current.don_vi_thu_hoi,
         noiDung,
         TypeDocumentDetailRow.text,
       ),
@@ -139,7 +139,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_bi_thu_hoi,
+        S.current.don_vi_bi_thu_hoi,
         donViXuLy,
         TypeDocumentDetailRow.text,
       ),
@@ -155,13 +155,13 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.nd_thu_hoi,
+        S.current.noi_dung_thu_hoi,
         donViTaoXuLy,
 
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_thu_hoi,
+        S.current.don_vi_thu_hoi,
         noiDung,
         TypeDocumentDetailRow.text,
       ),
@@ -176,7 +176,7 @@ class LichSuVanBanModel {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_bi_thu_hoi,
+        S.current.don_vi_bi_thu_hoi,
         donViXuLy,
         TypeDocumentDetailRow.text,
       ),

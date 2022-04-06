@@ -1,11 +1,7 @@
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
-import 'package:ccvc_mobile/domain/locals/hive_local.dart';
-
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/app_theme_model.dart';
-
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';

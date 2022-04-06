@@ -1,11 +1,9 @@
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
-
-
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ContainerInfoWidget extends StatelessWidget {
   final List<InfoData> listData;

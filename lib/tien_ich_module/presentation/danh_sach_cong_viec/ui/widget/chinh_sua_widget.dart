@@ -45,7 +45,6 @@ class _EditWidgetState extends State<EditWidget> {
             padding: const EdgeInsets.only(top: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ItemTextFieldWidgetDSNV(
                   initialValue: widget.todo.label ?? '',
@@ -112,11 +111,13 @@ class _EditWidgetState extends State<EditWidget> {
                                 left: 10,
                                 top: 14,
                                 bottom: 14,
+                                right: 30,
                               ),
                               child: Text(
                                 snapshot.data == true
                                     ? (widget.cubit.person.isEmpty
-                                        ? widget.todo.createdBy ?? ''
+                                        ? widget.cubit.convertIdToPerson(
+                                    widget.todo.updatedBy ?? '')
                                         : widget.cubit.person)
                                     : (widget.cubit.person.isEmpty)
                                         ? S.current.tim_theo_nguoi
@@ -179,6 +180,7 @@ class _EditWidgetState extends State<EditWidget> {
                     title1: S.current.dong,
                     title2: S.current.luu,
                     onPressed1: () {
+                      widget.cubit.person = '';
                       Navigator.pop(context);
                     },
                     onPressed2: () {

@@ -21,26 +21,32 @@ import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/thong_tin_p
 import 'package:ccvc_mobile/data/response/lich_hop/chi_tiet_lich_hop/xem_ket_luan_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chon_bien_ban_cuoc_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/chuong_trinh_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/co_cau_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_bieu_quyet_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_can_bo_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phat_bieu_lich_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/danh_sach_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/dash_board_lh_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/dashborad_thong_ke_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/event_calendar_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/gui_mail_ket_luat-response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/moi_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/nguoi_chu_trinh_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/select_phien_hop_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/statistic_by_month_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/sua_ket_luan_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tao_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_moi_bieu_quayet_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/them_y_kien_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/ti_le_tham_gia_response.dart';
+import 'package:ccvc_mobile/data/response/lich_hop/to_chuc_boi_don_vi_response.dart';
 import 'package:ccvc_mobile/data/response/lich_hop/tong_phien_hop_respone.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/danh_sach_y_kien_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/list_phien_hop_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/menu_response.dart';
 import 'package:ccvc_mobile/data/response/lich_lam_viec/xoa_bao_cao_response.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/utils/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -223,5 +229,35 @@ abstract class HopServices {
   Future<MenuResponse> getMenuLichHop(
     @Query('DateStart') String DateStart,
     @Query('DateTo') String DateTo,
+  );
+
+  @POST(ApiConstants.STATISTIC_BY_MONTH)
+  Future<StatisticByMonthResponse> postStatisticByMonth(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.DASHBOARD_THONG_KE)
+  Future<DashBoardThongKeResponse> getDashBoardThongKe(
+    @Field('dateFrom') String dateFrom,
+    @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.CO_CAU_LICH_HOP)
+  Future<CoCauLichHopResponse> postCoCauLichHop(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.TO_CHUC_BOI_DON_VI)
+  Future<ToChucBoiDonViResponse> postToChucBoiDonVi(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
+  );
+
+  @POST(ApiConstants.TI_LE_THAM_GIA)
+  Future<TiLeThamGiaResponse> postTiLeThamGia(
+      @Field('dateFrom') String dateFrom,
+      @Field('dateTo') String dateTo,
   );
 }

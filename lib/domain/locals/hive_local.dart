@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:ccvc_mobile/domain/model/account/data_user.dart';
 import 'package:ccvc_mobile/domain/model/account/permission_app_model.dart';
 import 'package:ccvc_mobile/domain/model/account/user_infomation.dart';
-import 'package:ccvc_mobile/domain/model/app_theme_model.dart';
 import 'package:ccvc_mobile/domain/model/select_key/select_key_model.dart';
 import 'package:hive/hive.dart';
-import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:queue/queue.dart';
 
 enum PermissionType { QLVB, PAKN, VPDT, QLNV }

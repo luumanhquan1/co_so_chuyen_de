@@ -36,6 +36,7 @@ class _DanhSachCongViecTienIchMobileState
     super.initState();
     cubit.getToDoList();
     cubit.listNguoiThucHien();
+    cubit.getNHomCVMoi();
   }
 
   @override

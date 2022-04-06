@@ -1,27 +1,22 @@
-import '/home_module/config/themes/app_theme.dart';
-
-import '/presentation/webview/web_view_screen.dart';
-
-import '/home_module/config/resources/color.dart';
-import '/home_module/config/resources/styles.dart';
-import '/home_module/domain/model/home/press_network_model.dart';
-import '/home_module/domain/model/home/WidgetType.dart';
-import '/generated/l10n.dart';
-import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
-
-import '/home_module/presentation/home_screen/ui/home_provider.dart';
-
-import '/home_module/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
-import '/home_module/presentation/home_screen/ui/widgets/bao_chi_widget.dart';
-import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
-
-
-import '/home_module/utils/constants/image_asset.dart';
-import '/home_module/widgets/text/text/no_data_widget.dart';
-import '/home_module/widgets/text/views/loading_only.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/generated/l10n.dart';
+import '/home_module/config/resources/color.dart';
+import '/home_module/config/resources/styles.dart';
+import '/home_module/config/themes/app_theme.dart';
+import '/home_module/domain/model/home/WidgetType.dart';
+import '/home_module/domain/model/home/press_network_model.dart';
+import '/home_module/presentation/home_screen/bloc/home_cubit.dart';
+import '/home_module/presentation/home_screen/ui/home_provider.dart';
+import '/home_module/presentation/home_screen/ui/mobile/widgets/container_backgroud_widget.dart';
+import '/home_module/presentation/home_screen/ui/widgets/bao_chi_widget.dart';
+import '/home_module/presentation/home_screen/ui/widgets/dialog_setting_widget.dart';
+import '/home_module/utils/constants/image_asset.dart';
+import '/home_module/widgets/text/text/no_data_widget.dart';
+import '/home_module/widgets/text/views/loading_only.dart';
+import '/presentation/webview/web_view_screen.dart';
 
 class PressSocialNetWork extends StatefulWidget {
   final WidgetType homeItemType;

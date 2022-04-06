@@ -1,8 +1,8 @@
 
-import '/generated/l10n.dart';
-
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
+
+import '/generated/l10n.dart';
 
 final formatValue = NumberFormat('###,###,###.###', 'en_US');
 

@@ -1,6 +1,5 @@
-import '/home_module/domain/model/home/WidgetType.dart';
-
-
+import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
+import 'package:flutter/cupertino.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/calendar_work_widget.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/document_widget.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/event_of_day_widget.dart';
@@ -25,7 +24,6 @@ import '/home_module/presentation/home_screen/ui/tablet/items/situation_of_handl
 import '/home_module/presentation/home_screen/ui/tablet/items/summary_of_task_tablet_widget.dart';
 import '/home_module/presentation/home_screen/ui/tablet/items/word_processing_state_tablet_widget.dart';
 import '/home_module/presentation/home_screen/ui/tablet/items/work_list_tablet_widget.dart';
-import 'package:flutter/cupertino.dart';
 
 extension ItemExtension on WidgetType {
   Widget getItemsMobile() {
@@ -159,7 +157,6 @@ extension ItemExtension on WidgetType {
     }
   }
 }
-
 
 class KeyKeepAlive {
   static final _keyWordProcessState = GlobalKey();

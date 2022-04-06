@@ -28,6 +28,9 @@ class DanhSachCongViecTienIchCubit
   final BehaviorSubject<List<NguoiThucHienModel>> nguoiThucHien =
       BehaviorSubject<List<NguoiThucHienModel>>();
 
+  final BehaviorSubject<List<String>> nhomCVMoiSubject =
+      BehaviorSubject<List<String>>();
+
   final BehaviorSubject<WidgetType?> _showDialogSetting =
       BehaviorSubject<WidgetType?>();
 
@@ -234,6 +237,18 @@ class DanhSachCongViecTienIchCubit
     );
   }
 
+  Future<void> getNHomCVMoi() async {
+    showLoading();
+    final result = await tienIchRep.NhomCVMoi();
+    showContent();
+    result.when(
+      success: (res) {
+        nhomCVMoiSubject.sink.add(res.map((e) => e.label).toList());
+      },
+      error: (err) {},
+    );
+  }
+
   String dateChange = '';
 
   String getDate(String date) {
@@ -297,7 +312,7 @@ class DanhSachCongViecTienIchCubit
           .where((element) => isListCanBo(element))
           .toList();
       print(vl);
-      TodoListModel todoListModel =
+      final TodoListModel todoListModel =
           TodoListModel(listTodoImportant: vl, listTodoDone: data.listTodoDone);
       _getTodoList.sink.add(todoListModel);
     } else {
@@ -305,26 +320,11 @@ class DanhSachCongViecTienIchCubit
     }
   }
 
-  void searchNguoiThucHien(String text) {
-    final data = dataListNguoiThucHienModelDefault.items;
-    if (text != '') {
-      final searchTxt = text.trim().toLowerCase().vietNameseParse();
-      bool isListNguoiThucHien(NguoiThucHienModel person) {
-        return person.hoten.toLowerCase().vietNameseParse().contains(searchTxt);
-      }
-
-      final vl = data.where((element) => isListNguoiThucHien(element)).toList();
-      nguoiThucHien.sink.add(vl);
-    } else {
-      nguoiThucHien.sink.add(dataListNguoiThucHienModelDefault.items);
-    }
-  }
-
   late ItemChonBienBanCuocHopModel dataListNguoiThucHienModelDefault;
 
   Future<void> listNguoiThucHien() async {
     showLoading();
-    final result = await tienIchRep.getListNguoiThucHien(true, 10, 1);
+    final result = await tienIchRep.getListNguoiThucHien(true, 999, 1);
     result.when(
       success: (res) {
         nguoiThucHien.sink.add(res.items);
@@ -332,6 +332,28 @@ class DanhSachCongViecTienIchCubit
       },
       error: (err) {},
     );
+  }
+
+  void timNguoiTHucHien(String text) {
+    final searchTxt = text.trim().toLowerCase().vietNameseParse();
+    bool isListCanBo(NguoiThucHienModel person) {
+      return person.data().toLowerCase().vietNameseParse().contains(searchTxt);
+    }
+
+    final vl = dataListNguoiThucHienModelDefault.items
+        .where((element) => isListCanBo(element))
+        .toList();
+    nguoiThucHien.sink.add(vl);
+  }
+
+  String convertIdToPerson(String vl) {
+    String personWithId = '';
+    for (final e in dataListNguoiThucHienModelDefault.items) {
+      if (e.id == vl) {
+        e.hoten = personWithId;
+      }
+    }
+    return personWithId;
   }
 }
 

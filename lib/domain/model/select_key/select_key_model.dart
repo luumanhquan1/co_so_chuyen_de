@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:hive/hive.dart';
+
 part 'select_key_model.g.dart';
 
 @HiveType(typeId: 4)
