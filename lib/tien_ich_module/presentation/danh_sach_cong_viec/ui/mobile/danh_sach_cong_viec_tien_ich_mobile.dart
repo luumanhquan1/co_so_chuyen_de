@@ -35,10 +35,10 @@ class _DanhSachCongViecTienIchMobileState
     // TODO: implement initState
     super.initState();
     cubit.getToDoList();
-    // cubit.listNguoiThucHien();
+    cubit.listNguoiThucHien();
     cubit.getNHomCVMoi();
-    // cubit.getToDoListDSCV();
-    // cubit.getDSCVGanCHoToi();
+    cubit.getToDoListDSCV();
+    cubit.getDSCVGanCHoToi();
   }
 
   @override
