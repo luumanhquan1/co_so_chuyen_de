@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/widge
 import 'package:ccvc_mobile/home_module/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/config/resources/color.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/mobile/danh_sach_cong_viec_tien_ich_mobile.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cell_dscv_tien_tich.dart';
@@ -86,8 +87,6 @@ class _DanhSachCongViecTienIchTabletState
                 MaterialPageRoute(
                   builder: (_) => MenuDSCV(
                     cubit: cubit,
-                    theoDangLich: () {},
-                    TheoDangDanhSach: () {},
                   ),
                 ),
               );
@@ -116,11 +115,11 @@ class _DanhSachCongViecTienIchTabletState
                 if (snapshotbool.data?[0] ?? true)
                   Column(
                     children: [
-                      StreamBuilder<TodoListModel>(
+                      StreamBuilder<TodoListModelTwo>(
                         stream: cubit.getTodoList,
                         builder: (context, snapshot) {
-                          final data =
-                              snapshot.data?.listTodoImportant ?? <TodoModel>[];
+                          final data = snapshot.data?.listTodoImportant ??
+                              <TodoDSCVModel>[];
                           if (data.isNotEmpty) {
                             return Container(
                               decoration: BoxDecoration(
@@ -301,11 +300,11 @@ class _DanhSachCongViecTienIchTabletState
                       const SizedBox(
                         height: 28,
                       ),
-                      StreamBuilder<TodoListModel>(
+                      StreamBuilder<TodoListModelTwo>(
                         stream: cubit.getTodoList,
                         builder: (context, snapshot) {
                           final data =
-                              snapshot.data?.listTodoDone ?? <TodoModel>[];
+                              snapshot.data?.listTodoDone ?? <TodoDSCVModel>[];
                           if (data.isNotEmpty) {
                             return Container(
                               decoration: BoxDecoration(
@@ -432,7 +431,7 @@ class _DanhSachCongViecTienIchTabletState
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                       border: Border.all(color: toDayColor.withOpacity(0.5)),
                     ),
-                    child: StreamBuilder<List<TodoModel>>(
+                    child: StreamBuilder<List<TodoDSCVModel>>(
                       stream: cubit.listImportanntWork.stream,
                       builder: (context, snapshot) {
                         final data = snapshot.data ?? [];
@@ -507,10 +506,11 @@ class _DanhSachCongViecTienIchTabletState
                     ),
                   ),
                 if (snapshotbool.data?[2] ?? true)
-                  StreamBuilder<TodoListModel>(
+                  StreamBuilder<TodoListModelTwo>(
                     stream: cubit.getTodoList,
                     builder: (context, snapshot) {
-                      final data = snapshot.data?.listTodoDone ?? <TodoModel>[];
+                      final data =
+                          snapshot.data?.listTodoDone ?? <TodoDSCVModel>[];
                       if (data.isNotEmpty) {
                         return Container(
                           decoration: BoxDecoration(

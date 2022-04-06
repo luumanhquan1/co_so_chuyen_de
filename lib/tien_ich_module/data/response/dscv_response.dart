@@ -1,8 +1,7 @@
-import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 
 class ToDoListDSCVResponse {
-  List<Data>? data;
+  List<DataDSCV>? data;
   int? statusCode;
   bool? succeeded;
   String? code;
@@ -18,9 +17,9 @@ class ToDoListDSCVResponse {
 
   ToDoListDSCVResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataDSCV>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(DataDSCV.fromJson(v));
       });
     }
     statusCode = json['statusCode'];
@@ -33,7 +32,33 @@ class ToDoListDSCVResponse {
       data?.map((e) => e.toDomain()).toList() ?? [];
 }
 
-class Data {
+class ToDoListUpdateResponseTwo {
+  DataDSCV? data;
+  int? statusCode;
+  bool? succeeded;
+  String? code;
+  String? message;
+
+  ToDoListUpdateResponseTwo({
+    this.data,
+    this.statusCode,
+    this.succeeded,
+    this.code,
+    this.message,
+  });
+
+  ToDoListUpdateResponseTwo.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = DataDSCV.fromJson(json['data']);
+    }
+    statusCode = json['statusCode'];
+    succeeded = json['succeeded'];
+    code = json['code'];
+    message = json['message'];
+  }
+}
+
+class DataDSCV {
   String? id;
   String? label;
   bool? isTicked;
@@ -47,7 +72,7 @@ class Data {
   String? note;
   String? performer;
 
-  Data({
+  DataDSCV({
     this.id,
     this.label,
     this.isTicked,
@@ -62,7 +87,7 @@ class Data {
     this.performer,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataDSCV.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     label = json['label'];
     isTicked = json['isTicked'];

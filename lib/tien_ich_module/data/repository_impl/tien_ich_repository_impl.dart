@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/dscv_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/nhom_cv_moi_dscv_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/todo_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
@@ -40,26 +41,27 @@ class TienIchRepositoryImpl implements TienIchRepository {
   }
 
   @override
-  Future<Result<TodoListModel>> getListTodo() {
-    return runCatchingAsync<ToDoListResponse, TodoListModel>(
+  Future<Result<TodoListModelTwo>> getListTodo() {
+    return runCatchingAsync<ToDoListResponseTwo, TodoListModelTwo>(
       () => _tienIchService.getTodoList(),
       (res) => res.toDomain(),
     );
   }
 
   @override
-  Future<Result<TodoModel>> upDateTodo(ToDoListRequest toDoListRequest) {
-    return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
+  Future<Result<TodoDSCVModel>> upDateTodo(ToDoListRequest toDoListRequest) {
+    return runCatchingAsync<ToDoListUpdateResponseTwo, TodoDSCVModel>(
       () => _tienIchService.updateTodoList(toDoListRequest),
-      (res) => res.data?.toDomain() ?? TodoModel(),
+      (res) => res.data?.toDomain() ?? TodoDSCVModel(),
     );
   }
 
   @override
-  Future<Result<TodoModel>> createTodo(CreateToDoRequest createToDoRequest) {
-    return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
+  Future<Result<TodoDSCVModel>> createTodo(
+      CreateToDoRequest createToDoRequest) {
+    return runCatchingAsync<ToDoListUpdateResponseTwo, TodoDSCVModel>(
       () => _tienIchService.createTodoList(createToDoRequest),
-      (res) => res.data?.toDomain() ?? TodoModel(),
+      (res) => res.data?.toDomain() ?? TodoDSCVModel(),
     );
   }
 
@@ -146,8 +148,8 @@ class TienIchRepositoryImpl implements TienIchRepository {
   @override
   Future<Result<List<TodoDSCVModel>>> getListDSCVGanChoToi() {
     return runCatchingAsync<ToDoListDSCVResponse, List<TodoDSCVModel>>(
-          () => _tienIchService.getListDSCVGanChoToi(),
-          (response) => response.toModel(),
+      () => _tienIchService.getListDSCVGanChoToi(),
+      (response) => response.toModel(),
     );
   }
 }

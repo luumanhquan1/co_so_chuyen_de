@@ -14,11 +14,11 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/danh_ba_dien_tu/ui/mobi
 mixin TienIchRepository {
   Future<Result<List<TopicHDSD>>> getTopicHDSD();
 
-  Future<Result<TodoListModel>> getListTodo();
+  Future<Result<TodoListModelTwo>> getListTodo();
 
-  Future<Result<TodoModel>> upDateTodo(ToDoListRequest toDoListRequest);
+  Future<Result<TodoDSCVModel>> upDateTodo(ToDoListRequest toDoListRequest);
 
-  Future<Result<TodoModel>> createTodo(CreateToDoRequest createToDoRequest);
+  Future<Result<TodoDSCVModel>> createTodo(CreateToDoRequest createToDoRequest);
 
   Future<Result<ItemChonBienBanCuocHopModel>> getListNguoiThucHien(
     bool isGetAll,

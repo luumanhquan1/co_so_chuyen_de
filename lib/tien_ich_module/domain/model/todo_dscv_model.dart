@@ -1,3 +1,11 @@
+class TodoListModelTwo {
+  final List<TodoDSCVModel> listTodoImportant;
+  final List<TodoDSCVModel> listTodoDone;
+
+  TodoListModelTwo(
+      {required this.listTodoImportant, required this.listTodoDone});
+}
+
 class TodoDSCVModel {
   String? id;
   String? label;
@@ -11,6 +19,7 @@ class TodoDSCVModel {
   String? updatedBy;
   String? note;
   String? performer;
+  String? groupId;
 
   TodoDSCVModel(
       {this.id,
@@ -24,5 +33,6 @@ class TodoDSCVModel {
       this.updatedOn,
       this.updatedBy,
       this.note,
-      this.performer});
+      this.performer,
+      this.groupId});
 }

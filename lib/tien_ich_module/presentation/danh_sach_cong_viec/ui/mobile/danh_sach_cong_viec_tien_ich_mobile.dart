@@ -1,16 +1,16 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/home_module/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/tablet/widgets/scroll_bar_widget.dart';
-import 'package:ccvc_mobile/home_module/widgets/dialog/show_dialog.dart';
-import 'package:ccvc_mobile/home_module/widgets/show_buttom_sheet/show_bottom_sheet.dart';
-import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/ket_noi_module/widgets/drawer_slide/drawer_slide.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cell_dscv_tien_tich.dart';
-import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/chinh_sua_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cong_viec_cua_ban_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cong_viec_da_hoan_thanh_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cv_da_hoan_thanh_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/da_bi_xoa_widget.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/gan_cho_toi_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/menu_dscv.dart';
+import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/nhom_cong_viec_moi_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/appbar/app_bar_with_two_leading.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/search/base_search_bar.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -43,346 +43,95 @@ class _DanhSachCongViecTienIchMobileState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWithTwoLeading(
-        title: S.current.danh_sach_cong_viec,
-        leadingIcon: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: SvgPicture.asset(
-                ImageAssets.icBack,
+    return StreamBuilder<String>(
+        stream: cubit.titleAppBar.stream,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBarWithTwoLeading(
+              title: snapshot.data ?? 'Công việc của bạn',
+              leadingIcon: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: SvgPicture.asset(
+                      ImageAssets.icBack,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        actions: [
-          PopupMenuButton(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            ),
-            icon: SvgPicture.asset(ImageAssets.ic_Group),
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                child: AddToDoWidgetTienIch(
-                  onTap: (value) {
-                    cubit.addTodo(value);
-                    Navigator.pop(context);
-                  },
-                ),
-              )
-            ],
-          ),
-          IconButton(
-            onPressed: () {
-              DrawerSlide.navigatorSlide(
-                context: context,
-                screen: MenuDSCV(
-                  cubit: cubit,
-                  theoDangLich: () {},
-                  TheoDangDanhSach: () {},
-                ),
-                thenValue: (value) {},
-              );
-            },
-            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
-          )
-        ],
-      ),
-      body: StreamBuilder<List<bool>>(
-          stream: cubit.selectTypeCalendarSubject.stream,
-          builder: (context, snapshotbool) {
-            return ScrollBarWidget(
-              children: [
-                BaseSearchBar(
-                  hintText: S.current.tim_kiem_nhanh,
-                  onChange: (value) {
-                    cubit.search(value);
-                  },
-                ),
-                if (snapshotbool.data?[0] ?? true)
-                  Column(
-                    children: [
-                      StreamBuilder<TodoListModel>(
-                        stream: cubit.getTodoList,
-                        builder: (context, snapshot) {
-                          final data =
-                              snapshot.data?.listTodoImportant ?? <TodoModel>[];
-                          if (data.isNotEmpty) {
-                            return ListView.builder(
-                              key: UniqueKey(),
-                              itemCount: data.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                final todo = data[index];
-                                return CongViecCellTienIch(
-                                  isTheEdit: true,
-                                  text: todo.label ?? '',
-                                  todoModel: todo,
-                                  onCheckBox: (value) {
-                                    cubit.tickerListWord(
-                                      todo: todo,
-                                      removeDone: false,
-                                    );
-                                  },
-                                  onStar: () {
-                                    cubit.tickerQuanTrongTodo(
-                                      todo,
-                                      removeDone: false,
-                                    );
-                                  },
-                                  onClose: () {
-                                    showDiaLog(
-                                      context,
-                                      funcBtnRight: () {
-                                        cubit.deleteCongViec(
-                                          todo,
-                                          removeDone: false,
-                                        );
-                                      },
-                                      icon: SvgPicture.asset(
-                                        ImageAssets.icDeleteLichHop,
-                                      ),
-                                      title: S.current.xoa_cong_viec,
-                                      textContent:
-                                          S.current.ban_chac_chan_muon_xoa,
-                                      btnLeftTxt: S.current.huy,
-                                      btnRightTxt: S.current.xoa,
-                                    );
-                                  },
-                                  onChange: (controller) {
-                                    cubit.changeLabelTodo(
-                                      controller.text.trim(),
-                                      todo,
-                                    );
-                                  },
-                                  onEdit: () {
-                                    showBottomSheetCustom(
-                                      context,
-                                      title: S.current.chinh_sua,
-                                      child: EditWidget(
-                                        cubit: cubit,
-                                        todo: todo,
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            );
-                          }
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 30),
-                            child: NodataWidget(),
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.current.da_hoan_thanh,
-                            style: textNormalCustom(
-                                fontSize: 14, color: infoColor),
-                          ),
-                          StreamBuilder<TodoListModel>(
-                            stream: cubit.getTodoList,
-                            builder: (context, snapshot) {
-                              final data =
-                                  snapshot.data?.listTodoDone ?? <TodoModel>[];
-                              if (data.isNotEmpty) {
-                                return Column(
-                                  children: List.generate(data.length, (index) {
-                                    final todo = data[index];
-                                    return CongViecCellTienIch(
-                                      enabled: false,
-                                      todoModel: todo,
-                                      onCheckBox: (value) {
-                                        cubit.tickerListWord(todo: todo);
-                                      },
-                                      onClose: () {
-                                        showDiaLog(
-                                          context,
-                                          funcBtnRight: () {
-                                            cubit.deleteCongViec(todo);
-                                          },
-                                          icon: SvgPicture.asset(
-                                            ImageAssets.icDeleteLichHop,
-                                          ),
-                                          title: S.current.xoa_cong_viec,
-                                          textContent:
-                                              S.current.ban_chac_chan_muon_xoa,
-                                          btnLeftTxt: S.current.huy,
-                                          btnRightTxt: S.current.xoa,
-                                        );
-                                      },
-                                      onStar: () {
-                                        cubit.tickerQuanTrongTodo(todo);
-                                      },
-                                      text: todo.label ?? '',
-                                      onEdit: () {},
-                                    );
-                                  }),
-                                );
-                              }
-                              return const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 30),
-                                child: NodataWidget(),
-                              );
-                            },
-                          )
-                        ],
-                      )
-                    ],
+              actions: [
+                PopupMenuButton(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                if (snapshotbool.data?[1] ?? true)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Công việc quan trọng',
-                        style: textNormalCustom(fontSize: 14, color: infoColor),
-                      ),
-                      StreamBuilder<List<TodoModel>>(
-                        stream: cubit.listImportanntWork.stream,
-                        builder: (context, snapshot) {
-                          final data = snapshot.data ?? [];
-                          if (data.isNotEmpty) {
-                            return ListView.builder(
-                              key: UniqueKey(),
-                              itemCount: data.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                final todo = data[index];
-                                return CongViecCellTienIch(
-                                  isTheEdit: true,
-                                  text: todo.label ?? '',
-                                  todoModel: todo,
-                                  onCheckBox: (value) {
-                                    cubit.tickerListWord(
-                                      todo: todo,
-                                      removeDone: false,
-                                    );
-                                  },
-                                  onStar: () {
-                                    cubit.tickerQuanTrongTodo(
-                                      todo,
-                                      removeDone: false,
-                                    );
-                                  },
-                                  onClose: () {
-                                    showDiaLog(
-                                      context,
-                                      funcBtnRight: () {
-                                        cubit.deleteCongViec(
-                                          todo,
-                                          removeDone: false,
-                                        );
-                                      },
-                                      icon: SvgPicture.asset(
-                                        ImageAssets.icDeleteLichHop,
-                                      ),
-                                      title: S.current.xoa_cong_viec,
-                                      textContent:
-                                          S.current.ban_chac_chan_muon_xoa,
-                                      btnLeftTxt: S.current.huy,
-                                      btnRightTxt: S.current.xoa,
-                                    );
-                                  },
-                                  onChange: (controller) {
-                                    cubit.changeLabelTodo(
-                                      controller.text.trim(),
-                                      todo,
-                                    );
-                                  },
-                                  onEdit: () {
-                                    showBottomSheetCustom(
-                                      context,
-                                      title: S.current.chinh_sua,
-                                      child: EditWidget(
-                                        cubit: cubit,
-                                        todo: todo,
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            );
-                          }
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 30),
-                            child: NodataWidget(),
-                          );
+                  icon: SvgPicture.asset(ImageAssets.ic_Group),
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: AddToDoWidgetTienIch(
+                        onTap: (value) {
+                          cubit.addTodo(value);
+                          Navigator.pop(context);
                         },
                       ),
-                    ],
-                  ),
-                if (snapshotbool.data?[2] ?? true)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.current.da_hoan_thanh,
-                        style: textNormalCustom(fontSize: 14, color: infoColor),
+                    )
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    DrawerSlide.navigatorSlide(
+                      context: context,
+                      screen: MenuDSCV(
+                        cubit: cubit,
                       ),
-                      StreamBuilder<TodoListModel>(
-                        stream: cubit.getTodoList,
-                        builder: (context, snapshot) {
-                          final data =
-                              snapshot.data?.listTodoDone ?? <TodoModel>[];
-                          if (data.isNotEmpty) {
-                            return Column(
-                              children: List.generate(data.length, (index) {
-                                final todo = data[index];
-                                return CongViecCellTienIch(
-                                  enabled: false,
-                                  todoModel: todo,
-                                  onCheckBox: (value) {
-                                    cubit.tickerListWord(todo: todo);
-                                  },
-                                  onClose: () {
-                                    showDiaLog(
-                                      context,
-                                      funcBtnRight: () {
-                                        cubit.deleteCongViec(todo);
-                                      },
-                                      icon: SvgPicture.asset(
-                                        ImageAssets.icDeleteLichHop,
-                                      ),
-                                      title: S.current.xoa_cong_viec,
-                                      textContent:
-                                          S.current.ban_chac_chan_muon_xoa,
-                                      btnLeftTxt: S.current.huy,
-                                      btnRightTxt: S.current.xoa,
-                                    );
-                                  },
-                                  onStar: () {
-                                    cubit.tickerQuanTrongTodo(todo);
-                                  },
-                                  text: todo.label ?? '',
-                                  onEdit: () {},
-                                );
-                              }),
-                            );
-                          }
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 30),
-                            child: NodataWidget(),
-                          );
-                        },
-                      )
-                    ],
-                  )
+                      thenValue: (value) {},
+                    );
+                  },
+                  icon: SvgPicture.asset(ImageAssets.icMenuCalender),
+                )
               ],
-            );
-          }),
-    );
+            ),
+            body: StreamBuilder<List<bool>>(
+                stream: cubit.selectTypeCalendarSubject.stream,
+                builder: (context, snapshotbool) {
+                  return ScrollBarWidget(
+                    children: [
+                      BaseSearchBar(
+                        hintText: S.current.tim_kiem_nhanh,
+                        onChange: (value) {
+                          cubit.search(value);
+                        },
+                      ),
+                      if (snapshotbool.data?[0] ?? true)
+                        CvCuaBanWidget(
+                          cubit: cubit,
+                        ),
+                      if (snapshotbool.data?[1] ?? true)
+                        CvQuanTrongWidget(
+                          cubit: cubit,
+                        ),
+                      if (snapshotbool.data?[2] ?? true)
+                        CongViecDaHoanThanhWidget(
+                          cubit: cubit,
+                        ),
+                      if (snapshotbool.data?[3] ?? true)
+                        GanChoToiWidget(
+                          cubit: cubit,
+                        ),
+                      if (snapshotbool.data?[4] ?? true)
+                        DaBiXoaWidget(
+                          cubit: cubit,
+                        ),
+                      if (snapshotbool.data?[5] ?? true)
+                        NhomCvMoiWidget(
+                          cubit: cubit,
+                        )
+                    ],
+                  );
+                }),
+          );
+        });
   }
 }
 

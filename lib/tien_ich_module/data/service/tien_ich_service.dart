@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/tien_ich_module/data/response/dscv_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/nhom_cv_moi_dscv_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/todo_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
@@ -26,17 +27,17 @@ abstract class TienIchService {
 
   @GET(ApiConstants.TODO_LIST_CURRENT_USER)
   @FormUrlEncoded()
-  Future<ToDoListResponse> getTodoList();
+  Future<ToDoListResponseTwo> getTodoList();
 
   @PUT(ApiConstants.TODO_LIST_UPDATE)
   @FormUrlEncoded()
-  Future<ToDoListUpdateResponse> updateTodoList(
+  Future<ToDoListUpdateResponseTwo> updateTodoList(
     @Body() ToDoListRequest toDoListRequest,
   );
 
   @POST(ApiConstants.TODO_LIST_CREATE)
   @FormUrlEncoded()
-  Future<ToDoListUpdateResponse> createTodoList(
+  Future<ToDoListUpdateResponseTwo> createTodoList(
     @Body() CreateToDoRequest createToDoRequest,
   );
 

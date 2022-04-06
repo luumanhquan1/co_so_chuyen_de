@@ -1,9 +1,9 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
-import 'package:ccvc_mobile/home_module/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -22,13 +22,18 @@ class DanhSachCongViecTienIchCubit
   int sLCvGanChoToi = 0;
   int sLCvDaBiXoa = 0;
   int sLNhomCV = 0;
-  BehaviorSubject<List<TodoModel>> listImportanntWork = BehaviorSubject();
-  List<TodoDSCVModel> listGanChoToi = [];
-  List<TodoDSCVModel> listDaXoa = [];
-  List<TodoDSCVModel> listGanChoToiDaXoa = [];
+  String groupId = '';
+  final BehaviorSubject<TodoListModelTwo> todoListGroup =
+      BehaviorSubject<TodoListModelTwo>();
+  BehaviorSubject<List<TodoDSCVModel>> listImportanntWork = BehaviorSubject();
+  BehaviorSubject<List<TodoDSCVModel>> listGanChoToi = BehaviorSubject();
+  BehaviorSubject<List<TodoDSCVModel>> listDaXoa = BehaviorSubject();
+  BehaviorSubject<List<TodoDSCVModel>> listGanChoToiDaXoa = BehaviorSubject();
+
+  BehaviorSubject<String> titleAppBar = BehaviorSubject();
 
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
-      BehaviorSubject.seeded([true, false, false, false, false]);
+      BehaviorSubject.seeded([true, false, false, false, false, false]);
 
   DanhSachCongViecTienIchCubit() : super(MainStateInitial());
   BehaviorSubject<bool> enabled = BehaviorSubject.seeded(true);
@@ -40,16 +45,16 @@ class DanhSachCongViecTienIchCubit
   final BehaviorSubject<List<NguoiThucHienModel>> nguoiThucHien =
       BehaviorSubject<List<NguoiThucHienModel>>();
 
-  final BehaviorSubject<List<String>> nhomCVMoiSubject =
-      BehaviorSubject<List<String>>();
+  final BehaviorSubject<List<NhomCVMoiModel>> nhomCVMoiSubject =
+      BehaviorSubject<List<NhomCVMoiModel>>();
 
   final BehaviorSubject<WidgetType?> _showDialogSetting =
       BehaviorSubject<WidgetType?>();
 
-  final BehaviorSubject<TodoListModel> _getTodoList =
-      BehaviorSubject<TodoListModel>();
+  final BehaviorSubject<TodoListModelTwo> _getTodoList =
+      BehaviorSubject<TodoListModelTwo>();
 
-  Stream<TodoListModel> get getTodoList => _getTodoList.stream;
+  Stream<TodoListModelTwo> get getTodoList => _getTodoList.stream;
 
   void closeDialog() {
     _showDialogSetting.add(null);
@@ -96,7 +101,7 @@ class DanhSachCongViecTienIchCubit
     );
   }
 
-  void tickerListWord({required TodoModel todo, bool removeDone = true}) {
+  void tickerListWord({required TodoDSCVModel todo, bool removeDone = true}) {
     final data = _getTodoList.value;
     tienIchRep.upDateTodo(
       ToDoListRequest(
@@ -119,20 +124,20 @@ class DanhSachCongViecTienIchCubit
     }
   }
 
-  void _removeInsertImportant(TodoListModel data, TodoModel todo) {
+  void _removeInsertImportant(TodoListModelTwo data, TodoDSCVModel todo) {
     final result = data.listTodoDone.removeAt(
       data.listTodoDone.indexWhere((element) => element.id == todo.id),
     );
     data.listTodoImportant.insert(0, result..isTicked = false);
     _getTodoList.sink.add(
-      TodoListModel(
+      TodoListModelTwo(
         listTodoImportant: data.listTodoImportant,
         listTodoDone: data.listTodoDone,
       ),
     );
   }
 
-  void _removeInsertDone(TodoListModel data, TodoModel todo) {
+  void _removeInsertDone(TodoListModelTwo data, TodoDSCVModel todo) {
     final result = data.listTodoImportant.removeAt(
       data.listTodoImportant.indexWhere((element) => element.id == todo.id),
     );
@@ -143,7 +148,7 @@ class DanhSachCongViecTienIchCubit
     );
   }
 
-  void deleteCongViec(TodoModel todoModel, {bool removeDone = true}) {
+  void deleteCongViec(TodoDSCVModel todoModel, {bool removeDone = true}) {
     final data = _getTodoList.value;
     tienIchRep.upDateTodo(
       ToDoListRequest(
@@ -172,7 +177,7 @@ class DanhSachCongViecTienIchCubit
     _getTodoList.sink.add(data);
   }
 
-  void tickerQuanTrongTodo(TodoModel todo, {bool removeDone = true}) {
+  void tickerQuanTrongTodo(TodoDSCVModel todo, {bool removeDone = true}) {
     final data = _getTodoList.value;
     tienIchRep.upDateTodo(
       ToDoListRequest(
@@ -204,7 +209,7 @@ class DanhSachCongViecTienIchCubit
     _getTodoList.sink.add(data);
   }
 
-  void changeLabelTodo(String newLabel, TodoModel todo) {
+  void changeLabelTodo(String newLabel, TodoDSCVModel todo) {
     final data = _getTodoList.value;
     if (newLabel == todo.label) {
       return;
@@ -234,7 +239,11 @@ class DanhSachCongViecTienIchCubit
     );
   }
 
-  late TodoListModel dataListDefault;
+  late TodoListModelTwo dataListDefault;
+
+  Future<void> getGroupId(String id) async {
+    groupId = id;
+  }
 
   Future<void> getToDoList() async {
     showLoading();
@@ -245,6 +254,20 @@ class DanhSachCongViecTienIchCubit
         listImportanntWork.sink.add(res.listTodoImportant
             .where((element) => element.important == true)
             .toList());
+
+        bool isList(TodoDSCVModel toDo) {
+          return toDo.label!.toLowerCase().vietNameseParse().contains(groupId);
+        }
+
+        final TodoListModelTwo listModelTwo = TodoListModelTwo(
+            listTodoDone: res.listTodoImportant
+                .where((element) => isList(element))
+                .toList(),
+            listTodoImportant:
+                res.listTodoDone.where((element) => isList(element)).toList());
+
+        todoListGroup.sink.add(listModelTwo);
+
         _getTodoList.sink.add(res);
         dataListDefault = res;
         sLCvCuaBan = res.listTodoImportant.length;
@@ -261,7 +284,9 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
-        listDaXoa = res.where((element) => element.inUsed == false).toList();
+        listDaXoa.sink
+            .add(res.where((element) => element.inUsed == false).toList());
+        sLCvDaBiXoa = listDaXoa.value.length;
       },
       error: (err) {},
     );
@@ -273,11 +298,16 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
-        listGanChoToi = res.where((element) => element.inUsed == true).toList();
-        listGanChoToiDaXoa =
-            res.where((element) => element.inUsed == false).toList();
-        sLCvDaBiXoa = listDaXoa.length + listGanChoToiDaXoa.length;
-        sLCvGanChoToi = listGanChoToi.length;
+        if (res.isNotEmpty) {
+          listGanChoToi.sink
+              .add(res.where((element) => element.inUsed == true).toList());
+          listGanChoToiDaXoa.sink
+              .add(res.where((element) => element.inUsed == false).toList());
+          sLCvDaBiXoa =
+              listDaXoa.value.length + listGanChoToiDaXoa.value.length;
+          sLCvGanChoToi =
+              res.where((element) => element.inUsed == true).toList().length;
+        }
       },
       error: (err) {},
     );
@@ -289,7 +319,7 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
-        nhomCVMoiSubject.sink.add(res.map((e) => e.label).toList());
+        nhomCVMoiSubject.sink.add(res);
       },
       error: (err) {},
     );
@@ -324,24 +354,24 @@ class DanhSachCongViecTienIchCubit
     this.idPerson = idPerson;
   }
 
-  Future<void> editWork(TodoModel todo) async {
+  Future<void> editWork(TodoDSCVModel todo) async {
     await tienIchRep.upDateTodo(
       ToDoListRequest(
-        id: todo.id,
-        inUsed: true,
-        important: todo.important,
-        isDeleted: todo.isDeleted,
-        createdOn: todo.createdOn,
-        createdBy: todo.createdBy,
-        isTicked: todo.isTicked,
-        label: titleChange.isEmpty ? todo.label : titleChange,
-        updatedBy: HiveLocal.getDataUser()?.userInformation?.id ?? '',
-        updatedOn: DateTime.now().formatApi,
-        note: noteChange.isNotEmpty ? todo.note : noteChange,
-        finishDay: dateChange.isEmpty
-            ? DateTime.now().formatApi
-            : DateTime.parse(dateChange).formatDayCalendar,
-      ),
+          id: todo.id,
+          inUsed: true,
+          important: todo.important,
+          isDeleted: todo.isDeleted,
+          createdOn: todo.createdOn,
+          createdBy: todo.createdBy,
+          isTicked: todo.isTicked,
+          label: titleChange.isEmpty ? todo.label : titleChange,
+          updatedBy: HiveLocal.getDataUser()?.userInformation?.id ?? '',
+          updatedOn: DateTime.now().formatApi,
+          note: noteChange.isNotEmpty ? todo.note : noteChange,
+          finishDay: dateChange.isEmpty
+              ? DateTime.now().formatApi
+              : DateTime.parse(dateChange).formatDayCalendar,
+          performer: idPerson),
     );
     await getToDoList();
   }
@@ -350,7 +380,7 @@ class DanhSachCongViecTienIchCubit
     final data = _getTodoList.value;
     if (text != '') {
       final searchTxt = text.trim().toLowerCase().vietNameseParse();
-      bool isListCanBo(TodoModel toDo) {
+      bool isListCanBo(TodoDSCVModel toDo) {
         return toDo.label!.toLowerCase().vietNameseParse().contains(searchTxt);
       }
 
@@ -358,8 +388,8 @@ class DanhSachCongViecTienIchCubit
           .where((element) => isListCanBo(element))
           .toList();
       print(vl);
-      final TodoListModel todoListModel =
-          TodoListModel(listTodoImportant: vl, listTodoDone: data.listTodoDone);
+      final TodoListModelTwo todoListModel = TodoListModelTwo(
+          listTodoImportant: vl, listTodoDone: data.listTodoDone);
       _getTodoList.sink.add(todoListModel);
     } else {
       _getTodoList.sink.add(dataListDefault);
@@ -392,11 +422,12 @@ class DanhSachCongViecTienIchCubit
     nguoiThucHien.sink.add(vl);
   }
 
+  String personWithId = '';
+
   String convertIdToPerson(String vl) {
-    String personWithId = '';
     for (final e in dataListNguoiThucHienModelDefault.items) {
       if (e.id == vl) {
-        e.hoten = personWithId;
+        personWithId = e.data();
       }
     }
     return personWithId;

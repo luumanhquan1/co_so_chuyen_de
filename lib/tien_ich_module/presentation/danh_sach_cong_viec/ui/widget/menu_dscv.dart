@@ -2,28 +2,22 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/widget/container_menu_bao_chi.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/cell_menu_custom.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/container_menu_dscv.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/theo_dang_lich_widget_dscv.dart';
 import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'item_menu.dart';
-
 class MenuDSCV extends StatefulWidget {
   final DanhSachCongViecTienIchCubit cubit;
-  final Function theoDangLich;
-  final Function TheoDangDanhSach;
 
   const MenuDSCV({
     Key? key,
-    required this.theoDangLich,
-    required this.TheoDangDanhSach,
     required this.cubit,
   }) : super(key: key);
 
@@ -64,9 +58,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             icon: ImageAssets.icCVCuaBan,
                             name: S.current.cong_viec_cua_ban,
                             onTap: () {
-                              widget.cubit.selectTypeCalendarSubject
-                                  .add([true, false, false, false, false]);
-                              widget.theoDangLich();
+                              widget.cubit.selectTypeCalendarSubject.add(
+                                  [true, false, false, false, false, false]);
+                              widget.cubit.titleAppBar.add('Công việc của bạn');
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[0] ?? true,
@@ -76,9 +70,10 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             icon: ImageAssets.icCVQT,
                             name: S.current.cong_viec_quan_trong,
                             onTap: () {
-                              widget.cubit.selectTypeCalendarSubject
-                                  .add([false, true, false, false, false]);
-                              widget.TheoDangDanhSach();
+                              widget.cubit.selectTypeCalendarSubject.add(
+                                  [false, true, false, false, false, false]);
+                              widget.cubit.titleAppBar
+                                  .add('Công việc quan trọng');
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[1] ?? true,
@@ -88,9 +83,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             icon: ImageAssets.icHT,
                             name: S.current.da_hoan_thanh,
                             onTap: () {
-                              widget.cubit.selectTypeCalendarSubject
-                                  .add([false, false, true, false, false]);
-                              widget.theoDangLich();
+                              widget.cubit.selectTypeCalendarSubject.add(
+                                  [false, false, true, false, false, false]);
+                              widget.cubit.titleAppBar.add('Đã hoàn thành');
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[2] ?? true,
@@ -100,9 +95,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             icon: ImageAssets.icGanChoToi,
                             name: S.current.gan_cho_toi,
                             onTap: () {
-                              widget.cubit.selectTypeCalendarSubject
-                                  .add([false, false, false, true, false]);
-                              widget.TheoDangDanhSach();
+                              widget.cubit.selectTypeCalendarSubject.add(
+                                  [false, false, false, true, false, false]);
+                              widget.cubit.titleAppBar.add('Gán cho tôi');
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[3] ?? true,
@@ -112,9 +107,9 @@ class _MenuDSCVState extends State<MenuDSCV> {
                             icon: ImageAssets.icXoa,
                             name: S.current.da_bi_xoa,
                             onTap: () {
-                              widget.cubit.selectTypeCalendarSubject
-                                  .add([false, false, false, false, true]);
-                              widget.theoDangLich();
+                              widget.cubit.selectTypeCalendarSubject.add(
+                                  [false, false, false, false, true, false]);
+                              widget.cubit.titleAppBar.add('Đã bị xóa');
                               Navigator.pop(context);
                             },
                             isSelect: snapshot.data?[4] ?? true,
@@ -130,7 +125,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                         name: S.current.nhom_cong_viec_moi,
                         icon: ImageAssets.ic_nhomCVMoi,
                         type: TypeContainer.expand,
-                        childExpand: StreamBuilder<List<String>>(
+                        childExpand: StreamBuilder<List<NhomCVMoiModel>>(
                           stream: widget.cubit.nhomCVMoiSubject.stream,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? [];
@@ -142,14 +137,29 @@ class _MenuDSCVState extends State<MenuDSCV> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   final vl = data[index];
-                                  return TheoDangLichWidgetDSCV(
-                                    icon: '',
-                                    name: vl,
+                                  return GestureDetector(
                                     onTap: () {
-                                      Navigator.pop(context);
+                                      widget.cubit.getGroupId(vl.id);
                                     },
-                                    isSelect: false,
-                                    number: 0,
+                                    child: TheoDangLichWidgetDSCV(
+                                      icon: '',
+                                      name: vl.label,
+                                      onTap: () {
+                                        widget.cubit.selectTypeCalendarSubject
+                                            .add([
+                                          false,
+                                          false,
+                                          false,
+                                          false,
+                                          false,
+                                          true
+                                        ]);
+                                        widget.cubit.titleAppBar.add(vl.label);
+                                        Navigator.pop(context);
+                                      },
+                                      isSelect: false,
+                                      number: 0,
+                                    ),
                                   );
                                 },
                               );
@@ -192,7 +202,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([true, false, false, false, false]);
-                    widget.theoDangLich();
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[0] ?? true,
@@ -204,7 +213,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, true, false, false, false]);
-                    widget.TheoDangDanhSach();
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[1] ?? true,
@@ -216,7 +224,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, false, true, false, false]);
-                    widget.theoDangLich();
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[2] ?? true,
@@ -228,7 +235,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, false, false, true, false]);
-                    widget.TheoDangDanhSach();
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[3] ?? true,
@@ -240,7 +246,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, false, false, false, true]);
-                    widget.theoDangLich();
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[4] ?? true,
@@ -256,7 +261,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                         name: S.current.nhom_cong_viec_moi,
                         icon: ImageAssets.ic06,
                         type: TypeContainer.expand,
-                        childExpand: StreamBuilder<List<String>>(
+                        childExpand: StreamBuilder<List<NhomCVMoiModel>>(
                           stream: widget.cubit.nhomCVMoiSubject.stream,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? [];
@@ -270,7 +275,7 @@ class _MenuDSCVState extends State<MenuDSCV> {
                                   final vl = data[index];
                                   return ContainerMenuDSCVWidget(
                                     icon: '',
-                                    name: vl,
+                                    name: vl.label,
                                     onTap: () {
                                       Navigator.pop(context);
                                     },
