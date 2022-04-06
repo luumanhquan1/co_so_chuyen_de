@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_cubit.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -37,7 +38,7 @@ class ChartByMonthWidget extends StatelessWidget {
               placeLabelsNearAxisLine: true,
               labelStyle: textNormalCustom(
                 color: AqiColor,
-                fontSize: 12,
+                fontSize: 12.0.textScale(space: 4),
                 fontWeight: FontWeight.w400,
               ),
               axisLine: const AxisLine(
@@ -49,7 +50,7 @@ class ChartByMonthWidget extends StatelessWidget {
             primaryYAxis: CategoryAxis(
               labelStyle: textNormalCustom(
                 color: AqiColor,
-                fontSize: 12,
+                fontSize: 12.0.textScale(space: 4),
                 fontWeight: FontWeight.w400,
               ),
               placeLabelsNearAxisLine: true,
@@ -76,7 +77,7 @@ class ChartByMonthWidget extends StatelessWidget {
                   textStyle: textNormalCustom(
                     color: infoColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 12,
+                    fontSize: 12.0.textScale(space: 4),
                   ),
                   labelAlignment: ChartDataLabelAlignment.outer,
                 ),
