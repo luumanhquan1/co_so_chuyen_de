@@ -9,9 +9,13 @@ import 'package:flutter/material.dart';
 
 class DanhSachNhiemVuMobile extends StatefulWidget {
   final DanhSachCubit cubit;
+  final bool isCheck;
 
-  const DanhSachNhiemVuMobile({Key? key, required this.cubit})
-      : super(key: key);
+  const DanhSachNhiemVuMobile({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _DanhSachNhiemVuMobileState createState() => _DanhSachNhiemVuMobileState();
@@ -54,7 +58,7 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
       callApi: (page) => {
         widget.cubit.postDanhSachNhiemVu(
           index: page,
-          isNhiemVuCaNhan: true,
+          isNhiemVuCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
           mangTrangThai: [],
           ngayTaoNhiemVu: {
@@ -64,9 +68,15 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
           size: widget.cubit.pageSize,
         )
       },
-      viewItem: (value, index) => NhiemVuItemMobile(
-        data: value as PageData,
-      ),
+      viewItem: (value, index) {
+        try {
+          return NhiemVuItemMobile(
+            data: value as PageData,
+          );
+        } catch (e) {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

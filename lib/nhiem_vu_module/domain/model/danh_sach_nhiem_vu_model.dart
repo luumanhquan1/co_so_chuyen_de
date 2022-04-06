@@ -41,7 +41,7 @@ class PageData {
   String? nguoiTaoId;
   String? maNV;
   String? ngayTao;
-  String? trangThaiDonViXuLy;
+  List<TrangThaiDonViXuLyModel>? trangThaiDonViXuLy;
   CongViecCon? congViecCon;
   bool? daGuiVPCP;
   String? trichYeuVanBan;
@@ -129,6 +129,20 @@ class PageData {
     this.wTrangThai,
     this.isHoanThanhQuaHan,
     this.idCuocHop,
+  });
+}
+
+class TrangThaiDonViXuLyModel {
+  String? canBoId;
+  String? donViId;
+  String? trangThai;
+  int? trangThaiHanXuLy;
+
+  TrangThaiDonViXuLyModel({
+    required this.canBoId,
+    required this.donViId,
+    required this.trangThai,
+    required this.trangThaiHanXuLy,
   });
 }
 

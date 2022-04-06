@@ -89,7 +89,7 @@ class PageDataResponse {
   @JsonKey(name: 'NgayTao')
   String? ngayTao;
   @JsonKey(name: 'TrangThaiDonViXuLy')
-  String? trangThaiDonViXuLy;
+  List<TrangThaiDonViXuLy>? trangThaiDonViXuLy;
   @JsonKey(name: 'CongViecCon')
   CongViecConResponse? congViecCon;
   @JsonKey(name: 'DaGuiVPCP')
@@ -185,7 +185,8 @@ class PageDataResponse {
         nguoiTaoId: nguoiTaoId ?? '',
         maNV: maNV ?? '',
         ngayTao: ngayTao ?? '',
-        trangThaiDonViXuLy: trangThaiDonViXuLy ?? '',
+        trangThaiDonViXuLy:
+            trangThaiDonViXuLy?.map((e) => e.toModel()).toList() ?? [],
         congViecCon: congViecCon?.toDomain() ?? CongViecCon(),
         daGuiVPCP: daGuiVPCP ?? false,
         trichYeuVanBan: trichYeuVanBan ?? '',
@@ -215,6 +216,34 @@ class PageDataResponse {
         wTrangThai: wTrangThai ?? 0,
         isHoanThanhQuaHan: isHoanThanhQuaHan ?? false,
         idCuocHop: idCuocHop ?? '',
+      );
+}
+
+@JsonSerializable()
+class TrangThaiDonViXuLy {
+  @JsonKey(name: 'CanBoId')
+  String? canBoId;
+  @JsonKey(name: 'DonViId')
+  String? donViId;
+  @JsonKey(name: 'TrangThai')
+  String? trangThai;
+  @JsonKey(name: 'TrangThaiHanXuLy')
+  int? trangThaiHanXuLy;
+
+  TrangThaiDonViXuLy();
+
+  factory TrangThaiDonViXuLy.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$TrangThaiDonViXuLyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TrangThaiDonViXuLyToJson(this);
+
+  TrangThaiDonViXuLyModel toModel() => TrangThaiDonViXuLyModel(
+        canBoId: canBoId,
+        donViId: donViId,
+        trangThai: trangThai,
+        trangThaiHanXuLy: trangThaiHanXuLy,
       );
 }
 
