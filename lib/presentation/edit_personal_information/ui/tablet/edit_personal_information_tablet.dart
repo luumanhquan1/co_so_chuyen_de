@@ -19,7 +19,6 @@ import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
-import 'package:ccvc_mobile/widgets/textformfield/text_form_field_widget.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,14 +59,14 @@ class _EditPersonalInformationTabletScreen
     super.initState();
     cubit.managerStream.listen((event) {
       cubit.getCurrentUnit(event);
-      nameController.text = event.hoTen ?? 'Họ tên';
-      maCanBoController.text = event.maCanBo ?? 'Mã cán bộ';
+      nameController.text = event.hoTen ?? '';
+      maCanBoController.text = event.maCanBo ?? '';
       thuTuController.text = event.thuTu.toString();
-      cmndController.text = event.cmtnd ?? 'Số CMND';
-      emailController.text = event.email ?? 'Email';
-      sdtCoquanController.text = event.phoneCoQuan ?? 'Số điện thoại cơ quan';
-      sdtController.text = event.phoneDiDong ?? 'Số điện thoại';
-      diaChiLienHeController.text = event.diaChi ?? 'Địa chỉ';
+      cmndController.text = event.cmtnd ?? '';
+      emailController.text = event.email ?? '';
+      sdtCoquanController.text = event.phoneCoQuan ?? '';
+      sdtController.text = event.phoneDiDong ?? '';
+      diaChiLienHeController.text = event.diaChi ?? '';
       dateTimes = cubit.managerPersonalInformationModel.ngaySinh ?? '';
     });
     super.initState();
@@ -158,6 +157,7 @@ class _EditPersonalInformationTabletScreen
                                     isObligatory: true,
                                     title: user.keys.elementAt(1),
                                     child: TextFieldValidator(
+                                      hintText: S.current.ho_va_ten,
                                       controller: nameController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
@@ -171,6 +171,7 @@ class _EditPersonalInformationTabletScreen
                                     isObligatory: true,
                                     title: user.keys.elementAt(2),
                                     child: TextFieldValidator(
+                                      hintText: S.current.ma_can_bo,
                                       controller: maCanBoController,
                                       validator: (value) {
                                         return value?.checkNull();
@@ -179,9 +180,9 @@ class _EditPersonalInformationTabletScreen
                                   ),
                                   InputInfoUserWidget(
                                     title: user.keys.elementAt(3),
-                                    child: TextFormFieldWidget(
+                                    child: TextFieldValidator(
+                                      hintText: S.current.thu_tus,
                                       controller: thuTuController,
-                                      isEnabled: true,
                                     ),
                                   ),
                                   InputInfoUserWidget(
@@ -206,10 +207,8 @@ class _EditPersonalInformationTabletScreen
                                   InputInfoUserWidget(
                                     title: user.keys.elementAt(5),
                                     child: TextFieldValidator(
+                                      hintText: S.current.cmnd,
                                       controller: cmndController,
-                                      validator: (value) {
-                                        return value?.checkNull();
-                                      },
                                     ),
                                   ),
                                   InputInfoUserWidget(
@@ -237,6 +236,7 @@ class _EditPersonalInformationTabletScreen
                                   InputInfoUserWidget(
                                     title: user.keys.elementAt(7),
                                     child: TextFieldValidator(
+                                      hintText: S.current.email,
                                       controller: emailController,
                                       validator: (value) {
                                         return (value ?? '').checkEmail();
@@ -254,6 +254,7 @@ class _EditPersonalInformationTabletScreen
                                     needMargin: false,
                                     title: user.keys.elementAt(8),
                                     child: TextFieldValidator(
+                                      hintText: S.current.sdt_co_quan,
                                       controller: sdtCoquanController,
                                       textInputType: TextInputType.number,
                                       validator: (value) {
@@ -264,6 +265,7 @@ class _EditPersonalInformationTabletScreen
                                   InputInfoUserWidget(
                                     title: user.keys.elementAt(9),
                                     child: TextFieldValidator(
+                                      hintText: S.current.so_dien_thoai,
                                       controller: sdtController,
                                       textInputType: TextInputType.number,
                                       validator: (value) {
@@ -402,9 +404,9 @@ class _EditPersonalInformationTabletScreen
                                   ),
                                   InputInfoUserWidget(
                                     title: user.keys.elementAt(13),
-                                    child: TextFormFieldWidget(
+                                    child: TextFieldValidator(
+                                      hintText: S.current.dia_chi_lien_he,
                                       controller: diaChiLienHeController,
-                                      isEnabled: true,
                                     ),
                                   ),
                                 ],

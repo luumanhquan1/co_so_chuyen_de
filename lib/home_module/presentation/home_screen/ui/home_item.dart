@@ -1,6 +1,5 @@
+import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:flutter/cupertino.dart';
-
-import '/home_module/domain/model/home/WidgetType.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/calendar_work_widget.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/document_widget.dart';
 import '/home_module/presentation/home_screen/ui/mobile/items/event_of_day_widget.dart';
@@ -158,7 +157,6 @@ extension ItemExtension on WidgetType {
     }
   }
 }
-
 
 class KeyKeepAlive {
   static final _keyWordProcessState = GlobalKey();

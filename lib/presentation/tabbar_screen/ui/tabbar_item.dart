@@ -82,7 +82,7 @@ extension TabbarEnum on TabBarType {
               textButtom: 'dong',
               image: ImageAssets.icVideo,
             ),
-            tabletScreen: const ChiTietNhiemVuTabletScreen(),
+            tabletScreen: Container(),
           ),
           backgroundColor: Colors.cyanAccent,
         );

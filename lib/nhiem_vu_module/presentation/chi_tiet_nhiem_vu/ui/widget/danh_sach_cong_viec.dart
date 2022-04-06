@@ -1,6 +1,6 @@
-
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec.dart';
+import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_nhiem_vu/danh_sach_cong_viec_chi_tiet_nhiem_vu.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/bloc/chi_tiet_nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/widget/expand_only_nhiem_vu.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/widget/widget_in_expand.dart';
@@ -8,7 +8,7 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachCongViecWidget extends StatelessWidget {
-  final List<DanhSachCongViecModel> dataModel;
+  final List<DanhSachCongViecChiTietNhiemVuModel> dataModel;
   final ChiTietNVCubit cubit;
 
   const DanhSachCongViecWidget(
@@ -17,9 +17,10 @@ class DanhSachCongViecWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpandOnlyNhiemVu(
-      name: S.current.danh_sach_cong_viec,
-      child: Container(
+    if (dataModel.isNotEmpty) {
+      return ExpandOnlyNhiemVu(
+        name: S.current.danh_sach_cong_viec,
+        child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 16.0.textScale(space: 4),
           ),
@@ -32,7 +33,22 @@ class DanhSachCongViecWidget extends StatelessWidget {
                   ),
                 )
                 .toList(),
-          ),),
-    );
+          ),
+        ),
+      );
+    } else {
+      return ExpandOnlyNhiemVu(
+        name: S.current.danh_sach_cong_viec,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.0.textScale(space: 4),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: NodataWidget(),
+          ),
+        ),
+      );
+    }
   }
 }

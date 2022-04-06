@@ -29,8 +29,11 @@ import 'package:ccvc_mobile/domain/model/lich_hop/phat_bieu_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/select_phien_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/status_ket_luan_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/tao_phien_hop_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/co_cau_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/statistic_by_month_model.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/ti_le_tham_gia.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/to_chuc_boi_don_vi_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/them_y_kiem_model.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/thong_tin_phong_hop_model.dart';
@@ -41,6 +44,21 @@ import 'package:ccvc_mobile/domain/model/y_kien_model.dart';
 
 mixin HopRepository {
   Future<Result<List<DashBoardThongKeModel>>> getDashBoardThongKe(
+    String dateFrom,
+    String dateTo,
+  );
+
+  Future<Result<List<TiLeThamGiaModel>>> postTiLeThamGia(
+    String dateFrom,
+    String dateTo,
+  );
+
+  Future<Result<List<ToChucBoiDonViModel>>> postToChucBoiDonVi(
+    String dateFrom,
+    String dateTo,
+  );
+
+  Future<Result<List<CoCauLichHopModel>>> postCoCauLichHop(
     String dateFrom,
     String dateTo,
   );

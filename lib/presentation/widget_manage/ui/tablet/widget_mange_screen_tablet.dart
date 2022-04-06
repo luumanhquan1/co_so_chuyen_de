@@ -95,7 +95,9 @@ class _WidgetManageScreenTabletState extends State<WidgetManageScreenTablet> {
                                   ),
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                widgetManageCubit.resetListWidget();
+                              },
                             ),
                           ],
                         ),

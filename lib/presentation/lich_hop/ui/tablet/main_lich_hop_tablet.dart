@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/dash_board_lich_hop.dart';
 import 'package:ccvc_mobile/domain/model/lich_hop/lich_hop_item.dart';
+import 'package:ccvc_mobile/domain/model/lich_hop/thong_ke_lich_hop/dashboard_thong_ke_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/item_thong_bao.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/tablet/widget/custom_item_calender_work_tablet.dart';
@@ -30,7 +31,6 @@ class MainLichHopTabLet extends StatefulWidget {
 
 class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   LichHopCubit cubit = LichHopCubit();
-  late String title;
   final MenuCalendarCubit cubitMenu = MenuCalendarCubit();
 
   @override
@@ -41,13 +41,8 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
   @override
   void initState() {
     super.initState();
-    cubit.page = 1;
     cubit.chooseTypeList(Type_Choose_Option_List.DANG_LICH);
-    cubit.getDashboard();
-    cubit.menuCalendar();
-    cubit.postEventsCalendar();
-    cubit.initDataMenu();
-    title = S.current.lich_hop_cua_toi;
+    cubit.initData();
   }
 
   @override
@@ -55,14 +50,6 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
     return BlocBuilder<LichHopCubit, LichHopState>(
       bloc: cubit,
       builder: (context, state) {
-        if (state is LichHopStateDangLich) {
-          title = S.current.lich_hop_cua_toi;
-        } else if (state is LichHopStateDangList) {
-          title = S.current.lich_hop_cua_toi;
-        } else {
-          title = S.current.danh_sach_lich_hop;
-        }
-
         return StateStreamLayout(
           stream: cubit.stateStream,
           retry: () {},
@@ -78,6 +65,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   snapshot.data ?? TypeCalendarMenu.LichCuaToi;
               return Scaffold(
                 appBar: BaseAppBar(
+                  backGroundColor: state is LichHopStateDangThongKe
+                      ? backgroundRowColor
+                      : bgQLVBTablet,
                   title: snapshot.data == TypeCalendarMenu.LichTheoLanhDao
                       ? cubit.titleAppbar
                       : dataChangeScreen.getTitleLichHop(),
@@ -107,7 +97,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
 
                                   if (value == S.current.bao_cao_thong_ke) {
                                     cubit.chooseTypeList(
-                                      Type_Choose_Option_List.DANG_LIST,
+                                      Type_Choose_Option_List.DANG_THONG_KE,
                                     );
                                   }
 
@@ -152,7 +142,9 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                   ),
                 ),
                 body: Container(
-                  color: backgroundColorApp,
+                  color: state is LichHopStateDangThongKe
+                      ? bgColor
+                      : backgroundColorApp,
                   child: Column(
                     children: [
                       WidgetChooseDayWeekMonth(
@@ -205,6 +197,7 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                     startDate,
                                     endDate,
                                     selectDay,
+                                    state.type,
                                   );
                                 },
                               );
@@ -218,12 +211,40 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                           if (state is LichHopStateDangDanhSach) {
                             return const SizedBox();
                           } else {
-                            return StreamBuilder<DashBoardLichHopModel>(
-                              stream: cubit.dashBoardStream,
-                              builder: (context, snapshot) {
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
+                            if (state is LichHopStateDangThongKe) {
+                              return StreamBuilder<List<DashBoardThongKeModel>>(
+                                stream: cubit.listDashBoardThongKe.stream,
+                                builder: (context, snapshot) {
+                                  final data = snapshot.data ?? [];
+
+                                  return Container(
+                                    margin: const EdgeInsets.only(
+                                      left: 30.0,
+                                      top: 15,
+                                    ),
+                                    height: 116,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: data.length,
+                                      itemBuilder: (context, index) {
+                                        return CustomItemCalenderWorkTablet(
+                                          image: cubit
+                                              .listImageLichHopThongKe[index],
+                                          typeName: data[index].name ?? '',
+                                          numberOfCalendars:
+                                              data[index].quantities ?? 0,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            } else {
+                              return StreamBuilder<DashBoardLichHopModel>(
+                                stream: cubit.dashBoardStream,
+                                builder: (context, snapshot) {
+                                  return Container(
                                     margin: const EdgeInsets.only(left: 30.0),
                                     height: 116,
                                     child: ListView.builder(
@@ -242,10 +263,10 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                                         );
                                       },
                                     ),
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            }
                           }
                         },
                       ),
@@ -256,9 +277,12 @@ class _MainLichHopTabLetState extends State<MainLichHopTabLet> {
                             return const SizedBox();
                           } else {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0,
-                                vertical: 28.0,
+                              padding:  EdgeInsets.only(
+                                left: 30.0,
+                                right: 30,
+                                top: 28,
+                                bottom:
+                                    state is LichHopStateDangThongKe ? 0 : 28,
                               ),
                               child: Container(
                                 height: 1,

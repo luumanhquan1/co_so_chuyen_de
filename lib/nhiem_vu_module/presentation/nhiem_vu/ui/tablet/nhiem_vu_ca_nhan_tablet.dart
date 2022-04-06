@@ -121,7 +121,7 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
             children: [
               ListDanhSachNhiemVu(
                 titleButton: S.current.xem_danh_sach,
-                list: listDanhSachNhiemVu,
+                list: [],
                 onTap: () {
                   Navigator.push(
                     context,
@@ -133,7 +133,7 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
               ),
               ListDanhSachCongViec(
                 titleButton: S.current.xem_danh_sach,
-                list: listDanhSachCongViec,
+                list: [],
                 onTap: () {
                   Navigator.push(
                     context,

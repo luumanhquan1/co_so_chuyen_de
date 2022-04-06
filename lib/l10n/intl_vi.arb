@@ -779,11 +779,11 @@
   "van_ban_ban_hanh_kem_theo_du_an": "Văn bản ban hành kèm theo dự thảo",
   "van_ban_lien_thong_khong_ban_hanh_cung": "Văn bản liên thông (không ban hành cùng)",
   "khong_co_tep_nao": "Không có tệp nào",
-  "nd_ky_duyet": "ND ký duyệt",
+  "nd_ky_duyet": "Nội dung ký duyệt",
   "trinh_ky": "Trình ký",
   "lich_su_ky_duyet": "Lịch sử ký duyệt",
   "can_bo": "Cán bộ",
-  "nd_huy_duyet": "ND hủy duyệt",
+  "nd_huy_duyet": "Nội dung hủy duyệt",
   "lich_su_cap_nhat": "Lịch sử cập nhật",
   "dv": "ĐV",
   "UBND_tinh_dong_nai": "UBND tỉnh đồng nai",
@@ -820,7 +820,8 @@
   "co_cau_lich_hop": "Cơ cấu lịch họp",
   "ti_le_tham_du_cua_cac_don_vi": "Tỉ lệ tham dự họp của các đơn vị",
   "cv_cua_ban": "Công việc của bạn",
-  "cv_quan_trong": "Công việc quan trọng"
+  "cv_quan_trong": "Công việc quan trọng",
+  "noi_dung_thu_hoi" : "Nội dung thu hồi"
 }
 
 

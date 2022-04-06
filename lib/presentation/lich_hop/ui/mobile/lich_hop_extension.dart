@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_danh_sach_ngay_tuan_thang/thong_ke_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/danh_sach_lich_hop_tablet/danh_sach_lich_hop_ngay_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_danh_sach_ngay_tuan_thang_tablet/lich_hop_theo_danh_sach_ngay_tablet.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_danh_sach_ngay_tuan_thang_tablet/thong_ke_lich_hop_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_ngay_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_thang_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_tuan_tablet.dart';
@@ -294,6 +295,12 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
     }
   }
 
+  Widget getThongKeTablet(LichHopCubit cubit) {
+    return ThongKeLichHopTablet(
+      cubit: cubit,
+    );
+  }
+
   Widget getLichHopStateDanhSach(LichHopCubit cubit) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
@@ -431,6 +438,8 @@ extension lichHopCubitTablet on LichHopState {
       return type.getLichHopStateDangLichTablet(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSachTablet(cubit);
+    } else if (this is LichHopStateDangThongKe) {
+      return type.getThongKeTablet(cubit);
     } else {
       return const SizedBox();
     }

@@ -1,18 +1,18 @@
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/nhiem_vu_dashboard_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/dash_broash/dash_broash_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 
 class BieuDoNhiemVuMobile extends StatefulWidget {
-  final NhiemVuDashBoardModel nhiemVuDashBoardModel;
   final String? title;
+  final DanhSachCubit cubit;
   final List<ChartData> chartData;
 
   const BieuDoNhiemVuMobile({
     Key? key,
-    required this.nhiemVuDashBoardModel,
+    required this.cubit,
     required this.chartData,
     this.title,
   }) : super(key: key);
@@ -40,39 +40,29 @@ class _BieuDoNhiemVuMobileState extends State<BieuDoNhiemVuMobile> {
             onTap: (int value) {},
           ),
           Container(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: BoxStatusVanBan(
-                  value: widget.nhiemVuDashBoardModel.soLuongTrongHan ?? 0,
-                  onTap: () {},
-                  color: numberOfCalenders,
-                  statusName: S.current.trong_han,
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: BoxStatusVanBan(
-                  value: widget.nhiemVuDashBoardModel.soLuongQuaHan ?? 0,
-                  onTap: () {},
-                  color: dangXyLyColor,
-                  statusName: S.current.den_han,
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: BoxStatusVanBan(
-                  value: widget.nhiemVuDashBoardModel.soLuongDenHan ?? 0,
-                  onTap: () {},
-                  color: statusCalenderRed,
-                  statusName: S.current.qua_han,
-                ),
-              ),
-            ],
+          StreamBuilder<List<LoaiNhiemVuComomModel>>(
+            stream: widget.cubit.loaiNhiemVuSuject,
+            initialData: listFakeData,
+            builder: (context, snapshot) {
+              final data = snapshot.data ?? [];
+              return Row(
+                children: data
+                    .map(
+                      (e) => Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: BoxStatusVanBan(
+                            value: e.value ?? 0,
+                            onTap: () {},
+                            color: (e.giaTri ?? '').status(),
+                            statusName: e.text ?? '',
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
           )
         ],
       ),

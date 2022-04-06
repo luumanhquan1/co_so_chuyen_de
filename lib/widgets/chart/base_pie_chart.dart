@@ -151,4 +151,6 @@ class ChartData {
   final String title;
   final double value;
   final Color color;
+
+
 }
