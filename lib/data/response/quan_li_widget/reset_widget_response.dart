@@ -1,22 +1,29 @@
+import 'dart:convert';
+
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'quan_li_widget_response.g.dart';
+part 'reset_widget_response.g.dart';
 
 @JsonSerializable()
-class QuanLyWidgetResponse {
+class ResetWidgetResponse {
   @JsonKey(name: 'data')
-  List<WidgetData> listWidget;
+  String stringListWidget;
 
-  QuanLyWidgetResponse(this.listWidget);
+  ResetWidgetResponse(this.stringListWidget);
 
-  factory QuanLyWidgetResponse.fromJson(Map<String, dynamic> json) =>
-      _$QuanLyWidgetResponseFromJson(json);
+  factory ResetWidgetResponse.fromJson(Map<String, dynamic> json) =>
+      _$ResetWidgetResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QuanLyWidgetResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ResetWidgetResponseToJson(this);
 
   List<WidgetModel> toDomain() {
-    return listWidget.map((e) => e.toDomain()).toList();
+    final List<WidgetModel> listResult = [];
+    final listData = json.decode(stringListWidget) as List<dynamic>;
+    for (final element in listData) {
+       listResult.add(WidgetData.fromJson(element).toDomain());
+    }
+     return listResult;
   }
 }
 
@@ -80,6 +87,9 @@ class WidgetData {
   int? minH;
   @JsonKey(name: 'minW')
   int? minW;
+  @JsonKey(name: 'props')
+  Map<String,dynamic>? props;
+
   WidgetData(this.id, this.name, this.component);
 
   factory WidgetData.fromJson(Map<String, dynamic> json) =>
@@ -117,5 +127,6 @@ class WidgetData {
     maxW: maxW ?? 0,
     minH: minH ?? 0,
     minW: minW ?? 0,
-      );
+    props: props,
+  );
 }

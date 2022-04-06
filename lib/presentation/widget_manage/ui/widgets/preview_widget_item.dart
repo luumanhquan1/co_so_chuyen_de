@@ -25,140 +25,140 @@ import '/home_module/presentation/home_screen/ui/tablet/items/summary_of_task_ta
 import '/home_module/presentation/home_screen/ui/tablet/items/word_processing_state_tablet_widget.dart';
 import '/home_module/presentation/home_screen/ui/tablet/items/work_list_tablet_widget.dart';
 
-extension ItemExtension on WidgetType {
-  Widget getItemsMobile() {
+extension ItemPreview on WidgetType {
+  Widget getItemsMobilePreview() {
     switch (this) {
       case WidgetType.wordProcessState:
         return WordProcessingStateWidget(
-          key: KeyKeepAlive._keyWordProcessState,
+          key: KeyKeepAlivePreview._keyWordProcessState,
           homeItemType: WidgetType.wordProcessState,
         );
       case WidgetType.document:
         return DocumentWidget(
-          key: KeyKeepAlive._keyDocument,
+          key: KeyKeepAlivePreview._keyDocument,
           homeItemType: WidgetType.document,
         );
       case WidgetType.summaryOfTask:
         return SummaryOfTaskWidget(
-          key: KeyKeepAlive._keySummaryOfTask,
+          key: KeyKeepAlivePreview._keySummaryOfTask,
           homeItemType: WidgetType.summaryOfTask,
         );
       case WidgetType.situationHandlingPeople:
         return SituationOfHandlingPeopleWidget(
-          key: KeyKeepAlive._keySituationHandlingPeople,
+          key: KeyKeepAlivePreview._keySituationHandlingPeople,
           homeItemType: WidgetType.situationHandlingPeople,
         );
       case WidgetType.peopleOpinions:
         return PeopleOpinions(
-          key: KeyKeepAlive._keyPeopleOpinions,
+          key: KeyKeepAlivePreview._keyPeopleOpinions,
           homeItemType: WidgetType.peopleOpinions,
         );
       case WidgetType.workSchedule:
         return CalendarWorkWidget(
-          key: KeyKeepAlive._keyWorkSchedule,
+          key: KeyKeepAlivePreview._keyWorkSchedule,
           homeItemType: WidgetType.workSchedule,
         );
       case WidgetType.meetingSchedule:
         return MeetingScheduleWidget(
-          key: KeyKeepAlive._keyMeetingSchedule,
+          key: KeyKeepAlivePreview._keyMeetingSchedule,
           homeItemType: WidgetType.meetingSchedule,
         );
       case WidgetType.pressSocialNetWork:
         return PressSocialNetWork(
-          key: KeyKeepAlive._keyPressSocialNetWork,
+          key: KeyKeepAlivePreview._keyPressSocialNetWork,
           homeItemType: WidgetType.pressSocialNetWork,
         );
       case WidgetType.listWork:
         return WorkListWidget(
-          key: KeyKeepAlive._keyListWork,
+          key: KeyKeepAlivePreview._keyListWork,
           homeItemType: WidgetType.listWork,
         );
       case WidgetType.eventOfDay:
         return EventOfDayWidget(
-          key: KeyKeepAlive._keyEventOfDay,
+          key: KeyKeepAlivePreview._keyEventOfDay,
           homeItemType: WidgetType.eventOfDay,
         );
       case WidgetType.sinhNhat:
         return SinhNhatWidget(
-          key: KeyKeepAlive._keySinhNhat,
+          key: KeyKeepAlivePreview._keySinhNhat,
           homeItemType: WidgetType.sinhNhat,
         );
       case WidgetType.nhiemVu:
         return NhiemVuWidget(
-          key: KeyKeepAlive._keyNhiemVu,
+          key: KeyKeepAlivePreview._keyNhiemVu,
           homeItemType: WidgetType.nhiemVu,
         );
     }
   }
 
-  Widget getItemsTablet() {
+  Widget getItemsTabletPreview() {
     switch (this) {
       case WidgetType.wordProcessState:
         return WordProcessingStateTabletWidget(
           homeItemType: WidgetType.wordProcessState,
-          key: KeyKeepAlive._keyWordProcessState,
+          key: KeyKeepAlivePreview._keyWordProcessState,
         );
       case WidgetType.document:
         return DocumentTabletWidget(
-          key: KeyKeepAlive._keyDocument,
+          key: KeyKeepAlivePreview._keyDocument,
           homeItemType: WidgetType.document,
         );
       case WidgetType.summaryOfTask:
         return SummaryOfTaskTabletWidget(
-          key: KeyKeepAlive._keySummaryOfTask,
+          key: KeyKeepAlivePreview._keySummaryOfTask,
           homeItemType: WidgetType.summaryOfTask,
         );
       case WidgetType.situationHandlingPeople:
         return SituationOfHandlingPeopleTabletWidget(
-          key: KeyKeepAlive._keySituationHandlingPeople,
+          key: KeyKeepAlivePreview._keySituationHandlingPeople,
           homeItemType: WidgetType.situationHandlingPeople,
         );
       case WidgetType.peopleOpinions:
         return PeopleOpinionsTabletWidget(
-          key: KeyKeepAlive._keyPeopleOpinions,
+          key: KeyKeepAlivePreview._keyPeopleOpinions,
           homeItemType: WidgetType.peopleOpinions,
         );
       case WidgetType.workSchedule:
         return CalendarWorkTabletWidget(
-          key: KeyKeepAlive._keyWorkSchedule,
+          key: KeyKeepAlivePreview._keyWorkSchedule,
           homeItemType: WidgetType.workSchedule,
         );
       case WidgetType.meetingSchedule:
         return MeetingScheduleTabletWidget(
-          key: KeyKeepAlive._keyMeetingSchedule,
+          key: KeyKeepAlivePreview._keyMeetingSchedule,
           homeItemType: WidgetType.meetingSchedule,
         );
       case WidgetType.pressSocialNetWork:
         return PressSocialNetWorkTabletWidget(
-          key: KeyKeepAlive._keyPressSocialNetWork,
+          key: KeyKeepAlivePreview._keyPressSocialNetWork,
           homeItemType: WidgetType.pressSocialNetWork,
         );
       case WidgetType.listWork:
         return WorkListTabletWidget(
-          key: KeyKeepAlive._keyListWork,
+          key: KeyKeepAlivePreview._keyListWork,
           homeItemType: WidgetType.listWork,
         );
       case WidgetType.eventOfDay:
         return EventOfDayTabletWidget(
-          key: KeyKeepAlive._keyEventOfDay,
+          key: KeyKeepAlivePreview._keyEventOfDay,
           homeItemType: WidgetType.eventOfDay,
         );
 
       case WidgetType.sinhNhat:
         return SinhNhatTabletWidget(
-          key: KeyKeepAlive._keySinhNhat,
+          key: KeyKeepAlivePreview._keySinhNhat,
           homeItemType: WidgetType.sinhNhat,
         );
       case WidgetType.nhiemVu:
         return NhiemVuTabletWidget(
-          key: KeyKeepAlive._keyNhiemVu,
+          key: KeyKeepAlivePreview._keyNhiemVu,
           homeItemType: WidgetType.nhiemVu,
         );
     }
   }
 }
 
-class KeyKeepAlive {
+class KeyKeepAlivePreview {
   static final _keyWordProcessState = GlobalKey();
   static final _keyDocument = GlobalKey();
   static final _keySummaryOfTask = GlobalKey();

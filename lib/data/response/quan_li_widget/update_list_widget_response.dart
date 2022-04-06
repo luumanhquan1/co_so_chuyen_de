@@ -1,22 +1,28 @@
+import 'dart:convert';
+
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-part 'quan_li_widget_response.g.dart';
+part 'update_list_widget_response.g.dart';
 
 @JsonSerializable()
-class QuanLyWidgetResponse {
+class  UpdateListWidgetResponse {
   @JsonKey(name: 'data')
-  List<WidgetData> listWidget;
+  String stringListWidget;
 
-  QuanLyWidgetResponse(this.listWidget);
+  UpdateListWidgetResponse(this.stringListWidget);
 
-  factory QuanLyWidgetResponse.fromJson(Map<String, dynamic> json) =>
-      _$QuanLyWidgetResponseFromJson(json);
+  factory UpdateListWidgetResponse.fromJson(Map<String, dynamic> json) =>
+      _$UpdateListWidgetResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$QuanLyWidgetResponseToJson(this);
+  Map<String, dynamic> toJson() => _$UpdateListWidgetResponseToJson(this);
 
   List<WidgetModel> toDomain() {
-    return listWidget.map((e) => e.toDomain()).toList();
+    final List<WidgetModel> listResult = [];
+    final listData = json.decode(stringListWidget) as List<dynamic>;
+    for (final element in listData) {
+      listResult.add(WidgetData.fromJson(element).toDomain());
+    }
+    return listResult;
   }
 }
 
@@ -26,6 +32,8 @@ class WidgetData {
   String? id = '';
   @JsonKey(name: 'name')
   String? name = '';
+  @JsonKey(name: 'component')
+  String? component = '';
   @JsonKey(name: 'widgetTypeId')
   String? widgetTypeId;
   @JsonKey(name: 'description')
@@ -44,8 +52,6 @@ class WidgetData {
   int? maxHeight;
   @JsonKey(name: 'maxWidth')
   int? maxWidth;
-  @JsonKey(name: 'component')
-  String? component = '';
   @JsonKey(name: 'static')
   bool? static;
   @JsonKey(name: 'isResizable')
@@ -80,6 +86,8 @@ class WidgetData {
   int? minH;
   @JsonKey(name: 'minW')
   int? minW;
+  @JsonKey(name: 'props')
+  Map<String,dynamic>? props;
   WidgetData(this.id, this.name, this.component);
 
   factory WidgetData.fromJson(Map<String, dynamic> json) =>
@@ -117,5 +125,6 @@ class WidgetData {
     maxW: maxW ?? 0,
     minH: minH ?? 0,
     minW: minW ?? 0,
-      );
+    props: props,
+  );
 }

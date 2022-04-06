@@ -161,6 +161,9 @@ class ApiConstants {
   static const SEARCH_Y_KIEN_NGUOI_DAN = '/pakn/api/IocApi/danh-sach-pakn?';
   static const GET_LIST_WIDGET = '/api/Widget/get-list-widget?';
   static const GET_DANH_SACH_Y_KIEN_PAKN = '/pakn/api/TaskYKien/danh-sach-ykien';
+  static const RESET_LIST_WIDGET = '/api/Widget/reset-dashboard-widget';
+  static const UPDATE_LIST_WIDGET = '/api/Widget/update-dashboard-widget-config';
+
 }
 
 class ImageConstants {

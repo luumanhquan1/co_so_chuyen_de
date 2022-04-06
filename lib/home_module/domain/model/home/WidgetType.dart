@@ -1,7 +1,3 @@
-
-
-
-
 import '/home_module/utils/constants/app_constants.dart';
 
 enum WidgetType {
@@ -23,15 +19,70 @@ class WidgetModel {
   String id = '';
   String name = '';
   String component = '';
+  String? widgetTypeId;
+  String? description;
+  String? code;
+  int? width;
+  int? height;
+  int? minWidth;
+  int? minHeight;
+  int? maxHeight;
+  int? maxWidth;
+  Map<String,dynamic>? props={};
+  bool? static;
+  bool? isResizable;
+  String? thumbnail;
+  String? appId;
+  int? order;
+  bool? isShowing;
+  int? x;
+  int? y;
+  String? i;
+  bool? enable;
+  bool? moved;
+  int? w;
+  int? h;
+  int? maxH;
+  int? maxW;
+  int? minH;
+  int? minW;
   WidgetType? widgetType;
 
   WidgetModel({
     required this.id,
     required this.name,
     required this.component,
+    this.widgetTypeId,
+    this.description,
+    this.code,
+    this.width,
+    this.height,
+    this.minWidth,
+    this.minHeight,
+    this.maxHeight,
+    this.maxWidth,
+    this.props,
+    this.static,
+    this.isResizable,
+    this.thumbnail,
+    this.appId,
+    this.order,
+    this.isShowing,
+    this.x,
+    this.y,
+    this.i,
+    this.enable,
+    this.moved,
+    this.w,
+    this.h,
+    this.maxH,
+    this.maxW,
+    this.minH,
+    this.minW,
+    this.widgetType,
   }) {
     widgetType = fromEnum();
-  }
+  } //
 
   WidgetType? fromEnum() {
     switch (component) {
@@ -62,3 +113,47 @@ class WidgetModel {
     }
   }
 }
+
+class Props {
+  Props();
+
+  Props.fromJson();
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    return data;
+  }
+}
+  Map<String, dynamic> widgetModelToJson(WidgetModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'widgetTypeId': instance.widgetTypeId,
+      'description': instance.description,
+      'code': instance.code,
+      'width': instance.width,
+      'height': instance.height,
+      'minWidth': instance.minWidth,
+      'minHeight': instance.minHeight,
+      'maxHeight': instance.maxHeight,
+      'maxWidth': instance.maxWidth,
+      'component': instance.component,
+      'static': instance.static,
+      'isResizable': instance.isResizable,
+      'thumbnail': instance.thumbnail,
+      'appId': instance.appId,
+      'order': instance.order,
+      'isShowing': instance.isShowing,
+      'x': instance.x,
+      'y': instance.y,
+      'i': instance.i,
+      'enable': instance.enable,
+      'moved': instance.moved,
+      'w': instance.w,
+      'h': instance.h,
+      'maxH': instance.maxH,
+      'maxW': instance.maxW,
+      'minH': instance.minH,
+      'minW': instance.minW,
+      'props':instance.props
+    };

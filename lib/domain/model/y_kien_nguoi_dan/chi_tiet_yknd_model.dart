@@ -150,13 +150,11 @@ class ChiTietYKNDModel {
   }
 
    getFile() {
-     String listFile='';
     if (fileDinhKem.isNotEmpty) {
       final List<String> listFileName = [];
       for (final element in fileDinhKem) {
         listFileName.add(element.tenFile);
       }
-      listFile = listFileName.join('\n');
     }
   }
 }
