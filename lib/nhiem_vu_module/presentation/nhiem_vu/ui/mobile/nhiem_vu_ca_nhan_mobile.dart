@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/danh_sach/danh_sach_cong_viec_mobile.dart';
@@ -120,6 +121,7 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                               MaterialPageRoute(
                                 builder: (context) => DanhSachNhiemVuMobile(
                                   cubit: danhSachCubit,
+                                  isCheck: widget.isCheck,
                                 ),
                               ),
                             );
@@ -141,7 +143,20 @@ class _NhiemVuCaNhanMobileState extends State<NhiemVuCaNhanMobile> {
                               shrinkWrap: true,
                               itemCount: data.length < 3 ? data.length : 3,
                               itemBuilder: (context, index) {
-                                return NhiemVuItemMobile(data: data[index]);
+                                return NhiemVuItemMobile(
+                                  data: data[index],
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChiTietNhiemVuPhoneScreen(
+                                          id: data[index].id ?? '',
+                                          isCheck: widget.isCheck,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             );
                           }

@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/phone/chi_tiet_nhiem_vu_phone_screen.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_mobile.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -9,9 +10,13 @@ import 'package:flutter/material.dart';
 
 class DanhSachNhiemVuMobile extends StatefulWidget {
   final DanhSachCubit cubit;
+  final bool isCheck;
 
-  const DanhSachNhiemVuMobile({Key? key, required this.cubit})
-      : super(key: key);
+  const DanhSachNhiemVuMobile({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _DanhSachNhiemVuMobileState createState() => _DanhSachNhiemVuMobileState();
@@ -66,6 +71,17 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
       },
       viewItem: (value, index) => NhiemVuItemMobile(
         data: value as PageData,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChiTietNhiemVuPhoneScreen(
+                id: value.id ?? '',
+                isCheck: widget.isCheck,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

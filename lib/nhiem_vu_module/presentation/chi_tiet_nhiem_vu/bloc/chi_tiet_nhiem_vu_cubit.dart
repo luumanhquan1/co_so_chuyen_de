@@ -76,10 +76,10 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
       chiTietHeaderSubject.stream;
 
   Future<void> loadDataNhiemVuCaNhan({
-    required String nhiemVuId,
+    required String nhiemVuId,required bool isCheck
   }) async {
     final queue = Queue(parallel: 8);
-    unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId)));
+    unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId,isCheck)));
     unawaited(queue.add(() => getLichSuPhanXuLy(nhiemVuId)));
     unawaited(queue.add(() => getYKienXuLyNhiemVu(nhiemVuId)));
     unawaited(queue.add(() => getDanhSachCongViecChiTietNhiemVu(nhiemVuId)));
@@ -92,8 +92,8 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
     queue.dispose();
   }
 
-  Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId) async {
-    final result = await nhiemVuRepo.getChiTietNhiemVu(nhiemVuId, true);
+  Future<void> getChiTietNhiemVuCaNhan(String nhiemVuId,bool isCheck) async {
+    final result = await nhiemVuRepo.getChiTietNhiemVu(nhiemVuId, isCheck);
     result.when(
         success: (res) {
           chiTietHeaderSubject.add(res);
