@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ccvc_mobile/domain/model/detail_doccument/lich_su_van_ban_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/type_data_row.dart';
 
@@ -19,7 +20,8 @@ class ItemVanBanLienQuanModel {
   String soKyHieu = '';
   String ngayVB = '';
   String trichYeu = '';
-  File fileDinhKem = File('');
+
+  List<FileDinhKems>? fileDinhKem;
 
   ItemVanBanLienQuanModel.empty();
 

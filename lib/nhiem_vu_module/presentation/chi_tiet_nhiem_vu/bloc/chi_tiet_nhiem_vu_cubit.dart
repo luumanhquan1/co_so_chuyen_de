@@ -34,16 +34,16 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   BehaviorSubject<List<LichSuPhanXuLyNhiemVuModel>> lichSuPhanXuLySubject =
       BehaviorSubject();
 
-  BehaviorSubject<List<LichSuThuHoiModel>> lichSuThuHoiSubject =
+  BehaviorSubject<List<LichSuThuHoiNhiemVuModel>> lichSuThuHoiSubject =
       BehaviorSubject();
 
   BehaviorSubject<List<LichSuCapNhatTHTHModel>> lichSuCapNhatTHTHSubject =
       BehaviorSubject();
 
-  BehaviorSubject<List<LichSuTraLaiModel>> lichSuTraLaiSubject =
+  BehaviorSubject<List<LichSuTraLaiNhiemVuModel>> lichSuTraLaiSubject =
       BehaviorSubject();
 
-  BehaviorSubject<List<LichSuDonDocModel>> lichSuDonDocSubject =
+  BehaviorSubject<List<LichSuDonDocNhiemVuModel>> lichSuDonDocSubject =
       BehaviorSubject();
   BehaviorSubject<List<YKienSuLyNhiemVuModel>> yKienXuLyNhiemVuSubject =
       BehaviorSubject();
@@ -51,16 +51,16 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Stream<VanBanLienQuanModel> get vanBanLienQuanStream =>
       vanBanLienQuanSubject.stream;
 
-  Stream<List<LichSuThuHoiModel>> get lichSuThuHoiStream =>
+  Stream<List<LichSuThuHoiNhiemVuModel>> get lichSuThuHoiStream =>
       lichSuThuHoiSubject.stream;
 
-  Stream<List<LichSuDonDocModel>> get lichSuDonDocStream =>
+  Stream<List<LichSuDonDocNhiemVuModel>> get lichSuDonDocStream =>
       lichSuDonDocSubject.stream;
 
   Stream<List<DanhSachCongViecChiTietNhiemVuModel>>
       get danhSachCongViecStream => danhsachCongViecSubject.stream;
 
-  Stream<List<LichSuTraLaiModel>> get lichSuTraLaiStream =>
+  Stream<List<LichSuTraLaiNhiemVuModel>> get lichSuTraLaiStream =>
       lichSuTraLaiSubject.stream;
 
   Stream<List<LichSuPhanXuLyNhiemVuModel>> get lichSuPhanXuLyModelStream =>
@@ -78,11 +78,15 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
   Future<void> loadDataNhiemVuCaNhan({
     required String nhiemVuId,
   }) async {
-    final queue = Queue(parallel: 4);
+    final queue = Queue(parallel: 8);
     unawaited(queue.add(() => getChiTietNhiemVuCaNhan(nhiemVuId)));
     unawaited(queue.add(() => getLichSuPhanXuLy(nhiemVuId)));
     unawaited(queue.add(() => getYKienXuLyNhiemVu(nhiemVuId)));
     unawaited(queue.add(() => getDanhSachCongViecChiTietNhiemVu(nhiemVuId)));
+    unawaited(queue.add(() => getLichSuTraLaiNhiemVu(nhiemVuId)));
+    unawaited(queue.add(() => getLichSuCapNhatThth(nhiemVuId)));
+    unawaited(queue.add(() => getLichSuThuHoiNhiemVu(nhiemVuId)));
+    unawaited(queue.add(() => getLichSuDonDocNhiemVu(nhiemVuId)));
     await queue.onComplete;
     showContent();
     queue.dispose();
@@ -125,121 +129,74 @@ class ChiTietNVCubit extends BaseCubit<ChiTietNVState> {
         error: (error) {});
   }
 
-  List<LichSuThuHoiModel> fakeLSTH = [
-    LichSuThuHoiModel(
-      id: '',
-      noiDungTraLai: 'Chưa có',
-      thoiGian: '27/07/2021 | 17:02:22',
-      donViBiThuHoi: 'UBND Đồng Nai',
-      donViThuHoi: 'UBND Đồng Nai',
-      nguoiBiThuHoi: 'Hà Kiều Anh',
-      nguoiThuHoi: 'Hà Kiều Anh',
-    ),
-    LichSuThuHoiModel(
-      id: '',
-      noiDungTraLai: 'Chưa có',
-      thoiGian: '27/07/2021 | 17:02:22',
-      donViBiThuHoi: 'UBND Đồng Nai',
-      donViThuHoi: 'UBND Đồng Nai',
-      nguoiBiThuHoi: 'Hà Kiều Anh',
-      nguoiThuHoi: 'Hà Kiều Anh',
-    ),
-  ];
+  Future<void> getLichSuTraLaiNhiemVu(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getLichSuTraLaiNhiemVu(nhiemVuId);
+    result.when(
+      success: (res) {
+        lichSuTraLaiSubject.add(res);
+      },
+      error: (error) {},
+    );
+  }
 
-  List<LichSuDonDocModel> fakeLSDD = [
-    LichSuDonDocModel(
-      id: '',
-      noiDungDonDoc: 'Chưa có',
-      thoiGian: '27/07/2021 | 17:02:22',
-      donViDonDoc: 'UBND Đồng Nai',
-      donViBiDonDoc: 'UBND Đồng Nai',
-      nguoiBiDonDoc: 'Hà Kiều Anh',
-      nguoiDonDoc: 'Hà Kiều Anh',
-    ),
-    LichSuDonDocModel(
-      id: '',
-      noiDungDonDoc: 'Chưa có',
-      thoiGian: '27/07/2021 | 17:02:22',
-      donViDonDoc: 'UBND Đồng Nai',
-      donViBiDonDoc: 'UBND Đồng Nai',
-      nguoiBiDonDoc: 'Hà Kiều Anh',
-      nguoiDonDoc: 'Hà Kiều Anh',
-    ),
-    LichSuDonDocModel(
-      id: '',
-      noiDungDonDoc: 'Chưa có',
-      thoiGian: '27/07/2021 | 17:02:22',
-      donViDonDoc: 'UBND Đồng Nai',
-      donViBiDonDoc: 'UBND Đồng Nai',
-      nguoiBiDonDoc: 'Hà Kiều Anh',
-      nguoiDonDoc: 'Hà Kiều Anh',
-    ),
-  ];
+  Future<void> getLichSuCapNhatThth(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getLichSuCapNhatThth(nhiemVuId);
+    result.when(
+      success: (res) {
+        lichSuCapNhatTHTHSubject.add(res);
+      },
+      error: (error) {},
+    );
+  }
 
-  List<LichSuCapNhatTHTHModel> fakeLSCNTHTH = [
-    LichSuCapNhatTHTHModel(
-      id: '',
-      thoiGian: '27/07/2021 | 17:02:22',
-      trangThai: 'DANG_THUC_HIEN',
-      donViCapNhat: 'UBND Đồng Nai',
-      dvBiTraLai: 'UBND Đồng Nai',
-      nguoiCapNhat: 'chanhvpboqlvb',
-      noiDungCapNhat: 'chanhvpboqlvb',
-    ),
-    LichSuCapNhatTHTHModel(
-      id: '',
-      thoiGian: '27/07/2021 | 17:02:22',
-      trangThai: 'DANG_THUC_HIEN',
-      donViCapNhat: 'UBND Đồng Nai',
-      dvBiTraLai: 'UBND Đồng Nai',
-      nguoiCapNhat: 'chanhvpboqlvb',
-      noiDungCapNhat: 'chanhvpboqlvb',
-    ),
-  ];
+  Future<void> getLichSuThuHoiNhiemVu(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getLichSuThuHoiNhiemVu(nhiemVuId);
+    result.when(
+      success: (res) {
+        lichSuThuHoiSubject.add(res);
+      },
+      error: (error) {},
+    );
+  }
 
-  List<LichSuTraLaiModel> fakeLSTL = [
-    LichSuTraLaiModel(
-      id: '',
-      nguoiCapNhat: 'chanhvpboqlvb',
-      dvBiTraLai: 'UBND Đồng Nai',
-      thoiGian: '27/07/2021 | 17:02:22',
-      fileDinhKem: File('Mô tả dự án.docx'),
-      donViTraLai: 'UBND Đồng Nai',
-      nguoiBiTraLai: 'Hà Kiều Anh',
-      noiDungTraLai: 'Chưa có',
-    ),
-  ];
+  Future<void> getLichSuDonDocNhiemVu(String nhiemVuId) async {
+    final result = await nhiemVuRepo.getLichSuDonDocNhiemVu(nhiemVuId);
+    result.when(
+      success: (res) {
+        lichSuDonDocSubject.add(res);
+      },
+      error: (error) {},
+    );
+  }
 
   VanBanLienQuanModel fakeVBLQ = VanBanLienQuanModel(
     id: '',
     vanBanGiaoNV: [
-      ItemVanBanLienQuanModel(
-          id: '',
-          ngayVB: '25/08/2021',
-          fileDinhKem: File('Mô tả dự án.docx'),
-          soKyHieu: '1',
-          trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
-      ItemVanBanLienQuanModel(
-          id: '',
-          ngayVB: '25/08/2021',
-          fileDinhKem: File('Mô tả dự án.docx'),
-          soKyHieu: '1',
-          trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
-      ItemVanBanLienQuanModel(
-          id: '',
-          ngayVB: '25/08/2021',
-          fileDinhKem: File('Mô tả dự án.docx'),
-          soKyHieu: '1',
-          trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
+      // ItemVanBanLienQuanModel(
+      //     id: '',
+      //     ngayVB: '25/08/2021',
+      //     fileDinhKem: File('Mô tả dự án.docx'),
+      //     soKyHieu: '1',
+      //     trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
+      // ItemVanBanLienQuanModel(
+      //     id: '',
+      //     ngayVB: '25/08/2021',
+      //     fileDinhKem: ['Mô tả dự án.docx'],
+      //     soKyHieu: '1',
+      //     trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
+      // ItemVanBanLienQuanModel(
+      //     id: '',
+      //     ngayVB: '25/08/2021',
+      //     fileDinhKem: File('Mô tả dự án.docx'),
+      //     soKyHieu: '1',
+      //     trichYeu: 'Thi hành khảo sát tình hình hộ nghèo năm 2021'),
     ],
     vanBanKhac: [],
   );
 
   void initChiTietNV() {
     vanBanLienQuanSubject.add(fakeVBLQ);
-    lichSuCapNhatTHTHSubject.add(fakeLSCNTHTH);
-    lichSuTraLaiSubject.add(fakeLSTL);
-    lichSuThuHoiSubject.add(fakeLSTH);
-    lichSuDonDocSubject.add(fakeLSDD);
+    // lichSuThuHoiSubject.add(fakeLSTH);
+    // lichSuDonDocSubject.add(fakeLSDD);
   }
 }

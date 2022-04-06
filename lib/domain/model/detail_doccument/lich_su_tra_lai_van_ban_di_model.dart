@@ -43,7 +43,7 @@ class LichSuTraLaiVanBanDi {
         TypeDocumentDetailRow.text,
       ),
       DocumentDetailRow(
-        S.current.dv_tra_lai,
+        S.current.don_vi_tra_lai,
         donViTraLai ?? '',
         TypeDocumentDetailRow.text,
       ),

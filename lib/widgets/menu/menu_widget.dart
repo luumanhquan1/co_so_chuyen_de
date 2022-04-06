@@ -267,7 +267,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   onTap: () {
                     widget.cubit.selectTypeCalendarSubject
                         .add([false, false, true]);
-                    widget.onTap(S.current.theo_dang_danh_sach);
+                    widget.onTap(S.current.bao_cao_thong_ke);
 
                     Navigator.pop(context);
                   },

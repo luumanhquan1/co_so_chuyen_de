@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/repository/quan_ly_widget/quan_li_widget_respository.dart';
@@ -29,6 +31,7 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   List<WidgetModel> listUsing = [];
   List<WidgetModel> listNotUse = [];
   List<String> listTitleWidgetUse = [];
+  final List<String> listResponse = [];
   final List<String> removeWidget = [
     WidgetTypeConstant.HANH_CHINH_CONG,
     WidgetTypeConstant.LICH_LAM_VIEC_LICH_HOP,
@@ -107,6 +110,7 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
   final QuanLyWidgetRepository _qlWidgetRepo = Get.find();
 
   Future<void> _getListWidgetNotUse() async {
+    listNotUse.clear();
     showLoading();
     final result = await _qlWidgetRepo.getListWidget();
     result.when(
@@ -125,5 +129,55 @@ class WidgetManageCubit extends BaseCubit<WidgetManageState> {
         return;
       },
     );
+  }
+
+  Future<void> resetListWidget() async {
+    showLoading();
+    final result = await _qlWidgetRepo.resetListWidget();
+    result.when(
+      success: (res) {
+        listUsing.clear();
+        listNotUse.clear();
+        listUsing = res;
+        listTitleWidgetUse = listUsing.map((e) => e.name).toList();
+        for (final element in res) {
+          // ignore: iterable_contains_unrelated_type
+          if (!listTitleWidgetUse.contains(element.name) &&
+              !removeWidget.contains(element.component)) {
+            listNotUse.add(element);
+          }
+        }
+        _listWidgetUsing.sink.add(listUsing);
+        _listWidgetNotUse.sink.add(listNotUse);
+        orderWidgetHome(_listWidgetUsing.value);
+        showContent();
+      },
+      error: (err) {
+        return;
+      },
+    );
+  }
+
+  Future<void> updateListWidget(String request) async {
+    showLoading();
+    final result = await _qlWidgetRepo.updateListWidget(request);
+    result.when(
+      success: (res) {
+        showContent();
+      },
+      error: (err) {
+        throw err;
+      },
+    );
+  }
+
+  void setParaUpdateWidget(List<WidgetModel> listWidget) {
+    final listMap = [];
+    for (final element in listWidget) {
+      listMap.add(widgetModelToJson(element));
+    }
+    for (final element in listMap) {
+      listResponse.add(json.encode(element));
+    }
   }
 }

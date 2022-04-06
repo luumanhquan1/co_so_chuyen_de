@@ -1,3 +1,8 @@
+import 'dart:ui';
+
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:flutter/material.dart';
+
 class DanhSachCongViecModel {
   List<PageDatas>? pageData;
   int? totalRows;
@@ -96,4 +101,38 @@ class PageDatas {
     required this.coTheGan,
     required this.coTheXoa,
   });
+}
+
+extension CheckColor on String {
+  Color trangThaiToColor() {
+    switch (this) {
+      case 'thu-hoi':
+        return Colors.red;
+      case 'cho-phan-xu-ly':
+        return choXuLyColor;
+      case 'chua-thuc-hien':
+        return Colors.red;
+      case 'dang-thuc-hien':
+        return yellowColor;
+      case 'da-hoan-thanh':
+        return daXuLyColor;
+      case 'tra-lai':
+        return Colors.red;
+      default:
+        return Colors.red;
+    }
+  }
+
+  Color status() {
+    switch (this) {
+      case 'qua-han':
+        return statusCalenderRed;
+      case 'den-han':
+        return dangXyLyColor;
+      case 'trong-han':
+        return numberOfCalenders;
+      default:
+        return Colors.red;
+    }
+  }
 }

@@ -2,10 +2,10 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/domain/model/home/WidgetType.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/home_item.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/home_provider.dart';
 import 'package:ccvc_mobile/home_module/presentation/home_screen/ui/widgets/mequee_widget.dart';
 import 'package:ccvc_mobile/presentation/widget_manage/bloc/widget_manage_cubit.dart';
+import 'package:ccvc_mobile/presentation/widget_manage/ui/widgets/preview_widget_item.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 
@@ -20,12 +20,19 @@ class _PrevViewWidgetState extends State<PrevViewWidget> {
   WidgetManageCubit cubit = WidgetManageCubit();
   HomeCubit homeCubit = HomeCubit();
   ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     cubit.loadApi();
     homeCubit.loadApi();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    homeCubit.dispose();
   }
 
   @override
@@ -58,7 +65,7 @@ class _PrevViewWidgetState extends State<PrevViewWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: List.generate(data.length, (index) {
                           final type = data[index];
-                          return type.widgetType?.getItemsMobile() ??
+                          return type.widgetType?.getItemsMobilePreview() ??
                               const SizedBox();
                         }),
                       );

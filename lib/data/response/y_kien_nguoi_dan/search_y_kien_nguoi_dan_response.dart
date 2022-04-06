@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan%20_model.dart';
+import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'search_y_kien_nguoi_dan_response.g.dart';

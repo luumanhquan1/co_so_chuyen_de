@@ -136,7 +136,7 @@ class _ChiTietNhiemVuTabletScreenState
                                     );
                                   },
                                 ),
-                                StreamBuilder<List<LichSuTraLaiModel>>(
+                                StreamBuilder<List<LichSuTraLaiNhiemVuModel>>(
                                   stream: cubit.lichSuTraLaiStream,
                                   builder: (context, snapshot) {
                                     final data = snapshot.data ?? [];
@@ -146,7 +146,7 @@ class _ChiTietNhiemVuTabletScreenState
                                     );
                                   },
                                 ),
-                                StreamBuilder<List<LichSuThuHoiModel>>(
+                                StreamBuilder<List<LichSuThuHoiNhiemVuModel>>(
                                   stream: cubit.lichSuThuHoiStream,
                                   builder: (context, snapshot) {
                                     final data = snapshot.data ?? [];
@@ -156,7 +156,7 @@ class _ChiTietNhiemVuTabletScreenState
                                     );
                                   },
                                 ),
-                                StreamBuilder<List<LichSuDonDocModel>>(
+                                StreamBuilder<List<LichSuDonDocNhiemVuModel>>(
                                   stream: cubit.lichSuDonDocStream,
                                   builder: (context, snapshot) {
                                     final data = snapshot.data ?? [];

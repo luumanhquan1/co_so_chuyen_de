@@ -27,7 +27,7 @@ class _DragItemListState extends State<DragItemList> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: widget.widgetManageCubit.listUpdate,
-      builder: (index,snapshot){
+      builder: (index, snapshot) {
         return ReorderableListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -81,13 +81,17 @@ class _DragItemListState extends State<DragItemList> {
                 clickICon: () {
                   widget.isUsing
                       ? widget.widgetManageCubit.insertItemNotUse(
-                    widget.listWidget[index],
-                    index,
-                  )
+                          widget.listWidget[index],
+                          index,
+                        )
                       : widget.widgetManageCubit.insertItemUsing(
-                    widget.listWidget[index],
-                    index,
-                  );
+                          widget.listWidget[index],
+                          index,
+                        );
+                  widget.widgetManageCubit
+                      .setParaUpdateWidget(widget.widgetManageCubit.listUsing);
+                  widget.widgetManageCubit.updateListWidget(
+                      widget.widgetManageCubit.listResponse.toString(),);
                 },
               ),
             );
@@ -99,7 +103,8 @@ class _DragItemListState extends State<DragItemList> {
               }
               widget.widgetManageCubit.sortListWidget(
                 oldIndex,
-                newIndex,);
+                newIndex,
+              );
             });
           },
         );

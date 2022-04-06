@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/lich_hop/bloc/lich_hop_state.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/mobile/lich_hop_danh_sach_ngay_tuan_thang/thong_ke_lich_hop.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/danh_sach_lich_hop_tablet/danh_sach_lich_hop_ngay_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_danh_sach_ngay_tuan_thang_tablet/lich_hop_theo_danh_sach_ngay_tablet.dart';
+import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_danh_sach_ngay_tuan_thang_tablet/thong_ke_lich_hop_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_ngay_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_thang_tablet.dart';
 import 'package:ccvc_mobile/presentation/lich_hop/ui/tablet/lich_hop_theo_ngay_tuan_thang_tablet/lich_hop_theo_tuan_tablet.dart';
@@ -123,10 +124,11 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
             builder: (context, snapshot) {
               final data = snapshot.data ?? cubit.selectedDay;
               final dateTimeFormRange =
-                  data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+              data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
 
               final dataString =
-                  '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+                  '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1]
+                  .formatDayCalendar}';
               return Text(
                 dataString,
                 style: textNormalCustom(
@@ -182,10 +184,11 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
           builder: (context, snapshot) {
             final data = snapshot.data ?? cubit.selectDay;
             final dateTimeFormRange =
-                data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+            data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
 
             final dataString =
-                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1]
+                .formatDayCalendar}';
             return Text(
               dataString,
               style: textNormalCustom(
@@ -241,10 +244,11 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
           builder: (context, snapshot) {
             final data = snapshot.data ?? cubit.selectDay;
             final dateTimeFormRange =
-                data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
+            data.dateTimeFormRange(timeRange: TimeRange.THANG_NAY);
 
             final dataString =
-                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1].formatDayCalendar}';
+                '${dateTimeFormRange[0].day} - ${dateTimeFormRange[1]
+                .formatDayCalendar}';
             return Text(
               dataString,
               style: textNormalCustom(
@@ -287,6 +291,25 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         );
       case Type_Choose_Option_Day.MONTH:
         return ThongKeLichHopScreen(
+          cubit: cubit,
+        );
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget getThongKeTablet(LichHopCubit cubit) {
+    switch (this) {
+      case Type_Choose_Option_Day.DAY:
+        return ThongKeLichHopTablet(
+          cubit: cubit,
+        );
+      case Type_Choose_Option_Day.WEEK:
+        return ThongKeLichHopTablet(
+          cubit: cubit,
+        );
+      case Type_Choose_Option_Day.MONTH:
+        return ThongKeLichHopTablet(
           cubit: cubit,
         );
       default:
@@ -359,10 +382,8 @@ extension lichHopCubit on LichHopState {
 }
 
 extension lichHopOptionDayCubitTablet on Type_Choose_Option_Day {
-  Widget getLichHopStateDangListTablet(
-    LichHopCubit cubit,
-    Type_Choose_Option_Day type,
-  ) {
+  Widget getLichHopStateDangListTablet(LichHopCubit cubit,
+      Type_Choose_Option_Day type,) {
     switch (this) {
       case Type_Choose_Option_Day.DAY:
         return LichHopTheoDanhSachNgayTablet(
@@ -421,18 +442,18 @@ extension lichHopOptionDayCubitTablet on Type_Choose_Option_Day {
 }
 
 extension lichHopCubitTablet on LichHopState {
-  Widget lichHopTablet(
-    LichHopCubit cubit,
-    Type_Choose_Option_Day type,
-  ) {
+  Widget lichHopTablet(LichHopCubit cubit,
+      Type_Choose_Option_Day type,) {
     if (this is LichHopStateDangList) {
       return type.getLichHopStateDangListTablet(cubit, type);
     } else if (this is LichHopStateDangLich) {
       return type.getLichHopStateDangLichTablet(cubit: cubit);
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSachTablet(cubit);
+    } else if (this is LichHopStateDangThongKe) {
+      return type.getThongKeTablet(cubit);
     } else {
-      return const SizedBox();
+    return const SizedBox();
     }
   }
 }
