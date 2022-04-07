@@ -145,7 +145,6 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
       statusData: StatusYKien.DANG_XU_LY,
     ),
   ];
-
   void callApi() {
     getUserData();
     getDashBoardTinhHinhXuLy(
@@ -316,38 +315,39 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
+
         listChartPhanLoai.clear();
         listChartPhanLoai.add(
           ChartData(
-            res.listPhanLoai[4].status,
+            res.listPhanLoai[4].tenNguon,
             res.listPhanLoai[4].soLuong.toDouble(),
             choTrinhKyColor,
           ),
         );
         listChartPhanLoai.add(
           ChartData(
-            res.listPhanLoai[0].status,
+            res.listPhanLoai[0].tenNguon,
             res.listPhanLoai[0].soLuong.toDouble(),
             labelColor,
           ),
         );
         listChartPhanLoai.add(
           ChartData(
-            res.listPhanLoai[3].status,
+            res.listPhanLoai[3].tenNguon,
             res.listPhanLoai[3].soLuong.toDouble(),
             unselectLabelColor,
           ),
         );
         listChartPhanLoai.add(
           ChartData(
-            res.listPhanLoai[5].status,
+            res.listPhanLoai[5].tenNguon,
             res.listPhanLoai[5].soLuong.toDouble(),
             itemWidgetUsing,
           ),
         );
         listChartPhanLoai.add(
           ChartData(
-            res.listPhanLoai[6].status,
+            res.listPhanLoai[6].tenNguon,
             res.listPhanLoai[6].soLuong.toDouble(),
             itemWidgetNotUse,
           ),
@@ -410,7 +410,7 @@ class YKienNguoiDanCubitt extends BaseCubit<YKienNguoiDanState> {
     showContent();
     result.when(
       success: (res) {
-        print(res.listYKienNguoiDan.length);
+
       },
       error: (err) {
         return;

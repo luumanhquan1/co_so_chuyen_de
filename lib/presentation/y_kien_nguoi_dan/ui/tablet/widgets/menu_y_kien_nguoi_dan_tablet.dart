@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/widget_item_menu_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
+import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_state.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                 name: S.current.thong_tin_chung,
                 onTap: () {
                   widget.cubit.selectTypeYKNDSubject.add([true, false]);
+                  widget.cubit.emit(ThongTinChung());
                   Navigator.pop(context);
                 },
                 isSelect: data[0],
@@ -65,6 +67,7 @@ class _MenuYKIenNguoiDanTabletState extends State<MenuYKIenNguoiDanTablet> {
                 name: S.current.bao_cao_thong_ke,
                 onTap: () {
                   widget.cubit.selectTypeYKNDSubject.add([false, true]);
+                  widget.cubit.emit(BaoCaoThongKe());
                   Navigator.pop(context);
                 },
                 isSelect: data[1],

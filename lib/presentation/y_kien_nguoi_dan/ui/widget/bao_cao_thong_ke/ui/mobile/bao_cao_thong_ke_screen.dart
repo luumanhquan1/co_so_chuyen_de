@@ -40,32 +40,6 @@ class _BaoCaoThongKeScreenState extends State<BaoCaoThongKeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
-        title: S.current.bao_cao_thong_ke,
-        leadingIcon: IconButton(
-          onPressed: () => {Navigator.pop(context)},
-          icon: SvgPicture.asset(
-            ImageAssets.icBack,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(ImageAssets.ic_search_calendar),
-          ),
-          IconButton(
-            onPressed: () {
-              // DrawerSlide.navigatorSlide(
-              //   context: context,
-              //   screen: YKienNguoiDanMenu(
-              //     cubit: cubit,
-              //   ),
-              // );
-            },
-            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
-          ),
-        ],
-      ),
       body: StateStreamLayout(
         textEmpty: S.current.khong_co_du_lieu,
         retry: () {},
@@ -76,11 +50,8 @@ class _BaoCaoThongKeScreenState extends State<BaoCaoThongKeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 20),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(

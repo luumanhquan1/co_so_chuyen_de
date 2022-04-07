@@ -50,6 +50,7 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
               child: Container(
                 color: Colors.white,
                 child: ChooseTimeScreen(
+                  baseChooseTimeCubit: chooseTimeCubit,
                   today: DateTime.now(),
                   onSubmit: (value) {},
                   onChangTime: () {
