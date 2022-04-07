@@ -157,29 +157,6 @@ extension LichLv on CalenderState {
     required CalenderCubit cubit,
     Type_Choose_Option_Day type = Type_Choose_Option_Day.DAY,
   }) {
-    if (this is LichLVStateDangLich && type == Type_Choose_Option_Day.MONTH) {
-      return StreamBuilder<List<DateTime>>(
-          stream: cubit.eventsStream,
-          builder: (context, snapshot) {
-            return TableCalendarWidget(
-              eventsLoader: snapshot.data,
-              type: type,
-              isCalendar: false,
-              onChange: (DateTime start, DateTime end, selectDay) {
-                cubit.selectDay = selectDay;
-                if (type == Type_Choose_Option_Day.DAY) {
-                  cubit.callApi();
-                } else if (type == Type_Choose_Option_Day.WEEK) {
-                  cubit.callApiTuan();
-                } else {
-                  cubit.callApiMonth();
-                }
-              },
-              onChangeRange:
-                  (DateTime? start, DateTime? end, DateTime? focusedDay) {},
-            );
-          });
-    }
     return StreamBuilder<List<DateTime>>(
         stream: cubit.eventsStream,
         builder: (context, snapshot) {
@@ -187,18 +164,19 @@ extension LichLv on CalenderState {
             eventsLoader: snapshot.data,
             type: type,
             onChange: (DateTime start, DateTime end, selectDay) {
-              cubit.startDates = start;
-              cubit.endDates = end;
               cubit.selectDay = selectDay;
-              cubit.listDSLV.clear();
-              cubit.page = 1;
-              cubit.moveTimeSubject.add(selectDay);
-              cubit.callApi();
+              if (type == Type_Choose_Option_Day.DAY) {
+                cubit.callApi();
+              } else if (type == Type_Choose_Option_Day.WEEK) {
+                cubit.callApiTuan();
+              } else {
+                cubit.callApiMonth();
+              }
             },
             onChangeRange:
                 (DateTime? start, DateTime? end, DateTime? focusedDay) {},
           );
-        });
+        },);
   }
 
   Widget itemCalendarWork(CalenderCubit cubit) {

@@ -53,6 +53,8 @@ class CalenderCubit extends BaseCubit<CalenderState> {
   final BehaviorSubject<DanhSachLichlamViecModel> danhSachLichLamViecSubject =
       BehaviorSubject();
 
+  BehaviorSubject<CalendarController> stateCalendarSubject = BehaviorSubject();
+
   BehaviorSubject<DateTime> moveTimeSubject = BehaviorSubject();
 
   Stream<DanhSachLichlamViecModel> get danhSachLichLamViecStream =>
@@ -96,6 +98,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
     );
     menuCalendar();
     initDataMenu();
+    final CalendarController controller = CalendarController();
+    controller.displayDate = selectDay;
+    stateCalendarSubject.add(controller);
   }
 
   void callApiNgay() {
@@ -181,6 +186,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       endDate: endDates.formatApi,
     );
     menuCalendar();
+    final CalendarController controller = CalendarController();
+    controller.displayDate = selectDay;
+    stateCalendarSubject.add(controller);
   }
 
   void callApiMonth() {
@@ -196,6 +204,9 @@ class CalenderCubit extends BaseCubit<CalenderState> {
       endDate: endDates.formatApi,
     );
     menuCalendar();
+    final CalendarController controller = CalendarController();
+    controller.displayDate = selectDay;
+    stateCalendarSubject.add(controller);
   }
 
   List<ListLichLVModel> listDSLV = [];
