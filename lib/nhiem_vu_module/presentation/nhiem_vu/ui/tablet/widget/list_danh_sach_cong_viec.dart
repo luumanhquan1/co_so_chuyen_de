@@ -48,14 +48,14 @@ class _ListDanhSachCongViecState extends State<ListDanhSachCongViec> {
                 itemBuilder: (context, index) {
                   return NhiemVuCellTablet(
                     onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChitietCongViecNhiemVuTablet(
-                              id: widget.list[index].id ?? '',
-                            ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChitietCongViecNhiemVuTablet(
+                            id: widget.list[index].id ?? '',
                           ),
-                        );
+                        ),
+                      );
                     },
                     title: widget.list[index].maCv ?? '',
                     noiDung:
@@ -67,6 +67,7 @@ class _ListDanhSachCongViecState extends State<ListDanhSachCongViec> {
                     index: index + 1,
                     hanXuLy: widget.list[index].hanXuLy ??
                         DateTime.now().formatDdMMYYYY,
+                    maTrangThai: widget.list[index].maTrangThai ?? '',
                   );
                 },
               ),

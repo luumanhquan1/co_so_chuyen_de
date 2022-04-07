@@ -53,11 +53,10 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                               ChiTietNhiemVuTabletScreen(
-                                 id: widget.list[index].id??'',
-                                 isCheck:widget.isCheck ,
-                               ),
+                          builder: (context) => ChiTietNhiemVuTabletScreen(
+                            id: widget.list[index].id ?? '',
+                            isCheck: widget.isCheck,
+                          ),
                         ),
                       );
                     },
@@ -71,6 +70,7 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
                     userImage:
                         'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                     index: index + 1,
+                    maTrangThai: widget.list[index].maTrangThai ?? '',
                   );
                 },
               ),

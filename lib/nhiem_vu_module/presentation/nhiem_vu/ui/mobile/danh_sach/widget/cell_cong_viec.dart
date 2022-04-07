@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -111,7 +112,7 @@ class CellCongViec extends StatelessWidget {
                                 height: 24.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
-                                  color: textColorForum,
+                                  color: data.maTrangThai?.trangThaiColorNhiemVu(),
                                 ),
                                 child: Center(
                                   child: Text(
