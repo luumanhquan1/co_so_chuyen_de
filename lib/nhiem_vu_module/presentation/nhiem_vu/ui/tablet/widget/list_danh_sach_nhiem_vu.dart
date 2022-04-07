@@ -48,13 +48,13 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
                 itemBuilder: (context, index) {
                   return NhiemVuCellTablet(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const ChiTietNhiemVuTabletScreen(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         const ChiTietNhiemVuTabletScreen(),
+                      //   ),
+                      // );
                     },
                     title: widget.list[index].loaiNhiemVu ?? '',
                     noiDung:
