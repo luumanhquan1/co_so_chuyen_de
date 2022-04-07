@@ -1,35 +1,24 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/string_extension.dart';
 import 'package:flutter/cupertino.dart';
 
-class NhiemVuCellTablet extends StatelessWidget {
-  final String title;
-  final String hanXuLy;
-  final String userImage;
-  final String userName;
-  final String noiDung;
-  final String status;
+class CellDanhSachCongViecTablet extends StatelessWidget {
+  final PageDatas data;
   final int index;
-  final Function onTap;
 
-  const NhiemVuCellTablet({
+  const CellDanhSachCongViecTablet({
     Key? key,
-    required this.title,
-    required this.hanXuLy,
-    required this.userImage,
-    required this.userName,
-    required this.noiDung,
-    required this.status,
+    required this.data,
     required this.index,
-    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onTap();
-      },
+      onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(bottom: 24.0),
         height: 137,
@@ -58,7 +47,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                         SizedBox(
                           width: 30,
                           child: Text(
-                            '${index.toString().padLeft(2, '0')}.',
+                            '${(index + 1).toString().padLeft(2, '0')}.',
                             style: textNormalCustom(
                               fontSize: 16.0,
                               color: titleItemEdit,
@@ -79,7 +68,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  title,
+                                  data.maCv ?? '',
                                   style: titleAppbar(),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -87,7 +76,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                               ),
                               const SizedBox(width: 10.0),
                               Text(
-                                hanXuLy,
+                                data.hanXuLy ?? DateTime.now().formatDdMMYYYY,
                                 style: textNormalCustom(
                                   color: textBodyTime,
                                   fontWeight: FontWeight.w400,
@@ -98,7 +87,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                           ),
                           Flexible(
                             child: Text(
-                              noiDung,
+                              (data.noiDungCongViec ?? '').parseHtml(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: textNormalCustom(
@@ -113,10 +102,12 @@ class NhiemVuCellTablet extends StatelessWidget {
                               Container(
                                 width: 28,
                                 height: 28,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: NetworkImage(userImage),
+                                    image: NetworkImage(
+                                      'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                                    ),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -126,7 +117,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  userName,
+                                  data.doiTuongThucHien ?? '',
                                   style: textNormalCustom(
                                     color: unselectedLabelColor,
                                     fontSize: 16.0,
@@ -145,7 +136,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    status,
+                                    data.trangThai ?? '',
                                     style: textNormalCustom(fontSize: 12.0),
                                   ),
                                 ),

@@ -2,16 +2,24 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/widget/cell_danh_sach_cong_viec_tablet.dart';
 import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
-import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DanhSachCongViecTablet extends StatefulWidget {
-  const DanhSachCongViecTablet({Key? key}) : super(key: key);
+  final DanhSachCubit cubit;
+  final bool isCheck;
+
+  const DanhSachCongViecTablet({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _DanhSachCongViecTabletState createState() => _DanhSachCongViecTabletState();
@@ -29,44 +37,51 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            color: Colors.white,
-            child: ChooseTimeScreen(
-              today: DateTime.now(),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 30,
+                right: 30,
+                bottom: 28,
+                top: 28,
+              ),
+              child: _content(),
             ),
           ),
-          // Expanded(
-          //   child: SingleChildScrollView(
-          //     child: Container(
-          //       margin: const EdgeInsets.only(top: 28.0),
-          //       child: Padding(
-          //         padding: const EdgeInsets.only(right: 30.0, left: 30.0),
-          //         child: ListView.builder(
-          //           physics: const NeverScrollableScrollPhysics(),
-          //           shrinkWrap: true,
-          //           itemCount: listDanhSachCongViec.length,
-          //           itemBuilder: (context, index) {
-          //             return NhiemVuCellTablet(
-          //               onTap: () {},
-          //               title: listDanhSachCongViec[index].title ?? '',
-          //               noiDung: listDanhSachCongViec[index].noiDung ?? '',
-          //               dateTimeStart:
-          //                   listDanhSachCongViec[index].timeStart ?? '',
-          //               dateTimeEnd: listDanhSachCongViec[index].timeEnd ?? '',
-          //               userName: listDanhSachCongViec[index].nguoiTao ?? '',
-          //               status: listDanhSachCongViec[index].trangThai ?? '',
-          //               userImage:
-          //                   'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-          //               index: index + 1,
-          //             );
-          //           },
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
+    );
+  }
+
+  Widget _content() {
+    return ListViewLoadMore(
+      cubit: widget.cubit,
+      isListView: true,
+      callApi: (page) => {
+        widget.cubit.postDanhSachCongViec(
+          hanXuLy: {
+            'FromDate': widget.cubit.ngayDauTien,
+            'ToDate': widget.cubit.ngayKetThuc
+          },
+          index: page,
+          isCaNhan: widget.isCheck,
+          isSortByHanXuLy: true,
+          keySearch: widget.cubit.keySearch,
+          mangTrangThai: [],
+          size: widget.cubit.pageSize,
+          trangThaiHanXuLy: '',
+        )
+      },
+      viewItem: (value, index) {
+        try {
+          return CellDanhSachCongViecTablet(
+            data: value as PageDatas,
+            index: index ?? 0,
+          );
+        } catch (e) {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

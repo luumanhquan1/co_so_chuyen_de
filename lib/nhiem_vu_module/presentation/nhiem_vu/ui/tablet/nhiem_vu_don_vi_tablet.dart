@@ -3,15 +3,16 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/domain/model/nhiem_vu_dashboard_model.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/danh_sach_cong_viec_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/danh_sach_nhiem_vu_tablet.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/widget/bieu_do_don_vi_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/widget/list_danh_sach_cong_viec.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/widget/list_danh_sach_nhiem_vu.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/bieu_do_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
+import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
@@ -25,21 +26,37 @@ class NhiemVuDonViTablet extends StatefulWidget {
 }
 
 class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
-  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
+  ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
+  DanhSachCubit danhSachCubit = DanhSachCubit();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    danhSachCubit.callApiDonVi(false);
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context,
-            bool innerBoxIsScrolled,) {
+        headerSliverBuilder: (
+          BuildContext context,
+          bool innerBoxIsScrolled,
+        ) {
           return [
             SliverToBoxAdapter(
               child: Container(
                 color: Colors.white,
                 child: ChooseTimeScreen(
                   today: DateTime.now(),
+                  onSubmit: (value) {},
+                  onChangTime: () {
+                    danhSachCubit.ngayDauTien = chooseTimeCubit.startDate;
+                    danhSachCubit.ngayKetThuc = chooseTimeCubit.endDate;
+                    danhSachCubit.callApiDashBroashDonVi(false);
+                  },
                 ),
               ),
             ),
@@ -49,7 +66,11 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
                   Container(
                     color: bgQLVBTablet,
                     child: Container(
-                      margin: const EdgeInsets.only(top: 20.0,right: 30.0,left: 30.0,),
+                      margin: const EdgeInsets.only(
+                        top: 20.0,
+                        right: 30.0,
+                        left: 30.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
@@ -60,19 +81,35 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: BieuDoNhiemVuTablet(
-                              title: S.current.nhiem_vu,
-                              nhiemVuDashboardModel:
-                              nhiemVuDashBoardModel,
-                              chartData: widget.cubit.chartDataNhiemVu,
+                            child: StreamBuilder<List<ChartData>>(
+                              stream: danhSachCubit.statusSuject,
+                              initialData: danhSachCubit.chartDataNhiemVu,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ??
+                                    widget.cubit.chartDataNhiemVu;
+                                return BieuDoDonViTablet(
+                                  title: S.current.nhiem_vu,
+                                  chartData: data,
+                                  isCheck: true,
+                                  cubit: danhSachCubit,
+                                );
+                              },
                             ),
                           ),
                           Expanded(
-                            child: BieuDoNhiemVuTablet(
-                              title: S.current.cong_viec,
-                              nhiemVuDashboardModel:
-                              nhiemVuDashBoardModel,
-                              chartData: widget.cubit.chartDataCongViec,
+                            child: StreamBuilder<List<ChartData>>(
+                              stream: danhSachCubit.statusCongViecSuject,
+                              initialData: danhSachCubit.chartDataNhiemVu,
+                              builder: (context, snapshot) {
+                                final data = snapshot.data ??
+                                    widget.cubit.chartDataNhiemVu;
+                                return BieuDoDonViTablet(
+                                  title: S.current.cong_viec,
+                                  chartData: data,
+                                  cubit: danhSachCubit,
+                                  isCheck: false,
+                                );
+                              },
                             ),
                           ),
                         ],
@@ -113,26 +150,60 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
           ),
           content: TabBarView(
             children: [
-              ListDanhSachNhiemVu(
-                titleButton: S.current.xem_danh_sach,
-                list: [],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DanhSachNhiemVuTablet()
+              StreamBuilder<List<PageData>>(
+                stream: danhSachCubit.dataSubject,
+                builder: (context, snapshot) {
+                  final data = snapshot.data ?? [];
+                  if (data.isNotEmpty) {
+                    return ListDanhSachNhiemVu(
+                      titleButton: S.current.xem_danh_sach,
+                      list: data,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DanhSachNhiemVuTablet(
+                              cubit: danhSachCubit,
+                              isCheck: false,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return SizedBox(
+                    child: Text(
+                      S.current.khong_co_du_lieu,
+                      style: titleAppbar(fontSize: 16.0),
                     ),
                   );
                 },
               ),
-              ListDanhSachCongViec(
-                titleButton: S.current.xem_danh_sach,
-                list: [],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DanhSachCongViecTablet()
+              StreamBuilder<List<PageDatas>>(
+                stream: danhSachCubit.dataSubjects,
+                builder: (context, snapshot) {
+                  final data = snapshot.data ?? [];
+                  if (data.isNotEmpty) {
+                    return ListDanhSachCongViec(
+                      titleButton: S.current.xem_danh_sach,
+                      list: data,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DanhSachCongViecTablet(
+                              cubit: danhSachCubit,
+                              isCheck: false,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return SizedBox(
+                    child: Text(
+                      S.current.khong_co_du_lieu,
+                      style: titleAppbar(fontSize: 16.0),
                     ),
                   );
                 },
