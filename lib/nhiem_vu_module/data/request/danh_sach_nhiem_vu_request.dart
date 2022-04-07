@@ -10,6 +10,8 @@ class DanhSachNhiemVuRequest {
   bool? isNhiemVuCaNhan;
   @JsonKey(name: 'IsSortByHanXuLy')
   bool? isSortByHanXuLy;
+  @JsonKey(name: 'KeySearch')
+  String? keySearch;
   @JsonKey(name: 'MangTrangThai')
   List<String>? mangTrangThai;
   @JsonKey(name: 'NgayTaoNhiemVu')
@@ -21,6 +23,7 @@ class DanhSachNhiemVuRequest {
     this.index,
     this.isNhiemVuCaNhan,
     this.isSortByHanXuLy,
+    this.keySearch,
     this.mangTrangThai,
     this.ngayTaoNhiemVu,
     this.size,
