@@ -356,6 +356,18 @@ class ImageAssets {
   static const String icMessage = '$baseImg/icMessage.svg';
   static const String Group2 = '$baseImg/Group2.svg';
   static const String Comment_ic = '$baseImg/Comment_ic.svg';
+  static const String ic_cho_cho_bo_sung_y_kien = '$baseImg/ic_cho_bo_sung_y_kien.svg';
+  static const String ic_cho_cho_y_kien = '$baseImg/ic_cho_cho_y_kien.svg';
+  static const String ic_cho_phan_cong_xu_ly = '$baseImg/ic_cho_phan_cong_xu_ly.svg';
+  static const String ic_cho_tiep_nhan = '$baseImg/ic_cho_tiep_nhan.svg';
+  static const String ic_cho_tiep_nhan_xu_ly= '$baseImg/ic_cho_tiep_nhan_xu_ly.svg';
+  static const String ic_cho_xu_ly= '$baseImg/ic_cho_xu_ly.svg';
+  static const String ic_cho_xu_ly_yknd= '$baseImg/ic_cho_xu_ly_yknd.svg';
+  static const String ic_tong_so_yknd= '$baseImg/ic_tong_hop_yknd_da_nhan.svg';
+  static const String ic_da_xu_ly_yknd= '$baseImg/ic_da_xu_ly_yknd.svg';
+  static const String ic_dang_xu_ly_yknd= '$baseImg/ic_dang_xu_ly_yknd.svg';
+  static const String ic_dang_tai_cong_khai_yknd= '$baseImg/ic_dang_tai_cong_khai.svg';
+
 
   static const String IcEmail = '$baseImg/IcEmail.svg';
   static const String XoaKLHop = '$baseImg/XoaKLHop.svg';

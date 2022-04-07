@@ -4,11 +4,13 @@ import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/y_kien_nguoi_dan_model.dart';
 import 'package:ccvc_mobile/domain/model/y_kien_nguoi_dan/yknd_dash_board_item.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/home_module/domain/model/home/document_dashboard_model.dart';
 import 'package:ccvc_mobile/presentation/calender_work/ui/mobile/widget/custom_item_calender_work.dart';
 import 'package:ccvc_mobile/presentation/chi_tiet_yknd/ui/mobile/chi_tiet_yknd_screen.dart';
 import 'package:ccvc_mobile/presentation/danh_sach_y_kien_nd/ui/mobile/danh_sach_yknd_screen.dart';
 import 'package:ccvc_mobile/presentation/quan_li_van_ban/ui/widgets/box_satatus_vb.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
+import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/widget/bao_cao_thong_ke/ui/mobile/bao_cao_thong_ke_screen.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/indicator_chart.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/y__kien_nguoi_dan_item.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/mobile/widgets/y_kien_nguoi_dan_menu.dart';
@@ -41,6 +43,8 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // return const BaoCaoThongKeScreen();
+
     return Scaffold(
       appBar: BaseAppBar(
         title: S.current.thong_tin_chung,
@@ -60,9 +64,7 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                 ),
               );
             },
-            icon: SvgPicture.asset(
-              ImageAssets.ic_mennu_ykien,
-            ),
+            icon: SvgPicture.asset(ImageAssets.icMenuCalender),
           ),
         ],
       ),
@@ -149,40 +151,46 @@ class _YKienNguoiDanScreenState extends State<YKienNguoiDanScreen> {
                           },
                         ),
                         Container(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: BoxStatusVanBan(
-                                value:
-                                    cubit.dashboardModel.soLuongTrongHan ?? 0,
-                                onTap: () {},
-                                color: numberOfCalenders,
-                                statusName: S.current.trong_han,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Expanded(
-                              child: BoxStatusVanBan(
-                                value: cubit.dashboardModel.soLuongDenHan ?? 0,
-                                onTap: () {},
-                                color: labelColor,
-                                statusName: S.current.den_han,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Expanded(
-                              child: BoxStatusVanBan(
-                                value: cubit.dashboardModel.soLuongQuaHan ?? 0,
-                                onTap: () {},
-                                color: statusCalenderRed,
-                                statusName: S.current.qua_han,
-                              ),
-                            ),
-                          ],
+                        StreamBuilder<DocumentDashboardModel>(
+                          stream: cubit.statusTinhHinhXuLyData,
+                          builder: (context, snapshot){
+                            final data=snapshot.data?? DocumentDashboardModel();
+                            return  Row(
+                              children: [
+                                Expanded(
+                                  child: BoxStatusVanBan(
+                                    value:
+                                    data.soLuongTrongHan ?? 0,
+                                    onTap: () {},
+                                    color: numberOfCalenders,
+                                    statusName: S.current.trong_han,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Expanded(
+                                  child: BoxStatusVanBan(
+                                    value: data.soLuongDenHan ?? 0,
+                                    onTap: () {},
+                                    color: labelColor,
+                                    statusName: S.current.den_han,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Expanded(
+                                  child: BoxStatusVanBan(
+                                    value: data.soLuongQuaHan ?? 0,
+                                    onTap: () {},
+                                    color: statusCalenderRed,
+                                    statusName: S.current.qua_han,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),
