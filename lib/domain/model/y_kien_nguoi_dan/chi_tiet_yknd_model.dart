@@ -250,14 +250,12 @@ class FileData {
 }
 
 class ChiTietYKienNguoiDanRow {
-  final List<DataRowChiTietKienNghi> dataHeaderRow;
   final List<DataRowChiTietKienNghi> thongTinPhanAnhRow;
   final List<DataRowChiTietKienNghi> thomgTinXuLyRow;
   final List<DataRowChiTietKienNghi> ketQuaXuLyRow;
   final List<DataRowChiTietKienNghi> tienTrinhXuLy;
 
   ChiTietYKienNguoiDanRow(
-    this.dataHeaderRow,
     this.thongTinPhanAnhRow,
     this.thomgTinXuLyRow,
     this.ketQuaXuLyRow,

@@ -49,82 +49,93 @@ class _ChiTietYKNDScreenState extends State<ChiTietYKNDScreen>
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top: 16),
-            child: StreamBuilder<ChiTietYKienNguoiDanRow>(
-              stream: cubit.rowDataChiTietYKienNguoiDan,
-              builder: (context, snapshot) {
-                final data = snapshot.data;
-                return Column(
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: ChiTietYKNDHeader(
-                          listRow: data?.dataHeaderRow ?? [],
-                        )),
-                    ExpandOnlyNhiemVu(
-                      name: S.current.thong_tin_nguoi_phan_anh,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
-                        ),
-                        child: ThongTinNguoiPhanAnh(
-                          indexCheck: cubit.checkIndex,
-                          listRow: data?.thongTinPhanAnhRow ?? [],
-                        ),
-                      ),
-                    ),
-                    ExpandOnlyNhiemVu(
-                      name: S.current.thong_tin_xu_ly_phan_anh,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
-                        child: ThongTinXuLyPhanAnh(
-                          listRow: data?.thomgTinXuLyRow ?? [],
-                        ),
-                      ),
-                    ),
-                    ExpandOnlyNhiemVu(
-                      name: S.current.ket_qua_xu_ly,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
-                        child: Column(
-                          children: [
-                            ItemRow(
-                              title: S.current.y_kien_xu_ly,
-                              content: cubit.yKienXuLy,
+            child: Column(
+              children: [
+                StreamBuilder<List<DataRowChiTietKienNghi>>(
+                  initialData: cubit.initDataHeadler,
+                  stream: cubit.headerRowData,
+                  builder: (context,snapshot){
+                    final dataHeader=snapshot.data??[];
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: ChiTietYKNDHeader(
+                        listRow: dataHeader,
+                      ),);
+                  },
+                ),
+                StreamBuilder<ChiTietYKienNguoiDanRow>(
+                  stream: cubit.rowDataChiTietYKienNguoiDan,
+                  builder: (context, snapshot) {
+                    final data = snapshot.data;
+                    return Column(
+                      children: [
+                        ExpandOnlyNhiemVu(
+                          name: S.current.thong_tin_nguoi_phan_anh,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
                             ),
-                            KetQuaXuLyScreen(
-                              listRow: data?.ketQuaXuLyRow ?? [],
+                            child: ThongTinNguoiPhanAnh(
+                              indexCheck: cubit.checkIndex,
+                              listRow: data?.thongTinPhanAnhRow ?? [],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    ExpandOnlyNhiemVu(
-                      name: S.current.tien_trinh_xu_ly,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
-                        child: Column(
-                          children: [
-                            ItemRow(
-                              title: S.current.y_kien_xu_ly,
-                              content: cubit.yKienXuLy,
+                        ExpandOnlyNhiemVu(
+                          name: S.current.thong_tin_xu_ly_phan_anh,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            child: ThongTinXuLyPhanAnh(
+                              listRow: data?.thomgTinXuLyRow ?? [],
                             ),
-                            TienTrinhXuLyScreen(
-                              listRow: data?.tienTrinhXuLy ?? [],
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    YKienXuLyPAKNWidgetExpand(
-                      cubit:cubit ,
-                    ),
-                  ],
-                );
-              },
+                        ExpandOnlyNhiemVu(
+                          name: S.current.ket_qua_xu_ly,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            child: Column(
+                              children: [
+                                ItemRow(
+                                  title: S.current.y_kien_xu_ly,
+                                  content: cubit.yKienXuLy,
+                                ),
+                                KetQuaXuLyScreen(
+                                  listRow: data?.ketQuaXuLyRow ?? [],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ExpandOnlyNhiemVu(
+                          name: S.current.tien_trinh_xu_ly,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            child: Column(
+                              children: [
+                                ItemRow(
+                                  title: S.current.y_kien_xu_ly,
+                                  content: cubit.yKienXuLy,
+                                ),
+                                TienTrinhXuLyScreen(
+                                  listRow: data?.tienTrinhXuLy ?? [],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        YKienXuLyPAKNWidgetExpand(
+                          cubit:cubit ,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),

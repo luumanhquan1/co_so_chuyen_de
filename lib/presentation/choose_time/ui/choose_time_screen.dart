@@ -87,7 +87,6 @@ class _ChooseTimeScreenState extends State<ChooseTimeScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              setState(() {});
                               baseChooseTimeCubit.checkToOptionBackDay(
                                 baseChooseTimeCubit.changeOption,
                               );

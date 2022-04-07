@@ -46,8 +46,8 @@ class ChooseTimeCubit extends BaseCubit<ChooseTimeState> {
     endDate=times.formatApi;
   }
 
-  void onBackDay() {
-    int a = times.millisecondsSinceEpoch;
+  void onBackDay(DateTime time) {
+    int a = time.millisecondsSinceEpoch;
     a = a - (24 * 60 * 60 * 1000);
     times = DateTime.fromMillisecondsSinceEpoch(a);
     textDisplayTime = getDateToString(times);
@@ -233,7 +233,7 @@ class ChooseTimeCubit extends BaseCubit<ChooseTimeState> {
   void checkToOptionBackDay(String a) {
     switch (a) {
       case 'Ngày':
-        onBackDay();
+        onBackDay(times);
         break;
       case 'Tuần':
         onBackWeek();

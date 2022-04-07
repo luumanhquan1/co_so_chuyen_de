@@ -4,14 +4,15 @@ import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_mode
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ListDanhSachNhiemVu extends StatefulWidget {
   final String titleButton;
-  final List<DanhSachNhiemVuModel> list;
+  final List<PageData> list;
   final Function() onTap;
-
 
   const ListDanhSachNhiemVu({
     required this.titleButton,
@@ -32,7 +33,7 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
           color: bgQLVBTablet,
-          padding: const EdgeInsets.fromLTRB(30, 60, 30,0),
+          padding: const EdgeInsets.fromLTRB(30, 60, 30, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -40,32 +41,34 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
               const SizedBox(
                 height: 20,
               ),
-              // ListView.builder(
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   itemCount: widget.list.length<3?widget.list.length:3,
-              //   itemBuilder: (context, index) {
-              //     return NhiemVuCellTablet(
-              //       onTap: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) =>
-              //             const ChiTietNhiemVuTabletScreen(),
-              //           ),
-              //         );
-              //       },
-              //       title: widget.list[index].title??'',
-              //       noiDung: widget.list[index].noiDung??'',
-              //       dateTimeStart: widget.list[index].timeStart??'',
-              //       dateTimeEnd:widget.list[index].timeEnd??'' ,
-              //       userName: widget.list[index].nguoiTao??'',
-              //       status: widget.list[index].trangThai??'',
-              //       userImage: 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-              //       index: index+1,
-              //     );
-              //   },
-              // ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: widget.list.length < 3 ? widget.list.length : 3,
+                itemBuilder: (context, index) {
+                  return NhiemVuCellTablet(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         const ChiTietNhiemVuTabletScreen(),
+                      //   ),
+                      // );
+                    },
+                    title: widget.list[index].loaiNhiemVu ?? '',
+                    noiDung:
+                        (widget.list[index].noiDungTheoDoi ?? '').parseHtml(),
+                    hanXuLy: widget.list[index].hanXuLy ??
+                        DateTime.now().formatDdMMYYYY,
+                    userName: widget.list[index].tinhHinhThucHienNoiBo ?? '',
+                    status: widget.list[index].trangThai ?? '',
+                    userImage:
+                        'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
+                    index: index + 1,
+                  );
+                },
+              ),
             ],
           ),
         ),

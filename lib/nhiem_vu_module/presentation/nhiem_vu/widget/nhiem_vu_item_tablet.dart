@@ -1,12 +1,10 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
 import 'package:flutter/cupertino.dart';
 
 class NhiemVuCellTablet extends StatelessWidget {
   final String title;
-  final String dateTimeStart;
-  final String dateTimeEnd;
+  final String hanXuLy;
   final String userImage;
   final String userName;
   final String noiDung;
@@ -17,8 +15,7 @@ class NhiemVuCellTablet extends StatelessWidget {
   const NhiemVuCellTablet({
     Key? key,
     required this.title,
-    required this.dateTimeStart,
-    required this.dateTimeEnd,
+    required this.hanXuLy,
     required this.userImage,
     required this.userName,
     required this.noiDung,
@@ -63,9 +60,10 @@ class NhiemVuCellTablet extends StatelessWidget {
                           child: Text(
                             '${index.toString().padLeft(2, '0')}.',
                             style: textNormalCustom(
-                                fontSize: 16.0,
-                                color: titleItemEdit,
-                                fontWeight: FontWeight.w400),
+                              fontSize: 16.0,
+                              color: titleItemEdit,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ],
@@ -89,7 +87,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                               ),
                               const SizedBox(width: 10.0),
                               Text(
-                                '${DateTime.parse(dateTimeStart).toStringWithAMPM}-${DateTime.parse(dateTimeEnd).toStringWithAMPM}',
+                                hanXuLy,
                                 style: textNormalCustom(
                                   color: textBodyTime,
                                   fontWeight: FontWeight.w400,

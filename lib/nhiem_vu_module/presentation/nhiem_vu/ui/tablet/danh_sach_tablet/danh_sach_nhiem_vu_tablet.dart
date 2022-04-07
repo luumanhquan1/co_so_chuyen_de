@@ -1,18 +1,25 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_nhiem_vu/ui/tablet/chi_tiet_nhiem_vu_tablet_screen.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
-import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/nhiem_vu_item_tablet.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/widget/cell_danh_sach_nhiem_vu.dart';
 import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
-import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/listview/listview_loadmore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DanhSachNhiemVuTablet extends StatefulWidget {
-  const DanhSachNhiemVuTablet({Key? key}) : super(key: key);
+  final DanhSachCubit cubit;
+  final bool isCheck;
+
+  const DanhSachNhiemVuTablet({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _DanhSachNhiemVuTabletState createState() => _DanhSachNhiemVuTabletState();
@@ -20,7 +27,8 @@ class DanhSachNhiemVuTablet extends StatefulWidget {
 
 class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
   NhiemVuCubit cubit = NhiemVuCubit();
-  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
+  ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,52 +37,49 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            color: Colors.white,
-            child: ChooseTimeScreen(
-              today: DateTime.now(),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 30,
+                right: 30,
+                bottom: 28,
+                top: 28,
+              ),
+              child: _content(),
             ),
           ),
-          // Expanded(
-          //   child: SingleChildScrollView(
-          //     child: Container(
-          //       margin: const EdgeInsets.only(top: 28.0),
-          //       child: Padding(
-          //         padding: const EdgeInsets.only(right: 30.0, left: 30.0),
-          //         child: ListView.builder(
-          //           physics: const NeverScrollableScrollPhysics(),
-          //           shrinkWrap: true,
-          //           itemCount: listDanhSachNhiemVu.length,
-          //           itemBuilder: (context, index) {
-          //             return NhiemVuCellTablet(
-          //               onTap: () {
-          //                 Navigator.push(
-          //                   context,
-          //                   MaterialPageRoute(
-          //                     builder: (context) =>
-          //                         const ChiTietNhiemVuTabletScreen(),
-          //                   ),
-          //                 );
-          //               },
-          //               title: listDanhSachNhiemVu[index].title ?? '',
-          //               noiDung: listDanhSachNhiemVu[index].noiDung ?? '',
-          //               dateTimeStart:
-          //                   listDanhSachNhiemVu[index].timeStart ?? '',
-          //               dateTimeEnd: listDanhSachNhiemVu[index].timeEnd ?? '',
-          //               userName: listDanhSachNhiemVu[index].nguoiTao ?? '',
-          //               status: listDanhSachNhiemVu[index].trangThai ?? '',
-          //               userImage:
-          //                   'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
-          //               index: index + 1,
-          //             );
-          //           },
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
+    );
+  }
+
+  Widget _content() {
+    return ListViewLoadMore(
+      cubit: widget.cubit,
+      isListView: true,
+      callApi: (page) => {
+        widget.cubit.postDanhSachNhiemVu(
+          index: page,
+          isNhiemVuCaNhan: widget.isCheck,
+          isSortByHanXuLy: true,
+          mangTrangThai: [],
+          ngayTaoNhiemVu: {
+            'FromDate': widget.cubit.ngayDauTien,
+            'ToDate': widget.cubit.ngayKetThuc
+          },
+          size: widget.cubit.pageSize,
+        )
+      },
+      viewItem: (value, index) {
+        try {
+          return CellDanhSachNhiemVuTablet(
+            data: value as PageData,
+            index: index ?? 0,
+          );
+        } catch (e) {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

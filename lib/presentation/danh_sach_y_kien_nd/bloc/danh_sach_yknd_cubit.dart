@@ -27,11 +27,11 @@ class DanhSachYKienNguoiDanCubit extends BaseCubit<YKienNguoiDanState> {
     _selectSreach.sink.add(!_selectSreach.value);
   }
 
-  void callApi() {
+  void callApi( String startDate, String endDate) {
     getUserData();
     getDanhSachYKienNguoiDan(
-      '01/03/2022',
-      '25/03/2022',
+      startDate,
+      endDate,
       10,
       1,
     );
