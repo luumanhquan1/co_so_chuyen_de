@@ -39,7 +39,11 @@ class KetNoiRepoImpl implements KetNoiRepository {
   ) {
     return runCatchingAsync<TrongNuocResponse, TrongNuocModel>(
       () => _ketNoiService.getListTrongNuoc(
-          pageIndex, pageSize, category, fullSize,),
+        pageIndex,
+        pageSize,
+        category,
+        fullSize,
+      ),
       (response) => response.data.toModel(),
     );
   }
@@ -72,10 +76,18 @@ class KetNoiRepoImpl implements KetNoiRepository {
 
   @override
   Future<Result<DataDanhSachChungModel>> listCategory(
-      int pageIndex, int pageSize, String idDauMucSuKien, String type,) {
+    int pageIndex,
+    int pageSize,
+    String idDauMucSuKien,
+    String type,
+  ) {
     return runCatchingAsync<ListChungKetNoiResponse, DataDanhSachChungModel>(
       () => _ketNoiService.getListCategory(
-          pageIndex, pageSize, idDauMucSuKien, type,),
+        pageIndex,
+        pageSize,
+        idDauMucSuKien,
+        type,
+      ),
       (response) => response.data.toDomain(),
     );
   }

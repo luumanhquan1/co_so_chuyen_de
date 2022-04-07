@@ -1,5 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/ket_noi_module/domain/model/loai_bai_viet_model.dart';
+import 'package:ccvc_mobile/ket_noi_module/utils/constants/app_constants.dart';
+import 'package:ccvc_mobile/ket_noi_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/select_only_expands/expand_animation_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,27 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ContainerKetNoiTablet extends StatefulWidget {
-  final String name;
-  final String? icon;
-  final bool isIcon;
-  final int index;
-  final bool isTypeContainer;
   final Widget? childExpand;
-  final Function onTap;
-  final bool? showIcons;
-  final int lenghtItem;
+  final Function() onTap;
+  final LoaiBaiVietModel data;
 
   const ContainerKetNoiTablet({
     Key? key,
-    required this.name,
-    this.icon,
-    this.isIcon = true,
-    this.index = 0,
-    this.isTypeContainer = true,
+    required this.data,
     this.childExpand,
     required this.onTap,
-    this.showIcons = true,
-    required this.lenghtItem,
   }) : super(key: key);
 
   @override
@@ -52,13 +43,13 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
           ),
           child: GestureDetector(
             onTap: () {
-              isExpand = !isExpand;
-              setState(() {});
-              if (widget.lenghtItem <= 0) {
+              if (widget.data.childrens.isEmpty) {
                 widget.onTap();
                 Navigator.pop(context);
               } else {
-                widget.onTap();
+                widget.data.isShowExpanded =
+                    !(widget.data.isShowExpanded ?? false);
+                setState(() {});
               }
             },
             child: Container(
@@ -73,30 +64,26 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
                   Expanded(
                     child: Row(
                       children: [
-                        if (widget.isIcon)
-                          widget.icon != null
-                              ? SizedBox(
-                                  height: 15.0.textScale(space: 8),
-                                  width: 15.0.textScale(space: 8),
-                                  child: SvgPicture.asset(
-                                    widget.icon ?? '',
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: 15.0.textScale(space: 8),
-                                  width: 15.0.textScale(space: 8),
-                                )
+                        if (widget.data.id == ID_KET_NOI ||
+                            widget.data.id == ID_SU_KIEN)
+                          SizedBox(
+                            height: 15.0.textScale(space: 8),
+                            width: 15.0.textScale(space: 8),
+                            child: SvgPicture.asset(
+                              ImageAssets.icSide,
+                            ),
+                          )
                         else
-                          const SizedBox(
-                            height: 15,
-                            width: 15,
+                          SizedBox(
+                            height: 15.0.textScale(space: 8),
+                            width: 15.0.textScale(space: 8),
                           ),
                         Container(
                           width: 14.0.textScale(),
                         ),
                         Expanded(
                           child: Text(
-                            widget.name,
+                            widget.data.title,
                             style: textNormalCustom(
                               color: textTitle,
                               fontSize: 14.0.textScale(),
@@ -110,29 +97,11 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
                   const SizedBox(
                     width: 12,
                   ),
-                  if (widget.lenghtItem <= 0)
-                    Container(
-                        // padding: const EdgeInsets.symmetric(
-                        //   vertical: 4,
-                        //   horizontal: 5,
-                        // ),
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(4),
-                        //   color: numberColorTabletbg,
-                        // ),
-                        // alignment: Alignment.center,
-                        // child: Text(
-                        //   widget.index.toString(),
-                        //   style: textNormalCustom(
-                        //     color: textDefault,
-                        //     fontWeight: FontWeight.w500,
-                        //     fontSize: 12.0.textScale(),
-                        //   ),
-                        // ),
-                        )
+                  if (widget.data.childrens.isEmpty)
+                    Container()
                   else
                     Icon(
-                      isExpand
+                      (widget.data.isShowExpanded ?? false)
                           ? Icons.keyboard_arrow_down_outlined
                           : Icons.keyboard_arrow_up_rounded,
                       color: AqiColor,
@@ -142,9 +111,9 @@ class _ContainerKetNoiTabletState extends State<ContainerKetNoiTablet> {
             ),
           ),
         ),
-        if (widget.lenghtItem > 0)
+        if (widget.data.childrens.isNotEmpty)
           ExpandedSection(
-            expand: isExpand,
+            expand: widget.data.isShowExpanded ?? false,
             child: widget.childExpand ?? Container(),
           ),
       ],
