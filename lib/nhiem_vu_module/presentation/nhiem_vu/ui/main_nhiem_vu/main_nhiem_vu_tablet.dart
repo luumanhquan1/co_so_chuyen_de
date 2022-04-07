@@ -79,10 +79,12 @@ class _MainNhiemVuTabletState extends State<MainNhiemVuTablet>
               if (state is NhiemVuCaNhan) {
                 return NhiemVuCaNhanTablet(
                   cubit: cubit,
+                  isCheck: true,
                 );
               } else {
                 return NhiemVuDonViTablet(
                   cubit: cubit,
+                  isCheck: false,
                 );
               }
             },
