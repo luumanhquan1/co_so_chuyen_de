@@ -6,14 +6,15 @@ class NhomCVMoiModel {
   String label;
   String updatedBy;
   String updatedOn;
+  int? number;
 
-  NhomCVMoiModel({
-    required this.createdBy,
-    required this.createdOn,
-    required this.id,
-    required this.isDeleted,
-    required this.label,
-    required this.updatedBy,
-    required this.updatedOn,
-  });
+  NhomCVMoiModel(
+      {required this.createdBy,
+      required this.createdOn,
+      required this.id,
+      required this.isDeleted,
+      required this.label,
+      required this.updatedBy,
+      required this.updatedOn,
+      this.number});
 }

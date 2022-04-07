@@ -1,11 +1,16 @@
+import 'dart:core';
+
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/menu_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
+import 'package:ccvc_mobile/tien_ich_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -13,6 +18,14 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'danh_sach_cong_viec_tien_ich_state.dart';
+import 'extension.dart';
+
+const int CVCB = 0;
+const int CVQT = 1;
+const int DHT = 2;
+const int GCT = 3;
+const int DBX = 4;
+const int NCXM = 5;
 
 class DanhSachCongViecTienIchCubit
     extends BaseCubit<DanhSachCongViecTienIchState> {
@@ -22,6 +35,13 @@ class DanhSachCongViecTienIchCubit
   int sLCvGanChoToi = 0;
   int sLCvDaBiXoa = 0;
   int sLNhomCV = 0;
+
+  //NamLV
+
+  Map<String, ItemMissionMenu> mapData = {};
+  List<String> listKey = [];
+  List<TodoDSCVModel> importance = [];
+
   String groupIdGet = '';
   final BehaviorSubject<TodoListModelTwo> todoListGroup =
       BehaviorSubject<TodoListModelTwo>();
@@ -29,8 +49,8 @@ class DanhSachCongViecTienIchCubit
   BehaviorSubject<List<TodoDSCVModel>> listGanChoToi = BehaviorSubject();
   BehaviorSubject<List<TodoDSCVModel>> listDaXoa = BehaviorSubject();
   BehaviorSubject<List<TodoDSCVModel>> listGanChoToiDaXoa = BehaviorSubject();
-
   BehaviorSubject<String> titleAppBar = BehaviorSubject();
+  BehaviorSubject<int> statusDSCV = BehaviorSubject.seeded(0);
 
   BehaviorSubject<List<bool>> selectTypeCalendarSubject =
       BehaviorSubject.seeded([true, false, false, false, false, false]);
@@ -39,6 +59,38 @@ class DanhSachCongViecTienIchCubit
   BehaviorSubject<bool> enabled = BehaviorSubject.seeded(true);
 
   Stream<bool> get getEnabled => enabled.stream;
+
+  Future<void> initialData() async {
+    showLoading();
+    await getToDoList();
+    await listNguoiThucHien();
+    await getNHomCVMoi();
+    await getToDoListDSCV();
+    await getDSCVGanCHoToi();
+  }
+
+  List<MenuDscvModel> vlMenuDf = [
+    MenuDscvModel(
+      icon: ImageAssets.icCVCuaBan,
+      title: S.current.cong_viec_cua_ban,
+    ),
+    MenuDscvModel(
+      icon: ImageAssets.icCVQT,
+      title: S.current.cong_viec_quan_trong,
+    ),
+    MenuDscvModel(
+      icon: ImageAssets.icHT,
+      title: S.current.da_hoan_thanh,
+    ),
+    MenuDscvModel(
+      icon: ImageAssets.icGanChoToi,
+      title: S.current.gan_cho_toi,
+    ),
+    MenuDscvModel(
+      icon: ImageAssets.icXoa,
+      title: S.current.da_bi_xoa,
+    ),
+  ];
 
   TienIchRepository get tienIchRep => Get.find();
 
@@ -241,8 +293,11 @@ class DanhSachCongViecTienIchCubit
 
   late TodoListModelTwo dataListDefault;
 
-  void getGroupId(String id) {
-    groupIdGet = id;
+  bool isList(TodoDSCVModel toDo, String idGr) {
+    if (toDo.groupId != null) {
+      return toDo.groupId!.contains(idGr);
+    }
+    return false;
   }
 
   Future<void> getToDoList() async {
@@ -254,25 +309,29 @@ class DanhSachCongViecTienIchCubit
         listImportanntWork.sink.add(res.listTodoImportant
             .where((element) => element.important == true)
             .toList());
-
-        // bool isList(TodoDSCVModel toDo) {
-        //   return toDo.groupId!.contains(groupIdGet);
-        // }
-        //
-        // todoListGroup.sink.add(TodoListModelTwo(
-        //     listTodoDone:
-        //         res.listTodoDone.where((element) => isList(element)).toList(),
-        //     listTodoImportant: res.listTodoImportant
-        //         .where((element) => isList(element))
-        //         .toList()));
-        // print(
-        //     '---------------${res.listTodoDone.where((element) => isList(element)).toList().length}');
-
         _getTodoList.sink.add(res);
         dataListDefault = res;
-        sLCvCuaBan = res.listTodoImportant.length;
-        sLCvDaHoanthanh = res.listTodoDone.length;
-        slCvQuanTrong = listImportanntWork.value.length;
+        vlMenuDf[CVCB].number = res.listTodoImportant.length;
+
+        vlMenuDf[DHT].number = res.listTodoDone.length;
+        vlMenuDf[CVQT].number = listImportanntWork.value.length;
+      },
+      error: (err) {},
+    );
+  }
+
+  Future<void> getListNhomCVMoi(String idGr) async {
+    showLoading();
+    final result = await tienIchRep.getListTodo();
+    result.when(
+      success: (res) {
+        todoListGroup.sink.add(TodoListModelTwo(
+            listTodoDone: res.listTodoDone
+                .where((element) => isList(element, idGr))
+                .toList(),
+            listTodoImportant: res.listTodoImportant
+                .where((element) => isList(element, idGr))
+                .toList()));
       },
       error: (err) {},
     );
@@ -284,9 +343,9 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
+        createData(res);
         listDaXoa.sink
             .add(res.where((element) => element.inUsed == false).toList());
-        sLCvDaBiXoa = listDaXoa.value.length;
       },
       error: (err) {},
     );
@@ -295,7 +354,6 @@ class DanhSachCongViecTienIchCubit
   Future<void> getDSCVGanCHoToi() async {
     showLoading();
     final result = await tienIchRep.getListDSCVGanChoToi();
-    showContent();
     result.when(
       success: (res) {
         if (res.isNotEmpty) {
@@ -303,9 +361,9 @@ class DanhSachCongViecTienIchCubit
               .add(res.where((element) => element.inUsed == true).toList());
           listGanChoToiDaXoa.sink
               .add(res.where((element) => element.inUsed == false).toList());
-          sLCvDaBiXoa =
+          vlMenuDf[DBX].number =
               listDaXoa.value.length + listGanChoToiDaXoa.value.length;
-          sLCvGanChoToi = listGanChoToi.value.length;
+          vlMenuDf[GCT].number = listGanChoToi.value.length;
         }
       },
       error: (err) {},
@@ -318,6 +376,7 @@ class DanhSachCongViecTienIchCubit
     showContent();
     result.when(
       success: (res) {
+        createMap(res);
         nhomCVMoiSubject.sink.add(res);
       },
       error: (err) {},
@@ -432,5 +491,3 @@ class DanhSachCongViecTienIchCubit
     return personWithId;
   }
 }
-
-extension MenuDSCVEx on DanhSachCongViecTienIchCubit {}

@@ -34,11 +34,7 @@ class _DanhSachCongViecTienIchMobileState
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.getToDoList();
-    cubit.listNguoiThucHien();
-    cubit.getNHomCVMoi();
-    cubit.getToDoListDSCV();
-    cubit.getDSCVGanCHoToi();
+    cubit.initialData();
   }
 
   @override
@@ -92,8 +88,8 @@ class _DanhSachCongViecTienIchMobileState
                 )
               ],
             ),
-            body: StreamBuilder<List<bool>>(
-                stream: cubit.selectTypeCalendarSubject.stream,
+            body: StreamBuilder<int>(
+                stream: cubit.statusDSCV.stream,
                 builder: (context, snapshotbool) {
                   return ScrollBarWidget(
                     children: [
@@ -103,27 +99,27 @@ class _DanhSachCongViecTienIchMobileState
                           cubit.search(value);
                         },
                       ),
-                      if (snapshotbool.data?[0] ?? true)
+                      if (snapshotbool.data == CVCB)
                         CvCuaBanWidget(
                           cubit: cubit,
                         ),
-                      if (snapshotbool.data?[1] ?? true)
+                      if (snapshotbool.data == CVQT)
                         CvQuanTrongWidget(
                           cubit: cubit,
                         ),
-                      if (snapshotbool.data?[2] ?? true)
+                      if (snapshotbool.data == DHT)
                         CongViecDaHoanThanhWidget(
                           cubit: cubit,
                         ),
-                      if (snapshotbool.data?[3] ?? true)
+                      if (snapshotbool.data == GCT)
                         GanChoToiWidget(
                           cubit: cubit,
                         ),
-                      if (snapshotbool.data?[4] ?? true)
+                      if (snapshotbool.data == DBX)
                         DaBiXoaWidget(
                           cubit: cubit,
                         ),
-                      if (snapshotbool.data?[5] ?? true)
+                      if (snapshotbool.data == NCXM)
                         NhomCvMoiWidget(
                           cubit: cubit,
                         )

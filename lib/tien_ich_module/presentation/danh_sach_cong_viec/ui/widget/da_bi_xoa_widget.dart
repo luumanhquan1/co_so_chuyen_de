@@ -1,14 +1,13 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/home_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/home_module/widgets/dialog/show_dialog.dart';
-import 'package:ccvc_mobile/home_module/widgets/text/text/no_data_widget.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'cell_dscv_tien_tich.dart';
+import 'cong_viec_da_xoa_cell.dart';
 
 class DaBiXoaWidget extends StatelessWidget {
   final DanhSachCongViecTienIchCubit cubit;
@@ -33,7 +32,7 @@ class DaBiXoaWidget extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final todo = data[index];
-                    return CongViecCellTienIch(
+                    return CongViecCellDaXoaTienIch(
                       enabled: false,
                       todoModel: todo,
                       onCheckBox: (value) {
@@ -78,7 +77,7 @@ class DaBiXoaWidget extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final todo = data[index];
-                    return CongViecCellTienIch(
+                    return CongViecCellDaXoaTienIch(
                       enabled: false,
                       isTheEdit: true,
                       text: todo.label ?? '',

@@ -114,15 +114,29 @@ class NhomCvMoiWidget extends StatelessWidget {
                       final todo = data[index];
                       return CongViecCellTienIch(
                         enabled: false,
+                        isTheEdit: true,
+                        text: todo.label ?? '',
                         todoModel: todo,
                         onCheckBox: (value) {
-                          cubit.tickerListWord(todo: todo);
+                          cubit.tickerListWord(
+                            todo: todo,
+                            removeDone: false,
+                          );
+                        },
+                        onStar: () {
+                          cubit.tickerQuanTrongTodo(
+                            todo,
+                            removeDone: false,
+                          );
                         },
                         onClose: () {
                           showDiaLog(
                             context,
                             funcBtnRight: () {
-                              cubit.deleteCongViec(todo);
+                              cubit.deleteCongViec(
+                                todo,
+                                removeDone: false,
+                              );
                             },
                             icon: SvgPicture.asset(
                               ImageAssets.icDeleteLichHop,
@@ -133,10 +147,12 @@ class NhomCvMoiWidget extends StatelessWidget {
                             btnRightTxt: S.current.xoa,
                           );
                         },
-                        onStar: () {
-                          cubit.tickerQuanTrongTodo(todo);
+                        onChange: (controller) {
+                          cubit.changeLabelTodo(
+                            controller.text.trim(),
+                            todo,
+                          );
                         },
-                        text: todo.label ?? '',
                         onEdit: () {},
                       );
                     }),

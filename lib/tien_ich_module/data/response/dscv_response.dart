@@ -71,21 +71,22 @@ class DataDSCV {
   String? updatedBy;
   String? note;
   String? performer;
+  String? groupId;
 
-  DataDSCV({
-    this.id,
-    this.label,
-    this.isTicked,
-    this.important,
-    this.inUsed,
-    this.isDeleted,
-    this.createdOn,
-    this.createdBy,
-    this.updatedOn,
-    this.updatedBy,
-    this.note,
-    this.performer,
-  });
+  DataDSCV(
+      {this.id,
+      this.label,
+      this.isTicked,
+      this.important,
+      this.inUsed,
+      this.isDeleted,
+      this.createdOn,
+      this.createdBy,
+      this.updatedOn,
+      this.updatedBy,
+      this.note,
+      this.performer,
+      this.groupId});
 
   DataDSCV.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -100,16 +101,19 @@ class DataDSCV {
     updatedBy = json['updatedBy'];
     note = json['note'];
     performer = json['performer'];
+    groupId = json['groupId'];
   }
 
   TodoDSCVModel toDomain() => TodoDSCVModel(
-      id: id,
-      label: label,
-      important: important ?? false,
-      inUsed: inUsed,
-      isDeleted: isDeleted,
-      isTicked: isTicked,
-      createdBy: createdBy,
-      createdOn: createdOn,
-      performer: performer);
+        id: id,
+        label: label,
+        important: important ?? false,
+        inUsed: inUsed,
+        isDeleted: isDeleted,
+        isTicked: isTicked,
+        createdBy: createdBy,
+        createdOn: createdOn,
+        performer: performer,
+        groupId: groupId,
+      );
 }
