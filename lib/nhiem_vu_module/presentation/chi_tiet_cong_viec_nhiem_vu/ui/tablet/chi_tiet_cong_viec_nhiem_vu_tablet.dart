@@ -50,7 +50,7 @@ class _ChitietCongViecNhiemVuTabletState
             stream: cubit.stateStream,
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
                   children: [
                     StreamBuilder<ChiTietCongViecNhiemVuModel>(

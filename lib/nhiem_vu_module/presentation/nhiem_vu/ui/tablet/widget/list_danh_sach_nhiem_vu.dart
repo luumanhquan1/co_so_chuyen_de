@@ -13,11 +13,13 @@ class ListDanhSachNhiemVu extends StatefulWidget {
   final String titleButton;
   final List<PageData> list;
   final Function() onTap;
+  final bool isCheck;
 
   const ListDanhSachNhiemVu({
     required this.titleButton,
     required this.list,
     required this.onTap,
+    required this.isCheck,
     Key? key,
   }) : super(key: key);
 
@@ -48,13 +50,15 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
                 itemBuilder: (context, index) {
                   return NhiemVuCellTablet(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         const ChiTietNhiemVuTabletScreen(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChiTietNhiemVuTabletScreen(
+                            id: widget.list[index].id ?? '',
+                            isCheck: widget.isCheck,
+                          ),
+                        ),
+                      );
                     },
                     title: widget.list[index].loaiNhiemVu ?? '',
                     noiDung:
@@ -66,6 +70,7 @@ class _ListDanhSachNhiemVuState extends State<ListDanhSachNhiemVu> {
                     userImage:
                         'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                     index: index + 1,
+                    maTrangThai: widget.list[index].maTrangThai ?? '',
                   );
                 },
               ),

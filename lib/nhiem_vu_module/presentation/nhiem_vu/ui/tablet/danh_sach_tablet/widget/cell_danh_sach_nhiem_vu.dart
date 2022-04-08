@@ -8,17 +8,21 @@ import 'package:flutter/cupertino.dart';
 class CellDanhSachNhiemVuTablet extends StatelessWidget {
   final PageData data;
   final int index;
+  final Function onTap;
 
   const CellDanhSachNhiemVuTablet({
     Key? key,
     required this.data,
     required this.index,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 24.0),
         height: 137,
@@ -132,7 +136,8 @@ class CellDanhSachNhiemVuTablet extends StatelessWidget {
                                 height: 24.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
-                                  color: textColorForum,
+                                  color:
+                                      data.maTrangThai?.trangThaiColorNhiemVu(),
                                 ),
                                 child: Center(
                                   child: Text(

@@ -18,8 +18,13 @@ import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class NhiemVuDonViTablet extends StatefulWidget {
   final NhiemVuCubit cubit;
+  final bool isCheck;
 
-  const NhiemVuDonViTablet({Key? key, required this.cubit}) : super(key: key);
+  const NhiemVuDonViTablet({
+    Key? key,
+    required this.cubit,
+    required this.isCheck,
+  }) : super(key: key);
 
   @override
   _NhiemVuDonViTabletState createState() => _NhiemVuDonViTabletState();
@@ -168,7 +173,7 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
                             ),
                           ),
                         );
-                      },
+                      }, isCheck: widget.isCheck,
                     );
                   }
                   return SizedBox(
