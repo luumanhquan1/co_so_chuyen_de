@@ -6,7 +6,7 @@ import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
 import '/home_module/utils/constants/image_asset.dart';
 
-class CongViecCellTienIch extends StatefulWidget {
+class CongViecCellDaXoaTienIch extends StatefulWidget {
   final String text;
   final bool enabled;
   final bool borderBottom;
@@ -18,7 +18,7 @@ class CongViecCellTienIch extends StatefulWidget {
   final bool isTheEdit;
   final Function onEdit;
 
-  const CongViecCellTienIch({
+  const CongViecCellDaXoaTienIch({
     Key? key,
     required this.text,
     required this.onCheckBox,
@@ -33,10 +33,10 @@ class CongViecCellTienIch extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CongViecCellTienIch> createState() => _CongViecCellTienIchState();
+  State<CongViecCellDaXoaTienIch> createState() => _CongViecCellDaXoaTienIchState();
 }
 
-class _CongViecCellTienIchState extends State<CongViecCellTienIch> {
+class _CongViecCellDaXoaTienIchState extends State<CongViecCellDaXoaTienIch> {
   final FocusNode focusNode = FocusNode();
   final TextEditingController textEditingController = TextEditingController();
 
@@ -130,9 +130,7 @@ class _CongViecCellTienIchState extends State<CongViecCellTienIch> {
                   widget.onStar();
                 },
                 child: SvgPicture.asset(
-                  widget.todoModel.important ?? false
-                      ? ImageAssets.icStarFocus
-                      : ImageAssets.icStarUnfocus,
+                  ImageAssets.ic_hoan_tac,
                 ),
               ),
               const SizedBox(
@@ -142,11 +140,8 @@ class _CongViecCellTienIchState extends State<CongViecCellTienIch> {
                 onTap: () {
                   widget.onClose();
                 },
-                child: Container(
-                  color: Colors.transparent,
-                  child: SvgPicture.asset(
-                    ImageAssets.icClose,
-                  ),
+                child: SvgPicture.asset(
+                  ImageAssets.ic_delete_dscv,
                 ),
               )
             ],

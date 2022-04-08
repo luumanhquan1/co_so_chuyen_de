@@ -4,9 +4,11 @@ import 'package:ccvc_mobile/home_module/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_sach_hssd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/detail_huong_dan_su_dung_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/dscv_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/nhom_cv_moi_dscv_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/todo_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
@@ -16,6 +18,7 @@ import 'package:ccvc_mobile/tien_ich_module/domain/model/detail_huong_dan_su_dun
 import 'package:ccvc_mobile/tien_ich_module/domain/model/lich_am_duong.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nguoi_thuc_hien_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/nhom_cv_moi_model.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/topic_hdsd.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/model/tra_cuu_van_ban_phap_luat_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/domain/repository/tien_ich_repository.dart';
@@ -38,26 +41,27 @@ class TienIchRepositoryImpl implements TienIchRepository {
   }
 
   @override
-  Future<Result<TodoListModel>> getListTodo() {
-    return runCatchingAsync<ToDoListResponse, TodoListModel>(
+  Future<Result<TodoListModelTwo>> getListTodo() {
+    return runCatchingAsync<ToDoListResponseTwo, TodoListModelTwo>(
       () => _tienIchService.getTodoList(),
       (res) => res.toDomain(),
     );
   }
 
   @override
-  Future<Result<TodoModel>> upDateTodo(ToDoListRequest toDoListRequest) {
-    return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
+  Future<Result<TodoDSCVModel>> upDateTodo(ToDoListRequest toDoListRequest) {
+    return runCatchingAsync<ToDoListUpdateResponseTwo, TodoDSCVModel>(
       () => _tienIchService.updateTodoList(toDoListRequest),
-      (res) => res.data?.toDomain() ?? TodoModel(),
+      (res) => res.data?.toDomain() ?? TodoDSCVModel(),
     );
   }
 
   @override
-  Future<Result<TodoModel>> createTodo(CreateToDoRequest createToDoRequest) {
-    return runCatchingAsync<ToDoListUpdateResponse, TodoModel>(
+  Future<Result<TodoDSCVModel>> createTodo(
+      CreateToDoRequest createToDoRequest) {
+    return runCatchingAsync<ToDoListUpdateResponseTwo, TodoDSCVModel>(
       () => _tienIchService.createTodoList(createToDoRequest),
-      (res) => res.data?.toDomain() ?? TodoModel(),
+      (res) => res.data?.toDomain() ?? TodoDSCVModel(),
     );
   }
 
@@ -128,7 +132,23 @@ class TienIchRepositoryImpl implements TienIchRepository {
   @override
   Future<Result<List<NhomCVMoiModel>>> NhomCVMoi() {
     return runCatchingAsync<NhomCVMoiDSCVResponse, List<NhomCVMoiModel>>(
-      () => _tienIchServiceUAT.NhomCVMoi(),
+      () => _tienIchService.NhomCVMoi(),
+      (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<TodoDSCVModel>>> getListTodoDSCV() {
+    return runCatchingAsync<ToDoListDSCVResponse, List<TodoDSCVModel>>(
+      () => _tienIchService.getTodoListDSCV(),
+      (response) => response.toModel(),
+    );
+  }
+
+  @override
+  Future<Result<List<TodoDSCVModel>>> getListDSCVGanChoToi() {
+    return runCatchingAsync<ToDoListDSCVResponse, List<TodoDSCVModel>>(
+      () => _tienIchService.getListDSCVGanChoToi(),
       (response) => response.toModel(),
     );
   }
