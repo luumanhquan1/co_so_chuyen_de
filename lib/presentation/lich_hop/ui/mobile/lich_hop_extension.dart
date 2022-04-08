@@ -19,6 +19,7 @@ import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/calendar_tablet/src/table_calendar_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'danh_sach_lich_hop/danh_sach_lich_hop.dart';
 import 'lich_hop_danh_sach_ngay_tuan_thang/lich_hop_theo_danh_sach_ngay.dart';
@@ -66,6 +67,7 @@ extension lichHopOptionDayCubit on Type_Choose_Option_Day {
         return LichHopTheoDanhSachNgay(
           cubit: cubit,
           type: type,
+          key: UniqueKey(),
         );
       case Type_Choose_Option_Day.WEEK:
         return LichHopTheoDanhSachNgay(
@@ -350,7 +352,9 @@ extension lichHopCubit on LichHopState {
         type: type,
       );
     } else if (this is LichHopStateDangLich) {
-      return type.getLichHopStateDangLich(cubit: cubit);
+      return type.getLichHopStateDangLich(
+        cubit: cubit,
+      );
     } else if (this is LichHopStateDangDanhSach) {
       return type.getLichHopStateDanhSach(cubit);
     } else if (this is LichHopStateDangThongKe) {

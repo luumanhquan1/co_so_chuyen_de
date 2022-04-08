@@ -15,74 +15,83 @@ class LichHopTheoThang extends StatefulWidget {
 }
 
 class _LichHopTheoThangState extends State<LichHopTheoThang> {
-  final CalendarController _controller = CalendarController();
-
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DanhSachLichHopModel>(
-        stream: widget.cubit.danhSachLichHopStream,
+    return StreamBuilder<CalendarController>(
+        stream: widget.cubit.stateCalendarSubject.stream,
         builder: (context, snapshot) {
-          return SfCalendar(
-            allowAppointmentResize: true,
-            controller: _controller,
-            headerHeight: 0.0,
-            appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
-            view: CalendarView.month,
-            todayHighlightColor: labelColor,
-            appointmentTimeTextFormat: 'hh:mm:ss a',
-            dataSource: widget.cubit.getCalenderDataSource(
-              snapshot.data ?? DanhSachLichHopModel.empty(),
-            ),
-            viewHeaderStyle: ViewHeaderStyle(
-              dayTextStyle:
-                  textNormalCustom(fontSize: 13, color: unselectLabelColor),
-            ),
-            monthViewSettings: MonthViewSettings(
-              appointmentDisplayCount: 3,
-              monthCellStyle: MonthCellStyle(
-                trailingDatesTextStyle:
-                    textNormalCustom(fontSize: 14, color: iconColorDown),
-                textStyle:
-                    textNormalCustom(fontSize: 14, color: fontColorTablet2),
-              ),
-              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-            ),
-            selectionDecoration: const BoxDecoration(color: Colors.transparent),
-            appointmentBuilder: (
-              BuildContext context,
-              CalendarAppointmentDetails calendarAppointmentDetails,
-            ) {
-              final Appointment appointment =
-                  calendarAppointmentDetails.appointments.first;
-              return Padding(
-                padding: const EdgeInsets.only(left: 4, bottom: 2),
-                child: Container(
-                  height: 500,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2.0),
-                    color: textColorMangXaHoi,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 2.0,
-                      vertical: 2.0,
+          final data = snapshot.data ?? CalendarController();
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: StreamBuilder<DanhSachLichHopModel>(
+                stream: widget.cubit.danhSachLichHopStream,
+                builder: (context, snapshot) {
+                  return SfCalendar(
+                    allowAppointmentResize: true,
+                    controller: data,
+                    headerHeight: 0.0,
+                    appointmentTextStyle:
+                        textNormalCustom(color: backgroundColorApp),
+                    view: CalendarView.month,
+                    todayHighlightColor: labelColor,
+                    appointmentTimeTextFormat: 'hh:mm:ss a',
+                    dataSource: widget.cubit.getCalenderDataSource(
+                      snapshot.data ?? DanhSachLichHopModel.empty(),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            appointment.subject,
-                            style: textNormalCustom(fontSize: 8),
-                            overflow: TextOverflow.ellipsis,
+                    viewHeaderStyle: ViewHeaderStyle(
+                      dayTextStyle: textNormalCustom(
+                          fontSize: 13, color: unselectLabelColor),
+                    ),
+                    monthViewSettings: MonthViewSettings(
+                      appointmentDisplayCount: 3,
+                      monthCellStyle: MonthCellStyle(
+                        trailingDatesTextStyle: textNormalCustom(
+                            fontSize: 14, color: iconColorDown),
+                        textStyle: textNormalCustom(
+                            fontSize: 14, color: fontColorTablet2),
+                      ),
+                      appointmentDisplayMode:
+                          MonthAppointmentDisplayMode.appointment,
+                    ),
+                    selectionDecoration:
+                        const BoxDecoration(color: Colors.transparent),
+                    appointmentBuilder: (
+                      BuildContext context,
+                      CalendarAppointmentDetails calendarAppointmentDetails,
+                    ) {
+                      final Appointment appointment =
+                          calendarAppointmentDetails.appointments.first;
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 4, bottom: 2),
+                        child: Container(
+                          height: 500,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.0),
+                            color: textColorMangXaHoi,
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 2.0,
+                              vertical: 2.0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    appointment.subject,
+                                    style: textNormalCustom(fontSize: 8),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }),
           );
         });
   }
