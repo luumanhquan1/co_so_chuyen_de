@@ -179,6 +179,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
         },
         error: (err) {});
   }
+
   String name = '';
 
   Future<void> _getNguoiChuTri() async {
@@ -220,10 +221,12 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       '',
       '',
       '',
-      dateFrom ?? '',
-      timeFrom ?? '',
-      dateEnd ?? '',
-      timeEnd ?? '',
+      dateFrom ?? DateTime.now().formatApi,
+      timeFrom ??
+          '${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}',
+      dateEnd ?? DateTime.now().formatApi,
+      timeEnd ??
+          '${DateTime.now().hour.toString()}:${(DateTime.now().minute + 1).toString()}',
       content,
       location,
       '',
@@ -242,8 +245,8 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
       donviModel ?? [],
       1,
       1,
-      dateFrom ?? '',
-      dateEnd ?? '',
+      dateFrom ?? DateTime.now().formatApi,
+      dateEnd ?? DateTime.now().formatApi,
       true,
     );
     result.when(success: (res) {
