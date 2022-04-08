@@ -78,6 +78,8 @@ class LichHopCubit extends BaseCubit<LichHopState> {
   BehaviorSubject<stateLDM> getStateLDM =
       BehaviorSubject.seeded(stateLDM.ChoXacNhan);
 
+  BehaviorSubject<CalendarController> stateCalendarSubject = BehaviorSubject();
+
   HopRepository get hopRepo => Get.find();
   BehaviorSubject<List<MenuModel>> menuModelSubject = BehaviorSubject();
 
@@ -290,6 +292,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     }
     return false;
   }
+
   bool checkDataRateList(List<TiLeThamGiaModel> data) {
     for (var i in data) {
       if (i.rate != 0) return true;
@@ -316,6 +319,9 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     } else {
       postDSLHMonth();
     }
+    final CalendarController controller = CalendarController();
+    controller.displayDate = selectTime;
+    stateCalendarSubject.add(controller);
   }
 
   void initData() {
@@ -406,6 +412,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postCoCauLichHop();
     postToChucBoiDonVi();
     postTiLeThamDu();
+    stateCalendarSubject.add(CalendarController());
   }
 
   void postDSLHMonth() {
@@ -425,6 +432,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postCoCauLichHop();
     postToChucBoiDonVi();
     postTiLeThamDu();
+    stateCalendarSubject.add(CalendarController());
   }
 
   void postDSLHDay() {
@@ -441,6 +449,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     postCoCauLichHop();
     postToChucBoiDonVi();
     postTiLeThamDu();
+    stateCalendarSubject.add(CalendarController());
   }
 
   Future<void> postDanhSachLichHop() async {
