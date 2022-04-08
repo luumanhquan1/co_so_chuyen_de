@@ -69,6 +69,7 @@ class _DanhSachNhiemVuTabletState extends State<DanhSachNhiemVuTablet> {
             'ToDate': widget.cubit.ngayKetThuc
           },
           size: widget.cubit.pageSize,
+          keySearch: widget.cubit.keySearch,
         )
       },
       viewItem: (value, index) {

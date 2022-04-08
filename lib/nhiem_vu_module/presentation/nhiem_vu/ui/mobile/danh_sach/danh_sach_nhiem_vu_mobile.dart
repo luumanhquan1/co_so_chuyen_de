@@ -56,7 +56,8 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
     return ListViewLoadMore(
       cubit: widget.cubit,
       isListView: true,
-      callApi: (page) => {
+      callApi: (page) =>
+      {
         widget.cubit.postDanhSachNhiemVu(
           index: page,
           isNhiemVuCaNhan: widget.isCheck,
@@ -67,6 +68,7 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
             'ToDate': widget.cubit.ngayKetThuc
           },
           size: widget.cubit.pageSize,
+          keySearch: widget.cubit.keySearch,
         )
       },
       viewItem: (value, index) {
@@ -77,10 +79,11 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChiTietNhiemVuPhoneScreen(
-                    id: value.id ?? '',
-                    isCheck: widget.isCheck,
-                  ),
+                  builder: (context) =>
+                      ChiTietNhiemVuPhoneScreen(
+                        id: value.id ?? '',
+                        isCheck: widget.isCheck,
+                      ),
                 ),
               );
             },

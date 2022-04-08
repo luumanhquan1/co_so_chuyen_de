@@ -9,9 +9,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class KetNoiMenu extends StatefulWidget {
   final Function(LoaiBaiVietModel) onChange;
-  List<LoaiBaiVietModel> listData;
+  final List<LoaiBaiVietModel> listData;
 
-  KetNoiMenu({
+  const KetNoiMenu({
     Key? key,
     required this.onChange,
     required this.listData,

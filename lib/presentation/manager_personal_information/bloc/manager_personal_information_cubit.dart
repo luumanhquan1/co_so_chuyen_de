@@ -8,10 +8,8 @@ import 'package:ccvc_mobile/domain/model/edit_personal_information/data_edit_per
 import 'package:ccvc_mobile/domain/model/manager_personal_information/manager_personal_information_model.dart';
 import 'package:ccvc_mobile/domain/model/widget_manage/widget_model.dart';
 import 'package:ccvc_mobile/domain/repository/login_repository.dart';
-import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/manager_personal_information/bloc/manager_personal_information_state.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
-import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:queue/queue.dart';
@@ -182,11 +180,8 @@ class ManagerPersonalInformationCubit
       success: (res) {
         dataEditPersonInformation = res;
         dataEditSubject.sink.add(dataEditPersonInformation);
-        MessageConfig.show(title: S.current.sua_thanh_cong);
       },
-      error: (error) {
-        MessageConfig.show(title: S.current.sua_that_bai);
-      },
+      error: (error) {},
     );
   }
 
