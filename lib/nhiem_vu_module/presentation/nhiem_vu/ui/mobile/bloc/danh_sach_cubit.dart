@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/nhiem_vu_module/domain/model/dash_broash/dash_broash
 import 'package:ccvc_mobile/nhiem_vu_module/domain/repository/nhiem_vu_repository.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_state.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/constants/api_constants.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/utils/debouncer.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
@@ -26,6 +27,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
   String keySearch = '';
   BehaviorSubject<List<PageData>> dataSubject = BehaviorSubject();
   BehaviorSubject<List<PageDatas>> dataSubjects = BehaviorSubject();
+  BehaviorSubject<String> searchSubjects = BehaviorSubject();
   String ngayDauTien = '';
   String ngayKetThuc = '';
 
@@ -95,6 +97,33 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     );
   }
 
+  void apiDanhSachCongViecCaNhan(String start, String end, bool isCheckCaNhan) {
+    postDanhSachCongViec(
+      hanXuLy: {'FromDate': start, 'ToDate': end},
+      index: pageIndex,
+      isCaNhan: isCheckCaNhan,
+      isSortByHanXuLy: true,
+      keySearch: keySearch,
+      mangTrangThai: [],
+      size: pageSize,
+      trangThaiHanXuLy: '',
+    );
+  }
+
+  void apiDanhSachNhiemVuCaNhan(String start, String end, bool isCheckCaNhan) {
+    postDanhSachNhiemVu(
+      index: pageIndex,
+      isNhiemVuCaNhan: isCheckCaNhan,
+      isSortByHanXuLy: true,
+      mangTrangThai: [],
+      ngayTaoNhiemVu: {'FromDate': start, 'ToDate': end},
+      size: pageSize,
+      keySearch: keySearch,
+    );
+  }
+
+  Debouncer debouncer = Debouncer();
+
   Future<void> postDanhSachNhiemVu({
     required int? index,
     required bool isNhiemVuCaNhan,
@@ -121,7 +150,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
         dataSubject.sink.add(res.pageData ?? []);
         if (index == ApiConstants.PAGE_BEGIN) {
           if (res.pageData?.isEmpty ?? true) {
-            showEmpty();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
           } else {
             showContent();
             emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
@@ -165,7 +194,8 @@ class DanhSachCubit extends BaseCubit<BaseState> {
         dataSubjects.sink.add(res.pageData ?? []);
         if (index == ApiConstants.PAGE_BEGIN) {
           if (res.pageData?.isEmpty ?? true) {
-            showEmpty();
+            //   showEmpty();
+            emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
           } else {
             showContent();
             emit(CompletedLoadMore(CompleteType.SUCCESS, posts: res.pageData));
@@ -222,6 +252,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     required String ngayDauTien,
     required String ngayCuoiCung,
   }) async {
+    showLoading();
     final result = await repo.getDashBroashCongViec(ngayDauTien, ngayCuoiCung);
     result.when(
       success: (res) {
@@ -254,6 +285,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     required String ngayDauTien,
     required String ngayCuoiCung,
   }) async {
+    showLoading();
     final result = await repo.getDashBroashNhiemVuCaNhan(
       ngayDauTien,
       ngayCuoiCung,
