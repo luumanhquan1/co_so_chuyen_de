@@ -12,9 +12,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ContainerKetNoiMenuWidget extends StatefulWidget {
   final Widget? childExpand;
   final Function() onTap;
-  LoaiBaiVietModel data;
+  final LoaiBaiVietModel data;
 
-  ContainerKetNoiMenuWidget({
+  const ContainerKetNoiMenuWidget({
     Key? key,
     required this.data,
     this.childExpand,

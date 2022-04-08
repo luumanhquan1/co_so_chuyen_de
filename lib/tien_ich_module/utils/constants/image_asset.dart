@@ -36,6 +36,7 @@ class ImageAssets {
   static const String icDau = '$baseImg/ic_dau.svg';
   static const String icTuat = '$baseImg/ic_tuat.svg';
   static const String icHoi = '$baseImg/ic_hoi.svg';
+  static const String ic_nhomCVMoi = '$baseImg/ic_nhomCVMoi.svg';
 
   //icon huong dan su dung
   static const String icBaoCao = '$baseImg/ic_bao_cao.svg';

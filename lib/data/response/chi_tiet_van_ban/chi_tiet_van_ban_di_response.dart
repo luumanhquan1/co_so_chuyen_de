@@ -49,7 +49,7 @@ class ChiTietVanBanDiResponse {
   @JsonKey(name: 'DonViBanHanh')
   String? donViBanHanh;
   @JsonKey(name: 'IdVanBanGoc')
-  int? idVanBanGoc;
+  String? idVanBanGoc;
   @JsonKey(name: 'KyHieuVanBanGoc')
   String? kyHieuVanBanGoc;
   @JsonKey(name: 'IsDaKyPhieuTrinh')

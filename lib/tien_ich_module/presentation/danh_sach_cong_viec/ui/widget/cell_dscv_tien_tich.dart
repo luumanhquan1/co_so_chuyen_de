@@ -1,9 +1,9 @@
+import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '/home_module/config/resources/color.dart';
 import '/home_module/config/resources/styles.dart';
-import '/home_module/domain/model/home/todo_model.dart';
 import '/home_module/utils/constants/image_asset.dart';
 
 class CongViecCellTienIch extends StatefulWidget {
@@ -13,7 +13,7 @@ class CongViecCellTienIch extends StatefulWidget {
   final Function(bool) onCheckBox;
   final Function onStar;
   final Function() onClose;
-  final TodoModel todoModel;
+  final TodoDSCVModel todoModel;
   final Function(TextEditingController)? onChange;
   final bool isTheEdit;
   final Function onEdit;

@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_d
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_infomation_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_list_view_tablet.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/tablet/item_tablet_topic_tablet.dart';
+import 'package:ccvc_mobile/presentation/choose_time/bloc/choose_time_cubit.dart';
 import 'package:ccvc_mobile/presentation/choose_time/ui/choose_time_screen.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -29,6 +30,7 @@ class TatCaChuDeScreenTablet extends StatefulWidget {
 
 class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> with AutomaticKeepAliveClientMixin {
   ScrollController _scrollController = ScrollController();
+  ChooseTimeCubit chooseTimeCubit=ChooseTimeCubit();
   ChuDeCubit chuDeCubit = ChuDeCubit();
 
   @override
@@ -58,6 +60,7 @@ class _TatCaChuDeScreenTabletState extends State<TatCaChuDeScreenTablet> with Au
             child: Column(
               children: [
                 ChooseTimeScreen(
+                  baseChooseTimeCubit: chooseTimeCubit,
                   today: DateTime.now(),
                 ),
                 Container(

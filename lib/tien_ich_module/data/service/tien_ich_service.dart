@@ -2,9 +2,11 @@ import 'package:ccvc_mobile/home_module/data/response/home/todo_current_user_res
 import 'package:ccvc_mobile/tien_ich_module/data/request/to_do_list_request.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/danh_sach_hssd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/detail_huong_dan_su_dung_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/dscv_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/lich_am_duong_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/list_nguoi_thuc_hien_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/nhom_cv_moi_dscv_response.dart';
+import 'package:ccvc_mobile/tien_ich_module/data/response/todo_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/topic_hdsd_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tra_cuu_van_ban_phap_luat_response.dart';
 import 'package:ccvc_mobile/tien_ich_module/data/response/tree_danh_ba_response.dart';
@@ -25,17 +27,17 @@ abstract class TienIchService {
 
   @GET(ApiConstants.TODO_LIST_CURRENT_USER)
   @FormUrlEncoded()
-  Future<ToDoListResponse> getTodoList();
+  Future<ToDoListResponseTwo> getTodoList();
 
   @PUT(ApiConstants.TODO_LIST_UPDATE)
   @FormUrlEncoded()
-  Future<ToDoListUpdateResponse> updateTodoList(
+  Future<ToDoListUpdateResponseTwo> updateTodoList(
     @Body() ToDoListRequest toDoListRequest,
   );
 
   @POST(ApiConstants.TODO_LIST_CREATE)
   @FormUrlEncoded()
-  Future<ToDoListUpdateResponse> createTodoList(
+  Future<ToDoListUpdateResponseTwo> createTodoList(
     @Body() CreateToDoRequest createToDoRequest,
   );
 
@@ -59,6 +61,18 @@ abstract class TienIchService {
     @Query('PageIndex') int pageIndex,
     @Query('PageSize') int pageSize,
   );
+
+  @GET(ApiConstants.NHOM_CV_MOI)
+  @FormUrlEncoded()
+  Future<NhomCVMoiDSCVResponse> NhomCVMoi();
+
+  @GET(ApiConstants.TODO_LIST_CURRENT_USER)
+  @FormUrlEncoded()
+  Future<ToDoListDSCVResponse> getTodoListDSCV();
+
+  @GET(ApiConstants.GAN_CONG_VIEC_CHO_TOI)
+  @FormUrlEncoded()
+  Future<ToDoListDSCVResponse> getListDSCVGanChoToi();
 }
 
 @RestApi()
@@ -70,10 +84,6 @@ abstract class TienIchServiceUAT {
   Future<DataLichAmDuongResponse> getLichAmDuong(
     @Query('dateStr') String date,
   );
-
-  @GET(ApiConstants.NHOM_CV_MOI)
-  @FormUrlEncoded()
-  Future<NhomCVMoiDSCVResponse> NhomCVMoi();
 }
 
 @RestApi()

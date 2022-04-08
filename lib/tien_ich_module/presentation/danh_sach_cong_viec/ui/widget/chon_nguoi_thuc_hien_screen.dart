@@ -33,16 +33,19 @@ class _DanhSachCongViecTienIchMobileState
     return Scaffold(
       appBar: AppBarDefaultBack(S.current.chon_nguoi_thuc_hien),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BaseSearchBar(
-                hintText: S.current.tim_kiem_nhanh,
-                onChange: (value) {
-                  widget.cubit.timNguoiTHucHien(value);
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: BaseSearchBar(
+                  hintText: S.current.tim_kiem_nhanh,
+                  onChange: (value) {
+                    widget.cubit.timNguoiTHucHien(value);
+                  },
+                ),
               ),
               StreamBuilder<List<NguoiThucHienModel>>(
                 stream: widget.cubit.nguoiThucHien.stream,

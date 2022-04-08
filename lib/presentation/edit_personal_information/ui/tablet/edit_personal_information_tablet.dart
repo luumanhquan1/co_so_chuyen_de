@@ -15,6 +15,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:ccvc_mobile/widgets/dropdown/custom_drop_down.dart';
 import 'package:ccvc_mobile/widgets/input_infor_user/input_info_user_widget.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -502,9 +503,10 @@ class _EditPersonalInformationTabletScreen
                           onPressed1: () {
                             Navigator.pop(context);
                           },
-                          onPressed2: () {
+                          onPressed2: () async {
                             if (keyGroup.currentState!.validator()) {
-                              cubit.getEditPerson(
+                              await cubit
+                                  .getEditPerson(
                                 id: widget.id,
                                 maCanBo: maCanBoController.value.text,
                                 name: nameController.value.text,
@@ -520,7 +522,20 @@ class _EditPersonalInformationTabletScreen
                                 tinh: tinh,
                                 huyen: huyen,
                                 xa: xa,
+                              )
+                                  .then(
+                                (value) {
+                                  return MessageConfig.show(
+                                    title: S.current.sua_thanh_cong,
+                                  );
+                                },
+                              ).onError(
+                                (error, stackTrace) => MessageConfig.show(
+                                  title: S.current.sua_that_bai,
+                                  messState: MessState.error,
+                                ),
                               );
+                              Navigator.pop(context);
                             } else {}
                           },
                           title1: S.current.dong,

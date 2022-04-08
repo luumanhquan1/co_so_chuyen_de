@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/widget/widget_item_menu_nhiem_vu_mobile.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_cubit.dart';
+import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/block/y_kien_nguoidan_state.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,6 +45,7 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
                       widget.cubit.selectTypeYKNDSubject.add(
                         [true, false],
                       );
+                      widget.cubit.emit(ThongTinChung());
                       Navigator.pop(context);
                     },
                     isSelect: data[0],
@@ -55,6 +57,7 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
                       widget.cubit.selectTypeYKNDSubject.add(
                         [false, true],
                       );
+                      widget.cubit.emit(BaoCaoThongKe());
                       Navigator.pop(context);
                     },
                     isSelect: data[1],
@@ -65,33 +68,8 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
           ),
         ),
       ],
-    ));
+    ),);
 
-    // child: Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     ItemMenu(
-    //         widgetItem: SvgPicture.asset(ImageAssets.icMessItemMenu),
-    //         textItem: S.current.y_kien_nguoi_dan,
-    //         isTitile: true),
-    //     const SizedBox(
-    //       height: 32,
-    //     ),
-    //     ItemMenu(
-    //       widgetItem: SvgPicture.asset(ImageAssets.icPersonItemMenu),
-    //       textItem: S.current.thong_tin_chung,
-    //       isTitile: true,
-    //     ),
-    //     const SizedBox(
-    //       height: 32,
-    //     ),
-    //     ItemMenu(
-    //       widgetItem: SvgPicture.asset(ImageAssets.icBaoCaoItemNenu),
-    //       textItem: S.current.bao_cao_thong_ke,
-    //       isTitile: true,
-    //     ),
-    //   ],
-    // ),
   }
 
   Widget headerWidget({required String menu}) {

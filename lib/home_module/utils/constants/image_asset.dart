@@ -56,6 +56,8 @@ class ImageAssets {
 
   static const String icPlus = '$baseImg/ic_cong.svg';
   static const String icClose = '$baseImg/ic_close.svg';
+  static const String ic_delete_dscv = '$baseImg/ic_delete_dscv.svg';
+  static const String ic_hoan_tac = '$baseImg/ic_hoan_tac.svg';
 
   static const String icMore = '$baseImg/ic_more.svg';
   static const String icEdit = '$baseImg/ic_edits.svg';
@@ -69,7 +71,6 @@ class ImageAssets {
   static const String icCalendar = '$baseImg/ic_calendar.svg';
   static const String icWork = '$baseImg/ic_work.svg';
   static const String edit_dscv = '$baseImg/edit_dscv.svg';
-
 
   static const String appBarBackgroundXanh =
       '$baseImg/app_bar_backgroud_xanh.png';
@@ -91,10 +92,6 @@ class ImageAssets {
       '$baseImg/header_background_thu.png';
   static const String headerBackgroungDong =
       '$baseImg/header_background_dong.png';
-
-
-
-
 
   static const String headerBackgroudTetNguyenDan =
       '$baseImg/header_background_tet_nguyen_dan.png';

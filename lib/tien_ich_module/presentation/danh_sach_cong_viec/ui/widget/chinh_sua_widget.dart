@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/home_module/domain/model/home/todo_model.dart';
 import 'package:ccvc_mobile/home_module/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/home_module/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/presentation/edit_personal_information/ui/mobile/widget/selectdate.dart';
+import 'package:ccvc_mobile/tien_ich_module/domain/model/todo_dscv_model.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/bloc/danh_sach_cong_viec_tien_ich_cubit.dart';
 import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/ui/widget/chon_nguoi_thuc_hien_screen.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/customTextFieldVersion2.dart';
@@ -19,7 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EditWidget extends StatefulWidget {
-  final TodoModel todo;
+  final TodoDSCVModel todo;
   final DanhSachCongViecTienIchCubit cubit;
 
   const EditWidget({Key? key, required this.cubit, required this.todo})
@@ -117,7 +118,7 @@ class _EditWidgetState extends State<EditWidget> {
                                 snapshot.data == true
                                     ? (widget.cubit.person.isEmpty
                                         ? widget.cubit.convertIdToPerson(
-                                    widget.todo.updatedBy ?? '')
+                                            widget.todo.performer ?? '')
                                         : widget.cubit.person)
                                     : (widget.cubit.person.isEmpty)
                                         ? S.current.tim_theo_nguoi
@@ -142,12 +143,14 @@ class _EditWidgetState extends State<EditWidget> {
                                 setState(() {});
                               },
                               child: snapshot.data == true
-                                  ? Container(
-                                      color: Colors.transparent,
-                                      child: SvgPicture.asset(
-                                        ImageAssets.icClose,
-                                      ),
-                                    )
+                                  ? (widget.cubit.person != ''
+                                      ? Container(
+                                          color: Colors.transparent,
+                                          child: SvgPicture.asset(
+                                            ImageAssets.icClose,
+                                          ),
+                                        )
+                                      : const SizedBox())
                                   : const SizedBox(),
                             ),
                           )

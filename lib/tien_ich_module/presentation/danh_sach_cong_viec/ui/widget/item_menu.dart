@@ -4,8 +4,6 @@ import 'package:ccvc_mobile/tien_ich_module/presentation/danh_sach_cong_viec/blo
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'container_menu_dscv.dart';
-
 class ItemMenuDSCV {
   String icon;
   TypeMenuDSCV typeMenu;

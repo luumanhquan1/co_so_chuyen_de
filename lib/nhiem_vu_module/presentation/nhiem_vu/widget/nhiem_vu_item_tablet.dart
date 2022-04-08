@@ -1,5 +1,6 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_nhiem_vu_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class NhiemVuCellTablet extends StatelessWidget {
@@ -8,6 +9,7 @@ class NhiemVuCellTablet extends StatelessWidget {
   final String userImage;
   final String userName;
   final String noiDung;
+  final String maTrangThai;
   final String status;
   final int index;
   final Function onTap;
@@ -19,6 +21,7 @@ class NhiemVuCellTablet extends StatelessWidget {
     required this.userImage,
     required this.userName,
     required this.noiDung,
+    required this.maTrangThai,
     required this.status,
     required this.index,
     required this.onTap,
@@ -141,7 +144,7 @@ class NhiemVuCellTablet extends StatelessWidget {
                                 height: 24.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
-                                  color: textColorForum,
+                                  color: maTrangThai.trangThaiColorNhiemVu(),
                                 ),
                                 child: Center(
                                   child: Text(

@@ -111,7 +111,8 @@ class NhiemVuItemMobile extends StatelessWidget {
                                 height: 24.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
-                                  color: textColorForum,
+                                  color:
+                                      data.maTrangThai?.trangThaiColorNhiemVu(),
                                 ),
                                 child: Center(
                                   child: Text(

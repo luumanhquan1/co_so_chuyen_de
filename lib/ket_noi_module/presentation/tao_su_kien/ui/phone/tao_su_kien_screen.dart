@@ -17,24 +17,25 @@ import 'package:ccvc_mobile/ket_noi_module/widgets/widget_tablet/widget_tablet.d
 import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/calendar/scroll_pick_date/ui/start_end_date_widget.dart';
+import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TaoSuKienKetNoi extends StatefulWidget {
-  const TaoSuKienKetNoi({Key? key}) : super(key: key);
+  final TaoSuKienCubit cubit;
+
+  const TaoSuKienKetNoi({Key? key, required this.cubit}) : super(key: key);
 
   @override
   _TaoSuKienKetNoiState createState() => _TaoSuKienKetNoiState();
 }
 
 class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
-  final TaoSuKienCubit cubit = TaoSuKienCubit();
   final keyGroup = GlobalKey<FormGroupState>();
 
   @override
   void initState() {
     super.initState();
-    cubit.callApi();
   }
 
   @override
@@ -67,7 +68,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icEdit,
                           hintText: S.current.nhap_ten_chuong_trinh,
                           onChange: (value) {
-                            cubit.tenSuKien = value;
+                            widget.cubit.tenSuKien = value;
                           },
                           validator: (value) {
                             if ((value ?? '').isEmpty) {
@@ -78,18 +79,21 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                         ),
                         spaceH5,
                         StreamBuilder<List<LoaiBaiVietModel>>(
-                          stream: cubit.loaiBaiVietSubject,
+                          stream: widget.cubit.loaiBaiVietSubject,
                           builder: (context, snapshot) {
-                            final data = snapshot.data ?? <LoaiBaiVietModel>[];
-                            return SelectOnlyExpand(
-                              urlIcon: ImageAssets.ic_calender,
-                              title: S.current.loai_bai_viet,
-                              value: data.map((e) => e.title).first,
-                              listSelect: data.map((e) => e.title).toList(),
-                              onChange: (value) {
-                                cubit.loaiBaiViet = value;
-                              },
-                            );
+                            final data = snapshot.data ?? [];
+                            if (data.isNotEmpty) {
+                              return SelectOnlyExpand(
+                                urlIcon: ImageAssets.icDocument,
+                                title: S.current.loai_bai_viet,
+                                value: data.map((e) => e.title).first,
+                                listSelect: data.map((e) => e.title).toList(),
+                                onChange: (value) {
+                                  widget.cubit.loaiBaiViet = value;
+                                },
+                              );
+                            }
+                            return const SizedBox();
                           },
                         ),
                         spaceH5,
@@ -97,7 +101,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icDoublePerson,
                           hintText: S.current.them_nguoi,
                           onChange: (value) {
-                            cubit.themNguoi = value;
+                            widget.cubit.themNguoi = value;
                           },
                           validator: (value) {
                             if ((value ?? '').isEmpty) {
@@ -111,7 +115,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           icMargin: false,
                           onEndDateTimeChanged: (DateTime value) {},
                           onStartDateTimeChanged: (DateTime value) {
-                            cubit.thoiGian = value.formatApiSS;
+                            widget.cubit.thoiGian = value.formatApiSS;
                           },
                         ),
                         spaceH5,
@@ -119,7 +123,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.ic_location,
                           hintText: S.current.dia_diem,
                           onChange: (value) {
-                            cubit.diaDiem = value;
+                            widget.cubit.diaDiem = value;
                           },
                         ),
                         spaceH24,
@@ -138,7 +142,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                             return (value ?? '').checkSdt();
                           },
                           onChange: (value) {
-                            cubit.tel = value;
+                            widget.cubit.tel = value;
                           },
                         ),
                         spaceH16,
@@ -146,7 +150,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icViber,
                           hintText: S.current.id_viber,
                           onChange: (value) {
-                            cubit.viber = value;
+                            widget.cubit.viber = value;
                           },
                         ),
                         spaceH16,
@@ -154,7 +158,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icGroup,
                           hintText: S.current.id_meeting,
                           onChange: (value) {
-                            cubit.emeeting = value;
+                            widget.cubit.emeeting = value;
                           },
                         ),
                         spaceH16,
@@ -162,7 +166,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icZoom,
                           hintText: S.current.zoom,
                           onChange: (value) {
-                            cubit.zoom = value;
+                            widget.cubit.zoom = value;
                           },
                         ),
                         spaceH24,
@@ -170,7 +174,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           urlIcon: ImageAssets.icDocument,
                           hintText: S.current.noi_dung,
                           onChange: (value) {
-                            cubit.noiDung = value;
+                            widget.cubit.noiDung = value;
                           },
                           maxLine: 4,
                         ),
@@ -181,9 +185,22 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                           onPressed1: () {
                             Navigator.pop(context);
                           },
-                          onPressed2: () {
+                          onPressed2: () async {
                             if (keyGroup.currentState!.validator()) {
-                              cubit.callApis();
+                              await widget.cubit.callApis().then(
+                                (value) {
+                                  MessageConfig.show(
+                                    title: S.current.tao_thanh_cong,
+                                  );
+                                },
+                              ).onError(
+                                (error, stackTrace) {
+                                  MessageConfig.show(
+                                    title: S.current.tao_that_bai,
+                                  );
+                                },
+                              );
+                              Navigator.pop(context);
                             } else {}
                           },
                         )
@@ -224,7 +241,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                         return (value ?? '').checkSdt();
                       },
                       onChange: (value) {
-                        cubit.tel = value;
+                        widget.cubit.tel = value;
                       },
                     ),
                     spaceH16,
@@ -232,7 +249,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                       urlIcon: ImageAssets.icViber,
                       hintText: S.current.id_viber,
                       onChange: (value) {
-                        cubit.viber = value;
+                        widget.cubit.viber = value;
                       },
                     ),
                     spaceH16,
@@ -240,7 +257,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                       urlIcon: ImageAssets.icMeetings,
                       hintText: S.current.id_meeting,
                       onChange: (value) {
-                        cubit.emeeting = value;
+                        widget.cubit.emeeting = value;
                       },
                     ),
                     spaceH16,
@@ -248,7 +265,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                       urlIcon: ImageAssets.icZoom,
                       hintText: S.current.id_zoom,
                       onChange: (value) {
-                        cubit.zoom = value;
+                        widget.cubit.zoom = value;
                       },
                     ),
                     spaceH24,
@@ -256,7 +273,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                       urlIcon: ImageAssets.icDocument,
                       hintText: S.current.noi_dung,
                       onChange: (value) {
-                        cubit.noiDung = value;
+                        widget.cubit.noiDung = value;
                       },
                       maxLine: 4,
                     ),
@@ -279,7 +296,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 urlIcon: ImageAssets.icEdit,
                                 hintText: S.current.nhap_ten_chuong_trinh,
                                 onChange: (value) {
-                                  cubit.tenSuKien = value;
+                                  widget.cubit.tenSuKien = value;
                                 },
                                 validator: (value) {
                                   if ((value ?? '').isEmpty) {
@@ -290,20 +307,22 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                               ),
                               spaceH5,
                               StreamBuilder<List<LoaiBaiVietModel>>(
-                                stream: cubit.loaiBaiVietSubject,
+                                stream: widget.cubit.loaiBaiVietSubject,
                                 builder: (context, snapshot) {
-                                  final data =
-                                      snapshot.data ?? <LoaiBaiVietModel>[];
-                                  return SelectOnlyExpand(
-                                    urlIcon: ImageAssets.icDocument,
-                                    title: S.current.loai_bai_viet,
-                                    value: data.map((e) => e.title).first,
-                                    listSelect:
-                                        data.map((e) => e.title).toList(),
-                                    onChange: (value) {
-                                      cubit.loaiBaiViet = value;
-                                    },
-                                  );
+                                  final data = snapshot.data ?? [];
+                                  if (data.isNotEmpty) {
+                                    return SelectOnlyExpand(
+                                      urlIcon: ImageAssets.icDocument,
+                                      title: S.current.loai_bai_viet,
+                                      value: data.map((e) => e.title).first,
+                                      listSelect:
+                                          data.map((e) => e.title).toList(),
+                                      onChange: (value) {
+                                        widget.cubit.loaiBaiViet = value;
+                                      },
+                                    );
+                                  }
+                                  return const SizedBox();
                                 },
                               ),
                               spaceH5,
@@ -311,7 +330,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 urlIcon: ImageAssets.icDoublePerson,
                                 hintText: S.current.them_nguoi,
                                 onChange: (value) {
-                                  cubit.themNguoi = value;
+                                  widget.cubit.themNguoi = value;
                                 },
                                 validator: (value) {
                                   if ((value ?? '').isEmpty) {
@@ -325,7 +344,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 icMargin: false,
                                 onEndDateTimeChanged: (DateTime value) {},
                                 onStartDateTimeChanged: (DateTime value) {
-                                  cubit.thoiGian = value.formatApiSS;
+                                  widget.cubit.thoiGian = value.formatApiSS;
                                 },
                               ),
                               spaceH5,
@@ -333,7 +352,7 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                                 urlIcon: ImageAssets.ic_location,
                                 hintText: S.current.dia_diem,
                                 onChange: (value) {
-                                  cubit.diaDiem = value;
+                                  widget.cubit.diaDiem = value;
                                 },
                               ),
                             ],
@@ -350,9 +369,22 @@ class _TaoSuKienKetNoiState extends State<TaoSuKienKetNoi> {
                   child: ButtonSaveWidget(
                     leftTxt: S.current.huy,
                     rightTxt: S.current.tao_su_kien,
-                    funcBtnOk: () {
+                    funcBtnOk: () async {
                       if (keyGroup.currentState!.validator()) {
-                        cubit.callApis();
+                        await widget.cubit.callApis().then(
+                          (value) {
+                            MessageConfig.show(
+                              title: S.current.tao_thanh_cong,
+                            );
+                          },
+                        ).onError(
+                          (error, stackTrace) {
+                            MessageConfig.show(
+                              title: S.current.tao_that_bai,
+                            );
+                          },
+                        );
+                        Navigator.pop(context);
                       } else {}
                     },
                   ),
