@@ -11,6 +11,7 @@ class PicKDateCupertino extends StatefulWidget {
   final String? title2;
   final Function(DateTime value) onDateTimeChanged;
   final Color background;
+  final DateTime? initData;
   final DateTime? maximumDate;
   final DateTime? minimumDate;
   final StartOfEnd startOfEnd;
@@ -28,6 +29,7 @@ class PicKDateCupertino extends StatefulWidget {
     required this.onDateTimeChanged,
     this.title2,
     this.isUnderLine = false,
+    this.initData,
   }) : super(key: key);
 
   @override
@@ -63,7 +65,7 @@ class _PicKDateCupertinoState extends State<PicKDateCupertino>
               backgroundColor: widget.background,
               mode: widget.mode,
               use24hFormat: true,
-              initialDateTime: widget.minimumDate,
+              initialDateTime: widget.initData ?? widget.minimumDate,
               onDateTimeChanged: (DateTime value) {
                 widget.onDateTimeChanged(value);
               },
