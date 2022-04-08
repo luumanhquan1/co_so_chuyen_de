@@ -41,7 +41,7 @@ mixin YKienNguoiDanRepository {
     String TaskId,
   );
 
-  Future<Result<DanhSachYKienNguoiDan>> searchYKienNguoiDan(
+  Future<Result<List<YKienNguoiDanModel>>> searchYKienNguoiDan(
     String tuNgay,
     String denNgay,
     int pageSize,
