@@ -13,3 +13,13 @@ class Loading extends YKienNguoiDanState {
   @override
   List<Object> get props => [];
 }
+class ThongTinChung extends YKienNguoiDanState {
+  @override
+  List<Object?> get props => [];
+}
+
+class BaoCaoThongKe extends YKienNguoiDanState {
+  @override
+  List<Object?> get props => [];
+}
+

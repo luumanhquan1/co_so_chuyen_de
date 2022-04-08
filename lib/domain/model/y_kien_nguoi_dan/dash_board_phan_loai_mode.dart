@@ -6,7 +6,7 @@ class PhanLoaiModel {
 
 class PhanLoaiDataModel {
   int soLuong;
-  String status;
+  String tenNguon;
 
-  PhanLoaiDataModel({required this.soLuong, required this.status});
+  PhanLoaiDataModel({required this.soLuong, required this.tenNguon});
 }

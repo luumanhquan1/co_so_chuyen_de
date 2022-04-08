@@ -174,7 +174,7 @@ extension GetScreen on MenuType {
       case MenuType.yKienNguoiDan:
         return screenDevice(
           mobileScreen: const YKienNguoiDanScreen(),
-          tabletScreen: const YKNDScreenTablet(),
+          tabletScreen: const YKienNguoiDanTablet(),
         );
       case MenuType.quanLyVanBan:
         return screenDevice(
