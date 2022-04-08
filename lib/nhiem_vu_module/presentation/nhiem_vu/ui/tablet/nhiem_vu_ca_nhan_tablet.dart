@@ -176,6 +176,7 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
                           ),
                         );
                       },
+                      isCheck: widget.isCheck,
                     );
                   }
                   return SizedBox(

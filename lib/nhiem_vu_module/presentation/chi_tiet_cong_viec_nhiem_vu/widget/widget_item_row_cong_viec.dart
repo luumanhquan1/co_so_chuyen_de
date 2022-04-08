@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/chi_tiet_cong_viec_nhiem_vu/chi_tiet_cong_viec_nhiem_vu_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 
 class WidgetItemRowCongViec extends StatelessWidget {
   final ChiTietCongViecNhiemVuRow row;
@@ -21,7 +22,7 @@ class WidgetItemRowCongViec extends StatelessWidget {
               child: Text(
                 row.title,
                 style: textDetailHDSD(
-                  fontSize: 14.0,
+                  fontSize: 14.0.textScale(),
                   color: infoColor,
                   textHeight: 1.7,
                 ),
@@ -33,7 +34,7 @@ class WidgetItemRowCongViec extends StatelessWidget {
               child: Text(
                 row.value,
                 style: textDetailHDSD(
-                  fontSize: 14.0,
+                  fontSize: 14.0.textScale(),
                   color: titleColor,
                   textHeight: 1.7,
                 ),

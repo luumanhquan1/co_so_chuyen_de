@@ -84,6 +84,7 @@ class _MainNhiemVuTabletState extends State<MainNhiemVuTablet>
               } else {
                 return NhiemVuDonViTablet(
                   cubit: cubit,
+                  isCheck: false,
                 );
               }
             },
