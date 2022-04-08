@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke/tong_quan_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/menu_response.dart';
@@ -59,19 +60,26 @@ abstract class BaoChiMangXaHoiService {
 
   @GET(ApiConstants.BAI_VIET_THEO_DOI)
   Future<String> getTheoDoiBaiViet(
-      @Query('pageIndex') int pageInDex,
-      @Query('pageSize') int pageSize,
-      @Query('fromDate') String fromDate,
-      @Query('toDate') String toDate,
-      @Query('topic') int total,
-      );
+    @Query('pageIndex') int pageInDex,
+    @Query('pageSize') int pageSize,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+    @Query('topic') int total,
+  );
 
   @GET(ApiConstants.SEARCH_TIN_TUC)
   Future<SearchTinTucResponse> searchTinTuc(
-      @Query('pageIndex') int pageInDex,
-      @Query('pageSize') int pageSize,
-      @Query('fromDate') String fromDate,
-      @Query('toDate') String toDate,
-      @Query('keyword') String keyword,
-      );
+    @Query('pageIndex') int pageInDex,
+    @Query('pageSize') int pageSize,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+    @Query('keyword') String keyword,
+  );
+
+  @GET(ApiConstants.TONG_QUAN_BAO_CAO_BCMXH)
+  Future<TongQuanDeResponse> baoCaoTongQuan(
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+    @Query('treeNode') int treeNode,
+  );
 }

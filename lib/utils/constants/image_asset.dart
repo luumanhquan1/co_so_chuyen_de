@@ -284,6 +284,7 @@ class ImageAssets {
   static const String ic_loop_mode = '$baseImg/ic_loop_mode.svg';
   static const String ic_replay = '$baseImg/ic_replay.svg';
   static const String ic_pasue = '$baseImg/ic_pause.svg';
+  static const String ic_three_dot_doc = '$baseImg/three_dot_doc.svg';
 
   //
   static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';

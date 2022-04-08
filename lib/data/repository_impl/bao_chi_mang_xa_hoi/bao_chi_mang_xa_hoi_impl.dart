@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke/tong_quan_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/bao_cao_thong_ke_resopnse.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/dash_board_tat_ca_chu_de_response.dart';
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/list_chu_de_response.dart';
@@ -9,6 +10,7 @@ import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/theo_doi_bai_viet_
 import 'package:ccvc_mobile/data/response/bao_chi_mang_xa_hoi/tin_tuc_thoi_su_response.dart';
 import 'package:ccvc_mobile/data/result/result.dart';
 import 'package:ccvc_mobile/data/services/bao_chi_mang_xa_hoi/bao_chi_mang_xa_hoi_service.dart';
+import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/bao_cao_thong_ke/bao_cao_tong_quan_model.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/menu_bcmxh.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/bao_cao_thong_ke.dart';
 import 'package:ccvc_mobile/domain/model/bao_chi_mang_xa_hoi/tat_ca_chu_de/dashboard_item.dart';
@@ -139,16 +141,37 @@ class BaoChiMangXaHoiImpl implements BaoChiMangXaHoiRepository {
   }
 
   @override
-  Future<Result<TinTucModel>> searchTinTuc(int pageIndex, int pageSize,
-      String fromDate, String toDate, String keyword,) {
+  Future<Result<TinTucModel>> searchTinTuc(
+    int pageIndex,
+    int pageSize,
+    String fromDate,
+    String toDate,
+    String keyword,
+  ) {
     return runCatchingAsync<SearchTinTucResponse, TinTucModel>(
-            () => _baoChiMangXaHoiService.searchTinTuc(
-          pageIndex,
-          pageSize,
-          fromDate,
-          toDate,
-          keyword,
-        ), (res) {
+        () => _baoChiMangXaHoiService.searchTinTuc(
+              pageIndex,
+              pageSize,
+              fromDate,
+              toDate,
+              keyword,
+            ), (res) {
+      return res.toDomain();
+    });
+  }
+
+  @override
+  Future<Result<BaoCaoTongQuanModel>> tongQuanBaoCaoThongKe(
+    String fromDate,
+    String enddDate,
+    int treeNode,
+  ) {
+    return runCatchingAsync<TongQuanDeResponse, BaoCaoTongQuanModel>(
+        () => _baoChiMangXaHoiService.baoCaoTongQuan(
+              fromDate,
+              enddDate,
+              treeNode,
+            ), (res) {
       return res.toDomain();
     });
   }
