@@ -28,6 +28,8 @@ class YKienNguoiDanData {
   String? tieuDe;
   @JsonKey(name: 'NgayNhan')
   String? ngayNhan;
+  @JsonKey(name: 'TenNguoiPhanAnh')
+  String? tenNguoiPhanAnh;
   @JsonKey(name: 'SoNgayToiHan')
   int? soNgayToiHan;
   @JsonKey(name: 'TaskId')
@@ -37,6 +39,7 @@ class YKienNguoiDanData {
     this.id,
     this.tieuDe,
     this.ngayNhan,
+    this.tenNguoiPhanAnh,
     this.soNgayToiHan,
     this.taskId,
   );
@@ -50,6 +53,7 @@ class YKienNguoiDanData {
         id: id ?? '',
         tieuDe: tieuDe ?? '',
         ngayNhan: ngayNhan ?? '',
+        tenNguoiPhanAnh: tenNguoiPhanAnh??'',
         soNgayToiHan: soNgayToiHan ?? 0,
         taskID: taskId??'',
       );

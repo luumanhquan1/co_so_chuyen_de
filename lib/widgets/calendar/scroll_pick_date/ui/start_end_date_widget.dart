@@ -53,7 +53,6 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
                   picKDateCupertinoCubit.listeningStartDataTime(
                     value,
                   );
-
                   widget.onStartDateTimeChanged(value);
                 },
                 title: S.current.bat_dau,

@@ -112,7 +112,7 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
   }
 
   @override
-  Future<Result<DanhSachYKienNguoiDan>> searchYKienNguoiDan(
+  Future<Result<List<YKienNguoiDanModel>>> searchYKienNguoiDan(
       String tuNgay,
       String denNgay,
       int pageSize,
@@ -120,7 +120,7 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
       String tuKhoa,
       String userId,
       String donViId) {
-    return runCatchingAsync<SearchYKienNguoiDanResponse, DanhSachYKienNguoiDan>(
+    return runCatchingAsync<SearchYKienNguoiDanResponse, List<YKienNguoiDanModel>>(
       () => _yKienNguoIDanService.searchDanhSachYKienNguoiDan(
         tuNgay,
         denNgay,
@@ -130,7 +130,7 @@ class YKienNguoiDanImpl implements YKienNguoiDanRepository {
         userId,
         donViId,
       ),
-      (res) => res.toDomain(),
+      (res) => res.listDanhSachYKien?.map((e) => e.toDomain()).toList()??[],
     );
   }
 

@@ -332,17 +332,17 @@ class _ThongTinChungYKNDTabletState extends State<ThongTinChungYKNDTablet>
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           ChiTietVanBanTabletScreen(
-                                            iD: data[index].id,
-                                            taskID: data[index].taskID,
+                                            iD: data[index].id??'',
+                                            taskID: data[index].taskID??'',
                                           ),
                                     ),
                                   );
                                 },
-                                title: data[index].tieuDe,
-                                dateTime: data[index].ngayNhan,
+                                title: data[index].tieuDe??'',
+                                dateTime: data[index].ngayNhan??'',
                                 userName:
                                 cubit.listYKienNguoiDan[index].ten ?? '',
-                                status: data[index].soNgayToiHan,
+                                status: data[index].soNgayToiHan??0,
                                 userImage:
                                 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                               );

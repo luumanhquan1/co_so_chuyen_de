@@ -31,6 +31,7 @@ class ChartDonViXuLyWidget extends StatelessWidget {
                   ),
                 ),
                 primaryXAxis: CategoryAxis(
+
                   placeLabelsNearAxisLine: true,
                   labelStyle: textNormalCustom(
                     color: AqiColor,
