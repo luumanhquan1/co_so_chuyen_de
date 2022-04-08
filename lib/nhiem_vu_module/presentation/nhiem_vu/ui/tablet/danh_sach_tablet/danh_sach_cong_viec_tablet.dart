@@ -1,6 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/domain/model/danh_sach_cong_viec_model.dart';
+import 'package:ccvc_mobile/nhiem_vu_module/presentation/chi_tiet_cong_viec_nhiem_vu/ui/tablet/chi_tiet_cong_viec_nhiem_vu_tablet.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/bloc/nhiem_vu_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/mobile/bloc/danh_sach_cubit.dart';
 import 'package:ccvc_mobile/nhiem_vu_module/presentation/nhiem_vu/ui/tablet/danh_sach_tablet/widget/cell_danh_sach_cong_viec_tablet.dart';
@@ -77,6 +78,16 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
           return CellDanhSachCongViecTablet(
             data: value as PageDatas,
             index: index ?? 0,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChitietCongViecNhiemVuTablet(
+                    id: value.id ?? '',
+                  ),
+                ),
+              );
+            },
           );
         } catch (e) {
           return const SizedBox();

@@ -16,7 +16,7 @@ class ChiTietVanBanDiModel {
   String? tenNguoiSoanThao;
   String? donViSoanThao;
   String? donViBanHanh;
-  int? idVanBanGoc;
+  String? idVanBanGoc;
   String? kyHieuVanBanGoc;
   bool? isDaKyPhieuTrinh;
   List<DonViTrongHeThongs>? donViTrongHeThongs;

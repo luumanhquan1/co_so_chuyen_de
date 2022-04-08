@@ -140,7 +140,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
 
   void selectColor(ItemSelectModel item) {
     listColorDefault.forEach((element) {
-      if(element == item) {
+      if (element == item) {
         element.isSelect = true;
       } else {
         element.isSelect = false;
@@ -179,6 +179,7 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
         },
         error: (err) {});
   }
+  String name = '';
 
   Future<void> _getNguoiChuTri() async {
     final dataUser = HiveLocal.getDataUser();
@@ -194,7 +195,13 @@ class TaoLichLamViecCubit extends BaseCubit<TaoLichLamViecState> {
     result.when(
         success: (res) {
           if (res.isNotEmpty) {
-            selectNguoiChuTri = res.first;
+            name = HiveLocal.getDataUser()?.userId ?? '';
+            for (var i in res) {
+              if (i.userId.toString() == name.toString()) {
+                selectNguoiChuTri = i;
+                break;
+              }
+            }
           }
           _nguoiChuTri.sink.add(res);
         },

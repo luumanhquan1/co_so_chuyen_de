@@ -17,8 +17,6 @@ class CalenderFormMonth extends StatefulWidget {
 }
 
 class _CalenderFormMonthState extends State<CalenderFormMonth> {
-  final CalendarController _controller = CalendarController();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,87 +25,93 @@ class _CalenderFormMonthState extends State<CalenderFormMonth> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        spaceH20,
-        Expanded(
-          child: StreamBuilder<DataLichLvModel>(
-            stream: widget.cubit.streamListLich,
-            builder: (context, snapshot) {
-              return SfCalendar(
-                firstDayOfWeek: 1,
-                allowAppointmentResize: true,
-                controller: _controller,
-                headerHeight: 0.0,
-                appointmentTextStyle:
-                    textNormalCustom(color: backgroundColorApp),
-                view: CalendarView.month,
-                todayHighlightColor: labelColor,
-                appointmentTimeTextFormat: 'hh:mm:ss a',
-                dataSource: widget.cubit.getCalenderDataSource(
-                  snapshot.data ?? DataLichLvModel(),
-                ),
-                viewHeaderStyle: ViewHeaderStyle(
-                  dayTextStyle: textNormalCustom(
-                    fontSize: 13,
-                    color: unselectLabelColor,
-                  ),
-                ),
-                monthViewSettings: MonthViewSettings(
-                  showTrailingAndLeadingDates: false,
-                  appointmentDisplayCount: 2,
-                  monthCellStyle: MonthCellStyle(
-                    trailingDatesTextStyle:
-                        textNormalCustom(fontSize: 14, color: iconColorDown),
-                    textStyle: textNormalCustom(
-                      fontSize: 14,
-                      color: fontColorTablet2,
-                    ),
-                  ),
-                  appointmentDisplayMode:
-                      MonthAppointmentDisplayMode.appointment,
-                ),
-                selectionDecoration:
-                    const BoxDecoration(color: Colors.transparent),
-                appointmentBuilder: (
-                  BuildContext context,
-                  CalendarAppointmentDetails calendarAppointmentDetails,
-                ) {
-                  final Appointment appointment =
-                      calendarAppointmentDetails.appointments.first;
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 4, bottom: 2),
-                    child: Container(
-                      height: 500,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2.0),
-                        color: textColorMangXaHoi,
+    return StreamBuilder<CalendarController>(
+        stream: widget.cubit.stateCalendarSubject.stream,
+        builder: (context, snapshot) {
+          final data = snapshot.data ?? CalendarController();
+
+          return Column(
+            children: [
+              spaceH20,
+              Expanded(
+                child: StreamBuilder<DataLichLvModel>(
+                  stream: widget.cubit.streamListLich,
+                  builder: (context, snapshot) {
+                    return SfCalendar(
+                      firstDayOfWeek: 1,
+                      allowAppointmentResize: true,
+                      controller: data,
+                      headerHeight: 0.0,
+                      appointmentTextStyle:
+                          textNormalCustom(color: backgroundColorApp),
+                      view: CalendarView.month,
+                      todayHighlightColor: labelColor,
+                      appointmentTimeTextFormat: 'hh:mm:ss a',
+                      dataSource: widget.cubit.getCalenderDataSource(
+                        snapshot.data ?? DataLichLvModel(),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 2.0,
-                          vertical: 2.0,
+                      viewHeaderStyle: ViewHeaderStyle(
+                        dayTextStyle: textNormalCustom(
+                          fontSize: 13,
+                          color: unselectLabelColor,
                         ),
-                        child: Column(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                appointment.subject,
-                                style: textNormalCustom(fontSize: 8),
-                                overflow: TextOverflow.ellipsis,
+                      ),
+                      monthViewSettings: MonthViewSettings(
+                        showTrailingAndLeadingDates: false,
+                        appointmentDisplayCount: 2,
+                        monthCellStyle: MonthCellStyle(
+                          trailingDatesTextStyle: textNormalCustom(
+                              fontSize: 14, color: iconColorDown),
+                          textStyle: textNormalCustom(
+                            fontSize: 14,
+                            color: fontColorTablet2,
+                          ),
+                        ),
+                        appointmentDisplayMode:
+                            MonthAppointmentDisplayMode.appointment,
+                      ),
+                      selectionDecoration:
+                          const BoxDecoration(color: Colors.transparent),
+                      appointmentBuilder: (
+                        BuildContext context,
+                        CalendarAppointmentDetails calendarAppointmentDetails,
+                      ) {
+                        final Appointment appointment =
+                            calendarAppointmentDetails.appointments.first;
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 4, bottom: 2),
+                          child: Container(
+                            height: 500,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2.0),
+                              color: textColorMangXaHoi,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 2.0,
+                                vertical: 2.0,
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        ),
-      ],
-    );
+                              child: Column(
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      appointment.subject,
+                                      style: textNormalCustom(fontSize: 8),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

@@ -15,8 +15,6 @@ class CalenderWeekMobile extends StatefulWidget {
 }
 
 class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
-  final CalendarController _controller = CalendarController();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -25,60 +23,68 @@ class _CalenderWeekMobileState extends State<CalenderWeekMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-      child: StreamBuilder<DataLichLvModel>(
-        stream: widget.cubit.streamListLich,
+    return StreamBuilder<CalendarController>(
+        stream: widget.cubit.stateCalendarSubject.stream,
         builder: (context, snapshot) {
-          return SfCalendar(
-            allowAppointmentResize: true,
-            controller: _controller,
-            viewHeaderHeight: 0.0,
-            headerHeight: 0.0,
-            appointmentTextStyle: textNormalCustom(color: backgroundColorApp),
-            view: CalendarView.week,
-            todayHighlightColor: statusCalenderRed,
-            appointmentTimeTextFormat: 'hh:mm:ss a',
-            dataSource: widget.cubit.getCalenderDataSource(
-              snapshot.data ?? DataLichLvModel(),
-            ),
-            timeSlotViewSettings: const TimeSlotViewSettings(
-              timeIntervalHeight: 54,
-            ),
-            selectionDecoration: const BoxDecoration(color: Colors.transparent),
-            appointmentBuilder: (
-              BuildContext context,
-              CalendarAppointmentDetails calendarAppointmentDetails,
-            ) {
-              final Appointment appointment =
-                  calendarAppointmentDetails.appointments.first;
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
-                  color: textColorMangXaHoi,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 5.0,
-                    vertical: 2.0,
+          final data = snapshot.data ?? CalendarController();
+
+          return Padding(
+            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+            child: StreamBuilder<DataLichLvModel>(
+              stream: widget.cubit.streamListLich,
+              builder: (context, snapshot) {
+                return SfCalendar(
+                  allowAppointmentResize: true,
+                  controller: data,
+                  viewHeaderHeight: 0.0,
+                  headerHeight: 0.0,
+                  appointmentTextStyle:
+                      textNormalCustom(color: backgroundColorApp),
+                  view: CalendarView.week,
+                  todayHighlightColor: statusCalenderRed,
+                  appointmentTimeTextFormat: 'hh:mm:ss a',
+                  dataSource: widget.cubit.getCalenderDataSource(
+                    snapshot.data ?? DataLichLvModel(),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          appointment.subject,
-                          style: textNormalCustom(),
+                  timeSlotViewSettings: const TimeSlotViewSettings(
+                    timeIntervalHeight: 54,
+                  ),
+                  selectionDecoration:
+                      const BoxDecoration(color: Colors.transparent),
+                  appointmentBuilder: (
+                    BuildContext context,
+                    CalendarAppointmentDetails calendarAppointmentDetails,
+                  ) {
+                    final Appointment appointment =
+                        calendarAppointmentDetails.appointments.first;
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: textColorMangXaHoi,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 5.0,
+                          vertical: 2.0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                appointment.subject,
+                                style: textNormalCustom(),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
+                    );
+                  },
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 }

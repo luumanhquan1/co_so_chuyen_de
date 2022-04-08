@@ -17,8 +17,6 @@ class InCalenderForm extends StatefulWidget {
 }
 
 class _InCalenderFormState extends State<InCalenderForm> {
-  final CalendarController _controller = CalendarController();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,70 +25,77 @@ class _InCalenderFormState extends State<InCalenderForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Column(
-        children: [
-          spaceH16,
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: StreamBuilder<DataLichLvModel>(
-                stream: widget.cubit.listLichSubject,
-                builder: (context, snapshot) {
-                  return SfCalendar(
-                    viewHeaderHeight: 0.0,
-                    allowAppointmentResize: true,
-                    headerHeight: 0.0,
-                    controller: _controller,
-                    appointmentTextStyle:
-                        textNormalCustom(color: backgroundColorApp),
-                    todayHighlightColor: statusCalenderRed,
-                    timeSlotViewSettings: const TimeSlotViewSettings(
-                      timeIntervalHeight: 54,
-                    ),
-                    selectionDecoration:
-                        const BoxDecoration(color: Colors.transparent),
-                    appointmentTimeTextFormat: 'hh:mm:ss a',
-                    dataSource: widget.cubit.getCalenderDataSource(
-                      snapshot.data ?? DataLichLvModel(),
-                    ),
-                    appointmentBuilder: (
-                      BuildContext context,
-                      CalendarAppointmentDetails calendarAppointmentDetails,
-                    ) {
-                      final Appointment appointment =
-                          calendarAppointmentDetails.appointments.first;
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0,
-                          vertical: 2.0,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
-                          color: textColorMangXaHoi,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                appointment.subject,
-                                style: textNormalCustom(fontSize: 12.0),
+    return StreamBuilder<CalendarController>(
+        stream: widget.cubit.stateCalendarSubject.stream,
+        builder: (context, snapshot) {
+          final data = snapshot.data ?? CalendarController();
+
+          return Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Column(
+              children: [
+                spaceH16,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: StreamBuilder<DataLichLvModel>(
+                      stream: widget.cubit.listLichSubject,
+                      builder: (context, snapshot) {
+                        return SfCalendar(
+                          viewHeaderHeight: 0.0,
+                          allowAppointmentResize: true,
+                          headerHeight: 0.0,
+                          controller: data,
+                          appointmentTextStyle:
+                              textNormalCustom(color: backgroundColorApp),
+                          todayHighlightColor: statusCalenderRed,
+                          timeSlotViewSettings: const TimeSlotViewSettings(
+                            timeIntervalHeight: 54,
+                          ),
+                          selectionDecoration:
+                              const BoxDecoration(color: Colors.transparent),
+                          appointmentTimeTextFormat: 'hh:mm:ss a',
+                          dataSource: widget.cubit.getCalenderDataSource(
+                            snapshot.data ?? DataLichLvModel(),
+                          ),
+                          appointmentBuilder: (
+                            BuildContext context,
+                            CalendarAppointmentDetails
+                                calendarAppointmentDetails,
+                          ) {
+                            final Appointment appointment =
+                                calendarAppointmentDetails.appointments.first;
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5.0,
+                                vertical: 2.0,
                               ),
-                            ),
-                            const SizedBox(height: 4.0),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: textColorMangXaHoi,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      appointment.subject,
+                                      style: textNormalCustom(fontSize: 12.0),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4.0),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
