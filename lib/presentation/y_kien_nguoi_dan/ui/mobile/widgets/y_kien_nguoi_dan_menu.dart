@@ -21,55 +21,55 @@ class _YKienNguoiDanMenuState extends State<YKienNguoiDanMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        const SizedBox(
-          height: 58,
-        ),
-        headerWidget(menu: S.current.y_kien_nguoi_dan),
-        const SizedBox(
-          height: 24,
-        ),
-        Expanded(
-          flex: 8,
-          child: StreamBuilder<List<bool>>(
-            stream: widget.cubit.selectTypeYKNDSubject.stream,
-            builder: (context, snapshot) {
-              final data = snapshot.data ?? [true, false];
-              return Column(
-                children: [
-                  ItemMenuNhiemVuWidgetMobile(
-                    icon: ImageAssets.icPersonItemMenu,
-                    name: S.current.thong_tin_chung,
-                    onTap: () {
-                      widget.cubit.selectTypeYKNDSubject.add(
-                        [true, false],
-                      );
-                      widget.cubit.emit(ThongTinChung());
-                      Navigator.pop(context);
-                    },
-                    isSelect: data[0],
-                  ),
-                  ItemMenuNhiemVuWidgetMobile(
-                    icon: ImageAssets.icBaoCaoItemNenu,
-                    name: S.current.bao_cao_thong_ke,
-                    onTap: () {
-                      widget.cubit.selectTypeYKNDSubject.add(
-                        [false, true],
-                      );
-                      widget.cubit.emit(BaoCaoThongKe());
-                      Navigator.pop(context);
-                    },
-                    isSelect: data[1],
-                  ),
-                ],
-              );
-            },
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 58,
           ),
-        ),
-      ],
-    ),);
-
+          headerWidget(menu: S.current.y_kien_nguoi_dan),
+          const SizedBox(
+            height: 24,
+          ),
+          Expanded(
+            flex: 8,
+            child: StreamBuilder<List<bool>>(
+              stream: widget.cubit.selectTypeYKNDSubject.stream,
+              builder: (context, snapshot) {
+                final data = snapshot.data ?? [true, false];
+                return Column(
+                  children: [
+                    ItemMenuNhiemVuWidgetMobile(
+                      icon: ImageAssets.icPersonItemMenu,
+                      name: S.current.thong_tin_chung,
+                      onTap: () {
+                        widget.cubit.selectTypeYKNDSubject.add(
+                          [true, false],
+                        );
+                        widget.cubit.emit(ThongTinChung());
+                        Navigator.pop(context);
+                      },
+                      isSelect: data[0],
+                    ),
+                    ItemMenuNhiemVuWidgetMobile(
+                      icon: ImageAssets.icBaoCaoItemNenu,
+                      name: S.current.bao_cao_thong_ke,
+                      onTap: () {
+                        widget.cubit.selectTypeYKNDSubject.add(
+                          [false, true],
+                        );
+                        widget.cubit.emit(BaoCaoThongKe());
+                        Navigator.pop(context);
+                      },
+                      isSelect: data[1],
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget headerWidget({required String menu}) {
