@@ -87,7 +87,7 @@ class _BaoCaoThongKeTabletState extends State<BaoCaoThongKeTablet> {
                   height: 20,
                 ),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Container(
