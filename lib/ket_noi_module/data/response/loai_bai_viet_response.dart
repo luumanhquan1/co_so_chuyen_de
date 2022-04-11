@@ -59,7 +59,7 @@ class DataLoaiBaiVietResponse {
 
   LoaiBaiVietModel toDomain(String id) => LoaiBaiVietModel(
         childrens: childrens?.map((e) => e.toDomain(id)).toList() ?? [],
-        id: id ?? '',
+        id: id,
         title: title ?? '',
         code: code ?? '',
         alias: alias ?? '',

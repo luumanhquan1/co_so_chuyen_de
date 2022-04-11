@@ -86,7 +86,8 @@ class _MenuDSCVState extends State<MenuDSCV> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                           final vl  = widget.cubit.mapData[widget.cubit.listKey[index]];
+                          final vl =
+                              widget.cubit.mapData[widget.cubit.listKey[index]];
                           return TheoDangLichWidgetDSCV(
                             icon: '',
                             name: vl?.label ?? '',
@@ -104,36 +105,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
                           );
                         },
                       ),
-                      // childExpand: StreamBuilder<List<NhomCVMoiModel>>(
-                      //   stream: widget.cubit.nhomCVMoiSubject.stream,
-                      //   builder: (context, snapshot) {
-                      //     final data = snapshot.data ?? [];
-                      //     if (data.isNotEmpty) {
-                      //       return ListView.builder(
-                      //         padding: EdgeInsets.zero,
-                      //         itemCount: data.length,
-                      //         shrinkWrap: true,
-                      //         physics: const NeverScrollableScrollPhysics(),
-                      //         itemBuilder: (context, index) {
-                      //           final vl = data[index];
-                      //           return TheoDangLichWidgetDSCV(
-                      //             icon: '',
-                      //             name: vl.label,
-                      //             onTap: () {
-                      //               widget.cubit.titleAppBar.add(vl.label);
-                      //               widget.cubit.getListNhomCVMoi(vl.id);
-                      //               widget.cubit.statusDSCV.sink.add(5);
-                      //               Navigator.pop(context);
-                      //             },
-                      //             isSelect: false,
-                      //             number: vl.number ?? 0,
-                      //           );
-                      //         },
-                      //       );
-                      //     }
-                      //     return const SizedBox();
-                      //   },
-                      // ),
                       onTap: () {},
                     ),
                   )
@@ -158,7 +129,6 @@ class _MenuDSCVState extends State<MenuDSCV> {
           ),
         ),
         body: StreamBuilder<List<bool>>(
-          stream: widget.cubit.selectTypeCalendarSubject.stream,
           builder: (context, snapshot) {
             return Column(
               children: [
@@ -166,56 +136,46 @@ class _MenuDSCVState extends State<MenuDSCV> {
                   icon: ImageAssets.ic01,
                   name: S.current.cong_viec_cua_ban,
                   onTap: () {
-                    widget.cubit.selectTypeCalendarSubject
-                        .add([true, false, false, false, false]);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[0] ?? true,
-                  number: widget.cubit.sLCvCuaBan,
+                  number: 0,
                 ),
                 CellMenuCustom(
                   icon: ImageAssets.ic02,
                   name: S.current.cong_viec_quan_trong,
                   onTap: () {
-                    widget.cubit.selectTypeCalendarSubject
-                        .add([false, true, false, false, false]);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[1] ?? true,
-                  number: widget.cubit.slCvQuanTrong,
+                  number: 0,
                 ),
                 CellMenuCustom(
                   icon: ImageAssets.ic03,
                   name: S.current.da_hoan_thanh,
                   onTap: () {
-                    widget.cubit.selectTypeCalendarSubject
-                        .add([false, false, true, false, false]);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[2] ?? true,
-                  number: widget.cubit.sLCvDaHoanthanh,
+                  number: 0,
                 ),
                 CellMenuCustom(
                   icon: ImageAssets.ic04,
                   name: S.current.gan_cho_toi,
                   onTap: () {
-                    widget.cubit.selectTypeCalendarSubject
-                        .add([false, false, false, true, false]);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[3] ?? true,
-                  number: widget.cubit.sLCvGanChoToi,
+                  number: 0,
                 ),
                 CellMenuCustom(
                   icon: ImageAssets.ic05,
                   name: S.current.da_bi_xoa,
                   onTap: () {
-                    widget.cubit.selectTypeCalendarSubject
-                        .add([false, false, false, false, true]);
                     Navigator.pop(context);
                   },
                   isSelect: snapshot.data?[4] ?? true,
-                  number: widget.cubit.sLCvDaBiXoa,
+                  number: 0,
                 ),
                 SingleChildScrollView(
                   child: Padding(
