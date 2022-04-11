@@ -17,8 +17,6 @@ class CalenderMonthTablet extends StatefulWidget {
 }
 
 class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
-  final CalendarController _controller = CalendarController();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,95 +25,103 @@ class _CalenderMonthTabletState extends State<CalenderMonthTablet> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30, top: 28),
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(right: 30),
-              child: StreamBuilder<DataLichLvModel>(
-                stream: widget.cubit.streamListLich,
-                builder: (context, snapshot) {
-                  return SfCalendar(
-                    firstDayOfWeek: 1,
-                    allowAppointmentResize: true,
-                    controller: _controller,
-                    headerHeight: 0.0,
-                    view: CalendarView.month,
-                    todayHighlightColor: labelColor,
-                    appointmentTimeTextFormat: 'hh:mm:ss a',
-                    dataSource: widget.cubit.getCalenderDataSource(
-                      snapshot.data ?? DataLichLvModel(),
-                    ),
-                    viewHeaderStyle: ViewHeaderStyle(
-                      dayTextStyle: textNormalCustom(
-                        fontSize: 13,
-                        color: unselectLabelColor,
-                      ),
-                    ),
-                    monthViewSettings: MonthViewSettings(
-                      showTrailingAndLeadingDates: false,
-                      appointmentDisplayCount: 2,
-                      monthCellStyle: MonthCellStyle(
-                        backgroundColor: bgCalenderColor,
-                        trailingDatesTextStyle: textNormalCustom(
-                          fontSize: 14,
-                          color: iconColorDown,
-                        ),
-                        textStyle: textNormalCustom(
-                          fontSize: 14,
-                          color: fontColorTablet2,
-                        ),
-                      ),
-                      // numberOfWeeksInView: 4,
-                      //showAgenda: true,
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment,
-                    ),
-                    selectionDecoration:
-                        const BoxDecoration(color: Colors.transparent),
-                    appointmentBuilder: (
-                      BuildContext context,
-                      CalendarAppointmentDetails calendarAppointmentDetails,
-                    ) {
-                      final Appointment appointment =
-                          calendarAppointmentDetails.appointments.first;
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 2, bottom: 4),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2.0),
-                            color: choTrinhKyColor,
+    return StreamBuilder<CalendarController>(
+        stream: widget.cubit.stateCalendarSubject.stream,
+        builder: (context, snapshot) {
+          final data = snapshot.data ?? CalendarController();
+
+          return Padding(
+            padding: const EdgeInsets.only(left: 30, top: 28),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 30),
+                    child: StreamBuilder<DataLichLvModel>(
+                      stream: widget.cubit.streamListLich,
+                      builder: (context, snapshot) {
+                        return SfCalendar(
+                          firstDayOfWeek: 1,
+                          allowAppointmentResize: true,
+                          controller: data,
+                          headerHeight: 0.0,
+                          view: CalendarView.month,
+                          todayHighlightColor: labelColor,
+                          appointmentTimeTextFormat: 'hh:mm:ss a',
+                          dataSource: widget.cubit.getCalenderDataSource(
+                            snapshot.data ?? DataLichLvModel(),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 8,
-                                    right: 8,
-                                  ),
-                                  child: Text(
-                                    appointment.subject,
-                                    style: textNormalCustom(fontSize: 12),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                          viewHeaderStyle: ViewHeaderStyle(
+                            dayTextStyle: textNormalCustom(
+                              fontSize: 13,
+                              color: unselectLabelColor,
+                            ),
+                          ),
+                          monthViewSettings: MonthViewSettings(
+                            showTrailingAndLeadingDates: false,
+                            appointmentDisplayCount: 2,
+                            monthCellStyle: MonthCellStyle(
+                              backgroundColor: bgCalenderColor,
+                              trailingDatesTextStyle: textNormalCustom(
+                                fontSize: 14,
+                                color: iconColorDown,
+                              ),
+                              textStyle: textNormalCustom(
+                                fontSize: 14,
+                                color: fontColorTablet2,
+                              ),
+                            ),
+                            // numberOfWeeksInView: 4,
+                            //showAgenda: true,
+                            appointmentDisplayMode:
+                                MonthAppointmentDisplayMode.appointment,
+                          ),
+                          selectionDecoration:
+                              const BoxDecoration(color: Colors.transparent),
+                          appointmentBuilder: (
+                            BuildContext context,
+                            CalendarAppointmentDetails
+                                calendarAppointmentDetails,
+                          ) {
+                            final Appointment appointment =
+                                calendarAppointmentDetails.appointments.first;
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 2, bottom: 4),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2.0),
+                                  color: choTrinhKyColor,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 8,
+                                          right: 8,
+                                        ),
+                                        child: Text(
+                                          appointment.subject,
+                                          style: textNormalCustom(fontSize: 12),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }

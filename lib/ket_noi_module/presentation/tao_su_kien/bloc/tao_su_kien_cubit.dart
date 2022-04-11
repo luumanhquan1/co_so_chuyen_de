@@ -33,8 +33,8 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
     getLoaiBaiViet(type: type);
   }
 
-  void callApis() {
-    postTaoSuKien(
+  Future<void> callApis() async {
+   await postTaoSuKien(
       loaiBaiViet: loaiBaiViet.join(','),
       tieuDe: tenSuKien,
       ngayBatDau: thoiGian,
@@ -60,7 +60,7 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
       success: (res) {
         listData.clear();
         listData.addAll(res);
-        loaiBaiVietSubject.sink.add(res);
+        loaiBaiVietSubject.sink.add(res.first.childrens);
         showContent();
       },
       error: (error) {
@@ -92,10 +92,10 @@ class TaoSuKienCubit extends BaseCubit<TaoSuKienState> {
     final result = await repo.postTaoSuKien(taoSuKienRequest);
     result.when(
       success: (res) {
-        MessageConfig.show(title: S.current.tao_thanh_cong);
+        // MessageConfig.show(title: S.current.tao_thanh_cong);
       },
       error: (error) {
-        MessageConfig.show(title: S.current.tao_that_bai);
+        // MessageConfig.show(title: S.current.tao_that_bai);
       },
     );
   }

@@ -22,6 +22,7 @@ import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'lich_hop_extension.dart';
 
@@ -198,15 +199,13 @@ class _MainLichHopState extends State<MainLichHop> {
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 itemCount: data.length,
-                                                itemBuilder:
-                                                    (context, index) {
+                                                itemBuilder: (context, index) {
                                                   return CustomItemCalenderWork(
                                                     image: cubit
                                                             .listImageLichHopThongKe[
                                                         index],
                                                     typeName:
-                                                        data[index].name ??
-                                                            '',
+                                                        data[index].name ?? '',
                                                     numberOfCalendars:
                                                         data[index]
                                                                 .quantities ??
@@ -343,6 +342,9 @@ class _MainLichHopState extends State<MainLichHop> {
                                 );
                               }
                             },
+                          ),
+                          const SizedBox(
+                            height: 16,
                           ),
                           Expanded(
                             child: BlocBuilder<LichHopCubit, LichHopState>(

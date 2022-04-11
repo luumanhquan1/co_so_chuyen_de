@@ -57,15 +57,15 @@ class DataLoaiBaiVietResponse {
 
   Map<String, dynamic> toJson() => _$DataLoaiBaiVietResponseToJson(this);
 
-  LoaiBaiVietModel toDomain(String id) => LoaiBaiVietModel(
-        childrens: childrens?.map((e) => e.toDomain(id)).toList() ?? [],
-        id: id,
+  LoaiBaiVietModel toDomain(String ids) => LoaiBaiVietModel(
+        childrens: childrens?.map((e) => e.toDomain(ids)).toList() ?? [],
+        id: id ?? '',
         title: title ?? '',
         code: code ?? '',
         alias: alias ?? '',
         description: description ?? '',
         thumbnailUrl: thumbnailUrl ?? '',
-        parentId: id,
+        parentId: ids,
         pathItem: pathItem ?? '',
         isDuocMoi: isDuocMoi ?? false,
         type: type ?? '',

@@ -91,6 +91,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
       mangTrangThai: [],
       ngayTaoNhiemVu: {'FromDate': start, 'ToDate': end},
       size: pageSize,
+      keySearch: keySearch,
     );
   }
 
@@ -98,6 +99,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
     required int? index,
     required bool isNhiemVuCaNhan,
     required bool isSortByHanXuLy,
+    required String keySearch,
     required List<String> mangTrangThai,
     required Map<String, String> ngayTaoNhiemVu,
     required int size,
@@ -107,6 +109,7 @@ class DanhSachCubit extends BaseCubit<BaseState> {
       index: index,
       isNhiemVuCaNhan: isNhiemVuCaNhan,
       isSortByHanXuLy: isSortByHanXuLy,
+      keySearch: keySearch,
       mangTrangThai: mangTrangThai,
       ngayTaoNhiemVu: ngayTaoNhiemVu,
       size: size,

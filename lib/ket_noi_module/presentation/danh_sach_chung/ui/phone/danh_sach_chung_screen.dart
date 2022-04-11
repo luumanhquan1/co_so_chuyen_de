@@ -78,7 +78,9 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const TaoSuKienKetNoi(),
+              builder: (_) => TaoSuKienKetNoi(
+                cubit: taoSuKienCubit,
+              ),
             ),
           );
         },
@@ -97,14 +99,22 @@ class _DanhSachChungScreenState extends State<DanhSachChungScreen> {
       viewItem: (value, index) {
         if (cubit.dataCurrent?.id == ID_KET_NOI ||
             cubit.dataCurrent?.parentId == ID_KET_NOI) {
-          return ItemListTrongNuoc(
-            model: value as ItemTrongNuocModel,
-          );
+          try {
+            return ItemListTrongNuoc(
+              model: value as ItemTrongNuocModel,
+            );
+          } catch (e) {
+            return const SizedBox();
+          }
         } else {
-          return ItemListChung(
-            danhSachChungModel: value as DanhSachChungModel,
-            index: index ?? 0,
-          );
+          try {
+            return ItemListChung(
+              danhSachChungModel: value as DanhSachChungModel,
+              index: index ?? 0,
+            );
+          } catch (e) {
+            return const SizedBox();
+          }
         }
       },
     );

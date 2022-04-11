@@ -24,10 +24,10 @@ class DashBoashPhanLoaiResponse {
 class DashboardData {
   @JsonKey(name: 'SoLuong')
   int? soLuong;
-  @JsonKey(name: 'Status')
-  String? status;
+  @JsonKey(name: 'TenNguon')
+  String? tenNguon;
 
-  DashboardData(this.soLuong, this.status);
+  DashboardData(this.soLuong, this.tenNguon);
 
   factory DashboardData.fromJson(Map<String, dynamic> json) =>
       _$DashboardDataFromJson(json);
@@ -36,6 +36,6 @@ class DashboardData {
 
   PhanLoaiDataModel toDomain() => PhanLoaiDataModel(
         soLuong: soLuong ?? 0,
-        status: status ?? '',
+        tenNguon: tenNguon ?? '',
       );
 }

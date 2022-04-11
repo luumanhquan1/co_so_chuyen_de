@@ -244,10 +244,7 @@ Widget itemCalendarWorkIscheck(CalenderCubit cubit) {
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
-        margin: EdgeInsets.only(
-          left: 16.0,
-          top: cubit.isCheck ? 54 : 32,
-        ),
+        margin: const EdgeInsets.only(left: 16.0, top:  120),
         height: 88,
         child: Row(
           children: [

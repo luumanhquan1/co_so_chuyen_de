@@ -1,3 +1,6 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:flutter/material.dart';
+
 class DanhSachNhiemVuModel {
   List<PageData>? pageData;
   int? totalRows;
@@ -130,6 +133,29 @@ class PageData {
     this.isHoanThanhQuaHan,
     this.idCuocHop,
   });
+}
+
+extension CheckColor on String {
+  Color trangThaiColorNhiemVu() {
+    switch (this) {
+      case 'QUA_HAN':
+        return statusCalenderRed;
+      case 'CHUA_THUC_HIEN':
+        return AqiColor;
+      case 'DANG_THUC_HIEN':
+        return yellowColor;
+      case 'THU_HOI':
+        return yellowColor;
+      case 'DA_HOAN_THANH':
+        return daXuLyColor;
+      case 'CHO_PHAN_XU_LY':
+        return choXuLyColor;
+      case 'TRA_LAI':
+        return statusCalenderRed;
+      default:
+        return statusCalenderRed;
+    }
+  }
 }
 
 class TrangThaiDonViXuLyModel {
