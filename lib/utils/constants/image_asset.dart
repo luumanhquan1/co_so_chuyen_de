@@ -284,6 +284,7 @@ class ImageAssets {
   static const String ic_loop_mode = '$baseImg/ic_loop_mode.svg';
   static const String ic_replay = '$baseImg/ic_replay.svg';
   static const String ic_pasue = '$baseImg/ic_pause.svg';
+  static const String ic_three_dot_doc = '$baseImg/three_dot_doc.svg';
 
   //
   static const String ic_CheckedDate = '$baseImg/ic_check_date.svg';
@@ -385,6 +386,9 @@ class ImageAssets {
   static const String ic_big_play = '$baseImg/ic_big _play.png';
   static const String ic_dongnai_title = '$baseImg/ic_dongnai_title.png';
   static const String ic_xem_them = '$baseImg/ic_xem_them.svg';
+  static const String ic_preson_menu_yknd = '$baseImg/icon_person_menu_yknd.svg';
+  static const String ic_baocao_menu_yknd = '$baseImg/ic_baocao_menu_yknd.svg';
+  static const String ic_kinh_to = '$baseImg/kinh_to.svg';
 
   ///gif
   static const String gifKhanCap = '$baseImg/gif_khan_cap.gif';

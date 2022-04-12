@@ -167,7 +167,8 @@ class ApiConstants {
   static const UPDATE_LIST_WIDGET = '/api/Widget/update-dashboard-widget-config';
   static const BAO_CAO_LINH_VUC_KHAC = '/pakn/api/Dashboard/statistics-by-field';
   static const DON_VI_XU_LY = '/pakn/api/Dashboard/statistics-by-unit';
-  static const SO_LUONG_BY_MONTH= '/pakn/api/Dashboard/statistics-by-month';
+  static const SO_LUONG_BY_MONTH= '/api/NewsNetViews/tong_quan';
+  static const TONG_QUAN_BAO_CAO_BCMXH= '/api/NewsNetViews/tong_quan';
 
 }
 

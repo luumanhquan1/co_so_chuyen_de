@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/bao_cao_thong_ke/ui/mobile/bao_cao_thong_ke_bcmxh_screen.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/menu/bao_chi_mang_xa_hoi_menu_phone.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tabbar/bloc/bao_chi_mang_xa_hoi_cubit.dart';
 import 'package:ccvc_mobile/presentation/bao_chi_mang_xa_hoi_screen/tat_ca_chu_de_screen/ui/mobile/tat_ca_chu_de_screen.dart';
@@ -110,8 +111,8 @@ class _TabbarNewspaperState extends State<TabbarNewspaper> {
         child: TabBarView(
           controller: _controller,
           children: [
-            Text(
-              S.current.bao_cao_thong_ke,
+            BaoCaoThongKeBCMXHScreen(
+              topic: cubit.topic,
             ),
             const TatCaChuDeScreen(),
             StreamBuilder(
