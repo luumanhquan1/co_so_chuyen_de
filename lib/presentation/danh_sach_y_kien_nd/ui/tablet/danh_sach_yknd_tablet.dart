@@ -62,16 +62,16 @@ class _DanhSachYKNDTabletState extends State<DanhSachYKNDTablet>
                                 MaterialPageRoute(
                                   builder: (context) =>
                                    ChiTietYKNDScreen(
-                                    iD: listData[index].id,
-                                     taskID: listData[index].taskID,
+                                    iD: listData[index].id??'',
+                                     taskID: listData[index].taskID??'',
                                   ),
                                 ),
                               );
                             },
-                            title: listData[index].tieuDe,
-                            dateTime: listData[index].ngayNhan,
-                            userName: 'Ha Kieu Anh',
-                            status: listData[index].soNgayToiHan,
+                            title: listData[index].tieuDe??'',
+                            dateTime: listData[index].ngayNhan??'',
+                            userName: listData[index].tenNguoiPhanAnh??'',
+                            status: listData[index].soNgayToiHan??0,
                             userImage:
                                 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
                           );

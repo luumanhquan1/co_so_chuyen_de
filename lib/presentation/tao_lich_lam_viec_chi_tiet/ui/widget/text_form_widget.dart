@@ -36,6 +36,11 @@ class _TextFormWidgetState extends State<TextFormWidget> {
             controller: widget.controller,
             validator: widget.validator,
             decoration: InputDecoration(
+              labelStyle: textNormalCustom(
+                color: titleItemEdit,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
               hintStyle: textNormalCustom(
                 color: unselectLabelColor,
                 fontWeight: FontWeight.w400,

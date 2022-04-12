@@ -9,13 +9,15 @@ import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachCongViecMobile extends StatefulWidget {
-  final DanhSachCubit cubit;
   final bool isCheck;
+  final String ngayBatDau;
+  final String ngayKetThuc;
 
   const DanhSachCongViecMobile({
     Key? key,
-    required this.cubit,
     required this.isCheck,
+    required this.ngayBatDau,
+    required this.ngayKetThuc,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,18 @@ class DanhSachCongViecMobile extends StatefulWidget {
 }
 
 class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
+  final DanhSachCubit cubit = DanhSachCubit();
+
+  @override
+  void initState() {
+    super.initState();
+    cubit.apiDanhSachCongViecCaNhan(
+      widget.ngayBatDau,
+      widget.ngayKetThuc,
+      widget.isCheck,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +50,10 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
             ),
             BaseSearchBar(
               onChange: (value) {
-                setState(() {});
-                widget.cubit.keySearch = value;
+                cubit.debouncer.run(() {
+                  setState(() {});
+                  cubit.keySearch = value;
+                });
               },
             ),
             Expanded(
@@ -54,20 +70,20 @@ class _DanhSachCongViecMobileState extends State<DanhSachCongViecMobile> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: widget.cubit,
+      cubit: cubit,
       isListView: true,
       callApi: (page) => {
-        widget.cubit.postDanhSachCongViec(
+        cubit.postDanhSachCongViec(
           hanXuLy: {
-            'FromDate': widget.cubit.ngayDauTien,
-            'ToDate': widget.cubit.ngayKetThuc
+            'FromDate': widget.ngayBatDau,
+            'ToDate': widget.ngayKetThuc
           },
           index: page,
           isCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
-          keySearch: widget.cubit.keySearch,
+          keySearch: cubit.keySearch,
           mangTrangThai: [],
-          size: widget.cubit.pageSize,
+          size: cubit.pageSize,
           trangThaiHanXuLy: '',
         )
       },

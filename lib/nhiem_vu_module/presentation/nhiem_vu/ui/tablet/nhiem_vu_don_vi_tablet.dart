@@ -169,12 +169,14 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DanhSachNhiemVuTablet(
-                              cubit: danhSachCubit,
                               isCheck: false,
+                              ngayBatDau: danhSachCubit.ngayDauTien,
+                              ngayKetThuc: danhSachCubit.ngayKetThuc,
                             ),
                           ),
                         );
-                      }, isCheck: widget.isCheck,
+                      },
+                      isCheck: widget.isCheck,
                     );
                   }
                   return SizedBox(
@@ -198,8 +200,9 @@ class _NhiemVuDonViTabletState extends State<NhiemVuDonViTablet> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DanhSachCongViecTablet(
-                              cubit: danhSachCubit,
                               isCheck: false,
+                              ngayBatDau: danhSachCubit.ngayDauTien,
+                              ngayKetThuc: danhSachCubit.ngayKetThuc,
                             ),
                           ),
                         );
