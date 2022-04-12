@@ -306,8 +306,10 @@ class _ThongTinChungYKNDTabletState extends State<ThongTinChungYKNDTablet>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                const DanhSachYKNDTablet(),
+                                builder: (context) => DanhSachYKNDTablet(
+                                  startDate: cubit.startDate,
+                                  endDate: cubit.endDate,
+                                ),
                               ),
                             );
                           }),
@@ -341,7 +343,7 @@ class _ThongTinChungYKNDTabletState extends State<ThongTinChungYKNDTablet>
                                 title: data[index].tieuDe??'',
                                 dateTime: data[index].ngayNhan??'',
                                 userName:
-                                cubit.listYKienNguoiDan[index].ten ?? '',
+                                data[index].tenNguoiPhanAnh??'',
                                 status: data[index].soNgayToiHan??0,
                                 userImage:
                                 'https://th.bing.com/th/id/OIP.A44wmRFjAmCV90PN3wbZNgHaEK?pid=ImgDet&rs=1',
