@@ -8,13 +8,17 @@ class TextFieldStyle extends StatelessWidget {
   final String? hintText;
   final String urlIcon;
   final int maxLines;
+  final Function(String)? onChange;
+  final TextEditingController? controller;
 
-  const TextFieldStyle({
-    Key? key,
-    this.hintText,
-    required this.urlIcon,
-    this.maxLines = 1,
-  }) : super(key: key);
+  const TextFieldStyle(
+      {Key? key,
+      this.hintText,
+      required this.urlIcon,
+      this.maxLines = 1,
+      this.onChange,
+      this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,12 @@ class TextFieldStyle extends StatelessWidget {
 
   Widget textField() {
     return TextField(
+      controller: controller,
+      onChanged: (value) {
+        if (onChange != null) {
+          onChange!(value);
+        }
+      },
       maxLines: maxLines,
       style: textNormal(titleColor, 16),
       decoration: InputDecoration(

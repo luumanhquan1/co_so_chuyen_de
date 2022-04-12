@@ -11,7 +11,7 @@ class ChiTietLichHopResponse {
       {this.data, this.statusCode, this.succeeded, this.code, this.message});
 
   ChiTietLichHopResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     statusCode = json['statusCode'];
     succeeded = json['succeeded'];
     code = json['code'];
@@ -58,6 +58,7 @@ class Data {
   String? tenLinhVuc;
   String? typeScheduleId;
   PhongHop? phongHop;
+
   Data(
       {this.nguoiTaoStr,
       this.isDuyetPhong,
@@ -144,6 +145,7 @@ class Data {
     tenLinhVuc = json['tenLinhVuc'];
     typeScheduleId = json['typeScheduleId'];
   }
+
   ChiTietLichHopModel toDomain() => ChiTietLichHopModel(
       id: id ?? '',
       typeScheduleId: typeScheduleId ?? '',
@@ -157,7 +159,12 @@ class Data {
       timeStart: timeStart ?? '',
       ngayBatDau: ngayBatDau ?? DateTime.now().toString(),
       ngayKetThuc: ngayKetThuc ?? DateTime.now().toString(),
-      mucDoHop: mucDo);
+      mucDoHop: mucDo,
+      bit_HopTrucTuyen: bitHopTrucTuyen ?? false,
+      bit_TrongDonVi: bitTrongDonVi ?? false,
+      isAllDay: isAllDay ?? false,
+      typeReminder: typeReminder,
+      typeRepeat: typeRepeat);
 }
 
 class ChuTri {
@@ -198,10 +205,11 @@ class ChuTri {
 
     canBoTenChucVu = json['canBo_TenChucVu'];
   }
+
   ChuTriModel toDomain() => ChuTriModel(
         id: id ?? '',
         tenCanBo: tenCanBo ?? '',
-        tenChucVu: tenCoQuan ?? '',
+        tenCoQuan: tenCoQuan ?? '',
         dauMoiLienHe: dauMoiLienHe ?? '',
         soDienThoai: soDienThoai ?? '',
       );
@@ -213,6 +221,7 @@ class PhongHop {
   String? lichHopId;
   String? noiDungYeuCau;
   String? ten;
+
   PhongHop.fromJson(Map<String, dynamic> json) {
     donViId = json['donViId'];
     id = json['id'];
@@ -220,5 +229,6 @@ class PhongHop {
     noiDungYeuCau = json['noiDungYeuCau'];
     ten = json['ten'];
   }
+
   PhongHopMode toDomain() => PhongHopMode(id: id ?? '', ten: ten ?? '');
 }

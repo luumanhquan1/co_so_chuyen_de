@@ -10,11 +10,8 @@ const _DOT_XUAT = 2;
 
 class ChiTietLichHopModel {
   String id = '';
-
   String loaiLich = '';
-
   String linhVuc = '';
-
   String noiDung = '';
   String title = '';
   String tenLinhVuc;
@@ -27,23 +24,93 @@ class ChiTietLichHopModel {
   ChuTriModel chuTriModel;
   PhongHopMode phongHopMode;
   String typeScheduleId;
-  ChiTietLichHopModel({
-    this.id = '',
-    this.loaiLich = '',
-    this.linhVuc = '',
-    this.noiDung = '',
-    this.title = '',
-    this.ngayBatDau = '',
-    this.ngayKetThuc = '',
-    this.timeStart = '',
-    this.timeTo = '',
-    this.tenLinhVuc = '',
-    this.loaiHop = '',
-    this.mucDoHop,
-    this.chuTriModel = const ChuTriModel(),
-    this.phongHopMode = const PhongHopMode(),
-    this.typeScheduleId = '',
-  });
+
+  bool bit_HopTrucTuyen;
+  bool bit_TrongDonVi;
+  bool isAllDay;
+  int? typeReminder;
+  int? typeRepeat;
+
+  ChiTietLichHopModel(
+      {this.id = '',
+      this.loaiLich = '',
+      this.linhVuc = '',
+      this.noiDung = '',
+      this.title = '',
+      this.ngayBatDau = '',
+      this.ngayKetThuc = '',
+      this.timeStart = '',
+      this.timeTo = '',
+      this.tenLinhVuc = '',
+      this.loaiHop = '',
+      this.mucDoHop,
+      this.chuTriModel = const ChuTriModel(),
+      this.phongHopMode = const PhongHopMode(),
+      this.typeScheduleId = '',
+      this.bit_HopTrucTuyen = false,
+      this.bit_TrongDonVi = false,
+      this.isAllDay = false,
+      this.typeReminder,
+      this.typeRepeat});
+
+  String mucDoHopWithInt() {
+    switch (mucDoHop) {
+      case 1:
+        return 'Bình thường';
+      case 2:
+        return 'Đột xuất';
+    }
+    return '';
+  }
+
+  String nhacLai() {
+    switch (typeReminder) {
+      case 1:
+        return 'Không bao giờ';
+      case 0:
+        return 'Sau khi tạo lịch';
+      case 5:
+        return 'Trước 5 phút';
+      case 10:
+        return 'Trước 10 phút';
+      case 15:
+        return 'Trước 15 phút';
+      case 30:
+        return 'Trước 30 phút';
+      case 60:
+        return 'Trước 1 giờ';
+      case 120:
+        return 'Trước 2 giờ';
+      case 720:
+        return 'Trước 12 giờ';
+      case 1140:
+        return 'Trước 1 ngày';
+      case 10080:
+        return 'Trước 1 tuần';
+    }
+    return '';
+  }
+
+  String lichLap() {
+    switch (typeRepeat) {
+      case 1:
+        return 'Không lặp lại';
+      case 2:
+        return 'Lặp lại hàng ngày';
+      case 3:
+        return 'Thứ 2 đến thứ 6 hàng tuần';
+      case 4:
+        return 'Lặp lại hàng tuần';
+      case 5:
+        return 'Lặp lại hàng tháng';
+      case 6:
+        return 'Lặp lại hàng năm';
+      case 7:
+        return 'Tùy chỉnh';
+    }
+    return '';
+  }
+
   List<ChiTietDataRow> valueData() {
     if (isMobile()) {
       return _valueDateMobile();
@@ -101,7 +168,7 @@ class ChiTietLichHopModel {
     data.add(
       ChiTietDataRow(
         urlIcon: ImageAssets.icPeople,
-        text: '${chuTriModel.tenCanBo} - ${chuTriModel.tenChucVu}',
+        text: '${chuTriModel.tenCanBo} - ${chuTriModel.tenCoQuan}',
       ),
     );
     data.add(ChiTietDataRow(urlIcon: ImageAssets.icDocument, text: noiDung));
@@ -156,7 +223,7 @@ class ChiTietLichHopModel {
     data.add(
       ChiTietDataRow(
         urlIcon: ImageAssets.icPeople,
-        text: '${chuTriModel.tenCanBo} - ${chuTriModel.tenChucVu}',
+        text: '${chuTriModel.tenCanBo} - ${chuTriModel.tenCoQuan}',
       ),
     );
     data.add(ChiTietDataRow(urlIcon: ImageAssets.icDocument, text: noiDung));
@@ -176,16 +243,21 @@ class ChiTietLichHopModel {
 
 class ChuTriModel {
   final String id;
-  final String tenChucVu;
+  final String tenCoQuan;
   final String tenCanBo;
   final String dauMoiLienHe;
   final String soDienThoai;
+
   const ChuTriModel(
       {this.id = '',
-      this.tenChucVu = '',
+      this.tenCoQuan = '',
       this.tenCanBo = '',
       this.dauMoiLienHe = '',
       this.soDienThoai = ''});
+
+  String data() {
+    return '$tenCanBo - $tenCoQuan';
+  }
 }
 
 class PhongHopMode {

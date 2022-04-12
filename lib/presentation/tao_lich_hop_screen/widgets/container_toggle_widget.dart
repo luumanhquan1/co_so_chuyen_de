@@ -5,12 +5,13 @@ import 'package:ccvc_mobile/widgets/switch/custom_switch.dart';
 import 'package:flutter/material.dart';
 
 class ContainerToggleWidget extends StatelessWidget {
+  final bool initData;
   final String title;
   final Function(bool) onChange;
   const ContainerToggleWidget({
     Key? key,
     this.title = '',
-    required this.onChange,
+    required this.onChange, this.initData = false,
   }) : super(key: key);
 
   @override
@@ -31,6 +32,7 @@ class ContainerToggleWidget extends StatelessWidget {
             style: textNormal(titleColumn, 16),
           ),
           CustomToggle(
+            initValue: initData,
             onChange: onChange,
           )
         ],
