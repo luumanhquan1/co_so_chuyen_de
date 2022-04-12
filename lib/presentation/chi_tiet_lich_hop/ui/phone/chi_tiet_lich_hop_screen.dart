@@ -107,7 +107,9 @@ class _DetailMeetCalenderScreenState extends State<DetailMeetCalenderScreen> {
                     title: S.current.sua_lich_hop,
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.8,
-                      child: const SuaLichHopWidget(),
+                      child: SuaLichHopWidget(
+                        cubit: cubit,
+                      ),
                     ),
                   );
                 },

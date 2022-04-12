@@ -29,14 +29,6 @@ const int NCXM = 5;
 
 class DanhSachCongViecTienIchCubit
     extends BaseCubit<DanhSachCongViecTienIchState> {
-  int sLCvCuaBan = 0;
-  int slCvQuanTrong = 0;
-  int sLCvDaHoanthanh = 0;
-  int sLCvGanChoToi = 0;
-  int sLCvDaBiXoa = 0;
-  int sLNhomCV = 0;
-
-  //NamLV
 
   Map<String, ItemMissionMenu> mapData = {};
   List<String> listKey = [];

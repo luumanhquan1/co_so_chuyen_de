@@ -245,9 +245,6 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
       success: (value) {
         dataThanhPhanThamGia = value.listCanBo ?? [];
         thanhPhanThamGia.sink.add(value.listCanBo ?? []);
-        print('vllllllllllllllllllllllllllllllllllllll-${value.listCanBo}');
-        print(
-            'dataTPTGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG-${dataThanhPhanThamGia[0].tenCanBo}');
       },
       error: (error) {},
     );
@@ -620,6 +617,8 @@ class DetailMeetCalenderCubit extends BaseCubit<DetailMeetCalenderState> {
     result.when(success: (res) {}, error: (err) {});
   }
 
+
+
   void dispose() {}
 }
 
@@ -630,5 +629,3 @@ extension ChuongTrinhHop on DetailMeetCalenderCubit {
     result.when(success: (res) {}, error: (error) {});
   }
 }
-
-
