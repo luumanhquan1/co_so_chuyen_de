@@ -15,13 +15,13 @@ extension GetTypeCalendar on String {
       case 'Schedule':
         return TypeCalendar.Schedule;
       default:
-        return TypeCalendar.MeetingSchedule;
+        return TypeCalendar.Schedule;
     }
   }
 }
 
 extension typeCalendar on TypeCalendar {
-  void navigatorDetail(BuildContext context, CalenderCubit cubit) {
+  void navigatorDetail(BuildContext context, CalenderCubit cubit, int index) {
     switch (this) {
       case TypeCalendar.Schedule:
         {

@@ -91,10 +91,10 @@ class _InListFormState extends State<InListForm> {
                         onTap: () {
                           final String typeCalendar = _cubit.dataLichLvModel
                                   .listLichLVModel?[index].typeSchedule ??
-                              'MeetingSchedule';
+                              'Schedule';
 
                           typeCalendar.getTypeCalendar
-                              .navigatorDetail(context, _cubit);
+                              .navigatorDetail(context, _cubit, index);
                         },
                         isTrung: _cubit.dataLichLvModel.listLichLVModel?[index]
                                 .isLichLap ??

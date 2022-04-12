@@ -349,7 +349,7 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     stateCalendarSubject.add(controller);
   }
 
-  void initData() {
+  Future<void> initData()  async {
     page = 1;
     getDashboard();
     postDanhSachLichHop();
