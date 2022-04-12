@@ -171,8 +171,9 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DanhSachNhiemVuTablet(
-                              cubit: danhSachCubit,
                               isCheck: widget.isCheck,
+                              ngayBatDau: danhSachCubit.ngayDauTien,
+                              ngayKetThuc: danhSachCubit.ngayKetThuc,
                             ),
                           ),
                         );
@@ -202,7 +203,8 @@ class _NhiemVuCaNhanTabletState extends State<NhiemVuCaNhanTablet> {
                           MaterialPageRoute(
                             builder: (context) => DanhSachCongViecTablet(
                               isCheck: widget.isCheck,
-                              cubit: danhSachCubit,
+                              ngayBatDau: danhSachCubit.ngayDauTien,
+                              ngayKetThuc: danhSachCubit.ngayKetThuc,
                             ),
                           ),
                         );

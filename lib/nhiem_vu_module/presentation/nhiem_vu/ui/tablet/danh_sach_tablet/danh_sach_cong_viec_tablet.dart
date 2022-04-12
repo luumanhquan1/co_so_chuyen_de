@@ -13,13 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DanhSachCongViecTablet extends StatefulWidget {
-  final DanhSachCubit cubit;
   final bool isCheck;
+  final String ngayBatDau;
+  final String ngayKetThuc;
 
   const DanhSachCongViecTablet({
     Key? key,
-    required this.cubit,
     required this.isCheck,
+    required this.ngayBatDau,
+    required this.ngayKetThuc,
   }) : super(key: key);
 
   @override
@@ -29,6 +31,17 @@ class DanhSachCongViecTablet extends StatefulWidget {
 class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
   NhiemVuCubit cubit = NhiemVuCubit();
   ChooseTimeCubit chooseTimeCubit = ChooseTimeCubit();
+  final DanhSachCubit danhSachCubit = DanhSachCubit();
+
+  @override
+  void initState() {
+    super.initState();
+    danhSachCubit.apiDanhSachCongViecCaNhan(
+      widget.ngayBatDau,
+      widget.ngayKetThuc,
+      widget.isCheck,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +69,20 @@ class _DanhSachCongViecTabletState extends State<DanhSachCongViecTablet> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: widget.cubit,
+      cubit: danhSachCubit,
       isListView: true,
       callApi: (page) => {
-        widget.cubit.postDanhSachCongViec(
+        danhSachCubit.postDanhSachCongViec(
           hanXuLy: {
-            'FromDate': widget.cubit.ngayDauTien,
-            'ToDate': widget.cubit.ngayKetThuc
+            'FromDate': widget.ngayBatDau,
+            'ToDate': widget.ngayKetThuc
           },
           index: page,
           isCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
-          keySearch: widget.cubit.keySearch,
+          keySearch: danhSachCubit.keySearch,
           mangTrangThai: [],
-          size: widget.cubit.pageSize,
+          size: danhSachCubit.pageSize,
           trangThaiHanXuLy: '',
         )
       },

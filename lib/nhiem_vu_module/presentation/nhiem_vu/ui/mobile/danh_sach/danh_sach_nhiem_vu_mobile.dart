@@ -9,13 +9,15 @@ import 'package:ccvc_mobile/widgets/search/base_search_bar.dart';
 import 'package:flutter/material.dart';
 
 class DanhSachNhiemVuMobile extends StatefulWidget {
-  final DanhSachCubit cubit;
   final bool isCheck;
+  final String ngayBatDau;
+  final String ngayKetThuc;
 
   const DanhSachNhiemVuMobile({
     Key? key,
-    required this.cubit,
     required this.isCheck,
+    required this.ngayBatDau,
+    required this.ngayKetThuc,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,18 @@ class DanhSachNhiemVuMobile extends StatefulWidget {
 }
 
 class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
+  final DanhSachCubit cubit = DanhSachCubit();
+
+  @override
+  void initState() {
+    super.initState();
+    cubit.apiDanhSachNhiemVuCaNhan(
+      widget.ngayBatDau,
+      widget.ngayKetThuc,
+      widget.isCheck,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +50,10 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
             ),
             BaseSearchBar(
               onChange: (value) {
-                setState(() {});
-                widget.cubit.keySearch = value;
+                cubit.debouncer.run(() {
+                  setState(() {});
+                  cubit.keySearch = value;
+                });
               },
             ),
             Expanded(
@@ -54,21 +70,20 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
 
   Widget _content() {
     return ListViewLoadMore(
-      cubit: widget.cubit,
+      cubit: cubit,
       isListView: true,
-      callApi: (page) =>
-      {
-        widget.cubit.postDanhSachNhiemVu(
+      callApi: (page) => {
+        cubit.postDanhSachNhiemVu(
           index: page,
           isNhiemVuCaNhan: widget.isCheck,
           isSortByHanXuLy: true,
           mangTrangThai: [],
           ngayTaoNhiemVu: {
-            'FromDate': widget.cubit.ngayDauTien,
-            'ToDate': widget.cubit.ngayKetThuc
+            'FromDate': cubit.ngayDauTien,
+            'ToDate': cubit.ngayKetThuc
           },
-          size: widget.cubit.pageSize,
-          keySearch: widget.cubit.keySearch,
+          size: cubit.pageSize,
+          keySearch: cubit.keySearch,
         )
       },
       viewItem: (value, index) {
@@ -79,11 +94,10 @@ class _DanhSachNhiemVuMobileState extends State<DanhSachNhiemVuMobile> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ChiTietNhiemVuPhoneScreen(
-                        id: value.id ?? '',
-                        isCheck: widget.isCheck,
-                      ),
+                  builder: (context) => ChiTietNhiemVuPhoneScreen(
+                    id: value.id ?? '',
+                    isCheck: widget.isCheck,
+                  ),
                 ),
               );
             },
