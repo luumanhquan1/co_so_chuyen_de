@@ -11,11 +11,8 @@ import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/widget/bao_cao_thon
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/widget/bao_cao_thong_ke/widgets/chart_linh_vu_xu_ly.dart';
 import 'package:ccvc_mobile/presentation/y_kien_nguoi_dan/ui/widget/bao_cao_thong_ke/widgets/chart_so_luong_by_month.dart';
 import 'package:ccvc_mobile/tien_ich_module/widget/views/state_stream_layout.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/chart/base_pie_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BaoCaoThongKeScreen extends StatefulWidget {
   const BaoCaoThongKeScreen({Key? key}) : super(key: key);
