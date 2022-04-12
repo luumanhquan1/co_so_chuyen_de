@@ -159,6 +159,31 @@ class LichHopCubit extends BaseCubit<LichHopState> {
     dataMenu[2].listWidget = listLanhDaoLichHop;
   }
 
+  double getMax(List<ToChucBoiDonViModel> data) {
+    double value = 0;
+    data.forEach((element) {
+      if ((element.quantities?.toDouble() ?? 0.0) > value) {
+        value = element.quantities?.toDouble() ?? 0.0;
+      }
+    });
+    final double range = value % 10;
+
+    return (value + (10.0 - range)) / 5.0;
+  }
+
+  double getMaxTiLe(List<TiLeThamGiaModel> data) {
+    double value = 0;
+    data.forEach((element) {
+      if ((element.rate?.toDouble() ?? 0.0) > value) {
+        value = element.rate?.toDouble() ?? 0.0;
+      }
+    });
+
+    final double range = value % 10;
+
+    return (value + (10.0 - range)) / 5.0;
+  }
+
   Future<void> postCoCauLichHop() async {
     final result = await hopRepo.postCoCauLichHop(
       startDate.formatApiDDMMYYYYSlash,
