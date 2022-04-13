@@ -32,7 +32,11 @@ extension typeCalendar on TypeCalendar {
                 id: cubit.dataLichLvModel.listLichLVModel?[index].id ?? '',
               ),
             ),
-          );
+          ).then((value) {
+            if (value == true) {
+              cubit.callApi();
+            }
+          });
 
           break;
         }

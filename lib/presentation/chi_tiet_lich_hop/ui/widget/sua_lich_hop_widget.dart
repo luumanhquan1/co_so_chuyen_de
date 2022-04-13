@@ -105,7 +105,7 @@ class _SuaLichHopWidgetState extends State<SuaLichHopWidget> {
                         StartEndDateWidget(
                           icMargin: dataDetail.isAllDay,
                           onEndDateTimeChanged: (DateTime value) {},
-                          onStartDateTimeChanged: (DateTime value) {},
+                          onStartDateTimeChanged: (DateTime value) {}, isCheck: (bool value) {  },
                         ),
                         spaceH5,
                         SelectOnlyExpand(
