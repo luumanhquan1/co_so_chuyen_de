@@ -77,6 +77,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               widget.onTap(S.current.theo_dang_lich);
                               Navigator.pop(
                                 context,
+                                TypeCalendarMenu.LichCuaToi,
                               );
                             },
                             isSelect: snapshot.data?[0] ?? true,
@@ -90,6 +91,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               widget.onTap(S.current.theo_dang_danh_sach);
                               Navigator.pop(
                                 context,
+                                TypeCalendarMenu.LichCuaToi,
                               );
                             },
                             isSelect: snapshot.data?[1] ?? true,
