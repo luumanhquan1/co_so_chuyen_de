@@ -12,6 +12,7 @@ class StartEndDateWidget extends StatefulWidget {
   final DateTime? initStartData;
   final DateTime? initEndData;
   final bool icMargin;
+  final Function(bool value) isCheck;
 
   const StartEndDateWidget({
     Key? key,
@@ -20,6 +21,7 @@ class StartEndDateWidget extends StatefulWidget {
     this.icMargin = true,
     this.initStartData,
     this.initEndData,
+    required this.isCheck,
   }) : super(key: key);
 
   @override
@@ -42,6 +44,9 @@ class _StartEndDateWidgetState extends State<StartEndDateWidget> {
             children: [
               IsCaNgayWidget(
                 isMargin: widget.icMargin,
+                isCheck: (bool value) {
+                  widget.isCheck(value);
+                },
               ),
               SizedBox(
                 height: 16.0.textScale(),

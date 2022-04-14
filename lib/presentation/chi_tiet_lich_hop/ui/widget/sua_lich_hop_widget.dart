@@ -127,6 +127,7 @@ class _SuaLichHopWidgetState extends State<SuaLichHopWidget> {
                             widget.cubit.taoLichHopRequest.ngayKetThuc =
                                 value.toString();
                           },
+                          isCheck: (bool value) {},
                         ),
                         spaceH5,
                         SelectOnlyExpand(
