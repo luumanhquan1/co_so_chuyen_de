@@ -1,9 +1,8 @@
 
 import 'package:ccvc_mobile/main.dart';
-import 'package:ccvc_mobile/presentation/login/ui/mobile/login_screen.dart';
-import 'package:ccvc_mobile/presentation/login/ui/tablet/login_screen_tablet.dart';
+
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
-import 'package:ccvc_mobile/utils/extensions/screen_device_extension.dart';
+
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +46,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget screen(String token) {
-    if (token.isNotEmpty) {
-      return const MainTabBarView();
-    } else {
-      return screenDevice(
-        mobileScreen: const LoginScreen(),
-        tabletScreen: const LoginTabletScreen(),
-      );
-    }
+    return MainTabBarView();
   }
+  //   if (token.isNotEmpty) {
+  //     return const MainTabBarView();
+  //   } else {
+  //     return screenDevice(
+  //       mobileScreen: const LoginScreen(),
+  //       tabletScreen: const LoginTabletScreen(),
+  //     );
+  //   }
+  // }
 }
