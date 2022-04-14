@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 
-import 'package:ccvc_mobile/domain/model/app_theme_model.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,17 +54,5 @@ class PrefsService {
   Future<void> clearData() async {
     await _prefsInstance?.clear();
     return;
-  }
-  static Future<bool> setAppTheme(AppThemModel appThemModel) async {
-    final prefs = await _instance;
-    return prefs.setString(_PREF_APP_THEME, json.encode(appThemModel.toJson()));
-  }
-  static AppThemModel getAppTheme(){
-    final result = _prefsInstance?.getString(_PREF_APP_THEME);
-    if(result == null){
-      return AppThemModel();
-    }
-    final jsonDecode =  json.decode(result) as Map<String,dynamic>;
-     return AppThemModel.fromJson(jsonDecode);
   }
 }

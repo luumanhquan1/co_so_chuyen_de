@@ -70,61 +70,7 @@ extension StringParse on String {
     return parsedString;
   }
 
-  String convertNameFile() {
-    final document = this;
 
-    final parts = document.split('/');
 
-    final lastName = parts.last;
 
-    final partsNameFile = lastName.split('.');
-
-    if (partsNameFile[0].length > 30) {
-      partsNameFile[0] = '${partsNameFile[0].substring(0, 10)}... ';
-    }
-    final fileName = '${partsNameFile[0]}.${partsNameFile[1]}';
-
-    return fileName;
-  }
-}
-
-extension CheckValidate on String {
-  String? checkEmail() {
-    final isCheck = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}")
-        .hasMatch(this);
-    if (isCheck) {
-      return null;
-    } else {
-      return S.current.dinh_dang_email;
-    }
-  }
-
-  String? checkSdt() {
-    final isCheckSdt = RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(this);
-    if (isCheckSdt) {
-      return null;
-    } else {
-      return S.current.dinh_dang_sdt;
-    }
-  }
-
-  String? checkNull() {
-    if (trim().isEmpty) {
-      return S.current.khong_duoc_de_trong;
-    }
-    return null;
-  }
-
-  String? checkInt() {
-    final result = checkNull();
-    if (result != null) {
-      return result;
-    }
-    try {
-      int.parse(this);
-    } catch (e) {
-      return S.current.check_so_luong;
-    }
-  }
 }
