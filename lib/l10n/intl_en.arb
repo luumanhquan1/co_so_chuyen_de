@@ -7,5 +7,18 @@
   "error_network": "No internet!",
   "retry": "Retry",
   "unauthorized": "Your session has expired. Please sign in.",
-  "search": "Search..."
+  "search": "Search...",
+  "hello": "Xin chào",
+  "wellcom_login": "Vui lòng đăng nhập để sử dụng ứng dụng",
+  "account": "Tài khoản",
+  "password": "Mật khẩu",
+  "dinh_dang_email": "Sai định dạng email",
+  "dinh_dang_sdt": "Sai định dạng số điện thoại",
+  "khong_duoc_de_trong": "Không được để trống",
+  "check_so_luong": " Số lượng thiết bị chỉ có thể có các kí tự số",
+  "login": "Đăng nhập",
+  "dang_nhap_that_bai": "Đăng nhập thất bại hãy thử lại",
+  "quen_mat_khau": "Quên mật khẩu",
+  "dang_ky" : "Đăng ký"
 }
+
