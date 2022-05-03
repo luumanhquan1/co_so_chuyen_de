@@ -1,8 +1,10 @@
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainTabBarView extends StatefulWidget {
   const MainTabBarView({Key? key}) : super(key: key);
@@ -37,11 +39,14 @@ class _MainTabBarViewState extends State<MainTabBarView> {
       builder: (context, snapshot) {
         final type = snapshot.data ?? TabBarType.home;
         return Scaffold(
+          backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,
           body: IndexedStack(
             index: _getIndexListScreen(type),
             children: _listScreen.map((e) => e.widget).toList(),
           ),
+          floatingActionButton: SvgPicture.asset(ImageAssets.icAdd),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: BottomTabBarWidget(
             selectItemIndex: type.index,
             onChange: (value) {
