@@ -5,7 +5,8 @@ import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 
@@ -18,14 +19,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+
+import 'firebase_options.dart';
 
 Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await PrefsService.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // await Firebase.initializeApp();
 
+// Ideal time to initialize
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -53,6 +62,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     appStateCubit.getTokenPrefs();
     checkDeviceType();
+
   }
 
   @override

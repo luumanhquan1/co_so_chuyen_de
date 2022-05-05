@@ -11,7 +11,6 @@ import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -195,7 +194,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             isColorBlue: true,
                             onPressed: () async {
                               if (keyGroup.currentState!.validator()) {
-                                User? user = await signInUsingEmailPassword(
+                                final User? user =
+                                    await signInUsingEmailPassword(
                                   email: textTaiKhoanController.text,
                                   password: textPasswordController.text,
                                   context: context,
