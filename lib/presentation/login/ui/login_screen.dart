@@ -1,5 +1,7 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/sign_up_screen.dart';
@@ -26,36 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController textPasswordController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
 
-  static Future<User?> signInUsingEmailPassword({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-
-    try {
-      final UserCredential userCredential =
-          await auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
-      }
-    }
-
-    return user;
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
+      stream: auth.authStateChanges(),
       builder: (context, snapshot) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
@@ -157,7 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         },
                                         child: loginCubit.isCheckEye1
                                             ? SvgPicture.asset(
-                                                ImageAssets.imgView)
+                                                ImageAssets.imgView,
+                                              )
                                             : SvgPicture.asset(
                                                 ImageAssets.imgViewHide,
                                               ),
@@ -194,20 +171,23 @@ class _LoginScreenState extends State<LoginScreen> {
                             isColorBlue: true,
                             onPressed: () async {
                               if (keyGroup.currentState!.validator()) {
-                                final User? user =
-                                    await signInUsingEmailPassword(
+                                final User? user = await FirebaseAuthentication
+                                    .signInUsingEmailPassword(
                                   email: textTaiKhoanController.text,
                                   password: textPasswordController.text,
                                   context: context,
                                 );
+                                print(user);
                                 if (user != null) {
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                      builder: (context) => MainTabBarView(),
+                                      builder: (context) => const MainTabBarView(),
                                     ),
                                   );
                                 }
-                              } else {}
+                              } else {
+                                _showToast(context);
+                              }
 
                               if (loginCubit.passIsError == true) {
                                 _showToast(context);

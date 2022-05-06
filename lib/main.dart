@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
@@ -31,10 +32,8 @@ Future<void> mainApp() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await Firebase.initializeApp();
 
-// Ideal time to initialize
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  await auth.useAuthEmulator('localhost', 9099);
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
