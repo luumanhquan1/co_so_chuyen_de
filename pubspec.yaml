@@ -26,7 +26,17 @@ dependencies:
   #Favourite library
   share: ^2.0.1
  # provider: ^5.0.0
-  device_info: 2.0.0
+  #device_info: 2.0.0
+
+  pull_to_refresh: ^2.0.0
+
+  #loading
+  shimmer: ^2.0.0
+
+  #firebase
+  firebase_core: ^1.16.0
+  firebase_storage: ^10.2.15
+  cloud_firestore: ^3.1.14
 
   package_info: ^2.0.0
   google_fonts: 2.0.0

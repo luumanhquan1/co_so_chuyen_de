@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +50,9 @@ class AppImage extends StatelessWidget {
     ));
   }
 
-  // Widget get _errorWidget {
-  //   return Image.asset(ImageConstants.alilogiLogo);
-  // }
+  Widget get _errorWidget {
+    return Container(color: ThemeColor.ebonyClay,);
+  }
 
   Widget _buildLottieImageWidget() {
     if (isAsset) {
@@ -67,9 +68,9 @@ class AppImage extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
-      // errorBuilder: (context, error, stackTrace) {
-      //   return errorWidget ?? _errorWidget;
-      // },
+      errorBuilder: (context, error, stackTrace) {
+        return errorWidget ?? _errorWidget;
+      },
       frameBuilder: (context, child, composition) {
         if (composition != null) {
           return Lottie(composition: composition);
@@ -115,9 +116,9 @@ class AppImage extends StatelessWidget {
       width: width,
       height: height,
       placeholder: (context, url) => placeholder ?? _placeholder,
-      // errorWidget: (context, url, error) {
-      //   return errorWidget ?? _errorWidget;
-      // },
+      errorWidget: (context, url, error) {
+        return errorWidget ?? _errorWidget;
+      },
       cacheManager: CacheManager(
         Config(
           'ImageCacheKey',
