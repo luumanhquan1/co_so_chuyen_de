@@ -1,14 +1,14 @@
-
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
-
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
-
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +18,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:hive/hive.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  final appDocumentDirectory =
+      await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  await HiveLocal.init();
   await PrefsService.init();
-
-
+  await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -80,8 +84,7 @@ class _MyAppState extends State<MyApp> {
               textSelectionTheme: TextSelectionThemeData(
                 cursorColor: AppTheme.getInstance().primaryColor(),
                 selectionColor: AppTheme.getInstance().primaryColor(),
-                selectionHandleColor:
-                AppTheme.getInstance().primaryColor(),
+                selectionHandleColor: AppTheme.getInstance().primaryColor(),
               ),
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 secondary: AppTheme.getInstance().accentColor(),
