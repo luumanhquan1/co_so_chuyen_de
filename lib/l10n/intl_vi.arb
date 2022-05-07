@@ -19,5 +19,6 @@
   "login": "Đăng nhập",
   "dang_nhap_that_bai": "Đăng nhập thất bại hãy thử lại",
   "quen_mat_khau": "Quên mật khẩu",
-  "dang_ky" : "Đăng ký"
+  "dang_ky" : "Đăng ký",
+  "khong_co_du_lieu" : "Không có dữ liệu"
 }
