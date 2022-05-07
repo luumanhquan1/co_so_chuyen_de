@@ -11,6 +11,8 @@ class ImageAssets {
   static const String icHome = '$baseImg/ic_home.svg';
   static const String icAdd = '$baseImg/ic_add.svg';
   static const String icBackgroundMessage = '$baseImg/background_message.svg';
+  static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icSendSms = '$baseImg/ic_send_sms.svg';
 
   static SvgPicture svgAssets(
     String name, {

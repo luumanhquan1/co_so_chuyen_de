@@ -7,5 +7,7 @@
   "error_network": "No internet!",
   "retry": "Retry",
   "unauthorized": "Your session has expired. Please sign in.",
-  "search": "Search..."
+  "search": "Search...",
+  "search_for_contacts" : "Tìm kiếm...",
+  "messages"  : "Messages"
 }

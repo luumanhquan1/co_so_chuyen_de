@@ -1,0 +1,88 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/main_message/widgets/tin_nhan_cell.dart';
+import 'package:ccvc_mobile/presentation/message/message_screen.dart';
+
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/widgets/textformfield/base_search_bar.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class MainMessageScreen extends StatefulWidget {
+  const MainMessageScreen({Key? key}) : super(key: key);
+
+  @override
+  _MessageScreenState createState() => _MessageScreenState();
+}
+
+class _MessageScreenState extends State<MainMessageScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Transform.translate(
+            offset: const Offset(0, 40),
+            child: SvgPicture.asset(
+              ImageAssets.icBackgroundMessage,
+              fit: BoxFit.fill,
+            ),
+          ),
+          NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                CupertinoSliverNavigationBar(
+                  backgroundColor: Colors.transparent,
+                  border: Border.all(color: Colors.transparent),
+                  largeTitle: Text(
+                    S.current.messages,
+                    style: textNormalCustom(
+                        color: colorBlack,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
+                )
+              ];
+            },
+            body: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 23),
+                child: Column(
+                  children: [
+                    BaseSearchBar(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Column(
+                      children: List.generate(
+                          100,
+                          (index) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MessageScreen()));
+                                    },
+                                    child: TinNhanCell()),
+                              )),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

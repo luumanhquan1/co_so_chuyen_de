@@ -40,7 +40,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
         final type = snapshot.data ?? TabBarType.home;
         return Scaffold(
           backgroundColor: Colors.white,
-          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: false,
           body: IndexedStack(
             index: _getIndexListScreen(type),
             children: _listScreen.map((e) => e.widget).toList(),

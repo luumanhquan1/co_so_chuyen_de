@@ -83,6 +83,7 @@ const backgroundItemCalender = Color(0xffF5F8FD);
 const borderItemCalender = Color(0xffE2E8F0);
 const numberOfCalenders = Color(0xff5A8DEE);
 const editColor = Color(0xffEDF0FD);
+const hintColor = Color(0xffC4C4C4);
 const dotColor = Color(0xffD4DAE3);
 const yellowColor = Color(0xffFDB000);
 const greenColor = Color(0xff058141);
@@ -104,10 +105,11 @@ const colorNumberCellQLVB = Color(0xffFCFDFD);
 //tabbar color
 const labelColor = Color(0xff7966FF);
 const unselectedLabelColor = Color(0xff667793);
-const indicatorColor = Color(0xff7966FF);
+const indicatorColor = Color(0xffFAFAFA);
 const titleColor = Color(0xFF3D5586);
 const colorBlack = Color(0xff000000);
 const errorBorderColor = Color(0xFF585782);
+
 
 const lineColor = Color(0xffECEEF7);
 const buttonColor = Color(0xff7966FF);
@@ -116,7 +118,7 @@ const buttonColor2 = Color(0x1A7966FF);
 const unselectLabelColor = Color(0xFFA2AEBD);
 const selectColorTabbar = Color(0xFF304261);
 const whiteHide = Color(0xFFEAEEF5);
-const greyHide = Color(0xFFF5F6FA);
+const greyHide = Color(0xFF656565);
 //drawer menu color
 const backgroundDrawerMenu = Color(0xFF333333);
 const backgroundDrawer = Colors.black12;

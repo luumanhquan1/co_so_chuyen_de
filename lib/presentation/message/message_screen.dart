@@ -1,6 +1,11 @@
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
+import 'package:ccvc_mobile/presentation/message/widgets/header_mess_widget.dart';
+import 'package:ccvc_mobile/presentation/message/widgets/send_sms_widget.dart';
+import 'package:ccvc_mobile/presentation/message/widgets/sms_cell.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({Key? key}) : super(key: key);
@@ -10,22 +15,40 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
+  MessageCubit cubit = MessageCubit();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Transform.translate(
-            offset: const Offset(0, 40),
-            child: SvgPicture.asset(
-              ImageAssets.icBackgroundMessage,
-              fit: BoxFit.fill,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+           HeaderMessWidget(),
+            const SizedBox(
+              height: 16,
             ),
-          )
+            Expanded(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  children: List.generate(cubit.listFakeData.length, (index) {
+                    final result = cubit.listFakeData[index];
+                    return SmsCell(smsModel: result);
+                  }),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: SendSmsWidget(hintText: 'Write a message...',sendTap: (){
 
-        ],
+              },),
+            )
+          ],
+        ),
       ),
+
     );
   }
 }
