@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
 
 void hideKeyboard(BuildContext context) {
@@ -110,3 +111,16 @@ void showLoading(BuildContext context, {Function? close}) {
 void hideLoading(BuildContext context) {
   Navigator.of(context).pop();
 }
+
+String parseTimeCreate(int time){
+  int now = DateTime.now().millisecondsSinceEpoch;
+  if((now - time) <60000)
+    return "Vừa xong";
+  if((now - time) >= 60000 && (now - time)< 60000*60 )
+    return '${(now - time)/60000} phút trước';
+  if((now - time) >= 60000*60 && (now - time)< 60000*60*24 )
+    return '${(now - time)/(60000*60)} giờ trước';
+  return  DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(time));
+}
+
+

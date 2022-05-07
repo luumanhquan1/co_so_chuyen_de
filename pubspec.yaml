@@ -110,12 +110,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/home_module/assets/images/
-    - lib/tien_ich_module/assets/images/
     - assets/images/
     - assets/menu/
     - assets/style/
-    - lib/ket_noi_module/assets/images/
-    - lib/nhiem_vu_module/assets/images/
 flutter_intl:
   enabled: true
