@@ -13,6 +13,12 @@ class ImageAssets {
   static const String icBackgroundMessage = '$baseImg/background_message.svg';
   static const String icSearch = '$baseImg/ic_search.svg';
   static const String icSendSms = '$baseImg/ic_send_sms.svg';
+  static const String icClearLogin = '$baseImg/ic_clear_login.svg';
+  static const String imgAcount = '$baseImg/ic_acount.svg';
+  static const String imgLoginPng = '$baseImg/img_login.png';
+  static const String imgViewHide = '$baseImg/ic_view_hide.svg';
+  static const String imgView = '$baseImg/ic_view.svg';
+  static const String imgPassword = '$baseImg/ic_password.svg';
 
   static SvgPicture svgAssets(
     String name, {

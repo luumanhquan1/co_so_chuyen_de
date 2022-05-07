@@ -83,6 +83,7 @@ dependencies:
   html_editor_enhanced: ^2.4.0+1
   translator: ^0.1.7
   flutter_contacts:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
@@ -94,15 +95,16 @@ dev_dependencies:
   injectable_generator: ^1.4.1
   flutter_lints: ^1.0.0
 
+  #firebase
+  firebase_auth: ^2.0.0
+  firebase_core: ^1.10.0
+
+
 flutter:
   uses-material-design: true
   assets:
-    - lib/home_module/assets/images/
-    - lib/tien_ich_module/assets/images/
     - assets/images/
     - assets/menu/
     - assets/style/
-    - lib/ket_noi_module/assets/images/
-    - lib/nhiem_vu_module/assets/images/
 flutter_intl:
   enabled: true
