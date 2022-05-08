@@ -1,5 +1,3 @@
-
-
 enum AppMode { MAC_DINH, XANH, HONG, VANG }
 enum DeviceType { MOBILE, TABLET }
 enum ServerType { DEV, QA, STAGING, PRODUCT }
@@ -87,6 +85,7 @@ enum PageTransitionType {
   RIGHT_TO_LEFT_WITH_FADE,
 }
 
+String EXCEPTION_LOGIN = '';
 const String HOAN_THANH = 'HOAN_THANH';
 const String DEN_HAN = 'DEN_HAN';
 const String QUA_HAN = 'QUA_HAN';
@@ -124,9 +123,10 @@ const _dtFormat4 = 'yyyy-MM-dd';
 const _dtFormat5 = 'MMM dd, yyyy';
 const _dtFormat6 = 'MM/dd/yyyy HH:mm:ss';
 
-const String DO_MAIN_DOWLOAD_FILE='http://api-qlvb-nv.dongnai.edsolabs.vn';
-const String DO_MAIN_DOWLOAD_FILE_NHIEM_VU='https://api-qlvb-nv-ccvc-uat.chinhquyendientu.vn';
-const String DO_MAIN_LICH_AM_DUONG='https://api-and-uat.chinhquyendientu.vn';
+const String DO_MAIN_DOWLOAD_FILE = 'http://api-qlvb-nv.dongnai.edsolabs.vn';
+const String DO_MAIN_DOWLOAD_FILE_NHIEM_VU =
+    'https://api-qlvb-nv-ccvc-uat.chinhquyendientu.vn';
+const String DO_MAIN_LICH_AM_DUONG = 'https://api-and-uat.chinhquyendientu.vn';
 
 class DateTimeFormat {
   static const DEFAULT_FORMAT = _dtFormat1;
