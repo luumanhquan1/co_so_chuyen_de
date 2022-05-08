@@ -1,11 +1,12 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'firebase_const.dart';
 
 class FirebaseAuthentication {
-
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,
@@ -19,12 +20,9 @@ class FirebaseAuthentication {
         password: password,
       );
       user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
-      }
+    } on Exception catch (e) {
+      EXCEPTION_LOGIN = S.current.tai_khoan_hoac_mat_khau_khong_chinh_xac;
+      print(e.toString());
     }
     return user;
   }
