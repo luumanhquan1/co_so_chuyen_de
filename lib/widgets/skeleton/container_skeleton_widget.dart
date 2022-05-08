@@ -1,8 +1,5 @@
-import 'package:alilogi/commons/constants/app_dimens.dart';
-import 'package:alilogi/presentation/theme/theme_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'skeleton_widget.dart';
 
 class ContainerSkeletonWidget extends StatelessWidget {
@@ -15,14 +12,14 @@ class ContainerSkeletonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? AppDimens.width_60,
+      width: width ?? 60.w,
       height: height ?? 86.h,
       child: SkeletonWidget(
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius ?? AppDimens.radius_12),
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
               shape: BoxShape.rectangle,
-              color: AppColors.white),
+              color: Colors.white),
         ),
       ),
     );

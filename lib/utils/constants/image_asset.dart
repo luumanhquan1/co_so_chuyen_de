@@ -7,10 +7,18 @@ class ImageAssets {
   static const String icHeaderMenuBlue = '$baseImg/background_menu_blue.png';
   static const String icProfile = '$baseImg/ic_profile.svg';
   static const String icMessage = '$baseImg/ic_message.svg';
-  static const String icTym  = '$baseImg/ic_tym.svg';
+  static const String icTym = '$baseImg/ic_tym.svg';
   static const String icHome = '$baseImg/ic_home.svg';
   static const String icAdd = '$baseImg/ic_add.svg';
   static const String icBackgroundMessage = '$baseImg/background_message.svg';
+  static const String imgLoginPng = '$baseImg/img_login.png';
+
+  static const String icClearLogin = '$baseImg/ic_clear_login.svg';
+
+  static const String imgAcount = '$baseImg/ic_acount.svg';
+  static const String imgPassword = '$baseImg/ic_password.svg';
+  static const String imgViewHide = '$baseImg/ic_view_hide.svg';
+  static const String imgView = '$baseImg/ic_view.svg';
 
   static SvgPicture svgAssets(
     String name, {
