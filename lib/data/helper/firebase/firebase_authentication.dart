@@ -21,7 +21,12 @@ class FirebaseAuthentication {
       );
       user = userCredential.user;
     } on Exception catch (e) {
-      EXCEPTION_LOGIN = S.current.tai_khoan_hoac_mat_khau_khong_chinh_xac;
+      if (e.toString() ==
+              '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.' ||
+          e.toString() ==
+              '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
+        EXCEPTION_LOGIN = S.current.tai_khoan_hoac_mat_khau_khong_chinh_xac;
+      }
       print(e.toString());
     }
     return user;
