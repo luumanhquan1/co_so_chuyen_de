@@ -1,12 +1,16 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
+import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -16,116 +20,167 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final SignUpCubit cubit = SignUpCubit();
+
   final keyGroup = GlobalKey<FormGroupState>();
+  TextEditingController textTaiKhoanController = TextEditingController();
+  TextEditingController textPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // return FormGroup(
-    //   child: Center(
-    //     child: Column(
-    //       children: [
-    //         Text(
-    //           S.current.wellcom_login,
-    //           style: textNormal(AqiColor, 14),
-    //         ),
-    //         const SizedBox(
-    //           height: 12,
-    //         ),
-    //         TextFieldValidator(
-    //           controller: textTaiKhoanController,
-    //           hintText: S.current.account,
-    //           prefixIcon: SizedBox(
-    //             width: 20.0,
-    //             height: 20.0,
-    //             child: Center(
-    //               child: SvgPicture.asset(ImageAssets.imgAcount),
-    //             ),
-    //           ),
-    //           onChange: (text) {
-    //             if (text.isEmpty) {
-    //               setState(() {});
-    //             }
-    //             setState(() {});
-    //           },
-    //           validator: (value) {
-    //             return (value ?? '').checkNull();
-    //           },
-    //         ),
-    //         const SizedBox(
-    //           height: 16,
-    //         ),
-    //         TextFieldValidator(
-    //           obscureText: loginCubit.isCheckEye1,
-    //           suffixIcon: loginCubit.isHideEye1
-    //               ? SizedBox(
-    //                   width: 20,
-    //                   height: 20,
-    //                   child: Center(
-    //                     child: GestureDetector(
-    //                       onTap: () {
-    //                         setState(() {});
-    //                         loginCubit.isCheckEye1 = !loginCubit.isCheckEye1;
-    //                       },
-    //                       child: loginCubit.isCheckEye1
-    //                           ? SvgPicture.asset(ImageAssets.imgView)
-    //                           : SvgPicture.asset(
-    //                               ImageAssets.imgViewHide,
-    //                             ),
-    //                     ),
-    //                   ),
-    //                 )
-    //               : const SizedBox(),
-    //           hintText: S.current.password,
-    //           prefixIcon: SizedBox(
-    //             width: 20.0,
-    //             height: 20.0,
-    //             child: Center(
-    //               child: SvgPicture.asset(ImageAssets.imgPassword),
-    //             ),
-    //           ),
-    //           onChange: (text) {
-    //             if (text.isEmpty) {
-    //               setState(() {});
-    //               return loginCubit.isHideEye1 = false;
-    //             }
-    //             setState(() {});
-    //             return loginCubit.isHideEye1 = true;
-    //           },
-    //           validator: (value) {
-    //             return (value ?? '').checkNull();
-    //           },
-    //         ),
-    //         const SizedBox(
-    //           height: 35,
-    //         ),
-    //         ButtonCustomBottom(
-    //           title: S.current.login,
-    //           isColorBlue: true,
-    //           onPressed: () async {
-    //             if (keyGroup.currentState!.validator()) {
-    //               User? user = await signInUsingEmailPassword(
-    //                 email: textTaiKhoanController.text,
-    //                 password: textPasswordController.text,
-    //                 context: context,
-    //               );
-    //               if (user != null) {
-    //                 await Navigator.of(context).pushReplacement(
-    //                   MaterialPageRoute(
-    //                     builder: (context) => MainTabBarView(),
-    //                   ),
-    //                 );
-    //               }
-    //             } else {}
-    //
-    //             if (loginCubit.passIsError == true) {
-    //               _showToast(context);
-    //             }
-    //           },
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
-    return Container();
+    return Scaffold(
+      appBar: BaseAppBar(
+        title: S.current.dang_ky,
+        leadingIcon: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const SizedBox(
+            height: 10,
+            width: 10,
+            child: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: AqiColor,
+            ),
+          ),
+        ),
+      ),
+      body: FormGroup(
+        key: keyGroup,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              Image.asset(ImageAssets.icBackgroundMessage),
+              TextFieldValidator(
+                controller: textTaiKhoanController,
+                suffixIcon: cubit.isHideClearData
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {});
+                              textTaiKhoanController.clear();
+                              cubit.isHideClearData = false;
+                            },
+                            child: SvgPicture.asset(
+                              ImageAssets.icClearLogin,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+                hintText: S.current.account,
+                prefixIcon: SizedBox(
+                  width: 20.0,
+                  height: 20.0,
+                  child: Center(
+                    child: SvgPicture.asset(ImageAssets.imgAcount),
+                  ),
+                ),
+                onChange: (text) {
+                  if (text.isEmpty) {
+                    setState(() {});
+                    return cubit.isHideClearData = false;
+                  }
+                  setState(() {});
+                  return cubit.isHideClearData = true;
+                },
+                validator: (value) {
+                  return (value ?? '').checkNull();
+                },
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFieldValidator(
+                controller: textPasswordController,
+                obscureText: cubit.isCheckEye1,
+                suffixIcon: cubit.isHideEye1
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {});
+                              cubit.isCheckEye1 = !cubit.isCheckEye1;
+                            },
+                            child: cubit.isCheckEye1
+                                ? SvgPicture.asset(
+                                    ImageAssets.imgView,
+                                  )
+                                : SvgPicture.asset(
+                                    ImageAssets.imgViewHide,
+                                  ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+                hintText: S.current.password,
+                prefixIcon: SizedBox(
+                  width: 20.0,
+                  height: 20.0,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      ImageAssets.imgPassword,
+                    ),
+                  ),
+                ),
+                onChange: (text) {
+                  if (text.isEmpty) {
+                    setState(() {});
+                    return cubit.isHideEye1 = false;
+                  }
+                  setState(() {});
+                  return cubit.isHideEye1 = true;
+                },
+                validator: (value) {
+                  return (value ?? '').checkNull();
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ButtonCustomBottom(
+                title: S.current.dang_ky,
+                isColorBlue: true,
+                onPressed: () async {
+                  if (keyGroup.currentState!.validator()) {
+                    final User? user = await cubit.signUp(
+                      textTaiKhoanController.text,
+                      textPasswordController.text,
+                    );
+
+                    if (user != null) {
+                    } else {
+                      _showToast(
+                        context: context,
+                        text: EXCEPTION_LOGIN,
+                      );
+                    }
+                  } else {
+                    _showToast(
+                      context: context,
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showToast({required BuildContext context, String? text}) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(text ?? S.current.dang_nhap_that_bai),
+      ),
+    );
   }
 }

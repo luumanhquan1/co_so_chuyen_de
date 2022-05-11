@@ -134,6 +134,8 @@ Color cellColor = Color(0xffDBDFEF).withOpacity(0.1);
 
 const dateColor = Color(0xFF667793);
 
+const buttomColor = Color(0xFFA2AEBD);
+
 //tất cả chủ đề color
 const textColorTongTin = Color(0xFF39CEAD);
 const textColorBaoChi = Color(0xFFF763A0);
