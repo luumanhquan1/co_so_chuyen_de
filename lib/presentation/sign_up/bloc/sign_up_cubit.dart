@@ -26,5 +26,4 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     showContent();
     return user;
   }
-
 }
