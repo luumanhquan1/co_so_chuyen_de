@@ -28,5 +28,10 @@
   "welcome_to" : "Welcome to",
   "socially" : "Socially",
   "tao_thong_tin_nguoi_dung" : "Tạo thông tin người dùng",
-  "nguyen_van_a" : "VD : Nguyễn Văn A"
+  "nguyen_van_a" : "VD : Nguyễn Văn A",
+  "xac_nhan_mat_khau" : "Xác nhận mật khẩu",
+  "nhap_lai_mat_khau_chua_chinh_xac" : "Nhập lại mật khẩu chưa chính xác",
+  "ngay_sinh" : "Ngày sinh",
+  "gioi_tinh" : "Giới tính",
+  "ho_ten" : "Họ tên"
 }

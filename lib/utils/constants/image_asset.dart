@@ -20,6 +20,9 @@ class ImageAssets {
   static const String imgViewHide = '$baseImg/ic_view_hide.svg';
   static const String imgView = '$baseImg/ic_view.svg';
 
+
+  static const String imgEmptyAvata = 'https://i.stack.imgur.com/l60Hf.png';
+
   static SvgPicture svgAssets(
     String name, {
     Color? color,

@@ -9,5 +9,9 @@ extension DateFormatString on DateTime {
     final dateString = DateFormat.jm('en').format(this);
     return dateString;
   }
-
+  String get formatDdMMYYYY {
+    final dateString =
+        DateFormat('dd/MM/yyyy ').format(this);
+    return dateString;
+  }
 }

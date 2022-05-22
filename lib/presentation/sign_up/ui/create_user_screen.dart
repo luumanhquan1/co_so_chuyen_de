@@ -2,6 +2,10 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
+import 'package:ccvc_mobile/presentation/sign_up/ui/widget/avata_widget.dart';
+import 'package:ccvc_mobile/presentation/sign_up/ui/widget/birth_day_widget.dart';
+import 'package:ccvc_mobile/presentation/sign_up/ui/widget/container_data_widget.dart';
+import 'package:ccvc_mobile/presentation/sign_up/ui/widget/drop_down_gender.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -52,7 +56,6 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 200,
@@ -90,54 +93,44 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                     ),
                   ),
                   spaceH30,
-                  Text(
-                    'Full name',
-                    style: textNormalCustom(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: titleColor,
-                    ),
-                  ),
-                  spaceH10,
-                  TextFieldValidator(
-                    controller: textTaiKhoanController,
-                    hintText: S.current.nguyen_van_a,
-                    onChange: (text) {
-                      if (text.isEmpty) {
-                        setState(() {});
-                        return widget.cubit.isHideClearData = false;
-                      }
-                      setState(() {});
-                      return widget.cubit.isHideClearData = true;
-                    },
-                    validator: (value) {
-                      return (value ?? '').checkNull();
-                    },
-                  ),
+                  AvataWidget(cubit: widget.cubit,),
                   spaceH16,
-                  Text(
-                    'Giới tính',
-                    style: textNormalCustom(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: titleColor,
-                    ),
-                  ),
-                  spaceH10,
-                  TextFieldValidator(
-                    controller: textPasswordController,
-                    hintText: S.current.password,
-                    onChange: (text) {
-                      if (text.isEmpty) {
-                        setState(() {});
-                        return widget.cubit.isHideEye1 = false;
-                      }
-                      setState(() {});
-                      return widget.cubit.isHideEye1 = true;
-                    },
-                    validator: (value) {
-                      return (value ?? '').checkNull();
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ContainerDataWidget(
+                        title: S.current.ho_ten,
+                        child: TextFieldValidator(
+                          controller: textTaiKhoanController,
+                          hintText: S.current.nguyen_van_a,
+                          onChange: (text) {
+                            if (text.isEmpty) {
+                              setState(() {});
+                              return widget.cubit.isHideClearData = false;
+                            }
+                            setState(() {});
+                            return widget.cubit.isHideClearData = true;
+                          },
+                          validator: (value) {
+                            return (value ?? '').checkNull();
+                          },
+                        ),
+                      ),
+                      ContainerDataWidget(
+                        title: S.current.gioi_tinh,
+                        child: DropDownGender(
+                          items: const ['Nam', 'Nữ', 'Khác'],
+                          onChange: (String value) {},
+                        ),
+                      ),
+                      ContainerDataWidget(
+                        title: S.current.ngay_sinh,
+                        child: BirthDayWidget(
+                          onChange: (value) {},
+                          cubit: widget.cubit,
+                        ),
+                      ),
+                    ],
                   ),
                   spaceH30,
                   ButtonCustomBottom(
