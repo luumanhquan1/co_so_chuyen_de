@@ -14,4 +14,7 @@ extension DateFormatString on DateTime {
         DateFormat('dd/MM/yyyy ').format(this);
     return dateString;
   }
+  int get convertToTimesTamp {
+    return microsecondsSinceEpoch;
+  }
 }

@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:hive/hive.dart';
 
 part 'user_info.g.dart';
@@ -31,6 +33,17 @@ class UserInfoModel {
     required this.createAt,
     required this.updateAt,
   });
+
+  Map<String, dynamic> toJson() => {
+        'userId': userId,
+        'avataUrl': avataUrl,
+        'email': email,
+        'birthday': birthday,
+        'gender': gender,
+        'nameDisplay': nameDisplay,
+        'createAt': createAt,
+        'updateAt': updateAt,
+      };
 
   UserInfoModel.empty();
 }

@@ -33,5 +33,7 @@
   "nhap_lai_mat_khau_chua_chinh_xac" : "Nhập lại mật khẩu chưa chính xác",
   "ngay_sinh" : "Ngày sinh",
   "gioi_tinh" : "Giới tính",
-  "ho_ten" : "Họ tên"
+  "ho_ten" : "Họ tên",
+  "tao_tai_khoan_thanh_cong" : "Tạo tài khoản thành công"
+
 }

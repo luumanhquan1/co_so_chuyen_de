@@ -22,6 +22,7 @@ class _AvataWidgetState extends State<AvataWidget> {
 
     setState(() {
       _image = im;
+      widget.cubit.image = im;
     });
   }
 

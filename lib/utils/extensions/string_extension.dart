@@ -17,6 +17,10 @@ extension StringMoneyFormat on String {
     final String result = formatValue.format(money);
     return result;
   }
+  
+  String get removeChar {
+    return replaceAll(RegExp(r'[^\w\s]+'), 'a');
+  }
 }
 
 extension VietNameseParse on String {
@@ -58,7 +62,7 @@ extension FormatAddressConfirm on String {
   }
 
   DateTime convertStringToDate() {
-    return DateFormat('yyyy-MM-dd').parse(this);
+    return DateFormat('dd-MM-yyyy').parse(this);
   }
 }
 
