@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:device_info/device_info.dart';
+//import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
@@ -30,35 +30,35 @@ double getHeightSize(BuildContext context) {
   return size.height;
 }
 
-Future<String> getDeviceName() async {
-  if (Platform.isAndroid) {
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    //Xiaomi Redmi Note 7
-    return '${androidInfo.manufacturer} ${androidInfo.model}';
-  }
-
-  if (Platform.isIOS) {
-    final iosInfo = await DeviceInfoPlugin().iosInfo;
-    //iPhone 11 Pro Max iPhone
-    return '${iosInfo.name} ${iosInfo.model}';
-  }
-  return '';
-}
-
-Future<String> getOSName() async {
-  if (Platform.isAndroid) {
-    final info = await DeviceInfoPlugin().androidInfo;
-    // Android 9 (SDK 28)
-    return 'Android ${info.version.release} (SDK ${info.version.sdkInt})';
-  }
-
-  if (Platform.isIOS) {
-    final iosInfo = await DeviceInfoPlugin().iosInfo;
-    // iOS 13.1, iPhone 11 Pro Max iPhone
-    return '${iosInfo.systemName}, ${iosInfo.systemVersion}';
-  }
-  return '';
-}
+// Future<String> getDeviceName() async {
+//   if (Platform.isAndroid) {
+//     final androidInfo = await DeviceInfoPlugin().androidInfo;
+//     //Xiaomi Redmi Note 7
+//     return '${androidInfo.manufacturer} ${androidInfo.model}';
+//   }
+//
+//   if (Platform.isIOS) {
+//     final iosInfo = await DeviceInfoPlugin().iosInfo;
+//     //iPhone 11 Pro Max iPhone
+//     return '${iosInfo.name} ${iosInfo.model}';
+//   }
+//   return '';
+// }
+//
+// Future<String> getOSName() async {
+//   if (Platform.isAndroid) {
+//     final info = await DeviceInfoPlugin().androidInfo;
+//     // Android 9 (SDK 28)
+//     return 'Android ${info.version.release} (SDK ${info.version.sdkInt})';
+//   }
+//
+//   if (Platform.isIOS) {
+//     final iosInfo = await DeviceInfoPlugin().iosInfo;
+//     // iOS 13.1, iPhone 11 Pro Max iPhone
+//     return '${iosInfo.systemName}, ${iosInfo.systemVersion}';
+//   }
+//   return '';
+// }
 
 String getDevice() {
   if (Platform.isAndroid) {
@@ -74,18 +74,18 @@ Future<String> getAppVersion() async {
   return packageInfo.version;
 }
 
-Future<String> getDeviceId() async {
-  final deviceInfo = DeviceInfoPlugin();
-  if (Platform.isIOS) {
-    final iosDeviceInfo = await deviceInfo.iosInfo;
-    return iosDeviceInfo.identifierForVendor;
-  } else if (Platform.isAndroid) {
-    final androidDeviceInfo = await deviceInfo.androidInfo;
-    return androidDeviceInfo.androidId;
-  } else {
-    return '';
-  }
-}
+// Future<String> getDeviceId() async {
+//   final deviceInfo = DeviceInfoPlugin();
+//   if (Platform.isIOS) {
+//     final iosDeviceInfo = await deviceInfo.iosInfo;
+//     return iosDeviceInfo.identifierForVendor;
+//   } else if (Platform.isAndroid) {
+//     final androidDeviceInfo = await deviceInfo.androidInfo;
+//     return androidDeviceInfo.androidId;
+//   } else {
+//     return '';
+//   }
+// }
 
 void showLoading(BuildContext context, {Function? close}) {
   showDialog(
@@ -117,9 +117,9 @@ String parseTimeCreate(int time){
   if((now - time) <60000)
     return "Vừa xong";
   if((now - time) >= 60000 && (now - time)< 60000*60 )
-    return '${(now - time)/60000} phút trước';
+    return '${((now - time)/60000).round()} phút trước';
   if((now - time) >= 60000*60 && (now - time)< 60000*60*24 )
-    return '${(now - time)/(60000*60)} giờ trước';
+    return '${((now - time)/(60000*60)).round()} giờ trước';
   return  DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(time));
 }
 

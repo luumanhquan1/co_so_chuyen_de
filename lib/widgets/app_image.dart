@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,6 +18,7 @@ class AppImage extends StatelessWidget {
   final double? height;
   final Color? color;
   double? loadingSize;
+  int? borderRadius;
 
   AppImage.asset({
     required this.path,
@@ -24,6 +27,7 @@ class AppImage extends StatelessWidget {
     this.width,
     this.height,
     this.color,
+    this.borderRadius
   });
 
   AppImage.network({
@@ -36,6 +40,7 @@ class AppImage extends StatelessWidget {
     this.height,
     this.loadingSize,
     this.color,
+    this.borderRadius
   });
 
   Widget get _placeholder {
@@ -130,7 +135,9 @@ class AppImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('vvvvvvvvvvvv'+imageType.toString());
     switch (imageType) {
+
       case ImageType.lottie:
         return _buildLottieImageWidget();
       case ImageType.svg:
@@ -143,9 +150,12 @@ class AppImage extends StatelessWidget {
   ImageType get imageType {
     int length = path.length;
     String lastString = path.substring(length - 5).toUpperCase();
+    log(path);
+    log(lastString);
     if (lastString.contains('.json'.toUpperCase())) {
       return ImageType.lottie;
     } else if (lastString.contains('.svg'.toUpperCase())) {
+      log(lastString.contains('.svg'.toUpperCase()).toString());
       return ImageType.svg;
     } else {
       return ImageType.image;

@@ -1,57 +1,62 @@
+import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
-import 'package:ccvc_mobile/domain/repository/user_repository.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dartx/dartx.dart';
 
-// part 'post_model.freezed.dart';
-//
-// part 'post_model.g.dart';
-
-// @freezed
-// @JsonSerializable()
-// abstract class PostModel with _$PostModel{
-//
-//   factory PostModel({
-//    String? postId,
-//     String? userId,
-//     int? type,
-//     String? data,
-//     String? createAt,
-//     String? updateAt
-//   }) = _PostModel;
-class PostModel{
+class PostModel {
   String? postId;
-      UserModel? author;
+  UserModel? author;
   int? type;
-      String? content;
-  String? createAt;
+  String? content;
+  int? createAt;
   String? imageUrl;
-      String? updateAt;
+  int? updateAt;
+  List<String>? likes;
+  List<CommentModel>? comments;
 
+  PostModel(
+      {this.postId,
+      this.author,
+      this.type,
+      this.content,
+      this.createAt,
+      this.imageUrl,
+      this.updateAt,
+      this.likes,
+      this.comments}); // factory PostModel.fromJson(Map<String, dynamic> json) =>
 
-  PostModel({this.postId, this.author, this.type, this.content, this.createAt,
-    this.imageUrl,
-    this.updateAt}); // factory PostModel.fromJson(Map<String, dynamic> json) =>
-  //     _$PostModelFromJson(json);
-  //
-  // Map<String, dynamic> toJson() => _$PostModelToJson(this);
+  PostModel.fromJson(Map<String, dynamic> json) {
+    postId = json['post_id'] as String?;
+    type = json['type'] as int?;
+    content = json['content'] as String?;
+    createAt = json['create_at'] as int?;
+    updateAt = json['update_at'] as int?;
+    imageUrl = json['image_url'] as String?;
+    if (json['likes'] != null) {
+      likes = [];
+      json['likes'].forEach((v) {
+        likes!.add(v);
+      });
+    }
+    // if (json['comments'] != null) {
+    //   comments = [];
+    //   json['comments'].forEach((v) {
+    //     comments!.add(CommentModel.fromJson(v));
+    //   });
+    // }
+  }
+  Map<String, dynamic> PostModelToJson(PostModel instance) => <String, dynamic>{
+        'post_id': instance.postId,
+        'user_id': instance.author?.userId ?? '',
+        'image_url': instance.imageUrl,
+        'type': instance.type,
+        'content': instance.content,
+        'create_at': instance.createAt,
+        'update_at': instance.updateAt,
+      };
 
-  factory PostModel.fromJson(Map<String, dynamic> json)  => PostModel(
-    postId: json['postId'] as String?,
+  @override
+  String toString() {
+    return 'PostModel{postId: $postId, author: $author, type: $type, content: $content, createAt: $createAt, imageUrl: $imageUrl, updateAt: $updateAt, likes: $likes}';
+  }
 
-    type: json['type'] as int?,
-    content: json['content'] as String?,
-    createAt: json['createAt'] as String?,
-    updateAt: json['updateAt'] as String?,
-    imageUrl: json['imageUrl'] as String?
-  );
-
-Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
-      'postId': instance.postId,
-      'userId': instance.author?.userId ?? '',
-  'imageUrl': instance.imageUrl,
-      'type': instance.type,
-      'content': instance.content,
-      'createAt': instance.createAt,
-      'updateAt': instance.updateAt,
-    };
 }

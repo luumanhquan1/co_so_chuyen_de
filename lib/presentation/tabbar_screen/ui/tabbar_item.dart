@@ -46,7 +46,7 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return  HomeScreen();
+        return  HomeScreen(userId: 'G50uaqIsy0QiZ9AgckORnl1ZHhl2',);
 
       case TabBarType.likeTab:
         return Scaffold(

@@ -18,10 +18,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (ctx) => const SplashScreen(),
         );
-      case home:
-        return MaterialPageRoute(
-          builder: (_) => const HomeScreen()
-        );
+      // case home:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomeScreen()
+      //   );
     }
   }
 }

@@ -1,5 +1,6 @@
 
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
@@ -11,6 +12,7 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,7 +27,8 @@ Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await PrefsService.init();
-
+  final firebaseSetup = FirebaseSetup();
+  await firebaseSetup.setUp();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -113,11 +116,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   void checkDeviceType() {
-    final shortestSide =
-        MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-            .size
-            .shortestSide;
-    APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
+    // final shortestSide =
+    //     MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    //         .size
+    //         .shortestSide;
+    // APP_DEVICE = shortestSide < 700 ? DeviceType.MOBILE : DeviceType.TABLET;
   }
 }
 

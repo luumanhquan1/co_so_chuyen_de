@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -115,7 +116,7 @@ TextStyle textNormalCustom({
   );
 }
 
-TextStyle titleAppbar({Color color = titleColor}) {
+TextStyle titleAppbar({double? fontSize, Color color = titleColor}) {
   return GoogleFonts.roboto(
     color: color,
     fontWeight: FontWeight.bold,
@@ -133,7 +134,16 @@ TextStyle heading2({Color color = titleColor}) {
   );
 }
 
-TextStyle caption({Color color = titleColor}) {
+TextStyle username({Color color = titleColor}) {
+  return GoogleFonts.roboto(
+    color: ThemeColor.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.sp,
+    fontStyle: FontStyle.normal,
+  );
+}
+
+TextStyle detail({Color color = titleColor}) {
   return GoogleFonts.roboto(
     color: color,
     fontWeight: FontWeight.w400,
@@ -141,3 +151,12 @@ TextStyle caption({Color color = titleColor}) {
     fontStyle: FontStyle.normal,
   );
 }
+
+  TextStyle caption({Color color = titleColor}) {
+    return GoogleFonts.roboto(
+      color: color,
+      fontWeight: FontWeight.normal,
+      fontSize: 16.sp,
+      fontStyle: FontStyle.normal,
+    );
+  }
