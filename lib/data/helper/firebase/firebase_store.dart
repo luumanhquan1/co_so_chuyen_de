@@ -26,7 +26,7 @@ class FireStoreMethod {
 
   static Future<void> uploadImageToStorage(String id, Uint8List file) async {
     try {
-      final Reference ref = storage.ref().child('avataUser/$id');
+      final Reference ref = storage.ref().child('avatarUser').child(id);
 
       await ref.putData(file);
     } catch (e) {

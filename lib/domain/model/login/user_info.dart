@@ -1,5 +1,3 @@
-import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
-import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:hive/hive.dart';
 
 part 'user_info.g.dart';
@@ -25,7 +23,7 @@ class UserInfoModel {
 
   UserInfoModel({
     required this.userId,
-    required this.avataUrl,
+    this.avataUrl,
     required this.email,
     required this.birthday,
     required this.gender,
