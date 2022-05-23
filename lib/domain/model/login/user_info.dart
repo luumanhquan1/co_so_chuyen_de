@@ -23,7 +23,7 @@ class UserInfoModel {
 
   UserInfoModel({
     required this.userId,
-    required this.avataUrl,
+    this.avataUrl,
     required this.email,
     required this.birthday,
     required this.gender,
@@ -31,6 +31,17 @@ class UserInfoModel {
     required this.createAt,
     required this.updateAt,
   });
+
+  Map<String, dynamic> toJson() => {
+        'userId': userId,
+        'avataUrl': avataUrl,
+        'email': email,
+        'birthday': birthday,
+        'gender': gender,
+        'nameDisplay': nameDisplay,
+        'createAt': createAt,
+        'updateAt': updateAt,
+      };
 
   UserInfoModel.empty();
 }

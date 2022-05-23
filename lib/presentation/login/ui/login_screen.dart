@@ -27,7 +27,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginCubit loginCubit = LoginCubit();
-  TextEditingController textTaiKhoanController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController textPasswordController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
 
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 12,
                               ),
                               TextFieldValidator(
-                                controller: textTaiKhoanController,
+                                controller: fullNameController,
                                 suffixIcon: loginCubit.isHideClearData
                                     ? SizedBox(
                                   width: 20,
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: GestureDetector(
                                       onTap: () {
                                         setState(() {});
-                                        textTaiKhoanController.clear();
+                                        fullNameController.clear();
                                         loginCubit.isHideClearData =
                                         false;
                                       },
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () async {
                                   if (keyGroup.currentState!.validator()) {
                                     final User? user = await loginCubit.lognIn(
-                                      textTaiKhoanController.text.trim(),
+                                      fullNameController.text.trim(),
                                       textPasswordController.text.trim(),
                                     );
                                     if (user != null) {

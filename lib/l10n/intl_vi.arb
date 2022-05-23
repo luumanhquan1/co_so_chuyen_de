@@ -21,5 +21,19 @@
   "quen_mat_khau": "Quên mật khẩu",
   "dang_ky": "Đăng ký",
   "khong_co_du_lieu": "Không có dữ liệu",
-  "tai_khoan_hoac_mat_khau_khong_chinh_xac": "Thông tin tài khoản hoặc mật khẩu của bạn không chính xác, vui lòng kiểm tra lại"
+  "tai_khoan_hoac_mat_khau_khong_chinh_xac": "Thông tin tài khoản hoặc mật khẩu của bạn không chính xác, vui lòng kiểm tra lại",
+  "email_da_duoc_su_dung" : "Địa chỉ email đã được một tài khoản khác sử dụng.",
+  "password_dai_hon_6_ky_tu" : "Mật khẩu của bạn phải dài hơn 6 ký tự",
+  "email_sai_dinh_dang": "Email của bạn sai định dạng",
+  "welcome_to" : "Welcome to",
+  "socially" : "Socially",
+  "tao_thong_tin_nguoi_dung" : "Tạo thông tin người dùng",
+  "nguyen_van_a" : "VD : Nguyễn Văn A",
+  "xac_nhan_mat_khau" : "Xác nhận mật khẩu",
+  "nhap_lai_mat_khau_chua_chinh_xac" : "Nhập lại mật khẩu chưa chính xác",
+  "ngay_sinh" : "Ngày sinh",
+  "gioi_tinh" : "Giới tính",
+  "ho_ten" : "Họ tên",
+  "tao_tai_khoan_thanh_cong" : "Tạo tài khoản thành công"
+
 }

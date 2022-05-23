@@ -31,4 +31,33 @@ class FirebaseAuthentication {
     }
     return user;
   }
+
+  static Future<User?> signUp({
+    required String email,
+    required String password,
+  }) async {
+    User? user;
+
+    try {
+      final UserCredential userCredential = await auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      user = userCredential.user;
+    } on Exception catch (e) {
+      if (e.toString() ==
+          '[firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+        EXCEPTION_LOGIN = S.current.email_da_duoc_su_dung;
+      }
+      if (e.toString() ==
+          '[firebase_auth/weak-password] Password should be at least 6 characters') {
+        EXCEPTION_LOGIN = S.current.password_dai_hon_6_ky_tu;
+      }
+      if (e.toString() ==
+          '[firebase_auth/invalid-email] The email address is badly formatted.') {
+        EXCEPTION_LOGIN = S.current.email_sai_dinh_dang;
+      }
+      print(e.toString());
+    }
+    return user;
+  }
 }

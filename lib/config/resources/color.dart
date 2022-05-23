@@ -53,7 +53,7 @@ const textDropDownColor = Color(0xff3D5586);
 const bgDropDown = Color(0xFFE2E8F0);
 const bgButtonDropDown = Color(0xff7966FF);
 const bgQLVBTablet = Color(0xffF9FAFF);
-
+const welCome = Color(0xFF4E4E4E);
 const bgrCalendar = Color(0xFFE9E9E9);
 const bgrChart = Color(0xFF00CFE8);
 const homeColor = Color(0xffEEF3FF);
@@ -133,6 +133,8 @@ Color cellColorborder = Color(0xffDBDFEF).withOpacity(0.5);
 Color cellColor = Color(0xffDBDFEF).withOpacity(0.1);
 
 const dateColor = Color(0xFF667793);
+
+const buttomColor = Color(0xFFA2AEBD);
 
 //tất cả chủ đề color
 const textColorTongTin = Color(0xFF39CEAD);
