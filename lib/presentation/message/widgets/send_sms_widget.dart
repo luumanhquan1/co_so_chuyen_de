@@ -5,14 +5,20 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SendSmsWidget extends StatelessWidget {
+class SendSmsWidget extends StatefulWidget {
   final String? hintText;
   final TextEditingController? controller;
   final Function(String)? onChange;
-  final Function() sendTap;
+  final Function(String) sendTap;
   const SendSmsWidget({Key? key, this.hintText, this.controller, this.onChange,required this.sendTap})
       : super(key: key);
 
+  @override
+  State<SendSmsWidget> createState() => _SendSmsWidgetState();
+}
+
+class _SendSmsWidgetState extends State<SendSmsWidget> {
+  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,23 +35,25 @@ class SendSmsWidget extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+
         onChanged: (value) {
-          if (onChange != null) {
-            onChange!(value);
+          if (widget.onChange != null) {
+            widget.onChange!(value);
           }
         },
         controller: controller,
         style: textNormal(titleCalenderWork, 15),
         decoration: InputDecoration(
           filled: true,
-          hintText: hintText ?? S.current.search_for_contacts,
+          hintText: widget.hintText ?? S.current.search_for_contacts,
           hintStyle: textNormal(hintColor, 12),
           fillColor: backgroundColorApp,
           contentPadding: EdgeInsets.symmetric(horizontal: 20),
           suffixIcon: SizedBox(
               width: 88,
               child: GestureDetector(onTap: (){
-                sendTap();
+                widget.sendTap(controller.text);
+                controller.text = '';
               },child: Center(child: SvgPicture.asset(ImageAssets.icSendSms)))),
           border: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),

@@ -1,6 +1,6 @@
+import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
-import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -27,16 +27,16 @@ class LoginCubit extends BaseCubit<LoginState> {
     if (user != null) {
       final UserInfoModel dataUser = UserInfoModel(
         userId: user.uid,
-        avataUrl: user.photoURL,
+        avatarUrl: user.photoURL,
         email: user.email,
-        birthday: user.email,
+        birthday: 0,
         gender: true,
         nameDisplay: user.displayName,
-        createAt: '',
-        updateAt: '',
+        createAt: 0,
+        updateAt: 0,
       );
 
-      HiveLocal.saveDataUser(dataUser);
+      idUser = user.uid;
     }
     showContent();
     return user;

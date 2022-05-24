@@ -1,6 +1,9 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_cubit.dart';
 import 'package:ccvc_mobile/presentation/main_message/widgets/tin_nhan_cell.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 
@@ -19,6 +22,14 @@ class MainMessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MainMessageScreen> {
+  MainMessageCubit cubit = MainMessageCubit();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit.fetchRoom();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,26 +67,39 @@ class _MessageScreenState extends State<MainMessageScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 child: Column(
                   children: [
-                    BaseSearchBar(),
+                    const BaseSearchBar(),
                     const SizedBox(
                       height: 30,
                     ),
-                    Column(
-                      children: List.generate(
-                          100,
-                          (index) => Padding(
+                    StreamBuilder<List<RoomChatModel>>(
+                        stream: cubit.getRoomChat,
+                        builder: (context, snapshot) {
+                          final data = snapshot.data ?? <RoomChatModel>[];
+                          return Column(
+                            children: List.generate(data.length, (index) {
+                              final result = data[index];
+
+                              return Padding(
                                 padding: const EdgeInsets.only(bottom: 16),
                                 child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MessageScreen()));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MessageScreen(
+                                            idRoom: result.roomId,
+                                            chatModel: result,
+                                          ),
+                                        ),
+                                      );
                                     },
-                                    child: TinNhanCell()),
-                              )),
-                    )
+                                    child: TinNhanCell(
+                                      listPeople: data[index].peopleChats,
+                                    )),
+                              );
+                            }),
+                          );
+                        })
                   ],
                 ),
               ),

@@ -1,17 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:flutter/material.dart';
 
 class TinNhanCell extends StatelessWidget {
-  const TinNhanCell({Key? key}) : super(key: key);
+  final List<PeopleChat> listPeople;
+  const TinNhanCell({Key? key,required this.listPeople}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final data = listPeople.first;
     return Container(
       height: 103,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.6),
           borderRadius: const BorderRadius.all(Radius.circular(30))),
@@ -32,7 +35,7 @@ class TinNhanCell extends StatelessWidget {
                   shape: BoxShape.circle, color: Colors.teal),
               child: CachedNetworkImage(
                 imageUrl:
-                    'https://image.thanhnien.vn/w660/Uploaded/2022/wpxlcqjwq/2020_07_13/ngoctrinhmuonsinhcon1_swej.jpg',
+                data.avatarUrl,
                 errorWidget: (context, url, error) => Icon(Icons.error),
                 fit: BoxFit.cover,
               ),
@@ -48,7 +51,7 @@ class TinNhanCell extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Malena Tudi',
+                    data.nameDisplay,
                     style: textNormal(colorBlack, 12),
                   ),
                   const SizedBox(

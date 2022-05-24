@@ -10,7 +10,7 @@ class SmsCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMe = smsModel.isMe;
+    final isMe = smsModel.isMe();
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child:  smsModel.smsType.getSmsWidget(context,smsModel),

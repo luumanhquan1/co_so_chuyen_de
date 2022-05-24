@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:flutter/material.dart';
 class HeaderMessWidget extends StatelessWidget {
-  const HeaderMessWidget({Key? key}) : super(key: key);
+  final PeopleChat peopleChat;
+  const HeaderMessWidget({Key? key,required this.peopleChat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class HeaderMessWidget extends StatelessWidget {
                       shape: BoxShape.circle, color: Colors.teal),
                   child: CachedNetworkImage(
                     imageUrl:
-                    'https://image.thanhnien.vn/w660/Uploaded/2022/wpxlcqjwq/2020_07_13/ngoctrinhmuonsinhcon1_swej.jpg',
+                    peopleChat.avatarUrl,
                     errorWidget: (context, url, error) =>
                         Icon(Icons.error),
                     fit: BoxFit.cover,
@@ -59,7 +61,7 @@ class HeaderMessWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Malena Tudi',
+                      peopleChat.nameDisplay,
                       style: textNormal(colorBlack, 20),
                     ),
                     const SizedBox(

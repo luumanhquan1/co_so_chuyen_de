@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 extension SmsExtension on SmsType {
   Widget getSmsWidget(BuildContext context,MessageSmsModel model) {
-    final isMe = model.isMe;
+    final isMe = model.isMe();
     switch (this) {
       case SmsType.Sms:
         return Container(
@@ -28,7 +28,7 @@ extension SmsExtension on SmsType {
                       : const Radius.circular(4))),
           padding: const EdgeInsets.all(16),
           child: Text(
-            model.content,
+            model.content ?? '',
             style: textNormal(greyHide, 12),
           ),
         );
@@ -46,7 +46,7 @@ extension SmsExtension on SmsType {
           ),
           child: CachedNetworkImage(
             imageUrl:
-           model.content,
+           model.content ?? '',
             errorWidget: (context, url, error) => Icon(Icons.error),
             fit: BoxFit.cover,
           ),

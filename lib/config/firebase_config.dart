@@ -3,18 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseSetup {
-  late CollectionReference usersCollection;
-  late CollectionReference postsCollection;
+  static late DocumentReference fireStore;
 
-  Future<void> setUp() async {
+  static Future<void> setUp() async {
     await Firebase.initializeApp();
-    usersCollection = FirebaseFirestore.instance
+    fireStore = FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection)
-        .doc(DefaultEnv.developDoc)
-        .collection(DefaultEnv.usersCollection);
-    postsCollection = FirebaseFirestore.instance
-        .collection(DefaultEnv.appCollection)
-        .doc(DefaultEnv.developDoc)
-        .collection(DefaultEnv.postsCollection);
+        .doc(DefaultEnv.developDoc);
   }
 }

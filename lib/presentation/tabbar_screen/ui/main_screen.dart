@@ -1,4 +1,4 @@
-import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
@@ -53,6 +53,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
             onChange: (value) {
               _addScreen(value);
               _cubit.selectTab(value);
+
             },
           ),
         );
