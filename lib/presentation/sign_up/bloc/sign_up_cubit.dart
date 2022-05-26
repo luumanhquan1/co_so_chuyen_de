@@ -42,7 +42,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
       dataUser = UserInfoModel(
         userId: user.uid,
         email: user.email,
-        birthday: '',
+        birthday: 0,
         gender: true,
         nameDisplay: user.displayName,
         createAt: '',
@@ -58,7 +58,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
   ) async {
     showLoading();
     dataUser.gender = gender.getGender;
-    dataUser.birthday = birthDay.formatDdMMYYYY;
+    dataUser.birthday = birthDay.convertToTimesTamp;
     dataUser.nameDisplay = name;
 
     if(image == null) {

@@ -1,3 +1,5 @@
+import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:hive/hive.dart';
 
 part 'user_info.g.dart';
@@ -11,7 +13,7 @@ class UserInfoModel {
   @HiveField(2)
   String? email;
   @HiveField(3)
-  String? birthday;
+  int? birthday;
   @HiveField(4)
   bool? gender;
   @HiveField(5)
