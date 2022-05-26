@@ -29,7 +29,7 @@ class LoginCubit extends BaseCubit<LoginState> {
         userId: user.uid,
         avataUrl: user.photoURL,
         email: user.email,
-        birthday: user.email,
+        birthday: 0,
         gender: true,
         nameDisplay: user.displayName,
         createAt: '',
