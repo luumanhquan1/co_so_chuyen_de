@@ -24,8 +24,6 @@ class UserModel {
       this.updateAt});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    log(json['avatar_url'] ?? 'cccccccccccccccccc');
-    log('aaaaaaaaaaaaaaaaa'+json.toString());
     nameDisplay = json['name_display'] as String?;
     gender = json['gender'] as bool?;
     onlineFlag = json['online_flag'] as bool?;
@@ -36,7 +34,7 @@ class UserModel {
     userId = json['user_id'] as String?;
     birthday = json['bỉthday'] as int?;
   }
-  Map<String, dynamic> PostModelToJson(UserModel instance) => <String, dynamic>{
+  Map<String, dynamic> toJson(UserModel instance) => <String, dynamic>{
         'email': instance.email,
         'user_id': instance.userId,
         'avatar_url': instance.avatarUrl,
@@ -47,4 +45,9 @@ class UserModel {
         'online_flag': instance.onlineFlag,
         'birthday': instance.birthday
       };
+
+  @override
+  String toString() {
+    return 'UserModel{avatarUrl: $avatarUrl, userId: $userId, email: $email, birthday: $birthday, gender: $gender, nameDisplay: $nameDisplay, onlineFlag: $onlineFlag, createAt: $createAt, updateAt: $updateAt}';
+  }
 }

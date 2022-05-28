@@ -30,8 +30,8 @@ Future<void> mainApp() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
-  await HiveLocal.init();
+  // Hive.init(appDocumentDirectory.path);
+  // await HiveLocal.init();
   await PrefsService.init();
   await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(

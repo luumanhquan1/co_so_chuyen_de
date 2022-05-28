@@ -29,7 +29,7 @@ class _AvataWidgetState extends State<AvataWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
+     // overflow: Overflow.visible,
       children: [
         if (_image == null)
           const CircleAvatar(

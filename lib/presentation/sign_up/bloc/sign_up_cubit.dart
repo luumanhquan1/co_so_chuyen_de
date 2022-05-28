@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_state.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
@@ -22,7 +22,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
   bool passIsError = false;
   String gender = 'Nam';
   DateTime birthDay = DateTime(2001, 1, 1);
-  UserInfoModel dataUser = UserInfoModel.empty();
+  UserModel dataUser = UserModel();
   Uint8List? image;
 
   BehaviorSubject<DateTime> birthDaySubject =
@@ -39,14 +39,14 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     );
 
     if (user != null) {
-      dataUser = UserInfoModel(
+      dataUser = UserModel(
         userId: user.uid,
         email: user.email,
         birthday: 0,
         gender: true,
         nameDisplay: user.displayName,
-        createAt: '',
-        updateAt: '',
+        createAt: 0,
+        updateAt: 0,
       );
     }
     showContent();
@@ -60,9 +60,11 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     dataUser.gender = gender.getGender;
     dataUser.birthday = birthDay.convertToTimesTamp;
     dataUser.nameDisplay = name;
+    dataUser.createAt= DateTime.now().millisecondsSinceEpoch;
+    dataUser.updateAt= DateTime.now().millisecondsSinceEpoch;
 
     if(image == null) {
-      dataUser.avataUrl = ImageAssets.imgEmptyAvata;
+      dataUser.avatarUrl = ImageAssets.imgEmptyAvata;
     } else {
       await FireStoreMethod.uploadImageToStorage(
         dataUser.userId ?? '',
@@ -71,7 +73,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
 
       final String photoImage =
       await FireStoreMethod.downImage(dataUser.userId ?? '');
-      dataUser.avataUrl = photoImage;
+      dataUser.avatarUrl = photoImage;
     }
 
     await FireStoreMethod.saveInformationUser(

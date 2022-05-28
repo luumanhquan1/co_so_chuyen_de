@@ -43,7 +43,7 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    //   log('vvvvvvvvvvvvvv' + widget.postModel.author!.avatarUrl!);
+       log('vvvvvvvvvvvvvv' + widget.userId);
     return GestureDetector(
       onTap: widget.onTap,
 //      onDoubleTap: onLike,

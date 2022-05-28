@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
@@ -12,11 +13,13 @@ import 'package:rxdart/subjects.dart';
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(HomeStateInitial())
   {
-    // getUserInfo(userId);
-    // getAllPosts();
+     userId =  PrefsService.getUserId();
+    log(userId);
+    getUserInfo(userId);
+    getAllPosts();
   }
 
-
+  String userId='';
   final BehaviorSubject<List<PostModel>> _posts =
   BehaviorSubject<List<PostModel>>.seeded([]);
 
@@ -69,6 +72,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       final result = await _userRepopsitory.getUserProfile(userId: userId);
       if(result != null)
         {
+          log('pppp'+result.toString());
           _user.sink.add(result);
        //   showContent();
         }

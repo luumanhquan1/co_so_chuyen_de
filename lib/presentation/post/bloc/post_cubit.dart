@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
@@ -14,13 +15,15 @@ import 'package:rxdart/subjects.dart';
 
 class PostCubit extends BaseCubit<PostState> {
   PostCubit(String postId) : super(PostState()){
-    getUserInfo('G50uaqIsy0QiZ9AgckORnl1ZHhl2');
+    userId =  PrefsService.getUserId();
+    log(userId);
+    getUserInfo(userId);
     updatePost(postId);
 
   }
  final BehaviorSubject<PostModel> _posts =
   BehaviorSubject<PostModel>.seeded(PostModel());
-
+  String userId='';
   Stream<PostModel> get post => _posts.stream;
   // //
   // // final BehaviorSubject<int> _unreadNotis =

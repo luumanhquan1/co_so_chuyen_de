@@ -5,7 +5,7 @@ import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsService {
-  static const _PREF_LANGUAGE = 'pref_language';
+  static const _PREF_USERID = 'pref_user_id';
   static const _PREF_TOKEN = 'pref_token';
   static const _PREF_REFRESH_TOKEN = 'pref_token';
 
@@ -41,14 +41,14 @@ class PrefsService {
     return prefs.setString(_PREF_DATA_USER, data);
   }
 
-  static Future<bool> saveLanguage(String code) async {
+  static Future<bool> saveUserId(String code) async {
     final prefs = await _instance;
-    return prefs.setString(_PREF_LANGUAGE, code);
+    return prefs.setString(_PREF_USERID, code);
   }
 
 
-  static String getLanguage() {
-    return _prefsInstance?.getString(_PREF_LANGUAGE) ?? VI_CODE;
+  static String getUserId() {
+    return _prefsInstance?.getString(_PREF_USERID) ?? '';
   }
 
   Future<void> clearData() async {

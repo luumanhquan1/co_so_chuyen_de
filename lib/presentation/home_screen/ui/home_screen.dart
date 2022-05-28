@@ -19,8 +19,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key, required this.userId}) : super(key: key);
-  String userId;
+  HomeScreen({Key? key,
+  //  required this.userId
+  }) : super(key: key);
+  //String userId;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -31,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeCubit _homeCubit = HomeCubit();
   @override
   void initState() {
-    _homeCubit.getUserInfo(widget.userId);
-    _homeCubit.getAllPosts();
+    // _homeCubit.getUserInfo(widget.userId);
+    // _homeCubit.getAllPosts();
   }
 
   @override
