@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
@@ -45,9 +46,8 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return Scaffold(
-          backgroundColor: Colors.white,
-        );
+        return  HomeScreen();
+
       case TabBarType.likeTab:
         return Scaffold(
           backgroundColor: Colors.red,

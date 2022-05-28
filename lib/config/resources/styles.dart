@@ -1,7 +1,8 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
+import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 const emptyView = SizedBox(width: 0, height: 0);
 
 /// height and width space
@@ -115,11 +116,47 @@ TextStyle textNormalCustom({
   );
 }
 
-TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
+TextStyle titleAppbar({double? fontSize, Color color = titleColor}) {
   return GoogleFonts.roboto(
     color: color,
-    fontWeight: FontWeight.w500,
-    fontSize: fontSize,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.sp,
     fontStyle: FontStyle.normal,
   );
 }
+
+TextStyle heading2({Color color = titleColor}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: FontWeight.bold,
+    fontSize: 25.sp,
+    fontStyle: FontStyle.normal,
+  );
+}
+
+TextStyle username({Color color = titleColor}) {
+  return GoogleFonts.roboto(
+    color: ThemeColor.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.sp,
+    fontStyle: FontStyle.normal,
+  );
+}
+
+TextStyle detail({Color color = titleColor}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: FontWeight.w400,
+    fontSize: 12.8.sp,
+    fontStyle: FontStyle.normal,
+  );
+}
+
+  TextStyle caption({Color color = titleColor}) {
+    return GoogleFonts.roboto(
+      color: color,
+      fontWeight: FontWeight.normal,
+      fontSize: 16.sp,
+      fontStyle: FontStyle.normal,
+    );
+  }
