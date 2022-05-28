@@ -26,7 +26,22 @@ dependencies:
   #Favourite library
   share: ^2.0.1
  # provider: ^5.0.0
-  device_info: 2.0.0
+  #device_info: 2.0.0
+
+  pull_to_refresh: ^2.0.0
+
+  #loading
+  shimmer: ^2.0.0
+
+  uuid: ^3.0.5
+  fluttertoast: 8.0.3
+
+  adaptive_dialog: ^1.5.0
+
+  #firebase
+  firebase_core: ^1.16.0
+  firebase_storage: ^10.2.15
+  cloud_firestore: ^3.1.14
 
   shimmer:
 
@@ -51,7 +66,7 @@ dependencies:
   intl: ^0.17.0
   event_bus: ^2.0.0
   equatable: ^2.0.3
-  fluttertoast: 8.0.3
+
   retrofit: ^2.0.1
   json_annotation: ^4.0.1
   flutter_screenutil: 5.0.0
@@ -61,7 +76,7 @@ dependencies:
   rxdart: ^0.27.1
   hive: ^2.0.5
   just_audio: ^0.9.20
-  speech_to_text: 5.4.3
+ # speech_to_text: 5.4.3
   flutter_tts: ^3.3.3
 
   #  permission_handler: ^8.1.4+2

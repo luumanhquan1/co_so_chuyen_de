@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/splash/splash_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class AppRouter {
   static const dfNamed = Navigator.defaultRouteName;
 
   static const splash = '/splash';
+  static const home = '/home';
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     // final args = settings.arguments;
@@ -16,6 +18,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (ctx) => const SplashScreen(),
         );
+      // case home:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomeScreen()
+      //   );
     }
   }
 }
