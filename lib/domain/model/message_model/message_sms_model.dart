@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:uuid/uuid.dart';
 
 enum SmsType { Sms, Image }
@@ -14,6 +15,7 @@ class MessageSmsModel {
     smsType = fromEnum(loaiTinNhan ?? 0);
   }
   bool isMe(){
+    final idUser = PrefsService.getUserId();
     if(senderId == idUser){
       return true;
     }
@@ -31,6 +33,7 @@ class MessageSmsModel {
 
   Map<String, dynamic> toJson() {
     var uuid = Uuid();
+    final idUser = PrefsService.getUserId();
     final idRoom = uuid.v1();
     final map = <String, dynamic>{};
     map['message_id'] = idRoom;

@@ -10,7 +10,7 @@ import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageService {
-  static Future<List<RoomChatModel>> getRoomChat() async {
+  static Future<List<RoomChatModel>> getRoomChat( String idUser) async {
     final listRoom = await FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(idUser)
@@ -32,8 +32,9 @@ class MessageService {
             .get();
         final jsonProfileRoom = profileRoom.data();
         if (jsonProfileRoom != null) {
-          final listPeople = await getChatRoomUser(
-              jsonProfileRoom['people_chat'] as List<dynamic>);
+          final listPeople = await _getChatRoomUser(
+              jsonProfileRoom['people_chat'] as List<dynamic>,idUser);
+
           data.add(RoomChatModel(
               roomId: value,
               peopleChats: listPeople,
@@ -54,12 +55,13 @@ class MessageService {
         .collection(DefaultEnv.profileCollection)
         .get();
     for (final element in result.docs) {
+      log('${element.data()}');
       userProfile = UserInfoModel.fromJson(element.data());
     }
     return userProfile;
   }
 
-  static Future<List<PeopleChat>> getChatRoomUser(List<dynamic> data) async {
+  static Future<List<PeopleChat>> _getChatRoomUser(List<dynamic> data,String idUser) async {
     final pepole = <PeopleChat>[];
     for (final element in data) {
       final id = element['user_id'];
@@ -114,6 +116,7 @@ class MessageService {
     doc.update({
       'data': FieldValue.arrayUnion([messageSmsModel.toJson()])
     }).onError((error, stackTrace) {
+
       if (error.toString().contains('cloud_firestore/not-found')) {
         doc.set({
           'data': FieldValue.arrayUnion([messageSmsModel.toJson()])

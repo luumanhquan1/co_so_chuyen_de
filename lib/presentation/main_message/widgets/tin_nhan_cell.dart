@@ -5,12 +5,12 @@ import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:flutter/material.dart';
 
 class TinNhanCell extends StatelessWidget {
-  final List<PeopleChat> listPeople;
-  const TinNhanCell({Key? key,required this.listPeople}) : super(key: key);
+  final PeopleChat peopleChat;
+  const TinNhanCell({Key? key,required this.peopleChat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final data = listPeople.first;
+    final data = peopleChat;
     return Container(
       height: 103,
       width: double.infinity,

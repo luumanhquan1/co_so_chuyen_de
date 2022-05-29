@@ -14,7 +14,7 @@ extension SmsExtension on SmsType {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width - 100
           ),
-          margin: const EdgeInsets.only(bottom: 16),
+          margin: const EdgeInsets.only(bottom: 5),
           decoration: BoxDecoration(
               color: indicatorColor,
               borderRadius: BorderRadius.only(

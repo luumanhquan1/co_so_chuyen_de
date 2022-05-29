@@ -17,6 +17,10 @@ extension StringMoneyFormat on String {
     final String result = formatValue.format(money);
     return result;
   }
+  
+  String get removeChar {
+    return replaceAll(RegExp(r'[^\w\s]+'), 'a');
+  }
 }
 
 extension VietNameseParse on String {
@@ -58,7 +62,7 @@ extension FormatAddressConfirm on String {
   }
 
   DateTime convertStringToDate() {
-    return DateFormat('yyyy-MM-dd').parse(this);
+    return DateFormat('dd-MM-yyyy').parse(this);
   }
 }
 
@@ -71,11 +75,10 @@ extension StringParse on String {
   }
 }
 
-
 extension CheckValidate on String {
   String? checkEmail() {
     final isCheck = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}")
         .hasMatch(this);
     if (isCheck) {
       return null;
@@ -100,6 +103,16 @@ extension CheckValidate on String {
     return null;
   }
 
+  String? xacNhanMatKhau(String passWord) {
+    if (trim().isEmpty) {
+      return S.current.khong_duoc_de_trong;
+    }
+    if (trim() != passWord) {
+      return S.current.nhap_lai_mat_khau_chua_chinh_xac;
+    }
+    return null;
+  }
+
   String? checkInt() {
     final result = checkNull();
     if (result != null) {
@@ -112,4 +125,3 @@ extension CheckValidate on String {
     }
   }
 }
-

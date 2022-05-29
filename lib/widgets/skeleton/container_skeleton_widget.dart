@@ -1,8 +1,6 @@
 
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'skeleton_widget.dart';
 
 class ContainerSkeletonWidget extends StatelessWidget {
@@ -15,14 +13,14 @@ class ContainerSkeletonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? 60,
+      width: width ?? 60.w,
       height: height ?? 86.h,
       child: SkeletonWidget(
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius ?? 12),
               shape: BoxShape.rectangle,
-              color: backgroundColorApp),
+              color: Colors.white),
         ),
       ),
     );

@@ -1,5 +1,3 @@
-
-import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +17,7 @@ class LineSkeletonWidget extends StatelessWidget {
         height: height ?? 8.0.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(80),
-          color:backgroundColorApp,
+          color: Colors.white,
         ),
       ),
     );

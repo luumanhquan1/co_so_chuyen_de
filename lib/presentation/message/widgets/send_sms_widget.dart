@@ -52,8 +52,10 @@ class _SendSmsWidgetState extends State<SendSmsWidget> {
           suffixIcon: SizedBox(
               width: 88,
               child: GestureDetector(onTap: (){
-                widget.sendTap(controller.text);
-                controller.text = '';
+             if(controller.text.isNotEmpty){
+               widget.sendTap(controller.text);
+               controller.text = '';
+             }
               },child: Center(child: SvgPicture.asset(ImageAssets.icSendSms)))),
           border: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),

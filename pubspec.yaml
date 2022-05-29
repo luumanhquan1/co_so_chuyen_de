@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.6+2
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,9 +26,25 @@ dependencies:
   #Favourite library
   share: ^2.0.1
  # provider: ^5.0.0
-  device_info: 2.0.0
+  #device_info: 2.0.0
 
-  shimmer:
+  pull_to_refresh: ^2.0.0
+
+  #loading
+  shimmer: ^2.0.0
+
+  uuid: ^3.0.5
+  fluttertoast: 8.0.3
+
+  adaptive_dialog: ^1.5.0
+
+  #firebase
+  firebase_core: ^1.16.0
+  firebase_storage: ^10.2.15
+  cloud_firestore: ^3.1.14
+
+
+
 
   package_info: ^2.0.0
   google_fonts: 2.0.0
@@ -40,32 +56,38 @@ dependencies:
   lint: ^1.6.0
   table_calendar: ^3.0.2
   image_picker: ^0.8.4+3
-
+  syncfusion_flutter_charts: ^19.4.38
+  flutter_rounded_date_picker: ^2.0.2
+  syncfusion_flutter_calendar: ^19.4.40
   date_format: ^2.0.2
-
+  pin_code_fields: ^7.3.0
   keyboard_dismisser: ^2.0.0
-
+  sticky_headers: ^0.2.0
   #Library helpful
   intl: ^0.17.0
   event_bus: ^2.0.0
   equatable: ^2.0.3
-  fluttertoast: 8.0.3
   retrofit: ^2.0.1
   json_annotation: ^4.0.1
   flutter_screenutil: 5.0.0
   cached_network_image: ^3.0.0
-
+  flutter_staggered_grid_view: ^0.4.0
   logger: any
   rxdart: ^0.27.1
   hive: ^2.0.5
-
+  just_audio: ^0.9.20
+ # speech_to_text: 5.4.3
+  flutter_tts: ^3.3.3
 
   #  permission_handler: ^8.1.4+2
   file_picker: ^4.0.2
   cool_alert: ^1.1.0
-
+  expandable: 5.0.1
   queue: ^3.1.0+1
+  readmore: any
 
+  dots_indicator: ^2.0.0
+  dotted_border:
   #svg
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
@@ -78,12 +100,9 @@ dependencies:
   injectable: ^1.4.1
   freezed: ^0.14.2
   tuple: ^2.0.0
-
-
-  cloud_firestore: ^3.1.14
-  uuid: ^3.0.6
-  firebase_auth: ^2.0.0
-  firebase_core: ^1.10.0
+  html_editor_enhanced: ^2.4.0+1
+  translator: ^0.1.7
+  flutter_contacts:
 
 dev_dependencies:
   flutter_test:
@@ -94,11 +113,12 @@ dev_dependencies:
   json_serializable: ^4.1.0
   injectable_generator: ^1.4.1
   flutter_lints: ^1.0.0
-
-
-
-
-
+  #firebase
+  firebase_auth: ^2.0.0
+  firebase_core: ^1.10.0
+  cloud_firestore: ^3.1.8
+  firebase_storage: ^10.2.8
+  firebase_messaging: 10.0.9
 flutter:
   uses-material-design: true
   assets:

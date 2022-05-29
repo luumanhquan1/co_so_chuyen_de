@@ -4,11 +4,13 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_cubit.dart';
+import 'package:ccvc_mobile/presentation/main_message/widgets/loading_skeleton_message_widget.dart';
 import 'package:ccvc_mobile/presentation/main_message/widgets/tin_nhan_cell.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/textformfield/base_search_bar.dart';
+import 'package:ccvc_mobile/widgets/views/state_loading_skeleton.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -71,17 +73,20 @@ class _MessageScreenState extends State<MainMessageScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    StreamBuilder<List<RoomChatModel>>(
-                        stream: cubit.getRoomChat,
-                        builder: (context, snapshot) {
-                          final data = snapshot.data ?? <RoomChatModel>[];
-                          return Column(
-                            children: List.generate(data.length, (index) {
-                              final result = data[index];
+                    StateLoadingSkeleton(
+                      stream: cubit.stateStream,
+                      skeleton: const LoadingSkeletonMessageWidget(),
+                      child: StreamBuilder<List<RoomChatModel>>(
+                          stream: cubit.getRoomChat,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? <RoomChatModel>[];
+                            return Column(
+                              children: List.generate(data.length, (index) {
+                                final result = data[index];
 
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: GestureDetector(
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                         context,
@@ -89,17 +94,20 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                           builder: (context) => MessageScreen(
                                             idRoom: result.roomId,
                                             chatModel: result,
+                                            peopleChat: result.getPeople(),
                                           ),
                                         ),
                                       );
                                     },
                                     child: TinNhanCell(
-                                      listPeople: data[index].peopleChats,
-                                    )),
-                              );
-                            }),
-                          );
-                        })
+                                      peopleChat: result.getPeople(),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            );
+                          }),
+                    )
                   ],
                 ),
               ),

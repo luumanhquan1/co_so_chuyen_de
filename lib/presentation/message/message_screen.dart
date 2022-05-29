@@ -16,7 +16,8 @@ import 'package:flutter/material.dart';
 class MessageScreen extends StatefulWidget {
   final String idRoom;
   final RoomChatModel chatModel;
-  const MessageScreen({Key? key, required this.idRoom, required this.chatModel})
+  final PeopleChat peopleChat;
+  const MessageScreen({Key? key, required this.idRoom, required this.chatModel,required this.peopleChat})
       : super(key: key);
 
   @override
@@ -39,9 +40,7 @@ class _MessageScreenState extends State<MessageScreen> {
         child: Column(
           children: [
             HeaderMessWidget(
-              peopleChat: widget.chatModel.peopleChats
-                  .where((element) => element.userId != idUser)
-                  .first,
+              peopleChat: widget.peopleChat,
             ),
             const SizedBox(
               height: 16,
@@ -50,7 +49,7 @@ class _MessageScreenState extends State<MessageScreen> {
               child: SingleChildScrollView(
                 reverse: true,
                 child: StreamBuilder<List<MessageSmsModel>>(
-                    stream: MessageService.smsRealTime(widget.idRoom),
+                    stream: cubit.chatStream(widget.idRoom),
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? <MessageSmsModel>[];
                       return Column(
