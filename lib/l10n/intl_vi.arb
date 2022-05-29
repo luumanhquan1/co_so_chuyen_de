@@ -8,6 +8,8 @@
   "retry": "Retry",
   "unauthorized": "Your session has expired. Please sign in.",
   "search": "Search...",
+  "search_for_contacts" : "Tìm kiếm...",
+  "messages"  : "Messages",
   "hello": "Xin chào",
   "wellcom_login": "Vui lòng đăng nhập để sử dụng ứng dụng",
   "account": "Tài khoản",

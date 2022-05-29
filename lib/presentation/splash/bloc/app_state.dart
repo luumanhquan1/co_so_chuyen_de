@@ -7,7 +7,7 @@ class AppState {
   String token = '';
   final BehaviorSubject<String> getToken = BehaviorSubject<String>();
   void getTokenPrefs() {
-    token = PrefsService.getToken();
+    token = PrefsService.getUserId();
     getToken.sink.add(token);
   }
 

@@ -28,12 +28,9 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
-  // Hive.init(appDocumentDirectory.path);
-  // await HiveLocal.init();
+
   await PrefsService.init();
-  await Firebase.initializeApp();
+  await FirebaseSetup.setUp();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

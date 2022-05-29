@@ -1,6 +1,11 @@
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
+
+import 'package:ccvc_mobile/presentation/main_message/main_message_screen.dart';
+
+
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
+
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 
@@ -53,7 +58,7 @@ extension TabbarEnum on TabBarType {
           backgroundColor: Colors.red,
         );
       case TabBarType.message:
-        return const MessageScreen();
+        return const MainMessageScreen();
       case TabBarType.profile:
         return Scaffold(
           backgroundColor: Colors.red,
