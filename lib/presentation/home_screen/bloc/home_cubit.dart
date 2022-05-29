@@ -80,18 +80,8 @@ class HomeCubit extends BaseCubit<HomeState> {
         showError();
       }
 
-    FirebaseFirestore.instance
-        .collection(DefaultEnv.appCollection)
-        .doc(DefaultEnv.developDoc)
-        .collection(DefaultEnv.postsCollection)
-        .snapshots()
-        .listen((event) async {
-      if (event.docs == null) {
-        return null;
-      } else {}
 
 
-    });
 
     // }catch (e){
     //   log(e.toString());

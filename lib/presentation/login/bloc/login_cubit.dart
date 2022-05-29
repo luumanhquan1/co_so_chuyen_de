@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'login_state.dart';
@@ -39,6 +40,8 @@ class LoginCubit extends BaseCubit<LoginState> {
       // HiveLocal.saveDataUser(dataUser);
 
     await PrefsService.saveUserId(user.uid);
+
+    await UserRepopsitory().updateOnline(userId: user.uid, onlineFlag: false);
     }
     showContent();
     return user;
