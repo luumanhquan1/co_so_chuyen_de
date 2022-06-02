@@ -5,7 +5,7 @@ import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:html_editor_enhanced/utils/utils.dart';
+import 'package:uuid/uuid.dart';
 
 class FireStoreMethod {
   static Future<void> saveInformationUser({
@@ -18,7 +18,7 @@ class FireStoreMethod {
         .collection(DefaultEnv.users)
         .doc(id)
         .collection(DefaultEnv.profile)
-        .doc(getRandString(15).removeChar)
+        .doc(const Uuid().v1())
         .set(
       user.toJson(user),
     );

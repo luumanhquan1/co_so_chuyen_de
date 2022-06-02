@@ -8,7 +8,6 @@ static const appCollection = 'social-network';
 static const profileCollection = 'profile';
 static const friendsCollection = 'friends';
 static const messCollection = 'message';
-static const roomChartCollection = 'room-chat';
 static const thongTinRoomChatCollect = 'thong-tin';
 static const chatsCollection = 'chats';
 
