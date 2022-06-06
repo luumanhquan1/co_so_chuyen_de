@@ -36,6 +36,10 @@
   "ngay_sinh" : "Ngày sinh",
   "gioi_tinh" : "Giới tính",
   "ho_ten" : "Họ tên",
-  "tao_tai_khoan_thanh_cong" : "Tạo tài khoản thành công"
+  "tao_tai_khoan_thanh_cong" : "Tạo tài khoản thành công",
+  "cap_nhat_tai_khoan" : "Cập nhật tài khoản",
+  "cap_nhat" : "Cập nhật",
+  "cap_nhat_tai_khoan_thanh_cong" : "Cập nhật tài khoản thành công"
+
 }
 

@@ -60,4 +60,8 @@ class FirebaseAuthentication {
     }
     return user;
   }
+
+  static Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

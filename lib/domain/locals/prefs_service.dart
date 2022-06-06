@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -46,9 +45,15 @@ class PrefsService {
     return prefs.setString(_PREF_USERID, code);
   }
 
-
   static String getUserId() {
     return _prefsInstance?.getString(_PREF_USERID) ?? '';
+  }
+
+  static Future<void> removeUserId() async {
+    final prefs = await _instance;
+    if (prefs.containsKey(_PREF_USERID)) {
+      await prefs.remove(_PREF_USERID);
+    }
   }
 
   Future<void> clearData() async {
