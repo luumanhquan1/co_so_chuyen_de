@@ -39,8 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final data = HiveLocal.getDataUser();
-    print('${data?.userId} ?????????');
     // _homeCubit.getUserInfo(widget.userId);
     // _homeCubit.getAllPosts();
   }
@@ -55,28 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: ( ) async{
-                    await FirebaseAuthentication.logout();
-                    await PrefsService.removeUserId();
-                     HiveLocal.removeDataUser();
-                    await Navigator.of(context)
-                        .pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                        const LoginScreen(),
-                      ),
-                    );
-
-                    await PrefsService.removeUserId();
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
-                  ),
-                ),
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.sp),
                   child: Row(

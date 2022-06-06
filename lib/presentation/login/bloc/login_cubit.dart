@@ -43,6 +43,21 @@ class LoginCubit extends BaseCubit<LoginState> {
     return user;
   }
 
+  Future<void> logOut() async{
+    await FirebaseAuthentication.logout();
+    await PrefsService.removeUserId();
+    HiveLocal.removeDataUser();
+    // await Navigator.of(context)
+    //     .pushReplacement(
+    //   MaterialPageRoute(
+    //     builder: (context) =>
+    //     const LoginScreen(),
+    //   ),
+    // );
+
+    await PrefsService.removeUserId();
+  }
+
   void closeDialog() {
     showContent();
   }
