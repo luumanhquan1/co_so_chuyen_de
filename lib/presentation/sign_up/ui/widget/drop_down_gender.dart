@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class DropDownGender extends StatefulWidget {
   final List<String> items;
+  final String? initData;
   final Function(String value) onChange;
 
   const DropDownGender({
     Key? key,
     required this.items,
     required this.onChange,
+    this.initData,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,11 @@ class _DropDownGenderState extends State<DropDownGender> {
   @override
   void initState() {
     super.initState();
-    dropDownValue = widget.items[0];
+    if (widget.initData == null) {
+      dropDownValue = widget.items[0];
+    } else {
+      dropDownValue = widget.initData ?? widget.items[0];
+    }
   }
 
   @override

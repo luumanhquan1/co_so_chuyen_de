@@ -16,5 +16,4 @@ class AppState {
     this.token = token;
     getToken.sink.add(token);
   }
-
 }
