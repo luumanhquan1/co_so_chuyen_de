@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageService {
@@ -47,8 +47,8 @@ class MessageService {
     return [];
   }
 
-  static Future<UserInfoModel> getUserChat(String id) async {
-    late UserInfoModel userProfile;
+  static Future<UserModel> getUserChat(String id) async {
+    late UserModel userProfile;
     final result = await FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(id)
@@ -56,7 +56,7 @@ class MessageService {
         .get();
     for (final element in result.docs) {
       log('${element.data()}');
-      userProfile = UserInfoModel.fromJson(element.data());
+      userProfile = UserModel.fromJson(element.data());
     }
     return userProfile;
   }

@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -10,7 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:html_editor_enhanced/utils/utils.dart';
 
 class FireStoreMethod {
-  static Future<UserInfoModel> getDataUserInfo(String id) async {
+  static Future<UserModel> getDataUserInfo(String id) async {
     final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
         .collection(DefaultEnv.socialNetwork)
         .doc(DefaultEnv.develop)
@@ -19,7 +18,7 @@ class FireStoreMethod {
         .collection(DefaultEnv.profile)
         .get();
 
-    final UserInfoModel userInfo = UserInfoModel.fromJson(
+    final UserModel userInfo = UserModel.fromJson(
       snap.docs.first.data(),
     );
     return userInfo;
@@ -27,7 +26,7 @@ class FireStoreMethod {
 
   static Future<void> updateUser(
     String userId,
-    UserInfoModel model,
+      UserModel model,
   ) async {
     try {
       final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
