@@ -9,7 +9,7 @@
   "unauthorized": "Your session has expired. Please sign in.",
   "search": "Search...",
   "search_for_contacts" : "Tìm kiếm...",
-  "messages"  : "Messages",
+  "messages" : "Messages",
   "hello": "Xin chào",
   "wellcom_login": "Vui lòng đăng nhập để sử dụng ứng dụng",
   "account": "Tài khoản",
@@ -39,7 +39,9 @@
   "tao_tai_khoan_thanh_cong" : "Tạo tài khoản thành công",
   "cap_nhat_tai_khoan" : "Cập nhật tài khoản",
   "cap_nhat" : "Cập nhật",
-  "cap_nhat_tai_khoan_thanh_cong" : "Cập nhật tài khoản thành công"
-
+  "cap_nhat_tai_khoan_thanh_cong" : "Cập nhật tài khoản thành công",
+  "doi_mat_khau" : "Đổi mật khẩu",
+  "mat_khau_hien_tai": "Mật khẩu hiện tại",
+  "mat_khau_moi" : "Mật khẩu mới",
+  "xac_nhan_mat_khau_moi" : "Xác nhận mật khẩu mới"
 }
-
