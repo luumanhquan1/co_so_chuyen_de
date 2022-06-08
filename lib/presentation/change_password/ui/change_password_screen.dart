@@ -64,41 +64,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  // SizedBox(
-                  //   height: 200,
-                  //   width: double.maxFinite,
-                  //   child: Stack(
-                  //     children: [
-                  //       SvgPicture.asset(
-                  //         ImageAssets.icBackgroundMessage,
-                  //         fit: BoxFit.fill,
-                  //       ),
-                  //       Center(
-                  //         child: Column(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: [
-                  //             Text(
-                  //               S.current.welcome_to,
-                  //               style: GoogleFonts.poppins(
-                  //                 color: welCome,
-                  //                 fontSize: 16,
-                  //                 fontWeight: FontWeight.w400,
-                  //               ),
-                  //             ),
-                  //             Text(
-                  //               S.current.socially,
-                  //               style: GoogleFonts.poppins(
-                  //                 color: welCome,
-                  //                 fontSize: 38,
-                  //                 fontWeight: FontWeight.w700,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  spaceH30,
+                  Image.asset(ImageAssets.imgChangePassword),
                   spaceH30,
                   TextFieldValidator(
                     controller: textTaiKhoanController,
@@ -125,7 +92,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       width: 20.0,
                       height: 20.0,
                       child: Center(
-                        child: SvgPicture.asset(ImageAssets.imgAcount),
+                        child: SvgPicture.asset(ImageAssets.icConfirm),
                       ),
                     ),
                     onChange: (text) {

@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/presentation/change_password/bloc/change_password_state.dart';
 
 class ChangePasswordCubit extends BaseCubit<ChangePasswordSate> {
@@ -10,4 +11,8 @@ class ChangePasswordCubit extends BaseCubit<ChangePasswordSate> {
   bool isHideEyeXacNhan = false;
   bool isHideEye1 = false;
   bool passIsError = false;
+
+  Future<void> changePassword(String newPassword) async {
+    await FirebaseAuthentication.changePassword(newPassword);
+  }
 }

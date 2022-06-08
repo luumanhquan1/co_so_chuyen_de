@@ -32,6 +32,20 @@ class FirebaseAuthentication {
     return user;
   }
 
+  static Future<void> changePassword(
+    String newPassword,
+  ) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+      await user?.updatePassword(newPassword).then((value) {
+      //Success, do something
+        print('');
+    }).catchError((error) {
+        print('$error');
+      //Error, show something
+      });
+  }
+
   static Future<User?> signUp({
     required String email,
     required String password,
