@@ -20,6 +20,7 @@ class ImageAssets {
   static const String imgViewHide = '$baseImg/ic_view_hide.svg';
   static const String imgView = '$baseImg/ic_view.svg';
   static const String imgPassword = '$baseImg/ic_password.svg';
+  static const String avatarDefault = '$baseImg/avatar_default.png';
 
 
 

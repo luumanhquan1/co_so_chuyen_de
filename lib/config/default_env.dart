@@ -10,5 +10,6 @@ static const friendsCollection = 'friends';
 static const messCollection = 'message';
 static const thongTinRoomChatCollect = 'thong-tin';
 static const chatsCollection = 'chats';
+static const relationshipsCollection = 'relationships';
 
 }
