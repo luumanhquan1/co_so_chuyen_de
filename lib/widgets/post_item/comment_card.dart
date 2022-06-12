@@ -68,8 +68,7 @@ class CommentCard extends StatelessWidget {
                           style:
                               detail(color: ThemeColor.black.withOpacity(0.7)),
                         ),
-                        canDelete
-                            ? Padding(
+                        if (canDelete) Padding(
                               padding:  EdgeInsets.only(left: 16.sp),
                               child: GestureDetector(
                                   onTap: () async {
@@ -94,8 +93,7 @@ class CommentCard extends StatelessWidget {
                                     style: detail(
                                         color: ThemeColor.black.withOpacity(0.7)),
                                   )),
-                            )
-                            : SizedBox()
+                            ) else const SizedBox()
                       ],
                     ),
                   )

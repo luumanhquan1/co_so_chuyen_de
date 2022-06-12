@@ -1,16 +1,8 @@
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
-
-import 'package:ccvc_mobile/presentation/main_message/main_message_screen.dart';
-
-
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
-import 'package:ccvc_mobile/presentation/message/message_screen.dart';
-
-
+import 'package:ccvc_mobile/presentation/main_message/main_message_screen.dart';
+import 'package:ccvc_mobile/presentation/update_user/ui/update_user_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-
-import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,6 +54,7 @@ extension TabbarEnum on TabBarType {
       case TabBarType.profile:
         return Scaffold(
           backgroundColor: Colors.red,
+          body: UpdateUserScreen(),
         );
       case TabBarType.empty:
         return const SizedBox();

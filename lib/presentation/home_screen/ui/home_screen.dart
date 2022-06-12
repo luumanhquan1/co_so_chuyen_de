@@ -2,10 +2,12 @@ import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
+import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
@@ -18,6 +20,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../domain/locals/hive_local.dart';
+import '../../../domain/locals/prefs_service.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
@@ -35,6 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeCubit _homeCubit = HomeCubit();
   @override
   void initState() {
+    super.initState();
+    final data = HiveLocal.getDataUser();
+    print('${data?.userId} ?????????');
     // _homeCubit.getUserInfo(widget.userId);
     // _homeCubit.getAllPosts();
   }
@@ -49,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.sp),
                   child: Row(
@@ -276,10 +285,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        ProfileScreen(
-                                                            id: (user.data
-                                                                as UserModel)))),
+                                                    builder: (_) => PostScreen(
+                                                          postId: e.postId,
+                                                        ))),
                                           ),
                                         ))
                                     .toList())),
