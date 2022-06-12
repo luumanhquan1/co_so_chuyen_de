@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
+import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -24,8 +25,9 @@ import '../../../domain/locals/hive_local.dart';
 import '../../../domain/locals/prefs_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key,
-  //  required this.userId
+  HomeScreen({
+    Key? key,
+    //  required this.userId
   }) : super(key: key);
   //String userId;
   @override
@@ -55,27 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: ( ) async{
-                    await FirebaseAuthentication.logout();
-                    await PrefsService.removeUserId();
-                     HiveLocal.removeDataUser();
-                    await Navigator.of(context)
-                        .pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                        const LoginScreen(),
-                      ),
-                    );
-
-                    await PrefsService.removeUserId();
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
-                  ),
-                ),
 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.sp),
@@ -165,70 +146,100 @@ class _HomeScreenState extends State<HomeScreen> {
               [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: ThemeColor.gray77,
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
                       child: PostItemSkeleton()),
                 ])
               ],
@@ -250,21 +261,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                 (snapshot.data! as List)
                                     .map((e) => Container(
-                                  margin: EdgeInsets.symmetric(vertical: 16.sp, horizontal: 24.sp),
-                                  decoration: BoxDecoration(boxShadow: [
-                                    BoxShadow(
-                                      color: ThemeColor.gray77,
-                                      spreadRadius: 0,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3), // changes position of shadow
-                                    ),
-                                  ], borderRadius: BorderRadius.circular(20), color: ThemeColor.white),
-                                      child: PostCard(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 16.sp,
+                                              horizontal: 24.sp),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ThemeColor.gray77,
+                                                  spreadRadius: 0,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeColor.white),
+                                          child: PostCard(
                                             postModel: e,
-                                            userId:
-                                                (user.data as UserModel).userId ??
-                                                    '',
-
+                                            userId: (user.data as UserModel)
+                                                    .userId ??
+                                                '',
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -272,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           postId: e.postId,
                                                         ))),
                                           ),
-                                    ))
+                                        ))
                                     .toList())),
               ));
     }

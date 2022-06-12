@@ -8,9 +8,10 @@ import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class MessageService {
-  static Future<List<RoomChatModel>> getRoomChat( String idUser) async {
+  static Future<List<RoomChatModel>> getRoomChat(String idUser) async {
     final listRoom = await FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(idUser)
@@ -26,14 +27,14 @@ class MessageService {
       for (var value in idRooms) {
         final profileRoom = await FirebaseSetup.fireStore
             .collection(DefaultEnv.messCollection)
-            .doc(DefaultEnv.roomChartCollection)
+            .doc(value)
             .collection(value)
             .doc(DefaultEnv.thongTinRoomChatCollect)
             .get();
         final jsonProfileRoom = profileRoom.data();
         if (jsonProfileRoom != null) {
           final listPeople = await _getChatRoomUser(
-              jsonProfileRoom['people_chat'] as List<dynamic>,idUser);
+              jsonProfileRoom['people_chat'] as List<dynamic>, idUser);
 
           data.add(RoomChatModel(
               roomId: value,
@@ -61,7 +62,8 @@ class MessageService {
     return userProfile;
   }
 
-  static Future<List<PeopleChat>> _getChatRoomUser(List<dynamic> data,String idUser) async {
+  static Future<List<PeopleChat>> _getChatRoomUser(
+      List<dynamic> data, String idUser) async {
     final pepole = <PeopleChat>[];
     for (final element in data) {
       final id = element['user_id'];
@@ -80,48 +82,61 @@ class MessageService {
     return pepole;
   }
 
-  static Stream<List<MessageSmsModel>> smsRealTime(String idRoom) {
-    return FirebaseSetup.fireStore
-        .collection(DefaultEnv.messCollection)
-        .doc(DefaultEnv.roomChartCollection)
-        .collection(idRoom)
-        .doc(DefaultEnv.chatsCollection)
-        .snapshots()
-        .transform(
-      StreamTransformer.fromHandlers(
-        handleData: (docSnap, sink) {
-          if (docSnap.exists) {
-            final json = docSnap.data();
-            if (json != null) {
-              final data = <MessageSmsModel>[];
-              final result = json['data'] as List<dynamic>;
-              for (final element in result) {
-                data.add(MessageSmsModel.fromJson(element));
+  static Stream<List<MessageSmsModel>>? smsRealTime(String idRoom) {
+    try {
+      return FirebaseSetup.fireStore
+          .collection(DefaultEnv.messCollection)
+          .doc(idRoom)
+          .collection(idRoom)
+          .doc(DefaultEnv.chatsCollection)
+          .snapshots()
+          .transform(
+        StreamTransformer.fromHandlers(
+          handleData: (docSnap, sink) {
+            if (docSnap.exists) {
+              final json = docSnap.data();
+              if (json != null) {
+                final data = <MessageSmsModel>[];
+                final result = json['data'] as List<dynamic>;
+                for (final element in result) {
+                  data.add(MessageSmsModel.fromJson(element));
+                }
+                sink.add(data);
               }
-              sink.add(data);
             }
-          }
-          // sink.add();
-        },
-      ),
-    );
+            // sink.add();
+          },
+        ),
+      );
+    } catch (e) {}
   }
 
   static void sendSms(String idRoom, MessageSmsModel messageSmsModel) {
     final doc = FirebaseSetup.fireStore
         .collection(DefaultEnv.messCollection)
-        .doc(DefaultEnv.roomChartCollection)
+        .doc(idRoom)
         .collection(idRoom)
         .doc(DefaultEnv.chatsCollection);
     doc.update({
       'data': FieldValue.arrayUnion([messageSmsModel.toJson()])
     }).onError((error, stackTrace) {
-
       if (error.toString().contains('cloud_firestore/not-found')) {
         doc.set({
           'data': FieldValue.arrayUnion([messageSmsModel.toJson()])
         });
       }
     });
+  }
+
+  static Future<List<RoomChatModel>> findRoomChat(String idUser) async {
+    log('>>>>>>>>>>>${idUser}');
+    final listRoom = await FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .get();
+    log('>>>>>>>>>${listRoom}');
+   listRoom.docs.forEach((element) {
+     log('>>>>>>>>>>>${element.id}');
+   });
+    return [];
   }
 }
