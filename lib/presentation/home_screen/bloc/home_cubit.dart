@@ -2,12 +2,14 @@ import 'dart:developer';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
 class HomeCubit extends BaseCubit<HomeState> {
@@ -50,10 +52,46 @@ class HomeCubit extends BaseCubit<HomeState> {
       if (event.docs == null) {
         return null;
       } else {
-        final result = await _postRepository.fetchAllPost();
-      log(result.toString());
-      log('gggggggggggggg');
-      _posts.sink.add(result);
+       // final result = await _postRepository.fetchAllPost();
+      // log(result.toString());
+      // log('gggggggggggggg');
+        List<PostModel> posts = [];
+        log(event.docs.length.toString());
+        for (var x in event.docs) {
+          log('huhu');
+          Map<String, dynamic> post = {};
+          post.addAll({'post_id': x.id});
+          post.addAll(x.data());
+          log(post.toString());
+
+          PostModel newPost = PostModel.fromJson(post);
+
+          //get user
+          final user =
+          await UserRepopsitory().getUserProfile(userId: post['user_id']);
+          newPost.author = user;
+
+          //get comments
+          final comments = await FirebaseFirestore.instance
+              .collection(DefaultEnv.appCollection)
+              .doc(DefaultEnv.developDoc)
+              .collection(DefaultEnv.postsCollection)
+              .doc(x.id)
+              .collection('comments')
+              .orderBy('create_at', descending: true)
+              .get();
+          List<CommentModel> cmts = [];
+          for (var cmt in comments.docs) {
+            cmt.data().addAll({'comment_id': cmt.id});
+            CommentModel commentModel = CommentModel.fromJson(cmt.data());
+            cmts.add(commentModel);
+          }
+          newPost.comments = cmts;
+          debugPrint(newPost.toString());
+          posts.add(newPost);
+        }
+
+      _posts.sink.add(posts);
       showContent();
    }
 

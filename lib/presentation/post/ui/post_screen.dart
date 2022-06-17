@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/post/bloc/post_cubit.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/comment_card.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -69,6 +70,8 @@ class _PostScreenState extends State<PostScreen> {
                                     PostCard(
                                       postModel: post.data!,
                                       userId: user.data?.userId ?? '',
+                                      onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: post.data?.author?.userId ??
+                                          ''))),
                                     ),
                                     post.data!.comments == null
                                         ? SizedBox()
@@ -81,6 +84,8 @@ class _PostScreenState extends State<PostScreen> {
                                                   post.data!.comments!.length,
                                               itemBuilder: (ctx, index) =>
                                                   CommentCard(
+                                                    onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: post.data?.comments?[index].author?.userId ??
+                                                        ''))),
                                                 commentModel:
                                                     post.data!.comments![index],
                                                 canDelete: (post

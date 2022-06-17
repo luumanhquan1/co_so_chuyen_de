@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -245,7 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             userId:
                                                 (user.data as UserModel).userId ??
                                                     '',
-
+                                            onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: (e as PostModel).author?.userId ??
+                                                ''))),
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

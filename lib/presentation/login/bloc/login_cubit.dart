@@ -41,7 +41,7 @@ class LoginCubit extends BaseCubit<LoginState> {
 
     await PrefsService.saveUserId(user.uid);
 
-    await UserRepopsitory().updateOnline(userId: user.uid, onlineFlag: false);
+    await UserRepopsitory().updateOnline(userId: user.uid, onlineFlag: true);
     }
     showContent();
     return user;

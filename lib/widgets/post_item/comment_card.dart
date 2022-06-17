@@ -13,8 +13,9 @@ import 'package:optimized_cached_image/optimized_cached_image.dart';
 class CommentCard extends StatelessWidget {
   final CommentModel commentModel;
   final bool canDelete;
+  final Function() onTapName;
   const CommentCard(
-      {Key? key, required this.commentModel, required this.canDelete})
+      {Key? key, required this.commentModel, required this.canDelete,required this.onTapName})
       : super(key: key);
 
   @override
@@ -24,18 +25,21 @@ class CommentCard extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          ClipRRect(
-            child: Container(
-              width: 40.sp,
-              height: 40.sp,
-              child: commentModel.author == null ||
-                      commentModel.author!.avatarUrl!.isEmpty
-                  ? Container(
-                      color: ThemeColor.ebonyClay,
-                    )
-                  : AppImage.network(path: commentModel.author!.avatarUrl!),
+          GestureDetector(
+            onTap: onTapName,
+            child: ClipRRect(
+              child: Container(
+                width: 40.sp,
+                height: 40.sp,
+                child: commentModel.author == null ||
+                        commentModel.author!.avatarUrl!.isEmpty
+                    ? Container(
+                        color: ThemeColor.ebonyClay,
+                      )
+                    : AppImage.network(path: commentModel.author!.avatarUrl!),
+              ),
+              borderRadius: BorderRadius.circular(80),
             ),
-            borderRadius: BorderRadius.circular(80),
           ),
           Expanded(
             child: Padding(
@@ -44,6 +48,20 @@ class CommentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: onTapName,
+                        child: Text(  '${commentModel.author?.nameDisplay ?? ''}  ',
+                            style: username(
+                                color: ThemeColor.black.withOpacity(0.7))),
+                      ),
+                      SizedBox(width: 20.sp,),
+                      Text(commentModel.data ?? '',
+                        style:
+                        caption(color: ThemeColor.black.withOpacity(0.7)),)
+                    ],
+                  ),
                   RichText(
                     text: TextSpan(
                       children: [

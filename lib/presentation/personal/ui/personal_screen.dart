@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/personal/bloc/personal_cubit.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,9 @@ class _PersonalScreenState extends State<PersonalScreen> {
                           title: snapshot.data?.nameDisplay ?? '',
                           subtitle: 'Xem trang cá nhân',
                           avatarUrl: snapshot.data?.avatarUrl,
-                          onTap: () {}),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: snapshot.data!.userId!)));
+                          }),
                       _buildListTile(
                           title: 'Đổi mật khẩu',
                           icon: Icons.lock,
