@@ -71,6 +71,7 @@ class FireStoreMethod {
     try {
       final Reference ref = storage.ref().child(id).child('avatarUser');
 
+
       await ref.putData(file);
     } catch (e) {
       print(e.toString());

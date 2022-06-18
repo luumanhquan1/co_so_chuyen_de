@@ -4,6 +4,17 @@ import 'package:uuid/uuid.dart';
 
 enum SmsType { Sms, Image }
 
+extension smsTypeExtension on SmsType {
+  int getInt() {
+    switch (this) {
+      case SmsType.Sms:
+        return 0;
+      case SmsType.Image:
+        return 1;
+    }
+  }
+}
+
 class MessageSmsModel {
   String? id;
   String? senderId;
@@ -14,13 +25,14 @@ class MessageSmsModel {
   MessageSmsModel({this.id, this.senderId, this.content, this.loaiTinNhan}) {
     smsType = fromEnum(loaiTinNhan ?? 0);
   }
-  bool isMe(){
+  bool isMe() {
     final idUser = PrefsService.getUserId();
-    if(senderId == idUser){
+    if (senderId == idUser) {
       return true;
     }
     return false;
   }
+
   SmsType fromEnum(int loaiTinNhan) {
     switch (loaiTinNhan) {
       case 0:
