@@ -1,6 +1,8 @@
 import 'package:hive/hive.dart';
 part 'user_info.g.dart';
 
+enum PeopleType { Friend, FriendRequest, NoFriend }
+
 @HiveType(typeId: 0)
 class UserInfoModel {
   @HiveField(0)
@@ -44,14 +46,14 @@ class UserInfoModel {
   }
 
   Map<String, dynamic> toJson(UserInfoModel instance) => <String, dynamic>{
-    'email': instance.email,
-    'user_id': instance.userId,
-    'avatar_url': instance.avatarUrl,
-    'gender': instance.gender,
-    'name_display': instance.nameDisplay,
-    'create_at': instance.createAt,
-    'update_at': instance.updateAt,
-    'birthday': instance.birthday
-  };
+        'email': instance.email,
+        'user_id': instance.userId,
+        'avatar_url': instance.avatarUrl,
+        'gender': instance.gender,
+        'name_display': instance.nameDisplay,
+        'create_at': instance.createAt,
+        'update_at': instance.updateAt,
+        'birthday': instance.birthday
+      };
   UserInfoModel.empty();
 }

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,12 @@ import '../../../config/resources/styles.dart';
 class FriendCellWidget extends StatelessWidget {
   final String name;
   final String avatarUrl;
+  final PeopleType peopleType;
   const FriendCellWidget(
-      {Key? key, required this.name, required this.avatarUrl})
+      {Key? key,
+      required this.name,
+      required this.avatarUrl,
+      required this.peopleType})
       : super(key: key);
 
   @override
@@ -45,9 +50,34 @@ class FriendCellWidget extends StatelessWidget {
             name,
             style: textNormal(colorBlack, 16),
           ),
-         const Expanded(child: SizedBox()),
-          Icon(Icons.more_horiz)
+          const Expanded(child: SizedBox()),
+          iconRight()
         ],
+      ),
+    );
+  }
+
+  Widget iconRight() {
+    switch (peopleType) {
+      case PeopleType.Friend:
+        return const Icon(Icons.more_horiz);
+      case PeopleType.FriendRequest:
+        return button(backGround: mainTxtColor, onTap: (){}, title: 'Hủy');
+      case PeopleType.NoFriend:
+       return button(backGround: mainTxtColor, onTap: (){}, title: 'Thêm bạn bè');
+    }
+  }
+  Widget button({required Color backGround,required Function() onTap,required String title}){
+    return GestureDetector(
+      onTap: (){
+        onTap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: backGround,
+          borderRadius: const BorderRadius.all(Radius.circular(4))
+        ),
+        child: Text(title,style: textNormalCustom(color: Colors.white),),
       ),
     );
   }

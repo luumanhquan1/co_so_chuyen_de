@@ -8,8 +8,8 @@ import 'package:ccvc_mobile/presentation/relationship_screen/relationship_screen
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final UserModel id;
-  const ProfileScreen({Key? key, required this.id}) : super(key: key);
+  // final UserModel id;
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: GestureDetector(
           onTap: () async {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RelationshipScreen(userId: 'G50uaqIsy0QiZ9AgckORnl1ZHhl2',)));
+                MaterialPageRoute(builder: (context) => RelationshipScreen(userId: 'F3FF2Y6xDMcUyb5BbChqxi5TVIw2',)));
           },
           child: Container(
             height: 50,

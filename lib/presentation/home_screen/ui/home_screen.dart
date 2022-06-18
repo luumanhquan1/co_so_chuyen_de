@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.sp),
                   child: Row(
@@ -285,9 +284,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (_) => PostScreen(
-                                                          postId: e.postId,
-                                                        ))),
+                                                    builder: (_) =>
+                                                        ProfileScreen())),
                                           ),
                                         ))
                                     .toList())),
