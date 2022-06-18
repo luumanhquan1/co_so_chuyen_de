@@ -54,9 +54,6 @@ class _MainTabBarViewState extends State<MainTabBarView> {
           bottomNavigationBar: BottomTabBarWidget(
             selectItemIndex: type.index,
             onChange: (value) {
-              showImagePicker(context).then((value) {
-                log('${value}');
-              });
               _addScreen(value);
               _cubit.selectTab(value);
 

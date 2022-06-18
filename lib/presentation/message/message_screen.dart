@@ -68,6 +68,9 @@ class _MessageScreenState extends State<MessageScreen> {
                 sendTap: (value) {
                   cubit.sendSms(widget.chatModel?.roomId ?? '', value);
                 },
+                onSendFile: (value) {
+                  cubit.sendImage(widget.chatModel?.roomId ?? '', value);
+                },
               ),
             )
           ],

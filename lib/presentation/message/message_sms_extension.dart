@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
+import 'package:ccvc_mobile/widgets/skeleton/container_skeleton_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,11 +35,9 @@ extension SmsExtension on SmsType {
         );
       case SmsType.Image:
         return Container(
-          constraints: BoxConstraints(
-            maxHeight: 350,
-          ),
+
           margin: const EdgeInsets.only(bottom: 16),
-          // height: 350,
+          height: 350,
           width: 250,
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
@@ -49,6 +48,12 @@ extension SmsExtension on SmsType {
            model.content ?? '',
             errorWidget: (context, url, error) => Icon(Icons.error),
             fit: BoxFit.cover,
+            progressIndicatorBuilder: (context,_,__){
+              return const ContainerSkeletonWidget(
+                width: 250,
+                height: 350,
+              );
+            },
           ),
         );
     }
