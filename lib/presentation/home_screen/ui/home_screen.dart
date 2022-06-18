@@ -284,8 +284,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        ProfileScreen())),
+                                                    builder: (_) => PostScreen(
+                                                          postId: e.postId,
+                                                        ))),
                                           ),
                                         ))
                                     .toList())),
