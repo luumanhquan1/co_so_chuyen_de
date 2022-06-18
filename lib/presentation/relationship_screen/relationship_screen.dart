@@ -39,7 +39,6 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
               builder: (context, snapshot) {
                 final data = snapshot.data ?? <UserInfoModel>[];
                 return ListView(
-
                   children: List.generate(data.length, (index) {
                     final result = data[index];
 
@@ -48,6 +47,7 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       child: FriendCellWidget(
                         avatarUrl: result.avatarUrl ?? '',
                         name: result.nameDisplay ?? '',
+                        peopleType: cubit.peopleType(result.userId ?? ''),
                       ),
                     );
                   }),

@@ -11,7 +11,6 @@ import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_state.da
 import 'package:ccvc_mobile/presentation/relationship_screen/bloc/relationship_state.dart';
 
 import 'package:rxdart/rxdart.dart';
-
 class RelationShipCubit extends BaseCubit<RelationshipState> {
   RelationShipCubit() : super(RelationshipStateStateIntial());
 
@@ -20,10 +19,24 @@ class RelationShipCubit extends BaseCubit<RelationshipState> {
 
   Stream<List<UserInfoModel>> get getListFriend => _getListFriend.stream;
   final idUser = PrefsService.getUserId();
+   List<String> listIdFriend = [];
+   List<String> listsIdFriendRequest = [];
   Future<void> fetchFriends(String id) async {
     showLoading();
+    listIdFriend = await ProfileService.getIdsRelationShipUser();
+    listsIdFriendRequest = await ProfileService.getIdsFriendRequestUser();
     final result = await ProfileService.listFriends(id);
     showContent();
     _getListFriend.sink.add(result);
+  }
+  PeopleType peopleType(String id){
+    if(listsIdFriendRequest.indexWhere((element) => element == id) != -1){
+      return PeopleType.FriendRequest;
+    }
+    if(listIdFriend.contains(id)){
+      return PeopleType.Friend;
+    }
+
+    return PeopleType.NoFriend;
   }
 }
