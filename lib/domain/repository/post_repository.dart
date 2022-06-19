@@ -16,11 +16,6 @@ class PostRepository {
 
   Future<List<PostModel>> fetchAllPost() async {
     final response =
-        // await FirebaseFirestore.instance
-        //     .collection(DefaultEnv.appCollection)
-        //     .doc(DefaultEnv.developDoc).collection('posts')
-        //     .get();
-        // log(response.docs.first.id.toString());
         await FirebaseFirestore.instance
             .collection(DefaultEnv.appCollection)
             .doc(DefaultEnv.developDoc)
@@ -74,11 +69,6 @@ class PostRepository {
 
   Future<PostModel?> fetchPost(String postId) async {
     final response =
-        // await FirebaseFirestore.instance
-        //     .collection(DefaultEnv.appCollection)
-        //     .doc(DefaultEnv.developDoc).collection('posts')
-        //     .get();
-        // log(response.docs.first.id.toString());
         await FirebaseFirestore.instance
             .collection(DefaultEnv.appCollection)
             .doc(DefaultEnv.developDoc)
@@ -125,6 +115,59 @@ class PostRepository {
       return newPost;
     }
   }
+
+  Future<List<PostModel>> fetchAllPostOfUser(String userId) async {
+    final response =
+    await FirebaseFirestore.instance
+        .collection(DefaultEnv.appCollection)
+        .doc(DefaultEnv.developDoc)
+        .collection(DefaultEnv.postsCollection).where('user_id' == userId)
+        .orderBy('create_at', descending: true)
+    // .orderBy('create_at')
+    // .limit(10)
+        .get();
+    if (response.docs == null) {
+      return [];
+    } else {
+      List<PostModel> posts = [];
+      log(response.docs.length.toString());
+      for (var x in response.docs) {
+        Map<String, dynamic> post = {};
+        post.addAll({'post_id': x.id});
+        post.addAll(x.data());
+        log(post.toString());
+
+        PostModel newPost = PostModel.fromJson(post);
+
+        //get user
+        final user =
+        await UserRepopsitory().getUserProfile(userId: post['user_id']);
+        newPost.author = user;
+
+        //get comments
+        final comments = await FirebaseFirestore.instance
+            .collection(DefaultEnv.appCollection)
+            .doc(DefaultEnv.developDoc)
+            .collection(DefaultEnv.postsCollection)
+            .doc(x.id)
+            .collection('comments')
+            .orderBy('create_at', descending: true)
+            .get();
+        List<CommentModel> cmts = [];
+        for (var cmt in comments.docs) {
+          cmt.data().addAll({'comment_id': cmt.id});
+          CommentModel commentModel = CommentModel.fromJson(cmt.data());
+          cmts.add(commentModel);
+        }
+        newPost.comments = cmts;
+        debugPrint(newPost.toString());
+        posts.add(newPost);
+      }
+
+      return posts;
+    }
+  }
+
 
   // Future<String> uploadPost(String description, Uint8List file, String uid,
   //     String username, String profImage) async {

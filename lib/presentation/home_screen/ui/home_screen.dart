@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -9,6 +10,7 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
@@ -53,31 +55,41 @@ class _HomeScreenState extends State<HomeScreen> {
       stream: _homeCubit.stateStream,
       builder: (context, snapshot) => SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            //backgroundColor: Color(0xFF339999),
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            title:       Text(Strings.app_name,
+                style:  heading2(color: ThemeColor.black)),
+          ),
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(Strings.app_name,
-                          style: titleAppbar(color: ThemeColor.black)),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 27.sp,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                  child: Text(Strings.feed,
-                      style: heading2(color: ThemeColor.black)),
-                ),
-                SizedBox(
-                  height: 27.sp,
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                //   child: Container(
+                //     color: colorPrimary,
+                //     child: Row(
+                //       mainAxisSize: MainAxisSize.max,
+                //       children: [
+                //         Text(Strings.app_name,
+                //             style: titleAppbar(color: ThemeColor.black)),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 27.sp,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                //   child: Text(Strings.feed,
+                //       style: heading2(color: ThemeColor.black)),
+                // ),
+                // SizedBox(
+                //   height: 27.sp,
+                // ),
                 // StreamBuilder(
                 //   stream: _homeCubit.posts,
                 //   builder: (context, snapshot) =>
@@ -278,9 +290,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: ThemeColor.white),
                                           child: PostCard(
                                             postModel: e,
-                                            userId: (user.data as UserModel)
-                                                    .userId ??
-                                                '',
+                                            userId:
+                                                (user.data as UserModel).userId ??
+                                                    '',
+                                            onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: (e as PostModel).author?.userId ??
+                                                ''))),
                                             onTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
