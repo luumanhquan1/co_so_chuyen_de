@@ -4,8 +4,10 @@ import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
@@ -19,7 +21,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
-
 
 Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +57,15 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     appStateCubit.getTokenPrefs();
     checkDeviceType();
+  }
+
+  @override
+  void dispose() async {
+    final UserModel userInfo =
+        await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
+    userInfo.onlineFlag = false;
+    await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+    super.dispose();
   }
 
   @override

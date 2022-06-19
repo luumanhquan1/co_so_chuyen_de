@@ -44,7 +44,7 @@ class UserModel {
     updateAt = json['update_at'] as int?;
     avatarUrl = json['avatar_url'] as String?;
     userId = json['user_id'] as String?;
-    birthday = json['bỉthday'] as int?;
+    birthday = json['birthday'] as int?;
   }
 
   Map<String, dynamic> toJson(UserModel instance) => <String, dynamic>{

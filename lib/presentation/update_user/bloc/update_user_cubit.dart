@@ -61,19 +61,18 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
           await FireStoreMethod.downImage(userInfo.userId ?? '');
       userInfo.avatarUrl = photoImage;
     }
-    HiveLocal.updateDataUser(userInfo);
+    await HiveLocal.updateDataUser(userInfo);
     await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
     showContent();
   }
 
-  Future<void> initData() async {
+  void initData() {
     showLoading();
-    userInfo = HiveLocal.getDataUser() ??  UserModel.empty();
+    userInfo =  HiveLocal.getDataUser() ?? UserModel.empty();
     birthDaySubject.add(
       (userInfo.birthday ?? 0).convertToDateTime,
     );
     gender = toGender(userInfo.gender ?? true);
-    await FireStoreMethod.getDataUserInfo(userInfo.userId ?? '');
     showContent();
   }
 

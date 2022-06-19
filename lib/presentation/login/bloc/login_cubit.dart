@@ -19,7 +19,7 @@ class LoginCubit extends BaseCubit<LoginState> {
   Future<void> saveUser() async {
     userInfo = await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
 
-    HiveLocal.saveDataUser(userInfo);
+    await HiveLocal.saveDataUser(userInfo);
   }
 
   Future<User?> lognIn(
@@ -34,8 +34,10 @@ class LoginCubit extends BaseCubit<LoginState> {
 
     if (user != null) {
       await PrefsService.saveUserId(user.uid);
+      await PrefsService.savePasswordPresent(password);
       await saveUser();
       userInfo.onlineFlag = true;
+      await HiveLocal.updateDataUser(userInfo);
       await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
     }
     showContent();
@@ -44,8 +46,6 @@ class LoginCubit extends BaseCubit<LoginState> {
 
   Future<void> logOut() async {
     await FirebaseAuthentication.logout();
-    await PrefsService.removeUserId();
-    HiveLocal.removeDataUser();
     // await Navigator.of(context)
     //     .pushReplacement(
     //   MaterialPageRoute(
@@ -56,6 +56,8 @@ class LoginCubit extends BaseCubit<LoginState> {
     userInfo.onlineFlag = false;
     await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
     await PrefsService.removeUserId();
+    await PrefsService.removePasswordPresent();
+    await HiveLocal.removeDataUser();
   }
 
   void closeDialog() {

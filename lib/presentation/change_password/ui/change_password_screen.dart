@@ -23,7 +23,7 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   ChangePasswordCubit cubit = ChangePasswordCubit();
   final keyGroup = GlobalKey<FormGroupState>();
-  TextEditingController textTaiKhoanController = TextEditingController();
+  TextEditingController textMatKhauCuController = TextEditingController();
   TextEditingController textPasswordController = TextEditingController();
   TextEditingController xacNhanMatKhauController = TextEditingController();
 
@@ -68,24 +68,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   Image.asset(ImageAssets.imgChangePassword),
                   spaceH30,
                   TextFieldValidator(
-                    controller: textTaiKhoanController,
-                    suffixIcon: cubit.isHideClearData
+                    controller: textMatKhauCuController,
+                    obscureText: cubit.isCheckEye2,
+                    suffixIcon: cubit.isHideEye2
                         ? SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                            textTaiKhoanController.clear();
-                            cubit.isHideClearData = false;
-                          },
-                          child: SvgPicture.asset(
-                            ImageAssets.icClearLogin,
-                          ),
-                        ),
-                      ),
-                    )
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {});
+                                  cubit.isCheckEye2 = !cubit.isCheckEye2;
+                                },
+                                child: cubit.isCheckEye2
+                                    ? SvgPicture.asset(
+                                        ImageAssets.imgView,
+                                      )
+                                    : SvgPicture.asset(
+                                        ImageAssets.imgViewHide,
+                                      ),
+                              ),
+                            ),
+                          )
                         : const SizedBox(),
                     hintText: S.current.mat_khau_hien_tai,
                     prefixIcon: SizedBox(
@@ -98,10 +102,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     onChange: (text) {
                       if (text.isEmpty) {
                         setState(() {});
-                        return cubit.isHideClearData = false;
+                        return cubit.isHideEye2 = false;
                       }
                       setState(() {});
-                      return cubit.isHideClearData = true;
+                      return cubit.isHideEye2 = true;
                     },
                     validator: (value) {
                       return (value ?? '').checkNull();
@@ -113,24 +117,24 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     obscureText: cubit.isCheckEye1,
                     suffixIcon: cubit.isHideEye1
                         ? SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                            cubit.isCheckEye1 = !cubit.isCheckEye1;
-                          },
-                          child: cubit.isCheckEye1
-                              ? SvgPicture.asset(
-                            ImageAssets.imgView,
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {});
+                                  cubit.isCheckEye1 = !cubit.isCheckEye1;
+                                },
+                                child: cubit.isCheckEye1
+                                    ? SvgPicture.asset(
+                                        ImageAssets.imgView,
+                                      )
+                                    : SvgPicture.asset(
+                                        ImageAssets.imgViewHide,
+                                      ),
+                              ),
+                            ),
                           )
-                              : SvgPicture.asset(
-                            ImageAssets.imgViewHide,
-                          ),
-                        ),
-                      ),
-                    )
                         : const SizedBox(),
                     hintText: S.current.mat_khau_moi,
                     prefixIcon: SizedBox(
@@ -160,25 +164,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     obscureText: cubit.isCheckEyeXacNhan,
                     suffixIcon: cubit.isHideEyeXacNhan
                         ? SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                            cubit.isCheckEyeXacNhan =
-                            !cubit.isCheckEyeXacNhan;
-                          },
-                          child: cubit.isCheckEyeXacNhan
-                              ? SvgPicture.asset(
-                            ImageAssets.imgView,
+                            width: 20,
+                            height: 20,
+                            child: Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {});
+                                  cubit.isCheckEyeXacNhan =
+                                      !cubit.isCheckEyeXacNhan;
+                                },
+                                child: cubit.isCheckEyeXacNhan
+                                    ? SvgPicture.asset(
+                                        ImageAssets.imgView,
+                                      )
+                                    : SvgPicture.asset(
+                                        ImageAssets.imgViewHide,
+                                      ),
+                              ),
+                            ),
                           )
-                              : SvgPicture.asset(
-                            ImageAssets.imgViewHide,
-                          ),
-                        ),
-                      ),
-                    )
                         : const SizedBox(),
                     hintText: S.current.xac_nhan_mat_khau_moi,
                     prefixIcon: SizedBox(
@@ -209,19 +213,31 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     isColorBlue: true,
                     onPressed: () async {
                       if (keyGroup.currentState!.validator()) {
-                        // final User? user = await cubit.signUp(
-                        //   textTaiKhoanController.text.trim(),
-                        //   textPasswordController.text.trim(),
-                        // );
-                        //
-                        // if (user != null) {
-                        //
-                        // } else {
-                        //   _showToast(
-                        //     context: context,
-                        //     text: EXCEPTION_LOGIN,
-                        //   );
-                        // }
+                        if (!cubit
+                            .isMatchPassword(textMatKhauCuController.text)) {
+                          _showToast(
+                            context: context,
+                            text: S.current.mat_khau_hien_tai_chua_chinh_xac,
+                          );
+                        } else {
+                          await cubit.changePassword(
+                            newPassword: xacNhanMatKhauController.text,
+                            subsess: () {
+                              ///TODO
+
+                              _showToast(
+                                context: context,
+                                text: S.current.doi_mat_khau_thanh_cong,
+                              );
+                            },
+                            error: (String error) {
+                              _showToast(
+                                context: context,
+                                text: error,
+                              );
+                            },
+                          );
+                        }
                       } else {
                         _showToast(
                           context: context,
@@ -248,5 +264,3 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
   }
 }
-
-

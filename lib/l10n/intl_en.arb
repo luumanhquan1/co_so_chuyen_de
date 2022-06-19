@@ -43,5 +43,7 @@
   "doi_mat_khau" : "Đổi mật khẩu",
   "mat_khau_hien_tai": "Mật khẩu hiện tại",
   "mat_khau_moi" : "Mật khẩu mới",
-  "xac_nhan_mat_khau_moi" : "Xác nhận mật khẩu mới"
+  "xac_nhan_mat_khau_moi" : "Xác nhận mật khẩu mới",
+  "mat_khau_hien_tai_chua_chinh_xac" : "Mật khẩu hiện tại chưa chính xác",
+  "doi_mat_khau_thanh_cong" : "Đổi mật khẩu thành công"
 }

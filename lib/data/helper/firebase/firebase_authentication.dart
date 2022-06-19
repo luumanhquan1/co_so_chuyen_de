@@ -32,20 +32,6 @@ class FirebaseAuthentication {
     return user;
   }
 
-  static Future<void> changePassword(
-    String newPassword,
-  ) async {
-    final user = FirebaseAuth.instance.currentUser;
-
-      await user?.updatePassword(newPassword).then((value) {
-      //Success, do something
-        print('');
-    }).catchError((error) {
-        print('$error');
-      //Error, show something
-      });
-  }
-
   static Future<User?> signUp({
     required String email,
     required String password,
@@ -77,5 +63,27 @@ class FirebaseAuthentication {
 
   static Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  static Future<void> changePassword({
+    required String newPassword,
+    required Function() subsess,
+    required Function(String e) error,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    return await user?.updatePassword(newPassword).then((value) {
+      subsess();
+    }).catchError((e) {
+      if (e.toString() ==
+          '[firebase_auth/weak-password] Password should be at least 6 characters') {
+        EXCEPTION_CHANGE_PASSWORD = S.current.password_dai_hon_6_ky_tu;
+      } else {
+        EXCEPTION_CHANGE_PASSWORD = e.toString();
+      }
+      error(EXCEPTION_CHANGE_PASSWORD);
+      print('$e');
+      //Error, show something
+    });
   }
 }
