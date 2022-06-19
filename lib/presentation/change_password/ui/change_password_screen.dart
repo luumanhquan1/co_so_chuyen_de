@@ -3,6 +3,7 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/change_password/bloc/change_password_cubit.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -223,11 +224,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           await cubit.changePassword(
                             newPassword: xacNhanMatKhauController.text,
                             subsess: () {
-                              ///TODO
-
                               _showToast(
                                 context: context,
                                 text: S.current.doi_mat_khau_thanh_cong,
+                              );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => HomeScreen(),
+                                ),
                               );
                             },
                             error: (String error) {

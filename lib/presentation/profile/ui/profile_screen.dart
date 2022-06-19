@@ -38,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    super.initState();
     _profileCubit.getUserInfo(widget.userId);
     _profileCubit.getAllPosts(widget.userId);
     _profileCubit.getRelationship(widget.userId);

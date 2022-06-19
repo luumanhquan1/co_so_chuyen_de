@@ -122,7 +122,7 @@ TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
 
     color: color,
     fontWeight: FontWeight.bold,
-    fontSize: fontSize?? 16.sp,
+    fontSize: fontSize,
     fontStyle: FontStyle.normal,
   );
 }

@@ -11,7 +11,6 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
-import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -31,6 +30,7 @@ class HomeScreen extends StatefulWidget {
     Key? key,
     //  required this.userId
   }) : super(key: key);
+
   //String userId;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -38,8 +38,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   RefreshController refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
   HomeCubit _homeCubit = HomeCubit();
+
   @override
   void initState() {
     super.initState();
@@ -59,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
             //backgroundColor: Color(0xFF339999),
             elevation: 0,
             automaticallyImplyLeading: false,
-            title:       Text(Strings.app_name,
-                style:  heading2(color: ThemeColor.black)),
+            title: Text(Strings.app_name,
+                style: heading2(color: ThemeColor.black)),
           ),
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -95,13 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 //   builder: (context, snapshot) =>
                 Expanded(
                     child: RefreshWidget(
-                      // enableLoadMore: controller.canLoadMore.value,
-                      //  onLoadMore: () async {
-                      //    double oldPosition =
-                      //        controller.scrollController.position.pixels;
-                      //    await controller.getWeights();
-                      //    controller.scrollController.position.jumpTo(oldPosition);
-                      //  },
+                        // enableLoadMore: controller.canLoadMore.value,
+                        //  onLoadMore: () async {
+                        //    double oldPosition =
+                        //        controller.scrollController.position.pixels;
+                        //    await controller.getWeights();
+                        //    controller.scrollController.position.jumpTo(oldPosition);
+                        //  },
                         controller: refreshController,
                         onRefresh: () async {
                           await _homeCubit.getAllPosts();
@@ -110,33 +111,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: snapshot.data == null
                             ? SizedBox()
                             : _buildBody(snapshot.data!)
-                      // CustomScrollView(
-                      //   //   controller: controller.scrollController,
-                      //     slivers: [
-                      //       SliverList(
-                      //           delegate: SliverChildListDelegate(
-                      //             [
-                      //               Column(
-                      //                   crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //                   children:
-                      //                   //[
-                      //                   (snapshot.data! as List)
-                      //                       .map((e) =>
-                      //                       PostCard(postModel: e, userId: 'gCpoUW47luwn7wGX3AgY',deletePost: (){},))
-                      //                       .toList()
-                      //                 // controller.rxLoadedList.value ==
-                      //                 //     LoadedType.start
-                      //                 //     ? historyListSkeleton
-                      //                 //     : controller.weightsList.value
-                      //                 //     .map((e) => _buildWeightListTile(e))
-                      //                 //     .toList()),
-                      //                 //    ]
-                      //               )
-                      //             ],
-                      //           ))
-                      //     ]),
-                    )),
+                        // CustomScrollView(
+                        //   //   controller: controller.scrollController,
+                        //     slivers: [
+                        //       SliverList(
+                        //           delegate: SliverChildListDelegate(
+                        //             [
+                        //               Column(
+                        //                   crossAxisAlignment:
+                        //                   CrossAxisAlignment.start,
+                        //                   children:
+                        //                   //[
+                        //                   (snapshot.data! as List)
+                        //                       .map((e) =>
+                        //                       PostCard(postModel: e, userId: 'gCpoUW47luwn7wGX3AgY',deletePost: (){},))
+                        //                       .toList()
+                        //                 // controller.rxLoadedList.value ==
+                        //                 //     LoadedType.start
+                        //                 //     ? historyListSkeleton
+                        //                 //     : controller.weightsList.value
+                        //                 //     .map((e) => _buildWeightListTile(e))
+                        //                 //     .toList()),
+                        //                 //    ]
+                        //               )
+                        //             ],
+                        //           ))
+                        //     ]),
+                        )),
                 //  )
               ]),
 
@@ -150,161 +151,167 @@ class _HomeScreenState extends State<HomeScreen> {
     //HomeCubit _homeCubit = HomeCubit(widget.userId);
     if (state == StateLayout.showLoading) {
       return CustomScrollView(
-        //   controller: controller.scrollController,
+          //   controller: controller.scrollController,
           slivers: [
             SliverList(
                 delegate: SliverChildListDelegate(
-                  [
-                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 16.sp, horizontal: 24.sp),
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ThemeColor.gray77,
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset:
-                                  Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: ThemeColor.white),
-                          child: PostItemSkeleton()),
-                    ])
-                  ],
-                ))
-          ]);
-    }
-    if (state == StateLayout.showContent) {
-      return StreamBuilder(
-          stream: _homeCubit.user,
-          builder: (context, user) => SingleChildScrollView(
-            child: StreamBuilder(
-                stream: _homeCubit.posts,
-                builder: (context, snapshot) => snapshot.data == null
-                    ? SizedBox()
-                    : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:
-                    //[
-
-                    (snapshot.data! as List)
-                        .map((e) => Container(
+              [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Container(
                       margin: EdgeInsets.symmetric(
-                          vertical: 16.sp,
-                          horizontal: 24.sp),
+                          vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
                               blurRadius: 5,
-                              offset: Offset(0,
-                                  3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
-                          borderRadius:
-                          BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20),
                           color: ThemeColor.white),
-                      child: PostCard(
-                        postModel: e,
-                        userId:
-                        (user.data as UserModel).userId ??
-                            '',
-                        onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: (e as PostModel).author?.userId ??
-                            ''))),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => PostScreen(
-                                  postId: e.postId,
-                                ))),
-                      ),
-                    ))
-                        .toList())),
-          ));
+                      child: PostItemSkeleton()),
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostItemSkeleton()),
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostItemSkeleton()),
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostItemSkeleton()),
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostItemSkeleton()),
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp, horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostItemSkeleton()),
+                ])
+              ],
+            ))
+          ]);
+    }
+    if (state == StateLayout.showContent) {
+      return StreamBuilder(
+          stream: _homeCubit.user,
+          builder: (context, user) => SingleChildScrollView(
+                child: StreamBuilder(
+                    stream: _homeCubit.posts,
+                    builder: (context, snapshot) => snapshot.data == null
+                        ? SizedBox()
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:
+                                //[
+
+                                (snapshot.data! as List)
+                                    .map((e) => Container(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 16.sp,
+                                              horizontal: 24.sp),
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ThemeColor.gray77,
+                                                  spreadRadius: 0,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeColor.white),
+                                          child: PostCard(
+                                            postModel: e,
+                                            userId: (user.data as UserModel)
+                                                    .userId ??
+                                                '',
+                                            onTapName: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => ProfileScreen(
+                                                        userId: (e as PostModel)
+                                                                .author
+                                                                ?.userId ??
+                                                            ''))),
+                                            onTap: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => PostScreen(
+                                                          postId: e.postId,
+                                                        ))),
+                                          ),
+                                        ))
+                                    .toList())),
+              ));
     }
     if (state == StateLayout.showError) {
       return Center(
