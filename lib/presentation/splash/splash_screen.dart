@@ -1,4 +1,3 @@
-
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 
@@ -47,16 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget screen(String token) {
-    // return MainTabBarView();
-    return LoginScreen();
-   }
-  //   if (token.isNotEmpty) {
-  //     return const MainTabBarView();
-  //   } else {
-  //     return screenDevice(
-  //       mobileScreen: const LoginScreen(),
-  //       tabletScreen: const LoginTabletScreen(),
-  //     );
-  //   }
-  // }
+    if (token.isNotEmpty) {
+      return const MainTabBarView();
+    } else {
+      return const LoginScreen();
+    }
+  }
 }

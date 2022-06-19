@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/avata_widget.dart';
@@ -31,7 +32,6 @@ class CreateUserScreen extends StatefulWidget {
 class _CreateUserScreenState extends State<CreateUserScreen> {
   final keyGroup = GlobalKey<FormGroupState>();
   TextEditingController textNameController = TextEditingController();
-  TextEditingController textPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -159,10 +159,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                             context: context,
                             text: S.current.tao_tai_khoan_thanh_cong,
                           );
+                          await widget.cubit.saveUser();
                           await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()));
+                                  builder: (context) => HomeScreen()));
                         } else {
                           _showToast(
                             context: context,
