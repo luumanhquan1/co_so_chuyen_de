@@ -10,7 +10,6 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
-import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
