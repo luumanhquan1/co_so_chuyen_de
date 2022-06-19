@@ -92,7 +92,6 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => MessageScreen(
-                                            idRoom: result.roomId,
                                             chatModel: result,
                                             peopleChat: result.getPeople(),
                                           ),

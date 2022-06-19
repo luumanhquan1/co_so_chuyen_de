@@ -124,4 +124,20 @@ extension CheckValidate on String {
       return S.current.check_so_luong;
     }
   }
+  String convertNameFile() {
+    final document = this;
+
+    final parts = document.split('/');
+
+    final lastName = parts.last;
+
+    final partsNameFile = lastName.split('.');
+
+    if (partsNameFile[0].length > 30) {
+      partsNameFile[0] = '${partsNameFile[0].substring(0, 10)}... ';
+    }
+    final fileName = '${partsNameFile[0]}.${partsNameFile[1]}';
+
+    return fileName;
+  }
 }

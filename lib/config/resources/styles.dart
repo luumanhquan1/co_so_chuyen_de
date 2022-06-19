@@ -122,7 +122,7 @@ TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
 
     color: color,
     fontWeight: FontWeight.bold,
-    fontSize: 16.sp,
+    fontSize: fontSize?? 16.sp,
     fontStyle: FontStyle.normal,
   );
 }
@@ -162,3 +162,12 @@ TextStyle detail({Color color = titleColor}) {
       fontStyle: FontStyle.normal,
     );
   }
+
+TextStyle button({Color color = titleColor}) {
+  return GoogleFonts.roboto(
+    color: color,
+    fontWeight: FontWeight.normal,
+    fontSize: 18.sp,
+    fontStyle: FontStyle.normal,
+  );
+}

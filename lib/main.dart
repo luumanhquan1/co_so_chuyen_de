@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
@@ -28,6 +29,7 @@ Future<void> mainApp() async {
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
+
   await HiveLocal.init();
   await PrefsService.init();
   await FirebaseSetup.setUp();

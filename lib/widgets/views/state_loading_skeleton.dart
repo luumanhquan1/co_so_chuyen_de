@@ -25,12 +25,14 @@ class StateLoadingSkeleton extends StatelessWidget {
       builder: (context, snapshot) {
         final data = snapshot.data ?? StateLayout.showLoading;
         return data == StateLayout.showLoading
-            ? Column(
-                children: List.generate(countSkeleton, (index) => Padding(
-                  padding: EdgeInsets.only(bottom: paddingSkeleton),
-                  child: skeleton,
-                )),
-              )
+            ? SingleChildScrollView(
+              child: Column(
+                  children: List.generate(countSkeleton, (index) => Padding(
+                    padding: EdgeInsets.only(bottom: paddingSkeleton),
+                    child: skeleton,
+                  )),
+                ),
+            )
             : child;
       },
     );

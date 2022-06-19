@@ -1,15 +1,17 @@
+import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
-import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
+import 'package:ccvc_mobile/presentation/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -29,7 +31,6 @@ class HomeScreen extends StatefulWidget {
     Key? key,
     //  required this.userId
   }) : super(key: key);
-
   //String userId;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,12 +38,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
   HomeCubit _homeCubit = HomeCubit();
-
   @override
   void initState() {
     super.initState();
+    final data = HiveLocal.getDataUser();
+    print('${data?.userId} ?????????');
     // _homeCubit.getUserInfo(widget.userId);
     // _homeCubit.getAllPosts();
   }
@@ -53,43 +55,53 @@ class _HomeScreenState extends State<HomeScreen> {
       stream: _homeCubit.stateStream,
       builder: (context, snapshot) => SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            //backgroundColor: Color(0xFF339999),
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            title:       Text(Strings.app_name,
+                style:  heading2(color: ThemeColor.black)),
+          ),
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(Strings.app_name,
-                          style: titleAppbar(color: ThemeColor.black)),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 27.sp,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                  child: Text(Strings.feed,
-                      style: heading2(color: ThemeColor.black)),
-                ),
-                SizedBox(
-                  height: 27.sp,
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                //   child: Container(
+                //     color: colorPrimary,
+                //     child: Row(
+                //       mainAxisSize: MainAxisSize.max,
+                //       children: [
+                //         Text(Strings.app_name,
+                //             style: titleAppbar(color: ThemeColor.black)),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 27.sp,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                //   child: Text(Strings.feed,
+                //       style: heading2(color: ThemeColor.black)),
+                // ),
+                // SizedBox(
+                //   height: 27.sp,
+                // ),
                 // StreamBuilder(
                 //   stream: _homeCubit.posts,
                 //   builder: (context, snapshot) =>
                 Expanded(
                     child: RefreshWidget(
-                        // enableLoadMore: controller.canLoadMore.value,
-                        //  onLoadMore: () async {
-                        //    double oldPosition =
-                        //        controller.scrollController.position.pixels;
-                        //    await controller.getWeights();
-                        //    controller.scrollController.position.jumpTo(oldPosition);
-                        //  },
+                      // enableLoadMore: controller.canLoadMore.value,
+                      //  onLoadMore: () async {
+                      //    double oldPosition =
+                      //        controller.scrollController.position.pixels;
+                      //    await controller.getWeights();
+                      //    controller.scrollController.position.jumpTo(oldPosition);
+                      //  },
                         controller: refreshController,
                         onRefresh: () async {
                           await _homeCubit.getAllPosts();
@@ -98,33 +110,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: snapshot.data == null
                             ? SizedBox()
                             : _buildBody(snapshot.data!)
-                        // CustomScrollView(
-                        //   //   controller: controller.scrollController,
-                        //     slivers: [
-                        //       SliverList(
-                        //           delegate: SliverChildListDelegate(
-                        //             [
-                        //               Column(
-                        //                   crossAxisAlignment:
-                        //                   CrossAxisAlignment.start,
-                        //                   children:
-                        //                   //[
-                        //                   (snapshot.data! as List)
-                        //                       .map((e) =>
-                        //                       PostCard(postModel: e, userId: 'gCpoUW47luwn7wGX3AgY',deletePost: (){},))
-                        //                       .toList()
-                        //                 // controller.rxLoadedList.value ==
-                        //                 //     LoadedType.start
-                        //                 //     ? historyListSkeleton
-                        //                 //     : controller.weightsList.value
-                        //                 //     .map((e) => _buildWeightListTile(e))
-                        //                 //     .toList()),
-                        //                 //    ]
-                        //               )
-                        //             ],
-                        //           ))
-                        //     ]),
-                        )),
+                      // CustomScrollView(
+                      //   //   controller: controller.scrollController,
+                      //     slivers: [
+                      //       SliverList(
+                      //           delegate: SliverChildListDelegate(
+                      //             [
+                      //               Column(
+                      //                   crossAxisAlignment:
+                      //                   CrossAxisAlignment.start,
+                      //                   children:
+                      //                   //[
+                      //                   (snapshot.data! as List)
+                      //                       .map((e) =>
+                      //                       PostCard(postModel: e, userId: 'gCpoUW47luwn7wGX3AgY',deletePost: (){},))
+                      //                       .toList()
+                      //                 // controller.rxLoadedList.value ==
+                      //                 //     LoadedType.start
+                      //                 //     ? historyListSkeleton
+                      //                 //     : controller.weightsList.value
+                      //                 //     .map((e) => _buildWeightListTile(e))
+                      //                 //     .toList()),
+                      //                 //    ]
+                      //               )
+                      //             ],
+                      //           ))
+                      //     ]),
+                    )),
                 //  )
               ]),
 
@@ -138,159 +150,161 @@ class _HomeScreenState extends State<HomeScreen> {
     //HomeCubit _homeCubit = HomeCubit(widget.userId);
     if (state == StateLayout.showLoading) {
       return CustomScrollView(
-          //   controller: controller.scrollController,
+        //   controller: controller.scrollController,
           slivers: [
             SliverList(
                 delegate: SliverChildListDelegate(
-              [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                  [
+                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.sp, horizontal: 24.sp),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColor.gray77,
-                              spreadRadius: 0,
-                              blurRadius: 5,
-                              offset:
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: 16.sp, horizontal: 24.sp),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset:
                                   Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColor.white),
-                      child: PostItemSkeleton()),
-                ])
-              ],
-            ))
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(20),
+                              color: ThemeColor.white),
+                          child: PostItemSkeleton()),
+                    ])
+                  ],
+                ))
           ]);
     }
     if (state == StateLayout.showContent) {
       return StreamBuilder(
           stream: _homeCubit.user,
           builder: (context, user) => SingleChildScrollView(
-                child: StreamBuilder(
-                    stream: _homeCubit.posts,
-                    builder: (context, snapshot) => snapshot.data == null
-                        ? SizedBox()
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:
-                                //[
+            child: StreamBuilder(
+                stream: _homeCubit.posts,
+                builder: (context, snapshot) => snapshot.data == null
+                    ? SizedBox()
+                    : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                    //[
 
-                                (snapshot.data! as List)
-                                    .map((e) => Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 16.sp,
-                                              horizontal: 24.sp),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: ThemeColor.gray77,
-                                                  spreadRadius: 0,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: ThemeColor.white),
-                                          child: PostCard(
-                                            postModel: e,
-                                            userId: (user.data as UserModel)
-                                                    .userId ??
-                                                '',
-                                            onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) => PostScreen(
-                                                          postId: e.postId,
-                                                        ))),
-                                          ),
-                                        ))
-                                    .toList())),
-              ));
+                    (snapshot.data! as List)
+                        .map((e) => Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 16.sp,
+                          horizontal: 24.sp),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ThemeColor.gray77,
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset: Offset(0,
+                                  3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius:
+                          BorderRadius.circular(20),
+                          color: ThemeColor.white),
+                      child: PostCard(
+                        postModel: e,
+                        userId:
+                        (user.data as UserModel).userId ??
+                            '',
+                        onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: (e as PostModel).author?.userId ??
+                            ''))),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => PostScreen(
+                                  postId: e.postId,
+                                ))),
+                      ),
+                    ))
+                        .toList())),
+          ));
     }
     if (state == StateLayout.showError) {
       return Center(

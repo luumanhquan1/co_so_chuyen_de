@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +31,18 @@ class FirebaseAuthentication {
       print(e.toString());
     }
     return user;
+  }
+
+  static Future<bool> logOut(String userId) async{
+    try
+        {
+          await auth.signOut();
+          await UserRepopsitory().updateOnline(userId: userId, onlineFlag: false);
+          return true;
+        } catch (e){
+      print(e.toString());
+      return false;
+    }
   }
 
   static Future<User?> signUp({

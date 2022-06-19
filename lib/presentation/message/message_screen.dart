@@ -14,10 +14,9 @@ import 'package:ccvc_mobile/presentation/message/widgets/sms_cell.dart';
 import 'package:flutter/material.dart';
 
 class MessageScreen extends StatefulWidget {
-  final String idRoom;
-  final RoomChatModel chatModel;
+  final RoomChatModel? chatModel;
   final PeopleChat peopleChat;
-  const MessageScreen({Key? key, required this.idRoom, required this.chatModel,required this.peopleChat})
+  const MessageScreen({Key? key, this.chatModel, required this.peopleChat})
       : super(key: key);
 
   @override
@@ -30,6 +29,7 @@ class _MessageScreenState extends State<MessageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    cubit.getRoomChat(widget.peopleChat.userId);
   }
 
   @override
@@ -49,7 +49,7 @@ class _MessageScreenState extends State<MessageScreen> {
               child: SingleChildScrollView(
                 reverse: true,
                 child: StreamBuilder<List<MessageSmsModel>>(
-                    stream: cubit.chatStream(widget.idRoom),
+                    stream: cubit.chatStream(widget.chatModel?.roomId ?? ''),
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? <MessageSmsModel>[];
                       return Column(
@@ -66,7 +66,10 @@ class _MessageScreenState extends State<MessageScreen> {
               child: SendSmsWidget(
                 hintText: 'Write a message...',
                 sendTap: (value) {
-                  cubit.sendSms(widget.idRoom, value);
+                  cubit.sendSms(widget.chatModel?.roomId ?? '', value);
+                },
+                onSendFile: (value) {
+                  cubit.sendImage(widget.chatModel?.roomId ?? '', value);
                 },
               ),
             )

@@ -22,6 +22,8 @@ class ImageAssets {
   static const String imgPassword = '$baseImg/ic_password.svg';
   static const String imgChangePassword = '$baseImg/img_change_password.png';
   static const String icConfirm = '$baseImg/ic_confirm.svg';
+  static const String avatarDefault = '$baseImg/avatar_default.png';
+
 
 
   static const String imgEmptyAvata = 'https://i.stack.imgur.com/l60Hf.png';

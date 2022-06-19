@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BottomTabBarWidget extends StatelessWidget {
   final int selectItemIndex;
@@ -44,7 +45,7 @@ class BottomTabBarWidget extends StatelessWidget {
                 ? const Expanded(child: SizedBox())
                 : Expanded(
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         onChange(tab);
                       },
                       child: tabBarItem(
