@@ -148,6 +148,18 @@ class UserRepopsitory {
           .collection('friend_requests')
           .doc(requestId)
           .set(friendRequestModel.toJson());
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(friendRequestModel.sender?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(friendRequestModel.receiver?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
@@ -212,6 +224,19 @@ class UserRepopsitory {
           .collection('friend_requests')
           .doc(requestId)
           .delete();
+
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(userId1)
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(userId2)
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
@@ -244,6 +269,18 @@ class UserRepopsitory {
           .collection('friend_requests')
           .doc(requestModel.requestId)
           .delete();
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(requestModel.sender?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(requestModel.receiver?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
@@ -275,6 +312,18 @@ class UserRepopsitory {
           .collection('relationships')
           .doc(relationshipModel.relationshipId)
           .delete();
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(relationshipModel.user2?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(relationshipModel.user1?.userId ?? '')
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
