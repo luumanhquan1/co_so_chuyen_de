@@ -48,7 +48,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
 
   Stream<UserModel> get user => _user.stream;
   final BehaviorSubject<RelationshipType> _relationshipType =
-  BehaviorSubject<RelationshipType>.seeded(RelationshipType.stranger);
+      BehaviorSubject<RelationshipType>.seeded(RelationshipType.stranger);
 
   Stream<RelationshipType> get relationshipType => _relationshipType.stream;
   PostRepository _postRepository = PostRepository();
@@ -131,15 +131,17 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             .collection(DefaultEnv.usersCollection)
             .doc(userId)
             .collection('relationships')
-        .where('userId1', isEqualTo: userId)
+        //    .where('user_id1', isEqualTo: ownerId)
+            .where('user_id2', isEqualTo: ownerId)
 
             // .where(('userId1' == userId && 'userId2' == ownerId) ||
             //     ('userId2' == userId && 'userId1' == ownerId))
             .get();
+        log('friend');
         log(result.size.toString());
         if (result.docs != null && result.size != 0) {
-           result.docs.first.data()['type'] == 1
-              ?     _relationshipType.sink.add(RelationshipType.friend)
+          result.docs.first.data()['type'] == 1
+              ? _relationshipType.sink.add(RelationshipType.friend)
               : _relationshipType.sink.add(RelationshipType.blocked);
         } else {
           final result = await FirebaseFirestore.instance
@@ -148,10 +150,11 @@ class ProfileCubit extends BaseCubit<ProfileState> {
               .collection(DefaultEnv.usersCollection)
               .doc(userId)
               .collection('friend_requests')
-              .where('sender', isEqualTo: userId ).where( 'receiver' , isEqualTo: ownerId)
+              .where('sender', isEqualTo: userId)
+              .where('receiver', isEqualTo: ownerId)
               .get();
-          if (result.docs != null  && result.size != 0) {
-              _relationshipType.sink.add(RelationshipType.requestReceiver) ;
+          if (result.docs != null && result.size != 0) {
+            _relationshipType.sink.add(RelationshipType.requestReceiver);
           } else {
             final result = await FirebaseFirestore.instance
                 .collection(DefaultEnv.appCollection)
@@ -159,13 +162,14 @@ class ProfileCubit extends BaseCubit<ProfileState> {
                 .collection(DefaultEnv.usersCollection)
                 .doc(userId)
                 .collection('friend_requests')
-                .where('sender' , isEqualTo: ownerId ).where( 'receiver' , isEqualTo: userId)
+                .where('sender', isEqualTo: ownerId)
+                .where('receiver', isEqualTo: userId)
                 .get();
-            if (result.docs != null  && result.size != 0) {
+            if (result.docs != null && result.size != 0) {
               _relationshipType.sink.add(RelationshipType.requestSender);
             } else {
               log('mmmmmmmmmmmmmmmmmm');
-              _relationshipType.sink.add(RelationshipType.stranger) ;
+              _relationshipType.sink.add(RelationshipType.stranger);
             }
           }
         }
@@ -174,12 +178,12 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       log(e.toString());
       log('pppppppppppppppppppp');
       showError();
-      _relationshipType.sink.add(RelationshipType.stranger) ;
+      _relationshipType.sink.add(RelationshipType.stranger);
     }
   }
 
   Future<void> getUserInfo(userId) async {
-    log('lllllllllllllllllllll'+userId);
+    log('lllllllllllllllllllll' + userId);
     showLoading();
     try {
       final result = await _userRepopsitory.getUserProfile(userId: userId);
@@ -197,11 +201,16 @@ class ProfileCubit extends BaseCubit<ProfileState> {
   }
 
   Future<void> sendFriendRequest() async {
-   // showLoading();
+    // showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
-      FriendRequestModel newRequest = FriendRequestModel(sender: UserModel(userId: ownerId), receiver: UserModel(userId: _user.value.userId), createAt: DateTime.now().millisecondsSinceEpoch, updateAt: DateTime.now().millisecondsSinceEpoch);
-      final result = await _userRepopsitory.sendFriendRequest(friendRequestModel: newRequest );
+      FriendRequestModel newRequest = FriendRequestModel(
+          sender: UserModel(userId: ownerId),
+          receiver: UserModel(userId: _user.value.userId),
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          updateAt: DateTime.now().millisecondsSinceEpoch);
+      final result = await _userRepopsitory.sendFriendRequest(
+          friendRequestModel: newRequest);
       if (result) {
         log('pppp' + result.toString());
         _relationshipType.sink.add(RelationshipType.requestSender);
@@ -216,7 +225,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
   }
 
   Future<void> acceptFriendRequest() async {
-    // showLoading();
+     showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
       final result = await FirebaseFirestore.instance
@@ -225,14 +234,18 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           .collection(DefaultEnv.usersCollection)
           .doc(_user.value.userId)
           .collection('friend_requests')
-          .where('sender' , isEqualTo: _user.value.userId).where( 'receiver' , isEqualTo: ownerId)
+          .where('sender', isEqualTo: _user.value.userId)
+          .where('receiver', isEqualTo: ownerId)
           .get();
-      RelationshipModel newRela = RelationshipModel(user1: UserModel(userId: ownerId), user2: UserModel(userId: _user.value.userId), createAt: DateTime.now().millisecondsSinceEpoch, updateAt: DateTime.now().millisecondsSinceEpoch, type: 1);
-      final resultAccept = await _userRepopsitory.acceptFriendRequest(relationshipModel: newRela, requestId: result.docs.first.data()['request_id'] );
+
+      final resultAccept = await _userRepopsitory.acceptFriendRequest(
+         userId1: ownerId,
+          userId2:  _user.value.userId ?? '',
+          requestId: result.docs.first.id);
       if (resultAccept) {
         log('pppp' + resultAccept.toString());
         _relationshipType.sink.add(RelationshipType.friend);
-        //   showContent();
+           showContent();
       } else {
         showError();
       }
@@ -244,25 +257,44 @@ class ProfileCubit extends BaseCubit<ProfileState> {
 
   Future<void> cancelOrDeclineFriendRequest() async {
     // showLoading();
-    log('vvvvvvvvvvvvvvv'+_user.value.userId.toString());
+    log('vvvvvvvvvvvvvvv' + _user.value.userId.toString());
     try {
       final ownerId = await PrefsService.getUserId();
-      final result = await FirebaseFirestore.instance
-          .collection(DefaultEnv.appCollection)
-          .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.usersCollection)
-          .doc(_user.value.userId ?? '')
-          .collection('friend_requests')
-          .where('sender' , isEqualTo:ownerId).where('receiver' , isEqualTo:  _user.value.userId)
-          .get();
-    log('pppp' + result.docs.first.data().toString());
-      FriendRequestModel requestModel = FriendRequestModel.fromJson(result.docs.first.data());
+      late var result;
+     if(_relationshipType.value == RelationshipType.requestSender){
+         result = await FirebaseFirestore.instance
+           .collection(DefaultEnv.appCollection)
+           .doc(DefaultEnv.developDoc)
+           .collection(DefaultEnv.usersCollection)
+           .doc(_user.value.userId ?? '')
+           .collection('friend_requests')
+           .where('sender', isEqualTo: ownerId)
+           .where('receiver',  isEqualTo:_user.value.userId )
+           .get();
+     }
+     else
+         if(_relationshipType.value == RelationshipType.requestReceiver){
+           result = await FirebaseFirestore.instance
+               .collection(DefaultEnv.appCollection)
+               .doc(DefaultEnv.developDoc)
+               .collection(DefaultEnv.usersCollection)
+               .doc(_user.value.userId ?? '')
+               .collection('friend_requests')
+               .where('sender', isEqualTo:_user.value.userId)
+               .where('receiver',  isEqualTo:ownerId )
+               .get();
+       }
+      log('pppp' + result.docs.first.data().toString());
+      FriendRequestModel requestModel =
+          FriendRequestModel.fromJson(result.docs.first.data());
       requestModel.requestId = result.docs.first.id;
-      requestModel.sender= UserModel(userId: result.docs.first.data()['sender']);
-    requestModel.receiver= UserModel(userId: result.docs.first.data()['receiver']);
-      final resultdecline = await _userRepopsitory.cancelOrDeclineFriendRequest(requestModel: requestModel);
+      requestModel.sender =
+          UserModel(userId: result.docs.first.data()['sender']);
+      requestModel.receiver =
+          UserModel(userId: result.docs.first.data()['receiver']);
+      final resultdecline = await _userRepopsitory.cancelOrDeclineFriendRequest(
+          requestModel: requestModel);
       if (resultdecline) {
-
         _relationshipType.sink.add(RelationshipType.stranger);
         //   showContent();
       } else {
@@ -277,21 +309,28 @@ class ProfileCubit extends BaseCubit<ProfileState> {
 
   Future<void> discardRelationship() async {
     // showLoading();
-    log('vvvvvvvvvvvvvvv'+_user.value.userId.toString());
+    log('vvvvvvvvvvvvvvv' + _user.value.userId.toString());
     try {
       final ownerId = await PrefsService.getUserId();
+      log(ownerId);
       final result = await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
           .doc(_user.value.userId)
           .collection('relationships')
-      .where('user1', arrayContains: [ownerId, _user.value.userId ])
-          .get();
-       RelationshipModel rela = RelationshipModel(user1: UserModel(userId: ownerId), user2: UserModel(userId: _user.value.userId), createAt: DateTime.now().millisecondsSinceEpoch, updateAt: DateTime.now().millisecondsSinceEpoch, type: 1,relationshipId: result.docs.first.id);
-      final resultdecline = await _userRepopsitory.discardRelationship(relationshipModel: rela) ;
+          .where('user_id2', isEqualTo: ownerId).get();
+      log(result.docs.toString());
+      RelationshipModel rela = RelationshipModel(
+          user2: UserModel(userId: ownerId),
+          user1: UserModel(userId: _user.value.userId),
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          updateAt: DateTime.now().millisecondsSinceEpoch,
+          type: 1,
+          relationshipId: result.docs.first.id);
+      final resultdecline =
+          await _userRepopsitory.discardRelationship(relationshipModel: rela);
       if (resultdecline) {
-
         _relationshipType.sink.add(RelationshipType.stranger);
         //   showContent();
       } else {
@@ -305,29 +344,51 @@ class ProfileCubit extends BaseCubit<ProfileState> {
   }
 
   Future<void> block(context) async {
-    // showLoading();
+    showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
-      RelationshipModel newRela = RelationshipModel(user1: UserModel(userId: ownerId), user2:  UserModel(userId: _user.value.userId ?? ''), createAt: DateTime.now().millisecondsSinceEpoch, );
-      switch(_relationshipType.value)
-      {
+      RelationshipModel newRela = RelationshipModel(
+          user1: UserModel(userId: ownerId),
+          user2: UserModel(userId: _user.value.userId ?? ''),
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          updateAt: DateTime.now().millisecondsSinceEpoch,
+          type: 2);
+      switch (_relationshipType.value) {
         case RelationshipType.stranger:
-          final resultdecline = await _userRepopsitory.blockUser(relationshipModel: newRela) ;
-          if (resultdecline) {
-
+          final result =
+              await _userRepopsitory.blockUser(   userId1: ownerId,
+                  userId2:  _user.value.userId ?? '',
+                  );
+          if (result) {
             _relationshipType.sink.add(RelationshipType.blocked);
-           Navigator.pop(context);
+            Navigator.pop(context);
           } else {
             showError();
           }
-          return;
+          break;
         case RelationshipType.friend:
-          final resultdecline = await _userRepopsitory.discardRelationship(relationshipModel: newRela) ;
-          if (resultdecline) {
-
-            final result  = await _userRepopsitory.blockUser(relationshipModel: newRela) ;
-            if (result) {
-
+          final result = await FirebaseFirestore.instance
+              .collection(DefaultEnv.appCollection)
+              .doc(DefaultEnv.developDoc)
+              .collection(DefaultEnv.usersCollection)
+              .doc(_user.value.userId)
+              .collection('relationships')
+              .where('user_id2', isEqualTo: ownerId).get();
+          log(result.docs.toString());
+          RelationshipModel rela = RelationshipModel(
+              user2: UserModel(userId: ownerId),
+              user1: UserModel(userId: _user.value.userId),
+              createAt: DateTime.now().millisecondsSinceEpoch,
+              updateAt: DateTime.now().millisecondsSinceEpoch,
+              type: 1,
+              relationshipId: result.docs.first.id);
+          final resultDiscard =
+          await _userRepopsitory.discardRelationship(relationshipModel: rela);
+          if (resultDiscard) {
+            final resultBlock =
+                await _userRepopsitory.blockUser( userId1: ownerId,
+                  userId2:  _user.value.userId ?? '',);
+            if (resultBlock) {
               _relationshipType.sink.add(RelationshipType.blocked);
               Navigator.pop(context);
             } else {
@@ -338,45 +399,46 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             showError();
           }
 
-          return;
-        case RelationshipType.stranger:
-          final resultdecline = await _userRepopsitory.blockUser(relationshipModel: newRela) ;
+          break;
+        case RelationshipType.requestReceiver:
+        case RelationshipType.requestSender:
+          final ownerId = await PrefsService.getUserId();
+          final result = await FirebaseFirestore.instance
+              .collection(DefaultEnv.appCollection)
+              .doc(DefaultEnv.developDoc)
+              .collection(DefaultEnv.usersCollection)
+              .doc(_user.value.userId ?? '')
+              .collection('friend_requests')
+              .where('sender', isEqualTo: ownerId)
+              .where('receiver', isEqualTo: _user.value.userId)
+              .get();
+          log('pppp' + result.docs.first.data().toString());
+          FriendRequestModel requestModel =
+              FriendRequestModel.fromJson(result.docs.first.data());
+          requestModel.requestId = result.docs.first.id;
+          requestModel.sender =
+              UserModel(userId: result.docs.first.data()['sender']);
+          requestModel.receiver =
+              UserModel(userId: result.docs.first.data()['receiver']);
+          final resultdecline = await _userRepopsitory
+              .cancelOrDeclineFriendRequest(requestModel: requestModel);
           if (resultdecline) {
-
-            _relationshipType.sink.add(RelationshipType.stranger);
+            final result =
+                await _userRepopsitory.blockUser( userId1: ownerId,
+                  userId2:  _user.value.userId ?? '',);
+            if (result) {
+              _relationshipType.sink.add(RelationshipType.blocked);
+              Navigator.pop(context);
+            } else {
+              showError();
+            }
             Navigator.pop(context);
           } else {
             showError();
           }
-          return;
-        case RelationshipType.stranger:
-          final resultdecline = await _userRepopsitory.blockUser(relationshipModel: newRela) ;
-          if (resultdecline) {
-
-            _relationshipType.sink.add(RelationshipType.stranger);
-            Navigator.pop(context);
-          } else {
-            showError();
-          }
-          return;
+          break;
       }
-      final result = await FirebaseFirestore.instance
-          .collection(DefaultEnv.appCollection)
-          .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.usersCollection)
-          .doc(_user.value.userId)
-          .collection('relationships')
-          .where('user1', arrayContains: [ownerId, _user.value.userId ])
-          .get();
-      RelationshipModel rela = RelationshipModel(user1: UserModel(userId: ownerId), user2: UserModel(userId: _user.value.userId), createAt: DateTime.now().millisecondsSinceEpoch, updateAt: DateTime.now().millisecondsSinceEpoch, type: 1,relationshipId: result.docs.first.id);
-      final resultdecline = await _userRepopsitory.discardRelationship(relationshipModel: rela) ;
-      if (resultdecline) {
-
-        _relationshipType.sink.add(RelationshipType.stranger);
-        //   showContent();
-      } else {
-        showError();
-      }
+      showContent();
     } catch (e) {
       log('lllllllllllllllllllllllllllll');
       log(e.toString());

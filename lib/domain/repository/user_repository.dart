@@ -51,13 +51,14 @@ class UserRepopsitory {
     }
   }
 
-  Future<List<RelationshipModel>> fetchFriendsList (String userId) async {
-    final response =
-    await FirebaseFirestore.instance
+  Future<List<RelationshipModel>> fetchFriendsList(String userId) async {
+    final response = await FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection)
         .doc(DefaultEnv.developDoc)
         .collection(DefaultEnv.usersCollection)
-        .doc(userId).collection('relationships').where('type' == 1)
+        .doc(userId)
+        .collection('relationships')
+        .where('type' == 1)
         .get();
     if (response.docs == null) {
       return [];
@@ -73,14 +74,13 @@ class UserRepopsitory {
 
         //get user1
         final user1 =
-        await UserRepopsitory().getUserProfile(userId: friend['user_id1']);
+            await UserRepopsitory().getUserProfile(userId: friend['user_id1']);
         newFriend.user1 = user1;
 
         //get user2
         final user2 =
-        await UserRepopsitory().getUserProfile(userId: friend['user_id2']);
+            await UserRepopsitory().getUserProfile(userId: friend['user_id2']);
         newFriend.user2 = user2;
-
 
         friends.add(newFriend);
       }
@@ -89,13 +89,13 @@ class UserRepopsitory {
     }
   }
 
-  Future<List<FriendRequestModel>> fetchFriendRequests (String userId) async {
-    final response =
-    await FirebaseFirestore.instance
+  Future<List<FriendRequestModel>> fetchFriendRequests(String userId) async {
+    final response = await FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection)
         .doc(DefaultEnv.developDoc)
         .collection(DefaultEnv.usersCollection)
-        .doc(userId).collection('friend_requests')
+        .doc(userId)
+        .collection('friend_requests')
         .get();
     if (response.docs == null) {
       return [];
@@ -111,14 +111,13 @@ class UserRepopsitory {
 
         //get sender
         final sender =
-        await UserRepopsitory().getUserProfile(userId: request['sender']);
+            await UserRepopsitory().getUserProfile(userId: request['sender']);
         newRequest.sender = sender;
 
         //get receiver
         final receiver =
-        await UserRepopsitory().getUserProfile(userId: request['receiver']);
+            await UserRepopsitory().getUserProfile(userId: request['receiver']);
         newRequest.receiver = receiver;
-
 
         friendrequests.add(newRequest);
       }
@@ -128,7 +127,8 @@ class UserRepopsitory {
   }
 
   // send friend request
-  Future<bool> sendFriendRequest({required FriendRequestModel friendRequestModel }) async {
+  Future<bool> sendFriendRequest(
+      {required FriendRequestModel friendRequestModel}) async {
     try {
       // if the likes list contains the user uid, we need to remove it
       String requestId = const Uuid().v1();
@@ -136,14 +136,16 @@ class UserRepopsitory {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(friendRequestModel.sender?.userId ?? '').collection('friend_requests')
+          .doc(friendRequestModel.sender?.userId ?? '')
+          .collection('friend_requests')
           .doc(requestId)
           .set(friendRequestModel.toJson());
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(friendRequestModel.receiver?.userId ?? '').collection('friend_requests')
+          .doc(friendRequestModel.receiver?.userId ?? '')
+          .collection('friend_requests')
           .doc(requestId)
           .set(friendRequestModel.toJson());
     } catch (err) {
@@ -158,7 +160,10 @@ class UserRepopsitory {
     return true;
   }
 
-  Future<bool> acceptFriendRequest({required RelationshipModel relationshipModel, required String requestId}) async {
+  Future<bool> acceptFriendRequest(
+      {required String userId1,
+      required String userId2,
+      required String requestId}) async {
     try {
       // if the likes list contains the user uid, we need to remove it
       String relationshipId = const Uuid().v1();
@@ -166,29 +171,45 @@ class UserRepopsitory {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user1?.userId ?? '').collection('friends')
+          .doc(userId1)
+          .collection('relationships')
           .doc(relationshipId)
-          .set(relationshipModel.toJson());
+          .set(RelationshipModel(
+                  user1: UserModel(userId: userId1),
+                  user2: UserModel(userId: userId2),
+                  createAt: DateTime.now().millisecondsSinceEpoch,
+                  updateAt: DateTime.now().millisecondsSinceEpoch,
+                  type: 1)
+              .toJson());
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user2?.userId ?? '').collection('friends')
+          .doc(userId2)
+          .collection('relationships')
           .doc(relationshipId)
-          .set(relationshipModel.toJson());
+          .set(RelationshipModel(
+                  user1: UserModel(userId: userId2),
+                  user2: UserModel(userId: userId1),
+                  createAt: DateTime.now().millisecondsSinceEpoch,
+                  updateAt: DateTime.now().millisecondsSinceEpoch,
+                  type: 1)
+              .toJson());
 
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user1?.userId ?? '').collection('friend_requests')
+          .doc(userId1)
+          .collection('friend_requests')
           .doc(requestId)
           .delete();
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user2?.userId ?? '').collection('friend_requests')
+          .doc(userId2)
+          .collection('friend_requests')
           .doc(requestId)
           .delete();
     } catch (err) {
@@ -203,21 +224,24 @@ class UserRepopsitory {
     return true;
   }
 
-  Future<bool> cancelOrDeclineFriendRequest({required FriendRequestModel requestModel}) async {
+  Future<bool> cancelOrDeclineFriendRequest(
+      {required FriendRequestModel requestModel}) async {
     log(requestModel.requestId.toString());
     try {
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(requestModel.sender?.userId ?? '' ).collection('friend_requests')
+          .doc(requestModel.sender?.userId ?? '')
+          .collection('friend_requests')
           .doc(requestModel.requestId)
           .delete();
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(requestModel.receiver?.userId ?? '' ).collection('friend_requests')
+          .doc(requestModel.receiver?.userId ?? '')
+          .collection('friend_requests')
           .doc(requestModel.requestId)
           .delete();
     } catch (err) {
@@ -232,21 +256,23 @@ class UserRepopsitory {
     return true;
   }
 
-  Future<bool> discardRelationship({required RelationshipModel relationshipModel}) async {
-
+  Future<bool> discardRelationship(
+      {required RelationshipModel relationshipModel}) async {
     try {
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user1?.userId ?? '' ).collection('relationships')
+          .doc(relationshipModel.user1?.userId ?? '')
+          .collection('relationships')
           .doc(relationshipModel.relationshipId)
           .delete();
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user2?.userId ?? '' ).collection('relationships')
+          .doc(relationshipModel.user2?.userId ?? '')
+          .collection('relationships')
           .doc(relationshipModel.relationshipId)
           .delete();
     } catch (err) {
@@ -261,9 +287,9 @@ class UserRepopsitory {
     return true;
   }
 
-
   // block user
-  Future<bool> blockUser({required RelationshipModel relationshipModel}) async {
+  Future<bool> blockUser({required String userId1,
+    required String userId2}) async {
     try {
       // if the likes list contains the user uid, we need to remove it
       String requestId = const Uuid().v1();
@@ -271,31 +297,29 @@ class UserRepopsitory {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user1?.userId ?? '').collection('relationships')
+          .doc(userId1)
+          .collection('relationships')
           .doc(requestId)
-          .set(relationshipModel.toJson());
-      await FirebaseFirestore.instance
-          .collection(DefaultEnv.appCollection)
-          .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user1?.userId ?? '').collection('relationships')
-          .doc(requestId)
-          .update({'type':2,'update_at': DateTime.now().millisecondsSinceEpoch});
+          .set(RelationshipModel(
+          user1: UserModel(userId: userId1),
+          user2: UserModel(userId: userId2),
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          updateAt: DateTime.now().millisecondsSinceEpoch,
+          type: 2).toJson());
 
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user2?.userId ?? '').collection('relationships')
+          .doc(userId2)
+          .collection('relationships')
           .doc(requestId)
-          .set(relationshipModel.toJson());
-      await FirebaseFirestore.instance
-          .collection(DefaultEnv.appCollection)
-          .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.usersCollection)
-          .doc(relationshipModel.user2?.userId ?? '').collection('relationships')
-          .doc(requestId)
-          .update({'type':2,'update_at': DateTime.now().millisecondsSinceEpoch});
+          .set(RelationshipModel(
+          user1: UserModel(userId: userId2),
+          user2: UserModel(userId: userId1),
+          createAt: DateTime.now().millisecondsSinceEpoch,
+          updateAt: DateTime.now().millisecondsSinceEpoch,
+          type: 2).toJson());
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(

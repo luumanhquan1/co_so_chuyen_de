@@ -123,4 +123,6 @@ String parseTimeCreate(int time){
   return  DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(time));
 }
 
+String intToDatetime(int date) => DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(date));
+
 
