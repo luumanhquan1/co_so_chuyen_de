@@ -4,9 +4,11 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
+import 'package:ccvc_mobile/presentation/change_password/ui/change_password_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/personal/bloc/personal_cubit.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
+import 'package:ccvc_mobile/presentation/update_user/ui/update_user_screen.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
@@ -58,19 +60,52 @@ class _PersonalScreenState extends State<PersonalScreen> {
                           subtitle: 'Xem trang cá nhân',
                           avatarUrl: snapshot.data?.avatarUrl,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: snapshot.data!.userId!)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => ProfileScreen(
+                                        userId: snapshot.data!.userId!)));
                           }),
                       _buildListTile(
-                          title: 'Đổi mật khẩu',
-                          icon: Icons.lock,
-                          onTap: () {}),
+                        title: 'Cập nhật profile',
+                        icon: Icons.account_circle,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                              const UpdateUserScreen(),
+                            ),
+                          );
+                        },
+                      ),
                       _buildListTile(
-                          title: 'Đăng xuất', icon: Icons.logout, onTap: () async {
-                            final result = await FirebaseAuthentication.logOut(snapshot.data!.userId!);
-                            if(result){
-                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (_) => LoginScreen()));
+                        title: 'Đổi mật khẩu',
+                        icon: Icons.lock,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ChangePasswordScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      _buildListTile(
+                          title: 'Đăng xuất',
+                          icon: Icons.logout,
+                          onTap: () async {
+                            final result = await FirebaseAuthentication.logOut(
+                                snapshot.data!.userId!);
+                            if (result) {
+                              await _personalCubit.logOut();
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => LoginScreen()));
                             }
-                      }),
+                          }),
                     ]),
               ),
             )));

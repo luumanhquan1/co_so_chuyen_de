@@ -7,7 +7,7 @@ class PrefsService {
   static const _PREF_USERID = 'pref_user_id';
   static const _PREF_TOKEN = 'pref_token';
   static const _PREF_REFRESH_TOKEN = 'pref_token';
-
+  static const _PREF_PASSWORD_PRESENT = 'pref_password_present';
   static const _PREF_DATA_USER = 'pref_data_user';
   static const _PREF_APP_THEME = 'pref_app_theme';
   static SharedPreferences? _prefsInstance;
@@ -35,6 +35,11 @@ class PrefsService {
     return prefs.setString(_PREF_REFRESH_TOKEN, token);
   }
 
+  static Future<bool> savePasswordPresent(String passwordPresent) async {
+    final prefs = await _instance;
+    return prefs.setString(_PREF_PASSWORD_PRESENT, passwordPresent);
+  }
+
   static Future<bool> saveDataUser(String data) async {
     final prefs = await _instance;
     return prefs.setString(_PREF_DATA_USER, data);
@@ -49,10 +54,26 @@ class PrefsService {
     return _prefsInstance?.getString(_PREF_USERID) ?? '';
   }
 
+  static String getPasswordPresent() {
+    return _prefsInstance?.getString(_PREF_PASSWORD_PRESENT) ?? '';
+  }
+
+  static Future<void> updatePasswordPresent(String password) async {
+    await removePasswordPresent();
+    await savePasswordPresent(password);
+  }
+
   static Future<void> removeUserId() async {
     final prefs = await _instance;
     if (prefs.containsKey(_PREF_USERID)) {
       await prefs.remove(_PREF_USERID);
+    }
+  }
+
+  static Future<void> removePasswordPresent() async {
+    final prefs = await _instance;
+    if (prefs.containsKey(_PREF_PASSWORD_PRESENT)) {
+      await prefs.remove(_PREF_PASSWORD_PRESENT);
     }
   }
 
