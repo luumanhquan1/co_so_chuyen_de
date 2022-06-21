@@ -37,14 +37,8 @@ class PostModel {
         likes!.add(v);
       });
     }
-    // if (json['comments'] != null) {
-    //   comments = [];
-    //   json['comments'].forEach((v) {
-    //     comments!.add(CommentModel.fromJson(v));
-    //   });
-    // }
   }
-  Map<String, dynamic> PostModelToJson(PostModel instance) => <String, dynamic>{
+  Map<String, dynamic> toJson(PostModel instance) => <String, dynamic>{
         'post_id': instance.postId,
         'user_id': instance.author?.userId ?? '',
         'image_url': instance.imageUrl,

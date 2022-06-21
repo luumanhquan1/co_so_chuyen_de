@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/domain/model/login/user_info.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/bloc/relationship_cubit.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/widget/friend_cell_widget.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/widget/skeleton_friend_widget.dart';

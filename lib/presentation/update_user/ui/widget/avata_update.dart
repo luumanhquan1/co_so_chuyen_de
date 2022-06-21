@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:ccvc_mobile/presentation/update_user/bloc/update_user_cubit.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../utils/constants/image_asset.dart';
 
 class AvataUpdateWidget extends StatefulWidget {
   final UpdateUserCubit cubit;
@@ -33,13 +33,13 @@ class _AvataUpdateWidgetState extends State<AvataUpdateWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      // overflow: Overflow.visible,
+      overflow: Overflow.visible,
       children: [
         if (_image == null)
           CircleAvatar(
             radius: 64, // Image radius
             backgroundImage: NetworkImage(
-                widget.cubit.userInfo.avatarUrl ?? ImageAssets.imgEmptyAvata),
+                widget.cubit.userInfo.avatarUrl ?? ImageAssets.imgEmptyAvata,),
           )
         else
           CircleAvatar(

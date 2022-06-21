@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_state.dart';
 import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
@@ -13,9 +14,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '../../../domain/locals/prefs_service.dart';
-import '../../../domain/model/login/user_info.dart';
 
 class SignUpCubit extends BaseCubit<SignUpState> {
   SignUpCubit() : super(SignUpStateIntial());
@@ -42,7 +40,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
         .doc(PrefsService.getUserId())
         .collection(DefaultEnv.profile)
         .get();
-    final UserInfoModel userInfo = UserInfoModel.fromJson(
+    final UserModel userInfo = UserModel.fromJson(
       snap.docs.first.data(),
     );
     HiveLocal.saveDataUser(userInfo);

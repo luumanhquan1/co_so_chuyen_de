@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 ///=========== Colors for default when didn't setup app theme ===============
 ///https://stackoverflow.com/a/17239853
+const colorAppbar = Color(0xff00AA99);
 const colorPrimary = Color(0xff0ABAB5);
 const colorPrimaryTransparent = Color(0x720ABAB5);
 const colorAccent = Color(0xffDCFFFE);

@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_state.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/bloc/relationship_state.dart';
 

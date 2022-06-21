@@ -18,8 +18,9 @@ class PostCard extends StatefulWidget {
   final PostModel postModel;
   final String userId;
   final Function()? onTap;
+  final Function()? onTapName;
   const PostCard(
-      {Key? key, required this.postModel, this.userId = '', this.onTap})
+      {Key? key, required this.postModel, this.userId = '', this.onTap, this.onTapName})
       : super(key: key);
 
   @override
@@ -59,25 +60,28 @@ class _PostCardState extends State<PostCard> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(80),
-                    child: Container(
-                      height: 40.sp,
-                      width: 40.sp,
-                      decoration: BoxDecoration(
-                        //   shape: BoxShape.circle,
-                        color: ThemeColor.paleGrey,
-                      ),
-                      child: widget.postModel.author?.avatarUrl == null ||
-                              widget.postModel.author!.avatarUrl!.isEmpty
-                          ? SizedBox()
-                          : AppImage.network(
-                              path: widget.postModel.author!.avatarUrl!,
-                              //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+                  child: GestureDetector(
+                    onTap: widget.onTapName,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(80),
+                      child: Container(
+                        height: 40.sp,
+                        width: 40.sp,
+                        decoration: BoxDecoration(
+                          //   shape: BoxShape.circle,
+                          color: ThemeColor.paleGrey,
+                        ),
+                        child: widget.postModel.author?.avatarUrl == null ||
+                                widget.postModel.author!.avatarUrl!.isEmpty
+                            ? SizedBox()
+                            : AppImage.network(
+                                path: widget.postModel.author!.avatarUrl!,
+                                //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
 
-                              height: 40.sp,
-                              width: 40.sp,
-                            ),
+                                height: 40.sp,
+                                width: 40.sp,
+                              ),
+                      ),
                     ),
                   ),
                 ),
@@ -90,10 +94,13 @@ class _PostCardState extends State<PostCard> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.postModel.author?.nameDisplay ?? '',
-                          //      'abcs',
-                          style: username(),
+                        GestureDetector(
+                          onTap: widget.onTapName,
+                          child: Text(
+                            widget.postModel.author?.nameDisplay ?? '',
+                            //      'abcs',
+                            style: username(),
+                          ),
                         ),
                         SizedBox(
                           height: 3.sp,

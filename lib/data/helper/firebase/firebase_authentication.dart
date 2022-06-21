@@ -1,4 +1,5 @@
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
+import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +33,17 @@ class FirebaseAuthentication {
     return user;
   }
 
+  static Future<bool> logOut(String userId) async {
+    try {
+      await auth.signOut();
+      await UserRepopsitory().updateOnline(userId: userId, onlineFlag: false);
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
+
   static Future<User?> signUp({
     required String email,
     required String password,
@@ -63,5 +75,31 @@ class FirebaseAuthentication {
 
   static Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  static Future<void> changePassword({
+    required String newPassword,
+    required Function() subsess,
+    required Function(String e) error,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    return await user?.updatePassword(newPassword).then((value) {
+      subsess();
+    }).catchError((e) {
+      if (e.toString() ==
+          '[firebase_auth/weak-password] Password should be at least 6 characters') {
+        EXCEPTION_CHANGE_PASSWORD = S.current.password_dai_hon_6_ky_tu;
+      } else if (e.toString() ==
+          '[firebase_auth/requires-recent-login] This operation is sensitive and requires recent authentication. Log in again before retrying this request.') {
+        EXCEPTION_CHANGE_PASSWORD =
+            'Thao tác này nhạy cảm và yêu cầu xác thực gần đây. Đăng nhập lại trước khi thử lại yêu cầu này.';
+      } else {
+        EXCEPTION_CHANGE_PASSWORD = e.toString();
+      }
+      error(EXCEPTION_CHANGE_PASSWORD);
+      print('$e');
+      //Error, show something
+    });
   }
 }
