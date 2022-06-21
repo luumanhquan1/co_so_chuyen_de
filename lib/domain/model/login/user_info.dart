@@ -21,6 +21,7 @@ class UserInfoModel {
   int? createAt;
   @HiveField(7)
   int? updateAt;
+  PeopleType? peopleType;
 
   UserInfoModel({
     required this.userId,

@@ -47,7 +47,7 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       child: FriendCellWidget(
                         avatarUrl: result.avatarUrl ?? '',
                         name: result.nameDisplay ?? '',
-                        peopleType: cubit.peopleType(result.userId ?? ''),
+                        peopleType: result.peopleType,
                       ),
                     );
                   }),

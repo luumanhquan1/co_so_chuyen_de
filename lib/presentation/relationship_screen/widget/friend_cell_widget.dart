@@ -9,12 +9,12 @@ import '../../../config/resources/styles.dart';
 class FriendCellWidget extends StatelessWidget {
   final String name;
   final String avatarUrl;
-  final PeopleType peopleType;
+  final PeopleType? peopleType;
   const FriendCellWidget(
       {Key? key,
       required this.name,
       required this.avatarUrl,
-      required this.peopleType})
+       this.peopleType})
       : super(key: key);
 
   @override
@@ -66,6 +66,7 @@ class FriendCellWidget extends StatelessWidget {
       case PeopleType.NoFriend:
        return button(backGround: mainTxtColor, onTap: (){}, title: 'Thêm bạn bè');
     }
+    return const SizedBox();
   }
   Widget button({required Color backGround,required Function() onTap,required String title}){
     return GestureDetector(
@@ -73,6 +74,7 @@ class FriendCellWidget extends StatelessWidget {
         onTap();
       },
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
         decoration: BoxDecoration(
           color: backGround,
           borderRadius: const BorderRadius.all(Radius.circular(4))

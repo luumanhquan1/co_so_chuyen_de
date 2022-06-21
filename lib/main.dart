@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
@@ -13,7 +12,6 @@ import 'package:ccvc_mobile/generated/l10n.dart';
 
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,7 +23,6 @@ import 'package:hive/hive.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-import 'domain/model/login/user_info.dart';
 
 Future<void> mainApp() async {
   WidgetsFlutterBinding.ensureInitialized();
