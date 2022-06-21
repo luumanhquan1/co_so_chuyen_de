@@ -35,9 +35,7 @@ extension SmsExtension on SmsType {
         );
       case SmsType.Image:
         return Container(
-
           margin: const EdgeInsets.only(bottom: 16),
-          height: 350,
           width: 250,
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
@@ -51,9 +49,10 @@ extension SmsExtension on SmsType {
             progressIndicatorBuilder: (context,_,__){
               return const ContainerSkeletonWidget(
                 width: 250,
-                height: 350,
+                // height: 350,
               );
             },
+
           ),
         );
     }
