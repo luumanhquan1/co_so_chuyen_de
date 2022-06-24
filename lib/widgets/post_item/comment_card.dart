@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,25 +49,12 @@ class CommentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: onTapName,
-                        child: Text(  '${commentModel.author?.nameDisplay ?? ''}  ',
-                            style: username(
-                                color: ThemeColor.black.withOpacity(0.7))),
-                      ),
-                      SizedBox(width: 20.sp,),
-                      Text(commentModel.data ?? '',
-                        style:
-                        caption(color: ThemeColor.black.withOpacity(0.7)),)
-                    ],
-                  ),
                   RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(
                             text: '${commentModel.author?.nameDisplay ?? ''}  ',
+                            recognizer: TapGestureRecognizer()..onTap = onTapName,
                             style: username(
                                 color: ThemeColor.black.withOpacity(0.7))),
                         TextSpan(
@@ -117,15 +105,10 @@ class CommentCard extends StatelessWidget {
                   )
                 ],
               ),
+
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.all(8),
-          //   child: const Icon(
-          //     Icons.favorite,
-          //     size: 16,
-          //   ),
-          // )
+
         ],
       ),
     );

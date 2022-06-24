@@ -62,9 +62,9 @@ class _MessageScreenState extends State<MessageScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: SendSmsWidget(
-                hintText: 'Write a message...',
+                hintText: 'Soạn tin nhắn...',
                 sendTap: (value) {
                   cubit.sendSms(widget.chatModel?.roomId ?? '', value);
                 },
