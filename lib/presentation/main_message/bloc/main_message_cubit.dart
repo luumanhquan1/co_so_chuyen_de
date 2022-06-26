@@ -10,16 +10,19 @@ import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_state.da
 import 'package:rxdart/rxdart.dart';
 
 class MainMessageCubit extends BaseCubit<MainMessageState> {
-  MainMessageCubit() : super(MainMessageStateIntial()){
-    showContent();
-  }
+  MainMessageCubit() : super(MainMessageStateIntial()) {}
 
   final BehaviorSubject<List<RoomChatModel>> _getRoomChat =
       BehaviorSubject<List<RoomChatModel>>();
 
   Stream<List<RoomChatModel>> get getRoomChat => _getRoomChat.stream;
   final idUser = PrefsService.getUserId();
-  Stream<List<RoomChatModel>>? fetchRoom() {
-    return MessageService.getRoomChat(idUser);
+  void fetchRoom() {
+    showLoading();
+    MessageService.getRoomChat(idUser)?.listen((event) {
+      showContent();
+      _getRoomChat.sink.add(event);
+
+    });
   }
 }

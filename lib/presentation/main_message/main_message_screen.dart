@@ -77,7 +77,7 @@ class _MessageScreenState extends State<MainMessageScreen> {
                       stream: cubit.stateStream,
                       skeleton: const LoadingSkeletonMessageWidget(),
                       child: StreamBuilder<List<RoomChatModel>>(
-                          stream: cubit.fetchRoom(),
+                          stream: cubit.getRoomChat,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? <RoomChatModel>[];
                             return Column(
