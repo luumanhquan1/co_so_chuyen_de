@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_user.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
@@ -89,11 +90,13 @@ class MessageService {
   }
 
   static Stream<List<MessageSmsModel>>? smsRealTime(String idRoom) {
+    final String idUser = PrefsService.getUserId();
     try {
       return FirebaseSetup.fireStore
           .collection(DefaultEnv.messCollection)
           .doc(idRoom)
-          .collection(idRoom).orderBy('create_at',descending: false)
+          .collection(idRoom)
+          .orderBy('create_at', descending: false)
           .snapshots()
           .transform(
         StreamTransformer.fromHandlers(
@@ -101,8 +104,51 @@ class MessageService {
             final data = <MessageSmsModel>[];
             docSnap.docs.forEach((element) {
               final json = element.data();
-              data.add(MessageSmsModel.fromJson(json));
+              final result = MessageSmsModel.fromJson(json);
+              if (result.senderId != idUser &&
+                  result.daXem?.contains(idUser) == false) {
+                _updateDaXemSms(idRoom, element.id, idUser);
+              }
+              data.add(result);
             });
+            sink.add(data);
+          },
+        ),
+      );
+    } catch (e) {}
+  }
+
+  static Stream<List<MessageSmsModel>>? smsRealTimeMain(String idRoom) {
+    final String idUser = PrefsService.getUserId();
+    try {
+      return FirebaseSetup.fireStore
+          .collection(DefaultEnv.messCollection)
+          .doc(idRoom)
+          .collection(idRoom)
+          .orderBy('create_at', descending: true)
+          .limit(6)
+          .snapshots()
+          .transform(
+        StreamTransformer.fromHandlers(
+          handleData: (docSnap, sink) {
+            final data = <MessageSmsModel>[];
+            docSnap.docs.forEach((element) {
+              final json = element.data();
+              final result = MessageSmsModel.fromJson(json);
+              if (result.senderId != idUser &&
+                  result.daXem?.contains(idUser) == false) {
+                result.isDaXem = false;
+                data.add(result);
+              }
+            });
+            if (data.isEmpty) {
+              if (docSnap.docs.isNotEmpty) {
+                final doc = docSnap.docs.first;
+                final result = MessageSmsModel.fromJson(doc.data());
+                result.isDaXem = true;
+                data.add(result);
+              }
+            }
             sink.add(data);
           },
         ),
@@ -168,5 +214,16 @@ class MessageService {
         .collection(DefaultEnv.messCollection)
         .doc(idRoom)
         .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+  }
+
+  static void _updateDaXemSms(String idRoom, String idSms, String idUser) {
+    FirebaseSetup.fireStore
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoom)
+        .collection(idRoom)
+        .doc(idSms)
+        .update({
+      'da_xem': FieldValue.arrayUnion([idUser])
+    });
   }
 }

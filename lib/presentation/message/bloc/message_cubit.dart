@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/data/services/message_service.dart';
@@ -13,7 +11,6 @@ import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
@@ -40,6 +37,7 @@ void initDate(String id,PeopleChat peopleChat){
     MessageService.sendSms(
       idRoomChat,
       MessageSmsModel(
+        daXem: [idUser],
         messageId: const Uuid().v1(),
         id: idRoomChat,
         senderId: idUser,
@@ -51,6 +49,7 @@ void initDate(String id,PeopleChat peopleChat){
     MessageService.sendSms(
       idRoomChat,
       MessageSmsModel(
+        daXem: [idUser],
         messageId: const Uuid().v1(),
         id: idRoomChat,
         senderId: idUser,
