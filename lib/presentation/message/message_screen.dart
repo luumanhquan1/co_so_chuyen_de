@@ -1,10 +1,4 @@
-import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ccvc_mobile/config/app_config.dart';
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/data/services/message_service.dart';
+import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
@@ -12,6 +6,8 @@ import 'package:ccvc_mobile/presentation/message/widgets/header_mess_widget.dart
 import 'package:ccvc_mobile/presentation/message/widgets/send_sms_widget.dart';
 import 'package:ccvc_mobile/presentation/message/widgets/sms_cell.dart';
 import 'package:flutter/material.dart';
+
+import '../../widgets/views/state_stream_layout.dart';
 
 class MessageScreen extends StatefulWidget {
   final RoomChatModel? chatModel;
@@ -29,51 +25,67 @@ class _MessageScreenState extends State<MessageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit.getRoomChat(widget.peopleChat.userId);
+    if (widget.chatModel != null) {
+      cubit.initDate(widget.chatModel?.roomId ?? '', widget.peopleChat);
+    } else {
+      cubit.peopleChat = widget.peopleChat;
+      cubit.getRoomChat(widget.peopleChat.userId);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            HeaderMessWidget(
-              peopleChat: widget.peopleChat,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                reverse: true,
-                child: StreamBuilder<List<MessageSmsModel>>(
-                    stream: cubit.chatStream(widget.chatModel?.roomId ?? ''),
-                    builder: (context, snapshot) {
-                      final data = snapshot.data ?? <MessageSmsModel>[];
-                      return Column(
-                        children: List.generate(data.length, (index) {
-                          final result = data[index];
-                          return SmsCell(smsModel: result);
-                        }),
-                      );
-                    }),
+    return StateStreamLayout(
+      retry: () {},
+      error: AppException('', ''),
+      stream: cubit.stateStream,
+      textEmpty: '',
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              HeaderMessWidget(
+                peopleChat: widget.peopleChat,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: SendSmsWidget(
-                hintText: 'Write a message...',
-                sendTap: (value) {
-                  cubit.sendSms(widget.chatModel?.roomId ?? '', value);
-                },
-                onSendFile: (value) {
-                  cubit.sendImage(widget.chatModel?.roomId ?? '', value);
-                },
+              const SizedBox(
+                height: 16,
               ),
-            )
-          ],
+              StreamBuilder<String>(
+                  stream: cubit.roomChat,
+                  builder: (context, snapshot) {
+                    final id = snapshot.data ?? '';
+                    return Expanded(
+                      child: SingleChildScrollView(
+                        reverse: true,
+                        child: StreamBuilder<List<MessageSmsModel>>(
+                            stream: cubit.chatStream(id),
+                            builder: (context, snapshot) {
+                              final data = snapshot.data ?? <MessageSmsModel>[];
+                              return Column(
+                                children: List.generate(data.length, (index) {
+                                  final result = data[index];
+                                  return SmsCell(smsModel: result);
+                                }),
+                              );
+                            }),
+                      ),
+                    );
+                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: SendSmsWidget(
+                  hintText: 'Write a message...',
+                  sendTap: (value) {
+                    cubit.sendSms(value);
+                  },
+                  onSendFile: (value) {
+                    cubit.sendImage(value);
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
