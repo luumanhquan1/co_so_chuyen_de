@@ -5,45 +5,53 @@ import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model/message_user.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class MessageService {
-  static Future<List<RoomChatModel>> getRoomChat(String idUser) async {
-    final listRoom = await FirebaseSetup.fireStore
+  static Map<String, RoomChatModel> _idRoomChat = {};
+  static Stream<List<RoomChatModel>>? getRoomChat(String idUser) {
+    return FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(idUser)
         .collection(DefaultEnv.messCollection)
-        .doc(DefaultEnv.messCollection)
-        .get();
-    final data = <RoomChatModel>[];
-
-    final jsonRoomChat = listRoom.data();
-    if (jsonRoomChat != null) {
-      final idRooms = jsonRoomChat['idRoomChat'] as List<dynamic>;
-
-      for (var value in idRooms) {
-        final profileRoom = await FirebaseSetup.fireStore
-            .collection(DefaultEnv.messCollection)
-            .doc(value)
-            .get();
-        final jsonProfileRoom = profileRoom.data();
-        if (jsonProfileRoom != null) {
-          final listPeople = await _getChatRoomUser(
-              jsonProfileRoom['people_chat'] as List<dynamic>, idUser);
-
-          data.add(RoomChatModel(
-              roomId: value,
-              peopleChats: listPeople,
-              colorChart: jsonProfileRoom['color_chart']));
-        }
-      }
-
-      return data;
-    }
-    return [];
+        .orderBy("update_at", descending: true)
+        .snapshots()
+        .transform(
+      StreamTransformer.fromHandlers(
+        handleData: (docSnap, sink) async {
+          final data = <RoomChatModel>[];
+          await Future.forEach(docSnap.docs,
+              (QueryDocumentSnapshot<Map<String, dynamic>> element) async {
+            if (!_idRoomChat.keys.contains(element.id)) {
+              final profileRoom = await FirebaseSetup.fireStore
+                  .collection(DefaultEnv.messCollection)
+                  .doc(element.id)
+                  .get();
+              final jsonProfileRoom = profileRoom.data();
+              if (jsonProfileRoom != null) {
+                final listPeople = await _getChatRoomUser(
+                    jsonProfileRoom['people_chat'] as List<dynamic>, idUser);
+                final room = RoomChatModel(
+                    roomId: element.id,
+                    peopleChats: listPeople,
+                    colorChart: jsonProfileRoom['color_chart']);
+                data.add(room);
+                _idRoomChat.addAll({element.id: room});
+              }
+            } else {
+              if (_idRoomChat[element.id] != null) {
+                data.add(_idRoomChat[element.id]!);
+              }
+            }
+          });
+          sink.add(data);
+        },
+      ),
+    );
   }
 
   static Future<UserModel> getUserChat(String id) async {
@@ -85,24 +93,17 @@ class MessageService {
       return FirebaseSetup.fireStore
           .collection(DefaultEnv.messCollection)
           .doc(idRoom)
-          .collection(idRoom)
-          .doc(DefaultEnv.chatsCollection)
+          .collection(idRoom).orderBy('create_at',descending: false)
           .snapshots()
           .transform(
         StreamTransformer.fromHandlers(
           handleData: (docSnap, sink) {
-            if (docSnap.exists) {
-              final json = docSnap.data();
-              if (json != null) {
-                final data = <MessageSmsModel>[];
-                final result = json['data'] as List<dynamic>;
-                for (final element in result) {
-                  data.add(MessageSmsModel.fromJson(element));
-                }
-                sink.add(data);
-              }
-            }
-            // sink.add();
+            final data = <MessageSmsModel>[];
+            docSnap.docs.forEach((element) {
+              final json = element.data();
+              data.add(MessageSmsModel.fromJson(json));
+            });
+            sink.add(data);
           },
         ),
       );
@@ -114,16 +115,8 @@ class MessageService {
         .collection(DefaultEnv.messCollection)
         .doc(idRoom)
         .collection(idRoom)
-        .doc(DefaultEnv.chatsCollection);
-    doc.update({
-      'data': FieldValue.arrayUnion([messageSmsModel.toJson()])
-    }).onError((error, stackTrace) {
-      if (error.toString().contains('cloud_firestore/not-found')) {
-        doc.set({
-          'data': FieldValue.arrayUnion([messageSmsModel.toJson()])
-        });
-      }
-    });
+        .doc(messageSmsModel.messageId);
+    doc.set(messageSmsModel.toJson());
   }
 
   static Future<List<RoomChatModel>> findRoomChat(String idUser) async {
@@ -156,20 +149,24 @@ class MessageService {
   }
 
   static void _addUserRoomChat(String id, String idRoom) {
-    final doc = FirebaseSetup.fireStore
+    FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(id)
         .collection(DefaultEnv.messCollection)
-        .doc(DefaultEnv.messCollection);
+        .doc(idRoom)
+        .set(MessageUser(
+                id: idRoom,
+                createAt: DateTime.now().millisecondsSinceEpoch,
+                updateAt: DateTime.now().millisecondsSinceEpoch)
+            .toJson());
+  }
 
-    doc.update({
-      'idRoomChat': FieldValue.arrayUnion([idRoom])
-    }).onError((error, stackTrace) {
-      if (error.toString().contains('cloud_firestore/not-found')) {
-        doc.set({
-          'idRoomChat': FieldValue.arrayUnion([idRoom])
-        });
-      }
-    });
+  static void updateRoomChatUser(String idUser, String idRoom) {
+    FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(idUser)
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoom)
+        .update({'update_at': DateTime.now().millisecondsSinceEpoch});
   }
 }
