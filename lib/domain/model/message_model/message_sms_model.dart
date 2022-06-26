@@ -20,9 +20,9 @@ class MessageSmsModel {
   String? senderId;
   String? content;
   int? loaiTinNhan;
-
+  String? messageId;
   SmsType smsType = SmsType.Sms;
-  MessageSmsModel({this.id, this.senderId, this.content, this.loaiTinNhan}) {
+  MessageSmsModel({this.id, this.senderId, this.content, this.loaiTinNhan,this.messageId}) {
     smsType = fromEnum(loaiTinNhan ?? 0);
   }
   bool isMe() {
@@ -44,11 +44,9 @@ class MessageSmsModel {
   }
 
   Map<String, dynamic> toJson() {
-    var uuid = Uuid();
     final idUser = PrefsService.getUserId();
-    final idRoom = uuid.v1();
     final map = <String, dynamic>{};
-    map['message_id'] = idRoom;
+    map['message_id'] = messageId;
     map['message_type_id'] = loaiTinNhan;
     map['create_at'] = DateTime.now().millisecondsSinceEpoch;
     map['sender_id'] = idUser;

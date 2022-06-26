@@ -37,10 +37,10 @@ void initDate(String id,PeopleChat peopleChat){
   Future<void> sendSms(String content, {SmsType smsType = SmsType.Sms}) async {
   if(idRoomChat.isEmpty){
     idRoomChat = await createRoomChatDefault(peopleChat);
-
     MessageService.sendSms(
       idRoomChat,
       MessageSmsModel(
+        messageId: const Uuid().v1(),
         id: idRoomChat,
         senderId: idUser,
         content: content,
@@ -51,12 +51,16 @@ void initDate(String id,PeopleChat peopleChat){
     MessageService.sendSms(
       idRoomChat,
       MessageSmsModel(
+        messageId: const Uuid().v1(),
         id: idRoomChat,
         senderId: idUser,
         content: content,
         loaiTinNhan: smsType.getInt(),
       ),
     );
+    MessageService.updateRoomChatUser(idUser, idRoomChat);
+    MessageService.updateRoomChatUser(peopleChat.userId, idRoomChat);
+
   }
   }
 
