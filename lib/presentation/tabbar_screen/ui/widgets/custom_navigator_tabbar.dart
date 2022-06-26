@@ -48,10 +48,13 @@ class BottomTabBarWidget extends StatelessWidget {
                       onTap: () async {
                         onChange(tab);
                       },
-                      child: tabBarItem(
-                        context: context,
-                        item: tab,
-                        isSelect: index == selectItemIndex,
+                      child: Container(
+                        color: Colors.transparent,
+                        child: tabBarItem(
+                          context: context,
+                          item: tab,
+                          isSelect: index == selectItemIndex,
+                        ),
                       ),
                     ),
                   );

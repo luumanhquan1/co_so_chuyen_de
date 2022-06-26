@@ -99,7 +99,7 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                       );
                                     },
                                     child: TinNhanCell(
-                                      peopleChat: result.getPeople(),
+                                      peopleChat: result.getPeople(), idRoom: result.roomId,
                                     ),
                                   ),
                                 );
