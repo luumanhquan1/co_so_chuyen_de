@@ -148,6 +148,9 @@ class UserRepopsitory {
           .collection('friend_requests')
           .doc(requestId)
           .set(friendRequestModel.toJson());
+
+     
+    log('cccccccccccccccccccc '+DateTime.now().millisecondsSinceEpoch.toString());
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
@@ -369,6 +372,19 @@ class UserRepopsitory {
           createAt: DateTime.now().millisecondsSinceEpoch,
           updateAt: DateTime.now().millisecondsSinceEpoch,
           type: 2).toJson());
+
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(userId1)
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      await FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(userId2)
+          .update({'update_at': DateTime.now().millisecondsSinceEpoch});
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(

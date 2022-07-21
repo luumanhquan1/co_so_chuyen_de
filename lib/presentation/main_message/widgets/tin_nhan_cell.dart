@@ -71,7 +71,7 @@ class TinNhanCell extends StatelessWidget {
                         String title = '';
                         if (data.isNotEmpty) {
                           if(data.first.smsType == SmsType.Image){
-                            title = 'Có 1 ảnh';
+                            title = 'Tin nhắn hình ảnh';
                           }else {
                             title = data.first.content ?? '';
                           }
