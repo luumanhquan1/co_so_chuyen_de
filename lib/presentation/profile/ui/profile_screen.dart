@@ -96,7 +96,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: GestureDetector(
                                 onTap: () {
                                   _scaffoldKey.currentState?.openEndDrawer();
-                                  log('message333333333333333333333');
                                 },
                                 child: Icon(
                                   Icons.more_horiz,
@@ -107,7 +106,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       body: Stack(children: [
                         Positioned(
-                            top: 0, child: AppImage.asset(path: bgProfile)),
+                            top: 0, child: AppImage.asset(
+                            width: MediaQuery.of(context).size.width,
+
+                            path: bgProfile)),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,6 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onRefresh: () async {
                                       await _profileCubit
                                           .getAllPosts(widget.userId);
+                                      await _profileCubit.getRelationship(widget.userId);
                                       refreshController.refreshCompleted();
                                     },
                                     child: snapshot.data == null
