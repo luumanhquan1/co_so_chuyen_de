@@ -50,6 +50,7 @@ dependencies:
   connectivity: ^3.0.3
   url_launcher:
   path_provider: ^2.0.1
+  modal_bottom_sheet: ^2.0.1
   webview_flutter: ^2.0.10
   shared_preferences: ^2.0.5
   lint: ^1.6.0

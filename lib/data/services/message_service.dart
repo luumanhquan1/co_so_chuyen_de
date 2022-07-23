@@ -61,9 +61,8 @@ class MessageService {
         .collection(DefaultEnv.usersCollection)
         .doc(id)
         .collection(DefaultEnv.profileCollection)
-        .get();
+        .get(const GetOptions(source: Source.server));
     for (final element in result.docs) {
-      log('${element.data()}');
       userProfile = UserModel.fromJson(element.data());
     }
     return userProfile;

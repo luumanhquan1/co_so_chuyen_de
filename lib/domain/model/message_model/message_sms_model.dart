@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:uuid/uuid.dart';
 
 enum SmsType { Sms, Image }
@@ -52,6 +53,9 @@ class MessageSmsModel {
     }
     return SmsType.Sms;
   }
+  // PeopleChat? getSenderSms(PeopleChat peopleChat){
+  //   final data = peopleChat.
+  // }
 
   Map<String, dynamic> toJson() {
     final idUser = PrefsService.getUserId();

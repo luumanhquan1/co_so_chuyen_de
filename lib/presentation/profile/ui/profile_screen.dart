@@ -12,6 +12,7 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/bloc/profile_cubit.dart';
+import 'package:ccvc_mobile/presentation/relationship_screen/relationship_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -191,6 +192,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Navigator.pop(context);
                             },
                             title: 'Thông tin'),
+                        _buildListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RelationshipScreen(
+                                    userId: widget.userId,
+                                  ),
+                                ),
+                              );
+                            },
+                            title: 'Bạn bè'),
                         Visibility(
                           visible: type.data! == RelationshipType.owner,
                           child: _buildListTile(
@@ -339,16 +353,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       MessageScreen(
-                                                    peopleChat: PeopleChat(
-                                                        userId:
-                                                            userModel.userId ??
-                                                                '',
-                                                        nameDisplay: userModel
-                                                                .nameDisplay ??
-                                                            '',
-                                                        avatarUrl: userModel
-                                                                .avatarUrl ??
-                                                            '', bietDanh: ''),
+                                                    peopleChat: [
+                                                      PeopleChat(
+                                                          userId: userModel
+                                                                  .userId ??
+                                                              '',
+                                                          nameDisplay: userModel
+                                                                  .nameDisplay ??
+                                                              '',
+                                                          avatarUrl: userModel
+                                                                  .avatarUrl ??
+                                                              '',
+                                                          bietDanh: '')
+                                                    ],
                                                   ),
                                                 ),
                                               );

@@ -10,19 +10,16 @@ class RoomChatModel {
       {required this.roomId,
       required this.peopleChats,
       required this.colorChart});
-  PeopleChat getPeople() {
+
+  List<PeopleChat> getPeople() {
     final data = peopleChats
         .where((element) => element.userId != PrefsService.getUserId());
-    if (data.isNotEmpty) {
-      return data.first;
-    }
-    return PeopleChat(userId: '', avatarUrl: '', nameDisplay: '', bietDanh: '');
+    return data.toList();
   }
 
   factory RoomChatModel.fromJson(Map<String, dynamic> json) {
     final data = <PeopleChat>[];
-    if(json['people_chat'] != null){
-
+    if (json['people_chat'] != null) {
       json['people_chat'].forEach((v) {
         data.add(PeopleChat.fromJson(v));
       });
@@ -33,8 +30,8 @@ class RoomChatModel {
         colorChart: json['color_chart'] ?? 0);
   }
 
-  Map<String,dynamic> toJson(){
-    final data = <String,dynamic>{};
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
     data['room_id'] = roomId;
     data['color_chart'] = colorChart;
     data['people_chat'] = peopleChats.map((e) => e.toJson()).toList();
@@ -59,8 +56,8 @@ class PeopleChat {
         nameDisplay: json['name_display'] ?? '',
         bietDanh: json['biet_danh'] ?? '');
   }
-  Map<String,dynamic> toJson(){
-    final data = <String,dynamic>{};
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
     data['user_id'] = userId;
     data['avatar_url'] = avatarUrl;
     data['name_display'] = nameDisplay;
