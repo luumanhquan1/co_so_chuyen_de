@@ -37,11 +37,17 @@ class HomeCubit extends BaseCubit<HomeState> {
 
   Stream<UserModel> get user => _user.stream;
 
+  final BehaviorSubject<List<String>> _blockList =
+  BehaviorSubject<List<String>>.seeded([]);
+
+  Stream<List<String>> get blockList => _blockList.stream;
+
   PostRepository _postRepository = PostRepository();
   UserRepopsitory _userRepopsitory = UserRepopsitory();
   Future<void> getAllPosts() async{
     log(DateTime.now().toString());
-    //showLoading();
+    showLoading();
+    await getBlockList(userId);
    try{
     FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection)
@@ -58,37 +64,40 @@ class HomeCubit extends BaseCubit<HomeState> {
         List<PostModel> posts = [];
         log(event.docs.length.toString());
         for (var x in event.docs) {
-          log('huhu');
-          Map<String, dynamic> post = {};
-          post.addAll({'post_id': x.id});
-          post.addAll(x.data());
-          log(post.toString());
+         // debugPrint(relationship['user_id2']);
+          if(!_blockList.value.contains(x.data()['user_id'])){
+            log('huhu');
+            Map<String, dynamic> post = {};
+            post.addAll({'post_id': x.id});
+            post.addAll(x.data());
+            log(post.toString());
 
-          PostModel newPost = PostModel.fromJson(post);
+            PostModel newPost = PostModel.fromJson(post);
 
-          //get user
-          final user =
-          await UserRepopsitory().getUserProfile(userId: post['user_id']);
-          newPost.author = user;
+            //get user
+            final user =
+            await UserRepopsitory().getUserProfile(userId: post['user_id']);
+            newPost.author = user;
 
-          //get comments
-          final comments = await FirebaseFirestore.instance
-              .collection(DefaultEnv.appCollection)
-              .doc(DefaultEnv.developDoc)
-              .collection(DefaultEnv.postsCollection)
-              .doc(x.id)
-              .collection('comments')
-              .orderBy('create_at', descending: true)
-              .get();
-          List<CommentModel> cmts = [];
-          for (var cmt in comments.docs) {
-            cmt.data().addAll({'comment_id': cmt.id});
-            CommentModel commentModel = CommentModel.fromJson(cmt.data());
-            cmts.add(commentModel);
+            //get comments
+            final comments = await FirebaseFirestore.instance
+                .collection(DefaultEnv.appCollection)
+                .doc(DefaultEnv.developDoc)
+                .collection(DefaultEnv.postsCollection)
+                .doc(x.id)
+                .collection('comments')
+                .orderBy('create_at', descending: true)
+                .get();
+            List<CommentModel> cmts = [];
+            for (var cmt in comments.docs) {
+              cmt.data().addAll({'comment_id': cmt.id});
+              CommentModel commentModel = CommentModel.fromJson(cmt.data());
+              cmts.add(commentModel);
+            }
+            newPost.comments = cmts;
+            debugPrint(newPost.toString());
+            posts.add(newPost);
           }
-          newPost.comments = cmts;
-          debugPrint(newPost.toString());
-          posts.add(newPost);
         }
 
       _posts.sink.add(posts);
@@ -104,27 +113,60 @@ class HomeCubit extends BaseCubit<HomeState> {
     }
   }
 
+  Future<void> getBlockList(userid) async{
+    final List<String> blocks = [];
+
+    debugPrint('gggggggggggg');
+    showLoading();
+    try{
+      FirebaseFirestore.instance
+          .collection(DefaultEnv.appCollection)
+          .doc(DefaultEnv.developDoc)
+          .collection(DefaultEnv.usersCollection)
+          .doc(userId).collection(DefaultEnv.relationshipsCollection)
+          .snapshots()
+          .listen((event) async {
+        if (event.docs == null && event.size == 0) {
+          return null;
+        } else {
+          for(var i in event.docs)
+          {
+            final relationship = i.data();
+            if(relationship['type'] == 2)
+            {
+              debugPrint(relationship['user_id2']);
+              blocks.add(relationship['user_id2']);
+            }
+          }
+          debugPrint(blocks.toString());
+          _blockList.sink.add(blocks);
+          showContent();
+
+        }
+      });
+    }catch (e){
+      log(e.toString());
+      showError();
+    }
+  }
+
   Future<void> getUserInfo(userId) async{
     showLoading();
-  //  try{
+  try{
       final result = await _userRepopsitory.getUserProfile(userId: userId);
       if(result != null)
         {
           log('pppp'+result.toString());
           _user.sink.add(result);
-       //   showContent();
+        //   showContent();
         }
       else{
         showError();
       }
-
-
-
-
-    // }catch (e){
-    //   log(e.toString());
-    //   showError();
-    // }
+    }catch (e){
+      log(e.toString());
+      showError();
+    }
   }
 
   Future<void> likePost({required String postId, required List<String> likes}) async{
