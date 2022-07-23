@@ -94,12 +94,17 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                           builder: (context) => MessageScreen(
                                             chatModel: result,
                                             peopleChat: result.getPeople(),
+                                            peopleGroupChat:
+                                                result.peopleChats.length < 2
+                                                    ? null
+                                                    : result.peopleChats,
                                           ),
                                         ),
                                       );
                                     },
                                     child: TinNhanCell(
-                                      peopleChat: result.getPeople(), idRoom: result.roomId,
+                                      peopleChat: result.getPeople(),
+                                      idRoom: result.roomId,
                                     ),
                                   ),
                                 );
