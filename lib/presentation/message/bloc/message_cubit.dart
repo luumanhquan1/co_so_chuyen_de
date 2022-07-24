@@ -1,44 +1,92 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:ccvc_mobile/config/app_config.dart';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/data/services/message_service.dart';
+import 'package:ccvc_mobile/data/services/profile_service.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:optimized_cached_image/optimized_cached_image.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../data/helper/firebase/firebase_const.dart';
 
 class MessageCubit extends BaseCubit<MainState> {
-  MessageCubit() : super(MainStateInitial());
+  MessageCubit() : super(MainStateInitial()) {
+    showContent();
+  }
   final String idUser = PrefsService.getUserId();
-  void sendSms(String idRoom, String content,{SmsType smsType = SmsType.Sms}) {
-    MessageService.sendSms(
-      idRoom,
-      MessageSmsModel(
-        id: idRoom,
-        senderId: idUser,
-        content: content,
-        loaiTinNhan: smsType.getInt(),
-      ),
-    );
+  String idRoomChat = '';
+  final BehaviorSubject<String> _roomChat = BehaviorSubject<String>();
+  final BehaviorSubject<List<UserInfoModel>> selectCreateGroup =
+      BehaviorSubject();
+  List<UserInfoModel> listFriend = [];
+
+  late List<PeopleChat> peopleChat;
+  Stream<String> get roomChat => _roomChat.stream;
+  void initDate(String id, List<PeopleChat> peopleChat) {
+    idRoomChat = id;
+    this.peopleChat = peopleChat;
+    _roomChat.sink.add(id);
   }
 
-  Future<void> sendImage(String idRoom, File file) async {
+  Future<void> sendSms(String content, {SmsType smsType = SmsType.Sms}) async {
+    if (idRoomChat.isEmpty) {
+      idRoomChat = await createRoomChatDefault([
+        PeopleChat(
+          userId: peopleChat.first.userId,
+          avatarUrl: peopleChat.first.avatarUrl,
+          nameDisplay: peopleChat.first.nameDisplay,
+          bietDanh: '',
+        )
+      ]);
+      MessageService.sendSms(
+        idRoomChat,
+        MessageSmsModel(
+          daXem: [idUser],
+          messageId: const Uuid().v1(),
+          id: idRoomChat,
+          senderId: idUser,
+          content: content,
+          loaiTinNhan: smsType.getInt(),
+        ),
+      );
+    } else {
+      MessageService.sendSms(
+        idRoomChat,
+        MessageSmsModel(
+          daXem: [idUser],
+          messageId: const Uuid().v1(),
+          id: idRoomChat,
+          senderId: idUser,
+          content: content,
+          loaiTinNhan: smsType.getInt(),
+        ),
+      );
+      MessageService.updateRoomChatUser(idUser, idRoomChat);
+      for (var element in peopleChat) {
+        MessageService.updateRoomChatUser(element.userId, idRoomChat);
+      }
+
+    }
+  }
+
+  Future<void> sendImage(File file) async {
     final Reference ref = storage
         .ref()
         .child(DefaultEnv.messCollection)
-        .child(idRoom)
+        .child(idRoomChat)
         .child(file.path.convertNameFile());
     await ref.putFile(file);
     final url = await ref.getDownloadURL();
-    sendSms(idRoom, url,smsType: SmsType.Image);
+    await sendSms(url, smsType: SmsType.Image);
   }
 
   Stream<List<MessageSmsModel>>? chatStream(String idRoom) {
@@ -46,7 +94,41 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   Future<void> getRoomChat(String idUserChat) async {
-    log('${idUserChat}');
-    MessageService.findRoomChat(idUserChat);
+    showLoading();
+    final data = await MessageService.findRoomChat(idUserChat);
+    showContent();
+    for (var element in data) {
+      final peopleChatId = element.peopleChats.map((e) => e.userId);
+      if (peopleChatId.contains(idUserChat) &&
+          peopleChatId.contains(idUser) &&
+          peopleChatId.length == 2) {
+        idRoomChat = element.roomId;
+        _roomChat.sink.add(idRoomChat);
+        return;
+      }
+    }
+  }
+
+  Future<void> getListFriend() async {
+    listFriend = await ProfileService.listFriends(idUser);
+  }
+
+  Future<String> createRoomChatDefault(List<PeopleChat> peopleChat) async {
+    final idRoomChat = Uuid().v1();
+    final userCurrent = HiveLocal.getDataUser();
+    final room = RoomChatModel(
+        roomId: idRoomChat,
+        peopleChats: [
+          PeopleChat(
+            userId: idUser,
+            avatarUrl: userCurrent?.avatarUrl ?? '',
+            nameDisplay: userCurrent?.nameDisplay ?? '',
+            bietDanh: '',
+          ),
+          ...peopleChat
+        ],
+        colorChart: 0);
+    _roomChat.sink.add(room.roomId);
+    return MessageService.createRoomChat(room);
   }
 }

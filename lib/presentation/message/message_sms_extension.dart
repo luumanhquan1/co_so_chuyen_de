@@ -7,14 +7,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 extension SmsExtension on SmsType {
-  Widget getSmsWidget(BuildContext context,MessageSmsModel model) {
+  Widget getSmsWidget(BuildContext context, MessageSmsModel model) {
     final isMe = model.isMe();
     switch (this) {
       case SmsType.Sms:
         return Container(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width - 100
-          ),
+          constraints:
+              BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 100),
           margin: const EdgeInsets.only(bottom: 5),
           decoration: BoxDecoration(
               color: indicatorColor,
@@ -35,23 +34,19 @@ extension SmsExtension on SmsType {
         );
       case SmsType.Image:
         return Container(
-
           margin: const EdgeInsets.only(bottom: 16),
-          height: 350,
           width: 250,
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16))
-          ),
+              borderRadius: BorderRadius.all(Radius.circular(16))),
           child: CachedNetworkImage(
-            imageUrl:
-           model.content ?? '',
+            imageUrl: model.content ?? '',
             errorWidget: (context, url, error) => Icon(Icons.error),
             fit: BoxFit.cover,
-            progressIndicatorBuilder: (context,_,__){
+            progressIndicatorBuilder: (context, _, __) {
               return const ContainerSkeletonWidget(
                 width: 250,
-                height: 350,
+                // height: 350,
               );
             },
           ),

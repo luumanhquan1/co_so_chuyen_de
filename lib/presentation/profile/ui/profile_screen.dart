@@ -6,10 +6,13 @@ import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
+import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
+import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/bloc/profile_cubit.dart';
+import 'package:ccvc_mobile/presentation/relationship_screen/relationship_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -96,7 +99,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: GestureDetector(
                                 onTap: () {
                                   _scaffoldKey.currentState?.openEndDrawer();
-                                  log('message333333333333333333333');
                                 },
                                 child: Icon(
                                   Icons.more_horiz,
@@ -107,7 +109,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       body: Stack(children: [
                         Positioned(
-                            top: 0, child: AppImage.asset(path: bgProfile)),
+                            top: 0, child: AppImage.asset(
+                            width: MediaQuery.of(context).size.width,
+
+                            path: bgProfile)),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,35 +142,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //   stream: _profileCubit.posts,
                             //   builder: (context, snapshot) =>
 
-                            Expanded(
-                                child: RefreshWidget(
-                                    // enableLoadMore: controller.canLoadMore.value,
-                                    //  onLoadMore: () async {
-                                    //    double oldPosition =
-                                    //        controller.scrollController.position.pixels;
-                                    //    await controller.getWeights();
-                                    //    controller.scrollController.position.jumpTo(oldPosition);
-                                    //  },
-                                    controller: refreshController,
-                                    onRefresh: () async {
-                                      await _profileCubit
-                                          .getAllPosts(widget.userId);
-                                      refreshController.refreshCompleted();
-                                    },
-                                    child: snapshot.data == null
-                                        ? SizedBox()
-                                        : showUserInfo
-                                            ? _buildUserInfo(user.data!)
-                                            : _buildBody(
-                                                snapshot.data!, user.data!))),
-                            //  )
-                          ],
+                                Expanded(
+                                    child: RefreshWidget(
+                                        // enableLoadMore: controller.canLoadMore.value,
+                                        //  onLoadMore: () async {
+                                        //    double oldPosition =
+                                        //        controller.scrollController.position.pixels;
+                                        //    await controller.getWeights();
+                                        //    controller.scrollController.position.jumpTo(oldPosition);
+                                        //  },
+                                        controller: refreshController,
+                                        onRefresh: () async {
+                                          await _profileCubit
+                                              .getAllPosts(widget.userId);
+                                          refreshController.refreshCompleted();
+                                        },
+                                        child: snapshot.data == null
+                                            ? SizedBox()
+                                            : showUserInfo
+                                                ? _buildUserInfo(user.data!)
+                                                : _buildBody(snapshot.data!,
+                                                    user.data!))),
+                                //  )
+                              ],
 
-                          //   )),
+                              //   )),
+                            ),
+                          ]),
                         ),
-                      ]),
-                    ),
-                  ))),
+                      ))),
     );
   }
 
@@ -192,6 +197,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Navigator.pop(context);
                             },
                             title: 'Thông tin'),
+                        _buildListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RelationshipScreen(
+                                    userId: widget.userId,
+                                  ),
+                                ),
+                              );
+                            },
+                            title: 'Bạn bè'),
                         Visibility(
                           visible: type.data! == RelationshipType.owner,
                           child: _buildListTile(
@@ -338,7 +356,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           padding:
                                               EdgeInsets.only(right: 16.sp),
                                           child: GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MessageScreen(
+                                                    peopleChat: [
+                                                      PeopleChat(
+                                                          userId: userModel
+                                                                  .userId ??
+                                                              '',
+                                                          nameDisplay: userModel
+                                                                  .nameDisplay ??
+                                                              '',
+                                                          avatarUrl: userModel
+                                                                  .avatarUrl ??
+                                                              '',
+                                                          bietDanh: '')
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 color: colorPrimary,

@@ -125,54 +125,67 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       if (userId == ownerId) {
         _relationshipType.sink.add(RelationshipType.owner);
       } else {
-        final result = await FirebaseFirestore.instance
+        FirebaseFirestore.instance
             .collection(DefaultEnv.appCollection)
             .doc(DefaultEnv.developDoc)
             .collection(DefaultEnv.usersCollection)
             .doc(userId)
-            .collection('relationships')
-            //    .where('user_id1', isEqualTo: ownerId)
-            .where('user_id2', isEqualTo: ownerId)
-
-            // .where(('userId1' == userId && 'userId2' == ownerId) ||
-            //     ('userId2' == userId && 'userId1' == ownerId))
-            .get();
-        log('friend');
-        log(result.size.toString());
-        if (result.docs != null && result.size != 0) {
-          result.docs.first.data()['type'] == 1
-              ? _relationshipType.sink.add(RelationshipType.friend)
-              : _relationshipType.sink.add(RelationshipType.blocked);
-        } else {
-          final result = await FirebaseFirestore.instance
-              .collection(DefaultEnv.appCollection)
-              .doc(DefaultEnv.developDoc)
-              .collection(DefaultEnv.usersCollection)
-              .doc(userId)
-              .collection('friend_requests')
-              .where('sender', isEqualTo: userId)
-              .where('receiver', isEqualTo: ownerId)
-              .get();
-          if (result.docs != null && result.size != 0) {
-            _relationshipType.sink.add(RelationshipType.requestReceiver);
+            .snapshots()
+            .listen((event) async {
+          if (event.data() == null) {
+            return null;
           } else {
             final result = await FirebaseFirestore.instance
                 .collection(DefaultEnv.appCollection)
                 .doc(DefaultEnv.developDoc)
                 .collection(DefaultEnv.usersCollection)
                 .doc(userId)
-                .collection('friend_requests')
-                .where('sender', isEqualTo: ownerId)
-                .where('receiver', isEqualTo: userId)
+                .collection('relationships')
+                //    .where('user_id1', isEqualTo: ownerId)
+                .where('user_id2', isEqualTo: ownerId)
+
+                // .where(('userId1' == userId && 'userId2' == ownerId) ||
+                //     ('userId2' == userId && 'userId1' == ownerId))
                 .get();
+            log('friend');
+            log(result.size.toString());
             if (result.docs != null && result.size != 0) {
-              _relationshipType.sink.add(RelationshipType.requestSender);
+              debugPrint('ddddddddd ${result.docs.first.data()['type']}');
+              result.docs.first.data()['type'] == 1
+                  ? _relationshipType.sink.add(RelationshipType.friend)
+                  : _relationshipType.sink.add(RelationshipType.blocked);
             } else {
-              log('mmmmmmmmmmmmmmmmmm');
-              _relationshipType.sink.add(RelationshipType.stranger);
+              final result = await FirebaseFirestore.instance
+                  .collection(DefaultEnv.appCollection)
+                  .doc(DefaultEnv.developDoc)
+                  .collection(DefaultEnv.usersCollection)
+                  .doc(userId)
+                  .collection('friend_requests')
+                  .where('sender', isEqualTo: userId)
+                  .where('receiver', isEqualTo: ownerId)
+                  .get();
+              if (result.docs != null && result.size != 0) {
+                _relationshipType.sink.add(RelationshipType.requestReceiver);
+              } else {
+                final result = await FirebaseFirestore.instance
+                    .collection(DefaultEnv.appCollection)
+                    .doc(DefaultEnv.developDoc)
+                    .collection(DefaultEnv.usersCollection)
+                    .doc(userId)
+                    .collection('friend_requests')
+                    .where('sender', isEqualTo: ownerId)
+                    .where('receiver', isEqualTo: userId)
+                    .get();
+                if (result.docs != null && result.size != 0) {
+                  _relationshipType.sink.add(RelationshipType.requestSender);
+                } else {
+                  log('mmmmmmmmmmmmmmmmmm');
+                  _relationshipType.sink.add(RelationshipType.stranger);
+                }
+              }
             }
           }
-        }
+        });
       }
     } catch (e) {
       log(e.toString());
