@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/radio/check_box_widget.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CreateGroupScreen extends StatefulWidget {
-  final List<UserInfoModel> listFriend;
+  final List<UserModel> listFriend;
   final MessageCubit cubit;
   final String title;
   const CreateGroupScreen(
@@ -24,8 +24,8 @@ class CreateGroupScreen extends StatefulWidget {
 }
 
 class _CreateGroupScreenState extends State<CreateGroupScreen> {
-  final BehaviorSubject<List<UserInfoModel>> _select = BehaviorSubject();
-  final List<UserInfoModel> listSelect = [];
+  final BehaviorSubject<List<UserModel>> _select = BehaviorSubject();
+  final List<UserModel> listSelect = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,10 +186,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: StreamBuilder<List<UserInfoModel>>(
+      child: StreamBuilder<List<UserModel>>(
         stream: _select.stream,
         builder: (context, snapshot) {
-          final data = snapshot.data ?? <UserInfoModel>[];
+          final data = snapshot.data ?? <UserModel>[];
           return Row(
             children: List.generate(
                 data.length,

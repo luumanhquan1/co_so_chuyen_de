@@ -1,4 +1,3 @@
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/bloc/relationship_cubit.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/widget/friend_cell_widget.dart';
@@ -35,10 +34,10 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
         child: StateLoadingSkeleton(
           stream: cubit.stateStream,
           skeleton: const SkeletonFriendWidget(),
-          child: StreamBuilder<List<UserInfoModel>>(
+          child: StreamBuilder<List<UserModel>>(
               stream: cubit.getListFriend,
               builder: (context, snapshot) {
-                final data = snapshot.data ?? <UserInfoModel>[];
+                final data = snapshot.data ?? <UserModel>[];
                 return ListView(
                   children: List.generate(data.length, (index) {
                     final result = data[index];

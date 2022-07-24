@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'user_model.g.dart';
 
+enum PeopleType { Friend, FriendRequest, NoFriend }
 
 @HiveType(typeId: 0)
 class UserModel {
@@ -23,6 +24,7 @@ class UserModel {
   int? createAt;
   @HiveField(8)
   int? updateAt;
+  PeopleType? peopleType;
 
   UserModel({
     this.avatarUrl,

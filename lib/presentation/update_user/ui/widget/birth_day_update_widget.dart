@@ -129,7 +129,7 @@ class _OverLayBirthdayWidgetState extends State<OverLayBirthdayWidget>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 300),
     )..forward();
   }
 
@@ -164,7 +164,7 @@ class _OverLayBirthdayWidgetState extends State<OverLayBirthdayWidget>
                         _animationController.value,
                         _animationController.value,
                       ),
-                    child: Container(
+                    child: SizedBox(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       child: CupertinoDatePicker(

@@ -6,9 +6,9 @@ import 'package:ccvc_mobile/data/services/message_service.dart';
 import 'package:ccvc_mobile/data/services/profile_service.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -25,9 +25,9 @@ class MessageCubit extends BaseCubit<MainState> {
   final String idUser = PrefsService.getUserId();
   String idRoomChat = '';
   final BehaviorSubject<String> _roomChat = BehaviorSubject<String>();
-  final BehaviorSubject<List<UserInfoModel>> selectCreateGroup =
+  final BehaviorSubject<List<UserModel>> selectCreateGroup =
       BehaviorSubject();
-  List<UserInfoModel> listFriend = [];
+  List<UserModel> listFriend = [];
 
   late List<PeopleChat> peopleChat;
   Stream<String> get roomChat => _roomChat.stream;
