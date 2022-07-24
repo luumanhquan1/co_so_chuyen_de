@@ -28,7 +28,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
   UpdateUserCubit cubit = UpdateUserCubit();
   final keyGroup = GlobalKey<FormGroupState>();
   TextEditingController textNameController = TextEditingController();
-
+  GlobalKey keyDateTime = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -106,6 +106,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                         ContainerDataWidget(
                           title: S.current.ngay_sinh,
                           child: BirthDayUpdateWidget(
+                            key: keyDateTime,
                             onChange: (value) {
                               cubit.birthDay = value;
                             },
@@ -125,8 +126,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                             context: context,
                             text: S.current.cap_nhat_tai_khoan_thanh_cong,
                           );
-                          // await cubit.saveUser();
-                          // Navigator.pop(context);
+                          Navigator.pop(context);
                         } else {
                           _showToast(
                             context: context,

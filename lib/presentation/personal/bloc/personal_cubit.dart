@@ -27,7 +27,7 @@ class PersonalCubit extends BaseCubit<PersonalState> {
 
   Stream<UserModel> get user => _user.stream;
 
-  UserRepopsitory _userRepopsitory = UserRepopsitory();
+  final UserRepopsitory _userRepopsitory = UserRepopsitory();
 
   Future<void> getUserInfo(userId) async {
     showLoading();

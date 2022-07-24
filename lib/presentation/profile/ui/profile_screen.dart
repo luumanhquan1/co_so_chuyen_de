@@ -24,9 +24,12 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utils/constants/image_asset.dart';
+
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key, required this.userId}) : super(key: key);
   String userId;
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -139,36 +142,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //   stream: _profileCubit.posts,
                             //   builder: (context, snapshot) =>
 
-                            Expanded(
-                                child: RefreshWidget(
-                                    // enableLoadMore: controller.canLoadMore.value,
-                                    //  onLoadMore: () async {
-                                    //    double oldPosition =
-                                    //        controller.scrollController.position.pixels;
-                                    //    await controller.getWeights();
-                                    //    controller.scrollController.position.jumpTo(oldPosition);
-                                    //  },
-                                    controller: refreshController,
-                                    onRefresh: () async {
-                                      await _profileCubit
-                                          .getAllPosts(widget.userId);
-                                      await _profileCubit.getRelationship(widget.userId);
-                                      refreshController.refreshCompleted();
-                                    },
-                                    child: snapshot.data == null
-                                        ? SizedBox()
-                                        : showUserInfo
-                                            ? _buildUserInfo(user.data!)
-                                            : _buildBody(
-                                                snapshot.data!, user.data!))),
-                            //  )
-                          ],
+                                Expanded(
+                                    child: RefreshWidget(
+                                        // enableLoadMore: controller.canLoadMore.value,
+                                        //  onLoadMore: () async {
+                                        //    double oldPosition =
+                                        //        controller.scrollController.position.pixels;
+                                        //    await controller.getWeights();
+                                        //    controller.scrollController.position.jumpTo(oldPosition);
+                                        //  },
+                                        controller: refreshController,
+                                        onRefresh: () async {
+                                          await _profileCubit
+                                              .getAllPosts(widget.userId);
+                                          refreshController.refreshCompleted();
+                                        },
+                                        child: snapshot.data == null
+                                            ? SizedBox()
+                                            : showUserInfo
+                                                ? _buildUserInfo(user.data!)
+                                                : _buildBody(snapshot.data!,
+                                                    user.data!))),
+                                //  )
+                              ],
 
-                          //   )),
+                              //   )),
+                            ),
+                          ]),
                         ),
-                      ]),
-                    ),
-                  ))),
+                      ))),
     );
   }
 
@@ -309,14 +311,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 66.sp,
                                 ),
                                 Center(
-                                  child: _buildAvatar(
-                                      avatarUrl: userModel.avatarUrl),
+                                  child: CircleAvatar(
+                                    radius: 60, // Image radius
+                                    backgroundImage: NetworkImage(
+                                        userModel.avatarUrl ??
+                                            ImageAssets.imgEmptyAvata),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 16.sp,
                                 ),
                                 Center(
-                                    child: Text(userModel.nameDisplay ?? '',
+                                     child: Text(userModel.nameDisplay ?? '',
                                         style:
                                             heading2(color: ThemeColor.black))),
                                 SizedBox(

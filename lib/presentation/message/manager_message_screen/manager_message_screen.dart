@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/model/login/user_info.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:ccvc_mobile/presentation/message/manager_message_screen/create_group_screen.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
@@ -14,6 +14,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class ManagerMessagerScreen extends StatefulWidget {
   final List<PeopleChat> peopleChats;
   final MessageCubit messageCubit;
+
   const ManagerMessagerScreen(
       {Key? key, required this.peopleChats, required this.messageCubit})
       : super(key: key);
@@ -81,7 +82,8 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                             listFriend: widget.peopleChats.length == 1
                                 ? widget.messageCubit.listFriend
                                 : widget.peopleChats
-                                    .map((e) => UserInfoModel(
+                                    .map(
+                                      (e) => UserModel(
                                         userId: e.userId,
                                         avatarUrl: e.avatarUrl,
                                         nameDisplay: e.nameDisplay,
@@ -89,7 +91,9 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                                         birthday: 0,
                                         gender: true,
                                         email: '',
-                                        createAt: 0))
+                                        createAt: 0,
+                                      ),
+                                    )
                                     .toList(),
                             cubit: widget.messageCubit,
                             title: title(),
