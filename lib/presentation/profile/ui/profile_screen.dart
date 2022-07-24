@@ -21,9 +21,12 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utils/constants/image_asset.dart';
+
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key, required this.userId}) : super(key: key);
   String userId;
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -49,122 +52,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return StreamBuilder<StateLayout>(
       stream: _profileCubit.stateStream,
       builder: (context, snapshot) => SafeArea(
-          child:
-              StreamBuilder<UserModel>(
-                  stream: _profileCubit.user,
-                  builder: (context, user) => WillPopScope(
-                        onWillPop: () async {
-                          if (showUserInfo) {
-                            setState(() {
-                              showUserInfo = false;
-                            });
-                            return false;
-                          } else
-                            Navigator.pop(context);
+          child: StreamBuilder<UserModel>(
+              stream: _profileCubit.user,
+              builder: (context, user) => WillPopScope(
+                    onWillPop: () async {
+                      if (showUserInfo) {
+                        setState(() {
+                          showUserInfo = false;
+                        });
+                        return false;
+                      } else
+                        Navigator.pop(context);
 
-                          return true;
-                        },
-                        child: Scaffold(
-                          key: _scaffoldKey,
-                          endDrawer: _buildDrawer(context),
-                          //  backgroundColor: Colors.white,
-                          appBar: AppBar(
-                            //backgroundColor: Color(0xFF339999),
-                            elevation: 0,
-                            leading: IconButton(
-                                onPressed: () {
-                                  if (showUserInfo)
-                                    setState(() {
-                                      showUserInfo = false;
-                                    });
-                                  else
-                                    Navigator.pop(context);
+                      return true;
+                    },
+                    child: Scaffold(
+                      key: _scaffoldKey,
+                      endDrawer: _buildDrawer(context),
+                      //  backgroundColor: Colors.white,
+                      appBar: AppBar(
+                        //backgroundColor: Color(0xFF339999),
+                        elevation: 0,
+                        leading: IconButton(
+                            onPressed: () {
+                              if (showUserInfo)
+                                setState(() {
+                                  showUserInfo = false;
+                                });
+                              else
+                                Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black,
+                            )),
+                        automaticallyImplyLeading: true,
+                        title: Text(user.data?.nameDisplay ?? '',
+                            style: titleAppbar(
+                                color: ThemeColor.black, fontSize: 20.sp)),
+                        actions: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 16.sp),
+                            child: GestureDetector(
+                                onTap: () {
+                                  _scaffoldKey.currentState?.openEndDrawer();
+                                  log('message333333333333333333333');
                                 },
-                                icon: Icon(
-                                  Icons.arrow_back_ios,
+                                child: Icon(
+                                  Icons.more_horiz,
                                   color: Colors.black,
                                 )),
-                            automaticallyImplyLeading: true,
-                            title: Text(user.data?.nameDisplay ?? '',
-                                style: titleAppbar(
-                                    color: ThemeColor.black, fontSize: 20.sp)),
-                            actions: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 16.sp),
-                                child: GestureDetector(
-                                    onTap: () {
-                                      _scaffoldKey.currentState
-                                          ?.openEndDrawer();
-                                      log('message333333333333333333333');
+                          )
+                        ],
+                      ),
+                      body: Stack(children: [
+                        Positioned(
+                            top: 0, child: AppImage.asset(path: bgProfile)),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Padding(
+                            //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                            //   child: Row(
+                            //     mainAxisSize: MainAxisSize.max,
+                            //     children: [
+                            //       Text(Strings.app_name,
+                            //           style: titleAppbar(color: ThemeColor.black)),
+                            //     ],
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: 27.sp,
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
+                            //   child: Text(Strings.feed,
+                            //       style: heading2(color: ThemeColor.black)),
+                            // ),
+                            // SizedBox(
+                            //   height: 27.sp,
+                            // ),
+                            // StreamBuilder(
+                            //   stream: _profileCubit.posts,
+                            //   builder: (context, snapshot) =>
+
+                            Expanded(
+                                child: RefreshWidget(
+                                    // enableLoadMore: controller.canLoadMore.value,
+                                    //  onLoadMore: () async {
+                                    //    double oldPosition =
+                                    //        controller.scrollController.position.pixels;
+                                    //    await controller.getWeights();
+                                    //    controller.scrollController.position.jumpTo(oldPosition);
+                                    //  },
+                                    controller: refreshController,
+                                    onRefresh: () async {
+                                      await _profileCubit
+                                          .getAllPosts(widget.userId);
+                                      refreshController.refreshCompleted();
                                     },
-                                    child: Icon(
-                                      Icons.more_horiz,
-                                      color: Colors.black,
-                                    )),
-                              )
-                            ],
-                          ),
-                          body: Stack(children: [
-                            Positioned(
-                                top: 0, child: AppImage.asset(path: bgProfile)),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Padding(
-                                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                                //   child: Row(
-                                //     mainAxisSize: MainAxisSize.max,
-                                //     children: [
-                                //       Text(Strings.app_name,
-                                //           style: titleAppbar(color: ThemeColor.black)),
-                                //     ],
-                                //   ),
-                                // ),
-                                // SizedBox(
-                                //   height: 27.sp,
-                                // ),
-                                // Padding(
-                                //   padding: EdgeInsets.symmetric(horizontal: 24.sp),
-                                //   child: Text(Strings.feed,
-                                //       style: heading2(color: ThemeColor.black)),
-                                // ),
-                                // SizedBox(
-                                //   height: 27.sp,
-                                // ),
-                                // StreamBuilder(
-                                //   stream: _profileCubit.posts,
-                                //   builder: (context, snapshot) =>
+                                    child: snapshot.data == null
+                                        ? SizedBox()
+                                        : showUserInfo
+                                            ? _buildUserInfo(user.data!)
+                                            : _buildBody(
+                                                snapshot.data!, user.data!))),
+                            //  )
+                          ],
 
-                                Expanded(
-                                    child: RefreshWidget(
-                                        // enableLoadMore: controller.canLoadMore.value,
-                                        //  onLoadMore: () async {
-                                        //    double oldPosition =
-                                        //        controller.scrollController.position.pixels;
-                                        //    await controller.getWeights();
-                                        //    controller.scrollController.position.jumpTo(oldPosition);
-                                        //  },
-                                        controller: refreshController,
-                                        onRefresh: () async {
-                                          await _profileCubit
-                                              .getAllPosts(widget.userId);
-                                          refreshController.refreshCompleted();
-                                        },
-                                        child: snapshot.data == null
-                                            ? SizedBox()
-                                            : showUserInfo
-                                                ? _buildUserInfo(user.data!)
-                                                : _buildBody(snapshot.data!,
-                                                    user.data!))),
-                                //  )
-                              ],
-
-                              //   )),
-                            ),
-                          ]),
+                          //   )),
                         ),
-                      ))),
+                      ]),
+                    ),
+                  ))),
     );
   }
 
@@ -292,14 +293,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 66.sp,
                                 ),
                                 Center(
-                                  child: _buildAvatar(
-                                      avatarUrl: userModel.avatarUrl),
+                                  child: CircleAvatar(
+                                    radius: 60, // Image radius
+                                    backgroundImage: NetworkImage(
+                                        userModel.avatarUrl ??
+                                            ImageAssets.imgEmptyAvata),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 16.sp,
                                 ),
                                 Center(
-                                    child: Text(userModel.nameDisplay ?? '',
+                                     child: Text(userModel.nameDisplay ?? '',
                                         style:
                                             heading2(color: ThemeColor.black))),
                                 SizedBox(

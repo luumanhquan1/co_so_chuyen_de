@@ -3,12 +3,12 @@ import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
-import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/avata_widget.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/birth_day_widget.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/container_data_widget.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/drop_down_gender.dart';
+import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
@@ -160,10 +160,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                             text: S.current.tao_tai_khoan_thanh_cong,
                           );
                           await widget.cubit.saveUser();
-                          await Navigator.push(
+                          await Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => MainTabBarView()));
                         } else {
                           _showToast(
                             context: context,

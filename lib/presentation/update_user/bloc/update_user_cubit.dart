@@ -26,6 +26,7 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
   String gender = 'Nam';
   DateTime birthDay = DateTime(2001, 1, 1);
   Uint8List? image;
+  String imageUrl = '';
   UserModel userInfo = UserModel.empty();
 
   BehaviorSubject<DateTime> birthDaySubject =
@@ -49,7 +50,7 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
     userInfo.updateAt = DateTime.now().millisecondsSinceEpoch;
 
     if (image == null) {
-      userInfo.avatarUrl = ImageAssets.imgEmptyAvata;
+      userInfo.avatarUrl = imageUrl;
     } else {
       await FireStoreMethod.removeImage(userInfo.userId ?? '');
       await FireStoreMethod.uploadImageToStorage(
@@ -72,7 +73,10 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
     birthDaySubject.add(
       (userInfo.birthday ?? 0).convertToDateTime,
     );
+    birthDay = (userInfo.birthday ?? 0).convertToDateTime;
     gender = toGender(userInfo.gender ?? true);
+    nameDisplay = userInfo.nameDisplay ?? '';
+    imageUrl = userInfo.avatarUrl ?? '';
     showContent();
   }
 

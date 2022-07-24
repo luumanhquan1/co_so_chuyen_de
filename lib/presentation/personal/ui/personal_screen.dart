@@ -3,12 +3,14 @@ import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/change_password/ui/change_password_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/personal/bloc/personal_cubit.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/presentation/update_user/ui/update_user_screen.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,6 @@ class _PersonalScreenState extends State<PersonalScreen> {
               ),
               body: SingleChildScrollView(
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Padding(
@@ -56,16 +57,17 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       //      height: 27.sp,
                       //    ),
                       _buildListTile(
-                          title: snapshot.data?.nameDisplay ?? '',
-                          subtitle: 'Xem trang cá nhân',
-                          avatarUrl: snapshot.data?.avatarUrl,
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => ProfileScreen(
-                                        userId: snapshot.data!.userId!)));
-                          }),
+                        title: snapshot.data?.nameDisplay ?? '',
+                        subtitle: 'Xem trang cá nhân',
+                        avatarUrl: snapshot.data?.avatarUrl,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ProfileScreen(
+                                      userId: snapshot.data!.userId!)));
+                        },
+                      ),
                       _buildListTile(
                         title: 'Cập nhật profile',
                         icon: Icons.account_circle,
@@ -73,10 +75,12 @@ class _PersonalScreenState extends State<PersonalScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                              const UpdateUserScreen(),
+                              builder: (context) => const UpdateUserScreen(),
                             ),
-                          );
+                          ).then((value) {
+                            final String userId = PrefsService.getUserId();
+                            _personalCubit.getUserInfo(userId);
+                          });
                         },
                       ),
                       _buildListTile(
@@ -124,22 +128,27 @@ class _PersonalScreenState extends State<PersonalScreen> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            icon == null
-                ? ClipRRect(
-                    child: Container(
-                        width: 60.sp,
-                        height: 60.sp,
-                        child: (avatarUrl.isNullOrEmpty
-                            ? Container(
-                                color: ThemeColor.ebonyClay,
-                              )
-                            : AppImage.network(path: avatarUrl!))),
-                    borderRadius: BorderRadius.circular(120),
-                  )
-                : Icon(
-                    icon,
-                    color: mainTxtColor,
-                  ),
+            if (icon == null)
+              ClipRRect(
+                child: Container(
+                    width: 60.sp,
+                    height: 60.sp,
+                    child: (avatarUrl.isNullOrEmpty
+                        ? Container(
+                            color: ThemeColor.ebonyClay,
+                          )
+                        : CircleAvatar(
+                            // radius: 30, // Image radius
+                            backgroundImage: NetworkImage(
+                                avatarUrl ?? ImageAssets.imgEmptyAvata),
+                          ))),
+                borderRadius: BorderRadius.circular(120),
+              )
+            else
+              Icon(
+                icon,
+                color: mainTxtColor,
+              ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(left: 16.sp),

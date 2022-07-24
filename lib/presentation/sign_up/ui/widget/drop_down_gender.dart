@@ -43,6 +43,7 @@ class _DropDownGenderState extends State<DropDownGender> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: dropDownValue,
+          // onTap: () {},
           onChanged: (value) {
             dropDownValue = value ?? '';
             widget.onChange(value ?? '');
