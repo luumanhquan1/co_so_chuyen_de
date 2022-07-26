@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
+import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -26,7 +27,7 @@ class FireStoreMethod {
 
   static Future<void> updateUser(
     String userId,
-      UserModel model,
+    UserModel model,
   ) async {
     try {
       final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
@@ -66,10 +67,60 @@ class FireStoreMethod {
         );
   }
 
+  static Future<void> saveToken({
+    required String userId,
+    required FcmTokenModel fcmTokenModel,
+  }) async {
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .collection(DefaultEnv.tokkenFcm)
+        .doc(getRandString(15).removeChar)
+        .set(fcmTokenModel.toJson(fcmTokenModel));
+  }
+
+  static Future<void> updateToken({
+    required String userId,
+    required FcmTokenModel fcmTokenModel,
+  }) async {
+    final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .collection(DefaultEnv.tokkenFcm)
+        .get();
+
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .collection(DefaultEnv.tokkenFcm)
+        .doc(snap.docs.first.id)
+        .update(fcmTokenModel.toJson(fcmTokenModel));
+  }
+
+  static Future<FcmTokenModel> getTokenFcm({required String id}) async {
+    final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(id)
+        .collection(DefaultEnv.tokkenFcm)
+        .get();
+
+    final FcmTokenModel tokenModel =
+        FcmTokenModel.fromJson(snap.docs.first.data());
+
+    return tokenModel;
+  }
+
   static Future<void> uploadImageToStorage(String id, Uint8List file) async {
     try {
       final Reference ref = storage.ref().child(id).child('avatarUser');
-
 
       await ref.putData(file);
     } catch (e) {

@@ -10,6 +10,7 @@ import 'package:ccvc_mobile/data/di/module.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
@@ -64,9 +65,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
+    appStateCubit.getDataRefeshToken();
     onStateWhenOpenApp();
-    FirebaseMessaging.instance.getToken().then((value) {
-      log('${value}');
+    FirebaseMessaging.instance.onTokenRefresh.listen((event) {
+      FireStoreMethod.updateToken(
+        userId: PrefsService.getUserId(),
+        fcmTokenModel: FcmTokenModel(
+          userId: PrefsService.getUserId(),
+          tokenFcm: PrefsService.getToken(),
+          createAt: appStateCubit.tokenFcm.createAt,
+          updateAt: DateTime.now().millisecondsSinceEpoch,
+        ),
+      );
     });
     appStateCubit.getTokenPrefs();
     checkDeviceType();
@@ -102,10 +112,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           break;
         }
 
-      case AppLifecycleState.resumed: {
-        onStateWhenOpenApp();
-        break;
-      }
+      case AppLifecycleState.resumed:
+        {
+          onStateWhenOpenApp();
+          break;
+        }
     }
   }
 
