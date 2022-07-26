@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'login_state.dart';
 
@@ -40,6 +41,10 @@ class LoginCubit extends BaseCubit<LoginState> {
       userInfo.onlineFlag = true;
       await HiveLocal.updateDataUser(userInfo);
       await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+
+      await FirebaseMessaging.instance.getToken().then((value) async {
+        await PrefsService.saveToken(value ?? '');
+      });
     }
     showContent();
     return user;

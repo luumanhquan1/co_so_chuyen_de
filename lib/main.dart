@@ -57,12 +57,14 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final AppState appStateCubit = AppState();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+    onStateWhenOpenApp();
     FirebaseMessaging.instance.getToken().then((value) {
       log('${value}');
     });
@@ -70,12 +72,46 @@ class _MyAppState extends State<MyApp> {
     checkDeviceType();
   }
 
-  @override
-  void dispose() async {
+  Future<void> offStateWhenCloseApp() async {
     final UserModel userInfo =
         await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
     userInfo.onlineFlag = false;
     await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+  }
+
+  Future<void> onStateWhenOpenApp() async {
+    final UserModel userInfo =
+        await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
+    userInfo.onlineFlag = true;
+    await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.detached:
+        {
+          offStateWhenCloseApp();
+          break;
+        }
+
+      case AppLifecycleState.paused:
+        {
+          offStateWhenCloseApp();
+
+          break;
+        }
+
+      case AppLifecycleState.resumed: {
+        onStateWhenOpenApp();
+        break;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
 
@@ -165,10 +201,11 @@ class AppStateCt extends InheritedWidget {
     return true;
   }
 }
+
 void requestPermission() async {
   await Permission.storage.request();
   final NotificationSettings settings =
-  await FirebaseMessaging.instance.requestPermission(
+      await FirebaseMessaging.instance.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -180,10 +217,10 @@ void requestPermission() async {
 
   print('User granted permission: ${settings.authorizationStatus}');
 }
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
 }
-

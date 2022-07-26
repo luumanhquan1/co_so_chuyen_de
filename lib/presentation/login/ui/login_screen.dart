@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   padding:
-                  const EdgeInsets.only(top: 60, left: 16.0, right: 16.0),
+                      const EdgeInsets.only(top: 60, left: 16.0, right: 16.0),
                   child: FormGroup(
                     key: keyGroup,
                     child: Column(
@@ -96,22 +96,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                 controller: fullNameController,
                                 suffixIcon: loginCubit.isHideClearData
                                     ? SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: Center(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {});
-                                        fullNameController.clear();
-                                        loginCubit.isHideClearData =
-                                        false;
-                                      },
-                                      child: SvgPicture.asset(
-                                        ImageAssets.icClearLogin,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                        width: 20,
+                                        height: 20,
+                                        child: Center(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {});
+                                              fullNameController.clear();
+                                              loginCubit.isHideClearData =
+                                                  false;
+                                            },
+                                            child: SvgPicture.asset(
+                                              ImageAssets.icClearLogin,
+                                            ),
+                                          ),
+                                        ),
+                                      )
                                     : const SizedBox(),
                                 hintText: S.current.account,
                                 prefixIcon: SizedBox(
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 20.0,
                                   child: Center(
                                     child:
-                                    SvgPicture.asset(ImageAssets.imgAcount),
+                                        SvgPicture.asset(ImageAssets.imgAcount),
                                   ),
                                 ),
                                 onChange: (text) {
@@ -142,25 +142,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                 obscureText: loginCubit.isCheckEye1,
                                 suffixIcon: loginCubit.isHideEye1
                                     ? SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: Center(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {});
-                                        loginCubit.isCheckEye1 =
-                                        !loginCubit.isCheckEye1;
-                                      },
-                                      child: loginCubit.isCheckEye1
-                                          ? SvgPicture.asset(
-                                        ImageAssets.imgView,
+                                        width: 20,
+                                        height: 20,
+                                        child: Center(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {});
+                                              loginCubit.isCheckEye1 =
+                                                  !loginCubit.isCheckEye1;
+                                            },
+                                            child: loginCubit.isCheckEye1
+                                                ? SvgPicture.asset(
+                                                    ImageAssets.imgView,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    ImageAssets.imgViewHide,
+                                                  ),
+                                          ),
+                                        ),
                                       )
-                                          : SvgPicture.asset(
-                                        ImageAssets.imgViewHide,
-                                      ),
-                                    ),
-                                  ),
-                                )
                                     : const SizedBox(),
                                 hintText: S.current.password,
                                 prefixIcon: SizedBox(
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           .pushReplacement(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                          const MainTabBarView(),
+                                              const MainTabBarView(),
                                         ),
                                       );
                                     } else {
@@ -230,20 +230,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                            const SignUpScreen(),
+                                                const SignUpScreen(),
                                           ),
                                         );
                                       },
                                       child: Text(
                                         S.current.dang_ky,
                                         style: textNormalCustom(
-                                          color: textDefault,
-
+                                          color: colorPrimary,
                                         ),
                                       ),
                                     ),
-
-                                    const SizedBox(height: 30,),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
                                   ],
                                 ),
                               )
