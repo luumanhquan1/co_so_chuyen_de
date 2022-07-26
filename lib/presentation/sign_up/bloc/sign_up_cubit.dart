@@ -43,7 +43,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     final UserModel userInfo = UserModel.fromJson(
       snap.docs.first.data(),
     );
-    HiveLocal.saveDataUser(userInfo);
+    await HiveLocal.saveDataUser(userInfo);
   }
 
   Future<User?> signUp(
