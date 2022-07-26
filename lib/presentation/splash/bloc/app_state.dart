@@ -10,10 +10,4 @@ class AppState {
     token = PrefsService.getUserId();
     getToken.sink.add(token);
   }
-
-  void setToken(String token) {
-    PrefsService.saveToken(token);
-    this.token = token;
-    getToken.sink.add(token);
-  }
 }

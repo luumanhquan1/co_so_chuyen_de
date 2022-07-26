@@ -70,6 +70,13 @@ class PrefsService {
     }
   }
 
+  static Future<void> removeTokken() async {
+    final prefs = await _instance;
+    if (prefs.containsKey(_PREF_TOKEN)) {
+      await prefs.remove(_PREF_TOKEN);
+    }
+  }
+
   static Future<void> removePasswordPresent() async {
     final prefs = await _instance;
     if (prefs.containsKey(_PREF_PASSWORD_PRESENT)) {
