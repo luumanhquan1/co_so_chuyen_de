@@ -19,6 +19,7 @@ class PostScreen extends StatefulWidget {
   PostScreen({Key? key, required this.postId}) : super(key: key);
 
   String postId;
+
   @override
   State<PostScreen> createState() => _PostScreenState();
 }
@@ -70,8 +71,13 @@ class _PostScreenState extends State<PostScreen> {
                                     PostCard(
                                       postModel: post.data!,
                                       userId: user.data?.userId ?? '',
-                                      onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: post.data?.author?.userId ??
-                                          ''))),
+                                      onTapName: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => ProfileScreen(
+                                                  userId: post.data?.author
+                                                          ?.userId ??
+                                                      ''))),
                                     ),
                                     post.data!.comments == null
                                         ? SizedBox()
@@ -84,8 +90,17 @@ class _PostScreenState extends State<PostScreen> {
                                                   post.data!.comments!.length,
                                               itemBuilder: (ctx, index) =>
                                                   CommentCard(
-                                                    onTapName: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=> ProfileScreen(userId: post.data?.comments?[index].author?.userId ??
-                                                        ''))),
+                                                onTapName: () => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (_) => ProfileScreen(
+                                                            userId: post
+                                                                    .data
+                                                                    ?.comments?[
+                                                                        index]
+                                                                    .author
+                                                                    ?.userId ??
+                                                                ''))),
                                                 commentModel:
                                                     post.data!.comments![index],
                                                 canDelete: (post

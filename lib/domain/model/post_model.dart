@@ -46,6 +46,8 @@ class PostModel {
         'content': instance.content,
         'create_at': instance.createAt,
         'update_at': instance.updateAt,
+        'likes' : instance.likes
+
       };
 
   @override

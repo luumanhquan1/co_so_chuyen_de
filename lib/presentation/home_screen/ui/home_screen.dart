@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
@@ -8,11 +11,15 @@ import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/style_utils.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
+import 'package:ccvc_mobile/widgets/button_sheet/bottom_sheet_custom.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item_skeleton.dart';
 import 'package:ccvc_mobile/widgets/refresh_widget.dart';
@@ -30,6 +37,7 @@ class HomeScreen extends StatefulWidget {
     Key? key,
     //  required this.userId
   }) : super(key: key);
+
   //String userId;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -39,11 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   HomeCubit _homeCubit = HomeCubit();
+  late UserModel userModel;
+
   @override
   void initState() {
     super.initState();
-    final data = HiveLocal.getDataUser();
-    print('${data?.userId} ?????????');
+    userModel = HiveLocal.getDataUser() ?? UserModel.empty();
     // _homeCubit.getUserInfo(widget.userId);
     // _homeCubit.getAllPosts();
   }
@@ -159,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -175,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -191,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -207,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -223,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -239,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.symmetric(
                           vertical: 16.sp, horizontal: 24.sp),
                       decoration: BoxDecoration(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: ThemeColor.gray77,
                               spreadRadius: 0,
@@ -265,50 +274,73 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, snapshot) => snapshot.data == null
                         ? SizedBox()
                         : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:
-                                //[
+                            children: [
+                              postContainer(),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ThemeColor.gray77,
+                                      spreadRadius: 0,
+                                      blurRadius: 5,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children:
+                                      //[
 
-                                (snapshot.data! as List)
-                                    .map((e) => Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 16.sp,
-                                              horizontal: 24.sp),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: ThemeColor.gray77,
-                                                  spreadRadius: 0,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
+                                      (snapshot.data! as List)
+                                          .map((e) => Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 16.sp,
+                                                    horizontal: 24.sp),
+                                                decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color:
+                                                            ThemeColor.gray77,
+                                                        spreadRadius: 0,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0,
+                                                            3), // changes position of shadow
+                                                      ),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: ThemeColor.white),
+                                                child: PostCard(
+                                                  postModel: e,
+                                                  userId:
+                                                      (user.data as UserModel)
+                                                              .userId ??
+                                                          '',
+                                                  onTapName: () => Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) => ProfileScreen(
+                                                              userId: (e as PostModel)
+                                                                      .author
+                                                                      ?.userId ??
+                                                                  ''))),
+                                                  onTap: () => Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              PostScreen(
+                                                                postId:
+                                                                    e.postId,
+                                                              ))),
                                                 ),
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: ThemeColor.white),
-                                          child: PostCard(
-                                            postModel: e,
-                                            userId: (user.data as UserModel)
-                                                    .userId ??
-                                                '',
-                                            onTapName: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) => ProfileScreen(
-                                                        userId: (e as PostModel)
-                                                                .author
-                                                                ?.userId ??
-                                                            ''))),
-                                            onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) => PostScreen(
-                                                          postId: e.postId,
-                                                        ))),
-                                          ),
-                                        ))
-                                    .toList())),
+                                              ))
+                                          .toList()),
+                            ],
+                          )),
               ));
     }
     if (state == StateLayout.showError) {
@@ -509,4 +541,67 @@ class _HomeScreenState extends State<HomeScreen> {
 //     ),
 //   );
 // }
+
+  Widget postContainer() {
+    return GestureDetector(
+      onTap: () {
+        showBottomSheetCustom(
+          context,
+          child: CreatePostScreen(
+            userModel: userModel,
+            createPost: (Uint8List? image, String content) {
+              _homeCubit.createPost(content: content, image: image);
+            },
+          ),
+          title: 'Create Post',
+        ).then((value) {
+          _homeCubit.getUserInfo(_homeCubit.userId);
+          _homeCubit.getAllPosts();
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 16,
+        ),
+        width: double.maxFinite,
+        margin: EdgeInsets.symmetric(
+          vertical: 16.sp,
+          horizontal: 24.sp,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: ThemeColor.gray77,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            if (userModel.avatarUrl != null)
+              CircleAvatar(
+                radius: 23, // Image radius
+                backgroundImage: NetworkImage(userModel.avatarUrl ?? ''),
+              )
+            else
+              CircleAvatar(
+                radius: 23, // Image radius
+                backgroundImage: MemoryImage(Uint8List(0)),
+              ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              'What is on your mind ?',
+              style: textStyle(size: 14),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
