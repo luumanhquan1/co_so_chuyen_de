@@ -15,6 +15,10 @@ const secondTxtColor = Color(0xFF808FA8);
 const highlightTxtColor = Color(0xff303742);
 const subTitle = Color(0xff8F9CAE);
 const attackFile = Color(0xff8F9CAE);
+const colorECEEF7 = Color(0xffECEEF7);
+const color6566E9 = Color(0xff6566E9);
+const color667793 = Color(0xff667793);
+const colorDBDFEF = Color(0xffDBDFEF);
 
 //bottom navigation color
 const bgBottomTab = Color(0xFFFCFCFC);

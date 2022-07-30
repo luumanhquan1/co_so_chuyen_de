@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
 import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
+import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
@@ -77,6 +78,19 @@ class FireStoreMethod {
         .collection(DefaultEnv.users)
         .doc(userId)
         .collection(DefaultEnv.tokkenFcm)
+        .get()
+        .then((value) {
+      for (final DocumentSnapshot post in value.docs) {
+        post.reference.delete();
+      }
+    });
+
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .collection(DefaultEnv.tokkenFcm)
         .doc(getRandString(15).removeChar)
         .set(fcmTokenModel.toJson(fcmTokenModel));
   }
@@ -146,5 +160,41 @@ class FireStoreMethod {
       print(e.toString());
     }
     return downUrlImage;
+  }
+
+  static Future<void> uploadImageFromCreatePost({
+    required String id,
+    required String idPost,
+    required Uint8List file,
+  }) async {
+    try {
+      final Reference ref = storage.ref().child(id).child(idPost);
+
+      await ref.putData(file);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  static Future<String> downImageCreatePost(
+      {required String id, required String idPost}) async {
+    String downUrlImage = '';
+    try {
+      downUrlImage = await storage.ref().child('$id/$idPost').getDownloadURL();
+    } catch (e) {
+      print(e.toString());
+    }
+    return downUrlImage;
+  }
+
+  static Future<void> createPost({required PostModel model}) async {
+    final id = getRandString(15).removeChar;
+
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.postsCollection)
+        .doc(id)
+        .set(model.toJson(model));
   }
 }
