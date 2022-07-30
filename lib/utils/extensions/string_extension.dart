@@ -1,5 +1,5 @@
 import 'package:ccvc_mobile/generated/l10n.dart';
-import 'package:html/parser.dart';
+
 import 'package:intl/intl.dart';
 
 final formatValue = NumberFormat('###,###,###.###', 'en_US');
@@ -66,14 +66,6 @@ extension FormatAddressConfirm on String {
   }
 }
 
-extension StringParse on String {
-  String parseHtml() {
-    final document = parse(this);
-    final String parsedString =
-        parse(document.body?.text).documentElement?.text ?? '';
-    return parsedString;
-  }
-}
 
 extension CheckValidate on String {
   String? checkEmail() {
