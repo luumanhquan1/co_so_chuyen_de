@@ -1,9 +1,11 @@
+
 import 'dart:developer';
 
-import 'package:camera/camera.dart';
+import 'package:ccvc_mobile/config/crypto_config.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/routes/router.dart';
 import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/data/di/module.dart';
@@ -139,9 +141,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             theme: ThemeData(
               primaryColor: AppTheme.getInstance().primaryColor(),
               cardColor: Colors.white,
-              textTheme: GoogleFonts.latoTextTheme(
-                Theme.of(context).textTheme,
-              ),
               appBarTheme: const AppBarTheme(
                 color: Colors.white,
                 systemOverlayStyle: SystemUiOverlayStyle.dark,

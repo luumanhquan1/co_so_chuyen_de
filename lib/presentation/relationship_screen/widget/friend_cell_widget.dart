@@ -59,14 +59,14 @@ class FriendCellWidget extends StatelessWidget {
   }
 
   Widget iconRight() {
-    switch (peopleType) {
-      case PeopleType.Friend:
-        return const Icon(Icons.more_horiz);
-      case PeopleType.FriendRequest:
-        return button(backGround: mainTxtColor, onTap: (){}, title: 'Hủy');
-      case PeopleType.NoFriend:
-       return button(backGround: mainTxtColor, onTap: (){}, title: 'Thêm bạn bè');
-    }
+    // switch (peopleType) {
+    //   case PeopleType.Friend:
+    //     return const Icon(Icons.more_horiz);
+    //   case PeopleType.FriendRequest:
+    //     return button(backGround: mainTxtColor, onTap: (){}, title: 'Hủy');
+    //   case PeopleType.NoFriend:
+    //    return button(backGround: mainTxtColor, onTap: (){}, title: 'Thêm bạn bè');
+    // }
     return const SizedBox();
   }
   Widget button({required Color backGround,required Function() onTap,required String title}){

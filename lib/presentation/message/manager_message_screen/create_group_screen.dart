@@ -15,8 +15,13 @@ class CreateGroupScreen extends StatefulWidget {
   final List<UserModel> listFriend;
   final MessageCubit cubit;
   final String title;
+  final bool isAdd;
   const CreateGroupScreen(
-      {Key? key, required this.listFriend, required this.cubit,required this.title})
+      {Key? key,
+      required this.listFriend,
+      required this.cubit,
+      required this.title,
+      this.isAdd = false})
       : super(key: key);
 
   @override
@@ -33,10 +38,6 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           appBar(),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: BaseSearchBar(),
-          ),
           const SizedBox(
             height: 10,
           ),
@@ -82,11 +83,16 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Hủy',
-            style: textNormal(Colors.blue, 16),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              'Hủy',
+              style: textNormal(Colors.blue, 16),
+            ),
           ),
-          Text('Nhóm mới',
+          Text(widget.isAdd ? 'Thêm người' : 'Nhóm mới',
               style: textNormalCustom(
                   color: titleCalenderWork,
                   fontSize: 18,
@@ -96,26 +102,45 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
               builder: (context, snapshot) {
                 return GestureDetector(
                   onTap: () {
-                    if (listSelect.length > 1) {
-                      widget.cubit.createRoomChatDefault(listSelect
-                          .map(
-                            (e) => PeopleChat(
-                              userId: e.userId?.trim() ?? '',
-                              avatarUrl: e.avatarUrl ?? '',
-                              nameDisplay: e.nameDisplay ?? '',
-                              bietDanh: '',
-                            ),
-                          )
-                          .toList()).then((value){
-                            Navigator.popUntil(context, (route) => route.isFirst);
+                    if (widget.isAdd) {
+                      widget.cubit
+                          .addPeopleRoomChat(listSelect
+                              .map(
+                                (e) => PeopleChat(
+                                  userId: e.userId?.trim() ?? '',
+                                  avatarUrl: e.avatarUrl ?? '',
+                                  nameDisplay: e.nameDisplay ?? '',
+                                  bietDanh: '',
+                                ),
+                              )
+                              .toList())
+                          .then((value) {
+                        Navigator.popUntil(context, (route) => route.isFirst);
                       });
+                    } else {
+                      if (listSelect.length > 1) {
+                        widget.cubit
+                            .createRoomChatDefault(listSelect
+                                .map(
+                                  (e) => PeopleChat(
+                                    userId: e.userId?.trim() ?? '',
+                                    avatarUrl: e.avatarUrl ?? '',
+                                    nameDisplay: e.nameDisplay ?? '',
+                                    bietDanh: '',
+                                  ),
+                                )
+                                .toList())
+                            .then((value) {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                        });
+                      }
                     }
                   },
                   child: Text(
-                    'Tạo',
+                    widget.isAdd ? 'Thêm' : 'Tạo',
                     style: textNormalCustom(
                         color:
-                            listSelect.length > 1 ? Colors.blue : Colors.grey,
+                            listSelect.length > 1 || widget.isAdd ? Colors.blue : Colors.grey,
                         fontSize: 16,
                         fontWeight: FontWeight.w400),
                   ),

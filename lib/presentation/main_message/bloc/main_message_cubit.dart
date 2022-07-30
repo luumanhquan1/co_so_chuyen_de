@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/services/message_service.dart';

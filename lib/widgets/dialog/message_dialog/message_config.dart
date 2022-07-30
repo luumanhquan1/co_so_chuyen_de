@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 enum MessState { error, success, customIcon }
 
 class MessageConfig {
-  static BuildContext? _context;
+  static BuildContext? contextConfig;
   static void init(BuildContext context) {
-    if (_context != null) {
+    if (contextConfig != null) {
       return;
     }
-    _context = context;
+    contextConfig = context;
   }
 
   static void show({
@@ -19,7 +19,7 @@ class MessageConfig {
     String urlIcon = '',
     MessState messState = MessState.success,
   }) {
-    final OverlayState? overlayState = Overlay.of(_context!);
+    final OverlayState? overlayState = Overlay.of(contextConfig!);
     late OverlayEntry overlayEntry;
     overlayEntry = OverlayEntry(
       builder: (context) {

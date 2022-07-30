@@ -40,7 +40,7 @@ class TinNhanCell extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                   title(),
+                    title(),
                     style: textNormalCustom(color: colorBlack, fontSize: 14),
                     maxLines: 2,
                   ),
@@ -126,16 +126,18 @@ class TinNhanCell extends StatelessWidget {
                   shape: BoxShape.circle, color: Colors.teal),
               child: CachedNetworkImage(
                 imageUrl: peopleChat.first.avatarUrl,
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                errorWidget: (context, url, error) =>
+                    SvgPicture.asset(ImageAssets.avatarDefault),
                 fit: BoxFit.cover,
               ),
             ),
           )
-        :  avatarGroup();
+        : avatarGroup();
   }
-  Widget avatarGroup(){
-    Widget avatar(String url,double size){
-      return  Container(
+
+  Widget avatarGroup() {
+    Widget avatar(String url, double size) {
+      return Container(
         height: size,
         width: size,
         clipBehavior: Clip.hardEdge,
@@ -146,32 +148,37 @@ class TinNhanCell extends StatelessWidget {
             border: Border.all()),
         child: Container(
           clipBehavior: Clip.hardEdge,
-          decoration: const BoxDecoration(
-              shape: BoxShape.circle, color: Colors.teal),
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.teal),
           child: CachedNetworkImage(
             imageUrl: url,
-            errorWidget: (context, url, error) =>SvgPicture.asset(ImageAssets.avatarDefault),
+            errorWidget: (context, url, error) =>
+                SvgPicture.asset(ImageAssets.avatarDefault),
             fit: BoxFit.cover,
           ),
         ),
       );
     }
-    return peopleChat.length < 2? const SizedBox(): Container(
-      width: 62,
-      height: 62,
-      child: Stack(
-        children: [
-      avatar(peopleChat.first.avatarUrl, 50),
-          Positioned(
-          top: 0,
-            right: 0,
-            child: avatar(peopleChat.last.avatarUrl, 40),
-          )
-        ],
-      ),
-    );
+
+    return peopleChat.length < 2
+        ? const SizedBox()
+        : Container(
+            width: 62,
+            height: 62,
+            child: Stack(
+              children: [
+                avatar(peopleChat.first.avatarUrl, 50),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: avatar(peopleChat.last.avatarUrl, 40),
+                )
+              ],
+            ),
+          );
   }
-String title(){
+
+  String title() {
     return peopleChat.map((e) => e.nameDisplay).join(',');
-}
+  }
 }

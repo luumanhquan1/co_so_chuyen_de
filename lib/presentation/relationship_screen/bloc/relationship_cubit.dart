@@ -9,8 +9,10 @@ import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/main_message/bloc/main_message_state.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/bloc/relationship_state.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 
 import 'package:rxdart/rxdart.dart';
+
 class RelationShipCubit extends BaseCubit<RelationshipState> {
   RelationShipCubit() : super(RelationshipStateStateIntial());
 
@@ -19,15 +21,28 @@ class RelationShipCubit extends BaseCubit<RelationshipState> {
 
   Stream<List<UserModel>> get getListFriend => _getListFriend.stream;
   final idUser = PrefsService.getUserId();
-   List<String> listIdFriend = [];
-   List<String> listsIdFriendRequest = [];
+  List<UserModel> listFriend = [];
   Future<void> fetchFriends(String id) async {
     showLoading();
     final result = await ProfileService.listFriends(id);
+    listFriend = result;
     showContent();
     _getListFriend.sink.add(result);
   }
 
-
-
+  void searchUser(String keySearch) {
+    if (keySearch.isEmpty) {
+      _getListFriend.sink.add(listFriend);
+      return;
+    }
+    final data = listFriend
+        .where((element) => element.nameDisplay == null
+            ? false
+            : element.nameDisplay!
+                .toLowerCase()
+                .vietNameseParse()
+                .contains(keySearch.toLowerCase().vietNameseParse()))
+        .toList();
+    _getListFriend.sink.add(data);
+  }
 }

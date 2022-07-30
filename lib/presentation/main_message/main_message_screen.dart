@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 
@@ -69,7 +71,6 @@ class _MessageScreenState extends State<MainMessageScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 child: Column(
                   children: [
-                    const BaseSearchBar(),
                     const SizedBox(
                       height: 30,
                     ),
@@ -92,18 +93,21 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => MessageScreen(
+                                            isRoomGroup: result.isGroup,
                                             chatModel: result,
-                                            peopleChat: result.getPeople(),
+                                            peopleChat: result.peopleChats,
                                             peopleGroupChat:
                                                 result.peopleChats.length < 2
                                                     ? null
                                                     : result.peopleChats,
                                           ),
                                         ),
-                                      );
+                                      ).then((value) {
+                                        setState(() {});
+                                      });
                                     },
                                     child: TinNhanCell(
-                                      peopleChat: result.getPeople(),
+                                      peopleChat: result.peopleChats,
                                       idRoom: result.roomId,
                                     ),
                                   ),
