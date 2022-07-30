@@ -5,11 +5,11 @@ class RoomChatModel {
   String roomId;
   List<PeopleChat> peopleChats;
   int colorChart;
-
+  bool isGroup;
   RoomChatModel(
       {required this.roomId,
       required this.peopleChats,
-      required this.colorChart});
+      required this.colorChart,required this.isGroup});
 
   List<PeopleChat> getPeople() {
     final data = peopleChats
@@ -27,7 +27,7 @@ class RoomChatModel {
     return RoomChatModel(
         roomId: json['room_id'] ?? '',
         peopleChats: data,
-        colorChart: json['color_chart'] ?? 0);
+        colorChart: json['color_chart'] ?? 0, isGroup: json['is_group'] ?? false);
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +35,7 @@ class RoomChatModel {
     data['room_id'] = roomId;
     data['color_chart'] = colorChart;
     data['people_chat'] = peopleChats.map((e) => e.toJson()).toList();
+    data['is_group'] = isGroup;
     return data;
   }
 }
@@ -59,9 +60,6 @@ class PeopleChat {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['user_id'] = userId;
-    data['avatar_url'] = avatarUrl;
-    data['name_display'] = nameDisplay;
-    data['biet_danh'] = bietDanh;
     return data;
   }
 }

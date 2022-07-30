@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/crypto_config.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:uuid/uuid.dart';
@@ -64,7 +65,7 @@ class MessageSmsModel {
     map['message_type_id'] = loaiTinNhan;
     map['create_at'] = DateTime.now().millisecondsSinceEpoch;
     map['sender_id'] = idUser;
-    map['content'] = content;
+    map['content'] = CryptoConfig.encrypt(content ?? '');
     map['channel_id'] = id;
     map['da_xem'] = daXem;
     return map;
@@ -73,7 +74,8 @@ class MessageSmsModel {
   MessageSmsModel.fromJson(Map<String, dynamic> json) {
     id = json['message_id'];
     senderId = json['sender_id'];
-    content = json['content'];
+
+    content = CryptoConfig.decrypt(json['content'] ?? '');
     loaiTinNhan = json['message_type_id'];
     if (json['da_xem'] is List) {
       (json['da_xem'] as List).forEach((element) {

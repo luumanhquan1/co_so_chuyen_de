@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/app_config.dart';
+import 'package:ccvc_mobile/config/crypto_config.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
@@ -39,7 +40,8 @@ class MessageService {
                 final room = RoomChatModel(
                     roomId: element.id,
                     peopleChats: listPeople,
-                    colorChart: jsonProfileRoom['color_chart']);
+                    colorChart: jsonProfileRoom['color_chart'] ?? 0,
+                    isGroup: jsonProfileRoom['is_group'] ?? false);
                 data.add(room);
                 _idRoomChat.addAll({element.id: room});
               }
@@ -80,7 +82,7 @@ class MessageService {
             userId: id,
             avatarUrl: userInfo.avatarUrl ?? '',
             nameDisplay: userInfo.nameDisplay ?? '',
-            bietDanh: element['biet_danh'],
+            bietDanh: element['biet_danh'] ?? '',
           ),
         );
       }
@@ -182,6 +184,20 @@ class MessageService {
     return result;
   }
 
+  static Future<void> addPeopleRoomChat(
+      List<PeopleChat> peopleChat, String idRoomChat) async {
+    await Future.forEach(peopleChat, (PeopleChat element) async {
+      await _addUserRoomChat(element.userId, idRoomChat);
+    });
+    await FirebaseSetup.fireStore
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoomChat)
+        .update({
+      'people_chat':
+          FieldValue.arrayUnion(peopleChat.map((e) => e.toJson()).toList())
+    });
+  }
+
   static Future<String> createRoomChat(RoomChatModel roomChatModel) async {
     await FirebaseSetup.fireStore
         .collection(DefaultEnv.messCollection)
@@ -193,8 +209,25 @@ class MessageService {
     return roomChatModel.roomId;
   }
 
-  static void _addUserRoomChat(String id, String idRoom) {
+  static void removeChat(String idRoom, String idUser) {
     FirebaseSetup.fireStore
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoom)
+        .update({
+      'people_chat': FieldValue.arrayRemove([
+        {'user_id': idUser}
+      ])
+    });
+    FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(idUser)
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoom)
+        .delete();
+  }
+
+  static Future<void> _addUserRoomChat(String id, String idRoom) async {
+    await FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(id)
         .collection(DefaultEnv.messCollection)

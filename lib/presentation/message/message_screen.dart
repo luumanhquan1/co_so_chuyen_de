@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
@@ -14,11 +15,13 @@ class MessageScreen extends StatefulWidget {
   final RoomChatModel? chatModel;
   final List<PeopleChat> peopleChat;
   final List<PeopleChat>? peopleGroupChat;
+  final bool isRoomGroup;
   const MessageScreen({
     Key? key,
     this.chatModel,
     required this.peopleChat,
     this.peopleGroupChat,
+    this.isRoomGroup = false
   }) : super(key: key);
 
   @override
@@ -32,6 +35,7 @@ class _MessageScreenState extends State<MessageScreen> {
     // TODO: implement initState
     super.initState();
     if (widget.chatModel != null) {
+      cubit.peopleGroupChat = widget.peopleGroupChat;
       cubit.initDate(widget.chatModel?.roomId ?? '', widget.peopleChat);
     } else {
       cubit.peopleChat = widget.peopleChat;
@@ -57,15 +61,16 @@ class _MessageScreenState extends State<MessageScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ManagerMessagerScreen(
-                        peopleChats:
-                            widget.peopleGroupChat ?? [...widget.peopleChat],
-                        messageCubit: cubit,
+                        peopleChats: cubit.peopleChat,
+                        messageCubit: cubit, isGroup: widget.isRoomGroup,
                       ),
                     ),
-                  );
+                  ).then((value) {
+                    setState(() {});
+                  });
                 },
                 child: HeaderMessWidget(
-                  peopleChat: widget.peopleChat,
+                  peopleChat: cubit.peopleChat,
                 ),
               ),
               const SizedBox(
@@ -87,15 +92,17 @@ class _MessageScreenState extends State<MessageScreen> {
                               children: List.generate(data.length, (index) {
                                 final result = data[index];
                                 PeopleChat? peopleSender;
-                                if (widget.peopleGroupChat != null) {
-                                  final peopleGruop = widget.peopleGroupChat!
+                                if (cubit.peopleGroupChat != null) {
+                                  final peopleGruop = cubit.peopleGroupChat!
                                       .where((element) =>
                                           element.userId == result.senderId);
                                   if (peopleGruop.isNotEmpty) {
                                     peopleSender = peopleGruop.first;
                                   }
                                 } else {
-                                  peopleSender = widget.peopleChat.first;
+                                  if(widget.peopleChat.isNotEmpty) {
+                                    peopleSender = widget.peopleChat.first;
+                                  }
                                 }
                                 return SmsCell(
                                   smsModel: result,
@@ -108,18 +115,27 @@ class _MessageScreenState extends State<MessageScreen> {
                   );
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: SendSmsWidget(
-                  hintText: 'Soạn tin nhắn...',
-                  sendTap: (value) {
-                    cubit.sendSms(value);
-                  },
-                  onSendFile: (value) {
-                    cubit.sendImage(value);
-                  },
-                ),
-              )
+              StreamBuilder(
+                  stream: cubit.roomChat,
+                  builder: (context, snapshot) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: cubit.isBlock()
+                          ? Text(
+                              'Bạn không thể nhắn tin cho tài khoản này',
+                              style: textNormal(Colors.black, 14),
+                            )
+                          : SendSmsWidget(
+                              hintText: 'Soạn tin nhắn...',
+                              sendTap: (value) {
+                                cubit.sendSms(value);
+                              },
+                              onSendFile: (value) {
+                                cubit.sendImage(value);
+                              },
+                            ),
+                    );
+                  })
             ],
           ),
         ),

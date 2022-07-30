@@ -8,7 +8,7 @@ import 'package:ccvc_mobile/domain/model/profile_model.dart/friend_request_model
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 
 class ProfileService {
-  static Future<List<UserModel>> listFriends(String id) async {
+  static Future<List<UserModel>> listFriends(String id,{bool getBloc  = true}) async {
     final listIdFriend = await ProfileService.getIdsRelationShipUser();
     final listsIdFriendRequest = await ProfileService.getIdsFriendRequestUser();
     final idUser = PrefsService.getUserId();
@@ -23,17 +23,27 @@ class ProfileService {
       if (vl.userId2 != idUser) {
         final user = await getUserChat(vl.userId2);
         if (user != null) {
-          user.peopleType = _peopleType(user.userId ?? '',listsIdFriendRequest,listIdFriend);
-          data.add(user);
+          user.peopleType = _peopleType(
+              user.userId ?? '', listsIdFriendRequest, listIdFriend,vl);
+          if(getBloc){
+            if(user.peopleType != PeopleType.Block) {
+              data.add(user);
+            }
+          }else{
+            data.add(user);
+          }
+
         }
       }
     }
     return data;
   }
 
- static PeopleType? _peopleType(
-      String id, List<String> listsIdFriendRequest, List<String> listIdFriend) {
-
+  static PeopleType? _peopleType(
+      String id, List<String> listsIdFriendRequest, List<String> listIdFriend,FriendModel friendModel) {
+    if(friendModel.type == 2){
+      return PeopleType.Block;
+    }
     if (listsIdFriendRequest.contains(id.trim())) {
       return PeopleType.FriendRequest;
     }

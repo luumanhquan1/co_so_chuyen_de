@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'user_model.g.dart';
 
-enum PeopleType { Friend, FriendRequest, NoFriend }
+enum PeopleType { Friend, FriendRequest, NoFriend ,Block}
 
 @HiveType(typeId: 0)
 class UserModel {
