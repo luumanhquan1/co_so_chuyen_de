@@ -54,27 +54,26 @@ class HomeCubit extends BaseCubit<HomeState> {
   }) async {
     showLoading();
     String imgUrl = '';
-    final UserModel? userModel = HiveLocal.getDataUser();
+   // final UserModel? userModel = HiveLocal.getDataUser();
 
     final postId = getRandString(15).removeChar;
-    final createAt = DateTime.now().microsecondsSinceEpoch;
-    final updateAt = DateTime.now().microsecondsSinceEpoch;
+    final createAt = DateTime.now().millisecondsSinceEpoch;
+    final updateAt = DateTime.now().millisecondsSinceEpoch;
     if (image != null) {
       await FireStoreMethod.uploadImageFromCreatePost(
-        id: userModel?.userId ?? '',
+        id: _user.value.userId ?? '',
         idPost: postId,
         file: image,
       );
 
       imgUrl = await FireStoreMethod.downImageCreatePost(
-        id: userModel?.userId ?? '',
+        id: _user.value.userId ?? '',
         idPost: postId,
       );
     }
 
     final PostModel model = PostModel(
-      postId: postId,
-      author: userModel,
+      author: _user.value,
       type: image == null ? 1 : 2,
       createAt: createAt,
       updateAt: updateAt,
@@ -83,7 +82,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       likes: [],
       comments: [],
     );
-    await FireStoreMethod.createPost(model: model);
+    await FireStoreMethod.createPost(model: model,postId: postId );
 
     showContent();
   }
@@ -96,7 +95,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.postsCollection)
+          .collection(DefaultEnv.postsCollection).orderBy('update_at',descending: true)
           .snapshots()
           .listen((event) async {
         if (event.docs == null) {

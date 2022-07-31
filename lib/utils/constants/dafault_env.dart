@@ -10,4 +10,5 @@ class DefaultEnv {
   static const String friends = 'friends';
   static const String avatar = 'avatar';
   static const String tokkenFcm = 'tokken_fcm';
+  static const String comments = 'comments';
 }

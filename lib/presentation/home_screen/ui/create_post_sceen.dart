@@ -40,7 +40,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     maxLines: null,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'What is on your mind ?',
+                   //   hintText: 'Bài viết mới',
                     ),
                   ),
                   spaceH20,

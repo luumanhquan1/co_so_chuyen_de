@@ -39,7 +39,6 @@ class PostModel {
     }
   }
   Map<String, dynamic> toJson(PostModel instance) => <String, dynamic>{
-        'post_id': instance.postId,
         'user_id': instance.author?.userId ?? '',
         'image_url': instance.imageUrl,
         'type': instance.type,

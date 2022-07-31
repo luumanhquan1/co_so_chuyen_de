@@ -187,14 +187,13 @@ class FireStoreMethod {
     return downUrlImage;
   }
 
-  static Future<void> createPost({required PostModel model}) async {
-    final id = getRandString(15).removeChar;
+  static Future<void> createPost({required PostModel model, required String postId}) async {
 
     await firestore
         .collection(DefaultEnv.socialNetwork)
         .doc(DefaultEnv.develop)
         .collection(DefaultEnv.postsCollection)
-        .doc(id)
+        .doc(postId)
         .set(model.toJson(model));
   }
 }

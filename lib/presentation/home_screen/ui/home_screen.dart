@@ -553,11 +553,8 @@ class _HomeScreenState extends State<HomeScreen> {
               _homeCubit.createPost(content: content, image: image);
             },
           ),
-          title: 'Create Post',
-        ).then((value) {
-          _homeCubit.getUserInfo(_homeCubit.userId);
-          _homeCubit.getAllPosts();
-        });
+          title: 'Bài viết mới',
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(

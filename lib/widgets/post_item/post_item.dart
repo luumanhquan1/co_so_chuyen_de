@@ -6,7 +6,9 @@ import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -44,7 +46,7 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-       log('vvvvvvvvvvvvvv' + widget.userId);
+       debugPrint('vvvvvvvvvvvvvv  ${widget.postModel.postId}  ${widget.postModel.imageUrl}');
     return GestureDetector(
       onTap: widget.onTap,
 //      onDoubleTap: onLike,
@@ -62,27 +64,43 @@ class _PostCardState extends State<PostCard> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: widget.onTapName,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(80),
+                    child:
+                    ClipRRect(
                       child: Container(
-                        height: 40.sp,
-                        width: 40.sp,
-                        decoration: BoxDecoration(
-                          //   shape: BoxShape.circle,
-                          color: ThemeColor.paleGrey,
-                        ),
-                        child: widget.postModel.author?.avatarUrl == null ||
-                                widget.postModel.author!.avatarUrl!.isEmpty
-                            ? SizedBox()
-                            : AppImage.network(
-                                path: widget.postModel.author!.avatarUrl!,
-                                //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
-
-                                height: 40.sp,
-                                width: 40.sp,
-                              ),
-                      ),
-                    ),
+                          width: 40.sp,
+                          height: 40.sp,
+                          child: ( widget.postModel.author!.avatarUrl.isNullOrEmpty
+                              ? Container(
+                            color: ThemeColor.ebonyClay,
+                          )
+                              : CircleAvatar(
+                            // radius: 30, // Image radius
+                            backgroundImage: NetworkImage(
+                                widget.postModel.author?.avatarUrl ?? ImageAssets.imgEmptyAvata),
+                          ))),
+                      borderRadius: BorderRadius.circular(120),
+                    )
+                    // ClipRRect(
+                    //   borderRadius: BorderRadius.circular(80),
+                    //   child: Container(
+                    //     height: 40.sp,
+                    //     width: 40.sp,
+                    //     decoration: BoxDecoration(
+                    //       //   shape: BoxShape.circle,
+                    //       color: ThemeColor.paleGrey,
+                    //     ),
+                    //     child: widget.postModel.author?.avatarUrl == null ||
+                    //             widget.postModel.author!.avatarUrl!.isEmpty
+                    //         ? SizedBox()
+                    //         : AppImage.network(
+                    //             path: widget.postModel.author!.avatarUrl!,
+                    //             //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+                    //
+                    //             height: 40.sp,
+                    //             width: 40.sp,
+                    //           ),
+                    //   ),
+                    // ),
                   ),
                 ),
                 // SizedBox(width: 12.sp,),
