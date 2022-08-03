@@ -61,8 +61,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.postsCollection)
-          .where('user_id', isEqualTo: userId)
-          // .orderBy('create_at', descending: true)
+          .orderBy('create_at', descending: true)
           .snapshots()
           .listen((event) async {
         log('hihi');
@@ -80,7 +79,9 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             post.addAll({'post_id': x.id});
             post.addAll(x.data());
             log(post.toString());
-
+            if (post['user_id'] != userId) {
+              continue;
+            }
             PostModel newPost = PostModel.fromJson(post);
 
             //get user
