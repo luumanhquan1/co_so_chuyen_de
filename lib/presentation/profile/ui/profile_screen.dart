@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/images.dart';
-import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
@@ -113,10 +112,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       body: Stack(children: [
                         Positioned(
-                            top: 0, child: AppImage.asset(
-                            width: MediaQuery.of(context).size.width,
-
-                            path: bgProfile)),
+                            top: 0,
+                            child: AppImage.asset(
+                                width: MediaQuery.of(context).size.width,
+                                path: bgProfile)),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,35 +145,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //   stream: _profileCubit.posts,
                             //   builder: (context, snapshot) =>
 
-                                Expanded(
-                                    child: RefreshWidget(
-                                        // enableLoadMore: controller.canLoadMore.value,
-                                        //  onLoadMore: () async {
-                                        //    double oldPosition =
-                                        //        controller.scrollController.position.pixels;
-                                        //    await controller.getWeights();
-                                        //    controller.scrollController.position.jumpTo(oldPosition);
-                                        //  },
-                                        controller: refreshController,
-                                        onRefresh: () async {
-                                          await _profileCubit
-                                              .getAllPosts(widget.userId);
-                                          refreshController.refreshCompleted();
-                                        },
-                                        child: snapshot.data == null
-                                            ? SizedBox()
-                                            : showUserInfo
-                                                ? _buildUserInfo(user.data!)
-                                                : _buildBody(snapshot.data!,
-                                                    user.data!))),
-                                //  )
-                              ],
+                            Expanded(
+                                child: RefreshWidget(
+                                    // enableLoadMore: controller.canLoadMore.value,
+                                    //  onLoadMore: () async {
+                                    //    double oldPosition =
+                                    //        controller.scrollController.position.pixels;
+                                    //    await controller.getWeights();
+                                    //    controller.scrollController.position.jumpTo(oldPosition);
+                                    //  },
+                                    controller: refreshController,
+                                    onRefresh: () async {
+                                      refreshController.refreshCompleted();
+                                    },
+                                    child: snapshot.data == null
+                                        ? SizedBox()
+                                        : showUserInfo
+                                            ? _buildUserInfo(user.data!)
+                                            : _buildBody(
+                                                snapshot.data!, user.data!))),
+                            //  )
+                          ],
 
-                              //   )),
-                            ),
-                          ]),
+                          //   )),
                         ),
-                      ))),
+                      ]),
+                    ),
+                  ))),
     );
   }
 
@@ -306,61 +303,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 log(relationshipType.toString());
                 return StreamBuilder<List<PostModel>>(
                     stream: _profileCubit.posts,
-                    builder: (context, snapshot){
-                      debugPrint('qqqqqqq');
-                      return snapshot.data == null
-                          ? SizedBox()
-                          : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 66.sp,
-                            ),
-                            Center(
-                              child: CircleAvatar(
-                                radius: 60, // Image radius
-                                backgroundImage: NetworkImage(
-                                    userModel.avatarUrl ??
-                                        ImageAssets.imgEmptyAvata),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16.sp,
-                            ),
-                            Center(
-                                child: Text(userModel.nameDisplay ?? '',
-                                    style:
-                                    heading2(color: ThemeColor.black))),
-                            SizedBox(
-                              height: 16.sp,
-                            ),
+                    builder: (context, snapshot) => snapshot.data == null
+                        ? SizedBox()
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                SizedBox(
+                                  height: 66.sp,
+                                ),
+                                Center(
+                                  child: CircleAvatar(
+                                    radius: 60, // Image radius
+                                    backgroundImage: NetworkImage(
+                                        userModel.avatarUrl ??
+                                            ImageAssets.imgEmptyAvata),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16.sp,
+                                ),
+                                Center(
+                                     child: Text(userModel.nameDisplay ?? '',
+                                        style:
+                                            heading2(color: ThemeColor.black))),
+                                SizedBox(
+                                  height: 16.sp,
+                                ),
 
-                            Visibility(
-                              visible:
-                              !(type.data! == RelationshipType.owner),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.sp, vertical: 12.sp),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    SizedBox(
-                                      width: 16.sp,
-                                    ),
-                                    Expanded(
-                                        child: Padding(
+                                Visibility(
+                                  visible:
+                                      !(type.data! == RelationshipType.owner),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16.sp, vertical: 12.sp),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        SizedBox(
+                                          width: 16.sp,
+                                        ),
+                                        Expanded(
+                                            child: Padding(
                                           padding:
-                                          EdgeInsets.only(right: 16.sp),
+                                              EdgeInsets.only(right: 16.sp),
                                           child:
-                                          getRelationshipButton(type.data!),
+                                              getRelationshipButton(type.data!),
                                         )),
-                                    SizedBox(
-                                      width: 16.sp,
-                                    ),
-                                    Expanded(
-                                        child: Padding(
+                                        SizedBox(
+                                          width: 16.sp,
+                                        ),
+                                        Expanded(
+                                            child: Padding(
                                           padding:
-                                          EdgeInsets.only(right: 16.sp),
+                                              EdgeInsets.only(right: 16.sp),
                                           child: GestureDetector(
                                             onTap: () {
                                               Navigator.push(
@@ -368,15 +363,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       MessageScreen(
-                                                        peopleChat: [
-                                                          PeopleChat(
-                                                              userId: userModel
+                                                    peopleChat: [
+                                                      PeopleChat(
+                                                          userId: userModel
                                                                   .userId ??
-                                                                  '',
-                                                              nameDisplay: userModel
+                                                              '',
+                                                          nameDisplay: userModel
                                                                   .nameDisplay ??
-                                                                  '',
-                                                              avatarUrl: userModel
+                                                              '',
+                                                          avatarUrl: userModel
                                                                   .avatarUrl ??
                                                                   '',
                                                               bietDanh: '')

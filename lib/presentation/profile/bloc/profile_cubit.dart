@@ -64,9 +64,8 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.postsCollection).orderBy('create_at',descending: true)
-          .where('user_id', isEqualTo: userId)
-          // .orderBy('create_at', descending: true)
+          .collection(DefaultEnv.postsCollection)
+          .orderBy('create_at', descending: true)
           .snapshots()
           .listen((event) async {
         debugPrint('hihi');
@@ -83,8 +82,10 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             Map<String, dynamic> post = {};
             post.addAll({'post_id': x.id});
             post.addAll(x.data());
-            debugPrint(post.toString());
-
+            log(post.toString());
+            if (post['user_id'] != userId) {
+              continue;
+            }
             PostModel newPost = PostModel.fromJson(post);
 
             //get user
