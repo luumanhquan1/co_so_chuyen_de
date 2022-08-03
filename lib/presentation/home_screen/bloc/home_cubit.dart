@@ -95,7 +95,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.postsCollection).orderBy('update_at',descending: true)
+          .collection(DefaultEnv.postsCollection).orderBy('create_at',descending: true)
           .snapshots()
           .listen((event) async {
         if (event.docs == null) {
@@ -142,7 +142,7 @@ class HomeCubit extends BaseCubit<HomeState> {
               posts.add(newPost);
             }
           }
-
+          debugPrint('hhhhhhhhhhhhh');
           _posts.sink.add(posts);
           showContent();
         }
