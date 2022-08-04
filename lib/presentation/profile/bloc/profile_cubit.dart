@@ -65,7 +65,9 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.postsCollection)
+         // .where('user_id', isEqualTo: userId)
           .orderBy('create_at', descending: true)
+
           .snapshots()
           .listen((event) async {
         debugPrint('hihi');

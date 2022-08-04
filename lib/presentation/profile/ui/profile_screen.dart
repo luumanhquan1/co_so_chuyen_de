@@ -156,6 +156,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     //  },
                                     controller: refreshController,
                                     onRefresh: () async {
+                                      await _profileCubit
+                                          .getAllPosts(widget.userId);
                                       refreshController.refreshCompleted();
                                     },
                                     child: snapshot.data == null
@@ -451,14 +453,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     vertical: 16.sp,
                                     horizontal: 24.sp),
                                 decoration: BoxDecoration(
-                                  //     boxShadow: [
-                                  //   BoxShadow(
-                                  //     color: ThemeColor.gray77,
-                                  //     spreadRadius: 0,
-                                  //     blurRadius: 5,
-                                  //     offset: Offset(0, 3), // changes position of shadow
-                                  //   ),
-                                  // ],
+                                      boxShadow: [
+                                    BoxShadow(
+                                      color: ThemeColor.gray77,
+                                      spreadRadius: 0,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
                                     borderRadius:
                                     BorderRadius.circular(20),
                                     color: ThemeColor.white),
@@ -476,8 +478,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ))
                                   .toList(),
                             )
-                          ]);
-                });
+                          ])
+                );
               }));
     }
     if (state == StateLayout.showError) {
