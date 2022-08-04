@@ -168,7 +168,11 @@ class FireStoreMethod {
     required Uint8List file,
   }) async {
     try {
-      final Reference ref = storage.ref().child(id).child(idPost);
+      final Reference ref = storage
+          .ref()
+          .child(id)
+          .child(DefaultEnv.postsCollection)
+          .child(idPost);
 
       await ref.putData(file);
     } catch (e) {
@@ -180,15 +184,15 @@ class FireStoreMethod {
       {required String id, required String idPost}) async {
     String downUrlImage = '';
     try {
-      downUrlImage = await storage.ref().child('$id/$idPost').getDownloadURL();
+      downUrlImage = await storage.ref().child('$id/${DefaultEnv.postsCollection}/$idPost').getDownloadURL();
     } catch (e) {
       print(e.toString());
     }
     return downUrlImage;
   }
 
-  static Future<void> createPost({required PostModel model, required String postId}) async {
-
+  static Future<void> createPost(
+      {required PostModel model, required String postId}) async {
     await firestore
         .collection(DefaultEnv.socialNetwork)
         .doc(DefaultEnv.develop)

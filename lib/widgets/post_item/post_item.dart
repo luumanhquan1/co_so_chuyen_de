@@ -187,9 +187,7 @@ class _PostCardState extends State<PostCard> {
                                                       if (result.name == 'ok') {
                                                         await PostRepository()
                                                             .deletePost(widget
-                                                                    .postModel
-                                                                    .postId ??
-                                                                '');
+                                                                    .postModel);
 
                                                       }
                                                     }),

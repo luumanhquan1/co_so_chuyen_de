@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
 
@@ -15,15 +17,14 @@ class PostRepository {
   FirebaseSetup firebaseSetup = FirebaseSetup();
 
   Future<List<PostModel>> fetchAllPost() async {
-    final response =
-        await FirebaseFirestore.instance
-            .collection(DefaultEnv.appCollection)
-            .doc(DefaultEnv.developDoc)
-            .collection(DefaultEnv.postsCollection)
-            .orderBy('create_at', descending: true)
-            // .orderBy('create_at')
-            // .limit(10)
-            .get();
+    final response = await FirebaseFirestore.instance
+        .collection(DefaultEnv.appCollection)
+        .doc(DefaultEnv.developDoc)
+        .collection(DefaultEnv.postsCollection)
+        .orderBy('create_at', descending: true)
+        // .orderBy('create_at')
+        // .limit(10)
+        .get();
     if (response.docs == null) {
       return [];
     } else {
@@ -68,13 +69,12 @@ class PostRepository {
   }
 
   Future<PostModel?> fetchPost(String postId) async {
-    final response =
-        await FirebaseFirestore.instance
-            .collection(DefaultEnv.appCollection)
-            .doc(DefaultEnv.developDoc)
-            .collection(DefaultEnv.postsCollection)
-            .doc(postId)
-            .get();
+    final response = await FirebaseFirestore.instance
+        .collection(DefaultEnv.appCollection)
+        .doc(DefaultEnv.developDoc)
+        .collection(DefaultEnv.postsCollection)
+        .doc(postId)
+        .get();
     if (response.data() == null) {
       return null;
     } else {
@@ -117,14 +117,14 @@ class PostRepository {
   }
 
   Future<List<PostModel>> fetchAllPostOfUser(String userId) async {
-    final response =
-    await FirebaseFirestore.instance
+    final response = await FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection)
         .doc(DefaultEnv.developDoc)
-        .collection(DefaultEnv.postsCollection).where('user_id' == userId)
+        .collection(DefaultEnv.postsCollection)
+        .where('user_id' == userId)
         .orderBy('create_at', descending: true)
-    // .orderBy('create_at')
-    // .limit(10)
+        // .orderBy('create_at')
+        // .limit(10)
         .get();
     if (response.docs == null) {
       return [];
@@ -141,7 +141,7 @@ class PostRepository {
 
         //get user
         final user =
-        await UserRepopsitory().getUserProfile(userId: post['user_id']);
+            await UserRepopsitory().getUserProfile(userId: post['user_id']);
         newPost.author = user;
 
         //get comments
@@ -167,7 +167,6 @@ class PostRepository {
       return posts;
     }
   }
-
 
   // Future<String> uploadPost(String description, Uint8List file, String uid,
   //     String username, String profImage) async {
@@ -266,15 +265,25 @@ class PostRepository {
   }
 
   // Delete Post
-  Future<bool> deletePost(String postId) async {
+  Future<bool> deletePost(PostModel postModel) async {
     try {
       log('deleteeeee');
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.postsCollection)
-          .doc(postId)
+          .doc(postModel.postId)
           .delete();
+
+      if(postModel.type != null  && postModel.type ==2)
+        {
+          final Reference ref = storage
+              .ref()
+              .child(postModel.author?.userId ?? '').child(DefaultEnv.postsCollection)
+              .child(postModel.postId ?? '');
+
+          await ref.delete();
+        }
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
@@ -288,7 +297,7 @@ class PostRepository {
     ;
   }
 
-  // Delete Post
+  // Delete comment
   Future<bool> deleteComment(String postId, String commentId) async {
     try {
       log('deleteeeee');
