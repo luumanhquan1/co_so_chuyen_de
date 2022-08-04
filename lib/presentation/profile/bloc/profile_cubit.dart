@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:typed_data';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/friend_request_model.dart';
@@ -10,9 +12,11 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:ccvc_mobile/presentation/profile/bloc/profile_state.dart';
+import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:html_editor_enhanced/utils/utils.dart';
 import 'package:rxdart/subjects.dart';
 
 enum RelationshipType {
@@ -61,20 +65,22 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.postsCollection)
+         // .where('user_id', isEqualTo: userId)
           .orderBy('create_at', descending: true)
+
           .snapshots()
           .listen((event) async {
-        log('hihi');
+        debugPrint('hihi');
         if (event.docs == null || event.docs.isEmpty) {
-          log('hihi');
+          debugPrint('hihi');
           _posts.sink.add([]);
           showContent();
           return null;
         } else {
           List<PostModel> posts = [];
-          log(event.docs.length.toString());
+          debugPrint(event.docs.length.toString());
           for (var x in event.docs) {
-            log('huhu');
+            debugPrint('huhu');
             Map<String, dynamic> post = {};
             post.addAll({'post_id': x.id});
             post.addAll(x.data());
@@ -113,10 +119,49 @@ class ProfileCubit extends BaseCubit<ProfileState> {
         }
       });
     } catch (e) {
-      log('hahahahahhaa');
-      log(e.toString());
+      debugPrint('hahahahahhaa');
+      debugPrint(e.toString());
       showError();
     }
+  }
+
+  Future<void> createPost({
+    Uint8List? image,
+    required String content,
+  }) async {
+    showLoading();
+    String imgUrl = '';
+    // final UserModel? userModel = HiveLocal.getDataUser();
+
+    final postId = getRandString(15).removeChar;
+    final createAt = DateTime.now().millisecondsSinceEpoch;
+    final updateAt = DateTime.now().millisecondsSinceEpoch;
+    if (image != null) {
+      await FireStoreMethod.uploadImageFromCreatePost(
+        id: _user.value.userId ?? '',
+        idPost: postId,
+        file: image,
+      );
+
+      imgUrl = await FireStoreMethod.downImageCreatePost(
+        id: _user.value.userId ?? '',
+        idPost: postId,
+      );
+    }
+
+    final PostModel model = PostModel(
+      author: _user.value,
+      type: image == null ? 1 : 2,
+      createAt: createAt,
+      updateAt: updateAt,
+      content: content,
+      imageUrl: imgUrl,
+      likes: [],
+      comments: [],
+    );
+    await FireStoreMethod.createPost(model: model,postId: postId );
+
+    showContent();
   }
 
   Future<void> getRelationship(String userId) async {
