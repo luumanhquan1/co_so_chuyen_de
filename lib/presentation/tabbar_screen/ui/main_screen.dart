@@ -1,9 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
+import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
+import 'package:ccvc_mobile/utils/push_notification.dart';
 import 'package:ccvc_mobile/widgets/image_gallery/show_bottom_image_gallery.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,6 +31,30 @@ class _MainTabBarViewState extends State<MainTabBarView> {
 
     super.initState();
     _addScreen(TabBarType.home);
+    FirebaseMessaging.instance.getInitialMessage().then((value) {
+      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+        if (value != null) {}
+      });
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((value) {
+      log('${value.data}');
+      final data = json.decode(value.data['data'] ?? '');
+      final dataChat = DataChat.fromJson(data);
+      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+        pushDetailsOnTapNotification(dataChat);
+      });
+    });
+  }
+
+  void pushDetailsOnTapNotification(DataChat model) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MessageScreen(
+                isRoomGroup: model.isRoomGroup,
+                peopleChat: model.peopleChat,
+                peopleGroupChat: model.peopleGroupChat,
+                chatModel: model.chatModel)));
   }
 
   @override
@@ -49,7 +79,8 @@ class _MainTabBarViewState extends State<MainTabBarView> {
               children: _listScreen.map((e) => e.widget).toList(),
             ),
             floatingActionButton: SvgPicture.asset(ImageAssets.icAdd),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomTabBarWidget(
               selectItemIndex: type.index,
               onChange: (value) {
