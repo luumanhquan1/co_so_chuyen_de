@@ -8,40 +8,28 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImageWidget extends StatefulWidget {
-  final Function(Uint8List? image) onChangeImage;
+  final Uint8List? image;
+  final Function removeImage;
 
-  const PickImageWidget({Key? key, required this.onChangeImage})
-      : super(key: key);
+  const PickImageWidget({
+    Key? key,
+    required this.image,
+    required this.removeImage,
+  }) : super(key: key);
 
   @override
   State<PickImageWidget> createState() => _PickImageWidgetState();
 }
 
 class _PickImageWidgetState extends State<PickImageWidget> {
-  Uint8List? _image;
-
-  Future<void> pickImage() async {
-    final ImagePicker picker = ImagePicker();
-
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      _image = await image.readAsBytes();
-      widget.onChangeImage(_image);
-    }
-
-    setState(() {});
-  }
-
   void removeImg() {
-    _image = null;
-    widget.onChangeImage(_image);
+    widget.removeImage();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return _image == null ? emptyImage() : imageWidget();
+    return widget.image == null ? Container() : imageWidget();
   }
 
   Widget imageWidget() {
@@ -56,7 +44,7 @@ class _PickImageWidgetState extends State<PickImageWidget> {
             border: Border.all(color: colorDBDFEF.withOpacity(0.5)),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: MemoryImage(_image ?? Uint8List(0)),
+              image: MemoryImage(widget.image ?? Uint8List(0)),
             ),
             boxShadow: [
               BoxShadow(
@@ -78,47 +66,6 @@ class _PickImageWidgetState extends State<PickImageWidget> {
           ),
         )
       ],
-    );
-  }
-
-  Widget emptyImage() {
-    return GestureDetector(
-      onTap: () {
-        pickImage();
-      },
-      child: Container(
-        height: 300,
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: colorDBDFEF.withOpacity(0.5)),
-          boxShadow: [
-            BoxShadow(
-              color: color6566E9.withOpacity(0.05),
-              offset: const Offset(0, 4),
-              blurRadius: 10,
-            )
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(ImageAssets.icImage),
-              spaceH10,
-              const Text(
-                'Tải ảnh lên',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: color667793,
-                  fontWeight: FontWeight.w400,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

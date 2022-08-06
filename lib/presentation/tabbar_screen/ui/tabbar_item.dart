@@ -10,13 +10,12 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum TabBarType { home, likeTab, empty, message, profile }
+enum TabBarType { home, likeTab, message, profile }
 
 List<TabBarType> getTabListItem() {
   return [
     TabBarType.home,
     TabBarType.likeTab,
-    TabBarType.empty,
     TabBarType.message,
     TabBarType.profile,
   ];
@@ -25,6 +24,7 @@ List<TabBarType> getTabListItem() {
 class TabBarItem {
   Widget icon;
   String text;
+
   TabBarItem({required this.icon, required this.text});
 }
 
@@ -47,7 +47,7 @@ extension TabbarEnum on TabBarType {
   Widget getScreen() {
     switch (this) {
       case TabBarType.home:
-        return  HomeScreen();
+        return HomeScreen();
 
       case TabBarType.likeTab:
         return Scaffold(
@@ -58,8 +58,6 @@ extension TabbarEnum on TabBarType {
         return const MainMessageScreen();
       case TabBarType.profile:
         return PersonalScreen();
-      case TabBarType.empty:
-        return const SizedBox();
     }
   }
 
@@ -84,7 +82,7 @@ extension TabbarEnum on TabBarType {
       case TabBarType.message:
         return SvgPicture.asset(
           ImageAssets.icMessage,
-          height:20,
+          height: 20,
           color: isSelect
               ? AppTheme.getInstance().colorField()
               : AppTheme.getInstance().buttonUnfocus(),
@@ -92,15 +90,6 @@ extension TabbarEnum on TabBarType {
       case TabBarType.profile:
         return SvgPicture.asset(
           ImageAssets.icProfile,
-          height: 20,
-          color: isSelect
-              ? AppTheme.getInstance().colorField()
-              : AppTheme.getInstance().buttonUnfocus(),
-        );
-
-      case TabBarType.empty:
-        return SvgPicture.asset(
-          '',
           height: 20,
           color: isSelect
               ? AppTheme.getInstance().colorField()

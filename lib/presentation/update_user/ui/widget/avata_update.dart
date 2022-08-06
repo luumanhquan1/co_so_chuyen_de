@@ -5,7 +5,6 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class AvataUpdateWidget extends StatefulWidget {
   final UpdateUserCubit cubit;
 
@@ -28,6 +27,7 @@ class _AvataUpdateWidgetState extends State<AvataUpdateWidget> {
       _image = im;
       widget.cubit.image = im;
     });
+    widget.cubit.isUpdate();
   }
 
   @override
@@ -39,7 +39,8 @@ class _AvataUpdateWidgetState extends State<AvataUpdateWidget> {
           CircleAvatar(
             radius: 64, // Image radius
             backgroundImage: NetworkImage(
-                widget.cubit.userInfo.avatarUrl ?? ImageAssets.imgEmptyAvata,),
+              widget.cubit.userInfo.avatarUrl ?? ImageAssets.imgEmptyAvata,
+            ),
           )
         else
           CircleAvatar(
