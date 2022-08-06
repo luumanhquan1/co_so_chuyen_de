@@ -30,6 +30,20 @@ class RelationShipCubit extends BaseCubit<RelationshipState> {
     _getListFriend.sink.add(result);
   }
 
+  void searchNguoiLa(String keySearch) {
+    listFriend = [];
+    showLoading();
+    ProfileService.searchKey(keySearch).listen((event) {
+      if (event != null) {
+        listFriend.add(event);
+        _getListFriend.sink.add(listFriend);
+      } else {
+        _getListFriend.sink.add([]);
+      }
+      showContent();
+    });
+  }
+
   void searchUser(String keySearch) {
     if (keySearch.isEmpty) {
       _getListFriend.sink.add(listFriend);

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 const HERO_TAG_CAMERA = 'CAMERA_TAG';
 
@@ -15,7 +16,7 @@ class CameraPhotoWidget extends StatefulWidget {
 
 class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
   CameraController? controller;
-  late List<CameraDescription> _cameras;
+   List<CameraDescription>? _cameras;
   ValueNotifier<bool> isInitCamera = ValueNotifier(false);
 
   @override
@@ -25,15 +26,18 @@ class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
   }
 
   void _initApp() async {
-    _cameras = await availableCameras();
-    final firstCam = _cameras.first;
 
-    controller = CameraController(
-      firstCam,
-      ResolutionPreset.high,
-    );
-    await controller?.initialize();
-    isInitCamera.value = true;
+    _cameras = await availableCameras();
+    if(_cameras?.isNotEmpty ?? false) {
+      final firstCam = _cameras!.first;
+
+      controller = CameraController(
+        firstCam,
+        ResolutionPreset.high,
+      );
+      await controller?.initialize();
+      isInitCamera.value = true;
+    }
   }
 
   @override
@@ -45,24 +49,16 @@ class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 700),
-              pageBuilder: (_, __, ___) => CameraPhotoScreen(
-                camera: _cameras,
-              ),
-            ),
-          ).then((value) {
-            if(value!=null){
-           widget.onChange(value);
+    return _cameras != null? GestureDetector(
+        onTap: () async {
+          final data = await   ImagePicker().pickImage(
+            source:  ImageSource.camera,
+          );
+          if(data!=null){
+              widget.onChange(data);
+            onNewCameraSelected(_cameras![0]);
+          }
 
-            }
-            onNewCameraSelected(_cameras[0]);
-
-          });
         },
         child: ValueListenableBuilder<bool>(
           valueListenable: isInitCamera,
@@ -75,7 +71,7 @@ class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
               );
             }
           },
-        ));
+        )) : const SizedBox();
   }
 
   Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {

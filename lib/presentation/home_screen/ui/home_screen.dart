@@ -1,24 +1,15 @@
-import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:ccvc_mobile/config/resources/color.dart';
-import 'package:ccvc_mobile/config/resources/images.dart';
+import 'dart:typed_data';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/config/themes/theme_color.dart';
-import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
-import 'package:ccvc_mobile/presentation/home_screen/bloc/home_state.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
-import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
-import 'package:ccvc_mobile/utils/app_utils.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/style_utils.dart';
-import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:ccvc_mobile/widgets/button_sheet/bottom_sheet_custom.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item_skeleton.dart';
@@ -30,7 +21,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/locals/hive_local.dart';
-import '../../../domain/locals/prefs_service.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
