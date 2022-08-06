@@ -545,7 +545,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget postContainer() {
     return GestureDetector(
       onTap: () {
-        showBottomSheetCustom(
+        showBottomSheetCustomPostScreen(
           context,
           child: CreatePostScreen(
             userModel: userModel,
@@ -553,7 +553,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _homeCubit.createPost(content: content, image: image);
             },
           ),
-          title: 'Bài viết mới',
         );
       },
       child: Container(

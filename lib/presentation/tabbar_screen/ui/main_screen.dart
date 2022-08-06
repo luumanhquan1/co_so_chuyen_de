@@ -78,9 +78,6 @@ class _MainTabBarViewState extends State<MainTabBarView> {
               index: _getIndexListScreen(type),
               children: _listScreen.map((e) => e.widget).toList(),
             ),
-            floatingActionButton: SvgPicture.asset(ImageAssets.icAdd),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomTabBarWidget(
               selectItemIndex: type.index,
               onChange: (value) {

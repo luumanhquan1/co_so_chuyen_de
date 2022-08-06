@@ -48,6 +48,43 @@ Future<T?> showBottomSheetCustom<T>(BuildContext context,
   );
 }
 
+Future<T?> showBottomSheetCustomPostScreen<T>(BuildContext context,
+    {required Widget child, bool? textOption}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(32),
+        topRight: Radius.circular(32),
+      ),
+    ),
+    clipBehavior: Clip.hardEdge,
+    builder: (context) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          lineContainer(),
+          const SizedBox(
+            height: 22,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [child],
+            ),
+          )
+        ],
+      );
+    },
+  );
+}
+
 Widget lineContainer() {
   return Container(
     height: 6,
