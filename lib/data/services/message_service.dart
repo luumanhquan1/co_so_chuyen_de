@@ -44,14 +44,15 @@ class MessageService {
                     isGroup: jsonProfileRoom['is_group'] ?? false);
                 data.add(room);
                 _idRoomChat.addAll({element.id: room});
+                sink.add(data);
               }
             } else {
               if (_idRoomChat[element.id] != null) {
                 data.add(_idRoomChat[element.id]!);
+                sink.add(data);
               }
             }
           });
-          sink.add(data);
         },
       ),
     );

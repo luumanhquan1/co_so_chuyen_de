@@ -140,11 +140,11 @@ class HomeCubit extends BaseCubit<HomeState> {
               newPost.comments = cmts;
               debugPrint(newPost.toString());
               posts.add(newPost);
+              _posts.sink.add(posts);
+              showContent();
             }
           }
           debugPrint('hhhhhhhhhhhhh');
-          _posts.sink.add(posts);
-          showContent();
         }
       });
     } catch (e) {

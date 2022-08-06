@@ -14,6 +14,7 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		F62F6CA70E29EA002514FF2F /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C9B9A3F98CE0C775D232DA /* Pods_Runner.framework */; };
+		FA94C30A289E749600790CD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA94C309289E749600790CD9 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B89815755D815C87B7092F6D /* Pods-Runner.debug-develop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-develop.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-develop.xcconfig"; sourceTree = "<group>"; };
 		F0C9B9A3F98CE0C775D232DA /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA94C309289E749600790CD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC7FDD246E6BDE3E7B701A6F /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				FA94C309289E749600790CD9 /* GoogleService-Info.plist */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				03FBE13F611988F1A6A11074 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,12 +200,30 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				FA94C30A289E749600790CD9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03FBE13F611988F1A6A11074 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,7 +366,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -354,7 +376,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -478,7 +500,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -488,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -506,7 +528,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -516,7 +538,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -588,7 +610,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -598,7 +620,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -669,7 +691,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -680,7 +702,7 @@
 				);
 				MARKETING_VERSION = 1.1.4;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -749,7 +771,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = 65MUWGJ9FF;
+				DEVELOPMENT_TEAM = AP2BTG6TVS;
 				ENABLE_BITCODE = NO;
 				FLUTTER_TARGET = lib/main_develop.dart;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -760,7 +782,7 @@
 				);
 				MARKETING_VERSION = 1.1.4;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ccvc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.ccvc-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

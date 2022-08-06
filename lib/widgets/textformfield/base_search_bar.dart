@@ -12,6 +12,7 @@ class BaseSearchBar extends StatelessWidget {
   final Function(String)? onChange;
   final bool isEnabled;
   final Function()? onTap;
+  final Function(String)? onFieldSubmitted;
   const BaseSearchBar({
     Key? key,
     this.hintText,
@@ -19,6 +20,7 @@ class BaseSearchBar extends StatelessWidget {
     this.onChange,
     this.isEnabled = true,
     this.onTap,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -40,14 +42,16 @@ class BaseSearchBar extends StatelessWidget {
             onChange!(value);
           }
         },
-        onTap: (){
+        onTap: () {
           onTap?.call();
+        },
+        onFieldSubmitted: (value) {
+          onFieldSubmitted?.call(value);
         },
         controller: controller,
         style: textNormal(titleCalenderWork, 15),
         decoration: InputDecoration(
           filled: true,
-
           enabled: isEnabled,
           hintText: hintText ?? 'Tìm kiếm',
           hintStyle: textNormal(hintColor, 12),
@@ -63,7 +67,6 @@ class BaseSearchBar extends StatelessWidget {
             borderSide: BorderSide(color: Colors.transparent),
             borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
-
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
             borderRadius: BorderRadius.all(Radius.circular(20)),

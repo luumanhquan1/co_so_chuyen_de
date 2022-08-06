@@ -70,24 +70,22 @@ class _MainTabBarViewState extends State<MainTabBarView> {
       stream: _cubit.selectTabBar,
       builder: (context, snapshot) {
         final type = snapshot.data ?? TabBarType.home;
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            resizeToAvoidBottomInset: false,
-            body: IndexedStack(
-              index: _getIndexListScreen(type),
-              children: _listScreen.map((e) => e.widget).toList(),
-            ),
-            floatingActionButton: SvgPicture.asset(ImageAssets.icAdd),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: BottomTabBarWidget(
-              selectItemIndex: type.index,
-              onChange: (value) {
-                _addScreen(value);
-                _cubit.selectTab(value);
-              },
-            ),
+        return Scaffold(
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: false,
+          body: IndexedStack(
+            index: _getIndexListScreen(type),
+            children: _listScreen.map((e) => e.widget).toList(),
+          ),
+          floatingActionButton: SvgPicture.asset(ImageAssets.icAdd),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomTabBarWidget(
+            selectItemIndex: type.index,
+            onChange: (value) {
+              _addScreen(value);
+              _cubit.selectTab(value);
+            },
           ),
         );
       },

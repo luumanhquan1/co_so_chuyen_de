@@ -2,11 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/widgets/image_gallery/widgets/camera_photo_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photo_manager/photo_manager.dart';
+
+import '../../config/resources/color.dart';
 
 Future<File?> showImagePicker(BuildContext context) {
   return showModalBottomSheet<File?>(
