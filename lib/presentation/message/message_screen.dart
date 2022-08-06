@@ -34,6 +34,8 @@ class _MessageScreenState extends State<MessageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    cubit.isRoomGroup = widget.isRoomGroup;
+    cubit.chatModel = widget.chatModel;
     if (widget.chatModel != null) {
       cubit.peopleGroupChat = widget.peopleGroupChat;
       cubit.initDate(widget.chatModel?.roomId ?? '', widget.peopleChat);

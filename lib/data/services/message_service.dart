@@ -103,7 +103,7 @@ class MessageService {
         StreamTransformer.fromHandlers(
           handleData: (docSnap, sink) {
             final data = <MessageSmsModel>[];
-            docSnap.docs.forEach((element) {
+            for (var element in docSnap.docs) {
               final json = element.data();
               final result = MessageSmsModel.fromJson(json);
               if (result.senderId != idUser &&
@@ -111,7 +111,7 @@ class MessageService {
                 _updateDaXemSms(idRoom, element.id, idUser);
               }
               data.add(result);
-            });
+            }
             sink.add(data);
           },
         ),
@@ -133,7 +133,7 @@ class MessageService {
         StreamTransformer.fromHandlers(
           handleData: (docSnap, sink) {
             final data = <MessageSmsModel>[];
-            docSnap.docs.forEach((element) {
+            for (var element in docSnap.docs) {
               final json = element.data();
               final result = MessageSmsModel.fromJson(json);
               if (result.senderId != idUser &&
@@ -141,7 +141,7 @@ class MessageService {
                 result.isDaXem = false;
                 data.add(result);
               }
-            });
+            }
             if (data.isEmpty) {
               if (docSnap.docs.isNotEmpty) {
                 final doc = docSnap.docs.first;
@@ -164,6 +164,22 @@ class MessageService {
         .collection(idRoom)
         .doc(messageSmsModel.messageId);
     doc.set(messageSmsModel.toJson());
+  }
+
+  static void getToken(List<String> tokens, List<String> userId) {
+    for (final element in userId) {
+      FirebaseSetup.fireStore
+          .collection(DefaultEnv.usersCollection)
+          .doc(element)
+          .collection(DefaultEnv.tokenFcm)
+          .get()
+          .then((value) {
+        for (final element in value.docs) {
+          final token = element.data()['token_fcm'];
+          tokens.add(token);
+        }
+      });
+    }
   }
 
   static Future<List<RoomChatModel>> findRoomChat(String idUser) async {
@@ -203,9 +219,9 @@ class MessageService {
         .collection(DefaultEnv.messCollection)
         .doc(roomChatModel.roomId)
         .set(roomChatModel.toJson());
-    roomChatModel.peopleChats.forEach((element) {
+    for (var element in roomChatModel.peopleChats) {
       _addUserRoomChat(element.userId, roomChatModel.roomId);
-    });
+    }
     return roomChatModel.roomId;
   }
 

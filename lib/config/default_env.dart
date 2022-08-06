@@ -12,5 +12,5 @@ static const thongTinRoomChatCollect = 'thong-tin';
 static const chatsCollection = 'chats';
 static const relationshipsCollection = 'relationships';
 static const friendRequestCollection = 'friend_requests';
-
+static const tokenFcm = 'tokken_fcm';
 }

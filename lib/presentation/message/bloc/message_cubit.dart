@@ -13,6 +13,7 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/utils/push_notification.dart';
 import 'package:ccvc_mobile/widgets/views/show_loading_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
@@ -24,11 +25,15 @@ class MessageCubit extends BaseCubit<MainState> {
   MessageCubit() : super(MainStateInitial()) {
     showContent();
   }
+  RoomChatModel? chatModel;
+  bool isRoomGroup = false;
   final String idUser = PrefsService.getUserId();
+  final userMe = HiveLocal.getDataUser();
   String idRoomChat = '';
   final BehaviorSubject<String> _roomChat = BehaviorSubject<String>();
   final BehaviorSubject<List<UserModel>> selectCreateGroup = BehaviorSubject();
   List<UserModel> listFriend = [];
+  List<String> tokens = [];
 
   late List<PeopleChat> peopleChat;
   List<PeopleChat>? peopleGroupChat;
@@ -37,9 +42,9 @@ class MessageCubit extends BaseCubit<MainState> {
     showLoading();
     idRoomChat = id;
     this.peopleChat = peopleChat;
+    getTokenFcm();
     getListFriend().then((value) {
       showContent();
-
       _roomChat.sink.add(id);
     });
   }
@@ -78,6 +83,37 @@ class MessageCubit extends BaseCubit<MainState> {
         ),
       );
       MessageService.updateRoomChatUser(idUser, idRoomChat);
+      PushFCM.pushNoti(
+        tokens,
+        idRoomChat,
+        FCMModel(
+          isRoomGroup
+              ? '${userMe?.nameDisplay} tới ${peopleChat.map((e) => e.nameDisplay).join(',')}'
+              : userMe?.nameDisplay ?? '',
+          smsType == SmsType.Image ? 'Có 1 ảnh' : content,
+        ),
+        DataChat(
+          chatModel,
+          isRoomGroup
+              ? [
+                  ...peopleChat,
+                  PeopleChat(
+                      userId: userMe?.userId ?? '',
+                      avatarUrl: userMe?.avatarUrl ?? '',
+                      nameDisplay: userMe?.nameDisplay ?? '',
+                      bietDanh: '')
+                ]
+              : [
+                  PeopleChat(
+                      userId: userMe?.userId ?? '',
+                      avatarUrl: userMe?.avatarUrl ?? '',
+                      nameDisplay: userMe?.nameDisplay ?? '',
+                      bietDanh: '')
+                ],
+          peopleGroupChat,
+          isRoomGroup,
+        ),
+      );
       for (var element in peopleChat) {
         MessageService.updateRoomChatUser(element.userId, idRoomChat);
       }
@@ -103,6 +139,7 @@ class MessageCubit extends BaseCubit<MainState> {
     showLoading();
     final data = await MessageService.findRoomChat(idUserChat);
     await getListFriend();
+    getTokenFcm();
     showContent();
     for (var element in data) {
       final peopleChatId = element.peopleChats.map((e) => e.userId);
@@ -116,8 +153,12 @@ class MessageCubit extends BaseCubit<MainState> {
     }
   }
 
+  void getTokenFcm() {
+    MessageService.getToken(tokens, peopleChat.map((e) => e.userId).toList());
+  }
+
   Future<void> getListFriend() async {
-    listFriend = await ProfileService.listFriends(idUser,getBloc: false);
+    listFriend = await ProfileService.listFriends(idUser, getBloc: false);
   }
 
   Future<String> createRoomChatDefault(List<PeopleChat> peopleChat) async {
@@ -152,7 +193,6 @@ class MessageCubit extends BaseCubit<MainState> {
 
   void removePeople(String idUser) {
     peopleChat.removeWhere((element) => element.userId == idUser);
-    log('$peopleChat');
     MessageService.removeChat(idRoomChat, idUser);
   }
 
@@ -160,7 +200,6 @@ class MessageCubit extends BaseCubit<MainState> {
     if (peopleChat.length == 1) {
       final data = listFriend.where((element) =>
           element.userId?.trim() == peopleChat.first.userId.trim());
-      log('${data}');
       if (data.isNotEmpty) {
         return data.first.peopleType == PeopleType.Block;
       }

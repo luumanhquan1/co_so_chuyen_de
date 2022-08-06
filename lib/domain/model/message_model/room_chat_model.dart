@@ -62,4 +62,12 @@ class PeopleChat {
     data['user_id'] = userId;
     return data;
   }
+  Map<String,dynamic> toJsonMessage(){
+    final data = <String, dynamic>{};
+    data['user_id'] = userId;
+    data['avatar_url'] = avatarUrl;
+    data['name_display'] = nameDisplay;
+    data['biet_danh'] = bietDanh;
+    return data;
+  }
 }

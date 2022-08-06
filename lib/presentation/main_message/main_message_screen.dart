@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -11,7 +10,6 @@ import 'package:ccvc_mobile/presentation/main_message/widgets/tin_nhan_cell.dart
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
-import 'package:ccvc_mobile/widgets/textformfield/base_search_bar.dart';
 import 'package:ccvc_mobile/widgets/views/state_loading_skeleton.dart';
 import 'package:flutter/cupertino.dart';
 
