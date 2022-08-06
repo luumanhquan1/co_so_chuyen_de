@@ -76,7 +76,7 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                   }
                 },
                 onFieldSubmitted: (value) {
-                  if (value.trim().isNotEmpty) {
+                  if (value.trim().isNotEmpty && widget.isSearch) {
                     cubit.searchNguoiLa(value);
                   }
                 },
