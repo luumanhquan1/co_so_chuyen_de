@@ -1,6 +1,4 @@
 import 'package:ccvc_mobile/config/resources/styles.dart';
-import 'package:ccvc_mobile/domain/locals/hive_local.dart';
-import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/container_data_widget.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/widget/drop_down_gender.dart';
@@ -10,6 +8,7 @@ import 'package:ccvc_mobile/presentation/update_user/ui/widget/birth_day_update_
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -29,6 +28,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
   final keyGroup = GlobalKey<FormGroupState>();
   TextEditingController textNameController = TextEditingController();
   GlobalKey keyDateTime = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -38,14 +38,25 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: BaseAppBar(
         title: S.current.cap_nhat_tai_khoan,
         leadingIcon: IconButton(
           onPressed: () {
-            Navigator.pop(context);
-          },
+            if (cubit.isUpdateSubject.value) {
+              showDiaLogCustom(
+                context,
+                title: 'Cập nhật',
+                textContent: 'Bạn có chắc muốn thoát không ?',
+                btnRightTxt: 'Xác nhận',
+                btnLeftTxt: 'Đóng',
+                funcBtnRight: () {
+                  Navigator.pop(context, '');
+                },
+              );
+            } else {
+              Navigator.pop(context, '');
+            }          },
           icon: const Icon(
             Icons.arrow_back_ios_sharp,
             color: Colors.grey,
@@ -53,7 +64,6 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
         ),
       ),
       body: StateStreamLayout(
-
         textEmpty: S.current.khong_co_du_lieu,
         retry: () {},
         error: AppException('', S.current.something_went_wrong),
@@ -85,6 +95,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                                 return cubit.isHideClearData = false;
                               }
                               cubit.nameDisplay = text;
+                              cubit.isUpdate();
                               setState(() {});
                               return cubit.isHideClearData = true;
                             },
@@ -100,6 +111,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                             items: const ['Nam', 'Nữ'],
                             onChange: (String value) {
                               cubit.gender = value;
+                              cubit.isUpdate();
                             },
                           ),
                         ),
@@ -109,6 +121,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                             key: keyDateTime,
                             onChange: (value) {
                               cubit.birthDay = value;
+                              cubit.isUpdate();
                             },
                             cubit: cubit,
                           ),
@@ -116,24 +129,32 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                       ],
                     ),
                     spaceH30,
-                    ButtonCustomBottom(
-                      title: S.current.cap_nhat,
-                      isColorBlue: true,
-                      onPressed: () async {
-                        if (keyGroup.currentState!.validator()) {
-                          await cubit.updateInfomationUser();
-                          _showToast(
-                            context: context,
-                            text: S.current.cap_nhat_tai_khoan_thanh_cong,
+                    StreamBuilder<bool>(
+                        stream: cubit.isUpdateSubject.stream,
+                        builder: (context, snapshot) {
+                          final data = snapshot.data ?? false;
+                          return ButtonCustomBottom(
+                            title: S.current.cap_nhat,
+                            isColorBlue: data,
+                            onPressed: () async {
+                              if (keyGroup.currentState!.validator()) {
+                                if (cubit.isUpdateSubject.value) {
+                                  await cubit.updateInfomationUser();
+                                  _showToast(
+                                    context: context,
+                                    text:
+                                        S.current.cap_nhat_tai_khoan_thanh_cong,
+                                  );
+                                  Navigator.pop(context);
+                                }
+                              } else {
+                                _showToast(
+                                  context: context,
+                                );
+                              }
+                            },
                           );
-                          Navigator.pop(context);
-                        } else {
-                          _showToast(
-                            context: context,
-                          );
-                        }
-                      },
-                    ),
+                        }),
                     spaceH30,
                   ],
                 ),

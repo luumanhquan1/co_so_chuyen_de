@@ -5,7 +5,6 @@ import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/update_user/bloc/update_user_state.dart';
-import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:ccvc_mobile/utils/extensions/int_extension.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,6 +28,8 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
   String imageUrl = '';
   UserModel userInfo = UserModel.empty();
 
+  BehaviorSubject<bool> isUpdateSubject = BehaviorSubject.seeded(false);
+
   BehaviorSubject<DateTime> birthDaySubject =
       BehaviorSubject.seeded(DateTime(2001, 1, 1));
 
@@ -39,6 +40,17 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
       return _file.readAsBytes();
     }
     return null;
+  }
+
+  void isUpdate() {
+    if (nameDisplay.trim() != (userInfo.nameDisplay ?? '').trim() ||
+        gender != toGender(userInfo.gender ?? true) ||
+        birthDay.convertToTimesTamp != userInfo.birthday ||
+        image != null) {
+      isUpdateSubject.add(true);
+    } else {
+      isUpdateSubject.add(false);
+    }
   }
 
   Future<void> updateInfomationUser() async {
@@ -69,7 +81,7 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
 
   void initData() {
     showLoading();
-    userInfo =  HiveLocal.getDataUser() ?? UserModel.empty();
+    userInfo = HiveLocal.getDataUser() ?? UserModel.empty();
     birthDaySubject.add(
       (userInfo.birthday ?? 0).convertToDateTime,
     );

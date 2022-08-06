@@ -22,7 +22,7 @@ class BottomTabBarWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 19),
       clipBehavior: Clip.antiAlias,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -31,7 +31,7 @@ class BottomTabBarWidget extends StatelessWidget {
             blurRadius: 15,
           )
         ],
-        borderRadius:  const BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
         ),
@@ -41,23 +41,21 @@ class BottomTabBarWidget extends StatelessWidget {
           children: List.generate(listItem.length, (index) {
             final tab = listItem[index];
 
-            return tab == TabBarType.empty
-                ? const Expanded(child: SizedBox())
-                : Expanded(
-                    child: GestureDetector(
-                      onTap: () async {
-                        onChange(tab);
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        child: tabBarItem(
-                          context: context,
-                          item: tab,
-                          isSelect: index == selectItemIndex,
-                        ),
-                      ),
-                    ),
-                  );
+            return Expanded(
+              child: GestureDetector(
+                onTap: () async {
+                  onChange(tab);
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: tabBarItem(
+                    context: context,
+                    item: tab,
+                    isSelect: index == selectItemIndex,
+                  ),
+                ),
+              ),
+            );
           }),
         ),
       ),
