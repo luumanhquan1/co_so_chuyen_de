@@ -1,21 +1,22 @@
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
-import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
+import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
+import 'package:ccvc_mobile/presentation/sign_up/ui/create_user_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/sign_up_screen.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
-import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -197,13 +198,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                       textPasswordController.text.trim(),
                                     );
                                     if (user != null) {
-                                      await Navigator.of(context)
-                                          .pushReplacement(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MainTabBarView(),
-                                        ),
-                                      );
+                                      await PrefsService.saveUserId(user.uid);
+                                      if (loginCubit.isUserModel) {
+                                        await Navigator.of(context)
+                                            .pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainTabBarView(),
+                                          ),
+                                        );
+                                      } else {
+                                        await Navigator.of(context)
+                                            .pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CreateUserScreen(
+                                              email: user.email ?? '',
+                                              cubit: SignUpCubit(),
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     } else {
                                       _showToast(
                                         context: context,

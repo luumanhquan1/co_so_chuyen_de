@@ -26,6 +26,21 @@ class FireStoreMethod {
     return userInfo;
   }
 
+  static Future<bool> isDataUser(String userId) async {
+    final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .get();
+
+    for (final id in snap.docs) {
+      if (id as String == userId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static Future<void> updateUser(
     String userId,
     UserModel model,
@@ -117,6 +132,11 @@ class FireStoreMethod {
         .update(fcmTokenModel.toJson(fcmTokenModel));
   }
 
+  static Future<void> removeToken({
+    required String token,
+    required String userId,
+  }) async {}
+
   static Future<FcmTokenModel> getTokenFcm({required String id}) async {
     final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
         .collection(DefaultEnv.socialNetwork)
@@ -184,7 +204,10 @@ class FireStoreMethod {
       {required String id, required String idPost}) async {
     String downUrlImage = '';
     try {
-      downUrlImage = await storage.ref().child('$id/${DefaultEnv.postsCollection}/$idPost').getDownloadURL();
+      downUrlImage = await storage
+          .ref()
+          .child('$id/${DefaultEnv.postsCollection}/$idPost')
+          .getDownloadURL();
     } catch (e) {
       print(e.toString());
     }

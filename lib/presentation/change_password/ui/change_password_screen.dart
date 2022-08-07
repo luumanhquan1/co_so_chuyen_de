@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
+import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
 import 'package:ccvc_mobile/widgets/textformfield/text_field_validator.dart';
 import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
@@ -46,7 +47,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           title: S.current.doi_mat_khau,
           leadingIcon: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              if (cubit.isUpdate.value) {
+                showDiaLogCustom(
+                  context,
+                  title: 'Cập nhật',
+                  textContent: 'Bạn có chắc muốn thoát không ?',
+                  btnRightTxt: 'Xác nhận',
+                  btnLeftTxt: 'Đóng',
+                  funcBtnRight: () {
+                    Navigator.pop(context, '');
+                  },
+                );
+              } else {
+                Navigator.pop(context, '');
+              }
             },
             child: const SizedBox(
               height: 10,
@@ -101,6 +115,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     onChange: (text) {
+                      cubit.isUpdatePassword(
+                        textMatKhauCuController.text,
+                        textPasswordController.text,
+                        xacNhanMatKhauController.text,
+                      );
                       if (text.isEmpty) {
                         setState(() {});
                         return cubit.isHideEye2 = false;
@@ -148,6 +167,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     onChange: (text) {
+                      cubit.isUpdatePassword(
+                        textMatKhauCuController.text,
+                        textPasswordController.text,
+                        xacNhanMatKhauController.text,
+                      );
                       if (text.isEmpty) {
                         setState(() {});
                         return cubit.isHideEye1 = false;
@@ -196,6 +220,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     onChange: (text) {
+                      cubit.isUpdatePassword(
+                        textMatKhauCuController.text,
+                        textPasswordController.text,
+                        xacNhanMatKhauController.text,
+                      );
                       if (text.isEmpty) {
                         setState(() {});
                         return cubit.isHideEyeXacNhan = false;
@@ -209,47 +238,56 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     },
                   ),
                   spaceH30,
-                  ButtonCustomBottom(
-                    title: S.current.cap_nhat,
-                    isColorBlue: true,
-                    onPressed: () async {
-                      if (keyGroup.currentState!.validator()) {
-                        if (!cubit
-                            .isMatchPassword(textMatKhauCuController.text)) {
-                          _showToast(
-                            context: context,
-                            text: S.current.mat_khau_hien_tai_chua_chinh_xac,
-                          );
-                        } else {
-                          await cubit.changePassword(
-                            newPassword: xacNhanMatKhauController.text,
-                            subsess: () {
+                  StreamBuilder<bool>(
+                      stream: cubit.isUpdate.stream,
+                      builder: (context, snapshot) {
+                        final data = snapshot.data ?? false;
+                        return ButtonCustomBottom(
+                          title: S.current.cap_nhat,
+                          isColorBlue: data,
+                          onPressed: () async {
+                            if (keyGroup.currentState!.validator()) {
+                              if (cubit.isUpdate.value) {
+                                if (!cubit.isMatchPassword(
+                                    textMatKhauCuController.text)) {
+                                  _showToast(
+                                    context: context,
+                                    text: S.current
+                                        .mat_khau_hien_tai_chua_chinh_xac,
+                                  );
+                                } else {
+                                  await cubit.changePassword(
+                                    newPassword: xacNhanMatKhauController.text,
+                                    subsess: () {
+                                      _showToast(
+                                        context: context,
+                                        text: S.current.doi_mat_khau_thanh_cong,
+                                      );
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              const MainTabBarView(),
+                                        ),
+                                      );
+                                    },
+                                    error: (String error) {
+                                      _showToast(
+                                        context: context,
+                                        text: error,
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+                            } else {
                               _showToast(
                                 context: context,
-                                text: S.current.doi_mat_khau_thanh_cong,
                               );
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => MainTabBarView(),
-                                ),
-                              );
-                            },
-                            error: (String error) {
-                              _showToast(
-                                context: context,
-                                text: error,
-                              );
-                            },
-                          );
-                        }
-                      } else {
-                        _showToast(
-                          context: context,
+                            }
+                          },
                         );
-                      }
-                    },
-                  ),
+                      }),
                   spaceH30,
                 ],
               ),

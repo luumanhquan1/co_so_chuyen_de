@@ -257,6 +257,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             MaterialPageRoute(
                               builder: (context) => CreateUserScreen(
                                 cubit: cubit,
+                                email: user.email ?? '',
                               ),
                             ),
                           );
@@ -287,7 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        content: Text(text ?? S.current.dang_nhap_that_bai),
+        content: Text(text ?? S.current.dang_ky_that_bai),
       ),
     );
   }
