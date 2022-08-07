@@ -111,7 +111,6 @@ class _PersonalScreenState extends State<PersonalScreen> {
                               final result = await FirebaseAuthentication.logOut(
                                   snapshot.data!.userId!);
                               if (result) {
-                                await PrefsService.removeTokken();
 
                                 await _personalCubit.logOut();
                                 Navigator.pushReplacement(

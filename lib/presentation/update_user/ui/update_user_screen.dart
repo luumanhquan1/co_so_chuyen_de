@@ -56,7 +56,8 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
               );
             } else {
               Navigator.pop(context, '');
-            }          },
+            }
+          },
           icon: const Icon(
             Icons.arrow_back_ios_sharp,
             color: Colors.grey,

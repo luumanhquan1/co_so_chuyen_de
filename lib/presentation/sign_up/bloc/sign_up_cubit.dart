@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
@@ -74,32 +75,37 @@ class SignUpCubit extends BaseCubit<SignUpState> {
   }
 
   Future<void> saveInformationUser(
-    String name,
+    String name, String email,
   ) async {
     showLoading();
+    final String userId = PrefsService.getUserId();
+
     dataUser.gender = gender.getGender;
     dataUser.birthday = birthDay.convertToTimesTamp;
     dataUser.nameDisplay = name;
     dataUser.createAt = DateTime.now().millisecondsSinceEpoch;
     dataUser.updateAt = DateTime.now().millisecondsSinceEpoch;
-
+    dataUser.onlineFlag = true;
+    dataUser.userId = userId;  /// trường hợp tạo tài khoản nhưng chưa tạo thông tin
+    dataUser.email = email;
     if (image == null) {
       dataUser.avatarUrl = ImageAssets.imgEmptyAvata;
     } else {
       await FireStoreMethod.uploadImageToStorage(
-        dataUser.userId ?? '',
+        userId,
         image ?? Uint8List(0),
       );
 
       final String photoImage =
-          await FireStoreMethod.downImage(dataUser.userId ?? '');
+          await FireStoreMethod.downImage(userId);
       dataUser.avatarUrl = photoImage;
     }
 
     await FireStoreMethod.saveInformationUser(
-      id: dataUser.userId ?? '',
+      id: userId,
       user: dataUser,
     );
+
     showContent();
   }
 

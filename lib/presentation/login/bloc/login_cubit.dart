@@ -17,6 +17,7 @@ class LoginCubit extends BaseCubit<LoginState> {
   bool isCheckEye1 = true;
   bool isHideEye1 = false;
   bool passIsError = false;
+  bool isUserModel = false;
   UserModel userInfo = UserModel.empty();
   FcmTokenModel tokenModel = FcmTokenModel.empty();
 
@@ -43,21 +44,24 @@ class LoginCubit extends BaseCubit<LoginState> {
       email: email,
       password: password,
     );
+    isUserModel = await FireStoreMethod.isDataUser(user?.uid ?? '');
 
     if (user != null) {
-      await FirebaseMessaging.instance.getToken().then((value) async {
-        await PrefsService.saveToken(value ?? '');
-      });
-      await PrefsService.saveUserId(user.uid);
-      await PrefsService.savePasswordPresent(password);
-      await saveUser();
-      userInfo.onlineFlag = true;
-      await HiveLocal.updateDataUser(userInfo);
-      await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
-      await FireStoreMethod.saveToken(
-        userId: userInfo.userId ?? '',
-        fcmTokenModel: tokenModel,
-      );
+      if (isUserModel) {
+        await FirebaseMessaging.instance.getToken().then((value) async {
+          await PrefsService.saveToken(value ?? '');
+        });
+        await PrefsService.saveUserId(user.uid);
+        await PrefsService.savePasswordPresent(password);
+        await saveUser();
+        userInfo.onlineFlag = true;
+        await HiveLocal.updateDataUser(userInfo);
+        await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+        await FireStoreMethod.saveToken(
+          userId: userInfo.userId ?? '',
+          fcmTokenModel: tokenModel,
+        );
+      }
     }
     showContent();
     return user;

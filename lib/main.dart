@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/crypto_config.dart';
@@ -69,17 +68,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     WidgetsBinding.instance?.addObserver(this);
     appStateCubit.getDataRefeshToken();
     onStateWhenOpenApp();
-    FirebaseMessaging.instance.onTokenRefresh.listen((event) {
-      FireStoreMethod.updateToken(
-        userId: PrefsService.getUserId(),
-        fcmTokenModel: FcmTokenModel(
+    if(appStateCubit.isUserModel) {
+      FirebaseMessaging.instance.onTokenRefresh.listen((event) {
+        FireStoreMethod.updateToken(
           userId: PrefsService.getUserId(),
-          tokenFcm: PrefsService.getToken(),
-          createAt: appStateCubit.tokenFcm.createAt,
-          updateAt: DateTime.now().millisecondsSinceEpoch,
-        ),
-      );
-    });
+          fcmTokenModel: FcmTokenModel(
+            userId: PrefsService.getUserId(),
+            tokenFcm: PrefsService.getToken(),
+            createAt: appStateCubit.tokenFcm.createAt,
+            updateAt: DateTime.now().millisecondsSinceEpoch,
+          ),
+        );
+      });
+    }
     appStateCubit.getTokenPrefs();
     checkDeviceType();
   }
@@ -92,10 +93,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> onStateWhenOpenApp() async {
-    final UserModel userInfo =
-        await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
-    userInfo.onlineFlag = true;
-    await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+    if (appStateCubit.userId.isNotEmpty && appStateCubit.isUserModel) {
+      final UserModel userInfo =
+          await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
+      userInfo.onlineFlag = true;
+      await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
+    }
   }
 
   @override

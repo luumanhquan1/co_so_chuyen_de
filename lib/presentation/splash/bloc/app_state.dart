@@ -9,6 +9,8 @@ class AppState {
 
   String userId = '';
 
+  bool isUserModel = false;
+
   FcmTokenModel tokenFcm = FcmTokenModel.empty();
 
   final BehaviorSubject<String> getToken = BehaviorSubject<String>();
@@ -20,6 +22,9 @@ class AppState {
 
   Future<void> getDataRefeshToken() async {
     userId = PrefsService.getUserId();
-    tokenFcm = await FireStoreMethod.getTokenFcm(id: userId);
+    isUserModel = await FireStoreMethod.isDataUser(userId);
+    if (isUserModel && userId.isNotEmpty) {
+      tokenFcm = await FireStoreMethod.getTokenFcm(id: userId);
+    }
   }
 }

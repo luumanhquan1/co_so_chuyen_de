@@ -22,8 +22,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateUserScreen extends StatefulWidget {
   final SignUpCubit cubit;
+  final String email;
 
-  const CreateUserScreen({Key? key, required this.cubit}) : super(key: key);
+  const CreateUserScreen({Key? key, required this.cubit, required this.email})
+      : super(key: key);
 
   @override
   State<CreateUserScreen> createState() => _CreateUserScreenState();
@@ -32,6 +34,13 @@ class CreateUserScreen extends StatefulWidget {
 class _CreateUserScreenState extends State<CreateUserScreen> {
   final keyGroup = GlobalKey<FormGroupState>();
   TextEditingController textNameController = TextEditingController();
+  GlobalKey keyDateTime = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.cubit.showContent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +147,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         ContainerDataWidget(
                           title: S.current.ngay_sinh,
                           child: BirthDayWidget(
+                            key: keyDateTime,
                             onChange: (value) {
                               widget.cubit.birthDay = value;
                             },
@@ -148,12 +158,12 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                     ),
                     spaceH30,
                     ButtonCustomBottom(
-                      title: S.current.dang_ky,
+                      title: S.current.tao_thong_tin_nguoi_dung,
                       isColorBlue: true,
                       onPressed: () async {
                         if (keyGroup.currentState!.validator()) {
                           await widget.cubit.saveInformationUser(
-                            textNameController.text,
+                            textNameController.text, widget.email,
                           );
                           _showToast(
                             context: context,

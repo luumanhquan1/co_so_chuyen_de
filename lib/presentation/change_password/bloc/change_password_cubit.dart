@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/presentation/change_password/bloc/change_password_state.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ChangePasswordCubit extends BaseCubit<ChangePasswordSate> {
   ChangePasswordCubit() : super(ChangePasswordSateIntial());
@@ -14,6 +15,22 @@ class ChangePasswordCubit extends BaseCubit<ChangePasswordSate> {
   bool passIsError = false;
   bool isHideEye2 = false;
   bool isCheckEye2 = true;
+
+  BehaviorSubject<bool> isUpdate = BehaviorSubject.seeded(false);
+
+  void isUpdatePassword(
+    String passwordCurrent,
+    String passwordNew,
+    String passwordConfirm,
+  ) {
+    if (passwordCurrent.isNotEmpty &&
+        passwordNew.isNotEmpty &&
+        passwordConfirm.isNotEmpty ) {
+      isUpdate.add(true);
+    } else {
+      isUpdate.add(false);
+    }
+  }
 
   Future<void> changePassword({
     required String newPassword,
