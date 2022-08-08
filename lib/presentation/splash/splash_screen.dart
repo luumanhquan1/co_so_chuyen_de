@@ -1,3 +1,4 @@
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/main.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 
@@ -36,19 +37,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<String>(
-      initialData: AppStateCt.of(context).appState.token,
+      initialData: AppStateCt.of(context).appState.userId,
       stream: AppStateCt.of(context).appState.getToken,
       builder: (context, snapshot) {
         final data = snapshot.data ?? '';
-        return screen(data);
+        return screen(data, AppStateCt.of(context).appState.isUserModel);
       },
     );
   }
 
-  Widget screen(String token) {
-    if (token.isNotEmpty) {
+  Widget screen(String token, bool isUserModel) {
+    if (token.isNotEmpty && isUserModel) {
       return const MainTabBarView();
     } else {
+      if (PrefsService.getToken().isNotEmpty) {
+        PrefsService.removeTokken();
+      }
       return const LoginScreen();
     }
   }

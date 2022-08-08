@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -37,12 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   HomeCubit _homeCubit = HomeCubit();
-  late UserModel userModel;
 
   @override
   void initState() {
     super.initState();
-    userModel = HiveLocal.getDataUser() ?? UserModel.empty();
     // _homeCubit.getUserInfo(widget.userId);
     // _homeCubit.getAllPosts();
   }
@@ -538,7 +535,7 @@ class _HomeScreenState extends State<HomeScreen> {
         showBottomSheetCustomPostScreen(
           context,
           child: CreatePostScreen(
-            userModel: userModel,
+            userModel: _homeCubit.userModel,
             createPost: (Uint8List? image, String content) {
               _homeCubit.createPost(content: content, image: image);
             },
@@ -568,10 +565,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Row(
           children: [
-            if (userModel.avatarUrl != null)
+            if (_homeCubit.userModel.avatarUrl != null)
               CircleAvatar(
                 radius: 23, // Image radius
-                backgroundImage: NetworkImage(userModel.avatarUrl ?? ''),
+                backgroundImage:
+                    NetworkImage(_homeCubit.userModel.avatarUrl ?? ''),
               )
             else
               CircleAvatar(

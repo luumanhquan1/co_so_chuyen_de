@@ -45,7 +45,6 @@ class LoginCubit extends BaseCubit<LoginState> {
       password: password,
     );
     isUserModel = await FireStoreMethod.isDataUser(user?.uid ?? '');
-
     if (user != null) {
       if (isUserModel) {
         await FirebaseMessaging.instance.getToken().then((value) async {

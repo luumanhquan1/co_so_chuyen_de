@@ -5,8 +5,6 @@ import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AppState {
-  String token = '';
-
   String userId = '';
 
   bool isUserModel = false;
@@ -16,8 +14,8 @@ class AppState {
   final BehaviorSubject<String> getToken = BehaviorSubject<String>();
 
   void getTokenPrefs() {
-    token = PrefsService.getUserId();
-    getToken.sink.add(token);
+    userId = PrefsService.getUserId();
+    getToken.sink.add(userId);
   }
 
   Future<void> getDataRefeshToken() async {

@@ -68,17 +68,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     WidgetsBinding.instance?.addObserver(this);
     appStateCubit.getDataRefeshToken();
     onStateWhenOpenApp();
-    if(appStateCubit.isUserModel) {
-      FirebaseMessaging.instance.onTokenRefresh.listen((event) {
-        FireStoreMethod.updateToken(
+    if (appStateCubit.isUserModel) {
+      FirebaseMessaging.instance.onTokenRefresh.listen((event) async {
+        await FireStoreMethod.updateToken(
+          tokenOld: PrefsService.getToken(),
           userId: PrefsService.getUserId(),
           fcmTokenModel: FcmTokenModel(
             userId: PrefsService.getUserId(),
-            tokenFcm: PrefsService.getToken(),
+            tokenFcm: event,
             createAt: appStateCubit.tokenFcm.createAt,
             updateAt: DateTime.now().millisecondsSinceEpoch,
           ),
         );
+
+        await PrefsService.saveToken(event);
       });
     }
     appStateCubit.getTokenPrefs();
