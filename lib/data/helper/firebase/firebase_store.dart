@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
@@ -136,6 +137,8 @@ class FireStoreMethod {
     required FcmTokenModel fcmTokenModel,
   }) async {
     await deleteToken(userId: userId, token: fcmTokenModel.tokenFcm ?? '');
+
+    await PrefsService.removeTokken();
 
     await firestore
         .collection(DefaultEnv.socialNetwork)
