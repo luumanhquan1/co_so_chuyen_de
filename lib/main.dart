@@ -68,9 +68,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     WidgetsBinding.instance?.addObserver(this);
     appStateCubit.getDataRefeshToken();
     onStateWhenOpenApp();
-    if(appStateCubit.isUserModel) {
+    if (appStateCubit.isUserModel) {
       FirebaseMessaging.instance.onTokenRefresh.listen((event) {
         FireStoreMethod.updateToken(
+          tokenOld: PrefsService.getToken(),
           userId: PrefsService.getUserId(),
           fcmTokenModel: FcmTokenModel(
             userId: PrefsService.getUserId(),

@@ -21,9 +21,12 @@ class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(HomeStateInitial()) {
     userId = PrefsService.getUserId();
     log(userId);
+    getUserModel();
     getUserInfo(userId);
     getAllPosts();
   }
+
+  UserModel userModel = UserModel.empty();
 
   String userId = '';
   final BehaviorSubject<List<PostModel>> _posts =
@@ -85,6 +88,10 @@ class HomeCubit extends BaseCubit<HomeState> {
     await FireStoreMethod.createPost(model: model,postId: postId );
 
     showContent();
+  }
+
+  Future<void> getUserModel() async {
+    userModel = await FireStoreMethod.getDataUserInfo(userId);
   }
 
   Future<void> getAllPosts() async {

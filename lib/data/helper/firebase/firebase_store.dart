@@ -34,7 +34,7 @@ class FireStoreMethod {
         .get();
 
     for (final id in snap.docs) {
-      if (id as String == userId) {
+      if (id.id == userId) {
         return true;
       }
     }
@@ -83,9 +83,36 @@ class FireStoreMethod {
         );
   }
 
+  static Future<void> saveFlg({
+    required String userId,
+  }) async {
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .set({'onlineFlag': true});
+  }
+
   static Future<void> saveToken({
     required String userId,
     required FcmTokenModel fcmTokenModel,
+  }) async {
+    await deleteToken(userId: userId, token: fcmTokenModel.tokenFcm ?? '');
+
+    await firestore
+        .collection(DefaultEnv.socialNetwork)
+        .doc(DefaultEnv.develop)
+        .collection(DefaultEnv.users)
+        .doc(userId)
+        .collection(DefaultEnv.tokkenFcm)
+        .doc(fcmTokenModel.tokenFcm)
+        .set(fcmTokenModel.toJson(fcmTokenModel));
+  }
+
+  static Future<void> deleteToken({
+    required String userId,
+    required String token,
   }) async {
     await firestore
         .collection(DefaultEnv.socialNetwork)
@@ -96,31 +123,19 @@ class FireStoreMethod {
         .get()
         .then((value) {
       for (final DocumentSnapshot post in value.docs) {
-        post.reference.delete();
+        if (post.id == token) {
+          post.reference.delete();
+        }
       }
     });
-
-    await firestore
-        .collection(DefaultEnv.socialNetwork)
-        .doc(DefaultEnv.develop)
-        .collection(DefaultEnv.users)
-        .doc(userId)
-        .collection(DefaultEnv.tokkenFcm)
-        .doc(getRandString(15).removeChar)
-        .set(fcmTokenModel.toJson(fcmTokenModel));
   }
 
   static Future<void> updateToken({
     required String userId,
+    required String tokenOld,
     required FcmTokenModel fcmTokenModel,
   }) async {
-    final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance
-        .collection(DefaultEnv.socialNetwork)
-        .doc(DefaultEnv.develop)
-        .collection(DefaultEnv.users)
-        .doc(userId)
-        .collection(DefaultEnv.tokkenFcm)
-        .get();
+    await deleteToken(userId: userId, token: fcmTokenModel.tokenFcm ?? '');
 
     await firestore
         .collection(DefaultEnv.socialNetwork)
@@ -128,14 +143,9 @@ class FireStoreMethod {
         .collection(DefaultEnv.users)
         .doc(userId)
         .collection(DefaultEnv.tokkenFcm)
-        .doc(snap.docs.first.id)
+        .doc(fcmTokenModel.tokenFcm)
         .update(fcmTokenModel.toJson(fcmTokenModel));
   }
-
-  static Future<void> removeToken({
-    required String token,
-    required String userId,
-  }) async {}
 
   static Future<FcmTokenModel> getTokenFcm({required String id}) async {
     final QuerySnapshot<dynamic> snap = await FirebaseFirestore.instance

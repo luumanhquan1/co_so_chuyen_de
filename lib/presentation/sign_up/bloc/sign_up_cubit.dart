@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_state.dart';
 import 'package:ccvc_mobile/utils/constants/dafault_env.dart';
@@ -13,6 +14,7 @@ import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/date_time_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -43,6 +45,24 @@ class SignUpCubit extends BaseCubit<SignUpState> {
         .get();
     final UserModel userInfo = UserModel.fromJson(
       snap.docs.first.data(),
+    );
+
+    final String? token = await FirebaseMessaging.instance.getToken();
+    await PrefsService.saveToken(token ?? '');
+    final FcmTokenModel tokenModel = FcmTokenModel(
+      userId: userInfo.userId,
+      tokenFcm: token,
+      createAt: DateTime.now().millisecondsSinceEpoch,
+      updateAt: DateTime.now().millisecondsSinceEpoch,
+    );
+
+    await FireStoreMethod.saveToken(
+      userId: userInfo.userId ?? '',
+      fcmTokenModel: tokenModel,
+    );
+
+    await FireStoreMethod.saveFlg(
+      userId: userInfo.userId ?? '',
     );
     await HiveLocal.saveDataUser(userInfo);
   }
@@ -75,7 +95,8 @@ class SignUpCubit extends BaseCubit<SignUpState> {
   }
 
   Future<void> saveInformationUser(
-    String name, String email,
+    String name,
+    String email,
   ) async {
     showLoading();
     final String userId = PrefsService.getUserId();
@@ -86,7 +107,9 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     dataUser.createAt = DateTime.now().millisecondsSinceEpoch;
     dataUser.updateAt = DateTime.now().millisecondsSinceEpoch;
     dataUser.onlineFlag = true;
-    dataUser.userId = userId;  /// trường hợp tạo tài khoản nhưng chưa tạo thông tin
+    dataUser.userId = userId;
+
+    /// trường hợp tạo tài khoản nhưng chưa tạo thông tin
     dataUser.email = email;
     if (image == null) {
       dataUser.avatarUrl = ImageAssets.imgEmptyAvata;
@@ -96,8 +119,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
         image ?? Uint8List(0),
       );
 
-      final String photoImage =
-          await FireStoreMethod.downImage(userId);
+      final String photoImage = await FireStoreMethod.downImage(userId);
       dataUser.avatarUrl = photoImage;
     }
 
