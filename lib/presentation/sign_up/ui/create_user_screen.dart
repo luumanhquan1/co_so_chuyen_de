@@ -138,7 +138,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         ContainerDataWidget(
                           title: S.current.gioi_tinh,
                           child: DropDownGender(
-                            items: const ['Nam', 'Nữ', 'Khác'],
+                            items: const ['Nam', 'Nữ'],
                             onChange: (String value) {
                               widget.cubit.gender = value;
                             },

@@ -62,7 +62,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     onChanged: (value) {
                       if (value.isNotEmpty) {
                         cubit.isPost.add(true);
-                      } else if (cubit.imageSubject.value == null &&
+                      } else if (cubit.imageSubject.valueOrNull == null &&
                           value.isEmpty) {
                         cubit.isPost.add(false);
                       }
