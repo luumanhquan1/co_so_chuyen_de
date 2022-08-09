@@ -65,6 +65,9 @@ class SignUpCubit extends BaseCubit<SignUpState> {
       userId: userInfo.userId ?? '',
     );
     await HiveLocal.saveDataUser(userInfo);
+    if (PrefsService.getToken().isEmpty) {
+      await PrefsService.saveToken(userInfo.userId ?? '');
+    }
   }
 
   Future<User?> signUp(

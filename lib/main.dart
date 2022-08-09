@@ -96,7 +96,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> onStateWhenOpenApp() async {
-    if (appStateCubit.userId.isNotEmpty && appStateCubit.isUserModel) {
+    appStateCubit.isUserModel =
+        await FireStoreMethod.isDataUser(PrefsService.getUserId());
+    if (PrefsService.getUserId().isNotEmpty && appStateCubit.isUserModel) {
       final UserModel userInfo =
           await FireStoreMethod.getDataUserInfo(PrefsService.getUserId());
       userInfo.onlineFlag = true;
