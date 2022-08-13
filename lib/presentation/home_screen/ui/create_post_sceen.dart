@@ -71,7 +71,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       hintStyle:
                           textNormalCustom(fontSize: 14, color: Colors.grey),
                       border: InputBorder.none,
-                      hintText: 'What is on your mind ?',
+                      hintText: 'Bạn đang nghĩ gì?',
                     ),
                   ),
                   spaceH20,

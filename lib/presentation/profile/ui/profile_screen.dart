@@ -445,7 +445,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // )
 
                             //]
-                            postContainer(userModel),
+                            Visibility(
+                                visible:
+                                (type.data! == RelationshipType.owner),
+                                child: postContainer(userModel)),
                             Column(
                               children: (snapshot.data! as List)
                                   .map((e) => Container(
@@ -649,7 +652,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () => _profileCubit.sendFriendRequest(),
             child: Container(
               decoration: BoxDecoration(
-                color: colorPrimaryTransparent,
+                color: colorPrimary,
                 borderRadius: BorderRadius.circular(35),
               ),
               child: Padding(
@@ -669,7 +672,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () => _profileCubit.cancelOrDeclineFriendRequest(),
             child: Container(
               decoration: BoxDecoration(
-                color: colorPrimaryTransparent,
+                color: colorPrimary,
                 borderRadius: BorderRadius.circular(35),
               ),
               child: Padding(
@@ -687,7 +690,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () => showResponseFriendRequestBottomSheet(context),
           child: Container(
             decoration: BoxDecoration(
-              color: colorPrimaryTransparent,
+              color: colorPrimary,
               borderRadius: BorderRadius.circular(35),
             ),
             child: Padding(
@@ -705,7 +708,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () => showFriendBottomSheet(context),
           child: Container(
             decoration: BoxDecoration(
-              color: colorPrimaryTransparent,
+              color: colorPrimary,
               borderRadius: BorderRadius.circular(35),
             ),
             child: Padding(
@@ -721,7 +724,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       onTap: () => _profileCubit.sendFriendRequest(),
       child: Container(
         decoration: BoxDecoration(
-          color: colorPrimaryTransparent,
+          color: colorPrimary,
           borderRadius: BorderRadius.circular(35),
         ),
         child: Padding(
@@ -774,7 +777,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: EdgeInsets.only(
                           left: 16.sp, top: 16.sp, right: 16.sp, bottom: 8.sp),
                       decoration: BoxDecoration(
-                        color: colorPrimaryTransparent,
+                        color: colorPrimary,
                         borderRadius: BorderRadius.circular(35),
                       ),
                       child: Padding(
@@ -808,7 +811,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: EdgeInsets.only(
                           left: 16.sp, top: 16.sp, right: 16.sp, bottom: 24.sp),
                       decoration: BoxDecoration(
-                        color: colorPrimaryTransparent,
+                        color: colorPrimary,
                         borderRadius: BorderRadius.circular(35),
                       ),
                       child: Padding(
@@ -865,7 +868,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: EdgeInsets.only(
                           left: 16.sp, top: 16.sp, right: 16.sp, bottom: 8.sp),
                       decoration: BoxDecoration(
-                        color: colorPrimaryTransparent,
+                        color: colorPrimary,
                         borderRadius: BorderRadius.circular(35),
                       ),
                       child: Padding(
@@ -900,7 +903,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: EdgeInsets.only(
                           left: 16.sp, top: 16.sp, right: 16.sp, bottom: 24.sp),
                       decoration: BoxDecoration(
-                        color: colorPrimaryTransparent,
+                        color: colorPrimary,
                         borderRadius: BorderRadius.circular(35),
                       ),
                       child: Padding(
@@ -921,7 +924,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget postContainer(UserModel userModel ){
     return GestureDetector(
       onTap: () {
-        showBottomSheetCustom(
+        showBottomSheetCustomPostScreen(
           context,
           child: CreatePostScreen(
             userModel: userModel,
@@ -929,7 +932,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _profileCubit.createPost(content: content, image: image);
             },
           ),
-          title: 'Bài viết mới',
         );
       },
       child: Container(
