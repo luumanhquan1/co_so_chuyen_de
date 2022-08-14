@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
+import 'package:ccvc_mobile/presentation/friend_request/friend_request.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
@@ -248,6 +249,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               },
                               title: 'Chặn'),
                         ),
+                        Visibility(
+                          visible: type.data! == RelationshipType.owner,
+                          child: _buildListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                           const FriendRequestScreen()));
+                              },
+                              title: 'Lời mời kết bạn'),
+                        ),
                       ],
                     );
             }));
@@ -325,7 +338,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 16.sp,
                                 ),
                                 Center(
-                                     child: Text(userModel.nameDisplay ?? '',
+                                    child: Text(userModel.nameDisplay ?? '',
                                         style:
                                             heading2(color: ThemeColor.black))),
                                 SizedBox(
@@ -375,10 +388,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                               '',
                                                           avatarUrl: userModel
                                                                   .avatarUrl ??
-                                                                  '',
-                                                              bietDanh: '')
-                                                        ],
-                                                      ),
+                                                              '',
+                                                          bietDanh: '')
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -386,7 +399,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               decoration: BoxDecoration(
                                                 color: colorPrimary,
                                                 borderRadius:
-                                                BorderRadius.circular(35),
+                                                    BorderRadius.circular(35),
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
@@ -400,86 +413,86 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                           ),
                                         )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // Expanded(
-                            //   child: ListView.builder(
-                            //       shrinkWrap: true,
-                            //       physics: NeverScrollableScrollPhysics(),
-                            //       itemCount: snapshot.data!.length,
-                            //       itemBuilder: (context, index) => Container(
-                            //             margin: EdgeInsets.symmetric(
-                            //                 vertical: 16.sp,
-                            //                 horizontal: 24.sp),
-                            //             decoration: BoxDecoration(
-                            //                 boxShadow: [
-                            //                   BoxShadow(
-                            //                     color: ThemeColor.gray77,
-                            //                     spreadRadius: 0,
-                            //                     blurRadius: 5,
-                            //                     offset: Offset(0,
-                            //                         3), // changes position of shadow
-                            //                   ),
-                            //                 ],
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(20),
-                            //                 color: ThemeColor.white),
-                            //             child: PostCard(
-                            //               postModel: snapshot.data![index],
-                            //               userId: userModel
-                            //                       .userId ??
-                            //                   '',
-                            //               onTap: () => Navigator.push(
-                            //                   context,
-                            //                   MaterialPageRoute(
-                            //                       builder: (_) => PostScreen(
-                            //                             postId: snapshot
-                            //                                     .data?[index]
-                            //                                     .postId ??
-                            //                                 '',
-                            //                           ))),
-                            //             ),
-                            //           )),
-                            // )
-
-                            //]
-                            postContainer(userModel),
-                            Column(
-                              children: (snapshot.data! as List)
-                                  .map((e) => Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 16.sp,
-                                    horizontal: 24.sp),
-                                decoration: BoxDecoration(
-                                      boxShadow: [
-                                    BoxShadow(
-                                      color: ThemeColor.gray77,
-                                      spreadRadius: 0,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      ],
                                     ),
-                                  ],
-                                    borderRadius:
-                                    BorderRadius.circular(20),
-                                    color: ThemeColor.white),
-                                child: PostCard(
-                                  postModel: e,
-                                  userId: userModel.userId ?? '',
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              PostScreen(
-                                                postId: e.postId,
-                                              ))),
+                                  ),
                                 ),
-                              ))
-                                  .toList(),
-                            )
-                          ])
-                );
+                                // Expanded(
+                                //   child: ListView.builder(
+                                //       shrinkWrap: true,
+                                //       physics: NeverScrollableScrollPhysics(),
+                                //       itemCount: snapshot.data!.length,
+                                //       itemBuilder: (context, index) => Container(
+                                //             margin: EdgeInsets.symmetric(
+                                //                 vertical: 16.sp,
+                                //                 horizontal: 24.sp),
+                                //             decoration: BoxDecoration(
+                                //                 boxShadow: [
+                                //                   BoxShadow(
+                                //                     color: ThemeColor.gray77,
+                                //                     spreadRadius: 0,
+                                //                     blurRadius: 5,
+                                //                     offset: Offset(0,
+                                //                         3), // changes position of shadow
+                                //                   ),
+                                //                 ],
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(20),
+                                //                 color: ThemeColor.white),
+                                //             child: PostCard(
+                                //               postModel: snapshot.data![index],
+                                //               userId: userModel
+                                //                       .userId ??
+                                //                   '',
+                                //               onTap: () => Navigator.push(
+                                //                   context,
+                                //                   MaterialPageRoute(
+                                //                       builder: (_) => PostScreen(
+                                //                             postId: snapshot
+                                //                                     .data?[index]
+                                //                                     .postId ??
+                                //                                 '',
+                                //                           ))),
+                                //             ),
+                                //           )),
+                                // )
+
+                                //]
+                                postContainer(userModel),
+                                Column(
+                                  children: (snapshot.data! as List)
+                                      .map((e) => Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 16.sp,
+                                                horizontal: 24.sp),
+                                            decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: ThemeColor.gray77,
+                                                    spreadRadius: 0,
+                                                    blurRadius: 5,
+                                                    offset: Offset(0,
+                                                        3), // changes position of shadow
+                                                  ),
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: ThemeColor.white),
+                                            child: PostCard(
+                                              postModel: e,
+                                              userId: userModel.userId ?? '',
+                                              onTap: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          PostScreen(
+                                                            postId: e.postId,
+                                                          ))),
+                                            ),
+                                          ))
+                                      .toList(),
+                                )
+                              ]));
               }));
     }
     if (state == StateLayout.showError) {
@@ -917,8 +930,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           });
 
-
-  Widget postContainer(UserModel userModel ){
+  Widget postContainer(UserModel userModel) {
     return GestureDetector(
       onTap: () {
         showBottomSheetCustom(

@@ -7,7 +7,6 @@ import 'package:ccvc_mobile/domain/model/profile_model.dart/friend_model.dart';
 import 'package:ccvc_mobile/domain/model/profile_model.dart/friend_request_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileService {
   static Future<List<UserModel>> listFriends(String id,
@@ -43,7 +42,8 @@ class ProfileService {
 
   static Stream<UserModel?> searchKey(String keySearch) async* {
     final data = await FirebaseSetup.fireStore
-        .collection(DefaultEnv.usersCollection).get();
+        .collection(DefaultEnv.usersCollection)
+        .get();
     final List<UserModel> value = [];
     for (final element in data.docs) {
       final result = await FirebaseSetup.fireStore
@@ -62,7 +62,7 @@ class ProfileService {
         }
       }
     }
-    if(value.isEmpty){
+    if (value.isEmpty) {
       yield null;
     }
   }
@@ -122,5 +122,65 @@ class ProfileService {
       data.add(vl.receiverId);
     }
     return data;
+  }
+
+  static Future<List<UserModel>> listFriendRequest(
+    String id,
+  ) async {
+    try {
+      final List<UserModel> data = [];
+      final result = await FirebaseSetup.fireStore
+          .collection(DefaultEnv.usersCollection)
+          .doc(id)
+          .collection(DefaultEnv.friendRequestCollection)
+          .get();
+      for (var element in result.docs) {
+        final vl = FriendRequestModel.fromJson(element.data());
+
+        final user = await getUserChat(vl.senderId);
+        if (user != null && user.userId != PrefsService.getUserId()) {
+          data.add(user);
+        }
+      }
+      return data;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  static Future<void> confirmAccecptFreind(String idConfirm) async {
+    String ownerId = PrefsService.getUserId();
+    await FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(ownerId)
+        .collection(DefaultEnv.relationshipsCollection)
+        .add(FriendModel(ownerId, idConfirm, 1).toJson());
+    await FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(idConfirm)
+        .collection(DefaultEnv.relationshipsCollection)
+        .add(FriendModel(idConfirm, ownerId, 1).toJson());
+    await delectFriendRequets(idConfirm);
+  }
+
+  static Future<void> delectFriendRequets(String idConfirm) async {
+    String ownerId = PrefsService.getUserId();
+    final result = await FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(ownerId)
+        .collection(DefaultEnv.friendRequestCollection)
+        .get();
+
+    for (final e in result.docs) {
+      final vl = FriendRequestModel.fromJson(e.data());
+      if (vl.senderId == idConfirm) {
+        await FirebaseSetup.fireStore
+            .collection(DefaultEnv.usersCollection)
+            .doc(ownerId)
+            .collection(DefaultEnv.friendRequestCollection)
+            .doc(e.id)
+            .delete();
+      }
+    }
   }
 }

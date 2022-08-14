@@ -77,7 +77,7 @@ class _MessageScreenState extends State<MainMessageScreen> {
                         setState(() {});
                       });
                     },
-                    child:  Container(
+                    child: Container(
                         width: 30,
                         height: 30,
                         color: Colors.transparent,
@@ -108,6 +108,9 @@ class _MessageScreenState extends State<MainMessageScreen> {
                           stream: cubit.getRoomChat,
                           builder: (context, snapshot) {
                             final data = snapshot.data ?? <RoomChatModel>[];
+                            if (data.isEmpty) {
+                              return Center(child: Text("Không có dữ liêu"));
+                            }
                             return Column(
                               children: List.generate(data.length, (index) {
                                 final result = data[index];

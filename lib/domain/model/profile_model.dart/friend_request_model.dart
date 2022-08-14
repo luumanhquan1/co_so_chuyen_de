@@ -5,8 +5,8 @@ class FriendRequestModel {
   int updateAt = 0;
 
   FriendRequestModel.fromJson(Map<String, dynamic> json) {
-    receiverId = json['receiver_id'] ?? '';
-    senderId = json['sender_id'] ?? '';
+    receiverId = json['receiver'] ?? '';
+    senderId = json['sender'] ?? '';
     createAt = json['create_at'] ?? 0;
     updateAt = json['update_at'] ?? 0;
   }

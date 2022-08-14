@@ -53,6 +53,9 @@ class MessageService {
               }
             }
           });
+       if(data.isEmpty){
+         sink.add([]);
+       }
         },
       ),
     );
