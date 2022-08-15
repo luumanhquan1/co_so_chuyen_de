@@ -9,6 +9,7 @@ import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
+import 'package:ccvc_mobile/presentation/friend_request/friend_request.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
@@ -248,6 +249,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               },
                               title: 'Chặn'),
                         ),
+                        Visibility(
+                          visible: type.data! == RelationshipType.owner,
+                          child: _buildListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                           const FriendRequestScreen()));
+                              },
+                              title: 'Lời mời kết bạn'),
+                        ),
                       ],
                     );
             }));
@@ -325,7 +338,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 16.sp,
                                 ),
                                 Center(
-                                     child: Text(userModel.nameDisplay ?? '',
+                                    child: Text(userModel.nameDisplay ?? '',
                                         style:
                                             heading2(color: ThemeColor.black))),
                                 SizedBox(
@@ -920,8 +933,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           });
 
-
-  Widget postContainer(UserModel userModel ){
+  Widget postContainer(UserModel userModel) {
     return GestureDetector(
       onTap: () {
         showBottomSheetCustomPostScreen(
