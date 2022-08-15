@@ -31,13 +31,13 @@ Future<T?> showBottomSheetCustom<T>(BuildContext context,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Visibility(
-                  visible: textOption ?? true,
-                  child: Text(
-                    title,
-                    style: textNormalCustom(fontSize: 18, color: textTitle),
-                  ),
-                ),
+                // Visibility(
+                //   visible: textOption ?? true,
+                //   child: Text(
+                //     title,
+                //     style: textNormalCustom(fontSize: 18, color: textTitle),
+                //   ),
+                // ),
                 child
               ],
             ),
