@@ -14,6 +14,11 @@ extension DateFormatString on DateTime {
         DateFormat('dd/MM/yyyy ').format(this);
     return dateString;
   }
+  String get formatHHmmDdMMYYYY {
+    final dateString =
+        DateFormat('HH:mm dd/MM/yyyy ').format(this);
+    return dateString;
+  }
   int get convertToTimesTamp {
     return microsecondsSinceEpoch;
   }

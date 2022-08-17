@@ -2,6 +2,7 @@ import 'package:ccvc_mobile/config/themes/app_theme.dart';
 import 'package:ccvc_mobile/presentation/change_password/ui/change_password_screen.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/home_screen.dart';
 import 'package:ccvc_mobile/presentation/main_message/main_message_screen.dart';
+import 'package:ccvc_mobile/presentation/notification/ui/notification_screen.dart';
 import 'package:ccvc_mobile/presentation/update_user/ui/update_user_screen.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
 import 'package:ccvc_mobile/presentation/personal/ui/personal_screen.dart';
@@ -50,10 +51,7 @@ extension TabbarEnum on TabBarType {
         return HomeScreen();
 
       case TabBarType.likeTab:
-        return Scaffold(
-          backgroundColor: Colors.red,
-          body: ChangePasswordScreen(),
-        );
+        return const NotificationScreen();
       case TabBarType.message:
         return const MainMessageScreen();
       case TabBarType.profile:

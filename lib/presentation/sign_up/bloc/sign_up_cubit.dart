@@ -130,7 +130,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
       id: userId,
       user: dataUser,
     );
-
+    await PrefsService.saveIsCreateInfo(true);
     showContent();
   }
 

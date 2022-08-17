@@ -20,7 +20,8 @@ class AppState {
 
   Future<void> getDataRefeshToken() async {
     userId = PrefsService.getUserId();
-    isUserModel = await FireStoreMethod.isDataUser(userId);
+
+    isUserModel = PrefsService.getIsCreateInfo();
     if (isUserModel && userId.isNotEmpty) {
       tokenFcm = await FireStoreMethod.getTokenFcm(id: userId);
     }

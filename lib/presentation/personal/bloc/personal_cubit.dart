@@ -57,6 +57,7 @@ class PersonalCubit extends BaseCubit<PersonalState> {
     await FireStoreMethod.updateUser(userInfo.userId ?? '', userInfo);
     await PrefsService.removeUserId();
     await PrefsService.removePasswordPresent();
+    await PrefsService.removeIsInfo();
     await HiveLocal.removeDataUser();
   }
 }

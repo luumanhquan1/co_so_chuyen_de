@@ -67,6 +67,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
     appStateCubit.getDataRefeshToken();
+    appStateCubit.getTokenPrefs();
     onStateWhenOpenApp();
     if (appStateCubit.isUserModel) {
       FirebaseMessaging.instance.onTokenRefresh.listen((event) async {
@@ -84,7 +85,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         await PrefsService.saveToken(event);
       });
     }
-    appStateCubit.getTokenPrefs();
     checkDeviceType();
   }
 
