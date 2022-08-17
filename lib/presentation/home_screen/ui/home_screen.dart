@@ -580,7 +580,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 10,
             ),
             Text(
-              'What is on your mind ?',
+              'Bạn đang nghĩ gì?',
               style: textStyle(size: 14),
             ),
           ],
