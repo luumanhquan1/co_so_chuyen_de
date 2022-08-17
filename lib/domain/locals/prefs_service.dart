@@ -10,6 +10,8 @@ class PrefsService {
   static const _PREF_PASSWORD_PRESENT = 'pref_password_present';
   static const _PREF_DATA_USER = 'pref_data_user';
   static const _PREF_APP_THEME = 'pref_app_theme';
+  static const _PREF_IS_CREATE_INFO = 'pref_is_create_info';
+
   static SharedPreferences? _prefsInstance;
 
   static Future<SharedPreferences> get _instance async =>
@@ -19,6 +21,22 @@ class PrefsService {
   static Future<SharedPreferences> init() async {
     _prefsInstance = await _instance;
     return _prefsInstance!;
+  }
+
+  static bool getIsCreateInfo() {
+    return _prefsInstance?.getBool(_PREF_IS_CREATE_INFO) ?? false;
+  }
+
+  static Future<Future<bool>> saveIsCreateInfo(bool isInfo) async {
+    final prefs = await _instance;
+    return prefs.setBool(_PREF_IS_CREATE_INFO, isInfo);
+  }
+
+  static Future<void> removeIsInfo() async {
+    final prefs = await _instance;
+    if (prefs.containsKey(_PREF_IS_CREATE_INFO)) {
+      await prefs.remove(_PREF_IS_CREATE_INFO);
+    }
   }
 
   static String getToken() {

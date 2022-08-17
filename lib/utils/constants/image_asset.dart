@@ -13,6 +13,8 @@ class ImageAssets {
   static const String icBackgroundMessage = '$baseImg/background_message.svg';
 
   static const String icSearch = '$baseImg/ic_search.svg';
+  static const String icReadAll = '$baseImg/ic_read_all.svg';
+  static const String icNotify = '$baseImg/ic_notify.svg';
   static const String icSendSms = '$baseImg/ic_send_sms.svg';
   static const String icClearLogin = '$baseImg/ic_clear_login.svg';
   static const String imgAcount = '$baseImg/ic_acount.svg';

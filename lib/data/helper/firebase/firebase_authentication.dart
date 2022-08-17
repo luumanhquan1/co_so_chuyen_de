@@ -27,7 +27,12 @@ class FirebaseAuthentication {
           e.toString() ==
               '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
         EXCEPTION_LOGIN = S.current.tai_khoan_hoac_mat_khau_khong_chinh_xac;
+      } else if(e.toString() == '[firebase_auth/invalid-email] The email address is badly formatted.') {
+        EXCEPTION_LOGIN = 'Tài khoản của bạn bị sai định dạng';
+      } else {
+        EXCEPTION_LOGIN = 'Bạn đăng nhập thất bại vui lòng thử lại';
       }
+
       print(e.toString());
     }
     return user;
