@@ -37,7 +37,13 @@ class ProfileService {
         }
       }
     }
-    return data;
+final setData = <UserModel>[];
+    for (var element in data) {
+      if(setData.map((e) => e.userId).contains(element.userId) == false) {
+        setData.add(element);
+      }
+    }
+    return setData;
   }
 
   static Stream<UserModel?> searchKey(String keySearch) async* {

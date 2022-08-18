@@ -22,19 +22,21 @@ class FriendRequestCubit extends ProfileCubit {
 
   Future<void> confirmFriend(String idUserConfirm) async {
     try {
-
-      await ProfileService.confirmAccecptFreind(idUserConfirm);
       listFriendRequest.removeWhere((element) => element.userId == idUserConfirm);
       _getListFriend.sink.add(listFriendRequest);
+      await ProfileService.confirmAccecptFreind(idUserConfirm);
+
     } catch (e) {
 
     }
   }
   Future<void> delectFriendRequest(String idUserConfirm) async {
     try {
-      await ProfileService.delectFriendRequets(idUserConfirm);
       listFriendRequest.removeWhere((element) => element.userId == idUserConfirm);
       _getListFriend.sink.add(listFriendRequest);
+      await ProfileService.delectFriendRequets(idUserConfirm);
+
+
     } catch (e) {}
   }
 }

@@ -19,15 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      SizeConfig.init(context);
+      MessageConfig.init(context);
+    });
   }
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    SizeConfig.init(context);
-    MessageConfig.init(context);
-  }
+
 
   @override
   void dispose() {
