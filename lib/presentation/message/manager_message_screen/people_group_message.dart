@@ -61,6 +61,18 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
                             urlAvatar: data.avatarUrl ?? '',
                             name: data.nameDisplay ?? '',
                             onTap: () {
+                              if(widget.cubit.peopleChat.length < 3){
+                                CoolAlert.show(
+                                    context: context,
+                                    type: CoolAlertType.warning,
+                                    text:
+                                    'Nhóm cần tối thiểu 3 người',
+                                    onConfirmBtnTap: () {
+
+                                      Navigator.pop(context);
+                                    });
+                                return;
+                              }
                               CoolAlert.show(
                                   context: context,
                                   type: CoolAlertType.confirm,

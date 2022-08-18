@@ -192,8 +192,10 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   void removePeople(String idUser) {
-    peopleChat.removeWhere((element) => element.userId == idUser);
-    MessageService.removeChat(idRoomChat, idUser);
+
+      peopleChat.removeWhere((element) => element.userId == idUser);
+      MessageService.removeChat(idRoomChat, idUser);
+
   }
 
   bool isBlock() {

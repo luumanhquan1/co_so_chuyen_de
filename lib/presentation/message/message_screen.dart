@@ -123,10 +123,13 @@ class _MessageScreenState extends State<MessageScreen> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: cubit.isBlock()
-                          ? Text(
-                              'Bạn không thể nhắn tin cho tài khoản này',
-                              style: textNormal(Colors.black, 14),
-                            )
+                          ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Text(
+                                'Bạn không thể nhắn tin cho tài khoản này',
+                                style: textNormal(Colors.black, 14),
+                              ),
+                          )
                           : SendSmsWidget(
                               hintText: 'Soạn tin nhắn...',
                               sendTap: (value) {

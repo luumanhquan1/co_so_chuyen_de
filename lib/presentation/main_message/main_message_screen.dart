@@ -40,6 +40,44 @@ class _MessageScreenState extends State<MainMessageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        elevation: 0,
+        title:  Text(
+          S.current.messages,
+          style: textNormalCustom(
+              color: colorBlack,
+              fontSize: 24,
+              fontWeight: FontWeight.w700),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              showCupertinoModalBottomSheet(
+                context: context,
+                builder: (context) => CreateGroupScreen(
+                  cubit: messageCubit,
+                  title: 'Nhóm mới',
+                  listFriend: messageCubit.listFriend,
+                ),
+              ).whenComplete(() {
+                setState(() {});
+              });
+            },
+            child: Container(
+                width: 30,
+                height: 30,
+                margin: EdgeInsets.only(right: 16),
+                color: Colors.transparent,
+                child: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(
+                    Icons.group_add,
+                    color: Colors.black,
+                  ),
+                )),
+          )
+        ],
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -50,104 +88,61 @@ class _MessageScreenState extends State<MainMessageScreen> {
               fit: BoxFit.fill,
             ),
           ),
-          NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                CupertinoSliverNavigationBar(
-                  backgroundColor: Colors.transparent,
-                  border: Border.all(color: Colors.transparent),
-                  largeTitle: Text(
-                    S.current.messages,
-                    style: textNormalCustom(
-                        color: colorBlack,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700),
+          SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 23),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
                   ),
-                  trailing: GestureDetector(
-                    onTap: () {
-                      showCupertinoModalBottomSheet(
-                        context: context,
-                        builder: (context) => CreateGroupScreen(
-                          cubit: messageCubit,
-                          title: 'Nhóm mới',
-                          listFriend: messageCubit.listFriend,
-                        ),
-                      ).whenComplete(() {
-                        setState(() {});
-                      });
-                    },
-                    child: Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.transparent,
-                        child: const Padding(
-                          padding: EdgeInsets.only(right: 16),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.black,
-                          ),
-                        )),
-                  ),
-                )
-              ];
-            },
-            body: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 23),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    StateLoadingSkeleton(
-                      stream: cubit.stateStream,
-                      skeleton: const LoadingSkeletonMessageWidget(),
-                      child: StreamBuilder<List<RoomChatModel>>(
-                          stream: cubit.getRoomChat,
-                          builder: (context, snapshot) {
-                            final data = snapshot.data ?? <RoomChatModel>[];
-                            if (data.isEmpty) {
-                              return Center(child: Text("Không có dữ liêu"));
-                            }
-                            return Column(
-                              children: List.generate(data.length, (index) {
-                                final result = data[index];
+                  StateLoadingSkeleton(
+                    stream: cubit.stateStream,
+                    skeleton: const LoadingSkeletonMessageWidget(),
+                    child: StreamBuilder<List<RoomChatModel>>(
+                        stream: cubit.getRoomChat,
+                        builder: (context, snapshot) {
+                          final data = snapshot.data ?? <RoomChatModel>[];
+                          if (data.isEmpty) {
+                            return Center(child: Text("Không có dữ liêu"));
+                          }
+                          return Column(
+                            children: List.generate(data.length, (index) {
+                              final result = data[index];
 
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MessageScreen(
-                                            isRoomGroup: result.isGroup,
-                                            chatModel: result,
-                                            peopleChat: result.peopleChats,
-                                            peopleGroupChat:
-                                                result.peopleChats.length < 2
-                                                    ? null
-                                                    : result.peopleChats,
-                                          ),
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MessageScreen(
+                                          isRoomGroup: result.isGroup,
+                                          chatModel: result,
+                                          peopleChat: result.peopleChats,
+                                          peopleGroupChat:
+                                          result.peopleChats.length < 2
+                                              ? null
+                                              : result.peopleChats,
                                         ),
-                                      ).then((value) {
-                                        setState(() {});
-                                      });
-                                    },
-                                    child: TinNhanCell(
-                                      peopleChat: result.peopleChats,
-                                      idRoom: result.roomId,
-                                    ),
+                                      ),
+                                    ).then((value) {
+                                      setState(() {});
+                                    });
+                                  },
+                                  child: TinNhanCell(
+                                    peopleChat: result.peopleChats,
+                                    idRoom: result.roomId,
                                   ),
-                                );
-                              }),
-                            );
-                          }),
-                    )
-                  ],
-                ),
+                                ),
+                              );
+                            }),
+                          );
+                        }),
+                  )
+                ],
               ),
             ),
           )

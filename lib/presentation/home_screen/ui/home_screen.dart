@@ -8,6 +8,7 @@ import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
+import 'package:ccvc_mobile/presentation/relationship_screen/relationship_screen.dart';
 import 'package:ccvc_mobile/utils/style_utils.dart';
 import 'package:ccvc_mobile/widgets/button_sheet/bottom_sheet_custom.dart';
 import 'package:ccvc_mobile/widgets/post_item/post_item.dart';
@@ -56,6 +57,31 @@ class _HomeScreenState extends State<HomeScreen> {
             automaticallyImplyLeading: false,
             title: Text(Strings.app_name,
                 style: heading2(color: ThemeColor.black)),
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RelationshipScreen(
+                            userId: '',
+                            isSearch: true,
+                          )));
+                },
+                child: Container(
+                    width: 30,
+                    height: 30,
+                    margin: const EdgeInsets.only(right: 16),
+                    color: Colors.transparent,
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 16),
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                    )),
+              ),
+            ],
           ),
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
