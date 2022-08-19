@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -66,12 +65,16 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                         showCupertinoModalBottomSheet(
                           context: context,
                           builder: (context) => screen(),
-                        ).whenComplete((){
-                          setState(() {
-
-                          });
+                        ).whenComplete(() {
+                          setState(() {});
                         });
-                      })
+                      }),
+                  widget.isGroup
+                      ? cellButton(
+                          icon: const Icon(Icons.exit_to_app),
+                          title: 'Rời nhóm chat',
+                          onTap: () {})
+                      : SizedBox.shrink(),
                 ],
               ),
             )

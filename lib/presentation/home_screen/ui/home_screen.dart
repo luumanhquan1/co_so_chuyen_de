@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Padding(
                       padding: EdgeInsets.only(right: 16),
                       child: Icon(
-                        Icons.add,
+                        Icons.search,
                         color: Colors.black,
                       ),
                     )),

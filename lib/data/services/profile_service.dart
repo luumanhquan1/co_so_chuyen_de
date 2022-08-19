@@ -25,7 +25,7 @@ class ProfileService {
       if (vl.userId2 != idUser) {
         final user = await getUserChat(vl.userId2);
         if (user != null) {
-          user.peopleType = _peopleType(
+          user.peopleType = peopleType(
               user.userId ?? '', listsIdFriendRequest, listIdFriend, vl);
           if (getBloc) {
             if (user.peopleType != PeopleType.Block) {
@@ -37,9 +37,46 @@ class ProfileService {
         }
       }
     }
-final setData = <UserModel>[];
+    final setData = <UserModel>[];
     for (var element in data) {
-      if(setData.map((e) => e.userId).contains(element.userId) == false) {
+      if (setData.map((e) => e.userId).contains(element.userId) == false) {
+        setData.add(element);
+      }
+    }
+    return setData;
+  }
+
+  static Future<List<UserModel>> blocklist(String id,
+      {bool getBloc = true}) async {
+    final listIdFriend = await ProfileService.getIdsRelationShipUser();
+    final listsIdFriendRequest = await ProfileService.getIdsFriendRequestUser();
+    final idUser = PrefsService.getUserId();
+    final List<UserModel> data = [];
+    final result = await FirebaseSetup.fireStore
+        .collection(DefaultEnv.usersCollection)
+        .doc(id)
+        .collection(DefaultEnv.relationshipsCollection)
+        .get();
+    for (var element in result.docs) {
+      final vl = FriendModel.fromJson(element.data());
+      if (vl.userId2 != idUser) {
+        final user = await getUserChat(vl.userId2);
+        if (user != null) {
+          user.peopleType = peopleType(
+              user.userId ?? '', listsIdFriendRequest, listIdFriend, vl);
+          if (getBloc) {
+            if (user.peopleType == PeopleType.Block) {
+              data.add(user);
+            }
+          } else {
+            data.add(user);
+          }
+        }
+      }
+    }
+    final setData = <UserModel>[];
+    for (var element in data) {
+      if (setData.map((e) => e.userId).contains(element.userId) == false) {
         setData.add(element);
       }
     }
@@ -73,7 +110,7 @@ final setData = <UserModel>[];
     }
   }
 
-  static PeopleType? _peopleType(String id, List<String> listsIdFriendRequest,
+  static PeopleType? peopleType(String id, List<String> listsIdFriendRequest,
       List<String> listIdFriend, FriendModel friendModel) {
     if (friendModel.type == 2) {
       return PeopleType.Block;

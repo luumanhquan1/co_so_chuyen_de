@@ -30,20 +30,35 @@ class PersonalCubit extends BaseCubit<PersonalState> {
   final UserRepopsitory _userRepopsitory = UserRepopsitory();
 
   Future<void> getUserInfo(userId) async {
-    showLoading();
-    try {
-      final result = await _userRepopsitory.getUserProfile(userId: userId);
-      if (result != null) {
-        log('pppp' + result.toString());
-        _user.sink.add(result);
-        showContent();
-      } else {
+      showLoading();
+      try {
+        FirebaseFirestore.instance
+            .collection(DefaultEnv.appCollection)
+            .doc(DefaultEnv.developDoc)
+            .collection(DefaultEnv.usersCollection)
+            .doc(userId)
+            .collection('profile')
+            .snapshots()
+            .listen((event) async {
+          if (event.docs == null) {
+            return null;
+          } else {
+            Map<String, dynamic> data = Map<String, dynamic>();
+            for (var y in event.docs) {
+              data = y.data();
+              data.addAll({'user_id': userId});
+            }
+
+            _user.sink.add(UserModel.fromJson(data));
+            showContent();
+          }
+
+        });
+      } catch (e) {
+        log(e.toString());
         showError();
       }
-    } catch (e) {
-      log(e.toString());
-      showError();
-    }
+
   }
 
   Future<void> logOut() async {

@@ -194,12 +194,14 @@ class ProfileCubit extends BaseCubit<ProfileState> {
                 //     ('userId2' == userId && 'userId1' == ownerId))
                 .get();
             log('friend');
-            log(result.size.toString());
+            debugPrint('qqqq ${result.size.toString()}');
             if (result.docs != null && result.size != 0) {
               debugPrint('ddddddddd ${result.docs.first.data()['type']}');
               result.docs.first.data()['type'] == 1
                   ? _relationshipType.sink.add(RelationshipType.friend)
                   : _relationshipType.sink.add(RelationshipType.blocked);
+
+              debugPrint(_relationshipType.value.toString());
             } else {
               final result = await FirebaseFirestore.instance
                   .collection(DefaultEnv.appCollection)
@@ -264,7 +266,10 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           }
 
           _user.sink.add(UserModel.fromJson(data));
+
+          getAllPosts(userId);
         }
+
       });
     } catch (e) {
       log(e.toString());
@@ -432,7 +437,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           );
           if (result) {
             _relationshipType.sink.add(RelationshipType.blocked);
-            Navigator.pop(context);
+           // Navigator.pop(context);
           } else {
             showError();
           }

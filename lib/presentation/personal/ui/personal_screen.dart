@@ -7,6 +7,7 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_authentication.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/block_list/block_list_screen.dart';
 import 'package:ccvc_mobile/presentation/change_password/ui/change_password_screen.dart';
 import 'package:ccvc_mobile/presentation/login/ui/login_screen.dart';
 import 'package:ccvc_mobile/presentation/personal/bloc/personal_cubit.dart';
@@ -89,6 +90,18 @@ class _PersonalScreenState extends State<PersonalScreen> {
                               final String userId = PrefsService.getUserId();
                               _personalCubit.getUserInfo(userId);
                             });
+                          },
+                        ),
+                        _buildListTile(
+                          title: 'Danh sách chặn',
+                          icon: Icons.block,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>  BlockListScreen(userId: _personalCubit.userId),
+                              ),
+                            );
                           },
                         ),
                         _buildListTile(
