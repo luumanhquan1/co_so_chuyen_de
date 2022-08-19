@@ -162,7 +162,6 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   Future<String> createRoomChatDefault(List<PeopleChat> peopleChat) async {
-    ShowLoadingScreen.show();
     final idRoomChat = Uuid().v1();
     final userCurrent = HiveLocal.getDataUser();
     final room = RoomChatModel(
@@ -180,7 +179,6 @@ class MessageCubit extends BaseCubit<MainState> {
       isGroup: peopleChat.length > 1,
     );
     _roomChat.sink.add(room.roomId);
-    ShowLoadingScreen.dismiss();
     return MessageService.createRoomChat(room);
   }
 
