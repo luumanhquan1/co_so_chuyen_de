@@ -4,9 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShowLoadingScreen {
+  static BuildContext? contextConfig;
+  static void init(BuildContext context) {
+    if (contextConfig != null) {
+      return;
+    }
+    contextConfig = context;
+  }
   static final OverlayEntry _overlayEntry = _showLoading();
   static void show() {
-    final OverlayState? overlayState = Overlay.of(MessageConfig.contextConfig!);
+    final OverlayState? overlayState = Overlay.of(contextConfig!);
     overlayState?.insert(_overlayEntry);
   }
 
