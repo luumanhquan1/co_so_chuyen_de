@@ -88,8 +88,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  S.current.welcome_to,
-                                  style: GoogleFonts.poppins(
+                                  'Chào mừng bạn đến với',
+                             //     S.current.welcome_to,
+                                  style:TextStyle(
+                                  //GoogleFonts.poppins(
                                     color: welCome,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
@@ -97,7 +99,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                 ),
                                 Text(
                                   S.current.socially,
-                                  style: GoogleFonts.poppins(
+                                  style: TextStyle(
+                                  //GoogleFonts.poppins(
                                     color: welCome,
                                     fontSize: 38,
                                     fontWeight: FontWeight.w700,

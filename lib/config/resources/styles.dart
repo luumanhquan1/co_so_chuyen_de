@@ -59,7 +59,9 @@ const spaceW78 = SizedBox(width: 78);
 const spaceW100 = SizedBox(width: 100);
 
 TextStyle textNormal(Color? color, double? fontSize) {
-  return GoogleFonts.poppins(
+  return
+    //GoogleFonts.poppins(
+    TextStyle(
     color: color ?? Colors.white,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -72,7 +74,9 @@ TextStyle tokenDetailAmount({
   double fontSize = 24,
   FontWeight weight = FontWeight.w400,
 }) {
-  return GoogleFonts.poppins(
+  return
+    //GoogleFonts.poppins(
+    TextStyle(
     color: color,
     fontWeight: weight,
     fontStyle: FontStyle.normal,
@@ -86,7 +90,8 @@ TextStyle textDetailHDSD({
   FontWeight weight = FontWeight.w400,
   double textHeight = 1.9,
 }) {
-  return GoogleFonts.poppins(
+  return //GoogleFonts.poppins(
+    TextStyle(
     color: color,
     fontWeight: weight,
     fontStyle: FontStyle.normal,
@@ -95,7 +100,9 @@ TextStyle textDetailHDSD({
 }
 
 TextStyle titleText({Color color = Colors.white, double fontSize = 20}) {
-  return GoogleFonts.poppins(
+  return
+    TextStyle(
+    //GoogleFonts.poppins(
     color: color,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -108,7 +115,9 @@ TextStyle textNormalCustom({
   double? fontSize,
   FontWeight? fontWeight,
 }) {
-  return GoogleFonts.poppins(
+  return
+    TextStyle(
+    //GoogleFonts.poppins(
     color: color ?? Colors.white,
     fontWeight: fontWeight ?? FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -118,8 +127,10 @@ TextStyle textNormalCustom({
 
 
 TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
-  return GoogleFonts.poppins(
+  return
 
+    //GoogleFonts.poppins(
+    TextStyle(
     color: color,
     fontWeight: FontWeight.bold,
     fontSize: fontSize,
@@ -128,7 +139,9 @@ TextStyle titleAppbar({Color color = titleColor, double fontSize = 18}) {
 }
 
 TextStyle heading2({Color color = titleColor}) {
-  return GoogleFonts.poppins(
+  return
+    //GoogleFonts.poppins(
+    TextStyle(
     color: color,
     fontWeight: FontWeight.bold,
     fontSize: 25.sp,
@@ -137,7 +150,9 @@ TextStyle heading2({Color color = titleColor}) {
 }
 
 TextStyle username({Color color = titleColor}) {
-  return GoogleFonts.poppins(
+  return
+    //GoogleFonts.poppins(
+    TextStyle(
     color: ThemeColor.black,
     fontWeight: FontWeight.bold,
     fontSize: 16.sp,
@@ -146,7 +161,9 @@ TextStyle username({Color color = titleColor}) {
 }
 
 TextStyle detail({Color color = titleColor}) {
-  return GoogleFonts.poppins(
+  return
+    //GoogleFonts.poppins(
+    TextStyle(
     color: color,
     fontWeight: FontWeight.w400,
     fontSize: 12.8.sp,
@@ -155,7 +172,9 @@ TextStyle detail({Color color = titleColor}) {
 }
 
   TextStyle caption({Color color = titleColor}) {
-    return GoogleFonts.poppins(
+    return
+      //GoogleFonts.poppins(
+      TextStyle(
       color: color,
       fontWeight: FontWeight.normal,
       fontSize: 16.sp,
@@ -164,7 +183,9 @@ TextStyle detail({Color color = titleColor}) {
   }
 
 TextStyle button({Color color = titleColor}) {
-  return GoogleFonts.roboto(
+  return
+    //GoogleFonts.roboto(
+    TextStyle(
     color: color,
     fontWeight: FontWeight.normal,
     fontSize: 18.sp,
