@@ -64,7 +64,6 @@ class PersonalCubit extends BaseCubit<PersonalState> {
 
   Future<void> logOut() async {
     final UserModel userInfo = HiveLocal.getDataUser() ?? UserModel.empty();
-    FirebaseMessaging.instance.deleteToken();
     await FireStoreMethod.deleteToken(
       token: PrefsService.getToken(),
       userId: userInfo.userId ?? '',
@@ -76,5 +75,6 @@ class PersonalCubit extends BaseCubit<PersonalState> {
     await PrefsService.removePasswordPresent();
     await PrefsService.removeIsInfo();
     await HiveLocal.removeDataUser();
+    FirebaseMessaging.instance.deleteToken();
   }
 }
