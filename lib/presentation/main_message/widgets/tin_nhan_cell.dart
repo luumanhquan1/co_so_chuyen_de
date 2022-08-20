@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TinNhanCell extends StatelessWidget {
-  final List<PeopleChat> peopleChat;
-  final String idRoom;
-  const TinNhanCell({Key? key, required this.peopleChat, required this.idRoom})
+
+  final RoomChatModel chatModel;
+  const TinNhanCell({Key? key,required this.chatModel})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final data = peopleChat;
+    final peopleChat = chatModel.peopleChats;
 
     return Container(
       height: 103,
@@ -40,7 +40,7 @@ class TinNhanCell extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title(),
+                    chatModel.titleName(),
                     style: textNormalCustom(color: colorBlack, fontSize: 14),
                     maxLines: 2,
                   ),
@@ -49,7 +49,7 @@ class TinNhanCell extends StatelessWidget {
                   ),
                   Expanded(
                     child: StreamBuilder<List<MessageSmsModel>>(
-                      stream: MessageService.smsRealTimeMain(idRoom),
+                      stream: MessageService.smsRealTimeMain(chatModel.roomId),
                       builder: (context, snapshot) {
                         final data = snapshot.data ?? <MessageSmsModel>[];
                         String title = '';
@@ -110,7 +110,7 @@ class TinNhanCell extends StatelessWidget {
   }
 
   Widget avatar() {
-    return peopleChat.length == 1
+    return chatModel.peopleChats.length == 1
         ? Container(
             height: 62,
             width: 62,
@@ -125,7 +125,7 @@ class TinNhanCell extends StatelessWidget {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle, color: Colors.teal),
               child: CachedNetworkImage(
-                imageUrl: peopleChat.first.avatarUrl,
+                imageUrl: chatModel.peopleChats.first.avatarUrl,
                 errorWidget: (context, url, error) =>
                     SvgPicture.asset(ImageAssets.avatarDefault),
                 fit: BoxFit.cover,
@@ -160,25 +160,23 @@ class TinNhanCell extends StatelessWidget {
       );
     }
 
-    return peopleChat.length < 2
+    return chatModel.peopleChats.length < 2
         ? const SizedBox()
         : Container(
             width: 62,
             height: 62,
             child: Stack(
               children: [
-                avatar(peopleChat.first.avatarUrl, 50),
+                avatar(chatModel.peopleChats.first.avatarUrl, 50),
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: avatar(peopleChat.last.avatarUrl, 40),
+                  child: avatar(chatModel.peopleChats.last.avatarUrl, 40),
                 )
               ],
             ),
           );
   }
 
-  String title() {
-    return peopleChat.map((e) => e.nameDisplay).join(',');
-  }
+
 }

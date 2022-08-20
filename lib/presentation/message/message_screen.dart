@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
@@ -16,13 +19,13 @@ class MessageScreen extends StatefulWidget {
   final List<PeopleChat> peopleChat;
   final List<PeopleChat>? peopleGroupChat;
   final bool isRoomGroup;
-  const MessageScreen({
-    Key? key,
-    this.chatModel,
-    required this.peopleChat,
-    this.peopleGroupChat,
-    this.isRoomGroup = false
-  }) : super(key: key);
+  const MessageScreen(
+      {Key? key,
+      this.chatModel,
+      required this.peopleChat,
+      this.peopleGroupChat,
+      this.isRoomGroup = false})
+      : super(key: key);
 
   @override
   _MessageScreenState createState() => _MessageScreenState();
@@ -64,7 +67,8 @@ class _MessageScreenState extends State<MessageScreen> {
                     MaterialPageRoute(
                       builder: (context) => ManagerMessagerScreen(
                         peopleChats: cubit.peopleChat,
-                        messageCubit: cubit, isGroup: widget.isRoomGroup,
+                        messageCubit: cubit,
+                        isGroup: widget.isRoomGroup,
                       ),
                     ),
                   ).then((value) {
@@ -72,7 +76,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   });
                 },
                 child: HeaderMessWidget(
-                  peopleChat: cubit.peopleChat,
+                  cubit: cubit,
                 ),
               ),
               const SizedBox(
@@ -102,13 +106,32 @@ class _MessageScreenState extends State<MessageScreen> {
                                     peopleSender = peopleGruop.first;
                                   }
                                 } else {
-                                  if(widget.peopleChat.isNotEmpty) {
+                                  if (widget.peopleChat.isNotEmpty) {
                                     peopleSender = widget.peopleChat.first;
                                   }
                                 }
-                                return SmsCell(
-                                  smsModel: result,
-                                  peopleChat: peopleSender,
+                                return GestureDetector(
+                                  onLongPress: () {
+                                    if(result.isMe()) {
+                                      showModalActionSheet(
+                                        context: context,
+                                        style: AdaptiveStyle.iOS,
+                                        actions: [
+                                          const SheetAction(
+                                              label: 'Thu hồi tin nhắn',
+                                              key: 'GO_TN')
+                                        ],
+                                      ).then((value) {
+                                        if (value == 'GO_TN') {
+                                          cubit.goBoTinNhan(result.id ?? '');
+                                        }
+                                      });
+                                    }
+                                  },
+                                  child: SmsCell(
+                                    smsModel: result,
+                                    peopleChat: peopleSender,
+                                  ),
                                 );
                               }),
                             );
@@ -124,12 +147,12 @@ class _MessageScreenState extends State<MessageScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: cubit.isBlock()
                           ? Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Text(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
                                 'Bạn không thể nhắn tin cho tài khoản này',
                                 style: textNormal(Colors.black, 14),
                               ),
-                          )
+                            )
                           : SendSmsWidget(
                               hintText: 'Soạn tin nhắn...',
                               sendTap: (value) {

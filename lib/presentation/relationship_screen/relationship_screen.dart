@@ -29,6 +29,7 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
     if (!widget.isSearch) {
       cubit.fetchFriends(widget.userId);
     } else {
+      cubit.fetckBloc();
       cubit.showContent();
     }
   }

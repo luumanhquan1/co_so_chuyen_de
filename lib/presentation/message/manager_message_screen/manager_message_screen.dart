@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/data/services/message_service.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
@@ -11,6 +16,8 @@ import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import '../../../widgets/dialog/cool_alert/cool_alert.dart';
 
 class ManagerMessagerScreen extends StatefulWidget {
   final List<PeopleChat> peopleChats;
@@ -48,11 +55,39 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
               height: 16,
             ),
             Text(
-              titleGroup(),
+              widget.messageCubit.chatModel?.titleName() ?? '',
               style: textNormalCustom(color: Colors.black, fontSize: 20),
             ),
             const SizedBox(
               height: 16,
+            ),
+            Visibility(
+              visible: widget.isGroup,
+              child: GestureDetector(
+                onTap: () {
+                  showTextInputDialog(
+                    context: context,
+                    title: 'Tên nhóm',
+                    textFields: const [DialogTextField()],
+                    style: AdaptiveStyle.iOS,
+                    okLabel: 'Xong',
+                  ).then((value) {
+                    if (value != null) {
+                      if (value.first.isNotEmpty) {
+                        widget.messageCubit.changeNameGroup(value.first);
+                        Navigator.of(context).pop();
+                      }
+                    }
+                  });
+                },
+                child: Text(
+                  'Đổi tên nhóm',
+                  style: textNormalCustom(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
+                ),
+              ),
             ),
             Container(
               child: Column(
@@ -69,12 +104,26 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                           setState(() {});
                         });
                       }),
-                  widget.isGroup
-                      ? cellButton(
-                          icon: const Icon(Icons.exit_to_app),
-                          title: 'Rời nhóm chat',
-                          onTap: () {})
-                      : SizedBox.shrink(),
+                  if (widget.isGroup)
+                    cellButton(
+                        icon: const Icon(Icons.exit_to_app),
+                        title: 'Rời nhóm chat',
+                        onTap: () {
+                          CoolAlert.show(
+                              context: context,
+                              type: CoolAlertType.confirm,
+                              text: 'Bạn có chắc khi rời khỏi nhóm khỏi nhóm?',
+                              onConfirmBtnTap: () {
+                                MessageService.removeChat(
+                                  widget.messageCubit.idRoomChat,
+                                  PrefsService.getUserId(),
+                                );
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                              });
+                        })
+                  else
+                    SizedBox.shrink(),
                 ],
               ),
             )
@@ -153,10 +202,6 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
               );
             }),
           );
-  }
-
-  String titleGroup() {
-    return widget.peopleChats.map((e) => e.nameDisplay).join(',');
   }
 
   Widget screen() {

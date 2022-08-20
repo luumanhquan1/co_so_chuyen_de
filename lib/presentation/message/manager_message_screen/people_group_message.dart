@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:ccvc_mobile/presentation/message/manager_message_screen/create_group_screen.dart';
@@ -86,7 +87,7 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
                                     _data.sink.add(_data.value);
                                     Navigator.pop(context);
                                   });
-                            },
+                            }, idUser: data.userId ?? '',
                           );
                         }),
                       );
@@ -146,6 +147,7 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
     required String urlAvatar,
     required String name,
     required Function() onTap,
+    required String idUser
   }) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -183,14 +185,17 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
                     name,
                     style: textNormal(Colors.black, 14),
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        onTap();
-                      },
-                      child: const Icon(
-                        Icons.remove_circle,
-                        color: Colors.red,
-                      ))
+                  Visibility(
+                    visible: idUser != PrefsService.getUserId(),
+                    child: GestureDetector(
+                        onTap: () {
+                          onTap();
+                        },
+                        child: const Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        )),
+                  )
                 ],
               ),
             ),
