@@ -48,7 +48,10 @@ class HeaderMessWidget extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         child: Text(
-                          cubit.chatModel?.titleName() ?? '',
+                          cubit.chatModel?.titleName() ??
+                              cubit.peopleChat
+                                  .map((e) => e.nameDisplay)
+                                  .join(','),
                           style: textNormal(colorBlack, 20),
                           maxLines: 2,
                         ),
@@ -57,7 +60,7 @@ class HeaderMessWidget extends StatelessWidget {
                         height: 9,
                       ),
                       Visibility(
-                        visible: cubit.chatModel?.isGroup == false,
+                        visible: cubit.chatModel?.isGroup == false || cubit.chatModel == null,
                         child: Text(
                           cubit.chatModel?.isCheckOffline() ?? false
                               ? 'Online'

@@ -55,7 +55,8 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
               height: 16,
             ),
             Text(
-              widget.messageCubit.chatModel?.titleName() ?? '',
+              widget.messageCubit.chatModel?.titleName() ??
+                  widget.messageCubit.peopleChat.map((e) => e.nameDisplay).join(','),
               style: textNormalCustom(color: Colors.black, fontSize: 20),
             ),
             const SizedBox(
