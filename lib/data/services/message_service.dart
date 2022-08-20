@@ -14,7 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class MessageService {
-  static Map<String, RoomChatModel> _idRoomChat = {};
+  static Map<String, RoomChatModel> idRoomChat = {};
   static Stream<List<RoomChatModel>>? getRoomChat(String idUser) {
     return FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
@@ -28,7 +28,7 @@ class MessageService {
           final data = <RoomChatModel>[];
           await Future.forEach(docSnap.docs,
               (QueryDocumentSnapshot<Map<String, dynamic>> element) async {
-            if (!_idRoomChat.keys.contains(element.id)) {
+            if (!idRoomChat.keys.contains(element.id)) {
               final profileRoom = await FirebaseSetup.fireStore
                   .collection(DefaultEnv.messCollection)
                   .doc(element.id)
@@ -45,12 +45,12 @@ class MessageService {
                   tenNhom: jsonProfileRoom['ten_nhom'] ?? '',
                 );
                 data.add(room);
-                _idRoomChat.addAll({element.id: room});
+                idRoomChat.addAll({element.id: room});
                 sink.add(data);
               }
             } else {
-              if (_idRoomChat[element.id] != null) {
-                data.add(_idRoomChat[element.id]!);
+              if (idRoomChat[element.id] != null) {
+                data.add(idRoomChat[element.id]!);
                 sink.add(data);
               }
             }

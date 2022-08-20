@@ -24,4 +24,9 @@ class MainMessageCubit extends BaseCubit<MainMessageState> {
 
     });
   }
+void dispose(){
+    _getRoomChat.close();
+  MessageService.idRoomChat = {};
+}
+
 }

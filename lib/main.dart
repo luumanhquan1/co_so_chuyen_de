@@ -25,7 +25,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -42,10 +41,6 @@ Future<void> mainApp() async {
   await HiveLocal.init();
   await PrefsService.init();
   await FirebaseSetup.setUp();
-  FirebaseFirestore.instance.settings = const Settings(
-    sslEnabled: false,
-    persistenceEnabled: false,
-  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

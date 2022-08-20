@@ -35,6 +35,12 @@ class _MessageScreenState extends State<MainMessageScreen> {
     cubit.fetchRoom();
     messageCubit.getListFriend();
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    cubit.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
