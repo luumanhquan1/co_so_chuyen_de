@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,10 @@ Future<void> mainApp() async {
   await HiveLocal.init();
   await PrefsService.init();
   await FirebaseSetup.setUp();
+  FirebaseFirestore.instance.settings = const Settings(
+    sslEnabled: false,
+    persistenceEnabled: false,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
