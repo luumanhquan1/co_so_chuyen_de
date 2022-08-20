@@ -112,7 +112,9 @@ class _MessageScreenState extends State<MessageScreen> {
                                 }
                                 return GestureDetector(
                                   onLongPress: () {
-                                    if(result.isMe()) {
+                                    if (result.isMe() &&
+                                        result.smsType !=
+                                            SmsType.Tin_Nhan_Go_bo) {
                                       showModalActionSheet(
                                         context: context,
                                         style: AdaptiveStyle.iOS,
