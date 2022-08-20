@@ -23,7 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       SizeConfig.init(context);
       MessageConfig.init(context);
-      ShowLoadingScreen.init(context);
     });
   }
 
