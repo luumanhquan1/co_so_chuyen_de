@@ -74,7 +74,7 @@ extension SmsExtension on SmsType {
             border: Border.all(color: Colors.black38),
             borderRadius:const BorderRadius.all(Radius.circular(16)),
           ),
-          child: Text('Bạn đã thu hồi một tin nhắn',style:textNormal(greyHide, 12) ,),
+          child: Text(!isMe ? 'Tin nhắn đã bị thu hồi':'Bạn đã thu hồi một tin nhắn',style:textNormal(greyHide, 12) ,),
         );
     }
   }
