@@ -22,6 +22,13 @@ class RelationShipCubit extends BaseCubit<RelationshipState> {
   Stream<List<UserModel>> get getListFriend => _getListFriend.stream;
   final idUser = PrefsService.getUserId();
   List<UserModel> listFriend = [];
+  List<UserModel> blocs = [];
+  Future<void> fetckBloc() async {
+    final result = await ProfileService.listFriends(PrefsService.getUserId(),
+        getBloc: false);
+    blocs = result.where((e) => e.peopleType == PeopleType.Block).toList();
+  }
+
   Future<void> fetchFriends(String id) async {
     showLoading();
     final result = await ProfileService.listFriends(id);
@@ -33,7 +40,7 @@ class RelationShipCubit extends BaseCubit<RelationshipState> {
   void searchNguoiLa(String keySearch) {
     listFriend = [];
     showLoading();
-    ProfileService.searchKey(keySearch).listen((event) {
+    ProfileService.searchKey(keySearch,blocs).listen((event) {
       if (event != null) {
         listFriend.add(event);
         _getListFriend.sink.add(listFriend);

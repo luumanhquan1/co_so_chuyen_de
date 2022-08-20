@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -5,6 +7,8 @@ import 'package:ccvc_mobile/domain/model/message_model/message_sms_model.dart';
 import 'package:ccvc_mobile/widgets/skeleton/container_skeleton_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension SmsExtension on SmsType {
   Widget getSmsWidget(BuildContext context, MessageSmsModel model) {
@@ -27,10 +31,20 @@ extension SmsExtension on SmsType {
                       ? const Radius.circular(20)
                       : const Radius.circular(4))),
           padding: const EdgeInsets.all(16),
-          child: Text(
-            model.content ?? '',
+          child: Linkify(
+            onOpen: (link) async {
+
+             await launchUrl( Uri.parse(link.url));
+            },
+
+            text: model.content ?? '',
             style: textNormal(greyHide, 12),
+            linkStyle:textNormal(Colors.blue, 12),
           ),
+          // child: Text(
+          //   model.content ?? '',
+          //   style: textNormal(greyHide, 12),
+          // ),
         );
       case SmsType.Image:
         return Container(
@@ -50,6 +64,17 @@ extension SmsExtension on SmsType {
               );
             },
           ),
+        );
+      case SmsType.Tin_Nhan_Go_bo:
+        return Container(
+          margin:const EdgeInsets.symmetric(vertical: 5),
+          padding:const EdgeInsets.symmetric(vertical: 6,horizontal: 16),
+          decoration:  BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(color: Colors.black38),
+            borderRadius:const BorderRadius.all(Radius.circular(16)),
+          ),
+          child: Text('Bạn đã thu hồi một tin nhắn',style:textNormal(greyHide, 12) ,),
         );
     }
   }
