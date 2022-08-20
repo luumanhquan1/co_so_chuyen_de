@@ -17,6 +17,7 @@ class MainMessageCubit extends BaseCubit<MainMessageState> {
   Stream<List<RoomChatModel>> get getRoomChat => _getRoomChat.stream;
   final idUser = PrefsService.getUserId();
   void fetchRoom() {
+    MessageService.idRoomChat = {};
     showLoading();
     MessageService.getRoomChat(idUser)?.listen((event) {
       showContent();
@@ -26,7 +27,7 @@ class MainMessageCubit extends BaseCubit<MainMessageState> {
   }
 void dispose(){
     _getRoomChat.close();
-  MessageService.idRoomChat = {};
+
 }
 
 }
