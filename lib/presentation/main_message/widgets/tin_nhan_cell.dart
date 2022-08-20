@@ -56,7 +56,9 @@ class TinNhanCell extends StatelessWidget {
                         if (data.isNotEmpty) {
                           if (data.first.smsType == SmsType.Image) {
                             title = 'Có 1 ảnh';
-                          } else {
+                          } else if(data.first.smsType == SmsType.Tin_Nhan_Go_bo) {
+                            title = '1 tin nhắn bị gỡ bỏ';
+                          }else{
                             title = data.first.content ?? '';
                           }
                         }
