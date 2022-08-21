@@ -83,13 +83,15 @@ class ProfileService {
     return setData;
   }
 
-  static Stream<UserModel?> searchKey(String keySearch,List<UserModel> blocs) async* {
+  static Stream<UserModel?> searchKey(
+      String keySearch, List<UserModel> blocs) async* {
     final data = await FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .get();
     final List<UserModel> value = [];
     for (final element in data.docs) {
-      if(blocs.map((e) => e.userId).contains(element.id)){
+      if (blocs.map((e) => e.userId).contains(element.id) ||
+          element.id == PrefsService.getUserId()) {
         continue;
       }
       final result = await FirebaseSetup.fireStore
