@@ -639,26 +639,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildAvatar({String? avatarUrl}) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(160),
-      child: Container(
-        height: 80.sp,
-        width: 80.sp,
-        decoration: BoxDecoration(
-          //   shape: BoxShape.circle,
-          color: ThemeColor.paleGrey,
-        ),
-        child: avatarUrl == null || avatarUrl.isEmpty
-            ? SizedBox()
-            : AppImage.network(
-                path: avatarUrl,
-                //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+    return
 
-                height: 80.sp,
-                width: 80.sp,
-              ),
-      ),
-    );
+      ClipRRect(
+        child: Container(
+            width: 80.sp,
+            height: 80.sp,
+            child: ( avatarUrl == null || avatarUrl.isEmpty
+                ? Container(
+              color: ThemeColor.ebonyClay,
+            )
+                : CircleAvatar(
+              // radius: 30, // Image radius
+              backgroundImage: NetworkImage(
+                  avatarUrl),
+            ))),
+        borderRadius: BorderRadius.circular(200),
+      );
+
+
+
+
+    //   ClipRRect(
+    //   borderRadius: BorderRadius.circular(160),
+    //   child: Container(
+    //     height: 80.sp,
+    //     width: 80.sp,
+    //     decoration: BoxDecoration(
+    //       //   shape: BoxShape.circle,
+    //       color: ThemeColor.paleGrey,
+    //     ),
+    //     child: avatarUrl == null || avatarUrl.isEmpty
+    //         ? SizedBox()
+    //         : AppImage.network(
+    //             path: avatarUrl,
+    //             //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+    //
+    //             height: 80.sp,
+    //             width: 80.sp,
+    //           ),
+    //   ),
+    // );
   }
 
   Widget _loadingPost() {

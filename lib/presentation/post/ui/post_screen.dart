@@ -131,17 +131,32 @@ class _PostScreenState extends State<PostScreen> {
                           child: Row(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(80),
                                 child: Container(
                                     width: 40.sp,
                                     height: 40.sp,
-                                    child: user.data?.avatarUrl == null
+                                    child: (user.data?.avatarUrl == null
                                         ? Container(
-                                            color: ThemeColor.ebonyClay,
-                                          )
-                                        : AppImage.network(
-                                            path: user.data!.avatarUrl!)),
+                                      color: ThemeColor.ebonyClay,
+                                    )
+                                        : CircleAvatar(
+                                      // radius: 30, // Image radius
+                                      backgroundImage: NetworkImage(
+                                          user.data!.avatarUrl!),
+                                    ))),
+                                borderRadius: BorderRadius.circular(120),
                               ),
+                              // ClipRRect(
+                              //   borderRadius: BorderRadius.circular(80),
+                              //   child: Container(
+                              //       width: 40.sp,
+                              //       height: 40.sp,
+                              //       child: user.data?.avatarUrl == null
+                              //           ? Container(
+                              //               color: ThemeColor.ebonyClay,
+                              //             )
+                              //           : AppImage.network(
+                              //               path: user.data!.avatarUrl!)),
+                              // ),
                               Expanded(
                                 child: Padding(
                                   padding:

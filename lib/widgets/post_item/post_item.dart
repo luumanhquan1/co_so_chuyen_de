@@ -22,7 +22,11 @@ class PostCard extends StatefulWidget {
   final Function()? onTap;
   final Function()? onTapName;
   const PostCard(
-      {Key? key, required this.postModel, this.userId = '', this.onTap, this.onTapName})
+      {Key? key,
+      required this.postModel,
+      this.userId = '',
+      this.onTap,
+      this.onTapName})
       : super(key: key);
 
   @override
@@ -46,7 +50,8 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-       debugPrint('vvvvvvvvvvvvvv  ${widget.postModel.postId}  ${widget.postModel.imageUrl}');
+    debugPrint(
+        'vvvvvvvvvvvvvv  ${widget.postModel.postId}  ${widget.postModel.imageUrl}');
     return GestureDetector(
       onTap: widget.onTap,
 //      onDoubleTap: onLike,
@@ -63,45 +68,46 @@ class _PostCardState extends State<PostCard> {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                    onTap: widget.onTapName,
-                    child:
-                    ClipRRect(
-                      child: Container(
-                          width: 40.sp,
-                          height: 40.sp,
-                          child: ( widget.postModel.author!.avatarUrl.isNullOrEmpty
-                              ? Container(
-                            color: ThemeColor.ebonyClay,
-                          )
-                              : CircleAvatar(
-                            // radius: 30, // Image radius
-                            backgroundImage: NetworkImage(
-                                widget.postModel.author?.avatarUrl ?? ImageAssets.imgEmptyAvata),
-                          ))),
-                      borderRadius: BorderRadius.circular(120),
-                    )
-                    // ClipRRect(
-                    //   borderRadius: BorderRadius.circular(80),
-                    //   child: Container(
-                    //     height: 40.sp,
-                    //     width: 40.sp,
-                    //     decoration: BoxDecoration(
-                    //       //   shape: BoxShape.circle,
-                    //       color: ThemeColor.paleGrey,
-                    //     ),
-                    //     child: widget.postModel.author?.avatarUrl == null ||
-                    //             widget.postModel.author!.avatarUrl!.isEmpty
-                    //         ? SizedBox()
-                    //         : AppImage.network(
-                    //             path: widget.postModel.author!.avatarUrl!,
-                    //             //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
-                    //
-                    //             height: 40.sp,
-                    //             width: 40.sp,
-                    //           ),
-                    //   ),
-                    // ),
-                  ),
+                      onTap: widget.onTapName,
+                      child: ClipRRect(
+                        child: Container(
+                            width: 40.sp,
+                            height: 40.sp,
+                            child: (widget
+                                    .postModel.author!.avatarUrl.isNullOrEmpty
+                                ? Container(
+                                    color: ThemeColor.ebonyClay,
+                                  )
+                                : CircleAvatar(
+                                    // radius: 30, // Image radius
+                                    backgroundImage: NetworkImage(
+                                        widget.postModel.author?.avatarUrl ??
+                                            ImageAssets.imgEmptyAvata),
+                                  ))),
+                        borderRadius: BorderRadius.circular(120),
+                      )
+                      // ClipRRect(
+                      //   borderRadius: BorderRadius.circular(80),
+                      //   child: Container(
+                      //     height: 40.sp,
+                      //     width: 40.sp,
+                      //     decoration: BoxDecoration(
+                      //       //   shape: BoxShape.circle,
+                      //       color: ThemeColor.paleGrey,
+                      //     ),
+                      //     child: widget.postModel.author?.avatarUrl == null ||
+                      //             widget.postModel.author!.avatarUrl!.isEmpty
+                      //         ? SizedBox()
+                      //         : AppImage.network(
+                      //             path: widget.postModel.author!.avatarUrl!,
+                      //             //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+                      //
+                      //             height: 40.sp,
+                      //             width: 40.sp,
+                      //           ),
+                      //   ),
+                      // ),
+                      ),
                 ),
                 // SizedBox(width: 12.sp,),
                 Expanded(
@@ -179,16 +185,15 @@ class _PostCardState extends State<PostCard> {
                                                       if (widget.onTap ==
                                                           null) {
                                                         log('message');
-                                                          Navigator.of(context)
-                                                              .pop();
+                                                        Navigator.of(context)
+                                                            .pop();
                                                         // Navigator.of(context)
                                                         //     .pop();
                                                       }
                                                       if (result.name == 'ok') {
                                                         await PostRepository()
                                                             .deletePost(widget
-                                                                    .postModel);
-
+                                                                .postModel);
                                                       }
                                                     }),
                                               )
