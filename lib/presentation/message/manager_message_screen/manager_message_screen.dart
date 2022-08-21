@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:ccvc_mobile/presentation/message/manager_message_screen/create_group_screen.dart';
 import 'package:ccvc_mobile/presentation/message/manager_message_screen/people_group_message.dart';
+import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/appbar/app_bar_default_back.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,6 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final people = widget.peopleChats.first;
     return Scaffold(
       appBar: AppBarDefaultBack(''),
       body: Padding(
@@ -56,7 +56,9 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
             ),
             Text(
               widget.messageCubit.chatModel?.titleName() ??
-                  widget.messageCubit.peopleChat.map((e) => e.nameDisplay).join(','),
+                  widget.messageCubit.peopleChat
+                      .map((e) => e.nameDisplay)
+                      .join(','),
               style: textNormalCustom(color: Colors.black, fontSize: 20),
             ),
             const SizedBox(
@@ -124,7 +126,14 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                               });
                         })
                   else
-                    SizedBox.shrink(),
+                    cellButton(
+                        icon: const Icon(Icons.portrait_rounded),
+                        title: 'Trang cá nhân',
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ProfileScreen(
+                                  userId: widget.peopleChats.first.userId)));
+                        }),
                 ],
               ),
             )
@@ -211,6 +220,14 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
         listFriend: widget.messageCubit.listFriend,
         cubit: widget.messageCubit,
         title: title(),
+        selectDefault: widget.peopleChats.isNotEmpty
+            ? widget.peopleChats
+                .map((e) => UserModel(
+                    userId: e.userId,
+                    avatarUrl: e.avatarUrl,
+                    nameDisplay: e.nameDisplay))
+                .first
+            : null,
       );
     }
     return PeopleGroupScreen(

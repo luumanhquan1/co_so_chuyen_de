@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
@@ -7,7 +5,6 @@ import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/radio/check_box_widget.dart';
-import 'package:ccvc_mobile/widgets/textformfield/base_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -16,12 +13,14 @@ class CreateGroupScreen extends StatefulWidget {
   final MessageCubit cubit;
   final String title;
   final bool isAdd;
+  final UserModel? selectDefault;
   const CreateGroupScreen(
       {Key? key,
       required this.listFriend,
       required this.cubit,
       required this.title,
-      this.isAdd = false})
+      this.isAdd = false,
+      this.selectDefault})
       : super(key: key);
 
   @override
@@ -31,6 +30,22 @@ class CreateGroupScreen extends StatefulWidget {
 class _CreateGroupScreenState extends State<CreateGroupScreen> {
   final BehaviorSubject<List<UserModel>> _select = BehaviorSubject();
   final List<UserModel> listSelect = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.isAdd == false && widget.selectDefault != null) {
+      if (widget.listFriend
+              .map((e) => e.userId)
+              .contains(widget.selectDefault?.userId) ==
+          false) {
+        widget.listFriend.add(widget.selectDefault!);
+      }
+      listSelect.add(widget.selectDefault!);
+      _select.add(listSelect);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,12 +69,17 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             List.generate(widget.listFriend.length, (index) {
                           final data = widget.listFriend[index];
                           return cellButton(
-                            isCheck: listSelect.contains(data),
+                            isCheck: listSelect
+                                .map((e) => e.userId)
+                                .contains(data.userId),
                             urlAvatar: data.avatarUrl ?? '',
                             name: data.nameDisplay ?? '',
                             onTap: () {
-                              if (listSelect.contains(data)) {
-                                listSelect.remove(data);
+                              if (listSelect
+                                  .map((e) => e.userId)
+                                  .contains(data.userId)) {
+                                listSelect.removeWhere(
+                                    (element) => element.userId == data.userId);
                               } else {
                                 listSelect.add(data);
                               }
@@ -139,8 +159,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   child: Text(
                     widget.isAdd ? 'Thêm' : 'Tạo',
                     style: textNormalCustom(
-                        color:
-                            listSelect.length > 1 || widget.isAdd ? Colors.blue : Colors.grey,
+                        color: listSelect.length > 1 || widget.isAdd
+                            ? Colors.blue
+                            : Colors.grey,
                         fontSize: 16,
                         fontWeight: FontWeight.w400),
                   ),
@@ -223,7 +244,8 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                           EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
                       child: item(data[index].nameDisplay ?? '',
                           data[index].avatarUrl ?? '', () {
-                        listSelect.remove(data[index]);
+                        listSelect.removeWhere(
+                            (element) => element.userId == data[index].userId);
                         _select.sink.add(listSelect);
                       }),
                     )),
