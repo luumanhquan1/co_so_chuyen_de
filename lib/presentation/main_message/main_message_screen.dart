@@ -35,6 +35,12 @@ class _MessageScreenState extends State<MainMessageScreen> {
     cubit.fetchRoom();
     messageCubit.getListFriend();
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    cubit.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +48,10 @@ class _MessageScreenState extends State<MainMessageScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        title:  Text(
+        title: Text(
           S.current.messages,
           style: textNormalCustom(
-              color: colorBlack,
-              fontSize: 24,
-              fontWeight: FontWeight.w700),
+              color: colorBlack, fontSize: 24, fontWeight: FontWeight.w700),
         ),
         actions: [
           GestureDetector(
@@ -123,9 +127,9 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                           chatModel: result,
                                           peopleChat: result.peopleChats,
                                           peopleGroupChat:
-                                          result.peopleChats.length < 2
-                                              ? null
-                                              : result.peopleChats,
+                                              result.peopleChats.length < 2
+                                                  ? null
+                                                  : result.peopleChats,
                                         ),
                                       ),
                                     ).then((value) {
@@ -133,8 +137,8 @@ class _MessageScreenState extends State<MainMessageScreen> {
                                     });
                                   },
                                   child: TinNhanCell(
-                                    peopleChat: result.peopleChats,
-                                    idRoom: result.roomId,
+
+                                    chatModel: result,
                                   ),
                                 ),
                               );

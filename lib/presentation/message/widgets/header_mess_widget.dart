@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
+import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/constants/image_asset.dart';
 
 class HeaderMessWidget extends StatelessWidget {
-  final List<PeopleChat> peopleChat;
-  const HeaderMessWidget({Key? key, required this.peopleChat})
-      : super(key: key);
+  final MessageCubit cubit;
+  const HeaderMessWidget({Key? key, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +48,25 @@ class HeaderMessWidget extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         child: Text(
-                          title(),
+                          cubit.chatModel?.titleName() ??
+                              cubit.peopleChat
+                                  .map((e) => e.nameDisplay)
+                                  .join(','),
                           style: textNormal(colorBlack, 20),
                           maxLines: 2,
-                          
                         ),
                       ),
                       const SizedBox(
                         height: 9,
                       ),
-                      Text(
-                        'Online',
-                        style: textNormal(greyHide, 12),
+                      Visibility(
+                        visible: cubit.chatModel?.isGroup == false || cubit.chatModel == null,
+                        child: Text(
+                          cubit.chatModel?.isCheckOffline() ?? false
+                              ? 'Online'
+                              : 'Offline',
+                          style: textNormal(greyHide, 12),
+                        ),
                       ),
                     ],
                   ),
@@ -73,7 +80,7 @@ class HeaderMessWidget extends StatelessWidget {
   }
 
   Widget avatar() {
-    return peopleChat.length == 1
+    return cubit.peopleChat.length == 1
         ? Container(
             height: 62,
             width: 62,
@@ -88,8 +95,9 @@ class HeaderMessWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle, color: Colors.teal),
               child: CachedNetworkImage(
-                imageUrl: peopleChat.first.avatarUrl,
-                errorWidget: (context, url, error) =>  SvgPicture.asset(ImageAssets.avatarDefault),
+                imageUrl: cubit.peopleChat.first.avatarUrl,
+                errorWidget: (context, url, error) =>
+                    SvgPicture.asset(ImageAssets.avatarDefault),
                 fit: BoxFit.cover,
               ),
             ),
@@ -122,23 +130,21 @@ class HeaderMessWidget extends StatelessWidget {
       );
     }
 
-    return peopleChat.length < 2? const SizedBox(): Container(
-      width: 62,
-      height: 62,
-      child: Stack(
-        children: [
-          avatar(peopleChat.first.avatarUrl, 50),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: avatar(peopleChat.last.avatarUrl, 40),
-          )
-        ],
-      ),
-    );
-  }
-
-  String title() {
-    return peopleChat.map((e) => e.nameDisplay).join(',');
+    return cubit.peopleChat.length < 2
+        ? const SizedBox()
+        : Container(
+            width: 62,
+            height: 62,
+            child: Stack(
+              children: [
+                avatar(cubit.peopleChat.first.avatarUrl, 50),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: avatar(cubit.peopleChat.last.avatarUrl, 40),
+                )
+              ],
+            ),
+          );
   }
 }

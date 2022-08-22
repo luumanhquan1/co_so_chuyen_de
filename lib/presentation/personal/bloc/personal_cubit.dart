@@ -11,6 +11,7 @@ import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/domain/repository/user_repository.dart';
 import 'package:ccvc_mobile/presentation/personal/bloc/personal_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:rxdart/subjects.dart';
 
 class PersonalCubit extends BaseCubit<PersonalState> {
@@ -74,5 +75,6 @@ class PersonalCubit extends BaseCubit<PersonalState> {
     await PrefsService.removePasswordPresent();
     await PrefsService.removeIsInfo();
     await HiveLocal.removeDataUser();
+    FirebaseMessaging.instance.deleteToken();
   }
 }

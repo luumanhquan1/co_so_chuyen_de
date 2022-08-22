@@ -14,21 +14,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class MessageService {
-  static Map<String, RoomChatModel> _idRoomChat = {};
+  static Map<String, RoomChatModel> idRoomChat = {};
   static Stream<List<RoomChatModel>>? getRoomChat(String idUser) {
     return FirebaseSetup.fireStore
         .collection(DefaultEnv.usersCollection)
         .doc(idUser)
         .collection(DefaultEnv.messCollection)
         .orderBy("update_at", descending: true)
-        .snapshots()
+        .snapshots(includeMetadataChanges: true)
         .transform(
       StreamTransformer.fromHandlers(
         handleData: (docSnap, sink) async {
           final data = <RoomChatModel>[];
           await Future.forEach(docSnap.docs,
               (QueryDocumentSnapshot<Map<String, dynamic>> element) async {
-            if (!_idRoomChat.keys.contains(element.id)) {
+            if (!idRoomChat.keys.contains(element.id)) {
               final profileRoom = await FirebaseSetup.fireStore
                   .collection(DefaultEnv.messCollection)
                   .doc(element.id)
@@ -38,24 +38,26 @@ class MessageService {
                 final listPeople = await _getChatRoomUser(
                     jsonProfileRoom['people_chat'] as List<dynamic>, idUser);
                 final room = RoomChatModel(
-                    roomId: element.id,
-                    peopleChats: listPeople,
-                    colorChart: jsonProfileRoom['color_chart'] ?? 0,
-                    isGroup: jsonProfileRoom['is_group'] ?? false);
+                  roomId: element.id,
+                  peopleChats: listPeople,
+                  colorChart: jsonProfileRoom['color_chart'] ?? 0,
+                  isGroup: jsonProfileRoom['is_group'] ?? false,
+                  tenNhom: jsonProfileRoom['ten_nhom'] ?? '',
+                );
                 data.add(room);
-                _idRoomChat.addAll({element.id: room});
+                idRoomChat.addAll({element.id: room});
                 sink.add(data);
               }
             } else {
-              if (_idRoomChat[element.id] != null) {
-                data.add(_idRoomChat[element.id]!);
+              if (idRoomChat[element.id] != null) {
+                data.add(idRoomChat[element.id]!);
                 sink.add(data);
               }
             }
           });
-       if(data.isEmpty){
-         sink.add([]);
-       }
+          if (data.isEmpty) {
+            sink.add([]);
+          }
         },
       ),
     );
@@ -83,11 +85,11 @@ class MessageService {
         final userInfo = await getUserChat(id.toString());
         pepole.add(
           PeopleChat(
-            userId: id,
-            avatarUrl: userInfo.avatarUrl ?? '',
-            nameDisplay: userInfo.nameDisplay ?? '',
-            bietDanh: element['biet_danh'] ?? '',
-          ),
+              userId: id,
+              avatarUrl: userInfo.avatarUrl ?? '',
+              nameDisplay: userInfo.nameDisplay ?? '',
+              bietDanh: element['biet_danh'] ?? '',
+              isOnline: userInfo.onlineFlag ?? false),
         );
       }
     }
@@ -277,5 +279,22 @@ class MessageService {
         .update({
       'da_xem': FieldValue.arrayUnion([idUser])
     });
+  }
+
+  static void changeNameGroup(String idGroup, String name) {
+    FirebaseSetup.fireStore
+        .collection(DefaultEnv.messCollection)
+        .doc(idGroup)
+        .update({'ten_nhom': name});
+  }
+
+  static void goBoTinNhan(String idMessage, String idRoom) {
+
+    FirebaseSetup.fireStore
+        .collection(DefaultEnv.messCollection)
+        .doc(idRoom)
+        .collection(idRoom)
+        .doc(idMessage)
+        .update({'message_type_id': SmsType.Tin_Nhan_Go_bo.getInt()});
   }
 }

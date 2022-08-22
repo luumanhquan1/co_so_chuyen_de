@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/tabbar_screen/ui/main_screen.dart';
 
 import 'package:ccvc_mobile/utils/extensions/size_extension.dart';
 import 'package:ccvc_mobile/widgets/dialog/message_dialog/message_config.dart';
+import 'package:ccvc_mobile/widgets/views/show_loading_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

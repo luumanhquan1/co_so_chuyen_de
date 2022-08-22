@@ -162,7 +162,6 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   Future<String> createRoomChatDefault(List<PeopleChat> peopleChat) async {
-    ShowLoadingScreen.show();
     final idRoomChat = Uuid().v1();
     final userCurrent = HiveLocal.getDataUser();
     final room = RoomChatModel(
@@ -178,9 +177,9 @@ class MessageCubit extends BaseCubit<MainState> {
       ],
       colorChart: 0,
       isGroup: peopleChat.length > 1,
+      tenNhom: '',
     );
     _roomChat.sink.add(room.roomId);
-    ShowLoadingScreen.dismiss();
     return MessageService.createRoomChat(room);
   }
 
@@ -192,10 +191,19 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   void removePeople(String idUser) {
+    peopleChat.removeWhere((element) => element.userId == idUser);
+    MessageService.removeChat(idRoomChat, idUser);
+  }
 
-      peopleChat.removeWhere((element) => element.userId == idUser);
-      MessageService.removeChat(idRoomChat, idUser);
+  void changeNameGroup(String name) {
+    if (chatModel?.isGroup ?? false) {
+      MessageService.changeNameGroup(idRoomChat, name.trim());
+      chatModel?.tenNhom = name.trim();
+    }
+  }
 
+  void goBoTinNhan(String idMessage) {
+    MessageService.goBoTinNhan(idMessage, chatModel?.roomId ?? '');
   }
 
   bool isBlock() {

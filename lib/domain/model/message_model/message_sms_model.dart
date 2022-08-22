@@ -6,7 +6,7 @@ import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
 import 'package:uuid/uuid.dart';
 
-enum SmsType { Sms, Image }
+enum SmsType { Sms, Image, Tin_Nhan_Go_bo }
 
 extension smsTypeExtension on SmsType {
   int getInt() {
@@ -15,6 +15,8 @@ extension smsTypeExtension on SmsType {
         return 0;
       case SmsType.Image:
         return 1;
+      case SmsType.Tin_Nhan_Go_bo:
+        return 2;
     }
   }
 }
@@ -51,6 +53,8 @@ class MessageSmsModel {
         return SmsType.Sms;
       case 1:
         return SmsType.Image;
+      case 2:
+        return SmsType.Tin_Nhan_Go_bo;
     }
     return SmsType.Sms;
   }
@@ -79,9 +83,9 @@ class MessageSmsModel {
     loaiTinNhan = json['message_type_id'];
     if (json['da_xem'] is List) {
       (json['da_xem'] as List).forEach((element) {
-        if(daXem == null){
+        if (daXem == null) {
           daXem = [element];
-        }else {
+        } else {
           daXem!.add(element);
         }
       });
