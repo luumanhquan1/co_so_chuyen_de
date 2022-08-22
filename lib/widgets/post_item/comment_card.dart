@@ -4,6 +4,7 @@ import 'package:ccvc_mobile/config/themes/theme_color.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/utils/app_utils.dart';
+import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/widgets/app_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,19 +29,38 @@ class CommentCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: onTapName,
-            child: ClipRRect(
+            child:
+            ClipRRect(
               child: Container(
-                width: 40.sp,
-                height: 40.sp,
-                child: commentModel.author == null ||
-                        commentModel.author!.avatarUrl!.isEmpty
-                    ? Container(
-                        color: ThemeColor.ebonyClay,
-                      )
-                    : AppImage.network(path: commentModel.author!.avatarUrl!),
-              ),
-              borderRadius: BorderRadius.circular(80),
-            ),
+                  width: 40.sp,
+                  height: 40.sp,
+                  child: (commentModel.author == null ||
+                      commentModel.author!.avatarUrl!.isEmpty
+                      ? Container(
+                    color: ThemeColor.ebonyClay,
+                  )
+                      : CircleAvatar(
+                    // radius: 30, // Image radius
+                    backgroundImage: NetworkImage(
+
+                            commentModel.author?.avatarUrl ??
+                            ImageAssets.imgEmptyAvata),
+                  ))),
+              borderRadius: BorderRadius.circular(120),
+            )
+            // ClipRRect(
+            //   child: Container(
+            //     width: 40.sp,
+            //     height: 40.sp,
+            //     child: commentModel.author == null ||
+            //             commentModel.author!.avatarUrl!.isEmpty
+            //         ? Container(
+            //             color: ThemeColor.ebonyClay,
+            //           )
+            //         : AppImage.network(path: commentModel.author!.avatarUrl!),
+            //   ),
+            //   borderRadius: BorderRadius.circular(80),
+            // ),
           ),
           Expanded(
             child: Padding(

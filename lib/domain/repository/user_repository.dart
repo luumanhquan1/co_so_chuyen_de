@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/domain/model/friend_request_model.dart';
 import 'package:ccvc_mobile/domain/model/relationship_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
 
@@ -385,6 +386,7 @@ class UserRepopsitory {
           .collection(DefaultEnv.usersCollection)
           .doc(userId2)
           .update({'update_at': DateTime.now().millisecondsSinceEpoch});
+      debugPrint('blocked');
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
