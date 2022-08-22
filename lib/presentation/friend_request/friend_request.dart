@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/friend_request/bloc/friend_request_bloc.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/widget/skeleton_friend_widget.dart';
@@ -48,11 +49,40 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                               avatarUrl: result.avatarUrl ?? '',
                               name: result.nameDisplay ?? '',
                               peopleType: result.peopleType,
-                              onAccept: () {
-                                cubit.confirmFriend(result.userId ?? '');
+                              onAccept: () async {
+                                final accept = await showOkCancelAlertDialog(
+                                  context: context,
+                                  title: 'Đồng ý kết bạn',
+                                  message:
+                                      'Bạn có chắc chắn muốn đồng ý kết bạn với người này?',
+                                  okLabel: 'Ok',
+                                  cancelLabel: 'Hủy',
+                                  fullyCapitalizedForMaterial: false,
+                                );
+
+                                if (accept.name == 'ok') {
+                                  cubit.confirmFriend(result.userId ?? '');
+                                } else {
+                                  Navigator.pop(context);
+                                }
                               },
-                              onDelete: () {
-                                cubit.delectFriendRequest(result.userId ?? '');
+                              onDelete: () async {
+                                final accept = await showOkCancelAlertDialog(
+                                  context: context,
+                                  title: 'Xoá lời mời kết bạn',
+                                  message:
+                                      'Bạn có chắc chắn muốn xoá lời mời kết bạn của người này?',
+                                  okLabel: 'Ok',
+                                  cancelLabel: 'Hủy',
+                                  fullyCapitalizedForMaterial: false,
+                                );
+
+                                if (accept.name == 'ok') {
+                                  cubit
+                                      .delectFriendRequest(result.userId ?? '');
+                                } else {
+                                  Navigator.pop(context);
+                                }
                               },
                             ),
                           );

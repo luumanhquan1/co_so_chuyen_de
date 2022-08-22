@@ -328,10 +328,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: StreamBuilder<RelationshipType>(
               stream: _profileCubit.relationshipType,
               builder: (context, type) {
-                debugPrint('ffffq ${relationshipType.toString()}');
-                if (_profileCubit.relationshipType ==
+                debugPrint('ffffq ${type.data.toString()}');
+                if (type.data ==
                     RelationshipType.blocked) {
-                  return Center(child: Text('không có dữ liệu'));
+                  return Container(height: MediaQuery.of(context).size.height/2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: Text('Không có dữ liệu',
+                        style: titleAppbar(color: Colors.black),
+                      )));
                 }
                 return StreamBuilder<List<PostModel>>(
                     stream: _profileCubit.posts,
@@ -855,6 +859,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       if (result.name == 'ok') {
                         await _profileCubit.block(context);
+                     //   Navigator.pop(context);
                       } else {
                         Navigator.pop(context);
                       }
