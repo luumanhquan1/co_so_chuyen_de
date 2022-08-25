@@ -1,6 +1,10 @@
 import 'dart:developer';
 
 import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
+import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
+import 'package:ccvc_mobile/domain/model/notify/notification_model.dart';
+import 'package:ccvc_mobile/presentation/notification/bloc/screen_stype.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
@@ -194,8 +198,8 @@ class PostRepository {
   //   return res;
   // }
   //
-  Future<bool> likePost(String postId, String uid, List likes) async {
-    log(postId + ' rrr  ' + uid);
+  Future<bool> likePost(PostModel postModel, String uid, List likes) async {
+    log('${postModel.postId} rrr  ' + uid);
     try {
       if (likes.contains(uid)) {
         // if the likes list contains the user uid, we need to remove it
@@ -203,7 +207,7 @@ class PostRepository {
             .collection(DefaultEnv.appCollection)
             .doc(DefaultEnv.developDoc)
             .collection(DefaultEnv.postsCollection)
-            .doc(postId)
+            .doc(postModel.postId)
             .update({
           'update_at': DateTime.now().millisecondsSinceEpoch,
           'likes': FieldValue.arrayRemove([uid])
@@ -214,11 +218,26 @@ class PostRepository {
             .collection(DefaultEnv.appCollection)
             .doc(DefaultEnv.developDoc)
             .collection(DefaultEnv.postsCollection)
-            .doc(postId)
+            .doc(postModel.postId)
             .update({
           'update_at': DateTime.now().millisecondsSinceEpoch,
           'likes': FieldValue.arrayUnion([uid])
         });
+
+        if (PrefsService.getUserId() != (postModel.author?.userId ?? '')) {
+          await FireStoreMethod.createNotification(
+            model: NotificationModel(
+              notiId: '',
+              userId: postModel.author?.userId ?? '',
+              userReactId: PrefsService.getUserId(),
+              detailId: postModel.postId ?? '',
+              typeNoti: ScreenType.LIKE,
+              createAt: DateTime.now(),
+              isRead: false,
+            ),
+            userId: postModel.author?.userId ?? '',
+          );
+        }
       }
       return true;
     } catch (err) {
@@ -275,15 +294,15 @@ class PostRepository {
           .doc(postModel.postId)
           .delete();
 
-      if(postModel.type != null  && postModel.type ==2)
-        {
-          final Reference ref = storage
-              .ref()
-              .child(postModel.author?.userId ?? '').child(DefaultEnv.postsCollection)
-              .child(postModel.postId ?? '');
+      if (postModel.type != null && postModel.type == 2) {
+        final Reference ref = storage
+            .ref()
+            .child(postModel.author?.userId ?? '')
+            .child(DefaultEnv.postsCollection)
+            .child(postModel.postId ?? '');
 
-          await ref.delete();
-        }
+        await ref.delete();
+      }
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(

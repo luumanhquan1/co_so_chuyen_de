@@ -20,6 +20,6 @@ extension DateFormatString on DateTime {
     return dateString;
   }
   int get convertToTimesTamp {
-    return microsecondsSinceEpoch;
+    return millisecondsSinceEpoch;
   }
 }

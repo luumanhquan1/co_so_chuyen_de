@@ -1,3 +1,4 @@
 extension IntExtension on int {
-  DateTime get convertToDateTime => DateTime.fromMicrosecondsSinceEpoch(this);
+  DateTime get convertToDateTime =>
+      DateTime.fromMillisecondsSinceEpoch(this);
 }

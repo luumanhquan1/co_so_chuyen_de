@@ -79,9 +79,7 @@ class _PostScreenState extends State<PostScreen> {
                                                           ?.userId ??
                                                       ''))),
                                     ),
-                                    post.data!.comments == null
-                                        ? SizedBox()
-                                        : Container(
+                                    if (post.data!.comments == null) SizedBox() else Container(
                                             // width: 200,
                                             // height: 200,
                                             child: ListView.builder(
@@ -161,7 +159,7 @@ class _PostScreenState extends State<PostScreen> {
                                       .trim()
                                       .isNotEmpty) {
                                     _postCubit.commentPost(
-                                      postId: post.data?.postId ?? '',
+                                      postModel: post.data ?? PostModel.empty(),
                                       data: commentController.text.trim(),
                                     );
                                   }

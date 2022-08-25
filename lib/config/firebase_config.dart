@@ -7,7 +7,6 @@ class FirebaseSetup {
   static late CollectionReference postsCollection;
  static late DocumentReference fireStore;
  static Future<void> setUp() async {
-    await Firebase.initializeApp();
     fireStore = FirebaseFirestore.instance
         .collection(DefaultEnv.appCollection).doc(DefaultEnv.developDoc);
     usersCollection = FirebaseFirestore.instance

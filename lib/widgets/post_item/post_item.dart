@@ -304,7 +304,7 @@ class _PostCardState extends State<PostCard> {
                                         size: 20.sp,
                                       ),
                                 onTap: () => PostRepository().likePost(
-                                  widget.postModel.postId!,
+                                  widget.postModel,
                                   widget.userId,
                                   widget.postModel.likes!,
                                 ),

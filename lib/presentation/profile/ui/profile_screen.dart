@@ -680,7 +680,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: GestureDetector(
-            onTap: () => _profileCubit.sendFriendRequest(),
+            onTap: () => _profileCubit.sendFriendRequest(widget.userId),
             child: Container(
               decoration: BoxDecoration(
                 color: colorPrimary,
@@ -752,7 +752,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
     }
     return GestureDetector(
-      onTap: () => _profileCubit.sendFriendRequest(),
+      onTap: () => _profileCubit.sendFriendRequest(widget.userId),
       child: Container(
         decoration: BoxDecoration(
           color: colorPrimary,
@@ -889,7 +889,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       log(result.name.toString());
 
                       if (result.name == 'ok') {
-                        await _profileCubit.acceptFriendRequest();
+                        await _profileCubit.acceptFriendRequest(widget.userId);
                         Navigator.pop(context);
                       } else {
                         Navigator.pop(context);

@@ -83,7 +83,7 @@ class MessageCubit extends BaseCubit<MainState> {
         ),
       );
       MessageService.updateRoomChatUser(idUser, idRoomChat);
-      PushFCM.pushNoti(
+      PushFCM.pushNotiMessage(
         tokens,
         idRoomChat,
         FCMModel(
