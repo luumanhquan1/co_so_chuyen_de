@@ -328,10 +328,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: StreamBuilder<RelationshipType>(
               stream: _profileCubit.relationshipType,
               builder: (context, type) {
-                debugPrint('ffffq ${relationshipType.toString()}');
-                if (_profileCubit.relationshipType ==
+                debugPrint('ffffq ${type.data.toString()}');
+                if (type.data ==
                     RelationshipType.blocked) {
-                  return Center(child: Text('không có dữ liệu'));
+                  return Container(height: MediaQuery.of(context).size.height/2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: Text('Không có dữ liệu',
+                        style: titleAppbar(color: Colors.black),
+                      )));
                 }
                 return StreamBuilder<List<PostModel>>(
                     stream: _profileCubit.posts,
@@ -638,26 +642,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildAvatar({String? avatarUrl}) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(160),
-      child: Container(
-        height: 80.sp,
-        width: 80.sp,
-        decoration: BoxDecoration(
-          //   shape: BoxShape.circle,
-          color: ThemeColor.paleGrey,
-        ),
-        child: avatarUrl == null || avatarUrl.isEmpty
-            ? SizedBox()
-            : AppImage.network(
-                path: avatarUrl,
-                //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+    return
 
-                height: 80.sp,
-                width: 80.sp,
-              ),
-      ),
-    );
+      ClipRRect(
+        child: Container(
+            width: 80.sp,
+            height: 80.sp,
+            child: ( avatarUrl == null || avatarUrl.isEmpty
+                ? Container(
+              color: ThemeColor.ebonyClay,
+            )
+                : CircleAvatar(
+              // radius: 30, // Image radius
+              backgroundImage: NetworkImage(
+                  avatarUrl),
+            ))),
+        borderRadius: BorderRadius.circular(200),
+      );
+
+
+
+
+    //   ClipRRect(
+    //   borderRadius: BorderRadius.circular(160),
+    //   child: Container(
+    //     height: 80.sp,
+    //     width: 80.sp,
+    //     decoration: BoxDecoration(
+    //       //   shape: BoxShape.circle,
+    //       color: ThemeColor.paleGrey,
+    //     ),
+    //     child: avatarUrl == null || avatarUrl.isEmpty
+    //         ? SizedBox()
+    //         : AppImage.network(
+    //             path: avatarUrl,
+    //             //'https://img.freepik.com/free-vector/vector-set-two-different-dog-breeds-dog-illustration-flat-style_619130-447.jpg?w=1480',
+    //
+    //             height: 80.sp,
+    //             width: 80.sp,
+    //           ),
+    //   ),
+    // );
   }
 
   Widget _loadingPost() {
@@ -834,6 +859,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       if (result.name == 'ok') {
                         await _profileCubit.block(context);
+                     //   Navigator.pop(context);
                       } else {
                         Navigator.pop(context);
                       }

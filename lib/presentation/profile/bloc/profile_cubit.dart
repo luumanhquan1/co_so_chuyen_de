@@ -60,7 +60,6 @@ class ProfileCubit extends BaseCubit<ProfileState> {
   Stream<RelationshipType> get relationshipType => _relationshipType.stream;
   PostRepository _postRepository = PostRepository();
   UserRepopsitory _userRepopsitory = UserRepopsitory();
-
   Future<void> getAllPosts(String userId) async {
     //  log(DateTime.now().toString());
     try {
@@ -69,8 +68,9 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
           .collection(DefaultEnv.postsCollection)
-          // .where('user_id', isEqualTo: userId)
+         // .where('user_id', isEqualTo: userId)
           .orderBy('create_at', descending: true)
+
           .snapshots()
           .listen((event) async {
         debugPrint('hihi');
@@ -272,6 +272,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
 
           getAllPosts(userId);
         }
+
       });
     } catch (e) {
       log(e.toString());
@@ -294,7 +295,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       if (result) {
         log('pppp' + result.toString());
         _relationshipType.sink.add(RelationshipType.requestSender);
-        //   showContent();
+          showContent();
 
         await FireStoreMethod.createNotification(
           model: NotificationModel(
@@ -363,7 +364,6 @@ class ProfileCubit extends BaseCubit<ProfileState> {
 
   Future<void> cancelOrDeclineFriendRequest() async {
     // showLoading();
-    log('vvvvvvvvvvvvvvv' + _user.value.userId.toString());
     try {
       final ownerId = await PrefsService.getUserId();
       late var result;
@@ -388,7 +388,6 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             .where('receiver', isEqualTo: ownerId)
             .get();
       }
-      log('pppp' + result.docs.first.data().toString());
       FriendRequestModel requestModel =
           FriendRequestModel.fromJson(result.docs.first.data());
       requestModel.requestId = result.docs.first.id;
@@ -405,15 +404,13 @@ class ProfileCubit extends BaseCubit<ProfileState> {
         showError();
       }
     } catch (e) {
-      log('lllllllllllllllllllllllllllll');
       log(e.toString());
       showError();
     }
   }
 
   Future<void> discardRelationship() async {
-    // showLoading();
-    log('vvvvvvvvvvvvvvv' + _user.value.userId.toString());
+     showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
       log(ownerId);
@@ -437,12 +434,11 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           await _userRepopsitory.discardRelationship(relationshipModel: rela);
       if (resultdecline) {
         _relationshipType.sink.add(RelationshipType.stranger);
-        //   showContent();
+           showContent();
       } else {
         showError();
       }
     } catch (e) {
-      log('lllllllllllllllllllllllllllll');
       log(e.toString());
       showError();
     }
@@ -460,13 +456,14 @@ class ProfileCubit extends BaseCubit<ProfileState> {
           type: 2);
       switch (_relationshipType.value) {
         case RelationshipType.stranger:
+          debugPrint('nguoi laaaaaaa');
           final result = await _userRepopsitory.blockUser(
             userId1: ownerId,
             userId2: _user.value.userId ?? '',
           );
           if (result) {
             _relationshipType.sink.add(RelationshipType.blocked);
-            // Navigator.pop(context);
+           // Navigator.pop(context);
           } else {
             showError();
           }
@@ -497,17 +494,54 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             );
             if (resultBlock) {
               _relationshipType.sink.add(RelationshipType.blocked);
-              Navigator.pop(context);
+            //  Navigator.pop(context);
             } else {
               showError();
             }
-            Navigator.pop(context);
+           // Navigator.pop(context);
           } else {
             showError();
           }
 
           break;
         case RelationshipType.requestReceiver:
+
+          final ownerId = await PrefsService.getUserId();
+          final result = await FirebaseFirestore.instance
+              .collection(DefaultEnv.appCollection)
+              .doc(DefaultEnv.developDoc)
+              .collection(DefaultEnv.usersCollection)
+              .doc(_user.value.userId ?? '')
+              .collection('friend_requests')
+              .where('sender', isEqualTo:_user.value.userId )
+              .where('receiver', isEqualTo: ownerId )
+              .get();
+          log('pppp' + result.docs.first.data().toString());
+          FriendRequestModel requestModel =
+          FriendRequestModel.fromJson(result.docs.first.data());
+          requestModel.requestId = result.docs.first.id;
+          requestModel.sender =
+              UserModel(userId: result.docs.first.data()['sender']);
+          requestModel.receiver =
+              UserModel(userId: result.docs.first.data()['receiver']);
+          final resultdecline = await _userRepopsitory
+              .cancelOrDeclineFriendRequest(requestModel: requestModel);
+          if (resultdecline) {
+            final result = await _userRepopsitory.blockUser(
+              userId1: ownerId,
+              userId2: _user.value.userId ?? '',
+            );
+            if (result) {
+              _relationshipType.sink.add(RelationshipType.blocked);
+          //    Navigator.pop(context);
+            } else {
+              showError();
+            }
+            //Navigator.pop(context);
+          } else {
+            showError();
+          }
+          break;
         case RelationshipType.requestSender:
           final ownerId = await PrefsService.getUserId();
           final result = await FirebaseFirestore.instance
@@ -536,11 +570,11 @@ class ProfileCubit extends BaseCubit<ProfileState> {
             );
             if (result) {
               _relationshipType.sink.add(RelationshipType.blocked);
-              Navigator.pop(context);
+             // Navigator.pop(context);
             } else {
               showError();
             }
-            Navigator.pop(context);
+           // Navigator.pop(context);
           } else {
             showError();
           }

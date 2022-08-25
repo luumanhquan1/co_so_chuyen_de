@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/strings.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
@@ -99,7 +100,8 @@ class _PersonalScreenState extends State<PersonalScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  BlockListScreen(userId: _personalCubit.userId),
+                                builder: (context) => BlockListScreen(
+                                    userId: _personalCubit.userId),
                               ),
                             );
                           },
@@ -118,20 +120,34 @@ class _PersonalScreenState extends State<PersonalScreen> {
                           },
                         ),
                         _buildListTile(
-                            title: 'Đăng xuất',
-                            icon: Icons.logout,
-                            onTap: () async {
-                              final result = await FirebaseAuthentication.logOut(
-                                  snapshot.data!.userId!);
-                              if (result) {
+                          title: 'Đăng xuất',
+                          icon: Icons.logout,
+                          onTap: () async {
+                            final result = await showOkCancelAlertDialog(
+                              context: context,
+                              title: 'Đăng xuất',
+                              message: 'Bạn có chắc chắn muốn đăng xuất?',
+                              okLabel: 'Ok',
+                              cancelLabel: 'Hủy',
+                              fullyCapitalizedForMaterial: false,
+                            );
 
+                            if (result.name == 'ok') {
+                              final result =
+                                  await FirebaseAuthentication.logOut(
+                                      snapshot.data!.userId!);
+                              if (result) {
                                 await _personalCubit.logOut();
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => LoginScreen()));
                               }
-                            }),
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          },
+                        ),
                       ]),
                 ),
               ))),
