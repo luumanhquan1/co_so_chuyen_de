@@ -9,20 +9,29 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemNotificationWidget extends StatelessWidget {
   final NotificationModel model;
+  final Function() deleteNoti;
+  final Function() ontapNoti;
 
-  const ItemNotificationWidget({Key? key, required this.model})
-      : super(key: key);
+  const ItemNotificationWidget({
+    Key? key,
+    required this.model,
+    required this.deleteNoti,
+    required this.ontapNoti,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        ontapNoti();
       },
       child: Dismissible(
         key: ObjectKey(model),
         background: rightDelete(),
         secondaryBackground: rightDelete(),
-        onDismissed: (DismissDirection direction) {},
+        onDismissed: (DismissDirection direction) {
+          deleteNoti();
+        },
         child: Container(
           width: double.maxFinite,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -39,7 +48,7 @@ class ItemNotificationWidget extends StatelessWidget {
                   children: [
                     RichText(
                       text: TextSpan(
-                        text: model.name,
+                        text: model.nameReact,
                         style: textNormalCustom(
                           color: textTitle,
                           fontSize: 14,
@@ -47,7 +56,10 @@ class ItemNotificationWidget extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: model.screenType.getTitle(countLike: 3),
+                            text: model.typeNoti.getTitle(
+                              countLike: model.countLike,
+                              isPostToMe: model.isPostOfMe,
+                            ),
                             style: textNormalCustom(
                               fontSize: 13,
                               color: subTitle,
@@ -59,7 +71,7 @@ class ItemNotificationWidget extends StatelessWidget {
                     ),
                     spaceH14,
                     Text(
-                      model.createBy.formatHHmmDdMMYYYY,
+                      model.createAt.formatHHmmDdMMYYYY,
                       style: textNormalCustom(
                         fontSize: 12,
                         color: subTitle,

@@ -24,6 +24,8 @@ class PostModel {
       this.likes,
       this.comments}); // factory PostModel.fromJson(Map<String, dynamic> json) =>
 
+  PostModel.empty();
+
   PostModel.fromJson(Map<String, dynamic> json) {
     postId = json['post_id'] as String?;
     type = json['type'] as int?;
@@ -38,6 +40,26 @@ class PostModel {
       });
     }
   }
+
+  factory PostModel.fromJsonData(Map<String, dynamic> json) {
+    final List<String> dataLikes = [];
+
+    if (json['likes'] != null) {
+      json['likes'].forEach((v) {
+        dataLikes.add(v);
+      });
+    }
+    return PostModel(
+      postId: json['post_id'] as String?,
+      type: json['type'] as int?,
+      content: json['content'] as String?,
+      createAt: json['create_at'] as int?,
+      updateAt: json['update_at'] as int?,
+      imageUrl: json['image_url'] as String,
+      likes: dataLikes,
+    );
+  }
+
   Map<String, dynamic> toJson(PostModel instance) => <String, dynamic>{
         'user_id': instance.author?.userId ?? '',
         'image_url': instance.imageUrl,
@@ -45,13 +67,12 @@ class PostModel {
         'content': instance.content,
         'create_at': instance.createAt,
         'update_at': instance.updateAt,
-        'likes' : instance.likes
-
+        'likes': instance.likes,
+        'post_id': instance.postId,
       };
 
   @override
   String toString() {
     return 'PostModel{postId: $postId, author: $author, type: $type, content: $content, createAt: $createAt, imageUrl: $imageUrl, updateAt: $updateAt, likes: $likes}';
   }
-
 }

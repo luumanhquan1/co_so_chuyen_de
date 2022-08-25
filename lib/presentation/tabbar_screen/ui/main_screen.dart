@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:ccvc_mobile/domain/model/notify/notification_model.dart';
 import 'package:ccvc_mobile/presentation/message/message_screen.dart';
+import 'package:ccvc_mobile/presentation/notification/bloc/screen_stype.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/bloc/main_cubit.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/tabbar_item.dart';
 import 'package:ccvc_mobile/presentation/tabbar_screen/ui/widgets/custom_navigator_tabbar.dart';
@@ -35,9 +37,17 @@ class _MainTabBarViewState extends State<MainTabBarView> {
       log('${value.data}');
       final data = json.decode(value.data['data'] ?? '');
       final dataChat = DataChat.fromJson(data);
-      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-        pushDetailsOnTapNotification(dataChat);
-      });
+
+      if (data['type_noti'] == null) {
+        WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+          pushDetailsOnTapNotification(dataChat);
+        });
+      } else {
+        final NotificationModel noti = NotificationModel.fromJson(data);
+
+        noti.typeNoti
+            .navigatorScreen(context: context, detailId: noti.detailId);
+      }
     });
   }
 

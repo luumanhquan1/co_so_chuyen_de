@@ -23,7 +23,7 @@ class AppState {
 
     isUserModel = PrefsService.getIsCreateInfo();
     if (isUserModel && userId.isNotEmpty) {
-      tokenFcm = await FireStoreMethod.getTokenFcm(id: userId);
+      tokenFcm = await FireStoreMethod.getTokenFcm(id: userId, );
     }
   }
 }

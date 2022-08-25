@@ -11,4 +11,5 @@ class DefaultEnv {
   static const String avatar = 'avatar';
   static const String tokkenFcm = 'tokken_fcm';
   static const String comments = 'comments';
+  static const String noifications = 'notifications';
 }

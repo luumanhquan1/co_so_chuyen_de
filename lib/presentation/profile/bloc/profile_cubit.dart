@@ -3,14 +3,17 @@ import 'dart:typed_data';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
+import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/friend_request_model.dart';
+import 'package:ccvc_mobile/domain/model/notify/notification_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/relationship_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/domain/repository/user_repository.dart';
+import 'package:ccvc_mobile/presentation/notification/bloc/screen_stype.dart';
 import 'package:ccvc_mobile/presentation/profile/bloc/profile_state.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -159,7 +162,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       likes: [],
       comments: [],
     );
-    await FireStoreMethod.createPost(model: model,postId: postId );
+    await FireStoreMethod.createPost(model: model, postId: postId);
 
     showContent();
   }
@@ -277,10 +280,11 @@ class ProfileCubit extends BaseCubit<ProfileState> {
     }
   }
 
-  Future<void> sendFriendRequest() async {
-     showLoading();
+  Future<void> sendFriendRequest(String userIdRequestFriend) async {
+    // showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
+      final UserModel userModel = HiveLocal.getDataUser() ?? UserModel.empty();
       FriendRequestModel newRequest = FriendRequestModel(
           sender: UserModel(userId: ownerId),
           receiver: UserModel(userId: _user.value.userId),
@@ -291,7 +295,20 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       if (result) {
         log('pppp' + result.toString());
         _relationshipType.sink.add(RelationshipType.requestSender);
-           showContent();
+          showContent();
+
+        await FireStoreMethod.createNotification(
+          model: NotificationModel(
+            notiId: '',
+            userId: userIdRequestFriend,
+            detailId: ownerId,
+            typeNoti: ScreenType.FRIEND_REQUEST,
+            createAt: DateTime.now(),
+            isRead: false,
+            userReactId:  PrefsService.getUserId(),
+          ),
+          userId: userIdRequestFriend,
+        );
       } else {
         showError();
       }
@@ -301,7 +318,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
     }
   }
 
-  Future<void> acceptFriendRequest() async {
+  Future<void> acceptFriendRequest(String userIdRequestFriend) async {
     showLoading();
     try {
       final ownerId = await PrefsService.getUserId();
@@ -322,6 +339,19 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       if (resultAccept) {
         log('pppp' + resultAccept.toString());
         _relationshipType.sink.add(RelationshipType.friend);
+
+        await FireStoreMethod.createNotification(
+          model: NotificationModel(
+            notiId: '',
+            userId: userIdRequestFriend,
+            detailId: ownerId,
+            typeNoti: ScreenType.ACCEPT_REQUEST_FRIEND,
+            createAt: DateTime.now(),
+            isRead: false,
+            userReactId:  PrefsService.getUserId(),
+          ),
+          userId: userIdRequestFriend,
+        );
         showContent();
       } else {
         showError();
@@ -552,6 +582,7 @@ class ProfileCubit extends BaseCubit<ProfileState> {
       }
       showContent();
     } catch (e) {
+      log('lllllllllllllllllllllllllllll');
       log(e.toString());
       showError();
     }

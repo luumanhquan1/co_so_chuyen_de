@@ -175,6 +175,7 @@ class _OverLayBirthdayWidgetState extends State<OverLayBirthdayWidget>
                         mode: CupertinoDatePickerMode.date,
                         onDateTimeChanged: (DateTime value) {
                           widget.cubit.birthDaySubject.add(value);
+                          widget.cubit.isUpdate();
                           widget.onChange(value);
                         },
                       ),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ccvc_mobile/config/crypto_config.dart';
@@ -12,8 +13,10 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/fcm_tokken_model.dart';
+import 'package:ccvc_mobile/domain/model/notify/notification_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/notification/bloc/screen_stype.dart';
 import 'package:ccvc_mobile/presentation/splash/bloc/app_state.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,7 +40,17 @@ Future<void> mainApp() async {
       await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   requestPermission();
+  await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print(
+          'Message also contained a notification: ${message.notification?.title ?? 'null data'}');
+    }
+  });
   await HiveLocal.init();
   await PrefsService.init();
   await FirebaseSetup.setUp();
@@ -86,6 +99,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       });
     }
     checkDeviceType();
+
   }
 
   Future<void> offStateWhenCloseApp() async {
@@ -239,6 +253,5 @@ void requestPermission() async {
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
 }

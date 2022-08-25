@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/presentation/update_user/bloc/update_user_cubit.dart
 import 'package:ccvc_mobile/presentation/update_user/ui/widget/avata_update.dart';
 import 'package:ccvc_mobile/presentation/update_user/ui/widget/birth_day_update_widget.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/utils/push_notification.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/dialog/show_dialog.dart';
@@ -146,6 +147,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                                     text:
                                         S.current.cap_nhat_tai_khoan_thanh_cong,
                                   );
+
                                   Navigator.pop(context);
                                 }
                               } else {

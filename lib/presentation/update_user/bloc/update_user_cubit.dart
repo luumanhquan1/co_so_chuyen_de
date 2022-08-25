@@ -82,10 +82,8 @@ class UpdateUserCubit extends BaseCubit<UpdateUserState> {
   void initData() {
     showLoading();
     userInfo = HiveLocal.getDataUser() ?? UserModel.empty();
-    birthDaySubject.add(
-      (userInfo.birthday ?? 0).convertToDateTime,
-    );
     birthDay = (userInfo.birthday ?? 0).convertToDateTime;
+    birthDaySubject.add(birthDay);
     gender = toGender(userInfo.gender ?? true);
     nameDisplay = userInfo.nameDisplay ?? '';
     imageUrl = userInfo.avatarUrl ?? '';

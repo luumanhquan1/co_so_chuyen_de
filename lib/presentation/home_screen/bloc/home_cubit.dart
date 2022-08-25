@@ -83,6 +83,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       content: content,
       imageUrl: imgUrl,
       likes: [],
+      postId: postId,
       comments: [],
     );
     await FireStoreMethod.createPost(model: model,postId: postId );

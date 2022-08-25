@@ -2,29 +2,34 @@ import 'dart:developer';
 
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
+import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
+import 'package:ccvc_mobile/domain/model/notify/notification_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/domain/repository/post_repository.dart';
 import 'package:ccvc_mobile/domain/repository/user_repository.dart';
+import 'package:ccvc_mobile/presentation/notification/bloc/screen_stype.dart';
 import 'package:ccvc_mobile/presentation/post/bloc/post_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
 class PostCubit extends BaseCubit<PostState> {
-  PostCubit(String postId) : super(PostState()){
-    userId =  PrefsService.getUserId();
+  PostCubit(String postId) : super(PostState()) {
+    userId = PrefsService.getUserId();
     log(userId);
     getUserInfo(userId);
     updatePost(postId);
-
   }
- final BehaviorSubject<PostModel> _posts =
-  BehaviorSubject<PostModel>.seeded(PostModel());
-  String userId='';
+
+  final BehaviorSubject<PostModel> _posts =
+      BehaviorSubject<PostModel>.seeded(PostModel());
+  String userId = '';
+
   Stream<PostModel> get post => _posts.stream;
+
   // //
   // // final BehaviorSubject<int> _unreadNotis =
   // // BehaviorSubject<int>.seeded(0);
@@ -64,7 +69,8 @@ class PostCubit extends BaseCubit<PostState> {
             .doc(DefaultEnv.developDoc)
             .collection(DefaultEnv.postsCollection)
             .doc(event.id)
-            .collection('comments').orderBy('create_at',descending: true)
+            .collection('comments')
+            .orderBy('create_at', descending: true)
             .get();
         //post.addAll({'comments':comments.docs});
         PostModel newPost = PostModel.fromJson(post);
@@ -85,19 +91,38 @@ class PostCubit extends BaseCubit<PostState> {
         debugPrint(newPost.toString());
         _posts.sink.add(newPost);
       }
-
     });
-
   }
 
-  Future<void> commentPost(
-      {required String postId,
-      required String data,}) async {
+  Future<void> commentPost({
+    required PostModel postModel,
+    required String data,
+  }) async {
     CommentModel newComment = CommentModel(
-        postId: postId,
-        data: data,
-        createAt: DateTime.now().millisecondsSinceEpoch,
-        author: _user.value);
+      postId: postModel.postId,
+      data: data,
+      createAt: DateTime.now().millisecondsSinceEpoch,
+      author: _user.value,
+    );
+
+    await FireStoreMethod.createNotification(
+      model: NotificationModel(
+        notiId: '',
+        userId: '',
+        userReactId: PrefsService.getUserId(),
+        detailId: postModel.postId ?? '',
+        typeNoti: PrefsService.getUserId() != (postModel.author?.userId ?? '')
+            ? ScreenType.YOU_COMMENT
+            : ScreenType.ME_COMMENT,
+        isPostOfMe:
+            PrefsService.getUserId() != PrefsService.getUserId(),
+        createAt: DateTime.now(),
+        isRead: false,
+      ),
+      userId: postModel.author?.userId ?? '',
+      postModel: postModel,
+    );
+
     log(newComment.toString());
     try {
       final result =
@@ -108,21 +133,21 @@ class PostCubit extends BaseCubit<PostState> {
     }
   }
 
-  Future<void> likePost(
-      {required String postId, required List<String> likes}) async {
-    try {
-      log('gggggggg'+_user.value.toString());
-
-      await _postRepository.likePost(
-        postId,
-        _user.value.userId!,
-        likes,
-      );
-    } catch (e) {
-      log(e.toString());
-      showError();
-    }
-  }
+  // Future<void> likePost(
+  //     {required String postId, required List<String> likes}) async {
+  //   try {
+  //     log('gggggggg'+_user.value.toString());
+  //
+  //     await _postRepository.likePost(
+  //       postId,
+  //       _user.value.userId!,
+  //       likes,
+  //     );
+  //   } catch (e) {
+  //     log(e.toString());
+  //     showError();
+  //   }
+  // }
 
   Future<void> deletePost({required String postId}) async {
     // try {
@@ -151,16 +176,16 @@ class PostCubit extends BaseCubit<PostState> {
     }
   }
 
-  // Future<void> getAllPosts() async{
-  //   showLoading();
-  //   try{
-  //     final result = await _postRepository.fetchAllPost();
-  //     _posts.sink.add(result);
-  //     showContent();
-  //   }catch (e){
-  //     log(e.toString());
-  //     showError();
-  //   }
-  // }
+// Future<void> getAllPosts() async{
+//   showLoading();
+//   try{
+//     final result = await _postRepository.fetchAllPost();
+//     _posts.sink.add(result);
+//     showContent();
+//   }catch (e){
+//     log(e.toString());
+//     showError();
+//   }
+// }
 
 }
