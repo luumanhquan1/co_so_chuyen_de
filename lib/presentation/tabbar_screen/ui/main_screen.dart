@@ -83,6 +83,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
             children: _listScreen.map((e) => e.widget).toList(),
           ),
           bottomNavigationBar: BottomTabBarWidget(
+            streamNoti: _cubit.isNotiStream(),
             selectItemIndex: type.index,
             onChange: (value) {
               _addScreen(value);

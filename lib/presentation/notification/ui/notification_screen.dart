@@ -64,6 +64,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           error: AppException('', S.current.something_went_wrong),
           stream: cubit.stateStream,
           child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: StreamBuilder<List<NotificationModel>>(
               stream: cubit.listNotificationSubject.stream,
               builder: (context, snapshot) {

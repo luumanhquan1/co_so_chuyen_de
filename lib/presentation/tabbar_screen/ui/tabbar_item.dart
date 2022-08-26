@@ -59,7 +59,10 @@ extension TabbarEnum on TabBarType {
     }
   }
 
-  Widget getTabBarItem({bool isSelect = false}) {
+  Widget getTabBarItem({
+    bool isSelect = false,
+    bool isNoti = false,
+  }) {
     switch (this) {
       case TabBarType.home:
         return SvgPicture.asset(
@@ -70,12 +73,29 @@ extension TabbarEnum on TabBarType {
           height: 20,
         );
       case TabBarType.likeTab:
-        return SvgPicture.asset(
-          ImageAssets.icTym,
-          color: isSelect
-              ? AppTheme.getInstance().colorField()
-              : AppTheme.getInstance().buttonUnfocus(),
-          height: 20,
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            SvgPicture.asset(
+              ImageAssets.icTym,
+              color: isSelect
+                  ? AppTheme.getInstance().colorField()
+                  : AppTheme.getInstance().buttonUnfocus(),
+              height: 20,
+            ),
+            if (isNoti)
+              const Positioned(
+                bottom: 10,
+                right: 37,
+                child: Icon(
+                  Icons.circle,
+                  color: Colors.red,
+                  size: 8,
+                ),
+              )
+            else
+              const SizedBox()
+          ],
         );
       case TabBarType.message:
         return SvgPicture.asset(

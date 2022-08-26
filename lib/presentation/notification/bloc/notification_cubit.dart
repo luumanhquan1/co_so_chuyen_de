@@ -29,7 +29,6 @@ class NotificationCubit extends BaseCubit<NotificationState> {
   }
 
   void readAllNoti() {
-
     FireStoreMethod.readAllNoti(userId: PrefsService.getUserId());
   }
 

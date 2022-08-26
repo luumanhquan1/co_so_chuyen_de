@@ -9,11 +9,13 @@ import 'package:image_picker/image_picker.dart';
 class BottomTabBarWidget extends StatelessWidget {
   final int selectItemIndex;
   final Function(TabBarType) onChange;
+  final Stream<bool> streamNoti;
 
   const BottomTabBarWidget({
     Key? key,
     required this.selectItemIndex,
     required this.onChange,
+    required this.streamNoti,
   }) : super(key: key);
 
   @override
@@ -36,37 +38,47 @@ class BottomTabBarWidget extends StatelessWidget {
           topLeft: Radius.circular(20),
         ),
       ),
-      child: SafeArea(
-        child: Row(
-          children: List.generate(listItem.length, (index) {
-            final tab = listItem[index];
+      child: StreamBuilder<bool>(
+          stream: streamNoti,
+          builder: (context, snapshot) {
+            final isNoti = snapshot.data ?? false;
+            return SafeArea(
+              child: Row(
+                children: List.generate(listItem.length, (index) {
+                  final tab = listItem[index];
 
-            return Expanded(
-              child: GestureDetector(
-                onTap: () async {
-                  onChange(tab);
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: tabBarItem(
-                    context: context,
-                    item: tab,
-                    isSelect: index == selectItemIndex,
-                  ),
-                ),
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        onChange(tab);
+                      },
+                      child: Container(
+                        color: Colors.transparent,
+                        child: tabBarItem(
+                          context: context,
+                          item: tab,
+                          isSelect: index == selectItemIndex,
+                          isNoti: isNoti,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
             );
           }),
-        ),
-      ),
     );
   }
 
   Widget tabBarItem({
     required BuildContext context,
     required TabBarType item,
+    bool isNoti = false,
     bool isSelect = false,
   }) {
-    return item.getTabBarItem(isSelect: isSelect);
+    return item.getTabBarItem(
+      isSelect: isSelect,
+      isNoti: isNoti,
+    );
   }
 }
