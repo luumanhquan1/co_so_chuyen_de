@@ -775,8 +775,7 @@ class FireStoreMethod {
           .listen((data) async {
         final List<NotificationModel> result = [];
 
-        if (data.docs.isEmpty) {
-        } else {
+        if (data.docs.isNotEmpty) {
           for (final e in data.docs) {
             final noti = NotificationModel.fromJson(e.data());
 
@@ -799,7 +798,9 @@ class FireStoreMethod {
             result.add(noti);
           }
         }
-        callBack(result);
+        Timer(const Duration(microseconds: 500), () {
+          callBack(result);
+        });
       });
     } catch (error) {
       if (error is TimeoutException || error is NoNetworkException) {
