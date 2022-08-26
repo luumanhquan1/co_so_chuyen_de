@@ -79,19 +79,25 @@ class _PostScreenState extends State<PostScreen> {
                                                           ?.userId ??
                                                       ''))),
                                     ),
-                                    if (post.data!.comments == null) SizedBox() else Container(
-                                            // width: 200,
-                                            // height: 200,
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              itemCount:
-                                                  post.data!.comments!.length,
-                                              itemBuilder: (ctx, index) =>
-                                                  CommentCard(
-                                                onTapName: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (_) => ProfileScreen(
+                                    if (post.data!.comments == null)
+                                      SizedBox()
+                                    else
+                                      Container(
+                                        // width: 200,
+                                        // height: 200,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount:
+                                              post.data!.comments!.length,
+                                          itemBuilder: (ctx, index) =>
+                                              CommentCard(
+                                            onTapName: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        ProfileScreen(
                                                             userId: post
                                                                     .data
                                                                     ?.comments?[
@@ -99,20 +105,19 @@ class _PostScreenState extends State<PostScreen> {
                                                                     .author
                                                                     ?.userId ??
                                                                 ''))),
-                                                commentModel:
-                                                    post.data!.comments![index],
-                                                canDelete: (post
-                                                            .data!
-                                                            .comments![index]
-                                                            .author!
-                                                            .userId! ==
-                                                        user.data!.userId) ||
-                                                    (post.data!.author!
-                                                            .userId ==
-                                                        user.data!.userId),
-                                              ),
-                                            ),
-                                          )
+                                            commentModel:
+                                                post.data!.comments![index],
+                                            canDelete: (post
+                                                        .data!
+                                                        .comments![index]
+                                                        .author!
+                                                        .userId! ==
+                                                    user.data!.userId) ||
+                                                (post.data!.author!.userId ==
+                                                    user.data!.userId),
+                                          ),
+                                        ),
+                                      )
                                   ],
                                 )),
                       //},
@@ -134,13 +139,13 @@ class _PostScreenState extends State<PostScreen> {
                                     height: 40.sp,
                                     child: (user.data?.avatarUrl == null
                                         ? Container(
-                                      color: ThemeColor.ebonyClay,
-                                    )
+                                            color: ThemeColor.ebonyClay,
+                                          )
                                         : CircleAvatar(
-                                      // radius: 30, // Image radius
-                                      backgroundImage: NetworkImage(
-                                          user.data!.avatarUrl!),
-                                    ))),
+                                            // radius: 30, // Image radius
+                                            backgroundImage: NetworkImage(
+                                                user.data!.avatarUrl!),
+                                          ))),
                                 borderRadius: BorderRadius.circular(120),
                               ),
                               // ClipRRect(
