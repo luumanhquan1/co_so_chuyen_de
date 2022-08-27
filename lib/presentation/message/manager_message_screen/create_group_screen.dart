@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CreateGroupScreen extends StatefulWidget {
-  final List<UserModel> listFriend;
+  final List<UserModel> listPeople;
   final MessageCubit cubit;
   final String title;
   final bool isAdd;
   final UserModel? selectDefault;
   const CreateGroupScreen(
       {Key? key,
-      required this.listFriend,
+      required this.listPeople,
       required this.cubit,
       required this.title,
       this.isAdd = false,
@@ -30,20 +30,37 @@ class CreateGroupScreen extends StatefulWidget {
 class _CreateGroupScreenState extends State<CreateGroupScreen> {
   final BehaviorSubject<List<UserModel>> _select = BehaviorSubject();
   final List<UserModel> listSelect = [];
+   List<UserModel> listFriend = [];
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.isAdd == false && widget.selectDefault != null) {
-      if (widget.listFriend
-              .map((e) => e.userId)
-              .contains(widget.selectDefault?.userId) ==
-          false) {
-        widget.listFriend.add(widget.selectDefault!);
+    widget.cubit.getListFriend().then((value) {
+      if(widget.listPeople.isNotEmpty) {
+        listFriend = widget.cubit.listFriend.where((element) =>
+        widget.listPeople
+            .map((e) => e.userId)
+            .contains(element.userId) ==
+            false).toList();
+      }else{
+        listFriend = widget.cubit.listFriend;
       }
-      listSelect.add(widget.selectDefault!);
-      _select.add(listSelect);
-    }
+      if (widget.isAdd == false && widget.selectDefault != null) {
+        if (listFriend
+            .map((e) => e.userId)
+            .contains(widget.selectDefault?.userId) ==
+            false) {
+          listFriend.add(widget.selectDefault!);
+        }
+        listSelect.add(widget.selectDefault!);
+        _select.add(listSelect);
+      }
+      setState(() {
+
+      });
+    });
+
   }
 
   @override
@@ -64,10 +81,13 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 child: StreamBuilder<Object>(
                     stream: _select.stream,
                     builder: (context, snapshot) {
+                      if(listFriend.isEmpty){
+                        return Center(child: Text("Không có dữ liệu"));
+                      }
                       return Column(
                         children:
-                            List.generate(widget.listFriend.length, (index) {
-                          final data = widget.listFriend[index];
+                            List.generate(listFriend.length, (index) {
+                          final data = listFriend[index];
                           return cellButton(
                             isCheck: listSelect
                                 .map((e) => e.userId)
@@ -135,7 +155,8 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                               )
                               .toList())
                           .then((value) {
-                        Navigator.popUntil(context, (route) => route.isFirst);
+                       Navigator.pop(context);
+                       Navigator.pop(context);
                       });
                     } else {
                       if (listSelect.length > 1) {

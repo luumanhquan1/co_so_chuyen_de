@@ -223,7 +223,7 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
   Widget screen() {
     if (!widget.isGroup) {
       return CreateGroupScreen(
-        listFriend: widget.messageCubit.listFriend,
+        listPeople: [],
         cubit: widget.messageCubit,
         title: title(),
         selectDefault: widget.peopleChats.isNotEmpty

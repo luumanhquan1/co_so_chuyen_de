@@ -16,6 +16,7 @@ import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
 import 'package:ccvc_mobile/utils/push_notification.dart';
 import 'package:ccvc_mobile/widgets/views/show_loading_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
@@ -51,6 +52,7 @@ class MessageCubit extends BaseCubit<MainState> {
   void renderChat(){
     _roomChat.sink.add(idRoomChat);
   }
+
 
   Future<void> sendSms(String content, {SmsType smsType = SmsType.Sms}) async {
     if (idRoomChat.isEmpty) {
@@ -187,10 +189,10 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   Future<void> addPeopleRoomChat(List<PeopleChat> peopleCha) async {
-    ShowLoadingScreen.show();
+
     peopleChat.addAll(peopleCha);
     await MessageService.addPeopleRoomChat(peopleCha, idRoomChat);
-    ShowLoadingScreen.dismiss();
+
   }
 
   void removePeople(String idUser) {
@@ -206,7 +208,9 @@ class MessageCubit extends BaseCubit<MainState> {
   }
 
   void goBoTinNhan(String idMessage) {
-    MessageService.goBoTinNhan(idMessage, chatModel?.roomId ?? '');
+
+
+    MessageService.goBoTinNhan(idMessage,idRoomChat);
   }
 
   bool isBlock() {
