@@ -114,8 +114,7 @@ class PostCubit extends BaseCubit<PostState> {
         typeNoti: PrefsService.getUserId() != (postModel.author?.userId ?? '')
             ? ScreenType.YOU_COMMENT
             : ScreenType.ME_COMMENT,
-        isPostOfMe:
-            PrefsService.getUserId() != PrefsService.getUserId(),
+        isPostOfMe: PrefsService.getUserId() != PrefsService.getUserId(),
         createAt: DateTime.now(),
         isRead: false,
       ),
