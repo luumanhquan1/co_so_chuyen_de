@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/domain/model/post_model.dart';
 import 'package:ccvc_mobile/domain/model/user_model.dart';
 import 'package:ccvc_mobile/presentation/home_screen/bloc/home_cubit.dart';
 import 'package:ccvc_mobile/presentation/home_screen/ui/create_post_sceen.dart';
+import 'package:ccvc_mobile/presentation/home_screen/ui/widget/post_widget.dart';
 import 'package:ccvc_mobile/presentation/post/ui/post_screen.dart';
 import 'package:ccvc_mobile/presentation/profile/ui/profile_screen.dart';
 import 'package:ccvc_mobile/presentation/relationship_screen/relationship_screen.dart';
@@ -64,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const RelationshipScreen(
-                            userId: '',
-                            isSearch: true,
-                          )));
+                                userId: '',
+                                isSearch: true,
+                              )));
                 },
                 child: Container(
                     width: 30,
@@ -282,78 +283,40 @@ class _HomeScreenState extends State<HomeScreen> {
       return StreamBuilder(
           stream: _homeCubit.user,
           builder: (context, user) => SingleChildScrollView(
-                child: StreamBuilder(
+                child: StreamBuilder<List<String>>(
                     stream: _homeCubit.posts,
-                    builder: (context, snapshot) => snapshot.data == null
-                        ? SizedBox()
-                        : Column(
-                            children: [
-                              postContainer(),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ThemeColor.gray77,
-                                      spreadRadius: 0,
-                                      blurRadius: 5,
-                                      offset: Offset(
-                                          0, 3), // changes position of shadow
-                                    ),
-                                  ],
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? <String>[];
+                      if(data.isEmpty){
+                        return SizedBox();
+                      }
+                      return Column(
+                        children: [
+                          postContainer(),
+                          Container(
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ThemeColor.gray77,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
                                 ),
-                              ),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children:
-                                      //[
-
-                                      (snapshot.data! as List)
-                                          .map((e) => Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 16.sp,
-                                                    horizontal: 24.sp),
-                                                decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color:
-                                                            ThemeColor.gray77,
-                                                        spreadRadius: 0,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0,
-                                                            3), // changes position of shadow
-                                                      ),
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: ThemeColor.white),
-                                                child: PostCard(
-                                                  postModel: e,
-                                                  userId:
-                                                      (user.data as UserModel)
-                                                              .userId ??
-                                                          '',
-                                                  onTapName: () => Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (_) => ProfileScreen(
-                                                              userId: (e as PostModel)
-                                                                      .author
-                                                                      ?.userId ??
-                                                                  ''))),
-                                                  onTap: () => Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              PostScreen(
-                                                                postId:
-                                                                    e.postId,
-                                                              ))),
-                                                ),
-                                              ))
-                                          .toList()),
-                            ],
-                          )),
+                              ],
+                            ),
+                          ),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  //[
+                              data
+                                      .map((e) => PostWidget(
+                                          homeCubit: _homeCubit, id: e))
+                                      .toList()),
+                        ],
+                      );
+                    }),
               ));
     }
     if (state == StateLayout.showError) {

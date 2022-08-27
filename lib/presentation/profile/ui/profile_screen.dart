@@ -90,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   showUserInfo = false;
                                 });
                               else
-                                Navigator.pop(context);
+                                Navigator.pop(context,block);
                             },
                             icon: Icon(
                               Icons.arrow_back_ios,
@@ -255,8 +255,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 log(result.name.toString());
 
                                 if (result.name == 'ok') {
+                                  block = true;
                                   await _profileCubit.block(context);
-                                  Navigator.pop(context);
+
+                                  Navigator.pop(context,block);
                                 } else {
                                   Navigator.pop(context);
                                 }

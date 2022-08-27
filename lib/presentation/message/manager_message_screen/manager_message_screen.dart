@@ -130,9 +130,15 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                         icon: const Icon(Icons.portrait_rounded),
                         title: 'Trang cá nhân',
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ProfileScreen(
-                                  userId: widget.peopleChats.first.userId)));
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => ProfileScreen(
+                                      userId: widget.peopleChats.first.userId)))
+                              .then((value) {
+                            if (value is bool && value) {
+                              widget.messageCubit.setBlock();
+                            }
+                          });
                         }),
                 ],
               ),

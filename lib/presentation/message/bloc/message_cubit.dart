@@ -48,6 +48,9 @@ class MessageCubit extends BaseCubit<MainState> {
       _roomChat.sink.add(id);
     });
   }
+  void renderChat(){
+    _roomChat.sink.add(idRoomChat);
+  }
 
   Future<void> sendSms(String content, {SmsType smsType = SmsType.Sms}) async {
     if (idRoomChat.isEmpty) {
@@ -216,5 +219,11 @@ class MessageCubit extends BaseCubit<MainState> {
       return false;
     }
     return false;
+  }
+  Future<void> setBlock() async {
+    showLoading();
+   await getListFriend();
+   _roomChat.sink.add(idRoomChat);
+    showContent();
   }
 }
