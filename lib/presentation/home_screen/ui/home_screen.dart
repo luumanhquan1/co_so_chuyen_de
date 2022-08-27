@@ -286,8 +286,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: StreamBuilder<List<String>>(
                     stream: _homeCubit.posts,
                     builder: (context, snapshot) {
-                      final data = snapshot.data ?? <String>[];
-                      if(data.isEmpty){
+                      final data = snapshot.data;
+                      if(data == null){
                         return SizedBox();
                       }
                       return Column(

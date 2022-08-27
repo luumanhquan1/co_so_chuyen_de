@@ -111,6 +111,7 @@ class HomeCubit extends BaseCubit<HomeState> {
           post.addAll({'post_id': docSnap.id});
           post.addAll(docSnap.data() ?? {});
           PostModel newPost = PostModel.fromJson(post);
+          newPost.postId = docSnap.id;
           if (_userPost[post['user_id']] == null) {
             final user =
                 await UserRepopsitory().getUserProfile(userId: post['user_id']);
@@ -119,6 +120,7 @@ class HomeCubit extends BaseCubit<HomeState> {
           } else {
             newPost.author = _userPost[post['user_id']];
           }
+
           final comments = await FirebaseFirestore.instance
               .collection(DefaultEnv.appCollection)
               .doc(DefaultEnv.developDoc)
@@ -155,6 +157,8 @@ class HomeCubit extends BaseCubit<HomeState> {
         if (event.docs == null) {
           return null;
         } else {
+          idPosts = [];
+          log("message");
           for (var x in event.docs) {
             // debugPrint(relationship['user_id2']);
             log('${x.id}');
@@ -165,8 +169,6 @@ class HomeCubit extends BaseCubit<HomeState> {
             if (!_blockList.value.contains(x.data()['user_id'])) {
               // idPosts.add(x.id);
               idPosts.insert(0, x.id);
-              _posts.sink.add(idPosts);
-
               // log('huhu');
               // Map<String, dynamic> post = {};
               // post.addAll({'post_id': x.id});
@@ -199,8 +201,9 @@ class HomeCubit extends BaseCubit<HomeState> {
               // debugPrint(newPost.toString());
               // posts.add(newPost);
             }
-          }
 
+          }
+          _posts.sink.add(idPosts);
           showContent();
         }
       });
