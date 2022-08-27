@@ -83,6 +83,7 @@ class MessageService {
       final id = element['user_id'];
       if (id != idUser) {
         final userInfo = await getUserChat(id.toString());
+
         pepole.add(
           PeopleChat(
               userId: id,
@@ -289,7 +290,8 @@ class MessageService {
   }
 
   static void goBoTinNhan(String idMessage, String idRoom) {
-
+log(' .>>>>>>>>>>${idMessage}');
+log('>>>>>>>>>>>>${idRoom}');
     FirebaseSetup.fireStore
         .collection(DefaultEnv.messCollection)
         .doc(idRoom)

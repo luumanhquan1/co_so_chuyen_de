@@ -61,7 +61,7 @@ class _MessageScreenState extends State<MainMessageScreen> {
                 builder: (context) => CreateGroupScreen(
                   cubit: messageCubit,
                   title: 'Nhóm mới',
-                  listFriend: messageCubit.listFriend,
+            listPeople: [],
                 ),
               ).whenComplete(() {
                 setState(() {});
@@ -92,61 +92,68 @@ class _MessageScreenState extends State<MainMessageScreen> {
               fit: BoxFit.fill,
             ),
           ),
-          SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  StateLoadingSkeleton(
-                    stream: cubit.stateStream,
-                    skeleton: const LoadingSkeletonMessageWidget(),
-                    child: StreamBuilder<List<RoomChatModel>>(
-                        stream: cubit.getRoomChat,
-                        builder: (context, snapshot) {
-                          final data = snapshot.data ?? <RoomChatModel>[];
-                          if (data.isEmpty) {
-                            return Center(child: Text("Không có dữ liêu"));
-                          }
-                          return Column(
-                            children: List.generate(data.length, (index) {
-                              final result = data[index];
+          RefreshIndicator(
+            onRefresh: () async {
+              cubit.fetchRoom();
+             await messageCubit.getListFriend();
+            },
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 23),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    StateLoadingSkeleton(
+                      stream: cubit.stateStream,
+                      skeleton: const LoadingSkeletonMessageWidget(),
+                      child: StreamBuilder<List<RoomChatModel>>(
+                          stream: cubit.getRoomChat,
+                          builder: (context, snapshot) {
+                            final data = snapshot.data ?? <RoomChatModel>[];
+                            if (data.isEmpty) {
+                              return Center(child: Text("Không có dữ liêu"));
+                            }
+                            return Column(
+                              children: List.generate(data.length, (index) {
+                                final result = data[index];
 
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MessageScreen(
-                                          isRoomGroup: result.isGroup,
-                                          chatModel: result,
-                                          peopleChat: result.peopleChats,
-                                          peopleGroupChat:
-                                              result.peopleChats.length < 2
-                                                  ? null
-                                                  : result.peopleChats,
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MessageScreen(
+                                            isRoomGroup: result.isGroup,
+                                            chatModel: result,
+                                            peopleChat: result.peopleChats,
+                                            peopleGroupChat:
+                                                result.peopleChats.length < 2
+                                                    ? null
+                                                    : result.peopleChats,
+                                          ),
                                         ),
-                                      ),
-                                    ).then((value) {
-                                      setState(() {});
-                                    });
-                                  },
-                                  child: TinNhanCell(
+                                      ).then((value) {
+                                        setState(() {});
+                                      });
+                                    },
+                                    child: TinNhanCell(
 
-                                    chatModel: result,
+                                      chatModel: result,
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          );
-                        }),
-                  )
-                ],
+                                );
+                              }),
+                            );
+                          }),
+                    )
+                  ],
+                ),
               ),
             ),
           )

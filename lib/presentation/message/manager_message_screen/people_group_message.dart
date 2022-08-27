@@ -54,6 +54,9 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
                     stream: _data.stream,
                     builder: (context, snapshot) {
                       final data = snapshot.data ?? <UserModel>[];
+                      if(data.isEmpty){
+                        return Text("Không có dữ liệu");
+                      }
                       return Column(
                         children: List.generate(data.length, (index) {
                           final data = widget.listFriend[index];
@@ -126,11 +129,7 @@ class _CreateGroupScreenState extends State<PeopleGroupScreen> {
                   context: context,
                   builder: (context) => CreateGroupScreen(
                     isAdd: true,
-                    listFriend: widget.cubit.listFriend.where((element) =>
-                        _data.value
-                            .map((e) => e.userId)
-                            .contains(element.userId) ==
-                        false).toList(),
+                    listPeople: _data.value,
                     cubit: widget.cubit,
                     title: '',
                   ),

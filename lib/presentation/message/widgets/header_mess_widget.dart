@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ccvc_mobile/config/firebase_config.dart';
 import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/domain/model/message_model/room_chat_model.dart';
@@ -6,6 +9,7 @@ import 'package:ccvc_mobile/presentation/message/bloc/message_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../config/default_env.dart';
 import '../../../utils/constants/image_asset.dart';
 
 class HeaderMessWidget extends StatelessWidget {
@@ -14,6 +18,7 @@ class HeaderMessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String id = cubit.peopleChat.isEmpty ? '': cubit.peopleChat.first.userId;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -60,12 +65,26 @@ class HeaderMessWidget extends StatelessWidget {
                         height: 9,
                       ),
                       Visibility(
-                        visible: cubit.chatModel?.isGroup == false || cubit.chatModel == null,
-                        child: Text(
-                          cubit.chatModel?.isCheckOffline() ?? false
-                              ? 'Online'
-                              : 'Offline',
-                          style: textNormal(greyHide, 12),
+                        visible: cubit.chatModel?.isGroup == false ||
+                            cubit.chatModel == null,
+                        child: StreamBuilder<bool>(
+                          stream: FirebaseSetup.fireStore.collection(DefaultEnv.usersCollection).doc(id).collection(DefaultEnv.profileCollection).snapshots().transform( StreamTransformer.fromHandlers(
+                            handleData: (docSnap, sink) async {
+                              docSnap.docs.forEach((element) {
+                                final data = element.data()['online_flag'] ?? false;
+                                sink.add(data);
+                              });
+
+                            },
+                          ),),
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.data ?? false
+                                  ? 'Online'
+                                  : 'Offline',
+                              style: textNormal(greyHide, 12),
+                            );
+                          }
                         ),
                       ),
                     ],
