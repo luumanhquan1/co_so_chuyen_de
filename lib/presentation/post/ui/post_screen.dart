@@ -86,9 +86,8 @@ class _PostScreenState extends State<PostScreen> {
                                         // width: 200,
                                         // height: 200,
                                         child: ListView.builder(
+                                          physics: const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
                                           itemCount:
                                               post.data!.comments!.length,
                                           itemBuilder: (ctx, index) =>
