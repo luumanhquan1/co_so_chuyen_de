@@ -286,7 +286,7 @@ class PostRepository {
   // Delete Post
   Future<bool> deletePost(PostModel postModel) async {
     try {
-      log('deleteeeee');
+      log('deleteeeee ${postModel.postId}' );
       await FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
@@ -294,15 +294,15 @@ class PostRepository {
           .doc(postModel.postId)
           .delete();
 
-      if (postModel.type != null && postModel.type == 2) {
-        final Reference ref = storage
-            .ref()
-            .child(postModel.author?.userId ?? '')
-            .child(DefaultEnv.postsCollection)
-            .child(postModel.postId ?? '');
-
-        await ref.delete();
-      }
+      // if (postModel.type != null && postModel.type == 2) {
+      //   final Reference ref = storage
+      //       .ref()
+      //       .child(postModel.author?.userId ?? '')
+      //       .child(DefaultEnv.postsCollection)
+      //       .child(postModel.postId ?? '');
+      //
+      //   await ref.delete();
+      // }
     } catch (err) {
       log(err.toString());
       Fluttertoast.showToast(
