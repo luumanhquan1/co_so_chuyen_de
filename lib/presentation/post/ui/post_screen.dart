@@ -26,16 +26,10 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   TextEditingController commentController = TextEditingController();
-  late PostCubit _postCubit;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _postCubit = PostCubit(widget.postId);
-  }
 
   @override
   Widget build(BuildContext context) {
+    PostCubit _postCubit = PostCubit(widget.postId);
     return SafeArea(
         child: StreamBuilder<UserModel>(
             stream: _postCubit.user,
@@ -92,6 +86,7 @@ class _PostScreenState extends State<PostScreen> {
                                         // width: 200,
                                         // height: 200,
                                         child: ListView.builder(
+                                          physics: const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount:
                                               post.data!.comments!.length,
