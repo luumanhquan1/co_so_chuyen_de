@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:ccvc_mobile/config/base/base_cubit.dart';
 import 'package:ccvc_mobile/config/default_env.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
-import 'package:ccvc_mobile/domain/locals/hive_local.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/domain/model/comment_model.dart';
 import 'package:ccvc_mobile/domain/model/post_model.dart';
@@ -29,10 +29,11 @@ class HomeCubit extends BaseCubit<HomeState> {
   UserModel userModel = UserModel.empty();
 
   String userId = '';
-  final BehaviorSubject<List<PostModel>> _posts =
-      BehaviorSubject<List<PostModel>>.seeded([]);
+  final BehaviorSubject<List<String>> _posts =
+      BehaviorSubject<List<String>>.seeded([]);
+  List<String> idPosts = [];
 
-  Stream<List<PostModel>> get posts => _posts.stream;
+  Stream<List<String>> get posts => _posts.stream;
 
   final BehaviorSubject<int> _unreadNotis = BehaviorSubject<int>.seeded(0);
 
@@ -47,6 +48,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       BehaviorSubject<List<String>>.seeded([]);
 
   Stream<List<String>> get blockList => _blockList.stream;
+  Map<String, UserModel?> _userPost = {};
 
   PostRepository _postRepository = PostRepository();
   UserRepopsitory _userRepopsitory = UserRepopsitory();
@@ -57,7 +59,7 @@ class HomeCubit extends BaseCubit<HomeState> {
   }) async {
     showLoading();
     String imgUrl = '';
-   // final UserModel? userModel = HiveLocal.getDataUser();
+    // final UserModel? userModel = HiveLocal.getDataUser();
 
     final postId = getRandString(15).removeChar;
     final createAt = DateTime.now().millisecondsSinceEpoch;
@@ -86,13 +88,56 @@ class HomeCubit extends BaseCubit<HomeState> {
       postId: postId,
       comments: [],
     );
-    await FireStoreMethod.createPost(model: model,postId: postId );
+    await FireStoreMethod.createPost(model: model, postId: postId);
 
     showContent();
   }
 
   Future<void> getUserModel() async {
     userModel = await FireStoreMethod.getDataUserInfo(userId);
+  }
+
+  Stream<PostModel> postList(String idPost) {
+    return FirebaseFirestore.instance
+        .collection(DefaultEnv.appCollection)
+        .doc(DefaultEnv.developDoc)
+        .collection(DefaultEnv.postsCollection)
+        .doc(idPost)
+        .snapshots()
+        .transform(
+      StreamTransformer.fromHandlers(
+        handleData: (docSnap, sink) async {
+          Map<String, dynamic> post = {};
+          post.addAll({'post_id': docSnap.id});
+          post.addAll(docSnap.data() ?? {});
+          PostModel newPost = PostModel.fromJson(post);
+          if (_userPost[post['user_id']] == null) {
+            final user =
+                await UserRepopsitory().getUserProfile(userId: post['user_id']);
+            _userPost.addAll({post['user_id']: user});
+            newPost.author = user;
+          } else {
+            newPost.author = _userPost[post['user_id']];
+          }
+          final comments = await FirebaseFirestore.instance
+              .collection(DefaultEnv.appCollection)
+              .doc(DefaultEnv.developDoc)
+              .collection(DefaultEnv.postsCollection)
+              .doc(docSnap.id)
+              .collection('comments')
+              .orderBy('create_at', descending: true)
+              .get();
+          List<CommentModel> cmts = [];
+          for (var cmt in comments.docs) {
+            cmt.data().addAll({'comment_id': cmt.id});
+            CommentModel commentModel = CommentModel.fromJson(cmt.data());
+            cmts.add(commentModel);
+          }
+          newPost.comments = cmts;
+          sink.add(newPost);
+        },
+      ),
+    );
   }
 
   Future<void> getAllPosts() async {
@@ -103,56 +148,60 @@ class HomeCubit extends BaseCubit<HomeState> {
       FirebaseFirestore.instance
           .collection(DefaultEnv.appCollection)
           .doc(DefaultEnv.developDoc)
-          .collection(DefaultEnv.postsCollection).orderBy('create_at',descending: true)
+          .collection(DefaultEnv.postsCollection)
+          .orderBy('create_at', descending: false)
           .snapshots()
           .listen((event) async {
         if (event.docs == null) {
           return null;
         } else {
-          // final result = await _postRepository.fetchAllPost();
-          // log(result.toString());
-          // log('gggggggggggggg');
-          List<PostModel> posts = [];
-          log(event.docs.length.toString());
           for (var x in event.docs) {
             // debugPrint(relationship['user_id2']);
+            log('${x.id}');
+            if (idPosts.indexWhere((element) => element == x.id) != -1) {
+              continue;
+            }
+
             if (!_blockList.value.contains(x.data()['user_id'])) {
-              log('huhu');
-              Map<String, dynamic> post = {};
-              post.addAll({'post_id': x.id});
-              post.addAll(x.data());
-              log(post.toString());
+              // idPosts.add(x.id);
+              idPosts.insert(0, x.id);
+              _posts.sink.add(idPosts);
 
-              PostModel newPost = PostModel.fromJson(post);
-
-              //get user
-              final user = await UserRepopsitory()
-                  .getUserProfile(userId: post['user_id']);
-              newPost.author = user;
-
-              //get comments
-              final comments = await FirebaseFirestore.instance
-                  .collection(DefaultEnv.appCollection)
-                  .doc(DefaultEnv.developDoc)
-                  .collection(DefaultEnv.postsCollection)
-                  .doc(x.id)
-                  .collection('comments')
-                  .orderBy('create_at', descending: true)
-                  .get();
-              List<CommentModel> cmts = [];
-              for (var cmt in comments.docs) {
-                cmt.data().addAll({'comment_id': cmt.id});
-                CommentModel commentModel = CommentModel.fromJson(cmt.data());
-                cmts.add(commentModel);
-              }
-              newPost.comments = cmts;
-              debugPrint(newPost.toString());
-              posts.add(newPost);
+              // log('huhu');
+              // Map<String, dynamic> post = {};
+              // post.addAll({'post_id': x.id});
+              // post.addAll(x.data());
+              // log(post.toString());
+              //
+              // PostModel newPost = PostModel.fromJson(post);
+              //
+              // //get user
+              // final user = await UserRepopsitory()
+              //     .getUserProfile(userId: post['user_id']);
+              // newPost.author = user;
+              //
+              // //get comments
+              // final comments = await FirebaseFirestore.instance
+              //     .collection(DefaultEnv.appCollection)
+              //     .doc(DefaultEnv.developDoc)
+              //     .collection(DefaultEnv.postsCollection)
+              //     .doc(x.id)
+              //     .collection('comments')
+              //     .orderBy('create_at', descending: true)
+              //     .get();
+              // List<CommentModel> cmts = [];
+              // for (var cmt in comments.docs) {
+              //   cmt.data().addAll({'comment_id': cmt.id});
+              //   CommentModel commentModel = CommentModel.fromJson(cmt.data());
+              //   cmts.add(commentModel);
+              // }
+              // newPost.comments = cmts;
+              // debugPrint(newPost.toString());
+              // posts.add(newPost);
             }
           }
-          _posts.sink.add(posts);
+
           showContent();
-          debugPrint('hhhhhhhhhhhhh');
         }
       });
     } catch (e) {
