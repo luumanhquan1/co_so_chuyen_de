@@ -312,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   //[
                               data
                                       .map((e) => PostWidget(
-                                          homeCubit: _homeCubit, id: e))
+                                          homeCubit: _homeCubit, id: e,user: user,))
                                       .toList()),
                         ],
                       );
