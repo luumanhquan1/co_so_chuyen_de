@@ -46,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ProfileCubit _profileCubit = ProfileCubit();
   RelationshipType relationshipType = RelationshipType.stranger;
   bool showUserInfo = false;
+  bool block = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -71,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                         return false;
                       } else
-                        Navigator.pop(context);
+                        Navigator.pop(context, block);
 
                       return true;
                     },
@@ -89,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   showUserInfo = false;
                                 });
                               else
-                                Navigator.pop(context);
+                                Navigator.pop(context,block);
                             },
                             icon: Icon(
                               Icons.arrow_back_ios,
@@ -254,8 +255,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 log(result.name.toString());
 
                                 if (result.name == 'ok') {
+                                  block = true;
                                   await _profileCubit.block(context);
-                                  Navigator.pop(context);
+
+                                  Navigator.pop(context,block);
                                 } else {
                                   Navigator.pop(context);
                                 }
@@ -858,6 +861,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       log(result.name.toString());
 
                       if (result.name == 'ok') {
+                        setState(() {
+                          block = true;
+                        });
                         await _profileCubit.block(context);
                      //   Navigator.pop(context);
                       } else {
