@@ -539,6 +539,10 @@ class FireStoreMethod {
 
       listIdUSer.addAll(listDataUser.toSet().toList());
 
+      if (!listIdUSer.contains(postModel.author?.userId ?? '')) {
+        listIdUSer.add(postModel.author?.userId ?? '');
+      }
+
       listIdUSer.forEach((element) {
         if (element != PrefsService.getUserId()) {
           notificationModel.userId = element;
