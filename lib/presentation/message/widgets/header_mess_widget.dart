@@ -53,7 +53,12 @@ class HeaderMessWidget extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         child: Text(
-                          cubit.chatModel?.titleName() ??
+                          (cubit.chatModel?.titleName() ??
+                              cubit.peopleChat
+                                  .map((e) => e.nameDisplay)
+                                  .join(',')).isEmpty ?  cubit.peopleChat
+                              .map((e) => e.nameDisplay)
+                              .join(',') : cubit.chatModel?.titleName() ??
                               cubit.peopleChat
                                   .map((e) => e.nameDisplay)
                                   .join(','),

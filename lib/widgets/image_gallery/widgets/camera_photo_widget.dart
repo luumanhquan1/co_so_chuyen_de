@@ -38,6 +38,9 @@ class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
       await controller?.initialize();
       isInitCamera.value = true;
     }
+    setState(() {
+
+    });
   }
 
   @override
@@ -67,6 +70,8 @@ class _CameraPhotoWidgetState extends State<CameraPhotoWidget> {
               return CameraPreview(controller!);
             } else {
               return Container(
+width:  100,
+                height: 100,
                 color: Colors.black,
               );
             }

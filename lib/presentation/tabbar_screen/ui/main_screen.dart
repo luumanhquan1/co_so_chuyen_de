@@ -52,6 +52,7 @@ class _MainTabBarViewState extends State<MainTabBarView> {
   }
 
   void pushDetailsOnTapNotification(DataChat model) {
+
     Navigator.push(
         context,
         MaterialPageRoute(
