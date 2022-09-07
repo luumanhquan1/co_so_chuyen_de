@@ -64,6 +64,7 @@ dependencies:
   keyboard_dismisser: ^2.0.0
   #Library helpful
   intl: ^0.17.0
+  intl_utils: 2.4.0
   event_bus: ^2.0.0
   equatable: ^2.0.3
   retrofit: ^2.0.1
@@ -97,6 +98,12 @@ dependencies:
   html_editor_enhanced: ^2.4.0+1
 #  translator: ^0.1.7
 #  flutter_contacts:
+
+  #otp_captcha
+  pin_code_fields: ^7.4.0
+  country_code_picker: ^2.0.2
+  alt_sms_autofill: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:

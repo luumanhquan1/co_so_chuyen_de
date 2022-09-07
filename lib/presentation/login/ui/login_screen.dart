@@ -6,6 +6,7 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
+import 'package:ccvc_mobile/presentation/otp/ui/register_phone_number_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/create_user_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/sign_up_screen.dart';
@@ -32,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginCubit loginCubit = LoginCubit();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController textPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   final keyGroup = GlobalKey<FormGroupState>();
 
   @override
@@ -212,10 +214,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .pushReplacement(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                CreateUserScreen(
-                                              email: user.email ?? '',
-                                              cubit: SignUpCubit(),
-                                            ),
+                                                RegisterPhoneNumberScreen()
+                                            //     CreateUserScreen(
+                                            //   email: user.email ?? '',
+                                            //   cubit: SignUpCubit(),
+                                            // ),
                                           ),
                                         );
                                       }
@@ -245,7 +248,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const SignUpScreen(),
+                                                RegisterPhoneNumberScreen()
+                                           //     const SignUpScreen(),
                                           ),
                                         );
                                       },
@@ -261,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

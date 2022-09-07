@@ -19,9 +19,11 @@ class TextFieldValidator extends StatefulWidget {
   final Widget? prefixIcon;
   final bool? obscureText;
   final Color? fillColor;
+  final int? maxLength;
 
   const TextFieldValidator({
     Key? key,
+    this.maxLength,
     this.controller,
     this.isEnabled = true,
     this.onChange,
@@ -71,6 +73,7 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
     return Form(
       key: key,
       child: TextFormField(
+        maxLength: widget.maxLength,
         controller: widget.controller,
         obscureText: widget.obscureText ?? false,
         onChanged: (value) {
@@ -81,6 +84,7 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
             widget.onChange!(value);
           }
         },
+        textAlignVertical: TextAlignVertical.center,
         initialValue: widget.initialValue,
         keyboardType: widget.textInputType,
         maxLines: widget.maxLine,
@@ -92,7 +96,7 @@ class _TextFormFieldWidgetState extends State<TextFieldValidator> {
         style: tokenDetailAmount(
           fontSize: 14.0.textScale(),
           color: titleColor,
-        ),
+        ).copyWith(height: 1.4),
         enabled: widget.isEnabled,
         decoration: InputDecoration(
           hintText: widget.hintText,

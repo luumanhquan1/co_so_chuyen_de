@@ -58,6 +58,43 @@ class FirebaseAuthentication {
       final UserCredential userCredential = await auth
           .createUserWithEmailAndPassword(email: email, password: password);
 
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+84383284427',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) {
+            if (value.user != null) {
+              value.user?.delete();
+
+            }
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+       //   snackBar(context, e.message.toString(), Colors.white);
+        },
+        codeSent: (String vID, int? resendToken) {
+        //  verificationCode = vID;
+        },
+        codeAutoRetrievalTimeout: (String vID) {
+         // verificationCode = vID;
+        },
+        timeout: const Duration(seconds: 5),
+      );
+
+
+
+    //   userCredential.user?.linkWithCredential()
+    //       .then((linkResult) => {
+    //   // Sign in with the newly linked credential
+    //   const linkCredential = OAuthProvider.credentialFromResult(linkResult);
+    //       return signInWithCredential(auth, linkCredential);
+    // })
+    //     .then((signInResult) => {
+    // // Save the merged data to the new user
+    // repo.set(signInResult.user, mergedData);
+    // });
+
       user = userCredential.user;
     } on Exception catch (e) {
       if (e.toString() ==
