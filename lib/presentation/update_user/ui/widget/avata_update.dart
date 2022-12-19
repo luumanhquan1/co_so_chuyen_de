@@ -33,7 +33,7 @@ class _AvataUpdateWidgetState extends State<AvataUpdateWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
+      clipBehavior: Clip.none,
       children: [
         if (_image == null)
           CircleAvatar(
