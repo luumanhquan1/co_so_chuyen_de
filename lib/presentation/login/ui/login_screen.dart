@@ -5,6 +5,7 @@ import 'package:ccvc_mobile/data/helper/firebase/firebase_const.dart';
 import 'package:ccvc_mobile/data/helper/firebase/firebase_store.dart';
 import 'package:ccvc_mobile/domain/locals/prefs_service.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/confim_otp/confirm_otp_screen.dart';
 import 'package:ccvc_mobile/presentation/login/bloc/login_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/create_user_screen.dart';
@@ -20,6 +21,7 @@ import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -193,37 +195,52 @@ class _LoginScreenState extends State<LoginScreen> {
                                 isColorBlue: true,
                                 onPressed: () async {
                                   if (keyGroup.currentState!.validator()) {
-                                    final User? user = await loginCubit.lognIn(
-                                      fullNameController.text.trim(),
-                                      textPasswordController.text.trim(),
-                                    );
-                                    if (user != null) {
-                                      await PrefsService.saveUserId(user.uid);
-                                      if (loginCubit.isUserModel) {
-                                        await Navigator.of(context)
-                                            .pushReplacement(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MainTabBarView(),
-                                          ),
+                                    bool checkUser =
+                                        await loginCubit.checkUserPassWord(
+                                            fullNameController.text.trim(),
+                                            textPasswordController.text.trim());
+                                    if (checkUser) {
+                                      final checkOtp = await pushToConfimOtp(
+                                          context,
+                                          fullNameController.text.trim());
+                                      if (checkOtp) {
+                                        final User? user =
+                                            await loginCubit.lognIn(
+                                          fullNameController.text.trim(),
+                                          textPasswordController.text.trim(),
                                         );
-                                      } else {
-                                        await Navigator.of(context)
-                                            .pushReplacement(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                CreateUserScreen(
-                                              email: user.email ?? '',
-                                              cubit: SignUpCubit(),
-                                            ),
-                                          ),
-                                        );
+                                        if (user != null) {
+                                          await PrefsService.saveUserId(
+                                              user.uid);
+                                          if (loginCubit.isUserModel) {
+                                            await Navigator.of(context)
+                                                .pushReplacement(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MainTabBarView(),
+                                              ),
+                                            );
+                                          } else {
+                                            await Navigator.of(context)
+                                                .pushReplacement(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CreateUserScreen(
+                                                  email: user.email ?? '',
+                                                  cubit: SignUpCubit(),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        } else {
+                                          _showToast(
+                                            context: context,
+                                            text: EXCEPTION_LOGIN,
+                                          );
+                                        }
                                       }
-                                    } else {
-                                      _showToast(
-                                        context: context,
-                                        text: EXCEPTION_LOGIN,
-                                      );
+                                    }else{
+                                      _showToast(context: context,text: 'Tên tài khoản hoặc mật khẩu không đúng');
                                     }
                                   } else {
                                     _showToast(

@@ -2,11 +2,13 @@ import 'package:ccvc_mobile/config/resources/color.dart';
 import 'package:ccvc_mobile/config/resources/styles.dart';
 import 'package:ccvc_mobile/data/exception/app_exception.dart';
 import 'package:ccvc_mobile/generated/l10n.dart';
+import 'package:ccvc_mobile/presentation/confim_otp/confirm_otp_screen.dart';
 import 'package:ccvc_mobile/presentation/sign_up/bloc/sign_up_cubit.dart';
 import 'package:ccvc_mobile/presentation/sign_up/ui/create_user_screen.dart';
 import 'package:ccvc_mobile/utils/constants/app_constants.dart';
 import 'package:ccvc_mobile/utils/constants/image_asset.dart';
 import 'package:ccvc_mobile/utils/extensions/string_extension.dart';
+import 'package:ccvc_mobile/utils/send_otp.dart';
 import 'package:ccvc_mobile/widgets/appbar/base_app_bar.dart';
 import 'package:ccvc_mobile/widgets/button/button_custom_bottom.dart';
 import 'package:ccvc_mobile/widgets/textformfield/form_group.dart';
@@ -83,9 +85,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                            'Chào mừng bạn đến với',
-                            //     S.current.welcome_to,
-                            style:TextStyle(
+                                'Chào mừng bạn đến với',
+                                //     S.current.welcome_to,
+                                style: TextStyle(
                                   color: welCome,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -93,8 +95,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               Text(
                                 S.current.socially,
-                                style:TextStyle(
-                                //GoogleFonts.poppins(
+                                style: TextStyle(
+                                  //GoogleFonts.poppins(
                                   color: welCome,
                                   fontSize: 38,
                                   fontWeight: FontWeight.w700,
@@ -249,25 +251,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     isColorBlue: true,
                     onPressed: () async {
                       if (keyGroup.currentState!.validator()) {
-                        final User? user = await cubit.signUp(
-                          textTaiKhoanController.text.trim(),
-                          textPasswordController.text.trim(),
-                        );
-
-                        if (user != null) {
-                          await Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => CreateUserScreen(
-                                cubit: cubit,
-                                email: user.email ?? '',
-                              ),
-                            ),
-                          );
-                        } else {
+                        final checkUser = await cubit.checkIfEmailInUse(
+                            textTaiKhoanController.text.trim());
+                        if (checkUser) {
                           _showToast(
-                            context: context,
-                            text: EXCEPTION_LOGIN,
-                          );
+                              context: context, text: 'Tài khoản đã tồn tại!!');
+                        } else {
+                          // ignore: use_build_context_synchronously
+                          final isCheckDone =
+                              await pushToConfimOtp(context, textTaiKhoanController.text.trim());
+                          if (isCheckDone) {
+                            final User? user = await cubit.signUp(
+                              textTaiKhoanController.text.trim(),
+                              textPasswordController.text.trim(),
+                            );
+
+                            if (user != null) {
+                              await Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => CreateUserScreen(
+                                    cubit: cubit,
+                                    email: user.email ?? '',
+                                  ),
+                                ),
+                              );
+                            } else {
+                              _showToast(
+                                context: context,
+                                text: EXCEPTION_LOGIN,
+                              );
+                            }
+                          }
                         }
                       } else {
                         _showToast(

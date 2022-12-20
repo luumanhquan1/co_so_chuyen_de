@@ -19,7 +19,8 @@ import 'package:ccvc_mobile/widgets/views/state_stream_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 class CreateUserScreen extends StatefulWidget {
   final SignUpCubit cubit;
   final String email;

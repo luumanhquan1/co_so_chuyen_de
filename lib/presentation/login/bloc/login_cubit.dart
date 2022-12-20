@@ -69,7 +69,23 @@ class LoginCubit extends BaseCubit<LoginState> {
     return user;
   }
 
+   Future<bool> checkUserPassWord(
+    String email,
+    String password,
+  ) async {
+    showLoading();
+    final User? user = await FirebaseAuthentication.signInUsingEmailPassword(
+      email: email,
+      password: password,
+    );
+   
+    showContent();
+    return user != null;
+  }
+
   void closeDialog() {
     showContent();
   }
 }
+
+
