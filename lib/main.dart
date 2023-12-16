@@ -38,9 +38,10 @@ Future<void> mainApp() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
+  await Firebase.initializeApp();
   Hive.init(appDocumentDirectory.path);
   requestPermission();
-  await Firebase.initializeApp();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');

@@ -72,7 +72,7 @@ class _ManagerMessagerScreenState extends State<ManagerMessagerScreen> {
                     context: context,
                     title: 'Tên nhóm',
                     textFields: const [DialogTextField()],
-                    style: AdaptiveStyle.iOS,
+                    style: AdaptiveStyle.cupertino,
                     okLabel: 'Xong',
                   ).then((value) {
                     if (value != null) {

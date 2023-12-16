@@ -9,7 +9,7 @@ Future<void> saveFile(String _fileName, dynamic data) async {
     options: Options(
       responseType: ResponseType.bytes,
       followRedirects: false,
-      receiveTimeout: 0,
+      receiveTimeout: Duration(seconds: 0),
     ),
   );
   final dynamic dataSave = response.data;

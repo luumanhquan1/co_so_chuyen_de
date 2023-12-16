@@ -117,7 +117,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                             SmsType.Tin_Nhan_Go_bo) {
                                       showModalActionSheet(
                                         context: context,
-                                        style: AdaptiveStyle.iOS,
+                                        style: AdaptiveStyle.cupertino,
                                         actions: [
                                           const SheetAction(
                                               label: 'Thu hồi tin nhắn',
